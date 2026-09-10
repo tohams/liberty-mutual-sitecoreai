@@ -43,7 +43,7 @@ The native timeline includes page views for `/workspace`, `/resources` and the T
 }
 ```
 
-This confirms the browser journey reached the intended imported native profile and that the Search event contract was accepted. Profiles intentionally omit personal-name fields; identity uses the provider's opaque identifier and verified attributes. No customer name, policy number or account free text is required for this association. This evidence does not by itself prove a positive and negative native personalization rule test or complete persona-switch isolation.
+This confirms the browser journey reached the intended imported native profile and that the Search event contract was accepted. Browser identity events use the provider's opaque identifier and do not send personal-name fields. The imported fixture profiles contain fictional first and last names, including Avery Brooks. No customer name, policy number or account free text is required for this association. This evidence does not by itself prove a positive and negative native personalization rule test or complete persona-switch isolation.
 
 ## Editing and access-boundary review
 

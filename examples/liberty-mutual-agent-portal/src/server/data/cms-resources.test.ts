@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mapCmsResource } from './cms-resources';
+import { mapCmsResource, readCmsResourceCatalog } from './cms-resources';
 import { PortalError } from '../errors';
 
 const field = (value: unknown) => ({ jsonValue: { value } });
@@ -39,4 +39,43 @@ test('incomplete native content fails clearly instead of substituting an enginee
   const allStates = mapCmsResource({ ...authored, state: field('All'), sourceLink: field({ href: 'javascript:alert(1)' }) });
   assert.deepEqual(allStates.states, ['TX', 'FL', 'IL']);
   assert.equal(allStates.sourceUrl, undefined);
+});
+
+
+test('one invalid published resource is omitted while valid pages and pagination remain available', async () => {
+  const invalid = { ...authored, id: '0A946D4D-2385-4D84-A2E7-31FB2DB9DDF2', summary: field('') };
+  const diagnostics: string[] = [];
+  const cursors: Array<string | undefined> = [];
+  const catalog = await readCmsResourceCatalog(async (after) => {
+    cursors.push(after);
+    return after
+      ? { item: { children: { results: [authored], pageInfo: { hasNext: false } } } }
+      : { item: { children: { results: [invalid], pageInfo: { hasNext: true, endCursor: 'page-two' } } } };
+  }, (id) => diagnostics.push(id));
+  assert.deepEqual(cursors, [undefined, 'page-two']);
+  assert.deepEqual(catalog.map((resource) => resource.id), [mapCmsResource(authored).id]);
+  assert.deepEqual(diagnostics, ['0a946d4d23854d84a2e731fb2db9ddf2']);
+  assert.equal(JSON.stringify(diagnostics).includes(String(authored.title.jsonValue.value)), false);
+});
+
+test('an invalid-only catalog stays empty and diagnostics never reflect raw invalid identifiers', async () => {
+  const diagnostics: string[] = [];
+  const catalog = await readCmsResourceCatalog(async () => ({ item: { children: {
+    results: [{ ...authored, id: 'raw-untrusted-value', state: field('') }], pageInfo: { hasNext: false },
+  } } }), (id) => diagnostics.push(id));
+  assert.deepEqual(catalog, []);
+  assert.deepEqual(diagnostics, ['invalid-item-id']);
+});
+
+test('catalog degradation never hides provider, root, schema, or pagination failures', async () => {
+  const providerError = new Error('Provider unavailable');
+  await assert.rejects(readCmsResourceCatalog(async () => { throw providerError; }), (error) => error === providerError);
+  await assert.rejects(readCmsResourceCatalog(async () => ({ item: null })),
+    (error) => error instanceof PortalError && error.code === 'CONTENT_UNAVAILABLE');
+  await assert.rejects(readCmsResourceCatalog(async () => ({ item: { children: {
+    results: [{ ...authored, id: undefined } as unknown as typeof authored], pageInfo: { hasNext: false },
+  } } })), TypeError);
+  await assert.rejects(readCmsResourceCatalog(async () => ({ item: { children: {
+    results: [], pageInfo: { hasNext: true },
+  } } })), (error) => error instanceof PortalError && error.code === 'CONTENT_UNAVAILABLE');
 });

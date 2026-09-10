@@ -49,7 +49,7 @@ docs/brand/                      Source-backed brand and editorial assets
 
 ## Delivery model
 
-Feature branches open pull requests to `main`. Both **Offline validation** and **Connected production build** must pass. The connected build requires the GitHub repository variable `SITECORE_PUBLIC_EDGE_CONTEXT_ID`, containing the **Live published delivery context**. Missing configuration fails visibly; no stub Sitecore files are generated to make a build pass.
+Feature branches open pull requests to `main`. Both **Offline validation** and **Connected production build** must pass. The connected build requires the repository secret `SITECORE_SERVER_EDGE_CONTEXT_ID` for private scoped Live delivery access and the variable `SITECORE_PUBLIC_EDGE_CONTEXT_ID` for the scoped browser context. Missing configuration fails visibly; no stub Sitecore files are generated to make a build pass.
 
 Vercel uses the application directory as its project root, `npm ci` for installation, `npm run build` for builds, and Node.js 24. Production and preview deployments require separate state namespaces. Deploying code does not publish marketing content or import profiles. Initial content creation is an explicit one-time action; normal model releases preserve marketer edits.
 

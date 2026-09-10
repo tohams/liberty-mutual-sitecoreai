@@ -8,10 +8,12 @@ import { stateNames, usePortal } from "../portal/portal-context";
 export function SubmissionForm({
   submission,
   productId,
+  initialState,
   onSaved,
 }: {
   submission?: Submission;
   productId?: string;
+  initialState?: StateCode;
   onSaved: (id: string) => void;
 }) {
   const { data, act, busy } = usePortal();
@@ -102,13 +104,17 @@ export function SubmissionForm({
               Risk state
               <select
                 name="state"
-                defaultValue={submission?.state || data.agent.state}
+                defaultValue={
+                  submission?.state || initialState || data.agent.state
+                }
               >
-                {data.agent.licensedStates.map((state) => (
-                  <option key={state} value={state}>
-                    {stateNames[state]}
-                  </option>
-                ))}
+                {data.agent.licensedStates
+                  .filter((state) => product?.states.includes(state))
+                  .map((state) => (
+                    <option key={state} value={state}>
+                      {stateNames[state]}
+                    </option>
+                  ))}
               </select>
             </label>
             <label>

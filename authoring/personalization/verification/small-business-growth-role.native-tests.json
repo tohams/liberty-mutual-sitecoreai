@@ -1,0 +1,56 @@
+{
+  "recordedOn": "2026-09-10",
+  "evidenceSource": "Implementation owner's observations of the native SitecoreAI Custom Value Test and publication UI",
+  "customValueId": "d533bc1e-ded3-4755-84d7-a0805e5dabf8",
+  "nativePublicationStatus": "Published",
+  "tests": [
+    {
+      "case": "Imported Avery profile",
+      "contextSource": "Actual imported profile loaded in the native Test UI",
+      "nativeProfileId": "477f6b6f-673b-42e3-83ab-1bf0a8aa0ed2",
+      "testContextModified": false,
+      "observedResult": "principal"
+    },
+    {
+      "case": "Agency cohort flag false",
+      "contextSource": "Modified request JSON in the native Test UI; not a stored profile update",
+      "testContextModified": true,
+      "changedInput": "profile.extensions.smallBusinessGrowthAudience = false",
+      "observedResult": "neutral"
+    },
+    {
+      "case": "Producer role",
+      "contextSource": "Modified request JSON in the native Test UI; not a stored profile update",
+      "testContextModified": true,
+      "changedInput": "profile.extensions.role = producer",
+      "observedResult": "producer"
+    },
+    {
+      "case": "Account-manager role",
+      "contextSource": "Modified request JSON in the native Test UI; not a stored profile update",
+      "testContextModified": true,
+      "changedInput": "profile.extensions.role = account-manager",
+      "observedResult": "account-manager"
+    },
+    {
+      "case": "Anonymous profile",
+      "contextSource": "Modified request JSON in the native Test UI; not a stored profile update",
+      "testContextModified": true,
+      "changedInput": "profile type changed to anonymous",
+      "observedResult": "neutral"
+    },
+    {
+      "case": "Unrelated identity provider",
+      "contextSource": "Modified request JSON in the native Test UI; not a stored profile update",
+      "testContextModified": true,
+      "changedInput": "profile identifiers changed to an unrelated provider",
+      "observedResult": "neutral"
+    }
+  ],
+  "limitations": [
+    "Only the Avery case is recorded as a test of an actual imported profile. Producer and account-manager tests do not establish that those separate stored profiles were loaded.",
+    "Test-context changes affected request JSON only, not persisted UDL profile records.",
+    "Individual test execution timestamps and screenshot/run identifiers have not been transcribed into this record.",
+    "Publishing a custom value and passing its tests do not prove decision-table connection, content-variant selection or a browser personalization journey."
+  ]
+}

@@ -2,6 +2,8 @@
 
 The portal uses native Sitecore pages and editable datasource fields. Operational account, policy, submission and identity data remain in the authorized application data layer. Native UDL audiences personalize content; they do not authorize business records.
 
+Native custom-value source and test evidence are maintained separately in [authoring/personalization](../authoring/personalization/README.md). The published small-business growth role value has native test evidence; its decision-table connection and complete browser personalization journey require separate acceptance records. CMS serialization does not deploy that configuration.
+
 ## Native scope and ownership
 
 - Site collection: `/sitecore/content/LibertyMutual`

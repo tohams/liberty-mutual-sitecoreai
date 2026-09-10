@@ -49,7 +49,7 @@ export function GrowthScreen() {
             possibilities ahead.
           </p>
           <a href="#growth-plan" className="button button-primary">
-            Explore your growth plan
+            Explore a growth path
             <PortalIcon name="arrow" width="16" />
           </a>
         </div>
@@ -82,13 +82,13 @@ export function GrowthScreen() {
           </small>
         </div>
         <div>
-          <span>Policies across your agency</span>
+          <span>Policies in your workspace</span>
           <strong>
             {data.agency.production
               .reduce((sum, item) => sum + item.policyCount, 0)
               .toLocaleString()}
           </strong>
-          <small>Across your Liberty Mutual book</small>
+          <small>Across the business lines available to you</small>
         </div>
       </div>
       <div className="growth-columns">
@@ -135,7 +135,7 @@ export function GrowthScreen() {
           <span className="round-icon">
             <PortalIcon name="growth" width="25" />
           </span>
-          <span className="eyebrow">YOUR NEXT OPPORTUNITY</span>
+          <span className="eyebrow">PRACTICE DEVELOPMENT</span>
           <h2>{campaign.agencyGoal}</h2>
           <p>{campaign.description}</p>
           <Link href="/support" className="text-link">
@@ -144,7 +144,7 @@ export function GrowthScreen() {
           </Link>
           <div className="growth-opportunity-note">
             <PortalIcon name="users" width="18" />
-            <span>Built around {data.agency.name}</span>
+            <span>{campaign.audienceLabel}</span>
           </div>
         </aside>
       </div>

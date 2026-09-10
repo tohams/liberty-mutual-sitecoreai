@@ -69,23 +69,42 @@ export function mapCmsResource(item: CmsResourceItem): Resource {
   };
 }
 
-export async function getResourceCatalog(): Promise<Resource[]> {
-  if (process.env.PORTAL_CONTENT_ADAPTER === 'fixtures' && !process.env.VERCEL && process.env.NODE_ENV !== 'production') return fixtures.resources;
-  const { default: client } = await import('../../lib/sitecore-client');
-  const { default: config } = await import('../../../sitecore.config');
+/** A malformed published item cannot prevent agents from opening unrelated work. */
+export async function readCmsResourceCatalog(
+  fetchPage: (after?: string) => Promise<ResourceQueryResult>,
+  reportInvalid: (itemId: string) => void = (itemId) => console.warn('Portal resource omitted: invalid published metadata', itemId),
+): Promise<Resource[]> {
   const resources: Resource[] = [];
   let after: string | undefined;
   // Small pages avoid Experience Edge's query-complexity limit; a bounded cursor guards bad pagination.
   for (let page = 0; page < 25; page++) {
-    const result: ResourceQueryResult = await client.getData<ResourceQueryResult>(RESOURCE_QUERY, {
-      root: `/sitecore/content/LibertyMutual/${config.defaultSite}/Home/resources`, language: config.defaultLanguage, after,
-    }, { fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }) });
-    if (!result.item) throw new PortalError('CONTENT_UNAVAILABLE', 'The resource library is temporarily unavailable. Please try again shortly.', 503);
-    resources.push(...result.item.children.results.map(mapCmsResource));
+    const result = await fetchPage(after);
+    if (!result.item || !Array.isArray(result.item.children?.results) || typeof result.item.children.pageInfo?.hasNext !== 'boolean') {
+      throw new PortalError('CONTENT_UNAVAILABLE', 'The resource library is temporarily unavailable. Please try again shortly.', 503);
+    }
+    for (const item of result.item.children.results) {
+      try {
+        resources.push(mapCmsResource(item));
+      } catch (error) {
+        // Only known per-item metadata validation may degrade. Provider/schema errors still fail explicitly.
+        if (!(error instanceof PortalError) || error.code !== 'CONTENT_UNAVAILABLE') throw error;
+        const identifier = /^[a-f0-9-]{32,36}$/i.test(item.id) ? item.id.replace(/-/g, '').toLowerCase() : 'invalid-item-id';
+        reportInvalid(identifier);
+      }
+    }
     const nextCursor = result.item.children.pageInfo.endCursor;
     if (!result.item.children.pageInfo.hasNext) return resources;
     if (!nextCursor || nextCursor === after) break;
     after = nextCursor;
   }
   throw new PortalError('CONTENT_UNAVAILABLE', 'The resource library is temporarily unavailable. Please try again shortly.', 503);
+}
+
+export async function getResourceCatalog(): Promise<Resource[]> {
+  if (process.env.PORTAL_CONTENT_ADAPTER === 'fixtures' && !process.env.VERCEL && process.env.NODE_ENV !== 'production') return fixtures.resources;
+  const { default: client } = await import('../../lib/sitecore-client');
+  const { default: config } = await import('../../../sitecore.config');
+  return readCmsResourceCatalog((after) => client.getData<ResourceQueryResult>(RESOURCE_QUERY, {
+    root: `/sitecore/content/LibertyMutual/${config.defaultSite}/Home/resources`, language: config.defaultLanguage, after,
+  }, { fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }) }));
 }

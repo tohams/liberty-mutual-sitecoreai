@@ -25,7 +25,9 @@ export function ProductsScreen() {
   const [state, setState] = useState<StateCode>(data.agent.state);
   const [intakeId, setIntakeId] = useState("");
   const visible = data.products.filter(
-    (product) => line === "all" || product.line === line,
+    (product) =>
+      (line === "all" || product.line === line) &&
+      product.states.includes(state),
   );
   return (
     <>
@@ -99,7 +101,7 @@ export function ProductsScreen() {
         </p>
         <span>
           <PortalIcon name="pin" width="14" />
-          Showing guidance for {stateNames[state]}
+          Product preparation for {stateNames[state]}
         </span>
       </div>
       <div className="product-grid">
@@ -134,6 +136,7 @@ export function ProductsScreen() {
                 <PortalIcon name="arrow" width="17" />
               </Link>
               {product.line !== "surety" &&
+                data.agent.licensedStates.includes(state) &&
                 data.agency.appointedLines.includes(product.line) &&
                 (data.agent.role === "principal" ||
                   data.agent.specializations.includes(product.line)) && (
@@ -166,7 +169,8 @@ export function ProductsScreen() {
       >
         <SubmissionForm
           productId={intakeId}
-          key={intakeId}
+          initialState={state}
+          key={`${intakeId}:${state}`}
           onSaved={(id) => router.push(`/quote?submission=${id}`)}
         />
       </PortalDialog>

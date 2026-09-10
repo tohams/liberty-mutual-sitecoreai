@@ -72,8 +72,8 @@ jobs:
       run:
         working-directory: examples/liberty-mutual-agent-portal
     env:
-      # The Live delivery context is intentionally public; never use a Preview/editing context here.
-      SITECORE_EDGE_CONTEXT_ID: ${{ vars.SITECORE_PUBLIC_EDGE_CONTEXT_ID }}
+      # Edge is a private resource. Keep server delivery access in a repository secret.
+      SITECORE_EDGE_CONTEXT_ID: ${{ secrets.SITECORE_SERVER_EDGE_CONTEXT_ID }}
       NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID: ${{ vars.SITECORE_PUBLIC_EDGE_CONTEXT_ID }}
       NEXT_PUBLIC_SITECORE_EDGE_PLATFORM_HOSTNAME: ${{ vars.SITECORE_EDGE_PLATFORM_HOSTNAME || 'https://edge-platform.sitecorecloud.io' }}
       NEXT_PUBLIC_DEFAULT_SITE_NAME: liberty-mutual-agent-portal
@@ -85,8 +85,8 @@ jobs:
           persist-credentials: false
       - name: Require published delivery context
         run: |
-          if [ -z "$SITECORE_EDGE_CONTEXT_ID" ]; then
-            echo '::error::Set repository variable SITECORE_PUBLIC_EDGE_CONTEXT_ID to the Live published delivery context. Offline checks cannot certify a production build.'
+          if [ -z "$SITECORE_EDGE_CONTEXT_ID" ] || [ -z "$NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID" ]; then
+            echo '::error::Configure secret SITECORE_SERVER_EDGE_CONTEXT_ID for scoped Live delivery and variable SITECORE_PUBLIC_EDGE_CONTEXT_ID for the scoped browser context. Offline checks cannot certify a production build.'
             exit 1
           fi
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0

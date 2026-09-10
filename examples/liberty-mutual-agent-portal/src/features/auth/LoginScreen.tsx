@@ -37,7 +37,8 @@ export function LoginScreen() {
         const profile = await bootstrap.json();
         await establishPortalIdentity(profile.udlIdentity);
       }
-      // The known identity must reach the server before the first personalized page request.
+      // Identify browser measurement before navigation. Native campaign decisions independently
+      // use the verified portal session, so delayed analytics cannot select another agent's content.
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination
       window.location.assign("/workspace");
     } catch (failure) {

@@ -24,6 +24,10 @@ export function SubmissionsScreen({
 }) {
   const searchParams = useSearchParams();
   const { data, act, busy } = usePortal();
+  const canPrepareSurety =
+    data.agency.appointedLines.includes("surety") &&
+    (data.agent.role === "principal" ||
+      data.agent.specializations.includes("surety"));
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All submissions");
   const [selectedId, setSelectedId] = useState<string | null>(
@@ -34,7 +38,7 @@ export function SubmissionsScreen({
   );
   const [bondOpen, setBondOpen] = useState(Boolean(initialBondId));
   const [newBondOpen, setNewBondOpen] = useState(
-    searchParams.get("bond") === "1",
+    searchParams.get("bond") === "1" && canPrepareSurety,
   );
   const [selectedBondId, setSelectedBondId] = useState<string | null>(
     initialBondId || null,
@@ -78,7 +82,7 @@ export function SubmissionsScreen({
           <p>From a promising opportunity to a well-prepared submission.</p>
         </div>
         <div className="heading-actions">
-          {data.agency.appointedLines.includes("surety") && (
+          {canPrepareSurety && (
             <button
               className="button button-secondary"
               onClick={() => setNewBondOpen(true)}

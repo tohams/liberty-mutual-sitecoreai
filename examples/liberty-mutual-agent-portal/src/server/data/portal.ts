@@ -44,13 +44,31 @@ async function getPack(store: StateStore, reviewerPack: string): Promise<StoredV
   return result;
 }
 
-async function getContext(session: PortalSession, store: StateStore) {
+async function getPackContext(session: PortalSession, store: StateStore) {
   const agent = getAgent(session);
   const pack = await getPack(store, session.reviewerPack);
   const issuedAt = Date.parse(session.issuedAt);
   if (!Number.isFinite(issuedAt) || pack.value.restartedAt > issuedAt) throw new PortalError('UNAUTHENTICATED', 'Your workspace was restarted. Please sign in again.', 401);
   const remainingSeconds = Math.ceil((pack.value.createdAt + STATE_TTL_SECONDS * 1000 - Date.now()) / 1000);
   if (remainingSeconds <= 0) throw new PortalError('WORKSPACE_EXPIRED', 'This workspace has expired. Contact your portal administrator to restore it.', 409);
+  return { agent, pack, remainingSeconds };
+}
+
+function verifiedProfileIdentity(session: PortalSession, agent: Agent, metadata: PackMetadata): PortalBootstrap['udlIdentity'] {
+  const verifiedGenerations = (process.env.PORTAL_VERIFIED_PROFILE_GENERATIONS ?? '').split(',').map((value) => value.trim()).filter(Boolean);
+  return verifiedGenerations.includes(String(metadata.profileGeneration))
+    ? { provider: 'liberty-mutual-agent', id: getProfileIdentifier(session.reviewerPack, agent.id, metadata.profileGeneration) }
+    : null;
+}
+
+/** Resolve only the authenticated UDL identifier; no content or agency-state hydration. */
+export async function getPortalPersonalizationIdentity(session: PortalSession, store = getStateStore()): Promise<PortalBootstrap['udlIdentity']> {
+  const { agent, pack } = await getPackContext(session, store);
+  return verifiedProfileIdentity(session, agent, pack.value);
+}
+
+async function getContext(session: PortalSession, store: StateStore) {
+  const { agent, pack, remainingSeconds } = await getPackContext(session, store);
   const key = `${stateNamespace()}:pack:${session.reviewerPack}:run:${pack.value.runId}:agency:${agent.agencyId}`;
   const initial = await store.read<AgencyState>(key);
   const record = initial ?? await store.compareAndSet(key, null, baseline(agent.agencyId), remainingSeconds) ?? await store.read<AgencyState>(key);
@@ -71,12 +89,11 @@ function makeBootstrap(session: PortalSession, agent: Agent, metadata: PackMetad
   const bondRequests = allowedLine('surety') ? record.value.bondRequests : [];
   const allowedPaths = new Set([...policies.flatMap((item) => [`/policies/${item.id}`, `/renewals/${item.id}`]), ...submissions.map((item) => `/submissions/${item.id}`), ...bondRequests.map((item) => `/surety/${item.id}`)]);
   const profileId = editor ? '' : getProfileIdentifier(session.reviewerPack, agent.id, metadata.profileGeneration);
-  const verifiedGenerations = (process.env.PORTAL_VERIFIED_PROFILE_GENERATIONS ?? '').split(',').map((value) => value.trim()).filter(Boolean);
   return structuredClone({
     agent,
     agency: { ...agency, production: agency.production.filter((entry) => allowedLine(entry.line)) },
     session: { stateVersion: record.version, runId: metadata.runId, profileId, profileGeneration: metadata.profileGeneration, expiresAt: session.expiresAt },
-    udlIdentity: !editor && verifiedGenerations.includes(String(metadata.profileGeneration)) ? { provider: 'liberty-mutual-agent', id: profileId } : null,
+    udlIdentity: editor ? null : verifiedProfileIdentity(session, agent, metadata),
     asOfDate: fixtures.manifest.asOfDate,
     productionPeriod: fixtures.manifest.productionPeriod,
     products: fixtures.products, policies, submissions, bondRequests,

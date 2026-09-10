@@ -54,13 +54,15 @@ export async function establishPortalIdentity(
       ],
     });
     await initialization;
-    await identity({
+    const receipt = await identity({
       identifiers: [profile],
       channel: "WEB",
       currency: "USD",
       language: "EN",
       page: "Agent workspace",
     });
+    // The SDK resolves transport failures to null rather than throwing.
+    if (!receipt) return false;
     activeIdentity = key;
     return true;
   })()
@@ -86,13 +88,14 @@ export async function recordPortalPageView(
   if (recordedViews.has(key)) return;
   recordedViews.add(key);
   try {
-    await pageView({
+    const receipt = await pageView({
       channel: "WEB",
       currency: "USD",
       language: "EN",
       page: path,
       pageVariantId,
     });
+    if (!receipt) recordedViews.delete(key);
   } catch {
     recordedViews.delete(key);
   }

@@ -29,8 +29,8 @@ Start with the application's `.env.remote.example`. Keep real values out of Git.
 | --- | --- |
 | `NEXT_PUBLIC_DEFAULT_SITE_NAME` | `liberty-mutual-agent-portal` |
 | `NEXT_PUBLIC_DEFAULT_LANGUAGE` | `en`; enable another locale only with matching CMS content and application routing |
-| `SITECORE_EDGE_CONTEXT_ID` | Server SDK context; the deployed delivery application uses the Live published context |
-| `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | Public Live context for native browser integration; do not expose the Preview context |
+| `SITECORE_EDGE_CONTEXT_ID` | Server-only SDK context: Live delivery access in production; Preview content access on the dedicated editing host |
+| `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | Public-scoped child context containing only the required browser resources; never a master Live or Preview context |
 | `NEXT_PUBLIC_SITECORE_EDGE_PLATFORM_HOSTNAME` | Approved Edge platform URL, normally `https://edge-platform.sitecorecloud.io` |
 | `SITECORE_EDITING_SECRET` | Server-only editing endpoint secret, matching the authorized Sitecore rendering host |
 | `PORTAL_SESSION_SECRET` | Server-only random signing secret of at least 32 characters; independently provision per environment |
@@ -40,6 +40,8 @@ Start with the application's `.env.remote.example`. Keep real values out of Git.
 | `PORTAL_CONTENT_ADAPTER` | `sitecore` for connected environments; `fixtures` is allowed only outside Vercel and production |
 | `PORTAL_VERIFIED_PROFILE_GENERATIONS` | Comma-separated generations actually imported and verified in this tenant; never infer from the presence of a JSONL file |
 | `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED` | Enable only after profile import, consent handling and native identity/event verification |
+
+Sitecore master Live and Preview context IDs are secrets. The tenant's Context IDs UI also marks the Edge resource as private. The scoped `liberty-mutual-agent-portal-browser` context contains the Liberty Mutual Site Analytics identifier plus Files and Forms, which the UI automatically adds as required dependencies. It excludes Edge and DemoSite. The separate `liberty-mutual-agent-portal-server-live` and `liberty-mutual-agent-portal-server-preview` contexts include the corresponding private Edge resource and the same portal dependencies. Keep their values in protected server configuration. CI uses the private scoped Live context as a GitHub Actions secret, never as a public variable. See [Sitecore Context IDs](https://doc.sitecore.com/portal/en/developers/sitecore-cloud-portal/context-ids.html) and [scoped context management](https://doc.sitecore.com/portal/en/developers/sitecore-cloud-portal/context-ids/manage-scoped-context-ids.html).
 
 The provisioned free Redis integration is connected to Vercel Production and Preview. Local development must receive its own provider configuration or explicitly use `PORTAL_STATE_ADAPTER=local-json`. Deployed instances fail clearly when no durable provider is configured; they never fall back to memory or an ephemeral filesystem. Shared preview namespaces are isolated from production but shared among previews; use a separate namespace per preview project when independent review sessions are required.
 
@@ -52,11 +54,11 @@ Node.js 24 is required. `npm ci` installs the committed dependency graph. The ap
 The active [workflow](../.github/workflows/portal-validation.yml) runs on feature pull requests to `main`, pushes to `main`, and manual dispatch. It pins third-party actions to reviewed commits, grants read-only repository permission and does not retain checkout credentials.
 
 * **Offline validation** runs strict lint, meaningful domain/authorization/state/routing tests, read-only seed and UDL contract checks, and native CLI validation of the two owned serialization modules. Dependency and CLI restoration use public package networks; no tenant login is needed.
-* **Connected production build** generates real SDK artifacts, typechecks and compiles against published Sitecore content. It requires the repository **variable** `SITECORE_PUBLIC_EDGE_CONTEXT_ID`. The optional variable `SITECORE_EDGE_PLATFORM_HOSTNAME` supplies a nondefault Edge URL. No editing, session, Redis or operator credentials are given to PR builds.
+* **Connected production build** generates real SDK artifacts, typechecks and compiles against published Sitecore content. It requires repository **secret** `SITECORE_SERVER_EDGE_CONTEXT_ID` for the private scoped Live context and **variable** `SITECORE_PUBLIC_EDGE_CONTEXT_ID` for the scoped browser context. The optional variable `SITECORE_EDGE_PLATFORM_HOSTNAME` supplies a nondefault Edge URL. No editing, session, Redis or operator credentials are given to PR builds.
 
 Missing public context fails the connected job explicitly. Offline checks do not produce a substitute build, and a skipped or unavailable connected build is not release approval. Configure GitHub branch protection to require both named jobs; configure one approving reviewer, approval of the latest push and resolved conversations. These repository settings must be checked after transfer.
 
-The public context used by CI is intentionally the same class of context exposed to the delivery browser. Never solve a failing PR build by exposing a Preview context or an administrative token. If a tenant restricts public-context build access, arrange a reviewed environment-specific build; leave the required check failing until there is real build evidence.
+The private scoped context used by CI can read published environment content; it is not browser-safe. Review workflow changes and repository collaborator access accordingly. Fork PRs do not receive repository secrets and cannot pass the connected build without an authorized build context. Never solve a failing PR build by exposing private Edge access, a master context, a Preview context or an administrative token in a public variable.
 
 ## Vercel release process
 
@@ -76,6 +78,22 @@ authoring/scripts/deploy-content.sh ENVIRONMENT
 ```
 
 Normal releases push only `LibertyMutual.Model`, using `CreateAndUpdate` within the three owned model roots. The initial `--seed` option creates missing content only. The content module is `CreateOnly`; it never overwrites a marketer's existing item. `--publish` explicitly publishes the owned site and model roots. It does not include related items outside that scope. Never run a broad starter-wide serialization push for this portal.
+
+### Dedicated editing host
+
+The SDK's editing request headers select the page, language, version and edit mode; they do not replace its configured server context ID. The deployed editing host therefore needs a Preview server context, while production uses Live content. A Preview context was verified to return `pageEditing: true` with editable metadata for the owned home page; Live returned normal delivery fields.
+
+Use a stable editing deployment alias and a separate state namespace. Allow Sitecore to reach that alias; other previews can retain Vercel Authentication. Both `/api/editing/config` and `/api/editing/render` remain protected by the editing secret. Tracking is suppressed for the verified editor route, whose operational data is a safe fixture without an agent identity.
+
+The configuration script defaults to read-only and mutates only the dedicated rendering host and the owned site grouping:
+
+```sh
+node authoring/scripts/configure-portal-host.cjs ENVIRONMENT https://EDITING_HOST https://DELIVERY_HOST
+node authoring/scripts/configure-portal-host.cjs ENVIRONMENT https://EDITING_HOST https://DELIVERY_HOST --apply
+dotnet sitecore publish item -n ENVIRONMENT -p '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Settings/Site Grouping/liberty-mutual-agent-portal' -l en --pt Edge
+```
+
+It configures the application, rendering and configuration URLs; assigns that named host to the site; lists the delivery/editing hostnames; and preserves the existing analytics mapping. Regenerate SDK site metadata after publication. The initial CreateOnly seed stays environment-neutral; apply this host configuration after seeding a new tenant. Verify a real native editing canvas before recording editing acceptance.
 
 Keep an environment-to-tenant mapping in the team's private operations inventory. The current UDL verification ledger is scoped to the Safeco Insurance Company of America POC organization and its actual tenant ID; importing its files into another tenant requires new verification and configuration.
 

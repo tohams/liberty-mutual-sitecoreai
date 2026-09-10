@@ -4,9 +4,9 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { applyPortalAction, getEditorBootstrap, getPolicyDocument, getPortalBootstrap, resetReviewerPack } from './portal';
+import { applyPortalAction, getEditorBootstrap, getPolicyDocument, getPortalBootstrap, getPortalPersonalizationIdentity, resetReviewerPack } from './portal';
 import { fixtures, validateFixtures } from './fixtures';
-import { LocalJsonStateStore } from '../state/store';
+import { LocalJsonStateStore, stateNamespace, type StateStore } from '../state/store';
 import { createSession, verifySession } from '../auth/session';
 import { authenticate } from '../auth/credentials';
 import logins from '../../../fixtures/portal-logins.json';
@@ -39,6 +39,28 @@ test('session signatures reject tampering and expire after eight hours', async (
   parts[1] = Buffer.from(JSON.stringify({ agentId: 'elena' })).toString('base64url');
   assert.equal(await verifySession(parts.join('.'), now), null);
   assert.equal(await verifySession(token, new Date('2026-09-10T20:00:00Z')), null);
+});
+
+test('personalization identity reads only pack metadata and honors verified generation, restart, expiry and agent scope', async () => {
+  const session = await login('maya');
+  const keys: string[] = [];
+  const metadata = { runId: 'identity-test', profileGeneration: 0, createdAt: Date.now(), restartedAt: 0 };
+  const store: StateStore = {
+    read: async <T>(key: string) => { keys.push(key); return { value: metadata as T, version: 0, expiresAt: Date.now() + 10000 }; },
+    compareAndSet: async () => { throw new Error('Identity resolution must not hydrate agency state'); },
+  };
+  const identity = await getPortalPersonalizationIdentity(session, store);
+  assert.equal(identity?.provider, 'liberty-mutual-agent');
+  assert.deepEqual(keys, [`${stateNamespace()}:pack:01`]);
+  metadata.profileGeneration = 999;
+  assert.equal(await getPortalPersonalizationIdentity(session, store), null);
+  metadata.profileGeneration = 0;
+  metadata.restartedAt = Date.parse(session.issuedAt) + 1000;
+  await assert.rejects(getPortalPersonalizationIdentity(session, store), errorCode('UNAUTHENTICATED'));
+  metadata.restartedAt = 0;
+  metadata.createdAt = Date.now() - 8 * 24 * 60 * 60 * 1000;
+  await assert.rejects(getPortalPersonalizationIdentity(session, store), errorCode('WORKSPACE_EXPIRED'));
+  await assert.rejects(getPortalPersonalizationIdentity({ ...session, agencyId: 'wrong-agency' }, store), errorCode('UNAUTHENTICATED'));
 });
 
 test('all 28 fixture credentials use salted hashes and unknown logins fail', async () => {

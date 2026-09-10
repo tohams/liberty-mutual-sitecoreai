@@ -135,6 +135,7 @@ export function PortalApp({
   else if (["resources", "learning"].includes(section))
     content = (
       <ResourcesScreen
+        key={route}
         search={resourcesSearch}
         initialCourseId={section === "learning" ? selectedId : undefined}
       />
@@ -193,7 +194,9 @@ export function PortalApp({
             <>
               {content}
               {section !== "workspace" &&
-                !(section === "resources" && resourcesSearch) &&
+                !(
+                  ["resources", "learning"].includes(section) && resourcesSearch
+                ) &&
                 workspaceEditorial && (
                   <section className="cms-editorial-slot">
                     {workspaceEditorial}

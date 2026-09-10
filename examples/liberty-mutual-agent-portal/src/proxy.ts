@@ -4,7 +4,6 @@ import {
   defineProxy,
   PreviewProxy,
   AppRouterMultisiteProxy,
-  PersonalizeProxy,
   RedirectsProxy,
   LocaleProxy,
 } from '@sitecore-content-sdk/nextjs/proxy';
@@ -12,6 +11,8 @@ import sites from '.sitecore/sites.json';
 import scConfig from 'sitecore.config';
 import { routing } from './i18n/routing';
 import client from './lib/sitecore-client';
+import { PortalPersonalizeProxy } from './server/personalization/PortalPersonalizeProxy';
+import { getPortalPersonalizationIdentity } from './server/data/portal';
 
 const preview = new PreviewProxy({
     client,
@@ -62,7 +63,7 @@ const redirects = new RedirectsProxy({
   skip: () => false,
 });
 
-const personalize = new PersonalizeProxy({
+const personalize = new PortalPersonalizeProxy({
   /**
    * List of sites for site resolver to work with
    */
@@ -74,16 +75,22 @@ const personalize = new PersonalizeProxy({
   // By default it is disabled while in development mode.
   // This is an important performance consideration since Next.js Edge middleware runs on every request.
   skip: () => false,
-});
+}, async () => null);
 
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   if (path === '/login' || path.startsWith('/operator')) return NextResponse.next();
   const hasDraftCookie = req.cookies.has('__prerender_bypass');
-  if (!hasDraftCookie && !await verifySession(req.cookies.get(SESSION_COOKIE)?.value)) {
+  const session = hasDraftCookie ? null : await verifySession(req.cookies.get(SESSION_COOKIE)?.value);
+  if (!hasDraftCookie && !session) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
-  const response = await defineProxy(preview, locale, multisite, redirects, personalize).exec(req);
+  // Request-scoped identity is resolved only if native campaign discovery needs it.
+  // Draft requests and invalid/unverified runs cannot use a stale browser profile.
+  const requestPersonalize = personalize.forRequest(async () =>
+    session ? getPortalPersonalizationIdentity(session) : null,
+  );
+  const response = await defineProxy(preview, locale, multisite, redirects, requestPersonalize).exec(req);
   response.headers.set('Cache-Control', 'private, no-store, max-age=0');
   return response;
 }
