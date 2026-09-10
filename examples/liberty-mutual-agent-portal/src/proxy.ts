@@ -13,6 +13,7 @@ import { routing } from './i18n/routing';
 import client from './lib/sitecore-client';
 import { PortalPersonalizeProxy } from './server/personalization/PortalPersonalizeProxy';
 import { getPortalPersonalizationIdentity } from './server/data/portal';
+import { reportPersonalizationDiagnostic } from './server/personalization/diagnostics';
 
 const preview = new PreviewProxy({
     client,
@@ -82,11 +83,12 @@ export default async function proxy(req: NextRequest) {
   if (path === '/login' || path.startsWith('/operator')) return NextResponse.next();
   const hasDraftCookie = req.cookies.has('__prerender_bypass');
   const session = hasDraftCookie ? null : await verifySession(req.cookies.get(SESSION_COOKIE)?.value);
+  reportPersonalizationDiagnostic({ stage: 'proxy', enabled: scConfig.personalize.enabled, draft: hasDraftCookie || req.cookies.has('__next_preview_data'), signedSessionPresent: Boolean(session) });
   if (!hasDraftCookie && !session) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
-  // Request-scoped identity is resolved only if native campaign discovery needs it.
-  // Draft requests and invalid/unverified runs cannot use a stale browser profile.
+  // Native decisions use the browser profile linked at login, gated by this request's active run.
+  // Each request has its own transport context; draft and unverified runs remain neutral.
   const requestPersonalize = personalize.forRequest(async () =>
     session ? getPortalPersonalizationIdentity(session) : null,
   );

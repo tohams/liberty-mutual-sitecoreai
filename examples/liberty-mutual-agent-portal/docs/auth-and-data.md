@@ -59,6 +59,14 @@ Login verifies credentials on the server, applies a durable per-username attempt
 
 Successful login and logout expire the pinned SDK's `sc_cid` and `sc_cid_personalize` cookies, plus the exact legacy cookie names for this site's public context ID. Deletions use `/`, both host-only and the current hostname domain scope used by the SDK's server personalization proxy. They do not clear another application's cookies or a parent-domain namespace. The client also clears the supported event queue and transitions to a fresh document; that client step remains necessary because a server response cannot erase another browser tab's in-memory event state. A signed cookie alone does not trigger the login-page redirect: the corresponding reviewer workspace must still be active, preventing a redirect loop after an operator restart.
 
+An explicit `/login` remains available after Page Builder use on the editing alias, including a verified Next.js Draft Mode session. Successful portal login clears only the two intended draft cookies; a rejected login preserves them.
+
+After successful app authentication, the browser gives optional native identity preparation **eight seconds overall**. That budget includes authenticated bootstrap fetch and JSON parsing, waiting for old SDK work, clearing the supported queue, creating a fresh native browser and waiting for profile linkage. Any failure or deadline expiry still navigates to the workspace. The nested profile-link helper has **at most six seconds** within that overall budget: read the fresh browser's baseline profile, send one IDENTITY event, then observe browser/show until its profile reference changes. It stops immediately once the link is observed. Polling is bounded and applies only to explicit login. Ordinary tracking bounds its identity wait to two seconds without polling for an already-linked profile to change.
+
+The public analytics adapter wrapper forces a fresh browser through the supported `setClientId()` contract and never mutates the supplied adapter or hidden SDK state. Actual in-flight SDK work stays tracked even after its caller times out. Fresh initialization waits for it to settle; generation and abort checks prevent a superseded continuation from sending an old identity or activating a late result. The SDK identity transport itself does not accept cancellation, so a bounded wait must not be described as canceling that HTTP request.
+
+Campaign decisions use the linked browser's existing `sc_cid`, while the server checks the active portal session and verified profile generation as a prerequisite. `src/server/personalization/browser-profile-decision.ts` uses a request-local HTTP transport to the native decision endpoint; it never initializes shared server analytics state or sends the external agent identifier as a decision lookup. Native campaign discovery and rewrites remain in the public Content SDK proxy. Unknown variants, missing identity/cookies, transport errors and timeouts remain neutral, with no decision retry or fixture-selected campaign. UDL profile linking can complete after the identity-event response, so verify fresh-login behavior against the actual native tenant.
+
 This is an access simulation for a controlled customer sandbox. Replace it with the customer's identity provider and appointment/authorization services before a production portal launch. Rotating the session-signing secret invalidates all existing sessions.
 
 ## API contract
@@ -125,12 +133,14 @@ Flat `personalWrittenPremiumCents`, `smallCommercialWrittenPremiumCents`, and co
 
 ## Verification and replacement seams
 
-Run the server tests with the React server condition so the `server-only` package remains effective:
+Run the normal release test command, which includes all source tests and supplies the React server condition so the `server-only` package remains effective:
 
 ```sh
-NODE_OPTIONS='--conditions=react-server' node --import tsx --test src/server/**/*.test.ts
+npm test
 ```
 
 Tests cover signed-session tampering and expiry, credential validation, fixture reconciliation, agency and specialization isolation, persistence across store instances, idempotency, concurrent changes, stale tabs after reset, verified profile rotation, representative submission/surety/service/learning actions, CSRF and request-size rejection, Redis atomic command construction, and rejection of deployed filesystem fallback. The Redis protocol test is a contract test; production-provider persistence must also be checked against the actual provisioned store before handoff.
+
+Identity tests additionally cover baseline/receipt ordering, unchanged and late profile-link results, hung reads and identity responses, total optional-preparation deadlines, queued SDK work after cancellation, superseded initialization, and the unchanged public adapter contract. These local tests do not replace fresh-login acceptance against the actual tenant.
 
 Replace fixtures and service methods behind the public contracts as real systems arrive. Keep account ownership checks in the data layer. Keep issued policy documents behind the same authorization boundary. Do not publish account records or restricted documents through Experience Edge or the editorial search index: those published stores must not be treated as account-level access-control systems.
