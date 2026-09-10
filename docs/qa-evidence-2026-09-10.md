@@ -2,6 +2,8 @@
 
 The deployed portal passed the browser journeys below, and the native Unified Data Layer profile contains the corresponding page and Search events. These observations establish working delivery, authenticated operational state, native content retrieval and event ingestion. They do not replace customer-role Page builder acceptance or a complete security assessment.
 
+**Credential retirement and functional recovery are verified.** Scoped Live/Preview content, native Page builder, populated CMS index searches and all 37 unchanged production assertions passed after recovery. Index metadata remains inconsistent; customer-role editorial acceptance and native Agentic Brand Kit retrieval remain separate handoff items. See [Master Context ID retirement](#master-context-id-retirement) for the failed run and subsequent recovery evidence.
+
 | Review context | Value |
 | --- | --- |
 | Application | `https://liberty-mutual-agent-portal.vercel.app` |
@@ -94,6 +96,55 @@ Commit `a95366be68fa98bbe9975e6a4c2e9836f248c3e9`, preview deployment `GLHMpKboM
 | Elena | 805 ms | Neutral, 864 ms | Neutral, 515 ms |
 
 GitHub run `34522939424` passed Offline validation and Connected production build. Temporary `PORTAL_PERSONALIZATION_DIAGNOSTICS` was set to `false` for both Vercel Production and Preview before this deployment. Production verification is recorded in the [release pull request](https://github.com/tohams/liberty-mutual-sitecoreai/pull/9) after promotion; customer-role editorial approval remains a separate handoff check.
+
+### Master Context ID retirement
+
+The owner confirmed that the SitecoreAI `Demo` environment is used exclusively for this POC. At **20:55 UTC on September 10, 2026**, native master regeneration succeeded and replaced both the Live and Preview master Context IDs.
+
+| Check after regeneration | Observed result |
+| --- | --- |
+| Content requests with the original Live and Preview masters | Both returned `404`. |
+| Content requests with the existing scoped Live and Preview contexts | Both returned `200` with native Home content. |
+| Private Edge content request with the public browser context | Returned `403`, as expected for its browser-only scope. |
+| Existing three scoped child values | Unchanged; no Vercel or GitHub value changes were needed. |
+| Local environment configuration | Nine ignored files migrated from old master values to the appropriate server child or public browser scope according to each key; permissions set to `0600`. No credential values entered Git. |
+
+SitecoreAI [Build and deploy `6XUSEOqPB2caaZlw99oWFl`](https://deploy.sitecorecloud.io/projects/7f0TVOCnwZyTYy9vJwhC8/cm-environments/4Ng6xXzEpoWJNPisksPG2y/deployments/6XUSEOqPB2caaZlw99oWFl?organization=org_XqL3u1MSNVuubOTb) completed in **16 minutes 31 seconds**, but its post actions failed: `warmUpCM` failed for all three configured URLs, and `populateSchema` and `reindex` failed immediately. The unchanged CM hostname returned HTTP `530` with a Cloudflare error `1000` HTML page. Native Page builder displayed “Cannot connect to tenant.” Environment Details retained the replacement master IDs and the same CM hostname; new application logs reported Sitecore startup at 21:12:43 UTC. Application startup alone does not establish that the managed hostname is reachable.
+
+One standard **Restart environment** was requested around 21:19 UTC; the native UI confirmed initiation. Subsequent CM requests failed DNS resolution. Resolver `1.1.1.1` returned `NXDOMAIN` at 21:23 UTC. An authoritative recheck against `itzel.ns.cloudflare.com` at **21:28 UTC** also returned `NXDOMAIN`, with the authoritative-answer flag and zero answers. Restart initiation is not evidence of completed recovery. Cloudflare documents the preceding error `1000` as a DNS, proxy or origin-routing problem; the exact cause in this Sitecore-managed environment has not been established. [Cloudflare error reference](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1000/)
+
+The post-deployment strict production harness recorded **six failed assertions**. Native browser creation for Avery and Jordan exceeded its two-second deadline; each account then received neutral guidance on both workspace requests instead of its expected role variant. Some subsequent identity steps for those accounts were skipped. Maya and Elena completed their expected outcomes. The run failed; the earlier complete 37-assertion pass remains historical evidence only. The relationship between these timeouts and the CM outage has not been established.
+
+A subsequent read-only `verify-edge-content.cjs` run passed for all **27 native Live Edge routes**, including page compositions, editable fields, Search configuration and resource template projection. The portal sign-in page returned `200`. Deploy's System status screen reported every listed service Healthy at approximately 21:31, including Pages, Provisioning, Edge Proxy and Cloudflare. That aggregate status did not establish this environment's authoring availability.
+
+At **21:31:43 UTC**, authoritative DNS returned `NOERROR` with both Cloudflare A records; public resolver Quad9 also returned `NOERROR`. A request to the unchanged CM hostname, pinned to an observed authoritative public address while preserving its normal TLS SNI and Host, returned a `302` login redirect from `/sitecore/shell`. The operating-system lookup still reported `ENOTFOUND`, consistent with a remaining negative-cache entry; that cache explanation is an inference. Native scoped Live and Preview GraphQL requests both returned `200` JSON with Home content.
+
+After DNS reappeared, the **unchanged strict production harness passed all 37 assertions with zero failures**. The new run made no decision retries or saved-work resets and preserves the failed run above as separate evidence.
+
+| Persona | Native browser creation | First workspace | Second workspace |
+| --- | --- | --- | --- |
+| Avery | 428 ms | Principal, 1,767 ms | Principal, 696 ms |
+| Jordan | 432 ms | Producer, 642 ms | Producer, 708 ms |
+| Maya | 203 ms | Account manager, 814 ms | Account manager, 674 ms |
+| Elena | 212 ms | Neutral, 574 ms | Neutral, 496 ms |
+
+Native Page builder subsequently loaded Home with the portal's layout, editable guidance, populated content tree and Saved/Live status. Its headline had native `contenteditable` markup, and operational controls remained disabled in the isolated editor context. This check did not change or publish editorial content and does not replace customer-role acceptance.
+
+The two native indexes, `sitecore_core_index` and `sitecore_master_index`, were recovered using the existing CLI authentication and supported [Authoring GraphQL management operations](https://doc.sitecore.com/sai/en/developers/sitecoreai/content-modeling-and-presentation/sitecore-authoring-and-management-graphql-api/query-examples-for-management-operations.html). Requests preserved the normal hostname and TLS; a process-specific lookup used a freshly observed public DNS address while the local operating-system lookup retained `ENOTFOUND`. No DNS configuration or CLI hostname was changed.
+
+| Recovery operation | Submitted UTC | Verified complete UTC | Result |
+| --- | --- | --- | --- |
+| Populate managed schema, both indexes | 21:37:40 | 21:38:16 | Both jobs `FINISHED`, zero exceptions |
+| Rebuild both indexes | 21:38:16 | 21:39:13 | Both jobs `FINISHED`, zero exceptions; core processed 12,589 units and master 14,587 |
+| Functional native index search | 21:40:58 | 21:40:58 | `200`, zero GraphQL errors; exact Home ID/path returned; bounded general searches reported 30,996 master and 14,048 core results |
+
+Schema job IDs were `5a114679-7d38-4d96-97c3-68bdbf482f58` and `1fe83cff-63bc-4af7-aba3-1712d177cbed`. Rebuild job IDs were `9519aace-0b00-4c06-8c58-c0a814496bf9` (core) and `1cb2f871-e968-4d9f-8c32-9830089536f6` (master). Each full handle appends `;scaipocusem400b-sitecoreai950c-demo4418-5b47d4fc84-g7w45`. The reported rebuild execution durations were 19.8 seconds and 36.462 seconds.
+
+**Metadata discrepancy preserved:** the `indexes` response still reported `documentsCount: 0`, `numberOfFields: -1` and `outOfDate: true`, despite updated rebuild timestamps. The first strict metadata verifier exited `1`. Subsequent direct indexed searches demonstrate populated, functioning indexes, but do not explain these metadata values. No repeat rebuild was attempted. These native CMS indexes are separate from the agent-facing Search source; that source was not changed by this maintenance.
+
+**Functional recovery is complete.** The original deployment log retains its failed post actions; the successful recovery operations were separate management jobs. The support draft remains an unsent incident record, and escalation for the active authoring outage is no longer required. Customer-role editorial acceptance and native Agentic Brand Kit retrieval remain separate handoff items.
+
+This was master-only Context ID regeneration. The unchanged scoped children are an empirical result for this environment, not a promise that children survive all rotations. Sitecore's separate [full secret rotation procedure](https://doc.sitecore.com/sai/en/developers/sitecoreai/deploying-sitecoreai/deploy-app/manage-an-environment/rotate-deploy-secrets-for-your-environments.html) changes the editing secret and underlying Edge token as well, and requires updating scoped contexts.
 
 ### Repeatable native personalization acceptance
 
