@@ -1,0 +1,23 @@
+﻿---
+ID: "810a4ad9-0c31-5ec4-bc37-006d382bce44"
+Parent: "7b2c3326-500b-55c5-a8e8-1757d0398633"
+Template: "4d50cdae-c2d9-4de8-b080-8f992bfb1b55"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/AgentGuidance/Default"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260910T150000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "0a015989-504e-44a4-b6cd-6a9488431fbe"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260910T135530Z

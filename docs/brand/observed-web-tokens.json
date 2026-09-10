@@ -1,0 +1,20 @@
+[
+  {
+    "observedDeclaration": "--lmig-Logo-path-fill-color:#1A1446",
+    "page": "https://agents.libertymutual.com/",
+    "retrieved": "2026-09-10",
+    "context": "go-medallion-stroke-color:none;--lmig-Logo-medallion-stroke-width:1.5;--lmig-Logo-path-fill-color:#1A1446;--lmig-Logo-background-fill-color:#FFFFFF;--lmig-Investments-Logo-background-fill-color:#"
+  },
+  {
+    "observedDeclaration": "--lmig-FloatingHeader-brand-color:#FFD000",
+    "page": "https://agents.libertymutual.com/",
+    "retrieved": "2026-09-10",
+    "context": "0.04),0 6px 4px -1px rgba(0,0,0,0.04),0 4px 6px -2px rgba(0,0,0,0.08);--lmig-FloatingHeader-brand-color:#FFD000;--lmig-FloatingHeader-background-color:rgba(255,255,255,0.85);--lmig-FloatingHeader-verti"
+  },
+  {
+    "observedDeclaration": "font-family:Roboto,Arial,sans-serif",
+    "page": "https://agents.libertymutual.com/",
+    "retrieved": "2026-09-10",
+    "context": "ding-font-color:#D9E8EA}.lm-Heading{--lmig-Heading-font-color:#343741;font-family:Roboto,Arial,sans-serif;color:var(--lmig-Heading-font-color);max-width:736px;margin-top:1em;margin-bottom:.75em}."
+  }
+]

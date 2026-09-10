@@ -1,0 +1,183 @@
+Create a review-ready account-based marketing campaign named “Expand your small-business practice” for the fictional independent agency Cedar Ridge Insurance in Austin, Texas.
+
+Select the published Liberty Mutual Agent Portal Brand Kit, ID 7dc084e7-9b2a-4b2b-bf66-e3e8fd865156. Use its brand voice, factual constraints and approved route vocabulary. If the kit cannot be selected, report that limitation before proceeding and do not claim Brand Kit compliance.
+
+Use the campaign input JSON below as the source of account context. These are explicitly fictional, aggregated business figures prepared for this sandbox. The data supports a marketing-learning scenario only. Do not infer underwriting eligibility, appointment status or authorization from the production mix. Do not put financial figures or cohort scoring into visitor-facing content.
+
+Prepare six named outputs:
+1. Campaign brief: account context, objective, audience rationale, role strategy and a 30-day proposed sequence.
+2. Four portal content variants: principal, producer, account-manager and neutral fallback. For each, provide datasourceName, eyebrow (up to 35 characters), headline (up to 75 characters), body as one semantic HTML paragraph (up to 300 visible characters), and actionLink with text and href. Use the existing datasource names from the input and only the supplied working portal paths. Principal copy helps plan team development; producer copy helps prepare a BOP submission; account-manager copy helps recognize a business conversation and refer to an authorized colleague. Fallback offers broad useful guidance.
+3. Relationship-manager brief: a short private preparation note and four questions for an agency planning conversation. Do not invent a person's identity, availability, contact details or service commitment.
+4. Measurement plan: define exposure, action and completion metrics, time window and unit of analysis. Keep commercial outcomes exploratory and do not claim lift. Propose agency-level holdout assignment for any future causal evaluation.
+5. Source ledger: list each factual claim, its supporting exact official URL, and whether it is a source fact, synthetic account fact or implementation recommendation. Use only supplied source URLs; omit or flag any unsupported claim.
+6. Review checklist: brand voice, role relevance, state nuance, working links, source support, financial and underwriting claim checks, privacy and accessibility.
+
+Work in draft mode. Return the outputs for editorial review. Do not email, send messages, enroll agents, invite anyone, create integrations, publish website changes or activate a live campaign. Do not call external send or publication tools. Do not add pricing, discounts, savings, binding statements, guarantees, eligibility conclusions or unsupported product availability. Do not label any visitor-facing content as a demo, proof of concept, synthetic persona or sandbox. Those labels belong only in this internal brief and review record.
+
+Before finalizing, critique the four variants against the Brand Kit and the constraints above, repair issues, and return any remaining uncertainty in the review checklist. Preserve the distinction between successful AI drafting and a human-approved publication. If the Agentic workflow supports separate nodes, use Brief → Role copy → Source and brand review → Draft review package. End at the review package.
+
+Campaign input:
+
+{
+  "schemaVersion": "1.0.0",
+  "status": "prepared-for-native-agentic-run",
+  "campaignId": "expand-small-business",
+  "editorialCampaignSlug": "expand-small-business-practice",
+  "campaignName": "Expand your small-business practice",
+  "brandKit": {
+    "id": "7dc084e7-9b2a-4b2b-bf66-e3e8fd865156",
+    "name": "Liberty Mutual Agent Portal"
+  },
+  "inputProvenance": "All agency and production values are fictional integration fixtures. No client records, passwords, email addresses or policy records are included.",
+  "agency": {
+    "id": "cedar-ridge",
+    "name": "Cedar Ridge Insurance",
+    "state": "TX",
+    "channel": "independent",
+    "appointedLines": [
+      "personal",
+      "small-commercial"
+    ],
+    "productionPeriod": {
+      "start": "2025-09-01",
+      "end": "2026-08-31",
+      "label": "Sep 2025 \u2013 Aug 2026",
+      "currency": "USD"
+    },
+    "writtenPremiumCents": {
+      "personal": 287500000,
+      "small-commercial": 48600000
+    },
+    "smallCommercialShare": 0.1446,
+    "cohort": "Established personal lines agency developing its small-commercial practice"
+  },
+  "objective": "Help the agency build a repeatable, informed small-commercial preparation practice through role-specific learning and a focused next action.",
+  "roles": [
+    {
+      "role": "principal",
+      "agentId": "avery",
+      "goal": "Choose a practical team development plan and learning priority."
+    },
+    {
+      "role": "producer",
+      "agentId": "jordan",
+      "goal": "Prepare a stronger BOP submission with the business story and risk details."
+    },
+    {
+      "role": "account-manager",
+      "agentId": "maya",
+      "goal": "Recognize a business conversation and refer it to an authorized teammate."
+    },
+    {
+      "role": "fallback",
+      "agentId": null,
+      "goal": "Offer useful guidance when role or cohort is unknown; do not imply eligibility."
+    }
+  ],
+  "approvedDestinations": [
+    "/resources/expand-small-business-practice",
+    "/resources/build-a-bop-submission",
+    "/resources/business-vehicles-conversation",
+    "/resources/texas-workers-compensation",
+    "/resources",
+    "/support"
+  ],
+  "sourcePolicy": {
+    "brandKitId": "7dc084e7-9b2a-4b2b-bf66-e3e8fd865156",
+    "sourceManifest": "docs/brand/source-manifest.json",
+    "allowedHosts": [
+      "agents.libertymutual.com",
+      "www.libertymutual.com",
+      "business.libertymutual.com",
+      "www.tdi.texas.gov",
+      "www.myfloridacfo.com",
+      "iwcc.illinois.gov"
+    ],
+    "excludedUses": [
+      "No quotes, prices, premium discounts, guaranteed savings, binding statements, eligibility decisions or invented product availability.",
+      "Do not expose account production figures in agent-facing copy.",
+      "Do not infer appointment or permissions from marketing cohort.",
+      "Do not create accounts, invite external users, send emails, publish a live campaign or add tracking destinations.",
+      "Do not use real customer, policy, claim or credential data."
+    ]
+  },
+  "existingCmsPromotions": [
+    {
+      "id": "commercial-growth-principal",
+      "audienceKey": "established-personal-developing-commercial-principal",
+      "title": "Build your next chapter in small business",
+      "body": "Give your team a clear starting point for small-commercial conversations. Review the learning path and choose your next agency action.",
+      "ctaLabel": "Explore the growth path",
+      "ctaHref": "/resources/expand-small-business-practice",
+      "campaignId": "expand-small-business-practice"
+    },
+    {
+      "id": "commercial-growth-producer",
+      "audienceKey": "established-personal-developing-commercial-producer",
+      "title": "Bring a stronger submission to the table",
+      "body": "Start with the business story, check the state context, and use a focused checklist to prepare your next BOP request.",
+      "ctaLabel": "Prepare a BOP submission",
+      "ctaHref": "/resources/build-a-bop-submission",
+      "campaignId": "expand-small-business-practice"
+    },
+    {
+      "id": "commercial-growth-account-manager",
+      "audienceKey": "established-personal-developing-commercial-account-manager",
+      "title": "Connect everyday conversations to new needs",
+      "body": "Learn the questions that help identify a business conversation, then bring the right teammate into the next step.",
+      "ctaLabel": "Start the learning path",
+      "ctaHref": "/resources/expand-small-business-practice",
+      "campaignId": "expand-small-business-practice"
+    },
+    {
+      "id": "commercial-growth-neutral",
+      "audienceKey": "fallback",
+      "title": "Resources for your next client conversation",
+      "body": "Find product guidance, preparation checklists and learning organized around the work you do.",
+      "ctaLabel": "Browse resources",
+      "ctaHref": "/resources",
+      "campaignId": "expand-small-business-practice"
+    }
+  ],
+  "requiredOutputs": [
+    "campaignBrief",
+    "roleVariants",
+    "relationshipManagerBrief",
+    "measurementPlan",
+    "sourceLedger",
+    "reviewChecklist"
+  ],
+  "reviewGate": "Produce drafts for human review. A Sitecore editor reviews and publishes approved content using native workflow.",
+  "sourceLedger": [
+    {
+      "id": "LM01",
+      "title": "Liberty Mutual independent-agent homepage",
+      "url": "https://agents.libertymutual.com/"
+    },
+    {
+      "id": "LM02",
+      "title": "Benefits of working with an independent agent",
+      "url": "https://agents.libertymutual.com/benefits-of-agent"
+    },
+    {
+      "id": "LM04",
+      "title": "Agent and broker dashboard",
+      "url": "https://business.libertymutual.com/agent-and-broker-dashboard/"
+    },
+    {
+      "id": "LM05",
+      "title": "Small business insurance",
+      "url": "https://www.libertymutual.com/small-business"
+    },
+    {
+      "id": "LM06",
+      "title": "Business owner's policy insurance",
+      "url": "https://www.libertymutual.com/small-business/business-owners-insurance"
+    },
+    {
+      "id": "TX01",
+      "title": "Workers' compensation insurance guide",
+      "url": "https://www.tdi.texas.gov/pubs/consumer/cb030.html"
+    }
+  ]
+}

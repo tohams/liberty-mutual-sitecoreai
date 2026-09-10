@@ -1,0 +1,58 @@
+[
+  {
+    "id": "activity-sub-001",
+    "agencyId": "cedar-ridge",
+    "title": "Pecan Street Design",
+    "detail": "Draft \u00b7 SUB-2609-1042",
+    "createdAt": "2026-09-09T14:30:00Z",
+    "href": "/submissions/sub-001"
+  },
+  {
+    "id": "activity-sub-002",
+    "agencyId": "cedar-ridge",
+    "title": "Bluebird Landscaping",
+    "detail": "Information needed \u00b7 SUB-2609-1043",
+    "createdAt": "2026-09-08T14:30:00Z",
+    "href": "/submissions/sub-002"
+  },
+  {
+    "id": "activity-sub-003",
+    "agencyId": "prairie-oak",
+    "title": "Oak & Beam Contractors",
+    "detail": "Draft \u00b7 SUB-2609-1044",
+    "createdAt": "2026-09-07T14:30:00Z",
+    "href": "/submissions/sub-003"
+  },
+  {
+    "id": "activity-sub-004",
+    "agencyId": "prairie-oak",
+    "title": "Elm Street Provisions",
+    "detail": "In review \u00b7 SUB-2609-1045",
+    "createdAt": "2026-09-06T14:30:00Z",
+    "href": "/submissions/sub-004"
+  },
+  {
+    "id": "activity-sub-005",
+    "agencyId": "harborline",
+    "title": "Coastal Fabrication Group",
+    "detail": "Information needed \u00b7 SUB-2609-1046",
+    "createdAt": "2026-09-05T14:30:00Z",
+    "href": "/submissions/sub-005"
+  },
+  {
+    "id": "activity-sub-006",
+    "agencyId": "harborline",
+    "title": "Seagrass Retail Group",
+    "detail": "Submitted \u00b7 SUB-2609-1047",
+    "createdAt": "2026-09-04T14:30:00Z",
+    "href": "/submissions/sub-006"
+  },
+  {
+    "id": "activity-sub-007",
+    "agencyId": "summit-specialty",
+    "title": "Northpoint Property Partners",
+    "detail": "Information needed \u00b7 SUB-2609-1048",
+    "createdAt": "2026-09-03T14:30:00Z",
+    "href": "/submissions/sub-007"
+  }
+]

@@ -1,0 +1,13 @@
+---
+ID: ec2e306c-d1d4-5773-b3f8-112bbafb1f66
+Parent: 785ffd8a-b31d-51fa-9f9f-5f3475dd6eed
+Template: 785ffd8a-b31d-51fa-9f9f-5f3475dd6eed
+Path: /sitecore/templates/Project/LibertyMutual/PortalRenderingParameters/__Standard Values
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260910T140000Z

@@ -1,0 +1,379 @@
+[
+  {
+    "id": "pol-001",
+    "agencyId": "cedar-ridge",
+    "accountId": "morgan-household",
+    "accountName": "Morgan household",
+    "productId": "auto",
+    "line": "personal",
+    "state": "TX",
+    "policyNumber": "LM-8426100",
+    "effectiveDate": "2025-10-01",
+    "expirationDate": "2026-10-01",
+    "premiumCents": 184200,
+    "status": "Renewal review",
+    "assignedAgentId": "maya",
+    "address": "120 Orchard Lane, TX",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-001-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-001-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-002",
+    "agencyId": "cedar-ridge",
+    "accountId": "morgan-household",
+    "accountName": "Morgan household",
+    "productId": "home",
+    "line": "personal",
+    "state": "TX",
+    "policyNumber": "LM-8426101",
+    "effectiveDate": "2025-10-01",
+    "expirationDate": "2026-10-01",
+    "premiumCents": 267800,
+    "status": "Renewal review",
+    "assignedAgentId": "maya",
+    "address": "131 Orchard Lane, TX",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-002-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-002-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-003",
+    "agencyId": "cedar-ridge",
+    "accountId": "bennett-household",
+    "accountName": "Bennett household",
+    "productId": "home",
+    "line": "personal",
+    "state": "FL",
+    "policyNumber": "LM-8426102",
+    "effectiveDate": "2025-10-12",
+    "expirationDate": "2026-10-12",
+    "premiumCents": 398400,
+    "status": "Renewal review",
+    "assignedAgentId": "maya",
+    "address": "142 Orchard Lane, FL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-003-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-003-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-004",
+    "agencyId": "cedar-ridge",
+    "accountId": "taylor-household",
+    "accountName": "Taylor household",
+    "productId": "personal-umbrella",
+    "line": "personal",
+    "state": "IL",
+    "policyNumber": "LM-8426103",
+    "effectiveDate": "2025-11-03",
+    "expirationDate": "2026-11-03",
+    "premiumCents": 54200,
+    "status": "Active",
+    "assignedAgentId": "maya",
+    "address": "153 Orchard Lane, IL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-004-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-004-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-005",
+    "agencyId": "cedar-ridge",
+    "accountId": "juniper-coffee-and-goods",
+    "accountName": "Juniper Coffee & Goods",
+    "productId": "bop",
+    "line": "small-commercial",
+    "state": "TX",
+    "policyNumber": "LM-8426104",
+    "effectiveDate": "2025-10-18",
+    "expirationDate": "2026-10-18",
+    "premiumCents": 628400,
+    "status": "Renewal review",
+    "assignedAgentId": "jordan",
+    "address": "164 Orchard Lane, TX",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-005-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-005-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-006",
+    "agencyId": "cedar-ridge",
+    "accountId": "juniper-coffee-and-goods",
+    "accountName": "Juniper Coffee & Goods",
+    "productId": "workers-comp",
+    "line": "small-commercial",
+    "state": "TX",
+    "policyNumber": "LM-8426105",
+    "effectiveDate": "2025-10-18",
+    "expirationDate": "2026-10-18",
+    "premiumCents": 432600,
+    "status": "Renewal review",
+    "assignedAgentId": "jordan",
+    "address": "175 Orchard Lane, TX",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-006-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-006-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-007",
+    "agencyId": "prairie-oak",
+    "accountId": "oak-and-beam-contractors",
+    "accountName": "Oak & Beam Contractors",
+    "productId": "commercial-auto",
+    "line": "small-commercial",
+    "state": "IL",
+    "policyNumber": "LM-8426106",
+    "effectiveDate": "2025-10-08",
+    "expirationDate": "2026-10-08",
+    "premiumCents": 1198600,
+    "status": "Renewal review",
+    "assignedAgentId": "daniel",
+    "address": "186 Orchard Lane, IL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-007-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-007-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-008",
+    "agencyId": "prairie-oak",
+    "accountId": "prairie-hill-farms",
+    "accountName": "Prairie Hill Farms",
+    "productId": "farm-ranch",
+    "line": "commercial",
+    "state": "IL",
+    "policyNumber": "LM-8426107",
+    "effectiveDate": "2025-11-15",
+    "expirationDate": "2026-11-15",
+    "premiumCents": 1397400,
+    "status": "Active",
+    "assignedAgentId": "daniel",
+    "address": "197 Orchard Lane, IL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-008-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-008-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-009",
+    "agencyId": "harborline",
+    "accountId": "coastal-fabrication-group",
+    "accountName": "Coastal Fabrication Group",
+    "productId": "commercial-property",
+    "line": "commercial",
+    "state": "FL",
+    "policyNumber": "LM-8426108",
+    "effectiveDate": "2025-10-22",
+    "expirationDate": "2026-10-22",
+    "premiumCents": 8876500,
+    "status": "Renewal review",
+    "assignedAgentId": "priya",
+    "address": "208 Orchard Lane, FL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-009-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-009-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-010",
+    "agencyId": "harborline",
+    "accountId": "coastal-fabrication-group",
+    "accountName": "Coastal Fabrication Group",
+    "productId": "general-liability",
+    "line": "commercial",
+    "state": "FL",
+    "policyNumber": "LM-8426109",
+    "effectiveDate": "2025-10-22",
+    "expirationDate": "2026-10-22",
+    "premiumCents": 3152600,
+    "status": "Renewal review",
+    "assignedAgentId": "priya",
+    "address": "219 Orchard Lane, FL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-010-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-010-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-011",
+    "agencyId": "harborline",
+    "accountId": "harbor-house-market",
+    "accountName": "Harbor House Market",
+    "productId": "bop",
+    "line": "small-commercial",
+    "state": "FL",
+    "policyNumber": "LM-8426110",
+    "effectiveDate": "2025-12-01",
+    "expirationDate": "2026-12-01",
+    "premiumCents": 878900,
+    "status": "Active",
+    "assignedAgentId": "priya",
+    "address": "230 Orchard Lane, FL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-011-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-011-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-012",
+    "agencyId": "summit-specialty",
+    "accountId": "northpoint-property-partners",
+    "accountName": "Northpoint Property Partners",
+    "productId": "specialty-casualty",
+    "line": "specialty",
+    "state": "IL",
+    "policyNumber": "LM-8426111",
+    "effectiveDate": "2025-10-28",
+    "expirationDate": "2026-10-28",
+    "premiumCents": 5834000,
+    "status": "Renewal review",
+    "assignedAgentId": "elena",
+    "address": "241 Orchard Lane, IL",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-012-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-012-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  },
+  {
+    "id": "pol-013",
+    "agencyId": "summit-specialty",
+    "accountId": "meridian-design-group",
+    "accountName": "Meridian Design Group",
+    "productId": "professional-liability",
+    "line": "specialty",
+    "state": "TX",
+    "policyNumber": "LM-8426112",
+    "effectiveDate": "2025-12-05",
+    "expirationDate": "2026-12-05",
+    "premiumCents": 1894000,
+    "status": "Active",
+    "assignedAgentId": "elena",
+    "address": "252 Orchard Lane, TX",
+    "renewalNote": "Confirm any changes to the account and review the coverage information before renewal.",
+    "documents": [
+      {
+        "id": "pol-013-summary",
+        "name": "Coverage summary",
+        "kind": "Summary"
+      },
+      {
+        "id": "pol-013-renewal",
+        "name": "Renewal review checklist",
+        "kind": "Checklist"
+      }
+    ]
+  }
+]

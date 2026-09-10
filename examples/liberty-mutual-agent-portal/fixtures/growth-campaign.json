@@ -1,0 +1,35 @@
+{
+  "id": "expand-small-business",
+  "title": "Expand your small-business practice",
+  "description": "Build on the relationships you already know. Give your team the confidence and resources to grow a thoughtful commercial practice.",
+  "agencyGoal": "Develop a repeatable small-commercial submission practice",
+  "audienceLabel": "Established personal lines agencies developing their commercial book",
+  "steps": [
+    {
+      "id": "learn",
+      "title": "Build confidence",
+      "description": "Start with small-business foundations.",
+      "href": "/learning/small-business-foundations"
+    },
+    {
+      "id": "prepare",
+      "title": "Prepare your first opportunity",
+      "description": "Use the submission checklist with a business you understand.",
+      "href": "/resources/small-business-checklist"
+    },
+    {
+      "id": "connect",
+      "title": "Make a plan together",
+      "description": "Connect with your agency relationship manager.",
+      "href": "/support"
+    }
+  ],
+  "resourceIds": [
+    "small-business-checklist",
+    "bop-conversation",
+    "agency-growth"
+  ],
+  "courseIds": [
+    "small-business-foundations"
+  ]
+}

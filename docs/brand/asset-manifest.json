@@ -1,0 +1,61 @@
+{
+  "retrievedAt": "2026-09-10",
+  "assets": [
+    {
+      "file": "Roboto-OFL.txt",
+      "sha256": "061402327a96aadb0bfb694a960ed289ecd38d383e396243831ab81feb109c41",
+      "bytes": 4394,
+      "sourceRef": "FONT01",
+      "transformation": "Unchanged font/license file"
+    },
+    {
+      "file": "Roboto-Variable.ttf",
+      "sha256": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134",
+      "bytes": 488584,
+      "sourceRef": "FONT01",
+      "transformation": "Unchanged font/license file"
+    },
+    {
+      "file": "liberty-mutual-horizontal.source.svg",
+      "sha256": "c9ccda7991876e84698633295db9f65a29998b4e723ba0700045805a861660cb",
+      "bytes": 37421,
+      "sourceRef": "LM01",
+      "transformation": "Verbatim inline SVG snapshot from official homepage"
+    },
+    {
+      "file": "liberty-mutual-horizontal.svg",
+      "sha256": "af3ffe1e32ecb8e0ba7a389833e76bf25119f368cd58e6fe38d109de0221cfc9",
+      "bytes": 8369,
+      "sourceRef": "LM01",
+      "transformation": "Visible path geometry unchanged; explicit intrinsic dimensions and original navy/white fills added; alternate hidden dark-theme group and transparent interaction rectangle omitted for portable rendering; verbatim source retained"
+    },
+    {
+      "file": "liberty-mutual-stacked.source.svg",
+      "sha256": "795dc4ce9bdd91d1954500defb3892cc0d768167658e01d70848e022d59b69da",
+      "bytes": 34226,
+      "sourceRef": "LM01",
+      "transformation": "Verbatim inline SVG snapshot from official homepage"
+    },
+    {
+      "file": "liberty-mutual-stacked.svg",
+      "sha256": "fc9ef8640fda72a5b30b427f94f7bab9a9abf5f7e31224632f5d8c61bd6f16bc",
+      "bytes": 11012,
+      "sourceRef": "LM01",
+      "transformation": "Visible path geometry unchanged; explicit intrinsic dimensions and original navy/white fills added; alternate hidden dark-theme group and transparent interaction rectangle omitted for portable rendering; verbatim source retained"
+    },
+    {
+      "file": "liberty-mutual-symbol.source.svg",
+      "sha256": "0911af7a8e30aa37c4cebbcde750196ac9451f6f3cc5c08f53675a4a6a687e2d",
+      "bytes": 12434,
+      "sourceRef": "LM01",
+      "transformation": "Verbatim inline SVG snapshot from official homepage"
+    },
+    {
+      "file": "liberty-mutual-symbol.svg",
+      "sha256": "e345e603cad113811562e530c5b595207e4e8c9bf7f4e0f18d969e2e9ea52805",
+      "bytes": 6061,
+      "sourceRef": "LM01",
+      "transformation": "Visible path geometry unchanged; explicit intrinsic dimensions and original navy/white fills added; alternate hidden dark-theme group and transparent interaction rectangle omitted for portable rendering; verbatim source retained"
+    }
+  ]
+}

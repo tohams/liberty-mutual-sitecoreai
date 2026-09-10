@@ -1,0 +1,67 @@
+[
+  {
+    "id": "small-business-foundations",
+    "title": "Small business, strong foundations",
+    "description": "Build confidence in the BOP, workers compensation, and commercial auto conversation.",
+    "line": "small-commercial",
+    "durationMinutes": 35,
+    "format": "On demand",
+    "lessons": [
+      "Understand the business",
+      "Prepare the coverage conversation",
+      "Build a complete submission"
+    ]
+  },
+  {
+    "id": "household-review",
+    "title": "The connected household review",
+    "description": "Bring home, auto, and umbrella discussions together.",
+    "line": "personal",
+    "durationMinutes": 20,
+    "format": "On demand",
+    "lessons": [
+      "Prepare the account",
+      "Ask useful questions",
+      "Capture next steps"
+    ]
+  },
+  {
+    "id": "commercial-property",
+    "title": "A complete commercial property picture",
+    "description": "Make location and values information easier to review.",
+    "line": "commercial",
+    "durationMinutes": 30,
+    "format": "Workshop",
+    "lessons": [
+      "Understand locations",
+      "Reconcile reported values",
+      "Prepare the package"
+    ]
+  },
+  {
+    "id": "surety-fundamentals",
+    "title": "Contract surety: the essentials",
+    "description": "Follow the principal, obligee, and bond request through a structured review.",
+    "line": "surety",
+    "durationMinutes": 25,
+    "format": "On demand",
+    "lessons": [
+      "Understand the parties",
+      "Prepare the request",
+      "Manage follow-up"
+    ]
+  },
+  {
+    "id": "specialty-story",
+    "title": "The specialty risk narrative",
+    "description": "Translate complex account details into a useful placement narrative.",
+    "line": "specialty",
+    "durationMinutes": 25,
+    "format": "On demand",
+    "lessons": [
+      "Identify key exposures",
+      "Clarify placement objectives",
+      "Prepare for review"
+    ]
+  }
+]

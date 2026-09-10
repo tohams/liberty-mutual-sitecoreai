@@ -1,0 +1,146 @@
+{
+  "name": "Liberty Mutual - Agent Portal",
+  "version": "1.0.0",
+  "assembledAt": "2026-09-10",
+  "purpose": "Customer sandbox source pack for SitecoreAI Design Brand Kit ingestion",
+  "status": "Source-checked proposed portal guidance; not an official corporate brand manual",
+  "audience": "Independent agents; internal marketing and development handoff",
+  "sources": [
+    {
+      "id": "LM01",
+      "title": "Liberty Mutual independent-agent homepage",
+      "url": "https://agents.libertymutual.com/",
+      "publisher": "Liberty Mutual",
+      "authority": "Official public web",
+      "use": "Brand identity, auto/home and independent-agent context. Inline logo SVG and CSS declarations.",
+      "limitations": "No internal brand manual was provided. Logo is Liberty Mutual intellectual property; no new license is represented.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "LM02",
+      "title": "Benefits of working with an independent agent",
+      "url": "https://agents.libertymutual.com/benefits-of-agent",
+      "publisher": "Liberty Mutual",
+      "authority": "Official public web",
+      "use": "Agent role in coverage comparison, guidance, renewal and service.",
+      "limitations": "Paraphrased context only; no verbatim marketing paragraphs.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "LM03",
+      "title": "Liberty Mutual Insurance Retires Safeco Brand",
+      "url": "https://www.libertymutualgroup.com/about-lm/news/articles/liberty-mutual-insurance-retires-safeco-brand",
+      "publisher": "Liberty Mutual Group",
+      "authority": "Official public news",
+      "use": "Retirement effective April 25, 2026; independent and direct offerings remain differentiated.",
+      "limitations": "Published April 27, 2026. This is a brand transition fact, not a change to every underwriting company name.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "LM04",
+      "title": "Agent and broker dashboard",
+      "url": "https://business.libertymutual.com/agent-and-broker-dashboard/",
+      "publisher": "Liberty Mutual",
+      "authority": "Official public web",
+      "use": "Distinct small-commercial, midsize/large, surety and wholesale pathways.",
+      "limitations": "Descriptions do not establish that those operational platforms are integrated into this portal.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "LM05",
+      "title": "Small business insurance",
+      "url": "https://www.libertymutual.com/small-business",
+      "publisher": "Liberty Mutual",
+      "authority": "Official public web",
+      "use": "Small-business product taxonomy.",
+      "limitations": "No advertised pricing or consumer-channel discounts copied.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "LM06",
+      "title": "Business owner's policy insurance",
+      "url": "https://www.libertymutual.com/small-business/business-owners-insurance",
+      "publisher": "Liberty Mutual",
+      "authority": "Official public web",
+      "use": "BOP overview and distinction from separately considered workers compensation/commercial auto.",
+      "limitations": "General educational summary; terms and state/product availability require specific review.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "LM07",
+      "title": "Surety agents' portal",
+      "url": "https://business.libertymutual.com/commercial-solutions/surety/surety-resources/surety-agents/",
+      "publisher": "Liberty Mutual",
+      "authority": "Official public web",
+      "use": "Surety resources and existing eBonding context.",
+      "limitations": "No claim that this portal issues a bond.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "TX01",
+      "title": "Workers' compensation insurance guide",
+      "url": "https://www.tdi.texas.gov/pubs/consumer/cb030.html",
+      "publisher": "Texas Department of Insurance",
+      "authority": "Official regulator",
+      "use": "Most private employers not mandated; government-contract employees are an exception.",
+      "limitations": "Page last updated November 19, 2024; rechecked September 10, 2026. Educational summary is not exhaustive legal advice.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "FL01",
+      "title": "Workers' compensation coverage requirements",
+      "url": "https://www.myfloridacfo.com/division/wc/employer/coverage-requirements",
+      "publisher": "Florida Department of Financial Services",
+      "authority": "Official regulator",
+      "use": "Requirements differ by industry, employee count and entity organization.",
+      "limitations": "Preserve construction/non-construction/agricultural and exemption distinctions; do not reduce to one threshold.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "IL01",
+      "title": "Workers' compensation insurance",
+      "url": "https://iwcc.illinois.gov/about/insurance.html",
+      "publisher": "Illinois Workers’ Compensation Commission",
+      "authority": "Official regulator",
+      "use": "Generally one employee, including part-time; rare statutory exceptions.",
+      "limitations": "Entity-owner opt-outs and extra-hazardous occupations require context; no blanket exemption.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "FONT01",
+      "title": "Roboto variable font and license",
+      "url": "https://github.com/google/fonts/tree/main/ofl/roboto",
+      "publisher": "Google Fonts / Roboto Project Authors",
+      "authority": "Open-source font repository",
+      "use": "Roboto variable font selected for portal; SIL Open Font License 1.1.",
+      "limitations": "Font and matching OFL file distributed together. CSS asset provenance is separate from official Liberty brand approval.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "SC01",
+      "title": "Create a brand kit",
+      "url": "https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/brand-kits/create-a-brand-kit.html",
+      "publisher": "Sitecore",
+      "authority": "Official product documentation",
+      "use": "PDF ingestion and required role; review generated sections.",
+      "limitations": "The presence of this source pack does not prove native kit creation or site assignment.",
+      "retrievedAt": "2026-09-10"
+    },
+    {
+      "id": "SC02",
+      "title": "Brand kits",
+      "url": "https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/brand-kits/brand-kits.html",
+      "publisher": "Sitecore",
+      "authority": "Official product documentation",
+      "use": "Knowledge, voice, image and generation guidance.",
+      "limitations": "Kit processing is not corporate brand approval.",
+      "retrievedAt": "2026-09-10"
+    }
+  ],
+  "assetUse": "Public official assets used within the user-authorized Liberty Mutual sandbox. Trademark ownership remains with Liberty Mutual. No claim of a separate redistribution license.",
+  "rules": [
+    "Official facts, source-dated regulatory summaries and proposed portal copy are distinct.",
+    "Source-checked is an editorial status and does not mean Liberty Mutual corporate approval.",
+    "Do not ingest agency production, contact records, credentials, or private account briefs into a public content index."
+  ]
+}

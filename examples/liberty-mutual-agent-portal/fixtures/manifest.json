@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "asOfDate": "2026-09-10",
+  "productionPeriod": {
+    "start": "2025-09-01",
+    "end": "2026-08-31",
+    "label": "Sep 2025 \u2013 Aug 2026",
+    "currency": "USD"
+  },
+  "provenance": "Fictional insurance integration fixtures; agency production is a complete aggregate source, while policies and tasks are a curated working book.",
+  "reviewerPacks": [
+    "01",
+    "02",
+    "03",
+    "04"
+  ]
+}

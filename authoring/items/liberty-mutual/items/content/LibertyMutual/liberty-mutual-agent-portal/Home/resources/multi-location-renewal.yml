@@ -1,0 +1,73 @@
+﻿---
+ID: "ce8e6d69-14ff-5ff0-9354-022c7b09f219"
+Parent: "c9b4e46b-3b72-50d4-a96e-732c4d181b6a"
+Template: "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/resources/multi-location-renewal"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <r
+          uid="{E087C016-DE3C-5325-AD3A-82395E651877}"
+          id="{980AD02C-08E5-5F27-9F08-F28E829CA94D}"
+          ph="headless-main"
+          ds="{CE8E6D69-14FF-5FF0-9354-022C7B09F219}"
+          par="FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Keep a complex renewal moving
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{F7FE5BDD-A991-4A58-9735-CD08F9B097AB}"
+    - ID: "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8"
+      Hint: NavigationTitle
+      Value: Keep a complex renewal moving
+    - ID: "8a67dee3-1cc0-5a2c-aa51-02e5512cb36f"
+      Hint: channel
+      Value: "independent-agent"
+    - ID: "a640d3a6-0cac-5100-857b-d4ce5f2618ae"
+      Hint: businessFamily
+      Value: "midsize-large"
+    - ID: "ca57c6ef-fb0b-5513-9c6e-a6b511e3af9a"
+      Hint: summary
+      Value: Give every location, requirement and question a clear owner.
+    - ID: "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b"
+      Hint: Title
+      Value: Keep a complex renewal moving
+    - ID: "d6d51e3e-5c1e-5eda-9610-e53858e43a3e"
+      Hint: reviewedAt
+      Value: 20260910T000000Z
+    - ID: "dc1caf57-9be5-5423-ac92-2abf56dc91cc"
+      Hint: sourceLink
+      Value: |
+        ""
+    - ID: "e1f1902c-22e5-5dc7-acee-62c05dc4fe26"
+      Hint: product
+      Value: "commercial-package"
+    - ID: "e4144560-576a-559b-9110-b56e9a58a338"
+      Hint: body
+      Value: "<h2>Build one reliable account view</h2><p>Confirm the location schedule, business activities and changes since the last review. Use consistent names and dates across the package.</p><ul><li>Reconcile the location schedule with the account overview.</li><li>Assign each outstanding requirement.</li><li>Summarize material changes in a short cover note.</li><li>Separate coverage questions from missing-document tasks.</li><li>Agree the next review milestone with the account team.</li></ul><p>Keep specialist questions connected to the case so the next person can continue the work with context.</p>"
+    - ID: "ef9ca924-0217-59ba-8ae0-e3cb9cfbcdf9"
+      Hint: state
+      Value: All
+    - ID: "efdf8fef-2e79-5845-a709-0af3c615660c"
+      Hint: resourceType
+      Value: Checklist

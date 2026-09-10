@@ -1,0 +1,29 @@
+﻿---
+ID: "f7557ea1-8b9f-5b64-87d2-801cfdb4aa64"
+Parent: "20e904a1-9b60-43a1-a8d0-8e3aee45b115"
+Template: "0f04e2fd-7f21-584e-a150-842a5a49fb81"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Resources"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260910T150000Z
+    - ID: "4c346442-e859-4efd-89b2-44aedf467d21"
+      Hint: __Valid to
+      Value: 
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "71b70968-3e0a-4f78-b9d4-a3770984e4bb"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "c8f93afe-bfd4-4e8f-9c61-152559854661"
+      Hint: __Valid from
+      Value: 
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260910T135526Z

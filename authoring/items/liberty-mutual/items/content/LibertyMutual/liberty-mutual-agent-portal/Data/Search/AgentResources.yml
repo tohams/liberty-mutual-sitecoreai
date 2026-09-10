@@ -1,0 +1,43 @@
+﻿---
+ID: "c0bca8fb-a509-549f-b94a-24cb585a62a7"
+Parent: "2a146040-f703-58a8-806d-be929cc30779"
+Template: "d4f21e77-6f55-5d03-b094-be403be17285"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Search/AgentResources"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260910T142344Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{4460E76C-87E9-4859-9DE6-DE122774937F}"
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "44c1c919-0da4-44db-ada8-a7eeb0c94cdc"
+    - ID: "8d4ed36b-3547-5867-8518-91817f7caef4"
+      Hint: search
+      Value: |
+        {
+          "searchIndex": "b5e24aff-8b5b-4653-bf66-deef52c1241a",
+          "fieldsMapping": {
+            "title": "Title",
+            "description": "summary",
+            "state": "state",
+            "type": "resourceType",
+            "family": "businessFamily"
+          }
+        }
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260910T142344Z

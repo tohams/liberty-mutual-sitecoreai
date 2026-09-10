@@ -1,0 +1,29 @@
+---
+ID: 13a3d223-7857-5cfe-b310-cdf62ff34196
+Parent: 0b90d120-79f5-55f0-89a9-c329add38b06
+Template: c241fdcc-057e-501f-a45b-c893b061f04d
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/product-retail-specialty
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 314a1001-14df-51e3-acd0-1394fcedb1b3
+      Hint: eyebrow
+      Value: Products & appetite
+    - ID: 079be48f-cf09-5cde-9ceb-b35c983339ee
+      Hint: headline
+      Value: Retail specialty
+    - ID: 279e1a3c-7ed6-5769-8835-ef275b0bea4b
+      Hint: body
+      Value: <p>Organize complex needs and route the right questions to your specialist team.</p><p>Explore Cyber, Professional liability, Management liability, Environmental, Excess solutions. Product guidance is a starting point; availability and terms depend on the applicable product, risk and review.</p>
+    - ID: c8034562-b592-5193-a80a-ddbf03bf6c55
+      Hint: actionLink
+      Value: <link text="Explore the preparation guide" linktype="external" url="/resources/specialty-referral" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{4460E76C-87E9-4859-9DE6-DE122774937F}"

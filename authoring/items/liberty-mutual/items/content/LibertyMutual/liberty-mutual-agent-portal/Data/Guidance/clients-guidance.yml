@@ -1,0 +1,29 @@
+---
+ID: b2371470-68ad-5d59-b55d-859278f4346e
+Parent: 0b90d120-79f5-55f0-89a9-c329add38b06
+Template: c241fdcc-057e-501f-a45b-c893b061f04d
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/clients-guidance
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 314a1001-14df-51e3-acd0-1394fcedb1b3
+      Hint: eyebrow
+      Value: Clients & policies
+    - ID: 079be48f-cf09-5cde-9ceb-b35c983339ee
+      Hint: headline
+      Value: Keep the next conversation moving
+    - ID: 279e1a3c-7ed6-5769-8835-ef275b0bea4b
+      Hint: body
+      Value: <p>Review upcoming renewals, organize questions and save the follow-up that helps your client take the next step.</p>
+    - ID: c8034562-b592-5193-a80a-ddbf03bf6c55
+      Hint: actionLink
+      Value: <link text="Open the renewal checklist" linktype="external" url="/resources/prepare-a-household-renewal" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{4460E76C-87E9-4859-9DE6-DE122774937F}"

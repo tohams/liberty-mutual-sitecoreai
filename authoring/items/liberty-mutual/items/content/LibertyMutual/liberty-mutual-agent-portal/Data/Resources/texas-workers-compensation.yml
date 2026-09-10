@@ -1,0 +1,59 @@
+﻿---
+ID: "cd70ba49-8429-563b-a54e-cf8a383576c3"
+Parent: "f7557ea1-8b9f-5b64-87d2-801cfdb4aa64"
+Template: "2229a13f-eb34-540c-9184-6884a1544336"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Resources/texas-workers-compensation"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "'{A053ED9F-4099-4682-9411-2B4C98E481E4}'"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "054c9a6d-f1ff-51d1-b86d-b5dcc4a612a4"
+      Hint: resourceType
+      Value: State guidance
+    - ID: "0adad3c2-48c4-59db-9e15-02c7f816e86c"
+      Hint: body
+      Value: |
+        <h2>Begin with the employer and the work</h2><p>Texas does not require workers compensation coverage for most private employers. Private employers contracting with government entities must provide coverage for employees working on the project. Contracts may also require subcontractors or independent contractors to carry coverage.</p><h2>Check the source before advising</h2><p>Coverage choices have consequences beyond the premium. Review the Texas Department of Insurance guide for the employer's situation, including obligations that may apply when an employer does not provide workers compensation.</p><p>This is an educational starting point. It does not determine legal obligations or Liberty Mutual underwriting eligibility.</p><p><a href="https://www.tdi.texas.gov/pubs/consumer/cb030.html">Read the Texas Department of Insurance guide</a></p>
+    - ID: "195a2202-34ec-57d2-8f61-3051058d609d"
+      Hint: state
+      Value: TX
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260910T135527Z
+    - ID: "2e814688-8b6d-5173-84ca-6e75e286adc2"
+      Hint: sourceLink
+      Value: |
+        <link text="Workers&#x27; compensation insurance guide" linktype="external" url="https://www.tdi.texas.gov/pubs/consumer/cb030.html" />
+    - ID: "360eed1c-0f1a-5ca6-9956-71410ed42f50"
+      Hint: summary
+      Value: "A source-linked overview for discussions with Texas employers."
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "'{4460E76C-87E9-4859-9DE6-DE122774937F}'"
+    - ID: "4807ea63-34d5-54d6-8b71-e84db712b963"
+      Hint: title
+      Value: "'Workers compensation: a Texas starting point'"
+    - ID: "4c346442-e859-4efd-89b2-44aedf467d21"
+      Hint: __Valid to
+      Value: 
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "1ae66e9d-0861-4f98-aa4f-e43463abd1d6"
+    - ID: "98705348-d574-5755-a3a4-d63286fea318"
+      Hint: reviewedAt
+      Value: 20260910T000000Z
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "c8f93afe-bfd4-4e8f-9c61-152559854661"
+      Hint: __Valid from
+      Value: 
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260910T135527Z

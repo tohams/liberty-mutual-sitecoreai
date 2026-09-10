@@ -1,0 +1,23 @@
+---
+ID: c241fdcc-057e-501f-a45b-c893b061f04d
+Parent: 94b480f8-5b0a-4487-99bb-238569489481
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/Project/LibertyMutual/AgentGuidance
+SharedFields:
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Value: "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Office/32x32/document_text.png
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: "{592A61DE-F153-5034-BDB7-35B8E3513494}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260910T140000Z

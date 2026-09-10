@@ -1,0 +1,135 @@
+{
+  "provenance": "Implementation reference output; not generated or executed by native Agentic Studio.",
+  "campaignId": "expand-small-business",
+  "editorialCampaignSlug": "expand-small-business-practice",
+  "agencyId": "cedar-ridge",
+  "status": "draft",
+  "campaignBrief": {
+    "title": "Expand your small-business practice",
+    "objective": "Help the agency build a repeatable, informed small-commercial preparation practice through role-specific learning and a focused next action.",
+    "targetAccount": "Cedar Ridge Insurance",
+    "audienceRationale": "The fictional agency has an established personal-lines book and is appointed for small commercial. Its current product mix provides a sensible learning and preparation scenario, not an underwriting or financial recommendation."
+  },
+  "roleVariants": [
+    {
+      "role": "principal",
+      "datasourceName": "commercial-growth-principal",
+      "eyebrow": "Agency growth",
+      "headline": "Build your next chapter in small business",
+      "body": "<p>Give your team a clear starting point for small-commercial conversations. Review the learning path and choose your next agency action.</p>",
+      "actionLink": {
+        "text": "Explore the growth path",
+        "href": "/resources/expand-small-business-practice"
+      },
+      "status": "draft"
+    },
+    {
+      "role": "producer",
+      "datasourceName": "commercial-growth-producer",
+      "eyebrow": "Agency growth",
+      "headline": "Bring a stronger submission to the table",
+      "body": "<p>Start with the business story, check the state context, and use a focused checklist to prepare your next BOP request.</p>",
+      "actionLink": {
+        "text": "Prepare a BOP submission",
+        "href": "/resources/build-a-bop-submission"
+      },
+      "status": "draft"
+    },
+    {
+      "role": "account-manager",
+      "datasourceName": "commercial-growth-account-manager",
+      "eyebrow": "Agency growth",
+      "headline": "Connect everyday conversations to new needs",
+      "body": "<p>Learn the questions that help identify a business conversation, then bring the right teammate into the next step.</p>",
+      "actionLink": {
+        "text": "Start the learning path",
+        "href": "/resources/expand-small-business-practice"
+      },
+      "status": "draft"
+    },
+    {
+      "role": "fallback",
+      "datasourceName": "commercial-growth-neutral",
+      "eyebrow": "Agency growth",
+      "headline": "Resources for your next client conversation",
+      "body": "<p>Find product guidance, preparation checklists and learning organized around the work you do.</p>",
+      "actionLink": {
+        "text": "Browse resources",
+        "href": "/resources"
+      },
+      "status": "draft"
+    }
+  ],
+  "relationshipManagerBrief": {
+    "headline": "Align on the next small-business conversation",
+    "agenda": [
+      "Ask which kinds of local business conversations the team already encounters.",
+      "Confirm the appropriate specialists, appointment context and risk-state guidance.",
+      "Choose one learning action and one submission-preparation action.",
+      "Agree who owns the follow-up and review the result together."
+    ],
+    "avoid": [
+      "No promised volume, revenue target, conversion lift or quote turnaround.",
+      "Do not coach an account manager to perform activities beyond their authorization."
+    ]
+  },
+  "measurementPlan": {
+    "businessQuestion": "Does a role-specific learning path help eligible agency colleagues complete useful preparation actions?",
+    "unit": "Agency, with role-level interactions retained for diagnosis.",
+    "primaryMetric": "Share of eligible target agencies completing at least one selected learning or preparation action within 30 days of first campaign exposure.",
+    "supportingMetrics": [
+      "Unique target-agency reach",
+      "Role-variant CTA rate",
+      "Learning registration or completion where instrumented",
+      "BOP checklist or draft-submission preparation where instrumented",
+      "Relationship-manager contact request where instrumented"
+    ],
+    "guardrails": [
+      "No automatic coverage, pricing or eligibility action.",
+      "Verify no private agency values appear in public Edge content.",
+      "Do not claim causation from uncontrolled sandbox data."
+    ],
+    "experimentNote": "A future controlled holdout should assign and evaluate by agency to avoid different colleagues contaminating treatment/control. This sandbox prepares the measurement design; it does not establish campaign lift."
+  },
+  "reviewChecklist": [
+    "Source claims trace to current official source URLs.",
+    "Risk-state guidance preserved; Texas workers compensation exceptions are not simplified into blanket rules.",
+    "Principal, producer, account-manager and fallback copy differ in purpose.",
+    "Every CTA is in the approved route list.",
+    "No invented financial or underwriting promises.",
+    "Native Brand Kit is selected and reviewed.",
+    "No external send or live publishing action executed."
+  ],
+  "sourceLedger": [
+    {
+      "id": "LM01",
+      "title": "Liberty Mutual independent-agent homepage",
+      "url": "https://agents.libertymutual.com/"
+    },
+    {
+      "id": "LM02",
+      "title": "Benefits of working with an independent agent",
+      "url": "https://agents.libertymutual.com/benefits-of-agent"
+    },
+    {
+      "id": "LM04",
+      "title": "Agent and broker dashboard",
+      "url": "https://business.libertymutual.com/agent-and-broker-dashboard/"
+    },
+    {
+      "id": "LM05",
+      "title": "Small business insurance",
+      "url": "https://www.libertymutual.com/small-business"
+    },
+    {
+      "id": "LM06",
+      "title": "Business owner's policy insurance",
+      "url": "https://www.libertymutual.com/small-business/business-owners-insurance"
+    },
+    {
+      "id": "TX01",
+      "title": "Workers' compensation insurance guide",
+      "url": "https://www.tdi.texas.gov/pubs/consumer/cb030.html"
+    }
+  ]
+}
