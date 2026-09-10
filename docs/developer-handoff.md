@@ -21,6 +21,16 @@ The active rendering host is `liberty-mutual-agent-portal`, at `examples/liberty
 
 `ResourcePage` is the single authority for resource title, summary, body, type, risk state and taxonomy. The native resource item is also its article datasource. Bootstrap hydrates current published metadata from Experience Edge, with small paginated queries; favorites use the stable native item ID. Marketer edits appear through the normal publish workflow, without maintaining a duplicate resource catalog in application code. The explicit local fixture adapter is reserved for isolated engineering tests.
 
+### Licensed-state content relevance
+
+The authenticated agent adapter supplies `licensedStates`; home `state` is not a substitute. Workspace recommendations and the local resource listing share `src/features/resources/resource-state-scope.ts`. Recommendations preserve specialization and relevance, with license diversity as a tie-break. Native `ResourceSearch` composes the same default through `resource-search-facets.ts`: one `Risk state` equality filter whose array contains every license plus the CMS value `All`. The installed Content SDK defines this array as OR. Native Search applies it before pagination and total calculation; the client does not filter a fetched page or invent counts.
+
+The selector defaults to **My licensed states**. **All states** removes the native state restriction; an individual state includes nationwide guidance, and **Nationwide guidance only** matches raw `All`. Other facets intersect this scope. Changing scope or other filters returns to page one; clearing filters restores the licensed default. An empty license list yields nationwide guidance only. Profile/license changes remount Search with the new default. Saved resources and direct educational article links remain accessible; server-side licensing and agency checks still govern transactions.
+
+This is custom profile-aware query composition using native SitecoreAI Search. The current signed profile comes from the synthetic agent adapter, whose licenses are also represented in the imported UDL profile booleans; this change does not add a native UDL decision rule or duplicate resource copy. A future identity/agent-system adapter should supply the same contract. Published resource metadata stays authoritative. The current three-state resource contract expands CMS `All` to TX/FL/IL; update that mapping, supported-state contract and shared scope helper together when adding another jurisdiction.
+
+Run `node --import tsx scripts/verify-resource-state-search.mjs --public-context PUBLIC_CONTEXT --index NATIVE_INDEX` from the application directory for read-only native Search acceptance. It verifies every page, licensed and explicit scopes, nationwide inclusion, other facets, a text query and empty results against the actual index. Browser acceptance additionally covers login, filter/reset controls, saved articles and contrasting agents.
+
 ## Environment configuration
 
 Start with the application's `.env.remote.example`. Keep real values out of Git. Separate production, preview and local configuration; do not import a developer's entire environment file indiscriminately.

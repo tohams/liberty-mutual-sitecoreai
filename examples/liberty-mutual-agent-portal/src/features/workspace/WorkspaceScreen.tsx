@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { resourceHref } from "../portal/content-routes";
+import { selectRecommendedResources } from "../resources/resource-state-scope";
 import {
   dateLabel,
   lineNames,
@@ -34,19 +35,10 @@ export function WorkspaceScreen({ editorial }: { editorial?: ReactNode }) {
   const growth = priorTotal
     ? (((total - priorTotal) / priorTotal) * 100).toFixed(1)
     : "0";
-  const preferredResources = [...data.resources]
-    .filter(
-      (item) =>
-        item.states.includes(data.agent.state) &&
-        (item.line === "all" || data.agent.specializations.includes(item.line)),
-    )
-    .sort((left, right) => {
-      const relevance = (resource: typeof left) =>
-        (resource.states.length === 1 ? 2 : 0) +
-        (resource.line !== "all" ? 3 : 0);
-      return relevance(right) - relevance(left);
-    })
-    .slice(0, 2);
+  const preferredResources = selectRecommendedResources(
+    data.resources,
+    data.agent,
+  );
   const contact =
     data.contacts.find((item) =>
       item.lines.some((line) => data.agent.specializations.includes(line)),
@@ -341,7 +333,11 @@ export function WorkspaceScreen({ editorial }: { editorial?: ReactNode }) {
                   />
                   <span>
                     {resource.type === "State guidance"
-                      ? stateNames[data.agent.state]
+                      ? resource.states.length === 3
+                        ? "Nationwide"
+                        : resource.states
+                            .map((state) => stateNames[state])
+                            .join(" · ")
                       : "Grow what’s next"}
                   </span>
                 </div>

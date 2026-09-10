@@ -18,14 +18,15 @@ import type {
   ResourceSearchProps,
 } from "./resource-search.props";
 
-const FACET_NAMES = [
-  "Risk state",
-  "Resource type",
-  "Business family",
-  "Distribution channel",
-  "Product",
-] as const;
-type FacetSelection = Partial<Record<(typeof FACET_NAMES)[number], string>>;
+import {
+  DEFAULT_RESOURCE_STATE_SCOPE,
+  type ResourceStateScope,
+} from "@/features/resources/resource-state-scope";
+import {
+  buildResourceSearchFacet,
+  RESOURCE_FACET_NAMES,
+  type ResourceFacetSelection,
+} from "./resource-search-facets";
 const normalizeId = (value: string) =>
   value.replace(/[{}-]/g, "").toLowerCase();
 
@@ -93,21 +94,10 @@ function documentText(document: SearchDocument, field: string): string {
   return "";
 }
 
-function facetRequest(selection: FacetSelection): FacetRequest {
-  return {
-    all: true,
-    fields: Object.entries(selection)
-      .filter(([, value]) => value)
-      .map(([name, value]) => ({
-        name,
-        filters: [{ operator: "eq", value: value! }],
-      })),
-  };
-}
-
 /** Search retrieval and facet counts come exclusively from the native SitecoreAI Search index. */
 export function Default({ fields, params, rendering }: ResourceSearchProps) {
   const { page } = useSitecore();
+  const { data } = usePortal();
   const configuration = useMemo(
     () => parseConfiguration(fields?.search?.value),
     [fields?.search?.value],
@@ -130,7 +120,11 @@ export function Default({ fields, params, rendering }: ResourceSearchProps) {
     );
   return (
     <ResourceSearchExperience
-      key={configuration.searchIndex}
+      key={[
+        configuration.searchIndex,
+        data.agent.id,
+        ...data.agent.licensedStates,
+      ].join(":")}
       configuration={configuration}
       editing={page.mode.isEditing || page.mode.isPreview}
       id={params?.RenderingIdentifier}
@@ -161,8 +155,16 @@ function ResourceSearchExperience({
   const [input, setInput] = useState(searchParams.get("q") || "");
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [pageNumber, setPageNumber] = useState(1);
-  const [selection, setSelection] = useState<FacetSelection>({});
-  const [facet, setFacet] = useState<FacetRequest>({ all: true });
+  const [stateScope, setStateScope] = useState<ResourceStateScope>(
+    DEFAULT_RESOURCE_STATE_SCOPE,
+  );
+  const [selection, setSelection] = useState<ResourceFacetSelection>({});
+  const [facet, setFacet] = useState<FacetRequest>(() =>
+    buildResourceSearchFacet(
+      DEFAULT_RESOURCE_STATE_SCOPE,
+      data.agent.licensedStates,
+    ),
+  );
   const {
     results,
     total,
@@ -183,7 +185,19 @@ function ResourceSearchExperience({
     keepPreviousData: true,
   });
   const mapping = configuration.fieldsMapping;
-  const hasFilters = Object.values(selection).some(Boolean);
+  const hasFilters =
+    stateScope !== DEFAULT_RESOURCE_STATE_SCOPE ||
+    Object.values(selection).some(Boolean);
+  const stateSummary =
+    stateScope === "licensed"
+      ? data.agent.licensedStates.length
+        ? `${data.agent.licensedStates.map((state) => stateNames[state]).join(", ")} + nationwide`
+        : "Nationwide guidance"
+      : stateScope === "all"
+        ? "All states"
+        : stateScope === "All"
+          ? "Nationwide guidance"
+          : `${stateNames[stateScope]} + nationwide`;
   const loading = !editing && (isLoading || status === "idle");
 
   useEffect(() => {
@@ -242,11 +256,23 @@ function ResourceSearchExperience({
     event.preventDefault();
     search(input);
   }
-  function selectFacet(name: (typeof FACET_NAMES)[number], value: string) {
+  function selectFacet(
+    name: (typeof RESOURCE_FACET_NAMES)[number],
+    value: string,
+  ) {
     const next = { ...selection, [name]: value };
     setSelection(next);
     setPageNumber(1);
-    setFacet(facetRequest(next));
+    setFacet(
+      buildResourceSearchFacet(stateScope, data.agent.licensedStates, next),
+    );
+  }
+  function selectStateScope(scope: ResourceStateScope) {
+    setStateScope(scope);
+    setPageNumber(1);
+    setFacet(
+      buildResourceSearchFacet(scope, data.agent.licensedStates, selection),
+    );
   }
   function changePage(nextPage: number) {
     setPageNumber(nextPage);
@@ -256,7 +282,13 @@ function ResourceSearchExperience({
   function clearFilters() {
     setSelection({});
     setPageNumber(1);
-    setFacet({ all: true });
+    setStateScope(DEFAULT_RESOURCE_STATE_SCOPE);
+    setFacet(
+      buildResourceSearchFacet(
+        DEFAULT_RESOURCE_STATE_SCOPE,
+        data.agent.licensedStates,
+      ),
+    );
   }
 
   return (
@@ -298,7 +330,27 @@ function ResourceSearchExperience({
         </div>
       </section>
       <div className="native-search-filters" aria-label="Filter search results">
-        {FACET_NAMES.map((name) => {
+        <label>
+          <span>Risk state</span>
+          <select
+            aria-label="Risk state"
+            value={stateScope}
+            disabled={editing || loading}
+            onChange={(event) =>
+              selectStateScope(event.target.value as ResourceStateScope)
+            }
+          >
+            <option value="licensed">My licensed states</option>
+            <option value="all">All states</option>
+            {Object.entries(stateNames).map(([code, name]) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))}
+            <option value="All">Nationwide guidance only</option>
+          </select>
+        </label>
+        {RESOURCE_FACET_NAMES.map((name) => {
           const values =
             facets?.find((item) => item.name === name)?.value || [];
           return (
@@ -312,15 +364,13 @@ function ResourceSearchExperience({
               >
                 <option value="">
                   All{" "}
-                  {name === "Risk state"
-                    ? "states"
-                    : name === "Resource type"
-                      ? "resource types"
-                      : name === "Business family"
-                        ? "business families"
-                        : name === "Distribution channel"
-                          ? "channels"
-                          : "products"}
+                  {name === "Resource type"
+                    ? "resource types"
+                    : name === "Business family"
+                      ? "business families"
+                      : name === "Distribution channel"
+                        ? "channels"
+                        : "products"}
                 </option>
                 {selection[name] &&
                   !values.some(
@@ -353,7 +403,7 @@ function ResourceSearchExperience({
         <div>
           <span>
             <PortalIcon name="pin" width="14" />
-            Working in {stateNames[data.agent.state]}
+            {stateSummary}
           </span>
           {hasFilters && (
             <button onClick={clearFilters}>
@@ -380,7 +430,7 @@ function ResourceSearchExperience({
         </section>
       ) : (
         <div className="resource-grid" aria-busy={loading}>
-          {loading && results.length === 0
+          {loading
             ? Array.from({ length: 6 }, (_, index) => (
                 <div className="search-skeleton" key={index} aria-hidden="true">
                   <div />
@@ -506,7 +556,7 @@ function ResourceSearchExperience({
               })}
         </div>
       )}
-      {!editing && isSuccess && total === 0 && (
+      {!editing && !loading && isSuccess && total === 0 && (
         <section className="panel empty-state">
           <PortalIcon name="search" width="32" />
           <h3>Let&apos;s try another angle.</h3>
@@ -520,7 +570,7 @@ function ResourceSearchExperience({
               search("");
             }}
           >
-            Explore all resources
+            Reset search
           </button>
         </section>
       )}

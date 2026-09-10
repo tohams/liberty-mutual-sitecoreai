@@ -25,9 +25,11 @@ For one operational example, use Maya's **Clients & policies → Review renewals
 
 ## 2. Find state guidance with native Search
 
-Open [Learning & resources](https://liberty-mutual-agent-portal.vercel.app/resources), search **Workers compensation**, and choose **Texas** in **Risk state**. Open the Texas workers compensation guide. Inspect its reviewed date and Texas Department of Insurance source, save the resource, and reload to confirm its saved state.
+Sign in as **Daniel Ortiz** and open [Learning & resources](https://liberty-mutual-agent-portal.vercel.app/resources). **Risk state** starts at **My licensed states**: Illinois, Texas and nationwide guidance. His Illinois home state does not exclude his Texas license. His workspace recommendations also consider both licenses and his specialties.
 
-Clear the filter and compare Florida or Illinois. The risk-state facet is an explicit selection; the displayed agent state does not silently decide the customer's jurisdiction. State guidance is educational content, separate from fictional product eligibility.
+Search **Workers compensation**. Illinois, Texas and relevant nationwide guidance should appear; Florida-only guidance should not. Choose **All states** to research the broader catalog, or **Florida** to see Florida plus nationwide guidance. **Nationwide guidance only** excludes all state-specific articles. **Clear filters** returns to My licensed states while retaining the search phrase; **Reset search** from an empty result clears the phrase too.
+
+Open the Texas workers compensation guide, inspect its reviewed date and Texas Department of Insurance source, save it, and reload to confirm its saved state. Saved articles and direct article links remain available even outside the default licensed-state scope. These are educational resources; browsing them never grants transaction eligibility. Sign out and compare **Maya Chen**, whose profile has all three supported state licenses, so her default includes Florida as well.
 
 The initial connected review found 12 authored resources and five native facets. Search queries and results use SitecoreAI Search. Saving a resource uses the portal's individual saved-work service. The article and its searchable metadata come from the same native ResourcePage, so marketers do not maintain duplicate article copy in JSON. See the [content model](content-model.md#native-resource-search-composition). The optional Search Configuration Manager plugin editor is not yet enabled; its existing configuration field contains JSON for platform owners to manage.
 

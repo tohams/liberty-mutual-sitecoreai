@@ -7,6 +7,11 @@ import { resourceHref } from "../portal/content-routes";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";
 import { stateNames, usePortal } from "../portal/portal-context";
+import {
+  DEFAULT_RESOURCE_STATE_SCOPE,
+  matchesResourceStateScope,
+  type ResourceStateScope,
+} from "./resource-state-scope";
 
 export function ResourcesScreen({
   search,
@@ -19,6 +24,9 @@ export function ResourcesScreen({
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [filter, setFilter] = useState("All resources");
+  const [stateScope, setStateScope] = useState<ResourceStateScope>(
+    DEFAULT_RESOURCE_STATE_SCOPE,
+  );
   const [courseId, setCourseId] = useState(
     initialCourseId || searchParams.get("course") || "",
   );
@@ -29,14 +37,18 @@ export function ResourcesScreen({
       `${resource.title} ${resource.description} ${resource.tags.join(" ")}`
         .toLowerCase()
         .includes(query.toLowerCase()) &&
+      (filter === "Saved" ||
+        matchesResourceStateScope(
+          resource.states,
+          data.agent.licensedStates,
+          stateScope,
+        )) &&
       (filter === "All resources" ||
         (filter === "Saved"
           ? data.favorites.includes(resource.id)
-          : filter === "Your state"
-            ? resource.states.includes(data.agent.state)
-            : filter === "Guide"
-              ? resource.type.toLowerCase().endsWith("guide")
-              : resource.type === filter)),
+          : filter === "Guide"
+            ? resource.type.toLowerCase().endsWith("guide")
+            : resource.type === filter)),
   );
   return (
     <>
@@ -129,10 +141,43 @@ export function ResourcesScreen({
               )}
             </div>
           </section>
+          {filter !== "Saved" && (
+            <>
+              <div
+                className="catalog-filter"
+                role="group"
+                aria-label="Resource state scope"
+              >
+                <button
+                  className={stateScope === "licensed" ? "active" : ""}
+                  aria-pressed={stateScope === "licensed"}
+                  onClick={() => setStateScope("licensed")}
+                >
+                  My licensed states
+                </button>
+                <button
+                  className={stateScope === "all" ? "active" : ""}
+                  aria-pressed={stateScope === "all"}
+                  onClick={() => setStateScope("all")}
+                >
+                  All states
+                </button>
+              </div>
+              <p className="section-description">
+                {stateScope === "licensed"
+                  ? [
+                      ...data.agent.licensedStates.map(
+                        (state) => stateNames[state],
+                      ),
+                      "Nationwide guidance",
+                    ].join(" · ")
+                  : "Browse guidance from every state."}
+              </p>
+            </>
+          )}
           <div className="catalog-filter" aria-label="Resource filters">
             {[
               "All resources",
-              "Your state",
               "Guide",
               "Checklist",
               "State guidance",
@@ -144,9 +189,7 @@ export function ResourcesScreen({
                 aria-pressed={filter === item}
                 onClick={() => setFilter(item)}
               >
-                {item === "Your state"
-                  ? `${stateNames[data.agent.state]} guidance`
-                  : item}
+                {item}
               </button>
             ))}
           </div>
@@ -236,6 +279,7 @@ export function ResourcesScreen({
                 onClick={() => {
                   setQuery("");
                   setFilter("All resources");
+                  setStateScope(DEFAULT_RESOURCE_STATE_SCOPE);
                 }}
               >
                 Clear filters
