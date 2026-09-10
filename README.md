@@ -1,6 +1,6 @@
 # Liberty Mutual agent portal
 
-A customer-owned SitecoreAI sandbox for independent agents and the marketing and engineering teams who support them. The experience combines an authenticated agent workspace with native, editable Sitecore content. Account, policy and submission data are deliberately synthetic; changes persist within isolated reviewer packs.
+A SitecoreAI sandbox prepared for customer handoff, for independent agents and the marketing and engineering teams who support them. The experience combines an authenticated agent workspace with native, editable Sitecore content. Account, policy and submission data are deliberately synthetic; changes persist within isolated reviewer packs.
 
 The application is built on the official [SitecoreAI starter repository](https://github.com/Sitecore/xmcloud-starter-js), using the Content SDK and Next.js App Router. Original starters remain as upstream reference material. The active application and rendering host are **`examples/liberty-mutual-agent-portal`**.
 
@@ -10,6 +10,8 @@ The application is built on the official [SitecoreAI starter repository](https:/
 | --- | --- |
 | Developers and platform administrators | [Developer handoff](docs/developer-handoff.md) |
 | Marketers and content implementers | [Content model and publishing](docs/content-model.md) |
+| Marketing and platform walkthrough | [Guided portal walkthrough](docs/marketing-walkthrough.md) |
+| Campaign reviewers | [Agentic Studio campaign and native evidence](docs/agentic-studio/README.md) |
 | Review coordinators and integration developers | [Authentication, data and reset runbook](examples/liberty-mutual-agent-portal/docs/auth-and-data.md) |
 | Brand and content reviewers | [Brand sources and usage](docs/brand/README.md) |
 | Contributors | [Branch and review workflow](CONTRIBUTING.md) |

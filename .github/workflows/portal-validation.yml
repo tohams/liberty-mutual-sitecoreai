@@ -38,10 +38,8 @@ jobs:
       - run: npm ci
       - name: Lint application
         run: npm run lint
-      - name: Authentication, durable state, isolation, and resource routing tests
-        run: node --import tsx --test src/server/**/*.test.ts src/features/portal/*.test.ts
-        env:
-          NODE_OPTIONS: --conditions=react-server
+      - name: Authentication, identity readiness, durable state, isolation, and resource routing tests
+        run: npm test
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'

@@ -65,6 +65,7 @@
   "scripts": {
     "prebuild": "node scripts/check-build-environment.mjs",
     "build": "cross-env NODE_ENV=production npm-run-all --serial sitecore-tools:generate-map sitecore-tools:build next:build",
+    "postbuild": "node scripts/check-client-bundle-secrets.mjs",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit --incremental false",
@@ -76,6 +77,7 @@
     "sitecore-tools:build": "sitecore-tools project build",
     "dev": "cross-env NODE_ENV=development npm-run-all --serial sitecore-tools:generate-map sitecore-tools:build --parallel next:dev sitecore-tools:generate-map:watch",
     "start": "next start",
+    "test": "cross-env NODE_OPTIONS=--conditions=react-server node --import tsx --test \"src/**/*.test.ts\"",
     "test:backend": "NODE_OPTIONS='--conditions=react-server' tsx --test src/server/**/*.test.ts"
   },
   "engines": {

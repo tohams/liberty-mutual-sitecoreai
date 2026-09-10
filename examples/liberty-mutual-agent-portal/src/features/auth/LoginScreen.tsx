@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PortalIcon } from "@/components/ui/portal-icon";
-import { establishPortalIdentity } from "@/lib/portal-analytics";
+import { preparePortalLoginIdentity } from "@/lib/portal-analytics";
 
 export function LoginScreen() {
   const [busy, setBusy] = useState(false);
@@ -30,15 +30,9 @@ export function LoginScreen() {
           body.error?.message || "Please check your username and password.",
         );
       }
-      const bootstrap = await fetch("/api/portal/bootstrap", {
-        cache: "no-store",
-      });
-      if (bootstrap.ok) {
-        const profile = await bootstrap.json();
-        await establishPortalIdentity(profile.udlIdentity);
-      }
-      // Identify browser measurement before navigation. Native campaign decisions independently
-      // use the verified portal session, so delayed analytics cannot select another agent's content.
+      await preparePortalLoginIdentity();
+      // Optional bootstrap, SDK preparation and profile readiness share a five-second
+      // budget. Successful app authentication proceeds even when native identity is unavailable.
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination
       window.location.assign("/workspace");
     } catch (failure) {

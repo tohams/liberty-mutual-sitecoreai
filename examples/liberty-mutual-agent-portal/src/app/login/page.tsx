@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import { draftMode } from 'next/headers';
 import { getSession } from '@/server/auth/session';
 import { getPortalBootstrap } from '@/server/data/portal';
 import { PortalError } from '@/server/errors';
@@ -8,6 +9,9 @@ export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Sign in' };
 
 export default async function LoginPage() {
+  // Explicit sign-in lets an editor leave a verified draft session on this host.
+  // The successful authentication response expires the native draft cookies.
+  if ((await draftMode()).isEnabled) return <LoginScreen />;
   const session = await getSession();
   let hasActiveWorkspace = false;
   if (session) {

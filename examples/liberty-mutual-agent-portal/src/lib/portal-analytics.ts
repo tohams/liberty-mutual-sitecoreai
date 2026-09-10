@@ -13,12 +13,28 @@ import {
 } from "@sitecore-content-sdk/events";
 import { clearEventQueue } from "@sitecore-content-sdk/events/browser";
 import type { PortalBootstrap, PortalAction } from "@/contracts/portal";
+import {
+  readPortalBrowserProfileRef,
+  waitForPortalProfileLink,
+} from "./portal-identity-link";
+import {
+  awaitIdentityWork,
+  boundedIdentityPreparation,
+  LOGIN_IDENTITY_PREPARATION_TIMEOUT_MS,
+  ORDINARY_IDENTITY_TIMEOUT_MS,
+  PortalIdentityWork,
+  prepareBrowserAdapter,
+} from "./portal-identity-preparation";
 import config from "sitecore.config";
 
 type PortalIdentity = NonNullable<PortalBootstrap["udlIdentity"]>;
 let initialization: Promise<void> | undefined;
+let browserAdapter: ReturnType<typeof analyticsBrowserAdapter> | undefined;
 let activeIdentity: string | undefined;
 let identifying: Promise<boolean> | undefined;
+let identifyingKey: string | undefined;
+let loginPreparation: Promise<boolean> | undefined;
+const sdkWork = new PortalIdentityWork();
 const recordedViews = new Set<string>();
 
 export function trackingEnabled() {
@@ -30,51 +46,140 @@ export function trackingEnabled() {
   );
 }
 
-/** Called only with an identity returned by the authenticated server after a verified UDL import. */
+async function identifyProfile(
+  profile: PortalIdentity,
+  generation: number,
+  signal: AbortSignal,
+  fresh: boolean,
+): Promise<boolean> {
+  const current = () => sdkWork.isCurrent(generation) && !signal.aborted;
+  await sdkWork.waitUntilIdle(signal);
+  if (!current()) return false;
+  if (fresh) {
+    if (initialization) {
+      await awaitIdentityWork(
+        sdkWork.run(generation, signal, clearEventQueue),
+        signal,
+      );
+      if (!current()) return false;
+    }
+    initialization = undefined;
+  }
+  if (!initialization) {
+    const adapter = analyticsBrowserAdapter();
+    // Old initialization may have completed after the server expired cookies.
+    // Force this login to create a fresh browser through the public adapter.
+    const preparedAdapter = prepareBrowserAdapter(adapter, fresh);
+    browserAdapter = preparedAdapter;
+    const pending = sdkWork.run(generation, signal, () =>
+      initContentSdk({
+        config: {
+          contextId: config.api.edge.clientContextId,
+          edgeUrl: config.api.edge.edgeUrl,
+          siteName: config.defaultSite,
+        },
+        plugins: [
+          analyticsPlugin({
+            options: { enableCookie: true, timeout: 2000 },
+            adapter: preparedAdapter,
+          }),
+          eventsPlugin(),
+        ],
+      }),
+    );
+    initialization = pending;
+    void pending.catch(() => {
+      if (initialization === pending) initialization = undefined;
+    });
+  }
+  await awaitIdentityWork(initialization, signal);
+  if (!current()) return false;
+  const identify = () =>
+    sdkWork.run(generation, signal, () =>
+      identity({
+        identifiers: [profile],
+        channel: "WEB",
+        currency: "USD",
+        language: "EN",
+        page: "Agent workspace",
+      }),
+    );
+  const browserId = browserAdapter?.getClientId();
+  const ready = fresh
+    ? Boolean(browserId) &&
+      (await waitForPortalProfileLink(
+        {
+          identify,
+          readProfileRef: (signal) =>
+            readPortalBrowserProfileRef(
+              {
+                edgeUrl: config.api.edge.edgeUrl,
+                contextId: config.api.edge.clientContextId,
+                browserId: browserId!,
+              },
+              signal,
+            ),
+        },
+        { signal },
+      ))
+    : Boolean(await awaitIdentityWork(identify(), signal));
+  // A receipt alone does not establish the asynchronous browser-to-profile link.
+  // Ordinary page tracking does not wait for an already-linked profile to change.
+  if (!ready || !current()) return false;
+  activeIdentity = `${profile.provider}:${profile.id}`;
+  return true;
+}
+
+/** Ordinary tracking is bounded and never waits for an already-linked profile to change. */
 export async function establishPortalIdentity(
   profile: PortalIdentity | null,
 ): Promise<boolean> {
-  if (!profile || !trackingEnabled()) return false;
+  if (!profile || !trackingEnabled() || loginPreparation) return false;
   const key = `${profile.provider}:${profile.id}`;
   if (activeIdentity === key) return true;
-  if (identifying) return identifying;
-  identifying = (async () => {
-    initialization ??= initContentSdk({
-      config: {
-        contextId: config.api.edge.clientContextId,
-        edgeUrl: config.api.edge.edgeUrl,
-        siteName: config.defaultSite,
-      },
-      plugins: [
-        analyticsPlugin({
-          options: { enableCookie: true },
-          adapter: analyticsBrowserAdapter(),
-        }),
-        eventsPlugin(),
-      ],
-    });
-    await initialization;
-    const receipt = await identity({
-      identifiers: [profile],
-      channel: "WEB",
-      currency: "USD",
-      language: "EN",
-      page: "Agent workspace",
-    });
-    // The SDK resolves transport failures to null rather than throwing.
-    if (!receipt) return false;
-    activeIdentity = key;
-    return true;
-  })()
-    .catch(() => {
-      // Measurement availability must not prevent an agent from accessing their work.
-      initialization = undefined;
-      return false;
-    })
-    .finally(() => {
+  if (identifying) return identifyingKey === key ? identifying : false;
+  const generation = sdkWork.current();
+  identifyingKey = key;
+  const operation = boundedIdentityPreparation(
+    (signal) => identifyProfile(profile, generation, signal, false),
+    ORDINARY_IDENTITY_TIMEOUT_MS,
+  ).finally(() => {
+    if (identifying === operation) {
       identifying = undefined;
+      identifyingKey = undefined;
+    }
+  });
+  identifying = operation;
+  return operation;
+}
+
+/** Successful app authentication never waits more than five seconds for optional native identity. */
+export function preparePortalLoginIdentity(): Promise<boolean> {
+  if (!trackingEnabled()) return Promise.resolve(false);
+  const generation = sdkWork.invalidate();
+  activeIdentity = undefined;
+  recordedViews.clear();
+  const preparation = boundedIdentityPreparation(async (signal) => {
+    const response = await fetch("/api/portal/bootstrap", {
+      cache: "no-store",
+      signal,
     });
-  return identifying;
+    if (!response.ok) return false;
+    const bootstrap = await response.json();
+    if (signal.aborted || !sdkWork.isCurrent(generation)) return false;
+    const profile: PortalIdentity | undefined = bootstrap?.udlIdentity;
+    if (
+      profile?.provider !== "liberty-mutual-agent" ||
+      typeof profile.id !== "string" ||
+      !profile.id
+    )
+      return false;
+    return identifyProfile(profile, generation, signal, true);
+  }, LOGIN_IDENTITY_PREPARATION_TIMEOUT_MS).finally(() => {
+    if (loginPreparation === preparation) loginPreparation = undefined;
+  });
+  loginPreparation = preparation;
+  return preparation;
 }
 
 export async function recordPortalPageView(
@@ -159,7 +264,17 @@ export async function recordPortalSearch({
 
 /** Clear pending analytics before logout navigates to a fresh document. Cookies are expired by the server. */
 export function clearPortalAnalytics() {
-  if (initialization) void clearEventQueue().catch(() => undefined);
+  const generation = sdkWork.invalidate();
+  if (initialization)
+    void boundedIdentityPreparation(async (signal) => {
+      await sdkWork.waitUntilIdle(signal);
+      if (!sdkWork.isCurrent(generation)) return false;
+      await awaitIdentityWork(
+        sdkWork.run(generation, signal, clearEventQueue),
+        signal,
+      );
+      return true;
+    }, ORDINARY_IDENTITY_TIMEOUT_MS);
   activeIdentity = undefined;
   recordedViews.clear();
 }

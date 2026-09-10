@@ -87,8 +87,8 @@ export default async function proxy(req: NextRequest) {
   if (!hasDraftCookie && !session) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
-  // Request-scoped identity is resolved only if native campaign discovery needs it.
-  // Draft requests and invalid/unverified runs cannot use a stale browser profile.
+  // Native decisions use the browser profile linked at login, gated by this request's active run.
+  // Each request has its own transport context; draft and unverified runs remain neutral.
   const requestPersonalize = personalize.forRequest(async () =>
     session ? getPortalPersonalizationIdentity(session) : null,
   );

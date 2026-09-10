@@ -1,8 +1,9 @@
 type ReceiptType = 'null' | 'array' | 'object' | 'undefined' | 'string' | 'number' | 'boolean' | 'other';
 type Diagnostic =
   | { stage: 'proxy'; enabled: boolean; draft: boolean; signedSessionPresent: boolean }
+  | { stage: 'discovery'; outcome: 'unavailable'; elapsedMs: number }
   | { stage: 'identity'; identityPresent: boolean; outcome: 'available' | 'missing' | 'resolver-error'; elapsedMs: number }
-  | { stage: 'decision'; receiptType: ReceiptType; selectedVariant: boolean; outcome: 'completed' | 'execution-error'; elapsedMs: number };
+  | { stage: 'decision'; receiptType: ReceiptType; selectedVariant: boolean; outcome: 'completed' | 'execution-error' | 'http-error' | 'timeout'; elapsedMs: number; httpStatus?: number };
 
 const elapsed = (milliseconds: number) => Number.isFinite(milliseconds) ? Math.max(0, Math.round(milliseconds)) : 0;
 
@@ -14,6 +15,10 @@ export function reportPersonalizationDiagnostic(diagnostic: Diagnostic): void {
       stage: 'proxy', enabled: Boolean(diagnostic.enabled), draft: Boolean(diagnostic.draft),
       signedSessionPresent: Boolean(diagnostic.signedSessionPresent),
     });
+  } else if (diagnostic.stage === 'discovery') {
+    console.info('Portal personalization', {
+      stage: 'discovery', outcome: 'unavailable', elapsedMs: elapsed(diagnostic.elapsedMs),
+    });
   } else if (diagnostic.stage === 'identity') {
     console.info('Portal personalization', {
       stage: 'identity', identityPresent: Boolean(diagnostic.identityPresent),
@@ -22,11 +27,14 @@ export function reportPersonalizationDiagnostic(diagnostic: Diagnostic): void {
     });
   } else if (diagnostic.stage === 'decision') {
     const allowedTypes: ReceiptType[] = ['null', 'array', 'object', 'undefined', 'string', 'number', 'boolean', 'other'];
+    const allowedOutcomes = ['completed', 'execution-error', 'http-error', 'timeout'];
+    const httpStatus = diagnostic.httpStatus;
     console.info('Portal personalization', {
       stage: 'decision', receiptType: allowedTypes.includes(diagnostic.receiptType) ? diagnostic.receiptType : 'other',
       selectedVariant: Boolean(diagnostic.selectedVariant),
-      outcome: diagnostic.outcome === 'completed' ? 'completed' : 'execution-error',
+      outcome: allowedOutcomes.includes(diagnostic.outcome) ? diagnostic.outcome : 'execution-error',
       elapsedMs: elapsed(diagnostic.elapsedMs),
+      ...(typeof httpStatus === 'number' && Number.isInteger(httpStatus) && httpStatus >= 100 && httpStatus <= 599 ? { httpStatus } : {}),
     });
   }
 }
