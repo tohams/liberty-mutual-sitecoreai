@@ -19,7 +19,7 @@ Before starting, fill the ignored local environment file using the connected ten
 ```bash
 npm run type-check
 npm run lint
-npm run test:backend
+npm test
 npm run build
 ```
 

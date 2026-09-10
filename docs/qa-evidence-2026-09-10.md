@@ -68,7 +68,7 @@ Operational APIs independently require a signed portal session. Mutations also c
 
 The full application typecheck passed. Frontend lint and four CMS-route/editor-context regression tests passed. Backend and release-build evidence is maintained in the [implementation review](implementation-review.md) and [developer handoff](developer-handoff.md).
 
-The remaining editor acceptance is a real customer-role Page builder/Design Library round trip: select a datasource, edit populated and empty fields, preview standalone Search, switch a variant, apply supported styles and publish approved content. Native personalization, persona switching and workflow approval also need their own positive/negative acceptance evidence. The readonly context correction is a tested code change, not a claim that this customer-role browser exercise has already passed.
+The remaining editor acceptance is a real customer-role Page builder/Design Library round trip: select a datasource, edit populated and empty fields, preview standalone Search, switch a variant, apply supported styles and publish approved content through the customer's approval workflow. Native personalization and switching between signed-in agent profiles have passed the separate checks below and the [production release acceptance](https://github.com/tohams/liberty-mutual-sitecoreai/pull/9). Those results and the administrator editor checks do not establish that the customer-role browser exercise has passed.
 
 ### Release verification of native identity correction
 
