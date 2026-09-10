@@ -4833,3 +4833,106 @@ p {
 .native-search-summary p[role="status"] {
   scroll-margin-top: 105px;
 }
+
+/* Supported Page builder styles. Scope mappings to owned CMS components so
+   inherited SXA choices never change the portal navigation or account tools. */
+:is(.cms-guidance, .cms-article, .resource-search-component).position-left {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+}
+.resource-search-component.position-left .resource-search-hero {
+  text-align: left;
+}
+.resource-search-component.position-left .suggested-searches {
+  justify-content: flex-start;
+}
+:is(.cms-guidance, .cms-article, .resource-search-component).indent-top {
+  margin-top: clamp(1.5rem, 3vw, 3rem);
+}
+:is(.cms-guidance, .cms-article, .resource-search-component).sxa-bordered {
+  border: 1px solid #cbc8d7;
+  border-radius: 16px;
+}
+:is(.cms-article, .resource-search-component).sxa-bordered {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+:is(.cms-guidance, .cms-article).container-dark-background,
+.cms-highlight .cms-guidance.container-dark-background {
+  color: #ffffff;
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.cms-article.container-dark-background {
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-radius: 16px;
+}
+:is(.cms-guidance, .cms-article).container-dark-background :is(h1, h2, h3) {
+  color: #ffffff;
+}
+:is(.cms-guidance, .cms-article).container-dark-background
+  :is(.cms-rich-text, .cms-article-summary, .cms-article-meta, footer) {
+  color: #dedbea;
+}
+:is(.cms-guidance, .cms-article).container-dark-background
+  :is(a, .cms-eyebrow) {
+  color: var(--yellow);
+}
+.cms-article.container-dark-background footer {
+  border-color: #5c567b;
+}
+.resource-search-component.container-dark-background .resource-search-hero {
+  color: #ffffff;
+  background: var(--navy);
+}
+.resource-search-component.container-dark-background .resource-search-hero h2 {
+  color: #ffffff;
+}
+.resource-search-component.container-dark-background
+  .resource-search-hero
+  .eyebrow {
+  color: var(--yellow);
+}
+.resource-search-component.container-dark-background .resource-search-hero > p,
+.resource-search-component.container-dark-background .suggested-searches {
+  color: #dedbea;
+}
+.resource-search-component.container-dark-background
+  .suggested-searches
+  button {
+  color: #ffffff;
+}
+.resource-search-component.position-left .native-search-form {
+  margin-left: 0;
+  margin-right: auto;
+}
+.resource-search-component.container-dark-background .large-search input {
+  color: var(--ink);
+}
+:is(.cms-guidance, .cms-article, .resource-search-component).position-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+:is(.cms-guidance, .cms-article, .resource-search-component).position-right {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+}
+.resource-search-component.position-right .resource-search-hero {
+  text-align: right;
+}
+.resource-search-component.position-right .native-search-form {
+  margin-right: 0;
+  margin-left: auto;
+}
+.resource-search-component.position-right .suggested-searches {
+  justify-content: flex-end;
+}
+:is(.cms-guidance, .cms-article, .resource-search-component).indent-bottom {
+  margin-bottom: clamp(1.5rem, 3vw, 3rem);
+}
+:is(.cms-guidance, .cms-article, .resource-search-component).indent {
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
+  padding-right: clamp(1.25rem, 3vw, 2.5rem);
+}

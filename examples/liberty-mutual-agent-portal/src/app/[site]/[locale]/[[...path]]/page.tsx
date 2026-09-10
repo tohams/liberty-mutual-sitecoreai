@@ -23,7 +23,7 @@ const uncachedFetch: typeof fetch = (input, init) => fetch(input, { ...init, cac
 
 export default async function PortalPage({ params }: PageProps) {
   const { site, locale, path = [] } = await params;
-  if (site !== scConfig.defaultSite || !['en', 'es'].includes(locale)) notFound();
+  if (site !== scConfig.defaultSite || locale !== scConfig.defaultLanguage) notFound();
   const draft = await draftMode();
   const session = await getSession();
   if (!draft.isEnabled && !session) redirect('/login');

@@ -10,7 +10,7 @@ SharedFields:
   Value: "container-dark-background"
 - ID: "69bb49f3-da64-4b0e-abd6-184b832ff6ab"
   Hint: Allowed Renderings
-  Value: "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}"
+  Value: "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}|{193A0299-B5B6-5668-B792-9F3552463163}|{980AD02C-08E5-5F27-9F08-F28E829CA94D}|{15CF6EFA-C180-563A-B229-C08F2DAC3DAD}"
 - ID: "95579875-484e-41f0-b9c2-804eafaf3ccc"
   Hint: IsVerifiedStyle
   Value: 1
