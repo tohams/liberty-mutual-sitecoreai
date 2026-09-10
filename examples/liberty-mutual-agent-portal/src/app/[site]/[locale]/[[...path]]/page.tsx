@@ -8,6 +8,7 @@ import { getSession } from '@/server/auth/session';
 import { getPortalBootstrap, getEditorBootstrap } from '@/server/data/portal';
 import { PortalError } from '@/server/errors';
 import { PortalApp } from '@/features/portal/PortalApp';
+import { PortalEditorProvider } from '@/features/portal/PortalEditorProvider';
 import components from '.sitecore/component-map';
 import Providers from '@/Providers';
 import scConfig from 'sitecore.config';
@@ -60,7 +61,9 @@ export default async function PortalPage({ params }: PageProps) {
         <EditingScripts />
         <PortalTracking identity={data.udlIdentity} runId={data.session.runId} path={route} />
         {page.mode.isDesignLibrary ?
-          <DesignLibraryApp page={page} rendering={page.layout.sitecore.route} componentMap={components} loadServerImportMap={() => import('.sitecore/import-map.server')} /> :
+          <PortalEditorProvider data={data}>
+            <DesignLibraryApp page={page} rendering={page.layout.sitecore.route} componentMap={components} loadServerImportMap={() => import('.sitecore/import-map.server')} />
+          </PortalEditorProvider> :
           <PortalApp initialData={data} isEditing={draft.isEnabled} route={route === '/' ? '/workspace' : route} workspaceEditorial={route === '/resources' ? undefined : editorial} resourcesSearch={route === '/resources' ? editorial : undefined} pageContent={/^\/(resources|products)\/.+/.test(route) ? editorial : undefined} />}
       </Providers>
     </NextIntlClientProvider>

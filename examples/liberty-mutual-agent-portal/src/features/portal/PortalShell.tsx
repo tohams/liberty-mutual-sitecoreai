@@ -26,6 +26,7 @@ export function PortalShell({
   children: ReactNode;
 }) {
   const { data, notify } = usePortal();
+  const editorPreview = data.session.runId === "editor";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -42,6 +43,7 @@ export function PortalShell({
           ? "/resources"
           : route;
   async function signOut() {
+    if (editorPreview) return;
     setSigningOut(true);
     try {
       clearPortalAnalytics();
@@ -261,7 +263,7 @@ export function PortalShell({
           className="button button-secondary"
           type="button"
           onClick={signOut}
-          disabled={signingOut}
+          disabled={signingOut || editorPreview}
         >
           <PortalIcon name="logout" /> Sign out
         </button>
