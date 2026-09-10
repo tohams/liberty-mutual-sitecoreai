@@ -112,7 +112,7 @@ Keep an environment-to-tenant mapping in the team's private operations inventory
 
 ## Reviewer accounts, profile identity and reset
 
-There are seven named personas across four agency profiles and four isolated reviewer packs. The JSON credentials are intentionally fictional handoff material. The provisioning script converts them into salted scrypt hashes for server-only runtime verification. Rotate them by regenerating the hash file and redeploying; never re-use them for customer employees or real insureds.
+There are seven named personas across four agency profiles and four isolated reviewer packs. All 28 fictional portal accounts use the shared password `Sitecore`. The JSON credentials are intentionally fictional handoff material. The provisioning script converts them into salted scrypt hashes for server-only runtime verification. Rotate them by regenerating the hash file and redeploying; never re-use them for customer employees or real insureds.
 
 Each action is scoped to the authenticated agency, reviewer pack and active run. Mutations require an idempotency key and expected state version. A stale tab receives a conflict and must refresh; retrying an identical successful action does not duplicate the work. Eight-hour signed HttpOnly sessions are distinct from native SDK cookies. Login and logout clear only the intended Sitecore identity cookies so another persona does not inherit the former browser identity.
 

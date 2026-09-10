@@ -6,7 +6,7 @@ Use this guided review to follow an agent's work, inspect the content behind it,
 
 ## 1. Begin with the agency, then compare its people
 
-Open the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Obtain one reviewer pack and its fictional account credentials from the review coordinator; none are included here. Use the same pack throughout. In the separate Sitecore window, select **Safeco Insurance Company of America POC** and the **liberty-mutual-agent-portal** site.
+Open the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Obtain one reviewer pack and its fictional account usernames from the review coordinator; every portal account uses the password `Sitecore`. Use the same pack throughout. In the separate Sitecore window, select **Safeco Insurance Company of America POC** and the **liberty-mutual-agent-portal** site.
 
 Sign in as **Avery Brooks**, the Cedar Ridge Insurance principal. In **My workspace**, review the agency, Texas context, priorities and available lines. Open **Agency growth** to discuss the fictional production mix. The scenario covers September 2025–August 2026; these figures represent insurance-system inputs, not Sitecore engagement measurements.
 
