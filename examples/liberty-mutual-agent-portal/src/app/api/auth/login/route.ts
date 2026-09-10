@@ -1,7 +1,7 @@
 import { authenticate } from '@/server/auth/credentials';
 import { createSession, SESSION_COOKIE, sessionCookieOptions } from '@/server/auth/session';
 import { limitLoginAttempts } from '@/server/auth/rate-limit';
-import { clearSitecoreIdentityCookies } from '@/server/auth/sitecore-cookies';
+import { clearPortalDraftCookies, clearSitecoreIdentityCookies } from '@/server/auth/sitecore-cookies';
 import { PortalError } from '@/server/errors';
 import { errorResponse, jsonResponse, readJson, requireSameOrigin } from '@/server/http';
 
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
     const response = jsonResponse({ success: true, redirectTo: '/workspace' });
     response.cookies.set(SESSION_COOKIE, token, sessionCookieOptions);
     clearSitecoreIdentityCookies(response, request);
+    clearPortalDraftCookies(response);
     return response;
   } catch (error) { return errorResponse(error); }
 }

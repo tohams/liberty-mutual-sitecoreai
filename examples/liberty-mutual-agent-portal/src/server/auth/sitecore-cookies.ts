@@ -1,6 +1,17 @@
 import 'server-only';
 import type { NextResponse } from 'next/server';
 
+/** A successful explicit portal login exits this host's prior Next.js editing session. */
+export function clearPortalDraftCookies(response: NextResponse): void {
+  for (const name of ['__prerender_bypass', '__next_preview_data']) {
+    response.cookies.set(name, '', {
+      path: '/', expires: new Date(0), maxAge: 0, httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    });
+  }
+}
+
 /** Pinned analytics-core 2.1.2 and personalize 2.1.0 cookie contracts. */
 export function sitecoreIdentityCookieNames(): string[] {
   const names = new Set(['sc_cid', 'sc_cid_personalize']);
