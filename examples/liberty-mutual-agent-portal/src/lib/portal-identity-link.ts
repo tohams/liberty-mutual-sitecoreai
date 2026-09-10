@@ -1,5 +1,5 @@
 /** Login-only readiness: observe the fresh browser's profile link, never retry a decision. */
-export const PROFILE_LINK_TIMEOUT_MS = 2000;
+export const PROFILE_LINK_TIMEOUT_MS = 6000;
 
 type LinkOperations = {
   readProfileRef: (signal: AbortSignal) => Promise<string | null>;

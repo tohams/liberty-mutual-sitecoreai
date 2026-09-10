@@ -1,6 +1,6 @@
 import type { analyticsBrowserAdapter } from "@sitecore-content-sdk/analytics-core";
 
-export const LOGIN_IDENTITY_PREPARATION_TIMEOUT_MS = 5000;
+export const LOGIN_IDENTITY_PREPARATION_TIMEOUT_MS = 8000;
 export const ORDINARY_IDENTITY_TIMEOUT_MS = 2000;
 
 /** Only wraps the public adapter contract; the supplied adapter is never mutated. */

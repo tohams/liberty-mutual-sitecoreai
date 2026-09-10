@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readPortalBrowserProfileRef, waitForPortalProfileLink } from "./portal-identity-link";
+import { PROFILE_LINK_TIMEOUT_MS, readPortalBrowserProfileRef, waitForPortalProfileLink } from "./portal-identity-link";
 
 test("waits for profile-link change after an accepted identity without replaying it", async () => {
   let now = 0;
@@ -33,7 +33,7 @@ test("a receipt with an unchanged profile exhausts one deadline and stays unread
     identify: async () => { identities++; return { accepted: true }; },
   }, { now: () => now, sleep: async (milliseconds) => { now += milliseconds; } });
   assert.equal(ready, false);
-  assert.equal(now, 2000);
+  assert.equal(now, PROFILE_LINK_TIMEOUT_MS);
   assert.equal(identities, 1);
 });
 
@@ -58,7 +58,7 @@ test("a late changed profile cannot turn an expired deadline into success", asyn
   assert.equal(await waitForPortalProfileLink({
     readProfileRef: async () => {
       if (++reads === 1) return "baseline";
-      now = 2001;
+      now = PROFILE_LINK_TIMEOUT_MS + 1;
       return "linked";
     },
     identify: async () => ({}),

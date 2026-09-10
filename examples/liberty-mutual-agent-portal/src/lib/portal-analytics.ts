@@ -153,7 +153,7 @@ export async function establishPortalIdentity(
   return operation;
 }
 
-/** Successful app authentication never waits more than five seconds for optional native identity. */
+/** Successful app authentication never waits more than eight seconds for optional native identity. */
 export function preparePortalLoginIdentity(): Promise<boolean> {
   if (!trackingEnabled()) return Promise.resolve(false);
   const generation = sdkWork.invalidate();

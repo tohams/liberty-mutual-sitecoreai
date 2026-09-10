@@ -22,6 +22,7 @@ const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/
 const HELP = `Native personalization acceptance (no network without explicit arguments)
   node --import tsx scripts/verify-native-personalization.mjs --origin <allowed-HTTPS-origin> --pack <01|02|03|04> --public-context <reviewed-public-context>
   node --import tsx scripts/verify-native-personalization.mjs --origin http://localhost:3000 --pack <01|02|03|04> --public-context <reviewed-public-context> --allow-localhost
+  node --import tsx scripts/verify-native-personalization.mjs --origin <allowed-HTTPS-origin> --pack <01|02|03|04> --public-context <reviewed-public-context> --measure-link
   node --import tsx scripts/verify-native-personalization.mjs --self-test
 
 Allowed remote origins:
@@ -31,13 +32,18 @@ Uses the private fixtures/portal-logins.json file. Does not print credentials,
 cookies, response bodies, or identifiers. Does not reset saved work or profiles.
 The public context must match the compiled deployment; master IDs are rejected.
 Reproduces login's public browser/IDENTITY/profile-link sequence. Two workspace
-requests are strict separate assertions, never decision retries.`;
+requests are strict separate assertions, never decision retries.
+--measure-link is a separate diagnostic: observes native profile linking for up
+to 10 seconds, makes no workspace/decision requests, and does not change or pass
+the strict six-second acceptance gate. Prints only statuses, timings, and safe
+cache-control/age/x-cache metadata; preserves all previous acceptance results.`;
 
 function options(args) {
   const result = {};
   for (let index = 0; index < args.length; index++) {
     const key = args[index];
     if (key === '--allow-localhost') result.local = true;
+    else if (key === '--measure-link') result.measureLink = true;
     else if (['--origin', '--pack', '--public-context'].includes(key) && args[index + 1] && !args[index + 1].startsWith('--')) {
       if (result[key.slice(2)]) throw new Error('ARGUMENTS');
       result[key.slice(2)] = args[++index];
@@ -49,7 +55,7 @@ function options(args) {
   const remote = url.protocol === 'https:' && !url.port && HOSTS.has(url.hostname);
   const local = result.local === true && url.hostname === 'localhost' && ['http:', 'https:'].includes(url.protocol);
   if (!remote && !local) throw new Error('ARGUMENTS');
-  return { origin: url.origin, pack: result.pack, publicContext: result['public-context'] };
+  return { origin: url.origin, pack: result.pack, publicContext: result['public-context'], measureLink: result.measureLink === true };
 }
 
 function decodeText(value) {
@@ -365,6 +371,101 @@ async function installedSdkMetadata() {
   return { analytics: packages[0], events: packages[1] };
 }
 
+function safeCacheMetadata(headers) {
+  return ['cache-control', 'age', 'x-cache'].flatMap((name) => {
+    const value = headers.get(name);
+    if (value === null) return [];
+    // Only these caching headers may be printed, with bounded ordinary text.
+    return [`${name}=${/^[a-zA-Z0-9 ,.;:=_()/-]{0,120}$/.test(value) ? value : '[present]'}`];
+  }).join(' | ');
+}
+
+async function measureBrowserLink(config, verifiedIdentity, jar, label) {
+  const created = await nativeRequest(config, '/v1/events/v1.2/browser/create.json?client_key=');
+  console.log(`${label} | native browser create | HTTP ${created.status || 'unavailable'} | ${created.ms} ms`);
+  const browserId = created.json?.ref;
+  if (created.status !== 201 || typeof browserId !== 'string' || !/^[a-zA-Z0-9-]{1,200}$/.test(browserId)) return false;
+  jar.setBrowserIdentity(browserId, config.origin);
+  const started = performance.now();
+  const signal = AbortSignal.timeout(10_000);
+  let identityAcceptedAt;
+  let observation = 0;
+  const read = async () => {
+    const readStarted = performance.now();
+    let status = 0;
+    let cache = '';
+    const ref = await readPortalBrowserProfileRef({ edgeUrl: EDGE_URL, contextId: config.publicContext, browserId }, signal, async (input, init) => {
+      const response = await fetch(input, {
+        ...init, redirect: 'error',
+        headers: { ...init.headers, Origin: config.origin, 'User-Agent': BROWSER_UA },
+      });
+      status = response.status;
+      cache = safeCacheMetadata(response.headers);
+      return response;
+    });
+    const elapsed = Math.round(performance.now() - (identityAcceptedAt ?? started));
+    console.log(`${label} | ${identityAcceptedAt === undefined ? 'baseline read' : `profile read ${++observation}`} | HTTP ${status || 'unavailable'} | ${Math.round(performance.now() - readStarted)} ms | ${identityAcceptedAt === undefined ? 'diagnostic' : 'since identity receipt'} ${elapsed} ms${cache ? ` | ${cache}` : ''}`);
+    return ref;
+  };
+  const baseline = await read();
+  if (!baseline || signal.aborted) return false;
+  const receipt = await nativeRequest(config, '/v1/events/v1.2/events?siteId=liberty-mutual-agent-portal', {
+    type: 'IDENTITY', identifiers: [verifiedIdentity], browser_id: browserId,
+    channel: 'WEB', client_key: '', currency: 'USD', language: 'EN',
+    page: 'Agent workspace', pos: '', requested_at: new Date().toISOString(),
+  }, signal);
+  console.log(`${label} | native identity receipt | HTTP ${receipt.status || 'unavailable'} | ${receipt.ms} ms`);
+  if (receipt.status !== 201 || !receipt.ok || signal.aborted) return false;
+  identityAcceptedAt = performance.now();
+  let attempt = 0;
+  while (!signal.aborted && performance.now() - started < 10_000) {
+    const current = await read();
+    if (current && current !== baseline && !signal.aborted && performance.now() - started < 10_000) {
+      console.log(`${label} | profile link observed | since identity receipt ${Math.round(performance.now() - identityAcceptedAt)} ms | diagnostic ${Math.round(performance.now() - started)} ms`);
+      return true;
+    }
+    const remaining = 10_000 - (performance.now() - started);
+    if (signal.aborted || remaining <= 0) break;
+    await new Promise((resolve) => setTimeout(resolve, Math.min([200, 350, 500][Math.min(attempt++, 2)], remaining)));
+  }
+  console.log(`${label} | profile link not observed | diagnostic ${Math.round(performance.now() - started)} ms`);
+  return false;
+}
+
+async function measureLinks(config) {
+  const personas = await expectations(config.pack);
+  config.sdk = await installedSdkMetadata();
+  let failures = 0;
+  console.log('Link measurement only. No workspace/decision requests. Strict acceptance remains unchanged.');
+  for (const persona of personas) {
+    const jar = new MemoryCookies();
+    try {
+      const login = await request(config.origin, '/api/auth/login', jar, persona.login);
+      const authenticated = login.ok && login.status === 200 && jar.hasProtectedSession(config.origin);
+      console.log(`${persona.label} | login | HTTP ${login.status || 'unavailable'} | ${login.ms} ms`);
+      if (!authenticated) { failures++; continue; }
+      const bootstrap = await request(config.origin, '/api/portal/bootstrap', jar, undefined, 'json');
+      const identity = bootstrap.json?.udlIdentity;
+      const verified = bootstrap.ok && bootstrap.status === 200 && identity?.provider === 'liberty-mutual-agent' && typeof identity.id === 'string' && identity.id.length > 0;
+      console.log(`${persona.label} | authenticated bootstrap | HTTP ${bootstrap.status || 'unavailable'} | ${bootstrap.ms} ms`);
+      if (!verified) { failures++; continue; }
+      const linked = await measureBrowserLink(config, { provider: identity.provider, id: identity.id }, jar, persona.label);
+      if (!linked) failures++;
+    } finally {
+      const logout = await request(config.origin, '/api/auth/logout', jar, {});
+      console.log(`${persona.label} | logout | HTTP ${logout.status || 'unavailable'} | ${logout.ms} ms`);
+      if (!logout.ok || logout.status !== 200) failures++;
+      // An API check proves sign-out without triggering a page personalization decision.
+      const anonymous = await request(config.origin, '/api/portal/bootstrap', jar);
+      console.log(`${persona.label} | signed-out bootstrap | HTTP ${anonymous.status || 'unavailable'} | ${anonymous.ms} ms`);
+      if (!anonymous.ok || anonymous.status !== 401) failures++;
+      jar.clear();
+    }
+  }
+  console.log(`Link measurement finished: ${failures} unavailable or failed observations. This is not an acceptance rerun.`);
+  return failures === 0 ? 0 : 1;
+}
+
 async function selfTest() {
   const { strict: assert } = await import('node:assert');
   const wanted = '<aside aria-label="Agent guidance"><div><h2>Correct <span>headline</span></h2></div></aside>';
@@ -383,6 +484,9 @@ async function selfTest() {
   assert.throws(() => options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost']));
   assert.throws(() => options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', '--public-context', 'unreviewed-context']));
   assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs]).pack, '04');
+  assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs, '--measure-link']).measureLink, true);
+  assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs]).measureLink, false);
+  assert.equal(safeCacheMetadata(new Headers({ 'cache-control': 'no-cache, no-store', age: '0', 'x-cache': 'Miss from cloudfront', 'set-cookie': 'must-not-appear' })), 'cache-control=no-cache, no-store | age=0 | x-cache=Miss from cloudfront');
   const fixtures = await expectations('04');
   assert.equal(fixtures.length, 4);
   assert.equal(new Set(fixtures.map((fixture) => fixture.headline)).size, 4);
@@ -402,7 +506,7 @@ async function main() {
   let config;
   try { config = options(args); }
   catch { console.error('Invalid arguments. No network requests made. Use --help.'); return 2; }
-  return acceptance(config);
+  return config.measureLink ? measureLinks(config) : acceptance(config);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
