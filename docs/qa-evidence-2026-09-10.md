@@ -2,7 +2,7 @@
 
 The deployed portal passed the browser journeys below, and the native Unified Data Layer profile contains the corresponding page and Search events. These observations establish working delivery, authenticated operational state, native content retrieval and event ingestion. They do not replace customer-role Page builder acceptance or a complete security assessment.
 
-**Current handoff status, 21:28 UTC: blocked.** After the required SitecoreAI redeployment, the managed CM hostname stopped resolving and post-deployment connected acceptance failed. Earlier passing results below are historical; see [Master Context ID retirement](#master-context-id-retirement) for the current recovery evidence.
+**Credential retirement and functional recovery are verified.** Scoped Live/Preview content, native Page builder, populated CMS index searches and all 37 unchanged production assertions passed after recovery. Index metadata remains inconsistent; customer-role editorial acceptance and native Agentic Brand Kit retrieval remain separate handoff items. See [Master Context ID retirement](#master-context-id-retirement) for the failed run and subsequent recovery evidence.
 
 | Review context | Value |
 | --- | --- |
@@ -117,7 +117,32 @@ The post-deployment strict production harness recorded **six failed assertions**
 
 A subsequent read-only `verify-edge-content.cjs` run passed for all **27 native Live Edge routes**, including page compositions, editable fields, Search configuration and resource template projection. The portal sign-in page returned `200`. Deploy's System status screen reported every listed service Healthy at approximately 21:31, including Pages, Provisioning, Edge Proxy and Cloudflare. That aggregate status did not establish this environment's authoring availability.
 
-**Handoff remains blocked** pending managed CM DNS restoration, scoped Preview and native editor recovery, and a fresh connected acceptance run. A support request was prepared locally as `sitecore-support-request-2026-09-10.md`; it has not been sent because outbound submission has not been authorized. The scope checks before deployment do not establish post-deployment Preview availability.
+At **21:31:43 UTC**, authoritative DNS returned `NOERROR` with both Cloudflare A records; public resolver Quad9 also returned `NOERROR`. A request to the unchanged CM hostname, pinned to an observed authoritative public address while preserving its normal TLS SNI and Host, returned a `302` login redirect from `/sitecore/shell`. The operating-system lookup still reported `ENOTFOUND`, consistent with a remaining negative-cache entry; that cache explanation is an inference. Native scoped Live and Preview GraphQL requests both returned `200` JSON with Home content.
+
+After DNS reappeared, the **unchanged strict production harness passed all 37 assertions with zero failures**. The new run made no decision retries or saved-work resets and preserves the failed run above as separate evidence.
+
+| Persona | Native browser creation | First workspace | Second workspace |
+| --- | --- | --- | --- |
+| Avery | 428 ms | Principal, 1,767 ms | Principal, 696 ms |
+| Jordan | 432 ms | Producer, 642 ms | Producer, 708 ms |
+| Maya | 203 ms | Account manager, 814 ms | Account manager, 674 ms |
+| Elena | 212 ms | Neutral, 574 ms | Neutral, 496 ms |
+
+Native Page builder subsequently loaded Home with the portal's layout, editable guidance, populated content tree and Saved/Live status. Its headline had native `contenteditable` markup, and operational controls remained disabled in the isolated editor context. This check did not change or publish editorial content and does not replace customer-role acceptance.
+
+The two native indexes, `sitecore_core_index` and `sitecore_master_index`, were recovered using the existing CLI authentication and supported [Authoring GraphQL management operations](https://doc.sitecore.com/sai/en/developers/sitecoreai/content-modeling-and-presentation/sitecore-authoring-and-management-graphql-api/query-examples-for-management-operations.html). Requests preserved the normal hostname and TLS; a process-specific lookup used a freshly observed public DNS address while the local operating-system lookup retained `ENOTFOUND`. No DNS configuration or CLI hostname was changed.
+
+| Recovery operation | Submitted UTC | Verified complete UTC | Result |
+| --- | --- | --- | --- |
+| Populate managed schema, both indexes | 21:37:40 | 21:38:16 | Both jobs `FINISHED`, zero exceptions |
+| Rebuild both indexes | 21:38:16 | 21:39:13 | Both jobs `FINISHED`, zero exceptions; core processed 12,589 units and master 14,587 |
+| Functional native index search | 21:40:58 | 21:40:58 | `200`, zero GraphQL errors; exact Home ID/path returned; bounded general searches reported 30,996 master and 14,048 core results |
+
+Schema job IDs were `5a114679-7d38-4d96-97c3-68bdbf482f58` and `1fe83cff-63bc-4af7-aba3-1712d177cbed`. Rebuild job IDs were `9519aace-0b00-4c06-8c58-c0a814496bf9` (core) and `1cb2f871-e968-4d9f-8c32-9830089536f6` (master). Each full handle appends `;scaipocusem400b-sitecoreai950c-demo4418-5b47d4fc84-g7w45`. The reported rebuild execution durations were 19.8 seconds and 36.462 seconds.
+
+**Metadata discrepancy preserved:** the `indexes` response still reported `documentsCount: 0`, `numberOfFields: -1` and `outOfDate: true`, despite updated rebuild timestamps. The first strict metadata verifier exited `1`. Subsequent direct indexed searches demonstrate populated, functioning indexes, but do not explain these metadata values. No repeat rebuild was attempted. These native CMS indexes are separate from the agent-facing Search source; that source was not changed by this maintenance.
+
+**Functional recovery is complete.** The original deployment log retains its failed post actions; the successful recovery operations were separate management jobs. The support draft remains an unsent incident record, and escalation for the active authoring outage is no longer required. Customer-role editorial acceptance and native Agentic Brand Kit retrieval remain separate handoff items.
 
 This was master-only Context ID regeneration. The unchanged scoped children are an empirical result for this environment, not a promise that children survive all rotations. Sitecore's separate [full secret rotation procedure](https://doc.sitecore.com/sai/en/developers/sitecoreai/deploying-sitecoreai/deploy-app/manage-an-environment/rotate-deploy-secrets-for-your-environments.html) changes the editing secret and underlying Edge token as well, and requires updating scoped contexts.
 

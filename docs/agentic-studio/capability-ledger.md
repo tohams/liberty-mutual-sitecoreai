@@ -29,6 +29,12 @@ Status recorded September 10, 2026, from the implementation owner's native UI ob
 | Checked-in campaign reference | Local implementation artifact | `reference-campaign-draft.json` is a desired-output example created by the implementation process, not a native generated artifact or proof of execution. |
 | Outbound activation and publication | Outside this drafting flow | Drafting does not authorize email delivery, audience activation, automatic approval or CMS publication. Any approved CMS changes follow the existing editorial workflow. |
 
+## Retrieval configuration inspection
+
+On September 10, 2026, the implementation owner observed the embedded Agentic Studio interface exposing Start over, History, Chat/Artifacts, Select Agent and the composer. The documented Agentic Settings/Tools management controls were not visible. The global CMS Settings page exposed utilities rather than those Agentic controls. Context Retrieval configuration was therefore not inspected; whether it is disabled, and whether any role or entitlement explains the UI difference, remain unverified. This observation does not establish the cause of the Brand Kit retrieval limitation or change its status.
+
+Sitecore documents the Agentic-specific navigation in [Agentic Studio settings](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/agentic-studio-settings.html). Its [tool inventory](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/tools-available-to-chats-and-agents.html) lists Context Retrieval under Standard tools and Brand Kits under Agent API tools. These documented capabilities have not been verified in this tenant's configuration.
+
 ## Close the remaining acceptance work
 
 All eight artifacts are available in the [native Space](https://app.sitecorecloud.io/agentic/chat-new/944bcaa4-a10d-4bec-93bc-ebcff9c86328?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df). The eighth artifact supersedes the seventh for audience-contract prose. Its native JSON view was inspected and parsed. After generation settled, its Content and Preview views also displayed the complete body. No local export exists. The correction was made through a subsequent native Content Generator run after direct Content-editor interaction failed; the earlier artifacts remain unchanged as run history. Do not mark native retrieval verified when the agent used the provided brand excerpt. Preserve that limitation even when the generated draft is useful.
