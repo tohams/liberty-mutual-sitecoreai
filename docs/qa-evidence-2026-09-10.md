@@ -76,7 +76,24 @@ Preview commit `6af2a96bd9680bba0611d44eef5e454428b93475`, Vercel deployment `Hw
 
 Actual hydrated-browser sign-in then selected the expected guidance on the first workspace load for all four pack `04` accounts, with no refresh: principal for Avery, producer for Jordan, account manager for Maya, and neutral for Elena. Each account was signed out before the next; Elena's workspace showed her own agency records. No saved work was changed. Reloading the native Page Builder canvas on this deployment rendered the portal with neutral guidance and disabled operational mutation controls. Selecting the guidance headline exposed its native Headline editing control. This was an administrator check, not a customer-role approval test.
 
-The separate failed HTTP acceptance and subsequent timing diagnostic are preserved below. These observations do not certify a later build.
+The first strict HTTP acceptance attempt on this preview did **not** pass. At the original two-second profile-link budget, Avery, Maya and Elena reached the 2,001 ms readiness deadline. Avery's first and second workspace responses remained neutral. Jordan linked in 1,103 ms and received the producer variant twice; Maya's two subsequent responses selected account-manager guidance; Elena's two responses remained correctly neutral. All native create and IDENTITY requests returned `201`. The result was five failed assertions, retained as failed evidence.
+
+A separate `--measure-link` diagnostic made no workspace or personalization decision requests. It observed fresh native profile links after 416 ms for Avery, 377 ms for Jordan, 398 ms for Maya, and 791 ms for Elena, measured from the accepted IDENTITY receipt. Including baseline and receipt, those measurements were 737, 565, 581 and 1,023 ms. No cache-control, age or x-cache headers were returned; their absence does not establish whether an intermediary cached a response. This establishes variable asynchronous linkage, not a replacement acceptance pass.
+
+The subsequent release widens the bounded native-link allowance to six seconds inside an eight-second optional sign-in preparation budget, returning as soon as linking completes. Ordinary identity tracking remains capped at two seconds; server decision and discovery budgets remain two seconds and 1.5 seconds respectively. Its final deployed acceptance must be recorded separately; these earlier observations do not certify that later build.
+
+### Passing preview release
+
+Commit `a95366be68fa98bbe9975e6a4c2e9836f248c3e9`, preview deployment `GLHMpKboMpu6h9PKmHeLDS2NJYPS`, passed all 37 connected acceptance assertions with reviewer pack `04`. Avery, Jordan and Maya received their correct native role variant on both independent workspace requests; Elena received neutral guidance twice. Every native browser-create and identity receipt returned `201`, and every logout restored the anonymous redirect. No decision was retried and no saved-work reset was performed.
+
+| Persona | Native profile readiness | First workspace | Second workspace |
+| --- | --- | --- | --- |
+| Avery | 822 ms | Principal, 1,735 ms | Principal, 591 ms |
+| Jordan | 2,876 ms | Producer, 873 ms | Producer, 593 ms |
+| Maya | 2,242 ms | Account manager, 625 ms | Account manager, 523 ms |
+| Elena | 805 ms | Neutral, 864 ms | Neutral, 515 ms |
+
+GitHub run `34522939424` passed Offline validation and Connected production build. Temporary `PORTAL_PERSONALIZATION_DIAGNOSTICS` was set to `false` for both Vercel Production and Preview before this deployment. Production verification is recorded in the [release pull request](https://github.com/tohams/liberty-mutual-sitecoreai/pull/9) after promotion; customer-role editorial approval remains a separate handoff check.
 
 ### Repeatable native personalization acceptance
 

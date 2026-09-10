@@ -2,7 +2,7 @@
 
 Use this guided review to follow an agent's work, inspect the content behind it, and trace an agency campaign through SitecoreAI. Allow about 30 minutes. The audience is the team that will own content, audiences, Search, brand governance and platform operations.
 
-**Review status:** this guide describes the implemented experience and recorded native evidence as of September 10, 2026. Final deployment and fresh-login acceptance for the latest changes remain pending the release owner's QA. Earlier observations are in [connected QA evidence](qa-evidence-2026-09-10.md); they do not certify a later deployment.
+**Review status:** this guide describes the implemented experience and recorded native evidence as of September 10, 2026. The release preview passed all 37 native identity, first/second workspace, logout and anonymous-access assertions. See [connected QA evidence](qa-evidence-2026-09-10.md) and its linked release pull request for deployment-specific results. Customer author/approver-role acceptance remains a separate handoff step.
 
 ## 1. Begin with the agency, then compare its people
 
