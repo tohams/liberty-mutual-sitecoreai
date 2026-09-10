@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.Content",
+  "items": {
+    "includes": [
+      {
+        "name": "content",
+        "path": "/sitecore/content/LibertyMutual",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  },
+  "description": "Initial site and editorial content. CreateOnly preserves marketer changes; normal releases push LibertyMutual.Model only."
+}

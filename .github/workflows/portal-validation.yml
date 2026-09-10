@@ -1,0 +1,108 @@
+name: Portal validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portal-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '24.14.1'
+  NEXT_TELEMETRY_DISABLED: '1'
+
+jobs:
+  offline-validation:
+    name: Offline validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: examples/liberty-mutual-agent-portal
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: examples/liberty-mutual-agent-portal/package-lock.json
+      - run: npm ci
+      - name: Lint application
+        run: npm run lint
+      - name: Authentication, durable state, isolation, and resource routing tests
+        run: node --import tsx --test src/server/**/*.test.ts src/features/portal/*.test.ts
+        env:
+          NODE_OPTIONS: --conditions=react-server
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: authoring/scripts/requirements.txt
+      - name: Validate content and identity contracts without tenant credentials
+        working-directory: .
+        run: |
+          python -m pip install -r authoring/scripts/requirements.txt
+          python authoring/scripts/validate-content-seed.py
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '8.0.x'
+      - name: Validate owned Sitecore serialization modules
+        working-directory: .
+        run: |
+          dotnet tool restore
+          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content
+        env:
+          DOTNET_ROLL_FORWARD: Major
+          DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+
+  connected-build:
+    name: Connected production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: examples/liberty-mutual-agent-portal
+    env:
+      # Edge is a private resource. Keep server delivery access in a repository secret.
+      SITECORE_EDGE_CONTEXT_ID: ${{ secrets.SITECORE_SERVER_EDGE_CONTEXT_ID }}
+      NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID: ${{ vars.SITECORE_PUBLIC_EDGE_CONTEXT_ID }}
+      NEXT_PUBLIC_SITECORE_EDGE_PLATFORM_HOSTNAME: ${{ vars.SITECORE_EDGE_PLATFORM_HOSTNAME || 'https://edge-platform.sitecorecloud.io' }}
+      NEXT_PUBLIC_DEFAULT_SITE_NAME: liberty-mutual-agent-portal
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: en
+      NEXT_PUBLIC_PORTAL_TRACKING_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Require published delivery context
+        run: |
+          if [ -z "$SITECORE_EDGE_CONTEXT_ID" ] || [ -z "$NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID" ]; then
+            echo '::error::Configure secret SITECORE_SERVER_EDGE_CONTEXT_ID for scoped Live delivery and variable SITECORE_PUBLIC_EDGE_CONTEXT_ID for the scoped browser context. Offline checks cannot certify a production build.'
+            exit 1
+          fi
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: examples/liberty-mutual-agent-portal/package-lock.json
+      - run: npm ci
+      - name: Generate real Sitecore SDK files
+        run: |
+          npm run sitecore-tools:generate-map
+          npm run sitecore-tools:build
+      - name: Typecheck complete application
+        run: npm run type-check
+      - name: Build for production
+        run: npm run build
+      - name: Record verification scope
+        run: |
+          echo 'Production compilation passed against published Sitecore content. This check does not deploy, publish CMS content, or verify runtime Redis, login, search, personalization, or campaign behavior.' >> "$GITHUB_STEP_SUMMARY"

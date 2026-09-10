@@ -1,0 +1,17 @@
+---
+ID: ed487991-ae41-5af8-ae49-b8c2e29cf261
+Parent: 0f04e2fd-7f21-584e-a150-842a5a49fb81
+Template: 0f04e2fd-7f21-584e-a150-842a5a49fb81
+Path: /sitecore/templates/Project/LibertyMutual/ResourcesFolder/__Standard Values
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{2229A13F-EB34-540C-9184-6884A1544336}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260910T140000Z

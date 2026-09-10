@@ -1,0 +1,28 @@
+[
+  {
+    "id": "bond-001",
+    "agencyId": "harborline",
+    "principal": "Gulfline Construction",
+    "obligee": "Baywater Facilities Authority",
+    "state": "FL",
+    "bondType": "Performance and payment",
+    "amountCents": 250000000,
+    "status": "Information needed",
+    "updatedAt": "2026-09-09T16:15:00Z",
+    "reference": "BND-2609-0284",
+    "notes": "Current work-in-progress schedule requested."
+  },
+  {
+    "id": "bond-002",
+    "agencyId": "harborline",
+    "principal": "Palmetto Electrical Services",
+    "obligee": "City of Baywater",
+    "state": "FL",
+    "bondType": "License and permit",
+    "amountCents": 2500000,
+    "status": "Draft",
+    "updatedAt": "2026-09-08T11:00:00Z",
+    "reference": "BND-2609-0285",
+    "notes": "Confirm the required bond form with the obligee."
+  }
+]

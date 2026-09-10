@@ -1,0 +1,30 @@
+---
+ID: 8d4ed36b-3547-5867-8518-91817f7caef4
+Parent: a9e40dc1-5d6b-5322-862b-5f19cee8d45c
+Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+Path: /sitecore/templates/Project/LibertyMutual/ResourceSearch/Content/search
+SharedFields:
+- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+  Hint: Type
+  Value: Multi-Line Text
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
+Languages:
+- Language: en
+  Fields:
+  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+    Hint: Title
+    Value: Search configuration
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Search configuration
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: JSON configuration for the native resource search source. Change source and field mappings together; preserve valid JSON.
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260910T140000Z

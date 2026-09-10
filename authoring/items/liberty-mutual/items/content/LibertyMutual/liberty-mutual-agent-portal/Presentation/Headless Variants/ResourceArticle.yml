@@ -1,0 +1,23 @@
+﻿---
+ID: "a1529e61-e1b6-561c-b2fc-bcb578a51c33"
+Parent: "19a63bdd-f9c6-403b-8068-c1884e9bb413"
+Template: "49c111d0-6867-4798-a724-1f103166e6e9"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ResourceArticle"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260910T150000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "d1c530d8-5770-49c1-9328-14922a329806"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260910T135528Z

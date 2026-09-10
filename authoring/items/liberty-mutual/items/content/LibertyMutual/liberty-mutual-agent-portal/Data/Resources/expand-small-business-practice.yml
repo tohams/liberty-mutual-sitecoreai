@@ -1,0 +1,58 @@
+﻿---
+ID: "9212e8a1-5d6b-533c-a4f2-57f484d63772"
+Parent: "f7557ea1-8b9f-5b64-87d2-801cfdb4aa64"
+Template: "2229a13f-eb34-540c-9184-6884a1544336"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Resources/expand-small-business-practice"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "'{A053ED9F-4099-4682-9411-2B4C98E481E4}'"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "054c9a6d-f1ff-51d1-b86d-b5dcc4a612a4"
+      Hint: resourceType
+      Value: Learning path
+    - ID: "0adad3c2-48c4-59db-9e15-02c7f816e86c"
+      Hint: body
+      Value: "'<h2>Start with what you know</h2><p>Your client relationships can help you understand how a business operates. Begin with discovery, then bring the right information to the commercial conversation.</p><h2>A practical three-step path</h2><ol><li><strong>Understand the business.</strong> Review common BOP considerations and the role of workers compensation and commercial auto.</li><li><strong>Check the context.</strong> Explore guidance for the risk state and business type.</li><li><strong>Prepare the request.</strong> Use the submission checklist and ask your relationship team about unresolved questions.</li></ol><p>Choose one next action for your agency: complete the learning path, review a resource with a teammate, or prepare an appetite inquiry.</p>'"
+    - ID: "195a2202-34ec-57d2-8f61-3051058d609d"
+      Hint: state
+      Value: All
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260910T135527Z
+    - ID: "2e814688-8b6d-5173-84ca-6e75e286adc2"
+      Hint: sourceLink
+      Value: |
+        ""
+    - ID: "360eed1c-0f1a-5ca6-9956-71410ed42f50"
+      Hint: summary
+      Value: Build confidence in the conversation, then prepare your next submission.
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "'{4460E76C-87E9-4859-9DE6-DE122774937F}'"
+    - ID: "4807ea63-34d5-54d6-8b71-e84db712b963"
+      Hint: title
+      Value: "Expand your small-business practice"
+    - ID: "4c346442-e859-4efd-89b2-44aedf467d21"
+      Hint: __Valid to
+      Value: 
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "f890c285-00e1-4b09-a244-b15653c751ec"
+    - ID: "98705348-d574-5755-a3a4-d63286fea318"
+      Hint: reviewedAt
+      Value: 20260910T000000Z
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "c8f93afe-bfd4-4e8f-9c61-152559854661"
+      Hint: __Valid from
+      Value: 
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260910T135527Z

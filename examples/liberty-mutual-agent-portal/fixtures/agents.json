@@ -1,0 +1,256 @@
+[
+  {
+    "id": "avery",
+    "agencyId": "cedar-ridge",
+    "firstName": "Avery",
+    "lastName": "Brooks",
+    "name": "Avery Brooks",
+    "role": "principal",
+    "roleLabel": "Agency principal",
+    "state": "TX",
+    "licensedStates": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "specializations": [
+      "personal",
+      "small-commercial"
+    ],
+    "email": "avery@cedar-ridge.example",
+    "initials": "AB",
+    "production": [
+      {
+        "line": "personal",
+        "label": "Personal lines",
+        "writtenPremiumCents": 43125000,
+        "policyCount": 214,
+        "newBusinessPremiumCents": 7331250,
+        "priorPeriodPremiumCents": 38504464
+      }
+    ]
+  },
+  {
+    "id": "maya",
+    "agencyId": "cedar-ridge",
+    "firstName": "Maya",
+    "lastName": "Chen",
+    "name": "Maya Chen",
+    "role": "account-manager",
+    "roleLabel": "Personal lines account manager",
+    "state": "TX",
+    "licensedStates": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "specializations": [
+      "personal"
+    ],
+    "email": "maya@cedar-ridge.example",
+    "initials": "MC",
+    "production": [
+      {
+        "line": "personal",
+        "label": "Personal lines",
+        "writtenPremiumCents": 244375000,
+        "policyCount": 1218,
+        "newBusinessPremiumCents": 41543750,
+        "priorPeriodPremiumCents": 218191964
+      }
+    ]
+  },
+  {
+    "id": "jordan",
+    "agencyId": "cedar-ridge",
+    "firstName": "Jordan",
+    "lastName": "Ellis",
+    "name": "Jordan Ellis",
+    "role": "producer",
+    "roleLabel": "Small commercial producer",
+    "state": "TX",
+    "licensedStates": [
+      "TX",
+      "IL"
+    ],
+    "specializations": [
+      "small-commercial"
+    ],
+    "email": "jordan@cedar-ridge.example",
+    "initials": "JE",
+    "production": [
+      {
+        "line": "small-commercial",
+        "label": "Small commercial",
+        "writtenPremiumCents": 48600000,
+        "policyCount": 128,
+        "newBusinessPremiumCents": 8262000,
+        "priorPeriodPremiumCents": 43392857
+      }
+    ]
+  },
+  {
+    "id": "daniel",
+    "agencyId": "prairie-oak",
+    "firstName": "Daniel",
+    "lastName": "Ortiz",
+    "name": "Daniel Ortiz",
+    "role": "producer",
+    "roleLabel": "Business insurance producer",
+    "state": "IL",
+    "licensedStates": [
+      "IL",
+      "TX"
+    ],
+    "specializations": [
+      "personal",
+      "small-commercial",
+      "commercial"
+    ],
+    "email": "daniel@prairie-oak.example",
+    "initials": "DO",
+    "production": [
+      {
+        "line": "personal",
+        "label": "Personal lines",
+        "writtenPremiumCents": 68000000,
+        "policyCount": 1432,
+        "newBusinessPremiumCents": 11560000,
+        "priorPeriodPremiumCents": 60714285
+      },
+      {
+        "line": "small-commercial",
+        "label": "Small commercial",
+        "writtenPremiumCents": 39700000,
+        "policyCount": 128,
+        "newBusinessPremiumCents": 6749000,
+        "priorPeriodPremiumCents": 35446428
+      },
+      {
+        "line": "commercial",
+        "label": "Commercial",
+        "writtenPremiumCents": 17000000,
+        "policyCount": 76,
+        "newBusinessPremiumCents": 2890000,
+        "priorPeriodPremiumCents": 15178571
+      }
+    ]
+  },
+  {
+    "id": "priya",
+    "agencyId": "harborline",
+    "firstName": "Priya",
+    "lastName": "Shah",
+    "name": "Priya Shah",
+    "role": "account-executive",
+    "roleLabel": "Commercial account executive",
+    "state": "FL",
+    "licensedStates": [
+      "FL",
+      "TX",
+      "IL"
+    ],
+    "specializations": [
+      "small-commercial",
+      "commercial",
+      "specialty"
+    ],
+    "email": "priya@harborline.example",
+    "initials": "PS",
+    "production": [
+      {
+        "line": "small-commercial",
+        "label": "Small commercial",
+        "writtenPremiumCents": 93000000,
+        "policyCount": 128,
+        "newBusinessPremiumCents": 15810000,
+        "priorPeriodPremiumCents": 83035714
+      },
+      {
+        "line": "commercial",
+        "label": "Commercial",
+        "writtenPremiumCents": 487500000,
+        "policyCount": 76,
+        "newBusinessPremiumCents": 82875000,
+        "priorPeriodPremiumCents": 435267857
+      },
+      {
+        "line": "specialty",
+        "label": "Specialty",
+        "writtenPremiumCents": 78000000,
+        "policyCount": 42,
+        "newBusinessPremiumCents": 13260000,
+        "priorPeriodPremiumCents": 69642857
+      }
+    ]
+  },
+  {
+    "id": "marcus",
+    "agencyId": "harborline",
+    "firstName": "Marcus",
+    "lastName": "Reed",
+    "name": "Marcus Reed",
+    "role": "surety-specialist",
+    "roleLabel": "Surety specialist",
+    "state": "FL",
+    "licensedStates": [
+      "FL",
+      "TX",
+      "IL"
+    ],
+    "specializations": [
+      "surety"
+    ],
+    "email": "marcus@harborline.example",
+    "initials": "MR",
+    "production": [
+      {
+        "line": "surety",
+        "label": "Surety",
+        "writtenPremiumCents": 164000000,
+        "policyCount": 65,
+        "newBusinessPremiumCents": 27880000,
+        "priorPeriodPremiumCents": 146428571
+      }
+    ]
+  },
+  {
+    "id": "elena",
+    "agencyId": "summit-specialty",
+    "firstName": "Elena",
+    "lastName": "Park",
+    "name": "Elena Park",
+    "role": "wholesale-broker",
+    "roleLabel": "Wholesale broker",
+    "state": "IL",
+    "licensedStates": [
+      "IL",
+      "TX",
+      "FL"
+    ],
+    "specializations": [
+      "commercial",
+      "specialty"
+    ],
+    "email": "elena@summit-specialty.example",
+    "initials": "EP",
+    "production": [
+      {
+        "line": "commercial",
+        "label": "Commercial",
+        "writtenPremiumCents": 125000000,
+        "policyCount": 76,
+        "newBusinessPremiumCents": 21250000,
+        "priorPeriodPremiumCents": 111607142
+      },
+      {
+        "line": "specialty",
+        "label": "Specialty",
+        "writtenPremiumCents": 398500000,
+        "policyCount": 42,
+        "newBusinessPremiumCents": 67745000,
+        "priorPeriodPremiumCents": 355803571
+      }
+    ]
+  }
+]

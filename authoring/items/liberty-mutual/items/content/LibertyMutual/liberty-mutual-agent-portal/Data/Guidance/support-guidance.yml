@@ -1,0 +1,29 @@
+---
+ID: 68f17728-6049-5628-b01b-5ed7e0d78922
+Parent: 0b90d120-79f5-55f0-89a9-c329add38b06
+Template: c241fdcc-057e-501f-a45b-c893b061f04d
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/support-guidance
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 314a1001-14df-51e3-acd0-1394fcedb1b3
+      Hint: eyebrow
+      Value: Support
+    - ID: 079be48f-cf09-5cde-9ceb-b35c983339ee
+      Hint: headline
+      Value: Bring your question to the right team
+    - ID: 279e1a3c-7ed6-5769-8835-ef275b0bea4b
+      Hint: body
+      Value: <p>Keep the account context, open question and next step together when you request help.</p>
+    - ID: c8034562-b592-5193-a80a-ddbf03bf6c55
+      Hint: actionLink
+      Value: <link text="Prepare a focused referral" linktype="external" url="/resources/specialty-referral" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{4460E76C-87E9-4859-9DE6-DE122774937F}"

@@ -1,0 +1,450 @@
+[
+  {
+    "id": "auto",
+    "name": "Personal auto",
+    "line": "personal",
+    "description": "Help households review vehicles, drivers, and coverage as their lives change.",
+    "industries": [
+      "Households"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Driver and vehicle information",
+      "Current policy details",
+      "Requested effective date"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "home",
+    "name": "Homeowners",
+    "line": "personal",
+    "description": "Keep the home conversation focused on property details and changing household needs.",
+    "industries": [
+      "Households"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Property details",
+      "Current coverage information",
+      "Recent improvements"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "renters",
+    "name": "Renters & condo",
+    "line": "personal",
+    "description": "Support clients renting a home or owning a condominium.",
+    "industries": [
+      "Households"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Residence information",
+      "Property inventory summary",
+      "Current coverage information"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "personal-umbrella",
+    "name": "Personal umbrella",
+    "line": "personal",
+    "description": "Bring the household liability conversation together.",
+    "industries": [
+      "Households"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Underlying policy details",
+      "Household exposure summary"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "recreation",
+    "name": "Recreational vehicles",
+    "line": "personal",
+    "description": "Continue the coverage review for the vehicles clients use away from the everyday.",
+    "industries": [
+      "Households"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Vehicle information",
+      "Usage and storage details"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "bop",
+    "name": "Businessowners policy",
+    "line": "small-commercial",
+    "description": "Bring common property and liability needs into one clear small-business conversation.",
+    "industries": [
+      "Retail",
+      "Professional services",
+      "Trades",
+      "Food service"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Business operations summary",
+      "Property and location details",
+      "Three-year loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "workers-comp",
+    "name": "Workers compensation",
+    "line": "small-commercial",
+    "description": "Prepare an informed discussion of employee exposures and workplace safety.",
+    "industries": [
+      "Retail",
+      "Professional services",
+      "Trades",
+      "Manufacturing"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Payroll by class and state",
+      "Employee and owner details",
+      "Three-year loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "commercial-auto",
+    "name": "Commercial auto",
+    "line": "small-commercial",
+    "description": "Help businesses keep moving with a complete picture of vehicles and drivers.",
+    "industries": [
+      "Trades",
+      "Retail",
+      "Professional services"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Vehicle schedule",
+      "Driver list",
+      "Three-year loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "commercial-umbrella",
+    "name": "Commercial umbrella",
+    "line": "small-commercial",
+    "description": "Connect the underlying liability picture to broader business needs.",
+    "industries": [
+      "Retail",
+      "Trades",
+      "Manufacturing"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Underlying policy details",
+      "Operations and exposure summary"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "inland-marine",
+    "name": "Inland marine",
+    "line": "small-commercial",
+    "description": "Prepare equipment and property information for assets away from a fixed location.",
+    "industries": [
+      "Trades",
+      "Manufacturing"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Equipment schedule",
+      "Locations and transit details"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "commercial-property",
+    "name": "Commercial property",
+    "line": "commercial",
+    "description": "Build a coordinated submission for property exposures across locations.",
+    "industries": [
+      "Manufacturing",
+      "Retail",
+      "Real estate"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Location schedule",
+      "Statement of values",
+      "Five-year loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "general-liability",
+    "name": "General liability",
+    "line": "commercial",
+    "description": "Put operations, products, and premises exposures into context.",
+    "industries": [
+      "Manufacturing",
+      "Retail",
+      "Real estate"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Operations summary",
+      "Sales and payroll information",
+      "Five-year loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "fleet",
+    "name": "Commercial fleet",
+    "line": "commercial",
+    "description": "Organize vehicle, driver, and loss information for complex fleets.",
+    "industries": [
+      "Transportation",
+      "Manufacturing"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Vehicle and driver schedules",
+      "Fleet safety program",
+      "Five-year loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "farm-ranch",
+    "name": "Farm & ranch",
+    "line": "commercial",
+    "description": "Start a specialist conversation around agricultural property and operations.",
+    "industries": [
+      "Agriculture"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Property and equipment schedule",
+      "Operations summary",
+      "Loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "specialty-casualty",
+    "name": "Specialty casualty",
+    "line": "specialty",
+    "description": "Prepare a placement conversation for more complex or unusual risks.",
+    "industries": [
+      "Manufacturing",
+      "Real estate",
+      "Retail"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Risk narrative",
+      "Requested terms",
+      "Five-year loss history"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "professional-liability",
+    "name": "Professional liability",
+    "line": "specialty",
+    "description": "Bring professional services exposures into a focused specialist review.",
+    "industries": [
+      "Professional services"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Services and revenue summary",
+      "Current policy details",
+      "Claims information"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "contract-surety",
+    "name": "Contract surety",
+    "line": "surety",
+    "description": "Support a contractor\u2019s bond request with organized principal and project information.",
+    "industries": [
+      "Construction",
+      "Trades"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Principal financial information",
+      "Work-in-progress schedule",
+      "Project and obligee details"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  },
+  {
+    "id": "commercial-surety",
+    "name": "Commercial surety",
+    "line": "surety",
+    "description": "Prepare license, permit, and other commercial bond requests.",
+    "industries": [
+      "Retail",
+      "Professional services"
+    ],
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "requirements": [
+      "Principal and obligee details",
+      "Bond form and requirement",
+      "Requested bond amount"
+    ],
+    "highlights": [
+      "Clear preparation checklist",
+      "Relevant resources",
+      "Relationship team support"
+    ]
+  }
+]

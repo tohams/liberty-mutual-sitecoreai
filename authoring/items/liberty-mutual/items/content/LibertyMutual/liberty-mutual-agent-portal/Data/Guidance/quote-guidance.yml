@@ -1,0 +1,29 @@
+---
+ID: 963f63e8-bf5a-506e-a842-bc7a629c7dbb
+Parent: 0b90d120-79f5-55f0-89a9-c329add38b06
+Template: c241fdcc-057e-501f-a45b-c893b061f04d
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/quote-guidance
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 314a1001-14df-51e3-acd0-1394fcedb1b3
+      Hint: eyebrow
+      Value: Quote & submit
+    - ID: 079be48f-cf09-5cde-9ceb-b35c983339ee
+      Hint: headline
+      Value: Prepare a clear submission
+    - ID: 279e1a3c-7ed6-5769-8835-ef275b0bea4b
+      Hint: body
+      Value: <p>Bring the business story, risk locations and required information together before you send a request for review.</p>
+    - ID: c8034562-b592-5193-a80a-ddbf03bf6c55
+      Hint: actionLink
+      Value: <link text="Review the preparation guide" linktype="external" url="/resources/build-a-bop-submission" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{4460E76C-87E9-4859-9DE6-DE122774937F}"

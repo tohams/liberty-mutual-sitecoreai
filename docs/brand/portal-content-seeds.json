@@ -1,0 +1,444 @@
+{
+  "schemaVersion": "1.0.0",
+  "site": "liberty-mutual-agent-portal",
+  "authoredAt": "2026-09-10",
+  "publicationPolicy": "Import as drafts. Map approved source references and review dates to CMS fields. Publish after editorial review.",
+  "resources": [
+    {
+      "id": "resource-prepare-a-household-renewal",
+      "slug": "prepare-a-household-renewal",
+      "title": "Make the renewal conversation count",
+      "summary": "Review what has changed, organize the questions, and leave the client with a clear next step.",
+      "bodyHtml": "<h2>Start with the changes</h2><p>Confirm household members, drivers, vehicles, property use and contact preferences. Ask about changes since the last review before recommending a next step.</p><h2>Bring the right documents</h2><ul><li>Review the current policy and renewal documents together.</li><li>Record questions about limits, deductibles and named insureds.</li><li>Use the policy documents to explain the terms that apply.</li><li>Capture the client's preferred follow-up date and owner.</li></ul><h2>Close the loop</h2><p>Save a concise follow-up with the outstanding question and the next action. A saved follow-up does not change a policy.</p>",
+      "family": "personal",
+      "product": "auto-home",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Checklist",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-build-a-bop-submission",
+      "slug": "build-a-bop-submission",
+      "title": "Build a stronger BOP submission",
+      "summary": "Gather the business story and property details before beginning your request.",
+      "bodyHtml": "<h2>Begin with the business</h2><p>A businessowners policy brings property and general liability coverages together. Workers compensation and commercial auto should be considered separately; review the applicable policy terms and underwriting guidance.</p><h2>Prepare the account</h2><ul><li>Confirm the legal name, ownership and risk locations.</li><li>Describe the operations in plain language, including services, customers and changes.</li><li>Gather property details, annual sales, payroll and prior coverage information as requested.</li><li>Identify unanswered questions before submitting for review.</li></ul><h2>Choose a clear next step</h2><p>Use the appetite finder for the selected state and business type, then prepare the request. Submission is a request for review and does not bind coverage.</p>",
+      "family": "small-commercial",
+      "product": "businessowners-policy",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Submission guide",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [
+        "LM06"
+      ],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Source-dated educational summary",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-business-vehicles-conversation",
+      "slug": "business-vehicles-conversation",
+      "title": "Start the business-vehicle conversation",
+      "summary": "Clarify how vehicles are owned, used and driven before preparing a commercial auto request.",
+      "bodyHtml": "<h2>Understand the operation</h2><ul><li>Identify owned, leased and hired vehicles.</li><li>Describe business use, operating radius and garaging locations.</li><li>Confirm who drives and what driver information is requested.</li><li>Ask about deliveries, equipment and changes expected during the term.</li></ul><p>Use these questions to organize the conversation. Coverage recommendations and requirements depend on the actual operation, policy and underwriting review.</p>",
+      "family": "small-commercial",
+      "product": "commercial-auto",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Conversation guide",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-texas-workers-compensation",
+      "slug": "texas-workers-compensation",
+      "title": "Workers compensation: a Texas starting point",
+      "summary": "A source-linked overview for discussions with Texas employers.",
+      "bodyHtml": "<h2>Begin with the employer and the work</h2><p>Texas does not require workers compensation coverage for most private employers. Private employers contracting with government entities must provide coverage for employees working on the project. Contracts may also require subcontractors or independent contractors to carry coverage.</p><h2>Check the source before advising</h2><p>Coverage choices have consequences beyond the premium. Review the Texas Department of Insurance guide for the employer's situation, including obligations that may apply when an employer does not provide workers compensation.</p><p>This is an educational starting point. It does not determine legal obligations or Liberty Mutual underwriting eligibility.</p><p><a href=\"https://www.tdi.texas.gov/pubs/consumer/cb030.html\">Read the Texas Department of Insurance guide</a></p>",
+      "family": "small-commercial",
+      "product": "workers-compensation",
+      "states": [
+        "TX"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "State guidance",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [
+        "TX01"
+      ],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Source-dated educational summary",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-florida-workers-compensation",
+      "slug": "florida-workers-compensation",
+      "title": "Workers compensation: a Florida starting point",
+      "summary": "Review industry, headcount and business structure before discussing requirements.",
+      "bodyHtml": "<h2>Industry and entity structure matter</h2><p>Florida requirements vary by industry, employee count and entity organization. Construction employers generally need coverage with one or more employees; non-construction employers generally need coverage with four or more. Agricultural employers have separate thresholds.</p><h2>Review the details</h2><p>Owner treatment, exemptions, out-of-state work and contractor obligations need careful review. Use the Florida Department of Financial Services guidance to check the full requirements for the employer's circumstances.</p><p>This educational summary does not replace the official guidance or determine Liberty Mutual underwriting eligibility.</p><p><a href=\"https://www.myfloridacfo.com/division/wc/employer/coverage-requirements\">Read Florida coverage requirements</a></p>",
+      "family": "small-commercial",
+      "product": "workers-compensation",
+      "states": [
+        "FL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "State guidance",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [
+        "FL01"
+      ],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Source-dated educational summary",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-illinois-workers-compensation",
+      "slug": "illinois-workers-compensation",
+      "title": "Workers compensation: an Illinois starting point",
+      "summary": "Know when to review coverage with an Illinois employer.",
+      "bodyHtml": "<h2>Review coverage from the first employee</h2><p>The Illinois Workers' Compensation Commission explains that an employer with one employee, including a part-time employee, generally must obtain workers compensation insurance. Rare statutory exceptions apply.</p><h2>Keep the circumstances in view</h2><p>Entity owners may have particular opt-out provisions, and some extra-hazardous occupations require further review. Consult the Commission's insurance guidance and the applicable law rather than assuming that an ownership title creates an exemption.</p><p>This is educational content and does not determine an employer's legal obligations or Liberty Mutual underwriting eligibility.</p><p><a href=\"https://iwcc.illinois.gov/about/insurance.html\">Read Illinois insurance guidance</a></p>",
+      "family": "small-commercial",
+      "product": "workers-compensation",
+      "states": [
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "State guidance",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [
+        "IL01"
+      ],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Source-dated educational summary",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-farm-account-information",
+      "slug": "farm-account-information",
+      "title": "Prepare the farm account story",
+      "summary": "Bring property, operations and seasonal activity into one organized referral.",
+      "bodyHtml": "<h2>Describe the whole operation</h2><p>Begin with the people, locations and activities. Note seasonal changes, related businesses and work performed away from the main property.</p><ul><li>Organize locations and building use.</li><li>Summarize equipment, vehicles and storage.</li><li>Describe employees, contractors and visitor activity.</li><li>List existing policies and questions for the specialist.</li></ul><p>Send a focused referral with the missing information identified. These preparation steps are a conversation framework, not a statement of product availability.</p>",
+      "family": "farm-ranch",
+      "product": "farm",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Preparation guide",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-multi-location-renewal",
+      "slug": "multi-location-renewal",
+      "title": "Keep a complex renewal moving",
+      "summary": "Give every location, requirement and question a clear owner.",
+      "bodyHtml": "<h2>Build one reliable account view</h2><p>Confirm the location schedule, business activities and changes since the last review. Use consistent names and dates across the package.</p><ul><li>Reconcile the location schedule with the account overview.</li><li>Assign each outstanding requirement.</li><li>Summarize material changes in a short cover note.</li><li>Separate coverage questions from missing-document tasks.</li><li>Agree the next review milestone with the account team.</li></ul><p>Keep specialist questions connected to the case so the next person can continue the work with context.</p>",
+      "family": "midsize-large",
+      "product": "commercial-package",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Checklist",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-specialty-referral",
+      "slug": "specialty-referral",
+      "title": "Turn a complex need into a focused referral",
+      "summary": "Help the specialist understand the risk, the question and the intended next step.",
+      "bodyHtml": "<h2>Lead with the question</h2><p>State the client's concern and the operation involved. Identify the parties, relevant jurisdictions and timing before attaching supporting information.</p><ul><li>Describe the exposure in the client's language.</li><li>Identify existing coverage and the unresolved question.</li><li>Gather only the information required for the referral.</li><li>Confirm the appropriate distribution path and specialist.</li></ul><p>A referral begins a review. It is not a coverage determination or a commitment to place the risk.</p>",
+      "family": "retail-specialty",
+      "product": "specialty",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Referral guide",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-bond-request-checklist",
+      "slug": "bond-request-checklist",
+      "title": "Prepare a clear bond request",
+      "summary": "Organize the principal, obligee and obligation before sending the request for review.",
+      "bodyHtml": "<h2>Use the right parties and terms</h2><ul><li>Confirm the principal's legal name.</li><li>Identify the obligee and the underlying obligation.</li><li>Record the requested bond type, amount and required date.</li><li>Include the required form and supporting documents.</li><li>Make any rider, consent or renewal request explicit.</li></ul><p>Keep questions and requirements together in the request timeline. A submitted request is pending review and does not issue a bond.</p>",
+      "family": "surety",
+      "product": "contract-commercial-bonds",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Bond guide",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-wholesale-placement-handoff",
+      "slug": "wholesale-placement-handoff",
+      "title": "Create a useful wholesale handoff",
+      "summary": "Preserve the retail partner's context while keeping the placement path clear.",
+      "bodyHtml": "<h2>Connect the parties</h2><p>Record the retail agency, wholesale broker, client and specialist roles clearly. Confirm who owns communication at the next step.</p><ul><li>Summarize the risk and requested consideration.</li><li>Confirm the jurisdictions and proposed timing.</li><li>Record the supporting information already provided.</li><li>List open questions and the next responsible party.</li></ul><p>Follow the appropriate licensed distribution path. Do not present a placement status as evidence of coverage.</p>",
+      "family": "wholesale-specialty",
+      "product": "specialty",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "wholesale",
+      "resourceType": "Placement guide",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    },
+    {
+      "id": "resource-expand-small-business-practice",
+      "slug": "expand-small-business-practice",
+      "title": "Expand your small-business practice",
+      "summary": "Build confidence in the conversation, then prepare your next submission.",
+      "bodyHtml": "<h2>Start with what you know</h2><p>Your client relationships can help you understand how a business operates. Begin with discovery, then bring the right information to the commercial conversation.</p><h2>A practical three-step path</h2><ol><li><strong>Understand the business.</strong> Review common BOP considerations and the role of workers compensation and commercial auto.</li><li><strong>Check the context.</strong> Explore guidance for the risk state and business type.</li><li><strong>Prepare the request.</strong> Use the submission checklist and ask your relationship team about unresolved questions.</li></ol><p>Choose one next action for your agency: complete the learning path, review a resource with a teammate, or prepare an appetite inquiry.</p>",
+      "family": "small-commercial",
+      "product": "businessowners-policy",
+      "states": [
+        "TX",
+        "FL",
+        "IL"
+      ],
+      "channel": "independent-agent",
+      "resourceType": "Learning path",
+      "language": "en",
+      "readingMinutes": 4,
+      "sourceRefs": [],
+      "reviewedAt": "2026-09-10",
+      "internalProvenance": {
+        "contentKind": "Original proposed portal guidance",
+        "editorialStatus": "Ready for sandbox editorial review",
+        "corporateApproved": false,
+        "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
+      }
+    }
+  ],
+  "promotions": [
+    {
+      "id": "commercial-growth-principal",
+      "audienceKey": "established-personal-developing-commercial-principal",
+      "title": "Build your next chapter in small business",
+      "body": "Give your team a clear starting point for small-commercial conversations. Review the learning path and choose your next agency action.",
+      "ctaLabel": "Explore the growth path",
+      "ctaHref": "/resources/expand-small-business-practice",
+      "campaignId": "expand-small-business-practice"
+    },
+    {
+      "id": "commercial-growth-producer",
+      "audienceKey": "established-personal-developing-commercial-producer",
+      "title": "Bring a stronger submission to the table",
+      "body": "Start with the business story, check the state context, and use a focused checklist to prepare your next BOP request.",
+      "ctaLabel": "Prepare a BOP submission",
+      "ctaHref": "/resources/build-a-bop-submission",
+      "campaignId": "expand-small-business-practice"
+    },
+    {
+      "id": "commercial-growth-account-manager",
+      "audienceKey": "established-personal-developing-commercial-account-manager",
+      "title": "Connect everyday conversations to new needs",
+      "body": "Learn the questions that help identify a business conversation, then bring the right teammate into the next step.",
+      "ctaLabel": "Start the learning path",
+      "ctaHref": "/resources/expand-small-business-practice",
+      "campaignId": "expand-small-business-practice"
+    },
+    {
+      "id": "commercial-growth-neutral",
+      "audienceKey": "fallback",
+      "title": "Resources for your next client conversation",
+      "body": "Find product guidance, preparation checklists and learning organized around the work you do.",
+      "ctaLabel": "Browse resources",
+      "ctaHref": "/resources",
+      "campaignId": "expand-small-business-practice"
+    }
+  ],
+  "productHubs": [
+    {
+      "family": "personal",
+      "title": "Personal insurance",
+      "summary": "Support household conversations, review upcoming renewals and organize the next service step.",
+      "products": [
+        "Auto",
+        "Home",
+        "Renters and condo",
+        "Umbrella",
+        "Recreational vehicles"
+      ],
+      "resourceSlug": "prepare-a-household-renewal"
+    },
+    {
+      "family": "small-commercial",
+      "title": "Small commercial",
+      "summary": "Turn the business story into a clear request with relevant guidance and organized requirements.",
+      "products": [
+        "Businessowners policy",
+        "Workers compensation",
+        "Commercial auto",
+        "Umbrella",
+        "Inland marine"
+      ],
+      "resourceSlug": "build-a-bop-submission"
+    },
+    {
+      "family": "farm-ranch",
+      "title": "Farm and ranch",
+      "summary": "Bring the operation, property and seasonal activity together for a focused account review.",
+      "products": [
+        "Farm accounts",
+        "Related property and liability"
+      ],
+      "resourceSlug": "farm-account-information"
+    },
+    {
+      "family": "midsize-large",
+      "title": "Midsize and large commercial",
+      "summary": "Keep complex accounts, locations and specialist questions moving in one coordinated workflow.",
+      "products": [
+        "Property",
+        "Casualty",
+        "Fleet",
+        "Workers compensation",
+        "Industry solutions"
+      ],
+      "resourceSlug": "multi-location-renewal"
+    },
+    {
+      "family": "retail-specialty",
+      "title": "Retail specialty",
+      "summary": "Organize complex needs and route the right questions to your specialist team.",
+      "products": [
+        "Cyber",
+        "Professional liability",
+        "Management liability",
+        "Environmental",
+        "Excess solutions"
+      ],
+      "resourceSlug": "specialty-referral"
+    },
+    {
+      "family": "surety",
+      "title": "Surety",
+      "summary": "Prepare bond requests and servicing needs with clear parties, requirements and status.",
+      "products": [
+        "Contract bonds",
+        "Commercial bonds"
+      ],
+      "resourceSlug": "bond-request-checklist"
+    },
+    {
+      "family": "wholesale-specialty",
+      "title": "Wholesale specialty",
+      "summary": "Preserve the retail partner’s context through a clear wholesale placement path.",
+      "products": [
+        "Specialty",
+        "Excess and surplus"
+      ],
+      "resourceSlug": "wholesale-placement-handoff"
+    }
+  ]
+}

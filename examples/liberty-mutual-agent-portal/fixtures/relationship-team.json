@@ -1,0 +1,52 @@
+[
+  {
+    "id": "contact-lee",
+    "name": "Alex Lee",
+    "title": "Agency relationship manager",
+    "initials": "AL",
+    "lines": [
+      "personal",
+      "small-commercial"
+    ],
+    "email": "alex.lee@relationships.example",
+    "phone": "+1 (512) 555-0142",
+    "availability": "Request a conversation through your workspace"
+  },
+  {
+    "id": "contact-rivera",
+    "name": "Sofia Rivera",
+    "title": "Commercial account specialist",
+    "initials": "SR",
+    "lines": [
+      "small-commercial",
+      "commercial"
+    ],
+    "email": "sofia.rivera@relationships.example",
+    "phone": "+1 (312) 555-0128",
+    "availability": "Request a conversation through your workspace"
+  },
+  {
+    "id": "contact-bell",
+    "name": "Cameron Bell",
+    "title": "Surety relationship specialist",
+    "initials": "CB",
+    "lines": [
+      "surety"
+    ],
+    "email": "cameron.bell@relationships.example",
+    "phone": "+1 (813) 555-0164",
+    "availability": "Request a conversation through your workspace"
+  },
+  {
+    "id": "contact-wright",
+    "name": "Riley Wright",
+    "title": "Specialty distribution specialist",
+    "initials": "RW",
+    "lines": [
+      "specialty"
+    ],
+    "email": "riley.wright@relationships.example",
+    "phone": "+1 (312) 555-0185",
+    "availability": "Request a conversation through your workspace"
+  }
+]

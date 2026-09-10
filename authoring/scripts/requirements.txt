@@ -1,0 +1,2 @@
+# Only needed to regenerate the deterministic YAML seed. Deployment uses the .NET Sitecore CLI.
+PyYAML==6.0.3

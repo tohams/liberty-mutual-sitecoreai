@@ -1,0 +1,12 @@
+{
+  "name": "Liberty Mutual - Small business growth role",
+  "friendlyName": "liberty_mutual__small_business_growth_role",
+  "returnType": "String",
+  "sourceFile": "small-business-growth-role.js",
+  "nativeId": "d533bc1e-ded3-4755-84d7-a0805e5dabf8",
+  "nativeStatus": "Published",
+  "organization": "Safeco Insurance Company of America POC",
+  "recordedOn": "2026-09-10",
+  "evidence": "../verification/small-business-growth-role.native-tests.json",
+  "decisionTableConnection": "Pending at the time of this record; no end-to-end personalization result is implied."
+}

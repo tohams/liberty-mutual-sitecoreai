@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.Model",
+  "items": {
+    "includes": [
+      {
+        "name": "templates",
+        "path": "/sitecore/templates/Project/LibertyMutual",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "renderings",
+        "path": "/sitecore/layout/Renderings/Project/LibertyMutual",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "placeholders",
+        "path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutual",
+        "allowedPushOperations": "CreateAndUpdate"
+      }
+    ]
+  }
+}

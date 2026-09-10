@@ -1,0 +1,45 @@
+﻿---
+ID: "6349730f-6422-5912-813b-0a61eef073fb"
+Parent: "d8898b95-6720-5acf-86b6-b434c3fe7f57"
+Template: "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/products/personal"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <r
+          uid="{82EBC9BC-51D0-506B-9F43-784A138E3458}"
+          id="{193A0299-B5B6-5668-B792-9F3552463163}"
+          ph="headless-main"
+          ds="{EF1F4CD0-2671-547E-B628-1360C4E3A472}"
+          par="FieldNames={1CC4E97D-DD4F-5673-AF96-6D22FB1632F1}&amp;DynamicPlaceholderId=1" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Personal insurance
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{F7FE5BDD-A991-4A58-9735-CD08F9B097AB}"
+    - ID: "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8"
+      Hint: NavigationTitle
+      Value: Personal insurance
+    - ID: "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b"
+      Hint: Title
+      Value: Personal insurance

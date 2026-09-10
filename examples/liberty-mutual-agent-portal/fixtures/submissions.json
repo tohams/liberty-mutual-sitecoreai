@@ -1,0 +1,186 @@
+[
+  {
+    "id": "sub-001",
+    "agencyId": "cedar-ridge",
+    "accountName": "Pecan Street Design",
+    "productId": "bop",
+    "line": "small-commercial",
+    "state": "TX",
+    "industry": "Professional services",
+    "status": "Draft",
+    "updatedAt": "2026-09-09T14:30:00Z",
+    "assignedAgentId": "jordan",
+    "effectiveDate": "2026-10-01",
+    "employeeCount": 12,
+    "annualRevenueCents": 175000000,
+    "notes": "Review operations and confirm all requested details before proceeding.",
+    "requirements": [
+      "Business operations summary",
+      "Property and location details",
+      "Three-year loss history"
+    ],
+    "completedRequirements": [
+      "Business operations summary",
+      "Property and location details"
+    ],
+    "reference": "SUB-2609-1042"
+  },
+  {
+    "id": "sub-002",
+    "agencyId": "cedar-ridge",
+    "accountName": "Bluebird Landscaping",
+    "productId": "commercial-auto",
+    "line": "small-commercial",
+    "state": "TX",
+    "industry": "Trades",
+    "status": "Information needed",
+    "updatedAt": "2026-09-08T14:30:00Z",
+    "assignedAgentId": "jordan",
+    "effectiveDate": "2026-10-01",
+    "employeeCount": 15,
+    "annualRevenueCents": 210000000,
+    "notes": "Review operations and confirm all requested details before proceeding.",
+    "requirements": [
+      "Vehicle schedule",
+      "Driver list",
+      "Three-year loss history"
+    ],
+    "completedRequirements": [
+      "Vehicle schedule",
+      "Driver list"
+    ],
+    "reference": "SUB-2609-1043"
+  },
+  {
+    "id": "sub-003",
+    "agencyId": "prairie-oak",
+    "accountName": "Oak & Beam Contractors",
+    "productId": "workers-comp",
+    "line": "small-commercial",
+    "state": "IL",
+    "industry": "Trades",
+    "status": "Draft",
+    "updatedAt": "2026-09-07T14:30:00Z",
+    "assignedAgentId": "daniel",
+    "effectiveDate": "2026-10-01",
+    "employeeCount": 18,
+    "annualRevenueCents": 245000000,
+    "notes": "Review operations and confirm all requested details before proceeding.",
+    "requirements": [
+      "Payroll by class and state",
+      "Employee and owner details",
+      "Three-year loss history"
+    ],
+    "completedRequirements": [
+      "Payroll by class and state",
+      "Employee and owner details"
+    ],
+    "reference": "SUB-2609-1044"
+  },
+  {
+    "id": "sub-004",
+    "agencyId": "prairie-oak",
+    "accountName": "Elm Street Provisions",
+    "productId": "bop",
+    "line": "small-commercial",
+    "state": "IL",
+    "industry": "Retail",
+    "status": "In review",
+    "updatedAt": "2026-09-06T14:30:00Z",
+    "assignedAgentId": "daniel",
+    "effectiveDate": "2026-10-01",
+    "employeeCount": 21,
+    "annualRevenueCents": 280000000,
+    "notes": "Review operations and confirm all requested details before proceeding.",
+    "requirements": [
+      "Business operations summary",
+      "Property and location details",
+      "Three-year loss history"
+    ],
+    "completedRequirements": [
+      "Business operations summary",
+      "Property and location details",
+      "Three-year loss history"
+    ],
+    "reference": "SUB-2609-1045"
+  },
+  {
+    "id": "sub-005",
+    "agencyId": "harborline",
+    "accountName": "Coastal Fabrication Group",
+    "productId": "commercial-property",
+    "line": "commercial",
+    "state": "FL",
+    "industry": "Manufacturing",
+    "status": "Information needed",
+    "updatedAt": "2026-09-05T14:30:00Z",
+    "assignedAgentId": "priya",
+    "effectiveDate": "2026-10-01",
+    "employeeCount": 24,
+    "annualRevenueCents": 315000000,
+    "notes": "Review operations and confirm all requested details before proceeding.",
+    "requirements": [
+      "Location schedule",
+      "Statement of values",
+      "Five-year loss history"
+    ],
+    "completedRequirements": [
+      "Location schedule",
+      "Statement of values"
+    ],
+    "reference": "SUB-2609-1046"
+  },
+  {
+    "id": "sub-006",
+    "agencyId": "harborline",
+    "accountName": "Seagrass Retail Group",
+    "productId": "general-liability",
+    "line": "commercial",
+    "state": "FL",
+    "industry": "Retail",
+    "status": "Submitted",
+    "updatedAt": "2026-09-04T14:30:00Z",
+    "assignedAgentId": "priya",
+    "effectiveDate": "2026-10-01",
+    "employeeCount": 27,
+    "annualRevenueCents": 350000000,
+    "notes": "Review operations and confirm all requested details before proceeding.",
+    "requirements": [
+      "Operations summary",
+      "Sales and payroll information",
+      "Five-year loss history"
+    ],
+    "completedRequirements": [
+      "Operations summary",
+      "Sales and payroll information",
+      "Five-year loss history"
+    ],
+    "reference": "SUB-2609-1047"
+  },
+  {
+    "id": "sub-007",
+    "agencyId": "summit-specialty",
+    "accountName": "Northpoint Property Partners",
+    "productId": "specialty-casualty",
+    "line": "specialty",
+    "state": "IL",
+    "industry": "Real estate",
+    "status": "Information needed",
+    "updatedAt": "2026-09-03T14:30:00Z",
+    "assignedAgentId": "elena",
+    "effectiveDate": "2026-10-01",
+    "employeeCount": 30,
+    "annualRevenueCents": 385000000,
+    "notes": "Review operations and confirm all requested details before proceeding.",
+    "requirements": [
+      "Risk narrative",
+      "Requested terms",
+      "Five-year loss history"
+    ],
+    "completedRequirements": [
+      "Risk narrative",
+      "Requested terms"
+    ],
+    "reference": "SUB-2609-1048"
+  }
+]

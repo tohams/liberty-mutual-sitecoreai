@@ -1,0 +1,73 @@
+﻿---
+ID: "aff28382-83ff-5f02-892b-a500691f2568"
+Parent: "c9b4e46b-3b72-50d4-a96e-732c4d181b6a"
+Template: "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/resources/wholesale-placement-handoff"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <r
+          uid="{26E98249-249E-5701-8705-5E6DAC113FD5}"
+          id="{980AD02C-08E5-5F27-9F08-F28E829CA94D}"
+          ph="headless-main"
+          ds="{AFF28382-83FF-5F02-892B-A500691F2568}"
+          par="FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Create a useful wholesale handoff
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{F7FE5BDD-A991-4A58-9735-CD08F9B097AB}"
+    - ID: "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8"
+      Hint: NavigationTitle
+      Value: Create a useful wholesale handoff
+    - ID: "8a67dee3-1cc0-5a2c-aa51-02e5512cb36f"
+      Hint: channel
+      Value: wholesale
+    - ID: "a640d3a6-0cac-5100-857b-d4ce5f2618ae"
+      Hint: businessFamily
+      Value: "wholesale-specialty"
+    - ID: "ca57c6ef-fb0b-5513-9c6e-a6b511e3af9a"
+      Hint: summary
+      Value: Preserve the retail partner's context while keeping the placement path clear.
+    - ID: "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b"
+      Hint: Title
+      Value: Create a useful wholesale handoff
+    - ID: "d6d51e3e-5c1e-5eda-9610-e53858e43a3e"
+      Hint: reviewedAt
+      Value: 20260910T000000Z
+    - ID: "dc1caf57-9be5-5423-ac92-2abf56dc91cc"
+      Hint: sourceLink
+      Value: |
+        ""
+    - ID: "e1f1902c-22e5-5dc7-acee-62c05dc4fe26"
+      Hint: product
+      Value: specialty
+    - ID: "e4144560-576a-559b-9110-b56e9a58a338"
+      Hint: body
+      Value: <h2>Connect the parties</h2><p>Record the retail agency, wholesale broker, client and specialist roles clearly. Confirm who owns communication at the next step.</p><ul><li>Summarize the risk and requested consideration.</li><li>Confirm the jurisdictions and proposed timing.</li><li>Record the supporting information already provided.</li><li>List open questions and the next responsible party.</li></ul><p>Follow the appropriate licensed distribution path. Do not present a placement status as evidence of coverage.</p>
+    - ID: "ef9ca924-0217-59ba-8ae0-e3cb9cfbcdf9"
+      Hint: state
+      Value: All
+    - ID: "efdf8fef-2e79-5845-a709-0af3c615660c"
+      Hint: resourceType
+      Value: Placement guide

@@ -1,0 +1,45 @@
+﻿---
+ID: "7a62fd22-7289-5e0c-b370-427a84596cd7"
+Parent: "ae9e45ca-f127-4abe-9ca7-2ff109981998"
+Template: "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/quote"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <r
+          uid="{80B17D46-A67F-5818-BC7B-3D6BEEBE9632}"
+          id="{193A0299-B5B6-5668-B792-9F3552463163}"
+          ph="headless-main"
+          ds="{963F63E8-BF5A-506E-A842-BC7A629C7DBB}"
+          par="FieldNames={810A4AD9-0C31-5EC4-BC37-006D382BCE44}&amp;DynamicPlaceholderId=1" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Quote & submit
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{F7FE5BDD-A991-4A58-9735-CD08F9B097AB}"
+    - ID: "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8"
+      Hint: NavigationTitle
+      Value: Quote & submit
+    - ID: "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b"
+      Hint: Title
+      Value: Quote & submit

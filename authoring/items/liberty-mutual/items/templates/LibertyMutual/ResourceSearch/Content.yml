@@ -1,0 +1,13 @@
+---
+ID: a9e40dc1-5d6b-5322-862b-5f19cee8d45c
+Parent: d4f21e77-6f55-5d03-b094-be403be17285
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutual/ResourceSearch/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260910T140000Z

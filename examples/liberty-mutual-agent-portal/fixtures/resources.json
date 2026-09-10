@@ -1,0 +1,265 @@
+[
+  {
+    "id": "small-business-checklist",
+    "title": "Your small-business submission checklist",
+    "description": "A practical guide to building a complete, useful first submission.",
+    "body": "Start with the business operations, location, and requested effective date. Gather current coverage information and loss history. Confirm payroll, vehicles, and property details where relevant. Record open questions for your relationship team before you submit.",
+    "line": "small-commercial",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Checklist",
+    "readMinutes": 5,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "submission",
+      "contractor",
+      "requirements",
+      "businessowners"
+    ]
+  },
+  {
+    "id": "bop-conversation",
+    "title": "Make the businessowners conversation count",
+    "description": "Connect business needs with the information a BOP review requires.",
+    "body": "Ask how the business operates, where property is located, and how customers interact with the business. Document recent changes and business continuity concerns. Coverage, eligibility, terms, and availability are determined through the applicable underwriting process.",
+    "line": "small-commercial",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Guide",
+    "readMinutes": 6,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "BOP",
+      "property",
+      "liability",
+      "retail"
+    ]
+  },
+  {
+    "id": "home-renewal",
+    "title": "A more useful home renewal review",
+    "description": "Five questions to make the next household conversation more relevant.",
+    "body": "Confirm occupancy and use of the home. Ask about renovations, outbuildings, valuable property, and changes in the household. Review the current policy documentation together. Capture follow-up questions for the account team; a checklist does not change policy coverage.",
+    "line": "personal",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Checklist",
+    "readMinutes": 4,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "home",
+      "renewal",
+      "household"
+    ]
+  },
+  {
+    "id": "auto-review",
+    "title": "Stay current on the household\u2019s vehicles",
+    "description": "A straightforward vehicle and driver review.",
+    "body": "Review drivers, garaging addresses, vehicle use, and recently added or removed vehicles. Ask about changes in commute and household drivers. Compare the current policy record with the information provided and request any needed updates through the account team.",
+    "line": "personal",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Guide",
+    "readMinutes": 4,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "auto",
+      "renewal",
+      "drivers"
+    ]
+  },
+  {
+    "id": "contractor-readiness",
+    "title": "Prepare a contractor account for review",
+    "description": "Organize operations, payroll, vehicles, and subcontractor details.",
+    "body": "Describe the work performed, job locations, and use of subcontractors. Gather payroll by class and state, vehicle and driver schedules, and current loss information. Bring questions about unusual operations to the relationship team.",
+    "line": "small-commercial",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Checklist",
+    "readMinutes": 7,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "contractor",
+      "requirements",
+      "workers compensation",
+      "trades"
+    ]
+  },
+  {
+    "id": "fleet-safety",
+    "title": "Bring fleet safety into the renewal conversation",
+    "description": "A structured discussion for commercial vehicle accounts.",
+    "body": "Review driver selection, vehicle inspection, maintenance, incident reporting, and training practices. Capture the customer\u2019s existing program and any recent changes. Share unresolved exposure questions with the commercial account team.",
+    "line": "commercial",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Guide",
+    "readMinutes": 8,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "fleet",
+      "commercial auto",
+      "risk control"
+    ]
+  },
+  {
+    "id": "property-schedule",
+    "title": "Build a clearer property submission",
+    "description": "Keep a multi-location property schedule useful and consistent.",
+    "body": "Confirm each location, occupancy, construction details, and reported values. Record changes to operations and risk-control measures. Reconcile the location schedule with the statement of values before sending a package for specialist review.",
+    "line": "commercial",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Checklist",
+    "readMinutes": 6,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "property",
+      "statement of values",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "bond-documents",
+    "title": "Prepare your next contract bond request",
+    "description": "Principal, project, and obligee information in one place.",
+    "body": "Confirm the principal\u2019s legal name, obligee, requested bond form, amount, and project timeline. Gather current financial information and a work-in-progress schedule. Submit complete information to your surety relationship team. A request is subject to review and is not an issued bond.",
+    "line": "surety",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Checklist",
+    "readMinutes": 5,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "bond",
+      "surety",
+      "principal",
+      "obligee",
+      "documents"
+    ]
+  },
+  {
+    "id": "specialty-placement",
+    "title": "Tell the full specialty risk story",
+    "description": "Help a specialist understand the account beyond the application.",
+    "body": "Describe the operations, exposure, placement objectives, and material changes. Include relevant loss information and clarify any unresolved questions. Identify the retail agency and distribution channel when preparing a wholesale placement.",
+    "line": "specialty",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Guide",
+    "readMinutes": 7,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "specialty",
+      "wholesale",
+      "placement"
+    ]
+  },
+  {
+    "id": "agency-growth",
+    "title": "Build your small-business practice",
+    "description": "Turn established relationships into a thoughtful commercial development plan.",
+    "body": "Start with your team\u2019s current knowledge and agency focus. Select a business segment, complete a learning path, and review the information needed for a well-prepared submission. Keep the plan specific, measure progress, and involve your relationship team.",
+    "line": "all",
+    "states": [
+      "TX",
+      "FL",
+      "IL"
+    ],
+    "type": "Article",
+    "readMinutes": 5,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "growth",
+      "campaign",
+      "agency",
+      "commercial"
+    ]
+  },
+  {
+    "id": "state-wc-tx",
+    "title": "Texas workers compensation: start with the source",
+    "description": "Official state guidance to support a more informed conversation.",
+    "body": "Texas generally permits many private employers to choose whether to carry workers compensation insurance, with exceptions. Review the Texas Department of Insurance guidance and the employer\u2019s circumstances before discussing requirements.",
+    "line": "small-commercial",
+    "states": [
+      "TX"
+    ],
+    "type": "State guidance",
+    "readMinutes": 3,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "state",
+      "workers compensation",
+      "TX"
+    ],
+    "sourceUrl": "https://www.tdi.texas.gov/pubs/consumer/cb030.html"
+  },
+  {
+    "id": "state-wc-fl",
+    "title": "Florida workers compensation: check the business context",
+    "description": "Official state guidance to support a more informed conversation.",
+    "body": "Florida coverage requirements depend on the industry, number of employees, and applicable exceptions. Review the Division of Workers\u2019 Compensation guidance for the business and ownership structure.",
+    "line": "small-commercial",
+    "states": [
+      "FL"
+    ],
+    "type": "State guidance",
+    "readMinutes": 3,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "state",
+      "workers compensation",
+      "FL"
+    ],
+    "sourceUrl": "https://www.myfloridacfo.com/division/wc/employer/coverage-requirements"
+  },
+  {
+    "id": "state-wc-il",
+    "title": "Illinois workers compensation: review current requirements",
+    "description": "Official state guidance to support a more informed conversation.",
+    "body": "Illinois generally requires workers compensation coverage when an employer has employees, subject to applicable exceptions. Refer to the Illinois Workers\u2019 Compensation Commission for current guidance.",
+    "line": "small-commercial",
+    "states": [
+      "IL"
+    ],
+    "type": "State guidance",
+    "readMinutes": 3,
+    "updatedAt": "2026-09-10",
+    "tags": [
+      "state",
+      "workers compensation",
+      "IL"
+    ],
+    "sourceUrl": "https://iwcc.illinois.gov/about/insurance.html"
+  }
+]
