@@ -2,6 +2,8 @@
 
 The deployed portal passed the browser journeys below, and the native Unified Data Layer profile contains the corresponding page and Search events. These observations establish working delivery, authenticated operational state, native content retrieval and event ingestion. They do not replace customer-role Page builder acceptance or a complete security assessment.
 
+**Current handoff status, 21:28 UTC: blocked.** After the required SitecoreAI redeployment, the managed CM hostname stopped resolving and post-deployment connected acceptance failed. Earlier passing results below are historical; see [Master Context ID retirement](#master-context-id-retirement) for the current recovery evidence.
+
 | Review context | Value |
 | --- | --- |
 | Application | `https://liberty-mutual-agent-portal.vercel.app` |
@@ -94,6 +96,30 @@ Commit `a95366be68fa98bbe9975e6a4c2e9836f248c3e9`, preview deployment `GLHMpKboM
 | Elena | 805 ms | Neutral, 864 ms | Neutral, 515 ms |
 
 GitHub run `34522939424` passed Offline validation and Connected production build. Temporary `PORTAL_PERSONALIZATION_DIAGNOSTICS` was set to `false` for both Vercel Production and Preview before this deployment. Production verification is recorded in the [release pull request](https://github.com/tohams/liberty-mutual-sitecoreai/pull/9) after promotion; customer-role editorial approval remains a separate handoff check.
+
+### Master Context ID retirement
+
+The owner confirmed that the SitecoreAI `Demo` environment is used exclusively for this POC. At **20:55 UTC on September 10, 2026**, native master regeneration succeeded and replaced both the Live and Preview master Context IDs.
+
+| Check after regeneration | Observed result |
+| --- | --- |
+| Content requests with the original Live and Preview masters | Both returned `404`. |
+| Content requests with the existing scoped Live and Preview contexts | Both returned `200` with native Home content. |
+| Private Edge content request with the public browser context | Returned `403`, as expected for its browser-only scope. |
+| Existing three scoped child values | Unchanged; no Vercel or GitHub value changes were needed. |
+| Local environment configuration | Nine ignored files migrated from old master values to the appropriate server child or public browser scope according to each key; permissions set to `0600`. No credential values entered Git. |
+
+SitecoreAI [Build and deploy `6XUSEOqPB2caaZlw99oWFl`](https://deploy.sitecorecloud.io/projects/7f0TVOCnwZyTYy9vJwhC8/cm-environments/4Ng6xXzEpoWJNPisksPG2y/deployments/6XUSEOqPB2caaZlw99oWFl?organization=org_XqL3u1MSNVuubOTb) completed in **16 minutes 31 seconds**, but its post actions failed: `warmUpCM` failed for all three configured URLs, and `populateSchema` and `reindex` failed immediately. The unchanged CM hostname returned HTTP `530` with a Cloudflare error `1000` HTML page. Native Page builder displayed “Cannot connect to tenant.” Environment Details retained the replacement master IDs and the same CM hostname; new application logs reported Sitecore startup at 21:12:43 UTC. Application startup alone does not establish that the managed hostname is reachable.
+
+One standard **Restart environment** was requested around 21:19 UTC; the native UI confirmed initiation. Subsequent CM requests failed DNS resolution. Resolver `1.1.1.1` returned `NXDOMAIN` at 21:23 UTC. An authoritative recheck against `itzel.ns.cloudflare.com` at **21:28 UTC** also returned `NXDOMAIN`, with the authoritative-answer flag and zero answers. Restart initiation is not evidence of completed recovery. Cloudflare documents the preceding error `1000` as a DNS, proxy or origin-routing problem; the exact cause in this Sitecore-managed environment has not been established. [Cloudflare error reference](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1000/)
+
+The post-deployment strict production harness recorded **six failed assertions**. Native browser creation for Avery and Jordan exceeded its two-second deadline; each account then received neutral guidance on both workspace requests instead of its expected role variant. Some subsequent identity steps for those accounts were skipped. Maya and Elena completed their expected outcomes. The run failed; the earlier complete 37-assertion pass remains historical evidence only. The relationship between these timeouts and the CM outage has not been established.
+
+A subsequent read-only `verify-edge-content.cjs` run passed for all **27 native Live Edge routes**, including page compositions, editable fields, Search configuration and resource template projection. The portal sign-in page returned `200`. Deploy's System status screen reported every listed service Healthy at approximately 21:31, including Pages, Provisioning, Edge Proxy and Cloudflare. That aggregate status did not establish this environment's authoring availability.
+
+**Handoff remains blocked** pending managed CM DNS restoration, scoped Preview and native editor recovery, and a fresh connected acceptance run. A support request was prepared locally as `sitecore-support-request-2026-09-10.md`; it has not been sent because outbound submission has not been authorized. The scope checks before deployment do not establish post-deployment Preview availability.
+
+This was master-only Context ID regeneration. The unchanged scoped children are an empirical result for this environment, not a promise that children survive all rotations. Sitecore's separate [full secret rotation procedure](https://doc.sitecore.com/sai/en/developers/sitecoreai/deploying-sitecoreai/deploy-app/manage-an-environment/rotate-deploy-secrets-for-your-environments.html) changes the editing secret and underlying Edge token as well, and requires updating scoped contexts.
 
 ### Repeatable native personalization acceptance
 
