@@ -13,6 +13,7 @@ import { routing } from './i18n/routing';
 import client from './lib/sitecore-client';
 import { PortalPersonalizeProxy } from './server/personalization/PortalPersonalizeProxy';
 import { getPortalPersonalizationIdentity } from './server/data/portal';
+import { reportPersonalizationDiagnostic } from './server/personalization/diagnostics';
 
 const preview = new PreviewProxy({
     client,
@@ -82,6 +83,7 @@ export default async function proxy(req: NextRequest) {
   if (path === '/login' || path.startsWith('/operator')) return NextResponse.next();
   const hasDraftCookie = req.cookies.has('__prerender_bypass');
   const session = hasDraftCookie ? null : await verifySession(req.cookies.get(SESSION_COOKIE)?.value);
+  reportPersonalizationDiagnostic({ stage: 'proxy', enabled: scConfig.personalize.enabled, draft: hasDraftCookie || req.cookies.has('__next_preview_data'), signedSessionPresent: Boolean(session) });
   if (!hasDraftCookie && !session) {
     return NextResponse.redirect(new URL('/login', req.url));
   }

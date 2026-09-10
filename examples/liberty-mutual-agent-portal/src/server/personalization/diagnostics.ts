@@ -1,0 +1,39 @@
+type ReceiptType = 'null' | 'array' | 'object' | 'undefined' | 'string' | 'number' | 'boolean' | 'other';
+type Diagnostic =
+  | { stage: 'proxy'; enabled: boolean; draft: boolean; signedSessionPresent: boolean }
+  | { stage: 'identity'; identityPresent: boolean; outcome: 'available' | 'missing' | 'resolver-error'; elapsedMs: number }
+  | { stage: 'decision'; receiptType: ReceiptType; selectedVariant: boolean; outcome: 'completed' | 'execution-error'; elapsedMs: number };
+
+const elapsed = (milliseconds: number) => Number.isFinite(milliseconds) ? Math.max(0, Math.round(milliseconds)) : 0;
+
+/** Explicit allowlist: never log native request/response objects or exception messages. Disabled by default. */
+export function reportPersonalizationDiagnostic(diagnostic: Diagnostic): void {
+  if (process.env.PORTAL_PERSONALIZATION_DIAGNOSTICS !== 'true') return;
+  if (diagnostic.stage === 'proxy') {
+    console.info('Portal personalization', {
+      stage: 'proxy', enabled: Boolean(diagnostic.enabled), draft: Boolean(diagnostic.draft),
+      signedSessionPresent: Boolean(diagnostic.signedSessionPresent),
+    });
+  } else if (diagnostic.stage === 'identity') {
+    console.info('Portal personalization', {
+      stage: 'identity', identityPresent: Boolean(diagnostic.identityPresent),
+      outcome: diagnostic.outcome === 'available' ? 'available' : diagnostic.outcome === 'missing' ? 'missing' : 'resolver-error',
+      elapsedMs: elapsed(diagnostic.elapsedMs),
+    });
+  } else if (diagnostic.stage === 'decision') {
+    const allowedTypes: ReceiptType[] = ['null', 'array', 'object', 'undefined', 'string', 'number', 'boolean', 'other'];
+    console.info('Portal personalization', {
+      stage: 'decision', receiptType: allowedTypes.includes(diagnostic.receiptType) ? diagnostic.receiptType : 'other',
+      selectedVariant: Boolean(diagnostic.selectedVariant),
+      outcome: diagnostic.outcome === 'completed' ? 'completed' : 'execution-error',
+      elapsedMs: elapsed(diagnostic.elapsedMs),
+    });
+  }
+}
+
+export function decisionReceiptType(receipt: unknown): ReceiptType {
+  if (receipt === null) return 'null';
+  if (Array.isArray(receipt)) return 'array';
+  const type = typeof receipt;
+  return ['object', 'undefined', 'string', 'number', 'boolean'].includes(type) ? type as ReceiptType : 'other';
+}
