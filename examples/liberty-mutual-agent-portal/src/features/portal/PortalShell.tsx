@@ -3,10 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, type ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import { PortalIcon, type IconName } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";
 import { usePortal, stateNames } from "./portal-context";
 import { clearPortalAnalytics } from "@/lib/portal-analytics";
+import { readRiskState, withRiskState } from "./risk-state-navigation";
 
 const navigation: { href: string; label: string; icon: IconName }[] = [
   { href: "/workspace", label: "My workspace", icon: "grid" },
@@ -26,6 +28,11 @@ export function PortalShell({
   children: ReactNode;
 }) {
   const { data, notify } = usePortal();
+  const searchParams = useSearchParams();
+  const riskState = readRiskState(
+    searchParams.get("state"),
+    data.agent.licensedStates,
+  );
   const editorPreview = data.session.runId === "editor";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -140,7 +147,7 @@ export function PortalShell({
             {navigation.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={withRiskState(item.href, riskState)}
                 className={`nav-item ${activeRoute.startsWith(item.href) ? "active" : ""}`}
                 aria-current={
                   activeRoute.startsWith(item.href) ? "page" : undefined
@@ -179,7 +186,7 @@ export function PortalShell({
           <div className="sidebar-state">
             <PortalIcon name="pin" width="16" />
             <span>
-              {data.agency.city}, {stateNames[data.agent.state]}
+              {data.agency.city}, {stateNames[data.agency.state]}
             </span>
           </div>
           <p className="sidebar-copyright">
@@ -235,7 +242,7 @@ export function PortalShell({
         </div>
         <dl className="detail-list">
           <div>
-            <dt>Working state</dt>
+            <dt>Home state</dt>
             <dd>{stateNames[data.agent.state]}</dd>
           </div>
           <div>

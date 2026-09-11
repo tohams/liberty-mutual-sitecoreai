@@ -1,0 +1,1788 @@
+{
+  "schemaVersion": 1,
+  "provenance": "Synthetic sandbox transaction rules for demonstrating dated state authority, carrier appointments, and product appetite. These records are not actual Liberty Mutual availability, underwriting requirements, or regulatory determinations.",
+  "agentAuthorities": [
+    {
+      "agentId": "avery",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "avery",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "avery",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "maya",
+      "state": "TX",
+      "linesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "maya",
+      "state": "FL",
+      "linesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "maya",
+      "state": "IL",
+      "linesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "jordan",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "jordan",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "daniel",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "daniel",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "priya",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "priya",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "priya",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "marcus",
+      "state": "FL",
+      "linesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "marcus",
+      "state": "TX",
+      "linesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "marcus",
+      "state": "IL",
+      "linesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "elena",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "elena",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agentId": "elena",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    }
+  ],
+  "carrierAppointments": [
+    {
+      "agencyId": "cedar-ridge",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "prairie-oak",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "prairie-oak",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "prairie-oak",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property",
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "property",
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property",
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "summit-specialty",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "summit-specialty",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "summit-specialty",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "avery",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "avery",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "avery",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "maya",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "maya",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "maya",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "jordan",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "cedar-ridge",
+      "agentId": "jordan",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "prairie-oak",
+      "agentId": "daniel",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "prairie-oak",
+      "agentId": "daniel",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "personal-lines",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "agentId": "priya",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "agentId": "priya",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "agentId": "priya",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "agentId": "marcus",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "agentId": "marcus",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "harborline",
+      "agentId": "marcus",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "summit-specialty",
+      "agentId": "elena",
+      "carrierId": "liberty-mutual",
+      "state": "IL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "summit-specialty",
+      "agentId": "elena",
+      "carrierId": "liberty-mutual",
+      "state": "TX",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    },
+    {
+      "agencyId": "summit-specialty",
+      "agentId": "elena",
+      "carrierId": "liberty-mutual",
+      "state": "FL",
+      "linesOfAuthority": [
+        "casualty",
+        "property"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31"
+    }
+  ],
+  "productRules": [
+    {
+      "productId": "auto",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Driver and vehicle information",
+        "Current policy details",
+        "Requested effective date"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "auto",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Driver and vehicle information",
+        "Current policy details",
+        "Requested effective date"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "auto",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Driver and vehicle information",
+        "Current policy details",
+        "Requested effective date"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "home",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Property details",
+        "Current coverage information",
+        "Recent improvements"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "home",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Property details",
+        "Current coverage information",
+        "Recent improvements"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "home",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Property details",
+        "Current coverage information",
+        "Recent improvements"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "renters",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Residence information",
+        "Property inventory summary",
+        "Current coverage information"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "renters",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Residence information",
+        "Property inventory summary",
+        "Current coverage information"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "renters",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Residence information",
+        "Property inventory summary",
+        "Current coverage information"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "personal-umbrella",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Underlying policy details",
+        "Household exposure summary"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "personal-umbrella",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Underlying policy details",
+        "Household exposure summary"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "personal-umbrella",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Underlying policy details",
+        "Household exposure summary"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "recreation",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Vehicle information",
+        "Usage and storage details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "recreation",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Vehicle information",
+        "Usage and storage details",
+        "Seasonal storage and storm preparation details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "recreation",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "personal-lines"
+      ],
+      "status": "suspended",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Households"
+      ],
+      "requirements": [
+        "Vehicle information",
+        "Usage and storage details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "bop",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services",
+        "Trades",
+        "Food service"
+      ],
+      "requirements": [
+        "Business operations summary",
+        "Property and location details",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "bop",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services",
+        "Trades",
+        "Food service"
+      ],
+      "requirements": [
+        "Business operations summary",
+        "Property and location details",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "bop",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services",
+        "Trades",
+        "Food service"
+      ],
+      "requirements": [
+        "Business operations summary",
+        "Property and location details",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "workers-comp",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services",
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Payroll by class and state",
+        "Employee and owner details",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "workers-comp",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services",
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Payroll by class and state",
+        "Employee and owner details",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "workers-comp",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services",
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Payroll by class and state",
+        "Employee and owner details",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-auto",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Trades",
+        "Retail",
+        "Professional services"
+      ],
+      "requirements": [
+        "Vehicle schedule",
+        "Driver list",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-auto",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Trades",
+        "Retail",
+        "Professional services"
+      ],
+      "requirements": [
+        "Vehicle schedule",
+        "Driver list",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-auto",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Trades",
+        "Retail",
+        "Professional services"
+      ],
+      "requirements": [
+        "Vehicle schedule",
+        "Driver list",
+        "Three-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-umbrella",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Underlying policy details",
+        "Operations and exposure summary"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-umbrella",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Underlying policy details",
+        "Operations and exposure summary"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-umbrella",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Underlying policy details",
+        "Operations and exposure summary"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "inland-marine",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Equipment schedule",
+        "Locations and transit details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "inland-marine",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Equipment schedule",
+        "Locations and transit details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "inland-marine",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Trades",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Equipment schedule",
+        "Locations and transit details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-property",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Retail",
+        "Real estate"
+      ],
+      "requirements": [
+        "Location schedule",
+        "Statement of values",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-property",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Retail",
+        "Real estate"
+      ],
+      "requirements": [
+        "Location schedule",
+        "Statement of values",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-property",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Retail",
+        "Real estate"
+      ],
+      "requirements": [
+        "Location schedule",
+        "Statement of values",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "general-liability",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Retail",
+        "Real estate"
+      ],
+      "requirements": [
+        "Operations summary",
+        "Sales and payroll information",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "general-liability",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Retail",
+        "Real estate"
+      ],
+      "requirements": [
+        "Operations summary",
+        "Sales and payroll information",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "general-liability",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Retail",
+        "Real estate"
+      ],
+      "requirements": [
+        "Operations summary",
+        "Sales and payroll information",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "fleet",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Transportation",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Vehicle and driver schedules",
+        "Fleet safety program",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "fleet",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Transportation",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Vehicle and driver schedules",
+        "Fleet safety program",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "fleet",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Transportation",
+        "Manufacturing"
+      ],
+      "requirements": [
+        "Vehicle and driver schedules",
+        "Fleet safety program",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "farm-ranch",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Agriculture",
+        "Ranching"
+      ],
+      "requirements": [
+        "Property and equipment schedule",
+        "Operations summary",
+        "Loss history",
+        "Livestock and grazing operations summary"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "farm-ranch",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Agriculture"
+      ],
+      "requirements": [
+        "Property and equipment schedule",
+        "Operations summary",
+        "Loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "farm-ranch",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Agriculture"
+      ],
+      "requirements": [
+        "Property and equipment schedule",
+        "Operations summary",
+        "Loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "specialty-casualty",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Real estate",
+        "Retail"
+      ],
+      "requirements": [
+        "Risk narrative",
+        "Requested terms",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "specialty-casualty",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Real estate",
+        "Retail"
+      ],
+      "requirements": [
+        "Risk narrative",
+        "Requested terms",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "specialty-casualty",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Manufacturing",
+        "Real estate",
+        "Retail"
+      ],
+      "requirements": [
+        "Risk narrative",
+        "Requested terms",
+        "Five-year loss history"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "professional-liability",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Professional services"
+      ],
+      "requirements": [
+        "Services and revenue summary",
+        "Current policy details",
+        "Claims information"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "professional-liability",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Professional services"
+      ],
+      "requirements": [
+        "Services and revenue summary",
+        "Current policy details",
+        "Claims information"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "professional-liability",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "property",
+        "casualty"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Professional services"
+      ],
+      "requirements": [
+        "Services and revenue summary",
+        "Current policy details",
+        "Claims information"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "contract-surety",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Construction",
+        "Trades"
+      ],
+      "requirements": [
+        "Principal financial information",
+        "Work-in-progress schedule",
+        "Project and obligee details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "contract-surety",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Construction",
+        "Trades"
+      ],
+      "requirements": [
+        "Principal financial information",
+        "Work-in-progress schedule",
+        "Project and obligee details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "contract-surety",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Construction",
+        "Trades"
+      ],
+      "requirements": [
+        "Principal financial information",
+        "Work-in-progress schedule",
+        "Project and obligee details"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-surety",
+      "state": "TX",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services"
+      ],
+      "requirements": [
+        "Principal and obligee details",
+        "Bond form and requirement",
+        "Requested bond amount"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-surety",
+      "state": "FL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services"
+      ],
+      "requirements": [
+        "Principal and obligee details",
+        "Bond form and requirement",
+        "Requested bond amount"
+      ],
+      "appointmentScope": "both"
+    },
+    {
+      "productId": "commercial-surety",
+      "state": "IL",
+      "carrierId": "liberty-mutual",
+      "requiredLinesOfAuthority": [
+        "surety"
+      ],
+      "status": "active",
+      "validFrom": "2026-01-01",
+      "validThrough": "2028-12-31",
+      "industries": [
+        "Retail",
+        "Professional services"
+      ],
+      "requirements": [
+        "Principal and obligee details",
+        "Bond form and requirement",
+        "Requested bond amount"
+      ],
+      "appointmentScope": "both"
+    }
+  ],
+  "bondProducts": {
+    "Contract performance": "contract-surety",
+    "Payment bond": "contract-surety",
+    "Performance and payment": "contract-surety",
+    "License and permit": "commercial-surety",
+    "Commercial surety": "commercial-surety"
+  }
+}

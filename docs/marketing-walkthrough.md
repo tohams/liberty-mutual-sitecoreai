@@ -23,6 +23,12 @@ Avery, Jordan and Maya belong to the same agency but have different responsibili
 
 For one operational example, use Maya's **Clients & policies → Review renewals**, open an available policy, and save a renewal follow-up. Reload to inspect the saved work. These records and actions use synthetic integrations; they do not change real insurance coverage or send a message.
 
+### Check products against the account state
+
+With Daniel, open **Products & appetite** and confirm Risk state offers Illinois and Texas. Select Texas, open a coverage guide, and return: the chosen state should remain Texas. Prepare account carries that same state into intake. Compare personal recreational coverage with Maya in Illinois versus Texas to see an illustrative product-availability difference. These operational rules come from fictional integration data, separately from native Search and personalization.
+
+A colleague may see a shared submission that they cannot advance. For example, Jordan can view an Avery-owned Florida request but cannot edit, complete or submit it with TX/IL-only authority. The original risk state remains visible; no dropdown silently changes it. Use the designated preview acceptance records for this walkthrough rather than changing an existing customer-review record. See the [state eligibility runbook](state-eligibility.md).
+
 ## 2. Find state guidance with native Search
 
 Sign in as **Daniel Ortiz** and open [Learning & resources](https://liberty-mutual-agent-portal.vercel.app/resources). **Risk state** starts at **My licensed states**: Illinois, Texas and nationwide guidance. His Illinois home state does not exclude his Texas license. His workspace recommendations also consider both licenses and his specialties.

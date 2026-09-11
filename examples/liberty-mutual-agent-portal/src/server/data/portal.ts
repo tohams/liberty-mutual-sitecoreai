@@ -1,6 +1,7 @@
 import 'server-only';
 import { createHash, randomUUID } from 'node:crypto';
-import type { Agent, BusinessLine, PortalAction, PortalBootstrap, Submission, BondRequest, Task, Activity, Resource } from '../../contracts/portal';
+import type { Agent, BusinessLine, PortalAction, PortalBootstrap, Submission, BondRequest, Task, Activity, Resource, EligibilityDecision, Product, StateCode } from '../../contracts/portal';
+import { activeLicensedStates, evaluateProductEligibility, resolveBondProductId } from '../../domain/eligibility';
 import { RESOURCE_SLUG_ALIASES } from '../../contracts/resource-routes';
 import type { PortalSession } from '../auth/session';
 import { getProfileIdentifier } from '../auth/profile-identity';
@@ -27,6 +28,39 @@ function getAgent(session: PortalSession): Agent {
 function canAccessLine(agent: Agent, line: BusinessLine): boolean {
   const agency = fixtures.agencies.find((entry) => entry.id === agent.agencyId)!;
   return agency.appointedLines.includes(line) && (agent.role === 'principal' || agent.specializations.includes(line));
+}
+
+function productEligibility(agent: Agent, product: Product, state: StateCode, effectiveDate?: string): EligibilityDecision {
+  const agency = fixtures.agencies.find((entry) => entry.id === agent.agencyId)!;
+  return evaluateProductEligibility({ agent, agency, product, state, effectiveDate, eligibility: fixtures.eligibility });
+}
+
+function submissionEligibility(agent: Agent, value: Submission): EligibilityDecision {
+  const product = fixtures.products.find((entry) => entry.id === value.productId && entry.line === value.line);
+  if (!product) return { allowed: false, reason: 'The product for this submission could not be verified.', requirements: [], industries: [] };
+  const decision = productEligibility(agent, product, value.state, value.effectiveDate);
+  if (!decision.allowed) return decision;
+  const owner = fixtures.agents.find((entry) => entry.id === value.assignedAgentId && entry.agencyId === value.agencyId);
+  const ownerDecision = owner && productEligibility(owner, product, value.state, value.effectiveDate);
+  if (!ownerDecision?.allowed) return { allowed: false, reason: 'The assigned producer is not eligible for this product and state. Ask your relationship team to review the assignment.', requirements: [], industries: [] };
+  if (!decision.industries.includes(value.industry)) return { ...decision, allowed: false, reason: 'The business type is no longer available for this product and state. Ask your relationship team to review the account.' };
+  return decision;
+}
+
+function bondEligibility(agent: Agent, value: Pick<BondRequest, 'bondType' | 'state'>): EligibilityDecision {
+  const productId = resolveBondProductId(value.bondType, fixtures.eligibility);
+  const product = fixtures.products.find((entry) => entry.id === productId && entry.line === 'surety');
+  return product ? productEligibility(agent, product, value.state) : { allowed: false, reason: 'Choose a recognized bond type for this request.', requirements: [], industries: [] };
+}
+
+function requireEligibility(decision: EligibilityDecision): EligibilityDecision {
+  if (!decision.allowed) throw new PortalError('FORBIDDEN', decision.reason ?? 'This transaction is not currently authorized.', 403);
+  return decision;
+}
+
+function refreshRequirements(value: Submission, decision: EligibilityDecision): void {
+  value.requirements = [...decision.requirements];
+  value.completedRequirements = [...new Set(value.completedRequirements)].filter((entry) => decision.requirements.includes(entry));
 }
 
 function baseline(agencyId: string): AgencyState {
@@ -87,16 +121,27 @@ function makeBootstrap(session: PortalSession, agent: Agent, metadata: PackMetad
   const policies = fixtures.policies.filter((policy) => policy.agencyId === agency.id && allowedLine(policy.line));
   const submissions = record.value.submissions.filter((entry) => allowedLine(entry.line));
   const bondRequests = allowedLine('surety') ? record.value.bondRequests : [];
+  const actionEligibility = {
+    submissions: Object.fromEntries(submissions.map((entry) => [entry.id, submissionEligibility(agent, entry)])),
+    bondRequests: Object.fromEntries(bondRequests.map((entry) => [entry.id, bondEligibility(agent, entry)])),
+  };
   const allowedPaths = new Set([...policies.flatMap((item) => [`/policies/${item.id}`, `/renewals/${item.id}`]), ...submissions.map((item) => `/submissions/${item.id}`), ...bondRequests.map((item) => `/surety/${item.id}`)]);
   const profileId = editor ? '' : getProfileIdentifier(session.reviewerPack, agent.id, metadata.profileGeneration);
   return structuredClone({
-    agent,
+    agent: { ...agent, licensedStates: activeLicensedStates(agent, fixtures.eligibility) },
+    eligibility: { ...fixtures.eligibility, agentAuthorities: fixtures.eligibility.agentAuthorities.filter((entry) => entry.agentId === agent.id), carrierAppointments: fixtures.eligibility.carrierAppointments.filter((entry) => entry.agencyId === agency.id && (!entry.agentId || entry.agentId === agent.id)) },
+    actionEligibility,
     agency: { ...agency, production: agency.production.filter((entry) => allowedLine(entry.line)) },
     session: { stateVersion: record.version, runId: metadata.runId, profileId, profileGeneration: metadata.profileGeneration, expiresAt: session.expiresAt },
     udlIdentity: editor ? null : verifiedProfileIdentity(session, agent, metadata),
     asOfDate: fixtures.manifest.asOfDate,
     productionPeriod: fixtures.manifest.productionPeriod,
-    products: fixtures.products, policies, submissions, bondRequests,
+    products: fixtures.products, policies, submissions: submissions.map((entry) => {
+      const value = structuredClone(entry);
+      const decision = actionEligibility.submissions[value.id];
+      if (decision.allowed) refreshRequirements(value, decision);
+      return value;
+    }), bondRequests,
     tasks: record.value.tasks.filter((task) => task.assignedAgentId === agent.id || (agent.role === 'principal' && (allowedPaths.has(task.href) || task.kind === 'learning' || task.kind === 'service'))),
     resources, learning: fixtures.learning,
     contacts: fixtures.contacts.filter((entry) => entry.lines.some((line) => allowedLine(line))),
@@ -169,7 +214,9 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
   const submission = (submissionId: string) => {
     const result = next.submissions.find((item) => item.id === submissionId && item.agencyId === agent.agencyId);
     if (!result) failNotFound();
-    allowed(result.line); return result;
+    allowed(result.line);
+    refreshRequirements(result, requireEligibility(submissionEligibility(agent, result)));
+    return result;
   };
   const addActivity = (title: string, detail: string, href: string) => next.activity.unshift({ id: `activity-${id}`, agencyId: agent.agencyId, title, detail, href, createdAt: timestamp });
   const addTask = (title: string, description: string, href: string, kind: Task['kind'], dueDate = fixtures.manifest.asOfDate) => next.tasks.unshift({ id: `task-${id}`, agencyId: agent.agencyId, title, description, href, kind, dueDate, priority: 'Normal', status: 'Open', assignedAgentId: agent.id });
@@ -179,15 +226,16 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
       if (!product) failNotFound();
       allowed(product.line);
       if (product.line === 'surety') throw new PortalError('INVALID_INPUT', 'Use a bond request for a surety opportunity.');
-      if (!agent.licensedStates.includes(action.state) || !product.states.includes(action.state)) throw new PortalError('FORBIDDEN', 'Choose a state available for this account and your appointment.', 403);
-      if (!product.industries.includes(action.industry)) throw new PortalError('INVALID_INPUT', 'Choose a business type listed for this product.');
       const existing = action.submissionId ? submission(action.submissionId) : undefined;
       if (existing && existing.status !== 'Draft') throw new PortalError('INVALID_TRANSITION', 'Only a draft can be edited. Respond to the requested information for a submitted account.', 409);
+      const decision = requireEligibility(productEligibility(agent, product, action.state, action.effectiveDate));
+      if (!decision.industries.includes(action.industry)) throw new PortalError('INVALID_INPUT', 'Choose a business type listed for this product and state.');
+      if (existing) requireEligibility(submissionEligibility(agent, { ...existing, productId: product.id, line: product.line, state: action.state, industry: action.industry, effectiveDate: action.effectiveDate }));
       const value: Submission = { id: existing?.id ?? `sub-${id}`, agencyId: agent.agencyId, assignedAgentId: existing?.assignedAgentId ?? agent.id,
         accountName: text(action.accountName, 'account name', 120), productId: product.id, line: product.line, state: action.state,
         industry: action.industry, effectiveDate: date(action.effectiveDate, 'effective date'), employeeCount: number(action.employeeCount, 'employee count', 100000),
         annualRevenueCents: number(action.annualRevenueCents, 'annual revenue', 100000000000000), notes: text(action.notes ?? '', 'notes', 2000, true),
-        status: 'Draft', updatedAt: timestamp, requirements: [...product.requirements], completedRequirements: existing?.productId === product.id ? existing.completedRequirements : [],
+        status: 'Draft', updatedAt: timestamp, requirements: [...decision.requirements], completedRequirements: existing?.productId === product.id && existing.state === action.state ? existing.completedRequirements.filter((entry) => decision.requirements.includes(entry)) : [],
         reference: existing?.reference ?? `SUB-${id.slice(0, 8).toUpperCase()}` };
       next.submissions = [value, ...next.submissions.filter((item) => item.id !== value.id)];
       if (!existing) addTask(`Complete ${value.accountName}`, 'Finish the submission preparation checklist', `/submissions/${value.id}`, 'submission');
@@ -210,7 +258,7 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
     case 'submit-submission': {
       const value = submission(action.submissionId);
       if (value.status !== 'Draft') throw new PortalError('INVALID_TRANSITION', 'This submission has already been sent for review.', 409);
-      if (value.completedRequirements.length !== value.requirements.length) throw new PortalError('MISSING_REQUIREMENTS', 'Complete the preparation checklist before submitting.');
+      if (!value.requirements.every((requirement) => value.completedRequirements.includes(requirement))) throw new PortalError('MISSING_REQUIREMENTS', 'Complete the current preparation checklist before submitting.');
       value.status = 'Submitted'; value.updatedAt = timestamp;
       next.tasks = next.tasks.map((task) => task.href === `/submissions/${value.id}` ? { ...task, status: 'Completed' } : task);
       addActivity(value.accountName, `Submission received · ${value.reference}`, `/submissions/${value.id}`);
@@ -238,10 +286,11 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
     }
     case 'save-bond-request': {
       allowed('surety');
-      if (!agent.licensedStates.includes(action.state)) throw new PortalError('FORBIDDEN', 'Choose a state available for your appointment.', 403);
       const existing = action.bondRequestId ? next.bondRequests.find((item) => item.id === action.bondRequestId) : undefined;
       if (action.bondRequestId && !existing) failNotFound();
+      if (existing) requireEligibility(bondEligibility(agent, existing));
       if (existing && !['Draft', 'Information needed'].includes(existing.status)) throw new PortalError('INVALID_TRANSITION', 'This bond request is already being reviewed.', 409);
+      requireEligibility(bondEligibility(agent, { bondType: action.bondType, state: action.state }));
       const value: BondRequest = { id: existing?.id ?? `bond-${id}`, agencyId: agent.agencyId, principal: text(action.principal, 'principal', 120), obligee: text(action.obligee, 'obligee', 160), state: action.state,
         bondType: text(action.bondType, 'bond type', 100), amountCents: number(action.amountCents, 'bond amount', 10000000000000, 1), notes: text(action.notes ?? '', 'notes', 2000, true),
         status: existing?.status ?? 'Draft', updatedAt: timestamp, reference: existing?.reference ?? `BND-${id.slice(0, 8).toUpperCase()}` };
@@ -252,6 +301,7 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
       allowed('surety');
       const value = next.bondRequests.find((item) => item.id === action.bondRequestId);
       if (!value) failNotFound();
+      requireEligibility(bondEligibility(agent, value));
       if (!['Draft', 'Information needed'].includes(value.status)) throw new PortalError('INVALID_TRANSITION', 'This bond request has already been sent for review.', 409);
       value.status = value.status === 'Draft' ? 'Submitted' : 'In review'; value.updatedAt = timestamp;
       next.tasks = next.tasks.map((task) => task.href === `/surety/${value.id}` ? { ...task, status: 'Completed' } : task);

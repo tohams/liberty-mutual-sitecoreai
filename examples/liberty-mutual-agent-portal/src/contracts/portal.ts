@@ -19,6 +19,33 @@ export interface Product {
   id: string; name: string; line: BusinessLine; description: string; industries: string[];
   states: StateCode[]; requirements: string[]; highlights: string[];
 }
+export type LegalLineOfAuthority = 'property' | 'casualty' | 'personal-lines' | 'surety';
+export type AuthorityStatus = 'active' | 'suspended' | 'revoked';
+export interface AuthorityValidity { status: AuthorityStatus; validFrom: string; validThrough: string; }
+export interface AgentAuthority extends AuthorityValidity {
+  agentId: string; state: StateCode; linesOfAuthority: LegalLineOfAuthority[];
+}
+export interface CarrierAppointment extends AuthorityValidity {
+  agencyId: string; agentId?: string; carrierId: string; state: StateCode; linesOfAuthority: LegalLineOfAuthority[];
+}
+export interface ProductStateRule extends AuthorityValidity {
+  productId: string; state: StateCode; carrierId: string;
+  appointmentScope: 'agency' | 'producer' | 'both';
+  requiredLinesOfAuthority: LegalLineOfAuthority[]; industries: string[]; requirements: string[];
+}
+/** Versioned synthetic transaction rules, separate from educational content relevance. */
+export interface EligibilitySnapshot {
+  schemaVersion: 1; provenance: string;
+  agentAuthorities: AgentAuthority[]; carrierAppointments: CarrierAppointment[];
+  productRules: ProductStateRule[]; bondProducts: Record<string, string>;
+}
+export interface EligibilityDecision {
+  allowed: boolean; reason?: string; requirements: string[]; industries: string[];
+}
+export interface PortalActionEligibility {
+  submissions: Record<string, EligibilityDecision>;
+  bondRequests: Record<string, EligibilityDecision>;
+}
 export interface Policy {
   id: string; agencyId: string; accountId: string; accountName: string; productId: string;
   line: BusinessLine; state: StateCode; policyNumber: string; effectiveDate: string;
@@ -66,6 +93,7 @@ export interface GrowthCampaign {
 }
 export interface PortalBootstrap {
   agent: Agent; agency: Agency;
+  eligibility: EligibilitySnapshot; actionEligibility: PortalActionEligibility;
   session: { stateVersion: number; runId: string; profileId: string; profileGeneration: number; expiresAt: string };
   udlIdentity: { provider: 'liberty-mutual-agent'; id: string } | null;
   asOfDate: string; productionPeriod: { start: string; end: string; label: string; currency: 'USD' };
