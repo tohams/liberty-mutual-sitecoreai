@@ -160,6 +160,7 @@ test("native Sitecore links render real query parameters rather than an encoded 
     "TX",
     false,
   );
+  assert.ok(field);
   const html = renderToStaticMarkup(createElement(SitecoreLink, { field }));
   assert.match(
     html,
