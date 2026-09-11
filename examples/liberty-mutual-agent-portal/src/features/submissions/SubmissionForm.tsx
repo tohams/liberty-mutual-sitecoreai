@@ -26,7 +26,7 @@ export function SubmissionForm({
   queryState?: string | null;
   onSaved: (id: string, state: StateCode) => void;
 }) {
-  const { data, act, busy } = usePortal();
+  const { data, act, busy, notify } = usePortal();
   const products = data.products.filter(
     (product) =>
       product.line !== "surety" &&
@@ -100,6 +100,24 @@ export function SubmissionForm({
     event.preventDefault();
     if (!canContinue || !selectedState || busy) return;
     const form = new FormData(event.currentTarget);
+    const submittedDate = String(form.get("effectiveDate"));
+    const submittedDecision =
+      product &&
+      evaluateProductEligibility({
+        agent: data.agent,
+        agency: data.agency,
+        product,
+        state: selectedState,
+        eligibility: data.eligibility,
+        effectiveDate: submittedDate,
+      });
+    if (!submittedDecision?.allowed) {
+      notify(
+        submittedDecision?.reason ||
+          "Review the selected product and effective date.",
+      );
+      return;
+    }
     const result = await act(
       {
         type: "save-submission",
@@ -108,7 +126,7 @@ export function SubmissionForm({
         productId: selectedProduct,
         state: selectedState,
         industry,
-        effectiveDate,
+        effectiveDate: submittedDate,
         employeeCount: Number(form.get("employeeCount")),
         annualRevenueCents: Math.round(Number(form.get("annualRevenue")) * 100),
         notes: String(form.get("notes") || ""),
@@ -270,7 +288,7 @@ export function SubmissionForm({
                 name="effectiveDate"
                 type="date"
                 value={effectiveDate}
-                onChange={(event) => setEffectiveDate(event.target.value)}
+                onInput={(event) => setEffectiveDate(event.currentTarget.value)}
                 required={step === 2}
               />
             </label>
