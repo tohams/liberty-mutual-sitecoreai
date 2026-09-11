@@ -11,7 +11,7 @@ The application is built on the official [SitecoreAI starter repository](https:/
 | Developers and platform administrators | [Developer handoff](docs/developer-handoff.md) |
 | Marketers and content implementers | [Content model and publishing](docs/content-model.md) |
 | Marketing and platform walkthrough | [Guided portal walkthrough](docs/marketing-walkthrough.md) |
-| Presenters and review coordinators | [Seven demo loops: scripts, accounts and reset guidance](docs/demo-loops.md) |
+| Presenters and review coordinators | [Eight demo loops: scripts, accounts and reset guidance](docs/demo-loops.md) |
 | Campaign reviewers | [Agentic Studio campaign and native evidence](docs/agentic-studio/README.md) |
 | Review coordinators and integration developers | [Authentication, data and reset runbook](examples/liberty-mutual-agent-portal/docs/auth-and-data.md) |
 | Brand and content reviewers | [Brand sources and usage](docs/brand/README.md) |
