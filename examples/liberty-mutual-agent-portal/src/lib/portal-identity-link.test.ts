@@ -107,7 +107,7 @@ test("profile reader uses only the public browser endpoint and rejects invalid r
   const transport = (async (input, init) => {
     requested = new URL(String(input));
     options = init;
-    return Response.json({ customer: { ref: "linked-profile" } });
+    return Response.json({ ref: "browser/segment", customer: { ref: "linked-profile" } });
   }) satisfies typeof fetch;
   const browser = { edgeUrl: "https://edge.example.test/", contextId: "public-context", browserId: "browser/segment" };
   assert.equal(await readPortalBrowserProfileRef(browser, controller.signal, transport), "linked-profile");
@@ -116,9 +116,12 @@ test("profile reader uses only the public browser endpoint and rejects invalid r
   assert.equal(options?.method, "GET");
   assert.equal(options?.credentials, "omit");
   assert.equal(options?.cache, "no-store");
+  assert.equal(options?.redirect, "error");
   assert.equal(options?.signal, controller.signal);
   assert.equal(new Headers(options?.headers).get("x-sitecore-contextid"), "public-context");
-  for (const body of [{}, { customer: {} }, { customer: { ref: 123 } }]) {
+  for (const body of [{}, { customer: {} }, { customer: { ref: "valid-but-unbound" } },
+    { ref: "different-browser", customer: { ref: "wrong-profile" } },
+    ...[123, "", " padded ", "bad\nref", "x".repeat(201)].map((ref) => ({ ref: browser.browserId, customer: { ref } }))]) {
     assert.equal(await readPortalBrowserProfileRef(browser, controller.signal, async () => Response.json(body)), null);
   }
   assert.equal(await readPortalBrowserProfileRef(browser, controller.signal, async () => new Response(null, { status: 503 })), null);

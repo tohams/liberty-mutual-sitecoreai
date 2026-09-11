@@ -23,7 +23,13 @@ test('request-local proxy instances retain native discovery, variant validation 
   const calls: Record<string, unknown>[] = [];
   const firstResponse = deferred<Response>();
   const firstStarted = deferred<void>();
-  const transport: typeof fetch = async (_, init) => {
+  const profileReads: string[] = [];
+  const transport: typeof fetch = async (input, init) => {
+    if (init?.method === 'GET') {
+      const browserId = new URL(String(input)).pathname.split('/').at(-2)!;
+      profileReads.push(browserId);
+      return Response.json({ ref: browserId, customer: { ref: `native-${browserId}` } });
+    }
     assert.equal(new Headers(init?.headers).get('x-sitecore-contextid'), 'public-scoped-context');
     const body = JSON.parse(String(init?.body)) as Record<string, unknown>;
     calls.push(body);
@@ -45,7 +51,7 @@ test('request-local proxy instances retain native discovery, variant validation 
   };
   const sharedDiscovery = new PortalPersonalizeProxy(config, async () => null, transport);
   const request = (browserId: string) => new NextRequest('https://portal.example/workspace', {
-    headers: { host: 'portal.example', cookie: `sc_cid=${browserId}`, 'user-agent': 'Agent-browser' },
+    headers: { host: 'portal.example', cookie: `sc_cid=${browserId}; sc_cid_personalize=stale-anonymous-profile`, 'user-agent': 'Agent-browser' },
   });
   const firstContext: ProxiesContext = new Map();
   const secondContext: ProxiesContext = new Map();
@@ -55,15 +61,18 @@ test('request-local proxy instances retain native discovery, variant validation 
   firstResponse.resolve(Response.json({ variantId: 'component_principal' }));
   const firstResult = await first;
   assert.equal(discoveries, 2);
-  assert.equal(calls.length, 2, 'Only one native decision per request; no browser creation or profile lookup');
+  assert.equal(calls.length, 2, 'Only one native decision per request; no browser creation');
   assert.deepEqual(calls.map((call) => call.browserId), [principalBrowser, producerBrowser]);
+  assert.deepEqual(profileReads, [principalBrowser, producerBrowser]);
+  assert.deepEqual(calls.map((call) => call.guestRef), [`native-${principalBrowser}`, `native-${producerBrowser}`], 'A stale personalize cookie is never used');
   assert.ok(firstResult.headers.get('x-middleware-rewrite')?.includes('component_principal'));
   assert.ok(second.headers.get('x-middleware-rewrite')?.includes('component_producer'));
   assert.ok(!second.headers.get('x-middleware-rewrite')?.includes('component_principal'));
   assert.equal(firstResult.headers.get('set-cookie'), null, 'Personalization does not create or alter native identity cookies');
   assert.equal(firstContext.get('PersonalizeProxy')?.executedSuccessfully, true);
   assert.equal(secondContext.get('PersonalizeProxy')?.executedSuccessfully, true);
-  const rejectUnknown = new PortalPersonalizeProxy(config, async () => principal, async () => Response.json({ variantId: 'other_component' }));
+  const rejectUnknown = new PortalPersonalizeProxy(config, async () => principal, async (_, init) => Response.json(init?.method === 'GET'
+    ? { ref: principalBrowser, customer: { ref: `native-${principalBrowser}` } } : { variantId: 'other_component' }));
   const unchanged = await rejectUnknown.forRequest(async () => principal).handle(request(principalBrowser), NextResponse.next());
   assert.equal(unchanged.headers.get('x-middleware-rewrite'), null);
 });

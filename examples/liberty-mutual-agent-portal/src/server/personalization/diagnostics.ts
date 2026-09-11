@@ -3,7 +3,8 @@ type Diagnostic =
   | { stage: 'proxy'; enabled: boolean; draft: boolean; signedSessionPresent: boolean }
   | { stage: 'discovery'; outcome: 'unavailable'; elapsedMs: number }
   | { stage: 'identity'; identityPresent: boolean; outcome: 'available' | 'missing' | 'resolver-error'; elapsedMs: number }
-  | { stage: 'decision'; receiptType: ReceiptType; selectedVariant: boolean; outcome: 'completed' | 'execution-error' | 'http-error' | 'timeout'; elapsedMs: number; httpStatus?: number };
+  | { stage: 'profile'; outcome: 'available' | 'unavailable'; elapsedMs: number }
+  | { stage: 'decision'; receiptType: ReceiptType; selectedVariant: boolean; selection: 'accepted-control' | 'accepted-variant' | 'invalid' | 'none'; outcome: 'completed' | 'execution-error' | 'http-error' | 'timeout' | 'identity-unavailable' | 'profile-unavailable'; elapsedMs: number; httpStatus?: number };
 
 const elapsed = (milliseconds: number) => Number.isFinite(milliseconds) ? Math.max(0, Math.round(milliseconds)) : 0;
 
@@ -25,13 +26,20 @@ export function reportPersonalizationDiagnostic(diagnostic: Diagnostic): void {
       outcome: diagnostic.outcome === 'available' ? 'available' : diagnostic.outcome === 'missing' ? 'missing' : 'resolver-error',
       elapsedMs: elapsed(diagnostic.elapsedMs),
     });
+  } else if (diagnostic.stage === 'profile') {
+    console.info('Portal personalization', {
+      stage: 'profile', outcome: diagnostic.outcome === 'available' ? 'available' : 'unavailable',
+      elapsedMs: elapsed(diagnostic.elapsedMs),
+    });
   } else if (diagnostic.stage === 'decision') {
     const allowedTypes: ReceiptType[] = ['null', 'array', 'object', 'undefined', 'string', 'number', 'boolean', 'other'];
-    const allowedOutcomes = ['completed', 'execution-error', 'http-error', 'timeout'];
+    const allowedOutcomes = ['completed', 'execution-error', 'http-error', 'timeout', 'identity-unavailable', 'profile-unavailable'];
+    const allowedSelections = ['accepted-control', 'accepted-variant', 'invalid', 'none'];
     const httpStatus = diagnostic.httpStatus;
     console.info('Portal personalization', {
       stage: 'decision', receiptType: allowedTypes.includes(diagnostic.receiptType) ? diagnostic.receiptType : 'other',
       selectedVariant: Boolean(diagnostic.selectedVariant),
+      selection: allowedSelections.includes(diagnostic.selection) ? diagnostic.selection : 'none',
       outcome: allowedOutcomes.includes(diagnostic.outcome) ? diagnostic.outcome : 'execution-error',
       elapsedMs: elapsed(diagnostic.elapsedMs),
       ...(typeof httpStatus === 'number' && Number.isInteger(httpStatus) && httpStatus >= 100 && httpStatus <= 599 ? { httpStatus } : {}),
