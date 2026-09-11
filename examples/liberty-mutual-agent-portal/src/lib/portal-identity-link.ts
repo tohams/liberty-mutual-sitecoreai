@@ -118,7 +118,7 @@ export async function readPortalBrowserProfileRef(
   signal: AbortSignal,
   transport: typeof fetch = fetch,
 ): Promise<string | null> {
-  if (!browser.browserId || !browser.contextId) return null;
+  if (!browser.browserId || !browser.contextId || signal.aborted) return null;
   try {
     const endpoint = new URL(
       `${browser.edgeUrl.replace(/\/$/, "")}/v1/events/v1.2/browser/${encodeURIComponent(browser.browserId)}/show.json?client_key=&api_token=`,
@@ -133,6 +133,7 @@ export async function readPortalBrowserProfileRef(
       method: "GET",
       cache: "no-store",
       credentials: "omit",
+      redirect: "error",
       signal,
       headers: {
         "x-sitecore-contextid": browser.contextId,
@@ -141,13 +142,16 @@ export async function readPortalBrowserProfileRef(
     });
     if (!response.ok) return null;
     const body: unknown = await response.json();
-    if (!body || typeof body !== "object" || !("customer" in body)) return null;
+    // The response must describe this browser, never a stale or mismatched identity.
+    if (signal.aborted || !body || typeof body !== "object" ||
+        !("ref" in body) || body.ref !== browser.browserId || !("customer" in body)) return null;
     const customer = body.customer;
     if (!customer || typeof customer !== "object" || !("ref" in customer))
       return null;
-    return typeof customer.ref === "string" && customer.ref.length > 0
-      ? customer.ref
-      : null;
+    // Native refs are opaque; do not confuse them with imported external identity IDs.
+    return typeof customer.ref === "string" && customer.ref.length > 0 &&
+      customer.ref.length <= 200 && customer.ref.trim() === customer.ref &&
+      !/[\u0000-\u001f\u007f]/.test(customer.ref) ? customer.ref : null;
   } catch {
     return null;
   }

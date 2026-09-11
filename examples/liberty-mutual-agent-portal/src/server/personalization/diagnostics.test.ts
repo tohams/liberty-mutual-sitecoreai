@@ -22,18 +22,26 @@ test('diagnostics are opt-in, allowlisted, and distinguish failures without sens
     const request = { friendlyId: sensitive, channel: 'WEB', params: { query: sensitive }, pageVariantIds: [sensitive, 'component_default'] };
     const identity = { provider: 'liberty-mutual-agent' as const, id: sensitive };
     const context = { browserId: 'a1111111-1111-4111-8111-111111111111', siteName: sensitive, contextId: sensitive, edgeUrl: 'https://edge.example' };
+    const withProfile = (decision: typeof fetch): typeof fetch => async (input, init) => init?.method === 'GET'
+      ? Response.json({ ref: context.browserId, customer: { ref: 'native-linked-profile' } })
+      : decision(input, init);
     const cases = [
       createBrowserProfileDecisionExecutor(context, async () => null, async () => Response.json(null)),
       createBrowserProfileDecisionExecutor(context, async () => { throw new Error(sensitive); }, async () => Response.json(null)),
-      createBrowserProfileDecisionExecutor(context, async () => identity, async () => { throw new Error(sensitive); }),
-      createBrowserProfileDecisionExecutor(context, async () => identity, async () => Response.json(null)),
-      createBrowserProfileDecisionExecutor(context, async () => identity, async () => Response.json({ variantId: 'component_default' })),
-      createBrowserProfileDecisionExecutor(context, async () => identity, async () => Response.json({ variantId: sensitive, profileId: sensitive })),
-      createBrowserProfileDecisionExecutor(context, async () => identity, async () => Response.json({ message: sensitive }, { status: 500 })),
+      createBrowserProfileDecisionExecutor(context, async () => identity, withProfile(async () => { throw new Error(sensitive); })),
+      createBrowserProfileDecisionExecutor(context, async () => identity, withProfile(async () => Response.json(null))),
+      createBrowserProfileDecisionExecutor(context, async () => identity, withProfile(async () => Response.json({ variantId: 'component_default' }))),
+      createBrowserProfileDecisionExecutor(context, async () => identity, withProfile(async () => Response.json({ variantId: sensitive, profileId: sensitive }))),
+      createBrowserProfileDecisionExecutor(context, async () => identity, withProfile(async () => Response.json({ message: sensitive }, { status: 500 }))),
     ];
     for (const execute of cases) await execute(request);
+    await createBrowserProfileDecisionExecutor(context, async () => identity, async () => Response.json({ ref: 'wrong-browser', customer: { ref: sensitive } }))(request);
     const entries = logs.map((entry) => entry[1]) as Record<string, unknown>[];
     assert.ok(entries.some((entry) => entry.stage === 'identity' && entry.outcome === 'missing'));
+    for (const selection of ['accepted-control', 'accepted-variant', 'invalid']) {
+      assert.ok(entries.some((entry) => entry.stage === 'decision' && entry.selection === selection));
+    }
+    assert.ok(entries.some((entry) => entry.stage === 'decision' && entry.outcome === 'profile-unavailable' && entry.selection === 'none'));
     assert.ok(entries.some((entry) => entry.stage === 'identity' && entry.outcome === 'resolver-error'));
     assert.ok(entries.some((entry) => entry.stage === 'decision' && entry.outcome === 'execution-error'));
     assert.ok(entries.some((entry) => entry.stage === 'decision' && entry.receiptType === 'null' && entry.selectedVariant === false));
@@ -42,6 +50,8 @@ test('diagnostics are opt-in, allowlisted, and distinguish failures without sens
     assert.ok(entries.some((entry) => entry.stage === 'decision' && entry.outcome === 'http-error' && entry.httpStatus === 500));
     assert.ok(entries.filter((entry) => entry.stage !== 'proxy').every((entry) => typeof entry.elapsedMs === 'number' && entry.elapsedMs >= 0));
     assert.ok(!JSON.stringify(logs).includes(sensitive));
+    assert.ok(!JSON.stringify(logs).includes(context.browserId));
+    assert.ok(!JSON.stringify(logs).includes('native-linked-profile'));
     assert.ok(!JSON.stringify(logs).match(/profileId|guestRef|identifiers|friendlyId|query|url|message/));
   } finally {
     console.info = originalInfo;

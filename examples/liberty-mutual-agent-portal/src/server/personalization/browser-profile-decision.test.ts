@@ -9,6 +9,10 @@ const principal = { provider: 'liberty-mutual-agent' as const, id: 'opaque-princ
 const producer = { provider: 'liberty-mutual-agent' as const, id: 'opaque-producer' };
 const principalBrowser = 'a1111111-1111-4111-8111-111111111111';
 const producerBrowser = 'b2222222-2222-4222-8222-222222222222';
+const profileRef = (browser: string) => `native-profile-${browser}`;
+const withProfile = (decision: typeof fetch): typeof fetch => async (input, init) => init?.method === 'GET'
+  ? Response.json({ ref: principalBrowser, customer: { ref: profileRef(principalBrowser) } })
+  : decision(input, init);
 const context: BrowserDecisionContext = {
   browserId: principalBrowser, siteName: 'portal-a', contextId: 'public-scoped-context',
   edgeUrl: 'https://edge.example', userAgent: 'Agent-browser-A',
@@ -30,7 +34,14 @@ test('concurrent browser decisions preserve their own cookie, site, headers and 
   const firstResponse = deferred<Response>();
   const firstStarted = deferred<void>();
   const calls: { url: URL; init: RequestInit; body: Record<string, unknown> }[] = [];
+  const profileCalls: { url: URL; init: RequestInit }[] = [];
   const transport: typeof fetch = async (input, init) => {
+    if (init?.method === 'GET') {
+      const url = new URL(String(input));
+      const browser = url.pathname.split('/').at(-2)!;
+      profileCalls.push({ url, init });
+      return Response.json({ ref: browser, customer: { ref: profileRef(browser) } });
+    }
     const body = JSON.parse(String(init?.body)) as Record<string, unknown>;
     calls.push({ url: new URL(String(input)), init: init!, body });
     if (body.browserId === principalBrowser) {
@@ -66,10 +77,13 @@ test('concurrent browser decisions preserve their own cookie, site, headers and 
     assert.equal(call.init.redirect, 'error');
     assert.deepEqual(call.body, {
       channel: 'WEB', clientKey: '', currencyCode: 'USD', friendlyId: campaign.friendlyId, language: 'en',
-      params: { ...campaign.params, geo: { region: 'TX' } }, pointOfSale: '', variants: campaign.pageVariantIds, browserId,
+      params: { ...campaign.params, geo: { region: 'TX' } }, pointOfSale: '', variants: campaign.pageVariantIds, browserId, guestRef: profileRef(browserId),
     });
     assert.ok(!JSON.stringify(call.body).includes('opaque-'));
-    assert.ok(!('identifiers' in call.body) && !('guestRef' in call.body) && !('email' in call.body));
+    assert.equal(profileCalls[index].url.pathname, `/v1/events/v1.2/browser/${browserId}/show.json`);
+    assert.equal(new Headers(profileCalls[index].init.headers).get('x-sitecore-contextid'), publicContext);
+    assert.equal(profileCalls[index].init.cache, 'no-store');
+    assert.ok(!('identifiers' in call.body) && !('email' in call.body));
   }
   assert.equal(principalLookups, 1);
   assert.deepEqual(campaign, before);
@@ -95,23 +109,23 @@ test('missing or malformed cookie, missing identity, failed identity and unavail
 
 test('only native variants discovered for this execution can be selected', async () => {
   for (const receipt of [null, [], {}, { variantId: null }, { variantId: 'foreign-component_principal' }, { variantId: 'https://untrusted.example' }]) {
-    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, async () => Response.json(receipt));
+    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, withProfile(async () => Response.json(receipt)));
     assert.deepEqual(await execute(campaign), { variantId: '' });
   }
-  const execute = createBrowserProfileDecisionExecutor(context, async () => principal, async () => Response.json({ variantId: 'component_default' }));
+  const execute = createBrowserProfileDecisionExecutor(context, async () => principal, withProfile(async () => Response.json({ variantId: 'component_default' })));
   assert.deepEqual(await execute(campaign), { variantId: 'component_default' });
 });
 
 test('HTTP failures, invalid JSON, transport errors and deadlines remain neutral; deadline aborts the request', async () => {
   for (const status of [401, 403, 429, 500]) {
-    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, async () => Response.json({ variantId: 'component_principal' }, { status }));
+    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, withProfile(async () => Response.json({ variantId: 'component_principal' }, { status })));
     assert.deepEqual(await execute(campaign), { variantId: '' });
   }
   for (const transport of [
     async () => new Response('Invalid native receipt', { status: 200 }),
     async () => { throw new Error('Transport failure with a confidential request'); },
   ]) {
-    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, transport);
+    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, withProfile(transport));
     assert.deepEqual(await execute(campaign), { variantId: '' });
   }
   let signal: AbortSignal | undefined;
@@ -119,7 +133,7 @@ test('HTTP failures, invalid JSON, transport errors and deadlines remain neutral
     signal = init?.signal || undefined;
     return new Promise<Response>(() => {});
   };
-  const execute = createBrowserProfileDecisionExecutor(context, async () => principal, neverRespond);
+  const execute = createBrowserProfileDecisionExecutor(context, async () => principal, withProfile(neverRespond));
   assert.deepEqual(await execute(campaign, { timeout: 15 }), { variantId: '' });
   assert.equal(signal?.aborted, true);
 });
@@ -138,4 +152,91 @@ test('SDK proxy integration runs in the normal Next proxy module environment', a
   assert.ok(!result.stdout.includes('CONFIDENTIAL-GRAPHQL-FAILURE'));
   assert.ok(!result.stderr.includes('CONFIDENTIAL-GRAPHQL-FAILURE'));
   assert.ok(!result.stdout.includes('Personalize proxy failed'));
+});
+
+test('components share one authoritative lookup inside a request, and a new request re-reads a changed link', async () => {
+  const lookup = deferred<Response>();
+  const lookupStarted = deferred<void>();
+  const guestRefs: unknown[] = [];
+  let reads = 0;
+  let identities = 0;
+  const transport: typeof fetch = async (_, init) => {
+    if (init?.method === 'GET') {
+      reads++;
+      lookupStarted.resolve();
+      return reads === 1 ? lookup.promise : Response.json({ ref: principalBrowser, customer: { ref: 'new-linked-profile' } });
+    }
+    guestRefs.push(JSON.parse(String(init?.body)).guestRef);
+    return Response.json({ variantId: 'component_default' });
+  };
+  const identity = async () => { identities++; return principal; };
+  const execute = createBrowserProfileDecisionExecutor(context, identity, transport);
+  const first = execute(campaign);
+  await lookupStarted.promise;
+  const second = execute({ ...campaign, friendlyId: 'second-component-experience' });
+  lookup.resolve(Response.json({ ref: principalBrowser, customer: { ref: 'first-linked-profile' } }));
+  assert.deepEqual(await Promise.all([first, second]), [{ variantId: 'component_default' }, { variantId: 'component_default' }]);
+  assert.equal(reads, 1);
+  assert.equal(identities, 1);
+  await createBrowserProfileDecisionExecutor(context, identity, transport)(campaign);
+  assert.equal(reads, 2, 'No profile cache survives the request');
+  assert.equal(identities, 2);
+  assert.deepEqual(guestRefs, ['first-linked-profile', 'first-linked-profile', 'new-linked-profile']);
+});
+
+test('missing, mismatched and malformed browser links never execute or create profiles', async () => {
+  for (const response of [
+    Response.json({ ref: producerBrowser, customer: { ref: 'another-profile' } }),
+    Response.json({ customer: { ref: 'unbound-profile' } }),
+    ...[null, '', ' padded ', 'x'.repeat(201)].map((ref) => Response.json({ ref: principalBrowser, customer: { ref } })),
+    new Response('invalid JSON'),
+    new Response(null, { status: 503 }),
+  ]) {
+    let reads = 0;
+    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, async (_, init) => {
+      assert.equal(init?.method, 'GET', 'A failed lookup must not cause a decision or native profile creation');
+      reads++;
+      return response;
+    });
+    assert.deepEqual(await execute(campaign), { variantId: '' });
+    assert.equal(reads, 1);
+  }
+});
+
+test('the overall deadline includes signed identity resolution and prevents late profile lookup', async () => {
+  const identity = deferred<typeof principal>();
+  let calls = 0;
+  const execute = createBrowserProfileDecisionExecutor(context, () => identity.promise, async () => {
+    calls++;
+    throw new Error('Must not run after identity deadline');
+  });
+  assert.deepEqual(await execute(campaign, { timeout: 15 }), { variantId: '' });
+  identity.resolve(principal);
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.equal(calls, 0);
+});
+
+test('late browser lookup or response JSON cannot start a decision after the overall deadline', async () => {
+  for (const delayJson of [false, true]) {
+    const response = deferred<Response>();
+    const body = deferred<unknown>();
+    let signal: AbortSignal | undefined;
+    let calls = 0;
+    const execute = createBrowserProfileDecisionExecutor(context, async () => principal, async (_, init) => {
+      calls++;
+      assert.equal(init?.method, 'GET');
+      signal = init?.signal || undefined;
+      if (!delayJson) return response.promise;
+      const result = Response.json(null);
+      result.json = () => body.promise;
+      return result;
+    });
+    assert.deepEqual(await execute(campaign, { timeout: 15 }), { variantId: '' });
+    assert.equal(signal?.aborted, true);
+    const linked = { ref: principalBrowser, customer: { ref: 'late-native-profile' } };
+    response.resolve(Response.json(linked));
+    body.resolve(linked);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    assert.equal(calls, 1, 'An abort-ignoring lookup must not issue a late POST');
+  }
 });
