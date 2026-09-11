@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PortalLink as Link } from "@/components/ui/portal-link";
 import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Link from "next/link";
+import { PortalLink as Link } from "@/components/ui/portal-link";
 import { PortalDialog } from "@/components/ui/portal-dialog";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { dateLabel, lineNames, usePortal } from "../portal/portal-context";

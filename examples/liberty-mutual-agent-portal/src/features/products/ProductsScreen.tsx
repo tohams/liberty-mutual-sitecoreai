@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { PortalLink as Link } from "@/components/ui/portal-link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PortalIcon, type IconName } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";

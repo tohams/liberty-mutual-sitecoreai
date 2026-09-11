@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
-import Link from "next/link";
+import { PortalLink as Link } from "@/components/ui/portal-link";
 import { useSearchParams } from "next/navigation";
 import { useSitecore } from "@sitecore-content-sdk/nextjs";
 import { useSearch } from "@sitecore-content-sdk/nextjs/search";
