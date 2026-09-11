@@ -1,0 +1,50 @@
+﻿---
+ID: "77e00d15-681c-45de-9079-aa08a48b7195"
+Parent: "0b90d120-79f5-55f0-89a9-c329add38b06"
+Template: "c241fdcc-057e-501f-a45b-c893b061f04d"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/resources-guidance_var2"
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "079be48f-cf09-5cde-9ceb-b35c983339ee"
+      Hint: headline
+      Value: Useful guidance, easier to find
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260911T140637Z
+    - ID: "279e1a3c-7ed6-5769-8835-ef275b0bea4b"
+      Hint: body
+      Value: <p>Find preparation checklists, state guidance and learning organized around the work you do.</p>
+    - ID: "314a1001-14df-51e3-acd0-1394fcedb1b3"
+      Hint: eyebrow
+      Value: Learning & resources
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{4460E76C-87E9-4859-9DE6-DE122774937F}"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "4166c176-1de3-4372-80f5-313971279649"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "c8034562-b592-5193-a80a-ddbf03bf6c55"
+      Hint: actionLink
+      Value: |
+        <link linktype="external" url="/resources/expand-small-business-practice" text="Build your small-business practice"/>
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260911T141240Z

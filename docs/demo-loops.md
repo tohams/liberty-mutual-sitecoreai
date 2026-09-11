@@ -1,8 +1,10 @@
 # Liberty Mutual Agent Portal — presenter runbook
 
-Seven reusable loops for marketing, platform owners and developers. Each loop has a business story, an observable result and a clear implementation boundary. This is presenter documentation; the agent-facing site has no demonstration controls or labels.
+Eight reusable loops for marketing, platform owners and developers. Each loop has a business story, an observable result and a clear implementation boundary. This is presenter documentation; the agent-facing site has no demonstration controls or labels.
 
 **Evidence baseline:** the state-eligibility release in [PR #14](https://github.com/tohams/liberty-mutual-sitecoreai/pull/14), merged September 11, 2026 UTC, and the subsequent [seven-loop rehearsal](qa-seven-loops-2026-09-11.md). The rehearsal records fresh portal and native UI observations, 80 passing application tests, current connected CI, deployed eligibility checks and 37 native personalization checks on each host. All eight operational scopes were reset afterward, the 56-account baseline passed, and the temporary CMS summary was restored in the live site and native Search. Customer author/approver separation and native Brand Kit retrieval remain unverified. The earlier [release evidence](qa-evidence-2026-09-11.md) remains historical evidence.
+
+**Loop 8 status:** **Liberty Mutual Small Business Resource CTA** is in progress. Native treatment delivery and goal-page ingestion are verified: after PR #19, both hosts retained B through two guide-and-back journeys without extra Resources prefetch requests, and production completed an accepted native A journey. The native report shows **3** control and **1** B unique visits; aggregate goal attribution remains pending. An earlier treatment change did not recur; its exact cause remains unproven. See the [experiment record](ab-testing.md) and [runtime evidence](qa-ab-testing-2026-09-11.md). The earlier seven-loop rehearsal does not establish acceptance of this added loop.
 
 ## Choose the session
 
@@ -15,8 +17,11 @@ Seven reusable loops for marketing, platform owners and developers. Each loop ha
 | [5](#loop-5-marketing-owns-the-content) | Marketing owns the content | Authors, approvers, implementers | 6–8 minutes plus indexing |
 | [6](#loop-6-grow-an-agency-relationship) | Grow an agency relationship | Marketing, marketing operations | 7 minutes |
 | [7](#loop-7-beneath-the-implementation) | Beneath the implementation | Developers, platform owners | 8–10 minutes |
+| [8](#loop-8-a-clearer-next-step) | A clearer next step | Marketing, optimization and platform owners | 5 minutes plus reporting |
 
 For a **30-minute marketing session**, use 1 → 2 → 5 → 6 with a short introduction and questions. Rehearse the publication/indexing transition in advance. For a **30-minute IT session**, use 3 → 7, add the relevant specialty from 4, and inspect the UDL profile and native decision behind loop 1. A five-minute specialist loop covers one or two branches; showing all three needs more time.
+
+Loop 8 can replace loop 6 for an optimization-focused session when its verification limits are stated. Inspect the existing test and results; creating another test is not part of an ordinary presentation.
 
 ## Before presenting
 
@@ -208,6 +213,26 @@ It retains the new records, does not edit preexisting records, and does not rese
 
 **Leave it ready:** retain the newly created preview records and record their references. Close test sessions. No deploy, rollback, secret change or reset is needed merely to explain the implementation.
 
+## Loop 8: A clearer next step
+
+**Story:** marketing tests whether a more specific action label helps agents discover the small-business growth guide.
+
+**Start:** native Page Builder/A/B and results access, the [experiment's setup and acceptance record](ab-testing.md#native-configuration-and-acceptance-record), and an assigned portal account. **Liberty Mutual Small Business Resource CTA** is in progress. Corrected delivery and goal visits are recorded on preview and production. PR #19 preview and production each retained B on two guide-and-back journeys, and production completed an accepted native A journey. Functional delivery and native goal-page ingestion are verified; aggregate goal attribution remains pending. The earlier production treatment change did not recur, and its exact cause remains unproven. Do not promise a particular treatment or stable assignment. Use the existing experiment rather than creating or activating another test. Normal authenticated visits can add native history.
+
+1. Open **Learning & resources**. Below native Search, locate **Agent guidance**, headed **Useful guidance, easier to find**. Explain that the test changes the action label only.
+2. In the Resources page's native A/B interface, inspect A **Start with small business** and B **Build your small-business practice**. Use native treatment preview to compare them; keep the headline, body, layout and destination identical.
+3. Show the configured **50/50** allocation and **Increase page views** goal for `/resources/expand-small-business-practice`. The first test includes authenticated Resources visitors without additional role, agency, state or growth-cohort targeting. The workspace's existing personalization is a separate experience.
+4. From a normal authenticated Resources visit, follow the displayed treatment's action. Both target the same growth guide. Trace the native page variant and destination event using the recorded evidence. In **Performance → Profiles**, search the observed **Client ID** and inspect the canonical profile's **Engagement**; a direct profile reference can open a retired alias without sessions. Seeing A's copy alone does not distinguish assigned control from fallback; editor preview or an explicit B layout request does not establish random assignment or goal attribution.
+5. Open the native test results. Describe the observed visits and reporting status. A destination-page goal measures movement to the guide, including possible alternate navigation paths; it does not prove a click on this button or insurance conversion. Rehearsal traffic is insufficient to establish a winning label.
+
+**Expected result:** a native experiment holds the content comparison, allocation and page-view goal; authenticated delivery and attribution have their own recorded checks. A configured test and two previews alone do not prove live measurement.
+
+**Explain:** “We can test whether a clearer next step helps agents find useful guidance.” The card sits below Search, so a page allocation does not prove the action was visible. The test demonstrates the optimization process; manufactured traffic cannot establish business lift or statistical confidence.
+
+**If results are not ready:** show the recorded configuration and verified treatments, identify the pending measurement check and preserve the actual reporting status. Do not force identities or generate repeat visits to make a winner appear.
+
+**Leave it ready:** sign out and preserve the experiment's state and history. Operational resets do not stop or reset the test. Production and preview share native history for the same pack/person/generation. See the [experiment's measurement and lifecycle boundaries](ab-testing.md#rehearsal-reset-and-lifecycle).
+
 ## Reset and repeat
 
 Use the [operator reset runbook](../examples/liberty-mutual-agent-portal/docs/auth-and-data.md#durable-work-and-resetting); operator controls are intentionally absent from agent navigation. The command requires the separate operator secret in the shell environment. Never put that secret in this document, a URL or a presentation.
@@ -230,5 +255,6 @@ Copy this checklist into the review notes after a rehearsal or customer session.
 - New task/submission/bond references and whether retained:
 - CMS item/version, approval roles, publication/indexing result, restoration decision:
 - Agentic artifact reviewed; Brand Kit retrieval limitation stated:
+- A/B experiment ID/state, treatment, goal evidence and reporting time; any pending checks:
 - Failures, unexpected neutral results, owner and next action:
 - Logout/reset completed, or saved work deliberately retained:

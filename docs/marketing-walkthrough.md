@@ -2,7 +2,7 @@
 
 Use this guided review to follow an agent's work, inspect the content behind it, and trace an agency campaign through SitecoreAI. Allow about 30 minutes. The audience is the team that will own content, audiences, Search, brand governance and platform operations.
 
-For individual sessions, use the [seven-loop presenter runbook](demo-loops.md). It provides accounts, preparation, numbered click paths, expected results, implementation boundaries and reset guidance for each loop, with separate marketing and IT agendas.
+For individual sessions, use the [eight-loop presenter runbook](demo-loops.md). It provides accounts, preparation, numbered click paths, expected results, implementation boundaries and reset guidance for each loop, with separate marketing and IT agendas. The added [Resources A/B test](ab-testing.md) has its own setup and acceptance status; it is not covered by the earlier seven-loop rehearsal.
 
 **Review status:** the [September 11 seven-loop rehearsal](qa-seven-loops-2026-09-11.md) records fresh portal and native observations, including all 37 native identity, first/second workspace, logout and anonymous-access assertions on each host. It also records completed operational resets and restoration of the temporary CMS summary in the live site and native Search. Customer author/approver-role acceptance and native Brand Kit retrieval remain separate handoff checks. Earlier [connected QA evidence](qa-evidence-2026-09-10.md) remains available for deployment history.
 
