@@ -26,6 +26,7 @@ import {
   prepareBrowserAdapter,
 } from "./portal-identity-preparation";
 import config from "sitecore.config";
+import { PortalPageViews } from "./portal-page-views";
 
 type PortalIdentity = NonNullable<PortalBootstrap["udlIdentity"]>;
 let initialization: Promise<void> | undefined;
@@ -35,7 +36,7 @@ let identifying: Promise<boolean> | undefined;
 let identifyingKey: string | undefined;
 let loginPreparation: Promise<boolean> | undefined;
 const sdkWork = new PortalIdentityWork();
-const recordedViews = new Set<string>();
+const recordedViews = new PortalPageViews();
 
 export function trackingEnabled() {
   return (
@@ -188,22 +189,25 @@ export async function recordPortalPageView(
   path: string,
   pageVariantId: string,
 ) {
-  if (!(await establishPortalIdentity(profile))) return;
-  const key = `${profile!.id}:${runId}:${path}:${pageVariantId}`;
-  if (recordedViews.has(key)) return;
-  recordedViews.add(key);
-  try {
-    const receipt = await pageView({
-      channel: "WEB",
-      currency: "USD",
-      language: "EN",
-      page: path,
-      pageVariantId,
-    });
-    if (!receipt) recordedViews.delete(key);
-  } catch {
-    recordedViews.delete(key);
-  }
+  if (!profile || !trackingEnabled()) return;
+  const generation = sdkWork.current();
+  const identityKey = `${profile.provider}:${profile.id}`;
+  const key = JSON.stringify([identityKey, runId, path, pageVariantId]);
+  return recordedViews.record(
+    key,
+    async () =>
+      (await establishPortalIdentity(profile)) &&
+      sdkWork.isCurrent(generation) &&
+      activeIdentity === identityKey,
+    () =>
+      pageView({
+        channel: "WEB",
+        currency: "USD",
+        language: "EN",
+        page: path,
+        pageVariantId,
+      }),
+  );
 }
 
 /** Only a completed server action is measured; no customer names, free text or policy identifiers are sent. */
