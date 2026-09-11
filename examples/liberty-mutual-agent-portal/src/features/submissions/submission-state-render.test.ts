@@ -22,5 +22,5 @@ test("submission form renders saved and invalid risk states without silently rep
     ],
     { env: environment, timeout: 15000 },
   );
-  assert.match(stdout, /pass 3/);
+  assert.match(stdout, /pass 4/);
 });

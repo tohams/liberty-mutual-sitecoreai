@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { Link as SitecoreLink } from "@sitecore-content-sdk/nextjs";
+import { guidanceLinkWithRiskState } from "@/components/agent-guidance/guidance-risk-state";
 import type {
   Agency,
   Agent,
@@ -143,4 +145,25 @@ test("no eligible license/product shows a useful empty state with no save action
   const html = render({ noLicenses: true });
   assert.match(html, /No products are currently available/);
   assert.doesNotMatch(html, /<form|type="submit"/);
+});
+
+test("native Sitecore links render real query parameters rather than an encoded path", () => {
+  const field = guidanceLinkWithRiskState(
+    {
+      value: {
+        href: "/resources/farm-account-information",
+        querystring: "source=guidance",
+        anchor: "details",
+        text: "Preparation guide",
+      },
+    },
+    "TX",
+    false,
+  );
+  const html = renderToStaticMarkup(createElement(SitecoreLink, { field }));
+  assert.match(
+    html,
+    /href="\/resources\/farm-account-information\?state=TX&amp;source=guidance#details"/,
+  );
+  assert.doesNotMatch(html, /%3F/);
 });

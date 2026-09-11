@@ -8,14 +8,24 @@ test("product guidance carries risk context while retaining authored metadata an
       href: "/quote?new=1#account",
       text: "Prepare account",
       target: "_self",
+      querystring: "source=guidance&state=TX",
     },
     metadata: { fieldId: "guidance-action" },
   };
   const result = guidanceLinkWithRiskState(field, "IL", false)!;
-  assert.equal(result.value.href, "/quote?new=1&state=IL#account");
+  assert.equal(result.value.href, "/quote");
+  assert.equal(result.value.querystring, "new=1&state=IL&source=guidance");
+  assert.equal(result.value.anchor, "account");
   assert.equal(result.value.text, field.value.text);
   assert.deepEqual(result.metadata, field.metadata);
   assert.equal(field.value.href, "/quote?new=1#account");
+  const alreadySelected = guidanceLinkWithRiskState(
+    { value: { href: "/products?state=IL", querystring: "state=TX" } },
+    "IL",
+    false,
+  )!;
+  assert.equal(alreadySelected.value.href, "/products");
+  assert.equal(alreadySelected.value.querystring, "state=IL");
 });
 
 test("editor fields, external sources, authentication links and missing context stay unchanged", () => {
