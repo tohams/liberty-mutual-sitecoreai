@@ -29,6 +29,8 @@ Browser acceptance on the final preview confirmed:
 
 The scripted preview cases are `sub-26a034f6-bf60-4c6d-bbc7-bdd094f96b02` (Avery/FL, Submitted) and `sub-294a155d-ac47-4316-b38c-1840f6e94a0c` (Jordan/TX, Draft). Browser checks also created Prairie Market Partners (`SUB-1EAC38C7`, Daniel/IL, Draft) and Prairie Civic Builders (`BND-932E385F`, Marcus/IL, Submitted). These four newly created fictional preview records are retained. No preexisting records or reviewer packs were reset.
 
+**Later rehearsal reset:** the [subsequent seven-loop rehearsal](qa-seven-loops-2026-09-11.md) reset packs `01`–`04` on both hosts before and after its checks. The references above now describe historical evidence and are no longer active saved-work records; the retention statement records the earlier release-check outcome.
+
 ## Native platform regression
 
 - The native personalization harness passed all 37 checks on preview: sign-in, verified profile linking, audience variants, logout and anonymous redirect for Avery, Jordan, Maya and Elena. No decision retries or identity resets were used.

@@ -4,7 +4,7 @@ Use this guided review to follow an agent's work, inspect the content behind it,
 
 For individual sessions, use the [seven-loop presenter runbook](demo-loops.md). It provides accounts, preparation, numbered click paths, expected results, implementation boundaries and reset guidance for each loop, with separate marketing and IT agendas.
 
-**Review status:** this guide describes the implemented experience and recorded native evidence as of September 10, 2026. The release preview passed all 37 native identity, first/second workspace, logout and anonymous-access assertions. See [connected QA evidence](qa-evidence-2026-09-10.md) and its linked release pull request for deployment-specific results. Customer author/approver-role acceptance remains a separate handoff step.
+**Review status:** the [September 11 seven-loop rehearsal](qa-seven-loops-2026-09-11.md) records fresh portal and native observations, including all 37 native identity, first/second workspace, logout and anonymous-access assertions on each host. It also records completed operational resets and restoration of the temporary CMS summary in the live site and native Search. Customer author/approver-role acceptance and native Brand Kit retrieval remain separate handoff checks. Earlier [connected QA evidence](qa-evidence-2026-09-10.md) remains available for deployment history.
 
 ## 1. Begin with the agency, then compare its people
 
@@ -45,11 +45,13 @@ The initial connected review found 12 authored resources and five native facets.
 
 In native Page builder, locate **Home → resources → texas-workers-compensation** under the portal site. Select its **ResourceArticle** and inspect the title, summary, body, source and reviewed date. The resource page itself is the datasource. Use **Home/resources**, not the preserved, unused **Data/Resources** copies.
 
-Make an agreed, small summary edit without changing the regulatory meaning. Preview it, follow the installed workflow's approval step, and publish the exact owned item. Verify the article and resource listing, then allow native Search to index the published update before checking its result card. A Git deployment is not needed for an ordinary editorial change. Restore rehearsal wording through the same workflow when appropriate.
+For a summary change, open the same item in native **Content** and create a **new English draft version** with a descriptive name, such as **Presenter verification**. Edit **summary** on that version and save the agreed wording without changing regulatory meaning. Preview it through Page Builder. From **Draft**, use **Actions → Approve**, then **Submit** in the workflow dialog, and confirm **Approved**. Choose **Publish Page** for the current page in **English**, with **Subpages** and **All references** off. Verify the new summary in the live article and resource listing.
+
+Next, open **Content → Search Sources** and choose **Reindex Content** for **Liberty Mutual Agent Resources** (source `b5e24aff-8b5b-4653-bf66-deef52c1241a`). Wait for completion and verify the changed summary in its native Search result before recording success. Published content changes require this explicit source refresh; there is no verified automatic publication-to-Search cadence. A Git deployment is not needed. To restore rehearsal wording, create another named **new English draft version**, restore the original summary, complete the same approval and scoped publication, reindex the same source again, and verify the restored article, listing and Search summary. See [Sitecore's content-source workflow](https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/search-experiences/manage-content-sources.html) and [loop 5's exact sequence](demo-loops.md#loop-5-marketing-owns-the-content).
 
 On **workspace**, inspect **AgentGuidance** and the reusable datasources under **Data/Guidance**. Its editable fields are eyebrow, headline, rich-text body and action link; **Default** and **Highlight** are presentation variants. This is the authoring boundary behind the campaign cards. The editor uses an isolated preview of operational data and does not submit agent work.
 
-The tenant's Basic workflows are installed. Confirm this round trip with the actual customer author and approver roles during acceptance; initial approved seed content is not evidence of customer approval.
+The tenant's Basic workflows are installed. Customer author/approver separation remains unverified. Confirm this round trip with separate customer roles during acceptance; initial approved seed content or an administrator's workflow access is not evidence of that separation.
 
 ## 4. Inspect the profile and native rule
 
