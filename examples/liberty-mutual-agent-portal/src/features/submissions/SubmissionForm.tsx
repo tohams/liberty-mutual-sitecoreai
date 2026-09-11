@@ -4,34 +4,101 @@ import { useState, type FormEvent } from "react";
 import type { StateCode, Submission } from "@/contracts/portal";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { stateNames, usePortal } from "../portal/portal-context";
+import {
+  eligibleProductStates,
+  evaluateProductEligibility,
+} from "@/domain/eligibility";
+import {
+  initialRiskState,
+  riskStateOptions,
+} from "../portal/risk-state-navigation";
 
 export function SubmissionForm({
   submission,
   productId,
   initialState,
+  queryState,
   onSaved,
 }: {
   submission?: Submission;
   productId?: string;
   initialState?: StateCode;
-  onSaved: (id: string) => void;
+  queryState?: string | null;
+  onSaved: (id: string, state: StateCode) => void;
 }) {
   const { data, act, busy } = usePortal();
   const products = data.products.filter(
     (product) =>
       product.line !== "surety" &&
-      data.agency.appointedLines.includes(product.line) &&
-      (data.agent.role === "principal" ||
-        data.agent.specializations.includes(product.line)),
+      eligibleProductStates({
+        agent: data.agent,
+        agency: data.agency,
+        product,
+        eligibility: data.eligibility,
+      }).length > 0,
   );
   const [selectedProduct, setSelectedProduct] = useState(
     submission?.productId || productId || products[0]?.id || "",
   );
-  const product = products.find((item) => item.id === selectedProduct);
+  const product = data.products.find((item) => item.id === selectedProduct);
+  const productOptions =
+    product && !products.some((item) => item.id === product.id)
+      ? [product, ...products]
+      : products;
+  const [selectedState, setSelectedState] = useState<StateCode | "">(() =>
+    initialRiskState({
+      savedState: submission?.state,
+      queryState: queryState ?? initialState,
+      homeState: data.agent.state,
+      licensedStates: data.agent.licensedStates,
+    }),
+  );
+  const [effectiveDate, setEffectiveDate] = useState(
+    submission?.effectiveDate || data.asOfDate.slice(0, 10),
+  );
+  const [industry, setIndustry] = useState(submission?.industry || "");
+  const decision =
+    product && selectedState
+      ? evaluateProductEligibility({
+          agent: data.agent,
+          agency: data.agency,
+          product,
+          state: selectedState,
+          eligibility: data.eligibility,
+          effectiveDate,
+        })
+      : {
+          allowed: false,
+          reason: "Choose an available product and licensed risk state.",
+          requirements: [],
+          industries: [],
+        };
+  const existingDecision = submission
+    ? data.actionEligibility.submissions[submission.id]
+    : undefined;
+  const recordBlocked = !!submission && !existingDecision?.allowed;
+  const blockReason = recordBlocked
+    ? existingDecision?.reason ||
+      "This saved submission is available to view, but you cannot change it. Contact your relationship team."
+    : !decision.allowed
+      ? decision.reason
+      : undefined;
+  const availableStates = product
+    ? eligibleProductStates({
+        agent: data.agent,
+        agency: data.agency,
+        product,
+        eligibility: data.eligibility,
+        effectiveDate,
+      })
+    : [];
+  const industries = decision.industries;
+  const canContinue = !blockReason && industries.includes(industry);
   const isPersonal = product?.line === "personal";
   const [step, setStep] = useState(1);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!canContinue || !selectedState || busy) return;
     const form = new FormData(event.currentTarget);
     const result = await act(
       {
@@ -39,9 +106,9 @@ export function SubmissionForm({
         submissionId: submission?.id,
         accountName: String(form.get("accountName")),
         productId: selectedProduct,
-        state: String(form.get("state")) as StateCode,
-        industry: String(form.get("industry")),
-        effectiveDate: String(form.get("effectiveDate")),
+        state: selectedState,
+        industry,
+        effectiveDate,
         employeeCount: Number(form.get("employeeCount")),
         annualRevenueCents: Math.round(Number(form.get("annualRevenue")) * 100),
         notes: String(form.get("notes") || ""),
@@ -55,16 +122,17 @@ export function SubmissionForm({
             (item) =>
               !data.submissions.some((existing) => existing.id === item.id),
           );
-      if (saved) onSaved(saved.id);
+      if (saved) onSaved(saved.id, saved.state);
     }
   }
-  if (!products.length)
+  if (!products.length && !submission)
     return (
       <div className="empty-state">
         <h3>Let&apos;s connect you with the right team.</h3>
         <p>
-          Your current agency appointments do not include this transaction.
-          Contact your relationship team to explore your next opportunity.
+          No products are currently available for your licenses and agency
+          appointments. Contact your relationship team to explore your next
+          opportunity.
         </p>
       </div>
     );
@@ -84,6 +152,12 @@ export function SubmissionForm({
         </span>
       </div>
       <form className="portal-form" onSubmit={submit}>
+        {blockReason && (
+          <p className="note-box" role="status">
+            {blockReason}{" "}
+            {submission && "The saved risk state has not been changed."}
+          </p>
+        )}
         <div hidden={step !== 1}>
           <div className="form-grid">
             <label className="full-width">
@@ -93,9 +167,16 @@ export function SubmissionForm({
                 value={selectedProduct}
                 onChange={(event) => setSelectedProduct(event.target.value)}
               >
-                {products.map((item) => (
-                  <option key={item.id} value={item.id}>
+                {productOptions.map((item) => (
+                  <option
+                    key={item.id}
+                    value={item.id}
+                    disabled={!products.some((entry) => entry.id === item.id)}
+                  >
                     {item.name}
+                    {!products.some((entry) => entry.id === item.id)
+                      ? " — unavailable"
+                      : ""}
                   </option>
                 ))}
               </select>
@@ -104,28 +185,41 @@ export function SubmissionForm({
               Risk state
               <select
                 name="state"
-                defaultValue={
-                  submission?.state || initialState || data.agent.state
+                value={selectedState}
+                onChange={(event) =>
+                  setSelectedState(event.target.value as StateCode)
                 }
+                required
               >
-                {data.agent.licensedStates
-                  .filter((state) => product?.states.includes(state))
-                  .map((state) => (
-                    <option key={state} value={state}>
+                {!selectedState && (
+                  <option value="">Choose a licensed state</option>
+                )}
+                {riskStateOptions(availableStates, selectedState).map(
+                  ({ state, available }) => (
+                    <option key={state} value={state} disabled={!available}>
                       {stateNames[state]}
+                      {!available ? " — unavailable for this submission" : ""}
                     </option>
-                  ))}
+                  ),
+                )}
               </select>
             </label>
             <label>
               {isPersonal ? "Account type" : "Business type"}
               <select
                 name="industry"
-                defaultValue={submission?.industry || product?.industries[0]}
-                key={selectedProduct}
+                value={industry}
+                onChange={(event) => setIndustry(event.target.value)}
+                required
               >
-                {product?.industries.map((industry) => (
-                  <option key={industry}>{industry}</option>
+                {!industry && <option value="">Choose an account type</option>}
+                {industry && !industries.includes(industry) && (
+                  <option value={industry} disabled>
+                    {industry} — review for selected state
+                  </option>
+                )}
+                {industries.map((option) => (
+                  <option key={option}>{option}</option>
                 ))}
               </select>
             </label>
@@ -139,7 +233,7 @@ export function SubmissionForm({
                 <h3>A good start is a prepared submission.</h3>
                 <p>{product.description}</p>
                 <ul>
-                  {product.requirements.slice(0, 3).map((requirement) => (
+                  {decision.requirements.slice(0, 3).map((requirement) => (
                     <li key={requirement}>{requirement}</li>
                   ))}
                 </ul>
@@ -151,6 +245,7 @@ export function SubmissionForm({
               type="button"
               className="button button-primary"
               onClick={() => setStep(2)}
+              disabled={!canContinue || busy}
             >
               Continue to account information
               <PortalIcon name="arrow" width="16" />
@@ -174,9 +269,8 @@ export function SubmissionForm({
               <input
                 name="effectiveDate"
                 type="date"
-                defaultValue={
-                  submission?.effectiveDate || data.asOfDate.slice(0, 10)
-                }
+                value={effectiveDate}
+                onChange={(event) => setEffectiveDate(event.target.value)}
                 required={step === 2}
               />
             </label>
@@ -235,6 +329,14 @@ export function SubmissionForm({
             submitting your account for consideration. Coverage is not bound by
             submitting this request.
           </p>
+          {submission &&
+            (selectedState !== submission.state ||
+              selectedProduct !== submission.productId) && (
+              <p className="form-note">
+                Changing the risk state or product will require a fresh review
+                of the applicable submission checklist.
+              </p>
+            )}
           <div className="form-actions">
             <button
               type="button"
@@ -245,7 +347,7 @@ export function SubmissionForm({
             </button>
             <button
               type="submit"
-              disabled={busy}
+              disabled={busy || !canContinue}
               className="button button-primary"
             >
               {busy ? "Saving…" : "Save & review requirements"}

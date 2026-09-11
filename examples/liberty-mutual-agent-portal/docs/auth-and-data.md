@@ -16,7 +16,9 @@ This application uses fictional insurance records behind a signed session. Sitec
 | `src/app/api/portal` | Authenticated workspace, actions, account documents, and protected operator reset |
 | `fixtures` | Versioned fictional source records; never import from a client component |
 
-Server modules import `server-only`. UI components consume `PortalBootstrap` and send a discriminated `PortalAction`; they never read fixture files or decide account authorization. Each request checks the signed agent-to-agency mapping and each record's owner. Principals can work across their agency's appointed lines; other users work within their specialization and licensed states. Browsing product and educational content does not grant transaction permission.
+Server modules import `server-only`. UI components consume `PortalBootstrap` and send a discriminated `PortalAction`; they never read fixture files or decide account authorization. Each request checks the signed agent-to-agency mapping and record scope. State-sensitive actions also check current dated license authority, agency/producer carrier appointments, product/state availability and relevant assigned-producer eligibility. A principal can access agency work across appointed lines but does not bypass state authority. Browsing product and educational content does not grant transaction permission.
+
+The [state eligibility runbook](../../../docs/state-eligibility.md) explains the synthetic authority adapter, current UTC evaluation, restricted saved records and acceptance checks. Bootstrap includes current-agent rule data and server-computed decisions for existing-record actions.
 
 ## Configuration
 

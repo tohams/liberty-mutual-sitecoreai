@@ -2,13 +2,22 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PortalIcon, type IconName } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";
-import type { BusinessLine, StateCode } from "@/contracts/portal";
+import type { BusinessLine } from "@/contracts/portal";
 import { lineNames, stateNames, usePortal } from "../portal/portal-context";
 import { SubmissionForm } from "../submissions/SubmissionForm";
 import { productHref } from "../portal/content-routes";
+import {
+  initialRiskState,
+  readRiskState,
+  withRiskState,
+} from "../portal/risk-state-navigation";
+import {
+  evaluateProductAvailability,
+  evaluateProductEligibility,
+} from "@/domain/eligibility";
 
 const lineIcons: Record<BusinessLine, IconName> = {
   personal: "home",
@@ -21,13 +30,25 @@ const lineIcons: Record<BusinessLine, IconName> = {
 export function ProductsScreen() {
   const { data } = usePortal();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [line, setLine] = useState("all");
-  const [state, setState] = useState<StateCode>(data.agent.state);
+  const queryState = searchParams.get("state");
+  const state = initialRiskState({
+    queryState,
+    homeState: data.agent.state,
+    licensedStates: data.agent.licensedStates,
+  });
   const [intakeId, setIntakeId] = useState("");
   const visible = data.products.filter(
     (product) =>
       (line === "all" || product.line === line) &&
-      product.states.includes(state),
+      !!state &&
+      evaluateProductAvailability({
+        product,
+        state,
+        eligibility: data.eligibility,
+      }).allowed,
   );
   return (
     <>
@@ -43,17 +64,35 @@ export function ProductsScreen() {
             Risk state
             <select
               value={state}
-              onChange={(event) => setState(event.target.value as StateCode)}
+              onChange={(event) => {
+                const nextState = readRiskState(
+                  event.target.value,
+                  data.agent.licensedStates,
+                );
+                if (nextState)
+                  router.replace(
+                    withRiskState(`${pathname}?${searchParams}`, nextState),
+                    { scroll: false },
+                  );
+              }}
             >
-              {Object.entries(stateNames).map(([code, name]) => (
+              {!state && <option value="">Choose a licensed state</option>}
+              {data.agent.licensedStates.map((code) => (
                 <option key={code} value={code}>
-                  {name}
+                  {stateNames[code]}
                 </option>
               ))}
             </select>
           </label>
         </div>
       </div>
+      {!state && (
+        <p className="note-box" role="status">
+          {data.agent.licensedStates.length
+            ? "The requested state is not available for your license. Choose a licensed state to continue."
+            : "No licensed states are available. Contact your relationship team to review your access."}
+        </p>
+      )}
       <section className="products-hero">
         <div>
           <span className="eyebrow">LOCAL KNOWLEDGE. BROAD POSSIBILITIES.</span>
@@ -101,7 +140,9 @@ export function ProductsScreen() {
         </p>
         <span>
           <PortalIcon name="pin" width="14" />
-          Product preparation for {stateNames[state]}
+          {state
+            ? `Product preparation for ${stateNames[state]}`
+            : "Choose a risk state"}
         </span>
       </div>
       <div className="product-grid">
@@ -130,16 +171,23 @@ export function ProductsScreen() {
             <footer>
               <Link
                 className="text-link"
-                href={productHref(product, data.agency.channel)}
+                href={withRiskState(
+                  productHref(product, data.agency.channel),
+                  state || undefined,
+                )}
               >
                 Explore coverage
                 <PortalIcon name="arrow" width="17" />
               </Link>
               {product.line !== "surety" &&
-                data.agent.licensedStates.includes(state) &&
-                data.agency.appointedLines.includes(product.line) &&
-                (data.agent.role === "principal" ||
-                  data.agent.specializations.includes(product.line)) && (
+                state &&
+                evaluateProductEligibility({
+                  agent: data.agent,
+                  agency: data.agency,
+                  product,
+                  state,
+                  eligibility: data.eligibility,
+                }).allowed && (
                   <button
                     type="button"
                     className="product-availability borderless"
@@ -169,9 +217,11 @@ export function ProductsScreen() {
       >
         <SubmissionForm
           productId={intakeId}
-          initialState={state}
+          initialState={state || undefined}
           key={`${intakeId}:${state}`}
-          onSaved={(id) => router.push(`/quote?submission=${id}`)}
+          onSaved={(id, savedState) =>
+            router.push(withRiskState(`/quote?submission=${id}`, savedState))
+          }
         />
       </PortalDialog>
     </>

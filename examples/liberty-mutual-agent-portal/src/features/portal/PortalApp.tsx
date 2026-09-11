@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import type { PortalBootstrap } from "@/contracts/portal";
 import { PortalIcon } from "@/components/ui/portal-icon";
@@ -14,6 +14,7 @@ import { PortalContext } from "./portal-context";
 import type { ActionInput, PortalAppProps } from "./portal.types";
 import { PortalShell } from "./PortalShell";
 import { resourceHref } from "./content-routes";
+import { readRiskState, withRiskState } from "./risk-state-navigation";
 import { WorkspaceScreen } from "../workspace/WorkspaceScreen";
 import { SubmissionsScreen } from "../submissions/SubmissionsScreen";
 import { ClientsScreen } from "../clients/ClientsScreen";
@@ -31,6 +32,7 @@ export function PortalApp({
   isEditing = false,
 }: PortalAppProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [data, setData] = useState(initialData);
   const [serverSnapshot, setServerSnapshot] = useState(initialData);
   const [busy, setBusy] = useState(false);
@@ -119,11 +121,15 @@ export function PortalApp({
   const currentResource = data.resources.find(
     (resource) => resourceHref(resource) === route,
   );
+  const riskState = readRiskState(
+    searchParams.get("state"),
+    data.agent.licensedStates,
+  );
   let content;
   if (["quote", "submissions", "appetite", "surety"].includes(section))
     content = (
       <SubmissionsScreen
-        key={route}
+        key={`${route}:${searchParams.get("state") ?? ""}:${searchParams.get("submission") ?? ""}:${searchParams.get("new") ?? ""}:${searchParams.get("bond") ?? ""}`}
         initialSelectedId={section !== "surety" ? selectedId : undefined}
         initialBondId={section === "surety" ? selectedId : undefined}
       />
@@ -157,7 +163,10 @@ export function PortalApp({
             <>
               <div className="content-utility">
                 <Link
-                  href={section === "products" ? "/products" : "/resources"}
+                  href={withRiskState(
+                    section === "products" ? "/products" : "/resources",
+                    riskState,
+                  )}
                   className="text-link"
                 >
                   <PortalIcon name="arrow" width="16" className="back-arrow" />

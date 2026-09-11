@@ -14,6 +14,17 @@ import {
   usePortal,
 } from "../portal/portal-context";
 import { SubmissionForm } from "./SubmissionForm";
+import {
+  eligibleProductStates,
+  evaluateProductEligibility,
+  resolveBondProductId,
+} from "@/domain/eligibility";
+import {
+  initialRiskState,
+  readRiskState,
+  riskStateOptions,
+  withRiskState,
+} from "../portal/risk-state-navigation";
 
 export function SubmissionsScreen({
   initialSelectedId,
@@ -24,10 +35,18 @@ export function SubmissionsScreen({
 }) {
   const searchParams = useSearchParams();
   const { data, act, busy } = usePortal();
-  const canPrepareSurety =
-    data.agency.appointedLines.includes("surety") &&
-    (data.agent.role === "principal" ||
-      data.agent.specializations.includes("surety"));
+  const queryState = searchParams.get("state");
+  const navigationState = readRiskState(queryState, data.agent.licensedStates);
+  const canPrepareSurety = data.products.some(
+    (product) =>
+      product.line === "surety" &&
+      eligibleProductStates({
+        agent: data.agent,
+        agency: data.agency,
+        product,
+        eligibility: data.eligibility,
+      }).length > 0,
+  );
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All submissions");
   const [selectedId, setSelectedId] = useState<string | null>(
@@ -38,14 +57,55 @@ export function SubmissionsScreen({
   );
   const [bondOpen, setBondOpen] = useState(Boolean(initialBondId));
   const [newBondOpen, setNewBondOpen] = useState(
-    searchParams.get("bond") === "1" && canPrepareSurety,
+    searchParams.get("bond") === "1",
   );
+  const [newBondState, setNewBondState] = useState<StateCode | "">(() =>
+    initialRiskState({
+      queryState,
+      homeState: data.agent.state,
+      licensedStates: data.agent.licensedStates,
+    }),
+  );
+  const [newBondType, setNewBondType] = useState("Contract performance");
+  const newBondProduct = data.products.find(
+    (product) =>
+      product.id === resolveBondProductId(newBondType, data.eligibility),
+  );
+  const newBondDecision =
+    newBondProduct && newBondState
+      ? evaluateProductEligibility({
+          agent: data.agent,
+          agency: data.agency,
+          product: newBondProduct,
+          state: newBondState,
+          eligibility: data.eligibility,
+        })
+      : {
+          allowed: false,
+          reason: "Choose an available bond type and licensed state.",
+          requirements: [],
+          industries: [],
+        };
+  const bondStates = newBondProduct
+    ? eligibleProductStates({
+        agent: data.agent,
+        agency: data.agency,
+        product: newBondProduct,
+        eligibility: data.eligibility,
+      })
+    : [];
   const [selectedBondId, setSelectedBondId] = useState<string | null>(
     initialBondId || null,
   );
   const [editing, setEditing] = useState(false);
   const selected = data.submissions.find((item) => item.id === selectedId);
   const bond = data.bondRequests.find((item) => item.id === selectedBondId);
+  const selectedDecision = selected
+    ? data.actionEligibility.submissions[selected.id]
+    : undefined;
+  const bondDecision = bond
+    ? data.actionEligibility.bondRequests[bond.id]
+    : undefined;
   const visible = data.submissions.filter(
     (item) =>
       (filter === "All submissions" || item.status === filter) &&
@@ -55,14 +115,15 @@ export function SubmissionsScreen({
   );
   async function saveBond(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!newBondDecision.allowed || !newBondState || busy) return;
     const form = new FormData(event.currentTarget);
     const result = await act(
       {
         type: "save-bond-request",
         principal: String(form.get("principal")),
         obligee: String(form.get("obligee")),
-        state: String(form.get("state")) as StateCode,
-        bondType: String(form.get("bondType")),
+        state: newBondState,
+        bondType: newBondType,
         amountCents: Math.round(Number(form.get("amount")) * 100),
         notes: String(form.get("notes")),
       },
@@ -71,6 +132,11 @@ export function SubmissionsScreen({
     if (result) {
       setNewBondOpen(false);
       setBondOpen(true);
+      const saved = result.bondRequests.find(
+        (item) =>
+          !data.bondRequests.some((existing) => existing.id === item.id),
+      );
+      if (saved) setSelectedBondId(saved.id);
     }
   }
   return (
@@ -338,7 +404,10 @@ export function SubmissionsScreen({
             begin.
           </p>
         </div>
-        <Link href="/products" className="button button-secondary">
+        <Link
+          href={withRiskState("/products", navigationState)}
+          className="button button-secondary"
+        >
           Explore appetite
           <PortalIcon name="arrow" width="15" />
         </Link>
@@ -351,6 +420,8 @@ export function SubmissionsScreen({
         wide
       >
         <SubmissionForm
+          key={`new:${queryState ?? "home"}`}
+          queryState={queryState}
           onSaved={(id) => {
             setNewOpen(false);
             setSelectedId(id);
@@ -413,6 +484,12 @@ export function SubmissionsScreen({
                 </div>
               </dl>
               <h3>Submission checklist</h3>
+              {!selectedDecision?.allowed && (
+                <p className="note-box" role="status">
+                  {selectedDecision?.reason ||
+                    "This submission is available to view, but changes are not permitted for your current authority."}
+                </p>
+              )}
               <p className="section-description">
                 Review each requirement to confirm the account information is
                 prepared.
@@ -427,6 +504,7 @@ export function SubmissionsScreen({
                       )}
                       disabled={
                         busy ||
+                        !selectedDecision?.allowed ||
                         selected.completedRequirements.includes(requirement) ||
                         !["Draft", "Information needed"].includes(
                           selected.status,
@@ -458,6 +536,7 @@ export function SubmissionsScreen({
                   <button
                     className="button button-secondary"
                     onClick={() => setEditing(true)}
+                    disabled={busy || !selectedDecision?.allowed}
                   >
                     Edit account
                   </button>
@@ -467,6 +546,7 @@ export function SubmissionsScreen({
                     className="button button-primary"
                     disabled={
                       busy ||
+                      !selectedDecision?.allowed ||
                       selected.completedRequirements.length <
                         selected.requirements.length
                     }
@@ -499,6 +579,13 @@ export function SubmissionsScreen({
         onClose={() => setNewBondOpen(false)}
       >
         <form className="portal-form" onSubmit={saveBond}>
+          {!newBondDecision.allowed && (
+            <p className="note-box" role="status">
+              {newBondDecision.reason}{" "}
+              {!bondStates.length &&
+                "Contact your relationship team if you need help with this request."}
+            </p>
+          )}
           <label>
             Principal legal name
             <input name="principal" required maxLength={120} />
@@ -510,21 +597,37 @@ export function SubmissionsScreen({
           <div className="form-grid">
             <label>
               Bond type
-              <select name="bondType">
-                <option>Contract performance</option>
-                <option>Payment bond</option>
-                <option>License and permit</option>
-                <option>Commercial surety</option>
+              <select
+                name="bondType"
+                value={newBondType}
+                onChange={(event) => setNewBondType(event.target.value)}
+              >
+                {Object.keys(data.eligibility.bondProducts).map((type) => (
+                  <option key={type}>{type}</option>
+                ))}
               </select>
             </label>
             <label>
               State
-              <select name="state" defaultValue={data.agent.state}>
-                {data.agent.licensedStates.map((state) => (
-                  <option key={state} value={state}>
-                    {stateNames[state]}
-                  </option>
-                ))}
+              <select
+                name="state"
+                value={newBondState}
+                onChange={(event) =>
+                  setNewBondState(event.target.value as StateCode)
+                }
+                required
+              >
+                {!newBondState && (
+                  <option value="">Choose a licensed state</option>
+                )}
+                {riskStateOptions(bondStates, newBondState).map(
+                  ({ state, available }) => (
+                    <option key={state} value={state} disabled={!available}>
+                      {stateNames[state]}
+                      {!available ? " — unavailable for this bond type" : ""}
+                    </option>
+                  ),
+                )}
               </select>
             </label>
             <label>
@@ -545,7 +648,10 @@ export function SubmissionsScreen({
           <p className="form-note">
             A bond request does not issue a bond or establish surety credit.
           </p>
-          <button className="button button-primary" disabled={busy}>
+          <button
+            className="button button-primary"
+            disabled={busy || !newBondDecision.allowed}
+          >
             Save bond request
           </button>
         </form>
@@ -578,10 +684,16 @@ export function SubmissionsScreen({
               </div>
             </dl>
             <p className="section-description">{bond.notes}</p>
+            {!bondDecision?.allowed && (
+              <p className="note-box" role="status">
+                {bondDecision?.reason ||
+                  "This bond request is available to view, but you cannot submit it with your current authority."}
+              </p>
+            )}
             {bond.status === "Draft" && (
               <button
                 className="button button-primary"
-                disabled={busy}
+                disabled={busy || !bondDecision?.allowed}
                 onClick={() =>
                   act(
                     { type: "submit-bond-request", bondRequestId: bond.id },
