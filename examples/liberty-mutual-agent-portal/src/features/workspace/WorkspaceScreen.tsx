@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PortalLink as Link } from "@/components/ui/portal-link";
 import { useState, type ReactNode } from "react";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { resourceHref } from "../portal/content-routes";

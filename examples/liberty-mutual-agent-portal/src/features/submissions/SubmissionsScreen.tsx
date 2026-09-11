@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { PortalLink as Link } from "@/components/ui/portal-link";
 import type { StateCode } from "@/contracts/portal";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";

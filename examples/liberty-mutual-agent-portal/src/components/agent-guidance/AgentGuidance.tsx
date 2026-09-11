@@ -3,10 +3,10 @@
 import {
   Text,
   RichText,
-  Link,
   useSitecore,
 } from "@sitecore-content-sdk/nextjs";
 import { useContext } from "react";
+import { PortalContentLink as Link } from "@/components/ui/portal-link";
 import { useSearchParams } from "next/navigation";
 import { PortalContext } from "@/features/portal/portal-context";
 import { readRiskState } from "@/features/portal/risk-state-navigation";

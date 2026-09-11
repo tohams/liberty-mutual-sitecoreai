@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PortalLink as Link } from "@/components/ui/portal-link";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { dateLabel, money, usePortal } from "../portal/portal-context";
 

@@ -1,6 +1,7 @@
 'use client';
 
-import { Text, RichText, Link, DateField, useSitecore } from '@sitecore-content-sdk/nextjs';
+import { Text, RichText, DateField, useSitecore } from '@sitecore-content-sdk/nextjs';
+import { PortalContentLink as Link } from '@/components/ui/portal-link';
 import type { ResourceArticleProps } from './resource-article.props';
 
 export function Default({ fields, params }: ResourceArticleProps) {
