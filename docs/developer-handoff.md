@@ -35,6 +35,8 @@ Run `node --import tsx scripts/verify-resource-state-search.mjs --public-context
 
 Products, submission preparation and bond requests use the shared dated state-eligibility adapter. Every state-sensitive server action rechecks the acting agent, relevant assigned producer, current authority, carrier appointment and product/state rule. UI decisions are explanatory projections; they cannot authorize an action. The [state eligibility runbook](state-eligibility.md) documents the contract, risk-state navigation, saved-work handling, illustrative state differences and deployed acceptance commands. UDL remains the personalization layer; operational authority comes from the server adapter.
 
+The [September 11 eligibility evidence](qa-evidence-2026-09-11.md) records automated checks, deployed cross-agent cases, browser journeys and native platform regression results.
+
 ## Environment configuration
 
 Start with the application's `.env.remote.example`. Keep real values out of Git. Separate production, preview and local configuration; do not import a developer's entire environment file indiscriminately.
