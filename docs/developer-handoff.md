@@ -2,6 +2,8 @@
 
 This guide explains how to operate, change and transfer the Liberty Mutual agent portal. It distinguishes compiled application behavior from tenant configuration and runtime verification. The portal uses native Sitecore content; operational account, policy, submission and production records are fictional fixtures with durable, isolated workspaces.
 
+Use the [presenter runbook](demo-loops.md) for seven repeatable capability walkthroughs. Loops 3, 4 and 7 cover operational workflows, state authority and the development/release model; the shared preparation and reset sections explain pack coordination and environment boundaries.
+
 ## Ownership and architecture
 
 The active rendering host is `liberty-mutual-agent-portal`, at `examples/liberty-mutual-agent-portal`. It uses Next.js App Router, React, TypeScript and the Sitecore Content SDK. Other `examples/` directories retain upstream starter reference code and are not additional customer applications.
