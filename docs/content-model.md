@@ -11,8 +11,9 @@ Native custom-value source and test evidence are maintained separately in [autho
 - Templates: `/sitecore/templates/Project/LibertyMutual`
 - Renderings: `/sitecore/layout/Renderings/Project/LibertyMutual`
 - Placeholder settings: `/sitecore/layout/Placeholder Settings/Project/LibertyMutual`
+- Dedicated layouts: `/sitecore/layout/Layouts/Project/LibertyMutual`
 
-`LibertyMutual.Model` permits **CreateAndUpdate** only for the three model roots. `LibertyMutual.Content` permits **CreateOnly** for initial site scaffolding and editorial content. Neither permits deletion. Normal releases push the model module only; existing marketer content is never overwritten by the seed deployment script. No upstream starter module is pushed.
+`LibertyMutual.Model` permits **CreateAndUpdate** only for the four model roots. `LibertyMutual.Content` permits **CreateOnly** for initial site scaffolding and editorial content. Neither permits deletion. Normal releases push the model module only; existing marketer content is never overwritten by the seed deployment script. No upstream starter module is pushed.
 
 All initial content comes from the source-reviewed brand pack in `docs/brand`. Native IDs, field IDs, route pages and datasource relationships are recorded in `authoring/items/liberty-mutual/content-manifest.json`.
 
@@ -21,12 +22,13 @@ All initial content comes from the source-reviewed brand pack in `docs/brand`. N
 | Rendering | Editable datasource fields | Variants |
 |---|---|---|
 | `AgentGuidance` | `eyebrow`: Single-Line Text; `headline`: Single-Line Text; `body`: Rich Text; `actionLink`: General Link | `Default`, `Highlight` |
+| `ProductSpotlight` | `eyebrow`: Single-Line Text; `headline`: Single-Line Text; `body`: Rich Text; `actionLink`: General Link | `Default` |
 | `ResourceSearch` | `search`: Multi-Line Text containing the native source ID and field-mapping JSON | `Default` |
 | `ResourceArticle` | `Title`: inherited Single-Line Text; `summary`: Multi-Line Text; `body`: Rich Text; `resourceType`: Single-Line Text; `state`: Single-Line Text; `reviewedAt`: Date; `sourceLink`: General Link | `Default` |
 
 Field titles and short help text make the authoring form understandable while retaining predictable developer field names. Rich text fields use the site's rich text profile. General Links provide both label and destination. The renderings use Sitecore's standard flat datasource-field serialization; no custom component GraphQL query is needed. Front-end components use the Content SDK field controls so Page builder can edit them.
 
-`PortalRenderingParameters` inherits the installed SXA headless parameter bases, including rendering variants. `headless-main` is scoped under the Liberty Mutual placeholder folder and explicitly allows these three renderings. The site's Available Renderings group and Headless Variants items expose the matching components and named exports. Adding a new rendering requires the component code, model item, datasource contract and allowed-controls update together.
+`PortalRenderingParameters` inherits the installed SXA headless parameter bases, including rendering variants. `headless-main` is scoped under the Liberty Mutual placeholder folder and allows `AgentGuidance`, `ResourceSearch` and `ResourceArticle`. `ProductSpotlight` uses the separate `headless-products-spotlight` placeholder, exposed by the owned `ProductsLayout`. The site's Available Renderings group and Headless Variants items expose the matching components and named exports. Adding a new rendering requires the component code, model item, datasource contract and allowed-controls update together.
 
 The portal components pass through the native rendering identifier and style classes. Eight style options have scoped CSS mappings: `position-left`, `position-center`, `position-right`, `indent-top`, `indent-bottom`, `indent`, `container-dark-background`, and `sxa-bordered`. The six generic alignment/spacing styles retain their native applicability. The site's Dark background and Bordered style items add only the three portal renderings to their existing Allowed Renderings lists. Other preset styles remain restricted to their upstream renderings, which are not in this portal's component allowlist. This follows [Sitecore's style applicability guidance](https://doc.sitecore.com/xp/en/developers/sxa/101/sitecore-experience-accelerator/recommendations--working-with-themes.html).
 
@@ -34,7 +36,7 @@ For an existing target that already has the initial scaffold, `node authoring/sc
 
 ## Pages and composition
 
-`PortalPage` inherits the tenant-generated `Page`, preserving the installed SXA headless behaviors. It sets the existing Headless Layout and a native default workflow. Direct page composition in `headless-main` is visible and editable in Page builder. Every page's rendering has a stable unique ID and named datasource.
+`PortalPage` inherits the tenant-generated `Page`, preserving the installed SXA headless behaviors. It sets the existing Headless Layout and a native default workflow. Direct page composition in `headless-main` is visible and editable in Page builder. Every page's rendering has a stable unique ID and named datasource. The Products landing page uses its dedicated `ProductsLayout` and spotlight placeholder while retaining existing guidance. Other pages keep the shared layout. See the [Products affinity contract](affinity-personalization.md).
 
 The existing Home item and `/workspace` share the neutral workspace promotion datasource. Other top-level routes are `/quote`, `/clients`, `/products`, `/growth`, `/resources`, and `/support`. Seven family pages sit below `/products`. Twelve resource articles sit below `/resources/<slug>`.
 
@@ -42,13 +44,13 @@ The existing Home item and `/workspace` share the neutral workspace promotion da
 
 Resource state is `TX`, `FL`, `IL`, or `All`. It denotes risk-state applicability, not the visitor's office. Native Search configuration can map these stable field IDs to facets. More complex multi-state applicability should replace this initial string with a taxonomy reference before expansion beyond the three selected jurisdictions.
 
-`Data/Guidance` holds reusable workspace guidance, product guidance and campaign promotions. `Data/Resources` retains the 12 unused initial standalone article datasources from the first bootstrap. These are preserved without deletion, are no longer referenced by resource-page layouts, and are excluded from Search. Their IDs are listed as `unusedInitialResourceDatasources` in the manifest. Author active resource content under `Home/resources`; do not edit the unused copies expecting portal changes. Each folder has an insert-options template for its allowed datasource type. Portal page insert options expose `PortalPage` and `ResourcePage`.
+`Data/ProductSpotlight` holds the neutral, workers-compensation and household spotlight datasources. Their native publication and affinity decision mapping are separate from serialization. `Data/Guidance` holds reusable workspace guidance, product guidance and campaign promotions. `Data/Resources` retains the 12 unused initial standalone article datasources from the first bootstrap. These are preserved without deletion, are no longer referenced by resource-page layouts, and are excluded from Search. Their IDs are listed as `unusedInitialResourceDatasources` in the manifest. Author active resource content under `Home/resources`; do not edit the unused copies expecting portal changes. Each folder has an insert-options template for its allowed datasource type. Portal page insert options expose `PortalPage` and `ResourcePage`.
 
 ## Workflow and publication
 
 The installed **Basic Workflow** is used for pages (`B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F`). The installed **Basic Datasource Workflow** is used for datasources (`A053ED9F-4099-4682-9411-2B4C98E481E4`). These native workflows were read and referenced; their global definitions and role security were not modified. Their existing Draft/Approve behavior is the sandbox editorial baseline. Customer-specific separation of duties requires assigning and testing customer users and roles later.
 
-Initial source-reviewed bootstrap content is imported in each workflow's Approved state so it can be published. This is a recorded sandbox editorial decision by the implementation process, not a claim that Liberty Mutual corporate reviewers approved the content or that a named customer executed a workflow command. New content receives the existing native workflow through standard values and begins in its configured Draft state. Subsequent approval should be performed through native authoring workflows.
+The original source-reviewed bootstrap content was imported in each workflow's Approved state so it could be published. The later ProductSpotlight seeds instead start in Draft; their three live datasources were separately approved and published on September 13, as recorded in the [affinity runbook](affinity-personalization.md). This is a recorded sandbox editorial decision by the implementation process, not a claim that Liberty Mutual corporate reviewers approved the content or that a named customer executed a workflow command. New content receives the existing native workflow through standard values and begins in its configured Draft state. Subsequent approval should be performed through native authoring workflows.
 
 Publication is scoped to the Liberty Mutual model roots and customer content root, in English, to the `Edge` target. The script never omits the path, never requests a whole-database publish and never enables related-item expansion. Experience Edge does not enforce private content ACLs: published items contain reusable synthetic/general guidance only. Agency financial details, briefs, cohort inputs, login credentials and client records must not be placed here.
 
@@ -67,7 +69,7 @@ authoring/scripts/deploy-content.sh ENVIRONMENT
 authoring/scripts/deploy-content.sh ENVIRONMENT --seed --publish
 ```
 
-The script verifies that the seed module remains CreateOnly with no override rules before allowing a seed push. The generator `authoring/scripts/build-content-seed.py` writes deterministic UUIDv5 items from `docs/brand/portal-content-seeds.json` and records all generated files. Run it deliberately for seed development, not on every application build; it can rewrite the local seed snapshot. It never pushes or publishes.
+The script verifies that the seed module remains CreateOnly with no override rules before allowing a seed push. The generator `authoring/scripts/build-content-seed.py` writes deterministic UUIDv5 items from `docs/brand/portal-content-seeds.json` and records all generated files. Run it deliberately for seed development, not on every application build; it can rewrite the local seed snapshot. It never pushes or publishes. It can replace locally captured page versions, including Resources v2; preserve and compare the current native exports before deliberately regenerating the initial seed. The separate `build-product-spotlight-seed.py` generator adds only the spotlight model and seeds. Use the guarded placement procedure in the [developer handoff](developer-handoff.md#productspotlight-release-path) for an existing site, rather than regenerating its authored pages.
 
 For the original tenant, the already-created Home item needed a one-time scoped update to install its initial composition. That temporary update rule was removed immediately after the successful seed push. A scoped bootstrap correction repaired GUID scalar serialization and changed resource composition to page-backed datasources; all temporary update rules were removed. A fresh target with the same IDs receives Home through CreateOnly. If a target already has conflicting scaffold IDs or existing authored Home content, perform a reviewed migration; do not weaken the seed module to overwrite it.
 
