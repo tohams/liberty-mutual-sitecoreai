@@ -1,6 +1,6 @@
 # Products spotlight affinity personalization
 
-**Status — September 13, 2026 (UTC):** the Products page, three approved datasources and **Liberty Mutual - Product interest spotlight** table are live. Products English version 2 uses its dedicated layout/spotlight placement, and all five page-affinity assignments are saved. Both the workers-compensation and household browsing journeys still returned the neutral headline; the inspected native profiles had no populated affinities. The component and native setup are complete, while scoring and behavioral selection remain unverified. See the [runtime QA record](qa-affinity-personalization-2026-09-13.md).
+**Status — September 13, 2026 (UTC):** the corrected preview now builds native affinity scores and selects both topic spotlights. The application sent URL paths where native page assignments expect CMS page names; aligning the event with `route.name` resolved the tested path. Daniel’s workers-compensation journey and Maya’s household journey each increased the corresponding native view count from zero to two and rendered the authored topic hero, while keeping their known attributes and selected risk states. An independently checked Elena profile retained neutral content, and all 37 existing Workspace personalization checks passed on preview. Preview runtime acceptance is complete; production verification follows deployment. See the [runtime QA record](qa-affinity-personalization-2026-09-13.md).
 
 [PR #21](https://github.com/tohams/liberty-mutual-sitecoreai/pull/21), commit `de30ff301acdb32621138d75db6d4db672a6e428`, passed all 93 application tests, lint, typecheck and the production build under Node 24. GitHub CI passed and the Vercel preview is Ready. The existing designated preview branch was fast-forwarded to that commit, updating the [stable preview portal](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/login) without changing its access configuration. A successful production build is application validation; it does not establish production deployment or native affinity delivery.
 
@@ -10,7 +10,7 @@
 | --- | --- | --- | --- |
 | Known-attribute personalization | Workspace `AgentGuidance` | Native UDL identity, imported growth-cohort boolean and agent role | Existing live decision table and connected delivery evidence; see [native configuration](../authoring/personalization/README.md). |
 | A/B optimization | Resources `AgentGuidance` CTA | Native experiment allocation | Existing Resources test; see [A/B record](ab-testing.md). Its allocation and results are independent of affinity targeting. |
-| Affinity personalization | Products `ProductSpotlight` hero | Built-in Top Affinity custom value derived from visits to tagged pages | Native setup is live; two observed journeys remained neutral without populated profile affinities. |
+| Affinity personalization | Products `ProductSpotlight` hero | Built-in Top Affinity custom value derived from visits to tagged pages | Corrected preview: both native topic scores, authored selections, state-preserving CTAs and a neutral comparison verified. |
 
 `ProductSpotlight` replaces the formerly static Products hero. It is a separate component and placement from either `AgentGuidance` use. Keep the existing Workspace rules and Resources experiment intact. The [Resources A/B setup](ab-testing.md#native-setup-and-verification) records the native restriction on testing a personalized page; a second component on Resources would not create an independent page.
 
@@ -59,6 +59,16 @@ The `/products` landing page is intentionally **untagged**. Returning to see the
 
 Sitecore calculates interest scores from visits to pages with assigned affinities. It supports Top Affinity conditions and custom conditions for selecting authored variants. This does not prove reading completion, intent to transact or business eligibility. See [affinity setup](https://doc.sitecore.com/sai/en/users/sitecoreai/audience-and-insights/affinities/set-up-affinities-for-a-site.html) and [affinity personalization](https://doc.sitecore.com/sai/en/users/sitecoreai/audience-and-insights/affinities/personalize-a-page-using-affinities.html). Availability is phased across environments; availability observed here is not a deployment guarantee for another tenant.
 
+## Page-event contract
+
+Affinity assignments use the Sitecore site name and the **CMS page name**. The native Affinities editor stores each page under `siteConfigs[site.name].pageConfigs[page.name]`. A route such as `/resources/illinois-workers-compensation` therefore has the affinity lookup name `illinois-workers-compensation`.
+
+[PortalTracking](../examples/liberty-mutual-agent-portal/src/features/analytics/PortalTracking.tsx) obtains that name from `page.layout.sitecore.route.name`. The Sitecore SDK page-view event must send it as `page`, alongside the SDK-generated `pageVariantId` and the route language. The URL path remains useful for navigation and local duplicate-event control; it must not replace the CMS page name in the native event. Content authors can change display titles independently of the underlying item name.
+
+The original integration sent `page: path`. Its events reached the identified UDL profile and carried valid variant identifiers, but the event page name did not match the saved affinity page key. The correction aligns the event with the authored item; it does not add client-side scoring, new affinity tags or synthetic profile scores. The corrected preview demonstrated native score population and authored selection for both topics; the [QA record](qa-affinity-personalization-2026-09-13.md#corrected-preview-journey--workers-compensation-passed) records the remaining coverage. Sitecore's [standard page-view implementation](https://doc.sitecore.com/sdk/en/developers/006/cloud-sdk/cloud-sdk-events-browser-pageview.html) likewise sends `route.name`.
+
+Sitecore updates scores during a session and saves them to the profile when the session ends. A closed-session check is useful when diagnosing an empty profile, but closing a session is not a prerequisite for within-session personalization. See [affinity behavior and retention](https://doc.sitecore.com/sai/en/users/sitecoreai/audience-and-insights/affinities/index.html).
+
 ## Saved native decision and built-in contract
 
 The saved table is **Liberty Mutual - Product interest spotlight**. It has one String input column using the built-in **Custom Value → Top Affinity**, native identifier `top_affinity_value`, and two exact-match rules:
@@ -68,7 +78,7 @@ The saved table is **Liberty Mutual - Product interest spotlight**. It has one S
 | `workers_compensation` | `Data/ProductSpotlight/workers_compensation` |
 | `household` | `Data/ProductSpotlight/household` |
 
-The original component uses `Data/ProductSpotlight/neutral`. A `null` or unmatched string should match neither topic row and retain the original component. Neutral content was observed in both journeys, but no correlated runtime input/decision receipt has yet established that specific fallback path.
+The original component uses `Data/ProductSpotlight/neutral`. A `null` or unmatched string should match neither topic row and retain the original component. The corrected preview verified neutral content for an independently checked Elena profile with no affinities. A separate raw `null` input receipt was not captured; acceptance correlates native profile traits, the saved table and the rendered component.
 
 Sitecore documents the built-in custom value as the highest affinity value in the visitor profile, returning `null` when there are no valid affinities. The published documentation does not specify equal-score resolution. [Decision-table input contract](https://doc.sitecore.com/sai/en/users/sitecoreai/component-personalization/decision-tables/decision-table-inputs.html).
 
@@ -78,18 +88,18 @@ The inspected native Custom Value input exposes no affinity-name parameter. Trea
 
 The separate boolean **Top Affinity condition** supports optional affinity-name scoping; its documented parameter does not establish that the Custom Value accepts it. The native UI prevented adding that condition template twice as separate columns, so it was removed before this single-column table was saved. The final table uses the built-in String custom value and contains no custom JavaScript expression. See the [condition-specific contract](https://doc.sitecore.com/sai/en/users/sitecoreai/audience-and-insights/affinities/personalize-a-page-using-affinities.html).
 
-## Expected walkthrough — pending native acceptance
+## Verified walkthrough — preview
 
-Use **`daniel.04`** on the designated preview. Daniel's known profile remains a Prairie Oak business-insurance producer with Illinois and Texas licenses and the same imported attributes throughout the journey.
+Use an assigned Daniel account on the designated preview; the accepted workers-compensation journey used **`daniel.03`**, generation **0**. Daniel's known profile remains a Prairie Oak business-insurance producer with Illinois and Texas licenses and the same imported attributes throughout the journey.
 
 1. Inspect the active native profile generation and existing `insurance_interest` scores before rehearsal. Establish that the intended baseline is actually available. Record the host, identity generation and starting score/variant; do not infer a fresh profile from a new login.
 2. Confirm the saved Products configuration is available for normal delivery, then open `/products?state=IL` and record the neutral spotlight. Confirm the selected risk state and catalog. If prior history already selects a topic, resolve the starting profile deliberately rather than calling that a neutral baseline.
-3. Visit the actual Illinois and Texas workers-compensation resource pages. Observe native page events and the resulting `insurance_interest.workers_compensation` score. No fixed number of visits or guaranteed transition delay has been established.
+3. Visit the actual Illinois and Texas workers-compensation resource pages. Observe native page events and the resulting `insurance_interest.workers_compensation` score. In the accepted journey, the first Illinois visit showed 1 view and score 1.00, and the Texas visit brought the count to 2. These observations do not guarantee a transition time or a fixed visit threshold for a profile with other history.
 4. Return to `/products?state=IL`. When the native Top Affinity custom value returns `workers_compensation`, verify the matching datasource and CTA. Record the custom-value output, native decision and rendered result, with Daniel's known attributes and selected risk state unchanged. If the score/input is not ready, record that outcome; do not force a variant to complete the demonstration.
 5. Open the preparation CTA and verify retained Illinois context. Confirm product availability and transaction authorization are unchanged. Affinity selects editorial relevance; server authorization still determines whether an account action is permitted.
 6. Check an identified comparison agent with no matching topic condition and verify neutral content. Verify missing/insufficient affinity fallback separately. A household journey should use an independently checked starting profile so earlier workers-compensation activity does not confound the result.
 
-To accept the loop, correlate a populated native score with the built-in output, native decision and rendered topic datasource for the same identified agent. Then verify the comparison and `null`/unmatched fallback, retain risk state through the authored CTA and confirm that operational authority is unchanged. The [QA record](qa-affinity-personalization-2026-09-13.md) records the two journeys already attempted and the remaining acceptance checks.
+The accepted preview rehearsal correlated populated native scores with the two matching authored spotlights, verified Elena’s no-affinity neutral comparison and preserved risk state through both CTAs. The selector remains the saved native table; no local selector or injected score was added. Record a new rehearsal against the actual starting profile, because previous history remains. The [QA record](qa-affinity-personalization-2026-09-13.md) preserves both the initial failures and the successful correction.
 
 ## Rehearsal identity and reset boundaries
 
@@ -113,8 +123,12 @@ A `restart` affects the **entire reviewer pack**, invalidates its existing appli
 | Three authored ProductSpotlight datasources | Native workflow approval and publication completed |
 | Native decision table and topic variant mapping | Live as Liberty Mutual - Product interest spotlight; one built-in Top Affinity String column |
 | Built-in score selection and equal-score algorithm | Native UI source inspected: highest numeric score; equal scores retain first encountered value; no topic-priority guarantee |
-| Published Products page/datasources and neutral rendering | Verified; topic selection has not been observed |
-| Native profile scoring | Unverified: Daniel's inspected `traits` remained empty after Illinois/Texas visits; Maya's profile showed No affinities after the household journey |
-| Correlated native input/decision, topic transition, null/unmatched fallback and comparison | Pending; see the [runtime QA record](qa-affinity-personalization-2026-09-13.md) |
+| Published Products page/datasources and neutral rendering | Verified; corrected preview selected both topic variants after tagged-page visits |
+| Page-event naming contract | Corrected preview `cd96c0d` sends CMS `route.name`; ordinary browsing now populates native scores |
+| Native profile scoring | Corrected preview: Daniel `.03` and Maya `.03`, both generation 0, each built 2 views and score 1.00 for their respective topics; initial failures preserved in QA |
+| Neutral comparison and signed-in user switching | Passed: Elena `.04` had no affinities and neutral Products content after Daniel and Maya |
+| Corrected preview existing Workspace regression | Passed: 37/37 under Node 24, no resets |
+| Preview affinity runtime acceptance | Passed for both topics, neutral comparison and state-preserving CTAs; raw decision receipt not separately captured |
+| Production deployment and verification | Pending; see the separate production entry in the [runtime QA record](qa-affinity-personalization-2026-09-13.md#production-verification) |
 
 Application and serialization checks do not establish transfer of native affinity configuration, personalization decisions or profile history to another environment. Preserve their native setup and runtime evidence independently.
