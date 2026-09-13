@@ -35,6 +35,9 @@ export function WorkspaceScreen({ editorial }: { editorial?: ReactNode }) {
   const growth = priorTotal
     ? (((total - priorTotal) / priorTotal) * 100).toFixed(1)
     : "0";
+  const businessLineCount = data.agency.production.filter(
+    (item) => item.policyCount > 0,
+  ).length;
   const preferredResources = selectRecommendedResources(
     data.resources,
     data.agent,
@@ -127,12 +130,8 @@ export function WorkspaceScreen({ editorial }: { editorial?: ReactNode }) {
               .toLocaleString()}
           </strong>
           <span>
-            Across{" "}
-            {
-              data.agency.production.filter((item) => item.policyCount > 0)
-                .length
-            }{" "}
-            lines of business
+            Across {businessLineCount}{" "}
+            {businessLineCount === 1 ? "line" : "lines"} of business
           </span>
         </div>
         <div className="metric">
