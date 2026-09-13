@@ -138,7 +138,7 @@ export function ClientsScreen({
               <option key={value}>{value}</option>
             ))}
           </select>
-          <span className="results-count">{visible.length} results</span>
+          <span className="results-count">{visible.length} {visible.length === 1 ? "result" : "results"}</span>
         </div>
         <div className="table-scroll">
           <table className="portal-table responsive-records has-row-action">
