@@ -17,17 +17,23 @@ export function PortalTracking({
 }) {
   const { page } = useSitecore();
   const { route, context } = page.layout.sitecore;
+  const language = route?.itemLanguage || config.defaultLanguage;
+  const pageName = route?.name;
   const variant = route?.itemId
     ? CdpHelper.getPageVariantId(
         route.itemId,
-        route.itemLanguage || "en",
+        language,
         context.variantId as string,
         config.personalize?.scope,
       )
     : "";
   useEffect(() => {
     if (!page.mode.isNormal || !identity || !variant) return;
-    void recordPortalPageView(identity, runId, path, variant);
-  }, [identity, runId, path, variant, page.mode.isNormal]);
+    void recordPortalPageView(identity, runId, path, {
+      page: pageName,
+      language,
+      pageVariantId: variant,
+    });
+  }, [identity, runId, path, variant, pageName, language, page.mode.isNormal]);
   return null;
 }
