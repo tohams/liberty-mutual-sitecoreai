@@ -10,6 +10,7 @@ import {
   eventsPlugin,
   identity,
   pageView,
+  type PageViewData,
 } from "@sitecore-content-sdk/events";
 import { clearEventQueue } from "@sitecore-content-sdk/events/browser";
 import type { PortalBootstrap, PortalAction } from "@/contracts/portal";
@@ -187,12 +188,13 @@ export async function recordPortalPageView(
   profile: PortalIdentity | null,
   runId: string,
   path: string,
-  pageVariantId: string,
+  pageData: Pick<PageViewData, "page" | "language"> & { pageVariantId: string },
 ) {
   if (!profile || !trackingEnabled()) return;
   const generation = sdkWork.current();
   const identityKey = `${profile.provider}:${profile.id}`;
-  const key = JSON.stringify([identityKey, runId, path, pageVariantId]);
+  // Navigation deduplication uses the URL; Sitecore event metadata uses the CMS route.
+  const key = JSON.stringify([identityKey, runId, path, pageData.pageVariantId]);
   return recordedViews.record(
     key,
     async () =>
@@ -203,9 +205,7 @@ export async function recordPortalPageView(
       pageView({
         channel: "WEB",
         currency: "USD",
-        language: "EN",
-        page: path,
-        pageVariantId,
+        ...pageData,
       }),
   );
 }

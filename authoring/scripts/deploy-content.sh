@@ -47,6 +47,7 @@ if [[ "$portal_publish" == true && "$portal_what_if" == false ]]; then
   for portal_path in \
     '/sitecore/templates/Project/LibertyMutual' \
     '/sitecore/layout/Renderings/Project/LibertyMutual' \
+    '/sitecore/layout/Layouts/Project/LibertyMutual' \
     '/sitecore/layout/Placeholder Settings/Project/LibertyMutual'; do
     dotnet sitecore publish item -n "$portal_environment" -p "$portal_path" -sub -l en --pt Edge
   done

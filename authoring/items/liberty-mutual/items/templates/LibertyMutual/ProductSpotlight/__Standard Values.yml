@@ -1,0 +1,27 @@
+﻿---
+ID: "f3b54aca-ad87-5cce-aae9-1155ebe6fa66"
+Parent: "df47f749-485c-5e86-88e4-85ab46a7d7ca"
+Template: "df47f749-485c-5e86-88e4-85ab46a7d7ca"
+Path: /sitecore/templates/Project/LibertyMutual/ProductSpotlight/__Standard Values
+SharedFields:
+- ID: "ca9b9f52-4fb0-4f87-a79f-24dea62cda65"
+  Hint: __Default workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260912T000000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "c9cc238f-d9a1-4ecb-99de-54c36b298182"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260913T040117Z

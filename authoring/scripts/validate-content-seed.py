@@ -28,6 +28,7 @@ expected_model_paths = {
     '/sitecore/templates/Project/LibertyMutual',
     '/sitecore/layout/Renderings/Project/LibertyMutual',
     '/sitecore/layout/Placeholder Settings/Project/LibertyMutual',
+    '/sitecore/layout/Layouts/Project/LibertyMutual',
 }
 require({i['path'] for i in model['items']['includes']} == expected_model_paths,
         'Model includes must remain restricted to owned LibertyMutual roots.')

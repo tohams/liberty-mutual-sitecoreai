@@ -1,0 +1,23 @@
+﻿---
+ID: "b80274a3-38fb-56e0-a547-a24e27c03626"
+Parent: "20e904a1-9b60-43a1-a8d0-8e3aee45b115"
+Template: "386f0378-6076-52b4-8251-d240af07ea30"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260912T000000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "dd8e0600-6985-4fea-a905-d50cd26c0520"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260913T040221Z
