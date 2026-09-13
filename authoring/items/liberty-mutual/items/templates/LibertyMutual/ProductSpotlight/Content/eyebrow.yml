@@ -1,30 +1,40 @@
----
-ID: 35c4189e-3ef7-5178-92fd-c76c02920416
-Parent: 19a7350e-7698-5b48-98d9-683be940dfab
-Template: 455a3e98-a627-4b40-8035-e683a0331ac7
+﻿---
+ID: "35c4189e-3ef7-5178-92fd-c76c02920416"
+Parent: "19a7350e-7698-5b48-98d9-683be940dfab"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/Project/LibertyMutual/ProductSpotlight/Content/eyebrow
 SharedFields:
-- ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
-  Value: Single-Line Text
-- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: "100"
+  Value: 100
 Languages:
 - Language: en
   Fields:
-  - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
+  - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
     Hint: Title
     Value: Eyebrow
-  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
-    Hint: __Display name
-    Value: Eyebrow
-  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+  - ID: "9541e67d-ce8c-4225-803d-33f7f29f09ef"
     Hint: __Short description
     Value: Short context label above the product spotlight.
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Eyebrow
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20260912T000000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a26decdb-19a9-47cc-ae46-588cc024b6d9"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260913T040116Z

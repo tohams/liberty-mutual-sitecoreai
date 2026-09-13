@@ -10,9 +10,10 @@ SharedFields:
     {193A0299-B5B6-5668-B792-9F3552463163}
     {980AD02C-08E5-5F27-9F08-F28E829CA94D}
     {15CF6EFA-C180-563A-B229-C08F2DAC3DAD}
+    {1962D596-4187-51C9-A91F-4D39A9318B51}
 - ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
   Hint: __Shared revision
-  Value: "6a169b81-a9f4-4bcf-a054-040843711f20"
+  Value: "bb6dc1e2-ed7c-4fe0-aeb6-a08d9388f691"
 Languages:
 - Language: en
   Versions:
@@ -23,11 +24,11 @@ Languages:
       Value: 20260910T150000Z
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "2192124a-685e-457d-95cb-8832a3ecde46"
+      Value: "f778c769-4f6e-4234-bdd7-82f0a393170b"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\thomas.lin@sitecore.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20260910T142404Z
+      Value: 20260913T041430Z

@@ -95,6 +95,9 @@ def serialize(value):
     serialized = re.sub(r"(?m)^(\s*(?:- )?[^:\n]+: )('.*')$",
                         lambda match: match.group(1) + json.dumps(yaml.safe_load(match.group(2)), ensure_ascii=False),
                         serialized)
+    # The installed native SCS reader retains a quoted empty Value literally.
+    # Use its own empty-field convention instead of YAML's quoted empty scalar.
+    serialized = re.sub(r'(?m)^(\s*Value:) ""$', r'\1', serialized)
     return '---\n' + serialized
 
 

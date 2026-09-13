@@ -1,10 +1,10 @@
----
-ID: 6b4c5446-2e57-5a07-850e-36ed8beb7e4d
-Parent: b80274a3-38fb-56e0-a547-a24e27c03626
-Template: df47f749-485c-5e86-88e4-85ab46a7d7ca
-Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight/workers_compensation
+﻿---
+ID: "6b4c5446-2e57-5a07-850e-36ed8beb7e4d"
+Parent: "b80274a3-38fb-56e0-a547-a24e27c03626"
+Template: "df47f749-485c-5e86-88e4-85ab46a7d7ca"
+Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight/workers_compensation"
 SharedFields:
-- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
   Hint: __Workflow
   Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
 Languages:
@@ -12,18 +12,35 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 35c4189e-3ef7-5178-92fd-c76c02920416
-      Hint: eyebrow
-      Value: WORKERS COMPENSATION
-    - ID: 1c28b166-ffbd-5d00-8398-5120d65788f2
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "1041b290-9cb7-5d63-ade0-4bb88fcdacfb"
+      Hint: actionLink
+      Value: |
+        <link text="Review account preparation" linktype="external" url="/resources/build-a-bop-submission" />
+    - ID: "1c28b166-ffbd-5d00-8398-5120d65788f2"
       Hint: headline
       Value: Build a stronger workers compensation conversation
-    - ID: fdbff5cf-246a-5c1f-bcf2-cf38cc14de3e
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260913T040221Z
+    - ID: "35c4189e-3ef7-5178-92fd-c76c02920416"
+      Hint: eyebrow
+      Value: WORKERS COMPENSATION
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{4460E76C-87E9-4859-9DE6-DE122774937F}"
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "4b57c878-cd3b-4596-b009-b7fef22b80fe"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260913T041520Z
+    - ID: "fdbff5cf-246a-5c1f-bcf2-cf38cc14de3e"
       Hint: body
       Value: <p>Bring the employer's operations, payroll and risk locations into focus. Review the preparation guide, then check the guidance for the applicable risk state.</p>
-    - ID: 1041b290-9cb7-5d63-ade0-4bb88fcdacfb
-      Hint: actionLink
-      Value: <link text="Review account preparation" linktype="external" url="/resources/build-a-bop-submission" />
-    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
-      Hint: __Workflow state
-      Value: "{12FFAC4C-565F-4C9A-B63E-7F77E96B4D1F}"

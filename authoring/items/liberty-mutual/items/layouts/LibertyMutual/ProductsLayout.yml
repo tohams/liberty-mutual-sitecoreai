@@ -1,20 +1,34 @@
----
-ID: 75cfc4f6-9a69-52b3-97c3-11a6f1fabe89
-Parent: 306e6bad-84d3-56c5-8f41-5ee83728dfb3
-Template: e4e11508-04a4-4b0b-a263-5201f811c9cd
+﻿---
+ID: "75cfc4f6-9a69-52b3-97c3-11a6f1fabe89"
+Parent: "306e6bad-84d3-56c5-8f41-5ee83728dfb3"
+Template: "e4e11508-04a4-4b0b-a263-5201f811c9cd"
 Path: /sitecore/layout/Layouts/Project/LibertyMutual/ProductsLayout
 SharedFields:
-- ID: a036b2bc-ba04-44f6-a75f-bae6cd242abf
+- ID: "80334869-86dc-4472-aa89-44cf1b2f6c9b"
+  Hint: Placeholders
+  Value: |
+    {21F39740-9A0D-40D1-8341-0896179C9A1B}
+    {284D388A-9D4E-4742-A298-EC6871592D4B}
+    {49E56593-BB61-41CA-8B9A-806B11486366}
+    {8428148D-9F3B-5323-A166-88D0C5EA56AC}
+- ID: "a036b2bc-ba04-44f6-a75f-bae6cd242abf"
   Hint: Path
   Value: /Views/SXA JSS/SXA JSS Layout.cshtml
-- ID: 80334869-86dc-4472-aa89-44cf1b2f6c9b
-  Hint: Placeholders
-  Value: "{21F39740-9A0D-40D1-8341-0896179C9A1B}|{284D388A-9D4E-4742-A298-EC6871592D4B}|{49E56593-BB61-41CA-8B9A-806B11486366}|{8428148D-9F3B-5323-A166-88D0C5EA56AC}"
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20260912T000000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "30441071-901c-4a8b-8932-dccd0960d0f1"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260913T040117Z

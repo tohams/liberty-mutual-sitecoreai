@@ -1,16 +1,16 @@
----
-ID: df47f749-485c-5e86-88e4-85ab46a7d7ca
-Parent: 94b480f8-5b0a-4487-99bb-238569489481
-Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+﻿---
+ID: "df47f749-485c-5e86-88e4-85ab46a7d7ca"
+Parent: "94b480f8-5b0a-4487-99bb-238569489481"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
 Path: /sitecore/templates/Project/LibertyMutual/ProductSpotlight
 SharedFields:
-- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
-  Hint: __Base template
-  Value: "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
-- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
   Value: Office/32x32/document_text.png
-- ID: f7d48a55-2158-4f02-9356-756654404f73
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Value: "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
   Hint: __Standard values
   Value: "{F3B54ACA-AD87-5CCE-AAE9-1155EBE6FA66}"
 Languages:
@@ -18,6 +18,16 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20260912T000000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7326fb4c-06a6-48cb-acf5-f9b338ce2202"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260913T040116Z

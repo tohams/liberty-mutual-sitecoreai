@@ -1,10 +1,10 @@
----
-ID: 7ba69b40-6645-59b7-b471-6ae3885b6a4e
-Parent: 386f0378-6076-52b4-8251-d240af07ea30
-Template: 386f0378-6076-52b4-8251-d240af07ea30
+﻿---
+ID: "7ba69b40-6645-59b7-b471-6ae3885b6a4e"
+Parent: "386f0378-6076-52b4-8251-d240af07ea30"
+Template: "386f0378-6076-52b4-8251-d240af07ea30"
 Path: /sitecore/templates/Project/LibertyMutual/ProductSpotlightFolder/__Standard Values
 SharedFields:
-- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
   Hint: __Masters
   Value: "{DF47F749-485C-5E86-88E4-85AB46A7D7CA}"
 Languages:
@@ -12,6 +12,16 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20260912T000000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "322894ec-84aa-43e9-8389-ba2e9aa77b3b"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260913T040117Z

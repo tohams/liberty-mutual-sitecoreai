@@ -2,7 +2,7 @@
 
 This guide explains how to operate, change and transfer the Liberty Mutual agent portal. It distinguishes compiled application behavior from tenant configuration and runtime verification. The portal uses native Sitecore content; operational account, policy, submission and production records are fictional fixtures with durable, isolated workspaces.
 
-Use the [presenter runbook](demo-loops.md) for eight capability walkthroughs. Loops 3, 4 and 7 cover operational workflows, state authority and the development/release model; loop 8 adds a native Resources A/B test with its own [configuration and acceptance record](ab-testing.md). The shared preparation and reset sections explain pack coordination and environment boundaries.
+Use the [presenter runbook](demo-loops.md) for nine capability walkthroughs. Loops 3, 4 and 7 cover operational workflows, state authority and the development/release model; loop 8 adds a native Resources A/B test with its own [configuration and acceptance record](ab-testing.md). Loop 9 adds a separate Products affinity spotlight whose native runtime acceptance is pending in the [affinity record](affinity-personalization.md). The shared preparation and reset sections explain pack coordination and environment boundaries.
 
 ## Ownership and architecture
 
@@ -38,6 +38,18 @@ Run `node --import tsx scripts/verify-resource-state-search.mjs --public-context
 Products, submission preparation and bond requests use the shared dated state-eligibility adapter. Every state-sensitive server action rechecks the acting agent, relevant assigned producer, current authority, carrier appointment and product/state rule. UI decisions are explanatory projections; they cannot authorize an action. The [state eligibility runbook](state-eligibility.md) documents the contract, risk-state navigation, saved-work handling, illustrative state differences and deployed acceptance commands. UDL remains the personalization layer; operational authority comes from the server adapter.
 
 The [September 11 eligibility evidence](qa-evidence-2026-09-11.md) records automated checks, deployed cross-agent cases, browser journeys and native platform regression results.
+
+### Products affinity spotlight
+
+The [ProductSpotlight component](../examples/liberty-mutual-agent-portal/src/components/product-spotlight/ProductSpotlight.tsx) replaces the formerly static Products hero with editable `eyebrow`, `headline`, rich-text `body` and General Link `actionLink` fields. Its original artwork is retained. Native Sitecore supplies the datasource/variant; no browser scoring, history-based copy selection or forced treatment is implemented.
+
+`ProductsLayout` exposes the dedicated `headless-products-spotlight` root alongside the standard layout roots. Only the Products landing page receives this layout assignment; the shared site layout remains unchanged. The server passes its native `AppPlaceholder` through `PortalApp.productsSpotlight` into `ProductsScreen.spotlight`, preserving `headless-main` editorial and product-detail composition. The original hero remains when no published placement exists; missing datasource fields retain it in normal rendering and show a selection prompt in editing mode.
+
+The CTA uses the same selected/initial risk-state resolution as Products and the existing authored-link adapter. It preserves valid state context, authored query parameters and anchors; it does not rewrite editor/preview fields or substitute a home state for an invalid state hint. Catalog filtering and server eligibility are independent of spotlight content.
+
+Keep three native stories separate: Workspace `AgentGuidance` selects known role/imported-cohort guidance; Resources `AgentGuidance` remains the existing A/B CTA experiment; Products `ProductSpotlight` is the affinity placement. Products version 2, its dedicated layout/placement, the three approved datasources and the decision table are live. Five `insurance_interest` assignments cover `workers_compensation` and `household`; the Products landing page is untagged. Two actual topic journeys retained neutral content and had no populated native affinities, leaving behavioral acceptance open. See the [component contract](affinity-personalization.md) and [runtime QA record](qa-affinity-personalization-2026-09-13.md).
+
+The saved **Liberty Mutual - Product interest spotlight** table uses a single built-in **Top Affinity** custom-value String column (`top_affinity_value`) and exact matches for `workers_compensation` and `household`, mapped to their existing datasources. Its inspected UI exposes no affinity-name parameter; it is not explicitly scoped to `insurance_interest`. That is currently the site's only configured affinity name. The documented empty result is `null`; neutral delivery still needs verification. The built-in source inspected in the native UI iterates `profile.traits.affinities` across groups, selects the highest numeric score and retains the first encountered value on equal scores. The published documentation does not specify this tie behavior, and no stable topic ordering or business priority is established. The optional affinity-name parameter belongs to the separate boolean Top Affinity condition, not this saved custom-value input. See the [saved decision contract and runtime checkpoint](affinity-personalization.md#saved-native-decision-and-built-in-contract).
 
 ## Environment configuration
 
@@ -86,7 +98,7 @@ Do not enable verbose Sitecore editing diagnostics on a shared deployment: the u
 
 ## Build and continuous integration
 
-Node.js 24 is required. `npm ci` installs the committed dependency graph. The app's `npm run build` generates the actual Sitecore component maps and SDK metadata before compiling Next.js. Generated `.sitecore` files are ignored build artifacts, not source files to edit by hand. The component-map configuration excludes tests, fixtures and pure helpers; regeneration must retain the three intended native portal components, the required placeholder and SDK built-ins. Verify the generated registration set when adding modules so utility code does not become a CMS rendering.
+Node.js 24 is required. `npm ci` installs the committed dependency graph. The app's `npm run build` generates the actual Sitecore component maps and SDK metadata before compiling Next.js. Generated `.sitecore` files are ignored build artifacts, not source files to edit by hand. The component-map configuration excludes tests, fixtures and pure helpers; regeneration must retain the four intended native portal components—`AgentGuidance`, `ResourceArticle`, `ResourceSearch` and `ProductSpotlight`—plus `PartialDesignDynamicPlaceholder` and SDK built-ins. The generated server/client maps contain these registrations for PR #21. Verify the registration set when adding modules so utility code does not become a CMS rendering.
 
 The active [workflow](../.github/workflows/portal-validation.yml) runs on feature pull requests to `main`, pushes to `main`, and manual dispatch. It pins third-party actions to reviewed commits, grants read-only repository permission and does not retain checkout credentials.
 
@@ -114,7 +126,20 @@ authoring/scripts/deploy-content.sh ENVIRONMENT --what-if
 authoring/scripts/deploy-content.sh ENVIRONMENT
 ```
 
-Normal releases push only `LibertyMutual.Model`, using `CreateAndUpdate` within the three owned model roots. The initial `--seed` option creates missing content only. The content module is `CreateOnly`; it never overwrites a marketer's existing item. `--publish` explicitly publishes the owned site and model roots. It does not include related items outside that scope. Never run a broad starter-wide serialization push for this portal.
+Normal releases push only `LibertyMutual.Model`, using `CreateAndUpdate` within four owned model roots: templates, renderings, placeholder settings and layouts, each under its `Project/LibertyMutual` path. The added fourth root is `/sitecore/layout/Layouts/Project/LibertyMutual`, containing the dedicated `ProductsLayout`; it does not expand scope to the shared layout tree. The initial `--seed` option creates missing content only. The content module is `CreateOnly`; it never overwrites a marketer's existing item. `--publish` explicitly publishes the owned site and all four model roots. It does not include related items outside that scope. Never run a broad starter-wide serialization push for this portal.
+
+### ProductSpotlight release path
+
+After the scoped model and initial datasource seeds are available, apply the Products placement separately from serialization. The [placement helper](../authoring/scripts/configure-product-spotlight.cjs) requires a reviewed, bounded native Products baseline snapshot. Its default is a read-only plan:
+
+```sh
+node authoring/scripts/configure-product-spotlight.cjs ENVIRONMENT --baseline /absolute/path/to/reviewed-products-before.json
+node authoring/scripts/configure-product-spotlight.cjs ENVIRONMENT --baseline /absolute/path/to/reviewed-products-before.json --apply
+```
+
+The helper adds only `ProductSpotlight` to the owned Available Renderings list and creates/resumes the named **Product affinity spotlight** English draft version. Its final-layout delta selects `ProductsLayout` and adds the neutral spotlight in `headless-products-spotlight`; it preserves the original shared layout, prior page version and existing guidance. It journals apply stages, stops on unexpected author changes and makes no automatic remote retries. If a response is uncertain, inspect the journal and run the read-only plan before applying again.
+
+The helper does not approve or publish the page, alter the shared layout, or configure the affinity decision table. Datasource approval is a separate `--approve-datasources` operation with its own read-only preview. For a destination setup, review and approve the native page/datasources, publish the scoped items, then configure and activate the table deliberately. Inspect the current Products page's personalization/A/B status first and retain Workspace and Resources behavior. Record the native IDs, built-in input output, mappings, fallback/tie behavior, actual score updates and selected variants. App deployment, model release, content publication, native activation and runtime acceptance are separate checks. The current tenant's native setup is live; the [affinity QA record](qa-affinity-personalization-2026-09-13.md) records the unresolved scoring/behavioral check and the unchanged surrounding authoring items.
 
 ### Dedicated editing host
 
@@ -171,6 +196,7 @@ Record the deployment URL, commit, tenant, tester, time, persona, pack and resul
 | Native resource editing | Change an authored title or summary, publish, and verify browse/search/article views agree; favorites survive the metadata change |
 | Native UDL | Log in, resolve the intended imported provider identity, observe an event on that profile, and verify switching personas creates the correct association |
 | Native personalization | Inspect the published native rule/table, its actual profile context and the resulting component variant for positive and negative profiles |
+| Native affinity spotlight | Verify the five tagged pages and untagged Products root; observe the same identified agent's topic-score change and native ProductSpotlight selection with known attributes/state unchanged; verify neutral/comparison behavior and retained eligibility. Runtime proof is pending in the [affinity record](affinity-personalization.md) |
 | Native A/B testing | Verify the current experiment, A/B copy, goal and allocation; observe normal treatment delivery and accepted native decisions, distinguish control from fallback, and verify same-browser goal events plus native aggregate attribution when processed. Record host-specific results; no statistical winner is required for functional acceptance |
 | Native Search | Confirm the owned source indexes authored resource fields and returns relevant state/product guidance from native queries |
 | Native Agentic Studio | Verify the campaign workflow and Brand Kit in the tenant, with inputs, generated output and human review recorded; no outbound delivery is implied |
