@@ -4,7 +4,7 @@ Use this guided review to follow an agent's work, inspect the content behind it,
 
 For individual sessions, use the [eight-loop presenter runbook](demo-loops.md). It provides accounts, preparation, numbered click paths, expected results, implementation boundaries and reset guidance for each loop, with separate marketing and IT agendas. The added [Resources A/B test](ab-testing.md) has its own setup and acceptance status; it is not covered by the earlier seven-loop rehearsal.
 
-**Review status:** the [September 11 seven-loop rehearsal](qa-seven-loops-2026-09-11.md) records fresh portal and native observations, including all 37 native identity, first/second workspace, logout and anonymous-access assertions on each host. It also records completed operational resets and restoration of the temporary CMS summary in the live site and native Search. Customer author/approver-role acceptance and native Brand Kit retrieval remain separate handoff checks. Earlier [connected QA evidence](qa-evidence-2026-09-10.md) remains available for deployment history.
+**Review status:** the [September 11 seven-loop rehearsal](qa-seven-loops-2026-09-11.md) records fresh portal and native observations, including all 37 native identity, first/second workspace, logout and anonymous-access assertions on each host. It also records completed operational resets and restoration of the temporary CMS summary in the live site and native Search. Customer author/approver-role acceptance remains open. Native kit and section retrieval was verified separately on September 13, with the [projected-color limitation](agentic-studio/brand-kit-retrieval-2026-09-13.md). Earlier [connected QA evidence](qa-evidence-2026-09-10.md) remains available for deployment history.
 
 ## 1. Begin with the agency, then compare its people
 
@@ -69,7 +69,7 @@ Open the existing [Agentic Studio ABM space](https://app.sitecorecloud.io/agenti
 
 Review the **eighth artifact**, titled **Cedar Ridge Insurance ABM — Final Reviewed Implementation Package**. It contains the corrected audience contract and four validated seed payloads, available in native Content, JSON and Preview views. Its title does not replace human editorial approval, and the earlier artifacts remain run history.
 
-The Brand Kit was selected as context, but native retrieval of its contents remains **unverified**. The useful revised output used a supplied, source-grounded brand excerpt. Explain this boundary using the [capability ledger](agentic-studio/capability-ledger.md). Review generated copy before moving approved changes into the existing CMS datasources. This workflow has not sent emails, activated audiences or automatically published its drafts.
+Separate native Brand Kit retrieval was verified on September 13 in **Liberty Mutual — Read-only Brand Kit retrieval verification**. The kit and all nine sections returned successfully; the historical ABM still used the supplied excerpt. Retrieved top-level color metadata conflicts with the authored Visual guidance and needs review. See the [retrieval record](agentic-studio/brand-kit-retrieval-2026-09-13.md). Review generated copy before moving approved changes into CMS datasources. This drafting workflow has not sent emails or automatically published its outputs.
 
 ## 6. Leave the next reviewer a predictable starting point
 

@@ -1,6 +1,6 @@
 # Brand and Agentic capability ledger
 
-Status recorded September 10, 2026, from the implementation owner's native UI observations. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
+Current status includes the separate September 13 retrieval verification. The September 10 execution and configuration observations below remain historical evidence. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
 
 ## Native identifiers
 
@@ -13,7 +13,11 @@ Status recorded September 10, 2026, from the implementation owner's native UI ob
 - Initial Brief run: `e04cc244-8e06-4d2e-8dfb-23e0f5e3c459`.
 - Initial Content run: `776c2332-51e0-4348-a4c3-1e58c49c85c4`.
 
-## Capability evidence
+## Current retrieval status
+
+On September 13, native **Get Brand Kit** and all nine **Get Brand Kit Section** calls succeeded in a separate read-only conversation. The existing ABM artifacts still document their September 10 excerpt input. Structured top-level colors remain inconsistent with the authored Visual guidance. See the [retrieval record](brand-kit-retrieval-2026-09-13.md) for the actual conversation, returned fields and limitations. No campaign was rerun or published for this check.
+
+## September 10 capability evidence
 
 | Capability | Status | Evidence and boundary |
 |---|---|---|
@@ -29,11 +33,11 @@ Status recorded September 10, 2026, from the implementation owner's native UI ob
 | Checked-in campaign reference | Local implementation artifact | `reference-campaign-draft.json` is a desired-output example created by the implementation process, not a native generated artifact or proof of execution. |
 | Outbound activation and publication | Outside this drafting flow | Drafting does not authorize email delivery, audience activation, automatic approval or CMS publication. Any approved CMS changes follow the existing editorial workflow. |
 
-## Retrieval configuration inspection
+## September 10 retrieval configuration inspection
 
 On September 10, 2026, the implementation owner observed the embedded Agentic Studio interface exposing Start over, History, Chat/Artifacts, Select Agent and the composer. The documented Agentic Settings/Tools management controls were not visible. The global CMS Settings page exposed utilities rather than those Agentic controls. Context Retrieval configuration was therefore not inspected; whether it is disabled, and whether any role or entitlement explains the UI difference, remain unverified. This observation does not establish the cause of the Brand Kit retrieval limitation or change its status.
 
-Sitecore documents the Agentic-specific navigation in [Agentic Studio settings](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/agentic-studio-settings.html). Its [tool inventory](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/tools-available-to-chats-and-agents.html) lists Context Retrieval under Standard tools and Brand Kits under Agent API tools. These documented capabilities have not been verified in this tenant's configuration.
+Sitecore documents the Agentic-specific navigation in [Agentic Studio settings](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/agentic-studio-settings.html). Its [tool inventory](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/tools-available-to-chats-and-agents.html) lists Context Retrieval under Standard tools and Brand Kits under Agent API tools. They were unverified at that September 10 checkpoint. On September 13, Agentic Settings > Tools visibly enabled Context Retrieval and Brand Kits with read-only access, and the separate retrieval record verified returned content. This does not establish the cause of the earlier failure.
 
 ## Close the remaining acceptance work
 
