@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Text,
-  RichText,
-  useSitecore,
-} from "@sitecore-content-sdk/nextjs";
+import { Text, RichText, useSitecore } from "@sitecore-content-sdk/nextjs";
 import { useContext } from "react";
 import { PortalContentLink as Link } from "@/components/ui/portal-link";
 import { useSearchParams } from "next/navigation";
@@ -44,7 +40,10 @@ export function Default({ fields, params }: AgentGuidanceProps) {
         <RichText field={fields.body} className="cms-rich-text" />
       </div>
       {(fields.actionLink?.value?.href || page.mode.isEditing) && (
-        <Link field={actionLink ?? { value: {} }} className="cms-action" />
+        <Link
+          field={actionLink ?? { value: {} }}
+          className="button button-primary cms-action"
+        />
       )}
     </aside>
   );

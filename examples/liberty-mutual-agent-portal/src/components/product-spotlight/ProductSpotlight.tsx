@@ -52,7 +52,7 @@ export function Default({ fields, params }: ProductSpotlightProps) {
       {(fields.actionLink?.value?.href || page.mode.isEditing) && (
         <PortalContentLink
           field={actionLink ?? { value: {} }}
-          className="text-link"
+          className="button button-primary cms-action"
         />
       )}
     </ProductSpotlightFrame>
