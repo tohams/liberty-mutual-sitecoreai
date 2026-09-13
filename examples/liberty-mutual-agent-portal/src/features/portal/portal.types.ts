@@ -11,6 +11,7 @@ export interface PortalAppProps {
   route: string;
   workspaceEditorial?: ReactNode;
   resourcesSearch?: ReactNode;
+  productsSpotlight?: ReactNode;
   pageContent?: ReactNode;
   isEditing?: boolean;
 }

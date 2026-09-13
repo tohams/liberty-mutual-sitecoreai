@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { PortalLink as Link } from "@/components/ui/portal-link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PortalIcon, type IconName } from "@/components/ui/portal-icon";
@@ -18,6 +18,7 @@ import {
   evaluateProductAvailability,
   evaluateProductEligibility,
 } from "@/domain/eligibility";
+import { ProductSpotlightFallback } from "./product-spotlight-view";
 
 const lineIcons: Record<BusinessLine, IconName> = {
   personal: "home",
@@ -27,7 +28,7 @@ const lineIcons: Record<BusinessLine, IconName> = {
   surety: "file",
 };
 
-export function ProductsScreen() {
+export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
   const { data } = usePortal();
   const router = useRouter();
   const pathname = usePathname();
@@ -93,25 +94,7 @@ export function ProductsScreen() {
             : "No licensed states are available. Contact your relationship team to review your access."}
         </p>
       )}
-      <section className="products-hero">
-        <div>
-          <span className="eyebrow">LOCAL KNOWLEDGE. BROAD POSSIBILITIES.</span>
-          <h2>
-            Protection built around
-            <br />
-            the business you know.
-          </h2>
-          <p>
-            From the first home to a growing enterprise, explore guidance,
-            prepare your account, and connect with a specialist.
-          </p>
-        </div>
-        <div className="products-hero-art" aria-hidden="true">
-          <PortalIcon name="building" width="78" height="78" />
-          <PortalIcon name="home" width="61" height="61" />
-          <span className="product-art-sun" />
-        </div>
-      </section>
+      {spotlight ?? <ProductSpotlightFallback />}
       <div
         className="catalog-filter"
         aria-label="Filter products by business line"

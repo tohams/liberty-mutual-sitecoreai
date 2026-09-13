@@ -57,6 +57,10 @@ export default async function PortalPage({ params }: PageProps) {
     throw error;
   }
   const editorial = <AppPlaceholder page={page} componentMap={components} name="headless-main" rendering={page.layout.sitecore.route} />;
+  const productsSpotlight = route === '/products' && (
+    page.mode.isEditing ||
+    (page.layout.sitecore.route.placeholders?.['headless-products-spotlight']?.length ?? 0) > 0
+  ) ? <AppPlaceholder page={page} componentMap={components} name="headless-products-spotlight" rendering={page.layout.sitecore.route} /> : undefined;
   return (
     <NextIntlClientProvider locale={locale} messages={{}}>
       <Providers page={page}>
@@ -66,7 +70,7 @@ export default async function PortalPage({ params }: PageProps) {
           <PortalEditorProvider data={data}>
             <DesignLibraryApp page={page} rendering={page.layout.sitecore.route} componentMap={components} loadServerImportMap={() => import('.sitecore/import-map.server')} />
           </PortalEditorProvider> :
-          <PortalApp initialData={data} isEditing={draft.isEnabled} route={route === '/' ? '/workspace' : route} workspaceEditorial={isResourceLibrary ? undefined : editorial} resourcesSearch={isResourceLibrary ? editorial : undefined} pageContent={/^\/(resources|products)\/.+/.test(route) ? editorial : undefined} />}
+          <PortalApp initialData={data} isEditing={draft.isEnabled} route={route === '/' ? '/workspace' : route} workspaceEditorial={isResourceLibrary ? undefined : editorial} resourcesSearch={isResourceLibrary ? editorial : undefined} productsSpotlight={productsSpotlight} pageContent={/^\/(resources|products)\/.+/.test(route) ? editorial : undefined} />}
       </Providers>
     </NextIntlClientProvider>
   );

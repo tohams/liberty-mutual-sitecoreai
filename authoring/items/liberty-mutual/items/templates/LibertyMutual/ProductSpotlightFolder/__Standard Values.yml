@@ -1,0 +1,17 @@
+---
+ID: 7ba69b40-6645-59b7-b471-6ae3885b6a4e
+Parent: 386f0378-6076-52b4-8251-d240af07ea30
+Template: 386f0378-6076-52b4-8251-d240af07ea30
+Path: /sitecore/templates/Project/LibertyMutual/ProductSpotlightFolder/__Standard Values
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{DF47F749-485C-5E86-88E4-85AB46A7D7CA}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260912T000000Z

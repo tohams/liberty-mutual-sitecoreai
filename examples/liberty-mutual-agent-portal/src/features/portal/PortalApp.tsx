@@ -28,6 +28,7 @@ export function PortalApp({
   route,
   workspaceEditorial,
   resourcesSearch,
+  productsSpotlight,
   pageContent,
   isEditing = false,
 }: PortalAppProps) {
@@ -136,7 +137,8 @@ export function PortalApp({
     );
   else if (["clients", "policies", "renewals"].includes(section))
     content = <ClientsScreen key={route} initialSelectedId={selectedId} />;
-  else if (section === "products") content = <ProductsScreen />;
+  else if (section === "products")
+    content = <ProductsScreen spotlight={productsSpotlight} />;
   else if (section === "growth") content = <GrowthScreen />;
   else if (["resources", "learning"].includes(section))
     content = (

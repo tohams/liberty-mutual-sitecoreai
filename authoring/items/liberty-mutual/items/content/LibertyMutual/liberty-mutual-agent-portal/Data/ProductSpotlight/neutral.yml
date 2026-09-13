@@ -1,0 +1,29 @@
+---
+ID: 357ea7de-4039-51ad-80ff-cae025c56afb
+Parent: b80274a3-38fb-56e0-a547-a24e27c03626
+Template: df47f749-485c-5e86-88e4-85ab46a7d7ca
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight/neutral
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 35c4189e-3ef7-5178-92fd-c76c02920416
+      Hint: eyebrow
+      Value: LOCAL KNOWLEDGE. BROAD POSSIBILITIES.
+    - ID: 1c28b166-ffbd-5d00-8398-5120d65788f2
+      Hint: headline
+      Value: Protection built around the business you know.
+    - ID: fdbff5cf-246a-5c1f-bcf2-cf38cc14de3e
+      Hint: body
+      Value: <p>From the first home to a growing enterprise, explore guidance, prepare your account, and connect with a specialist.</p>
+    - ID: 1041b290-9cb7-5d63-ade0-4bb88fcdacfb
+      Hint: actionLink
+      Value: ""
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{12FFAC4C-565F-4C9A-B63E-7F77E96B4D1F}"
