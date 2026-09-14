@@ -13,7 +13,7 @@ You need approved read access to the **private** GitHub repository, an authentic
 | `SITECORE_EDGE_CONTEXT_ID` | The server-only scoped **Live** delivery context for this portal |
 | `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | The separate public browser context for this portal |
 
-Keep the values separate. A master Live or Preview context must never be placed in a `NEXT_PUBLIC_` variable. Request values through the team’s approved secret-sharing channel; do not put them in an issue, commit, slide, or screenshot.
+Keep the values separate. A master Live or Preview context must never be placed in a `NEXT_PUBLIC_` variable. Obtain the two approved scoped values from the restricted workshop deck or the team’s approved secret-sharing channel. Keep them out of source control and public issues, slides, or screenshots.
 
 GitHub write access is needed only if you later submit a pull request. Sitecore authoring and Vercel access are needed only for the corresponding content and release tasks. This frontend exercise does not require a Sitecore VM, Docker, a local Sitecore server, or a .NET installation.
 
@@ -38,7 +38,7 @@ Creating this local branch does not require GitHub write access and does not dep
 
 Open the repository root, **`liberty-mutual-sitecoreai`**, in VS Code with **File → Open Folder**. If the VS Code command is on your PATH, run `code .` from the repository root. Explorer should show the root configuration files, `authoring`, `.github`, and the portal application under `examples`.
 
-Keep that repository root open in VS Code. In its integrated terminal, change to the application directory before running the workshop’s npm commands:
+Keep that repository root open in VS Code. **npm uses the terminal’s current directory, not the folder shown in Explorer. The repository root has no `package.json`.** In the integrated terminal, change to the application directory before running any npm command:
 
 ```sh
 cd examples/liberty-mutual-agent-portal
@@ -52,11 +52,13 @@ The remaining terminal commands run from `examples/liberty-mutual-agent-portal`.
 
 ## 2. Create an isolated local configuration
 
+**Terminal directory: `liberty-mutual-sitecoreai/examples/liberty-mutual-agent-portal`.** If your terminal is still at the repository root, first run `cd examples/liberty-mutual-agent-portal`. Then run:
+
 ```sh
 npm run setup:local
 ```
 
-Use a fresh checkout with no other local `.env` files and a clean terminal without inherited portal configuration. The setup helper creates an ignored `.env.local` file with three independent local secrets, a unique state namespace, `PORTAL_STATE_ADAPTER=local-json`, and tracking disabled. It uses Node’s built-in modules, so it can run before dependency installation. It will not overwrite an existing `.env.local`.
+Use a fresh checkout with no other local `.env` files and a clean terminal without inherited portal configuration. The setup helper creates an ignored `.env.local` file with three independent local secrets, a unique state namespace, `PORTAL_STATE_ADAPTER=local-json`, and tracking disabled. It uses Node’s built-in modules and creates the environment file **before dependency installation**; `node_modules` is not required. It will not overwrite an existing `.env.local`.
 
 In VS Code, open `examples/liberty-mutual-agent-portal/.env.local` and fill only the two blank context values requested above. Save the file. Keep `PORTAL_CONTENT_ADAPTER=sitecore` and `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` for this exercise.
 
@@ -66,12 +68,14 @@ Do not copy production or preview environment files into this checkout. The stat
 
 ## 3. Install and start
 
+Stay in the same application directory after filling and saving `.env.local`:
+
 ```sh
 npm ci
 npm run dev
 ```
 
-`npm ci` installs the exact dependency tree from the committed lockfile. The development command generates Sitecore component maps, metadata, and import maps, then starts Next.js and the component-map watcher. Leave this terminal running.
+`npm ci` installs dependencies from the committed `package-lock.json`; it does not create `.env.local`. `npm install` also requires the application directory and does not replace the setup helper. Use `npm ci` for this workshop to preserve the locked dependency versions. The development command generates Sitecore component maps, metadata, and import maps, then starts Next.js and the component-map watcher. Leave this terminal running.
 
 When the terminal says **Ready**, open [http://localhost:3000/login](http://localhost:3000/login). If Next.js selects another port because 3000 is occupied, set `NEXT_PUBLIC_SITE_URL` to that reported local origin in `.env.local` and restart the server before using it.
 
@@ -173,6 +177,7 @@ The application’s [.env.remote.example](../examples/liberty-mutual-agent-porta
 
 | Setting or symptom | What to check |
 | --- | --- |
+| `ENOENT` opening `liberty-mutual-sitecoreai/package.json` | npm is running from the repository root, which has no package manifest. Run `cd examples/liberty-mutual-agent-portal` from that root, then `npm run setup:local`. Fill the generated `.env.local` before `npm ci` and `npm run dev`. Switching to `npm install` does not fix the directory or create the environment file. |
 | `SITECORE_EDGE_CONTEXT_ID` / `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | Both must be present, distinct, and correctly scoped. Restart the dev server after changing environment values. |
 | `PORTAL_SESSION_SECRET`, `PORTAL_OPERATOR_SECRET`, `SITECORE_EDITING_SECRET` | Local setup generates independent secrets. Keep deployed secrets in the hosting platform’s server-only configuration. A local editing secret does not register localhost as a Sitecore rendering host. |
 | `PORTAL_ENVIRONMENT`, `PORTAL_STATE_ADAPTER`, `PORTAL_LOCAL_STATE_DIRECTORY` | Keep the generated local namespace, `local-json`, and `.portal-state` for this exercise. |
