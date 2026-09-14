@@ -96,17 +96,17 @@ Languages:
                 <ruleset
                   s:pet="true">
                   <rule
-                    uid="{F155589F-7541-4B65-8974-E253BAFC56B8}"
-                    s:name="e144a961809e570f9e26c1cdd5d4e99b_4d9972ac27404789b7d0017adb300518">
+                    uid="{750E6AF4-FCE7-413E-8DE8-5267F55DC30A}"
+                    s:name="e144a961809e570f9e26c1cdd5d4e99b_a8d397f0f30145e384ea177916db4ce5">
                     <conditions>
                       <condition
-                        uid="148AE37BB79549B28DB77E4C665DC6CF"
+                        uid="EFAE6D2F9A0D4A08ADF64921B830653C"
                         s:id="{8E7426A4-12ED-4C44-8625-E7191860E726}"
-                        s:VariantName="e144a961809e570f9e26c1cdd5d4e99b_4d9972ac27404789b7d0017adb300518" />
+                        s:VariantName="e144a961809e570f9e26c1cdd5d4e99b_a8d397f0f30145e384ea177916db4ce5" />
                     </conditions>
                     <actions>
                       <action
-                        uid="{AE67FC42-CFC5-4725-A3EA-EC4EB943E2B4}"
+                        uid="{A25CFEE9-A909-42ED-BA73-15AF14AC9BDA}"
                         s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
                         s:DataSource="77e00d15-681c-45de-9079-aa08a48b7195" />
                     </actions>
@@ -116,7 +116,7 @@ Languages:
                     s:name="Default">
                     <conditions>
                       <condition
-                        uid="145CAEC11486471F81FA059FDCD011B8"
+                        uid="6FC1D5933402429D8DAA3B5CEE7BE2F2"
                         s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
                     </conditions>
                   </rule>
@@ -140,7 +140,7 @@ Languages:
         sitecore\thomas.lin@sitecore.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "7f566d06-fce1-407e-8877-c175565fd076"
+      Value: "b6a5f298-150a-4b5a-999b-f392da4ccbe4"
     - ID: "9857f526-390f-48df-b6d1-1a97cc328e8f"
       Hint: __Version Name
       Value: "Small-business CTA experiment"
@@ -156,4 +156,4 @@ Languages:
       Value: Learning & resources
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20260911T141343Z
+      Value: 20260914T023106Z

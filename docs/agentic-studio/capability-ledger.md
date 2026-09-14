@@ -1,6 +1,6 @@
 # Brand and Agentic capability ledger
 
-Current status includes the separate September 13 retrieval verification. The September 10 execution and configuration observations below remain historical evidence. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
+Current status includes the separate September 14 native consumption repair and creative-brief verification. The September 10 execution and configuration observations below remain historical evidence. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
 
 ## Native identifiers
 
@@ -15,7 +15,9 @@ Current status includes the separate September 13 retrieval verification. The Se
 
 ## Current retrieval status
 
-On September 13, native **Get Brand Kit** and all nine **Get Brand Kit Section** calls succeeded in a separate read-only conversation. The existing ABM artifacts still document their September 10 excerpt input. Structured top-level colors remain inconsistent with the authored Visual guidance. See the [retrieval record](brand-kit-retrieval-2026-09-13.md) for the actual conversation, returned fields and limitations. No campaign was rerun or published for this check.
+On September 14, a fresh native run retrieved the expanded **Visual guidance** text and produced **Liberty Mutual Independent Agents | Small-Business Resources ABM Creative Brief**, with all six authored hex values/roles, typography, logo handling and audience/state guardrails. The request supplied no expected colors or brand excerpt. See the [repair record and native conversation](brand-kit-consumption-repair-2026-09-14.md). The existing text field is protected as Non AI editable; original arrays and published knowledge remain unchanged.
+
+This verifies the demonstrated consumption path, not a vendor projection fix. Top-level color metadata still conflicts with the source and array fields still return empty through the inspected tool. The run uses complete authored text and records those discrepancies. The [September 13 retrieval record](brand-kit-retrieval-2026-09-13.md) and September 10 ABM excerpt history remain separate. No campaign was activated or published.
 
 ## Current artifact navigation
 

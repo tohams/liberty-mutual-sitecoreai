@@ -1,5 +1,7 @@
 # Resources A/B test evidence — September 11, 2026 UTC
 
+**Historical record.** The test described here was ended on September 14, 2026 UTC with control retained and published. The current **Liberty Mutual Small Business Guide CTA** has a separately verified goal selection and report. See the [current configuration](ab-testing.md) and [replacement verification record](qa-ab-testing-2026-09-14.md). The original observations below remain unchanged and must not be counted as results for the replacement.
+
 **Native test in progress; functional delivery and native goal-page ingestion verified.** PR #18 fixed the missing `guestRef`. PR #19 preview and production each retained B through two guide-and-back journeys without extra Resources prefetch requests, and production also completed an accepted native A journey. The native report now contains **3** control and **1** B unique visits, while aggregate goal attribution remains open. The earlier production treatment change did not recur, and its exact cause remains unproven. This record preserves the earlier failure alongside configuration, delivery and event evidence. It supports [loop 8](demo-loops.md#loop-8-a-clearer-next-step), with the definition and remaining checks in [ab-testing.md](ab-testing.md). It does not establish a winner or business lift.
 
 ## Release and native configuration

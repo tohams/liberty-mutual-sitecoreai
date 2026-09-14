@@ -1,6 +1,6 @@
 Create a review-ready account-based marketing campaign named “Expand your small-business practice” for the fictional independent agency Cedar Ridge Insurance in Austin, Texas.
 
-Select the published Liberty Mutual Agent Portal Brand Kit, ID 7dc084e7-9b2a-4b2b-bf66-e3e8fd865156. Use its brand voice, factual constraints and approved route vocabulary. If the kit cannot be selected, report that limitation before proceeding and do not claim Brand Kit compliance.
+Select the published Liberty Mutual — Independent Agents Brand Kit, ID 7dc084e7-9b2a-4b2b-bf66-e3e8fd865156. Retrieve Visual Guidelines, Tone of Voice and Brand Context using native Brand Kit tools before drafting. Use the complete authored Visual guidance as the authority for palette roles, typography and logo handling. If top-level summary metadata conflicts, use the authored section text and report the discrepancy. Empty returned arrays do not establish that native lists are empty; use their guidance only when present in the retrieved authored text. If required guidance cannot be retrieved, stop and report the gap instead of substituting a supplied excerpt or claiming Brand Kit compliance. Do not use web search or earlier chat content as brand evidence. Include the actual tool/section evidence in the review checklist.
 
 Use the campaign input JSON below as the source of account context. These are explicitly fictional, aggregated business figures prepared for this sandbox. The data supports a marketing-learning scenario only. Do not infer underwriting eligibility, appointment status or authorization from the production mix. Do not put financial figures or cohort scoring into visitor-facing content.
 
@@ -26,7 +26,7 @@ Campaign input:
   "campaignName": "Expand your small-business practice",
   "brandKit": {
     "id": "7dc084e7-9b2a-4b2b-bf66-e3e8fd865156",
-    "name": "Liberty Mutual Agent Portal"
+    "name": "Liberty Mutual — Independent Agents"
   },
   "inputProvenance": "All agency and production values are fictional integration fixtures. No client records, passwords, email addresses or policy records are included.",
   "agency": {

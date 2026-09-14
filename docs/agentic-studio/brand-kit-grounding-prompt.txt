@@ -1,0 +1,9 @@
+Prepare one concise, reviewable creative brief for a Liberty Mutual independent-agent account-based marketing campaign encouraging appropriately licensed agencies to explore small-business resources.
+
+Ground the work in the existing native Brand Kit Liberty Mutual — Independent Agents, ID 7dc084e7-9b2a-4b2b-bf66-e3e8fd865156. Retrieve Visual Guidelines, Tone of Voice and Brand Context directly using the native Brand Kit tools. Read the actual authored guidance; do not use web search, earlier chat content, supplied excerpts or general knowledge as brand evidence.
+
+Use the explicitly authored palette roles and values, typography and logo guidance. If generic summary metadata conflicts, use the authored Visual guidance and report that conflict separately in the evidence receipt. An empty returned array is not evidence that the native authored list is empty. Use its guidance only if that guidance is present in the retrieved authored text. If required guidance cannot be retrieved, stop and identify what is missing; do not invent it or claim compliance.
+
+Include a campaign objective, intended audience, one draft portal card, visual execution guidance, state and authorization guardrails, and a human review checkpoint. Do not infer appointment, eligibility, binding authority or coverage approval from marketing attributes. Do not expose private customer records or financial figures.
+
+Save one draft document artifact and include an evidence receipt identifying the native tools, returned sections and any remaining metadata or array discrepancy. No email, message delivery, audience activation, CMS mutation or publication. Leave the existing ABM space and its historical artifacts unchanged.
