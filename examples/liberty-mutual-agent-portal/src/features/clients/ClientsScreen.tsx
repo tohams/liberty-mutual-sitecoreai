@@ -32,6 +32,9 @@ export function ClientsScreen({
   const selected = data.policies.find(
     (item) => item.id === selectedId || item.accountId === selectedId,
   );
+  const renewalCount = data.policies.filter(
+    (item) => item.status === "Renewal review",
+  ).length;
   const visible = data.policies.filter(
     (item) =>
       `${item.accountName} ${item.policyNumber}`
@@ -93,12 +96,8 @@ export function ClientsScreen({
         <div>
           <h2>A timely conversation makes a difference.</h2>
           <p>
-            {
-              data.policies.filter((item) => item.status === "Renewal review")
-                .length
-            }{" "}
-            policies are ready for a renewal review. Start with what has
-            changed.
+            {renewalCount} {renewalCount === 1 ? "policy is" : "policies are"} ready
+            for a renewal review. Start with what has changed.
           </p>
         </div>
         <button
@@ -138,7 +137,7 @@ export function ClientsScreen({
               <option key={value}>{value}</option>
             ))}
           </select>
-          <span className="results-count">{visible.length} results</span>
+          <span className="results-count">{visible.length} {visible.length === 1 ? "result" : "results"}</span>
         </div>
         <div className="table-scroll">
           <table className="portal-table responsive-records has-row-action">

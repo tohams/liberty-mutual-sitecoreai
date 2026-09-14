@@ -16,11 +16,11 @@ SharedFields:
     <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
-        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        l="{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}">
         <r
           uid="{505DD086-70A3-53DE-8967-1B2ACBAAD108}"
           id="{980AD02C-08E5-5F27-9F08-F28E829CA94D}"
-          ph="headless-main"
+          ph="headless-resource-article"
           ds="{0BC41C85-4E9A-5DBA-BC62-9805509ACA23}"
           par="FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1" />
       </d>

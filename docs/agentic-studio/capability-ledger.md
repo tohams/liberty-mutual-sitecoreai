@@ -1,6 +1,6 @@
 # Brand and Agentic capability ledger
 
-Status recorded September 10, 2026, from the implementation owner's native UI observations. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
+Current status includes the separate September 14 native consumption repair and creative-brief verification. The September 10 execution and configuration observations below remain historical evidence. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
 
 ## Native identifiers
 
@@ -13,7 +13,17 @@ Status recorded September 10, 2026, from the implementation owner's native UI ob
 - Initial Brief run: `e04cc244-8e06-4d2e-8dfb-23e0f5e3c459`.
 - Initial Content run: `776c2332-51e0-4348-a4c3-1e58c49c85c4`.
 
-## Capability evidence
+## Current retrieval status
+
+On September 14, a fresh native run retrieved the expanded **Visual guidance** text and produced **Liberty Mutual Independent Agents | Small-Business Resources ABM Creative Brief**, with all six authored hex values/roles, typography, logo handling and audience/state guardrails. The request supplied no expected colors or brand excerpt. See the [repair record and native conversation](brand-kit-consumption-repair-2026-09-14.md). The existing text field is protected as Non AI editable; original arrays and published knowledge remain unchanged.
+
+This verifies the demonstrated consumption path, not a vendor projection fix. Top-level color metadata still conflicts with the source and array fields still return empty through the inspected tool. The run uses complete authored text and records those discrepancies. The [September 13 retrieval record](brand-kit-retrieval-2026-09-13.md) and September 10 ABM excerpt history remain separate. No campaign was activated or published.
+
+## Current artifact navigation
+
+Artifact numbers in the historical record below refer to creation order. The current **Artifacts** list is newest first. The reviewed package opens from the first **Liberty Mutual — Expand your small-business practice - Generated Content** card; verify the content heading **Cedar Ridge Insurance ABM — Final Reviewed Implementation Package**, because the first two cards share that generic label. **Classic** currently shows eight **Done** rows across the three agent types and no **Run workflow** control. Inspect the completed history without starting new work.
+
+## September 10 capability evidence
 
 | Capability | Status | Evidence and boundary |
 |---|---|---|
@@ -29,11 +39,11 @@ Status recorded September 10, 2026, from the implementation owner's native UI ob
 | Checked-in campaign reference | Local implementation artifact | `reference-campaign-draft.json` is a desired-output example created by the implementation process, not a native generated artifact or proof of execution. |
 | Outbound activation and publication | Outside this drafting flow | Drafting does not authorize email delivery, audience activation, automatic approval or CMS publication. Any approved CMS changes follow the existing editorial workflow. |
 
-## Retrieval configuration inspection
+## September 10 retrieval configuration inspection
 
 On September 10, 2026, the implementation owner observed the embedded Agentic Studio interface exposing Start over, History, Chat/Artifacts, Select Agent and the composer. The documented Agentic Settings/Tools management controls were not visible. The global CMS Settings page exposed utilities rather than those Agentic controls. Context Retrieval configuration was therefore not inspected; whether it is disabled, and whether any role or entitlement explains the UI difference, remain unverified. This observation does not establish the cause of the Brand Kit retrieval limitation or change its status.
 
-Sitecore documents the Agentic-specific navigation in [Agentic Studio settings](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/agentic-studio-settings.html). Its [tool inventory](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/tools-available-to-chats-and-agents.html) lists Context Retrieval under Standard tools and Brand Kits under Agent API tools. These documented capabilities have not been verified in this tenant's configuration.
+Sitecore documents the Agentic-specific navigation in [Agentic Studio settings](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/agentic-studio-settings.html). Its [tool inventory](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/agentic-studio-settings/tools-available-to-chats-and-agents.html) lists Context Retrieval under Standard tools and Brand Kits under Agent API tools. They were unverified at that September 10 checkpoint. On September 13, Agentic Settings > Tools visibly enabled Context Retrieval and Brand Kits with read-only access, and the separate retrieval record verified returned content. This does not establish the cause of the earlier failure.
 
 ## Close the remaining acceptance work
 

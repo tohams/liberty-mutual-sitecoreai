@@ -1,0 +1,21 @@
+---
+ID: "3d40b9c9-8126-5ff8-81e1-a48afb1ba1a8"
+Parent: "306e6bad-84d3-56c5-8f41-5ee83728dfb3"
+Template: "e4e11508-04a4-4b0b-a263-5201f811c9cd"
+Path: "/sitecore/layout/Layouts/Project/LibertyMutual/PortalLayout"
+SharedFields:
+- ID: "80334869-86dc-4472-aa89-44cf1b2f6c9b"
+  Hint: Placeholders
+  Value: |
+    {427C0C0A-38CB-5C1B-AA2D-34B20594A9AA}
+- ID: "a036b2bc-ba04-44f6-a75f-bae6cd242abf"
+  Hint: Path
+  Value: /Views/SXA JSS/SXA JSS Layout.cshtml
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260914T211210Z

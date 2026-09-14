@@ -1,4 +1,6 @@
 ﻿{
+  "js/ts.tsdk.path": "examples/liberty-mutual-agent-portal/node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "files.associations": {
     "*.sicpackage": "json"
   },

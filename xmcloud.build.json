@@ -1,15 +1,11 @@
 {
-  "renderingHosts": {
-    "liberty-mutual-agent-portal": {
-      "path": "./examples/liberty-mutual-agent-portal",
-      "nodeVersion": "24.19.0",
-      "packageManager": "npm",
-      "enabled": true,
-      "type": "sxa",
-      "buildCommand": "build",
-      "runCommand": "next:start"
-    }
+  "deployItems": {
+    "modules": [
+      "nextjs-starter",
+      "LibertyMutual.Model"
+    ]
   },
+  "renderingHosts": {},
   "postActions": {
     "actions": {
       "warmUpCm": {

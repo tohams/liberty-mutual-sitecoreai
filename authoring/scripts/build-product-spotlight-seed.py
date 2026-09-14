@@ -36,6 +36,7 @@ DATASOURCE_PATH = SITE + '/Data/ProductSpotlight'
 RENDERING_PATH = '/sitecore/layout/Renderings/Project/LibertyMutual/ProductSpotlight'
 PLACEHOLDER_KEY = 'headless-products-spotlight'
 PLACEHOLDER_PATH = '/sitecore/layout/Placeholder Settings/Project/LibertyMutual/' + PLACEHOLDER_KEY
+GUIDANCE_PLACEHOLDER_PATH = '/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-agent-guidance'
 VARIANT_PATH = SITE + '/Presentation/Headless Variants/ProductSpotlight'
 LAYOUT_ROOT = '/sitecore/layout/Layouts/Project/LibertyMutual'
 LAYOUT_PATH = LAYOUT_ROOT + '/ProductsLayout'
@@ -155,21 +156,19 @@ def build_items(manifest):
         field('b5b27af1-25ef-405c-87ce-369b3a004016', 'Datasource Location', DATASOURCE_PATH),
         field('a77e8568-1ab3-44f1-a664-b7c37ec7810d', 'Parameters Template', brace(manifest['templateIds']['PortalRenderingParameters'])),
         field('06d5295c-ed2f-4a54-9bf2-26228d113318', '__Icon', 'Office/32x32/document_text.png'),
-    ]))
+    ], values=[field('1b58d065-fe74-43e3-ba20-54c9588b3011', 'AllowedOnTemplates',
+                     brace(manifest['templateIds']['PortalPage']))]))
     records.append(item(PLACEHOLDER_PATH, 'e26a2d36-9ee9-49df-bb07-0073d8e20ccc', '5c547d4e-7111-4995-95b0-6b561751bf2e', shared=[
         field('7256bdab-1fd2-49dd-b205-cb4873d2917c', 'Placeholder Key', PLACEHOLDER_KEY),
         field('e391b526-d0c5-439d-803e-17512eae6222', 'Allowed Controls', brace(uid(RENDERING_PATH))),
     ]))
-    # Native JSS Layout metadata was read before this additive layout was defined.
-    # Preserve its three existing roots; only the owned Products layout adds the
-    # spotlight root. The Foundation layout and other page layouts stay intact.
+    # Bind only the two named regions used on the Products landing page.
+    # Shared Foundation placeholders and layouts remain untouched.
     records.append(item(LAYOUT_ROOT, 'da04b275-8838-4a3a-afee-817cf1fdd2eb', 'a87a00b1-e6db-45ab-8b54-636fec3b5523'))
     records.append(item(LAYOUT_PATH, uid(LAYOUT_ROOT), 'e4e11508-04a4-4b0b-a263-5201f811c9cd', shared=[
         field('a036b2bc-ba04-44f6-a75f-bae6cd242abf', 'Path', '/Views/SXA JSS/SXA JSS Layout.cshtml'),
-        field('80334869-86dc-4472-aa89-44cf1b2f6c9b', 'Placeholders', '|'.join(brace(value) for value in [
-            '21f39740-9a0d-40d1-8341-0896179c9a1b',
-            '284d388a-9d4e-4742-a298-ec6871592d4b',
-            '49e56593-bb61-41ca-8b9a-806b11486366',
+        field('80334869-86dc-4472-aa89-44cf1b2f6c9b', 'Placeholders', '\n'.join(brace(value) for value in [
+            uid(GUIDANCE_PLACEHOLDER_PATH),
             uid(PLACEHOLDER_PATH),
         ])),
     ]))

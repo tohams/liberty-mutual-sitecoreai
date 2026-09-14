@@ -2,6 +2,14 @@
 
 This directory preserves source and evidence for native SitecoreAI personalization configuration. It is separate from CMS item serialization and application releases. Saving these files does not deploy a custom value, connect a decision table or activate a content variant.
 
+## Choose the relevant surface
+
+- Workspace **AgentGuidance** uses the known role and agency growth flag described below.
+- Learning & resources has a separate [native Resources A/B test](../../docs/ab-testing.md).
+- Products & appetite uses **ProductSpotlight** and the built-in Top Affinity value, with [page assignments, model, native decision and verified browsing journeys](../../docs/affinity-personalization.md).
+
+These configurations are independent. Changing a serialized datasource does not configure cloud decisions, transfer native history or authorize insurance transactions.
+
 ## Small-business growth role
 
 The native custom value **Liberty Mutual - Small business growth role** is published in the Safeco Insurance Company of America POC organization.

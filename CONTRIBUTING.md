@@ -12,7 +12,7 @@ npm run sitecore-tools:generate-map
 npm run sitecore-tools:build
 npm run type-check
 npm run lint
-NODE_OPTIONS='--conditions=react-server' node --import tsx --test src/server/**/*.test.ts src/features/portal/*.test.ts
+npm test
 npm run build
 ```
 

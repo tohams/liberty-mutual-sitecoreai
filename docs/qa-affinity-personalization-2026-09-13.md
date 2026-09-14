@@ -1,6 +1,6 @@
 # Product affinity spotlight — runtime QA
 
-**September 13, 2026 UTC.** The corrected preview now builds native affinities and selects both topic spotlights through ordinary identified-agent journeys. The application had sent URL paths where native affinity assignments expect CMS page names. Daniel’s workers-compensation journey and Maya’s household journey each increased the matching native view count from zero to two and rendered the authored topic hero. An independently checked Elena profile retained the neutral spotlight, and the existing Workspace regression passed all 37 preview checks. Preview runtime acceptance has passed; production verification is recorded separately after deployment. The earlier failed journeys are preserved below.
+**September 13, 2026 UTC.** Affinity personalization passed ordinary browser journeys on production and preview. Daniel and Maya each built the corresponding native affinity to 2 views and score 1.00, then received the matching authored Products spotlight with risk state retained through its CTA. The correction sends CMS page names instead of URL paths in native page-view events. Elena’s no-affinity comparison stayed neutral, and both hosts passed all 37 existing Workspace personalization checks. The initial failed journeys are preserved below, followed by the corrected preview and production evidence.
 
 ## Initial configuration and application validation
 
@@ -38,7 +38,7 @@ During the initial failed journeys, the native **Top Affinity** built-in source 
 
 An initial Channels navigation displayed a warning about missing analytics identifiers, including this site. The registry and English assignment were present and enabled, and the warning did not recur after a fresh reload. No restore action was performed. This observation has not established the cause of the missing affinity scores.
 
-Sitecore documents near-real-time scoring during a session and persistence to the profile after session closure. A follow-up check found Daniel's earlier session closed with no visible profile affinities, so an open-session display delay does not explain all of the observations. No visit threshold or backend failure has been established. The event-to-assignment mismatch below is the next correction being verified.
+Sitecore documents near-real-time scoring during a session and persistence to the profile after session closure. A follow-up check found Daniel's earlier session closed with no visible profile affinities, so an open-session display delay does not explain all of the observations. No visit threshold or backend failure has been established. This led to the page-name correction verified below.
 
 ## Page-name correction
 
@@ -105,7 +105,20 @@ These results correlate native profile traits with authored selections on a comp
 
 ## Production verification
 
-Pending deployment of the accepted correction and a production check. Passing preview acceptance does not establish the deployed production commit or its runtime behavior. Keep this entry separate from the completed preview evidence.
+[PR #21](https://github.com/tohams/liberty-mutual-sitecoreai/pull/21) merged at **17:08:16 UTC** as `b99e3ca07ee2932ee69cd5531dda7004e6fd4213`. Vercel reported the production deployment Ready, and the implementation owner repeated both ordinary topic journeys at `https://liberty-mutual-agent-portal.vercel.app`.
+
+| Production journey | Starting state | Native result | Rendered result and CTA |
+| --- | --- | --- | --- |
+| `daniel.04`, generation 0 | Native **No affinities**; neutral Products | Actual Illinois then Texas workers-compensation articles produced **2 workers-compensation views, score 1.00** | **Build a stronger workers compensation conversation**; followed **Review account preparation** to the actual resource with `state=IL` retained |
+| `maya.04`, generation 0 | Native **No affinities**; neutral Products | Actual personal-products then household-renewal pages produced **2 household views, score 1.00** | **Make the next household renewal conversation count**; followed the household checklist CTA to the actual resource with `state=TX` retained |
+
+Both accounts retained their known attributes and generation. These were the same native identities that had failed before the correction, providing direct confirmation that the application change fixed score population without replacing their profiles. The two-view snapshots preceded the final CTA visits; opening a tagged CTA destination can add another view.
+
+In the same production browser, the implementation owner signed out Daniel, then Maya, and signed in as **`elena.04`**. Her native profile showed **No affinities**. Products retained **Protection built around the business you know.**, with Illinois selected and only her licensed Illinois/Texas/Florida options available. Neither previous agent’s topic choice carried over.
+
+The production known-attribute personalization regression passed **37/37**, preserving the existing Workspace behavior. **Production affinity runtime acceptance: passed** for native scoring, both authored topic selections, no-affinity neutral comparison and state-preserving CTAs.
+
+All journeys ended with verified sign-out to `/login`; temporary portal and Sitecore tabs were closed. No operational records were changed, no pack was reset and no profile generation advanced. Native browsing history remains, so these exercised profiles should not be described as unused baselines.
 
 ## Evidence provenance
 

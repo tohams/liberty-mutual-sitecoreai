@@ -13,10 +13,18 @@ NS=uuid.UUID('4a098fe0-ad6b-4722-9862-4e56b855337a')
 def uid(key):return str(uuid.uuid5(NS,key))
 def brace(s):return '{'+s.upper()+'}'
 def f(i,h,v):return {'ID':i,'Hint':h,'Value':str(v)}
+def upsert(lst,field):
+ for n,x in enumerate(lst):
+  if x['ID'].lower()==field['ID'].lower():lst[n]=field;return
+ lst.append(field)
 FIELDS={'base':'12c33f3f-86c5-43a5-aeb4-5598cec45116','std':'f7d48a55-2158-4f02-9356-756654404f73','sort':'ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e','icon':'06d5295c-ed2f-4a54-9bf2-26228d113318','layout':'f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e','workflow':'a4f985d9-98b3-4b52-aaaf-4344f6e747c6','defaultWorkflow':'ca9b9f52-4fb0-4f87-a79f-24dea62cda65','workflowState':'3e431de1-525e-47a3-b6b0-1ccbec3a8c98','masters':'1172f251-dad4-4efb-a329-0c63500e4f1e','display':'b5e02ad9-d56f-4c41-a065-a133db87bdeb','help':'9541e67d-ce8c-4225-803d-33f7f29f09ef'}
 IDS={'projectTemplates':'94b480f8-5b0a-4487-99bb-238569489481','projectRenderings':'705f29fc-a5de-489e-9e2e-2dac8e03d084','projectPlaceholders':'e26a2d36-9ee9-49df-bb07-0073d8e20ccc','page':'2ec94e3d-439c-4fc6-bd4e-f08c7ddd9203','home':'ae9e45ca-f127-4abe-9ca7-2ff109981998','site':'f8db2730-a55f-412d-97f6-06a0951cce27','data':'20e904a1-9b60-43a1-a8d0-8e3aee45b115','variants':'19a63bdd-f9c6-403b-8068-c1884e9bb413','available':'2bcfce89-293c-4ddb-870a-78bce4777859','headlessLayout':'96e5f4ba-a2cf-4a4c-a4e7-64da88226362','basicWorkflow':'b4f49b23-4bba-4c79-ba22-f89f5f0d4e4f','pageApproved':'f7fe5bdd-a991-4a58-9735-cd08f9b097ab','datasourceWorkflow':'a053ed9f-4099-4682-9411-2b4c98e481e4','datasourceApproved':'4460e76c-87e9-4859-9de6-de122774937f'}
 TEMPLATE='ab86861a-6030-46c5-b394-e8f99e8b87db';SECTION='e269fbb5-3750-427a-9149-7aa950b49301';FIELD='455a3e98-a627-4b40-8035-e683a0331ac7';FOLDER='a87a00b1-e6db-45ab-8b54-636fec3b5523';STD='1930bbeb-7805-471a-a3be-4858ac7cf696';DEVICE='fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3'
 SITE='/sitecore/content/LibertyMutual/liberty-mutual-agent-portal';TP='/sitecore/templates/Project/LibertyMutual'
+LAYOUT_ROOT='/sitecore/layout/Layouts/Project/LibertyMutual'
+PLACEHOLDER_ROOT='/sitecore/layout/Placeholder Settings/Project/LibertyMutual'
+PLACEHOLDERS={'AgentGuidance':'headless-agent-guidance','ResourceSearch':'headless-resource-search','ResourceArticle':'headless-resource-article'}
+LAYOUTS={'PortalLayout':['AgentGuidance'],'ResourcesLayout':['ResourceSearch','AgentGuidance'],'ResourceArticleLayout':['ResourceArticle']}
 written=[]
 class Dumper(yaml.SafeDumper):pass
 def string_rep(dumper,data):return dumper.represent_scalar('tag:yaml.org,2002:str',data,style='|' if '\n' in data else '"' if data=='' else None)
@@ -27,7 +35,7 @@ def save(item,kind):
    if not version.get('Fields'):version['Fields']=[f('25bed78c-4957-4165-998a-ca1b52f67497','__Created','20260910T140000Z')]
  if 'Languages' in item:
   item['Languages']=[{key:lang[key] for key in ('Language','Fields','Versions') if key in lang} for lang in item['Languages']]
- prefixes={'templates':'/sitecore/templates/Project/','renderings':'/sitecore/layout/Renderings/Project/','placeholders':'/sitecore/layout/Placeholder Settings/Project/','content':'/sitecore/content/'}
+ prefixes={'templates':'/sitecore/templates/Project/','renderings':'/sitecore/layout/Renderings/Project/','placeholders':'/sitecore/layout/Placeholder Settings/Project/','layouts':'/sitecore/layout/Layouts/Project/','content':'/sitecore/content/'}
  path=ITEMS/kind/(item['Path'][len(prefixes[kind]):]+'.yml');path.parent.mkdir(parents=True,exist_ok=True)
  # Sitecore serialization uses a narrow YAML reader: single-quoted scalars are
  # retained literally. Normalize them to double-quoted JSON/YAML strings.
@@ -66,9 +74,16 @@ meta=[x for x in resources if x[0]!='title']+ [('businessFamily','Business famil
 ag=template('AgentGuidance',guidance,workflow=IDS['datasourceWorkflow']);ra=template('ResourceArticle',resources,workflow=IDS['datasourceWorkflow'])
 rs=template('ResourceSearch',[('search','Search configuration','Multi-Line Text','JSON configuration for the native resource search source. Change source and field mappings together; preserve valid JSON.')],workflow=IDS['datasourceWorkflow'])
 params=template('PortalRenderingParameters',bases=['4247aad4-ebde-4994-998f-e067a51b1fe4','5c74e985-e055-43ff-b28c-db6c6a6450a2','44a022db-56d3-419a-b43b-e27e4d8e9c41','3db3eb10-f8d0-4cc9-be26-18ce7b139ec8'])
-emptylayout='<r><d id="'+brace(DEVICE)+'" l="'+brace(IDS['headlessLayout'])+'" /></r>'
+emptylayout='<r><d id="'+brace(DEVICE)+'" l="'+brace(uid(LAYOUT_ROOT+'/PortalLayout'))+'" /></r>'
 portal=template('PortalPage',bases=[IDS['page']],workflow=IDS['basicWorkflow'],sharedstd=[f(FIELDS['layout'],'__Renderings',emptylayout)])
-resourcepage=template('ResourcePage',meta,bases=[portal],workflow=IDS['basicWorkflow'])
+articlelayout='<r><d id="'+brace(DEVICE)+'" l="'+brace(uid(LAYOUT_ROOT+'/ResourceArticleLayout'))+'" /></r>'
+resourcepage=template('ResourcePage',meta,bases=[portal],workflow=IDS['basicWorkflow'],sharedstd=[f(FIELDS['layout'],'__Renderings',articlelayout)])
+# Home uses the tenant-created, project-owned Page template directly. Preserve
+# that item's native identity and other defaults while aligning its layout.
+page_std=ITEMS/'templates/LibertyMutual/Page/__Standard Values.yml'
+page_defaults=yaml.safe_load(page_std.read_text(encoding='utf-8-sig'))
+upsert(page_defaults.setdefault('SharedFields',[]),f(FIELDS['layout'],'__Renderings',emptylayout))
+save(page_defaults,'templates')
 for name,tid in [('GuidanceFolder',ag),('ResourcesFolder',ra),('SearchFolder',rs)]:
  t=template(name,bases=[FOLDER],sharedstd=[f(FIELDS['masters'],'__Masters',brace(tid))])
 # Insert options for authoring pages.
@@ -78,10 +93,15 @@ renderids={}
 for name,tid in [('AgentGuidance',ag),('ResourceArticle',ra),('ResourceSearch',rs)]:
  path='/sitecore/layout/Renderings/Project/LibertyMutual/'+name;rid=uid(path);renderids[name]=rid
  sf=[f('037fe404-dd19-4bf7-8e30-4dadf68b27b0','componentName',name),f('1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f','Datasource Template',TP+('/ResourcePage' if name=='ResourceArticle' else '/'+name)),f('b5b27af1-25ef-405c-87ce-369b3a004016','Datasource Location',SITE+('/Data/Guidance' if name=='AgentGuidance' else '/Data/Search' if name=='ResourceSearch' else '/Home/resources')),f('a77e8568-1ab3-44f1-a664-b7c37ec7810d','Parameters Template',brace(params)),f(FIELDS['icon'],'__Icon','Office/32x32/document_text.png')]
- item(path,IDS['projectRenderings'],'04646a89-996f-4ee7-878a-ffdbf1f0ef0d','renderings',shared=sf,id=rid)
+ allowed=[resourcepage] if name=='ResourceArticle' else [IDS['page'],portal] if name=='AgentGuidance' else [portal]
+ item(path,IDS['projectRenderings'],'04646a89-996f-4ee7-878a-ffdbf1f0ef0d','renderings',shared=sf,id=rid,values=[f('1b58d065-fe74-43e3-ba20-54c9588b3011','AllowedOnTemplates','\n'.join(brace(t) for t in allowed))])
  variantroot=item(SITE+'/Presentation/Headless Variants/'+name,IDS['variants'],'49c111d0-6867-4798-a724-1f103166e6e9','content')
  for v in ['Default','Highlight'] if name=='AgentGuidance' else ['Default']:item(SITE+'/Presentation/Headless Variants/'+name+'/'+v,variantroot,'4d50cdae-c2d9-4de8-b080-8f992bfb1b55','content')
-item('/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-main',IDS['projectPlaceholders'],'5c547d4e-7111-4995-95b0-6b561751bf2e','placeholders',shared=[f('7256bdab-1fd2-49dd-b205-cb4873d2917c','Placeholder Key','headless-main'),f('e391b526-d0c5-439d-803e-17512eae6222','Allowed Controls','\n'.join(brace(i) for i in renderids.values()))])
+for name,key in PLACEHOLDERS.items():
+ item(PLACEHOLDER_ROOT+'/'+key,IDS['projectPlaceholders'],'5c547d4e-7111-4995-95b0-6b561751bf2e','placeholders',shared=[f('7256bdab-1fd2-49dd-b205-cb4873d2917c','Placeholder Key',key),f('e391b526-d0c5-439d-803e-17512eae6222','Allowed Controls',brace(renderids[name]))])
+item(LAYOUT_ROOT,'da04b275-8838-4a3a-afee-817cf1fdd2eb',FOLDER,'layouts')
+for name,components in LAYOUTS.items():
+ item(LAYOUT_ROOT+'/'+name,uid(LAYOUT_ROOT),'e4e11508-04a4-4b0b-a263-5201f811c9cd','layouts',shared=[f('a036b2bc-ba04-44f6-a75f-bae6cd242abf','Path','/Views/SXA JSS/SXA JSS Layout.cshtml'),f('80334869-86dc-4472-aa89-44cf1b2f6c9b','Placeholders','\n'.join(brace(uid(PLACEHOLDER_ROOT+'/'+PLACEHOLDERS[c])) for c in components))])
 item(SITE+'/Presentation/Available Renderings/Agent portal',IDS['available'],'76da0a8d-fc7e-42b2-af1e-205b49e43f98','content',shared=[f('715ae6c0-71c8-4744-ab4f-65362d20ad65','Renderings','\n'.join(brace(i) for i in renderids.values()))])
 folders={}
 for name,t in [('Guidance','GuidanceFolder'),('Resources','ResourcesFolder'),('Search','SearchFolder')]:folders[name]=item(SITE+'/Data/'+name,IDS['data'],templates[t],'content')
@@ -92,10 +112,13 @@ def datasource(name,type,values,folder='Guidance',approved=True):
  return item(SITE+'/Data/'+folder+'/'+name,folders[folder],templates[type],'content',shared=sf,values=vf)
 def link(label,url):return '<link text="'+html.escape(label,quote=True)+'" linktype="external" url="'+html.escape(url,quote=True)+'" />'
 def layout(pageid,components):
- r='<r><d id="'+brace(DEVICE)+'" l="'+brace(IDS['headlessLayout'])+'">'
+ # The additive ProductSpotlight generator supplies ProductsLayout without
+ # rewriting page snapshots. Run both generators before validating a fresh seed.
+ layoutname='ProductsLayout' if pageid==uid(SITE+'/Home/products') else 'ResourceArticleLayout' if any(c[0]=='ResourceArticle' for c in components) else 'ResourcesLayout' if any(c[0]=='ResourceSearch' for c in components) else 'PortalLayout'
+ r='<r><d id="'+brace(DEVICE)+'" l="'+brace(uid(LAYOUT_ROOT+'/'+layoutname))+'">'
  for n,(name,ds,variant) in enumerate(components):
   vid=uid(SITE+'/Presentation/Headless Variants/'+name+'/'+variant)
-  r+='<r uid="'+brace(uid(pageid+'/rendering/'+str(n)))+'" id="'+brace(renderids[name])+'" ph="headless-main" ds="'+brace(ds)+'" par="FieldNames='+brace(vid)+'&amp;DynamicPlaceholderId='+str(n+1)+'" />'
+  r+='<r uid="'+brace(uid(pageid+'/rendering/'+str(n)))+'" id="'+brace(renderids[name])+'" ph="'+PLACEHOLDERS[name]+'" ds="'+brace(ds)+'" par="FieldNames='+brace(vid)+'&amp;DynamicPlaceholderId='+str(n+1)+'" />'
  return r+'</d></r>'
 def page(slug,title,components,values=None,parentid=IDS['home'],parentpath=SITE+'/Home',tid=None,order=100):
  path=parentpath+'/'+slug;pid=uid(path);sf=[f(FIELDS['layout'],'__Renderings',layout(pid,components)),f(FIELDS['sort'],'__Sortorder',order),f(FIELDS['workflow'],'__Workflow',brace(IDS['basicWorkflow']))]
@@ -119,10 +142,6 @@ for n,(slug,title,headline,body,label,url) in enumerate(top):
  pageids[slug]=page(slug,title,components,order=(n+1)*100)
 # Existing Home keeps its native identity and fields; only intentional title/layout/workflow entries change.
 homepath=ITEMS/'content/LibertyMutual/liberty-mutual-agent-portal/Home.yml';it=yaml.safe_load(homepath.read_text(encoding='utf-8-sig'))
-def upsert(lst,field):
- for n,x in enumerate(lst):
-  if x['ID'].lower()==field['ID'].lower():lst[n]=field;return
- lst.append(field)
 for x in [f(FIELDS['layout'],'__Renderings',layout(IDS['home'],[('AgentGuidance',neutral,'Default')])),f(FIELDS['workflow'],'__Workflow',brace(IDS['basicWorkflow']))]:upsert(it.setdefault('SharedFields',[]),x)
 vf=it['Languages'][0]['Versions'][0]['Fields']
 for x in [f('d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b','Title','My workspace'),f('4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8','NavigationTitle','My workspace'),f(FIELDS['workflowState'],'__Workflow state',brace(IDS['pageApproved']))]:upsert(vf,x)
@@ -139,5 +158,8 @@ for hub in DATA['productHubs']:
  ds=datasource('product-'+hub['family'],'AgentGuidance',{'eyebrow':'Products & appetite','headline':hub['title'],'body':body,'actionLink':link('Explore the preparation guide','/resources/'+hub['resourceSlug'])})
  page(hub['family'],hub['title'],[('AgentGuidance',ds,'Highlight')],parentid=pageids['products'],parentpath=SITE+'/Home/products')
 manifest={'schemaVersion':'1.0.0','site':SITE,'fieldIds':fieldids,'templateIds':templates,'renderingIds':renderids,'routePageIds':pageids,'promotions':promotionids,'resourceSearch':{'datasourceId':searchds,'sourceId':searchconfiguration['searchIndex'],'configuration':searchconfiguration},'resourcePages':resourceids,'seedWorkflowStatus':'Initial source-reviewed bootstrap items are Approved in existing Basic workflows. New author-created items use the native Draft initial state. This is sandbox editorial approval, not corporate brand approval.','unusedInitialResourceDatasources': [uid(SITE+'/Data/Resources/'+r['slug']) for r in DATA['resources']], 'generatedFiles':written}
+manifest['placeholderIds']={key:uid(PLACEHOLDER_ROOT+'/'+key) for key in PLACEHOLDERS.values()}
+manifest['layoutIds']={name:uid(LAYOUT_ROOT+'/'+name) for name in LAYOUTS}
+manifest['generatedFiles']=list(dict.fromkeys(written))
 (BASE/'content-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 print(f'Generated {len(written)} scoped Sitecore YAML files; {len(resourceids)} resource routes.')
