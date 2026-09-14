@@ -4,14 +4,21 @@ This is the active customer application. It uses the Sitecore Content SDK, Next.
 
 ## Run locally
 
-Follow the [developer quickstart](../../docs/developer-quickstart.md) for private-repository access, VS Code setup, and the complete heading-edit workshop. Open the repository root, `liberty-mutual-sitecoreai`, in VS Code. Use Node.js **24.19.0** and the checked-in package lock. In a fresh checkout, run these commands from the application directory, `examples/liberty-mutual-agent-portal`:
+Follow the [developer quickstart](../../docs/developer-quickstart.md) for private-repository access, VS Code setup, and the complete heading-edit workshop. Open the repository root, `liberty-mutual-sitecoreai`, in VS Code. Use Node.js **24.19.0** and the checked-in package lock. The root has no `package.json`. In a terminal starting at that root, run:
 
 ```bash
+cd examples/liberty-mutual-agent-portal
 npm run setup:local
-# Fill only the two blank approved context values in .env.local.
+```
+
+Fill the two approved scoped context values in `examples/liberty-mutual-agent-portal/.env.local` in VS Code and save. Keep the terminal in the application directory, then run:
+
+```bash
 npm ci
 npm run dev
 ```
+
+The setup helper creates `.env.local` before dependency installation. `npm ci` installs the locked dependencies; neither it nor `npm install` creates the environment file. If npm reports `ENOENT` for the repository-root `package.json`, change into the application directory first.
 
 The helper generates independent local secrets, a unique namespace and local JSON state; it leaves portal tracking disabled while retaining native content and Search. Keep Redis credentials absent from all local environment files and the terminal. Open http://localhost:3000/login and sign in as `daniel.01` with password `Sitecore`. The [authentication and data guide](docs/auth-and-data.md) covers operational state and resets; a production runtime requires Redis and cannot use the local JSON adapter.
 
