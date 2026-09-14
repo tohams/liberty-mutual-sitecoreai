@@ -1,0 +1,21 @@
+---
+ID: 0b1ed9c1-1abf-5d25-bbc2-74a4bab99f11
+Parent: f687abc0-0028-5475-801f-30a0533bd44f
+Template: 9dc18d3c-9944-507a-aeab-9787c8fc4d9c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Products/businessowners-policy
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "200"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Businessowners policy (BOP)
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 6a9542b0-b66e-5b22-82ea-74c3c774215b
+      Hint: description
+      Value: Businessowners policy preparation guidance.

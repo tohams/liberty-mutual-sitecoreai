@@ -1,0 +1,21 @@
+---
+ID: 2f7cd92d-aa0d-5a79-8a0e-5a7486373a03
+Parent: f687abc0-0028-5475-801f-30a0533bd44f
+Template: 9dc18d3c-9944-507a-aeab-9787c8fc4d9c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Products/contract-commercial-bonds
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "500"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Contract & commercial bonds
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 6a9542b0-b66e-5b22-82ea-74c3c774215b
+      Hint: description
+      Value: Contract and commercial surety bond preparation guidance.

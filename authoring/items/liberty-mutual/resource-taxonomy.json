@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0.0",
+  "site": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal",
+  "root": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy",
+  "description": "Initial editable metadata lists. Option item names preserve the portal and Search contract; use display names for friendly labels. Managed in Sitecore after CreateOnly seeding.",
+  "taxonomies": [
+    {
+      "field": "state",
+      "folder": "Risk states",
+      "description": "Select the risk location the resource applies to. All means reusable guidance that is not specific to one state.",
+      "options": [
+        {
+          "name": "All",
+          "displayName": "Cross-state guidance",
+          "description": "Reusable cross-state guidance. This does not override agent licensing or product eligibility."
+        },
+        {
+          "name": "FL",
+          "displayName": "Florida",
+          "description": "Resource guidance specific to a Florida risk."
+        },
+        {
+          "name": "IL",
+          "displayName": "Illinois",
+          "description": "Resource guidance specific to an Illinois risk."
+        },
+        {
+          "name": "TX",
+          "displayName": "Texas",
+          "description": "Resource guidance specific to a Texas risk."
+        }
+      ]
+    },
+    {
+      "field": "businessFamily",
+      "folder": "Business families",
+      "description": "Select the business family covered by the resource.",
+      "options": [
+        {
+          "name": "personal",
+          "displayName": "Personal insurance",
+          "description": "Guidance for personal insurance conversations."
+        },
+        {
+          "name": "small-commercial",
+          "displayName": "Small commercial",
+          "description": "Guidance for small-business insurance."
+        },
+        {
+          "name": "farm-ranch",
+          "displayName": "Farm & ranch",
+          "description": "Guidance for farm and ranch insurance."
+        },
+        {
+          "name": "midsize-large",
+          "displayName": "Midsize & large commercial",
+          "description": "Guidance for midsize and large commercial accounts."
+        },
+        {
+          "name": "retail-specialty",
+          "displayName": "Retail specialty",
+          "description": "Specialty insurance guidance for retail distribution."
+        },
+        {
+          "name": "surety",
+          "displayName": "Surety",
+          "description": "Guidance for contract and commercial bonds."
+        },
+        {
+          "name": "wholesale-specialty",
+          "displayName": "Wholesale specialty",
+          "description": "Specialty placement guidance for wholesale distribution."
+        }
+      ]
+    },
+    {
+      "field": "product",
+      "folder": "Products",
+      "description": "Select the product covered by the resource.",
+      "options": [
+        {
+          "name": "auto-home",
+          "displayName": "Auto & home",
+          "description": "Personal auto and homeowners preparation guidance."
+        },
+        {
+          "name": "businessowners-policy",
+          "displayName": "Businessowners policy (BOP)",
+          "description": "Businessowners policy preparation guidance."
+        },
+        {
+          "name": "commercial-auto",
+          "displayName": "Commercial auto",
+          "description": "Commercial automobile preparation guidance."
+        },
+        {
+          "name": "commercial-package",
+          "displayName": "Commercial package",
+          "description": "Commercial package preparation guidance."
+        },
+        {
+          "name": "contract-commercial-bonds",
+          "displayName": "Contract & commercial bonds",
+          "description": "Contract and commercial surety bond preparation guidance."
+        },
+        {
+          "name": "farm",
+          "displayName": "Farm",
+          "description": "Farm insurance preparation guidance."
+        },
+        {
+          "name": "specialty",
+          "displayName": "Specialty",
+          "description": "Specialty referral and placement preparation guidance."
+        },
+        {
+          "name": "workers-compensation",
+          "displayName": "Workers’ compensation",
+          "description": "Workers’ compensation preparation guidance."
+        }
+      ]
+    },
+    {
+      "field": "channel",
+      "folder": "Distribution channels",
+      "description": "Select the distribution channel the resource is written for.",
+      "options": [
+        {
+          "name": "independent-agent",
+          "displayName": "Independent agent",
+          "description": "Guidance intended for independent agency distribution."
+        },
+        {
+          "name": "wholesale",
+          "displayName": "Wholesale",
+          "description": "Guidance intended for wholesale distribution."
+        }
+      ]
+    },
+    {
+      "field": "resourceType",
+      "folder": "Resource types",
+      "description": "Select the kind of guidance the resource provides.",
+      "options": [
+        {
+          "name": "Bond guide",
+          "displayName": "Bond guide",
+          "description": "Guidance for preparing a bond conversation or request."
+        },
+        {
+          "name": "Checklist",
+          "displayName": "Checklist",
+          "description": "A task-oriented list of preparation steps."
+        },
+        {
+          "name": "Conversation guide",
+          "displayName": "Conversation guide",
+          "description": "Prompts and guidance for an agent conversation."
+        },
+        {
+          "name": "Learning path",
+          "displayName": "Learning path",
+          "description": "An ordered path for learning about a business topic."
+        },
+        {
+          "name": "Placement guide",
+          "displayName": "Placement guide",
+          "description": "Guidance for preparing an insurance placement."
+        },
+        {
+          "name": "Preparation guide",
+          "displayName": "Preparation guide",
+          "description": "Information to gather before the next step."
+        },
+        {
+          "name": "Referral guide",
+          "displayName": "Referral guide",
+          "description": "Guidance for preparing an appropriate referral."
+        },
+        {
+          "name": "State guidance",
+          "displayName": "State guidance",
+          "description": "Guidance scoped to a risk state."
+        },
+        {
+          "name": "Submission guide",
+          "displayName": "Submission guide",
+          "description": "Guidance for preparing a submission."
+        }
+      ]
+    }
+  ]
+}

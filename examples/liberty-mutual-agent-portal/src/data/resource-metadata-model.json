@@ -1,0 +1,44 @@
+{
+  "model": {
+    "siteName": "liberty-mutual-agent-portal",
+    "resourceRoot": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/resources",
+    "resourceTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+    "taxonomyRoot": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy",
+    "taxonomyRootId": "dfc6cfa1-6dfc-57ad-8e9a-583bff17bcc5",
+    "optionTemplateId": "9dc18d3c-9944-507a-aeab-9787c8fc4d9c",
+    "folderTemplateId": "d840055e-6e1a-50ae-b00a-c1db50375d42",
+    "descriptionFieldId": "6a9542b0-b66e-5b22-82ea-74c3c774215b"
+  },
+  "fields": [
+    {
+      "name": "state",
+      "fieldId": "ef9ca924-0217-59ba-8ae0-e3cb9cfbcdf9",
+      "sourceId": "a6c86a82-9b86-5347-8e96-287f69c536d3",
+      "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Risk states"
+    },
+    {
+      "name": "businessFamily",
+      "fieldId": "a640d3a6-0cac-5100-857b-d4ce5f2618ae",
+      "sourceId": "955b733d-0775-51f4-af32-171a525de043",
+      "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Business families"
+    },
+    {
+      "name": "product",
+      "fieldId": "e1f1902c-22e5-5dc7-acee-62c05dc4fe26",
+      "sourceId": "f687abc0-0028-5475-801f-30a0533bd44f",
+      "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Products"
+    },
+    {
+      "name": "channel",
+      "fieldId": "8a67dee3-1cc0-5a2c-aa51-02e5512cb36f",
+      "sourceId": "f181d7f4-f83e-58aa-afab-a1feef714da3",
+      "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Distribution channels"
+    },
+    {
+      "name": "resourceType",
+      "fieldId": "efdf8fef-2e79-5845-a709-0af3c615660c",
+      "sourceId": "eb629ebd-ff11-5049-8d4a-b875b4ca69ae",
+      "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Resource types"
+    }
+  ]
+}
