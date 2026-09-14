@@ -1,0 +1,25 @@
+Visual direction
+
+Create a calm, organized independent-agent workspace with clear headings, strong hierarchy, visible focus states and generous spacing. Use Roboto with Arial and system sans-serif fallbacks. Status must have text or an icon as well as color. Use natural, relevant work settings in photography. Never imply that stock subjects are actual Liberty Mutual employees, clients or agencies.
+
+Palette and roles
+
+Use the explicitly authored palette values and roles below. Never infer or substitute colors from a generic summary. Navy and yellow draw on the public Liberty Mutual agent website. The other portal colors, layout, spacing and components are implementation choices documented in the portal design tokens, not claimed corporate standards or an internal corporate brand manual.
+
+- Brand navy #1A1446: brand identity, main navigation, headings and primary text. Use supplied logo variants that preserve the original artwork.
+- Brand yellow #FFD000: compact identity bands and primary action surfaces, with navy text. Never use yellow as small text on white.
+- Canvas #F5F6FA: quiet page backgrounds around white content panels.
+- Secondary text #5A6276: supporting copy and metadata on light surfaces.
+- Border #DADEE7: panel and table separation.
+- Focus/supporting teal #006B68: visible focus and restrained accents.
+- Workspace presence: a yellow #FFD000 header brand region and navy #1A1446 CSS logo styling, using the supplied matching logo asset without changing its original path geometry or standalone styles.
+
+Logo guidelines
+
+- Use the official Liberty Mutual horizontal wordmark and symbol in the portal header, preserving their proportions and legibility. Independent Agents is portal context, not a newly invented logo lockup.
+- Use the supplied symbol-only version only when space requires it.
+- Do not redraw the logo, create new lockups or alter standalone files. Keep the original SVG path geometry, dimensions and light-theme styles intact.
+- Retain source SVGs, original source files and asset provenance.
+- Use a supplied logo variant with adequate contrast against its background. Keep the original path geometry and do not improvise color treatments or effects.
+- Trademark ownership remains with Liberty Mutual, and no separate redistribution license is granted.
+- The portal uses a compact yellow brand area, navy #1A1446 and a Roboto/Arial/system sans-serif stack, drawing on the public agent website. Portal layout and design tokens are implementation choices, not an internal corporate brand manual.

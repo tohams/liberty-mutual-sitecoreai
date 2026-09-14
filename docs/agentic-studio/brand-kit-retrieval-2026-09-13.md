@@ -1,5 +1,7 @@
 # Native Brand Kit retrieval verification — September 13, 2026
 
+**Historical checkpoint:** the [September 14 consumption repair](brand-kit-consumption-repair-2026-09-14.md) adds a verified native drafting path using complete authored text. Conflicting metadata and omitted arrays remain platform limitations; the observations below record the earlier read-only check.
+
 Native read-only retrieval succeeded for **Liberty Mutual — Independent Agents** in the existing SitecoreAI tenant. This is separate from the September 10 ABM generation, whose artifacts record a supplied brand excerpt. It does not establish that those earlier runs retrieved the kit.
 
 ## Inspect the saved proof
