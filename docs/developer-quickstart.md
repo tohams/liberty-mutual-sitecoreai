@@ -6,14 +6,14 @@ Run the Liberty Mutual agent portal locally, change one React heading in VS Code
 
 Install Git, **Node.js 24.19.0 with npm**, and VS Code or your preferred TypeScript editor. The application’s `.nvmrc` records the Node version; `package-lock.json` records the dependency versions. Use the existing lockfile rather than updating packages during this exercise.
 
-You need approved read access to the **private** GitHub repository, an authenticated Git client, and two scoped context values supplied by the environment owner:
+You need approved read access to the **private** GitHub repository and an authenticated Git client. Local setup supplies the owner-approved POC contexts automatically:
 
-| Environment variable | Value to request |
+| Environment variable | Value supplied by local setup |
 | --- | --- |
 | `SITECORE_EDGE_CONTEXT_ID` | The server-only scoped **Live** delivery context for this portal |
 | `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | The separate public browser context for this portal |
 
-Keep the values separate. A master Live or Preview context must never be placed in a `NEXT_PUBLIC_` variable. Obtain the two approved scoped values from the restricted workshop deck or the team’s approved secret-sharing channel. Keep them out of source control and public issues, slides, or screenshots.
+The scoped defaults belong to this private POC and are held in setup-only tooling, which must not be imported into application or browser code. Session, editing and operator secrets are generated independently on each machine. For another environment, obtain the correct scoped contexts through the owner-approved restricted workshop deck or secret-sharing channel and replace the POC defaults. A master Live or Preview context must never be placed in a `NEXT_PUBLIC_` variable; keep server context values out of browser bundles and public materials.
 
 GitHub write access is needed only if you later submit a pull request. Sitecore authoring and Vercel access are needed only for the corresponding content and release tasks. This frontend exercise does not require a Sitecore VM, Docker, a local Sitecore server, or a .NET installation.
 
@@ -52,15 +52,19 @@ The remaining terminal commands run from `examples/liberty-mutual-agent-portal`.
 
 ## 2. Create an isolated local configuration
 
-**Terminal directory: `liberty-mutual-sitecoreai/examples/liberty-mutual-agent-portal`.** If your terminal is still at the repository root, first run `cd examples/liberty-mutual-agent-portal`. Then run:
+**Terminal directory: `liberty-mutual-sitecoreai/examples/liberty-mutual-agent-portal`.** If your terminal is still at the repository root, first run `cd examples/liberty-mutual-agent-portal`.
+
+If you cloned an earlier workshop version, first update that checkout with `git pull --ff-only origin main` from the application directory. Coordinate any outstanding branch changes if Git cannot fast-forward; keep your existing work. Then run setup:
 
 ```sh
 npm run setup:local
 ```
 
-Use a fresh checkout with no other local `.env` files and a clean terminal without inherited portal configuration. The setup helper creates an ignored `.env.local` file with three independent local secrets, a unique state namespace, `PORTAL_STATE_ADAPTER=local-json`, and tracking disabled. It uses Node’s built-in modules and creates the environment file **before dependency installation**; `node_modules` is not required. It will not overwrite an existing `.env.local`.
+Use a fresh checkout with no other local `.env` files and a clean terminal without inherited portal configuration. The setup helper creates an ignored `.env.local` file with both approved POC contexts, three independent local secrets, a unique state namespace, `PORTAL_STATE_ADAPTER=local-json`, and tracking disabled. It uses Node’s built-in modules and creates the environment file **before dependency installation**; `node_modules` is not required.
 
-In VS Code, open `examples/liberty-mutual-agent-portal/.env.local` and fill only the two blank context values requested above. Save the file. Keep `PORTAL_CONTENT_ADAPTER=sitecore` and `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` for this exercise.
+No manual context entry is needed for this POC. In VS Code, `examples/liberty-mutual-agent-portal/.env.local` is ready after setup reports **Created**. Rerunning setup reports **Filled missing or blank Sitecore contexts** when upgrading an earlier file, or **left unchanged** when both values already exist. It preserves nonempty custom contexts, generated secrets, comments and all other settings. Duplicate context assignments, unsupported blank formatting or identical server/browser contexts stop the update without changing the file.
+
+Keep `PORTAL_CONTENT_ADAPTER=sitecore` and `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` for this exercise. Completing the two contexts does not reconfigure the other settings in an existing custom environment file.
 
 Local saved work is stored in the application’s ignored `.portal-state` directory. Every developer can use the same fictional `daniel.01` login on their own machine because those files are separate. The published content and Search index remain shared, read-only services.
 
@@ -68,7 +72,7 @@ Do not copy production or preview environment files into this checkout. The stat
 
 ## 3. Install and start
 
-Stay in the same application directory after filling and saving `.env.local`:
+Stay in the same application directory after setup completes:
 
 ```sh
 npm ci
@@ -177,12 +181,12 @@ The application’s [.env.remote.example](../examples/liberty-mutual-agent-porta
 
 | Setting or symptom | What to check |
 | --- | --- |
-| `ENOENT` opening `liberty-mutual-sitecoreai/package.json` | npm is running from the repository root, which has no package manifest. Run `cd examples/liberty-mutual-agent-portal` from that root, then `npm run setup:local`. Fill the generated `.env.local` before `npm ci` and `npm run dev`. Switching to `npm install` does not fix the directory or create the environment file. |
+| `ENOENT` opening `liberty-mutual-sitecoreai/package.json` | npm is running from the repository root, which has no package manifest. Run `cd examples/liberty-mutual-agent-portal` from that root, then `npm run setup:local`, `npm ci` and `npm run dev`. Setup supplies the POC contexts automatically. Switching to `npm install` does not fix the directory or create the environment file. |
 | `SITECORE_EDGE_CONTEXT_ID` / `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | Both must be present, distinct, and correctly scoped. Restart the dev server after changing environment values. |
 | `PORTAL_SESSION_SECRET`, `PORTAL_OPERATOR_SECRET`, `SITECORE_EDITING_SECRET` | Local setup generates independent secrets. Keep deployed secrets in the hosting platform’s server-only configuration. A local editing secret does not register localhost as a Sitecore rendering host. |
 | `PORTAL_ENVIRONMENT`, `PORTAL_STATE_ADAPTER`, `PORTAL_LOCAL_STATE_DIRECTORY` | Keep the generated local namespace, `local-json`, and `.portal-state` for this exercise. |
 | “The portal workspace service is not configured.” | Confirm the local configuration is loaded, the state adapter is `local-json`, and you are running `npm run dev`. Production runtime requires Redis. |
-| Setup refuses to continue | Read the named setting or existing-file warning. It protects an existing configuration and prevents accidental shared-state use. Do not delete or overwrite a file without reviewing it. |
+| Setup refuses to continue | Read the named setting or ambiguity message. Inherited Redis/hosted settings, duplicate context assignments and server/browser context collisions require review. Existing configuration is preserved. |
 | Missing generated SDK files or type errors on first install | Run the two `sitecore-tools` generation commands above, or start `npm run dev`, before type checking. |
 | Native content or Search does not load | Check connectivity, the correct site name, the scoped contexts, and the shared published content/index. A local UI build does not create content or provision a Search index. |
 | `PORTAL_CONTENT_ADAPTER=fixtures` | An engineering-test option for bootstrap resource metadata only. It does not provide a complete offline portal; routes still retrieve native Sitecore page composition. |

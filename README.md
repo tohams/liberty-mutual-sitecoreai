@@ -20,23 +20,18 @@ The application is built on the official [SitecoreAI starter repository](https:/
 
 ## Run locally
 
-Use Node.js **24.19.0**, npm, and the committed lockfile. Begin with a fresh authenticated clone of this private repository. The [developer quickstart](docs/developer-quickstart.md) covers access, VS Code, the two approved Sitecore contexts, and a reversible heading change that preserves native Search.
+Use Node.js **24.19.0**, npm, and the committed lockfile. Begin with a fresh authenticated clone of this private repository. The [developer quickstart](docs/developer-quickstart.md) covers access, VS Code, automatic POC context setup, and a reversible heading change that preserves native Search.
 
 Open the repository root, `liberty-mutual-sitecoreai`, in VS Code. **The root has no `package.json`; npm commands must run inside the portal application.** In a terminal starting at the repository root, run:
 
 ```sh
 cd examples/liberty-mutual-agent-portal
 npm run setup:local
-```
-
-In VS Code, fill the two approved scoped context values in `examples/liberty-mutual-agent-portal/.env.local` and save. Then, in the same application terminal, run:
-
-```sh
 npm ci
 npm run dev
 ```
 
-`setup:local` creates `.env.local` before dependencies are installed; `npm ci` installs dependencies using the committed lockfile. An `ENOENT` error referring to the root `package.json` means the terminal has not changed into the application directory. `npm install` also needs that directory and does not create the environment file.
+`setup:local` creates `.env.local` with the approved scoped POC contexts before dependencies are installed. A rerun fills only missing/blank contexts and preserves existing values and secrets. `npm ci` installs dependencies using the committed lockfile. An `ENOENT` error referring to the root `package.json` means the terminal has not changed into the application directory. `npm install` also needs that directory and does not create the environment file.
 
 Open `http://localhost:3000/login` and use the workshop’s `daniel.01` account with password `Sitecore`. Setup creates independent local secrets, a unique namespace, local JSON state, native content, and disabled portal tracking. Keep Redis credentials absent from every local environment file and your terminal: Redis takes precedence over local JSON. Each developer's saved work stays on their own machine; published content and native Search remain shared reads. Deployed environments require the configured HTTP Redis provider. The explicit fixture content adapter is an engineering-test seam, not a complete offline portal.
 
