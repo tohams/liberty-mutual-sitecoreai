@@ -293,7 +293,11 @@
     "authoring/items/liberty-mutual/items/layouts/LibertyMutual/PortalLayout.yml",
     "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ResourcesLayout.yml",
     "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ResourceArticleLayout.yml",
-    "authoring/items/liberty-mutual/items/templates/LibertyMutual/Page/__Standard Values.yml"
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/Page/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/site-agent-guidance/headless-agent-guidance.yml",
+    "authoring/items/liberty-mutual/items/site-resource-search/headless-resource-search.yml",
+    "authoring/items/liberty-mutual/items/site-resource-article/headless-resource-article.yml",
+    "authoring/items/liberty-mutual/items/site-products-spotlight/headless-products-spotlight.yml"
   ],
   "placeholderIds": {
     "headless-products-spotlight": "8428148d-9f3b-5323-a166-88d0c5ea56ac",
@@ -321,5 +325,11 @@
     "defaultVariantId": "df2d5d60-4b81-538a-973c-9e2f010780f3",
     "seedWorkflowStatus": "New datasource seeds start in Basic Datasource Workflow Draft and require native review, approval and publication.",
     "deploymentScope": "Additive model and initial content only. Products page layout assignment, Available Renderings and native affinity configuration are applied separately and captured from the target."
+  },
+  "sitePlaceholderIds": {
+    "headless-agent-guidance": "ee271523-71b1-537b-af86-4be918ccc934",
+    "headless-resource-search": "30300f08-7257-5684-973d-37bfac7f859a",
+    "headless-resource-article": "841765c3-50d9-5a1c-b7d2-a709c2e9085e",
+    "headless-products-spotlight": "26cea173-788c-504b-afe6-14fa57a94946"
   }
 }

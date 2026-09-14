@@ -3,7 +3,7 @@
 set -euo pipefail
 if [[ $# -lt 1 || "$1" == "--help" ]]; then
   echo 'Usage: authoring/scripts/deploy-content.sh ENVIRONMENT [--seed] [--publish] [--what-if]'
-  echo 'Normal release updates only LibertyMutual.Model. --seed creates missing editorial items only.'
+  echo 'Normal release updates LibertyMutual.Model and LibertyMutual.SitePresentation. --seed creates missing editorial items only.'
   exit 0
 fi
 portal_environment="$1"
@@ -21,7 +21,7 @@ for portal_option in "$@"; do
 done
 portal_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$portal_repo_root"
-dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content
+dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation
 if [[ "$portal_what_if" == true ]]; then
   dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.Model --what-if
 else
@@ -33,15 +33,27 @@ import json
 from pathlib import Path
 p=Path('authoring/items/liberty-mutual/LibertyMutual.Content.module.json')
 d=json.loads(p.read_text())
+keys=['headless-agent-guidance','headless-resource-search','headless-resource-article','headless-products-spotlight']
+expected=[{'path':'/liberty-mutual-agent-portal/Presentation/Placeholder Settings/'+key,'scope':'Ignored'} for key in sorted(keys)]
+if len(d['items']['includes'])!=1:
+    raise SystemExit('Refusing seed push: expected one owned content include.')
 for include in d['items']['includes']:
-    if include['allowedPushOperations']!='CreateOnly' or include.get('rules'):
-        raise SystemExit('Refusing seed push: content module must remain CreateOnly with no update rules.')
+    if (include['path']!='/sitecore/content/LibertyMutual' or include['allowedPushOperations']!='CreateOnly'
+            or sorted(include.get('rules',[]),key=lambda rule:rule['path'])!=expected):
+        raise SystemExit('Refusing seed push: content must remain CreateOnly with only the four model-owned site placeholder exclusions.')
 PY
   if [[ "$portal_what_if" == true ]]; then
     dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.Content --what-if
   else
     dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.Content
   fi
+fi
+# Site-specific restrictions need their Presentation parent. On a new target,
+# the optional CreateOnly content seed above creates that folder first.
+if [[ "$portal_what_if" == true ]]; then
+  dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SitePresentation --what-if
+else
+  dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SitePresentation
 fi
 if [[ "$portal_publish" == true && "$portal_what_if" == false ]]; then
   for portal_path in \

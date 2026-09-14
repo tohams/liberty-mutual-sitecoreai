@@ -36,6 +36,7 @@ DATASOURCE_PATH = SITE + '/Data/ProductSpotlight'
 RENDERING_PATH = '/sitecore/layout/Renderings/Project/LibertyMutual/ProductSpotlight'
 PLACEHOLDER_KEY = 'headless-products-spotlight'
 PLACEHOLDER_PATH = '/sitecore/layout/Placeholder Settings/Project/LibertyMutual/' + PLACEHOLDER_KEY
+SITE_PLACEHOLDER_PATH = SITE + '/Presentation/Placeholder Settings/' + PLACEHOLDER_KEY
 GUIDANCE_PLACEHOLDER_PATH = '/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-agent-guidance'
 VARIANT_PATH = SITE + '/Presentation/Headless Variants/ProductSpotlight'
 LAYOUT_ROOT = '/sitecore/layout/Layouts/Project/LibertyMutual'
@@ -103,6 +104,8 @@ def serialize(value):
 
 
 def file_for(value):
+    if value['Path'] == SITE_PLACEHOLDER_PATH:
+        return ITEMS / 'site-products-spotlight' / (PLACEHOLDER_KEY + '.yml')
     for kind, prefix in [
         ('templates', '/sitecore/templates/Project/'),
         ('renderings', '/sitecore/layout/Renderings/Project/'),
@@ -159,6 +162,10 @@ def build_items(manifest):
     ], values=[field('1b58d065-fe74-43e3-ba20-54c9588b3011', 'AllowedOnTemplates',
                      brace(manifest['templateIds']['PortalPage']))]))
     records.append(item(PLACEHOLDER_PATH, 'e26a2d36-9ee9-49df-bb07-0073d8e20ccc', '5c547d4e-7111-4995-95b0-6b561751bf2e', shared=[
+        field('7256bdab-1fd2-49dd-b205-cb4873d2917c', 'Placeholder Key', PLACEHOLDER_KEY),
+        field('e391b526-d0c5-439d-803e-17512eae6222', 'Allowed Controls', brace(uid(RENDERING_PATH))),
+    ]))
+    records.append(item(SITE_PLACEHOLDER_PATH, 'e601261f-f47f-4831-b91e-ef70efab3276', 'd2a6884c-04d5-4089-a64e-d27ca9d68d4c', shared=[
         field('7256bdab-1fd2-49dd-b205-cb4873d2917c', 'Placeholder Key', PLACEHOLDER_KEY),
         field('e391b526-d0c5-439d-803e-17512eae6222', 'Allowed Controls', brace(uid(RENDERING_PATH))),
     ]))
@@ -226,6 +233,7 @@ def main():
     merge_new_entries(updated['fieldIds'], {'ProductSpotlight.' + name: uid('field/ProductSpotlight/' + name) for name, _, _, _ in FIELD_DEFINITIONS})
     merge_new_entries(updated['renderingIds'], {'ProductSpotlight': uid(RENDERING_PATH)})
     merge_new_entries(updated.setdefault('placeholderIds', {}), {PLACEHOLDER_KEY: uid(PLACEHOLDER_PATH)})
+    merge_new_entries(updated.setdefault('sitePlaceholderIds', {}), {PLACEHOLDER_KEY: uid(SITE_PLACEHOLDER_PATH)})
     merge_new_entries(updated.setdefault('layoutIds', {}), {'ProductsLayout': uid(LAYOUT_PATH)})
     spotlight = {
         'placeholderKey': PLACEHOLDER_KEY,

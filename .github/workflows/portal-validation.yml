@@ -61,7 +61,7 @@ jobs:
         working-directory: .
         run: |
           dotnet tool restore
-          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content
+          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation
         env:
           DOTNET_ROLL_FORWARD: Major
           DOTNET_CLI_TELEMETRY_OPTOUT: '1'

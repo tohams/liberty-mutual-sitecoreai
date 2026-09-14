@@ -26,6 +26,11 @@ def read_json(path):
 
 model = read_json(BASE / 'LibertyMutual.Model.module.json')
 content = read_json(BASE / 'LibertyMutual.Content.module.json')
+site_presentation = read_json(BASE / 'LibertyMutual.SitePresentation.module.json')
+site_placeholder_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings'
+site_placeholder_keys = ['headless-agent-guidance', 'headless-resource-search',
+                         'headless-resource-article', 'headless-products-spotlight']
+site_placeholder_paths = {site_placeholder_root + '/' + key for key in site_placeholder_keys}
 expected_model_paths = {
     '/sitecore/templates/Project/LibertyMutual',
     '/sitecore/layout/Renderings/Project/LibertyMutual',
@@ -33,15 +38,25 @@ expected_model_paths = {
     '/sitecore/layout/Layouts/Project/LibertyMutual',
 }
 require({i['path'] for i in model['items']['includes']} == expected_model_paths,
-        'Model includes must remain restricted to owned LibertyMutual roots.')
+        'Model includes must remain restricted to four owned roots.')
 for include in model['items']['includes']:
     require(include.get('allowedPushOperations') == 'CreateAndUpdate' and not include.get('rules'),
             'Model release must not introduce deletion or wider include rules.')
+    require(include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants',
+            'Model roots must retain their bounded descendant scope.')
+require({i['path'] for i in site_presentation['items']['includes']} == site_placeholder_paths,
+        'SitePresentation includes must contain only the four exact site placeholder items.')
+for include in site_presentation['items']['includes']:
+    require(include.get('scope') == 'SingleItem' and include.get('allowedPushOperations') == 'CreateAndUpdate'
+            and not include.get('rules'), 'SitePresentation must use non-deleting SingleItem includes only.')
 require(len(content['items']['includes']) == 1, 'Content requires one owned include.')
 include = content['items']['includes'][0]
+expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
+                         for path in sorted(site_placeholder_paths)]
 require(include['path'] == '/sitecore/content/LibertyMutual' and
-        include.get('allowedPushOperations') == 'CreateOnly' and not include.get('rules'),
-        'Initial content seed must preserve marketing edits: CreateOnly with no rules.')
+        include.get('allowedPushOperations') == 'CreateOnly' and
+        sorted(include.get('rules', []), key=lambda rule: rule['path']) == expected_ignore_rules,
+        'Initial content seed must remain CreateOnly with only the four exact site placeholder exclusions.')
 
 items = {}
 paths = {}
@@ -129,6 +144,16 @@ for component, key in PLACEMENTS.items():
             [normalized_id(manifest['renderingIds'][component])],
             f'{key} must permit only {component}; empty lists are unrestricted.')
     placeholder_ids[key] = identifier
+    site_placeholder = paths[site_placeholder_root + '/' + key]
+    require(normalized_id(site_placeholder['ID']) == manifest['sitePlaceholderIds'].get(key),
+            f'Site placeholder manifest mismatch: {key}')
+    require(normalized_id(site_placeholder['Template']) == 'd2a6884c-04d5-4089-a64e-d27ca9d68d4c' and
+            normalized_id(site_placeholder['Parent']) == 'e601261f-f47f-4831-b91e-ef70efab3276',
+            f'{key} must use the native SXA site Placeholder template and owned settings folder.')
+    require(field_value(site_placeholder.get('SharedFields', []), 'Placeholder Key') == key and
+            id_list(field_value(site_placeholder.get('SharedFields', []), 'Allowed Controls')) ==
+            [normalized_id(manifest['renderingIds'][component])],
+            f'Site authoring restriction {key} must permit only {component}.')
 
 layout_ids = {}
 for name, components in LAYOUT_COMPONENTS.items():

@@ -22,6 +22,15 @@ const PH = {
   'headless-resource-article': '27225f95-329c-5193-b6d9-8ea86c0010a5',
   'headless-products-spotlight': '8428148d-9f3b-5323-a166-88d0c5ea56ac',
 };
+const SITE_PH_ROOT = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/';
+const SITE_PH_PARENT = 'e601261f-f47f-4831-b91e-ef70efab3276';
+const SITE_PH_TEMPLATE = 'd2a6884c-04d5-4089-a64e-d27ca9d68d4c';
+const SITE_PH = {
+  'headless-agent-guidance': 'ee271523-71b1-537b-af86-4be918ccc934',
+  'headless-resource-search': '30300f08-7257-5684-973d-37bfac7f859a',
+  'headless-resource-article': '841765c3-50d9-5a1c-b7d2-a709c2e9085e',
+  'headless-products-spotlight': '26cea173-788c-504b-afe6-14fa57a94946',
+};
 const LAYOUT_PH = {
   PortalLayout: ['headless-agent-guidance'],
   ResourcesLayout: ['headless-resource-search', 'headless-agent-guidance'],
@@ -74,6 +83,160 @@ function assertResumable(current, before, expected) {
   }
   assert.deepEqual(semantic(normalized), semantic(before), 'A protected field, template, parent or version changed.');
 }
+/**
+ * Sitecore can generate a page thumbnail when shared presentation is saved.
+ * Verify that one narrowly scoped native side effect; do not change the actual
+ * read, baseline, expected presentation, or any native item. The returned copy
+ * is solely for the existing protected-field and completed-layout comparisons.
+ */
+async function verifyResumableItem(query, current, before, expected) {
+  const comparison = structuredClone(current);
+  const sideEffects = [];
+  const thumbnailChanged = current.versions.some(version => {
+    const oldVersion = before.versions.find(v => versionKey(v) === versionKey(version));
+    return oldVersion && value(version, '__Thumbnail') !== value(oldVersion, '__Thumbnail');
+  });
+  if (thumbnailChanged) {
+    assert(before.path === HOME || before.path.startsWith(HOME + '/'),
+      'Generated thumbnail exception is limited to owned pages, never standard values.');
+    assert.equal(current.path, before.path, 'Thumbnail page path changed.');
+    assert.equal(norm(current.itemId), norm(before.itemId), 'Thumbnail page identity changed.');
+    const pageId = norm(before.itemId).toUpperCase();
+    assert(/^[A-F\d]{32}$/.test(pageId), 'Invalid page ID for generated thumbnail.');
+    assert(current.versions.length && current.versions.every(v => versionKey(v).startsWith('en:')),
+      'Generated thumbnail exception requires consistent English page versions.');
+    assert(before.versions.length === current.versions.length &&
+      new Set(current.versions.map(versionKey)).size === current.versions.length,
+    'Thumbnail version inventory changed.');
+    const thumbnails = new Set();
+    for (const version of comparison.versions) {
+      const oldVersion = before.versions.find(v => versionKey(v) === versionKey(version));
+      const newVersion = expected.versions.find(v => versionKey(v) === versionKey(version));
+      assert(oldVersion && newVersion, 'Thumbnail language/version inventory changed.');
+      for (const candidate of [oldVersion, version, newVersion]) {
+        const field = candidate.fields.find(f => f.name === '__Thumbnail');
+        assert(field && norm(field.fieldId) === 'c7c26117dbb142b2ab5ef7223845cca3',
+          'Missing or unexpected native thumbnail field.');
+      }
+      assert.equal(value(oldVersion, '__Thumbnail'), '', 'An existing thumbnail must remain unchanged.');
+      assert.equal(value(newVersion, '__Thumbnail'), '', 'The reviewed plan must preserve the blank thumbnail.');
+      assert.notEqual(value(oldVersion, '__Renderings'), value(newVersion, '__Renderings'),
+        'Generated thumbnail requires a reviewed shared-layout change.');
+      assert.equal(value(version, '__Renderings'), value(newVersion, '__Renderings'),
+        'Generated thumbnail requires the reviewed shared layout to be applied.');
+      thumbnails.add(value(version, '__Thumbnail'));
+    }
+    assert.equal(thumbnails.size, 1, 'Generated thumbnail differs across English versions.');
+    const thumbnail = [...thumbnails][0];
+    const match = /^<image mediaid="\{([a-fA-F\d]{8}(?:-[a-fA-F\d]{4}){3}-[a-fA-F\d]{12})\}" \/>$/.exec(thumbnail);
+    assert(match, 'Generated thumbnail must contain exactly one native image reference.');
+    const mediaItemId = match[1].toLowerCase();
+    const expectedMediaPath = '/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/System/' +
+      pageId.slice(0, 4).split('').join('/') + '/thumbnail_' + pageId;
+    const media = (await query('query($id:ID!){item(where:{database:"master",itemId:$id,language:"en"}){itemId path}}', { id: mediaItemId })).item;
+    assert(media && norm(media.itemId) === norm(mediaItemId) && media.path === expectedMediaPath,
+      'Generated thumbnail media does not belong to this page.');
+    for (const version of comparison.versions) version.fields.find(f => f.name === '__Thumbnail').value = '';
+    sideEffects.push({ kind: 'native-generated-page-thumbnail', itemId: current.itemId, path: current.path,
+      field: '__Thumbnail', mediaItemId, mediaPath: media.path, versions: current.versions.map(versionKey) });
+  }
+  assertResumable(comparison, before, expected);
+  return { comparison, sideEffects };
+}
+/** Keep the original creation timestamp when Sitecore materializes a resource item. */
+function placementUpdateInput(current, change) {
+  assert(scoped(current), 'Placement update is outside the reviewed item scope.');
+  assert(['__Renderings', '__Final Renderings'].includes(change.name) && typeof change.after === 'string',
+    'Only a reviewed presentation field may be updated.');
+  const version = current.versions.find(v => versionKey(v) === `${change.language}:${change.version}`);
+  assert(version, 'Placement update version is missing.');
+  assert.equal(value(version, change.name), change.before, 'Placement changed before building the update.');
+  const created = version.fields.find(f => f.name === '__Created');
+  assert(created && norm(created.fieldId) === '25bed78c49574165998aca1b52f67497' &&
+    typeof created.value === 'string' && /^\d{8}T\d{6}Z$/.test(created.value),
+  'The existing creation timestamp must be preserved explicitly.');
+  return { database: 'master', itemId: current.itemId, language: change.language, version: change.version,
+    fields: [{ name: change.name, value: change.after }, { name: '__Created', value: created.value }] };
+}
+function validateJournal(journal, context) {
+  assert(journal && Array.isArray(journal.entries) && journal.baselineSha256 === context.baselineSha256 &&
+    journal.environment === context.environment, 'Journal belongs to a different baseline/environment.');
+}
+function sitecoreTimestamp(timestamp) {
+  assert(typeof timestamp === 'string' && /^\d{8}T\d{6}Z$/.test(timestamp), 'Invalid native creation timestamp.');
+  const date = new Date(timestamp.replace(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/, '$1-$2-$3T$4:$5:$6Z'));
+  assert(Number.isFinite(date.getTime()) && date.toISOString().replace(/[-:]/g, '').replace('.000', '') === timestamp,
+    'Invalid native creation timestamp.');
+  return date.getTime();
+}
+/** Read-only review of a temporary creation-date reset caused by our own recorded save. */
+async function reviewCreatedRepairs(query, current, before, expected, context) {
+  const restored = structuredClone(current), creationRepairs = [];
+  for (const version of restored.versions) {
+    const oldVersion = before.versions.find(v => versionKey(v) === versionKey(version));
+    const newVersion = expected.versions.find(v => versionKey(v) === versionKey(version));
+    if (!oldVersion || value(version, '__Created') === value(oldVersion, '__Created')) continue;
+    validateJournal(context.journal, context);
+    assert(scoped(before) && current.path === before.path && norm(current.itemId) === norm(before.itemId),
+      'Creation restoration is outside the reviewed item scope.');
+    assert(newVersion && value(newVersion, '__Created') === value(oldVersion, '__Created'),
+      'Creation restoration must preserve the reviewed baseline.');
+    const created = version.fields.find(f => f.name === '__Created');
+    assert(created && norm(created.fieldId) === '25bed78c49574165998aca1b52f67497',
+      'Unexpected native creation field.');
+    assert.equal(created.value, value(version, '__Updated'), 'Creation reset must exactly match the native update timestamp.');
+    const createdAt = sitecoreTimestamp(created.value);
+    sitecoreTimestamp(value(oldVersion, '__Created'));
+    assert.equal(value(version, '__Renderings'), value(newVersion, '__Renderings'),
+      'Creation reset requires the reviewed shared layout to be applied.');
+    const digest = input => crypto.createHash('sha256').update(input).digest('hex');
+    const matchingIntents = context.journal.entries.filter(entry => {
+      if (entry.phase !== 'write-intent' || norm(entry.itemId) !== norm(before.itemId) || entry.path !== before.path ||
+        `${entry.language}:${entry.version}` !== versionKey(version) || !['__Renderings', '__Final Renderings'].includes(entry.field)) return false;
+      const original = value(oldVersion, entry.field), intended = value(newVersion, entry.field);
+      if (original === intended || value(version, entry.field) !== intended ||
+        entry.beforeSha256 !== digest(original) || entry.afterSha256 !== digest(intended)) return false;
+      const intendedAt = Date.parse(entry.at);
+      if (!Number.isFinite(intendedAt)) return false;
+      // Sitecore serializes seconds while the journal records milliseconds.
+      const firstSecond = Math.floor(intendedAt / 1000) * 1000;
+      return createdAt >= firstSecond && createdAt <= firstSecond + 60000;
+    });
+    assert.equal(matchingIntents.length, 1, 'Creation reset requires one matching recent layout write-intent.');
+    const intent = matchingIntents[0];
+    creationRepairs.push({ itemId: current.itemId, path: current.path,
+      language: typeof version.language === 'string' ? version.language : version.language.name, version: version.version,
+      before: created.value, after: value(oldVersion, '__Created'), layoutField: intent.field, layoutIntentAt: intent.at,
+      layoutBeforeSha256: intent.beforeSha256, layoutAfterSha256: intent.afterSha256 });
+    created.value = value(oldVersion, '__Created');
+  }
+  const verified = await verifyResumableItem(query, restored, before, expected);
+  return { ...verified, creationRepairs };
+}
+/** Restore only a reviewed native creation-date reset; uncertain writes stop without retry. */
+async function restoreCreatedMetadata(query, current, before, expected, context, record, readCurrent = readItem) {
+  const review = await reviewCreatedRepairs(query, current, before, expected, context);
+  if (!review.creationRepairs.length) return { current, verified: { comparison: review.comparison, sideEffects: review.sideEffects } };
+  for (const repair of review.creationRepairs) {
+    for (const v of current.versions) assert(!value(v, '__Lock').trim() || /^<r\s*\/\s*>$/.test(value(v, '__Lock').trim()), 'Item is locked for editing.');
+    const version = current.versions.find(v => versionKey(v) === `${repair.language}:${repair.version}`);
+    assert.equal(value(version, '__Created'), repair.before, 'Creation value changed before restoration.');
+    const restoredSnapshot = structuredClone(current);
+    restoredSnapshot.versions.find(v => versionKey(v) === `${repair.language}:${repair.version}`)
+      .fields.find(f => f.name === '__Created').value = repair.after;
+    record({ phase: 'restore-intent', field: '__Created', ...repair });
+    await query('mutation($input:UpdateItemInput!){updateItem(input:$input){item{itemId}}}', {
+      input: { database: 'master', itemId: current.itemId, language: repair.language, version: repair.version,
+        fields: [{ name: '__Created', value: repair.after }] },
+    });
+    current = await readCurrent(query, current.itemId);
+    assert.deepEqual(semantic(current), semantic(restoredSnapshot),
+      'Creation restoration changed another protected field or did not restore the timestamp.');
+    record({ phase: 'restore-verified', itemId: repair.itemId, language: repair.language, version: repair.version,
+      field: '__Created', restoredValue: repair.after, layoutIntentAt: repair.layoutIntentAt });
+  }
+  return { current, verified: await verifyResumableItem(query, current, before, expected) };
+}
 function connection(environment, apply) {
   const config = JSON.parse(fs.readFileSync(path.join(ROOT, '.sitecore/user.json'), 'utf8'));
   const find = name => Object.entries(config.endpoints).find(([key]) => key.toLowerCase() === name.toLowerCase())?.[1];
@@ -122,11 +285,18 @@ async function readItem(query, id) {
 }
 async function preflightModel(query) {
   for (const [renderingId, component] of Object.entries(COMPONENTS)) {
-    const setting = await readItem(query, PH[component.to]);
-    assert.equal(setting.path, PH_ROOT + component.to);
-    assert.equal(value(setting.versions[0], 'Placeholder Key'), component.to);
-    assert.equal(value(setting.versions[0], 'Editable'), '1', 'Placeholder must support author insertion.');
-    assert.equal(norm(value(setting.versions[0], 'Allowed Controls').trim()), renderingId, 'Placeholder must allow exactly its component.');
+    for (const [id, root, siteSpecific] of [[PH[component.to], PH_ROOT, false], [SITE_PH[component.to], SITE_PH_ROOT, true]]) {
+      const setting = await readItem(query, id);
+      assert.equal(norm(setting.itemId), norm(id), 'Unexpected placeholder item identity.');
+      assert.equal(setting.path, root + component.to);
+      if (siteSpecific) {
+        assert.equal(norm(setting.template.templateId), norm(SITE_PH_TEMPLATE), 'Site placeholder must use the native SXA template.');
+        assert.equal(norm(setting.parent.itemId), norm(SITE_PH_PARENT), 'Site placeholder must remain in the owned presentation folder.');
+      }
+      assert.equal(value(setting.versions[0], 'Placeholder Key'), component.to);
+      assert.equal(value(setting.versions[0], 'Editable'), '1', 'Placeholder must support author insertion.');
+      assert.equal(norm(value(setting.versions[0], 'Allowed Controls').trim()), renderingId, 'Placeholder must allow exactly its component.');
+    }
   }
   for (const [name, id] of Object.entries(LAYOUTS)) {
     const layout = await readItem(query, id);
@@ -153,48 +323,78 @@ async function main() {
   const baselines = snapshotItems(JSON.parse(raw));
   const plans = baselines.map(planItemLayouts);
   const expected = baselines.map((item, index) => expectedItem(item, plans[index]));
+  const journalPath = options.journal || path.join(path.dirname(options.baseline), 'placeholder-migration-journal.json');
+  assert(path.isAbsolute(journalPath) && path.resolve(journalPath) !== path.resolve(options.baseline));
+  const journalContext = { environment, baselineSha256: hash(raw) };
+  let journal = fs.existsSync(journalPath) ? JSON.parse(fs.readFileSync(journalPath, 'utf8')) : null;
+  if (journal) validateJournal(journal, journalContext);
   const query = connection(environment, Boolean(options.apply));
   // Inspect live write contract before any mutation; reject incompatible servers.
   const schema = await query('query{input:__type(name:"UpdateItemInput"){inputFields{name}} payload:__type(name:"UpdateItemPayload"){fields{name}}}');
   assert(['database', 'itemId', 'language', 'version', 'fields'].every(name => schema.input.inputFields.some(f => f.name === name)));
   assert(schema.payload.fields.some(f => f.name === 'item'));
-  const states = [];
+  const states = [], initialSideEffects = [], pendingCreationRepairs = [];
   for (let i = 0; i < baselines.length; i++) {
     const current = await readItem(query, baselines[i].itemId);
-    assertResumable(current, baselines[i], expected[i]);
-    states.push(current);
+    const verified = await reviewCreatedRepairs(query, current, baselines[i], expected[i], { ...journalContext, journal });
+    states.push(verified.comparison);
+    initialSideEffects.push(...verified.sideEffects);
+    pendingCreationRepairs.push(...verified.creationRepairs);
   }
   const summary = { environment, apply: Boolean(options.apply), targetItems: plans.length,
     sharedChanges: plans.filter(p => p.sharedChange).length, finalVersionChanges: plans.reduce((sum, p) => sum + p.finalChanges.length, 0),
     alreadyConfigured: states.filter((state, i) => hash(semantic(state)) === hash(semantic(expected[i]))).length,
+    verifiedNativeThumbnails: initialSideEffects.length,
+    pendingCreatedRestorations: pendingCreationRepairs.length,
+    createdRestorationItems: pendingCreationRepairs.map(({ path, language, version, before, after }) => ({ path, language, version, before, after })),
     baselineSha256: hash(raw) };
   if (!options.apply) { console.log(JSON.stringify(summary, null, 2)); return; }
   await preflightModel(query);
-  const journalPath = options.journal || path.join(path.dirname(options.baseline), 'placeholder-migration-journal.json');
-  assert(path.isAbsolute(journalPath) && path.resolve(journalPath) !== path.resolve(options.baseline));
-  const journal = fs.existsSync(journalPath) ? JSON.parse(fs.readFileSync(journalPath, 'utf8')) : { ...summary, startedAt: new Date().toISOString(), entries: [] };
-  assert(journal.baselineSha256 === summary.baselineSha256 && journal.environment === environment, 'Journal belongs to a different baseline/environment.');
+  if (!journal) journal = { ...summary, startedAt: new Date().toISOString(), entries: [] };
+  validateJournal(journal, journalContext);
   const record = entry => { journal.entries.push({ at: new Date().toISOString(), ...entry }); fs.writeFileSync(journalPath, JSON.stringify(journal, null, 2), { mode: 0o600 }); fs.chmodSync(journalPath, 0o600); };
+  const recordedSideEffects = new Set(journal.entries.filter(entry => entry.phase === 'verified-native-side-effect')
+    .map(entry => `${norm(entry.itemId)}:${norm(entry.mediaItemId)}`));
+  const recordSideEffects = effects => {
+    for (const effect of effects) {
+      const key = `${norm(effect.itemId)}:${norm(effect.mediaItemId)}`;
+      if (recordedSideEffects.has(key)) continue;
+      record({ phase: 'verified-native-side-effect', ...effect });
+      recordedSideEffects.add(key);
+    }
+  };
+  recordSideEffects(initialSideEffects);
   for (let i = 0; i < plans.length; i++) {
     const plan = plans[i]; let current = await readItem(query, plan.itemId);
-    assertResumable(current, baselines[i], expected[i]);
+    let prepared = await restoreCreatedMetadata(query, current, baselines[i], expected[i], { ...journalContext, journal }, record);
+    current = prepared.current;
+    let verified = prepared.verified;
+    recordSideEffects(verified.sideEffects);
     const changes = [...(plan.sharedChange ? [{ ...plan.sharedChange, language: current.versions[0].language, version: current.versions[0].version }] : []), ...plan.finalChanges];
     for (const change of changes) {
       const currentVersion = current.versions.find(v => versionKey(v) === `${change.language}:${change.version}`);
       if (value(currentVersion, change.name) === change.after) continue;
       assert.equal(value(currentVersion, change.name), change.before, 'Unexpected presentation value.');
       for (const v of current.versions) assert(!value(v, '__Lock').trim() || /^<r\s*\/\s*>$/.test(value(v, '__Lock').trim()), 'Item is locked for editing.');
+      const input = placementUpdateInput(current, change);
       record({ phase: 'write-intent', itemId: plan.itemId, path: plan.path, field: change.name, language: change.language, version: change.version, beforeSha256: change.beforeSha256, afterSha256: change.afterSha256 });
-      await query('mutation($input:UpdateItemInput!){updateItem(input:$input){item{itemId}}}', { input: { database: 'master', itemId: plan.itemId, language: change.language, version: change.version, fields: [{ name: change.name, value: change.after }] } });
+      await query('mutation($input:UpdateItemInput!){updateItem(input:$input){item{itemId}}}', { input });
       current = await readItem(query, plan.itemId);
-      assertResumable(current, baselines[i], expected[i]);
+      prepared = await restoreCreatedMetadata(query, current, baselines[i], expected[i], { ...journalContext, journal }, record);
+      current = prepared.current;
+      verified = prepared.verified;
+      recordSideEffects(verified.sideEffects);
       assert.equal(value(current.versions.find(v => versionKey(v) === `${change.language}:${change.version}`), change.name), change.after, 'Write read-back failed.');
       record({ phase: 'write-verified', itemId: plan.itemId, field: change.name, language: change.language, version: change.version });
     }
-    assert.deepEqual(semantic(current), semantic(expected[i]), 'Final item does not match the reviewed placement-only result.');
+    assert.deepEqual(semantic(verified.comparison), semantic(expected[i]), 'Final item does not match the reviewed placement-only result.');
   }
-  record({ phase: 'complete', contentAndWorkflowPreserved: true });
-  console.log(JSON.stringify({ ...summary, complete: true, contentAndWorkflowPreserved: true, journalPath }, null, 2));
+  const restoredCreationTimestamps = journal.entries.filter(entry => entry.phase === 'restore-verified').length;
+  record({ phase: 'complete', contentAndWorkflowPreserved: true, verifiedNativeThumbnails: recordedSideEffects.size, restoredCreationTimestamps });
+  console.log(JSON.stringify({ ...summary, verifiedNativeThumbnails: recordedSideEffects.size,
+    pendingCreatedRestorations: 0, createdRestorationItems: [], restoredCreationTimestamps,
+    complete: true, contentAndWorkflowPreserved: true, journalPath }, null, 2));
 }
-module.exports = { snapshotItems, expectedItem, semantic, assertResumable, readItem, preflightModel, PH, LAYOUT_PH };
+module.exports = { snapshotItems, expectedItem, semantic, assertResumable, verifyResumableItem, placementUpdateInput,
+  reviewCreatedRepairs, restoreCreatedMetadata, validateJournal, readItem, preflightModel, PH, SITE_PH, SITE_PH_ROOT, SITE_PH_TEMPLATE, SITE_PH_PARENT, LAYOUT_PH };
 if (require.main === module) main().catch(() => { console.error('Portal placeholders: stopped safely. A baseline/model/concurrency check or native request failed; inspect the journal and rerun the read-only plan. No automatic retry or publication occurred.'); process.exitCode = 1; });
