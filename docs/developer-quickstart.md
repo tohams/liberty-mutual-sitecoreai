@@ -6,6 +6,8 @@ Run the Liberty Mutual agent portal locally, change one React heading in VS Code
 
 Install Git, **Node.js 24.19.0 with npm**, and VS Code or your preferred TypeScript editor. The application’s `.nvmrc` records the Node version; `package-lock.json` records the dependency versions. Use the existing lockfile rather than updating packages during this exercise.
 
+A Node version manager such as `nvm` is optional, not an additional prerequisite. You can use the Node installer instead. After installing Node or changing its PATH, open a new VS Code terminal and confirm the version there; an older terminal may still use a previously installed Node version. TypeScript is installed with the application dependencies below; a separate global TypeScript installation is not needed.
+
 You need approved read access to the **private** GitHub repository and an authenticated Git client. Local setup supplies the owner-approved POC contexts automatically:
 
 | Environment variable | Value supplied by local setup |
@@ -76,10 +78,19 @@ Stay in the same application directory after setup completes:
 
 ```sh
 npm ci
+```
+
+`npm ci` installs dependencies from the committed `package-lock.json`; it does not create `.env.local`. `npm install` also requires the application directory and does not replace the setup helper. Use `npm ci` for this workshop to preserve the locked dependency versions.
+
+After installation, open `examples/liberty-mutual-agent-portal/src/components/resource-search/ResourceSearch.tsx` in VS Code. If asked to use the workspace TypeScript version, select **Allow**. Otherwise, open the Command Palette, run **TypeScript: Select TypeScript Version**, and select **Use Workspace Version**. Confirm **5.9.3**, the version installed by this lockfile. The repository's `.vscode/settings.json` points VS Code to that application dependency so editor diagnostics use the same TypeScript version as the build. It does not switch versions without your selection. See [VS Code's workspace TypeScript instructions](https://code.visualstudio.com/docs/typescript/typescript-transpiling#_using-the-workspace-version-of-typescript).
+
+Then start the application in the integrated terminal:
+
+```sh
 npm run dev
 ```
 
-`npm ci` installs dependencies from the committed `package-lock.json`; it does not create `.env.local`. `npm install` also requires the application directory and does not replace the setup helper. Use `npm ci` for this workshop to preserve the locked dependency versions. The development command generates Sitecore component maps, metadata, and import maps, then starts Next.js and the component-map watcher. Leave this terminal running.
+The development command generates Sitecore component maps, metadata, and import maps, then starts Next.js and the component-map watcher. Leave this terminal running.
 
 When the terminal says **Ready**, open [http://localhost:3000/login](http://localhost:3000/login). If Next.js selects another port because 3000 is occupied, set `NEXT_PUBLIC_SITE_URL` to that reported local origin in `.env.local` and restart the server before using it.
 
@@ -188,6 +199,7 @@ The application’s [.env.remote.example](../examples/liberty-mutual-agent-porta
 | “The portal workspace service is not configured.” | Confirm the local configuration is loaded, the state adapter is `local-json`, and you are running `npm run dev`. Production runtime requires Redis. |
 | Setup refuses to continue | Read the named setting or ambiguity message. Inherited Redis/hosted settings, duplicate context assignments and server/browser context collisions require review. Existing configuration is preserved. |
 | Missing generated SDK files or type errors on first install | Run the two `sitecore-tools` generation commands above, or start `npm run dev`, before type checking. |
+| VS Code reports a `baseUrl` deprecation error while command-line type checking passes | Open a `.tsx` file, run **TypeScript: Select TypeScript Version** from the Command Palette, and select **Use Workspace Version** (5.9.3 for this lockfile). The editor's bundled TypeScript can be newer than the application's compiler. Do not change `tsconfig.json` just to suppress an error from the wrong editor version. |
 | Native content or Search does not load | Check connectivity, the correct site name, the scoped contexts, and the shared published content/index. A local UI build does not create content or provision a Search index. |
 | `PORTAL_CONTENT_ADAPTER=fixtures` | An engineering-test option for bootstrap resource metadata only. It does not provide a complete offline portal; routes still retrieve native Sitecore page composition. |
 | `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` | Keeps portal engagement tracking and native personalization disabled for local development. Use the configured HTTPS hosts for the UDL, A/B, and affinity walkthroughs. |
