@@ -115,7 +115,7 @@ export function PortalShell({
           <button
             type="button"
             className="icon-button notification-button"
-            aria-label={`${openTasks.length} open priorities`}
+            aria-label={`${openTasks.length} open ${openTasks.length === 1 ? "priority" : "priorities"}`}
             onClick={() => setNotificationsOpen(true)}
           >
             <PortalIcon name="bell" />

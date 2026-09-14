@@ -116,7 +116,8 @@ export function GrowthScreen() {
                   />
                 </div>
                 <small>
-                  {item.policyCount.toLocaleString()} policies ·{" "}
+                  {item.policyCount.toLocaleString()}{" "}
+                  {item.policyCount === 1 ? "policy" : "policies"} ·{" "}
                   {total
                     ? ((item.writtenPremiumCents / total) * 100).toFixed(1)
                     : "0"}

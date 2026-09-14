@@ -119,7 +119,8 @@ export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
       </div>
       <div className="catalog-summary">
         <p>
-          <strong>{visible.length}</strong> solutions to explore
+          <strong>{visible.length}</strong>{" "}
+          {visible.length === 1 ? "solution" : "solutions"} to explore
         </p>
         <span>
           <PortalIcon name="pin" width="14" />
