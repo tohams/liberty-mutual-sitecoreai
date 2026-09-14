@@ -14,12 +14,7 @@ SharedFields:
   Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
-  Value: |
-    <r>
-      <d
-        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
-        l="{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}" />
-    </r>
+  Value: "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}\" /></r>"
 Languages:
 - Language: en
   Versions:
