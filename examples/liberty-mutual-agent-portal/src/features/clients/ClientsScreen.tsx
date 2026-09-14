@@ -32,6 +32,9 @@ export function ClientsScreen({
   const selected = data.policies.find(
     (item) => item.id === selectedId || item.accountId === selectedId,
   );
+  const renewalCount = data.policies.filter(
+    (item) => item.status === "Renewal review",
+  ).length;
   const visible = data.policies.filter(
     (item) =>
       `${item.accountName} ${item.policyNumber}`
@@ -93,12 +96,8 @@ export function ClientsScreen({
         <div>
           <h2>A timely conversation makes a difference.</h2>
           <p>
-            {
-              data.policies.filter((item) => item.status === "Renewal review")
-                .length
-            }{" "}
-            policies are ready for a renewal review. Start with what has
-            changed.
+            {renewalCount} {renewalCount === 1 ? "policy is" : "policies are"} ready
+            for a renewal review. Start with what has changed.
           </p>
         </div>
         <button
