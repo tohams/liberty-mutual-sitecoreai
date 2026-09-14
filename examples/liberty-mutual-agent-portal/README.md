@@ -9,16 +9,11 @@ Follow the [developer quickstart](../../docs/developer-quickstart.md) for privat
 ```bash
 cd examples/liberty-mutual-agent-portal
 npm run setup:local
-```
-
-Fill the two approved scoped context values in `examples/liberty-mutual-agent-portal/.env.local` in VS Code and save. Keep the terminal in the application directory, then run:
-
-```bash
 npm ci
 npm run dev
 ```
 
-The setup helper creates `.env.local` before dependency installation. `npm ci` installs the locked dependencies; neither it nor `npm install` creates the environment file. If npm reports `ENOENT` for the repository-root `package.json`, change into the application directory first.
+The setup helper creates `.env.local` with the approved scoped POC contexts before dependency installation. Rerunning it fills only missing/blank contexts while preserving custom values and existing secrets. `npm ci` installs the locked dependencies; neither it nor `npm install` creates the environment file. If npm reports `ENOENT` for the repository-root `package.json`, change into the application directory first.
 
 The helper generates independent local secrets, a unique namespace and local JSON state; it leaves portal tracking disabled while retaining native content and Search. Keep Redis credentials absent from all local environment files and the terminal. Open http://localhost:3000/login and sign in as `daniel.01` with password `Sitecore`. The [authentication and data guide](docs/auth-and-data.md) covers operational state and resets; a production runtime requires Redis and cannot use the local JSON adapter.
 
