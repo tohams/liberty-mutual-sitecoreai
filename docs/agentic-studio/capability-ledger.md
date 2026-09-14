@@ -17,6 +17,10 @@ Current status includes the separate September 13 retrieval verification. The Se
 
 On September 13, native **Get Brand Kit** and all nine **Get Brand Kit Section** calls succeeded in a separate read-only conversation. The existing ABM artifacts still document their September 10 excerpt input. Structured top-level colors remain inconsistent with the authored Visual guidance. See the [retrieval record](brand-kit-retrieval-2026-09-13.md) for the actual conversation, returned fields and limitations. No campaign was rerun or published for this check.
 
+## Current artifact navigation
+
+Artifact numbers in the historical record below refer to creation order. The current **Artifacts** list is newest first. The reviewed package opens from the first **Liberty Mutual — Expand your small-business practice - Generated Content** card; verify the content heading **Cedar Ridge Insurance ABM — Final Reviewed Implementation Package**, because the first two cards share that generic label. **Classic** currently shows eight **Done** rows across the three agent types and no **Run workflow** control. Inspect the completed history without starting new work.
+
 ## September 10 capability evidence
 
 | Capability | Status | Evidence and boundary |
