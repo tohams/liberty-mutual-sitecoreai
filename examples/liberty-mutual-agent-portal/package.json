@@ -63,6 +63,8 @@
     "esbuild": ">=0.28.1"
   },
   "scripts": {
+    "setup:local": "node scripts/setup-local.mjs",
+    "test:setup": "node --test scripts/setup-local.test.mjs",
     "prebuild": "node scripts/check-build-environment.mjs",
     "build": "cross-env NODE_ENV=production npm-run-all --serial sitecore-tools:generate-map sitecore-tools:build next:build",
     "postbuild": "node scripts/check-client-bundle-secrets.mjs",

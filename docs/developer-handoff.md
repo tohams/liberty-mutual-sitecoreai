@@ -2,6 +2,8 @@
 
 This guide explains how to operate, change and transfer the Liberty Mutual agent portal. It distinguishes compiled application behavior from tenant configuration and runtime verification. The portal uses native Sitecore content; operational account, policy, submission and production records are fictional fixtures with durable, isolated workspaces.
 
+New to the repository? Begin with the [developer quickstart](developer-quickstart.md). It covers a clean machine setup, isolated local state, native content/Search, and a reversible `ResourceSearch` heading edit in VS Code. The local exercise keeps portal tracking disabled and requires no authoring change or deployment. Return here for model ownership, release, runtime acceptance and transfer.
+
 Use the [presenter runbook](demo-loops.md) for nine capability walkthroughs. Loops 3, 4 and 7 cover operational workflows, state authority and the development/release model; loop 8 adds a native Resources A/B test with its own [configuration and acceptance record](ab-testing.md). Loop 9 covers the separate Products affinity spotlight, verified on production and preview through actual browsing, native scores, both topic variants and a neutral comparison. See the [affinity record](affinity-personalization.md). The shared preparation and reset sections explain pack coordination and environment boundaries.
 
 ## Ownership and architecture
@@ -97,6 +99,8 @@ The provisioned free Redis integration is connected to Vercel Production and Pre
 Do not enable verbose Sitecore editing diagnostics on a shared deployment: the upstream SDK's editing debug path can log secret comparisons. Keep secrets in protected configuration and review logging changes before enabling them.
 
 ## Build and continuous integration
+
+The application's `.nvmrc` pins Node.js 24.19.0; the validation workflow reads that same file. The local setup helper has separate preservation and state-isolation checks in `npm run test:setup`, also run by CI.
 
 Node.js 24 is required. `npm ci` installs the committed dependency graph. The app's `npm run build` generates the actual Sitecore component maps and SDK metadata before compiling Next.js. Generated `.sitecore` files are ignored build artifacts, not source files to edit by hand. The component-map configuration excludes tests, fixtures and pure helpers; regeneration must retain the four intended native portal components—`AgentGuidance`, `ResourceArticle`, `ResourceSearch` and `ProductSpotlight`—plus `PartialDesignDynamicPlaceholder` and SDK built-ins. The generated server/client maps contain these registrations for PR #21. Verify the registration set when adding modules so utility code does not become a CMS rendering.
 

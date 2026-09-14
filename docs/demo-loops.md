@@ -2,6 +2,8 @@
 
 Nine reusable loops for marketing, platform owners and developers. Each loop has a business story, an observable result and a clear implementation boundary. This is presenter documentation; the agent-facing site has no demonstration controls or labels.
 
+The separate [developer setup and component-edit workshop](developer-quickstart.md) adds a hands-on local exercise without changing these nine loop numbers. Developers create isolated local configuration, sign in as `daniel.01`, change the `ResourceSearch` heading, verify native Search and restore the original heading. Portal tracking remains disabled. Add it to an IT session when attendees will use their own machines; allow setup time before the walkthrough.
+
 **Evidence baseline:** the state-eligibility release in [PR #14](https://github.com/tohams/liberty-mutual-sitecoreai/pull/14), merged September 11, 2026 UTC, and the subsequent [seven-loop rehearsal](qa-seven-loops-2026-09-11.md). The rehearsal records fresh portal and native UI observations, 80 passing application tests, current connected CI, deployed eligibility checks and 37 native personalization checks on each host. All eight operational scopes were reset afterward, the 56-account baseline passed, and the temporary CMS summary was restored in the live site and native Search. Customer author/approver separation remains open. The separate September 14 [Brand Kit consumption repair](agentic-studio/brand-kit-consumption-repair-2026-09-14.md) verifies native drafting from complete authored guidance, while retaining the historical ABM excerpt input and the vendor metadata/array limitation. The earlier [release evidence](qa-evidence-2026-09-11.md) remains historical evidence.
 
 **Loop 8 status:** **Liberty Mutual Small Business Guide CTA** is Live. Its exact guide goal was saved and reopened before activation on September 14, 2026 UTC. Published A/B content passed 18 checks and a normal production Daniel `.04` visit reached the guide. Native goal attribution remains pending. The preceding **Liberty Mutual Small Business Resource CTA** was ended with control retained; its historical report is separate. See the [current experiment record](ab-testing.md) and [verification record](qa-ab-testing-2026-09-14.md).
@@ -195,6 +197,8 @@ The insurance records, premium figures, authority records and operational action
 ## Loop 7: Beneath the implementation
 
 **Story:** developers can trace an agent action through clear contracts and server rules, then release changes with repeatable checks.
+
+**Optional hands-on extension:** use the [developer workshop](developer-quickstart.md) to change a component locally and inspect Fast Refresh before discussing the shared release pipeline. Each attendee's JSON state is local; this extension does not require a shared preview reset, CMS publication or Git push.
 
 **Start:** GitHub/code access and a coordinated preview pack. Avery and Jordan must share the same pack. The cross-agent API cases in [release evidence](qa-evidence-2026-09-11.md) and [rehearsal evidence](qa-seven-loops-2026-09-11.md) used preview pack `04`; the fresh browser Draft check used preview pack `01`. The reset cycle removed those records from active saved work. Use their IDs as historical evidence and create a new Draft for this loop.
 
