@@ -17,22 +17,16 @@ Keep the values separate. A master Live or Preview context must never be placed 
 
 GitHub write access is needed only if you later submit a pull request. Sitecore authoring and Vercel access are needed only for the corresponding content and release tasks. This frontend exercise does not require a Sitecore VM, Docker, a local Sitecore server, or a .NET installation.
 
-## 1. Clone and open the application
+## 1. Clone and open the repository
 
 Run these commands in a terminal in your preferred projects directory:
 
 ```sh
 git clone https://github.com/tohams/liberty-mutual-sitecoreai.git
-cd liberty-mutual-sitecoreai/examples/liberty-mutual-agent-portal
-node --version
-npm --version
+cd liberty-mutual-sitecoreai
 ```
 
-If Git asks you to authenticate, use your organization’s approved GitHub sign-in method. Alternatively, use VS Code’s **Git: Clone** command, sign in to GitHub, and select `tohams/liberty-mutual-sitecoreai`; then open the application subdirectory shown above. The GitHub CLI is optional.
-
-`node --version` should report `v24.19.0`. If you use a Node version manager, select the version in this directory’s `.nvmrc` before continuing. On macOS or Linux with `nvm` already installed, run `nvm install` and then `nvm use` from this directory. On Windows, select the same version using your installed version manager or Node installer.
-
-Open this application directory in VS Code with **File → Open Folder**. If the VS Code command is on your PATH, `code .` opens it from this terminal. Keep terminal commands below in `examples/liberty-mutual-agent-portal`; the other starter examples are reference projects.
+If Git asks you to authenticate, use your organization’s approved GitHub sign-in method. Alternatively, use VS Code’s **Git: Clone** command, sign in to GitHub, select `tohams/liberty-mutual-sitecoreai`, and open the cloned repository. The GitHub CLI is optional.
 
 Create your own local workshop branch before editing. Replace `your-name` with a short, unique name using lowercase letters and hyphens:
 
@@ -42,6 +36,20 @@ git switch -c workshop/your-name-resource-search
 
 Creating this local branch does not require GitHub write access and does not deploy anything.
 
+Open the repository root, **`liberty-mutual-sitecoreai`**, in VS Code with **File → Open Folder**. If the VS Code command is on your PATH, run `code .` from the repository root. Explorer should show the root configuration files, `authoring`, `.github`, and the portal application under `examples`.
+
+Keep that repository root open in VS Code. In its integrated terminal, change to the application directory before running the workshop’s npm commands:
+
+```sh
+cd examples/liberty-mutual-agent-portal
+node --version
+npm --version
+```
+
+`node --version` should report `v24.19.0`. If you use a Node version manager, select the version in the application directory’s `.nvmrc` before continuing. On macOS or Linux with `nvm` already installed, run `nvm install` and then `nvm use` from this directory. On Windows, select the same version using your installed version manager or Node installer.
+
+The remaining terminal commands run from `examples/liberty-mutual-agent-portal`. Editor file paths below start at the repository root. The other starter examples are reference projects.
+
 ## 2. Create an isolated local configuration
 
 ```sh
@@ -50,7 +58,7 @@ npm run setup:local
 
 Use a fresh checkout with no other local `.env` files and a clean terminal without inherited portal configuration. The setup helper creates an ignored `.env.local` file with three independent local secrets, a unique state namespace, `PORTAL_STATE_ADAPTER=local-json`, and tracking disabled. It uses Node’s built-in modules, so it can run before dependency installation. It will not overwrite an existing `.env.local`.
 
-Open `.env.local` in your editor and fill only the two blank context values requested above. Save the file. Keep `PORTAL_CONTENT_ADAPTER=sitecore` and `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` for this exercise.
+In VS Code, open `examples/liberty-mutual-agent-portal/.env.local` and fill only the two blank context values requested above. Save the file. Keep `PORTAL_CONTENT_ADAPTER=sitecore` and `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` for this exercise.
 
 Local saved work is stored in the application’s ignored `.portal-state` directory. Every developer can use the same fictional `daniel.01` login on their own machine because those files are separate. The published content and Search index remain shared, read-only services.
 
@@ -81,7 +89,7 @@ Open **Learning & resources** in the left navigation. Find the search heading **
 In VS Code, open:
 
 ```text
-src/components/resource-search/ResourceSearch.tsx
+examples/liberty-mutual-agent-portal/src/components/resource-search/ResourceSearch.tsx
 ```
 
 Find this JSX:
@@ -114,7 +122,7 @@ git diff -- src/components/resource-search/ResourceSearch.tsx
 
 For a practice run, replace the heading with its original text and save. Confirm the original heading returns in the browser. This restores the exercise without discarding anyone else’s changes.
 
-Run the normal application checks in a second terminal, from the same application directory:
+Run the normal application checks in a second terminal, from the same application directory. If that terminal starts at the repository root, first run `cd examples/liberty-mutual-agent-portal`:
 
 ```sh
 npm run lint

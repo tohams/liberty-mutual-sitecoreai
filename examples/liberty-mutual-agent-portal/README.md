@@ -4,7 +4,7 @@ This is the active customer application. It uses the Sitecore Content SDK, Next.
 
 ## Run locally
 
-Follow the [developer quickstart](../../docs/developer-quickstart.md) for private-repository access, VS Code setup, and the complete heading-edit workshop. Use Node.js **24.19.0** and the checked-in package lock. In a fresh checkout, from this directory:
+Follow the [developer quickstart](../../docs/developer-quickstart.md) for private-repository access, VS Code setup, and the complete heading-edit workshop. Open the repository root, `liberty-mutual-sitecoreai`, in VS Code. Use Node.js **24.19.0** and the checked-in package lock. In a fresh checkout, run these commands from the application directory, `examples/liberty-mutual-agent-portal`:
 
 ```bash
 npm run setup:local
