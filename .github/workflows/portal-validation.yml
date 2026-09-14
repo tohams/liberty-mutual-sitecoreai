@@ -51,6 +51,9 @@ jobs:
         run: |
           python -m pip install -r authoring/scripts/requirements.txt
           python authoring/scripts/validate-content-seed.py
+      - name: Validate placement migration and preservation safeguards
+        working-directory: .
+        run: node --test authoring/scripts/portal-placeholder-layouts.test.cjs authoring/scripts/configure-portal-placeholders.test.cjs
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
         with:
           dotnet-version: '8.0.x'

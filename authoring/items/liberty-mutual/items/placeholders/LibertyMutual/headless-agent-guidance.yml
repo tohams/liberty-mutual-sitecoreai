@@ -1,0 +1,20 @@
+---
+ID: "427c0c0a-38cb-5c1b-aa2d-34b20594a9aa"
+Parent: "e26a2d36-9ee9-49df-bb07-0073d8e20ccc"
+Template: "5c547d4e-7111-4995-95b0-6b561751bf2e"
+Path: "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-agent-guidance"
+SharedFields:
+- ID: "7256bdab-1fd2-49dd-b205-cb4873d2917c"
+  Hint: Placeholder Key
+  Value: "headless-agent-guidance"
+- ID: "e391b526-d0c5-439d-803e-17512eae6222"
+  Hint: Allowed Controls
+  Value: "{193A0299-B5B6-5668-B792-9F3552463163}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260914T211210Z

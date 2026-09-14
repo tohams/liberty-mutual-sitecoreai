@@ -209,7 +209,6 @@
     "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourcesFolder/__Standard Values.yml",
     "authoring/items/liberty-mutual/items/templates/LibertyMutual/SearchFolder.yml",
     "authoring/items/liberty-mutual/items/templates/LibertyMutual/SearchFolder/__Standard Values.yml",
-    "authoring/items/liberty-mutual/items/templates/LibertyMutual/PortalPage/__Standard Values.yml",
     "authoring/items/liberty-mutual/items/renderings/LibertyMutual/AgentGuidance.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/AgentGuidance.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/AgentGuidance/Default.yml",
@@ -220,7 +219,6 @@
     "authoring/items/liberty-mutual/items/renderings/LibertyMutual/ResourceSearch.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ResourceSearch.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ResourceSearch/Default.yml",
-    "authoring/items/liberty-mutual/items/placeholders/LibertyMutual/headless-main.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Resources.yml",
@@ -288,13 +286,26 @@
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductSpotlight/Default.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight/neutral.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight/workers_compensation.yml",
-    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight/household.yml"
+    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight/household.yml",
+    "authoring/items/liberty-mutual/items/placeholders/LibertyMutual/headless-agent-guidance.yml",
+    "authoring/items/liberty-mutual/items/placeholders/LibertyMutual/headless-resource-search.yml",
+    "authoring/items/liberty-mutual/items/placeholders/LibertyMutual/headless-resource-article.yml",
+    "authoring/items/liberty-mutual/items/layouts/LibertyMutual/PortalLayout.yml",
+    "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ResourcesLayout.yml",
+    "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ResourceArticleLayout.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/Page/__Standard Values.yml"
   ],
   "placeholderIds": {
-    "headless-products-spotlight": "8428148d-9f3b-5323-a166-88d0c5ea56ac"
+    "headless-products-spotlight": "8428148d-9f3b-5323-a166-88d0c5ea56ac",
+    "headless-agent-guidance": "427c0c0a-38cb-5c1b-aa2d-34b20594a9aa",
+    "headless-resource-search": "f64643c1-6280-57c2-8695-02d4c563b4ae",
+    "headless-resource-article": "27225f95-329c-5193-b6d9-8ea86c0010a5"
   },
   "layoutIds": {
-    "ProductsLayout": "75cfc4f6-9a69-52b3-97c3-11a6f1fabe89"
+    "ProductsLayout": "75cfc4f6-9a69-52b3-97c3-11a6f1fabe89",
+    "PortalLayout": "3d40b9c9-8126-5ff8-81e1-a48afb1ba1a8",
+    "ResourcesLayout": "2dac85b2-7271-519e-a454-5a841ac1ad0d",
+    "ResourceArticleLayout": "bb11e9d7-11d7-5c71-9ab7-1dd37267c4d3"
   },
   "productSpotlight": {
     "placeholderKey": "headless-products-spotlight",

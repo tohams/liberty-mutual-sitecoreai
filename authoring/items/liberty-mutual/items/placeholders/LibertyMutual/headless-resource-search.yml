@@ -1,0 +1,20 @@
+---
+ID: "f64643c1-6280-57c2-8695-02d4c563b4ae"
+Parent: "e26a2d36-9ee9-49df-bb07-0073d8e20ccc"
+Template: "5c547d4e-7111-4995-95b0-6b561751bf2e"
+Path: "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-resource-search"
+SharedFields:
+- ID: "7256bdab-1fd2-49dd-b205-cb4873d2917c"
+  Hint: Placeholder Key
+  Value: "headless-resource-search"
+- ID: "e391b526-d0c5-439d-803e-17512eae6222"
+  Hint: Allowed Controls
+  Value: "{15CF6EFA-C180-563A-B229-C08F2DAC3DAD}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260914T211210Z

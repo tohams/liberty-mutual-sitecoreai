@@ -12,6 +12,14 @@ SharedFields:
 - ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
   Hint: __Shared revision
   Value: "5877a8ca-d5c7-473e-8cef-186a8cad17ca"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}" />
+    </r>
 Languages:
 - Language: en
   Versions:
