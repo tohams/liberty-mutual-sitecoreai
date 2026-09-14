@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Resource metadata</title>
+  <rect width="256" height="256" rx="56" fill="#5548d9"/>
+  <g fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="52" y="58" width="30" height="30" rx="7"/>
+    <path d="M110 73h88M110 128h88M110 183h88"/>
+    <rect x="52" y="113" width="30" height="30" rx="7"/>
+    <rect x="52" y="168" width="30" height="30" rx="7"/>
+  </g>
+</svg>

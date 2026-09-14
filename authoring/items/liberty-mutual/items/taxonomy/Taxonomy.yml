@@ -1,0 +1,24 @@
+---
+ID: dfc6cfa1-6dfc-57ad-8e9a-583bff17bcc5
+Parent: 20e904a1-9b60-43a1-a8d0-8e3aee45b115
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{D840055E-6E1A-50AE-B00A-C1DB50375D42}"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Taxonomy
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: Initial editable metadata lists. Option item names preserve the portal and Search contract; use display names for friendly labels. Managed in Sitecore after CreateOnly seeding.
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260914T000000Z

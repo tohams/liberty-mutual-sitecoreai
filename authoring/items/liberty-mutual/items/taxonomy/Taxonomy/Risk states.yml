@@ -1,0 +1,24 @@
+---
+ID: a6c86a82-9b86-5347-8e96-287f69c536d3
+Parent: dfc6cfa1-6dfc-57ad-8e9a-583bff17bcc5
+Template: d840055e-6e1a-50ae-b00a-c1db50375d42
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Risk states
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Risk states
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: Select the risk location the resource applies to. All means reusable guidance that is not specific to one state.
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260914T000000Z

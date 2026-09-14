@@ -23,6 +23,10 @@
           {
             "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-products-spotlight",
             "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Data/Taxonomy",
+            "scope": "Ignored"
           }
         ]
       }

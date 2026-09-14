@@ -27,6 +27,8 @@ def read_json(path):
 model = read_json(BASE / 'LibertyMutual.Model.module.json')
 content = read_json(BASE / 'LibertyMutual.Content.module.json')
 site_presentation = read_json(BASE / 'LibertyMutual.SitePresentation.module.json')
+taxonomy = read_json(BASE / 'LibertyMutual.Taxonomy.module.json')
+taxonomy_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy'
 site_placeholder_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings'
 site_placeholder_keys = ['headless-agent-guidance', 'headless-resource-search',
                          'headless-resource-article', 'headless-products-spotlight']
@@ -52,11 +54,21 @@ for include in site_presentation['items']['includes']:
 require(len(content['items']['includes']) == 1, 'Content requires one owned include.')
 include = content['items']['includes'][0]
 expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
-                         for path in sorted(site_placeholder_paths)]
+                         for path in sorted(site_placeholder_paths | {taxonomy_root})]
 require(include['path'] == '/sitecore/content/LibertyMutual' and
         include.get('allowedPushOperations') == 'CreateOnly' and
+        include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and
         sorted(include.get('rules', []), key=lambda rule: rule['path']) == expected_ignore_rules,
-        'Initial content seed must remain CreateOnly with only the four exact site placeholder exclusions.')
+        'Initial content seed must remain CreateOnly with only site placeholder and taxonomy exclusions.')
+require(len(taxonomy['items']['includes']) == 1, 'Taxonomy requires one isolated include.')
+include = taxonomy['items']['includes'][0]
+require(include['path'] == taxonomy_root and include.get('allowedPushOperations') == 'CreateOnly'
+        and include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and not include.get('rules'),
+        'Taxonomy must remain CreateOnly and restricted to its owned subtree.')
+resource_modules = read_json(ROOT / 'xmcloud.build.json')['deployItems']['modules']
+require(len(resource_modules) == 3 and set(resource_modules) ==
+        {'nextjs-starter', 'LibertyMutual.Model', 'LibertyMutual.SitePresentation'},
+        'Editable content and taxonomy must remain outside authoring resource packages.')
 
 items = {}
 paths = {}
@@ -131,6 +143,65 @@ def field_value(fields, hint):
 
 def id_list(value):
     return [normalized_id(value) for value in re.findall(r'\{([0-9a-fA-F-]{36})\}', value)]
+
+
+# Managed choices remain native editable content. Their names are existing scalar
+# contract values; no GUID migration or unsupported Search field type is implied.
+taxonomy_manifest = read_json(BASE / 'resource-taxonomy-manifest.json')
+require(taxonomy_manifest['root'] == taxonomy_root, 'Taxonomy manifest root differs from its module.')
+option_template = normalized_id(taxonomy_manifest['templateIds']['ResourceMetadataOption'])
+folder_template = normalized_id(taxonomy_manifest['templateIds']['ResourceMetadataFolder'])
+taxonomy_item = paths[taxonomy_root]
+require(id_list(field_value(taxonomy_item.get('SharedFields', []), '__Masters')) == [folder_template],
+        'Taxonomy root must offer only the managed metadata folder as its insert option.')
+folder_defaults = paths[TEMPLATE_ROOT + '/ResourceMetadataFolder/__Standard Values']
+require(id_list(field_value(folder_defaults.get('SharedFields', []), '__Masters')) == [option_template],
+        'Metadata folders must offer only managed metadata options.')
+expected_taxonomy_paths = {taxonomy_root}
+taxonomy_values = {}
+for managed_list in taxonomy_manifest['taxonomies']:
+    source = managed_list['source']
+    require(source == taxonomy_root + '/' + managed_list['folder'], 'Metadata list must be a direct taxonomy child.')
+    folder = paths[source]
+    require(normalized_id(folder['ID']) == normalized_id(managed_list['sourceId'])
+            and normalized_id(folder['Template']) == folder_template
+            and normalized_id(folder['Parent']) == normalized_id(taxonomy_item['ID']),
+            'Metadata list identity or parent is incorrect: ' + source)
+    expected_taxonomy_paths.add(source)
+    values = set()
+    for option in managed_list['options']:
+        option_path = source + '/' + option['name']
+        entry = paths[option_path]
+        require(normalized_id(entry['ID']) == normalized_id(option['id'])
+                and normalized_id(entry['Template']) == option_template
+                and normalized_id(entry['Parent']) == normalized_id(folder['ID']),
+                'Metadata option identity or parent is incorrect: ' + option_path)
+        english = next(language for language in entry['Languages'] if language['Language'] == 'en')
+        require(field_value(english.get('Fields', []), '__Display name') == option['displayName']
+                and field_value(english['Versions'][0]['Fields'], 'description') == option['description'],
+                'Metadata option needs its declared label and description: ' + option_path)
+        require(option['name'] not in values, 'Duplicate metadata option code: ' + option_path)
+        values.add(option['name'])
+        expected_taxonomy_paths.add(option_path)
+    require(managed_list['field'] not in taxonomy_values, 'Duplicate metadata field mapping.')
+    taxonomy_values[managed_list['field']] = values
+require(set(taxonomy_values) == {'state', 'businessFamily', 'product', 'channel', 'resourceType'},
+        'Expected exactly five resource metadata lists.')
+require({path for path in paths if path == taxonomy_root or path.startswith(taxonomy_root + '/')} ==
+        expected_taxonomy_paths, 'Taxonomy contains undeclared folders or options.')
+for relative in taxonomy_manifest['generatedFiles']:
+    require((ROOT / relative).is_file(), 'Missing generated taxonomy item: ' + relative)
+for metadata_field in taxonomy_values:
+    definition = paths[TEMPLATE_ROOT + '/ResourcePage/Content/' + metadata_field]
+    require(field_value(definition['SharedFields'], 'Type') == 'Single-Line Text',
+            'ResourcePage metadata must retain its tenant-verified Search-supported text type: ' + metadata_field)
+for resource in resources:
+    entry = items[normalized_id(resource['pageId'])]
+    for language in entry['Languages']:
+        for version in language['Versions']:
+            for metadata_field, values in taxonomy_values.items():
+                value = field_value(version['Fields'], metadata_field)
+                require(value in values, f'Authored metadata has no managed option: {entry["Path"]} {metadata_field}={value}')
 
 
 placeholder_ids = {}

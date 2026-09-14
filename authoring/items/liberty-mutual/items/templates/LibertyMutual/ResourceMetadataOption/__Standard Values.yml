@@ -1,0 +1,17 @@
+---
+ID: aa45e001-773c-59d5-b8e0-cc58868440e1
+Parent: 9dc18d3c-9944-507a-aeab-9787c8fc4d9c
+Template: 9dc18d3c-9944-507a-aeab-9787c8fc4d9c
+Path: /sitecore/templates/Project/LibertyMutual/ResourceMetadataOption/__Standard Values
+Languages:
+- Language: en
+  Fields:
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: The item name is the stored metadata code. Change Display name for a friendly label; coordinate code changes with resource content and Search.
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260914T000000Z

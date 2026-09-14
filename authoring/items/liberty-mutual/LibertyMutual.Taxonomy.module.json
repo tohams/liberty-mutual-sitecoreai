@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.Taxonomy",
+  "items": {
+    "includes": [
+      {
+        "name": "taxonomy",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  },
+  "description": "Editable resource metadata lists. CreateOnly preserves author changes; never include this module in an authoring resource package."
+}
