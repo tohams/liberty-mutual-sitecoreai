@@ -23,6 +23,7 @@ TEMPLATE='ab86861a-6030-46c5-b394-e8f99e8b87db';SECTION='e269fbb5-3750-427a-9149
 SITE='/sitecore/content/LibertyMutual/liberty-mutual-agent-portal';TP='/sitecore/templates/Project/LibertyMutual'
 LAYOUT_ROOT='/sitecore/layout/Layouts/Project/LibertyMutual'
 PLACEHOLDER_ROOT='/sitecore/layout/Placeholder Settings/Project/LibertyMutual'
+SITE_PLACEHOLDER_ROOT=SITE+'/Presentation/Placeholder Settings'
 PLACEHOLDERS={'AgentGuidance':'headless-agent-guidance','ResourceSearch':'headless-resource-search','ResourceArticle':'headless-resource-article'}
 LAYOUTS={'PortalLayout':['AgentGuidance'],'ResourcesLayout':['ResourceSearch','AgentGuidance'],'ResourceArticleLayout':['ResourceArticle']}
 written=[]
@@ -36,7 +37,10 @@ def save(item,kind):
  if 'Languages' in item:
   item['Languages']=[{key:lang[key] for key in ('Language','Fields','Versions') if key in lang} for lang in item['Languages']]
  prefixes={'templates':'/sitecore/templates/Project/','renderings':'/sitecore/layout/Renderings/Project/','placeholders':'/sitecore/layout/Placeholder Settings/Project/','layouts':'/sitecore/layout/Layouts/Project/','content':'/sitecore/content/'}
- path=ITEMS/kind/(item['Path'][len(prefixes[kind]):]+'.yml');path.parent.mkdir(parents=True,exist_ok=True)
+ if kind=='site-placeholders':
+  key=item['Path'].rsplit('/',1)[1];path=ITEMS/('site-'+key.removeprefix('headless-'))/(key+'.yml')
+ else:path=ITEMS/kind/(item['Path'][len(prefixes[kind]):]+'.yml')
+ path.parent.mkdir(parents=True,exist_ok=True)
  # Sitecore serialization uses a narrow YAML reader: single-quoted scalars are
  # retained literally. Normalize them to double-quoted JSON/YAML strings.
  serialized=yaml.dump(item,Dumper=Dumper,sort_keys=False,allow_unicode=True,width=100000)
@@ -99,6 +103,7 @@ for name,tid in [('AgentGuidance',ag),('ResourceArticle',ra),('ResourceSearch',r
  for v in ['Default','Highlight'] if name=='AgentGuidance' else ['Default']:item(SITE+'/Presentation/Headless Variants/'+name+'/'+v,variantroot,'4d50cdae-c2d9-4de8-b080-8f992bfb1b55','content')
 for name,key in PLACEHOLDERS.items():
  item(PLACEHOLDER_ROOT+'/'+key,IDS['projectPlaceholders'],'5c547d4e-7111-4995-95b0-6b561751bf2e','placeholders',shared=[f('7256bdab-1fd2-49dd-b205-cb4873d2917c','Placeholder Key',key),f('e391b526-d0c5-439d-803e-17512eae6222','Allowed Controls',brace(renderids[name]))])
+ item(SITE_PLACEHOLDER_ROOT+'/'+key,'e601261f-f47f-4831-b91e-ef70efab3276','d2a6884c-04d5-4089-a64e-d27ca9d68d4c','site-placeholders',shared=[f('7256bdab-1fd2-49dd-b205-cb4873d2917c','Placeholder Key',key),f('e391b526-d0c5-439d-803e-17512eae6222','Allowed Controls',brace(renderids[name]))])
 item(LAYOUT_ROOT,'da04b275-8838-4a3a-afee-817cf1fdd2eb',FOLDER,'layouts')
 for name,components in LAYOUTS.items():
  item(LAYOUT_ROOT+'/'+name,uid(LAYOUT_ROOT),'e4e11508-04a4-4b0b-a263-5201f811c9cd','layouts',shared=[f('a036b2bc-ba04-44f6-a75f-bae6cd242abf','Path','/Views/SXA JSS/SXA JSS Layout.cshtml'),f('80334869-86dc-4472-aa89-44cf1b2f6c9b','Placeholders','\n'.join(brace(uid(PLACEHOLDER_ROOT+'/'+PLACEHOLDERS[c])) for c in components))])
@@ -159,6 +164,7 @@ for hub in DATA['productHubs']:
  page(hub['family'],hub['title'],[('AgentGuidance',ds,'Highlight')],parentid=pageids['products'],parentpath=SITE+'/Home/products')
 manifest={'schemaVersion':'1.0.0','site':SITE,'fieldIds':fieldids,'templateIds':templates,'renderingIds':renderids,'routePageIds':pageids,'promotions':promotionids,'resourceSearch':{'datasourceId':searchds,'sourceId':searchconfiguration['searchIndex'],'configuration':searchconfiguration},'resourcePages':resourceids,'seedWorkflowStatus':'Initial source-reviewed bootstrap items are Approved in existing Basic workflows. New author-created items use the native Draft initial state. This is sandbox editorial approval, not corporate brand approval.','unusedInitialResourceDatasources': [uid(SITE+'/Data/Resources/'+r['slug']) for r in DATA['resources']], 'generatedFiles':written}
 manifest['placeholderIds']={key:uid(PLACEHOLDER_ROOT+'/'+key) for key in PLACEHOLDERS.values()}
+manifest['sitePlaceholderIds']={key:uid(SITE_PLACEHOLDER_ROOT+'/'+key) for key in PLACEHOLDERS.values()}
 manifest['layoutIds']={name:uid(LAYOUT_ROOT+'/'+name) for name in LAYOUTS}
 manifest['generatedFiles']=list(dict.fromkeys(written))
 (BASE/'content-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

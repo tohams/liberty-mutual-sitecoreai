@@ -2,7 +2,8 @@
   "deployItems": {
     "modules": [
       "nextjs-starter",
-      "LibertyMutual.Model"
+      "LibertyMutual.Model",
+      "LibertyMutual.SitePresentation"
     ]
   },
   "renderingHosts": {},
