@@ -4,24 +4,29 @@ This is the active customer application. It uses the Sitecore Content SDK, Next.
 
 ## Run locally
 
-Use Node.js 24 and the checked-in package lock. From this directory:
+Follow the [developer quickstart](../../docs/developer-quickstart.md) for private-repository access, VS Code setup, and the complete heading-edit workshop. Use Node.js **24.19.0** and the checked-in package lock. In a fresh checkout, from this directory:
 
 ```bash
-cp .env.remote.example .env.local
+npm run setup:local
+# Fill only the two blank approved context values in .env.local.
 npm ci
 npm run dev
 ```
 
-Before starting, fill the ignored local environment file using the connected tenant's Edge configuration and independent portal session/operator secrets. Follow [authentication and data setup](docs/auth-and-data.md) for durable state or the explicit local JSON adapter. The native content adapter is the default; the deployed portal must use it. Open http://localhost:3000/login. Synthetic reviewer credentials are documented privately in the repository fixture pack; never use a real account password.
+The helper generates independent local secrets, a unique namespace and local JSON state; it leaves portal tracking disabled while retaining native content and Search. Keep Redis credentials absent from all local environment files and the terminal. Open http://localhost:3000/login and sign in as `daniel.01` with password `Sitecore`. The [authentication and data guide](docs/auth-and-data.md) covers operational state and resets; a production runtime requires Redis and cannot use the local JSON adapter.
 
 ## Verify changes
 
 ```bash
-npm run type-check
 npm run lint
 npm test
+npm run test:setup
+npm run type-check
+# Stop npm run dev before building.
 npm run build
 ```
+
+Development startup generates the Sitecore SDK files required by type checking. If you have not started the app, run `npm run sitecore-tools:generate-map` and `npm run sitecore-tools:build` before `npm run type-check`. A successful build checks compilation and private-value exposure in browser assets; it does not deploy or validate production runtime services.
 
 From the repository root, validate scoped content with `dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content` and native delivery with `node authoring/scripts/verify-edge-content.cjs`. These checks serve different purposes: application tests validate behavior; the connected checker proves that Sitecore returns the expected authored content.
 

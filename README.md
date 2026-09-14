@@ -8,6 +8,7 @@ The application is built on the official [SitecoreAI starter repository](https:/
 
 | Audience | Guide |
 | --- | --- |
+| Developers starting on a new machine | [Local setup and component-edit workshop](docs/developer-quickstart.md) |
 | Developers and platform administrators | [Developer handoff](docs/developer-handoff.md) |
 | Marketers and content implementers | [Content model and publishing](docs/content-model.md) |
 | Marketing and platform walkthrough | [Guided portal walkthrough](docs/marketing-walkthrough.md) |
@@ -19,17 +20,17 @@ The application is built on the official [SitecoreAI starter repository](https:/
 
 ## Run locally
 
-Use Node.js 24 and npm with the committed lockfile. Local authoring also requires access to this SitecoreAI tenant. Copy the environment template, then obtain the appropriate delivery context and editing secret through the team's approved credential channel.
+Use Node.js **24.19.0**, npm, and the committed lockfile. Begin with a fresh authenticated clone of this private repository. The [developer quickstart](docs/developer-quickstart.md) covers access, VS Code, the two approved Sitecore contexts, and a reversible heading change that preserves native Search.
 
 ```sh
 cd examples/liberty-mutual-agent-portal
+npm run setup:local
+# Fill the two blank scoped context values in the generated .env.local.
 npm ci
-cp .env.remote.example .env.local
-# Configure .env.local as described in docs/auth-and-data.md.
 npm run dev
 ```
 
-Open `http://localhost:3000/login`. Review coordinators distribute the synthetic account credentials from the private fixture file; the website and API never publish the login list. For local development only, set `PORTAL_STATE_ADAPTER=local-json` and a unique `PORTAL_ENVIRONMENT`. Deployed environments require the configured HTTP Redis provider. Keep native Sitecore content enabled; the explicit local fixture content adapter exists for isolated engineering tests.
+Open `http://localhost:3000/login` and use the workshop’s `daniel.01` account with password `Sitecore`. Setup creates independent local secrets, a unique namespace, local JSON state, native content, and disabled portal tracking. Keep Redis credentials absent from every local environment file and your terminal: Redis takes precedence over local JSON. Each developer's saved work stays on their own machine; published content and native Search remain shared reads. Deployed environments require the configured HTTP Redis provider. The explicit fixture content adapter is an engineering-test seam, not a complete offline portal.
 
 ## Repository map
 
