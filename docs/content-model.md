@@ -15,6 +15,10 @@ Native custom-value source and test evidence are maintained separately in [autho
 
 `LibertyMutual.Model` permits **CreateAndUpdate** only for the four model roots. `LibertyMutual.Content` permits **CreateOnly** for initial site scaffolding and editorial content. Neither permits deletion. Normal releases push the model module only; existing marketer content is never overwritten by the seed deployment script. No upstream starter module is pushed.
 
+The root `sitecore.json` discovers only the default rendering-host module and the two Liberty Mutual modules. The upstream Click Click Launch files remain in Git as reference, outside this portal's serialization configuration. None of its 55 rendering definitions is used by the portal. The native dependency audit also found no references from Liberty Mutual content or model items to the Starter Kit's templates, branches, settings, placeholders, scripts or media.
+
+`xmcloud.build.json` explicitly packages only `nextjs-starter` and `LibertyMutual.Model` for an authoring-environment deployment. `LibertyMutual.Content` stays outside Items as Resources (IAR); seed it deliberately using the guarded CreateOnly procedure. Resource-backed Starter Kit components cannot be deleted in Content Editor. Rebuild and deploy the authoring environment with this configuration to remove the old resources, then verify the component library and retained page layouts. Keep Sitecore's shared Foundation/Feature components intact. See [Sitecore's build configuration](https://doc.sitecore.com/sai/en/developers/sitecoreai/deploying-sitecoreai/the-sitecoreai-build-configuration/the-sitecoreai-build-configuration.html).
+
 All initial content comes from the source-reviewed brand pack in `docs/brand`. Native IDs, field IDs, route pages and datasource relationships are recorded in `authoring/items/liberty-mutual/content-manifest.json`.
 
 ## Component contracts
