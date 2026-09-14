@@ -22,6 +22,8 @@ The application is built on the official [SitecoreAI starter repository](https:/
 
 Use Node.js **24.19.0**, npm, and the committed lockfile. Begin with a fresh authenticated clone of this private repository. The [developer quickstart](docs/developer-quickstart.md) covers access, VS Code, the two approved Sitecore contexts, and a reversible heading change that preserves native Search.
 
+Open the repository root, `liberty-mutual-sitecoreai`, in VS Code. In a terminal starting at that root, run:
+
 ```sh
 cd examples/liberty-mutual-agent-portal
 npm run setup:local
