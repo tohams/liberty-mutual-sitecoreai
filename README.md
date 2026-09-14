@@ -27,7 +27,11 @@ Open the repository root, `liberty-mutual-sitecoreai`, in VS Code. **The root ha
 ```sh
 cd examples/liberty-mutual-agent-portal
 npm run setup:local
-# Fill the two blank scoped context values in the generated .env.local.
+```
+
+In VS Code, fill the two approved scoped context values in `examples/liberty-mutual-agent-portal/.env.local` and save. Then, in the same application terminal, run:
+
+```sh
 npm ci
 npm run dev
 ```

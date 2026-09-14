@@ -9,7 +9,11 @@ Follow the [developer quickstart](../../docs/developer-quickstart.md) for privat
 ```bash
 cd examples/liberty-mutual-agent-portal
 npm run setup:local
-# Fill only the two blank approved context values in .env.local.
+```
+
+Fill the two approved scoped context values in `examples/liberty-mutual-agent-portal/.env.local` in VS Code and save. Keep the terminal in the application directory, then run:
+
+```bash
 npm ci
 npm run dev
 ```
