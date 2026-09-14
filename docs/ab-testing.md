@@ -13,7 +13,7 @@ Does a more specific, benefit-led action label help agents discover the small-bu
 | Native test name | **Liberty Mutual Small Business Guide CTA** |
 | Native tenant/site | Safeco Insurance Company of America POC / `liberty-mutual-agent-portal` |
 | Page | `/resources`, native `Home/resources`; English version **2**, named **Small-business CTA experiment** |
-| Component | `AgentGuidance`, below `ResourceSearch` in `headless-main` |
+| Component | `AgentGuidance` in `headless-agent-guidance`, below `ResourceSearch` in its separate `headless-resource-search` region |
 | Existing datasource | `Data/Guidance/resources-guidance`, ID `584cc87c-ae9a-552a-962f-fa31b7e1e126` |
 | Control A | **Start with small business** |
 | Variant B | **Build your small-business practice**; separate native datasource `Data/Guidance/resources-guidance_var2`, ID `77e00d15-681c-45de-9079-aa08a48b7195` |

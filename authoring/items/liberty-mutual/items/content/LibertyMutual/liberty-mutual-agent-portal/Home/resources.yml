@@ -23,17 +23,17 @@ SharedFields:
     <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
-        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        l="{2DAC85B2-7271-519E-A454-5A841AC1AD0D}">
         <r
           uid="{DAB6066F-44F8-59EF-B7A5-E79550A291FB}"
           id="{15CF6EFA-C180-563A-B229-C08F2DAC3DAD}"
-          ph="headless-main"
+          ph="headless-resource-search"
           ds="{C0BCA8FB-A509-549F-B94A-24CB585A62A7}"
           par="FieldNames={F13802DB-532B-504C-B466-F83A1FA0EF0F}&amp;DynamicPlaceholderId=1" />
         <r
           uid="{E144A961-809E-570F-9E26-C1CDD5D4E99B}"
           id="{193A0299-B5B6-5668-B792-9F3552463163}"
-          ph="headless-main"
+          ph="headless-agent-guidance"
           ds="{584CC87C-AE9A-552A-962F-FA31B7E1E126}"
           par="FieldNames={810A4AD9-0C31-5EC4-BC37-006D382BCE44}&amp;DynamicPlaceholderId=2" />
       </d>
