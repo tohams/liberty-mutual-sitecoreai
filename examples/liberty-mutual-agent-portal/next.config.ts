@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
       { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
     ] }, {
-      source: '/marketplace/resource-metadata',
+      source: '/resource-metadata',
       headers: [{
         key: 'Content-Security-Policy',
         value: "frame-ancestors https://pages.sitecorecloud.io https://app.sitecorecloud.io https://portal.sitecorecloud.io",
