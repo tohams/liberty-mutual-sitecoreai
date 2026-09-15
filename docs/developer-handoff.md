@@ -6,6 +6,8 @@ New to the repository? Begin with the [developer quickstart](developer-quickstar
 
 Use the [presenter runbook](demo-loops.md) for nine capability walkthroughs. Loops 3, 4 and 7 cover operational workflows, state authority and the development/release model; loop 8 adds a native Resources A/B test with its own [configuration and acceptance record](ab-testing.md). Loop 9 covers the separate Products affinity spotlight, verified on production and preview through actual browsing, native scores, both topic variants and a neutral comparison. See the [affinity record](affinity-personalization.md). The shared preparation and reset sections explain pack coordination and environment boundaries.
 
+For optional assistant access to this SitecoreAI tenant and current documentation, follow [Sitecore tools in VS Code](vscode-sitecore-mcp.md). Each developer authorizes their own account. The initial exercise uses read-only tools and is separate from the portal runtime.
+
 ## Ownership and architecture
 
 The active rendering host is `liberty-mutual-agent-portal`, at `examples/liberty-mutual-agent-portal`. It uses Next.js App Router, React, TypeScript and the Sitecore Content SDK. Other `examples/` directories retain upstream starter reference code and are not additional customer applications.

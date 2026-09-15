@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "liberty-mutual-sitecoreai": {
+      "type": "http",
+      "url": "https://marketer.sitecorecloud.io/mcp/marketer-mcp-prod"
+    },
+    "sitecore-documentation": {
+      "type": "http",
+      "url": "https://sitecore.mcp.kapa.ai"
+    }
+  }
+}

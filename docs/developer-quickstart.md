@@ -2,6 +2,8 @@
 
 Run the Liberty Mutual agent portal locally, change one React heading in VS Code, and see the result in your browser. This exercise reads published Sitecore content and uses native Search while keeping saved portal work on your machine. It does not require a CMS content change or a deployment.
 
+For optional chat-assisted CMS and documentation inspection, see [Sitecore tools in VS Code](vscode-sitecore-mcp.md). That separate MCP exercise does not change the Node/npm prerequisites below.
+
 ## Before you begin
 
 Install Git, **Node.js 24.19.0 with npm**, and VS Code or your preferred TypeScript editor. The application’s `.nvmrc` records the Node version; `package-lock.json` records the dependency versions. Use the existing lockfile rather than updating packages during this exercise.
