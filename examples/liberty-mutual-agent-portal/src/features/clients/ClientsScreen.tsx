@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import type { PortalAction } from "@/contracts/portal";
 import { PortalDialog } from "@/components/ui/portal-dialog";
 import { PortalIcon } from "@/components/ui/portal-icon";
+import { portalDialogClosedHref } from "../portal/dialog-navigation";
 import {
   dateLabel,
   money,
@@ -18,6 +19,7 @@ export function ClientsScreen({
   initialSelectedId?: string;
 }) {
   const { data, act, busy } = usePortal();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState(
@@ -220,7 +222,14 @@ export function ClientsScreen({
         title={selected?.accountName || "Client account"}
         eyebrow={selected?.policyNumber}
         open={!!selected}
-        onClose={() => setSelectedId("")}
+        onClose={() => {
+          setSelectedId("");
+          const href = portalDialogClosedHref(
+            `${window.location.pathname}${window.location.search}${window.location.hash}`,
+            "policy",
+          );
+          if (href) router.replace(href, { scroll: false });
+        }}
         wide
       >
         {selected && (

@@ -8,6 +8,7 @@ From `examples/liberty-mutual-agent-portal`:
 
 ```sh
 npm ci
+npm run test:setup
 npm run sitecore-tools:generate-map
 npm run sitecore-tools:build
 npm run type-check
@@ -22,7 +23,7 @@ SDK generation and production builds require a valid Sitecore delivery context. 
 python3 -m pip install -r authoring/scripts/requirements.txt
 python3 authoring/scripts/validate-content-seed.py
 dotnet tool restore
-dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content
+dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch
 ```
 
 Record the actual results and any remaining configuration gaps in the pull request. For a visible change, inspect desktop and mobile layouts and the keyboard path. For authentication, state, profile or CMS changes, verify the relevant persona, reviewer-pack isolation and native platform behavior. Add tests when they protect a meaningful boundary or business transition.
@@ -37,6 +38,6 @@ Keep editorial text in native CMS fields. Do not replace Sitecore Search or pers
 
 ## Content changes
 
-Normal releases push only `LibertyMutual.Model` with `CreateAndUpdate`. The `LibertyMutual.Content` module is `CreateOnly` and runs only with an explicit seed request. Do not widen either module or add deletion rules. Changing a seed file does not update an already-authored item; intentional editorial updates use the native review and publication workflow.
+Normal scoped releases push `LibertyMutual.Model` and `LibertyMutual.SitePresentation` with `CreateAndUpdate` within their exact owned scopes. The three editable seed modules—`LibertyMutual.Content`, `LibertyMutual.Taxonomy` and `LibertyMutual.ResourcePageBranch`—are `CreateOnly` and run only with an explicit seed request. They stay outside authoring Items as Resources. Do not widen module scopes or add deletion rules. Changing a seed file does not update an already-authored item; intentional editorial updates use the native review and publication workflow. Follow the [release procedure](docs/developer-handoff.md#vercel-release-process) for the reviewed model push, optional seed flags and separate authoring-environment deployment.
 
 Never commit real credentials, tokens, `.env.local`, local state or deployment caches. The disposable fictional login fixture is intentional, private handoff material requested for this sandbox; it must never be copied to `public/`, returned by an API or reused for real identities. See the [handoff guide](docs/developer-handoff.md) for release and transfer responsibilities.
