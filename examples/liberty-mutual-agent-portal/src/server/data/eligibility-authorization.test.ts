@@ -6,6 +6,8 @@ import type { PortalSession } from "../auth/session";
 import type { StateStore, StoredValue } from "../state/store";
 import { fixtures, validateFixtures } from "./fixtures";
 import { applyPortalAction, getPortalBootstrap } from "./portal";
+import { canAccessResourcePage } from "./resource-page-access";
+import type { RouteData } from "@sitecore-content-sdk/nextjs";
 
 class MemoryStore implements StateStore {
   records = new Map<string, StoredValue<unknown>>();
@@ -355,7 +357,7 @@ test("bond save and submit enforce current actor authority, availability and exp
   }
 });
 
-test("bootstrap exposes only current actor authority and available states while preserving educational access", async () => {
+test("bootstrap exposes only current actor authority and licensed or nationwide guidance", async () => {
   const original = structuredClone(fixtures.eligibility);
   try {
     fixtures.eligibility.agentAuthorities.find(
@@ -379,9 +381,90 @@ test("bootstrap exposes only current actor authority and available states while 
       ),
     );
     assert.ok(
-      workspace.resources.some(
+      !workspace.resources.some(
         (entry) => entry.states.length === 1 && entry.states[0] === "FL",
       ),
+    );
+  } finally {
+    fixtures.eligibility = original;
+  }
+});
+
+test("authenticated Daniel bootstrap and direct native pages exclude Florida guidance and forged favorites", async () => {
+  const store = new MemoryStore();
+  const daniel = session("daniel");
+  const workspace = await getPortalBootstrap(daniel, store);
+  assert.deepEqual(workspace.agent.licensedStates, ["IL", "TX"]);
+  for (const state of ["FL", "IL", "TX", "All"]) {
+    const route: RouteData = {
+      name: "state-guidance",
+      fields: { state: { value: state } },
+      placeholders: {
+        "headless-resource-article": [
+          {
+            componentName: "ResourceArticle",
+            fields: { state: { value: state } },
+          },
+        ],
+      },
+    };
+    assert.equal(
+      canAccessResourcePage(
+        "/resources/state-guidance",
+        route,
+        workspace.agent.licensedStates,
+        false,
+      ),
+      state !== "FL",
+    );
+  }
+  assert.ok(
+    !workspace.resources.some((resource) => resource.id === "state-wc-fl"),
+  );
+  assert.ok(
+    workspace.resources.some((resource) => resource.id === "state-wc-il"),
+  );
+  assert.ok(
+    workspace.resources.some((resource) => resource.id === "state-wc-tx"),
+  );
+  assert.ok(
+    workspace.resources.some(
+      (resource) => resource.id === "small-business-checklist",
+    ),
+  );
+  await deniedWithoutWrite(
+    daniel,
+    { type: "toggle-favorite", resourceId: "state-wc-fl" },
+    store,
+    "NOT_FOUND",
+  );
+});
+
+test("a saved article disappears when its required license is revoked without rewriting saved work", async () => {
+  const store = new MemoryStore();
+  const daniel = session("daniel");
+  const saved = await act(
+    daniel,
+    { type: "toggle-favorite", resourceId: "state-wc-tx" },
+    store,
+  );
+  assert.ok(saved.favorites.includes("state-wc-tx"));
+  const original = structuredClone(fixtures.eligibility);
+  const before = structuredClone(store.records);
+  try {
+    fixtures.eligibility.agentAuthorities.find(
+      (entry) => entry.agentId === "daniel" && entry.state === "TX",
+    )!.status = "revoked";
+    const workspace = await getPortalBootstrap(daniel, store);
+    assert.deepEqual(workspace.agent.licensedStates, ["IL"]);
+    assert.ok(
+      !workspace.resources.some((resource) => resource.id === "state-wc-tx"),
+    );
+    assert.ok(!workspace.favorites.includes("state-wc-tx"));
+    assert.deepEqual(
+      store.records,
+      before,
+      "Filtering must not delete the saved favorite",
     );
   } finally {
     fixtures.eligibility = original;

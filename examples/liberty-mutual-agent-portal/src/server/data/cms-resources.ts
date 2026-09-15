@@ -1,7 +1,8 @@
 import 'server-only';
-import type { BusinessLine, Resource, StateCode } from '../../contracts/portal';
+import type { BusinessLine, Resource } from '../../contracts/portal';
 import { fixtures } from './fixtures';
 import { PortalError } from '../errors';
+import { parseResourceStates } from '../../domain/resource-access';
 
 interface CmsField { jsonValue?: { value?: unknown } | null; }
 interface CmsResourceItem {
@@ -40,7 +41,6 @@ const FAMILY_LINES: Record<string, BusinessLine | 'all'> = {
   'midsize-large': 'commercial', 'farm-ranch': 'commercial', specialty: 'specialty',
   'retail-specialty': 'specialty', 'wholesale-specialty': 'specialty', surety: 'surety', all: 'all',
 };
-const ALL_STATES: StateCode[] = ['TX', 'FL', 'IL'];
 function fieldText(field?: CmsField | null): string { return typeof field?.jsonValue?.value === 'string' ? field.jsonValue.value.trim() : ''; }
 
 /** Map CMS metadata directly; a resource's item ID remains stable when its name/URL changes. */
@@ -52,7 +52,7 @@ export function mapCmsResource(item: CmsResourceItem): Resource {
   const family = fieldText(item.businessFamily);
   const body = fieldText(item.body).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
   const stateValue = fieldText(item.state);
-  const states = stateValue.toLowerCase() === 'all' ? ALL_STATES : stateValue.split(/[,;| ]+/).filter((value): value is StateCode => ALL_STATES.includes(value as StateCode));
+  const states = parseResourceStates(stateValue);
   const dateValue = fieldText(item.reviewedAt);
   const updatedAt = /^\d{8}T/.test(dateValue) ? `${dateValue.slice(0, 4)}-${dateValue.slice(4, 6)}-${dateValue.slice(6, 8)}` : dateValue.slice(0, 10);
   if (!/^[a-f0-9]{32}$/.test(id) || !/^[a-z0-9-]+$/i.test(item.name) || !title || !description || !type || !states.length || !FAMILY_LINES[family] || !/^\d{4}-\d{2}-\d{2}$/.test(updatedAt)) {

@@ -59,11 +59,11 @@ test("licensed-state defaults follow the current profile rather than Daniel's or
   assert.ok(ids.includes("small-business-checklist"));
 });
 
-test("All states deliberately exposes out-of-license educational content without changing licensing", () => {
+test("old All states and forged selections cannot expose out-of-license guidance", () => {
   const before = [...daniel.licensedStates];
-  assert.ok(matchesResourceStateScope(["FL"], daniel.licensedStates, "all"));
-  assert.ok(matchesResourceStateScope(["FL"], daniel.licensedStates, "FL"));
-  assert.ok(!matchesResourceStateScope(["TX"], daniel.licensedStates, "FL"));
+  assert.ok(!matchesResourceStateScope(["FL"], daniel.licensedStates, "all"));
+  assert.ok(!matchesResourceStateScope(["FL"], daniel.licensedStates, "FL"));
+  assert.ok(matchesResourceStateScope(["TX"], daniel.licensedStates, "FL"));
   assert.ok(
     matchesResourceStateScope(["TX", "FL", "IL"], daniel.licensedStates, "FL"),
   );

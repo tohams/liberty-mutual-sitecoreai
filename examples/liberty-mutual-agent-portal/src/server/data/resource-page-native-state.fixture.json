@@ -1,0 +1,202 @@
+{
+  "source": "Native CM editing and published Experience Edge state field envelopes. Only page identity, article identity, and state fields are retained; no credentials or editing clientData.",
+  "capturedAt": "2026-09-15T04:36:09.818Z",
+  "results": [
+    {
+      "slug": "bond-request-checklist",
+      "native": {
+        "pageId": "1033de19-b0fe-5e12-9552-463a33be8cfd",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{1033DE19-B0FE-5E12-9552-463A33BE8CFD}",
+              "language": "en",
+              "revision": "aadaca0d-1429-42a7-bc2a-b1bfa8b62115",
+              "version": 1
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "All"
+          },
+          "value": "All"
+        },
+        "articleStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{1033DE19-B0FE-5E12-9552-463A33BE8CFD}",
+              "language": "en",
+              "revision": "aadaca0d-1429-42a7-bc2a-b1bfa8b62115",
+              "version": 1
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "All"
+          },
+          "value": "All"
+        },
+        "articleUid": "8599319d-e9ba-5b00-9378-a31c393170d4"
+      },
+      "liveEdge": {
+        "pageId": "1033de19-b0fe-5e12-9552-463a33be8cfd",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "value": "All"
+        },
+        "articleStateField": {
+          "value": "All"
+        },
+        "articleUid": "8599319d-e9ba-5b00-9378-a31c393170d4"
+      }
+    },
+    {
+      "slug": "florida-workers-compensation",
+      "native": {
+        "pageId": "f473aef2-b947-5c16-be07-1f98959e28d3",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{F473AEF2-B947-5C16-BE07-1F98959E28D3}",
+              "language": "en",
+              "revision": "45b66676-6fa2-4e39-bcdd-087ef41148b9",
+              "version": 1
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "FL"
+          },
+          "value": "FL"
+        },
+        "articleStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{F473AEF2-B947-5C16-BE07-1F98959E28D3}",
+              "language": "en",
+              "revision": "45b66676-6fa2-4e39-bcdd-087ef41148b9",
+              "version": 1
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "FL"
+          },
+          "value": "FL"
+        },
+        "articleUid": "d9cc58a0-d9a6-54c3-afbf-1b89c0c102c5"
+      },
+      "liveEdge": {
+        "pageId": "f473aef2-b947-5c16-be07-1f98959e28d3",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "value": "FL"
+        },
+        "articleStateField": {
+          "value": "FL"
+        },
+        "articleUid": "d9cc58a0-d9a6-54c3-afbf-1b89c0c102c5"
+      }
+    },
+    {
+      "slug": "illinois-workers-compensation",
+      "native": {
+        "pageId": "bebfee26-7275-5bd4-ade1-fac9812e51a4",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{BEBFEE26-7275-5BD4-ADE1-FAC9812E51A4}",
+              "language": "en",
+              "revision": "98213433-628d-4d43-b902-ee063b6aa90a",
+              "version": 1
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "IL"
+          },
+          "value": "IL"
+        },
+        "articleStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{BEBFEE26-7275-5BD4-ADE1-FAC9812E51A4}",
+              "language": "en",
+              "revision": "98213433-628d-4d43-b902-ee063b6aa90a",
+              "version": 1
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "IL"
+          },
+          "value": "IL"
+        },
+        "articleUid": "601326f3-4b11-5ee7-8024-274a9da14af3"
+      },
+      "liveEdge": {
+        "pageId": "bebfee26-7275-5bd4-ade1-fac9812e51a4",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "value": "IL"
+        },
+        "articleStateField": {
+          "value": "IL"
+        },
+        "articleUid": "601326f3-4b11-5ee7-8024-274a9da14af3"
+      }
+    },
+    {
+      "slug": "texas-workers-compensation",
+      "native": {
+        "pageId": "b0467ff2-ef7d-5fd2-a452-98afde3be186",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{B0467FF2-EF7D-5FD2-A452-98AFDE3BE186}",
+              "language": "en",
+              "revision": "69260763-9942-4e05-a296-1af719f610db",
+              "version": 7
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "TX"
+          },
+          "value": "TX"
+        },
+        "articleStateField": {
+          "metadata": {
+            "datasource": {
+              "id": "{B0467FF2-EF7D-5FD2-A452-98AFDE3BE186}",
+              "language": "en",
+              "revision": "69260763-9942-4e05-a296-1af719f610db",
+              "version": 7
+            },
+            "title": "Risk state",
+            "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+            "fieldType": "Single-Line Text",
+            "rawValue": "TX"
+          },
+          "value": "TX"
+        },
+        "articleUid": "d438580f-d35a-55a7-838b-cf5d9b83e25f"
+      },
+      "liveEdge": {
+        "pageId": "b0467ff2-ef7d-5fd2-a452-98afde3be186",
+        "routeTemplateId": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "routeStateField": {
+          "value": "TX"
+        },
+        "articleStateField": {
+          "value": "TX"
+        },
+        "articleUid": "d438580f-d35a-55a7-838b-cf5d9b83e25f"
+      }
+    }
+  ]
+}
