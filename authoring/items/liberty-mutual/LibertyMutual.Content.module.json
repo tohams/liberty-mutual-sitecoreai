@@ -27,6 +27,14 @@
           {
             "path": "/liberty-mutual-agent-portal/Data/Taxonomy",
             "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-resource-image",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page",
+            "scope": "Ignored"
           }
         ]
       }

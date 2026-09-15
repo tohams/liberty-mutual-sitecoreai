@@ -28,10 +28,12 @@ model = read_json(BASE / 'LibertyMutual.Model.module.json')
 content = read_json(BASE / 'LibertyMutual.Content.module.json')
 site_presentation = read_json(BASE / 'LibertyMutual.SitePresentation.module.json')
 taxonomy = read_json(BASE / 'LibertyMutual.Taxonomy.module.json')
+resource_branch = read_json(BASE / 'LibertyMutual.ResourcePageBranch.module.json')
+resource_branch_path = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page'
 taxonomy_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy'
 site_placeholder_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings'
 site_placeholder_keys = ['headless-agent-guidance', 'headless-resource-search',
-                         'headless-resource-article', 'headless-products-spotlight']
+                         'headless-resource-article', 'headless-products-spotlight', 'headless-resource-image']
 site_placeholder_paths = {site_placeholder_root + '/' + key for key in site_placeholder_keys}
 expected_model_paths = {
     '/sitecore/templates/Project/LibertyMutual',
@@ -47,19 +49,22 @@ for include in model['items']['includes']:
     require(include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants',
             'Model roots must retain their bounded descendant scope.')
 require({i['path'] for i in site_presentation['items']['includes']} == site_placeholder_paths,
-        'SitePresentation includes must contain only the four exact site placeholder items.')
+        'SitePresentation includes must contain only the five exact site placeholder items.')
 for include in site_presentation['items']['includes']:
     require(include.get('scope') == 'SingleItem' and include.get('allowedPushOperations') == 'CreateAndUpdate'
             and not include.get('rules'), 'SitePresentation must use non-deleting SingleItem includes only.')
 require(len(content['items']['includes']) == 1, 'Content requires one owned include.')
 include = content['items']['includes'][0]
 expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
-                         for path in sorted(site_placeholder_paths | {taxonomy_root})]
+                         for path in sorted(site_placeholder_paths | {taxonomy_root, resource_branch_path})]
 require(include['path'] == '/sitecore/content/LibertyMutual' and
         include.get('allowedPushOperations') == 'CreateOnly' and
         include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and
         sorted(include.get('rules', []), key=lambda rule: rule['path']) == expected_ignore_rules,
-        'Initial content seed must remain CreateOnly with only site placeholder and taxonomy exclusions.')
+        'Initial content seed must remain CreateOnly with only site placeholder, taxonomy, and branch exclusions.')
+require(resource_branch['items']['includes'] == [{'name': 'resource-page-branch', 'path': resource_branch_path,
+                                                 'allowedPushOperations': 'CreateOnly'}],
+        'Editable resource branch must remain in one CreateOnly subtree.')
 require(len(taxonomy['items']['includes']) == 1, 'Taxonomy requires one isolated include.')
 include = taxonomy['items']['includes'][0]
 require(include['path'] == taxonomy_root and include.get('allowedPushOperations') == 'CreateOnly'
@@ -123,6 +128,7 @@ PLACEMENTS = {
     'ResourceSearch': 'headless-resource-search',
     'ResourceArticle': 'headless-resource-article',
     'ProductSpotlight': 'headless-products-spotlight',
+    'ResourceImage': 'headless-resource-image',
 }
 LAYOUT_COMPONENTS = {
     'PortalLayout': ['AgentGuidance'],
@@ -243,6 +249,7 @@ for component, template_names in {
     'ResourceSearch': ['PortalPage'],
     'ResourceArticle': ['ResourcePage'],
     'ProductSpotlight': ['PortalPage'],
+    'ResourceImage': ['ResourcePage'],
 }.items():
     rendering = items[normalized_id(manifest['renderingIds'][component])]
     require(not field_value(rendering.get('SharedFields', []), 'AllowedOnTemplates'),
@@ -324,12 +331,15 @@ def validate_placement(presentation, expected_layout, label):
         require(device['layout'] == layout_ids[expected_layout],
                 f'{label} must use {expected_layout}, got {device["layout"]}.')
         allowed_components = set(LAYOUT_COMPONENTS[expected_layout])
+        if expected_layout == 'ResourceArticleLayout':
+            allowed_components.add('ResourceImage')
         for rendering_uid, attributes in device['renderings'].items():
             name = rendering_names.get(attributes.get('id'))
             require(name in allowed_components,
                     f'{label}: rendering {rendering_uid} ({name}) is not allowed by {expected_layout}.')
-            require(attributes.get('ph') == PLACEMENTS[name],
-                    f'{label}: {name} must use {PLACEMENTS[name]}, got {attributes.get("ph")}.')
+            expected_placeholder = '/headless-resource-article/headless-resource-image' if name == 'ResourceImage' else PLACEMENTS[name]
+            require(attributes.get('ph') == expected_placeholder,
+                    f'{label}: {name} must use {expected_placeholder}, got {attributes.get("ph")}.')
 
 
 for template_name, layout_name in [('Page', 'PortalLayout'), ('PortalPage', 'PortalLayout'),

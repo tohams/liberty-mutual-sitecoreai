@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.ResourcePageBranch",
+  "description": "Editable blank Resource page branch and its local image datasource. CreateOnly; excluded from authoring resource packages. Apply only after the site exists.",
+  "items": {
+    "includes": [
+      {
+        "name": "resource-page-branch",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  }
+}

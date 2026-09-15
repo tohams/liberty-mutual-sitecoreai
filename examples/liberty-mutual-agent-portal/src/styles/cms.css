@@ -95,6 +95,21 @@
   text-transform: uppercase;
   color: #676080;
 }
+.cms-resource-image {
+  margin: 0 0 2rem;
+}
+.cms-resource-image-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+.cms-resource-image-caption {
+  margin-top: 0.75rem;
+  color: #676080;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
 .cms-article footer {
   margin-top: 2rem;
   padding-top: 1rem;
