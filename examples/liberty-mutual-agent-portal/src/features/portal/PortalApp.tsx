@@ -133,6 +133,7 @@ export function PortalApp({
         key={`${route}:${searchParams.get("state") ?? ""}:${searchParams.get("submission") ?? ""}:${searchParams.get("new") ?? ""}:${searchParams.get("bond") ?? ""}`}
         initialSelectedId={section !== "surety" ? selectedId : undefined}
         initialBondId={section === "surety" ? selectedId : undefined}
+        showBondRequests={section === "surety"}
       />
     );
   else if (["clients", "policies", "renewals"].includes(section))
