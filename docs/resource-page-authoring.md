@@ -4,17 +4,41 @@ Use the **Resource page** page branch under **Learning & resources**. It creates
 
 ## Create an article
 
-1. Open Page builder and select **Liberty Mutual Agent Portal**.
-2. In the site tree, select **Learning & resources**, then create a page using **Resource page**.
-3. Enter a short URL name using lowercase words separated by hyphens, such as `texas-submission-guide`. The title starts with that name; edit the displayed title into readable text. The summary, body, reviewed date, source link, and five metadata selections start empty. No existing article's state, product, copy, or image is copied.
-4. Enter the title, summary, body and reviewed date. Add a source link only when appropriate. Use **Apps → Resource metadata** to select **Risk state**, **Business family**, **Product**, **Distribution channel**, and **Resource type**, then click **Save metadata**. Use **All** only when the guidance applies across the supported states.
-5. Select the image area between the summary and article body. Click **Add**, then choose **Media** in the picker for the modern Media Library. Select a suitable public image and click **Insert**. Use **Change** to replace it later. Review the image's alt text and add a caption when useful.
-6. Preview the article. Confirm the correct title, state, image, alt text, body and source destination. Follow the page's approval workflow, then publish the page and its referenced content.
-7. Open **Content → Search Sources → Liberty Mutual Agent Resources → Reindex Content**. After the job completes, verify the article in **Learning & resources**, including its state and business-family filters.
+1. Open [Page Builder](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb) and select **Liberty Mutual Agent Portal**. Use your Sitecore sign-in; the fictional agent usernames do not authorize CMS editing. Keep the site's **Default** editing host selected.
+2. In the site tree, open the **…** menu beside **Learning & resources** and choose **Create a subpage**. Select **Resource page**, then **Select**.
+3. Enter a unique URL name using lowercase words separated by hyphens, such as `texas-submission-guide`, and press **Enter**. Wait for **Page created from branch template**, then **Reload tree** and select your new page. The title initially uses the new name; the summary, body, reviewed date, source link and five metadata selections start empty. No existing article's state, product, copy or image is copied.
+4. Enter a readable title, summary, body and reviewed date. Add a source link only when appropriate. In **Content** mode, click outside each field and wait for **Saved**. Open **Apps → Resource metadata** to select **Risk state**, **Business family**, **Product**, **Distribution channel**, and **Resource type**, then click **Save metadata**. Each currently allows one selection. Choose **Cross-state guidance** (stored as `All`) only when the same guidance applies across all supported states; choose the applicable state for state-specific guidance.
+5. In the canvas, select the blank image area between the summary and body, then **Browse media library → Media BETA**. Click the intended image to open its details. Check **Details → Alt text**, and confirm **Delivery → Public link** is available. Under **Image transformation**, set a suitable **Width**; leave the aspect ratio locked so **Height** follows. Click **Insert**. The image is saved to this page's **Data → Resource image** item. Add a caption when it helps explain the image.
+6. Preview the article and confirm its title, state, image, alt text, body and source destination. Follow the page's approval workflow. Publish the page **with its local Data and Resource image descendants**; publishing only the page can leave the image unavailable. Include only this page subtree, not every linked resource. See [publishing and image changes](#publishing-and-image-changes).
+7. Open **Content → Search Sources → Liberty Mutual Agent Resources → Reindex Content**. After the job succeeds, open [Learning & resources](https://liberty-mutual-agent-portal.vercel.app/resources) and verify the article, including its state and business-family filters. A portal sign-in is required.
 
 Publishing and Search ingestion are separate actions. An incomplete published article is omitted by the portal's resource catalog when required content, state, business-family, type or reviewed-date values are invalid. Finish those fields before approval instead of relying on this defensive behavior.
 
 Modern Media Library assets require an active public link to be selected for the website. An asset upload is not the same as publishing a page. Alt text, tags and asset descriptions are managed in Media; the article's optional caption is local content. Follow the [image selection instructions](https://doc.sitecore.com/sai/en/users/sitecoreai/build-pages/adding-content-to-a-page/add-an-image-to-a-page.html) and [public-link instructions](https://doc.sitecore.com/sai/en/users/sitecoreai/manage-media/modern-media-library/add-a-public-link.html).
+
+## Publishing and image changes
+
+There are three separate delivery steps:
+
+- **Media public link:** makes the image rendition retrievable. It does not publish an article or change its approval status.
+- **Page and local content publication:** sends the approved article and its **Data/Resource image** to Experience Edge. For a new article or changed image/caption, include that page's descendants in the scoped publication. The existing summary-only walkthrough deliberately publishes only the page because it does not change a datasource.
+- **Search Reindex Content:** updates the native resource index after published title, summary or metadata changes. The image and caption are not Search fields, so an image-only change does not require Search reindexing.
+
+Reopen the image picker from the existing image to choose a replacement. Verify the saved article image after changing an asset's alt text or delivery transformation; do not assume previously selected CMS image fields automatically inherit later Media edits. Keep public links active while published articles reference them. A public Media link is suitable for these reference images; it is not a private-policy-document store.
+
+Use the supplied rendition rather than delivering a multi-megabyte original. The component preserves the native image URL and its parameters, keeps the photograph's aspect ratio, and limits its displayed height without cropping. The [image source register](brand/resource-image-sources.json) records the official Liberty Mutual source, subject, dimensions and suggested alt text for each resource.
+
+## A short creation exercise
+
+Use a new, uniquely named **unpublished** page so reviewers can learn without changing an existing article. Allow about five minutes and use the Sitecore operator account; no agent login or reviewer-pack reset is needed.
+
+1. Complete creation steps 1–3. Observe the new page, its empty authoring fields and blank image control.
+2. Enter a temporary title and summary. Use the image picker in step 5 to insert an existing asset. Observe the image between summary and body. Do not upload another copy of the asset.
+3. Open **Apps → Resource metadata**. Observe the five empty managed selections. Choose values appropriate to the temporary text, then **Discard changes** to return to the loaded values. Do not publish incomplete or invented regulatory guidance.
+4. Return to the page and confirm its image is local. If comparing two new pages, changing one image must leave the other unchanged.
+5. At the end, recycle only your uniquely named page and its descendants using the native content controls. Leave the reusable Media asset and **Resource page** branch intact. Confirm your temporary page is absent from the tree. Because it was never published, no Search reindex or live unpublish is needed.
+
+The portal's **Reset workspace** control does not remove CMS pages or undo Media selections. A published practice article needs a coordinated removal from published delivery and a Search reindex before it is considered reset.
 
 ## What belongs where
 

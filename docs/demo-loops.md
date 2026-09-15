@@ -157,6 +157,8 @@ The insurance records, premium figures, authority records and operational action
 
 **Story:** a marketer updates an agent resource once and follows it through preview, publication and Search without deploying application code.
 
+**Optional creation exercise:** before or after this existing-article walkthrough, use the [new resource and Media exercise](resource-page-authoring.md#a-short-creation-exercise). Create an independent unpublished **Resource page**, observe its blank fields and local **Data/Resource image**, and select an existing asset through **Browse media library → Media BETA**. Recycle only that practice page afterward. Keep this exercise separate from the published Texas article restoration below; an agent workspace reset cannot reset CMS content.
+
 **Start:** native Content, Page Builder and Search Sources access, the correct customer author and approver roles, and an agreed temporary edit plus restoration wording. **Customer author/approver separation remains unverified.** The control path below describes this tenant's workflow; it does not establish acceptance with separate customer accounts. Allow time for an explicit Search source reindex after publication and restoration.
 
 1. In the portal site, locate **Home → Learning & resources → Workers compensation: a Texas starting point** (item name `texas-workers-compensation`). Select **ResourceArticle** and inspect its title, summary, body, source and reviewed date. The page itself is the datasource; the unused **Data/Resources** copies are not the active source.
