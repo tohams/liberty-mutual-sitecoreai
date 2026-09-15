@@ -12,7 +12,7 @@ test('identity reset expires only intended SDK cookies and preserves the signed 
     response.cookies.set('unrelated_app', 'preserved', { path: '/' });
     clearSitecoreIdentityCookies(response, new Request('https://portal.example/api/auth/login'));
     const cookies = response.headers.getSetCookie();
-    for (const name of ['sc_cid', 'sc_cid_personalize', 'sc_public-context-123', 'sc_public-context-123_personalize']) {
+    for (const name of ['sc_cid', 'sc_cid_personalize', 'lm_portal_personalize_binding', 'sc_public-context-123', 'sc_public-context-123_personalize']) {
       const deletion = cookies.filter((cookie) => cookie.startsWith(`${name}=`));
       assert.equal(deletion.length, 2);
       assert.ok(deletion.every((cookie) => cookie.includes('Path=/') && cookie.includes('Max-Age=0')));
