@@ -100,8 +100,11 @@
 }
 .cms-resource-image-media {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: 26rem;
+  margin-inline: auto;
   border-radius: 14px;
 }
 .cms-resource-image-caption {
