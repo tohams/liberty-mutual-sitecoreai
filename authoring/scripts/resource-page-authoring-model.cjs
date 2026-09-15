@@ -8,7 +8,9 @@ const PROTOTYPE_PATH = BRANCH_PATH + '/$name';
 const DATA_PATH = PROTOTYPE_PATH + '/Data';
 const IMAGE_PATH = DATA_PATH + '/Resource image';
 const PLACEHOLDER = 'headless-resource-image';
-const NESTED_PLACEHOLDER = '/headless-resource-article/' + PLACEHOLDER;
+const PLACEHOLDER_KEY = PLACEHOLDER + '-{*}';
+// The branch's single ResourceArticle has DynamicPlaceholderId=1.
+const NESTED_PLACEHOLDER = '/headless-resource-article/' + PLACEHOLDER + '-1';
 function uuidV5(name) {
   const bytes = crypto.createHash('sha1').update(Buffer.from('4a098fe0ad6b472298624e56b855337a', 'hex')).update(name).digest().subarray(0, 16);
   bytes[6] = bytes[6] & 15 | 80; bytes[8] = bytes[8] & 63 | 128;
@@ -47,6 +49,7 @@ const IDS = Object.freeze({
   branchAction: 'd46ec8e5-7b46-47de-b44a-4c5c30ef48d1',
 });
 const FIELDS = Object.freeze({
+  otherProperties: 'e829c217-5e94-4306-9c48-2634b094fdc2',
   masters: '1172f251-dad4-4efb-a329-0c63500e4f1e',
   renderings: 'f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e',
   placeholders: '069a8361-b1cd-437c-8c32-a3be78941446',
@@ -80,4 +83,4 @@ function appendRule(current) {
   if (!/<\/ruleset>\s*$/.test(current)) throw new Error('Unsupported insert rule XML.');
   return current.replace(/<\/ruleset>\s*$/, RULE_XML + '</ruleset>');
 }
-module.exports = { SITE, TEMPLATES, BRANCH_PATH, PROTOTYPE_PATH, DATA_PATH, IMAGE_PATH, PLACEHOLDER, NESTED_PLACEHOLDER, IDS, FIELDS, RULE_ID, RULE_XML, ARTICLE_INSTANCE, IMAGE_INSTANCE, uuidV5, norm, brace, branchLayout, appendId, appendRule };
+module.exports = { SITE, TEMPLATES, BRANCH_PATH, PROTOTYPE_PATH, DATA_PATH, IMAGE_PATH, PLACEHOLDER, PLACEHOLDER_KEY, NESTED_PLACEHOLDER, IDS, FIELDS, RULE_ID, RULE_XML, ARTICLE_INSTANCE, IMAGE_INSTANCE, uuidV5, norm, brace, branchLayout, appendId, appendRule };

@@ -25,6 +25,9 @@ SharedFields:
 - ID: a3411ff6-c978-40aa-b059-a49b9ca2209b
   Hint: Can select Page as a data source
   Value: "1"
+- ID: e829c217-5e94-4306-9c48-2634b094fdc2
+  Hint: OtherProperties
+  Value: IsRenderingsWithDynamicPlaceholders=true
 Languages:
 - Language: en
   Versions:

@@ -27,7 +27,10 @@ const versionKey = v => `${v.language}:${v.version}`;
 const digest = value => crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const TARGETS = [
   { id: IDS.articleRendering, path: '/sitecore/layout/Renderings/Project/LibertyMutual/ResourceArticle', template: '04646a89-996f-4ee7-878a-ffdbf1f0ef0d',
-    fields: [['Placeholders', FIELDS.placeholders, () => brace(IDS.placeholder)], ['Can select Page as a data source', FIELDS.pageDatasource, () => '1'], ['Datasource Location', FIELDS.datasourceLocation, () => '']] },
+    fields: [['OtherProperties', FIELDS.otherProperties, current => {
+      if (current === '' || current === 'IsRenderingsWithDynamicPlaceholders=true') return 'IsRenderingsWithDynamicPlaceholders=true';
+      throw new Error('ResourceArticle has custom properties; preserve and review them before enabling its dynamic placeholder.');
+    }], ['Placeholders', FIELDS.placeholders, () => brace(IDS.placeholder)], ['Can select Page as a data source', FIELDS.pageDatasource, () => '1'], ['Datasource Location', FIELDS.datasourceLocation, () => '']] },
   { id: IDS.pageDefaults, path: TEMPLATES + '/ResourcePage/__Standard Values', template: IDS.pageTemplate,
     fields: [['__Masters', FIELDS.masters, () => brace(IDS.dataTemplate)]] },
   { id: IDS.resources, path: SITE + '/Home/resources', template: IDS.portalPageTemplate,
@@ -131,7 +134,7 @@ async function preflight(query) {
     const version = item.versions.find(v => v.language === 'en');
     assert(version, 'English configuration is missing.');
     if (target.id === IDS.image) assert(!value(version, 'image') && !value(version, 'caption'), 'The branch image contains editorial content; preserve and review it.');
-    if ([IDS.placeholder, IDS.sitePlaceholder].includes(target.id)) assert(value(version, 'Placeholder Key') === M.PLACEHOLDER && norm(value(version, 'Allowed Controls')) === norm(IDS.rendering), 'The resource image placeholder is not restricted.');
+    if ([IDS.placeholder, IDS.sitePlaceholder].includes(target.id)) assert(value(version, 'Placeholder Key') === M.PLACEHOLDER_KEY && norm(value(version, 'Allowed Controls')) === norm(IDS.rendering), 'The resource image placeholder is not restricted.');
     if (target.id === IDS.rendering) assert(value(version, 'componentName') === 'ResourceImage' && value(version, 'Datasource Template') === TEMPLATES + '/ResourceImage' && norm(value(version, 'AllowedOnTemplates')) === norm(IDS.pageTemplate), 'ResourceImage does not match its authoring contract.');
   }
   const prototype = await readItem(query, IDS.prototype);

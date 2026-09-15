@@ -23,11 +23,13 @@ test('branch layout has one current-page article and one local image at the rest
   const layout = xmlShape(M.branchLayout()), device = layout[3][0];
   const components = device[3].map(node => Object.fromEntries(node[1]));
   assert.equal(components.length, 2);
+  assert.equal(M.PLACEHOLDER_KEY, 'headless-resource-image-{*}');
+  assert.equal(new URLSearchParams(components[0].par).get('DynamicPlaceholderId'), '1');
   assert.equal(components[0].ds, '$id');
   assert.equal(components[0].ph, 'headless-resource-article');
   assert.equal(M.norm(components[0].id), M.norm(M.IDS.articleRendering));
   assert.equal(components[1].ds, 'page:/Data/Resource image');
-  assert.equal(components[1].ph, '/headless-resource-article/headless-resource-image');
+  assert.equal(components[1].ph, '/headless-resource-article/headless-resource-image-1');
   assert.equal(M.norm(components[1].id), M.norm(M.IDS.rendering));
   assert(!M.branchLayout().includes(M.IDS.prototype), 'Created pages must not point back to the branch prototype.');
 });
@@ -130,4 +132,12 @@ test('child insert overrides apply before the parent default changes inherited v
     targets.find(target => target.id === M.IDS.portalDefaults),
     ...targets.filter(target => target.id !== M.IDS.portalDefaults),
   ]), /outside this plan/);
+});
+
+test('article dynamic placeholder flag is explicit and preserves unfamiliar properties', () => {
+  const target = C.TARGETS.find(t => t.id === M.IDS.articleRendering);
+  const item = fixture(target), plan = C.planItem(item, target);
+  assert.equal(plan.changes.find(c => c.name === 'OtherProperties').after, 'IsRenderingsWithDynamicPlaceholders=true');
+  item.versions.forEach(v => { v.fields.find(f => f.name === 'OtherProperties').value = 'AuthorCustomProperty=true'; });
+  assert.throws(() => C.planItem(item, target), /custom properties/);
 });

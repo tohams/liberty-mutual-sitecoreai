@@ -5,7 +5,8 @@
   "DATA_PATH": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page/$name/Data",
   "IMAGE_PATH": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page/$name/Data/Resource image",
   "PLACEHOLDER": "headless-resource-image",
-  "NESTED_PLACEHOLDER": "/headless-resource-article/headless-resource-image",
+  "PLACEHOLDER_KEY": "headless-resource-image-{*}",
+  "NESTED_PLACEHOLDER": "/headless-resource-article/headless-resource-image-1",
   "IDS": {
     "branch": "8376af58-fc32-4894-a57d-fd5e6e966272",
     "prototype": "f88b4735-b33d-4ad4-a0b0-bfe60e657572",
@@ -39,6 +40,7 @@
     "branchAction": "d46ec8e5-7b46-47de-b44a-4c5c30ef48d1"
   },
   "FIELDS": {
+    "otherProperties": "e829c217-5e94-4306-9c48-2634b094fdc2",
     "masters": "1172f251-dad4-4efb-a329-0c63500e4f1e",
     "renderings": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
     "placeholders": "069a8361-b1cd-437c-8c32-a3be78941446",
@@ -49,7 +51,7 @@
   "ARTICLE_INSTANCE": "0d896b77-39d8-559b-ae12-8a1898f07030",
   "IMAGE_INSTANCE": "979e3420-9c7c-52fc-8d26-dcf77920ee12",
   "schemaVersion": 1,
-  "branchLayout": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}\"><r uid=\"{0D896B77-39D8-559B-AE12-8A1898F07030}\" id=\"{980AD02C-08E5-5F27-9F08-F28E829CA94D}\" ph=\"headless-resource-article\" ds=\"$id\" par=\"FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1\" /><r uid=\"{979E3420-9C7C-52FC-8D26-DCF77920EE12}\" id=\"{2958922F-9832-5A46-B489-A4408EB363B1}\" ph=\"/headless-resource-article/headless-resource-image\" ds=\"page:/Data/Resource image\" par=\"FieldNames={29106DD0-F5ED-5197-9A66-92E0B15D724F}&amp;DynamicPlaceholderId=2\" /></d></r>",
+  "branchLayout": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}\"><r uid=\"{0D896B77-39D8-559B-AE12-8A1898F07030}\" id=\"{980AD02C-08E5-5F27-9F08-F28E829CA94D}\" ph=\"headless-resource-article\" ds=\"$id\" par=\"FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1\" /><r uid=\"{979E3420-9C7C-52FC-8D26-DCF77920EE12}\" id=\"{2958922F-9832-5A46-B489-A4408EB363B1}\" ph=\"/headless-resource-article/headless-resource-image-1\" ds=\"page:/Data/Resource image\" par=\"FieldNames={29106DD0-F5ED-5197-9A66-92E0B15D724F}&amp;DynamicPlaceholderId=2\" /></d></r>",
   "branchInsertRule": "<ruleset><rule uid=\"{FBE86BA0-883B-5D58-8A80-72570289B3C8}\" name=\"Resource page beneath Learning and resources\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{9F3DE103-5249-5AF3-83C0-53DC689EAE07}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{C9B4E46B-3B72-50D4-A96E-732C4D181B6A}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{36AEDCAB-F6C2-5E10-9F38-497FD6C355A3}\" PageBranchId=\"{8376AF58-FC32-4894-A57D-FD5E6E966272}\" /></actions></rule></ruleset>",
   "editorialFieldsOnPage": [
     "Title",
