@@ -72,7 +72,7 @@ def records(manifest):
         (SITE_PLACEHOLDER, 'e601261f-f47f-4831-b91e-ef70efab3276', 'd2a6884c-04d5-4089-a64e-d27ca9d68d4c'),
     ]:
         result.append(item(ph_path, parent, template, shared=[
-            field('7256bdab-1fd2-49dd-b205-cb4873d2917c', 'Placeholder Key', KEY),
+            field('7256bdab-1fd2-49dd-b205-cb4873d2917c', 'Placeholder Key', KEY + '-{*}'),
             field('e391b526-d0c5-439d-803e-17512eae6222', 'Allowed Controls', brace(uid(RENDERING))),
         ]))
     result.append(item(VARIANT, '19a63bdd-f9c6-403b-8068-c1884e9bb413', '49c111d0-6867-4798-a724-1f103166e6e9'))
@@ -166,7 +166,7 @@ def main():
         raise ValueError('The ResourceImage manifest entries are missing or different.')
     if not args.check and manifest != original:
         manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')
-    contract = {key: model[key] for key in ['SITE', 'BRANCH_PATH', 'PROTOTYPE_PATH', 'DATA_PATH', 'IMAGE_PATH', 'PLACEHOLDER', 'NESTED_PLACEHOLDER', 'IDS', 'FIELDS', 'ARTICLE_INSTANCE', 'IMAGE_INSTANCE']}
+    contract = {key: model[key] for key in ['SITE', 'BRANCH_PATH', 'PROTOTYPE_PATH', 'DATA_PATH', 'IMAGE_PATH', 'PLACEHOLDER', 'PLACEHOLDER_KEY', 'NESTED_PLACEHOLDER', 'IDS', 'FIELDS', 'ARTICLE_INSTANCE', 'IMAGE_INSTANCE']}
     contract['schemaVersion'] = 1
     contract['branchLayout'] = model['layout']
     contract['branchInsertRule'] = model['rule']

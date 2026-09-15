@@ -10,6 +10,7 @@ import { Default as ResourceImage } from './ResourceImage';
 import { Default as ResourceArticle } from '../resource-article/ResourceArticle';
 import { getResourceImagePlaceholder } from '@/features/resources/resource-image-placeholder';
 import type { ResourceImageProps } from './resource-image.props';
+import nativeArticleFixture from './resource-article-native.fixture.json';
 
 const imageRendering: ComponentRendering = { componentName: 'ResourceImage', uid: 'resource-image-instance', dataSource: 'local-image-item' };
 const componentMap: ComponentMap = new Map([['ResourceImage', { Default: ResourceImage }]]);
@@ -69,7 +70,8 @@ test('native nested image placement is between article summary and body, and emp
   const page = pageFor(false);
   const article: ComponentRendering = {
     componentName: 'ResourceArticle', uid: 'native-article-instance', dataSource: 'page:',
-    placeholders: { 'headless-resource-image': [{ ...imageRendering, fields: {
+    params: { DynamicPlaceholderId: '1' },
+    placeholders: { 'headless-resource-image-{*}': [{ ...imageRendering, fields: {
       image: { value: { src: 'https://media.example.test/hero.jpg', alt: 'A resource illustration' } },
       caption: { value: 'Caption marker' },
     } }] },
@@ -85,6 +87,32 @@ test('native nested image placement is between article summary and body, and emp
   const slot = getResourceImagePlaceholder(emptyArticle, true)!;
   const emptyHtml = render(createElement(AppPlaceholder, { ...slot, page: editing, componentMap }), editing);
   assert.match(emptyHtml, /sc-jss-empty-placeholder/);
-  assert.match(emptyHtml, /id="headless-resource-image_[^"]+"/);
+  assert.match(emptyHtml, /id="headless-resource-image-\{\*\}_native-article-instance"/);
   assert.doesNotMatch(emptyHtml, /id=""|headless-main/);
+});
+
+test('captured native SXA metadata keeps the image bound to its cloned page and emits matching editing chrome', () => {
+  // Captured from the tenant's real preview GraphQL response after native branch creation.
+  // The original static-only helper cannot find this wildcard key and fails this test.
+  // Native optional SXA fields can be null although the SDK index signature excludes null.
+  const article = structuredClone(nativeArticleFixture.rendering) as unknown as ComponentRendering;
+  const original = structuredClone(article);
+  const nativeImage = article.placeholders!['headless-resource-image-{*}'][0];
+  const slot = getResourceImagePlaceholder(article, true)!;
+  assert.equal(slot.name, 'headless-resource-image-1');
+  assert.deepEqual(slot.rendering, article, 'Every native rendering, field and metadata value survives binding');
+  assert.equal(slot.rendering.placeholders['headless-resource-image-{*}'][0], nativeImage);
+
+  const editing = pageFor(true);
+  const html = render(createElement(ResourceArticle, {
+    page: editing, rendering: article, params: article.params!, fields: article.fields,
+  }), editing);
+  assert.match(html, /<figure/);
+  assert.match(html, /id="headless-resource-image-\{\*\}_0d896b77-39d8-559b-ae12-8a1898f07030"/);
+  assert.match(html, /979e3420-9c7c-52fc-8d26-dcf77920ee12/);
+  assert.match(html, /72EFB61C-854B-47BF-B36E-60B2B0815DA5/i);
+  assert.match(html, /CA9A643A-07B6-5945-8FA5-AF13E02AF584/i);
+  assert.match(html, /transform=true&amp;format=auto&amp;width=745&amp;height=420/);
+  assert.doesNotMatch(html, /id=""|headless-resource-image-0-1|headless-main/);
+  assert.deepEqual(article, original, 'SDK rendering does not mutate the captured native response');
 });

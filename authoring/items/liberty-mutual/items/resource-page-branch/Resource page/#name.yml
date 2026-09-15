@@ -9,7 +9,7 @@ SharedFields:
   Value: "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
-  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}"><r uid="{0D896B77-39D8-559B-AE12-8A1898F07030}" id="{980AD02C-08E5-5F27-9F08-F28E829CA94D}" ph="headless-resource-article" ds="$id" par="FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1" /><r uid="{979E3420-9C7C-52FC-8D26-DCF77920EE12}" id="{2958922F-9832-5A46-B489-A4408EB363B1}" ph="/headless-resource-article/headless-resource-image" ds="page:/Data/Resource image" par="FieldNames={29106DD0-F5ED-5197-9A66-92E0B15D724F}&amp;DynamicPlaceholderId=2" /></d></r>
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}"><r uid="{0D896B77-39D8-559B-AE12-8A1898F07030}" id="{980AD02C-08E5-5F27-9F08-F28E829CA94D}" ph="headless-resource-article" ds="$id" par="FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1" /><r uid="{979E3420-9C7C-52FC-8D26-DCF77920EE12}" id="{2958922F-9832-5A46-B489-A4408EB363B1}" ph="/headless-resource-article/headless-resource-image-1" ds="page:/Data/Resource image" par="FieldNames={29106DD0-F5ED-5197-9A66-92E0B15D724F}&amp;DynamicPlaceholderId=2" /></d></r>
 - ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
   Hint: __Workflow
   Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"

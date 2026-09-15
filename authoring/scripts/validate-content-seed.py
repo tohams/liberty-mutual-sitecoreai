@@ -212,10 +212,11 @@ for resource in resources:
 
 placeholder_ids = {}
 for component, key in PLACEMENTS.items():
+    setting_key = key + '-{*}' if component == 'ResourceImage' else key
     placeholder = paths[PLACEHOLDER_ROOT + '/' + key]
     identifier = normalized_id(placeholder['ID'])
     require(manifest['placeholderIds'].get(key) == identifier, f'Placeholder manifest mismatch: {key}')
-    require(field_value(placeholder.get('SharedFields', []), 'Placeholder Key') == key,
+    require(field_value(placeholder.get('SharedFields', []), 'Placeholder Key') == setting_key,
             f'Placeholder key mismatch: {key}')
     require(id_list(field_value(placeholder.get('SharedFields', []), 'Allowed Controls')) ==
             [normalized_id(manifest['renderingIds'][component])],
@@ -227,10 +228,14 @@ for component, key in PLACEMENTS.items():
     require(normalized_id(site_placeholder['Template']) == 'd2a6884c-04d5-4089-a64e-d27ca9d68d4c' and
             normalized_id(site_placeholder['Parent']) == 'e601261f-f47f-4831-b91e-ef70efab3276',
             f'{key} must use the native SXA site Placeholder template and owned settings folder.')
-    require(field_value(site_placeholder.get('SharedFields', []), 'Placeholder Key') == key and
+    require(field_value(site_placeholder.get('SharedFields', []), 'Placeholder Key') == setting_key and
             id_list(field_value(site_placeholder.get('SharedFields', []), 'Allowed Controls')) ==
             [normalized_id(manifest['renderingIds'][component])],
             f'Site authoring restriction {key} must permit only {component}.')
+
+article_rendering = paths['/sitecore/layout/Renderings/Project/LibertyMutual/ResourceArticle']
+require(field_value(article_rendering.get('SharedFields', []), 'OtherProperties') == 'IsRenderingsWithDynamicPlaceholders=true',
+        'ResourceArticle must enable the native SXA dynamic placeholder resolver.')
 
 layout_ids = {}
 for name, components in LAYOUT_COMPONENTS.items():
@@ -337,7 +342,7 @@ def validate_placement(presentation, expected_layout, label):
             name = rendering_names.get(attributes.get('id'))
             require(name in allowed_components,
                     f'{label}: rendering {rendering_uid} ({name}) is not allowed by {expected_layout}.')
-            expected_placeholder = '/headless-resource-article/headless-resource-image' if name == 'ResourceImage' else PLACEMENTS[name]
+            expected_placeholder = '/headless-resource-article/headless-resource-image-1' if name == 'ResourceImage' else PLACEMENTS[name]
             require(attributes.get('ph') == expected_placeholder,
                     f'{label}: {name} must use {expected_placeholder}, got {attributes.get("ph")}.')
 
