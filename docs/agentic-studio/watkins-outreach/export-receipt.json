@@ -1,0 +1,51 @@
+{
+  "source": "Native SitecoreAI Artifacts Download all export",
+  "exportedAt": "2026-09-15T15:48:45.342Z",
+  "nativeExportSha256": "381e99eff122ebfd8231e0f21e0e2e78a47eeb2243362b9f3fe47b1d518ed134",
+  "spaceUrl": "https://agentic-studio-use.sitecorecloud.io/spaces/c7b405d0-efc0-4bac-9cb4-86e7a67c4251",
+  "artifacts": [
+    {
+      "artifactId": "ae717627-065d-4e04-8752-e976405bb945",
+      "title": "Watkins | Principal email preview | Patrick Watkins",
+      "kind": "content_item",
+      "createdAt": "2026-09-15T15:43:49.636Z",
+      "jsonFile": "principal.json",
+      "htmlFile": "principal.html",
+      "htmlSha256": "aafaf754c1eeb26489066297f7e918b784de52e5d962acb905b3569c0f5aa2a6"
+    },
+    {
+      "artifactId": "a4dc0fc6-a03d-45df-98a5-9020f10d2ff0",
+      "title": "Watkins | Advisor email preview | Clint Bradford",
+      "kind": "content_item",
+      "createdAt": "2026-09-15T15:43:49.650Z",
+      "jsonFile": "advisor.json",
+      "htmlFile": "advisor.html",
+      "htmlSha256": "fc71737f5534f7e29cf84e11cfad16da985e5b57c3f259bb0fbbf7af73c67937"
+    },
+    {
+      "artifactId": "5c2e5a69-b855-4d1a-9206-bb796849a189",
+      "title": "Watkins | Client service email preview",
+      "kind": "content_item",
+      "createdAt": "2026-09-15T15:43:49.643Z",
+      "jsonFile": "client-service.json",
+      "htmlFile": "client-service.html",
+      "htmlSha256": "b14a1159096231cad12f59d181f9e15adf3d70136a2a7edf1a9bebd91d06b465"
+    },
+    {
+      "artifactId": "04239161-ff2d-4cee-a9e5-4f59d94fcb4c",
+      "title": "Watkins | Account research and campaign brief",
+      "kind": "research",
+      "createdAt": "2026-09-15T15:43:50.053Z",
+      "file": "account-research-and-campaign-brief.md",
+      "sha256": "3a8ca134417c784118fae3693d65240de795681da46f23872bfc0210ca814191"
+    },
+    {
+      "artifactId": "99b9e270-46a5-47a0-8429-2528d651faae",
+      "title": "Watkins outreach | Evidence and editorial review",
+      "kind": "research",
+      "createdAt": "2026-09-15T15:33:36.065Z",
+      "file": "evidence-and-editorial-review.md",
+      "sha256": "c767432d18386dbefa9754a9ac0bb604fc14f5147e2f71a6865dbc706aff94c2"
+    }
+  ]
+}
