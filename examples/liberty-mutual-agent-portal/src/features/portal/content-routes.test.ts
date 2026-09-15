@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import type { Product, Resource } from "@/contracts/portal";
-import { productHref, resourceHref, portalContentPath } from "./content-routes";
+import { productHref, resourceHref, portalContentPath, isPortalNavigationActive } from "./content-routes";
 import { getPersonalizedRewrite, getPersonalizedRewriteData, normalizePersonalizedRewrite } from '@sitecore-content-sdk/content/personalize';
 
 const manifest = JSON.parse(
@@ -67,4 +67,27 @@ test("Every operational product has an authored hub in both distribution channel
       );
     }
   }
+});
+
+
+test("Home keeps the native root path and SDK personalization selection", () => {
+  const plainPath: string[] = [];
+  assert.equal(portalContentPath("/", plainPath), plainPath);
+  const rewritten = getPersonalizedRewrite("/", ["home-campaign", "component_principal"]);
+  const path = rewritten.split("/").filter(Boolean);
+  const contentPath = portalContentPath(normalizePersonalizedRewrite(rewritten), path);
+  assert.equal(contentPath, path);
+  assert.deepEqual(getPersonalizedRewriteData(contentPath.join("/")), {
+    variantId: "home-campaign",
+    componentVariantIds: ["component_principal"],
+  });
+});
+
+test("My workspace navigation matches only Home while sections include their child routes", () => {
+  assert.equal(isPortalNavigationActive("/", "/"), true);
+  for (const route of ["/resources", "/resources/texas-guide", "/products", "/quote"])
+    assert.equal(isPortalNavigationActive(route, "/"), false);
+  assert.equal(isPortalNavigationActive("/resources", "/resources"), true);
+  assert.equal(isPortalNavigationActive("/resources/texas-guide", "/resources"), true);
+  assert.equal(isPortalNavigationActive("/resources-other", "/resources"), false);
 });

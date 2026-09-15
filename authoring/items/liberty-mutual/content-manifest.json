@@ -52,7 +52,7 @@
     "ResourceImage": "2958922f-9832-5a46-b489-a4408eb363b1"
   },
   "routePageIds": {
-    "workspace": "885f4bc8-d774-5fa9-90b3-cbc34daf3b83",
+    "home": "ae9e45ca-f127-4abe-9ca7-2ff109981998",
     "quote": "7a62fd22-7289-5e0c-b370-427a84596cd7",
     "clients": "9049ba4a-e97c-5705-b0a3-4cfe7b26bb6d",
     "products": "d8898b95-6720-5acf-86b6-b434c3fe7f57",
@@ -232,7 +232,6 @@
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/commercial-growth-account-manager.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/commercial-growth-neutral.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Search/AgentResources.yml",
-    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Home/workspace.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/quote-guidance.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Home/quote.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/clients-guidance.yml",

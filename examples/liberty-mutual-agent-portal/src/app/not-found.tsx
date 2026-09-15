@@ -11,7 +11,7 @@ export default function NotFound() {
       />
       <h1>Let’s get you back on track.</h1>
       <p>This page is unavailable or has moved.</p>
-      <Link href="/workspace">Open your workspace</Link>
+      <Link href="/">Open your workspace</Link>
     </main>
   );
 }

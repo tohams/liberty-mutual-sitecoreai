@@ -34,7 +34,7 @@ export function LoginScreen() {
       // Optional bootstrap, SDK preparation and profile readiness share an eight-second
       // budget. Successful app authentication proceeds even when native identity is unavailable.
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-      window.location.assign("/workspace");
+      window.location.assign("/");
     } catch (failure) {
       setError(
         failure instanceof Error

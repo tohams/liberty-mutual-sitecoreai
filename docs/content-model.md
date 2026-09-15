@@ -41,7 +41,7 @@ Field titles and short help text make the authoring form understandable while re
 
 | Page | Owned layout | Placeholder → allowed rendering |
 |---|---|---|
-| Home, workspace, quote, clients, agency growth, support and product-family pages | `PortalLayout` | `headless-agent-guidance` → `AgentGuidance` |
+| Home (My workspace), quote, clients, agency growth, support and product-family pages | `PortalLayout` | `headless-agent-guidance` → `AgentGuidance` |
 | Learning & resources landing (`/resources`) | `ResourcesLayout` | `headless-resource-search` → `ResourceSearch`; `headless-agent-guidance` → `AgentGuidance` |
 | Products landing (`/products`) | `ProductsLayout` | `headless-agent-guidance` → `AgentGuidance`; `headless-products-spotlight` → `ProductSpotlight` |
 | Resource articles (`/resources/<slug>`) | `ResourceArticleLayout` | `headless-resource-article` → `ResourceArticle`; nested `headless-resource-image-{*}` → `ResourceImage` |
@@ -62,7 +62,7 @@ For an existing target that already has the initial scaffold, `node authoring/sc
 
 Direct composition in the named placeholders above is visible and editable in Page builder. Every rendering keeps a stable unique ID and its existing datasource. To apply the placement contract to an existing environment, migrate the exact page layout and placeholder attributes in both shared and final presentation fields across all page versions. Preserve rendering UIDs, datasources, parameters, personalization rules, A/B test configuration and other authored values. Publishing the new model alone does not migrate existing page presentation. The CreateOnly content module deliberately leaves existing pages unchanged. See the [Products affinity contract](affinity-personalization.md).
 
-The existing Home item and `/workspace` share the neutral workspace promotion datasource. Other top-level routes are `/quote`, `/clients`, `/products`, `/growth`, `/resources`, and `/support`. Seven family pages sit below `/products`. Twelve resource articles sit below `/resources/<slug>`.
+The existing Home item is the sole My workspace page at `/`. It keeps its native item identity and owns the workspace guidance composition. The former `/workspace` child is removed, with no redirect or alias. Other top-level routes are `/quote`, `/clients`, `/products`, `/growth`, `/resources`, and `/support`. Seven family pages sit below `/products`. Twelve resource articles sit below `/resources/<slug>`.
 
 `ResourcePage` derives from `PortalPage`, with route-level `summary`, `body`, `resourceType`, `state`, `reviewedAt`, `sourceLink`, `businessFamily`, `product`, and `channel`. Its inherited page title is `Title` (capital T). Each resource page is its own `ResourceArticle` rendering datasource, so Page builder and native Search read the same authoritative fields. The component accepts `Title` with a `title` fallback for standalone reusable articles. **Search should index resource route pages under Home/resources, not the Data folder.** The rendering enables **Can select Page as a data source** and leaves the datasource location empty so authors use the current article, rather than creating a second ResourcePage from a datasource picker. A marketer edits the resource once; there is no metadata mirror to synchronize.
 
@@ -112,11 +112,11 @@ For the original tenant, the already-created Home item needed a one-time scoped 
 
 Sources: [Sitecore serialization configuration](https://doc.sitecore.com/sai/en/developers/sitecoreai/sitecore-content-serialization/configuration/sitecore-content-serialization-configuration-reference.html); brand and regulator references are recorded in `docs/brand/source-manifest.json`.
 
-After scoped publication, run `node authoring/scripts/verify-edge-content.cjs` with the active application dependencies installed and local Edge environment configured. It checks 27 native page payloads and the ResourcePage GraphQL type projection for the expected component and editable fields, prints only content identifiers, and exits nonzero on failure. It does not use fixtures or an application fallback to prove Edge delivery.
+After scoped publication, run `node authoring/scripts/verify-edge-content.cjs` with the active application dependencies installed and local Edge environment configured. It checks 26 native page payloads and the ResourcePage GraphQL type projection for the expected component and editable fields, prints only content identifiers, and exits nonzero on failure. It does not use fixtures or an application fallback to prove Edge delivery.
 
 ## Verified delivery and schema maintenance
 
-On September 10, 2026, the authenticated Content SDK verified all 27 native routes: Home, seven workspace/navigation pages, seven product hubs and twelve resource articles. Resource pages delivered their own editable Title, summary, rich-text body and taxonomy fields through ResourceArticle. The GraphQL schema projected ResourcePage with typed title, summary, body, state, resourceType, reviewedAt, sourceLink, businessFamily, product and channel. These checks used native Edge content, not fixtures.
+Historical baseline: before Home consolidation, on September 10, 2026, the authenticated Content SDK verified all 27 native routes: Home, seven workspace/navigation pages, seven product hubs and twelve resource articles. Resource pages delivered their own editable Title, summary, rich-text body and taxonomy fields through ResourceArticle. The GraphQL schema projected ResourcePage with typed title, summary, body, state, resourceType, reviewedAt, sourceLink, businessFamily, product and channel. These checks used native Edge content, not fixtures.
 
 Native Sitecore field `Title` becomes the typed GraphQL property `title`; generic `field(name: "Title")` retains the original spelling. Resource listing queries should paginate at ten items per request to stay within the tenant's query complexity budget.
 

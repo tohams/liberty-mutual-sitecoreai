@@ -99,6 +99,15 @@ for file in sorted((BASE / 'items').rglob('*.yml')):
     paths[item['Path']] = item
 
 manifest = read_json(BASE / 'content-manifest.json')
+# Home is the sole workspace page. Keep its native identity and reject a stale
+# serialized child so a later CreateOnly seed cannot recreate the removed route.
+home_path = manifest['site'] + '/Home'
+require(manifest['routePageIds'].get('home') == 'ae9e45ca-f127-4abe-9ca7-2ff109981998',
+        'Home must retain its existing native item identity.')
+require('workspace' not in manifest['routePageIds'] and home_path + '/workspace' not in paths,
+        'The removed workspace child must not be present in the content seed.')
+require(paths[home_path]['ID'] == manifest['routePageIds']['home'],
+        'The canonical Home page and route manifest must agree.')
 for relative in manifest['generatedFiles']:
     require((ROOT / relative).is_file(), f'Missing generated item: {relative}')
 sources = read_json(ROOT / 'docs/brand/portal-content-seeds.json')['resources']

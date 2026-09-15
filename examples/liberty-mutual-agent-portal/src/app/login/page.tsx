@@ -23,6 +23,6 @@ export default async function LoginPage() {
       if (!(error instanceof PortalError) || ![401, 409].includes(error.status)) throw error;
     }
   }
-  if (hasActiveWorkspace) redirect('/workspace');
+  if (hasActiveWorkspace) redirect('/');
   return <LoginScreen />;
 }

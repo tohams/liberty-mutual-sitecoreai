@@ -30,7 +30,7 @@ test('real redacted Home chrome reproduces the native 17-rendering permission fa
   assert(result.placeholders[0].allowedRenderingIds.includes(RENDERINGS.ResourceArticle));
 });
 test('each page role requires the exact intended key and one rendering per native insertion region', () => {
-  for (const route of ['/', '/workspace', '/products', '/products/small-commercial', '/resources', '/resources/build-a-bop-submission']) {
+  for (const route of ['/', '/products', '/products/small-commercial', '/resources', '/resources/build-a-bop-submission']) {
     const result = inspectPermissions(responseFor(route, 7), page(route, 7));
     assert.equal(result.passed, true); assert.deepEqual(result.placeholders.map(f => f.placeholder), Object.keys(placements(route)));
     assert(result.placeholders.every(f => f.allowedRenderingIds.length === 1));
@@ -65,8 +65,9 @@ test('extra or absent route placeholders fail even when existing allowlists are 
   const missing = responseFor('/resources'); delete missing.sitecore.route.placeholders['headless-resource-search'];
   assert.throws(() => inspectPermissions(missing, page('/resources')), /unexpected-placeholder-inventory/);
 });
-test('27 route inventory is bounded and latest native English version wins', () => {
-  const routes = portalRoutes(manifest); assert.equal(routes.length, 27); assert.equal(new Set(routes).size, 27);
+test('26 route inventory is bounded and latest native English version wins', () => {
+  const routes = portalRoutes(manifest); assert.equal(routes.length, 26); assert.equal(new Set(routes).size, 26);
+  assert.equal(routes[0], '/'); assert(!routes.includes('/workspace'));
   assert.deepEqual(latestPage({ itemId: HOME_ID, path: HOME, versions: [
     { version: 1, language: { name: 'en' } }, { version: 7, language: { name: 'en' } }, { version: 19, language: { name: 'fr' } },
   ] }, '/'), page('/', 7));
@@ -81,7 +82,7 @@ test('native discovery resolves every route through read-only queries and reject
     return Object.fromEntries(Object.entries(variables).map(([key, pathname]) => [key, { itemId: (++count).toString(16).padStart(32, '0'), path: pathname,
       versions: [{ version: 1, language: { name: 'en' } }, { version: 3, language: { name: 'en' } }] }]));
   } };
-  const pages = await discoverPages(client, routes); assert.equal(pages.length, 27); assert.equal(calls, 5); assert(pages.every(p => p.version === 3));
+  const pages = await discoverPages(client, routes); assert.equal(pages.length, 26); assert.equal(calls, 5); assert(pages.every(p => p.version === 3));
   await assert.rejects(() => discoverPages({ query: async () => ({ p0: null }) }, ['/']), /missing-or-mismatched-page/);
 });
 const config = { endpoints: { demo: { host: 'https://cm.example.test/', ref: 'cloud' }, cloud: { accessToken: 'private-test-token' } } };
