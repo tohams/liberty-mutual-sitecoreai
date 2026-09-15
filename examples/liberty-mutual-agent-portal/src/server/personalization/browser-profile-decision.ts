@@ -2,6 +2,7 @@ import type { PersonalizeData, PersonalizeOpts } from '@sitecore-content-sdk/per
 import type { PortalBootstrap } from '../../contracts/portal';
 import { readPortalBrowserProfileRef } from '../../lib/portal-identity-link';
 import { decisionReceiptType, reportPersonalizationDiagnostic } from './diagnostics';
+import type { GuestProfileResolver } from './guest-profile-cookie';
 
 export type VerifiedIdentityResolver = () => Promise<PortalBootstrap['udlIdentity']>;
 export type BrowserDecisionData = Omit<PersonalizeData, 'identifier' | 'email'>;
@@ -29,6 +30,7 @@ export function createBrowserProfileDecisionExecutor(
   context: BrowserDecisionContext,
   resolveIdentity: VerifiedIdentityResolver,
   transport: typeof fetch = fetch,
+  resolveGuestProfile?: GuestProfileResolver,
 ) {
   const requestContext = Object.freeze({ ...context });
   let verifiedProfile: Promise<{ identityPresent: boolean; ref: string | null }> | undefined;
@@ -55,13 +57,14 @@ export function createBrowserProfileDecisionExecutor(
         }, decisionTimeout(options?.timeout));
       });
       const execute = async () => {
-        // Share a fresh lookup only among components in this HTTP request. A personalize
-        // cookie can still refer to an anonymous profile from before the explicit login.
+        // Share verified identity work only within this request. The cookie adapter
+        // accepts a guest ID only when its signed login/browser/UDL binding matches.
         verifiedProfile ??= (async () => {
           const identityStarted = performance.now();
           let available = false;
+          let identity: PortalBootstrap['udlIdentity'] = null;
           try {
-            const identity = await resolveIdentity();
+            identity = await resolveIdentity();
             if (abort.signal.aborted) return { identityPresent: false, ref: null };
             available = identity?.provider === 'liberty-mutual-agent' && Boolean(identity.id);
             reportPersonalizationDiagnostic({
@@ -77,7 +80,10 @@ export function createBrowserProfileDecisionExecutor(
           }
           if (!available || abort.signal.aborted) return { identityPresent: false, ref: null };
           const profileStarted = performance.now();
-          const ref = await readPortalBrowserProfileRef({ ...requestContext, browserId }, abort.signal, transport);
+          const readNativeProfile = () => readPortalBrowserProfileRef({ ...requestContext, browserId }, abort.signal, transport);
+          const ref = resolveGuestProfile
+            ? await resolveGuestProfile(identity!, readNativeProfile, abort.signal)
+            : await readNativeProfile();
           if (abort.signal.aborted) return { identityPresent: true, ref: null };
           reportPersonalizationDiagnostic({
             stage: 'profile', outcome: ref ? 'available' : 'unavailable', elapsedMs: performance.now() - profileStarted,

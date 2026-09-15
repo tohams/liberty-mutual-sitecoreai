@@ -94,6 +94,7 @@ export default async function proxy(req: NextRequest) {
   // Each request has its own transport context; draft and unverified runs remain neutral.
   const requestPersonalize = personalize.forRequest(async () =>
     session ? getPortalPersonalizationIdentity(session) : null,
+    session ?? undefined,
   );
   const response = await defineProxy(preview, locale, multisite, redirects, requestPersonalize).exec(req);
   response.headers.set('Cache-Control', 'private, no-store, max-age=0');

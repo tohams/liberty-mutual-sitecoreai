@@ -68,7 +68,7 @@ test('request-local proxy instances retain native discovery, variant validation 
   assert.ok(firstResult.headers.get('x-middleware-rewrite')?.includes('component_principal'));
   assert.ok(second.headers.get('x-middleware-rewrite')?.includes('component_producer'));
   assert.ok(!second.headers.get('x-middleware-rewrite')?.includes('component_principal'));
-  assert.equal(firstResult.headers.get('set-cookie'), null, 'Personalization does not create or alter native identity cookies');
+  assert.equal(firstResult.headers.get('set-cookie'), null, 'No guest binding is minted without a verified portal session');
   assert.equal(firstContext.get('PersonalizeProxy')?.executedSuccessfully, true);
   assert.equal(secondContext.get('PersonalizeProxy')?.executedSuccessfully, true);
   const rejectUnknown = new PortalPersonalizeProxy(config, async () => principal, async (_, init) => Response.json(init?.method === 'GET'
@@ -145,5 +145,71 @@ test('concurrent discovery misses cannot clear another request deadline', async 
     assert.equal(outcome, undefined, 'The still-pending request must independently time out to neutral');
   } finally {
     clearTimeout(watchdog);
+  }
+});
+
+
+test('SDK rewrite preserves bound guest cookies and later requests reuse identity without caching a variant', async () => {
+  const { PortalPersonalizeProxy } = await import('./PortalPersonalizeProxy');
+  const { PERSONALIZE_BINDING_COOKIE, PERSONALIZE_GUEST_COOKIE } = await import('./guest-profile-cookie');
+  const previous = process.env.PORTAL_SESSION_SECRET;
+  process.env.PORTAL_SESSION_SECRET = 'proxy-integration-test-guest-binding-key-only';
+  try {
+    const now = Date.now();
+    const session = {
+      agentId: 'agent', agencyId: 'agency', reviewerPack: '04', username: 'agent.04',
+      sessionId: 'same-authenticated-login', issuedAt: new Date(now).toISOString(),
+      expiresAt: new Date(now + 8 * 60 * 60 * 1000).toISOString(),
+    };
+    let profileReads = 0;
+    const decisions: Record<string, unknown>[] = [];
+    const transport: typeof fetch = async (_, init) => {
+      if (init?.method === 'GET') {
+        profileReads++;
+        return Response.json({ ref: principalBrowser, customer: { ref: 'first-native-guest' } });
+      }
+      decisions.push(JSON.parse(String(init?.body)) as Record<string, unknown>);
+      return Response.json({ variantId: decisions.length === 1 ? 'component_B' : 'component_default' });
+    };
+    const config: PersonalizeProxyConfig = {
+      sites: [{ name: 'portal-a', hostName: 'portal.example', language: 'en' }],
+      contextId: 'private-discovery-context', clientContextId: context.contextId, edgeUrl: context.edgeUrl,
+      enabled: true, cdpTimeout: 800, edgeTimeout: 800, scope: '', channel: 'WEB', currency: 'USD',
+      personalizeService: { getPersonalizeInfo: async () => ({
+        pageId: 'native-resources-page', variantIds: ['component_B'],
+      }) } as unknown as PersonalizeProxyConfig['personalizeService'],
+    };
+    const proxy = new PortalPersonalizeProxy(config, async () => null, transport);
+    const request = (cookies: string) => new NextRequest('https://portal.example/resources', {
+      headers: { host: 'portal.example', cookie: cookies, rsc: '1' },
+    });
+    const incomingResponse = NextResponse.next();
+    incomingResponse.cookies.set('retired-feature', '', { path: '/', maxAge: 0 });
+    const first = await proxy.forRequest(async () => principal, session).handle(
+      request(`sc_cid=${principalBrowser}; sc_cid_personalize=unbound-old-profile`), incomingResponse,
+    );
+    assert.ok(first.headers.get('x-middleware-rewrite')?.endsWith('/resources/_variantId_component_B'));
+    const rawGuest = first.cookies.get(PERSONALIZE_GUEST_COOKIE);
+    const companion = first.cookies.get(PERSONALIZE_BINDING_COOKIE);
+    assert.equal(rawGuest?.value, 'first-native-guest');
+    assert.equal(rawGuest?.domain, 'portal.example', 'Native SDK hostname scope replaces the former standard cookie');
+    assert.equal(rawGuest?.httpOnly, true);
+    assert.ok(companion?.value);
+    assert.equal(companion?.httpOnly, true);
+    assert.equal(companion?.domain, undefined);
+    assert.ok(first.headers.getSetCookie().some((header) => header.startsWith('retired-feature=') && header.includes('Max-Age=0')), 'Existing cookie expiry survives the SDK rewrite');
+    const pair = [PERSONALIZE_GUEST_COOKIE, PERSONALIZE_BINDING_COOKIE]
+      .map((name) => `${name}=${encodeURIComponent(first.cookies.get(name)!.value)}`).join('; ');
+    const second = await proxy.forRequest(async () => principal, session).handle(
+      request(`sc_cid=${principalBrowser}; ${pair}`), NextResponse.next(),
+    );
+    assert.equal(profileReads, 1, 'A later HTTP request verifies the cookie pair instead of reading another alias');
+    assert.equal(decisions.length, 2, 'The native experiment is still executed on every eligible visit');
+    assert.deepEqual(decisions.map((body) => body.guestRef), ['first-native-guest', 'first-native-guest']);
+    assert.ok(second.headers.get('x-middleware-rewrite')?.endsWith('/resources/_variantId_component_default'), 'A new native result is honored; no treatment is pinned locally');
+    assert.equal(second.headers.get('set-cookie'), null, 'Reuse does not extend the authenticated cookie lifetime');
+  } finally {
+    if (previous === undefined) delete process.env.PORTAL_SESSION_SECRET;
+    else process.env.PORTAL_SESSION_SECRET = previous;
   }
 });

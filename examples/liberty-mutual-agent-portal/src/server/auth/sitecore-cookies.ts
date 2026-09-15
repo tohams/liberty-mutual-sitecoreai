@@ -14,7 +14,7 @@ export function clearPortalDraftCookies(response: NextResponse): void {
 
 /** Pinned analytics-core 2.1.2 and personalize 2.1.0 cookie contracts. */
 export function sitecoreIdentityCookieNames(): string[] {
-  const names = new Set(['sc_cid', 'sc_cid_personalize']);
+  const names = new Set(['sc_cid', 'sc_cid_personalize', 'lm_portal_personalize_binding']);
   // The SDK migrates these exact legacy names to sc_cid. Clear only this public context.
   const clientContext = process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID;
   if (clientContext && /^[a-zA-Z0-9-]{1,200}$/.test(clientContext)) {

@@ -3,6 +3,8 @@ import { PersonalizeProxy, type PersonalizeProxyConfig } from '@sitecore-content
 import { createGraphQLClientFactory } from '@sitecore-content-sdk/content/client';
 import { createBrowserProfileDecisionExecutor, type VerifiedIdentityResolver } from './browser-profile-decision';
 import { PortalPersonalizeService } from './PortalPersonalizeService';
+import { createGuestProfileCookieStore } from './guest-profile-cookie';
+import type { PortalSession } from '../auth/session';
 
 /** Keep native discovery and rewrites; decisions use a request-local, already-linked browser profile. */
 export class PortalPersonalizeProxy extends PersonalizeProxy {
@@ -12,6 +14,7 @@ export class PortalPersonalizeProxy extends PersonalizeProxy {
     config: PersonalizeProxyConfig,
     private readonly resolveIdentity: VerifiedIdentityResolver,
     private readonly transport: typeof fetch = fetch,
+    private readonly session?: PortalSession,
   ) {
     super({
       ...config,
@@ -29,21 +32,26 @@ export class PortalPersonalizeProxy extends PersonalizeProxy {
   }
 
   /** Share only native campaign discovery/cache; never use the SDK's global analytics context. */
-  forRequest(resolveIdentity: VerifiedIdentityResolver) {
+  forRequest(resolveIdentity: VerifiedIdentityResolver, session?: PortalSession) {
     return new PortalPersonalizeProxy({
       ...this.config,
       ...(this.personalizeService && { personalizeService: this.personalizeService }),
-    }, resolveIdentity, this.transport);
+    }, resolveIdentity, this.transport, session);
   }
 
-  protected override async initPersonalizeServer({ siteName, request }: Parameters<PersonalizeProxy['initPersonalizeServer']>[0]) {
+  protected override async initPersonalizeServer({ siteName, request, response }: Parameters<PersonalizeProxy['initPersonalizeServer']>[0]) {
+    const contextId = this.config.clientContextId || this.config.contextId || '';
+    const browserId = request.cookies.get('sc_cid')?.value;
     this.executeBrowserDecision = createBrowserProfileDecisionExecutor({
       siteName,
-      browserId: request.cookies.get('sc_cid')?.value,
+      browserId,
       userAgent: request.headers.get('user-agent') || undefined,
-      contextId: this.config.clientContextId || this.config.contextId || '',
+      contextId,
       edgeUrl: this.config.edgeUrl || 'https://edge-platform.sitecorecloud.io',
-    }, this.resolveIdentity, this.transport);
+    }, this.resolveIdentity, this.transport, this.session && browserId ? createGuestProfileCookieStore({
+      request, response, session: this.session, browserId, contextId, siteName,
+      hostname: request.nextUrl.hostname,
+    }) : undefined);
   }
 
   protected override async personalize({ params, friendlyId, language, timeout, variantIds, geo }: Parameters<PersonalizeProxy['personalize']>[0]) {
