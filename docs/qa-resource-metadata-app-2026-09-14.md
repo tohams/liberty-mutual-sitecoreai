@@ -2,9 +2,9 @@
 
 ## Scope and current status
 
-The custom Resource metadata Page Builder panel and managed taxonomy implementation are complete in source. Native service validation, Search regression checks and local production compilation passed. Marketplace registration, installation and end-to-end iframe acceptance remain pending; the public shell alone is not evidence of an installed app.
+The custom Resource metadata Page Builder panel and managed taxonomy implementation are complete in source. Native service validation, Search regression checks and local production compilation passed. The Marketplace app is registered as `86157b8a-7411-415d-9931-1e7508b7bd81` with status **In development**. Activation, installation and end-to-end iframe acceptance remain pending; the public shell alone is not evidence of an installed app.
 
-Environment: Safeco Insurance Company of America POC; SitecoreAI tenant `97eea84c-ac47-4d91-7e4f-08defdaaa7df`; site `liberty-mutual-agent-portal`. App route: `/marketplace/resource-metadata` on the existing portal host.
+Environment: Safeco Insurance Company of America POC; SitecoreAI tenant `97eea84c-ac47-4d91-7e4f-08defdaaa7df`; site `liberty-mutual-agent-portal`. App route: `/resource-metadata` on the existing portal host.
 
 ## Completed checks
 
@@ -23,14 +23,15 @@ Environment: Safeco Insurance Company of America POC; SitecoreAI tenant `97eea84
 | Application validation | 111 tests, lint, type-check and production build passed. The 12 service tests include model synchronization and Shared/Unversioned drift guards. |
 | Client asset validation | Production postbuild scan checked 27 browser assets for configured private values; passed. |
 | Authoring validation | 85 tests; generator check; 300 serialized items; all four serialization modules validated. |
-| Local route/authentication | App shell and SVG returned 200; protected bootstrap returned 401; unknown Marketplace route and resources redirected to login. Exact Sitecore frame-ancestor policy returned on the shell. |
+| Marketplace registration | App Studio created application `86157b8a-7411-415d-9931-1e7508b7bd81`; status In development. Its extension route uses the required single-level `/resource-metadata`. Activation and installation remain pending. |
+| Local route/authentication | The `/resource-metadata` shell and existing SVG returned 200; a trailing slash redirected to the canonical route. The old nested route, child route and protected resources redirected to login; bootstrap returned 401. The new shell returned its SitecoreAI title and exact Sitecore frame-ancestor policy. Production build, postbuild scan, type-check and targeted lint passed after the route move. |
 | Standalone browser | App title, instructions and Sitecore-styled shell rendered without agent navigation, agent login or visitor analytics. |
 
 Native service checks used authenticated CLI transport and supplied Pages context. They prove the actual Authoring GraphQL read/write contract; they do not prove Marketplace installation, SDK handshake or the originating user's permission propagation.
 
 ## Required installation acceptance
 
-1. Record the app registration ID, installed tenant and access scope in `authoring/marketplace/resource-metadata-app.json`.
+1. Complete activation and installation, then update the installed tenant, status and access scope in `authoring/marketplace/resource-metadata-app.json`.
 2. Open a real ResourcePage draft in Page Builder and open Apps → Resource metadata. Verify application context, five native dropdown lists, readable labels and help text.
 3. On a disposable unpublished resource, change selections, discard, save and inspect native readback. Confirm canvas refresh, correct language/version and unchanged unrelated fields.
 4. Verify approved read-only behavior, a non-resource page, a page/version switch, changed managed choices and an intervening content update.

@@ -36,7 +36,7 @@ Adding a state or business family to a list does not extend an agent's licensing
 
 ## Use the Resource metadata panel
 
-The app is implemented in this repository. **Marketplace registration and installation are pending**, so these steps become available after an administrator completes the installation below. The status is recorded in `authoring/marketplace/resource-metadata-app.json`.
+The app is implemented in this repository and registered in App Studio as **In development**. **Activation, installation and end-to-end acceptance are pending**, so these steps become available after an administrator completes the installation below. The status is recorded in `authoring/marketplace/resource-metadata-app.json`.
 
 1. In SitecoreAI **Page Builder**, select **liberty-mutual-agent-portal**.
 2. Open **Learning & resources**, then select a resource article under **resources**. The Resources landing page itself is not a ResourcePage and cannot be edited with this panel.
@@ -61,7 +61,9 @@ This is a private **custom Marketplace app** using the [Page Builder context-pan
 | Name | Resource metadata |
 | Type | Custom |
 | Deployment URL | `https://liberty-mutual-agent-portal.vercel.app` |
-| Route | `/marketplace/resource-metadata` |
+| Route | `/resource-metadata` |
+| App registration ID | `86157b8a-7411-415d-9931-1e7508b7bd81` |
+| App Studio status | In development |
 | Extension point | SitecoreAI Page builder context panel |
 | API access | SitecoreAI APIs |
 | Browser permissions | None |
@@ -70,7 +72,7 @@ This is a private **custom Marketplace app** using the [Page Builder context-pan
 | Tenant ID | `97eea84c-ac47-4d91-7e4f-08defdaaa7df` |
 | Initial access | Organization administrators and owners |
 
-An organization administrator registers the app in **Cloud Portal → App studio → Studio**, configures the values above and uploads `public/marketplace/resource-metadata-icon.svg` from the active Next.js app. Activate it, then use **My apps → Install** and select only the Liberty Mutual environment. Record the resulting application ID and installation status in the registration manifest. Follow the current [registration](https://doc.sitecore.com/mp/en/developers/marketplace/register-a-custom-app.html), [configuration](https://doc.sitecore.com/mp/en/developers/marketplace/configure-and-activate-a-custom-app.html) and [installation](https://doc.sitecore.com/mp/en/developers/marketplace/install-an-activated-custom-app.html) instructions when the UI changes.
+The app is registered in **Cloud Portal → App studio → Studio**. An organization administrator completes the configuration above and uploads `public/marketplace/resource-metadata-icon.svg` from the active Next.js app. Activate it, then use **My apps → Install** and select only the Liberty Mutual environment. Update the installation status in the registration manifest after verifying the installed panel. App Studio requires a single-level extension route such as `/resource-metadata`; nested routes are not accepted. Follow the current [registration](https://doc.sitecore.com/mp/en/developers/marketplace/register-a-custom-app.html), [configuration](https://doc.sitecore.com/mp/en/developers/marketplace/configure-and-activate-a-custom-app.html) and [installation](https://doc.sitecore.com/mp/en/developers/marketplace/install-an-activated-custom-app.html) instructions when the UI changes.
 
 The code deploys with the existing portal through GitHub and Vercel on the current Hobby plan. It requires no additional portal credentials or new server-side authoring endpoint. The public route displays instructions when opened outside Page Builder. Marketplace provides the authorized environment context inside its iframe. The app checks the exact organization and tenant before querying Sitecore.
 
@@ -88,7 +90,7 @@ Native Authoring GraphQL does not provide an atomic revision precondition. The p
 - `src/features/resource-metadata/metadata-service.ts`: transport-independent native reads, validation, minimal writes and readback.
 - `src/features/resource-metadata/useResourceMetadataPanel.ts`: Marketplace SDK connection, selected-page subscriptions, state and canvas refresh.
 - `src/features/resource-metadata/ResourceMetadataPanel.tsx`: accessible form and workflow messages.
-- `src/app/marketplace/resource-metadata/`: route and metadata; no portal navigation or visitor analytics.
+- `src/app/resource-metadata/`: route and metadata; no portal navigation or visitor analytics.
 - `src/proxy.ts` and `next.config.ts`: exact public shell route and allowed Sitecore frame ancestors. All protected portal routes keep their existing login requirements.
 
 Paths above are relative to `examples/liberty-mutual-agent-portal`. The app uses the existing Node 24 setup and normal `npm ci`, `npm run dev`, `npm run type-check`, `npm run lint`, `npm test` and `npm run build` commands. Opening the local route directly validates only the inert shell. End-to-end authoring validation requires an installed Marketplace context panel; CLI service checks do not prove the iframe handshake or installation.
