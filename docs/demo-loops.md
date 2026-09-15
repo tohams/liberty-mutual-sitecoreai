@@ -62,7 +62,7 @@ The insurance records, premium figures, authority records and operational action
 2. Sign out; repeat with `jordan.01`, then `maya.01`. Explain their different responsibilities within the same agency. Their workspaces also differ in operational scope.
 3. Sign in as `elena.01`. Show the neutral guidance for a wholesale broker outside the small-business growth cohort.
 4. In UDL, inspect the correct person, pack and active profile generation. Review individual role, agency relationship, state/specialty attributes and `smallBusinessGrowthAudience`. Keep individual production distinct from agency totals.
-5. Open the Published JavaScript Custom Value **Liberty Mutual - Small business growth role**. In **Page Builder → Home → Layers → AgentGuidance**, click **Edit personalization rules**. Inspect the Live **Liberty Mutual - Small business growth guidance** table, tracing cohort plus role to the authored `AgentGuidance` datasource. Click **Cancel** to leave the rules unchanged.
+5. Open the Published JavaScript Custom Value **Liberty Mutual - Small business growth role**. In **Page Builder → Home → Layers → AgentGuidance**, click **Edit personalization rules**. Inspect the Live **Liberty Mutual - Home growth guidance** table, tracing cohort plus role to the authored `AgentGuidance` datasource. Click **Cancel** to leave the rules unchanged.
 
 **Expected baseline:**
 
