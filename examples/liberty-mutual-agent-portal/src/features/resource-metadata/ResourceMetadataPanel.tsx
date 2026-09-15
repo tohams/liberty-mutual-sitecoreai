@@ -220,21 +220,6 @@ export default function ResourceMetadataPanel() {
             })}
           </fieldset>
 
-          <details className={styles.listLocation}>
-            <summary>Where are these choices managed?</summary>
-            <p>
-              In Sitecore content, open{" "}
-              <strong>
-                LibertyMutual → liberty-mutual-agent-portal → Data → Taxonomy
-              </strong>
-              .
-            </p>
-            <p>
-              Each list supplies a label and description. Saving a selection
-              stores its existing search value.
-            </p>
-          </details>
-
           <footer className={styles.actions}>
             <p className={styles.changeCount} role="status">
               {panel.saving
