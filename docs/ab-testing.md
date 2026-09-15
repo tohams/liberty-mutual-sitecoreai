@@ -1,6 +1,6 @@
 # Resources guidance A/B test
 
-**Current test: Liberty Mutual Small Business Guide CTA — Live.** On September 14, 2026 UTC, the guide page was explicitly selected as the goal, saved and reopened to verify the selection before activation. Published A and B content passed all 18 read-only checks, and a normal production Daniel `.04` visit reached the guide. Native goal attribution remains pending; a configured goal and a page visit do not establish a credited conversion or winner. See the [current verification record](qa-ab-testing-2026-09-14.md) and [eighth presenter loop](demo-loops.md#loop-8-a-clearer-next-step).
+**Current test: Liberty Mutual Small Business Guide CTA — Live.** On September 14, 2026 UTC, the guide page was explicitly selected as the goal, saved and reopened to verify the selection before activation. Published A and B content passed all 18 read-only checks, and a normal production Daniel `.04` visit reached the guide. Native reporting inspected at approximately **23:11 UTC on September 15, 2026** showed credited goals for both variants and **Test is in progress**. The small sample does not establish a winner. See the [dated reporting observation](#native-configuration-and-acceptance-record), [September 14 configuration record](qa-ab-testing-2026-09-14.md) and [eighth presenter loop](demo-loops.md#loop-8-a-clearer-next-step).
 
 The preceding **Liberty Mutual Small Business Resource CTA** test was ended with A retained and published. Its history is preserved separately in the [September 11 record](qa-ab-testing-2026-09-11.md). Do not combine its visits or goals with the replacement test. Reconfiguration does not establish why the earlier report did not credit goals.
 
@@ -30,7 +30,7 @@ The control remains in [resources-guidance.yml](../authoring/items/liberty-mutua
 
 ## Native setup and verification
 
-The setup steps below document how this test was prepared and started. It is already in progress; do not repeat creation or activation to inspect it. Outstanding runtime checks are identified in the acceptance table.
+The setup steps below document how this test was prepared and started. It is already in progress; do not repeat creation or activation to inspect it. Configuration and dated runtime observations appear in the acceptance table.
 
 Use the following creation steps for a new destination where the test does not exist. On the current tenant, inspect the existing Live test without creating, starting or replacing it.
 
@@ -75,7 +75,7 @@ For handoff, the repository contains a narrow native snapshot of the Resources p
 
 ## Native configuration and acceptance record
 
-This record describes the replacement test. Pending entries are not successful checks.
+This record describes the replacement test. Each dated observation retains its original scope; the latest aggregate report does not establish which individual journey received a credited goal.
 
 | Evidence | Recorded result |
 | --- | --- |
@@ -87,8 +87,10 @@ This record describes the replacement test. Pending entries are not successful c
 | Saved goal | **Increase page views**; exact published guide item `2bf3a728-a631-5a90-a323-8922aca62f23` explicitly selected. After Save and reopening Configure, `expand-small-business-practice` remained selected |
 | Allocation and audience | **50/50**, **100%**, **All visitors**. Base rate **2%**, minimum detectable difference **20%**, confidence **95%**, displayed sample size **21,110**. Both outcome actions return traffic to control |
 | Published content and scope | **18/18** read-only Edge checks passed: new B discovery, expected labels/datasources, shared target, published goal page and preserved Search. Resources and reused B were captured with an exact two-item pull; only Resources YAML changed |
-| Current normal navigation | Production Daniel `.04`, generation **0**, saw **Start with small business** on Resources at **02:34:42.220 UTC**, followed it to the guide around **02:35**, and signed out by **02:36**. Maya `.04` followed the same normal route around **02:55–03:00 UTC**, also seeing A’s copy, then signed out. No operational work or profile generation changed; traffic across both variants is not established |
-| Decision request evidence | The exact production Resources GET returned HTTP **200** and its Vercel trace included a native browser-profile read and POST `/v1/personalize`. The response/selection was not exposed, so accepted control allocation is not established |
+| September 14 normal navigation | Production Daniel `.04`, generation **0**, saw **Start with small business** on Resources at **02:34:42.220 UTC**, followed it to the guide around **02:35**, and signed out by **02:36**. Maya `.04` followed the same normal route around **02:55–03:00 UTC**, also seeing A’s copy, then signed out. No operational work or profile generation changed; these two journeys did not establish traffic across both variants |
+| September 14 decision request | The exact production Resources GET returned HTTP **200** and its Vercel trace included a native browser-profile read and POST `/v1/personalize`. The response/selection was not exposed, so accepted control allocation is not established |
 | Native goal event contract | Goal `page` is `expand-small-business-practice`, language `en`; page-variant identifier `2bf3a728a6315a90a3238922aca62f23_en_default`. Inspect the canonical profile and same client/session for the current journey |
-| Current aggregate goal attribution | **Pending**. At **02:49:16 UTC**, the replacement report still showed **0 visits and 0 goals** per variant. This is within Sitecore’s documented 24-hour reporting window, not evidence of a new failure. Inspect again after processing; do not substitute old report totals |
+| September 14 early aggregate report | At **02:49:16 UTC**, the replacement report showed **0 visits and 0 goals** per variant. This historical observation preceded the credited goals below and remains in the [September 14 record](qa-ab-testing-2026-09-14.md) |
+| Latest aggregate goal attribution | At approximately **23:11 UTC on September 15, 2026**, native **Component A/B/n tests** showed **19 total visits**: A **12 unique visits, 2 goals, 16.67%**; B **7 unique visits, 3 goals, 42.86%**. Both variants have credited goals |
+| Latest native result status | **Test is in progress**, with **B leading** and displayed confidence **77.52%** at the same observation. This is a small rehearsal sample, not a winner or evidence of business lift. Read the current report for updated figures |
 | Winner or measured business lift | Not established |
