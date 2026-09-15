@@ -40,7 +40,7 @@ Use a new, uniquely named **unpublished** page so reviewers can learn without ch
 4. In **Content**, expand your practice page → **Data → Resource image**. Confirm that the image item belongs beneath that page. If comparing two new pages, changing one image must leave the other unchanged.
 5. At the end, select your uniquely named practice page and open **Content tree options (… ) → Delete**. In **Delete item**, confirm that the message names your practice page, then click **Delete**. Its versions and descendants move to the Recycle Bin. Leave the reusable Media asset and **Resource page** branch intact. Confirm the temporary page is absent from the tree. Because it was never published, no Search reindex or live unpublish is needed. See [Sitecore's item deletion behavior](https://doc.sitecore.com/sai/en/users/sitecoreai/build-pages/managing-the-site-tree/create-delete-and-rename-items.html).
 
-The portal's **Reset workspace** control does not remove CMS pages or undo Media selections. A published practice article needs a coordinated removal from published delivery and a Search reindex before it is considered reset.
+The operator's **saved-work** reset does not remove CMS pages or undo Media selections; no reset control appears in the agent portal. A published practice article needs a coordinated removal from published delivery and a Search reindex before it is considered reset.
 
 ## What belongs where
 
@@ -105,7 +105,7 @@ Before handing over this creation flow, verify it in the native authoring enviro
 6. Complete one article, approve and publish it and its local content, then reindex **Liberty Mutual Agent Resources**. Verify both an applicable licensed-state result and a state that should exclude it. Confirm the Resource metadata app still edits the article page itself.
 7. Restore any existing article fields or images changed during a rehearsal. Recycle only the temporary pages created for the test; if published, remove them from published delivery and reindex Search. Retain the permanent Resource page branch and all existing customer content.
 
-An unpublished test page can be recycled without touching live resource content. The portal's **Reset workspace** control resets agent activity; it does not undo CMS authoring, Media assets, branch edits or Search ingestion.
+An unpublished test page can be recycled without touching live resource content. The operator's **saved-work** reset restores operational work in the selected host and reviewer pack. It does not undo CMS authoring, Media assets, branch edits or Search ingestion.
 
 Sitecore describes the independent-copy behavior and insert rules in [Create and configure a page branch](https://doc.sitecore.com/sai/en/users/sitecoreai/build-pages/building-page-templates-and-branches/create-and-configure-a-page-branch.html), and page-relative datasource behavior in [Use a prefix to set the data source context](https://doc.sitecore.com/sai/en/developers/sitecoreai/content-modeling-and-presentation/data-sources/use-a-prefix-to-set-the-data-source-context.html).
 
