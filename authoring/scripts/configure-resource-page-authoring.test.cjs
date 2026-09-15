@@ -74,7 +74,7 @@ test('concurrent author edits, locks, version changes, wrong identity and unexpe
     item => { item.versions[0].fields.find(f => f.name === 'body').value = '<p>Author text</p>'; },
     item => { item.versions.push({ ...structuredClone(item.versions[0]), version: 3 }); },
     item => { item.versions[0].fields.find(f => f.name === '__Renderings').value = '<r><d /></r>'; },
-    item => { item.path = M.SITE + '/Home/workspace'; },
+    item => { item.path = M.SITE + '/Home'; },
   ]) {
     const current = structuredClone(before); change(current);
     assert.throws(() => C.assertResumable(current, before, plan));

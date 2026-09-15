@@ -117,7 +117,7 @@ export function PortalApp({
       actionLock.current = false;
     }
   }
-  const section = route.split("/").filter(Boolean)[0] || "workspace";
+  const section = route.split("/").filter(Boolean)[0] || "home";
   const selectedId = route.split("/").filter(Boolean)[1];
   const currentResource = data.resources.find(
     (resource) => resourceHref(resource) === route,
@@ -205,7 +205,7 @@ export function PortalApp({
           ) : (
             <>
               {content}
-              {section !== "workspace" &&
+              {section !== "home" &&
                 !(
                   ["resources", "learning"].includes(section) && resourcesSearch
                 ) &&

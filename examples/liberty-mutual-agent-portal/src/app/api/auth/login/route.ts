@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const identity = await authenticate(body.username, body.password);
     if (!identity) throw new PortalError('INVALID_CREDENTIALS', 'The username or password is incorrect.', 401);
     const { token } = await createSession(identity);
-    const response = jsonResponse({ success: true, redirectTo: '/workspace' });
+    const response = jsonResponse({ success: true, redirectTo: '/' });
     response.cookies.set(SESSION_COOKIE, token, sessionCookieOptions);
     clearSitecoreIdentityCookies(response, request);
     clearPortalDraftCookies(response);
