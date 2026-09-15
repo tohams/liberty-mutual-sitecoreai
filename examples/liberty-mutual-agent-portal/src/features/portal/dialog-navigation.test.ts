@@ -64,6 +64,25 @@ test("bond details retain the surety list route and new-bond forms clear only th
   );
 });
 
+test("closing a newly saved bond returns to its bond list while form cancellation and row closes preserve context", () => {
+  const openedForm = "/quote?bond=1&state=TX&source=guidance#bonds";
+  const closedSavedBond = portalDialogClosedHref(openedForm, "bond", {
+    returnToBondList: true,
+  });
+  assert.equal(closedSavedBond, "/surety?state=TX&source=guidance#bonds");
+  assert.equal(portalDialogClosedHref(closedSavedBond!, "bond"), null);
+  assert.equal(
+    portalDialogClosedHref(openedForm, "bond"),
+    "/quote?state=TX&source=guidance#bonds",
+  );
+  assert.equal(
+    portalDialogClosedHref("/quote?state=TX", "bond", {
+      returnToBondList: true,
+    }),
+    null,
+  );
+});
+
 test("unrelated query values, duplicates and encoded text survive closing", () => {
   const closed = portalDialogClosedHref(
     "/quote?submission=sub-001&state=TX&source=one&source=two&q=A%26B#saved",

@@ -122,10 +122,14 @@ export function SubmissionsScreen({
         .toLowerCase()
         .includes(query.toLowerCase()),
   );
-  function closeDialogLocation(kind: PortalDialogKind) {
+  function closeDialogLocation(
+    kind: PortalDialogKind,
+    options: { returnToBondList?: boolean } = {},
+  ) {
     const href = portalDialogClosedHref(
       `${window.location.pathname}${window.location.search}${window.location.hash}`,
       kind,
+      options,
     );
     if (href) router.replace(href, { scroll: false });
   }
@@ -685,7 +689,7 @@ export function SubmissionsScreen({
         open={!!bond}
         onClose={() => {
           setSelectedBondId(null);
-          closeDialogLocation("bond");
+          closeDialogLocation("bond", { returnToBondList: true });
         }}
       >
         {bond && (

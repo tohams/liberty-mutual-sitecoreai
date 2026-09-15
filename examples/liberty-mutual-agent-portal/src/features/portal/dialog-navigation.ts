@@ -11,6 +11,7 @@ const DIALOG_ROUTES: Record<PortalDialogKind, readonly string[]> = {
 export function portalDialogClosedHref(
   href: string,
   kind: PortalDialogKind,
+  options: { returnToBondList?: boolean } = {},
 ): string | null {
   if (
     !href.startsWith("/") ||
@@ -56,5 +57,9 @@ export function portalDialogClosedHref(
     changed = true;
   }
 
-  return changed ? `${url.pathname}${url.search}${url.hash}` : null;
+  if (!changed) return null;
+  // Saving a form opened by ?bond=1 switches to the bond list in memory.
+  // Keep that list when removing the trigger remounts the screen.
+  if (kind === "bond" && options.returnToBondList) url.pathname = "/surety";
+  return `${url.pathname}${url.search}${url.hash}`;
 }
