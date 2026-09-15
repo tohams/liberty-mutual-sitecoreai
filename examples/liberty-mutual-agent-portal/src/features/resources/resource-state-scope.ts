@@ -1,22 +1,31 @@
 import type { Agent, Resource, StateCode } from "@/contracts/portal";
+import {
+  canAccessResourceStates,
+  isNationwideResource as isNationwide,
+} from "@/domain/resource-access";
 
 export const DEFAULT_RESOURCE_STATE_SCOPE = "licensed";
 export type ResourceStateScope = "licensed" | "all" | StateCode | "All";
 
-const SUPPORTED_STATES: readonly StateCode[] = ["TX", "FL", "IL"];
-
-function isNationwide(resourceStates: readonly StateCode[]) {
-  // The public resource contract expands the CMS's `All` value to these states.
-  return SUPPORTED_STATES.every((state) => resourceStates.includes(state));
+/** Old All-states values and unlicensed selections never widen access. */
+export function normalizeResourceStateScope(
+  scope: unknown,
+  licensedStates: readonly StateCode[],
+): Exclude<ResourceStateScope, "all"> {
+  if (scope === "All") return "All";
+  return licensedStates.includes(scope as StateCode)
+    ? (scope as StateCode)
+    : DEFAULT_RESOURCE_STATE_SCOPE;
 }
 
-/** Content relevance only: browsing guidance never changes an agent's licensing. */
+/** Narrow the already licensed resource set; a filter never grants access. */
 export function matchesResourceStateScope(
   resourceStates: readonly StateCode[],
   licensedStates: readonly StateCode[],
   scope: ResourceStateScope,
 ): boolean {
-  if (scope === "all") return true;
+  if (!canAccessResourceStates(resourceStates, licensedStates)) return false;
+  scope = normalizeResourceStateScope(scope, licensedStates);
   const nationwide = isNationwide(resourceStates);
   if (scope === "All") return nationwide;
   if (nationwide) return true;

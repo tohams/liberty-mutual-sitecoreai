@@ -2,6 +2,7 @@ import 'server-only';
 import { createHash, randomUUID } from 'node:crypto';
 import type { Agent, BusinessLine, PortalAction, PortalBootstrap, Submission, BondRequest, Task, Activity, Resource, EligibilityDecision, Product, StateCode } from '../../contracts/portal';
 import { activeLicensedStates, evaluateProductEligibility, resolveBondProductId } from '../../domain/eligibility';
+import { canAccessResourceStates } from '../../domain/resource-access';
 import { RESOURCE_SLUG_ALIASES } from '../../contracts/resource-routes';
 import type { PortalSession } from '../auth/session';
 import { getProfileIdentifier } from '../auth/profile-identity';
@@ -116,6 +117,8 @@ function resolveResource(reference: string, resources: Resource[]) {
 }
 
 function makeBootstrap(session: PortalSession, agent: Agent, metadata: PackMetadata, record: StoredValue<AgencyState>, editor = false, resources = fixtures.resources): PortalBootstrap {
+  const licensedStates = activeLicensedStates(agent, fixtures.eligibility);
+  resources = editor ? resources : resources.filter((resource) => canAccessResourceStates(resource.states, licensedStates));
   const agency = fixtures.agencies.find((entry) => entry.id === agent.agencyId)!;
   const allowedLine = (line: BusinessLine) => canAccessLine(agent, line);
   const policies = fixtures.policies.filter((policy) => policy.agencyId === agency.id && allowedLine(policy.line));
@@ -128,7 +131,7 @@ function makeBootstrap(session: PortalSession, agent: Agent, metadata: PackMetad
   const allowedPaths = new Set([...policies.flatMap((item) => [`/policies/${item.id}`, `/renewals/${item.id}`]), ...submissions.map((item) => `/submissions/${item.id}`), ...bondRequests.map((item) => `/surety/${item.id}`)]);
   const profileId = editor ? '' : getProfileIdentifier(session.reviewerPack, agent.id, metadata.profileGeneration);
   return structuredClone({
-    agent: { ...agent, licensedStates: activeLicensedStates(agent, fixtures.eligibility) },
+    agent: { ...agent, licensedStates },
     eligibility: { ...fixtures.eligibility, agentAuthorities: fixtures.eligibility.agentAuthorities.filter((entry) => entry.agentId === agent.id), carrierAppointments: fixtures.eligibility.carrierAppointments.filter((entry) => entry.agencyId === agency.id && (!entry.agentId || entry.agentId === agent.id)) },
     actionEligibility,
     agency: { ...agency, production: agency.production.filter((entry) => allowedLine(entry.line)) },
@@ -308,7 +311,7 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
       addActivity(value.principal, `Bond request received · ${value.reference}`, `/surety/${value.id}`); break;
     }
     case 'toggle-favorite': {
-      if (!context.resources.some((resource) => resource.id === action.resourceId)) failNotFound();
+      if (!context.resources.some((resource) => resource.id === action.resourceId && canAccessResourceStates(resource.states, activeLicensedStates(agent, fixtures.eligibility)))) failNotFound();
       const favorites = (next.favorites[agent.id] ?? []).map((reference) => resolveResource(reference, context.resources)?.id).filter((resourceId): resourceId is string => !!resourceId);
       next.favorites[agent.id] = favorites.includes(action.resourceId) ? favorites.filter((resourceId) => resourceId !== action.resourceId) : [...favorites, action.resourceId];
       break;

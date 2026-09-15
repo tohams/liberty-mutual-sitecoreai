@@ -86,14 +86,14 @@ The insurance records, premium figures, authority records and operational action
 
 1. Open **Learning & resources**. Confirm **Risk state → My licensed states**. Daniel's default includes Illinois, Texas and nationwide guidance, despite Illinois being his home state.
 2. Search **Workers compensation**. Show Illinois, Texas and relevant nationwide results; Florida-only guidance is absent from this default.
-3. Select **All states**, then **Florida**, then **Nationwide guidance only**. Explain the difference between educational research and permission to conduct business in that state.
+3. Select **Texas**, then **Illinois**, then **Nationwide guidance only**. Each state includes its applicable guidance plus nationwide content; the last option excludes state-only articles. Daniel's selector offers neither Florida nor an All states override.
 4. Use **Clear filters** to restore licensed-state scope while retaining the search phrase. If demonstrating empty results, use an unmatched phrase and **Reset search** to clear it too.
 5. Open the Texas workers compensation article. Point to the source and reviewed date. If it is not already saved, select **Save resource**; reload and confirm its saved state.
 6. Sign out and compare Maya. Her three-state license profile includes Florida in the default results.
 
 **Expected baseline:** 12 authored resources overall, 11 for Daniel's licensed-state scope, 12 for Maya and 9 nationwide-only. Daniel's workers-compensation query returned 4 in the verified release. Treat these as baseline evidence rather than fixed product limits after new content is published.
 
-**Explain:** “The article and its searchable metadata come from the same Sitecore ResourcePage.” Native Search performs the query, facets, pagination and counts. Custom query composition supplies licensed-state context; the portal's durable service stores favorites. Direct educational articles and saved resources remain accessible beyond the default scope.
+**Explain:** “The article and its searchable metadata come from the same Sitecore ResourcePage.” Native Search performs the query, facets, pagination and counts. Custom query composition supplies active licensed-state context; the portal's durable service stores favorites. Direct articles and saved-resource views use that same licensed scope. These guidance checks do not replace the additional permissions required to advance insurance work.
 
 **If the result differs:** inspect query, facets and current published/indexed content. Do not call an indexing delay a failed publication or describe local filtering as native Search. The optional Search Configuration Manager plugin editor is not enabled; configuration currently uses its existing JSON field.
 

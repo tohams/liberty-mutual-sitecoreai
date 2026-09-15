@@ -29,13 +29,17 @@ test("native Search combines licenses and nationwide in one OR filter, independe
   );
 });
 
-test("All states removes the native state restriction, explicit states keep nationwide, and missing licenses stay narrow", () => {
-  assert.deepEqual(buildResourceSearchFacet("all", ["IL", "TX"]), {
-    all: true,
-    fields: [],
-  });
+test("legacy and forged state scopes stay licensed, explicit licenses keep nationwide, and missing licenses stay narrow", () => {
+  for (const scope of ["all", "FL"] as const)
+    assert.deepEqual(
+      buildResourceSearchFacet(scope, ["IL", "TX"]),
+      buildResourceSearchFacet("licensed", ["IL", "TX"]),
+    );
+  assert.deepEqual(buildResourceSearchFacet("TX", ["IL", "TX"]).fields, [
+    { name: "Risk state", filters: [{ operator: "eq", value: ["TX", "All"] }] },
+  ]);
   for (const [scope, expected] of [
-    ["FL", ["FL", "All"]],
+    ["FL", ["All"]],
     ["All", ["All"]],
     ["licensed", ["All"]],
   ] as const) {

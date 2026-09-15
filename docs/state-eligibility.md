@@ -1,6 +1,6 @@
 # State eligibility and risk context
 
-The portal separates educational browsing, agency record visibility and permission to advance insurance work. One shared eligibility module describes the decision; the server recomputes it before each protected action. A disabled button, a URL parameter or a Sitecore audience match never grants permission.
+The portal applies active licensed-state scope to resource guidance and separately checks agency record visibility and permission to advance insurance work. The server recomputes eligibility for protected requests. A disabled button, a URL parameter or a Sitecore audience match never grants permission.
 
 ## Decision inputs
 
@@ -31,7 +31,7 @@ The acting producer must be eligible for an existing submission's actual state b
 
 Existing-record transitions recheck current product availability and required preparation. They do not rely on a draft's earlier successful save as continuing authorization. Product withdrawal, expired or revoked authority, and changed preparation rules can therefore prevent an old draft from advancing. Bond save and submit use the mapped product and actual saved risk state.
 
-Agency record visibility and administrative follow-up/service tasks remain separate. A colleague may see a shared record with a read-only restriction. Saving a service-request task does not change insurance coverage. Educational articles, saved resources and general learning remain available under the previously agreed browsing behavior.
+Agency record visibility and administrative follow-up/service tasks remain separate. A colleague may see a shared record with a read-only restriction. Saving a service-request task does not change insurance coverage. Resource guidance follows the acting agent's active licensed states, including direct article URLs and saved-resource views; nationwide guidance remains available.
 
 No durable namespace is changed or reset by this release. Existing saved records retain their IDs, states, owners and statuses. An incompatible record becomes restricted; the application does not rewrite its jurisdiction to make it pass. Successful idempotent retries remain nonduplicating. Denied requests must leave the persisted version and records unchanged.
 
@@ -43,7 +43,9 @@ No durable namespace is changed or reset by this release. Existing saved records
 - State and product changes are deliberate choices. The form checks their preparation requirements and eligibility together, and the server validates the submitted combination again.
 - Native AgentGuidance links carry valid operational context while retaining Content SDK field metadata. External sources, authentication/API links and editor/preview field rendering remain unchanged.
 - Home state is labeled as home state. It is a default for new work only when there is no explicit risk-state selection; it is not the account's jurisdiction.
-- Search and workspace content defaults receive the active licensed-state projection. The explicit All states research option and saved educational articles continue to work.
+- Search, workspace recommendations, resource bootstrap and saved-resource views receive the active licensed-state projection. **Risk state** offers **My licensed states**, the agent's active licensed states, and **Nationwide guidance only**. There is no broader **All states** override.
+- A direct URL does not bypass the resource article's server-side state check. Native, verified Sitecore authoring remains able to edit every article; it is separate from an agent portal session.
+- If a previously saved resource falls outside the agent's current licenses, it is hidden from the current view without deleting the saved record. A workspace reset is not needed to enforce the changed scope.
 
 ## Illustrative state differences
 
@@ -68,4 +70,4 @@ node scripts/verify-state-eligibility.mjs --origin https://liberty-mutual-agent-
 
 The explicit preview exercise creates two new fictional records: an Avery-owned Florida draft and a Jordan-owned Texas draft. It checks denied cross-agent completion/submission/state changes, preservation of owner/state after refusal, and Avery's valid submission path. It retains those two preview records for browser inspection and never edits a preexisting record or resets a reviewer pack. The default production mode checks bootstrap decisions and denied requests only; it must not produce a successful transactional write. Credentials and cookies are never printed. Each login is logged out afterward.
 
-Browser acceptance covers Daniel's licensed-only selector, product/detail/back/intake context, explicit invalid-state handling, Jordan's read-only view of the Florida case, deliberate state changes and a valid submission/bond flow. Run the normal connected build and serialization checks, then repeat production acceptance after deployment. A customer implementation must connect approved authority/appointment and underwriting sources behind the same boundary before using these decisions for real insurance work.
+Browser acceptance covers Daniel's licensed-only selectors, denial of a direct Florida resource URL, filtered saved resources, product/detail/back/intake context, explicit invalid-state handling, Jordan's read-only view of the Florida case, deliberate state changes and a valid submission/bond flow. Compare Maya's valid Florida resource access and confirm native authoring still works. Run the normal connected build and serialization checks, then repeat production acceptance after deployment. A customer implementation must connect approved authority/appointment and underwriting sources behind the same boundary before using these decisions for real insurance work.

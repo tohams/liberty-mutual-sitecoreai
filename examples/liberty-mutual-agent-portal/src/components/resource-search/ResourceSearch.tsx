@@ -20,6 +20,7 @@ import type {
 
 import {
   DEFAULT_RESOURCE_STATE_SCOPE,
+  normalizeResourceStateScope,
   type ResourceStateScope,
 } from "@/features/resources/resource-state-scope";
 import {
@@ -268,6 +269,7 @@ function ResourceSearchExperience({
     );
   }
   function selectStateScope(scope: ResourceStateScope) {
+    scope = normalizeResourceStateScope(scope, data.agent.licensedStates);
     setStateScope(scope);
     setPageNumber(1);
     setFacet(
@@ -341,10 +343,9 @@ function ResourceSearchExperience({
             }
           >
             <option value="licensed">My licensed states</option>
-            <option value="all">All states</option>
-            {Object.entries(stateNames).map(([code, name]) => (
+            {data.agent.licensedStates.map((code) => (
               <option key={code} value={code}>
-                {name}
+                {stateNames[code]}
               </option>
             ))}
             <option value="All">Nationwide guidance only</option>
