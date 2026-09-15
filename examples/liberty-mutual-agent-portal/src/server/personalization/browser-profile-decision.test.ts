@@ -148,7 +148,7 @@ test('SDK proxy integration runs in the normal Next proxy module environment', a
     '--import', 'tsx', '--experimental-test-module-mocks', '--test', '--test-reporter=tap',
     path.join(process.cwd(), 'src/server/personalization/proxy-runtime.fixture.ts'),
   ], { env: environment, timeout: 15000 });
-  assert.match(result.stdout, /pass 3/);
+  assert.match(result.stdout, /pass 4/);
   assert.ok(!result.stdout.includes('CONFIDENTIAL-GRAPHQL-FAILURE'));
   assert.ok(!result.stderr.includes('CONFIDENTIAL-GRAPHQL-FAILURE'));
   assert.ok(!result.stdout.includes('Personalize proxy failed'));
