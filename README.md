@@ -9,6 +9,7 @@ The application is built on the official [SitecoreAI starter repository](https:/
 | Audience | Guide |
 | --- | --- |
 | Developers starting on a new machine | [Local setup and component-edit workshop](docs/developer-quickstart.md) |
+| Developers using an optional AI assistant | [SitecoreAI and Documentation MCP in VS Code](docs/vscode-sitecore-mcp.md) |
 | Developers and platform administrators | [Developer handoff](docs/developer-handoff.md) |
 | Marketers and content implementers | [Content model and publishing](docs/content-model.md) |
 | Marketing and platform walkthrough | [Guided portal walkthrough](docs/marketing-walkthrough.md) |
