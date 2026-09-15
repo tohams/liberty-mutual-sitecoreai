@@ -12,7 +12,7 @@ function fixture(t) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'portal-deploy-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const files = ['authoring/scripts/deploy-content.sh', 'xmcloud.build.json',
-    ...['Content', 'Taxonomy'].map(name => `${MODULES}/LibertyMutual.${name}.module.json`)];
+    ...['Content', 'Taxonomy', 'ResourcePageBranch'].map(name => `${MODULES}/LibertyMutual.${name}.module.json`)];
   for (const file of files) {
     const target = path.join(directory, file);
     fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -62,7 +62,7 @@ test('taxonomy seeding is explicit and follows its model definitions', t => {
 test('fresh-site seeding creates the Data parent before managed metadata lists', t => {
   const result = fixture(t).run('--seed');
   assert.equal(result.status, 0, result.stderr);
-  assert.deepEqual(pushedModules(result), ['LibertyMutual.Model', 'LibertyMutual.Content', 'LibertyMutual.Taxonomy', 'LibertyMutual.SitePresentation']);
+  assert.deepEqual(pushedModules(result), ['LibertyMutual.Model', 'LibertyMutual.Content', 'LibertyMutual.Taxonomy', 'LibertyMutual.ResourcePageBranch', 'LibertyMutual.SitePresentation']);
 });
 
 test('combined seed flags do not push the taxonomy twice', t => {
@@ -74,7 +74,7 @@ test('combined seed flags do not push the taxonomy twice', t => {
 test('what-if protects every requested push and suppresses publication', t => {
   const result = fixture(t).run('--seed', '--publish', '--what-if');
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.pushes.length, 4);
+  assert.equal(result.pushes.length, 5);
   assert.ok(result.pushes.every(command => command.endsWith(' --what-if')));
   assert.equal(result.commands.some(command => command.startsWith('sitecore publish ')), false);
 });
@@ -106,7 +106,7 @@ test('rejects overlapping content ownership before the first native operation', 
   assert.deepEqual(result.commands, []);
 });
 
-for (const module of ['LibertyMutual.Content', 'LibertyMutual.Taxonomy', '*']) {
+for (const module of ['LibertyMutual.Content', 'LibertyMutual.Taxonomy', 'LibertyMutual.ResourcePageBranch', '*']) {
   test(`rejects ${module} in authoring resource packages before the first native operation`, t => {
     const context = fixture(t);
     context.edit('xmcloud.build.json', build => { build.deployItems.modules.push(module); });
@@ -121,5 +121,20 @@ test('rejects an unknown command-line flag without contacting Sitecore', t => {
   const result = fixture(t).run('--all');
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /Unknown option/);
+  assert.deepEqual(result.commands, []);
+});
+
+test('branch seeding is explicit and never seeds unrelated content or taxonomy', t => {
+  const result = fixture(t).run('--seed-branch');
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(pushedModules(result), ['LibertyMutual.Model', 'LibertyMutual.ResourcePageBranch', 'LibertyMutual.SitePresentation']);
+});
+
+test('rejects branch update permissions before any native operation', t => {
+  const context = fixture(t);
+  context.edit(`${MODULES}/LibertyMutual.ResourcePageBranch.module.json`, module => { module.items.includes[0].allowedPushOperations = 'CreateAndUpdate'; });
+  const result = context.run('--seed-branch');
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Refusing branch seed/);
   assert.deepEqual(result.commands, []);
 });

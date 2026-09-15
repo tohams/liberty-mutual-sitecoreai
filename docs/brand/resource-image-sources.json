@@ -1,0 +1,389 @@
+{
+  "schemaVersion": "1.0.0",
+  "site": "liberty-mutual-agent-portal",
+  "reviewedAt": "2026-09-15T03:30:55.105732+00:00",
+  "resourceInventory": "docs/brand/portal-content-seeds.json resources (12 authored pages)",
+  "usageStatus": "Public Liberty Mutual web imagery selected for the user-authorized customer sandbox. This manifest records provenance and does not grant a separate redistribution license or claim corporate brand approval.",
+  "sourcePolicy": "All images downloaded unchanged from official Liberty Mutual public pages or their referenced Liberty Mutual CDN. No generated imagery. No identity claim is made about photographed people, businesses or locations.",
+  "deliveryNotes": [
+    "Use responsive image renditions from Sitecore media delivery rather than transferring the full original on every page view.",
+    "The household conversation original is 4096 by 2734 pixels and approximately 8.6 MB; preserve the original in media storage and request an appropriately sized rendition.",
+    "Photos used with state guidance illustrate work settings; state applicability comes from the article metadata, not the photograph.",
+    "Several public small-business source files already have rounded image corners. A landscape crop can avoid showing their corner padding.",
+    "subjectFocusPercent supplies an editorial crop suggestion; verify the actual responsive component at desktop and mobile sizes."
+  ],
+  "images": [
+    {
+      "resourceSlug": "prepare-a-household-renewal",
+      "mediaAssetName": "liberty-mutual-agent-client-renewal-conversation",
+      "sourcePageUrl": "https://agents.libertymutual.com/benefits-of-agent",
+      "sourceImageUrl": "https://public.libertymutual-cdn.com/agent-search/independent_agent_with_client.jpg",
+      "width": 4096,
+      "height": 2734,
+      "format": "JPEG",
+      "bytes": 8570909,
+      "sha256": "6df607ca231b8755a03b2d469a321ff44d555e97e0ee908d21960d18a0bcd575",
+      "altText": "An advisor discussing documents with two clients at a table.",
+      "description": "A natural client conversation with documents and a laptop supports the household renewal checklist.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "personal insurance",
+        "household renewal",
+        "advisor",
+        "client conversation"
+      ],
+      "subjectFocusPercent": {
+        "x": 55,
+        "y": 42
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-agent-client-renewal-conversation.jpg"
+    },
+    {
+      "resourceSlug": "build-a-bop-submission",
+      "mediaAssetName": "liberty-mutual-businessowner-preparing-submission",
+      "sourcePageUrl": "https://www.libertymutual.com/small-business/business-owners-insurance",
+      "sourceImageUrl": "https://public.libertymutual-cdn.com/small-business/products-pages/business-owners-insurance/woman-working-on-laptop.jpg",
+      "width": 669,
+      "height": 540,
+      "format": "JPEG",
+      "bytes": 414844,
+      "sha256": "d4daf57197ee1040e5cc90fc1251e458bfcb1bba50da22e1be21267b668d4a4e",
+      "altText": "A businessowner reviewing paperwork at a laptop in a workshop.",
+      "description": "A businessowner works through documents in a practical workspace, supporting preparation of a businessowners policy submission.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "small commercial",
+        "businessowners policy",
+        "submission",
+        "workshop"
+      ],
+      "subjectFocusPercent": {
+        "x": 52,
+        "y": 45
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-businessowner-preparing-submission.jpg"
+    },
+    {
+      "resourceSlug": "business-vehicles-conversation",
+      "mediaAssetName": "liberty-mutual-business-vehicles-at-work",
+      "sourcePageUrl": "https://www.libertymutual.com/small-business/commercial-auto-insurance",
+      "sourceImageUrl": "https://public.libertymutual-cdn.com/small-business/products-pages/Two-cars-at-construction-site.png",
+      "width": 1338,
+      "height": 1080,
+      "format": "PNG",
+      "bytes": 3382551,
+      "sha256": "7a283c46167d79fd60241180500e68870e8e0a23bb9a8471707cb7100462dd36",
+      "altText": "Two pickup trucks parked at a construction site.",
+      "description": "Business vehicles in a recognizable work setting illustrate the need to discuss vehicle ownership, use and drivers.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "small commercial",
+        "commercial auto",
+        "business vehicles",
+        "construction"
+      ],
+      "subjectFocusPercent": {
+        "x": 48,
+        "y": 55
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-business-vehicles-at-work.png"
+    },
+    {
+      "resourceSlug": "texas-workers-compensation",
+      "mediaAssetName": "liberty-mutual-construction-team-at-work",
+      "sourcePageUrl": "https://business.libertymutual.com/insurance-industries/construction/",
+      "sourceImageUrl": "https://business.libertymutual.com/wp-content/uploads/2021/03/L3_Construction_745-x-420.jpg",
+      "width": 745,
+      "height": 420,
+      "format": "JPEG",
+      "bytes": 98317,
+      "sha256": "6f5ea2f01532db186bb11ce69242b3d80515e0801d1736c93fa7002df36fda43",
+      "altText": "Construction workers wearing protective equipment on a job site.",
+      "description": "Workers engaged in construction provide workplace context for the Texas guide; the photo does not identify a location or establish state requirements.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "workers compensation",
+        "Texas guidance",
+        "construction",
+        "workplace safety"
+      ],
+      "subjectFocusPercent": {
+        "x": 55,
+        "y": 48
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-construction-team-at-work.jpg"
+    },
+    {
+      "resourceSlug": "florida-workers-compensation",
+      "mediaAssetName": "liberty-mutual-retail-workplace-customer-service",
+      "sourcePageUrl": "https://www.libertymutual.com/small-business/retail",
+      "sourceImageUrl": "https://public.libertymutual-cdn.com/small-business/industry-pages/retail-woman-examining-receipt.png",
+      "width": 669,
+      "height": 540,
+      "format": "PNG",
+      "bytes": 505345,
+      "sha256": "7f177deb1f4d9729e074809b1ae6edeca9b0cce02243bd7ece7a25f11120caeb",
+      "altText": "A retail worker checking a receipt at a shop counter.",
+      "description": "An everyday retail workplace illustrates the importance of reviewing the type of business and its employees in the Florida guide; no location is asserted.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "workers compensation",
+        "Florida guidance",
+        "retail",
+        "employees"
+      ],
+      "subjectFocusPercent": {
+        "x": 52,
+        "y": 47
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-retail-workplace-customer-service.png"
+    },
+    {
+      "resourceSlug": "illinois-workers-compensation",
+      "mediaAssetName": "liberty-mutual-manufacturing-team-at-work",
+      "sourcePageUrl": "https://business.libertymutual.com/insurance-industries/manufacturing/",
+      "sourceImageUrl": "https://business.libertymutual.com/wp-content/uploads/2021/03/L3_Manufacturing_745-x-420.jpg",
+      "width": 745,
+      "height": 420,
+      "format": "JPEG",
+      "bytes": 111615,
+      "sha256": "9b93ee2e3be8476a886c4b78f682d42e907e55fb35631f5607864ec1e908c969",
+      "altText": "A manufacturing worker using a tool while wearing safety glasses and gloves.",
+      "description": "An active manufacturing workplace provides context for the Illinois employer guide without implying that the photographed business is in Illinois.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "workers compensation",
+        "Illinois guidance",
+        "manufacturing",
+        "workplace safety"
+      ],
+      "subjectFocusPercent": {
+        "x": 55,
+        "y": 45
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-manufacturing-team-at-work.jpg"
+    },
+    {
+      "resourceSlug": "farm-account-information",
+      "mediaAssetName": "liberty-mutual-farm-harvest-operations",
+      "sourcePageUrl": "https://www.libertymutual.com/small-business/farm-insurance",
+      "sourceImageUrl": "https://public.libertymutual-cdn.com/small-business/products-pages/combine-in-wheat-field-669X540.png",
+      "width": 669,
+      "height": 540,
+      "format": "PNG",
+      "bytes": 615365,
+      "sha256": "e9882e53c2018b5fa728a8c345ef1926578d6bff89d551a9945af118548d22cc",
+      "altText": "A combine harvesting a field of grain in warm evening light.",
+      "description": "Farm equipment, crops and the surrounding land introduce the breadth of property and operations information needed for a farm referral.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "farm and ranch",
+        "agriculture",
+        "harvest",
+        "farm equipment"
+      ],
+      "subjectFocusPercent": {
+        "x": 50,
+        "y": 55
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-farm-harvest-operations.png"
+    },
+    {
+      "resourceSlug": "multi-location-renewal",
+      "mediaAssetName": "liberty-mutual-commercial-property-warehouse",
+      "sourcePageUrl": "https://business.libertymutual.com/commercial-solutions/property/",
+      "sourceImageUrl": "https://business.libertymutual.com/wp-content/uploads/2021/04/L3_Property_745-x-420.jpg",
+      "width": 745,
+      "height": 420,
+      "format": "JPEG",
+      "bytes": 109277,
+      "sha256": "994893e03337c96bd00dbe9e9e660f05a24b4cd052b69889b71c2d0d1d0884c4",
+      "altText": "A wide view of a warehouse with equipment, stock and marked work areas.",
+      "description": "An organized commercial facility supports discussion of property locations, operations and schedules during a complex renewal.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "commercial property",
+        "warehouse",
+        "multi-location",
+        "renewal"
+      ],
+      "subjectFocusPercent": {
+        "x": 50,
+        "y": 50
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-commercial-property-warehouse.jpg"
+    },
+    {
+      "resourceSlug": "specialty-referral",
+      "mediaAssetName": "liberty-mutual-specialist-risk-conversation",
+      "sourcePageUrl": "https://business.libertymutual.com/commercial-solutions/specialty/",
+      "sourceImageUrl": "https://business.libertymutual.com/wp-content/uploads/2021/04/L2_Specialty_1500-x-400.jpg",
+      "width": 1500,
+      "height": 400,
+      "format": "JPEG",
+      "bytes": 75697,
+      "sha256": "6fc5def1530ee15656a139186b63e8b5d68cbeff0a55ba2336272969c433bb5c",
+      "altText": "Two colleagues discussing information on a tablet in an office corridor.",
+      "description": "Professional collaboration supports the focused conversation and information exchange behind a specialty referral.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "retail specialty",
+        "specialist referral",
+        "collaboration",
+        "risk discussion"
+      ],
+      "subjectFocusPercent": {
+        "x": 65,
+        "y": 45
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-specialist-risk-conversation.jpg"
+    },
+    {
+      "resourceSlug": "bond-request-checklist",
+      "mediaAssetName": "liberty-mutual-contractor-project-review",
+      "sourcePageUrl": "https://business.libertymutual.com/commercial-solutions/specialty/subcontractor-default-insurance/",
+      "sourceImageUrl": "https://business.libertymutual.com/wp-content/uploads/2021/04/L3_Subcontractor-default-insurance_745-x-420.jpg",
+      "width": 745,
+      "height": 420,
+      "format": "JPEG",
+      "bytes": 67894,
+      "sha256": "4d0ded13e543a4dd592999b69c0e6ab8b49eabca6a67d40fca6b7e37f94245b0",
+      "altText": "Two contractors in hard hats and safety glasses examining work together.",
+      "description": "Contractors reviewing practical work connect the bond request checklist to the underlying project and obligations.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "surety",
+        "contract bond",
+        "contractors",
+        "project review"
+      ],
+      "subjectFocusPercent": {
+        "x": 55,
+        "y": 42
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-contractor-project-review.jpg"
+    },
+    {
+      "resourceSlug": "wholesale-placement-handoff",
+      "mediaAssetName": "liberty-mutual-broker-partner-conversation",
+      "sourcePageUrl": "https://business.libertymutual.com/commercial-solutions/property/",
+      "sourceImageUrl": "https://business.libertymutual.com/wp-content/uploads/2022/08/IS_Wholesale_HalfImage.jpg",
+      "width": 887,
+      "height": 398,
+      "format": "JPEG",
+      "bytes": 89571,
+      "sha256": "18f8f0efbf29cfbcda019f688f51ee5fc7c59a9cb0b9b3479cd8f2f37e318a84",
+      "altText": "Five professionals reviewing information together around a meeting table.",
+      "description": "A collaborative meeting illustrates the exchange of context between retail partners, wholesale brokers and specialists.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "wholesale specialty",
+        "broker",
+        "placement handoff",
+        "collaboration"
+      ],
+      "subjectFocusPercent": {
+        "x": 53,
+        "y": 45
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-broker-partner-conversation.jpg"
+    },
+    {
+      "resourceSlug": "expand-small-business-practice",
+      "mediaAssetName": "liberty-mutual-small-business-team-planning",
+      "sourcePageUrl": "https://www.libertymutual.com/small-business",
+      "sourceImageUrl": "https://public.libertymutual-cdn.com/small-business/home-page/collaborating-business-associates.png",
+      "width": 1157,
+      "height": 308,
+      "format": "PNG",
+      "bytes": 470668,
+      "sha256": "388fcee27fa3a6825e2109393637a5a9f74ac272791f8c4278392fce7493fc8d",
+      "altText": "Two colleagues reviewing a tablet beside boxes on warehouse shelves.",
+      "description": "Small-business colleagues planning together support an agency learning path focused on understanding business operations.",
+      "tags": [
+        "Liberty Mutual",
+        "agent portal",
+        "small commercial",
+        "agency growth",
+        "learning",
+        "business planning"
+      ],
+      "subjectFocusPercent": {
+        "x": 66,
+        "y": 50
+      },
+      "visualReview": {
+        "status": "reviewed",
+        "result": "Suitable editorial photograph; no embedded headline, corporate logo hero, collage or named employee portrait."
+      },
+      "transformations": [],
+      "assetFileName": "liberty-mutual-small-business-team-planning.png"
+    }
+  ]
+}
