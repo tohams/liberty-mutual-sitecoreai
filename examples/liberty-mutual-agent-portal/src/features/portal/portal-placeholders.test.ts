@@ -43,7 +43,6 @@ const allSlots: RouteData = {
 test("only the appropriate named slots are exposed for each page and operational alias", () => {
   for (const route of [
     "/",
-    "/workspace",
     "/quote",
     "/submissions/sub-001",
     "/clients/client-001",

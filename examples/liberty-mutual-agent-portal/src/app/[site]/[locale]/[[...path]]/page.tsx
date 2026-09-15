@@ -131,7 +131,7 @@ export default async function PortalPage({ params }: PageProps) {
           <PortalApp
             initialData={data}
             isEditing={draft.isEnabled}
-            route={route === "/" ? "/workspace" : route}
+            route={route}
             workspaceEditorial={resourcesSearch ? undefined : guidance}
             resourcesSearch={resourcesSearch}
             productsSpotlight={renderPlaceholder(placements.productSpotlight)}

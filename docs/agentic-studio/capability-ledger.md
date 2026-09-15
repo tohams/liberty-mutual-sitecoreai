@@ -1,25 +1,31 @@
 # Brand and Agentic capability ledger
 
-Current status includes the separate September 14 native consumption repair and creative-brief verification. The September 10 execution and configuration observations below remain historical evidence. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
+Current status includes the September 15 Watkins outreach and its native brand retrieval, in addition to the separate September 14 creative-brief verification. The September 10 execution and configuration observations below remain historical evidence. This is the handoff record for Brand Kit and ABM capabilities only. It does not certify unrelated identity, personalization, Search or deployment behavior.
+
+## September 15 Watkins outreach
+
+The current outreach example uses [Watkins Insurance Group](watkins-account-research.md), with distinct CEO, advisor and commercial service-team messages. [Native execution evidence](watkins-native-evidence.md) records the new space, the initial research error and editorial refinement. The current record identifies three unique final email-preview content items and a separate current account brief. All three native previews, 320/375 px layouts and actual CTA destinations were checked. Independent static/editorial verification passed 79 checks. No emails were sent. The earlier records below remain historical; they are not rewritten as evidence for the new agency.
 
 ## Native identifiers
 
 - Organization: Safeco Insurance Company of America POC.
 - Site: `liberty-mutual-agent-portal`.
 - Brand Kit: `7dc084e7-9b2a-4b2b-bf66-e3e8fd865156`.
-- ABM space: `944bcaa4-a10d-4bec-93bc-ebcff9c86328`.
+- Current Watkins execution space: `c7b405d0-efc0-4bac-9cb4-86e7a67c4251`.
+- Watkins conversation/configuration identity: `21e4d9d9-ba94-498e-808e-1b1ae125066c`.
+- Historical Cedar Ridge ABM space: `944bcaa4-a10d-4bec-93bc-ebcff9c86328`.
 - Space name: **Liberty Mutual — Expand your small-business practice**.
 - Initial Account Enrich run: `b4049977-fb08-44bb-a506-c1a98b27b35a`.
 - Initial Brief run: `e04cc244-8e06-4d2e-8dfb-23e0f5e3c459`.
 - Initial Content run: `776c2332-51e0-4348-a4c3-1e58c49c85c4`.
 
-## Current retrieval status
+## September 14 retrieval status
 
 On September 14, a fresh native run retrieved the expanded **Visual guidance** text and produced **Liberty Mutual Independent Agents | Small-Business Resources ABM Creative Brief**, with all six authored hex values/roles, typography, logo handling and audience/state guardrails. The request supplied no expected colors or brand excerpt. See the [repair record and native conversation](brand-kit-consumption-repair-2026-09-14.md). The existing text field is protected as Non AI editable; original arrays and published knowledge remain unchanged.
 
 This verifies the demonstrated consumption path, not a vendor projection fix. Top-level color metadata still conflicts with the source and array fields still return empty through the inspected tool. The run uses complete authored text and records those discrepancies. The [September 13 retrieval record](brand-kit-retrieval-2026-09-13.md) and September 10 ABM excerpt history remain separate. No campaign was activated or published.
 
-## Current artifact navigation
+## Historical Cedar Ridge artifact navigation
 
 Artifact numbers in the historical record below refer to creation order. The current **Artifacts** list is newest first. The reviewed package opens from the first **Liberty Mutual — Expand your small-business practice - Generated Content** card; verify the content heading **Cedar Ridge Insurance ABM — Final Reviewed Implementation Package**, because the first two cards share that generic label. **Classic** currently shows eight **Done** rows across the three agent types and no **Run workflow** control. Inspect the completed history without starting new work.
 

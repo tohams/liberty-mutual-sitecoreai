@@ -6,6 +6,8 @@ New to the repository? Begin with the [developer quickstart](developer-quickstar
 
 Use the [presenter runbook](demo-loops.md) for nine capability walkthroughs. Loops 3, 4 and 7 cover operational workflows, state authority and the development/release model; loop 8 adds a native Resources A/B test with its own [configuration and acceptance record](ab-testing.md). Loop 9 covers the separate Products affinity spotlight, verified on production and preview through actual browsing, native scores, both topic variants and a neutral comparison. See the [affinity record](affinity-personalization.md). The shared preparation and reset sections explain pack coordination and environment boundaries.
 
+For optional assistant access to this SitecoreAI tenant and current documentation, follow [Sitecore tools in VS Code](vscode-sitecore-mcp.md). Each developer authorizes their own account. The initial exercise uses read-only tools and is separate from the portal runtime.
+
 ## Ownership and architecture
 
 The active rendering host is `liberty-mutual-agent-portal`, at `examples/liberty-mutual-agent-portal`. It uses Next.js App Router, React, TypeScript and the Sitecore Content SDK. Other `examples/` directories retain upstream starter reference code and are not additional customer applications.
@@ -190,6 +192,12 @@ It configures the application, rendering and configuration URLs; assigns that na
 
 Keep an environment-to-tenant mapping in the team's private operations inventory. The current UDL verification ledger is scoped to the Safeco Insurance Company of America POC organization and its actual tenant ID; importing its files into another tenant requires new verification and configuration.
 
+## Canonical Home route
+
+My workspace is the existing Sitecore Home item at `/`. Login, the brand link and navigation all use this root URL. The former `/workspace` child is removed and has no redirect or alias. Native workspace personalization must target Home’s existing item and component, and native verification now covers 26 page routes. The seed manifest and validator reject the removed child so a later CreateOnly seed cannot recreate it.
+
+Dated QA records retain their original route names and page counts. They describe the deployment tested on that date; use the current verification commands for the consolidated Home implementation.
+
 ## Reviewer accounts, profile identity and reset
 
 There are seven named personas across four agency profiles and four isolated reviewer packs. All 28 fictional portal accounts use the shared password `Sitecore`. The JSON credentials are intentionally fictional handoff material. The provisioning script converts them into salted scrypt hashes for server-only runtime verification. Rotate them by regenerating the hash file and redeploying; never re-use them for customer employees or real insureds.
@@ -265,7 +273,7 @@ From the repository root, use an existing authenticated Sitecore CLI environment
 node authoring/scripts/verify-placeholder-permissions.cjs demo
 ```
 
-The check resolves the latest native English version of each of the portal's 27 routes, then requests its editing layout with tracking disabled. Every expected placeholder must have exactly one allowed rendering: AgentGuidance in guidance, ResourceSearch in search, ResourceArticle in articles, and ProductSpotlight in the Products spotlight. An extra component, an empty allowlist, missing editing metadata, the wrong page version, or an unexpected placeholder makes the command fail. A broad component list is a failure even when the correct component is also listed.
+The check resolves the latest native English version of each of the portal's 26 routes, then requests its editing layout with tracking disabled. Every expected placeholder must have exactly one allowed rendering: AgentGuidance in guidance, ResourceSearch in search, ResourceArticle in articles, and ProductSpotlight in the Products spotlight. An extra component, an empty allowlist, missing editing metadata, the wrong page version, or an unexpected placeholder makes the command fail. A broad component list is a failure even when the correct component is also listed.
 
 The output contains page IDs, versions, placeholder keys and allowed rendering IDs. To retain that evidence, add `--report /absolute/path/to/placeholder-permissions.json`; the file must not already exist. The check reads the bearer token from the selected CLI environment, makes no retries or authentication changes, and does not log credentials, raw layouts or editable content. It does not change or publish items. Finish with a Page Builder insertion check on Home, Products, Learning & resources and a resource article, and confirm their existing personalized and tested component instances remain intact.
 

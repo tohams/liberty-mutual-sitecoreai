@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-09-15T15:29:16.040467+00:00",
+  "requestedUrl": "https://watkinsinsurancegroup.com/existing-clients/claims-advocacy/",
+  "finalUrl": "https://watkinsinsurancegroup.com/existing-clients/claims-advocacy/",
+  "status": 200,
+  "source": "Direct public HTTPS retrieval using Python urllib; HTML text extraction",
+  "verifiedFacts": {
+    "dedicatedClaimsAdvocacyTeam": true,
+    "helpsReportClaims": true,
+    "explainsClaimsProcess": true,
+    "followsUpWithAdjusters": true,
+    "reviewsLossHistory": true
+  }
+}

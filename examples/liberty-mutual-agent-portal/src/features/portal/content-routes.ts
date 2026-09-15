@@ -2,6 +2,11 @@ import type { Product, Resource } from "@/contracts/portal";
 
 import { RESOURCE_SLUG_ALIASES } from "@/contracts/resource-routes";
 
+/** The root navigation item is active only on Home, not every absolute path. */
+export function isPortalNavigationActive(route: string, href: string) {
+  return route === href || (href !== "/" && route.startsWith(`${href}/`));
+}
+
 /** Select an authored page for operational routes without interpreting SDK rewrite segments. */
 export function portalContentPath(route: string, originalPath: string[]) {
   const segments = route.split('/').filter(Boolean);

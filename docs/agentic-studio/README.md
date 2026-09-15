@@ -1,61 +1,45 @@
-# Agentic Studio: agency growth campaign
+# Agentic Studio: Watkins agency outreach
 
-The native ABM space **Liberty Mutual — Expand your small-business practice** has been created and executed in the customer's tenant. Three initial runs produced six artifacts; two subsequent Content Generator runs produced the reviewed package and its audience-contract correction. Use the final reviewed artifact, **Cedar Ridge Insurance ABM — Final Reviewed Implementation Package**, for the walkthrough. It is eighth in creation order, while the current Artifacts list is newest first. Its four seed payloads and strict audience rules were statically checked. The September 10 package records use of the reviewed brand excerpt when native retrieval was unavailable. A September 14 native creative-brief run now verifies consumption of the complete authored visual guidance without a supplied excerpt. The purple top-level metadata and omitted arrays still persist, so the run uses authored text and reports that conflict. See the [consumption repair and saved proof](brand-kit-consumption-repair-2026-09-14.md).
+The current example develops three email messages for **Watkins Insurance Group**, a real independent agency listed in Liberty Mutual's public commercial-agent directory. The [source dossier](watkins-account-research.md) supports the agency relationship, the relevant service model, and each named recipient's current role. It does not establish private account performance or product appointments.
 
-The Brand Kit itself is created, published and assigned to the `liberty-mutual-agent-portal` site. These completed configuration steps are separate from proof that an Agentic run retrieved its contents. See the [capability ledger](capability-ledger.md) for the exact evidence and limitations. All customer-facing copy is free of sandbox labels; internal provenance remains explicit.
+Open [Liberty Mutual | Watkins Insurance Group outreach](https://agentic-studio-use.sitecorecloud.io/spaces/c7b405d0-efc0-4bac-9cb4-86e7a67c4251). The [native execution record](watkins-native-evidence.md) distinguishes initial research, editorial correction, final artifacts and verified previews.
 
-## Run inputs
+## One account, three useful messages
 
-- [native-run-prompt.txt](native-run-prompt.txt): complete paste-ready campaign prompt, native grounding requirements, constraints and account input.
-- [brand-kit-grounding-prompt.txt](brand-kit-grounding-prompt.txt): a smaller isolated grounding check that supplies no expected palette values or brand excerpt.
-- `cedar-ridge-campaign-input.json`: minimally necessary fictional account context, role goals, working route allowlist, native Brand Kit ID and official source ledger.
-- `reference-campaign-draft.json`: source-grounded desired-output example written by the implementation process. It must not be represented as a native Agentic Studio result.
+| Recipient | Public basis | Email purpose | Resource |
+| --- | --- | --- | --- |
+| Patrick Watkins, CEO | Agency biography and July 2026 Sequel acquisition announcement | A construction business-planning conversation that fits Watkins' advisory process | Liberty Mutual construction capabilities |
+| Clint Bradford, Insurance Advisor | Agency biography identifies construction and transportation specialties | A useful contractor risk conversation | Liberty Mutual construction quality-control checklist |
+| Watkins commercial client service team | Agency client-service and claims-advocacy pages | A clear commercial claims reporting reference | Liberty Mutual commercial claims reporting options |
 
-Campaign: **Expand your small-business practice**. Native Brand Kit: `7dc084e7-9b2a-4b2b-bf66-e3e8fd865156`. Account: Cedar Ridge Insurance; TX; independent channel; appointed for personal and small-commercial lines. The supplied September 2025–August 2026 production totals reconcile to the integration fixtures. Principal Avery, producer Jordan and account-manager Maya share the same agency. The fourth variant is a neutral fallback, not a fourth invented colleague.
-
-The application fixture campaign ID is `expand-small-business`; the CMS editorial slug is `expand-small-business-practice`. Keep both identifiers explicit in the native workflow record until one canonical ID is adopted across event instrumentation, workflow and CMS. Existing CMS datasource names are already provided, so the draft can be reviewed against the implemented portal without duplicating content.
-
-## Native setup and current evidence
-
-| Native record | Value |
-|---|---|
-| Space name | Liberty Mutual — Expand your small-business practice |
-| Space ID | `944bcaa4-a10d-4bec-93bc-ebcff9c86328` |
-| Starting template | ABM Campaign |
-| Brand Kit ID | `7dc084e7-9b2a-4b2b-bf66-e3e8fd865156` |
-| Site assignment | `liberty-mutual-agent-portal` |
-| Initial execution | Three completed runs; six generated artifacts |
-| Subsequent content generation | Two additional artifacts; the final reviewed artifact contains the corrected audience contract and four validated seed payloads |
-| Content Generation acceptance | Useful internal review package; native Brand Kit retrieval and customer editorial approval remain separate |
-| Native kit consumption | Verified in a separate September 14 creative-brief run using complete authored Visual guidance. Top-level color metadata and empty-array projection remain inconsistent; the September 10 ABM excerpt history is unchanged |
-
-The installed ABM template uses Account Data Enricher, Brief Generator and Bulk Content Generator. The published Liberty Mutual kit was selected as context for all three stages. The run and artifact counts above record native execution, not content approval or successful retrieval. Initial run IDs and later artifact timestamps are recorded in the capability ledger. The final reviewed artifact's complete body was verified in native JSON, Content and Preview views.
+The third message addresses the service function. It does not invent a recipient or use Maya Chen from the fictional portal fixture. This example neither changes portal profiles nor activates an audience.
 
 ## Inspect the existing workflow and artifacts
 
-1. Open the existing space by the name and ID above. Inspect **Classic**: it currently shows eight **Done** rows across the three agent types. No **Run workflow** control is visible in this completed space. Preserve the workflow and original artifacts; `reference-campaign-draft.json` is a separate local example.
-2. Check Agentic settings and the selected agent's capabilities for Context Retrieval and Brand Kits. Keep the published kit selected in the run context. A new top-level Brand Context is a separate feature, not a documented prerequisite for consuming a Brand Kit. See [agent configuration](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/understanding-agents/create-a-standard-agent.html) and [the distinction between Brand Context and Brand Kits](https://doc.sitecore.com/sai/en/users/sitecoreai/brand-context/when-to-use-brand-context-or-a-brand-kit.html).
-3. Open **Artifacts**, which lists eight items newest first. Open the first **Liberty Mutual — Expand your small-business practice - Generated Content** card, and verify the content heading **Cedar Ridge Insurance ABM — Final Reviewed Implementation Package**; the first two cards have the same generic label. Review that package and its excerpt provenance. For current grounding proof, open the [September 14 verification conversation](https://agentic-studio-use.sitecorecloud.io/conversations/6605d4e6-b423-4510-afd0-161f2ee99dc8), inspect its native tool results, and read **Liberty Mutual Independent Agents | Small-Business Resources ABM Creative Brief**. It is a separate artifact, not a ninth output in this ABM space. Keep the completed workflow and all eight artifacts unchanged.
-4. For a deliberate new content run or destination tenant, record the actual run ID, time, returned tool evidence, artifact IDs and human review outcome. A selected kit name or an agent's assertion is insufficient evidence of retrieval. Use the [grounding checklist](brand-kit-consumption-repair-2026-09-14.md#repeat-the-grounding-check): retrieve authored Visual guidance, reject conflicting summary metadata, and verify the draft against actual returned content.
-5. Review all role variants against the acceptance checks below. Only approved changes should move into the existing CMS datasources and proceed through the installed Sitecore workflow. No email sending, audience activation, automated approval or public publishing belongs in this drafting flow.
+1. Open **Design → Brand kits → Liberty Mutual — Independent Agents**. Inspect the published Knowledge PDF and **Sections → Visual Guidelines → Visual guidance**. In **Channels → Liberty Mutual Agent Portal → Localization → Configuration**, confirm the English Brand kit assignment.
+2. Open the linked Watkins execution space. In the **Artifacts** dropdown, select **Watkins | Account research and campaign brief**. The dropdown scrolls to that card in the conversation. Click its expand arrows (the tooltip says **Open … in dialog**) to open the full artifact viewer. Read the current agency facts, dated ownership source and three role goals.
+3. In the dialog's left list, select **Watkins | Principal email preview | Patrick Watkins**, then **Preview**. Observe a concise planning invitation for Watkins' construction priorities and the **Explore construction capabilities** button.
+4. In the left list, select **Watkins | Advisor email preview | Clint Bradford**. Click **Preview** if needed. Observe three contractor-discovery questions and **Read the construction checklist**.
+5. Select **Watkins | Client service email preview** in the left list. Click **Preview** if needed. Observe the practical claims-service handoff and **View commercial claims reporting options**.
+6. Close the dialog. Expand the corrected run's **Get Brand Kit** and **Get Brand Kit Section** results. **Visual Guidelines** returns complete authored palette, Roboto and logo guidance for this run.
+7. For detailed provenance, use the **Artifacts** dropdown to locate **Watkins outreach | Evidence and editorial review**, then open its card in the dialog. The [native exports](watkins-outreach/export-receipt.json) preserve the current account brief, email source and evidence with their identifiers.
+8. Close the dialog and preserve the saved outputs. Inspecting them needs no new generation, CMS publication or operational reset.
 
-For a repeat installation, the official [ABM Campaign guide](https://doc.sitecore.com/sai/en/users/sitecoreai/working-with-agentic-studio/understanding-spaces/create-a-space/abm-campaign.html) describes creating the three-agent flow and selecting Brand Kits as context. Site assignment is configured through **Channels → site Dashboard → Localization → Configuration → Brand kit → Save**, as documented in [Assign a brand kit to a site](https://doc.sitecore.com/sai/en/users/sitecoreai/ai-capabilities-in-sitecoreai/assign-a-brand-kit-to-a-site.html).
+The three final messages have **email preview** in their titles. Earlier research and source artifacts remain history. The initial three-stage workflow generated research and a brief; a native editorial refinement produced the final reviewed message content and corrected HTML presentation. Running the generic workflow again is not required to inspect these saved outputs.
 
-## Acceptance checks
+The [email preview format](watkins-email-preview-format.md) explains the observed native Content Item contract and the separate source, HTML and rendered views.
 
-- The native run identifies the selected Brand Kit, input campaign and account.
-- Native grounding is supported by actual returned brand content and tool evidence. Palette, logo and typography decisions follow the complete authored Visual guidance; conflicting metadata is reported. If required guidance is missing, stop rather than invent it. Any supplied-excerpt run remains explicitly separate from native retrieval proof.
-- All four role variants exist, differ in purpose, and retain a neutral fallback.
-- Every CTA is in the supplied route allowlist and opens the corresponding authored CMS page.
-- Every factual product or legal assertion has an exact primary source; recommendations and fictional account facts are labeled in the internal source ledger.
-- No financial figure, account score, private identity, credential or client record appears in visitor-facing copy.
-- Texas workers compensation guidance does not become a blanket statement that coverage is universally optional or universally required.
-- The account-manager variant recommends discovery/referral, not actions beyond that colleague's authorization.
-- Draft outputs remain reviewable; no live send or publication occurred.
-- Workflow evidence records actual native results. The checked-in reference draft is never used as proof of Agentic execution.
+## Editorial review
 
-## Walkthrough for marketing and IT
+- Each email should render as readable HTML, with subject, preheader, greeting, short paragraphs, a visible action and team signature. Keep the account dossier and implementation JSON outside the email preview.
+- Agency facts come from exact primary sources with dates. Inferences and proposed next steps are separate from verified facts.
+- The CEO, advisor and service-team emails have distinct purposes. No private premium, growth target, claims history, commission or carrier dissatisfaction is invented.
+- Each action points to the official resource named in its label. No calendar, recipient address or delivery integration is fabricated.
+- Product resources do not promise pricing, eligibility, coverage, appointment or state availability.
+- Generated content remains subject to editorial review. No send, audience activation, automatic publishing or commercial lift is established.
 
-The marketing walkthrough translates one agency-level opportunity into useful role-specific content, with brand and source review before approval. Present the final package as an internal draft. Distinguish the historical package’s excerpt input from the separate native creative brief’s verified use of authored text. The vendor metadata/array projection issue remains; the drafting workflow now handles it explicitly. IT can inspect the native space, fictional inputs, stable identifiers, generated artifacts and separate editorial publishing boundary. UDL audience matching and server-side authorization remain outside the drafting workflow; a content-personalization decision never grants access to agency records.
+## Brand guidance and historical records
 
-The measurement plan is a proposed evaluation design. A sandbox cannot establish commercial conversion lift from manufactured activity. For a later real study, randomize and analyze at agency level to reduce cross-colleague contamination and agree event semantics, consent and retention with the customer.
+The published Brand Kit is assigned to the portal. The [brand guidance](../brand/README.md) and [retrieval checklist](brand-kit-consumption-repair-2026-09-14.md) explain complete authored Visual guidance and the known generic metadata/list projection discrepancy. Record the actual results of this run in the [capability ledger](capability-ledger.md).
+
+The older [Cedar Ridge example](cedar-ridge-history.md), `cedar-ridge-campaign-input.json`, `native-run-prompt.txt` and `reference-campaign-draft.json` remain historical fixtures. They must not be renamed into Watkins facts. The portal's Cedar Ridge users, role-based `AgentGuidance` and synthetic operational data remain unchanged.

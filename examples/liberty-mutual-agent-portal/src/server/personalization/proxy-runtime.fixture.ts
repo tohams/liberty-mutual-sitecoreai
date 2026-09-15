@@ -50,7 +50,7 @@ test('request-local proxy instances retain native discovery, variant validation 
     } } as unknown as PersonalizeProxyConfig['personalizeService'],
   };
   const sharedDiscovery = new PortalPersonalizeProxy(config, async () => null, transport);
-  const request = (browserId: string) => new NextRequest('https://portal.example/workspace', {
+  const request = (browserId: string) => new NextRequest('https://portal.example/', {
     headers: { host: 'portal.example', cookie: `sc_cid=${browserId}; sc_cid_personalize=stale-anonymous-profile`, 'user-agent': 'Agent-browser' },
   });
   const firstContext: ProxiesContext = new Map();
@@ -94,8 +94,8 @@ test('guarded native discovery keeps its cache and prevents confidential failure
     fetch: transport, timeout: 800, cacheEnabled: true, cacheTimeout: 0.1,
   });
   const expected = { pageId: 'native-page', variantIds: ['component_principal'] };
-  assert.deepEqual(await service.getPersonalizeInfo('/workspace', 'en', 'portal-a'), expected);
-  assert.deepEqual(await service.getPersonalizeInfo('/workspace', 'en', 'portal-a'), expected);
+  assert.deepEqual(await service.getPersonalizeInfo('/', 'en', 'portal-a'), expected);
+  assert.deepEqual(await service.getPersonalizeInfo('/', 'en', 'portal-a'), expected);
   assert.equal(queries, 1, 'Repeated native discovery reuses the SDK cache');
   let decisions = 0;
   const proxy = new PortalPersonalizeProxy({

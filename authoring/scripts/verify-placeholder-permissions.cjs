@@ -32,14 +32,14 @@ function placements(route) {
 function portalRoutes(manifest) {
   insist(manifest?.site === HOME.slice(0, -5), 'unexpected-site-manifest');
   for (const [name, id] of Object.entries(RENDERINGS)) insist(norm(manifest.renderingIds?.[name]) === id, 'unexpected-rendering-manifest');
-  const base = ['/', '/workspace', '/quote', '/clients', '/products', '/growth', '/resources', '/support'];
+  const base = ['/', '/quote', '/clients', '/products', '/growth', '/resources', '/support'];
   insist(Array.isArray(manifest.resourcePages) && manifest.resourcePages.length === 12, 'unexpected-resource-manifest');
   const resources = manifest.resourcePages.map(item => {
     insist(typeof item.route === 'string' && /^\/resources\/[a-z0-9-]+$/.test(item.route) && GUID.test(item.pageId), 'invalid-resource-manifest');
     return item.route;
   });
   const routes = [...base, ...PRODUCT_ROUTES.map(slug => '/products/' + slug), ...resources];
-  insist(routes.length === 27 && new Set(routes).size === 27, 'unexpected-page-inventory');
+  insist(routes.length === 26 && new Set(routes).size === 26, 'unexpected-page-inventory');
   return routes;
 }
 function pagePath(route) { return route === '/' ? HOME : HOME + route; }

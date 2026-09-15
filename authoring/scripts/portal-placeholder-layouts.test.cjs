@@ -13,7 +13,7 @@ const UID = '{11111111-1111-4111-8111-111111111111}';
 const SEARCH_UID = '{22222222-2222-4222-8222-222222222222}';
 const SOURCE = '{33333333-3333-4333-8333-333333333333}';
 const shared = (id = AG, extra = '') => `<r><d id="${DEVICE}" l="${OLD}"><r uid="${UID}" id="${id}" ph="headless-main" ds="${SOURCE}" par="FieldNames=Default&amp;DynamicPlaceholderId=1" />${extra}</d></r>`;
-const input = (sharedLayout = shared(), finalLayout = '') => ({ path: HOME + '/workspace', templateId: IDS.portalTemplate, sharedLayout, finalLayout });
+const input = (sharedLayout = shared(), finalLayout = '') => ({ path: HOME + "/quote", templateId: IDS.portalTemplate, sharedLayout, finalLayout });
 
 test('guidance move preserves source bytes, datasource, parameters and native behavior rules', () => {
   const rules = '<rls><ruleset s:pet="true"><rule uid="{44444444-4444-4444-8444-444444444444}" s:name="native_personalization"><conditions><condition s:VariantName="existing_variant" /></conditions><actions><action s:DataSource="existing_challenger" /></actions></rule></ruleset></rls>';
@@ -83,7 +83,7 @@ test('rejects unrecognized components, placeholders, inherited final UIDs and co
 test('all-version plan writes shared layout once and preserves version-specific final values', () => {
   const final = `<r xmlns:s="s"><d id="${DEVICE}"><r uid="${UID}" s:ph="headless-main" s:ds="${SOURCE}" /></d></r>`;
   const version = (n, value) => ({ version: n, language: 'en', fields: [{ fieldId: IDS.sharedField, name: '__Renderings', value: shared() }, { fieldId: IDS.finalField, name: '__Final Renderings', value }] });
-  const item = { itemId: SOURCE, path: HOME + '/workspace', template: { templateId: IDS.portalTemplate }, versions: [version(2, final), version(1, '')] };
+  const item = { itemId: SOURCE, path: HOME + "/quote", template: { templateId: IDS.portalTemplate }, versions: [version(2, final), version(1, '')] };
   const before = JSON.stringify(item);
   const plan = planItemLayouts(item);
   assert(plan.sharedChange);

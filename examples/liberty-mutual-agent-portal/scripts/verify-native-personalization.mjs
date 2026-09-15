@@ -320,7 +320,7 @@ async function acceptance(config) {
     console.log(`${label} | ${step} | HTTP ${result.status || 'unavailable'} | ${result.ms} ms | expectation ${match ? 'PASS' : 'FAIL'}`);
   };
   const anonymous = new MemoryCookies();
-  const initial = await request(config.origin, '/workspace', anonymous);
+  const initial = await request(config.origin, '/', anonymous);
   report('Signed out', 'workspace redirect', initial, initial.ok && initial.loginRedirect);
   anonymous.clear();
   for (const persona of personas) {
@@ -341,7 +341,7 @@ async function acceptance(config) {
         }
         // Continue observing fallback even when native readiness failed; never retry a decision.
         for (const step of ['firstMatched', 'secondMatched']) {
-          const page = await request(config.origin, '/workspace', jar, undefined, 'html');
+          const page = await request(config.origin, '/', jar, undefined, 'html');
           let match = false;
           try {
             const headlines = renderedGuidanceHeadlines(page.html);
@@ -353,7 +353,7 @@ async function acceptance(config) {
     } finally {
       const logout = await request(config.origin, '/api/auth/logout', jar, {});
       report(persona.label, 'logout', logout, logout.ok && logout.status === 200);
-      const signedOut = await request(config.origin, '/workspace', jar);
+      const signedOut = await request(config.origin, '/', jar);
       report(persona.label, 'signed-out workspace redirect', signedOut, signedOut.ok && signedOut.loginRedirect);
       jar.clear();
     }

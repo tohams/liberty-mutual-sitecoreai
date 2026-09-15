@@ -13,7 +13,7 @@ const LoginScreen = () => null;
 
 mock.module('next/headers', { namedExports: { draftMode: async () => ({ isEnabled: draftEnabled }) } });
 mock.module('next/navigation', { namedExports: {
-  redirect: (path: string) => { assert.equal(path, '/workspace'); throw redirectSignal; },
+  redirect: (path: string) => { assert.equal(path, '/'); throw redirectSignal; },
 } });
 mock.module(join(process.cwd(), 'src/server/auth/session.ts'), { namedExports: {
   getSession: async () => { sessionReads++; return session; },

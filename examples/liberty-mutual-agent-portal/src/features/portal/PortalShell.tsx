@@ -9,9 +9,10 @@ import { PortalDialog } from "@/components/ui/portal-dialog";
 import { usePortal, stateNames } from "./portal-context";
 import { clearPortalAnalytics } from "@/lib/portal-analytics";
 import { readRiskState, withRiskState } from "./risk-state-navigation";
+import { isPortalNavigationActive } from "./content-routes";
 
 const navigation: { href: string; label: string; icon: IconName }[] = [
-  { href: "/workspace", label: "My workspace", icon: "grid" },
+  { href: "/", label: "My workspace", icon: "grid" },
   { href: "/quote", label: "Quote & submit", icon: "file" },
   { href: "/clients", label: "Clients & policies", icon: "users" },
   { href: "/products", label: "Products & appetite", icon: "shield" },
@@ -87,7 +88,7 @@ export function PortalShell({
             <PortalIcon name="menu" />
           </button>
           <Link
-            href="/workspace"
+            href="/"
             aria-label="Liberty Mutual, my workspace"
             className="brand-logo"
           >
@@ -148,9 +149,9 @@ export function PortalShell({
               <Link
                 key={item.href}
                 href={withRiskState(item.href, riskState)}
-                className={`nav-item ${activeRoute.startsWith(item.href) ? "active" : ""}`}
+                className={`nav-item ${isPortalNavigationActive(activeRoute, item.href) ? "active" : ""}`}
                 aria-current={
-                  activeRoute.startsWith(item.href) ? "page" : undefined
+                  isPortalNavigationActive(activeRoute, item.href) ? "page" : undefined
                 }
                 onClick={() => setMobileOpen(false)}
               >

@@ -50,7 +50,7 @@ async function main() {
     api: { edge: { contextId: process.env.SITECORE_EDGE_CONTEXT_ID || '', clientContextId: process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID || '', edgeUrl: process.env.NEXT_PUBLIC_SITECORE_EDGE_PLATFORM_HOSTNAME || 'https://edge-platform.sitecorecloud.io' } },
     defaultSite: 'liberty-mutual-agent-portal', defaultLanguage: 'en', generateStaticPaths: false,
   }));
-  const routes = ['/', '/workspace', '/quote', '/clients', '/products', '/growth', '/resources', '/support', ...manifest.resourcePages.map(x => x.route), ...['personal','small-commercial','farm-ranch','midsize-large','retail-specialty','surety','wholesale-specialty'].map(x => '/products/' + x)];
+  const routes = ['/', '/quote', '/clients', '/products', '/growth', '/resources', '/support', ...manifest.resourcePages.map(x => x.route), ...['personal','small-commercial','farm-ranch','midsize-large','retail-specialty','surety','wholesale-specialty'].map(x => '/products/' + x)];
   for (const route of routes) {
     activeRoute = route;
     const page = await client.getPage(route, { site: 'liberty-mutual-agent-portal', locale: 'en' }, { cache: 'no-store' });

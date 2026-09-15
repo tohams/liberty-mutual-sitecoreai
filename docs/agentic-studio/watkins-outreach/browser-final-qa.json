@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-15",
+  "nativeWorkspace": "https://agentic-studio-use.sitecorecloud.io/spaces/c7b405d0-efc0-4bac-9cb4-86e7a67c4251",
+  "nativeHtmlPreviews": {
+    "principal": "pass: title, subject, opening, bullets, CTA, signature visually verified",
+    "advisor": "pass: title, subject, opening, bullets, CTA, signature visually verified",
+    "client-service": "pass: title, subject, opening, bullets, CTA, policy instruction, signature visually verified"
+  },
+  "responsiveChecks": {
+    "375px": {
+      "overflow": false,
+      "paragraphFontSize": "16px",
+      "ctaHeights": [
+        66,
+        46,
+        66
+      ]
+    },
+    "320px": {
+      "overflow": false,
+      "ctaHeights": [
+        66,
+        66,
+        66
+      ]
+    },
+    "viewportReset": true
+  },
+  "ctaClickThrough": {
+    "principal": "https://business.libertymutual.com/industries/construction/",
+    "advisor": "https://business.libertymutual.com/insights/10-quality-control-steps-to-reduce-construction-defect-risk/",
+    "client-service": "https://business.libertymutual.com/claims/report-a-claim/"
+  },
+  "limits": "Browser rendering verified, not an inbox-delivery or Outlook-client certification. Emails were not sent."
+}
