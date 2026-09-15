@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PortalLink as Link } from "@/components/ui/portal-link";
 import type { StateCode } from "@/contracts/portal";
 import { PortalIcon } from "@/components/ui/portal-icon";
@@ -14,6 +14,10 @@ import {
   usePortal,
 } from "../portal/portal-context";
 import { SubmissionForm } from "./SubmissionForm";
+import {
+  portalDialogClosedHref,
+  type PortalDialogKind,
+} from "../portal/dialog-navigation";
 import {
   eligibleProductStates,
   evaluateProductEligibility,
@@ -29,10 +33,13 @@ import {
 export function SubmissionsScreen({
   initialSelectedId,
   initialBondId,
+  showBondRequests = false,
 }: {
   initialSelectedId?: string;
   initialBondId?: string;
+  showBondRequests?: boolean;
 }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const { data, act, busy } = usePortal();
   const queryState = searchParams.get("state");
@@ -55,7 +62,9 @@ export function SubmissionsScreen({
   const [newOpen, setNewOpen] = useState(
     initialSelectedId === "new" || searchParams.get("new") === "1",
   );
-  const [bondOpen, setBondOpen] = useState(Boolean(initialBondId));
+  const [bondOpen, setBondOpen] = useState(
+    showBondRequests || Boolean(initialBondId),
+  );
   const [newBondOpen, setNewBondOpen] = useState(
     searchParams.get("bond") === "1",
   );
@@ -113,6 +122,17 @@ export function SubmissionsScreen({
         .toLowerCase()
         .includes(query.toLowerCase()),
   );
+  function closeDialogLocation(
+    kind: PortalDialogKind,
+    options: { returnToBondList?: boolean } = {},
+  ) {
+    const href = portalDialogClosedHref(
+      `${window.location.pathname}${window.location.search}${window.location.hash}`,
+      kind,
+      options,
+    );
+    if (href) router.replace(href, { scroll: false });
+  }
   async function saveBond(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!newBondDecision.allowed || !newBondState || busy) return;
@@ -416,7 +436,10 @@ export function SubmissionsScreen({
         title="Start a submission"
         eyebrow="A NEW OPPORTUNITY"
         open={newOpen}
-        onClose={() => setNewOpen(false)}
+        onClose={() => {
+          setNewOpen(false);
+          closeDialogLocation("submission");
+        }}
         wide
       >
         <SubmissionForm
@@ -435,6 +458,7 @@ export function SubmissionsScreen({
         onClose={() => {
           setSelectedId(null);
           setEditing(false);
+          closeDialogLocation("submission");
         }}
         wide
       >
@@ -576,7 +600,10 @@ export function SubmissionsScreen({
         title="New bond request"
         eyebrow="SURETY"
         open={newBondOpen}
-        onClose={() => setNewBondOpen(false)}
+        onClose={() => {
+          setNewBondOpen(false);
+          closeDialogLocation("bond");
+        }}
       >
         <form className="portal-form" onSubmit={saveBond}>
           {!newBondDecision.allowed && (
@@ -660,7 +687,10 @@ export function SubmissionsScreen({
         title={bond?.principal || "Bond request"}
         eyebrow={bond?.reference}
         open={!!bond}
-        onClose={() => setSelectedBondId(null)}
+        onClose={() => {
+          setSelectedBondId(null);
+          closeDialogLocation("bond", { returnToBondList: true });
+        }}
       >
         {bond && (
           <>

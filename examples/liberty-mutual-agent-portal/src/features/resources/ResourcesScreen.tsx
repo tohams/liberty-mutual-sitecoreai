@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PortalLink as Link } from "@/components/ui/portal-link";
 import { resourceHref } from "../portal/content-routes";
+import { portalDialogClosedHref } from "../portal/dialog-navigation";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";
 import { stateNames, usePortal } from "../portal/portal-context";
@@ -21,6 +22,7 @@ export function ResourcesScreen({
   initialCourseId?: string;
 }) {
   const { data, act, busy } = usePortal();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [filter, setFilter] = useState("All resources");
@@ -327,7 +329,14 @@ export function ResourcesScreen({
           course ? `${course.format} · ${course.durationMinutes} MIN` : ""
         }
         open={!!course}
-        onClose={() => setCourseId("")}
+        onClose={() => {
+          setCourseId("");
+          const href = portalDialogClosedHref(
+            `${window.location.pathname}${window.location.search}${window.location.hash}`,
+            "course",
+          );
+          if (href) router.replace(href, { scroll: false });
+        }}
       >
         {course && (
           <>
