@@ -33,89 +33,9 @@ Do not label Sheila Noxon the current operations leader: her current biography s
 
 Optional fresh producer resource: the 25 June 2026 drone-risk article describes a construction technology report and eight evaluation elements. Its linked report may add a separate marketing-hub step; the quality-control article is the cleaner direct CTA for this sample. [Drone risk article](https://business.libertymutual.com/insights/managing-construction-risk-with-drone-technology/)
 
-## Suggested email copy
+## Current outreach messages
 
-These are proposed role-specific messages for a campaign preview, not sent communications or evidence of meetings arranged. Use **Liberty Mutual Agency Team** as an unsigned team identity; do not invent an employee, sender address, calendar, or prior relationship. Evidence is kept here rather than added as footnotes inside the emails.
-
-### 1 — Principal: a business discussion
-
-**To:** Patrick Watkins, CEO, Watkins Insurance Group
-
-**Subject:** A construction growth conversation for Watkins
-
-**Preheader:** Connect your advisory process with Liberty Mutual's construction capabilities.
-
-Patrick,
-
-Watkins' approach goes beyond placing a policy: assess the exposure, identify the risks, then stay involved through mitigation and advocacy. That is a useful starting point for a more focused construction conversation with Liberty Mutual.
-
-As Watkins enters its next chapter with Sequel, could we set aside 30 minutes to consider where our construction capabilities would be useful to your advisors and clients?
-
-We could use the time to:
-
-- Compare the contractor needs your team wants to prioritize.
-- Review relevant underwriting, risk control, and claims capabilities.
-- Choose one practical topic for a producer and service-team working session.
-
-The aim would be a short, actionable plan that fits Watkins' way of advising clients. Our construction overview is linked below. If the discussion would be useful, reply with the colleague you would like to include.
-
-**CTA: Explore construction capabilities**
-
-https://business.libertymutual.com/industries/construction/
-
-Liberty Mutual Agency Team
-
-### 2 — Producer: a useful client conversation
-
-**To:** Clint Bradford, Insurance Advisor, Watkins Insurance Group
-
-**Subject:** A practical checklist for your next contractor conversation
-
-**Preheader:** A two-minute resource to support your construction risk discussions.
-
-Clint,
-
-Your focus on construction and transportation makes the discussion before a project starts especially relevant. Liberty Mutual's construction quality-control checklist offers a practical way to open that conversation with a contractor.
-
-It connects day-to-day project decisions with risk questions, including:
-
-- How are responsibilities agreed before work begins?
-- How are inspections and changes documented?
-- What records show that completed work was reviewed?
-
-You can use the checklist alongside your own discovery process to identify the topics that deserve a closer look. It is a conversation aid, not a substitute for project-specific advice or a coverage review.
-
-Would it be useful to walk through one contractor scenario together and identify the information needed for an underwriting discussion? Reply with the type of operation or project you would like to explore; no client-sensitive information is needed in the reply.
-
-**CTA: Read the construction checklist**
-
-https://business.libertymutual.com/insights/10-quality-control-steps-to-reduce-construction-defect-risk/
-
-Liberty Mutual Agency Team
-
-### 3 — Service team: a clear next step when a claim arrives
-
-**To:** Watkins commercial client service team
-
-**Subject:** A claims reporting reference for the Watkins service team
-
-**Preheader:** Keep the next step clear across commercial claims types.
-
-Hello Watkins commercial client service team,
-
-Your claims advocacy approach includes reporting a loss, following up with adjusters, and reviewing loss history. That makes a clear reporting reference useful at the point a client first asks for help.
-
-Liberty Mutual's commercial claims page brings the reporting options together, with separate routes for property and casualty, specialty, and surety claims. It also distinguishes small-business customers from midsize and large accounts.
-
-Consider keeping the page alongside your existing service references. For each request, your team can confirm the policy and claim type, find the appropriate reporting route, and record the follow-up in its established workflow.
-
-Would a short walkthrough with a few common service scenarios be useful? We could focus on the handoff between the client's first call and the appropriate claims team. Always follow the reporting and notice instructions in the applicable policy.
-
-**CTA: View commercial claims reporting options**
-
-https://business.libertymutual.com/claims/report-a-claim/
-
-Liberty Mutual Agency Team
+The current three emails are the final native exports linked in the [campaign walkthrough](README.md) and [execution record](watkins-native-evidence.md). They address Patrick Watkins, Clint Bradford and the Watkins commercial client service team with distinct planning, advisory and service objectives. This dossier supplies public research and claim boundaries rather than a second set of message copy.
 
 ## Copy boundaries for the native Agentic Studio run
 
