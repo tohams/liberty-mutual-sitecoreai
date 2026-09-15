@@ -1,0 +1,13 @@
+---
+ID: 6cb82f3f-588c-51be-ae6c-6c495625a8b5
+Parent: 57ee0749-a33c-50ff-b20b-0337974b7bd6
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutual/ResourceImage/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260912T000000Z

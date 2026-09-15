@@ -1,0 +1,56 @@
+---
+ID: f88b4735-b33d-4ad4-a0b0-bfe60e657572
+Parent: 8376af58-fc32-4894-a57d-fd5e6e966272
+Template: e9573e8d-00d6-5fd9-9015-2f0aec4a0b60
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page/$name
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}"><r uid="{0D896B77-39D8-559B-AE12-8A1898F07030}" id="{980AD02C-08E5-5F27-9F08-F28E829CA94D}" ph="headless-resource-article" ds="$id" par="FieldNames={B46F708F-BE88-5805-9799-E2DD4D37F0AA}&amp;DynamicPlaceholderId=1" /><r uid="{979E3420-9C7C-52FC-8D26-DCF77920EE12}" id="{2958922F-9832-5A46-B489-A4408EB363B1}" ph="/headless-resource-article/headless-resource-image-1" ds="page:/Data/Resource image" par="FieldNames={29106DD0-F5ED-5197-9A66-92E0B15D724F}&amp;DynamicPlaceholderId=2" /></d></r>
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: $name
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: $name
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{57CC7DCE-E6B1-4564-9581-0E5850B8BDF2}"
+    - ID: ca57c6ef-fb0b-5513-9c6e-a6b511e3af9a
+      Hint: summary
+      Value:
+    - ID: e4144560-576a-559b-9110-b56e9a58a338
+      Hint: body
+      Value:
+    - ID: efdf8fef-2e79-5845-a709-0af3c615660c
+      Hint: resourceType
+      Value:
+    - ID: ef9ca924-0217-59ba-8ae0-e3cb9cfbcdf9
+      Hint: state
+      Value:
+    - ID: d6d51e3e-5c1e-5eda-9610-e53858e43a3e
+      Hint: reviewedAt
+      Value:
+    - ID: dc1caf57-9be5-5423-ac92-2abf56dc91cc
+      Hint: sourceLink
+      Value:
+    - ID: a640d3a6-0cac-5100-857b-d4ce5f2618ae
+      Hint: businessFamily
+      Value:
+    - ID: e1f1902c-22e5-5dc7-acee-62c05dc4fe26
+      Hint: product
+      Value:
+    - ID: 8a67dee3-1cc0-5a2c-aa51-02e5512cb36f
+      Hint: channel
+      Value:

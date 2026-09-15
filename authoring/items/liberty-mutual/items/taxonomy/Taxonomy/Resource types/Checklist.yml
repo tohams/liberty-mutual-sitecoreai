@@ -1,0 +1,21 @@
+---
+ID: 714631b8-79c6-5f0b-99d2-583b0c540656
+Parent: eb629ebd-ff11-5049-8d4a-b875b4ca69ae
+Template: 9dc18d3c-9944-507a-aeab-9787c8fc4d9c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Resource types/Checklist
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "200"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Checklist
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 6a9542b0-b66e-5b22-82ea-74c3c774215b
+      Hint: description
+      Value: A task-oriented list of preparation steps.

@@ -50,10 +50,18 @@ jobs:
         working-directory: .
         run: |
           python -m pip install -r authoring/scripts/requirements.txt
+          python authoring/scripts/build-resource-taxonomy-seed.py --check
+          python authoring/scripts/build-resource-page-seed.py --check
           python authoring/scripts/validate-content-seed.py
       - name: Validate placement migration and preservation safeguards
         working-directory: .
         run: node --test authoring/scripts/portal-placeholder-layouts.test.cjs authoring/scripts/configure-portal-placeholders.test.cjs
+      - name: Validate resource creation and local image authoring safeguards
+        working-directory: .
+        run: node --test authoring/scripts/configure-resource-page-authoring.test.cjs
+      - name: Validate editable content deployment safeguards
+        working-directory: .
+        run: node --test authoring/scripts/deploy-content.test.cjs
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
         with:
           dotnet-version: '8.0.x'
@@ -61,7 +69,7 @@ jobs:
         working-directory: .
         run: |
           dotnet tool restore
-          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content
+          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch
         env:
           DOTNET_ROLL_FORWARD: Major
           DOTNET_CLI_TELEMETRY_OPTOUT: '1'

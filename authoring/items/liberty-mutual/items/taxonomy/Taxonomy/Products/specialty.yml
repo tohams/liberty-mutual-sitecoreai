@@ -1,0 +1,21 @@
+---
+ID: c07a4368-c5cb-58d4-b2e9-cf891a414130
+Parent: f687abc0-0028-5475-801f-30a0533bd44f
+Template: 9dc18d3c-9944-507a-aeab-9787c8fc4d9c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Products/specialty
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "700"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Specialty
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 6a9542b0-b66e-5b22-82ea-74c3c774215b
+      Hint: description
+      Value: Specialty referral and placement preparation guidance.

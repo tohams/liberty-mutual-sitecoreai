@@ -6,20 +6,13 @@ Path: /sitecore/templates/Project/LibertyMutual/PortalPage/__Standard Values
 SharedFields:
 - ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
   Hint: __Masters
-  Value: |
-    {D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}
-    {E9573E8D-00D6-5FD9-9015-2F0AEC4A0B60}
+  Value: "{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}"
 - ID: "ca9b9f52-4fb0-4f87-a79f-24dea62cda65"
   Hint: __Default workflow
   Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
-  Value: |
-    <r>
-      <d
-        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
-        l="{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}" />
-    </r>
+  Value: "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}\" /></r>"
 Languages:
 - Language: en
   Versions:

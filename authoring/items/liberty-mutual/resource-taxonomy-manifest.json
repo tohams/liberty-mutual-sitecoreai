@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0.0",
+  "site": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal",
+  "root": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy",
+  "rootId": "dfc6cfa1-6dfc-57ad-8e9a-583bff17bcc5",
+  "templateIds": {
+    "ResourceMetadataOption": "9dc18d3c-9944-507a-aeab-9787c8fc4d9c",
+    "ResourceMetadataFolder": "d840055e-6e1a-50ae-b00a-c1db50375d42"
+  },
+  "descriptionFieldId": "6a9542b0-b66e-5b22-82ea-74c3c774215b",
+  "taxonomyModule": "LibertyMutual.Taxonomy",
+  "deploymentPolicy": "CreateOnly editable content; excluded from authoring resource packages.",
+  "taxonomies": [
+    {
+      "field": "state",
+      "folder": "Risk states",
+      "source": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Risk states",
+      "sourceId": "a6c86a82-9b86-5347-8e96-287f69c536d3",
+      "options": [
+        {
+          "name": "All",
+          "displayName": "Cross-state guidance",
+          "description": "Reusable cross-state guidance. This does not override agent licensing or product eligibility.",
+          "id": "c5675444-00bc-541f-b740-1b936556f036"
+        },
+        {
+          "name": "FL",
+          "displayName": "Florida",
+          "description": "Resource guidance specific to a Florida risk.",
+          "id": "e3cb8be3-8ca2-581b-9de6-37047c82e605"
+        },
+        {
+          "name": "IL",
+          "displayName": "Illinois",
+          "description": "Resource guidance specific to an Illinois risk.",
+          "id": "10ca6f71-703e-5917-81f4-2d2e0d289d3e"
+        },
+        {
+          "name": "TX",
+          "displayName": "Texas",
+          "description": "Resource guidance specific to a Texas risk.",
+          "id": "190e6130-817d-57bf-9730-65607d22c45f"
+        }
+      ]
+    },
+    {
+      "field": "businessFamily",
+      "folder": "Business families",
+      "source": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Business families",
+      "sourceId": "955b733d-0775-51f4-af32-171a525de043",
+      "options": [
+        {
+          "name": "personal",
+          "displayName": "Personal insurance",
+          "description": "Guidance for personal insurance conversations.",
+          "id": "5e3c2a4f-b6ec-56b2-8380-9a1308298990"
+        },
+        {
+          "name": "small-commercial",
+          "displayName": "Small commercial",
+          "description": "Guidance for small-business insurance.",
+          "id": "6746782f-ec25-50c5-baf9-c86b30e48e5a"
+        },
+        {
+          "name": "farm-ranch",
+          "displayName": "Farm & ranch",
+          "description": "Guidance for farm and ranch insurance.",
+          "id": "d6c0eaf9-751a-52e3-994d-424085e3fa75"
+        },
+        {
+          "name": "midsize-large",
+          "displayName": "Midsize & large commercial",
+          "description": "Guidance for midsize and large commercial accounts.",
+          "id": "1ca33d4a-0052-5951-8514-276cc3b8a7b1"
+        },
+        {
+          "name": "retail-specialty",
+          "displayName": "Retail specialty",
+          "description": "Specialty insurance guidance for retail distribution.",
+          "id": "0343e9e9-f4c1-5d6e-995f-71eea9619249"
+        },
+        {
+          "name": "surety",
+          "displayName": "Surety",
+          "description": "Guidance for contract and commercial bonds.",
+          "id": "435b1eec-9d53-5b17-9e38-b2c766af1090"
+        },
+        {
+          "name": "wholesale-specialty",
+          "displayName": "Wholesale specialty",
+          "description": "Specialty placement guidance for wholesale distribution.",
+          "id": "611b212c-97b0-5ff1-8376-3b160dc71bc1"
+        }
+      ]
+    },
+    {
+      "field": "product",
+      "folder": "Products",
+      "source": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Products",
+      "sourceId": "f687abc0-0028-5475-801f-30a0533bd44f",
+      "options": [
+        {
+          "name": "auto-home",
+          "displayName": "Auto & home",
+          "description": "Personal auto and homeowners preparation guidance.",
+          "id": "ed8fa42a-1b68-5afd-b152-08167f7a9118"
+        },
+        {
+          "name": "businessowners-policy",
+          "displayName": "Businessowners policy (BOP)",
+          "description": "Businessowners policy preparation guidance.",
+          "id": "0b1ed9c1-1abf-5d25-bbc2-74a4bab99f11"
+        },
+        {
+          "name": "commercial-auto",
+          "displayName": "Commercial auto",
+          "description": "Commercial automobile preparation guidance.",
+          "id": "a62bb0b6-47ef-5e8f-b2b3-f3065658dba3"
+        },
+        {
+          "name": "commercial-package",
+          "displayName": "Commercial package",
+          "description": "Commercial package preparation guidance.",
+          "id": "9ecbff05-8abc-522b-a638-0922852f8761"
+        },
+        {
+          "name": "contract-commercial-bonds",
+          "displayName": "Contract & commercial bonds",
+          "description": "Contract and commercial surety bond preparation guidance.",
+          "id": "2f7cd92d-aa0d-5a79-8a0e-5a7486373a03"
+        },
+        {
+          "name": "farm",
+          "displayName": "Farm",
+          "description": "Farm insurance preparation guidance.",
+          "id": "9b53d874-c96b-52d3-9750-ec431b4e96f4"
+        },
+        {
+          "name": "specialty",
+          "displayName": "Specialty",
+          "description": "Specialty referral and placement preparation guidance.",
+          "id": "c07a4368-c5cb-58d4-b2e9-cf891a414130"
+        },
+        {
+          "name": "workers-compensation",
+          "displayName": "Workers’ compensation",
+          "description": "Workers’ compensation preparation guidance.",
+          "id": "1a81cbb8-3c4c-58b6-8726-b1a108c3f179"
+        }
+      ]
+    },
+    {
+      "field": "channel",
+      "folder": "Distribution channels",
+      "source": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Distribution channels",
+      "sourceId": "f181d7f4-f83e-58aa-afab-a1feef714da3",
+      "options": [
+        {
+          "name": "independent-agent",
+          "displayName": "Independent agent",
+          "description": "Guidance intended for independent agency distribution.",
+          "id": "4b70f776-d528-5cfe-be25-8617c69787f0"
+        },
+        {
+          "name": "wholesale",
+          "displayName": "Wholesale",
+          "description": "Guidance intended for wholesale distribution.",
+          "id": "528f536c-b8da-5e56-aea6-910a2520a667"
+        }
+      ]
+    },
+    {
+      "field": "resourceType",
+      "folder": "Resource types",
+      "source": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Resource types",
+      "sourceId": "eb629ebd-ff11-5049-8d4a-b875b4ca69ae",
+      "options": [
+        {
+          "name": "Bond guide",
+          "displayName": "Bond guide",
+          "description": "Guidance for preparing a bond conversation or request.",
+          "id": "602e34c5-ad55-5d7e-a23c-2e4120d2de99"
+        },
+        {
+          "name": "Checklist",
+          "displayName": "Checklist",
+          "description": "A task-oriented list of preparation steps.",
+          "id": "714631b8-79c6-5f0b-99d2-583b0c540656"
+        },
+        {
+          "name": "Conversation guide",
+          "displayName": "Conversation guide",
+          "description": "Prompts and guidance for an agent conversation.",
+          "id": "7cd2c664-3e24-55ba-a21d-44fedd1daa70"
+        },
+        {
+          "name": "Learning path",
+          "displayName": "Learning path",
+          "description": "An ordered path for learning about a business topic.",
+          "id": "2f83ae0a-75fd-512d-8b11-050828b1703c"
+        },
+        {
+          "name": "Placement guide",
+          "displayName": "Placement guide",
+          "description": "Guidance for preparing an insurance placement.",
+          "id": "22f18bce-059a-5814-a80c-c3fa36ba84a9"
+        },
+        {
+          "name": "Preparation guide",
+          "displayName": "Preparation guide",
+          "description": "Information to gather before the next step.",
+          "id": "beb968e6-9cd8-5ce9-aada-1828e5a32f63"
+        },
+        {
+          "name": "Referral guide",
+          "displayName": "Referral guide",
+          "description": "Guidance for preparing an appropriate referral.",
+          "id": "5b69a3f1-e120-5fbc-9235-a6636db9298f"
+        },
+        {
+          "name": "State guidance",
+          "displayName": "State guidance",
+          "description": "Guidance scoped to a risk state.",
+          "id": "3e59dc6d-ebf5-5717-a9a2-1cfcf39ec696"
+        },
+        {
+          "name": "Submission guide",
+          "displayName": "Submission guide",
+          "description": "Guidance for preparing a submission.",
+          "id": "d354ca21-ccfe-57e1-b1d0-473948b63055"
+        }
+      ]
+    }
+  ],
+  "generatedFiles": [
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceMetadataOption.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceMetadataOption/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceMetadataFolder.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceMetadataFolder/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceMetadataOption/Content.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceMetadataOption/Content/description.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk states.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk states/All.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk states/FL.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk states/IL.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk states/TX.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/personal.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/small-commercial.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/farm-ranch.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/midsize-large.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/retail-specialty.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/surety.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/wholesale-specialty.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/auto-home.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/businessowners-policy.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/commercial-auto.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/commercial-package.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/contract-commercial-bonds.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/farm.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/specialty.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/workers-compensation.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Distribution channels.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Distribution channels/independent-agent.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Distribution channels/wholesale.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Bond guide.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Checklist.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Conversation guide.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Learning path.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Placement guide.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Preparation guide.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Referral guide.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/State guidance.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Resource types/Submission guide.yml"
+  ]
+}

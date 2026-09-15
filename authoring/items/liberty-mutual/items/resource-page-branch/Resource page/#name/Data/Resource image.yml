@@ -1,0 +1,16 @@
+---
+ID: af9d650d-4896-56ac-9d37-f8c4574d951d
+Parent: fbd4492a-74df-5ef1-94ed-c92a9f34b17b
+Template: 57ee0749-a33c-50ff-b20b-0337974b7bd6
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page/$name/Data/Resource image
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: ca9a643a-07b6-5945-8fa5-af13e02af584
+      Hint: image
+      Value:
+    - ID: a8d126c1-34ee-5679-9cf6-8d699a788cd8
+      Hint: caption
+      Value:

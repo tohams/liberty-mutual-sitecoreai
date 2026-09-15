@@ -81,6 +81,9 @@ const personalize = new PortalPersonalizeProxy({
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   if (path === '/login' || path.startsWith('/operator')) return NextResponse.next();
+  // This public shell authenticates through the Sitecore Marketplace host. It
+  // exposes no portal session, CMS credentials, or server-side authoring API.
+  if (path === '/resource-metadata' || path === '/marketplace/resource-metadata-icon.svg') return NextResponse.next();
   const hasDraftCookie = req.cookies.has('__prerender_bypass');
   const session = hasDraftCookie ? null : await verifySession(req.cookies.get(SESSION_COOKIE)?.value);
   reportPersonalizationDiagnostic({ stage: 'proxy', enabled: scConfig.personalize.enabled, draft: hasDraftCookie || req.cookies.has('__next_preview_data'), signedSessionPresent: Boolean(session) });

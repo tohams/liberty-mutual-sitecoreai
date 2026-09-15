@@ -12,7 +12,13 @@ const nextConfig: NextConfig = {
       { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
       { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
       { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
-    ] }];
+    ] }, {
+      source: '/resource-metadata',
+      headers: [{
+        key: 'Content-Security-Policy',
+        value: "frame-ancestors https://pages.sitecorecloud.io https://app.sitecorecloud.io https://portal.sitecorecloud.io",
+      }],
+    }];
   },
   async rewrites() { return [{ source: '/robots.txt', destination: '/api/robots' }]; },
 };

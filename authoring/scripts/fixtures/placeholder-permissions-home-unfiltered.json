@@ -1,0 +1,76 @@
+{
+  "capturedAt": "2026-09-14T22:16:04.870Z",
+  "sitecore": {
+    "context": {
+      "pageEditing": true,
+      "pageState": "edit",
+      "language": "en",
+      "site": {
+        "name": "liberty-mutual-agent-portal"
+      }
+    },
+    "route": {
+      "itemId": "ae9e45ca-f127-4abe-9ca7-2ff109981998",
+      "itemVersion": 1,
+      "itemLanguage": "en",
+      "placeholders": {
+        "headless-agent-guidance": [
+          {
+            "name": "code",
+            "type": "text/sitecore",
+            "attributes": {
+              "type": "text/sitecore",
+              "chrometype": "placeholder",
+              "kind": "open",
+              "id": "headless_agent_guidance",
+              "key": "headless-agent-guidance",
+              "class": "scpm",
+              "data-selectable": "true"
+            },
+            "contents": "{\"custom\":{\"allowedRenderings\":[\"193A0299B5B65668B7929F3552463163\",\"980AD02C08E55F279F08F28E829CA94D\",\"15CF6EFAC180563AB229C08F2DAC3DAD\",\"1962D596418751C9A91F4D39A9318B51\",\"CAA0C742F05249FB825BA03494798DB7\",\"DDC43BE7D77A4CE3928203DD036EEC6D\",\"62DD16399F2840408738C886480B2127\",\"AB2EDBA039604F12B765579DC231894A\",\"1DEB067F0BB1405E94F52ABB537A6160\",\"4956263D11954D6E931B800EA625FF6F\",\"C5F905F8FD1F444EA9E5AC6B774FF0DE\",\"2492BAC4DA074C8687F09873D40E2276\",\"9C6D53E3FE574638AF7B6D68304C7A94\",\"3836D951BB1443AC9231649B7F245DC5\",\"7A1D9A21B8D742F99B0B92ABF8D1974F\",\"15CABDFFFFD948F4826DA4C3D7868D3A\",\"5F6BF7C9C80C4BBDAD788DA749B35206\"],\"editable\":\"true\",\"placeholderKey\":\"headless-agent-guidance\",\"placeholderMetadataKeys\":[\"headless-agent-guidance\"],\"contextItem\":{\"id\":\"ae9e45ca-f127-4abe-9ca7-2ff109981998\",\"version\":1,\"language\":\"en\"}}}"
+          },
+          {
+            "name": "code",
+            "type": "text/sitecore",
+            "attributes": {
+              "type": "text/sitecore",
+              "chrometype": "rendering",
+              "kind": "open",
+              "hintname": "AgentGuidance",
+              "id": "r_89348F7F9F3150B99B2EBC3B28BA92BE",
+              "class": "scpm",
+              "data-selectable": "true"
+            },
+            "contents": "{\"custom\":{\"editable\":\"TRUE\",\"contextItem\":{\"id\":\"f6ff533b-be71-55da-8542-54c4dce67600\",\"version\":1,\"language\":\"en\"}}}"
+          },
+          {
+            "name": "code",
+            "type": "text/sitecore",
+            "attributes": {
+              "type": "text/sitecore",
+              "id": "scEnclosingTag_r_",
+              "chrometype": "rendering",
+              "kind": "close",
+              "hintkey": "AgentGuidance",
+              "class": "scpm"
+            },
+            "contents": ""
+          },
+          {
+            "name": "code",
+            "type": "text/sitecore",
+            "attributes": {
+              "type": "text/sitecore",
+              "id": "scEnclosingTag_",
+              "chrometype": "placeholder",
+              "kind": "close",
+              "hintname": "headless-agent-guidance",
+              "class": "scpm"
+            },
+            "contents": ""
+          }
+        ]
+      }
+    }
+  }
+}

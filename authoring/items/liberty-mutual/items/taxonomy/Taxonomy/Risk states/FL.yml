@@ -1,0 +1,21 @@
+---
+ID: e3cb8be3-8ca2-581b-9de6-37047c82e605
+Parent: a6c86a82-9b86-5347-8e96-287f69c536d3
+Template: 9dc18d3c-9944-507a-aeab-9787c8fc4d9c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Risk states/FL
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "200"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Florida
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 6a9542b0-b66e-5b22-82ea-74c3c774215b
+      Hint: description
+      Value: Resource guidance specific to a Florida risk.

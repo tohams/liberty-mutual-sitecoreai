@@ -26,6 +26,15 @@ def read_json(path):
 
 model = read_json(BASE / 'LibertyMutual.Model.module.json')
 content = read_json(BASE / 'LibertyMutual.Content.module.json')
+site_presentation = read_json(BASE / 'LibertyMutual.SitePresentation.module.json')
+taxonomy = read_json(BASE / 'LibertyMutual.Taxonomy.module.json')
+resource_branch = read_json(BASE / 'LibertyMutual.ResourcePageBranch.module.json')
+resource_branch_path = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page'
+taxonomy_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy'
+site_placeholder_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings'
+site_placeholder_keys = ['headless-agent-guidance', 'headless-resource-search',
+                         'headless-resource-article', 'headless-products-spotlight', 'headless-resource-image']
+site_placeholder_paths = {site_placeholder_root + '/' + key for key in site_placeholder_keys}
 expected_model_paths = {
     '/sitecore/templates/Project/LibertyMutual',
     '/sitecore/layout/Renderings/Project/LibertyMutual',
@@ -33,15 +42,38 @@ expected_model_paths = {
     '/sitecore/layout/Layouts/Project/LibertyMutual',
 }
 require({i['path'] for i in model['items']['includes']} == expected_model_paths,
-        'Model includes must remain restricted to owned LibertyMutual roots.')
+        'Model includes must remain restricted to four owned roots.')
 for include in model['items']['includes']:
     require(include.get('allowedPushOperations') == 'CreateAndUpdate' and not include.get('rules'),
             'Model release must not introduce deletion or wider include rules.')
+    require(include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants',
+            'Model roots must retain their bounded descendant scope.')
+require({i['path'] for i in site_presentation['items']['includes']} == site_placeholder_paths,
+        'SitePresentation includes must contain only the five exact site placeholder items.')
+for include in site_presentation['items']['includes']:
+    require(include.get('scope') == 'SingleItem' and include.get('allowedPushOperations') == 'CreateAndUpdate'
+            and not include.get('rules'), 'SitePresentation must use non-deleting SingleItem includes only.')
 require(len(content['items']['includes']) == 1, 'Content requires one owned include.')
 include = content['items']['includes'][0]
+expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
+                         for path in sorted(site_placeholder_paths | {taxonomy_root, resource_branch_path})]
 require(include['path'] == '/sitecore/content/LibertyMutual' and
-        include.get('allowedPushOperations') == 'CreateOnly' and not include.get('rules'),
-        'Initial content seed must preserve marketing edits: CreateOnly with no rules.')
+        include.get('allowedPushOperations') == 'CreateOnly' and
+        include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and
+        sorted(include.get('rules', []), key=lambda rule: rule['path']) == expected_ignore_rules,
+        'Initial content seed must remain CreateOnly with only site placeholder, taxonomy, and branch exclusions.')
+require(resource_branch['items']['includes'] == [{'name': 'resource-page-branch', 'path': resource_branch_path,
+                                                 'allowedPushOperations': 'CreateOnly'}],
+        'Editable resource branch must remain in one CreateOnly subtree.')
+require(len(taxonomy['items']['includes']) == 1, 'Taxonomy requires one isolated include.')
+include = taxonomy['items']['includes'][0]
+require(include['path'] == taxonomy_root and include.get('allowedPushOperations') == 'CreateOnly'
+        and include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and not include.get('rules'),
+        'Taxonomy must remain CreateOnly and restricted to its owned subtree.')
+resource_modules = read_json(ROOT / 'xmcloud.build.json')['deployItems']['modules']
+require(len(resource_modules) == 3 and set(resource_modules) ==
+        {'nextjs-starter', 'LibertyMutual.Model', 'LibertyMutual.SitePresentation'},
+        'Editable content and taxonomy must remain outside authoring resource packages.')
 
 items = {}
 paths = {}
@@ -96,6 +128,7 @@ PLACEMENTS = {
     'ResourceSearch': 'headless-resource-search',
     'ResourceArticle': 'headless-resource-article',
     'ProductSpotlight': 'headless-products-spotlight',
+    'ResourceImage': 'headless-resource-image',
 }
 LAYOUT_COMPONENTS = {
     'PortalLayout': ['AgentGuidance'],
@@ -118,17 +151,91 @@ def id_list(value):
     return [normalized_id(value) for value in re.findall(r'\{([0-9a-fA-F-]{36})\}', value)]
 
 
+# Managed choices remain native editable content. Their names are existing scalar
+# contract values; no GUID migration or unsupported Search field type is implied.
+taxonomy_manifest = read_json(BASE / 'resource-taxonomy-manifest.json')
+require(taxonomy_manifest['root'] == taxonomy_root, 'Taxonomy manifest root differs from its module.')
+option_template = normalized_id(taxonomy_manifest['templateIds']['ResourceMetadataOption'])
+folder_template = normalized_id(taxonomy_manifest['templateIds']['ResourceMetadataFolder'])
+taxonomy_item = paths[taxonomy_root]
+require(id_list(field_value(taxonomy_item.get('SharedFields', []), '__Masters')) == [folder_template],
+        'Taxonomy root must offer only the managed metadata folder as its insert option.')
+folder_defaults = paths[TEMPLATE_ROOT + '/ResourceMetadataFolder/__Standard Values']
+require(id_list(field_value(folder_defaults.get('SharedFields', []), '__Masters')) == [option_template],
+        'Metadata folders must offer only managed metadata options.')
+expected_taxonomy_paths = {taxonomy_root}
+taxonomy_values = {}
+for managed_list in taxonomy_manifest['taxonomies']:
+    source = managed_list['source']
+    require(source == taxonomy_root + '/' + managed_list['folder'], 'Metadata list must be a direct taxonomy child.')
+    folder = paths[source]
+    require(normalized_id(folder['ID']) == normalized_id(managed_list['sourceId'])
+            and normalized_id(folder['Template']) == folder_template
+            and normalized_id(folder['Parent']) == normalized_id(taxonomy_item['ID']),
+            'Metadata list identity or parent is incorrect: ' + source)
+    expected_taxonomy_paths.add(source)
+    values = set()
+    for option in managed_list['options']:
+        option_path = source + '/' + option['name']
+        entry = paths[option_path]
+        require(normalized_id(entry['ID']) == normalized_id(option['id'])
+                and normalized_id(entry['Template']) == option_template
+                and normalized_id(entry['Parent']) == normalized_id(folder['ID']),
+                'Metadata option identity or parent is incorrect: ' + option_path)
+        english = next(language for language in entry['Languages'] if language['Language'] == 'en')
+        require(field_value(english.get('Fields', []), '__Display name') == option['displayName']
+                and field_value(english['Versions'][0]['Fields'], 'description') == option['description'],
+                'Metadata option needs its declared label and description: ' + option_path)
+        require(option['name'] not in values, 'Duplicate metadata option code: ' + option_path)
+        values.add(option['name'])
+        expected_taxonomy_paths.add(option_path)
+    require(managed_list['field'] not in taxonomy_values, 'Duplicate metadata field mapping.')
+    taxonomy_values[managed_list['field']] = values
+require(set(taxonomy_values) == {'state', 'businessFamily', 'product', 'channel', 'resourceType'},
+        'Expected exactly five resource metadata lists.')
+require({path for path in paths if path == taxonomy_root or path.startswith(taxonomy_root + '/')} ==
+        expected_taxonomy_paths, 'Taxonomy contains undeclared folders or options.')
+for relative in taxonomy_manifest['generatedFiles']:
+    require((ROOT / relative).is_file(), 'Missing generated taxonomy item: ' + relative)
+for metadata_field in taxonomy_values:
+    definition = paths[TEMPLATE_ROOT + '/ResourcePage/Content/' + metadata_field]
+    require(field_value(definition['SharedFields'], 'Type') == 'Single-Line Text',
+            'ResourcePage metadata must retain its tenant-verified Search-supported text type: ' + metadata_field)
+for resource in resources:
+    entry = items[normalized_id(resource['pageId'])]
+    for language in entry['Languages']:
+        for version in language['Versions']:
+            for metadata_field, values in taxonomy_values.items():
+                value = field_value(version['Fields'], metadata_field)
+                require(value in values, f'Authored metadata has no managed option: {entry["Path"]} {metadata_field}={value}')
+
+
 placeholder_ids = {}
 for component, key in PLACEMENTS.items():
+    setting_key = key + '-{*}' if component == 'ResourceImage' else key
     placeholder = paths[PLACEHOLDER_ROOT + '/' + key]
     identifier = normalized_id(placeholder['ID'])
     require(manifest['placeholderIds'].get(key) == identifier, f'Placeholder manifest mismatch: {key}')
-    require(field_value(placeholder.get('SharedFields', []), 'Placeholder Key') == key,
+    require(field_value(placeholder.get('SharedFields', []), 'Placeholder Key') == setting_key,
             f'Placeholder key mismatch: {key}')
     require(id_list(field_value(placeholder.get('SharedFields', []), 'Allowed Controls')) ==
             [normalized_id(manifest['renderingIds'][component])],
             f'{key} must permit only {component}; empty lists are unrestricted.')
     placeholder_ids[key] = identifier
+    site_placeholder = paths[site_placeholder_root + '/' + key]
+    require(normalized_id(site_placeholder['ID']) == manifest['sitePlaceholderIds'].get(key),
+            f'Site placeholder manifest mismatch: {key}')
+    require(normalized_id(site_placeholder['Template']) == 'd2a6884c-04d5-4089-a64e-d27ca9d68d4c' and
+            normalized_id(site_placeholder['Parent']) == 'e601261f-f47f-4831-b91e-ef70efab3276',
+            f'{key} must use the native SXA site Placeholder template and owned settings folder.')
+    require(field_value(site_placeholder.get('SharedFields', []), 'Placeholder Key') == setting_key and
+            id_list(field_value(site_placeholder.get('SharedFields', []), 'Allowed Controls')) ==
+            [normalized_id(manifest['renderingIds'][component])],
+            f'Site authoring restriction {key} must permit only {component}.')
+
+article_rendering = paths['/sitecore/layout/Renderings/Project/LibertyMutual/ResourceArticle']
+require(field_value(article_rendering.get('SharedFields', []), 'OtherProperties') == 'IsRenderingsWithDynamicPlaceholders=true',
+        'ResourceArticle must enable the native SXA dynamic placeholder resolver.')
 
 layout_ids = {}
 for name, components in LAYOUT_COMPONENTS.items():
@@ -147,6 +254,7 @@ for component, template_names in {
     'ResourceSearch': ['PortalPage'],
     'ResourceArticle': ['ResourcePage'],
     'ProductSpotlight': ['PortalPage'],
+    'ResourceImage': ['ResourcePage'],
 }.items():
     rendering = items[normalized_id(manifest['renderingIds'][component])]
     require(not field_value(rendering.get('SharedFields', []), 'AllowedOnTemplates'),
@@ -228,12 +336,15 @@ def validate_placement(presentation, expected_layout, label):
         require(device['layout'] == layout_ids[expected_layout],
                 f'{label} must use {expected_layout}, got {device["layout"]}.')
         allowed_components = set(LAYOUT_COMPONENTS[expected_layout])
+        if expected_layout == 'ResourceArticleLayout':
+            allowed_components.add('ResourceImage')
         for rendering_uid, attributes in device['renderings'].items():
             name = rendering_names.get(attributes.get('id'))
             require(name in allowed_components,
                     f'{label}: rendering {rendering_uid} ({name}) is not allowed by {expected_layout}.')
-            require(attributes.get('ph') == PLACEMENTS[name],
-                    f'{label}: {name} must use {PLACEMENTS[name]}, got {attributes.get("ph")}.')
+            expected_placeholder = '/headless-resource-article/headless-resource-image-1' if name == 'ResourceImage' else PLACEMENTS[name]
+            require(attributes.get('ph') == expected_placeholder,
+                    f'{label}: {name} must use {expected_placeholder}, got {attributes.get("ph")}.')
 
 
 for template_name, layout_name in [('Page', 'PortalLayout'), ('PortalPage', 'PortalLayout'),

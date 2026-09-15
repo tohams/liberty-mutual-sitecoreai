@@ -8,6 +8,9 @@ SharedFields:
 - ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
   Hint: __Originator
   Value: "{63D0F6B2-D72F-4C31-BBA2-1709C4B68B7B}"
+- ID: "bb3391dd-f8be-4b2e-ae9f-47bb63c166ce"
+  Hint: Rule
+  Value: "<ruleset><rule uid=\"{FBE86BA0-883B-5D58-8A80-72570289B3C8}\" name=\"Resource page beneath Learning and resources\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{9F3DE103-5249-5AF3-83C0-53DC689EAE07}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{C9B4E46B-3B72-50D4-A96E-732C4D181B6A}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{36AEDCAB-F6C2-5E10-9F38-497FD6C355A3}\" PageBranchId=\"{8376AF58-FC32-4894-A57D-FD5E6E966272}\" /></actions></rule></ruleset>"
 Languages:
 - Language: en
   Versions:

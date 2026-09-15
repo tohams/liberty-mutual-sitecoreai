@@ -1,0 +1,376 @@
+{
+  "source": "Native CM preview GraphQL item.rendered with sc_editMode=true; synthetic unpublished QA page.",
+  "capturedAt": "2026-09-15T04:07:27.363Z",
+  "rendering": {
+    "uid": "0d896b77-39d8-559b-ae12-8a1898f07030",
+    "componentName": "ResourceArticle",
+    "dataSource": "{39729681-4869-464D-9DFF-39C8916AA657}",
+    "isContentResolved": true,
+    "params": {
+      "FieldNames": "Default",
+      "DynamicPlaceholderId": "1"
+    },
+    "fields": {
+      "summary": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Summary",
+          "fieldId": "{CA57C6EF-FB0B-5513-9C6E-A6B511E3AF9A}",
+          "fieldType": "Multi-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "body": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Body",
+          "fieldId": "{E4144560-576A-559B-9110-B56E9A58A338}",
+          "fieldType": "Rich Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "businessFamily": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Business family",
+          "fieldId": "{A640D3A6-0CAC-5100-857B-D4CE5F2618AE}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "resourceType": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Resource type",
+          "fieldId": "{EFDF8FEF-2E79-5845-A709-0AF3C615660C}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "sourceLink": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Source link",
+          "fieldId": "{DC1CAF57-9BE5-5423-AC92-2ABF56DC91CC}",
+          "fieldType": "General Link",
+          "rawValue": ""
+        },
+        "value": {
+          "href": ""
+        }
+      },
+      "channel": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Distribution channel",
+          "fieldId": "{8A67DEE3-1CC0-5A2C-AA51-02E5512CB36F}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "state": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Risk state",
+          "fieldId": "{EF9CA924-0217-59BA-8AE0-E3CB9CFBCDF9}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "product": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Product",
+          "fieldId": "{E1F1902C-22E5-5DC7-ACEE-62C05DC4FE26}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "reviewedAt": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Source reviewed",
+          "fieldId": "{D6D51E3E-5C1E-5EDA-9610-E53858E43A3E}",
+          "fieldType": "Date",
+          "rawValue": ""
+        },
+        "value": "0001-01-01T00:00:00Z"
+      },
+      "Title": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Title",
+          "fieldId": "{D3BED2BD-A5F0-49AB-B7A5-6B72B0F34E4B}",
+          "fieldType": "Single-Line Text",
+          "rawValue": "resource-authoring-check-one"
+        },
+        "value": "resource-authoring-check-one"
+      },
+      "Content": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Content",
+          "fieldId": "{11401E5E-D7D1-4448-82B8-E8BB48DF7334}",
+          "fieldType": "Rich Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "NavigationTitle": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Link caption in navigation",
+          "fieldId": "{4E0720E9-9D50-4DDC-87CF-ECD65E8E94C8}",
+          "fieldType": "Single-Line Text",
+          "rawValue": "resource-authoring-check-one"
+        },
+        "value": "resource-authoring-check-one"
+      },
+      "NavigationFilter": [],
+      "NavigationClass": null,
+      "SxaTags": [],
+      "Page Design": null,
+      "baseMetadataAuthor": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Author",
+          "fieldId": "{0E42A3A0-4C68-4441-A7F3-62F1ACFDAD15}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "baseMetadataKeywords": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Keywords",
+          "fieldId": "{CB3DEB57-FA16-43DE-A76B-9704E6620C24}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "baseMetadataDescription": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Description",
+          "fieldId": "{2569D76B-A34E-48BD-9FB5-505F5F170C51}",
+          "fieldType": "Multi-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "baseMetadataTitle": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Title",
+          "fieldId": "{A1B03767-AD31-45D6-8EDB-1940F1AB4D0D}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "baseOgImage": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Image",
+          "fieldId": "{B11CB7EB-8329-46F1-A39F-B7069BAE3E15}",
+          "fieldType": "Image",
+          "rawValue": ""
+        },
+        "value": {}
+      },
+      "baseOgType": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Type",
+          "fieldId": "{1FCE966B-B8DC-46F1-8CEB-6FF6816A88F0}",
+          "fieldType": "Single-Line Text",
+          "rawValue": "website"
+        },
+        "value": "website"
+      },
+      "baseOgTitle": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Title",
+          "fieldId": "{246173E5-BDA6-4E4E-A235-1D8A31E79A66}",
+          "fieldType": "Single-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      },
+      "baseOgDescription": {
+        "metadata": {
+          "datasource": {
+            "id": "{39729681-4869-464D-9DFF-39C8916AA657}",
+            "language": "en",
+            "revision": "f7f6c38f-6435-4d7c-a215-289f8904c164",
+            "version": 1
+          },
+          "title": "Description",
+          "fieldId": "{0E6F1E47-EE05-42B5-8480-7994D21209B3}",
+          "fieldType": "Multi-Line Text",
+          "rawValue": ""
+        },
+        "value": ""
+      }
+    },
+    "placeholders": {
+      "headless-resource-image-{*}": [
+        {
+          "uid": "979e3420-9c7c-52fc-8d26-dcf77920ee12",
+          "componentName": "ResourceImage",
+          "dataSource": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/resources/resource-authoring-check-one/Data/Resource image",
+          "isContentResolved": true,
+          "params": {
+            "FieldNames": "Default",
+            "DynamicPlaceholderId": "2"
+          },
+          "fields": {
+            "image": {
+              "metadata": {
+                "datasource": {
+                  "id": "{72EFB61C-854B-47BF-B36E-60B2B0815DA5}",
+                  "language": "en",
+                  "revision": "395a1f0b-8613-45c5-a3f2-aa8f8217e2fc",
+                  "version": 1
+                },
+                "title": "Resource image",
+                "fieldId": "{CA9A643A-07B6-5945-8FA5-AF13E02AF584}",
+                "fieldType": "Image",
+                "rawValue": "<Image height=\"420\" src=\"https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/c3f1b62cb7ae4cc7b291b1df4947a62d?transform=true&amp;format=auto&amp;width=745&amp;height=420\" dam-id=\"PZDOJ79cQo2RN3fOiJEU8Q\" thumbnailsrc=\"https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/c3f1b62cb7ae4cc7b291b1df4947a62d?transform=true&amp;format=auto&amp;width=745&amp;height=420\" width=\"745\" dam-content-type=\"Image\" alt=\"A manufacturing worker using a tool while wearing safety glasses and gloves.\" />"
+              },
+              "value": {
+                "height": "420",
+                "dam-content-type": "Image",
+                "alt": "A manufacturing worker using a tool while wearing safety glasses and gloves.",
+                "width": "745",
+                "thumbnailsrc": "https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/c3f1b62cb7ae4cc7b291b1df4947a62d?transform=true&format=auto&width=745&height=420",
+                "src": "https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/c3f1b62cb7ae4cc7b291b1df4947a62d?transform=true&format=auto&width=745&height=420",
+                "dam-id": "PZDOJ79cQo2RN3fOiJEU8Q"
+              }
+            },
+            "caption": {
+              "metadata": {
+                "datasource": {
+                  "id": "{72EFB61C-854B-47BF-B36E-60B2B0815DA5}",
+                  "language": "en",
+                  "revision": "395a1f0b-8613-45c5-a3f2-aa8f8217e2fc",
+                  "version": 1
+                },
+                "title": "Caption",
+                "fieldId": "{A8D126C1-34EE-5679-9CF6-8D699A788CD8}",
+                "fieldType": "Single-Line Text",
+                "rawValue": ""
+              },
+              "value": ""
+            }
+          }
+        }
+      ]
+    }
+  }
+}

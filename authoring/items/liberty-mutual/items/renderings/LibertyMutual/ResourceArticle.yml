@@ -12,19 +12,28 @@ SharedFields:
   Value: /sitecore/templates/Project/LibertyMutual/ResourcePage
 - ID: b5b27af1-25ef-405c-87ce-369b3a004016
   Hint: Datasource Location
-  Value: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/resources
+  Value:
 - ID: a77e8568-1ab3-44f1-a664-b7c37ec7810d
   Hint: Parameters Template
   Value: "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
   Value: Office/32x32/document_text.png
+- ID: 069a8361-b1cd-437c-8c32-a3be78941446
+  Hint: Placeholders
+  Value: "{74D15B03-B221-57BB-A21C-313A5CE0C461}"
+- ID: a3411ff6-c978-40aa-b059-a49b9ca2209b
+  Hint: Can select Page as a data source
+  Value: "1"
+- ID: e829c217-5e94-4306-9c48-2634b094fdc2
+  Hint: OtherProperties
+  Value: IsRenderingsWithDynamicPlaceholders=true
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: "1b58d065-fe74-43e3-ba20-54c9588b3011"
+    - ID: 1b58d065-fe74-43e3-ba20-54c9588b3011
       Hint: AllowedOnTemplates
       Value: "{E9573E8D-00D6-5FD9-9015-2F0AEC4A0B60}"
     - ID: 25bed78c-4957-4165-998a-ca1b52f67497

@@ -26,7 +26,9 @@
     "ProductSpotlight.eyebrow": "35c4189e-3ef7-5178-92fd-c76c02920416",
     "ProductSpotlight.headline": "1c28b166-ffbd-5d00-8398-5120d65788f2",
     "ProductSpotlight.body": "fdbff5cf-246a-5c1f-bcf2-cf38cc14de3e",
-    "ProductSpotlight.actionLink": "1041b290-9cb7-5d63-ade0-4bb88fcdacfb"
+    "ProductSpotlight.actionLink": "1041b290-9cb7-5d63-ade0-4bb88fcdacfb",
+    "ResourceImage.image": "ca9a643a-07b6-5945-8fa5-af13e02af584",
+    "ResourceImage.caption": "a8d126c1-34ee-5679-9cf6-8d699a788cd8"
   },
   "templateIds": {
     "AgentGuidance": "c241fdcc-057e-501f-a45b-c893b061f04d",
@@ -39,13 +41,15 @@
     "ResourcesFolder": "0f04e2fd-7f21-584e-a150-842a5a49fb81",
     "SearchFolder": "20baf2c0-296c-52d1-8058-1ae58c9b8fb8",
     "ProductSpotlight": "df47f749-485c-5e86-88e4-85ab46a7d7ca",
-    "ProductSpotlightFolder": "386f0378-6076-52b4-8251-d240af07ea30"
+    "ProductSpotlightFolder": "386f0378-6076-52b4-8251-d240af07ea30",
+    "ResourceImage": "57ee0749-a33c-50ff-b20b-0337974b7bd6"
   },
   "renderingIds": {
     "AgentGuidance": "193a0299-b5b6-5668-b792-9f3552463163",
     "ResourceArticle": "980ad02c-08e5-5f27-9f08-f28e829ca94d",
     "ResourceSearch": "15cf6efa-c180-563a-b229-c08f2dac3dad",
-    "ProductSpotlight": "1962d596-4187-51c9-a91f-4d39a9318b51"
+    "ProductSpotlight": "1962d596-4187-51c9-a91f-4d39a9318b51",
+    "ResourceImage": "2958922f-9832-5a46-b489-a4408eb363b1"
   },
   "routePageIds": {
     "workspace": "885f4bc8-d774-5fa9-90b3-cbc34daf3b83",
@@ -293,13 +297,32 @@
     "authoring/items/liberty-mutual/items/layouts/LibertyMutual/PortalLayout.yml",
     "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ResourcesLayout.yml",
     "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ResourceArticleLayout.yml",
-    "authoring/items/liberty-mutual/items/templates/LibertyMutual/Page/__Standard Values.yml"
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/Page/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/site-agent-guidance/headless-agent-guidance.yml",
+    "authoring/items/liberty-mutual/items/site-resource-search/headless-resource-search.yml",
+    "authoring/items/liberty-mutual/items/site-resource-article/headless-resource-article.yml",
+    "authoring/items/liberty-mutual/items/site-products-spotlight/headless-products-spotlight.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceImage.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceImage/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceImage/Content.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceImage/Content/image.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourceImage/Content/caption.yml",
+    "authoring/items/liberty-mutual/items/renderings/LibertyMutual/ResourceImage.yml",
+    "authoring/items/liberty-mutual/items/placeholders/LibertyMutual/headless-resource-image.yml",
+    "authoring/items/liberty-mutual/items/site-resource-image/headless-resource-image.yml",
+    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ResourceImage.yml",
+    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ResourceImage/Default.yml",
+    "authoring/items/liberty-mutual/items/resource-page-branch/Resource page.yml",
+    "authoring/items/liberty-mutual/items/resource-page-branch/Resource page/#name.yml",
+    "authoring/items/liberty-mutual/items/resource-page-branch/Resource page/#name/Data.yml",
+    "authoring/items/liberty-mutual/items/resource-page-branch/Resource page/#name/Data/Resource image.yml"
   ],
   "placeholderIds": {
     "headless-products-spotlight": "8428148d-9f3b-5323-a166-88d0c5ea56ac",
     "headless-agent-guidance": "427c0c0a-38cb-5c1b-aa2d-34b20594a9aa",
     "headless-resource-search": "f64643c1-6280-57c2-8695-02d4c563b4ae",
-    "headless-resource-article": "27225f95-329c-5193-b6d9-8ea86c0010a5"
+    "headless-resource-article": "27225f95-329c-5193-b6d9-8ea86c0010a5",
+    "headless-resource-image": "74d15b03-b221-57bb-a21c-313a5ce0c461"
   },
   "layoutIds": {
     "ProductsLayout": "75cfc4f6-9a69-52b3-97c3-11a6f1fabe89",
@@ -321,5 +344,12 @@
     "defaultVariantId": "df2d5d60-4b81-538a-973c-9e2f010780f3",
     "seedWorkflowStatus": "New datasource seeds start in Basic Datasource Workflow Draft and require native review, approval and publication.",
     "deploymentScope": "Additive model and initial content only. Products page layout assignment, Available Renderings and native affinity configuration are applied separately and captured from the target."
+  },
+  "sitePlaceholderIds": {
+    "headless-agent-guidance": "ee271523-71b1-537b-af86-4be918ccc934",
+    "headless-resource-search": "30300f08-7257-5684-973d-37bfac7f859a",
+    "headless-resource-article": "841765c3-50d9-5a1c-b7d2-a709c2e9085e",
+    "headless-products-spotlight": "26cea173-788c-504b-afe6-14fa57a94946",
+    "headless-resource-image": "5ce737cc-1f1d-5aa2-bd70-f8a513967738"
   }
 }

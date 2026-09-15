@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "Resource metadata",
+  "type": "Custom",
+  "deploymentUrl": "https://liberty-mutual-agent-portal.vercel.app",
+  "route": "/resource-metadata",
+  "extensionPoint": "SitecoreAI Page builder context panel",
+  "apiAccess": [
+    "SitecoreAI APIs"
+  ],
+  "browserPermissions": [],
+  "organizationId": "org_XqL3u1MSNVuubOTb",
+  "tenantId": "97eea84c-ac47-4d91-7e4f-08defdaaa7df",
+  "tenantName": "scaipocusem400b-sitecoreai950c-demo4418",
+  "initialAccess": "Organization administrators and owners",
+  "registrationId": "86157b8a-7411-415d-9931-1e7508b7bd81",
+  "status": "Activated",
+  "purpose": "Author resource metadata using managed taxonomy choices while preserving native Search-compatible text fields.",
+  "installationStatus": "Installed",
+  "installedTarget": "SitecoreAI / Demo",
+  "marketplaceAppTenantId": "bb0e3dd3-909e-4c0b-5f0e-08df0e9c530e"
+}

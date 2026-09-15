@@ -6,7 +6,37 @@
       {
         "name": "content",
         "path": "/sitecore/content/LibertyMutual",
-        "allowedPushOperations": "CreateOnly"
+        "allowedPushOperations": "CreateOnly",
+        "rules": [
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agent-guidance",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-resource-search",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-resource-article",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-products-spotlight",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Data/Taxonomy",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-resource-image",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page",
+            "scope": "Ignored"
+          }
+        ]
       }
     ]
   },
