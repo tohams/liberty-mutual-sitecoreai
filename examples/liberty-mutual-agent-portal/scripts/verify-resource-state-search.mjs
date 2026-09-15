@@ -31,14 +31,17 @@ async function search(scope, licenses, selection = {}, keyphrase = '') {
 }
 const states = (items) => new Set(items.map((item) => item.state));
 const ids = (items) => items.map((item) => item.sc_item_id).sort();
-const all = await search('all', ['IL', 'TX']);
+const allLicenses = ['TX', 'FL', 'IL'];
+const all = await search('licensed', allLicenses);
 assert.deepEqual(states(all), new Set(['TX', 'FL', 'IL', 'All']));
 const daniel = await search('licensed', ['IL', 'TX']);
 assert.deepEqual(states(daniel), new Set(['IL', 'TX', 'All']));
 assert.deepEqual(ids(daniel), ids(all.filter((item) => item.state !== 'FL')));
 const maya = await search('licensed', ['TX', 'FL', 'IL']);
 assert.deepEqual(ids(maya), ids(all));
-const florida = await search('FL', ['IL', 'TX']);
+assert.deepEqual(ids(await search('all', ['IL', 'TX'])), ids(daniel), 'Legacy All states cannot broaden licenses');
+assert.deepEqual(ids(await search('FL', ['IL', 'TX'])), ids(daniel), 'A forged Florida filter cannot broaden licenses');
+const florida = await search('FL', ['FL']);
 assert.deepEqual(states(florida), new Set(['FL', 'All']));
 const nationwide = await search('All', ['IL', 'TX']);
 assert.deepEqual(states(nationwide), new Set(['All']));
@@ -62,7 +65,7 @@ for (const [facetName, fieldName] of metadataFacets) {
   assert.ok(terms.length > 1, `${facetName} needs distinct values to verify exclusion`);
   for (const term of terms) {
     const selection = { [facetName]: term };
-    assert.deepEqual(ids(await search('all', ['IL', 'TX'], selection)),
+    assert.deepEqual(ids(await search('licensed', allLicenses, selection)),
       ids(all.filter((item) => item[fieldName] === term)),
       `${facetName} must return exactly the resources matching ${term}`);
     assert.deepEqual(ids(await search('licensed', ['IL', 'TX'], selection)),
@@ -71,7 +74,7 @@ for (const [facetName, fieldName] of metadataFacets) {
   }
   const absentTerm = '__unmatched_resource_metadata__';
   assert.ok(!terms.includes(absentTerm));
-  assert.equal((await search('all', ['IL', 'TX'], { [facetName]: absentTerm })).length, 0,
+  assert.equal((await search('licensed', allLicenses, { [facetName]: absentTerm })).length, 0,
     `${facetName} must exclude all resources for an unknown value`);
   metadataChecks[facetName] = { valuesVerified: terms.length, exactAndLicensedFilters: terms.length * 2 };
 }
@@ -83,7 +86,7 @@ for (const combination of combinations) {
   const terms = JSON.parse(combination);
   const selection = Object.fromEntries(metadataFacets.map(([facetName], index) => [facetName, terms[index]]));
   const matches = (item) => metadataFacets.every(([, fieldName], index) => item[fieldName] === terms[index]);
-  assert.deepEqual(ids(await search('all', ['IL', 'TX'], selection)), ids(all.filter(matches)),
+  assert.deepEqual(ids(await search('licensed', allLicenses, selection)), ids(all.filter(matches)),
     'Combined metadata facets must intersect all selected values');
   assert.deepEqual(ids(await search('licensed', ['IL', 'TX'], selection)), ids(daniel.filter(matches)),
     'Combined metadata facets must preserve licensed-state eligibility');
@@ -97,4 +100,4 @@ console.log(JSON.stringify({ status: 'passed', nativeTotals: {
   all: all.length, daniel: daniel.length, maya: maya.length, floridaAndNationwide: florida.length,
   nationwide: nationwide.length, danielStateGuidance: guidance.length, danielWorkersQuery: workers.length,
 }, metadataFacets: metadataChecks, metadataCombinationsVerified: combinations.length,
-checks: 'State OR filters, nationwide inclusion, explicit browsing, every product/business-family/channel/resource-type value, exact facet intersections, unknown facet values, query, native six-item pagination, empty results' }, null, 2));
+checks: 'Licensed state OR filters, nationwide inclusion, forged-filter restrictions, every product/business-family/channel/resource-type value, exact facet intersections, unknown facet values, query, native six-item pagination, empty results' }, null, 2));

@@ -11,6 +11,7 @@ import { NextIntlClientProvider } from "next-intl";
 import client from "@/lib/sitecore-client";
 import { getSession } from "@/server/auth/session";
 import { getPortalBootstrap, getEditorBootstrap } from "@/server/data/portal";
+import { canAccessResourcePage } from "@/server/data/resource-page-access";
 import { PortalError } from "@/server/errors";
 import { PortalApp } from "@/features/portal/PortalApp";
 import { PortalEditorProvider } from "@/features/portal/PortalEditorProvider";
@@ -78,6 +79,15 @@ export default async function PortalPage({ params }: PageProps) {
       redirect("/login");
     throw error;
   }
+  if (
+    !canAccessResourcePage(
+      route,
+      page.layout.sitecore.route,
+      data.agent.licensedStates,
+      draft.isEnabled,
+    )
+  )
+    notFound();
   const placements = getPortalPlaceholders(
     route,
     page.layout.sitecore.route,

@@ -30,7 +30,7 @@ test('native resource metadata stays authoritative and renaming preserves favori
 
 test('incomplete native content fails clearly instead of substituting an engineering fixture', () => {
   for (const patch of [
-    { title: field('') }, { state: field('') }, { businessFamily: field('unknown') },
+    { title: field('') }, { state: field('') }, { state: field('TX CA') }, { state: field('All FL') }, { businessFamily: field('unknown') },
     { id: 'invalid-identity' }, { name: '../private' },
   ]) {
     assert.throws(() => mapCmsResource({ ...authored, ...patch }),

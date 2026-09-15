@@ -1,6 +1,9 @@
 import type { FacetRequest } from "@sitecore-content-sdk/search";
 import type { StateCode } from "@/contracts/portal";
-import type { ResourceStateScope } from "@/features/resources/resource-state-scope";
+import {
+  normalizeResourceStateScope,
+  type ResourceStateScope,
+} from "@/features/resources/resource-state-scope";
 
 export const RESOURCE_FACET_NAMES = [
   "Resource type",
@@ -18,14 +21,13 @@ export function buildResourceSearchFacet(
   licensedStates: readonly StateCode[],
   selection: ResourceFacetSelection = {},
 ): FacetRequest {
+  scope = normalizeResourceStateScope(scope, licensedStates);
   const states =
     scope === "licensed"
       ? [...new Set([...licensedStates, "All"])]
-      : scope === "all"
-        ? []
-        : scope === "All"
-          ? ["All"]
-          : [scope, "All"];
+      : scope === "All"
+        ? ["All"]
+        : [scope, "All"];
   return {
     all: true,
     fields: [

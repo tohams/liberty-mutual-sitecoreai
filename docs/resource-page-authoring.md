@@ -56,6 +56,8 @@ The image renders in **headless-resource-image-{*}**, a native SXA dynamic place
 
 Keep the local **Data** and **Resource image** names intact. The datasource reference is page-relative; manually renaming the item requires reselecting its datasource. [Sitecore's datasource guidance](https://doc.sitecore.com/sai/en/developers/sitecoreai/data-sources.html) explains this relationship. The image's public delivery URL is retained as supplied by the modern Media Library; no legacy `mediaid` conversion or rendition-query rewriting is applied.
 
+The [resource image inventory](../authoring/media/README.md) records all twelve current image mappings, public URLs, alt text and stored image XML for handoff. It also distinguishes the existing sandbox from a fresh environment: the CreateOnly article seed does not automatically replay later-authored image instances.
+
 ## Developer implementation and deployment
 
 `ResourcePage` retains template ID `e9573e8d-00d6-5fd9-9015-2f0aec4a0b60` and its existing fields. The five indexed metadata fields remain versioned **Single-Line Text** because this tenant's native Search rejects Droplist fields. The Marketplace app provides the managed selections without changing the indexed contract.

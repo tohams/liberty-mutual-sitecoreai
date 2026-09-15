@@ -37,12 +37,11 @@ export function ResourcesScreen({
       `${resource.title} ${resource.description} ${resource.tags.join(" ")}`
         .toLowerCase()
         .includes(query.toLowerCase()) &&
-      (filter === "Saved" ||
-        matchesResourceStateScope(
-          resource.states,
-          data.agent.licensedStates,
-          stateScope,
-        )) &&
+      matchesResourceStateScope(
+        resource.states,
+        data.agent.licensedStates,
+        stateScope,
+      ) &&
       (filter === "All resources" ||
         (filter === "Saved"
           ? data.favorites.includes(resource.id)
@@ -156,11 +155,11 @@ export function ResourcesScreen({
                   My licensed states
                 </button>
                 <button
-                  className={stateScope === "all" ? "active" : ""}
-                  aria-pressed={stateScope === "all"}
-                  onClick={() => setStateScope("all")}
+                  className={stateScope === "All" ? "active" : ""}
+                  aria-pressed={stateScope === "All"}
+                  onClick={() => setStateScope("All")}
                 >
-                  All states
+                  Nationwide guidance only
                 </button>
               </div>
               <p className="section-description">
@@ -171,7 +170,7 @@ export function ResourcesScreen({
                       ),
                       "Nationwide guidance",
                     ].join(" · ")
-                  : "Browse guidance from every state."}
+                  : "Guidance that applies nationwide."}
               </p>
             </>
           )}
