@@ -108,16 +108,16 @@ Paths above are relative to `examples/liberty-mutual-agent-portal`. The app uses
 # Verify generated files and serialization locally.
 python authoring/scripts/build-resource-taxonomy-seed.py --check
 python authoring/scripts/validate-content-seed.py
-dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.Taxonomy -i LibertyMutual.SitePresentation
+dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch
 
 # Existing site: explicitly seed only missing taxonomy items.
 authoring/scripts/deploy-content.sh demo --seed-taxonomy --what-if
 authoring/scripts/deploy-content.sh demo --seed-taxonomy
 ```
 
-Inspect every proposed Model change before applying a release to an existing environment. For a narrowly scoped initial import, include only the two new ResourceMetadata templates and the Taxonomy subtree; preserve unrelated native model overrides.
+Inspect every proposed Model and SitePresentation change before applying a release to an existing environment. `--seed-taxonomy` limits the additional seed to taxonomy; it still runs the normal Model and SitePresentation pushes. If `--what-if` shows unrelated native overrides changing, stop and reconcile the intended model before applying the release.
 
-`--seed` includes taxonomy when creating a new site. A normal release does not seed or recreate taxonomy items. Both editorial modules are CreateOnly and never enter the IAR module list. The additive generator creates missing local files; it rejects changes to existing files instead of overwriting captured seed content. Capture intentional vocabulary changes into source through a reviewed serialization update.
+`--seed` includes the content, taxonomy and blank resource-page branch when creating a new site. A normal release updates Model and SitePresentation without seeding or recreating editorial items. All three seed modules are CreateOnly and stay outside Items as Resources (IAR). See the [release procedure](developer-handoff.md#vercel-release-process) for the exact module order and seed flags. The additive generator creates missing local files; it rejects changes to existing files instead of overwriting captured seed content. Capture intentional vocabulary changes into source through a reviewed serialization update.
 
 After any indexed-field change, publish the intended content, reindex **Liberty Mutual Agent Resources**, and run the native verifier from the application folder:
 
