@@ -41,7 +41,9 @@ export function Default({ fields, params }: CampaignProps) {
       <p className="cms-empty">Select a Campaign Alert content item.</p>
     ) : null;
   const window = campaignWindow(start, end, now ?? 0);
-  const bounded = !!(start?.trim() || end?.trim());
+  const startDate = campaignDate(start);
+  const endDate = campaignDate(end);
+  const bounded = startDate !== undefined || endDate !== undefined;
   if (
     !page.mode.isEditing &&
     ((bounded && now === undefined) || window !== "active")
@@ -61,8 +63,9 @@ export function Default({ fields, params }: CampaignProps) {
         <RichText field={fields.body} className="cms-rich-text" />
         {page.mode.isEditing && (
           <p className="cms-campaign-editor-note">
-            Display window (UTC): {start || "No start date"} –{" "}
-            {end || "No end date"}.{" "}
+            Display window (UTC):{" "}
+            {startDate === undefined ? "No start date" : start} –{" "}
+            {endDate === undefined ? "No end date" : end}.{" "}
             {now !== undefined && window !== "active"
               ? `Currently ${window}; visible here for editing.`
               : "Shown while the published display window is active."}{" "}

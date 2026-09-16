@@ -117,6 +117,8 @@ function routeData(empty = false): RouteData {
                     uid: "native-alert",
                     fields: {
                       title: { value: "Make room for your next conversation" },
+                      startsAt: { value: "0001-01-01T00:00:00Z" },
+                      endsAt: { value: "0001-01-01T00:00:00Z" },
                       body: {
                         value:
                           "<p>Explore <strong>practical preparation</strong> with your team.</p>",
@@ -295,6 +297,9 @@ test("authoring retains nested insertion chrome, editable accordion bodies and n
   assert.match(html, /id="native-callout-variant"/);
   assert.match(html, /<details[^>]* open=""/);
   assert.match(html, /Display window \(UTC\)/);
+  assert.match(html, /No start date/);
+  assert.match(html, /No end date/);
+  assert.doesNotMatch(html, /0001-01-01|Currently invalid/);
   assert.match(html, /This controls alert visibility, not publishing/);
   const blank = render({ editing: true, empty: true });
   for (const slot of ["hero", "main", "sidebar"])

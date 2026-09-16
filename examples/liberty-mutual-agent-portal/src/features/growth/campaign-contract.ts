@@ -53,6 +53,9 @@ export function campaignDate(value?: string): number | undefined {
     ? `${compact[1]}-${compact[2]}-${compact[3]}T${compact[4]}:${compact[5]}:${compact[6]}Z`
     : value;
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(iso)) return NaN;
+  // Layout Service serializes an empty Sitecore DateTime as DateTime.MinValue.
+  // Treat that CMS sentinel as an absent boundary, just like an empty raw field.
+  if (/^0001-01-01T00:00:00(?:\.0+)?Z$/.test(iso)) return undefined;
   const parsed = Date.parse(iso);
   return Number.isFinite(parsed) &&
     new Date(parsed).toISOString().slice(0, 19) === iso.slice(0, 19)

@@ -21,6 +21,20 @@ test("campaign dates are explicit UTC, with inclusive start and exclusive end", 
   assert.equal(campaignWindow(start, end, time), "active");
   assert.equal(campaignWindow(start, end, Date.parse(end)), "expired");
   assert.equal(campaignWindow(undefined, undefined, time), "active");
+  for (const sentinel of [
+    "0001-01-01T00:00:00Z",
+    "0001-01-01T00:00:00.000Z",
+    "00010101T000000Z",
+  ]) {
+    assert.equal(
+      campaignDate(sentinel),
+      undefined,
+      "Empty SDK DateTime is unbounded",
+    );
+    assert.equal(campaignWindow(sentinel, sentinel, time), "active");
+    assert.equal(campaignWindow(start, sentinel, time), "active");
+    assert.equal(campaignWindow(sentinel, end, Date.parse(end)), "expired");
+  }
   for (const invalid of [
     "tomorrow",
     "2026-09-16",
