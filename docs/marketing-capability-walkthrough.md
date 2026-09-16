@@ -194,7 +194,7 @@ Follow [loop 9](demo-loops.md#loop-9-an-interest-becomes-a-relevant-next-step) f
 
 The [Resources A/B example](ab-testing.md) compares **Start with small business** with **Build your small-business practice**. Inspect its authored variants, configured goal, normal delivered experience and native results. The goal is a guide-page visit, not a policy sale. Small samples do not establish a winner.
 
-**Personalization rules and A/B/n testing use separate components.** SitecoreAI does not allow an A/B/n test on a component that is already using personalization rules. The Resources CTA experiment is therefore separate from personalized Home guidance, the Products affinity spotlight and the calculated campaign callout.
+**Keep the Resources A/B test on its separate, unpersonalized page.** [Sitecore's test-creation guidance](https://doc.sitecore.com/sai/en/users/sitecoreai/a-b-n-testing/get-started-with-a-b-n-testing/create-an-a-b-n-test.html) excludes pages with personalization configured. A second component on a personalized page is not an established workaround. The Resources experiment stays separate from personalized Home guidance, the Products affinity spotlight and the calculated campaign callout.
 
 The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the campaign story to account-based outreach. Review real agency research and readable HTML email previews for the principal, advisor and service team. Inspect the actual Brand Kit retrieval evidence. These are reviewed outreach artifacts; no emails were sent.
 
@@ -233,7 +233,7 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 | 27 | AI metadata and alt text suggestions | Modern Media image-upload enrichment and review. It does not auto-populate arbitrary ResourcePage taxonomy fields. |
 | 28 | Auto-save and draft recovery | C16 and named versions. Persisted changes can be reopened; unsaved keystrokes are outside that promise. |
 | 29 | Forms | C5–C8 demonstrate the custom durable portal form. Native SitecoreAI Forms use a separate backend integration. |
-| 30 | A/B testing | Section 8 and the native Resources experiment. A component cannot combine personalization rules with an A/B/n test. Custom application feature tests may need broader instrumentation. |
+| 30 | A/B testing | Section 8 and the native Resources experiment. Keep it on a page without configured personalization. Custom application feature tests may need broader instrumentation. |
 | 31 | Bulk edit of fields and content | C17–C20: native Content Editor Search and replace over reviewed practice fields. Shared datasource reuse remains a distinct technique. |
 | 32 | Scheduled unpublish / content expiration | Section 6: scoped restriction and republish automation, distinct from hiding an alert. |
 | 33 | Personalization variant preview | Page Builder's selected variants and decision-table profile tests, followed by ordinary signed-in delivery. |
