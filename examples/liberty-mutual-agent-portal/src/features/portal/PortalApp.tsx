@@ -29,6 +29,7 @@ export function PortalApp({
   workspaceEditorial,
   resourcesSearch,
   productsSpotlight,
+  supportForm,
   pageContent,
   isEditing = false,
 }: PortalAppProps) {
@@ -149,7 +150,8 @@ export function PortalApp({
         initialCourseId={section === "learning" ? selectedId : undefined}
       />
     );
-  else if (section === "support") content = <SupportScreen />;
+  else if (section === "support")
+    content = <SupportScreen nativeForm={supportForm} />;
   else content = <WorkspaceScreen editorial={workspaceEditorial} />;
   return (
     <PortalNoticeContext.Provider value={toast}>

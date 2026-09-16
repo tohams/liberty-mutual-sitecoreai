@@ -23,6 +23,10 @@ export const PORTAL_PLACEHOLDERS = {
     name: "headless-products-spotlight",
     componentName: "ProductSpotlight",
   },
+  supportForm: {
+    name: "headless-support-form",
+    componentName: "Form",
+  },
 } as const;
 
 type PortalPlaceholder = keyof typeof PORTAL_PLACEHOLDERS;
@@ -39,6 +43,7 @@ function placeholdersForRoute(route: string): PortalPlaceholder[] {
   if (section === "resources" || section === "learning")
     return ["resourceSearch", "guidance"];
   if (section === "products" && !child) return ["guidance", "productSpotlight"];
+  if (section === "support" && !child) return ["guidance", "supportForm"];
   return ["guidance"];
 }
 
@@ -65,6 +70,7 @@ export function getPortalPlaceholders(
       !mode.isPreview &&
       !hasCanonicalKey &&
       slot !== "productSpotlight" &&
+      slot !== "supportForm" &&
       slot !== "campaignPage";
     const name = useLegacy ? "headless-main" : setting.name;
     const candidates = rendering.placeholders[name] ?? [];
@@ -73,7 +79,11 @@ export function getPortalPlaceholders(
         component.componentName === setting.componentName ||
         (mode.isEditing && component.componentName === HIDDEN_RENDERING_NAME),
     );
-    if (slot === "productSpotlight" && !mode.isEditing && contents.length === 0)
+    if (
+      (slot === "productSpotlight" || slot === "supportForm") &&
+      !mode.isEditing &&
+      contents.length === 0
+    )
       continue;
     placements[slot] = {
       name,

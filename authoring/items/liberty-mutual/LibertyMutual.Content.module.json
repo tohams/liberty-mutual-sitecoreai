@@ -67,6 +67,10 @@
           {
             "path": "/liberty-mutual-agent-portal/Home/growth/campaign-schedule-check",
             "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-support-form",
+            "scope": "Ignored"
           }
         ]
       }

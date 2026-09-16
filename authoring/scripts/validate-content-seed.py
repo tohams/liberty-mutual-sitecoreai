@@ -47,7 +47,8 @@ expected_model_paths = {
 require({i['path'] for i in model['items']['includes']} == expected_model_paths,
         'Model includes must remain restricted to four owned roots.')
 for include in model['items']['includes']:
-    require(include.get('allowedPushOperations') == 'CreateAndUpdate' and not include.get('rules'),
+    expected_rules = {'placeholders': [{'path': '/headless-support-form', 'scope': 'Ignored'}], 'layouts': [{'path': '/SupportLayout', 'scope': 'Ignored'}]}.get(include['name'], [])
+    require(include.get('allowedPushOperations') == 'CreateAndUpdate' and include.get('rules', []) == expected_rules,
             'Model release must not introduce deletion or wider include rules.')
     require(include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants',
             'Model roots must retain their bounded descendant scope.')
@@ -59,7 +60,7 @@ for include in site_presentation['items']['includes']:
 require(len(content['items']['includes']) == 1, 'Content requires one owned include.')
 include = content['items']['includes'][0]
 expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
-                         for path in sorted(site_placeholder_paths | api_owned_campaign_paths | {taxonomy_root, resource_branch_path, resource_branch_path.replace('Resource page', 'Campaign page')})]
+                         for path in sorted(site_placeholder_paths | {site_placeholder_root + '/headless-support-form'} | api_owned_campaign_paths | {taxonomy_root, resource_branch_path, resource_branch_path.replace('Resource page', 'Campaign page')})]
 require(include['path'] == '/sitecore/content/LibertyMutual' and
         include.get('allowedPushOperations') == 'CreateOnly' and
         include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and
@@ -74,9 +75,16 @@ require(include['path'] == taxonomy_root and include.get('allowedPushOperations'
         and include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and not include.get('rules'),
         'Taxonomy must remain CreateOnly and restricted to its owned subtree.')
 resource_modules = read_json(ROOT / 'xmcloud.build.json')['deployItems']['modules']
-require(len(resource_modules) == 3 and set(resource_modules) ==
-        {'nextjs-starter', 'LibertyMutual.Model', 'LibertyMutual.SitePresentation'},
+require(len(resource_modules) == 4 and set(resource_modules) ==
+        {'nextjs-starter', 'LibertyMutual.Model', 'LibertyMutual.SitePresentation', 'LibertyMutual.SupportForm'},
         'Editable content and taxonomy must remain outside authoring resource packages.')
+
+support_module = read_json(BASE / 'LibertyMutual.SupportForm.module.json')
+require(support_module['items']['includes'] == [
+    {'name': 'support-form-layout', 'path': '/sitecore/layout/Layouts/Project/LibertyMutual/SupportLayout', 'scope': 'SingleItem', 'allowedPushOperations': 'CreateAndUpdate'},
+    {'name': 'support-form-placeholder', 'path': '/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-support-form', 'scope': 'SingleItem', 'allowedPushOperations': 'CreateAndUpdate'},
+    {'name': 'support-form-site', 'path': site_placeholder_root + '/headless-support-form', 'scope': 'SingleItem', 'allowedPushOperations': 'CreateAndUpdate'},
+], 'Support Form module must contain exactly the three developer-owned layout/placeholder definitions.')
 
 items = {}
 paths = {}

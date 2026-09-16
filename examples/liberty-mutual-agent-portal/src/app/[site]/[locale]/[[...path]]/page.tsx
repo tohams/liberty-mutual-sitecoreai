@@ -137,6 +137,7 @@ export default async function PortalPage({ params }: PageProps) {
             workspaceEditorial={resourcesSearch ? undefined : guidance}
             resourcesSearch={resourcesSearch}
             productsSpotlight={renderPlaceholder(placements.productSpotlight)}
+            supportForm={renderPlaceholder(placements.supportForm)}
             pageContent={pageContent}
           />
         )}

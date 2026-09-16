@@ -14,7 +14,7 @@ function fixture(t) {
   const files = [
     "authoring/scripts/deploy-content.sh",
     "xmcloud.build.json",
-    ...["Content", "Taxonomy", "ResourcePageBranch"].map(
+    ...["Content", "Taxonomy", "ResourcePageBranch", "SupportForm"].map(
       (name) => `${MODULES}/LibertyMutual.${name}.module.json`,
     ),
   ];
@@ -80,6 +80,7 @@ test("normal release never seeds or recreates editorial content or taxonomy opti
   assert.deepEqual(pushedModules(result), [
     "LibertyMutual.Model",
     "LibertyMutual.SitePresentation",
+    "LibertyMutual.SupportForm",
   ]);
   assert.equal(
     result.commands.some((command) => command.startsWith("sitecore publish ")),
@@ -95,6 +96,7 @@ test("taxonomy seeding is explicit and follows its model definitions", (t) => {
     "LibertyMutual.Model",
     "LibertyMutual.Taxonomy",
     "LibertyMutual.SitePresentation",
+    "LibertyMutual.SupportForm",
   ]);
 });
 
@@ -107,6 +109,7 @@ test("fresh-site seeding creates the Data parent before managed metadata lists",
     "LibertyMutual.Taxonomy",
     "LibertyMutual.ResourcePageBranch",
     "LibertyMutual.SitePresentation",
+    "LibertyMutual.SupportForm",
   ]);
 });
 
@@ -123,7 +126,7 @@ test("combined seed flags do not push the taxonomy twice", (t) => {
 test("what-if protects every requested push and suppresses publication", (t) => {
   const result = fixture(t).run("--seed", "--publish", "--what-if");
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.pushes.length, 5);
+  assert.equal(result.pushes.length, 6);
   assert.ok(result.pushes.every((command) => command.endsWith(" --what-if")));
   assert.equal(
     result.commands.some((command) => command.startsWith("sitecore publish ")),
@@ -218,6 +221,7 @@ test("branch seeding is explicit and never seeds unrelated content or taxonomy",
     "LibertyMutual.Model",
     "LibertyMutual.ResourcePageBranch",
     "LibertyMutual.SitePresentation",
+    "LibertyMutual.SupportForm",
   ]);
 });
 
@@ -253,3 +257,12 @@ for (const slug of [
     assert.deepEqual(result.commands, []);
   });
 }
+
+test("rejects widening the native Form module before the first native operation", (t) => {
+  const context=fixture(t);
+  context.edit(`${MODULES}/LibertyMutual.SupportForm.module.json`, module => { module.items.includes[0].path = "/sitecore/content"; });
+  const result=context.run();
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/Support Form/);
+  assert.deepEqual(result.commands,[]);
+});
