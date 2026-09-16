@@ -1,0 +1,23 @@
+---
+ID: 0611315c-a0e8-59d5-b22d-8f30dd58fcca
+Parent: 94b480f8-5b0a-4487-99bb-238569489481
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/Project/LibertyMutual/CampaignPage
+SharedFields:
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Value: "{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}"
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: "{AB34F3E0-057B-5B77-91D1-40E7F54AF8A1}"
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Office/32x32/document_text.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

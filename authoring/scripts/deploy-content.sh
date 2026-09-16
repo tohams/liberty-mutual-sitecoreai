@@ -31,10 +31,12 @@ import json
 from pathlib import Path
 base=Path('authoring/items/liberty-mutual')
 d=json.loads((base/'LibertyMutual.Content.module.json').read_text())
-keys=['headless-agent-guidance','headless-resource-search','headless-resource-article','headless-products-spotlight','headless-resource-image']
+keys=['headless-agent-guidance','headless-resource-search','headless-resource-article','headless-products-spotlight','headless-resource-image','headless-campaign-page','headless-campaign-hero','headless-campaign-main','headless-campaign-sidebar']
 expected=[{'path':'/liberty-mutual-agent-portal/Presentation/Placeholder Settings/'+key,'scope':'Ignored'} for key in keys]
 expected.append({'path':'/liberty-mutual-agent-portal/Data/Taxonomy','scope':'Ignored'})
 expected.append({'path':'/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page','scope':'Ignored'})
+expected.append({'path':'/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page','scope':'Ignored'})
+expected.extend({'path':'/liberty-mutual-agent-portal/Home/growth/'+slug,'scope':'Ignored'} for slug in ['small-business','campaign-practice','campaign-schedule-check'])
 expected.sort(key=lambda rule:rule['path'])
 if len(d['items']['includes'])!=1:
     raise SystemExit('Refusing seed push: expected one owned content include.')
@@ -42,7 +44,7 @@ for include in d['items']['includes']:
     if (include['path']!='/sitecore/content/LibertyMutual' or include['allowedPushOperations']!='CreateOnly'
             or include.get('scope','ItemAndDescendants')!='ItemAndDescendants'
             or sorted(include.get('rules',[]),key=lambda rule:rule['path'])!=expected):
-        raise SystemExit('Refusing seed push: content must remain CreateOnly with only site placeholder, taxonomy and branch exclusions.')
+        raise SystemExit('Refusing seed push: content must remain CreateOnly with exact site placeholder, taxonomy, branch and API-owned campaign exclusions.')
 taxonomy=json.loads((base/'LibertyMutual.Taxonomy.module.json').read_text())
 includes=taxonomy['items']['includes']
 if (len(includes)!=1 or includes[0]['path']!='/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy'

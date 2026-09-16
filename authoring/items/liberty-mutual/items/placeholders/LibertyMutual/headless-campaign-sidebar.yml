@@ -1,0 +1,20 @@
+---
+ID: 12cf067a-4040-5590-8632-02ea8e271c3e
+Parent: e26a2d36-9ee9-49df-bb07-0073d8e20ccc
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-sidebar
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: headless-campaign-sidebar-{*}
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Value: "{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}|{E7E25E1F-7479-5D71-B846-91AA45BE58D9}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

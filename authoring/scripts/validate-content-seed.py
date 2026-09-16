@@ -33,8 +33,11 @@ resource_branch_path = '/sitecore/content/LibertyMutual/liberty-mutual-agent-por
 taxonomy_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy'
 site_placeholder_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings'
 site_placeholder_keys = ['headless-agent-guidance', 'headless-resource-search',
-                         'headless-resource-article', 'headless-products-spotlight', 'headless-resource-image']
+                         'headless-resource-article', 'headless-products-spotlight', 'headless-resource-image',
+                         'headless-campaign-page', 'headless-campaign-hero', 'headless-campaign-main', 'headless-campaign-sidebar']
 site_placeholder_paths = {site_placeholder_root + '/' + key for key in site_placeholder_keys}
+api_owned_campaign_paths = {'/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/' + slug
+                            for slug in ['small-business', 'campaign-practice', 'campaign-schedule-check']}
 expected_model_paths = {
     '/sitecore/templates/Project/LibertyMutual',
     '/sitecore/layout/Renderings/Project/LibertyMutual',
@@ -49,19 +52,19 @@ for include in model['items']['includes']:
     require(include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants',
             'Model roots must retain their bounded descendant scope.')
 require({i['path'] for i in site_presentation['items']['includes']} == site_placeholder_paths,
-        'SitePresentation includes must contain only the five exact site placeholder items.')
+        'SitePresentation includes must contain only the nine exact site placeholder items.')
 for include in site_presentation['items']['includes']:
     require(include.get('scope') == 'SingleItem' and include.get('allowedPushOperations') == 'CreateAndUpdate'
             and not include.get('rules'), 'SitePresentation must use non-deleting SingleItem includes only.')
 require(len(content['items']['includes']) == 1, 'Content requires one owned include.')
 include = content['items']['includes'][0]
 expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
-                         for path in sorted(site_placeholder_paths | {taxonomy_root, resource_branch_path})]
+                         for path in sorted(site_placeholder_paths | api_owned_campaign_paths | {taxonomy_root, resource_branch_path, resource_branch_path.replace('Resource page', 'Campaign page')})]
 require(include['path'] == '/sitecore/content/LibertyMutual' and
         include.get('allowedPushOperations') == 'CreateOnly' and
         include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and
         sorted(include.get('rules', []), key=lambda rule: rule['path']) == expected_ignore_rules,
-        'Initial content seed must remain CreateOnly with only site placeholder, taxonomy, and branch exclusions.')
+        'Initial content seed must remain CreateOnly with exact site placeholder, taxonomy, branch, and API-owned campaign exclusions.')
 require(resource_branch['items']['includes'] == [{'name': 'resource-page-branch', 'path': resource_branch_path,
                                                  'allowedPushOperations': 'CreateOnly'}],
         'Editable resource branch must remain in one CreateOnly subtree.')
