@@ -1,0 +1,11 @@
+{
+  "name": "Liberty Mutual - Small business growth opportunity",
+  "nativeId": "9faad837-0e23-4b5b-af10-c6883dba86ac",
+  "returnType": "Boolean",
+  "sourceFile": "small-business-growth-opportunity.js",
+  "nativeStatus": "Published",
+  "recordedOn": "2026-09-16",
+  "sourceSha256": "6a8cd7ba21b1856912d0121163e605b40f2535373062fc12f6f2a44496a9ca9d",
+  "scope": "Campaign callout content targeting; no transaction authorization; fixture-sourced imported agency premium attributes",
+  "decisionTableConnection": "Pending native Page Builder connection and live browser acceptance."
+}

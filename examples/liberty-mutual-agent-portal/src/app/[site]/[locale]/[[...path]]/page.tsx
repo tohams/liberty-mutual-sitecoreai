@@ -104,11 +104,13 @@ export default async function PortalPage({ params }: PageProps) {
       {guidance}
     </>
   ) : undefined;
-  const pageContent = placements.resourceArticle
-    ? renderPlaceholder(placements.resourceArticle)
-    : /^\/products\/.+/.test(route)
-      ? guidance
-      : undefined;
+  const pageContent = placements.campaignPage
+    ? renderPlaceholder(placements.campaignPage)
+    : placements.resourceArticle
+      ? renderPlaceholder(placements.resourceArticle)
+      : /^\/products\/.+/.test(route)
+        ? guidance
+        : undefined;
   return (
     <NextIntlClientProvider locale={locale} messages={{}}>
       <Providers page={page}>

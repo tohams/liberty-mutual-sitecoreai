@@ -1,0 +1,29 @@
+---
+ID: 6b763c11-deac-5afa-99fa-453f30e4bec6
+Parent: 9b0125b3-5cdb-5b92-b31f-e838e115d86b
+Template: 0611315c-a0e8-59d5-b22d-8f30dd58fcca
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page/$name
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{3C960D8F-B5DD-5CDA-B645-4D8CA4EF7B4C}"><r uid="{AF778525-1632-5DE6-8D3B-F2507170287F}" id="{B6EFD6F3-3107-542C-B1B1-0B6F30A8791F}" ph="headless-campaign-page" par="DynamicPlaceholderId=1" /><r uid="{19879D16-6A8D-5930-A37C-9EDEE5A17860}" id="{C479A19F-2857-5D96-ACE8-F24A5812C19F}" ph="/headless-campaign-page/headless-campaign-hero-1" ds="page:/Data/Campaign introduction" par="DynamicPlaceholderId=2" /><r uid="{398A3394-8451-5C63-8992-DC60A1BFD624}" id="{3D98EC75-765F-590B-AF51-5D0132A648ED}" ph="/headless-campaign-page/headless-campaign-main-1" ds="page:/Data/Preparation update" par="DynamicPlaceholderId=3" /><r uid="{1197C9AE-B387-5FE0-9F8C-2698A102E038}" id="{01B5CA5B-14DB-564E-A109-6E77462D9E52}" ph="/headless-campaign-page/headless-campaign-main-1" ds="page:/Data/Growth opportunity" par="DynamicPlaceholderId=4&amp;RenderingIdentifier=growth-opportunity" /><r uid="{C3857F07-62DF-545D-8B73-471D720193A5}" id="{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}" ph="/headless-campaign-page/headless-campaign-main-1" ds="page:/Data/Start the conversation" par="DynamicPlaceholderId=5&amp;RenderingIdentifier=growth-questions" /><r uid="{DE4F029B-BD9B-5704-B377-3DA56E765FC5}" id="{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}" ph="/headless-campaign-page/headless-campaign-main-1" ds="page:/Data/Prepare for review" par="DynamicPlaceholderId=6" /><r uid="{B8A3855A-2A80-5355-88FD-B2CFE4CF3149}" id="{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}" ph="/headless-campaign-page/headless-campaign-sidebar-1" ds="page:/Data/Useful resources" par="DynamicPlaceholderId=7" /><r uid="{D0940731-0CBC-5E1A-BFD6-5FECAD543894}" id="{E7E25E1F-7479-5D71-B846-91AA45BE58D9}" ph="/headless-campaign-page/headless-campaign-sidebar-1" ds="page:/Data/Your next step" par="DynamicPlaceholderId=8&amp;RenderingIdentifier=growth-contact" /></d></r>
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: $name
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: $name
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{57CC7DCE-E6B1-4564-9581-0E5850B8BDF2}"

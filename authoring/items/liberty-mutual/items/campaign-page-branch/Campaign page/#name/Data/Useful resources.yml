@@ -1,0 +1,35 @@
+---
+ID: 00da6d66-b68d-568e-ae34-6b3d76f8b540
+Parent: 378d614c-b09d-5d52-9edb-84a3f2e6951e
+Template: f10aa78c-6fd9-585c-b264-81b2a772d8c5
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page/$name/Data/Useful resources
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z
+    - ID: 6bef6828-3cf2-58a5-9a2a-9f1fe55c53b6
+      Hint: title
+      Value:
+    - ID: 43b8418e-2540-5ab7-af96-56cdf25400f9
+      Hint: icon
+      Value:
+    - ID: 7141ac2c-05ab-5d5c-ac6b-f7abd2240b06
+      Hint: link1
+      Value:
+    - ID: a6011349-c066-5530-8762-311138ad01fb
+      Hint: link2
+      Value:
+    - ID: 38444f75-05fb-5197-8aa6-c9b8f0370c98
+      Hint: link3
+      Value:
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{12FFAC4C-565F-4C9A-B63E-7F77E96B4D1F}"

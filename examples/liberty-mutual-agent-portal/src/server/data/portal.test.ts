@@ -198,3 +198,32 @@ test('a new commercial draft retains its owner through principal edits and reach
   assert.equal(workspace.submissions.find((submission) => submission.id === created.id)?.status, 'Submitted');
   assert.equal(workspace.tasks.find((task) => task.href === `/submissions/${created.id}`)?.status, 'Completed');
 });
+
+
+test('growth conversation requests persist once, remain agency scoped and reset with saved work', async () => {
+  const storePath = join(directory, 'growth-conversation');
+  const store = new LocalJsonStateStore(storePath);
+  const jordan = await login('jordan');
+  const baseline = await getPortalBootstrap(jordan, store);
+  const topic = 'Discuss a focused small-business growth plan and account preparation.';
+  const action: PortalAction = { type: 'request-contact', contactId: 'contact-lee', topic, ...requestMetadata(baseline) };
+  const saved = await applyPortalAction(jordan, action, store);
+  const restored = await applyPortalAction(jordan, action, new LocalJsonStateStore(storePath));
+  assert.equal(restored.tasks.filter(task => task.description === topic).length, 1);
+  assert.equal(restored.session.stateVersion, saved.session.stateVersion);
+  const task = restored.tasks.find(task => task.description === topic)!;
+  assert.equal(task.title, 'Conversation with Alex Lee');
+  assert.equal(task.assignedAgentId, 'jordan');
+  assert.equal(task.agencyId, 'cedar-ridge');
+  assert.equal(task.href, '/support');
+  assert.equal(task.status, 'Open');
+  const elena = await login('elena');
+  const unrelated = await getPortalBootstrap(elena, store);
+  assert.ok(!unrelated.tasks.some(entry => entry.description === topic));
+  await assert.rejects(applyPortalAction(elena, { ...action, ...requestMetadata(unrelated) }, store), errorCode('NOT_FOUND'));
+  await assert.rejects(applyPortalAction(jordan, { ...action, topic: 'x'.repeat(1001), ...requestMetadata(saved) }, store), errorCode('INVALID_INPUT'));
+  await resetReviewerPack('01', 'saved-work', store);
+  const reset = await getPortalBootstrap(jordan, store);
+  assert.ok(!reset.tasks.some(entry => entry.description === topic));
+  assert.equal(reset.udlIdentity?.id, baseline.udlIdentity?.id);
+});

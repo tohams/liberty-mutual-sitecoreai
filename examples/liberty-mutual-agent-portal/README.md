@@ -32,6 +32,8 @@ Development startup generates the Sitecore SDK files required by type checking. 
 
 From the repository root, validate scoped content with `dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content` and native delivery with `node authoring/scripts/verify-edge-content.cjs`. These checks serve different purposes: application tests validate behavior; the connected checker proves that Sitecore returns the expected authored content.
 
+The [authored campaign component guide](docs/campaign-components.md) covers the small-business campaign, nested placeholders, alert visibility dates and the integrated conversation request.
+
 ## Where work belongs
 
 - `src/features`: agent-facing workflows and portal shell.

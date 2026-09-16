@@ -1,0 +1,13 @@
+---
+ID: 067c2a79-e5b2-54a3-bf27-9414fd9a7539
+Parent: dd639201-740a-52f7-b47b-12e5f4c252ae
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutual/CampaignCallout/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

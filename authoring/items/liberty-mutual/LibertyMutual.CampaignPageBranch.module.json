@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.CampaignPageBranch",
+  "description": "Editable blank Campaign page branch and local data. Explicit CreateOnly seed; excluded from authoring resource packages.",
+  "items": {
+    "includes": [
+      {
+        "name": "campaign-page-branch",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  }
+}

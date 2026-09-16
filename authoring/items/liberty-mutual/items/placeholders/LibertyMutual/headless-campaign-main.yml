@@ -1,0 +1,20 @@
+---
+ID: 9da47519-713a-5ec1-86b6-534861a6f33f
+Parent: e26a2d36-9ee9-49df-bb07-0073d8e20ccc
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-main
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: headless-campaign-main-{*}
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Value: "{3D98EC75-765F-590B-AF51-5D0132A648ED}|{01B5CA5B-14DB-564E-A109-6E77462D9E52}|{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

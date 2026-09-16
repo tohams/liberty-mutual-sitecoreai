@@ -1,0 +1,17 @@
+---
+ID: fc3ab524-765a-5bcf-a34d-8985a6978e41
+Parent: 06b545e6-3068-5197-83df-af0ebb2f0b1f
+Template: 06b545e6-3068-5197-83df-af0ebb2f0b1f
+Path: /sitecore/templates/Project/LibertyMutual/CampaignHero/__Standard Values
+SharedFields:
+- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
+  Hint: __Default workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

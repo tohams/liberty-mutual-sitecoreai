@@ -1,0 +1,32 @@
+---
+ID: 60d07419-5013-5bc7-876c-23d9285e6e2d
+Parent: 378d614c-b09d-5d52-9edb-84a3f2e6951e
+Template: dd639201-740a-52f7-b47b-12e5f4c252ae
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page/$name/Data/Growth opportunity
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z
+    - ID: 0954ee3e-de72-5aba-95c0-4a12b372fdf2
+      Hint: eyebrow
+      Value:
+    - ID: 3882b163-d6d5-5f1f-8852-c7b277a404c3
+      Hint: title
+      Value:
+    - ID: d8e9e7da-3dea-57ee-a0b1-85052522f3ee
+      Hint: body
+      Value:
+    - ID: 2a27f7db-4d0e-5bfd-b10c-f5aecc07da41
+      Hint: actionLink
+      Value:
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{12FFAC4C-565F-4C9A-B63E-7F77E96B4D1F}"

@@ -1,0 +1,26 @@
+---
+ID: d1ec5b39-ee39-5fce-8b4b-a46c659f37eb
+Parent: 378d614c-b09d-5d52-9edb-84a3f2e6951e
+Template: f5a1c713-7121-51bb-a9cc-4920b3186fec
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page/$name/Data/Start the conversation
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z
+    - ID: 31dd4f7e-332c-5da5-a344-88cc078d8d53
+      Hint: title
+      Value:
+    - ID: 69b1f43d-6eb6-5b9d-aaf9-5088fa3dc31b
+      Hint: body
+      Value:
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{12FFAC4C-565F-4C9A-B63E-7F77E96B4D1F}"

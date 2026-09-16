@@ -1,0 +1,17 @@
+---
+ID: 85668f7f-2d18-5573-ae27-7822ec3c767f
+Parent: dd639201-740a-52f7-b47b-12e5f4c252ae
+Template: dd639201-740a-52f7-b47b-12e5f4c252ae
+Path: /sitecore/templates/Project/LibertyMutual/CampaignCallout/__Standard Values
+SharedFields:
+- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
+  Hint: __Default workflow
+  Value: "{A053ED9F-4099-4682-9411-2B4C98E481E4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z
