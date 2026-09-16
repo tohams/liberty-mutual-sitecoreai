@@ -27,6 +27,7 @@ function placements(route) {
   if (route.startsWith('/resources/')) return { 'headless-resource-article': RENDERINGS.ResourceArticle };
   if (route === '/resources') return { 'headless-resource-search': RENDERINGS.ResourceSearch, 'headless-agent-guidance': RENDERINGS.AgentGuidance };
   if (route === '/products') return { 'headless-agent-guidance': RENDERINGS.AgentGuidance, 'headless-products-spotlight': RENDERINGS.ProductSpotlight };
+  if (route === '/support') return { 'headless-agent-guidance': RENDERINGS.AgentGuidance, 'headless-support-form': '62dd16399f2840408738c886480b2127' };
   return { 'headless-agent-guidance': RENDERINGS.AgentGuidance };
 }
 function portalRoutes(manifest) {

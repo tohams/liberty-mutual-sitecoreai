@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { PortalLink as Link } from "@/components/ui/portal-link";
 import { PortalDialog } from "@/components/ui/portal-dialog";
 import { PortalIcon } from "@/components/ui/portal-icon";
 import { dateLabel, lineNames, usePortal } from "../portal/portal-context";
 
-export function SupportScreen() {
+export function SupportScreen({ nativeForm }: { nativeForm?: ReactNode }) {
   const { data, act, busy } = usePortal();
   const [contactId, setContactId] = useState("");
   const contact = data.contacts.find((item) => item.id === contactId);
@@ -86,6 +86,15 @@ export function SupportScreen() {
           </article>
         ))}
       </div>
+      {nativeForm && (
+        <section
+          className="panel support-contact-form"
+          id="contact-your-team"
+          aria-label="Contact your team"
+        >
+          {nativeForm}
+        </section>
+      )}
       <div className="support-columns">
         <section className="panel">
           <header className="panel-heading">

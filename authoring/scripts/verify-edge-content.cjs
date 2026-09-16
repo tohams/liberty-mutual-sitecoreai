@@ -8,6 +8,7 @@ function expectedPlacements(route) {
   if (route.startsWith('/resources/')) return { 'headless-resource-article': 'ResourceArticle' };
   if (route === '/resources') return { 'headless-resource-search': 'ResourceSearch', 'headless-agent-guidance': 'AgentGuidance' };
   if (route === '/products') return { 'headless-agent-guidance': 'AgentGuidance', 'headless-products-spotlight': 'ProductSpotlight' };
+  if (route === '/support') return { 'headless-agent-guidance': 'AgentGuidance', 'headless-support-form': 'Form' };
   return { 'headless-agent-guidance': 'AgentGuidance' };
 }
 
@@ -29,6 +30,8 @@ function verifyComposition(route, data, manifest) {
         const value = component.fields?.search?.value;
         const configuration = typeof value === 'string' ? JSON.parse(value) : value;
         if (configuration?.searchIndex !== manifest.resourceSearch.sourceId || configuration.fieldsMapping?.title !== 'Title') throw new Error('Missing native search configuration');
+      } else if (expected === 'Form') {
+        if (!/^[a-f\d]{32}-[a-z]{2,8}$/.test(component.params?.FormId || '')) throw new Error('Missing native Form selection');
       } else if (!component.fields?.body?.value || !component.fields?.[expected === 'ResourceArticle' ? 'Title' : 'headline']?.value) {
         throw new Error('Missing editable fields');
       }
@@ -67,7 +70,7 @@ async function main() {
 module.exports = { expectedPlacements, verifyComposition };
 
 if (require.main === module) main().catch((error) => {
-  const safeMessages = new Set(['Missing page', 'Missing composition', 'Unexpected placeholder', 'Unexpected component', 'Missing editable fields', 'Missing template projection', 'Missing native search configuration']);
+  const safeMessages = new Set(['Missing page', 'Missing composition', 'Unexpected placeholder', 'Unexpected component', 'Missing editable fields', 'Missing template projection', 'Missing native search configuration', 'Missing native Form selection']);
   console.error(JSON.stringify({errorType: error?.name, reason: safeMessages.has(error?.message) ? error.message : 'SDK request failed', route: activeRoute, status: error?.response?.status || error?.status}));
   if (process.env.PORTAL_VERIFY_DEBUG === 'true') {
     let safe = String(error?.stack || error?.message || error).split('\n').slice(0, 5).join('\n');

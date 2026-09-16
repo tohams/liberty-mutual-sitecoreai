@@ -51,9 +51,24 @@ Use the **designated preview**, `daniel.04`, and an agreed reviewer pack for thi
 
 This is a custom React form using the portal's authenticated action service and durable data store. It saves an administrative request. It does not send email, create a Salesforce activity, or change insurance coverage. In Page Builder, authors can inspect the dialog but cannot submit operational work.
 
-**Native SitecoreAI Forms is a separate option.** Its form authoring and collection capabilities must be connected to the intended business backend, for example through a webhook. A visual form does not establish a database or CRM integration by itself. The form's backend, access rules, error handling and retention require an explicit design.
+The separate native **Contact your team** form below demonstrates SitecoreAI Forms authoring and webhook delivery. It does not use this saved-request service.
 
 **Finish:** use the [saved-work reset](demo-loops.md#reset-and-repeat) for the selected preview pack only. A reset affects the entire pack, not just this request. Preserve unrelated review work until its owners finish.
+
+## Native Forms: Contact your team
+
+This exercise connects a marketer-managed SitecoreAI form to its configured receiver. **Verification is in progress:** complete the [operator acceptance checks](native-forms-operator-guide.md#acceptance-and-reset) before using this sequence as a verified live walkthrough. Field and completion labels must match the activated form.
+
+| Step | Click or enter | Observe |
+|---|---|---|
+| F1 | Sign in as `daniel.04` at the [live portal login](https://liberty-mutual-agent-portal.vercel.app/login), then open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). | A native SitecoreAI form appears separately from the relationship cards and saved-request history. |
+| F2 | Attempt to submit with required fields empty, then with an invalid email address. | Field validation asks for valid input; no successful request should reach the receiver. |
+| F3 | Enter fictional contact and agency details, use an `example.com` email address, choose a topic, and include a unique marker in the message. Submit once. | The form displays its configured completion state. Record the marker and submission time. |
+| F4 | Have the receiver owner inspect **Demo Webhook**'s webhook.site receiver. | A matching request contains the marker and submitted fields. This proves webhook receipt, not a Salesforce record or email delivery. |
+| F5 | In SitecoreAI, open **Forms → Contact your team**. Inspect its field design, validation, completion action, selected site and webhook settings without changing them. | Marketing manages the native form. Page Builder separately selects it through the native **Form** component on Support. |
+| F6 | Return to Support and inspect **Your service & follow-up requests**. | The native submission has not added a saved portal request. That list belongs to the custom conversation flow in C5–C8. |
+
+**Finish:** the receiver owner removes only this exercise's uniquely identified requests using the receiver's supported controls. If deletion is unavailable, retain the marker as test evidence under its retention process. Sign out after inspecting the result; the portal's saved-work reset does not erase webhook requests. Keep the active form and page binding. See the [native Forms operator guide](native-forms-operator-guide.md) for configuration, evidence and cleanup boundaries.
 
 ## 3. Compose and maintain the campaign in Page Builder
 
@@ -232,7 +247,7 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 | 26 | AI-assisted content drafting | C15: prompt-based drafting with author review and assigned brand guidance. |
 | 27 | AI metadata and alt text suggestions | Modern Media image-upload enrichment and review. It does not auto-populate arbitrary ResourcePage taxonomy fields. |
 | 28 | Auto-save and draft recovery | C16 and named versions. Persisted changes can be reopened; unsaved keystrokes are outside that promise. |
-| 29 | Forms | C5–C8 demonstrate the custom durable portal form. Native SitecoreAI Forms use a separate backend integration. |
+| 29 | Forms | F1–F6 cover native **Contact your team** authoring and webhook delivery; live acceptance is pending. C5–C8 separately demonstrate custom durable portal requests. The inspection receiver is not a production database or CRM. |
 | 30 | A/B testing | Section 8 and the native Resources experiment. Keep it on a page without configured personalization. Custom application feature tests may need broader instrumentation. |
 | 31 | Bulk edit of fields and content | C17–C20: native Content Editor Search and replace over reviewed practice fields. Shared datasource reuse remains a distinct technique. |
 | 32 | Scheduled unpublish / content expiration | Section 6: scoped restriction and republish automation, distinct from hiding an alert. |
@@ -245,6 +260,7 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 - Complete the Texas article's restoring publication and explicit Search refresh if that loop changed it.
 - Confirm the bounded publication script has completed, preserve its job journal and verify the dedicated page's final expired state. Resolve any interrupted operation before repeating it.
 - Coordinate the selected preview pack's saved-work reset after all reviewers finish.
+- Have the webhook receiver owner clean up only the native Forms requests identified by the exercise marker; portal saved-work reset does not remove them.
 - Preserve native profile, affinity, experiment and research history. A whole-pack identity restart is a separate operator decision.
 
 ## Supporting product documentation

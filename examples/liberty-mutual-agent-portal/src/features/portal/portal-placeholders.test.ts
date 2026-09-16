@@ -48,7 +48,6 @@ test("only the appropriate named slots are exposed for each page and operational
     "/clients/client-001",
     "/renewals/pol-001",
     "/growth",
-    "/support",
     "/products/personal",
   ]) {
     assert.deepEqual(
@@ -202,4 +201,62 @@ test("SDK emits canonical editing chrome IDs and preserves component placement i
     { env: environment, timeout: 15000 },
   );
   assert.match(stdout, /pass 2/);
+});
+
+const nativeForm: ComponentRendering = {
+  componentName: "Form",
+  uid: "native-contact-form",
+  params: { FormId: "980983421c624d078ccf2fd29e4ae665-use" },
+};
+
+test("native Forms are restricted to the Support slot and retain native parameters", () => {
+  const layout: RouteData = {
+    name: "Support",
+    placeholders: {
+      "headless-agent-guidance": [guidance, nativeForm],
+      "headless-support-form": [nativeForm, guidance],
+    },
+  };
+  for (const mode of [delivery, editing]) {
+    const support = getPortalPlaceholders("/support", layout, mode);
+    assert.deepEqual(Object.keys(support), ["guidance", "supportForm"]);
+    assert.deepEqual(support.supportForm?.rendering.placeholders, {
+      "headless-support-form": [nativeForm],
+    });
+    assert.equal(
+      support.supportForm?.rendering.placeholders["headless-support-form"][0],
+      nativeForm,
+    );
+    assert.deepEqual(support.guidance?.rendering.placeholders, {
+      "headless-agent-guidance": [guidance],
+    });
+    for (const route of [
+      "/",
+      "/growth/small-business",
+      "/resources",
+      "/support/other",
+      "/products",
+    ])
+      assert.equal(
+        getPortalPlaceholders(route, layout, mode).supportForm,
+        undefined,
+        route,
+      );
+  }
+});
+
+test("unconfigured Forms remain addable in Page Builder without exposing an empty live section", () => {
+  const layout: RouteData = {
+    name: "Support",
+    placeholders: { "headless-main": [nativeForm] },
+  };
+  assert.equal(
+    getPortalPlaceholders("/support", layout, delivery).supportForm,
+    undefined,
+  );
+  const slot = getPortalPlaceholders("/support", layout, editing).supportForm;
+  assert.equal(slot?.name, "headless-support-form");
+  assert.deepEqual(slot?.rendering.placeholders, {
+    "headless-support-form": [],
+  });
 });

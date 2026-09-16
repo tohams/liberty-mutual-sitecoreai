@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.SupportForm",
+  "description": "Three exact developer-owned Support layout and placeholder definitions. No native Form definition, webhook, or page content.",
+  "items": {
+    "includes": [
+      {
+        "name": "support-form-layout",
+        "path": "/sitecore/layout/Layouts/Project/LibertyMutual/SupportLayout",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "support-form-placeholder",
+        "path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-support-form",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "support-form-site",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-support-form",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      }
+    ]
+  }
+}
