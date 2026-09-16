@@ -2,7 +2,7 @@
 
 This exercise shows how a marketer manages a native SitecoreAI form and how an agent's submission reaches its configured webhook. The form belongs on [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Sign in through the [portal login](https://liberty-mutual-agent-portal.vercel.app/login) with your assigned reviewer account first.
 
-**Verification status:** **Contact your team** is Active, and its native **Test webhook** flow delivered all five fields to the receiver. The existing Support page has been bound while preserving its version and other fields. Production browser delivery and validation remain subject to the acceptance checks below; the native test receipt alone does not prove that deployed journey.
+**Verified September 16, 2026:** **Contact your team** is Active. Native **Test webhook** and the deployed preview passed submission checks; the preview also passed required-field/email validation and a 390-pixel layout check without horizontal overflow. In production, `daniel.04` submitted all five values, the receiver captured the matching request and production domain, and the form showed its success message. The saved-request list stayed unchanged. Reloading cleared the form and success message. The Support page retains its original guidance, workflow and version 1.
 
 ## What the two contact experiences demonstrate
 
@@ -15,7 +15,22 @@ Submitting the native form does not create an item in the portal's saved-request
 
 ## Run the agent and marketer walkthrough
 
-Use the [native Forms steps in the marketing walkthrough](marketing-capability-walkthrough.md#native-forms-contact-your-team). Obtain the current receiver link from **Demo Webhook** in the native form's Settings; the unique collector URL is not stored in this repository. Keep the receiver available in a separate tab so the form submission and its received fields can be compared. In its inbox, select the matching **POST**, then **Request Content → Raw Content** to inspect the submitted values. Record a unique marker in the message, such as `Contact review Thomas 2026-09-16 14:30`, rather than relying only on a timestamp or a shared agent name.
+Use the same F1–F8 sequence as the deck and [marketing walkthrough](marketing-capability-walkthrough.md#native-forms-contact-your-team). F1–F4 inspect marketer-owned configuration; F5–F8 follow an agent submission to the receiver and repeat it.
+
+The URL configured in **Demo Webhook** settings is the **POST destination**, not the receipt inspection link. Obtain the corresponding inbox link from the receiver owner. For webhook.site, the inspection route is `https://webhook.site/#!/view/<receiver-id>` using the same receiver identifier. The unique destination, inbox URL and receiver identifier are deliberately absent from this repository. Keep the inbox in a separate tab and use a unique message marker to distinguish your submission from earlier requests.
+
+| Step | Click or inspect | Observe |
+|---|---|---|
+| F1 | In SitecoreAI, open **Forms → Active → Contact your team**. From the preview, select **Edit form**, then **Edit**. | The active form designer opens. The form is available for `liberty-mutual-agent-portal`. |
+| F2 | Inspect **Your name**, **Work email**, **Agency name**, **How can we help?** and **What would you like to discuss?** | All five fields are required. Topic choices are **Agency growth**, **Product guidance** and **Portal support**. |
+| F3 | Open **Settings** using the gear. Inspect **Demo Webhook**, site availability and the success message. | The webhook uses **No authentication**. The configured site is `liberty-mutual-agent-portal`. |
+| F4 | Inspect **Push changes**, then return to the form preview without changing the form. | The action updates an active form. This inspection leaves the form and its live behavior unchanged. |
+| F5 | Sign in as `daniel.04`, password `Sitecore`, at the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Enter `Daniel Ortiz`, `daniel.04@example.com` and `Prairie Oak Insurance`. | **Your name**, **Work email** and **Agency name** contain those fictional values. |
+| F6 | Under **How can we help?**, select **Agency growth**. In **What would you like to discuss?**, enter a message with a fresh unique marker such as `LM-NATIVE-yourname-date-time`. Select **Send request** once. | **Thank you. Your request has been received.** appears. The fields clear and the form remains visible. |
+| F7 | Open the receiver's inspection inbox, select the **POST** with your marker, then inspect **Request Content** or **Raw Content**. | JSON matches the five submitted values; request metadata identifies **Contact your team**. Match the unique message marker. |
+| F8 | Reload to clear the confirmation. Repeat with a new message marker and leave earlier receipts unchanged. | No saved-work reset is needed. Portal reset does not erase webhook receipts. |
+
+Before entering the fictional values at F5, you can optionally select **Send request** with empty fields, then try an invalid **Work email**. Five required-field errors appear; an invalid email shows **Email address must follow the format user@example.com**. Neither invalid attempt sends a receipt. Native submissions remain separate from **Your service & follow-up requests**, which lists the custom conversation flow.
 
 The visitor's success message and the receiver's matching request are two separate observations. Check both. Do not infer backend storage, email delivery or Salesforce processing from a rendered form or a success screen.
 
