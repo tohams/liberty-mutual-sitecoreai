@@ -4935,3 +4935,89 @@ p {
   padding-left: clamp(1.25rem, 3vw, 2.5rem);
   padding-right: clamp(1.25rem, 3vw, 2.5rem);
 }
+
+/* Split navigation keeps the familiar overview link and adds an explicit disclosure. */
+.nav-group-trigger {
+  display: flex;
+  align-items: stretch;
+  border-radius: 8px;
+}
+.nav-group-trigger.active {
+  background: var(--navy-light, #efedf6);
+}
+.nav-group-trigger .nav-item {
+  flex: 1;
+  min-width: 0;
+  padding-right: 0;
+}
+.nav-group-trigger.active .nav-item {
+  color: var(--navy);
+  font-weight: 700;
+}
+.nav-group-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  min-height: 44px;
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+  border-radius: 8px;
+}
+.nav-group-toggle svg {
+  transform: rotate(90deg);
+}
+.nav-group-toggle[aria-expanded="true"] svg {
+  transform: rotate(-90deg);
+}
+.nav-submenu {
+  list-style: none;
+  margin: 0.25rem 0 0.7rem 1.5rem;
+  padding: 0 0 0 1.25rem;
+  border-left: 1px solid var(--line);
+}
+.nav-submenu[hidden] {
+  display: none;
+}
+.nav-submenu a {
+  display: block;
+  font-size: 0.77rem;
+  line-height: 1.45;
+  color: var(--muted);
+  padding: 0.7rem 0.5rem;
+  border-radius: 6px;
+}
+.nav-submenu a[aria-current="page"],
+.nav-submenu a:hover {
+  color: var(--navy);
+  background: #efedf6;
+  font-weight: 650;
+}
+.nav-group-toggle:focus-visible,
+.nav-submenu a:focus-visible {
+  outline: 3px solid #006b68;
+  outline-offset: 2px;
+}
+.growth-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.3rem;
+}
+.growth-campaign-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.growth-campaign-link:focus-visible {
+  outline: 3px solid #ffd000;
+  outline-offset: 4px;
+}

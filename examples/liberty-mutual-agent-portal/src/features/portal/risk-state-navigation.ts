@@ -9,6 +9,7 @@ const STATE_AWARE_ROUTES = new Set([
   "appetite",
   "resources",
   "learning",
+  "growth",
 ]);
 
 /** A browsing hint only. Transaction authority is evaluated separately. */

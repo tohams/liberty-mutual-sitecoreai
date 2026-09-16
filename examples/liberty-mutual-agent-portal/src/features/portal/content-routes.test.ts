@@ -91,3 +91,15 @@ test("My workspace navigation matches only Home while sections include their chi
   assert.equal(isPortalNavigationActive("/resources/texas-guide", "/resources"), true);
   assert.equal(isPortalNavigationActive("/resources-other", "/resources"), false);
 });
+
+
+test("growth campaigns retain the native page and component personalization rewrite", () => {
+  const rewritten = getPersonalizedRewrite("/growth/small-business", ["campaign-page-variant", "component_growth-opportunity"]);
+  const path = rewritten.split("/").filter(Boolean);
+  const contentPath = portalContentPath(normalizePersonalizedRewrite(rewritten), path);
+  assert.equal(contentPath, path);
+  assert.deepEqual(getPersonalizedRewriteData(contentPath.join("/")), {
+    variantId: "campaign-page-variant",
+    componentVariantIds: ["component_growth-opportunity"],
+  });
+});

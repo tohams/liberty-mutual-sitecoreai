@@ -174,7 +174,7 @@ export function SupportScreen() {
               name="topic"
               placeholder="Tell us about the account, product, or opportunity."
               required
-              maxLength={2000}
+              maxLength={1000}
             />
           </label>
           <p className="form-note">

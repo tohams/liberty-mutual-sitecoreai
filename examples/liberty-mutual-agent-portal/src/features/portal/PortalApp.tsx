@@ -167,7 +167,11 @@ export function PortalApp({
               <div className="content-utility">
                 <Link
                   href={withRiskState(
-                    section === "products" ? "/products" : "/resources",
+                    section === "products"
+                      ? "/products"
+                      : section === "growth"
+                        ? "/growth"
+                        : "/resources",
                     riskState,
                   )}
                   className="text-link"
@@ -175,7 +179,9 @@ export function PortalApp({
                   <PortalIcon name="arrow" width="16" className="back-arrow" />
                   {section === "products"
                     ? "Back to products & appetite"
-                    : "Back to learning & resources"}
+                    : section === "growth"
+                      ? "Back to agency growth"
+                      : "Back to learning & resources"}
                 </Link>
                 {currentResource && !isEditing && (
                   <button
