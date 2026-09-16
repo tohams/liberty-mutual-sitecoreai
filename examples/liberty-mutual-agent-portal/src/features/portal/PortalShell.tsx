@@ -2,7 +2,7 @@
 
 import { PortalLink as Link } from "@/components/ui/portal-link";
 import Image from "next/image";
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { PortalIcon, type IconName } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";
@@ -36,6 +36,8 @@ export function PortalShell({
   );
   const editorPreview = data.session.runId === "editor";
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [growthOpen, setGrowthOpen] = useState(route.startsWith("/growth"));
+  const growthToggle = useRef<HTMLButtonElement>(null);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
@@ -145,32 +147,110 @@ export function PortalShell({
         <div className="sidebar-top">
           <span className="eyebrow">YOUR PARTNERSHIP. YOUR POTENTIAL.</span>
           <nav>
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={withRiskState(item.href, riskState)}
-                className={`nav-item ${isPortalNavigationActive(activeRoute, item.href) ? "active" : ""}`}
-                aria-current={
-                  isPortalNavigationActive(activeRoute, item.href) ? "page" : undefined
-                }
-                onClick={() => setMobileOpen(false)}
-              >
-                <PortalIcon name={item.icon} />
-                <span>{item.label}</span>
-                {item.href === "/quote" &&
-                  data.submissions.filter(
-                    (item) => item.status === "Information needed",
-                  ).length > 0 && (
-                    <span className="nav-count">
-                      {
-                        data.submissions.filter(
-                          (item) => item.status === "Information needed",
-                        ).length
+            {navigation.map((item) =>
+              item.href === "/growth" ? (
+                <div
+                  key={item.href}
+                  className="nav-group"
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape" && growthOpen) {
+                      event.stopPropagation();
+                      setGrowthOpen(false);
+                      growthToggle.current?.focus();
+                    }
+                  }}
+                >
+                  <div
+                    className={`nav-group-trigger ${isPortalNavigationActive(activeRoute, item.href) ? "active" : ""}`}
+                  >
+                    <Link
+                      href={withRiskState(item.href, riskState)}
+                      className="nav-item"
+                      aria-current={
+                        activeRoute === item.href ? "page" : undefined
                       }
-                    </span>
-                  )}
-              </Link>
-            ))}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <PortalIcon name={item.icon} />
+                      <span>{item.label}</span>
+                    </Link>
+                    <button
+                      ref={growthToggle}
+                      type="button"
+                      className="nav-group-toggle"
+                      aria-expanded={growthOpen}
+                      aria-controls="agency-growth-pages"
+                      aria-label={
+                        growthOpen
+                          ? "Hide Agency growth pages"
+                          : "Show Agency growth pages"
+                      }
+                      onClick={() => setGrowthOpen(!growthOpen)}
+                    >
+                      <PortalIcon name="chevron" width="16" />
+                    </button>
+                  </div>
+                  <ul
+                    id="agency-growth-pages"
+                    className="nav-submenu"
+                    hidden={!growthOpen}
+                  >
+                    <li>
+                      <Link
+                        href={withRiskState("/growth", riskState)}
+                        aria-current={route === "/growth" ? "page" : undefined}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        Overview
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href={withRiskState(
+                          "/growth/small-business",
+                          riskState,
+                        )}
+                        aria-current={
+                          route === "/growth/small-business"
+                            ? "page"
+                            : undefined
+                        }
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        Small business growth
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={withRiskState(item.href, riskState)}
+                  className={`nav-item ${isPortalNavigationActive(activeRoute, item.href) ? "active" : ""}`}
+                  aria-current={
+                    isPortalNavigationActive(activeRoute, item.href)
+                      ? "page"
+                      : undefined
+                  }
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <PortalIcon name={item.icon} />
+                  <span>{item.label}</span>
+                  {item.href === "/quote" &&
+                    data.submissions.filter(
+                      (item) => item.status === "Information needed",
+                    ).length > 0 && (
+                      <span className="nav-count">
+                        {
+                          data.submissions.filter(
+                            (item) => item.status === "Information needed",
+                          ).length
+                        }
+                      </span>
+                    )}
+                </Link>
+              ),
+            )}
           </nav>
         </div>
         <div className="sidebar-bottom">

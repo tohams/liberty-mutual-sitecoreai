@@ -2,10 +2,14 @@
 
 import { PortalLink as Link } from "@/components/ui/portal-link";
 import { PortalIcon } from "@/components/ui/portal-icon";
+import { useSearchParams } from "next/navigation";
+import { readRiskState, withRiskState } from "../portal/risk-state-navigation";
 import { dateLabel, money, usePortal } from "../portal/portal-context";
 
 export function GrowthScreen() {
   const { data } = usePortal();
+  const query = useSearchParams();
+  const state = readRiskState(query.get("state"), data.agent.licensedStates);
   const total = data.agency.production.reduce(
     (sum, item) => sum + item.writtenPremiumCents,
     0,
@@ -48,10 +52,19 @@ export function GrowthScreen() {
             See where your strengths are taking you, and make room for the
             possibilities ahead.
           </p>
-          <a href="#growth-plan" className="button button-primary">
-            Explore a growth path
-            <PortalIcon name="arrow" width="16" />
-          </a>
+          <div className="growth-hero-actions">
+            <a href="#growth-plan" className="button button-primary">
+              Explore a growth path
+              <PortalIcon name="arrow" width="16" />
+            </a>
+            <Link
+              href={withRiskState("/growth/small-business", state)}
+              className="growth-campaign-link"
+            >
+              Small business growth
+              <PortalIcon name="arrow" width="16" />
+            </Link>
+          </div>
         </div>
         <div className="growth-hero-chart" aria-hidden="true">
           <span style={{ height: "27%" }} />

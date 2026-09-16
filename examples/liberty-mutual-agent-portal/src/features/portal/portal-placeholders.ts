@@ -3,6 +3,10 @@ import type { Page, RouteData } from "@sitecore-content-sdk/nextjs";
 
 /** These keys match the owned Sitecore placeholder settings and layout definitions. */
 export const PORTAL_PLACEHOLDERS = {
+  campaignPage: {
+    name: "headless-campaign-page",
+    componentName: "CampaignPage",
+  },
   guidance: {
     name: "headless-agent-guidance",
     componentName: "AgentGuidance",
@@ -30,6 +34,7 @@ export type PortalPlaceholderPlacement = {
 /** Operational aliases use the same authored composition as their owning page. */
 function placeholdersForRoute(route: string): PortalPlaceholder[] {
   const [section, child] = route.split("/").filter(Boolean);
+  if (section === "growth" && child) return ["campaignPage"];
   if (section === "resources" && child) return ["resourceArticle"];
   if (section === "resources" || section === "learning")
     return ["resourceSearch", "guidance"];
@@ -59,7 +64,8 @@ export function getPortalPlaceholders(
       !mode.isEditing &&
       !mode.isPreview &&
       !hasCanonicalKey &&
-      slot !== "productSpotlight";
+      slot !== "productSpotlight" &&
+      slot !== "campaignPage";
     const name = useLegacy ? "headless-main" : setting.name;
     const candidates = rendering.placeholders[name] ?? [];
     const contents = candidates.filter(
