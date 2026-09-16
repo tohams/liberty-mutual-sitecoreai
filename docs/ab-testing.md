@@ -61,7 +61,7 @@ For a real customer study, agree the primary metric, minimum traffic and duratio
 
 ## Rehearsal, reset and lifecycle
 
-Use an assigned reviewer pack and sign out when finished. A normal authenticated visit can create native experiment and engagement history even if it writes no saved work. Editor/preview rendering is for content inspection and does not prove live tracking or attribution.
+Use the [production portal](https://liberty-mutual-agent-portal.vercel.app/login) with an assigned reviewer pack to verify live treatment delivery and attribution, then sign out when finished. A normal authenticated visit can create native experiment and engagement history even if it writes no saved work. Editor/preview rendering is for content inspection and does not prove live tracking or attribution. The designated editing host uses Preview content access; a saved or expired treatment can remain visible there even when it is unavailable in published delivery.
 
 Production and the designated preview have separate operational namespaces but share the Sitecore site, experiment configuration and native profile identity for the same pack/person/generation. Preview traffic can therefore enter the same native history. Record the host and rehearsal period rather than describing preview as an isolated experiment population.
 

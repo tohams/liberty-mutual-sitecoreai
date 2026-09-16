@@ -109,7 +109,7 @@ for (const [page, title, approved] of [
         {
           name: "actionLink",
           value:
-            '<link text="Plan a growth conversation" linktype="external" url="#growth-contact" />',
+            '<link text="Plan a growth conversation" linktype="anchor" anchor="growth-contact" />',
         },
         { name: "__Workflow", value: brace(IDS.datasourceWorkflow) },
         { name: "__Workflow state", value: brace(IDS.datasourceApproved) },
