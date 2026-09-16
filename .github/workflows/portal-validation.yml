@@ -52,6 +52,8 @@ jobs:
           python -m pip install -r authoring/scripts/requirements.txt
           python authoring/scripts/build-resource-taxonomy-seed.py --check
           python authoring/scripts/build-resource-page-seed.py --check
+          python authoring/scripts/build-campaign-seed.py --check
+          python authoring/scripts/build-support-form-seed.py --check
           python authoring/scripts/validate-content-seed.py
       - name: Validate placement migration and preservation safeguards
         working-directory: .
@@ -59,6 +61,11 @@ jobs:
       - name: Validate resource creation and local image authoring safeguards
         working-directory: .
         run: node --test authoring/scripts/configure-resource-page-authoring.test.cjs
+      - name: Validate campaign composition and scoped scheduling safeguards
+        working-directory: .
+        run: |
+          node --test authoring/scripts/campaign-authoring.test.cjs authoring/scripts/schedule-campaign-publication.test.cjs authoring/scripts/configure-support-native-form.test.cjs
+          node authoring/personalization/verify-small-business-growth-opportunity.cjs
       - name: Validate editable content deployment safeguards
         working-directory: .
         run: node --test authoring/scripts/deploy-content.test.cjs
@@ -69,7 +76,7 @@ jobs:
         working-directory: .
         run: |
           dotnet tool restore
-          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch
+          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch -i LibertyMutual.CampaignPageBranch -i LibertyMutual.SupportForm
         env:
           DOTNET_ROLL_FORWARD: Major
           DOTNET_CLI_TELEMETRY_OPTOUT: '1'

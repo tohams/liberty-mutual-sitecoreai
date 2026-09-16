@@ -1,0 +1,13 @@
+---
+ID: 47f04f34-9b1e-5dd5-a1f2-11d43e9de633
+Parent: 06b545e6-3068-5197-83df-af0ebb2f0b1f
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutual/CampaignHero/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

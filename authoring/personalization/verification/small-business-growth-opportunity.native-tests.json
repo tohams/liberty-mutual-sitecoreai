@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-09-16T13:34:26.024808+00:00",
+  "method": "SitecoreAI native Custom Value Test UI loaded actual canonical imported CDP profile IDs and ran saved expression. Persisted profile records were not edited.",
+  "customValueId": "9faad837-0e23-4b5b-af10-c6883dba86ac",
+  "results": [
+    {
+      "name": "Avery Brooks",
+      "profileId": "477f6b6f-673b-42e3-83ab-1bf0a8aa0ed2",
+      "result": true
+    },
+    {
+      "name": "Daniel Ortiz",
+      "profileId": "87fc2285-bd5e-47ce-9f93-9df0dd480c04",
+      "result": false
+    },
+    {
+      "name": "Maya Chen",
+      "profileId": "c1d61ca6-b37b-4c65-a345-946734e541c0",
+      "result": false
+    }
+  ],
+  "publication": "Published status and success notification observed after Confirm publish",
+  "localBoundaryCases": 16,
+  "browserDelivery": {
+    "date": "2026-09-16",
+    "url": "https://liberty-mutual-agent-portal.vercel.app/growth/small-business",
+    "method": "Normal login with sign-out between users; published Live delivery context",
+    "avery.03": "Build on your personal-lines relationships",
+    "daniel.03": "Turn local knowledge into a stronger submission",
+    "maya.03": "Turn local knowledge into a stronger submission"
+  }
+}

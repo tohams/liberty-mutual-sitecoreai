@@ -35,6 +35,42 @@
           {
             "path": "/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page",
             "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-page",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-hero",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-main",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-sidebar",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Home/growth/small-business",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Home/growth/campaign-practice",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Home/growth/campaign-schedule-check",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-support-form",
+            "scope": "Ignored"
           }
         ]
       }

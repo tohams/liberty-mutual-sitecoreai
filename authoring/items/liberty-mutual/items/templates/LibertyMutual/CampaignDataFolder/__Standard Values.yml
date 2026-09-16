@@ -1,0 +1,17 @@
+---
+ID: f36c994f-e5c8-560d-8951-a2d007acea12
+Parent: c18c5ee9-43c0-5fb3-a3b8-bd6a77d08e07
+Template: c18c5ee9-43c0-5fb3-a3b8-bd6a77d08e07
+Path: /sitecore/templates/Project/LibertyMutual/CampaignDataFolder/__Standard Values
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{06B545E6-3068-5197-83DF-AF0EBB2F0B1F}|{6F08AD64-AA78-533E-89C8-4BD0579E5324}|{DD639201-740A-52F7-B47B-12E5F4C252AE}|{F5A1C713-7121-51BB-A9CC-4920B3186FEC}|{F10AA78C-6FD9-585C-B264-81B2A772D8C5}|{F89D38F9-867C-5B59-99B2-212A2EE8B89E}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

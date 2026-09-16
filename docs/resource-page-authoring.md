@@ -18,6 +18,8 @@ Modern Media Library assets require an active public link to be selected for the
 
 ## Publishing and image changes
 
+Inspect drafts in Page builder through the **Default** editing host. After publication, verify the article and its image on the [published portal](https://liberty-mutual-agent-portal.vercel.app/login); check its Search result there after reindexing. The designated editing preview uses Preview content access and can display unpublished or expired items, so it cannot establish successful publication or removal from Live Experience Edge.
+
 There are three separate delivery steps:
 
 - **Media public link:** makes the image rendition retrievable. It does not publish an article or change its approval status.

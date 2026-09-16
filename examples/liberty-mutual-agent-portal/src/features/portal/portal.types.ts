@@ -12,6 +12,7 @@ export interface PortalAppProps {
   workspaceEditorial?: ReactNode;
   resourcesSearch?: ReactNode;
   productsSpotlight?: ReactNode;
+  supportForm?: ReactNode;
   pageContent?: ReactNode;
   isEditing?: boolean;
 }

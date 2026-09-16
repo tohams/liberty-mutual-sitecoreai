@@ -3,7 +3,7 @@
 set -euo pipefail
 if [[ $# -lt 1 || "$1" == "--help" ]]; then
   echo 'Usage: authoring/scripts/deploy-content.sh ENVIRONMENT [--seed | --seed-taxonomy | --seed-branch] [--publish] [--what-if]'
-  echo 'Normal release updates Model and SitePresentation only. --seed creates missing editorial, taxonomy and branch items; --seed-taxonomy creates missing metadata lists; --seed-branch creates the missing Resource page branch only.'
+  echo 'Normal release updates Model, SitePresentation and SupportForm only. --seed creates missing editorial, taxonomy and branch items; --seed-taxonomy creates missing metadata lists; --seed-branch creates the missing Resource page branch only.'
   exit 0
 fi
 portal_environment="$1"
@@ -31,10 +31,12 @@ import json
 from pathlib import Path
 base=Path('authoring/items/liberty-mutual')
 d=json.loads((base/'LibertyMutual.Content.module.json').read_text())
-keys=['headless-agent-guidance','headless-resource-search','headless-resource-article','headless-products-spotlight','headless-resource-image']
+keys=['headless-agent-guidance','headless-resource-search','headless-resource-article','headless-products-spotlight','headless-resource-image','headless-campaign-page','headless-campaign-hero','headless-campaign-main','headless-campaign-sidebar','headless-support-form']
 expected=[{'path':'/liberty-mutual-agent-portal/Presentation/Placeholder Settings/'+key,'scope':'Ignored'} for key in keys]
 expected.append({'path':'/liberty-mutual-agent-portal/Data/Taxonomy','scope':'Ignored'})
 expected.append({'path':'/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page','scope':'Ignored'})
+expected.append({'path':'/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page','scope':'Ignored'})
+expected.extend({'path':'/liberty-mutual-agent-portal/Home/growth/'+slug,'scope':'Ignored'} for slug in ['small-business','campaign-practice','campaign-schedule-check'])
 expected.sort(key=lambda rule:rule['path'])
 if len(d['items']['includes'])!=1:
     raise SystemExit('Refusing seed push: expected one owned content include.')
@@ -42,7 +44,7 @@ for include in d['items']['includes']:
     if (include['path']!='/sitecore/content/LibertyMutual' or include['allowedPushOperations']!='CreateOnly'
             or include.get('scope','ItemAndDescendants')!='ItemAndDescendants'
             or sorted(include.get('rules',[]),key=lambda rule:rule['path'])!=expected):
-        raise SystemExit('Refusing seed push: content must remain CreateOnly with only site placeholder, taxonomy and branch exclusions.')
+        raise SystemExit('Refusing seed push: content must remain CreateOnly with exact site placeholder, taxonomy, branch and API-owned campaign exclusions.')
 taxonomy=json.loads((base/'LibertyMutual.Taxonomy.module.json').read_text())
 includes=taxonomy['items']['includes']
 if (len(includes)!=1 or includes[0]['path']!='/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy'
@@ -53,11 +55,19 @@ if (len(includes)!=1 or includes[0]['path']!='/sitecore/content/LibertyMutual/li
 branch=json.loads((base/'LibertyMutual.ResourcePageBranch.module.json').read_text())
 if branch['items']['includes']!=[{'name':'resource-page-branch','path':'/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page','allowedPushOperations':'CreateOnly'}]:
     raise SystemExit('Refusing branch seed: expected only the owned CreateOnly Resource page subtree.')
+support=json.loads((base/'LibertyMutual.SupportForm.module.json').read_text())
+expected_support=[
+    {'name':'support-form-layout','path':'/sitecore/layout/Layouts/Project/LibertyMutual/SupportLayout','scope':'SingleItem','allowedPushOperations':'CreateAndUpdate'},
+    {'name':'support-form-placeholder','path':'/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-support-form','scope':'SingleItem','allowedPushOperations':'CreateAndUpdate'},
+    {'name':'support-form-site','path':'/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-support-form','scope':'SingleItem','allowedPushOperations':'CreateAndUpdate'},
+]
+if support['items']['includes']!=expected_support:
+    raise SystemExit('Refusing Support Form push: expected exactly three owned layout/placeholder definitions.')
 deployed=json.loads(Path('xmcloud.build.json').read_text())['deployItems']['modules']
-if len(deployed)!=3 or set(deployed)!={'nextjs-starter','LibertyMutual.Model','LibertyMutual.SitePresentation'}:
+if len(deployed)!=4 or set(deployed)!={'nextjs-starter','LibertyMutual.Model','LibertyMutual.SitePresentation','LibertyMutual.SupportForm'}:
     raise SystemExit('Refusing deployment: editorial content, taxonomy and branches must remain outside authoring resource packages.')
 PY
-dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch
+dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch -i LibertyMutual.SupportForm
 if [[ "$portal_what_if" == true ]]; then
   dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.Model --what-if
 else
@@ -94,6 +104,12 @@ if [[ "$portal_what_if" == true ]]; then
   dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SitePresentation --what-if
 else
   dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SitePresentation
+fi
+# The native Form is provided by Sitecore; only Support layout/slots are pushed.
+if [[ "$portal_what_if" == true ]]; then
+  dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SupportForm --what-if
+else
+  dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SupportForm
 fi
 if [[ "$portal_publish" == true && "$portal_what_if" == false ]]; then
   for portal_path in \

@@ -3,7 +3,8 @@
     "modules": [
       "nextjs-starter",
       "LibertyMutual.Model",
-      "LibertyMutual.SitePresentation"
+      "LibertyMutual.SitePresentation",
+      "LibertyMutual.SupportForm"
     ]
   },
   "renderingHosts": {},

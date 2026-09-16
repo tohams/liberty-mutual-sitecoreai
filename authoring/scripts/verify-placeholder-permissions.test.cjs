@@ -30,7 +30,7 @@ test('real redacted Home chrome reproduces the native 17-rendering permission fa
   assert(result.placeholders[0].allowedRenderingIds.includes(RENDERINGS.ResourceArticle));
 });
 test('each page role requires the exact intended key and one rendering per native insertion region', () => {
-  for (const route of ['/', '/products', '/products/small-commercial', '/resources', '/resources/build-a-bop-submission']) {
+  for (const route of ['/', '/support', '/products', '/products/small-commercial', '/resources', '/resources/build-a-bop-submission']) {
     const result = inspectPermissions(responseFor(route, 7), page(route, 7));
     assert.equal(result.passed, true); assert.deepEqual(result.placeholders.map(f => f.placeholder), Object.keys(placements(route)));
     assert(result.placeholders.every(f => f.allowedRenderingIds.length === 1));

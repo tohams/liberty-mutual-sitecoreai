@@ -1,0 +1,20 @@
+---
+ID: 3f3a1f50-f865-57dc-bed7-9dc280e6850c
+Parent: e601261f-f47f-4831-b91e-ef70efab3276
+Template: d2a6884c-04d5-4089-a64e-d27ca9d68d4c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-sidebar
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: headless-campaign-sidebar-{*}
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Value: "{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}|{E7E25E1F-7479-5D71-B846-91AA45BE58D9}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

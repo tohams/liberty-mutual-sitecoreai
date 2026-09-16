@@ -1,0 +1,13 @@
+---
+ID: 378d614c-b09d-5d52-9edb-84a3f2e6951e
+Parent: 6b763c11-deac-5afa-99fa-453f30e4bec6
+Template: c18c5ee9-43c0-5fb3-a3b8-bd6a77d08e07
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page/$name/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260916T160000Z

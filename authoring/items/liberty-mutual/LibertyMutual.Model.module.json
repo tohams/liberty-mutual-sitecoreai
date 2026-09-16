@@ -16,12 +16,24 @@
       {
         "name": "placeholders",
         "path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutual",
-        "allowedPushOperations": "CreateAndUpdate"
+        "allowedPushOperations": "CreateAndUpdate",
+        "rules": [
+          {
+            "path": "/headless-support-form",
+            "scope": "Ignored"
+          }
+        ]
       },
       {
         "name": "layouts",
         "path": "/sitecore/layout/Layouts/Project/LibertyMutual",
-        "allowedPushOperations": "CreateAndUpdate"
+        "allowedPushOperations": "CreateAndUpdate",
+        "rules": [
+          {
+            "path": "/SupportLayout",
+            "scope": "Ignored"
+          }
+        ]
       }
     ]
   }
