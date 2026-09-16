@@ -65,10 +65,21 @@ Prerequisites: the campaign model is deployed, Node.js 24 is available, and an o
    node authoring/scripts/schedule-campaign-publication.cjs demo --run --apply --journal /absolute/private/campaign-schedule.json
    ```
 
-5. Before the start, confirm the dedicated page is absent from Experience Edge. After the start operation completes, inspect [Scheduled campaign preview](https://liberty-mutual-agent-portal.vercel.app/growth/campaign-schedule-check) while signed in. Allow publishing and cache propagation time; native job completion is not proof of immediate global delivery.
+5. Before the start, confirm the dedicated page is absent from Experience Edge. After the start operation completes, inspect [Scheduled campaign preview](https://liberty-mutual-agent-portal.vercel.app/growth/campaign-schedule-check) while signed in. Use this published-site URL for availability checks: Page builder and editing hosts configured with Preview content access can still show unpublished or expired items. Allow publishing and cache propagation time; native job completion is not proof of immediate global delivery.
 6. After the end operation completes, confirm that the route and its expired local content are absent from Experience Edge and that the deployed route is no longer available. The CMS items remain available for inspection. The journal records both publishing operation IDs and their completion status.
 
 The script refuses to overwrite an existing scheduling-proof page, publish unrelated items, widen the subtree, continue after content changes, or retry an uncertain publication submission. It resumes a confirmed publishing operation using the same journal. Expiration is a real publish operation that reevaluates native availability dates; no client-side hiding is used as evidence of unpublishing.
+
+### Prepare the exercise for another run
+
+The fixed `campaign-schedule-check` path is deliberately not overwritten. After the earlier run has completed, preserve its journal and use the following reviewed cleanup before preparing a new run:
+
+1. Confirm the earlier journal records both publishing operations as complete, the end time has passed, and the published-site URL above is unavailable. If a publishing submission is uncertain, resolve it using its recorded operation ID before proceeding.
+2. In Page builder, select **Agency growth → Scheduled campaign preview**. Verify its full path is `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/campaign-schedule-check` and its item ID matches the page recorded in that run's journal. Inspect its local `Data` folder: it must contain only the seven items recorded in that journal. Stop if other content or versions have been added.
+3. Open that page's **Content tree options (… ) → Delete**. In **Delete item**, verify the dialog names only your scheduling page, then select **Delete**. SitecoreAI moves the page and its children to the recycle bin, where they remain recoverable. Do not select the **Agency growth** parent, **Small-business growth**, or **Campaign practice**; do not empty the recycle bin. [SitecoreAI item deletion behavior](https://doc.sitecore.com/sai/en/users/sitecoreai/build-pages/managing-the-site-tree/create-delete-and-rename-items.html).
+4. Confirm only `campaign-schedule-check` has disappeared from the content tree. Choose a new private journal filename and fresh UTC timestamps, then repeat the prepare and run commands above. Retain the old journal with its original item IDs and operation IDs; never reuse it for the newly created page.
+
+Deleting the expired exercise page does not publish its siblings or reset agent work. If it is still available on the published site, investigate publishing before cleaning it up or beginning another run.
 
 ## Provision another environment
 

@@ -106,6 +106,18 @@ test("branch rule append preserves Resource page rule and is idempotent", () => 
   assert.throws(() => seed.branchRule("<invalid>"));
 });
 
+test("campaign in-page actions use native anchor links with a rendered target", () => {
+  const anchors = new Set(M.instances.map((instance) => instance.anchor));
+  const callout = seed.desired.find(
+    (spec) => spec.path === M.PAGE + "/Data/Personal lines growth opportunity",
+  );
+  const link = callout.fields.find((field) => field.name === "actionLink").value;
+  assert.match(link, /linktype="anchor"/);
+  const target = link.match(/anchor="([^"]+)"/)?.[1];
+  assert(anchors.has(target), "The native anchor must identify a campaign region");
+  assert(!/url="#/.test(link), "External fragment URLs receive a protocol in native delivery");
+});
+
 test("editable seed is limited to new campaigns and exposes rich text/date fields without claiming scheduling", () => {
   for (const spec of seed.desired)
     assert(

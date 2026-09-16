@@ -6,6 +6,8 @@
 
 ## Three independent capabilities
 
+For a new live demonstration, use the [production portal](https://liberty-mutual-agent-portal.vercel.app/login) and an assigned reviewer pack. The historical preview observations below remain evidence for those deployments; the current editing host has Preview content access and is intended for draft inspection and isolated saved work. A rendered preview variant does not establish current published targeting. Both hosts can contribute to the same native profile history for the same person, pack and generation.
+
 | Capability | Surface | Selection input | Current evidence |
 | --- | --- | --- | --- |
 | Known-attribute personalization | Workspace `AgentGuidance` | Native UDL identity, imported growth-cohort boolean and agent role | Existing live decision table and connected delivery evidence; see [native configuration](../authoring/personalization/README.md). |
