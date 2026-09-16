@@ -7,5 +7,15 @@
   "recordedOn": "2026-09-16",
   "sourceSha256": "6a8cd7ba21b1856912d0121163e605b40f2535373062fc12f6f2a44496a9ca9d",
   "scope": "Campaign callout content targeting; no transaction authorization; fixture-sourced imported agency premium attributes",
-  "decisionTableConnection": "Pending native Page Builder connection and live browser acceptance."
+  "decisionTableConnection": {
+    "name": "Liberty Mutual - Campaign growth opportunity",
+    "status": "Started",
+    "pageId": "53cb3090-a1d6-4ec3-9a61-130c4e7fb2a4",
+    "pagePath": "/growth/small-business",
+    "component": "CampaignCallout",
+    "componentUid": "165a66e0-dfe6-5d8c-b660-92d5308c1488",
+    "variantId": "36a29ff3-a317-4519-bf1f-04e29cc1f1bf",
+    "whenTrueDatasource": "local:/Data/Personal lines growth opportunity",
+    "defaultDatasource": "page:/Data/Growth opportunity"
+  }
 }

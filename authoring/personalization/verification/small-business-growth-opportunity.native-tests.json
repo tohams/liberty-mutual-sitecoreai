@@ -21,5 +21,12 @@
   ],
   "publication": "Published status and success notification observed after Confirm publish",
   "localBoundaryCases": 16,
-  "browserDelivery": "pending"
+  "browserDelivery": {
+    "date": "2026-09-16",
+    "url": "https://liberty-mutual-agent-portal.vercel.app/growth/small-business",
+    "method": "Normal login with sign-out between users; published Live delivery context",
+    "avery.03": "Build on your personal-lines relationships",
+    "daniel.03": "Turn local knowledge into a stronger submission",
+    "maya.03": "Turn local knowledge into a stronger submission"
+  }
 }

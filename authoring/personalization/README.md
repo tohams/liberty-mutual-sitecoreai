@@ -7,8 +7,31 @@ This directory preserves source and evidence for native SitecoreAI personalizati
 - Workspace **AgentGuidance** uses the known role and agency growth flag described below.
 - Learning & resources has a separate [native Resources A/B test](../../docs/ab-testing.md).
 - Products & appetite uses **ProductSpotlight** and the built-in Top Affinity value, with [page assignments, model, native decision and verified browsing journeys](../../docs/affinity-personalization.md).
+- Small business growth uses **CampaignCallout** and the calculated premium-share condition described below.
 
 These configurations are independent. Changing a serialized datasource does not configure cloud decisions, transfer native history or authorize insurance transactions.
+
+## Calculated small-business growth opportunity
+
+The published Boolean custom value **Liberty Mutual - Small business growth opportunity** evaluates the identified agent's role and agency business mix. A principal or producer qualifies when small-commercial premium is less than 20% of the combined personal-lines and small-commercial premium. Missing, invalid or negative metrics, an unrelated identity provider, and non-matching roles return false. Values are imported fictional agency metrics; this sandbox has no live Salesforce data connection.
+
+The active **Liberty Mutual - Campaign growth opportunity** decision table applies the true result to the CampaignCallout on `/growth/small-business`. The true variant uses **Data/Personal lines growth opportunity**; the original uses **Data/Growth opportunity**. Its guidance has no effect on licensing, authorization, product eligibility or underwriting.
+
+- [Saved JavaScript expression](custom-values/small-business-growth-opportunity.js)
+- [Native configuration identifiers](custom-values/small-business-growth-opportunity.metadata.json)
+- [Native profile tests and published browser observations](verification/small-business-growth-opportunity.native-tests.json)
+
+In Page Builder, select **Small-business growth → Layers → CampaignCallout → Edit personalization rules** to inspect the table. Select **Original** or the **is true** variant to preview its authored copy. Avoid stopping the running personalization during a walkthrough.
+
+To see actual decisions, use the [published portal login](https://liberty-mutual-agent-portal.vercel.app/login). Avery sees **Build on your personal-lines relationships**; Daniel and Maya see **Turn local knowledge into a stronger submission**. Sign out between personas. The editing preview can show unpublished content and is not the acceptance surface for Live delivery or expiration.
+
+Run the 16 local boundary checks from the repository root:
+
+```bash
+node authoring/personalization/verify-small-business-growth-opportunity.cjs
+```
+
+Changes to this source still require an explicit native Custom Value update, tests and publication. Git/Vercel deployments do not deploy the decision configuration. Native personalization and an A/B test cannot run on the same component; this campaign callout remains separate from the Resources A/B component.
 
 ## Small-business growth role
 
