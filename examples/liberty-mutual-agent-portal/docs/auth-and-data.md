@@ -14,6 +14,8 @@ This application uses fictional insurance records behind a signed session. Sitec
 | `src/server/http.ts` | Same-origin validation, bounded JSON requests, private responses, safe errors |
 | `src/app/api/auth` | Login and logout handlers |
 | `src/app/api/portal` | Authenticated workspace, actions, account documents, and protected operator reset |
+| `src/app/api/workshops/reset` | Documentation-session access to reviewer status and a complete clean reset on the current host |
+| `src/server/workshops/reset.ts` | Validates the fixed clean-reset contract and returns safe status, progress and current profile identities |
 | `fixtures` | Versioned fictional source records; never import from a client component |
 
 Server modules import `server-only`. UI components consume `PortalBootstrap` and send a discriminated `PortalAction`; they never read fixture files or decide account authorization. Each request checks the signed agent-to-agency mapping and record scope. State-sensitive actions also check current dated license authority, agency/producer carrier appointments, product/state availability and relevant assigned-producer eligibility. A principal can access agency work across appointed lines but does not bypass state authority. Browsing product and educational content does not grant transaction permission.
@@ -55,7 +57,7 @@ Fifteen packs (`01`–`15`) each contain the same seven identities, for 105 fict
 | `marcus` | Marcus Reed | Harborline Risk Partners | Surety specialist |
 | `elena` | Elena Park | Summit Specialty Partners | Wholesale broker |
 
-Reserve pack `01` for workshop presenters. Assign attendee and spare packs from `02`–`15` (14 non-presenter packs), keeping that suffix when switching among all seven personas. For example, the attendee assigned pack `12` uses `avery.12`, `maya.12`, `jordan.12`, `daniel.12`, `priya.12`, `marcus.12` and `elena.12`. Never reset a pack while an attendee is using it. The seven roles, licenses, appointments and four fictional agencies are unchanged across packs; the suffix selects an isolated copy, not a different role.
+Reserve pack `01` for workshop presenters. Assign attendee and spare packs from `02`–`15` (14 non-presenter packs), keeping that suffix when switching among all seven personas. For example, the attendee assigned pack `12` uses `avery.12`, `maya.12`, `jordan.12`, `daniel.12`, `priya.12`, `marcus.12` and `elena.12`. The reset page defaults to the signed-in reviewer's pack and allows any number from `01`–`15`; check the selected number because its seven personas share the reset. The seven roles, licenses, appointments and four fictional agencies are unchanged across packs; the suffix selects an isolated copy, not a different role.
 
 For example, `maya.01` and `maya.02` have different saved work and different native profile identifiers. The three Cedar Ridge users within one pack intentionally share the agency's operational work; favorites and learning registrations belong to the individual agent. Sharing the exact same username also shares its native marketing history. Each pack can be restarted on demand with a newly imported and verified set of seven native profiles. The original fixture generations (`0`–`3`) are historical seed sets, not a four-restart limit. The local developer exercise remains isolated on each workstation and can continue to use `daniel.01` with tracking disabled. Resource authoring uses each attendee’s own Sitecore sign-in and uniquely named unpublished page, not a portal reviewer pack.
 
@@ -92,10 +94,14 @@ All workspace and document responses use `Cache-Control: private, no-store`, `Va
 | `GET /api/portal/bootstrap` | Returns the current `PortalBootstrap` |
 | `POST /api/portal/actions` | Validates and persists a `PortalAction`, then returns a fresh bootstrap |
 | `GET /api/portal/policies/{policyId}/documents/{documentId}` | Returns an authorized account-review text document |
+| `GET /api/workshops/reset?reviewerPack=15` | Requires a valid documentation session; returns the selected pack's active run/generation, current `profiles`, pending operation and safe availability/status fields. Optional UUID `requestId` selects a retained operation receipt. This request does not start a reset or profile import. |
+| `POST /api/workshops/reset` | Requires a valid documentation session, matching Origin and bounded JSON `{ reviewerPack, mode: "restart", requestId, expectedRunId }`; optional boolean `resumeVerification` supports recovery of a retained import. `restart` is fixed: saved-work-only and storage-migration modes are rejected. Returns `202` while pending, `200` on completed, or `409` for a failed operation. |
 | `GET /api/portal/operator/reset?reviewerPack=15` | Separate operator bearer credential; current run/generation and pending restart; optional `requestId` returns that retained operation receipt |
 | `POST /api/portal/operator/reset` | Separate operator bearer credential; saved work uses `{ reviewerPack, mode: "saved-work" }`; restart also requires UUID `requestId` and `expectedRunId`; `mode: "persist-workspace"` preserves existing records while removing old storage expiry |
 
-Every action includes `expectedVersion`, `runId`, and a new `idempotencyKey`. Repeating the exact payload with the same key does not duplicate an action. Reusing a key for another actor or payload is rejected. Competing writes return `VERSION_CONFLICT` rather than overwriting another user's work. The UI refreshes before the user retries.
+The workshop reset routes use the independent `lm_workshop_session` cookie, not the portal cookie or an operator bearer credential. Any authenticated guide user can select `01`–`15`; the selected number is not restricted to the signed-in suffix. The routes operate only on the current host's configured namespace and accept no target-host or arbitrary-key parameter. API credentials and raw provider/import payloads stay server-only. A present Origin is validated for GET, and POST always requires the matching Origin. The public response's `profiles` entries expose each persona's username, name and active Agent identity, with a native profile UUID only when verified import evidence supplies it.
+
+Every operational `PortalAction` includes `expectedVersion`, `runId`, and a new `idempotencyKey`. Repeating the exact payload with the same key does not duplicate an action. Reusing a key for another actor or payload is rejected. Competing writes return `VERSION_CONFLICT` rather than overwriting another user's work. The UI refreshes before the user retries. Workshop reset instead uses its request UUID and expected active run for resumable, idempotent execution.
 
 Supported operations cover draft preparation and submission, missing-information responses, renewal follow-ups, service requests, task completion, bond requests, resource favorites, learning registration, and relationship conversation requests. A submitted request produces a scoped reference and activity history; it does not invoke a real insurance system. Client-facing text avoids claiming an actual email was sent or insurance was bound.
 
@@ -113,22 +119,47 @@ The fixed scenario date makes fixtures repeatable. To advance the scenario, upda
 
 ## Durable work and resetting
 
-State keys are namespaced by environment, reviewer pack, run UUID, and agency. Saved agency work and pack metadata have no automatic expiry. Work remains available until an operator explicitly resets that pack or the environment is deleted; leaving the portal idle does not restore starting fixtures. Eight-hour login sessions remain independent: signing in again resumes the same work. Pack metadata preserves the run UUID, native profile generation, verified identities, and restart receipts. An explicit saved-work reset changes the active run while retaining native identities and CDP history; only a verified profile restart activates a fresh native profile set.
+State keys are namespaced by environment, reviewer pack, run UUID, and agency. Saved agency work and pack metadata have no automatic expiry. Work remains available until that pack is explicitly reset or the environment is deleted; leaving the portal idle does not restore starting fixtures. Eight-hour login sessions remain independent: signing in again resumes the same work. Pack metadata preserves the run UUID, native profile generation, verified identities, and restart receipts.
+
+### Attendee reset: choose a reviewer number
+
+Use **Reset a reviewer number** in the HTML workshop guide. Sign in with an existing portal username and password; no separate operator account, secret, command or approval is needed.
+
+1. Open the reset page on the host used for the exercise: [live portal reset](https://liberty-mutual-agent-portal.vercel.app/workshops/reset) or [transaction-preview reset](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset).
+2. Check the displayed host and select **Reviewer number** from `01`–`15`. It defaults to the signed-in reviewer's number. The number is the only setting; every reset is a complete clean reset for all seven personas with that suffix on the current host.
+3. Click **Reset reviewer** followed by that number. The page shows **Reset in progress** while the service imports and verifies seven fresh profiles. The existing pack remains active until verification completes.
+4. Wait for **Reviewer [number] is ready**. Starting tasks, submissions, favorites and learning plans replace the prior active saved work. A new run and new native identity set are active; all affected portal personas must sign in again with their unchanged usernames and password. The documentation session remains separate.
+5. To inspect technical evidence, expand **Reset details** for **Saved-work run**, **Profile generation**, **Last reset status** and **Reset request**. The persona list shows each current **Agent identity** for native profile lookup. Opening this page, selecting a number or clicking **Refresh status** does not start a reset.
+
+After a connection interruption, reopen the same host and reviewer number, use **Refresh status**, then **Continue reset** when an operation is pending. The operation retains its request identity; do not start a different profile set to resolve an uncertain import. A failed or unverified native import does not activate a new set. If only the browser response was lost, read the current status because the operation may already have completed. The implementation team can inspect retained import evidence when needed.
+
+This single action always combines baseline saved work with seven newly verified native profiles. There is no saved-work-only choice in the attendee UI or its API. Earlier profiles and analytics remain historical; the fresh set does not inherit their browsing history. The reset does not delete native experiment history or alter CMS content, Search, media, Brand Kits, Agentic artifacts or webhook receipts. Other reviewer numbers and the other host's saved work remain unchanged. There is no artificial preloaded-set limit.
+
+The connected native profile-import service and durable state must be configured on the target host. The isolated local frontend workshop has tracking disabled and local JSON state; its normal component cleanup restores the one-line edit and stops the development server without using this hosted reset.
 
 | Operation | Saved work | Native identity and history |
 | --- | --- | --- |
 | Sign out | Preserved | Client clears supported Sitecore identity state; stored native history remains |
-| `saved-work` reset | Fresh run for the selected pack; all its agencies return to baseline | Same native identifier and historical events |
-| `restart` reset | After native verification, a fresh run replaces saved work and all existing app sessions for that pack are invalidated | Provisions a fresh set of seven native profiles on demand, verifies the complete import, then activates it; earlier profiles and analytics remain historical |
+| **Reset reviewer** | After native verification, starting work becomes active and previous portal sessions for that number are invalidated | Seven fresh verified profiles become active; earlier profiles and analytics remain historical |
 
-Run the operator command with the separate secret in the shell environment. The examples use reserved presenter pack `01`; for an attendee reset, use their assigned pack from `02`–`15`, confirm the host and coordinate with that attendee before selecting one reset mode. A pack reset affects all seven personas in that pack, not only the last login:
+### Advanced maintenance interfaces
+
+The existing operator API and CLI remain available for implementation maintenance. They are not prerequisites for the attendee reset above. These interfaces use a separate protected operator credential and include maintenance capabilities that the workshop reset API deliberately does not expose:
+
+| Maintenance mode | Saved work | Native identity and history |
+| --- | --- | --- |
+| `saved-work` | Fresh operational run only | Keeps the same native identities and their history |
+| `restart` | Same complete clean-reset lifecycle used by the workshop page | Imports and verifies seven fresh profiles before activation; retains earlier native history |
+| `persist-workspace` | Removes legacy expiry from existing records without resetting their values | No profile changes or native calls; operator API only |
+
+For maintenance, load the operator secret into the shell environment and choose the exact host and pack. The following commands illustrate different maintenance operations; run only the one needed for that maintenance task. Each affects all seven personas in the selected pack:
 
 ```sh
 node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 saved-work
 node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 restart
 ```
 
-The command reads `PORTAL_OPERATOR_SECRET`; it never accepts or prints that secret as a positional argument. The native import endpoint and API key are configured only on the server; the CLI does not receive or store the native API key. Operators must tell active reviewers to refresh after resetting saved work, and to sign in again after restarting. On restart, the browser integration must clear its supported Sitecore SDK identity, cookies, and queued client state before identifying the next profile. A backend reset cannot erase another browser's client storage. The operator route is intentionally absent from portal navigation.
+The command reads `PORTAL_OPERATOR_SECRET`; it never accepts or prints that secret as a positional argument. The native import endpoint and API key are configured only on the server; the CLI does not receive or store the native API key. After a maintenance saved-work-only reset, refresh affected portal tabs; after a complete restart, sign in again. On restart, the browser integration must clear its supported Sitecore SDK identity, cookies, and queued client state before identifying the next profile. A backend reset cannot erase another browser's client storage. The maintenance operator route is intentionally absent from portal navigation; the participant reset is available in the authenticated workshop guide.
 
 Reset advances the run UUID instead of deleting a shared database. Stale tabs cannot write into the active run, another pack stays intact, and previous run records remain isolated from the active workspace. A restart creates new native identities for all seven personas in the selected pack; it does not delete existing CDP history or reimport an old identity to erase its events. There is no preallocated four-set ceiling. Native import availability and verification still determine when a restart can complete.
 
@@ -163,12 +194,12 @@ Run this separately on production and the designated preview. A concurrent pack 
 
 ### Find the active native profile
 
-The static `fixtures/udl/profile-identity-map.json` contains the original seed only. After an on-demand restart, look up the live identity instead:
+The static `fixtures/udl/profile-identity-map.json` contains the original seed only. Use the reset page to read the active identities without performing a reset:
 
-1. Sign in with the assigned persona and pack on the host used for the walkthrough.
-2. In another tab in that same browser, open [production profile details](https://liberty-mutual-agent-portal.vercel.app/api/portal/bootstrap), or [preview profile details](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/api/portal/bootstrap) when using the designated preview. Confirm the `agent.id` matches the persona.
-3. Copy the `id` inside `udlIdentity`; record `session.runId` and `session.profileGeneration` if collecting evidence. If `udlIdentity` is null, stop and ask the operator to verify native identity readiness. Close the temporary details tab.
-4. In SitecoreAI, choose **Performance → Profiles → Search filter → Liberty Mutual agent identity**. Paste the identifier, press **Enter**, open the matching person, then inspect **Overview** or **Engagement**.
+1. Sign in to the workshop guide on the host used for the walkthrough, then open [live profile identities](https://liberty-mutual-agent-portal.vercel.app/workshops/reset) or [preview profile identities](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset).
+2. Select the intended **Reviewer number**. Find the persona's row and copy **Agent identity**. This is the value for the native identity search filter, not the native profile UUID.
+3. Expand **Reset details** to record **Saved-work run** and **Profile generation** if collecting evidence. Wait for any pending reset to complete before interpreting its new profile set. **Refresh status** rereads the current result without starting another reset.
+4. In SitecoreAI, choose **Performance → Profiles → Search filter → Liberty Mutual agent identity**. Paste the identifier, press **Enter**, open the matching person, then inspect **Overview** or **Engagement**. Native profile access uses your own authorized Sitecore account.
 
 The original seed identifiers can share history across production and preview. Each new restart set includes the environment scope and a fresh set UUID, so matching usernames and numeric generations no longer imply the same native identity across hosts. Both hosts still share Sitecore content, native rules and experiment configuration.
 
@@ -186,7 +217,7 @@ For an additive export, write the selected packs to a separate staging directory
 node scripts/export-udl-profiles.mjs /tmp/liberty-mutual-packs-05-15 --packs 05,06,07,08,09,10,11,12,13,14,15
 ```
 
-This creates a selected-pack JSONL file and identity map for the historical seed in that directory. Keep the archived map in `fixtures/udl` intact. These packs are already imported; do not reimport a regenerated file to reset native history. Ordinary on-demand restarts use the protected operator workflow and its durable verification, not this export command.
+This creates a selected-pack JSONL file and identity map for the historical seed in that directory. Keep the archived map in `fixtures/udl` intact. These packs are already imported; do not reimport a regenerated file to reset native history. Attendees use `/workshops/reset` for a complete clean reset; its authenticated server route uses the existing durable import-verification workflow, not this export command.
 
 The initial payload using extension arrays failed. The verified compatibility shape uses a top-level UUID correlation `id`, the unchanged opaque identifier, first/last name contact fields, and scalar-only extensions. Specializations and licensed states are separate boolean fields. Current Sitecore batch-format and troubleshooting pages differ on array support, so preserve the tenant-verified shape. Regenerating the file creates new transport correlation IDs without changing business/profile identifiers. One successful diagnostic probe may leave `importCompatibilityProbe=true` on Avery's first profile; it is internal diagnostic metadata and does not drive portal decisions.
 
