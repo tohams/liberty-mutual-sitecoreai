@@ -14,6 +14,8 @@ import client from './lib/sitecore-client';
 import { PortalPersonalizeProxy } from './server/personalization/PortalPersonalizeProxy';
 import { getPortalPersonalizationIdentity } from './server/data/portal';
 import { reportPersonalizationDiagnostic } from './server/personalization/diagnostics';
+import { privateHeaders } from './server/http';
+import { verifyWorkshopSession, WORKSHOP_SESSION_COOKIE, workshopReturnTo } from './server/workshops/auth';
 
 const preview = new PreviewProxy({
     client,
@@ -80,6 +82,19 @@ const personalize = new PortalPersonalizeProxy({
 
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
+  // Workshop access is separate from the agent session. Server pages check it
+  // again before reading guide content; none of these routes initialize CDP.
+  if (path === '/workshops' || path.startsWith('/workshops/')) {
+    if (path !== '/workshops/login') {
+      const workshop = await verifyWorkshopSession(req.cookies.get(WORKSHOP_SESSION_COOKIE)?.value);
+      if (!workshop) {
+        const login = new URL('/workshops/login', req.url);
+        login.searchParams.set('returnTo', workshopReturnTo(path));
+        return NextResponse.redirect(login, { headers: privateHeaders });
+      }
+    }
+    return NextResponse.next({ headers: privateHeaders });
+  }
   if (path === '/login' || path.startsWith('/operator')) return NextResponse.next();
   // This public shell authenticates through the Sitecore Marketplace host. It
   // exposes no portal session, CMS credentials, or server-side authoring API.
