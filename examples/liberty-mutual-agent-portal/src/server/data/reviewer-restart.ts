@@ -5,7 +5,7 @@ import { getStateStore, stateNamespace, type StateStore, type StoredValue } from
 import * as profileImport from '../udl/profile-import';
 import type { ProfileImportDiagnostic, ProfileImportPlan, ProfileImportSubmission, VerifiedProfileImport } from '../udl/profile-import';
 import { fixtures } from './fixtures';
-import { getPack, packStateKey, PACK_METADATA_TTL_SECONDS, requireReviewerPack, type PackMetadata, type RestartJob, type RestartReceipt } from './pack-state';
+import { getPack, packStateKey, requireReviewerPack, type PackMetadata, type RestartJob, type RestartReceipt } from './pack-state';
 
 const LEASE_MS = 45_000;
 const RETRY_SECONDS = 3;
@@ -139,7 +139,7 @@ export async function requestReviewerRestart(request: RestartRequest, dependenci
       const plan = importer.prepareProfileImport({ reviewerPack, generation, profileSetId: randomUUID(), identityScope: stateNamespace() });
       job = { requestId, expectedRunId, baseGeneration: current.value.profileGeneration, phase: 'preparing', plan, createdAt: now() };
     }
-    const reserved = await store.compareAndSet(key, current.version, { ...current.value, pendingRestart: job }, PACK_METADATA_TTL_SECONDS);
+    const reserved = await store.compareAndSet(key, current.version, { ...current.value, pendingRestart: job }, null);
     if (!reserved) return readConflict(store, reviewerPack, requestId, expectedRunId, now());
     current = reserved;
   }
@@ -154,7 +154,7 @@ export async function requestReviewerRestart(request: RestartRequest, dependenci
   const lease = { id: randomUUID(), expiresAt: now() + LEASE_MS };
   const claimedJob: RestartJob = { ...job, phase: job.phase === 'preparing' ? 'uploading' : 'verifying', lease };
   delete claimedJob.nextAttemptAt;
-  const claimed = await store.compareAndSet(key, current.version, { ...current.value, pendingRestart: claimedJob }, PACK_METADATA_TTL_SECONDS);
+  const claimed = await store.compareAndSet(key, current.version, { ...current.value, pendingRestart: claimedJob }, null);
   if (!claimed) return readConflict(store, reviewerPack, requestId, expectedRunId, now());
 
   if (claimedJob.phase === 'uploading') {
@@ -173,7 +173,7 @@ export async function requestReviewerRestart(request: RestartRequest, dependenci
     }
     const nextJob: RestartJob = { ...claimedJob, submission, phase: 'verifying' };
     delete nextJob.lease;
-    const saved = await store.compareAndSet(key, claimed.version, { ...claimed.value, pendingRestart: nextJob }, PACK_METADATA_TTL_SECONDS);
+    const saved = await store.compareAndSet(key, claimed.version, { ...claimed.value, pendingRestart: nextJob }, null);
     if (!saved) return readConflict(store, reviewerPack, requestId, expectedRunId, now());
     return pendingReceipt(reviewerPack, nextJob, now());
   }
@@ -209,7 +209,7 @@ export async function requestReviewerRestart(request: RestartRequest, dependenci
     restartReceipts: { ...claimed.value.restartReceipts, [requestId]: completed },
   };
   delete next.pendingRestart;
-  const saved = await store.compareAndSet(key, claimed.version, next, PACK_METADATA_TTL_SECONDS);
+  const saved = await store.compareAndSet(key, claimed.version, next, null);
   if (!saved) return readConflict(store, reviewerPack, requestId, expectedRunId, now());
   return completed;
 }
@@ -253,7 +253,7 @@ async function finishFailed(store: StateStore, reviewerPack: string, current: St
   delete failed.retryAfterSeconds;
   const next = { ...current.value, restartReceipts: { ...current.value.restartReceipts, [job.requestId]: failed } };
   delete next.pendingRestart;
-  const saved = await store.compareAndSet(packStateKey(reviewerPack), current.version, next, PACK_METADATA_TTL_SECONDS);
+  const saved = await store.compareAndSet(packStateKey(reviewerPack), current.version, next, null);
   if (!saved) return readConflict(store, reviewerPack, job.requestId, job.expectedRunId, now);
   return failed;
 }
@@ -263,7 +263,7 @@ async function releaseForRetry(store: StateStore, reviewerPack: string, current:
   const retry = Number.isSafeInteger(retryAfterSeconds) && retryAfterSeconds > 0 ? retryAfterSeconds : RETRY_SECONDS;
   const nextJob = { ...job, phase, nextAttemptAt: now + retry * 1000 };
   delete nextJob.lease;
-  const saved = await store.compareAndSet(packStateKey(reviewerPack), current.version, { ...current.value, pendingRestart: nextJob }, PACK_METADATA_TTL_SECONDS);
+  const saved = await store.compareAndSet(packStateKey(reviewerPack), current.version, { ...current.value, pendingRestart: nextJob }, null);
   if (!saved) return readConflict(store, reviewerPack, job.requestId, job.expectedRunId, now);
   return pendingReceipt(reviewerPack, nextJob, now);
 }

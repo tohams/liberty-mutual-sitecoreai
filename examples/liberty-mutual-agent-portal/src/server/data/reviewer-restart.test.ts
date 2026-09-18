@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requestReviewerRestart, getReviewerResetStatus, inspectReviewerRestart, type ProfileImporter } from './reviewer-restart';
-import { getPack, packStateKey, PACK_METADATA_TTL_SECONDS, type PackMetadata } from './pack-state';
+import { getPack, packStateKey, type PackMetadata } from './pack-state';
 import { LocalJsonStateStore, type StateStore } from '../state/store';
 import { fixtures } from './fixtures';
 import { getProfileIdentifier, getFreshProfileIdentifier } from '../auth/profile-identity';
@@ -55,7 +55,7 @@ async function session(pack = '15', agentId = 'maya', now = new Date()) {
 test('new restarts activate all seven verified identities atomically beyond the preloaded generation limit', async () => {
   const store = storeFor('unlimited');
   let current = await getPack(store, '15');
-  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, profileGeneration: 3 }, PACK_METADATA_TTL_SECONDS);
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, profileGeneration: 3 }, null);
   const originalSession = await session('15', 'maya', new Date(Date.now() - 1000));
   const oldIdentity = await getPortalPersonalizationIdentity(originalSession, store);
   assert.equal(oldIdentity?.id, getProfileIdentifier('15', 'maya', 3));
@@ -143,12 +143,23 @@ test('incomplete, updated, duplicate or mismatched native results never activate
 test('concurrent same-key requests submit once; another request and saved-work reset cannot race activation', async () => {
   const store = storeFor('concurrent');
   const request = await intent(store);
-  const { importer, state } = fakeImporter();
-  const results = await Promise.all(Array.from({ length: 8 }, () => requestReviewerRestart(request, { store, importer })));
-  assert.ok(results.every((result) => result.status === 'pending'));
-  assert.equal(state.submissions, 1);
+  let releaseUpload!: () => void;
+  let signalUploadStarted!: () => void;
+  const uploadGate = new Promise<void>((resolve) => { releaseUpload = resolve; });
+  const uploadStarted = new Promise<void>((resolve) => { signalUploadStarted = resolve; });
+  const { importer, state } = fakeImporter({ async submitProfileImport(plan) {
+    state.submissions++; state.plans.push(plan); signalUploadStarted();
+    await uploadGate;
+    return { batchId: randomUUID(), checksumMd5: plan.checksumMd5, fileSizeBytes: plan.fileSizeBytes };
+  } });
+  const requests = Promise.all(Array.from({ length: 8 }, () => requestReviewerRestart(request, { store, importer })));
+  await uploadStarted;
   await assert.rejects(requestReviewerRestart({ ...request, requestId: randomUUID() }, { store, importer }), errorCode('RESTART_PENDING'));
   await assert.rejects(resetReviewerPack('15', 'saved-work', store), errorCode('RESTART_PENDING'));
+  releaseUpload();
+  const results = await requests;
+  assert.ok(results.every((result) => ['pending', 'completed'].includes(result.status)));
+  assert.equal(state.submissions, 1);
   const completions = await Promise.all(Array.from({ length: 8 }, () => requestReviewerRestart(request, { store, importer })));
   assert.ok(completions.some((result) => result.status === 'completed'));
   assert.equal((await getPack(store, '15')).value.profileGeneration, 1);
@@ -165,8 +176,8 @@ test('expired uploading lease fails closed after process loss without resending 
   let now = Date.now();
   let rejectAfterUpload = true;
   const store: StateStore = {
-    read: local.read.bind(local),
-    async compareAndSet<T>(key: string, version: number | null, value: T, ttl: number) {
+    read: local.read.bind(local), persist: local.persist.bind(local),
+    async compareAndSet<T>(key: string, version: number | null, value: T, ttl: number | null) {
       if (rejectAfterUpload && (value as PackMetadata).pendingRestart?.phase === 'verifying') {
         rejectAfterUpload = false; throw new Error('Storage reply lost');
       }
@@ -288,8 +299,8 @@ test('a lost activation response is recovered from the committed receipt without
   const request = await intent(local);
   let dropReceipt = true;
   const store: StateStore = {
-    read: local.read.bind(local),
-    async compareAndSet<T>(key: string, version: number | null, value: T, ttl: number) {
+    read: local.read.bind(local), persist: local.persist.bind(local),
+    async compareAndSet<T>(key: string, version: number | null, value: T, ttl: number | null) {
       const result = await local.compareAndSet(key, version, value, ttl);
       if (result && dropReceipt && (value as PackMetadata).restartReceipts?.[request.requestId]?.status === 'completed') {
         dropReceipt = false;
@@ -401,15 +412,15 @@ test('recovery refuses unknown, uncertain, altered and superseded imports withou
   await requestReviewerRestart(request, { store, importer });
   const failed = await requestReviewerRestart(request, { store, importer });
   let current = await getPack(store, '15');
-  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: { ...failed, checksumMd5: '0'.repeat(32) } } }, PACK_METADATA_TTL_SECONDS);
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: { ...failed, checksumMd5: '0'.repeat(32) } } }, null);
   current = await getPack(store, '15');
   await assert.rejects(inspectReviewerRestart('15', request.requestId, { store, importer }), errorCode('IMPORT_PLAN_CHANGED'));
   await assert.rejects(requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), errorCode('IMPORT_PLAN_CHANGED'));
   assert.deepEqual(await getPack(store, '15'), current);
-  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: { ...failed, code: 'UPLOAD_UNCERTAIN' } } }, PACK_METADATA_TTL_SECONDS);
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: { ...failed, code: 'UPLOAD_UNCERTAIN' } } }, null);
   await assert.rejects(requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), errorCode('VERIFICATION_NOT_RECOVERABLE'));
   current = await getPack(store, '15');
-  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: failed } }, PACK_METADATA_TTL_SECONDS);
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: failed } }, null);
   await resetReviewerPack('15', 'saved-work', store);
   const changed = await getPack(store, '15');
   await assert.rejects(requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), errorCode('VERSION_CONFLICT'));

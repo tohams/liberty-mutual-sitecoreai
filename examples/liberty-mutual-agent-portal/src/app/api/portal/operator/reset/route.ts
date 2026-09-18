@@ -1,5 +1,6 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
 import { resetReviewerPack } from '@/server/data/portal';
+import { persistReviewerWorkspace } from '@/server/data/workspace-persistence';
 import { getReviewerResetStatus, inspectReviewerRestart, requestReviewerRestart } from '@/server/data/reviewer-restart';
 import { PortalError } from '@/server/errors';
 import { errorResponse, jsonResponse, readJson, requireSameOrigin } from '@/server/http';
@@ -32,7 +33,8 @@ export async function POST(request: Request) {
   try {
     requireOperator(request);
     const body = await readJson(request, 1024) as Record<string, unknown>;
-    if (!body || typeof body.reviewerPack !== 'string' || (body.mode !== 'saved-work' && body.mode !== 'restart')) throw new PortalError('INVALID_INPUT', 'Choose a reviewer pack and reset mode.');
+    if (!body || typeof body.reviewerPack !== 'string' || (body.mode !== 'saved-work' && body.mode !== 'restart' && body.mode !== 'persist-workspace')) throw new PortalError('INVALID_INPUT', 'Choose a reviewer pack and reset mode.');
+    if (body.mode === 'persist-workspace') return jsonResponse(await persistReviewerWorkspace(body.reviewerPack));
     if (body.mode === 'saved-work') return jsonResponse(await resetReviewerPack(body.reviewerPack, 'saved-work'));
     if (typeof body.requestId !== 'string' || typeof body.expectedRunId !== 'string') throw new PortalError('INVALID_INPUT', 'Provide a restart request ID and the current run ID.');
     if (body.resumeVerification !== undefined && typeof body.resumeVerification !== 'boolean') throw new PortalError('INVALID_INPUT', 'Choose whether to resume verification.');
