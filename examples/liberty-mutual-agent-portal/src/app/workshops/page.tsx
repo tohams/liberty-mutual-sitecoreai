@@ -138,11 +138,7 @@ export default async function WorkshopHome() {
                 Read the guide here and follow the steps in the portal or
                 SitecoreAI in another tab.
               </p>
-              <a
-                href="https://liberty-mutual-agent-portal.vercel.app/login"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="/login" target="_blank" rel="noreferrer">
                 Open Agent Portal <ArrowUpRight size={15} />
               </a>
             </div>
@@ -160,9 +156,13 @@ export default async function WorkshopHome() {
               <h3>Finish with cleanup</h3>
               <p>
                 Each walkthrough explains what to restore. Sign-out keeps saved
-                work. Resets require coordination with the workshop team.
+                work. Use the reset page to restore a reviewer number whenever
+                you want to repeat a walkthrough.
               </p>
             </div>
+            <Link href="/workshops/reset" className="workshop-home-reset-link">
+              Reset a reviewer number <ArrowRight size={16} />
+            </Link>
           </section>
           <div className="workshop-evaluation-note">
             <strong>An environment for exploration</strong>
