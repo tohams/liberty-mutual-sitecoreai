@@ -4,7 +4,7 @@ import test, { afterEach, beforeEach } from 'node:test';
 import { fixtures } from '../data/fixtures';
 import {
   assertProfileImportConfigured, inspectProfileImport, prepareProfileImport, ProfileImportError,
-  submitProfileImport, type ProfileImportPlan, type ProfileImportSubmission,
+  restoreProfileImportPlan, submitProfileImport, type ProfileImportPlan, type ProfileImportSubmission,
 } from './profile-import';
 
 const endpoint = 'https://edge-platform.sitecorecloud.io/op/tenant/cdp';
@@ -104,6 +104,31 @@ test('builder rejects unknown packs, noninteger generations and invalid identity
     { profileSetId: 'old-generation' }, { identityScope: '' }, { identityScope: 'not/a/scope' }]) {
     assert.throws(() => prepareProfileImport({ ...valid, ...change }), isImportError('INVALID_IMPORT_PLAN', false, false));
   }
+});
+
+test('retained descriptors reconstruct the exact immutable upload without network access', () => {
+  const input = plan();
+  globalThis.fetch = async () => { assert.fail('Restoration must not make native requests'); };
+  const restored = restoreProfileImportPlan(JSON.parse(JSON.stringify(input)));
+  assert.deepEqual(restored, input);
+  assert.ok(Object.isFrozen(restored) && Object.isFrozen(restored.profiles));
+  assert.ok(restored.profiles.every(Object.isFrozen));
+});
+
+test('restoration rejects altered descriptors, fixture bytes and missing or repeated correlations', () => {
+  const input = plan();
+  const changes = [
+    { checksumMd5: 'f'.repeat(32) }, { fileSizeBytes: input.fileSizeBytes + 1 },
+    { generation: input.generation + 1 }, { profileSetId: randomUUID() }, { identityScope: 'another-host' },
+    { profiles: input.profiles.slice(1) }, { profiles: [...input.profiles].reverse() },
+    { profiles: new Array(7) },
+    { profiles: input.profiles.map((p, i) => i === 0 ? { ...p, identifier: 'wrong' } : p) },
+    { profiles: input.profiles.map((p, i) => i === 0 ? { ...p, correlationId: input.profiles[1].correlationId } : p) },
+    { profiles: input.profiles.map((p, i) => i === 0 ? { ...p, correlationId: randomUUID() } : p) },
+  ];
+  globalThis.fetch = async () => { assert.fail('Invalid restoration must not make native requests'); };
+  for (const change of changes) assert.throws(() => restoreProfileImportPlan({ ...input, ...change }),
+    isImportError('INVALID_IMPORT_PLAN', false, false));
 });
 
 test('configuration accepts the native HTTPS path and rejects secret-bearing or untrusted URLs', () => {
@@ -232,6 +257,28 @@ test('results reject duplicates, missing/extra records, updates, bad UUIDs and w
   for (const results of bad) {
     mockResponses(input, { results });
     assert.equal((await inspectProfileImport(input, submission(input))).status, 'failed');
+  }
+});
+
+test('failed verification exposes only allowlisted stage and shape diagnostics', async () => {
+  const input = plan();
+  const scenarios = [
+    { options: { status: { ...status(), totalRecords: '7', [credential]: credential } }, code: 'STATUS_COUNTS_MISMATCH', stage: 'status' },
+    { options: { stats: { ...stats(input), checksumMd5: 'f'.repeat(32), [credential]: credential } }, code: 'STATS_METADATA_MISMATCH', stage: 'stats' },
+    { options: { results: records(input).map((r, i) => i === 0 ? { ...r, id: undefined, [credential]: credential } : r) }, code: 'RESULT_CORRELATION_MISMATCH', stage: 'results' },
+  ];
+  for (const scenario of scenarios) {
+    mockResponses(input, scenario.options);
+    const result = await inspectProfileImport(input, submission(input));
+    assert.equal(result.status, 'failed');
+    if (result.status !== 'failed') assert.fail('Expected failed receipt');
+    assert.equal(result.code, 'IMPORT_VERIFICATION_FAILED');
+    assert.equal(result.diagnosticCode, scenario.code);
+    assert.equal(result.diagnostic?.stage, scenario.stage);
+    assert.ok(!JSON.stringify(result).includes(credential));
+    assert.ok(!JSON.stringify(result).includes(input.profiles[0].correlationId));
+    assert.ok(!JSON.stringify(result).includes(input.checksumMd5));
+    if (scenario.stage === 'results') assert.equal(result.diagnostic?.fieldTypes?.id, 'missing');
   }
 });
 

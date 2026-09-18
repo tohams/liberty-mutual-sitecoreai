@@ -35,10 +35,17 @@ export interface VerifiedProfileImport extends ProfileImportSubmission {
 }
 
 export type ProfileImportReceipt = VerifiedProfileImport;
+export interface ProfileImportDiagnostic {
+  stage: 'status' | 'stats' | 'results';
+  fieldTypes?: Readonly<Record<string, string>>;
+  recordCount?: number;
+  recordIndex?: number;
+}
 export type ProfileImportInspection =
   | { status: 'pending'; retryAfterSeconds: number }
   | { status: 'verified'; receipt: VerifiedProfileImport }
-  | { status: 'failed'; code: string; message: string };
+  | { status: 'failed'; code: string; message: string;
+      diagnosticCode?: string; diagnostic?: ProfileImportDiagnostic };
 
 /** Safe, stable diagnostics only: never retain upstream bodies, URLs or causes. */
 export class ProfileImportError extends Error {
@@ -77,20 +84,32 @@ function configuration() {
 export function assertProfileImportConfigured(): void { configuration(); }
 export const assertConfigured = assertProfileImportConfigured;
 
-/** Uses the scalar-only profile shape already accepted by this tenant. */
-export function prepareProfileImport(input: {
+interface ProfileImportInput {
   reviewerPack: string; generation: number; profileSetId: string; identityScope: string;
-}): ProfileImportPlan {
-  if (!fixtures.manifest.reviewerPacks.includes(input.reviewerPack) ||
+}
+
+export interface ProfileImportRestoreDescriptor extends ProfileImportInput {
+  profiles: ProfileImportPlan['profiles'];
+  checksumMd5: string;
+  fileSizeBytes: number;
+}
+
+function buildProfileImport(input: ProfileImportInput, originalProfiles?: ProfileImportPlan['profiles']): ProfileImportPlan {
+  if (!input || !fixtures.manifest.reviewerPacks.includes(input.reviewerPack) ||
       !Number.isSafeInteger(input.generation) || input.generation < 0 ||
       !UUID.test(input.profileSetId) || typeof input.identityScope !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9:_-]{0,127}$/.test(input.identityScope) ||
       fixtures.agents.length !== PROFILE_COUNT) invalidPlan();
 
-  const profiles = fixtures.agents.map((agent) => Object.freeze({
+  if (originalProfiles && (!Array.isArray(originalProfiles) || originalProfiles.length !== PROFILE_COUNT ||
+      fixtures.agents.some((_, index) => !originalProfiles[index] || !uuid(originalProfiles[index].correlationId)))) invalidPlan();
+  const profiles = fixtures.agents.map((agent, index) => Object.freeze({
     agentId: agent.id,
     identifier: getFreshProfileIdentifier(input.identityScope, input.profileSetId, input.reviewerPack, agent.id),
-    correlationId: randomUUID(),
+    correlationId: originalProfiles ? originalProfiles[index].correlationId : randomUUID(),
   }));
+  if (originalProfiles && profiles.some((profile, index) =>
+    originalProfiles[index]?.agentId !== profile.agentId || originalProfiles[index]?.identifier !== profile.identifier ||
+    !uuid(profile.correlationId))) invalidPlan();
   const records = fixtures.agents.map((agent, index) => {
     const agency = fixtures.agencies.find((entry) => entry.id === agent.agencyId);
     if (!agency) invalidPlan();
@@ -132,6 +151,21 @@ export function prepareProfileImport(input: {
     checksumMd5: createHash('md5').update(payload, 'utf8').digest('hex'),
     fileSizeBytes: Buffer.byteLength(payload, 'utf8'),
   });
+}
+
+/** Uses the scalar-only profile shape already accepted by this tenant. */
+export function prepareProfileImport(input: ProfileImportInput): ProfileImportPlan {
+  return buildProfileImport(input);
+}
+
+/** Rebuilds an existing upload only when retained descriptors reproduce its exact bytes. */
+export function restoreProfileImportPlan(input: ProfileImportRestoreDescriptor): ProfileImportPlan {
+  if (!input || !Array.isArray(input.profiles) || !MD5.test(input.checksumMd5) || !Number.isSafeInteger(input.fileSizeBytes)) invalidPlan();
+  const plan = buildProfileImport({ reviewerPack: input.reviewerPack, generation: input.generation,
+    profileSetId: input.profileSetId, identityScope: input.identityScope }, input.profiles);
+  assertPlan(plan);
+  if (plan.checksumMd5 !== input.checksumMd5 || plan.fileSizeBytes !== input.fileSizeBytes) invalidPlan();
+  return plan;
 }
 
 function assertPlan(plan: ProfileImportPlan): void {
@@ -279,9 +313,17 @@ export async function submitProfileImport(plan: ProfileImportPlan): Promise<Prof
   });
 }
 
-const failed = (): ProfileImportInspection => ({
+const failed = (diagnosticCode: string, diagnostic: ProfileImportDiagnostic): ProfileImportInspection => ({
   status: 'failed', code: 'IMPORT_VERIFICATION_FAILED', message: 'Native import did not verify seven new profiles. The active pack has not changed.',
+  diagnosticCode, diagnostic,
 });
+
+/** Fixed field names and value types only; never expose upstream keys or values. */
+function responseShape(value: JsonObject, fields: readonly string[]): Readonly<Record<string, string>> {
+  return Object.freeze(Object.fromEntries(fields.map((field) => [field,
+    !(field in value) ? 'missing' : value[field] === null ? 'null' : Array.isArray(value[field]) ? 'array' : typeof value[field],
+  ])));
+}
 
 /** Read-only, one bounded inspection. Pending/transient reads are safely resumable. */
 export async function inspectProfileImport(
@@ -291,31 +333,47 @@ export async function inspectProfileImport(
   if (!submission || !metadata(submission as unknown as JsonObject, plan)) invalidPlan();
   const config = configuration();
   return deadline(false, async (signal) => {
+    let stage: ProfileImportDiagnostic['stage'] = 'status';
     try {
       const status = json(await request(config, `/${submission.batchId}/status`, signal));
-      if (!uuid(status.batchId) || status.batchId.toLowerCase() !== submission.batchId.toLowerCase()) return failed();
+      const statusDiagnostic = { stage, fieldTypes: responseShape(status, ['batchId', 'status', 'totalRecords', 'succeededRecords', 'failedRecords']) };
+      if (!uuid(status.batchId) || status.batchId.toLowerCase() !== submission.batchId.toLowerCase()) return failed('STATUS_BATCH_MISMATCH', statusDiagnostic);
       if (status.status === 'QUEUED' || status.status === 'RUNNING') return { status: 'pending', retryAfterSeconds: 3 };
-      if (status.status !== 'COMPLETED' || !count(status.totalRecords, PROFILE_COUNT) ||
-          !count(status.succeededRecords, PROFILE_COUNT) || !count(status.failedRecords, 0)) return failed();
+      if (status.status !== 'COMPLETED') return failed('STATUS_NOT_COMPLETED', statusDiagnostic);
+      if (!count(status.totalRecords, PROFILE_COUNT) || !count(status.succeededRecords, PROFILE_COUNT) ||
+          !count(status.failedRecords, 0)) return failed('STATUS_COUNTS_MISMATCH', statusDiagnostic);
+      stage = 'stats';
       const [statsText, resultsText] = await Promise.all([
         request(config, `/${submission.batchId}/stats`, signal),
         request(config, `/${submission.batchId}/results`, signal),
       ]);
       const stats = json(statsText);
-      if (!metadata(stats, plan, submission.batchId) || stats.status !== 'COMPLETED' ||
-          !count(stats.totalRecords, PROFILE_COUNT) || !count(stats.succeededRecords, PROFILE_COUNT) ||
-          !count(stats.createdRecords, PROFILE_COUNT) || !count(stats.updatedRecords, 0) || !count(stats.failedRecords, 0)) return failed();
+      const statsDiagnostic = { stage, fieldTypes: responseShape(stats, ['batchId', 'status', 'checksumMd5', 'fileSizeBytes',
+        'totalRecords', 'succeededRecords', 'createdRecords', 'updatedRecords', 'failedRecords']) };
+      if (!metadata(stats, plan, submission.batchId)) return failed('STATS_METADATA_MISMATCH', statsDiagnostic);
+      if (stats.status !== 'COMPLETED') return failed('STATS_NOT_COMPLETED', statsDiagnostic);
+      if (!count(stats.totalRecords, PROFILE_COUNT) || !count(stats.succeededRecords, PROFILE_COUNT) ||
+          !count(stats.createdRecords, PROFILE_COUNT) || !count(stats.updatedRecords, 0) ||
+          !count(stats.failedRecords, 0)) return failed('STATS_COUNTS_MISMATCH', statsDiagnostic);
+      stage = 'results';
       const lines = resultsText.trim().split(/\r?\n/);
-      if (lines.length !== PROFILE_COUNT) return failed();
+      if (lines.length !== PROFILE_COUNT) return failed('RESULT_COUNT_MISMATCH', { stage, recordCount: lines.length });
       const byIndex = new Map<number, string>();
       const nativeIds = new Set<string>();
       for (const line of lines) {
         const record = json(line);
         const index = record.recordIndex;
+        const diagnostic: ProfileImportDiagnostic = { stage,
+          fieldTypes: responseShape(record, ['recordIndex', 'id', 'recordType', 'outcome', 'profileId']) };
         if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0 || index >= PROFILE_COUNT ||
-            byIndex.has(index) || record.outcome !== 'CREATED' || record.recordType !== 'profile' ||
-            !uuid(record.id) || record.id.toLowerCase() !== plan.profiles[index].correlationId.toLowerCase() ||
-            !uuid(record.profileId) || nativeIds.has(record.profileId.toLowerCase())) return failed();
+            byIndex.has(index)) return failed('RESULT_INDEX_INVALID', diagnostic);
+        diagnostic.recordIndex = index;
+        if (record.outcome !== 'CREATED') return failed('RESULT_OUTCOME_MISMATCH', diagnostic);
+        if (record.recordType !== 'profile') return failed('RESULT_TYPE_MISMATCH', diagnostic);
+        if (!uuid(record.id) || record.id.toLowerCase() !== plan.profiles[index].correlationId.toLowerCase())
+          return failed('RESULT_CORRELATION_MISMATCH', diagnostic);
+        if (!uuid(record.profileId)) return failed('RESULT_PROFILE_ID_INVALID', diagnostic);
+        if (nativeIds.has(record.profileId.toLowerCase())) return failed('RESULT_PROFILE_ID_DUPLICATE', diagnostic);
         byIndex.set(index, record.profileId.toLowerCase());
         nativeIds.add(record.profileId.toLowerCase());
       }
@@ -327,7 +385,7 @@ export async function inspectProfileImport(
         }),
       };
     } catch (error) {
-      if (error instanceof ProfileImportError && error.code === 'INVALID_IMPORT_RESPONSE') return failed();
+      if (error instanceof ProfileImportError && error.code === 'INVALID_IMPORT_RESPONSE') return failed('INVALID_RESPONSE_FORMAT', { stage });
       throw error;
     }
   });
