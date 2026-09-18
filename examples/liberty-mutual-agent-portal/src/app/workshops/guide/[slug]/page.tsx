@@ -14,7 +14,6 @@ import { requireWorkshopSession } from "@/server/workshops/auth";
 import { WorkshopShell } from "@/features/workshops/WorkshopShell";
 import {
   CopyCode,
-  GuideProgress,
   GuideScreenshot,
 } from "@/features/workshops/WorkshopControls";
 import {
@@ -87,11 +86,6 @@ export default async function GuidePage({
               ))}
               <a href="#cleanup">Finish & cleanup</a>
             </nav>
-            <GuideProgress
-              username={session.username}
-              slug={slug}
-              total={guide.steps.length}
-            />
           </aside>
           <article>
             <header className="workshop-guide-heading">
@@ -184,12 +178,6 @@ export default async function GuidePage({
                       </div>
                     )}
                     {step.image && <GuideScreenshot image={step.image} />}
-                    <GuideProgress
-                      username={session.username}
-                      slug={slug}
-                      total={guide.steps.length}
-                      step={index}
-                    />
                   </div>
                 </section>
               ))}
