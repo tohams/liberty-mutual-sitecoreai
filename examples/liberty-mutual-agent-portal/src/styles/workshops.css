@@ -902,46 +902,6 @@
 .workshop-guide-toc nav a:hover {
   color: var(--w-navy);
 }
-.workshop-progress {
-  padding-top: 19px;
-  border-top: 1px solid var(--w-line);
-  font-size: 10px;
-  color: #96909f;
-}
-.workshop-progress > div {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-}
-.workshop-progress strong {
-  font-weight: 500;
-  color: #706981;
-}
-.workshop-progress progress {
-  display: block;
-  width: 100%;
-  height: 5px;
-  margin: 11px 0;
-  background: #ece9f2;
-  border: 0;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.workshop-progress progress::-webkit-progress-bar {
-  background: #ece9f2;
-}
-.workshop-progress progress::-webkit-progress-value {
-  background: #9280b0;
-}
-.workshop-progress progress::-moz-progress-bar {
-  background: #9280b0;
-}
-.workshop-progress button {
-  font-size: 10px !important;
-  padding: 6px 0;
-  color: #746888;
-  text-decoration: underline;
-}
 .workshop-guide-heading {
   padding: 4px 0 26px;
 }
@@ -1167,23 +1127,6 @@
 }
 .workshop-code code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-}
-.workshop-step-check {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  color: #938b9f;
-  margin-top: 19px;
-  cursor: pointer;
-  width: fit-content;
-}
-.workshop-step-check input {
-  appearance: auto;
-  accent-color: var(--w-navy);
-  width: 14px;
-  height: 14px;
-  margin: 0;
 }
 .workshop-figure {
   margin: 23px 0 15px;
@@ -1941,7 +1884,6 @@
   .workshop-footer,
   .workshop-guide-toc,
   .workshop-guide-top,
-  .workshop-step-check,
   .workshop-resource-links,
   .workshop-code button,
   .workshop-next,

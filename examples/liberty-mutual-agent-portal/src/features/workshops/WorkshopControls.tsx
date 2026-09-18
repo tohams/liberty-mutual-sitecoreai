@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useSyncExternalStore } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Check, Copy, LogOut, Maximize2, X } from "lucide-react";
 import type { GuideImage } from "./types";
@@ -110,95 +110,5 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
         </div>
       </dialog>
     </figure>
-  );
-}
-function subscribe(callback: () => void) {
-  window.addEventListener("storage", callback);
-  window.addEventListener("workshop-progress", callback);
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener("workshop-progress", callback);
-  };
-}
-function readProgress(key: string) {
-  try {
-    return window.localStorage.getItem(key) || "";
-  } catch {
-    return "";
-  }
-}
-function decodeProgress(value: string): number[] {
-  try {
-    const parsed = JSON.parse(value || "[]");
-    return Array.isArray(parsed)
-      ? parsed.filter((n) => Number.isInteger(n) && n >= 0)
-      : [];
-  } catch {
-    return [];
-  }
-}
-export function GuideProgress({
-  username,
-  slug,
-  total,
-  step,
-}: {
-  username: string;
-  slug: string;
-  total: number;
-  step?: number;
-}) {
-  const key = `lm-workshop:v1:${username}:${slug}`;
-  const raw = useSyncExternalStore(
-    subscribe,
-    () => readProgress(key),
-    () => "",
-  );
-  const complete = decodeProgress(raw).filter((n) => n < total);
-  function save(next: number[]) {
-    try {
-      window.localStorage.setItem(key, JSON.stringify(next));
-      window.dispatchEvent(new Event("workshop-progress"));
-    } catch {
-      /* Browsing and the instructions remain available without local storage. */
-    }
-  }
-  if (step !== undefined)
-    return (
-      <label className="workshop-step-check">
-        <input
-          type="checkbox"
-          checked={complete.includes(step)}
-          onChange={(event) =>
-            save(
-              event.target.checked
-                ? [...new Set([...complete, step])]
-                : complete.filter((n) => n !== step),
-            )
-          }
-        />
-        <span>Step complete</span>
-      </label>
-    );
-  return (
-    <div className="workshop-progress">
-      <div>
-        <strong>
-          {complete.length} of {total} steps
-        </strong>
-        <span>{Math.round((complete.length / total) * 100)}%</span>
-      </div>
-      <progress
-        max={total}
-        value={complete.length}
-        aria-label="Walkthrough progress"
-      />
-      <p>Checkmarks are saved in this browser.</p>
-      {complete.length > 0 && (
-        <button type="button" onClick={() => save([])}>
-          Clear checkmarks
-        </button>
-      )}
-    </div>
   );
 }

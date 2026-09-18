@@ -961,7 +961,6 @@ export const developmentGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "Continue to the next walkthrough after signing in again, or close the reset page. There is no need to reset a second time merely to finish this procedure.",
-        "The guide’s checkmarks are separate: clearing walkthrough progress does not reset portal work or native profiles.",
       ],
     },
     related: [
