@@ -70,7 +70,7 @@ No manual context entry is needed for this POC. In VS Code, `examples/liberty-mu
 
 Keep `PORTAL_CONTENT_ADAPTER=sitecore` and `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` for this exercise. Completing the two contexts does not reconfigure the other settings in an existing custom environment file.
 
-Local saved work is stored in the application’s ignored `.portal-state` directory. Every developer can use the same fictional `daniel.01` login on their own machine because those files are separate. The published content and Search index remain shared, read-only services.
+Local saved work is stored in the application’s ignored `.portal-state` directory without automatic expiry. It remains across development-server restarts until you explicitly reset the local pack or remove that local state directory. Existing local records upgrade automatically when read or saved after a code update; keep `.env.local` and `.portal-state` to preserve your work. Every developer can use the same fictional `daniel.01` login on their own machine because those files are separate. The published content and Search index remain shared, read-only services.
 
 Do not copy production or preview environment files into this checkout. The state adapter selects Redis whenever it finds a Redis URL and token, even if `PORTAL_STATE_ADAPTER` says `local-json`. The helper checks for inherited Redis and hosted-runtime settings. Resolve its message before continuing; do not add shared Redis credentials to bypass it.
 

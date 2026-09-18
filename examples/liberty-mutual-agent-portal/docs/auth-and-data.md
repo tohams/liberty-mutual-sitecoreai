@@ -93,7 +93,7 @@ All workspace and document responses use `Cache-Control: private, no-store`, `Va
 | `POST /api/portal/actions` | Validates and persists a `PortalAction`, then returns a fresh bootstrap |
 | `GET /api/portal/policies/{policyId}/documents/{documentId}` | Returns an authorized account-review text document |
 | `GET /api/portal/operator/reset?reviewerPack=15` | Separate operator bearer credential; current run/generation and pending restart; optional `requestId` returns that retained operation receipt |
-| `POST /api/portal/operator/reset` | Separate operator bearer credential; saved work uses `{ reviewerPack, mode: "saved-work" }`; restart also requires UUID `requestId` and `expectedRunId` |
+| `POST /api/portal/operator/reset` | Separate operator bearer credential; saved work uses `{ reviewerPack, mode: "saved-work" }`; restart also requires UUID `requestId` and `expectedRunId`; `mode: "persist-workspace"` preserves existing records while removing old storage expiry |
 
 Every action includes `expectedVersion`, `runId`, and a new `idempotencyKey`. Repeating the exact payload with the same key does not duplicate an action. Reusing a key for another actor or payload is rejected. Competing writes return `VERSION_CONFLICT` rather than overwriting another user's work. The UI refreshes before the user retries.
 
@@ -113,7 +113,7 @@ The fixed scenario date makes fixtures repeatable. To advance the scenario, upda
 
 ## Durable work and resetting
 
-State keys are namespaced by environment, reviewer pack, run UUID, and agency. Each agency's saved work is retained for seven days after its latest saved change; viewing it does not extend that retention. Eight-hour login sessions remain independent, and a reviewer pack does not lock users out because of its age. If the state store has already expired an agency's saved work, the next visit restores that agency's starting fixtures. Existing saved work is otherwise left untouched. This restoration preserves the run UUID, profile generation, verified native identities, and CDP history; it does not perform an operator reset. Durable pack metadata retains the latest native generation and restart timestamp.
+State keys are namespaced by environment, reviewer pack, run UUID, and agency. Saved agency work and pack metadata have no automatic expiry. Work remains available until an operator explicitly resets that pack or the environment is deleted; leaving the portal idle does not restore starting fixtures. Eight-hour login sessions remain independent: signing in again resumes the same work. Pack metadata preserves the run UUID, native profile generation, verified identities, and restart receipts. An explicit saved-work reset changes the active run while retaining native identities and CDP history; only a verified profile restart activates a fresh native profile set.
 
 | Operation | Saved work | Native identity and history |
 | --- | --- | --- |
@@ -130,7 +130,7 @@ node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 restart
 
 The command reads `PORTAL_OPERATOR_SECRET`; it never accepts or prints that secret as a positional argument. The native import endpoint and API key are configured only on the server; the CLI does not receive or store the native API key. Operators must tell active reviewers to refresh after resetting saved work, and to sign in again after restarting. On restart, the browser integration must clear its supported Sitecore SDK identity, cookies, and queued client state before identifying the next profile. A backend reset cannot erase another browser's client storage. The operator route is intentionally absent from portal navigation.
 
-Reset advances the run UUID instead of deleting a shared database. Stale tabs cannot write into the active run, another pack stays intact, and old operational keys expire naturally. A restart creates new native identities for all seven personas in the selected pack; it does not delete existing CDP history or reimport an old identity to erase its events. There is no preallocated four-set ceiling. Native import availability and verification still determine when a restart can complete.
+Reset advances the run UUID instead of deleting a shared database. Stale tabs cannot write into the active run, another pack stays intact, and previous run records remain isolated from the active workspace. A restart creates new native identities for all seven personas in the selected pack; it does not delete existing CDP history or reimport an old identity to erase its events. There is no preallocated four-set ceiling. Native import availability and verification still determine when a restart can complete.
 
 The command first reads the active run, then saves one request UUID and expected run UUID before it starts the restart. The private resume file is stored under `~/.sitecore/liberty-mutual-portal-operations/`, keyed by host and pack. It contains no operator secret, native API key, passwords or customer data. `--operation-file /absolute/path/restart.json` chooses another location. Keep that file until the operation completes.
 
@@ -146,6 +146,20 @@ node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 restart \
 A failed receipt, mismatched receipt or `UPLOAD_UNCERTAIN` stops the command and preserves the operation file. Do not delete that file and blindly rerun: inspect the protected operator status and native import first. An uncertain upload might already have reached Sitecore. Any subsequent attempt must be an explicit operator decision with a new request UUID, the current expected run UUID and a separate operation file. The CLI never silently retries an uncertain upload as a new operation. Saved-work reset remains one POST and does not import profiles; an unavailable response requires checking the current pack state before repeating it.
 
 The protected status endpoint accepts `requestId` to retrieve an immutable operation receipt even after later restarts. Its audit fields retain the profile-set ID, environment scope, payload checksum/size, seven identifier/correlation pairs, and batch ID when known. Completed receipts also retain the seven canonical native profile IDs and verified created/updated/failed counts. Neither payload credentials nor API keys are retained. Use these fields to match an operation to the native import; an old completed receipt proves that operation completed, not that its profile set is still current.
+
+### Upgrade existing workspace storage without a reset
+
+New workspace and pack records are stored without expiry. Existing local JSON records are upgraded when read or updated, preserving their contents and version; this also preserves an older file whose embedded expiry has passed but which still exists. Developers do not need a new `.env.local`, new credentials, or a separate migration step after updating the code and restarting the development server.
+
+After deploying this change to a hosted environment, the operator should preserve existing records for all packs before an old Redis timer can remove an idle record. Send an authenticated `POST /api/portal/operator/reset` on that host with the existing operator bearer secret and this body, changing the pack for each assignment from `01` through `15`:
+
+```json
+{ "reviewerPack": "01", "mode": "persist-workspace" }
+```
+
+This operation removes expiry only from existing pack metadata and that pack's active agency records. It does not create records, reset work, change native profiles, or call Sitecore. Verify the receipt's before/after versions and value hashes match, and that preserved records report `expiresAt: null` and `persistent: true`; Redis records also report `redisTtlSeconds: -1`. A missing record is reported rather than created. Data already deleted by the old Redis expiry cannot be recovered by this operation.
+
+Run this separately on production and the designated preview. A concurrent pack change returns `VERSION_CONFLICT`; inspect the current run and repeat the preservation operation. Repeating it is safe. This upgrade is an operator deployment task, not a customer workshop step or a reason to reset any reviewer pack.
 
 ### Find the active native profile
 
