@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { ArrowUpRight, BookOpen, Code2, Compass } from "lucide-react";
+import {
+  ArrowUpRight,
+  BookOpen,
+  Code2,
+  Compass,
+  RotateCcw,
+} from "lucide-react";
 import { WorkshopSignOut } from "./WorkshopControls";
 import type { WorkshopSession } from "@/server/workshops/auth";
 
@@ -9,7 +15,7 @@ export function WorkshopShell({
   children,
 }: {
   session: WorkshopSession;
-  active?: "marketing" | "development";
+  active?: "marketing" | "development" | "reset";
   children: React.ReactNode;
 }) {
   return (
@@ -65,13 +71,15 @@ export function WorkshopShell({
       {children}
       <footer className="workshop-footer">
         <span>Liberty Mutual · SitecoreAI workshop guide</span>
-        <a
-          href="https://liberty-mutual-agent-portal.vercel.app/login"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href="/login" target="_blank" rel="noreferrer">
           Open Agent Portal <ArrowUpRight size={14} />
         </a>
+        <Link
+          href="/workshops/reset"
+          aria-current={active === "reset" ? "page" : undefined}
+        >
+          <RotateCcw size={14} /> Reset users
+        </Link>
         <span>Evaluation sandbox · September 2026</span>
       </footer>
     </div>

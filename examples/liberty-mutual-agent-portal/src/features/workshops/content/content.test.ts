@@ -287,3 +287,108 @@ test("the local component and setup instructions still target the actual reposit
   assert.match(JSON.stringify(local), /http:\/\/localhost:3000\/login/);
   assert.match(JSON.stringify(local), /Default editing host/);
 });
+
+test("reset walkthroughs use the authenticated page and preserve the host, pack and history boundaries", () => {
+  const resetGuides = ["saved-work-reset", "fresh-profile-restart"].map(
+    (slug) => {
+      const guide = workshopGuides.find((candidate) => candidate.slug === slug);
+      assert.ok(guide, `missing ${slug}`);
+      return guide;
+    },
+  );
+  const expectedHosts = [
+    "liberty-mutual-agent-portal.vercel.app",
+    "liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app",
+  ];
+  for (const guide of resetGuides) {
+    const text = JSON.stringify(guide);
+    const resetLinks = linksFor(guide)
+      .map((link) => new URL(link.href))
+      .filter((url) => url.pathname === "/workshops/reset");
+    for (const host of expectedHosts) {
+      assert.ok(
+        resetLinks.some((url) => url.hostname === host),
+        `${guide.slug}: reset must be reachable on the host used for the exercise`,
+      );
+    }
+    assert.match(
+      text,
+      /Reviewer number/,
+      `${guide.slug}: identify the selector`,
+    );
+    assert.match(
+      text,
+      /Reset reviewer/,
+      `${guide.slug}: identify the actual action button`,
+    );
+    assert.match(
+      text,
+      /all seven personas/i,
+      `${guide.slug}: explain the whole-pack effect`,
+    );
+    assert.match(
+      text,
+      /other host|current host only|host shown/i,
+      `${guide.slug}: distinguish host scope`,
+    );
+    assert.doesNotMatch(
+      text,
+      /Operator-only|PORTAL_OPERATOR_SECRET|reset-reviewer-pack\.mjs|DEMO_PORTAL|coordinator.{0,80}approv/i,
+      `${guide.slug}: self-service reset must not require an operator or secret command`,
+    );
+    assert.ok(
+      guide.steps.every((step) => step.code === undefined),
+      `${guide.slug}: reset walkthrough must be usable through the page`,
+    );
+    for (const unaffected of ["CMS", "Search", "webhook", "history"]) {
+      assert.ok(
+        text.toLowerCase().includes(unaffected.toLowerCase()),
+        `${guide.slug}: explain separate ${unaffected} lifecycle`,
+      );
+    }
+  }
+  const saved = JSON.stringify(resetGuides[0]);
+  assert.match(
+    saved,
+    /restores starting operational work and creates seven fresh verified native profiles together/,
+  );
+  assert.match(saved, /profile generation increases by one/);
+  assert.match(saved, /all seven Agent identities change/);
+  assert.match(saved, /sign in again/i);
+  const fresh = JSON.stringify(resetGuides[1]);
+  assert.match(fresh, /does not require a second reset/);
+  assert.match(fresh, /Continue reset/);
+  assert.match(fresh, /sign in again/i);
+  assert.match(fresh, /earlier profiles/i);
+  assert.doesNotMatch(
+    JSON.stringify(workshopGuides),
+    /Reset saved work|Start fresh with new profiles/,
+    "the reset page has one clean action, not a choice between reset modes",
+  );
+});
+
+test("native profile lookup uses the selected host's current Agent identity without operator intervention", () => {
+  const guide = workshopGuides.find(
+    (candidate) => candidate.slug === "find-an-agent-profile",
+  );
+  assert.ok(guide);
+  const text = JSON.stringify(guide);
+  assert.match(text, /Agent identity/);
+  assert.match(text, /Liberty Mutual agent identity/);
+  assert.ok(
+    linksFor(guide).some(
+      (link) => new URL(link.href).pathname === "/workshops/reset",
+    ),
+    "profile lookup must link to the current-identity page",
+  );
+  assert.doesNotMatch(
+    text,
+    /ask the operator|operator:|\/api\/portal\/bootstrap/i,
+  );
+  const allContent = JSON.stringify(workshopGuides);
+  assert.doesNotMatch(
+    allContent,
+    /portal has no reset button|ask the operator before any pack reset|operator must complete a verified restart/i,
+    "marketing and development instructions must not retain the retired reset procedure",
+  );
+});

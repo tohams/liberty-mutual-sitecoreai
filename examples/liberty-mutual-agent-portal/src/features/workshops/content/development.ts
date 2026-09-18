@@ -13,33 +13,6 @@ const pageBuilder =
 const deployments =
   "https://vercel.com/thomas-lins-projects-67630b98/liberty-mutual-sitecoreai/deployments";
 
-// This is documentation for an operator's deliberate status inspection. It is
-// displayed as text and is never evaluated by the workshop application.
-const inspectPackStatus = `node --input-type=module <<'NODE'
-const { DEMO_PORTAL, WORKSHOP_PACK, PORTAL_OPERATOR_SECRET } = process.env;
-if (!DEMO_PORTAL || !/^(0[1-9]|1[0-5])$/.test(WORKSHOP_PACK ?? '') || !PORTAL_OPERATOR_SECRET) {
-  throw new Error('Confirm the host, assigned pack and protected operator environment first.');
-}
-const url = new URL('/api/portal/operator/reset', DEMO_PORTAL);
-url.searchParams.set('reviewerPack', WORKSHOP_PACK);
-const response = await fetch(url, {
-  headers: { Authorization: 'Bearer ' + PORTAL_OPERATOR_SECRET },
-  redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(20000)
-});
-if (!response.ok) throw new Error('Status lookup failed: HTTP ' + response.status);
-const status = await response.json();
-console.log(JSON.stringify({
-  reviewerPack: status.reviewerPack,
-  runId: status.runId,
-  profileGeneration: status.profileGeneration,
-  pendingRestart: status.pendingRestart ? {
-    requestId: status.pendingRestart.requestId,
-    phase: status.pendingRestart.phase,
-    status: status.pendingRestart.status
-  } : null
-}, null, 2));
-NODE`;
-
 export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "architecture-and-ownership",
@@ -149,7 +122,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "An accepted IDENTITY event alone does not prove profile linking and decisioning are ready. A current native profile and rendered decision provide the next evidence.",
           "Products affinity scores build in SitecoreAI from tagged page views. The application sends the CMS route name; it does not calculate those scores in the browser.",
           "The native Top Affinity String checks all affinity groups, so another group or a tie can affect selection. Do not promise that decision-table row order breaks ties.",
-          "Native Search returns indexed published resources. Resource publication and Search reindexing are separate; neither a source-code build nor a saved-work reset refreshes the index.",
+          "Native Search returns indexed published resources. Resource publication and Search reindexing are separate; neither a source-code build nor a workspace reset refreshes the index.",
           "Real navigation supplies page-view evidence for A/B testing. Link prefetch is disabled for the relevant portal links. Reported visits and goals are not proof of business lift or a winning variation.",
         ],
         links: [
@@ -204,7 +177,7 @@ export const developmentGuides: WorkshopGuide[] = [
     prerequisites: [
       "Use the designated preview and the same assigned reviewer suffix for Avery and Jordan. Pack 01 is reserved for presenters; attendees use their assigned pack from 02–15.",
       "Coordinate with anyone using that pack. Use a unique account name and a future effective date, and leave pre-existing records untouched.",
-      "GitHub read access is required for the code trace. A coordinator handles any end-of-session saved-work reset.",
+      "GitHub read access is required for the code trace. Use the reset page in this guide if you want to restore the preview pack after the exercise.",
     ],
     links: [
       { label: "Open designated preview login", href: `${preview}/login` },
@@ -281,8 +254,14 @@ export const developmentGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Keep the created account name and reference with your session notes. A coordinator may restore saved work for this one preview pack after every affected reviewer has finished.",
-        "Do not reset another pack or the production host. The reset affects all seven personas and all agencies in the selected pack; it preserves native profiles and affinity/A/B history.",
+        "Keep the created account name and reference with your session notes. To start again, open the preview reset page, select the same Reviewer number and click Reset reviewer for that number.",
+        "Use the same preview host and pack as this exercise. The reset affects all seven personas and all agencies in that pack. It restores starting work and creates seven fresh native profiles while retaining older profiles and analytics as history.",
+      ],
+      links: [
+        {
+          label: "Preview: reset the exercise workspace",
+          href: `${preview}/workshops/reset`,
+        },
       ],
     },
     related: [
@@ -501,10 +480,11 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Optional: let the coordinator demonstrate a hosted preview",
+        title:
+          "Optional: have the Vercel project owner demonstrate a hosted preview",
         action: [
           "If requested, the Vercel Hobby project owner reproduces the reviewed one-line edit, makes their own commit on a workshop branch and opens a pull request.",
-          "The coordinator verifies CI, the exact Vercel source commit, configured preview credentials, durable state and an isolated namespace before testing the preview URL.",
+          "The Vercel project owner verifies CI, the exact source commit, configured preview credentials, durable state and an isolated namespace before testing the preview URL.",
         ],
         expected: [
           "A local commit, a GitHub push and a deployed preview are separate events. GitHub write access alone does not establish deployment eligibility for the private Hobby project.",
@@ -514,8 +494,8 @@ export const developmentGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Keep your local setup and state files private and untracked. No shared saved-work reset, new-profile restart or CMS restoration is needed for the default local exercise.",
-        "If a coordinator created a shared preview, close the unmerged practice PR and follow the agreed branch cleanup process. Do not force-push shared work or merge a practice edit into main merely to finish the workshop.",
+        "Keep your local setup and state files private and untracked. No shared workspace reset or CMS restoration is needed for the default local exercise.",
+        "If the Vercel project owner created a shared preview, close the unmerged practice PR and follow the agreed branch cleanup process. Do not force-push shared work or merge a practice edit into main merely to finish the workshop.",
       ],
     },
     related: ["local-setup", "vscode-mcp", "release-and-recovery"],
@@ -646,7 +626,7 @@ export const developmentGuides: WorkshopGuide[] = [
     personas: [],
     prerequisites: [
       "GitHub read access and permission to view the Vercel project. Your own authorized Sitecore account is needed for native inspection.",
-      "This walkthrough is read-only. Deployments, model changes, host changes, publication and rollback are separate coordinator-approved operations.",
+      "This walkthrough inspects existing releases. A person with the relevant GitHub, Vercel or Sitecore access performs deployments, model changes, editing-host changes and rollback through the corresponding release procedure.",
       "The temporary evaluation is not a production handoff. Future operating standards are discussion points, not required attendee setup.",
     ],
     links: [
@@ -755,12 +735,12 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Choose recovery for the layer that changed",
         action: [
-          "For an application regression, coordinate a compatible known deployment and a reviewed source-code revert. For an editorial regression, restore the intended native version, review and republish it.",
+          "For an application regression, the Vercel project owner restores a compatible known deployment and the developer prepares a reviewed source-code revert. For an editorial regression, a Sitecore author restores the intended native version, reviews and republishes it.",
           "For model changes, apply a compatible correction in the owned scope. Protect durable data before any schema migration.",
           "Discuss future monitoring, dependency triage, patch approval and escalation ownership separately from this temporary evaluation.",
         ],
         expected: [
-          "Application rollback does not reset Redis, undo CMS publication or reverse experiment history. Saved-work reset cannot restore authored content.",
+          "Application rollback does not reset Redis, undo CMS publication or reverse experiment history. A workspace reset cannot restore authored content.",
           "The repo already includes a lockfile, weekly Dependabot, pinned CI actions, bounded service requests and checks for configured private values in browser bundles. A production operating model would add its own monitoring, support and security acceptance.",
         ],
       },
@@ -873,7 +853,7 @@ export const developmentGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "For the default inspection, discard any unsaved panel selections and close temporary authoring tabs. No publish or reset is needed.",
-        "If an agreed label/description was changed, restore its recorded original text in Content Editor, Save and Refresh the panel to confirm. If actual published resource values changed, use the coordinated editorial recovery and Search refresh process; a portal saved-work reset cannot undo them.",
+        "If an agreed label/description was changed, restore its recorded original text in Content Editor, Save and Refresh the panel to confirm. If actual published resource values changed, use the coordinated editorial recovery and Search refresh process; a portal workspace reset cannot undo them.",
       ],
     },
     related: ["architecture-and-ownership", "release-and-recovery"],
@@ -882,92 +862,106 @@ export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "saved-work-reset",
     audience: "development",
-    category: "Coordinator operations",
-    title: "Reset saved work for one agreed reviewer pack",
+    category: "Workspace controls",
+    title: "Reset a reviewer number and repeat an exercise",
     summary:
-      "Restore fictional tasks, submissions, favorites and learning plans without replacing native profiles or their history.",
+      "Choose a reviewer number to restore starting work and create seven fresh native profiles in one action.",
     outcome:
-      "Verify a new saved-work run on the selected host with the same active UDL profile generation.",
-    duration: "5–10 minutes after coordination",
+      "Repeat the walkthrough with baseline operational records and new profiles that do not carry the previous browsing history.",
+    duration: "Allow a few minutes for profile import verification",
     personas: [],
     prerequisites: [
-      "Operator-only procedure: a coordinator must approve the exact host, pack and timing with every affected reviewer before any reset. Documentation login provides no reset authority.",
-      "Use Node.js 24 and the private checkout. Run from examples/liberty-mutual-agent-portal in a macOS/Linux shell; adapt environment-variable syntax for another shell.",
-      "Securely load the selected host’s separate PORTAL_OPERATOR_SECRET into the shell environment using the owner-approved process. Do not put it in a URL, command argument, screenshot, Git commit or chat.",
-      "Deployed operations require configured durable Redis. A local reset instead targets localhost with that checkout’s own operator secret; never point a local exercise at shared Redis.",
+      "Sign in to the workshop guide with an existing portal username and password. No separate operator account, secret, terminal command or approval is needed.",
+      "Choose the hosted environment where you performed the exercise: live and transaction preview keep saved work separate. The connected profile-import service is required; the isolated local-development workshop does not need this reset.",
+      "Select the reviewer number you want to reset. The page starts with your signed-in number; you can select any number from 01–15. Number 01 is the presenter example.",
+      "A reset affects all seven personas and every agency with that suffix. Check the displayed number so you do not replace another attendee’s work by mistake.",
     ],
     links: [
       {
-        label: "Protected operator procedure and troubleshooting",
-        href: `${appSource}/docs/auth-and-data.md#durable-work-and-resetting`,
+        label: "Live portal: reset a reviewer number",
+        href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
+      },
+      {
+        label: "Transaction preview: reset a reviewer number",
+        href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
       },
     ],
     steps: [
       {
-        title: "Choose the control that matches the goal",
+        title: "Open Reset a reviewer number on the right host",
         action: [
-          "If you only need to end a browsing session, Sign out. If you need baseline operational records, coordinate saved-work reset. If you need a fresh native identity set for affinity replay, use the separate restart guide.",
-          "Confirm that nobody needs the current fictional records before replacing this pack’s active work. Record any example references required for your verification.",
+          "Open the live or transaction-preview reset link below. If asked, sign in to the workshop guide with your assigned portal username and password Sitecore.",
+          "Check the host shown on Reset a reviewer number. In Reviewer number, select the number for the exercise; the default is your signed-in number.",
         ],
         expected: [
-          "Saved work has no automatic expiry. Signing in again resumes it; the eight-hour login lifetime does not reset it.",
-          "Saved-work resets all seven personas and every agency in one pack on one host. It retains native identity, affinities and A/B history.",
+          "The page shows the selected group’s saved-work status and current Agent identity for each persona.",
+          "Opening the page, selecting a number or clicking Refresh status does not reset it. Every reset applies only to the host shown in your browser, not both environments.",
+        ],
+        links: [
+          {
+            label: "Live portal: reset a reviewer number",
+            href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
+          },
+          {
+            label: "Transaction preview: reset a reviewer number",
+            href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
+          },
         ],
       },
       {
-        title: "Select exactly one host and confirm the assigned pack",
+        title: "Check what the clean reset includes",
         action: [
-          "The example below selects the designated preview and your documentation pack. Confirm that suffix with the coordinator; pack 01 is the presenter pack.",
-          "For a deliberately approved production reset, replace DEMO_PORTAL with https://liberty-mutual-agent-portal.vercel.app. Do not run both host assignments as a batch.",
-          "Confirm that the protected operator secret belongs to the selected host. The portal password Sitecore cannot authorize this procedure.",
+          "Review the selected reviewer number and its seven usernames. The reset always restores starting operational work and creates seven fresh verified native profiles together.",
+          "Keep any example references you want to retain in your session notes before resetting. If you only want to leave the portal and keep working later, Sign out instead.",
         ],
-        code: `export DEMO_PORTAL='${preview}'\nexport WORKSHOP_PACK='{{pack}}'`,
         expected: [
-          "The intended host and pack are explicit. Preview and production saved-work namespaces are separate, so one command does not reset both hosts.",
+          "The selected number is the only setting to choose. All seven personas receive starting tasks, submissions, favorites and learning plans, plus new Agent identities.",
+          "Earlier native profiles and their analytics remain historical; their browsing behavior is not carried into the new profiles. Native experiment history is not erased.",
+          "Saved work has no automatic expiry. Signing out or returning later does not perform this reset.",
         ],
       },
       {
-        title: "Inspect the current status before deciding to reset",
+        title: "Start the reset and wait for completion",
         action: [
-          "With the selected environment variables and protected secret already loaded, run this GET-only status inspection.",
-          "Record the reviewerPack, runId and profileGeneration. If a pendingRestart is present, stop and have the coordinator resolve that operation first.",
+          "Click Reset reviewer for the selected number, for example Reset reviewer {{pack}}. This starts the clean reset immediately; there is no separate approval or confirmation dialog.",
+          "Keep the page open while Reset in progress is shown. Wait for the success message, such as Reviewer {{pack}} is ready.",
         ],
-        code: inspectPackStatus,
         expected: [
-          "The response identifies the selected pack’s current run and profile generation. This status request does not request a reset or a new native import.",
+          "Seven new profiles are imported and verified before activation. Pending progress does not mean the new set is active.",
+          "When completed, the saved-work run changes, the profile generation increases by one and all seven Agent identities change.",
+          "The other packs and the other host’s saved-work run stay unchanged. The workshop-guide login remains separate from the portal sessions being replaced.",
+        ],
+        note: "If the connection is interrupted, reopen the same page and click Refresh status. Use Continue reset if a pending operation is shown, rather than starting another profile set.",
+      },
+      {
+        title: "Sign in again and inspect starting work",
+        action: [
+          "Return to the portal on that same host. Sign in again with the same persona username, reviewer suffix and password Sitecore.",
+          "Open the areas used in your exercise. Compare the starting submissions, tasks and saved resources with the example references you recorded.",
+          "Use the same reviewer suffix when switching among personas. Other browser tabs for that reviewer number must also sign in again.",
+        ],
+        expected: [
+          "Previous portal sessions for all seven personas are invalidated. The new active workspace contains starting records; new examples, favorites and learning registrations from the earlier run have cleared.",
+          "The browser links to the fresh Agent identity. Known role and agency attributes still personalize guidance, while the earlier profile’s browsing affinities are absent from the new profile.",
+          "A stale action cannot overwrite the new saved-work run. Use Verify a clean reset in SitecoreAI if you want to inspect the native identity and score evidence.",
         ],
       },
       {
-        title: "Execute the coordinated saved-work reset once",
+        title: "Keep platform content recovery separate",
         action: [
-          "Only after the scope and timing are agreed, run the command below once. This is an actual change, not a dry-run.",
-          "Verify the receipt’s pack and mode before asking reviewers to continue.",
-        ],
-        code: 'node scripts/reset-reviewer-pack.mjs "$DEMO_PORTAL" "$WORKSHOP_PACK" saved-work',
-        expected: [
-          "reviewerPack matches the selected suffix, mode is saved-work, runId is new, profileGeneration is unchanged and clearBrowserIdentity is false.",
-          "The operation does not import profiles or erase Sitecore native history. Other packs and the other host’s saved-work run remain unchanged.",
-        ],
-        note: "There is no dry-run option. If the response is unavailable or the receipt cannot be verified, inspect status before repeating; do not assume a lost response means the reset failed.",
-      },
-      {
-        title: "Refresh and verify the baseline",
-        action: [
-          "Ask affected reviewers to refresh. Using the same selected host and pack, inspect the personas involved in your exercise.",
-          "Confirm new example submissions, follow-ups or bonds have returned to the starting set, and new favorites/learning registrations have cleared. Compare recorded example references rather than deleting individual records.",
-          "Recheck operator status and compare the run/profile values with the receipt.",
+          "For a changed Sitecore page, restore the intended content version through its native workflow and republish it; refresh Search when indexed fields changed.",
+          "Keep webhook receipts, Brand Kit edits, Agentic Studio artifacts and experiment history in their own native lifecycle controls.",
         ],
         expected: [
-          "Starting operational work is restored. Existing logins are not universally invalidated by saved-work reset, and a stale action cannot overwrite the new run.",
-          "Agency Growth, Products affinity or an A/B variation need not return to neutral: the native profiles and their accumulated history were deliberately retained.",
+          "Resetting the reviewer number does not change CMS content, Search configuration, media, Brand Kits, Agentic artifacts, webhook receipts or native experiment history.",
+          "Each clean reset provisions a fresh verified profile set. There is no artificial preloaded generation limit.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Sign out of any verification accounts and close temporary details tabs. Keep the scoped receipt with the session record, without secrets.",
-        "CMS content, Search, webhook receipts, Brand Kit edits and Agentic artifacts have separate recovery/lifecycle controls. Do not perform a fresh-profile restart merely to finish a saved-work cleanup.",
-        "Remove operator credentials from the temporary shell environment when the operation is finished, following the coordinator’s handling process.",
+        "Continue to the next walkthrough after signing in again, or close the reset page. There is no need to reset a second time merely to finish this procedure.",
+        "The guide’s checkmarks are separate: clearing walkthrough progress does not reset portal work or native profiles.",
       ],
     },
     related: [
@@ -980,111 +974,119 @@ export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "fresh-profile-restart",
     audience: "development",
-    category: "Coordinator operations",
-    title: "Restart with fresh native profiles for a new journey",
+    category: "Workspace controls",
+    title: "Verify a clean reset in SitecoreAI",
     summary:
-      "Provision and verify a new seven-persona UDL profile set when a clean affinity journey is needed.",
+      "Inspect the new native identities and starting profile history after resetting a reviewer number.",
     outcome:
-      "Activate a new saved-work run and profile generation without deleting earlier native history.",
-    duration: "Allow up to 15 minutes for import verification",
+      "Connect one completed clean reset to its new saved-work run, verified UDL profiles and fresh browsing history.",
+    duration: "5–10 minutes after reset completes",
     personas: [],
     prerequisites: [
-      "Operator-only, optional procedure. Coordinate the exact host and pack with all affected reviewers and wait until they have finished. Documentation access does not grant permission to restart.",
-      "Use the host-selection and read-only status steps in Reset saved work before continuing. Keep the host’s operator secret in the shell environment, not in this guide or an argument.",
-      "The target server must have native profile-import configuration and durable state. This is not part of the default isolated local development exercise.",
-      "Understand the effect: completion replaces saved work and invalidates that host/pack’s existing app sessions. It preserves older profiles, analytics, experiments and content.",
+      "Complete Reset a reviewer number and repeat an exercise first. This verification inspects that completed reset; it does not require a second reset.",
+      "Use the same hosted environment and reviewer number. The reset affects all seven personas on the current host only.",
+      "Keep any before-reset Agent identities if you want to compare them with the new set. Older native profiles are retained as history.",
+      "Use your own authorized Sitecore account to inspect profiles. Portal and workshop credentials do not grant native Sitecore access.",
     ],
     links: [
       {
-        label: "Operator restart and resume procedure",
-        href: `${appSource}/docs/auth-and-data.md#durable-work-and-resetting`,
+        label: "Live portal: reset a reviewer number",
+        href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
+      },
+      {
+        label: "Transaction preview: reset a reviewer number",
+        href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
       },
     ],
     steps: [
       {
-        title: "Confirm the active pack and starting profile generation",
+        title: "Read the completed reset status",
         action: [
-          "Complete the operator guide’s host selection, assigned-pack confirmation and status inspection. Record the current runId and profileGeneration.",
-          "Confirm the reviewers need a new native journey. Saved-work reset and Sign out do not erase native browsing behavior.",
-          "If an operation is already pending, inspect its status and resume that operation through its retained identity; do not start another import.",
+          "Open Reset a reviewer number on the same host and select the same Reviewer number. Click Refresh status.",
+          "Expand Reset details to inspect Last reset status, Saved-work run and Profile generation. Inspect the seven Agent identity values in the table above. Do not click Reset reviewer again just to inspect the result.",
         ],
         expected: [
-          "A reviewer suffix selects the attendee’s pack. A runId identifies saved work. A profileGeneration identifies the pack’s active native identity set. They are different concepts.",
-          "The usernames and passwords do not change: daniel.01 remains daniel.01 when his profile generation advances.",
-        ],
-      },
-      {
-        title: "Start the approved restart and preserve its operation identity",
-        action: [
-          "After the coordinator approves the selected host and pack, run this command from the app directory with DEMO_PORTAL, WORKSHOP_PACK and the protected secret already set.",
-          "Keep the reported resume file and request identity. The helper waits and polls while the server prepares, imports and verifies the seven profiles.",
-        ],
-        code: 'node scripts/reset-reviewer-pack.mjs "$DEMO_PORTAL" "$WORKSHOP_PACK" restart',
-        expected: [
-          "The current pack remains active while import verification is pending. Pending is not completion.",
-          "There is no artificial preloaded generation limit. Each restart creates unique, host-scoped identities and verifies all seven as newly created before activating them.",
-        ],
-        note: "This is a real operator action, not a dry-run. Restart does not reset experiment allocation/history or delete earlier CDP profiles.",
-      },
-      {
-        title: "Verify completed before asking everyone to sign in again",
-        action: [
-          "Wait for a verified completed receipt. Compare it to the recorded starting state and selected pack.",
-          "Confirm a new runId, profileGeneration advanced by exactly one and clearBrowserIdentity: true.",
-          "Ask all affected reviewers to sign in again on that same host using their unchanged usernames and password Sitecore.",
-        ],
-        expected: [
-          "Completion activates the fresh saved-work run and native profile set and invalidates the pack’s previous application sessions.",
-          "The browser integration clears its supported previous Sitecore identity before identifying the new profile. A server operation cannot directly erase another browser’s local storage.",
-          "A restart on preview does not advance production. New host-scoped sets do not reuse each other’s identities, although historical seed profiles can retain shared earlier history.",
-        ],
-      },
-      {
-        title: "Look up the actual active native profile",
-        action: [
-          "Sign in as the persona for the next journey. In a second tab in that same browser, open the bootstrap details link for the same host.",
-          "Confirm agent.id. Copy udlIdentity.id and, if recording evidence, note session.runId and session.profileGeneration. Close the temporary details tab.",
-          "In SitecoreAI, choose Performance → Profiles → Search filter → Liberty Mutual agent identity. Paste the active identifier, press Enter and open the matching agent.",
-          "Inspect Overview and Engagement, including starting affinities, before opening any tagged resource pages. Record the initial Products banner on the same host.",
-        ],
-        expected: [
-          "The lookup identifies the currently active profile, not a retired alias from an old direct link or the static historical fixture map.",
-          "If udlIdentity is null, stop and ask the coordinator to verify native identity readiness before training affinity.",
-          "Freshly imported profiles make a fresh journey possible; native targeting and experiment settings still determine the result. Record what the actual profile and page show.",
+          "The practical reset procedure always restores saved work and provisions fresh native profiles together. This guide explains that result; it is not a different reset option.",
+          "A reviewer suffix identifies the group of seven logins. A saved-work run identifies its operational records; a profile generation identifies its active native profile set.",
+          "The other host and other reviewer numbers are unchanged. Reading status does not make another change.",
         ],
         links: [
           {
-            label: "Production: current signed-in profile details",
-            href: `${portal}/api/portal/bootstrap`,
+            label: "Live portal: reset a reviewer number",
+            href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
           },
           {
-            label: "Designated preview: current signed-in profile details",
-            href: `${preview}/api/portal/bootstrap`,
+            label: "Transaction preview: reset a reviewer number",
+            href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
           },
-          { label: "Open Sitecore organization", href: sitecore },
         ],
       },
       {
-        title: "Resume an interrupted operation without duplicating it",
+        title: "Match the same login to its new Agent identity",
         action: [
-          "If the helper is interrupted or its wait expires, retain its operation file and rerun the same command to resume the same request and expected run.",
-          "For a failed or mismatched receipt, or UPLOAD_UNCERTAIN, stop. The coordinator must inspect protected status and the native import before deciding the next action.",
-          "Do not delete the resume file and blindly start again. An uncertain upload may already have reached Sitecore.",
+          "Find the intended persona in the page’s identity list and copy Agent identity. Compare it with that persona’s recorded identifier from before the reset, if available.",
+          "Sign in again to the portal on the same host with the unchanged persona username, assigned suffix and password Sitecore.",
         ],
         expected: [
-          "Resuming a known operation reuses its identity. An unverified or failed import does not silently activate a new pack.",
-          "A retained completed receipt proves that operation completed; current status confirms whether its set is still the active one.",
+          "The username is unchanged: daniel.01 remains daniel.01. Its new Agent identity belongs to the fresh native profile for this reviewer number and host.",
+          "Agent identity is a search identifier, not the native profile UUID. The static historical fixture map does not describe newly created sets.",
+          "Completed reset invalidates the old portal sessions. The browser integration clears its supported previous Sitecore identity before identifying the new profile.",
+        ],
+      },
+      {
+        title: "Open the current native profile",
+        action: [
+          "In SitecoreAI, choose Performance → Profiles → Search filter → Liberty Mutual agent identity.",
+          "Paste the current Agent identity copied from the reset page, press Enter and open the matching person.",
+          "Check the persona and its known attributes. Do not select a profile solely by display name when earlier sets have the same names.",
+        ],
+        expected: [
+          "The native result matches the current persona, reviewer number and host. The new profile retains the known agent attributes needed for the scenarios.",
+          "Earlier profiles remain historical. A saved direct link to an older profile does not prove that the portal is still using it.",
+        ],
+        links: [
+          {
+            label: "Open SitecoreAI Profiles",
+            href: "https://app.sitecorecloud.io/performance/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df",
+          },
+        ],
+      },
+      {
+        title: "Inspect the new browsing baseline",
+        action: [
+          "Open Overview → Top affinities and Engagement before visiting tagged articles. Record the starting scores and the Products banner on the same host.",
+          "Continue the affinity walkthrough using the current identifier. Compare the resulting page views, native score and Products content with this baseline.",
+        ],
+        expected: [
+          "The fresh profile does not carry the earlier set’s browsing history. Normal visits after signing in add new engagement, so inspect the actual starting scores before training a topic.",
+          "Native experiment history remains historical; a clean reviewer reset does not reset experiment configuration or its aggregate report.",
+          "CMS content, Search, media, Brand Kits, Agentic artifacts and webhook receipts were not changed by the reset.",
+        ],
+      },
+      {
+        title: "Recognize pending work and resume the same operation",
+        action: [
+          "If status still shows an import in progress, wait for completion before interpreting the new profile list. After a connection interruption, use Refresh status and Continue reset when offered.",
+          "Do not start another reset while an existing operation is unresolved. If the page reports a failed or uncertain import, retain the displayed result so the implementation team can inspect that import.",
+        ],
+        expected: [
+          "Resuming keeps the same operation identity. Unverified imports do not silently activate a new profile set.",
+          "Each completed reset verifies all seven new profiles before activation. There is no artificial preloaded generation limit.",
+          "Current status identifies the active set; an older completed receipt only describes its earlier operation.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Continue the intended affinity or personalization journey, or Sign out. Do not create another new profile set as routine end-of-session cleanup.",
-        "Use a coordinated saved-work reset only if the new journey created operational records that should return to baseline. That reset keeps the new native history.",
-        "Preserve earlier native profiles and receipts. Content restoration, Search refresh, webhook history and Agentic artifacts remain separate. Remove operator credentials from the temporary shell when finished.",
+        "Close profile tabs you no longer need and continue the intended journey. This verification does not require another reset.",
+        "Use the same reset page when you deliberately want another clean start. Every reset restores starting work and creates fresh profiles together; previous native history remains retained.",
       ],
     },
-    related: ["saved-work-reset", "architecture-and-ownership"],
+    related: [
+      "saved-work-reset",
+      "architecture-and-ownership",
+      "affinity-personalization",
+    ],
     sourceSlides: [135, 137, 139, 140, 141],
   },
 ];

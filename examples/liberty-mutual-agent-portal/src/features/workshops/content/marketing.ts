@@ -20,6 +20,14 @@ const previewLogin: GuideLink = {
   label: "Open the transaction-preview login",
   href: `${PREVIEW}/login`,
 };
+const liveReset: GuideLink = {
+  label: "Production: Reset a reviewer number and current identities",
+  href: `${LIVE}/workshops/reset`,
+};
+const previewReset: GuideLink = {
+  label: "Transaction preview: Reset a reviewer number and current identities",
+  href: `${PREVIEW}/workshops/reset`,
+};
 const pageBuilder: GuideLink = { label: "Open Page Builder", href: PAGES };
 const sitecoreWorkspace: GuideLink = {
   label: "Open SitecoreAI",
@@ -32,7 +40,7 @@ const profileLink: GuideLink = {
 const platformPrerequisite =
   "Use your own authorized Sitecore account in Safeco Insurance Company of America POC, with Liberty Mutual Agent Portal selected. Portal usernames do not grant Sitecore access.";
 const authorPrerequisite =
-  "Keep Default as the Page Builder editing host. Coordinate shared-item edits with the workshop operator; do not edit the same version concurrently.";
+  "Keep Default as the Page Builder editing host. Agree shared-item edits with the Sitecore author responsible for that content; do not edit the same version concurrently.";
 const packPrerequisite =
   "Use your assigned reviewer pack consistently across all personas. Pack 01 is the presenter example; attendees use their assigned pack from 02–15.";
 const signOut =
@@ -40,7 +48,7 @@ const signOut =
 const persistentWork =
   "Saved work has no automatic expiry. Signing out ends the session but keeps saved work and native SitecoreAI profile history.";
 const sharedReset =
-  "Retain the example for review, or ask the operator for a saved-work reset on the designated preview and your assigned pack after every person using that pack has finished. This resets the whole pack, not just one record. It does not restore CMS content or erase native profile history.";
+  "Retain the example for review, or open Reset a reviewer number on the designated preview and sign in to the workshop guide. Select your assigned pack under Reviewer number. Make sure everyone using that pack has finished, check the number on the button, then click Reset reviewer {{pack}}. Wait for Reviewer {{pack}} is ready and sign into the Agent Portal again. This one action restores baseline saved work and activates seven newly verified native profiles with clean browsing history, for this reviewer number on this host only. Previous native profiles and experiment history remain. CMS content, Search, Agentic artifacts and webhook receipts are unchanged.";
 
 function login(persona: string, preview = false): GuideStep {
   return {
@@ -78,9 +86,15 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     prerequisites: [
       packPrerequisite,
-      "Your workshop operator supplies your pack assignment and any separate Sitecore invitation.",
+      "The Sitecore workshop team supplies your pack assignment and any separate Sitecore invitation. Reset a reviewer number is available to signed-in workshop reviewers with no additional credentials.",
     ],
-    links: [liveLogin, previewLogin, sitecoreWorkspace],
+    links: [
+      liveLogin,
+      previewLogin,
+      sitecoreWorkspace,
+      liveReset,
+      previewReset,
+    ],
     steps: [
       {
         title: "Choose the environment for the exercise",
@@ -90,7 +104,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "Production and preview keep saved operational work separate.",
-          "The preview can show unpublished CMS content, so it cannot prove that an article has been published. Native history can be shared by older seeded identities; new operator-created profile sets use distinct identities for each host.",
+          "The preview can show unpublished CMS content, so it cannot prove that an article has been published. Native history can be shared by older seeded identities; new profile sets use distinct identities for each host.",
         ],
         links: [liveLogin, previewLogin],
       },
@@ -127,7 +141,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           persistentWork,
-          "Signing in again keeps the active native profile; it does not create a new profile set. The portal has no reset button.",
+          "Signing in again keeps the active native profile; it does not create a new profile set. Use Reset a reviewer number in this private workshop guide when you need to reset a pack.",
         ],
       },
       {
@@ -145,8 +159,9 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "Ask the operator before any pack reset. A saved-work reset restores operational examples while preserving native history; a verified restart creates seven new profiles and changes the whole pack to that set. Earlier native history remains. Neither operation restores CMS edits.",
+        "For a clean reset, open Reset a reviewer number on the host you used. Reviewer number offers 01–15 and starts at your assigned pack. Check the selected number, then click Reset reviewer for that number. There are no reset modes to choose. Wait for Reviewer [selected number] is ready and sign into the Agent Portal again. The action restores baseline saved work and activates seven newly verified native profiles with clean browsing history. All seven same-suffix personas change together on this host only. Previous profiles and experiment history remain; CMS content, Search, Agentic artifacts and webhook receipts are unaffected.",
       ],
+      links: [liveReset, previewReset],
     },
     related: [
       "personalization-by-role",
@@ -228,7 +243,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "No operational reset is needed. Browsing may add native engagement history.",
+        "No reviewer reset is needed. Browsing may add native engagement history.",
       ],
     },
     related: [
@@ -339,7 +354,7 @@ export const marketingGuides: WorkshopGuide[] = [
     personas: ["daniel.01"],
     prerequisites: [
       packPrerequisite,
-      "Use the designated transaction preview and a coordinated pack. Create a uniquely named fictional record; leave existing submissions unchanged.",
+      "Use the designated transaction preview and your assigned pack. Create a uniquely named fictional record; leave existing submissions unchanged.",
       "Choose an appropriate future requested effective date within the configured rules.",
     ],
     links: [previewLogin],
@@ -389,14 +404,14 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Close the dialog and reload. Type your unique account name in Search account or reference; the table filters as you type.",
           "Open the account and compare its reference, Texas risk state, effective date and Submitted status.",
-          "Close the dialog, clear the table search and sign out. Retain the reference for the operator.",
+          "Close the dialog, clear the table search and sign out. Retain the reference with your walkthrough notes.",
         ],
         expected: [
           "All recorded values persist. There is no separate table Search button or per-submission Delete/Undo control.",
         ],
       },
     ],
-    cleanup: { body: [sharedReset] },
+    cleanup: { body: [sharedReset], links: [previewReset] },
     related: ["renewal-follow-up", "surety-request"],
     sourceSlides: [77, 78, 79, 80],
   },
@@ -413,7 +428,7 @@ export const marketingGuides: WorkshopGuide[] = [
     personas: ["maya.01"],
     prerequisites: [
       packPrerequisite,
-      "Use the designated transaction preview. Coordinate saved-work cleanup with others using the pack.",
+      "Use the designated transaction preview. Before resetting, make sure other people using the same pack have finished.",
     ],
     links: [previewLogin],
     steps: [
@@ -460,6 +475,7 @@ export const marketingGuides: WorkshopGuide[] = [
         "Record the task title; there is no per-task delete/undo for this exercise.",
         sharedReset,
       ],
+      links: [previewReset],
     },
     related: ["commercial-and-wholesale", "bop-submission"],
     sourceSlides: [81, 82],
@@ -522,7 +538,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "Close any downloaded document preview. No saved-work reset is needed.",
+        "Close any downloaded document preview. No reviewer reset is needed.",
       ],
     },
     related: ["surety-request", "personalization-by-role"],
@@ -541,7 +557,7 @@ export const marketingGuides: WorkshopGuide[] = [
     personas: ["marcus.01"],
     prerequisites: [
       packPrerequisite,
-      "Use the designated transaction preview and a coordinated pack. Keep existing bond requests unchanged.",
+      "Use the designated transaction preview and your assigned pack. Keep existing bond requests unchanged.",
     ],
     links: [previewLogin],
     steps: [
@@ -576,14 +592,14 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Close the dialog and reload. In Your submissions, select Bond requests ([N]) if needed.",
           "Open your unique principal name and compare the reference, status, state and amount.",
-          "Close the dialog, sign out and retain the reference for the operator.",
+          "Close the dialog, sign out and retain the reference with your walkthrough notes.",
         ],
         expected: [
           "The same values remain. There is no per-bond Delete or Undo submission control.",
         ],
       },
     ],
-    cleanup: { body: [sharedReset] },
+    cleanup: { body: [sharedReset], links: [previewReset] },
     related: ["bop-submission", "commercial-and-wholesale"],
     sourceSlides: [85, 86],
   },
@@ -646,7 +662,10 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
       },
     ],
-    cleanup: { body: [signOut, "Record the request topic.", sharedReset] },
+    cleanup: {
+      body: [signOut, "Record the request topic.", sharedReset],
+      links: [previewReset],
+    },
     related: [
       "native-contact-form",
       "campaign-composition",
@@ -664,11 +683,11 @@ export const marketingGuides: WorkshopGuide[] = [
     outcome:
       "You see the full native form-to-webhook path and understand where a real business database or Salesforce integration would connect.",
     duration: "10 minutes",
-    personas: ["daniel.01", "Sitecore form operator"],
+    personas: ["daniel.01", "Sitecore form administrator"],
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Before submitting, have the operator confirm that Demo Webhook has an active receiver and provide its current receipt-inbox link. The original temporary receiver expires September 23, 2026; its owner must replace the URL and retest it before expiry.",
+      "Before submitting, ask the person who manages Demo Webhook to confirm its receiver is active and provide the current receipt-inbox link. The original temporary receiver expires September 23, 2026; its owner must replace the URL and retest it before expiry.",
       "Use fictional contact details. The receiver is a demonstration collector, not a Salesforce or email integration.",
     ],
     links: [
@@ -717,7 +736,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Match the actual receipt",
         action: [
-          "Ask the operator to open the current receiver inbox. Select the POST containing your unique marker.",
+          "Open the current receiver inbox with the person who has access. Select the POST containing your unique marker.",
           "Inspect Request Content or Raw Content and compare all five entered values with the form.",
         ],
         expected: [
@@ -729,7 +748,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "Reload the form to clear the confirmation, then sign out. Keep earlier receipts unchanged; any optional repeat uses a new marker.",
-        "No portal saved-work reset is needed, and a pack reset cannot delete webhook receipts.",
+        "No reviewer reset is needed, and a pack reset cannot delete webhook receipts.",
         "Native Forms owns the form design and webhook delivery. A governed backend is needed to persist business records, create Salesforce activity, send email or implement a production database.",
       ],
     },
@@ -746,12 +765,12 @@ export const marketingGuides: WorkshopGuide[] = [
     outcome:
       "The article and Search result show the same approved wording, then both return to the recorded starting content.",
     duration: "25–35 minutes, including publish and index time",
-    personas: ["daniel.01", "Authorized Sitecore content operator"],
+    personas: ["daniel.01", "Authorized Sitecore author"],
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
       authorPrerequisite,
-      "This is a coordinated shared-item exercise: one operator edits while others observe. Resource metadata access is currently limited to organization administrators/owners; separate customer author and approver permissions still require verification.",
+      "This is a shared-item exercise: one authorized Sitecore author edits while others observe. Resource metadata access is currently limited to organization administrators/owners; separate customer author and approver permissions still require verification.",
       "Reserve enough time to complete publication, Search refresh and restoration. Do not leave the temporary summary published.",
     ],
     links: [
@@ -886,7 +905,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "Complete the final restoration and verify both live article delivery and Search before leaving. Sign out of the portal.",
-        "If a temporary metadata value was accidentally published, restore it in a new Draft, approve and publish the exact page, then reindex the same Search source. A saved-work reset has no effect on CMS content.",
+        "If a temporary metadata value was accidentally published, restore it in a new Draft, approve and publish the exact page, then reindex the same Search source. A reviewer reset has no effect on CMS content.",
       ],
     },
     related: [
@@ -995,7 +1014,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "Delete only the uniquely named unpublished page created by this exercise. Never delete its reusable Media asset or the Resource page branch.",
-        "If the practice article was published, coordinate removal from live delivery and refresh its Search source before considering cleanup complete.",
+        "If the practice article was published, work with the Sitecore author responsible for it to remove it from live delivery and refresh its Search source before considering cleanup complete.",
         "For a real article with an image change, publication must include the page and Resource image: keep Page, English and All references on; clear Include related items, leave Subpages off and inspect View references before publishing. Public reference images do not demonstrate private policy-document storage.",
       ],
     },
@@ -1012,11 +1031,11 @@ export const marketingGuides: WorkshopGuide[] = [
     outcome:
       "You see how native authoring controls provide flexibility within the page’s approved structure.",
     duration: "10 minutes",
-    personas: ["Coordinating Sitecore author"],
+    personas: ["Sitecore author"],
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Use the shared unpublished Campaign practice page with one coordinating editor. Record the starting component order and local Data items before changing anything.",
+      "Use the shared unpublished Campaign practice page with one Sitecore author making changes at a time. Record the starting component order and local Data items before changing anything.",
     ],
     links: [pageBuilder],
     steps: [
@@ -1054,9 +1073,9 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Restore the coordinated practice layout",
+        title: "Restore the original practice layout",
         action: [
-          "Have the coordinating editor remove the newly added component and restore the recorded original order and layout.",
+          "Have the same Sitecore author remove the newly added component and restore the recorded original order and layout.",
           "After confirming it is no longer used, recycle only the duplicate’s newly created local datasource.",
           "Reopen Layers and compare the original component list and Data items.",
         ],
@@ -1088,7 +1107,7 @@ export const marketingGuides: WorkshopGuide[] = [
     outcome:
       "You can accept, reject and verify AI-assisted edits while retaining editorial control.",
     duration: "10 minutes",
-    personas: ["Coordinating Sitecore author"],
+    personas: ["Sitecore author"],
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
@@ -1162,10 +1181,10 @@ export const marketingGuides: WorkshopGuide[] = [
     outcome:
       "Four known practice fields change together and return to their original wording, with live content outside the scope.",
     duration: "10 minutes",
-    personas: ["Coordinating Sitecore content operator"],
+    personas: ["Sitecore content author"],
     prerequisites: [
       platformPrerequisite,
-      "Use one coordinating editor. Record the exact starting text in all affected fields and confirm no other editor is changing this practice folder.",
+      "Use one Sitecore author for this shared-folder exercise. Record the exact starting text in all affected fields and confirm no other author is changing this practice folder.",
       "Scope the operation to the full Campaign practice/Data path shown below. Do not run Search and replace across the site.",
     ],
     links: [
@@ -1183,7 +1202,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         code: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/campaign-practice/Data",
         expected: [
-          "The baseline has eight results: the Data folder and seven local items. The live campaign is outside this scope. If the set differs, stop and reconcile it with the coordinator first.",
+          "The baseline has eight results: the Data folder and seven local items. The live campaign is outside this scope. If the set differs, compare the items with the Sitecore author responsible for the practice page before replacing text.",
         ],
       },
       {
@@ -1210,7 +1229,7 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Verify every affected field and leave Campaign practice unpublished. A saved-work reset cannot reverse content changes.",
+        "Verify every affected field and leave Campaign practice unpublished. A reviewer reset cannot reverse content changes.",
         "For broader structured field updates, evaluate a scoped API workflow or a Marketplace export/import tool with versions, raw field formats and restoration validated first. Native text replacement is not a universal bulk field editor.",
       ],
     },
@@ -1229,19 +1248,19 @@ export const marketingGuides: WorkshopGuide[] = [
     summary:
       "Inspect rich-text alert dates, then distinguish a display window from actual content publication and expiration.",
     outcome:
-      "You can explain which settings hide an alert and which operator actions change Live Experience Edge delivery.",
+      "You can explain which settings hide an alert and which publishing actions change Live Experience Edge delivery.",
     duration:
-      "10 minutes to inspect; a timed release is separately coordinated",
-    personas: ["Sitecore author", "Publication operator"],
+      "10 minutes to inspect; allow the agreed UTC window for a timed release",
+    personas: ["Sitecore author", "Developer with publication API access"],
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Inspect the unpublished Campaign practice page. A full timed publication run is an operator-led exercise with an agreed UTC window and protected API access.",
+      "Inspect the unpublished Campaign practice page. A full timed publication run requires a developer with protected publication API access and an agreed UTC window.",
     ],
     links: [
       pageBuilder,
       {
-        label: "Open the bounded scheduling operator guide",
+        label: "Open the bounded scheduling guide",
         href: `${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise`,
       },
     ],
@@ -1250,7 +1269,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Inspect the alert’s authored message and dates",
         action: [
           "Open Campaign practice > Data > Preparation update in Page Builder Content.",
-          "Inspect Title, Body, Visible from (UTC) and Visible until (UTC). Record original values before any coordinated practice edit.",
+          "Inspect Title, Body, Visible from (UTC) and Visible until (UTC). Record original values before any practice edit.",
         ],
         expected: [
           "Body is Rich Text and can contain meaningful formatting and links.",
@@ -1261,7 +1280,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Keep inactive content editable",
         action: [
-          "With Default editing host, inspect the CampaignAlert in Editor, including an inactive window if the coordinator has prepared one.",
+          "With Default editing host, inspect the CampaignAlert in Editor, including an inactive window if the Sitecore author has prepared one.",
           "Restore any body or date values changed during practice and verify them after reload.",
         ],
         expected: [
@@ -1271,7 +1290,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Prepare an optional real publication-and-expiration run",
         action: [
-          "Ask the publication operator to follow the linked bounded scheduling guide, clean only its expired sample and prepare a new dedicated campaign-schedule-check page.",
+          "Have the developer with publication API access follow the linked bounded scheduling guide, clean only its expired sample and prepare a new dedicated campaign-schedule-check page.",
           "Record English content, the exact subtree and the UTC start/end window. Verify that the page is initially absent from Live Experience Edge.",
         ],
         expected: [
@@ -1279,7 +1298,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         links: [
           {
-            label: "Operator: scheduling procedure and cleanup",
+            label: "Scheduling procedure and cleanup",
             href: `${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise`,
           },
         ],
@@ -1287,8 +1306,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Observe the two delivery boundaries",
         action: [
-          "Have the operator start the bounded scheduler. At the start, inspect the scoped publish operation and wait for live propagation.",
-          "Open the production route supplied by the operator and confirm the page appears.",
+          "Have that developer start the bounded scheduler. At the start, inspect the scoped publish operation and wait for live propagation.",
+          "Open the production route supplied by that developer and confirm the page appears.",
           "At the end, inspect the second scoped publish operation applying expiration, then confirm the page is absent from Live Experience Edge and unavailable on the production route.",
         ],
         expected: [
@@ -1300,7 +1319,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "Restore any edited practice alert body and dates; keep Campaign practice unpublished.",
-        "For the optional timed run, have the operator record both publish-operation IDs and confirm the script exited. The dedicated sample items remain for inspection. A reviewer-pack reset cannot cancel publication jobs or restore CMS content.",
+        "For the optional timed run, have that developer record both publish-operation IDs and confirm the script exited. The dedicated sample items remain for inspection. A reviewer-pack reset cannot cancel publication jobs or restore CMS content.",
       ],
     },
     related: ["resource-content-workflow", "marketing-capability-boundaries"],
@@ -1320,36 +1339,27 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Choose one portal host and complete any planned operator restart before sign-in. Keep that host throughout profile lookup and browsing.",
+      "Choose one portal host and complete any planned reviewer reset before portal sign-in. Keep that host throughout profile lookup and browsing.",
     ],
-    links: [liveLogin, profileLink],
+    links: [liveLogin, profileLink, liveReset, previewReset],
     steps: [
       {
         title: "Get the current identity for the intended login",
         action: [
-          "Ask the operator for the current identifiers for the personas you will inspect on the chosen host.",
-          "Operator: sign in as the intended persona, open that host’s authenticated /api/portal/bootstrap in a temporary tab and copy udlIdentity.id. Record session.profileGeneration, then close the temporary tab.",
-          "Repeat with normal sign-out/sign-in for Maya or Elena only if their identifiers are needed. Do not rely on the historical seed map after a restart.",
+          "Open Reset a reviewer number on the same host as the portal you will use. Sign in to the workshop guide if needed, then select the intended pack under Reviewer number; the page starts with your assigned pack.",
+          "Under current profile identities, find the intended username and copy its Agent identity value. Note the active profile generation when recording the starting state.",
+          "Copy the displayed Agent identity values for Maya or Elena if needed. You can inspect all seven personas without switching portal logins. Do not reset merely to look up identities or rely on the historical seed map after a reviewer reset.",
         ],
         expected: [
-          "Each value identifies the current native profile for that username, pack and host. A restart changes these identifiers while retaining earlier history.",
+          "Agent identity is the active Liberty Mutual agent identifier for that username, pack and host, not a profile UUID. A completed reviewer reset changes these identifiers to the new profiles while retaining earlier native history.",
         ],
-        links: [
-          {
-            label: "Live: active profile details",
-            href: `${LIVE}/api/portal/bootstrap`,
-          },
-          {
-            label: "Preview: active profile details",
-            href: `${PREVIEW}/api/portal/bootstrap`,
-          },
-        ],
+        links: [liveReset, previewReset],
       },
       {
         title: "Search by the native agent identifier",
         action: [
           "In SitecoreAI, open Performance > Profiles.",
-          "Open Search filter > Liberty Mutual agent identity. Paste the supplied value into Search by Liberty Mutual agent identity and press Enter.",
+          "Open Search filter > Liberty Mutual agent identity. Paste the copied Agent identity value into Search by Liberty Mutual agent identity and press Enter.",
           "Wait for the matching person, then click their name.",
         ],
         expected: [
@@ -1370,9 +1380,10 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Close temporary bootstrap tabs. Keep only the profile and portal tabs needed for the next exercise.",
-        "Do not edit or delete profile data. A fresh comparison requires a coordinated operator restart for the whole chosen pack, followed by a new identity lookup.",
+        "Close the Reset a reviewer number tab when the identity lookup is complete. Keep only the profile and portal tabs needed for the next exercise.",
+        "Do not edit or delete profile data. For a fresh comparison, open Reset a reviewer number on the intended host, select the pack under Reviewer number and click Reset reviewer for that number. Wait for Reviewer [selected number] is ready, then sign into the portal again and use the newly displayed Agent identity values. This also restores baseline saved work for all seven personas in the selected pack.",
       ],
+      links: [liveReset, previewReset],
     },
     related: [
       "affinity-personalization",
@@ -1395,11 +1406,12 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Use the live portal and obtain the current Avery and Daniel profile identifiers for the same pack. Keep the saved custom value and rules unchanged.",
+      "Use the live portal. Open production Reset a reviewer number, choose your pack under Reviewer number and copy Avery’s and Daniel’s Agent identity values from the current profile identities. Keep the saved custom value and rules unchanged.",
     ],
     links: [
       pageBuilder,
       liveLogin,
+      liveReset,
       {
         label: "Open the growth-opportunity custom value",
         href: `https://app.sitecorecloud.io/personalize/custom-values/9faad837-0e23-4b5b-af10-c6883dba86ac?organization=${ORG}&tenantId=${TENANT}`,
@@ -1460,7 +1472,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "Cancel or close rule and custom-value editors without saving. No operational reset is needed.",
+        "Cancel or close rule and custom-value editors without saving. No reviewer reset is needed.",
       ],
     },
     related: [
@@ -1485,10 +1497,12 @@ export const marketingGuides: WorkshopGuide[] = [
       packPrerequisite,
       platformPrerequisite,
       "Use one chosen host throughout. Obtain current identifiers for Daniel, Maya and Elena using Find the active SitecoreAI profile for an agent.",
-      "Inspect starting scores before tagged browsing. If a clean replay is required, the operator must complete a verified restart before sign-in; logout and saved-work reset do not remove affinities.",
+      "Inspect starting scores before tagged browsing. For a clean replay, open Reset a reviewer number on the intended host, select your pack under Reviewer number and click Reset reviewer {{pack}}. Wait for Reviewer {{pack}} is ready before signing into the portal again. The reset restores saved-work baseline and creates seven fresh profiles with clean browsing history. Signing out alone preserves the current profile and its affinities.",
     ],
     links: [
       liveLogin,
+      liveReset,
+      previewReset,
       profileLink,
       {
         label: "Open native Affinities",
@@ -1585,9 +1599,10 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "Preserve rules and native history. A saved-work reset does not clear affinities. To replay a fresh journey, coordinate a whole-pack restart on the intended host and look up the new identities after completion.",
+        "Preserve the authored rules. To replay a fresh journey, open Reset a reviewer number on the intended host, select your pack under Reviewer number and click Reset reviewer {{pack}}. Wait for Reviewer {{pack}} is ready, then sign into the portal again and look up its new Agent identity values. The reset restores baseline saved work and activates seven new native profiles with clean browsing history. All seven same-suffix personas change together on this host only. Previous native profiles and experiment history remain; CMS content, Search, Agentic artifacts and webhook receipts are unaffected.",
         "Affinity here selects authored variants from browsing signals; it does not demonstrate autonomous machine-learning recommendations or business eligibility.",
       ],
+      links: [liveReset, previewReset],
     },
     related: ["find-an-agent-profile", "ab-testing", "personalization-by-role"],
     sourceSlides: [96, 98, 99, 100, 101],
@@ -1606,9 +1621,9 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Use production and obtain Daniel’s current profile identifier. Inspect the existing test without starting, stopping or selecting a winner.",
+      "Use production. Open Reset a reviewer number, choose your pack under Reviewer number and copy Daniel’s current Agent identity; viewing identities does not require a reset. Inspect the existing test without starting, stopping or selecting a winner.",
     ],
-    links: [pageBuilder, liveLogin, profileLink],
+    links: [pageBuilder, liveLogin, profileLink, liveReset],
     steps: [
       {
         title: "Preview the current authored variations",
@@ -1671,7 +1686,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "Sign out and preserve the running test, authored variations and history. Do not manufacture traffic or reset the experiment to improve its report.",
-        "Portal operational resets do not clear experiment history. Recheck the current profile identifier after a restart.",
+        "A reviewer reset creates fresh profiles and restores baseline saved work, but does not clear the experiment’s history or settings. Recheck the current Agent identity after any reset.",
       ],
     },
     related: ["find-an-agent-profile", "affinity-personalization"],
@@ -1814,7 +1829,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Identify integration and governance work explicitly",
         action: [
           "Compare Native Contact your team with the campaign’s custom saved request. Identify where a business backend would receive the data.",
-          "Record the customer roles and accessibility acceptance needed beyond the operator-led exercises.",
+          "Record the customer roles and accessibility acceptance needed beyond the exercises performed with administrator access.",
         ],
         expected: [
           "Native Forms delivers to a webhook; a real database or Salesforce workflow requires an implemented backend. The custom campaign request instead saves to Upstash.",
