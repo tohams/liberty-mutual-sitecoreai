@@ -39,6 +39,8 @@ jobs:
         run: npm run test:setup
       - name: Validate complete and additive UDL profile exports
         run: node --test scripts/export-udl-profiles.test.mjs
+      - name: Validate resumable reviewer restart operator commands
+        run: node --test scripts/reset-reviewer-pack.test.mjs
       - name: Lint application
         run: npm run lint
       - name: Authentication, identity readiness, durable state, isolation, and resource routing tests
