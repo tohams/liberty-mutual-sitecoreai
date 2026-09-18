@@ -165,12 +165,6 @@ test('new two-digit packs isolate saved work and resets from existing and neighb
   const cleared = await getPortalBootstrap(sessions[3], store);
   assert.equal(cleared.tasks.some((task) => task.title === 'Pack 15 attendee follow-up'), false);
   assert.equal(cleared.udlIdentity?.id, saved.udlIdentity?.id, 'Saved-work reset preserves the native identity');
-  const olderSession = { ...sessions[3], issuedAt: new Date(Date.now() - 1000).toISOString() };
-  await resetReviewerPack('15', 'restart', store);
-  await assert.rejects(getPortalBootstrap(olderSession, store), errorCode('UNAUTHENTICATED'));
-  const restarted = await getPortalBootstrap(await login('maya', '15'), store);
-  assert.equal(restarted.session.profileGeneration, 1);
-  assert.notEqual(restarted.udlIdentity?.id, cleared.udlIdentity?.id);
   for (const [index, session] of sessions.slice(0, 3).entries()) {
     const untouched = await getPortalBootstrap(session, store);
     assert.equal(untouched.session.runId, original[index].session.runId);
@@ -213,23 +207,14 @@ test('editor fixtures carry no native identity and CSRF/body size boundaries rej
   await assert.rejects(readJson(new Request('https://portal.example/api/portal/actions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ notes: 'x'.repeat(20000) }) })), errorCode('REQUEST_TOO_LARGE'));
 });
 
-test('restart requires a verified fresh identity and invalidates prior sessions while preserving other packs', async () => {
-  const store = new LocalJsonStateStore(join(directory, 'restart'));
-  const originalSession = await login('maya');
-  const initial = await getPortalBootstrap(originalSession, store);
-  const otherPack = await getPortalBootstrap(await login('maya', '02'), store);
-  const olderSession = { ...originalSession, issuedAt: new Date(Date.now() - 1000).toISOString() };
-  process.env.PORTAL_VERIFIED_PROFILE_GENERATIONS = '0';
-  await assert.rejects(resetReviewerPack('01', 'restart', store), errorCode('PROFILE_NOT_READY'));
-  process.env.PORTAL_VERIFIED_PROFILE_GENERATIONS = '0,1,2,3';
-  await resetReviewerPack('01', 'restart', store);
-  await assert.rejects(getPortalBootstrap(olderSession, store), errorCode('UNAUTHENTICATED'));
-  const restarted = await getPortalBootstrap(await login('maya'), store);
-  assert.equal(restarted.session.profileGeneration, 1);
-  assert.notEqual(restarted.udlIdentity?.id, initial.udlIdentity?.id);
-  const otherAfter = await getPortalBootstrap(await login('maya', '02'), store);
-  assert.equal(otherAfter.session.runId, otherPack.session.runId);
-  assert.equal(otherAfter.udlIdentity?.id, otherPack.udlIdentity?.id);
+test('legacy resets cannot advance to an unverified profile set implicitly', async () => {
+  const store = new LocalJsonStateStore(join(directory, 'restart-explicit'));
+  const session = await login('maya');
+  const before = await getPortalBootstrap(session, store);
+  await assert.rejects(resetReviewerPack('01', 'restart', store), errorCode('INVALID_INPUT'));
+  const after = await getPortalBootstrap(session, store);
+  assert.equal(after.session.runId, before.session.runId);
+  assert.equal(after.udlIdentity?.id, before.udlIdentity?.id);
 });
 
 test('surety, service requests, and learning actions create scoped durable work', async () => {

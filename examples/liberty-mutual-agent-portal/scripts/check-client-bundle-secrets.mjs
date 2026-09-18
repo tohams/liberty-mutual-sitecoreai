@@ -36,7 +36,13 @@ async function main() {
     process.exitCode = 1;
     return;
   }
-  const privateValues = [privateContext, process.env.SITECORE_EDITING_SECRET].filter(Boolean);
+  const privateValues = [
+    privateContext,
+    process.env.SITECORE_EDITING_SECRET,
+    process.env.SITECORE_PROFILE_IMPORT_API_KEY,
+    process.env.PORTAL_OPERATOR_SECRET,
+    process.env.PORTAL_SESSION_SECRET,
+  ].filter(Boolean);
   const needles = [...new Set(privateValues.flatMap((value) => [
     value, JSON.stringify(value).slice(1, -1), encodeURIComponent(value),
   ]))].map((value) => Buffer.from(value));

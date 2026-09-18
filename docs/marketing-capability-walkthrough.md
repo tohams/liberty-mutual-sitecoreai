@@ -8,7 +8,7 @@ Salesforce remains Liberty Mutual's existing business backend. SitecoreAI manage
 
 ## Accounts and preparation
 
-Assign one of the fifteen reviewer packs (`01`–`15`) to each attendee for hosted exercises. For a hosted presenter journey, coordinate use of an attendee’s pack and complete the guided work and its required cleanup before that attendee begins. Never reset a pack while an attendee is using it. Use that same suffix across all seven personas. Their roles and licenses are unchanged across packs; only their saved work and native profile identities are separate. The examples below use `.04`; substitute your assigned suffix consistently. All 105 fictional portal accounts use the password `Sitecore`. SitecoreAI itself uses your own invited account in **Safeco Insurance Company of America POC** and the **Liberty Mutual Agent Portal** site.
+Reserve pack `01` for workshop presenters. Assign attendee/spare packs from `02`–`15` (14 non-presenter packs). Never reset a pack while an attendee is using it. Use that same suffix across all seven personas. Their roles and licenses are unchanged across packs; only their saved work and native profile identities are separate. The examples below use presenter pack `.01`; attendees substitute their assigned suffix consistently. All 105 fictional portal accounts use the password `Sitecore`. SitecoreAI itself uses your own invited account in **Safeco Insurance Company of America POC** and the **Liberty Mutual Agent Portal** site.
 
 | Workspace | URL | Use |
 |---|---|---|
@@ -29,7 +29,7 @@ The live campaign is [https://liberty-mutual-agent-portal.vercel.app/growth/smal
 
 | Step | Click or enter | Observe |
 |---|---|---|
-| C1 | Sign in as `daniel.04`. Beside **Agency growth**, select **Show Agency growth pages**, then **Small business growth**. | The child page opens. **Overview** still leads to the agency production view. |
+| C1 | Sign in as `daniel.01`. Beside **Agency growth**, select **Show Agency growth pages**, then **Small business growth**. | The child page opens. **Overview** still leads to the agency production view. |
 | C2 | Under **ON THIS PAGE**, select **Opportunity**, **Your questions** and **Your next step** in turn. | Each anchor moves to the corresponding part of the page. The page title includes the growth icon. |
 | C3 | Expand **Where should my team begin?** and **What should we prepare before asking for a review?** | Each accordion displays its own authored answer. Use Tab and Enter or Space to inspect keyboard operation. |
 | C4 | Under **Keep useful guidance close**, select **Develop your small-business practice**. Return to the campaign. | The link opens the current resource. The callout's preparation action and the other resource links remain clear, separate destinations. |
@@ -40,7 +40,7 @@ The campaign's hero, alert, callout, questions, resource list and contact introd
 
 ## 2. Save a conversation request
 
-Use the **designated preview**, `daniel.04`, and an agreed reviewer pack for this exercise. A saved request becomes shared agency work.
+Use the **designated preview**, `daniel.01`, and an agreed reviewer pack for this exercise. A saved request becomes shared agency work.
 
 | Step | Click or enter | Observe |
 |---|---|---|
@@ -65,7 +65,7 @@ This exercise connects a marketer-managed SitecoreAI form to its configured rece
 | F2 | Inspect **Your name**, **Work email**, **Agency name**, **How can we help?** and **What would you like to discuss?** | All five fields are required. Topic choices are **Agency growth**, **Product guidance** and **Portal support**. |
 | F3 | Open **Settings** using the gear. Inspect **Demo Webhook**, site availability and the success message. | **Demo Webhook** is selected. Site availability shows **1 out of 1**. The success message is configured. |
 | F4 | Inspect **Push changes**, then return to the form preview without changing the form. | The action updates an active form. This inspection leaves the form and its live behavior unchanged. |
-| F5 | Sign in as `daniel.04`, password `Sitecore`, at the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Enter `Daniel Ortiz`, `daniel.04@example.com` and `Prairie Oak Insurance`. | **Your name**, **Work email** and **Agency name** contain those fictional values. |
+| F5 | Sign in as `daniel.01`, password `Sitecore`, at the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Enter `Daniel Ortiz`, `daniel.01@example.com` and `Prairie Oak Insurance`. | **Your name**, **Work email** and **Agency name** contain those fictional values. |
 | F6 | In **How can we help?**, select **Agency growth**. In **What would you like to discuss?**, enter a unique marker such as `LM-NATIVE-yourname-date-time`. Select **Send request**. | **Thank you. Your request has been received.** appears. The fields clear and the form remains visible. |
 | F7 | Open the receiver's inspection inbox, select the **POST** with your marker, then inspect **Request Content** or **Raw Content**. | JSON matches the five submitted values; request metadata identifies **Contact your team**. Match the unique message marker. |
 | F8 | Reload to clear the confirmation. Repeat with a new message marker and leave earlier receipts unchanged. | No saved-work reset is needed. Portal reset does not erase webhook receipts. |
@@ -203,7 +203,7 @@ The growth criterion is below 20%. Cedar Ridge's seeded share is about 14.46%, w
 | P1 | In Page Builder, open **Home → Agency growth → Small-business growth**. Select **CampaignCallout** in **Layers** and click **Edit personalization rules**. | The right panel shows **Personalized**. Its variant selector offers **Original** and **1 Liberty Mutual - Small business growth opportunity is true**. Leave the active rules running. |
 | P2 | Open the [custom JavaScript value](https://app.sitecorecloud.io/personalize/custom-values/9faad837-0e23-4b5b-af10-c6883dba86ac?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df) and inspect its input attributes. | The threshold, identity/role requirements and neutral fallback are explicit. |
 | P3 | Load Avery's actual Sitecore profile, then Daniel's from the same pack. Use [profile lookup](demo-loops.md) to obtain the native profile ID. | Avery meets the growth criterion; Daniel follows neutral guidance. The portal's imported identifier is not necessarily the native profile ID. |
-| P4 | [Sign in](https://liberty-mutual-agent-portal.vercel.app/login) as `avery.04` and open the campaign. Sign out, then repeat as `daniel.04`. | Avery sees **Build on your personal-lines relationships**. Daniel sees **Turn local knowledge into a stronger submission**. Compare those headings with the native test. |
+| P4 | [Sign in](https://liberty-mutual-agent-portal.vercel.app/login) as `avery.01` and open the campaign. Sign out, then repeat as `daniel.01`. | Avery sees **Build on your personal-lines relationships**. Daniel sees **Turn local knowledge into a stronger submission**. Compare those headings with the native test. |
 
 The current source metrics are fictional JSON data imported into profile extensions. Connecting the existing Salesforce backend needs approved identifiers, field mappings, permissions and freshness. Confirm any Snowflake data requirement separately. The CMS does not automatically discover or query those internal systems.
 
