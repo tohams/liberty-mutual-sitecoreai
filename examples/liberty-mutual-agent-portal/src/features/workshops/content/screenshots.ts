@@ -16,7 +16,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "resource-search.png",
       alt: "Learning and resources search interface with licensed-state filter controls",
       caption:
-        "Learning & resources: use the search field and Risk state filter. This reference shows Daniel’s library; result counts and treatment copy may vary.",
+        "**Learning & resources**: use the search field and **Risk state** filter. This reference shows Daniel’s library; result counts and treatment copy may vary.",
     },
   },
   "bop-submission": {
@@ -24,7 +24,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "products-texas.png",
       alt: "Products and appetite with Texas selected and Prepare account buttons",
       caption:
-        "Confirm Texas in Risk state before choosing Prepare account on the Businessowners policy card.",
+        "Confirm **Texas** in **Risk state** before choosing **Prepare account** on the **Businessowners policy** card.",
     },
     "3": {
       file: "bop-preparation.png",
@@ -38,7 +38,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "native-contact-form.png",
       alt: "Contact your team form below the relationship-team cards on Support",
       caption:
-        "On Support, scroll below the relationship-team cards to find the native Contact your team form.",
+        "On **Support**, scroll below the relationship-team cards to find the native **Contact your team** form.",
     },
   },
   "resource-content-workflow": {
@@ -46,13 +46,13 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "pagebuilder-resource.png",
       alt: "Page Builder showing the Texas resource and its ResourceArticle and ResourceImage layers",
       caption:
-        "Reference layout for the Texas resource. Layers identifies the article and its nested image. The version shown is Live; create the coordinated Draft before editing.",
+        "Reference layout for the Texas resource. **Layers** identifies the article and its nested image. The version shown is **Live**; create the coordinated **Draft** before editing.",
     },
     "4": {
       file: "resource-metadata.png",
       alt: "Resource metadata app with managed risk state, business family, product and distribution choices",
       caption:
-        "Apps → Resource metadata. This screenshot shows the existing Live version, so fields are read-only. The guide creates a Draft before making changes.",
+        "**Apps** → **Resource metadata**. This screenshot shows the existing **Live** version, so fields are read-only. The guide creates a **Draft** before making changes.",
     },
   },
   "create-resource-and-media": {
@@ -60,13 +60,13 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "modern-media-library.png",
       alt: "Modern Media Library showing the twelve Liberty Mutual resource images",
       caption:
-        "Content → Media BETA opens the Modern Media Library. Reuse the prepared asset that fits the practice article.",
+        "**Content** → **Media BETA** opens the **Modern Media Library**. Reuse the prepared asset that fits the practice article.",
     },
     "5": {
       file: "pagebuilder-resource.png",
       alt: "Page Builder Layers showing the nested ResourceImage component",
       caption:
-        "Existing article for reference: ResourceImage belongs inside ResourceArticle’s image placeholder. Your new page has its own local image datasource.",
+        "Existing article for reference: **ResourceImage** belongs inside **ResourceArticle**’s image placeholder. Your new page has its own local image datasource.",
     },
   },
   "affinity-personalization": {
@@ -74,7 +74,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "native-affinities.png",
       alt: "SitecoreAI Affinities showing insurance_interest page mappings",
       caption:
-        "Performance → Settings → Affinities shows the tagged pages. These settings define signals; inspect the current agent’s profile to verify accumulated scores.",
+        "**Performance** → **Settings** → **Affinities** shows the tagged pages. These settings define signals; inspect the current agent’s profile to verify accumulated scores.",
     },
     "5": {
       file: "products-texas.png",
@@ -88,13 +88,13 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "agentic-workflow.png",
       alt: "Agentic Studio showing saved conversation and three connected workflow stages",
       caption:
-        "The Agents panel shows Account Enrichment → Brief Generation → Content Generation. Inspect the saved work without clicking Run workflow.",
+        "The **Agents** panel shows **Account Enrichment** → **Brief Generation** → **Content Generation**. Inspect the saved work without clicking **Run workflow**.",
     },
     "5": {
       file: "agentic-email-preview.png",
       alt: "Agentic Studio artifact dialog showing the styled principal outreach email",
       caption:
-        "Choose the artifact ending in email preview, then select Preview. The left panel lets you compare the three reviewed role-specific emails.",
+        "Choose the artifact ending in **email preview**, then select **Preview**. The left panel lets you compare the three reviewed role-specific emails.",
     },
   },
   "architecture-and-ownership": {
@@ -110,7 +110,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "resource-metadata.png",
       alt: "Installed Resource metadata panel in Page Builder",
       caption:
-        "The panel reads managed taxonomy choices while preserving the raw Search-compatible field values. Live versions are read-only.",
+        "The panel reads managed taxonomy choices while preserving the raw Search-compatible field values. **Live** versions are read-only.",
     },
   },
 };
