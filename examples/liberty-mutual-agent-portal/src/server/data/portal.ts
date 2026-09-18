@@ -10,10 +10,9 @@ import { PortalError } from '../errors';
 import { getStateStore, stateNamespace, type StateStore, type StoredValue } from '../state/store';
 import { fixtures } from './fixtures';
 import { getResourceCatalog } from './cms-resources';
+import { getPack, PACK_METADATA_TTL_SECONDS, packStateKey, type PackMetadata } from './pack-state';
 
-const STATE_TTL_SECONDS = 7 * 24 * 60 * 60;
-const METADATA_TTL_SECONDS = 10 * 365 * 24 * 60 * 60;
-interface PackMetadata { runId: string; profileGeneration: number; createdAt: number; restartedAt: number; }
+const STATE_RETENTION_SECONDS = 7 * 24 * 60 * 60;
 interface AgencyState {
   submissions: Submission[]; bondRequests: BondRequest[]; tasks: Task[]; activity: Activity[];
   favorites: Record<string, string[]>; registrations: Record<string, string[]>;
@@ -69,27 +68,20 @@ function baseline(agencyId: string): AgencyState {
   return structuredClone({ submissions: owns(fixtures.submissions), bondRequests: owns(fixtures.bondRequests), tasks: owns(fixtures.tasks), activity: owns(fixtures.activity), favorites: {}, registrations: {}, appliedActions: {} });
 }
 
-async function getPack(store: StateStore, reviewerPack: string): Promise<StoredValue<PackMetadata>> {
-  const key = `${stateNamespace()}:pack:${reviewerPack}`;
-  const existing = await store.read<PackMetadata>(key);
-  if (existing) return existing;
-  const created = await store.compareAndSet<PackMetadata>(key, null, { runId: randomUUID(), profileGeneration: 0, createdAt: Date.now(), restartedAt: 0 }, METADATA_TTL_SECONDS);
-  const result = created ?? await store.read<PackMetadata>(key);
-  if (!result) throw new PortalError('STATE_UNAVAILABLE', 'Your workspace could not be opened. Please try again.', 503);
-  return result;
-}
-
 async function getPackContext(session: PortalSession, store: StateStore) {
   const agent = getAgent(session);
   const pack = await getPack(store, session.reviewerPack);
   const issuedAt = Date.parse(session.issuedAt);
-  if (!Number.isFinite(issuedAt) || pack.value.restartedAt > issuedAt) throw new PortalError('UNAUTHENTICATED', 'Your workspace was restarted. Please sign in again.', 401);
-  const remainingSeconds = Math.ceil((pack.value.createdAt + STATE_TTL_SECONDS * 1000 - Date.now()) / 1000);
-  if (remainingSeconds <= 0) throw new PortalError('WORKSPACE_EXPIRED', 'This workspace has expired. Contact your portal administrator to restore it.', 409);
-  return { agent, pack, remainingSeconds };
+  if (!Number.isFinite(issuedAt) || (pack.value.restartedAt > 0 && pack.value.restartedAt >= issuedAt)) throw new PortalError('UNAUTHENTICATED', 'Your workspace was restarted. Please sign in again.', 401);
+  return { agent, pack };
 }
 
 function verifiedProfileIdentity(session: PortalSession, agent: Agent, metadata: PackMetadata): PortalBootstrap['udlIdentity'] {
+  if (metadata.profileSet) {
+    const identifier = metadata.profileSet.identifiers[agent.id];
+    return identifier ? { provider: 'liberty-mutual-agent', id: identifier } : null;
+  }
+  // Existing imported generations retain their original identity and history.
   const verifiedGenerations = (process.env.PORTAL_VERIFIED_PROFILE_GENERATIONS ?? '').split(',').map((value) => value.trim()).filter(Boolean);
   return verifiedGenerations.includes(String(metadata.profileGeneration))
     ? { provider: 'liberty-mutual-agent', id: getProfileIdentifier(session.reviewerPack, agent.id, metadata.profileGeneration) }
@@ -103,13 +95,13 @@ export async function getPortalPersonalizationIdentity(session: PortalSession, s
 }
 
 async function getContext(session: PortalSession, store: StateStore) {
-  const { agent, pack, remainingSeconds } = await getPackContext(session, store);
+  const { agent, pack } = await getPackContext(session, store);
   const key = `${stateNamespace()}:pack:${session.reviewerPack}:run:${pack.value.runId}:agency:${agent.agencyId}`;
   const initial = await store.read<AgencyState>(key);
-  const record = initial ?? await store.compareAndSet(key, null, baseline(agent.agencyId), remainingSeconds) ?? await store.read<AgencyState>(key);
+  const record = initial ?? await store.compareAndSet(key, null, baseline(agent.agencyId), STATE_RETENTION_SECONDS) ?? await store.read<AgencyState>(key);
   if (!record) throw new PortalError('STATE_UNAVAILABLE', 'Your workspace could not be opened. Please try again.', 503);
   const resources = await getResourceCatalog();
-  return { agent, pack, key, record, remainingSeconds, resources };
+  return { agent, pack, key, record, resources };
 }
 
 function resolveResource(reference: string, resources: Resource[]) {
@@ -129,7 +121,7 @@ function makeBootstrap(session: PortalSession, agent: Agent, metadata: PackMetad
     bondRequests: Object.fromEntries(bondRequests.map((entry) => [entry.id, bondEligibility(agent, entry)])),
   };
   const allowedPaths = new Set([...policies.flatMap((item) => [`/policies/${item.id}`, `/renewals/${item.id}`]), ...submissions.map((item) => `/submissions/${item.id}`), ...bondRequests.map((item) => `/surety/${item.id}`)]);
-  const profileId = editor ? '' : getProfileIdentifier(session.reviewerPack, agent.id, metadata.profileGeneration);
+  const profileId = editor ? '' : metadata.profileSet?.identifiers[agent.id] ?? getProfileIdentifier(session.reviewerPack, agent.id, metadata.profileGeneration);
   return structuredClone({
     agent: { ...agent, licensedStates },
     eligibility: { ...fixtures.eligibility, agentAuthorities: fixtures.eligibility.agentAuthorities.filter((entry) => entry.agentId === agent.id), carrierAppointments: fixtures.eligibility.carrierAppointments.filter((entry) => entry.agencyId === agency.id && (!entry.agentId || entry.agentId === agent.id)) },
@@ -338,7 +330,7 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
   }
   next.appliedActions[idempotencyKey] = { hash, actor: agent.id };
   if (Object.keys(next.appliedActions).length > 1000) throw new PortalError('WORKSPACE_LIMIT', 'This workspace has reached its activity limit. Contact your portal administrator to restore it.', 409);
-  const saved = await store.compareAndSet(context.key, context.record.version, next, context.remainingSeconds);
+  const saved = await store.compareAndSet(context.key, context.record.version, next, STATE_RETENTION_SECONDS);
   if (!saved) throw new PortalError('VERSION_CONFLICT', 'Your workspace changed in another window. Refresh and try again.', 409);
   const latestPack = await getPack(store, session.reviewerPack);
   if (latestPack.value.runId !== context.pack.value.runId) throw new PortalError('WORKSPACE_RESET', 'Your workspace was reset. Refresh the page before continuing.', 409);
@@ -347,14 +339,13 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
 
 export async function resetReviewerPack(reviewerPack: string, mode: 'saved-work' | 'restart', store = getStateStore()) {
   if (!fixtures.manifest.reviewerPacks.includes(reviewerPack)) throw new PortalError('INVALID_INPUT', 'Choose a valid reviewer pack.');
+  if (mode !== 'saved-work') throw new PortalError('INVALID_INPUT', 'A profile restart requires a request ID and the current run. Use the operator restart endpoint.');
   const current = await getPack(store, reviewerPack);
-  const generation = current.value.profileGeneration + (mode === 'restart' ? 1 : 0);
-  const verified = (process.env.PORTAL_VERIFIED_PROFILE_GENERATIONS ?? '').split(',').map((value) => value.trim());
-  if (mode === 'restart' && !verified.includes(String(generation))) throw new PortalError('PROFILE_NOT_READY', 'The next native profile generation has not been imported and verified.', 409);
-  const next = { runId: randomUUID(), profileGeneration: generation, createdAt: Date.now(), restartedAt: mode === 'restart' ? Date.now() : current.value.restartedAt };
-  const saved = await store.compareAndSet(`${stateNamespace()}:pack:${reviewerPack}`, current.version, next, METADATA_TTL_SECONDS);
+  if (current.value.pendingRestart) throw new PortalError('RESTART_PENDING', 'A profile restart is in progress. Complete it before resetting saved work.', 409);
+  const next = { ...current.value, runId: randomUUID(), createdAt: Date.now() };
+  const saved = await store.compareAndSet(packStateKey(reviewerPack), current.version, next, PACK_METADATA_TTL_SECONDS);
   if (!saved) throw new PortalError('VERSION_CONFLICT', 'This reviewer pack changed. Refresh and try again.', 409);
-  return { reviewerPack, mode, runId: next.runId, profileGeneration: generation, clearBrowserIdentity: mode === 'restart' };
+  return { reviewerPack, mode, runId: next.runId, profileGeneration: next.profileGeneration, clearBrowserIdentity: false };
 }
 
 export async function getPolicyDocument(session: PortalSession, policyId: string, documentId: string, store = getStateStore()) {

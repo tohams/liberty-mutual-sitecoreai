@@ -30,7 +30,9 @@ The [state eligibility runbook](../../../docs/state-eligibility.md) explains the
 | `PORTAL_REDIS_REST_TOKEN` | Redis write token, server only |
 | `KV_REST_API_URL` / `KV_REST_API_TOKEN` | Supported aliases for a Vercel marketplace Redis connection |
 | `PORTAL_OPERATOR_SECRET` | Separate random secret, at least 32 characters, for the operator reset endpoint |
-| `PORTAL_VERIFIED_PROFILE_GENERATIONS` | Comma-separated generations whose complete native UDL import has been checked; leave empty until confirmed |
+| `SITECORE_PROFILE_IMPORT_URL` | Tenant-specific native profile import HTTPS endpoint; server only |
+| `SITECORE_PROFILE_IMPORT_API_KEY` | Native profile import API key; server only and separate from the operator secret |
+| `PORTAL_VERIFIED_PROFILE_GENERATIONS` | Verified historical fixture generations used for the initial profile mapping; new on-demand restart profiles require their own durable import verification before activation |
 | `PORTAL_STATE_ADAPTER=local-json` | Explicit local development only; never accepted on Vercel or in production |
 | `PORTAL_LOCAL_STATE_DIRECTORY` | Optional local-only path; defaults to `.portal-state` |
 | `PORTAL_CONTENT_ADAPTER` | `sitecore` (default) reads the published resource metadata; `fixtures` is restricted to explicit local engineering/tests |
@@ -53,9 +55,9 @@ Fifteen packs (`01`–`15`) each contain the same seven identities, for 105 fict
 | `marcus` | Marcus Reed | Harborline Risk Partners | Surety specialist |
 | `elena` | Elena Park | Summit Specialty Partners | Wholesale broker |
 
-Assign one pack to each attendee for hosted exercises, and keep that suffix when switching among all seven personas. For example, the attendee assigned pack `12` uses `avery.12`, `maya.12`, `jordan.12`, `daniel.12`, `priya.12`, `marcus.12` and `elena.12`. For a hosted presenter journey, coordinate use of an attendee’s pack and complete the guided work and its required cleanup before that attendee begins. Never reset a pack while an attendee is using it. The seven roles, licenses, appointments and four fictional agencies are unchanged across packs; the suffix selects an isolated copy, not a different role.
+Reserve pack `01` for workshop presenters. Assign attendee and spare packs from `02`–`15` (14 non-presenter packs), keeping that suffix when switching among all seven personas. For example, the attendee assigned pack `12` uses `avery.12`, `maya.12`, `jordan.12`, `daniel.12`, `priya.12`, `marcus.12` and `elena.12`. Never reset a pack while an attendee is using it. The seven roles, licenses, appointments and four fictional agencies are unchanged across packs; the suffix selects an isolated copy, not a different role.
 
-For example, `maya.01` and `maya.02` have different saved work and different native profile identifiers. The three Cedar Ridge users within one pack intentionally share the agency's operational work; favorites and learning registrations belong to the individual agent. Sharing the exact same username also shares its native marketing history. The fifteen packs do not change the four native profile generations (`0`–`3`) behind each login. The local developer exercise remains isolated on each workstation and can continue to use `daniel.01` with tracking disabled. Resource authoring uses each attendee’s own Sitecore sign-in and uniquely named unpublished page, not a portal reviewer pack.
+For example, `maya.01` and `maya.02` have different saved work and different native profile identifiers. The three Cedar Ridge users within one pack intentionally share the agency's operational work; favorites and learning registrations belong to the individual agent. Sharing the exact same username also shares its native marketing history. Each pack can be restarted on demand with a newly imported and verified set of seven native profiles. The original fixture generations (`0`–`3`) are historical seed sets, not a four-restart limit. The local developer exercise remains isolated on each workstation and can continue to use `daniel.01` with tracking disabled. Resource authoring uses each attendee’s own Sitecore sign-in and uniquely named unpublished page, not a portal reviewer pack.
 
 The requested readable username/password source is `fixtures/portal-logins.json`. All 105 fictional accounts use the shared password `Sitecore`. Handle that file as operator material even though it contains no customer credentials. It is not imported by runtime code. `node scripts/provision-credentials.mjs` derives `fixtures/portal-credentials.json` using independent salts and scrypt. The server imports only that hashed artifact. Rerun provisioning after changing the source, then release the application. Never put either file into `public`, a download route, or a Sitecore media library.
 
@@ -90,7 +92,8 @@ All workspace and document responses use `Cache-Control: private, no-store`, `Va
 | `GET /api/portal/bootstrap` | Returns the current `PortalBootstrap` |
 | `POST /api/portal/actions` | Validates and persists a `PortalAction`, then returns a fresh bootstrap |
 | `GET /api/portal/policies/{policyId}/documents/{documentId}` | Returns an authorized account-review text document |
-| `POST /api/portal/operator/reset` | Separate operator bearer credential; JSON `{ reviewerPack, mode }` |
+| `GET /api/portal/operator/reset?reviewerPack=15` | Separate operator bearer credential; current run/generation and pending restart; optional `requestId` returns that retained operation receipt |
+| `POST /api/portal/operator/reset` | Separate operator bearer credential; saved work uses `{ reviewerPack, mode: "saved-work" }`; restart also requires UUID `requestId` and `expectedRunId` |
 
 Every action includes `expectedVersion`, `runId`, and a new `idempotencyKey`. Repeating the exact payload with the same key does not duplicate an action. Reusing a key for another actor or payload is rejected. Competing writes return `VERSION_CONFLICT` rather than overwriting another user's work. The UI refreshes before the user retries.
 
@@ -110,28 +113,54 @@ The fixed scenario date makes fixtures repeatable. To advance the scenario, upda
 
 ## Durable work and resetting
 
-State keys are namespaced by environment, reviewer pack, run UUID, and agency. The store retains changes for seven days from the run's start, independently from eight-hour login sessions. Pack metadata retains the latest native generation and reset timestamp so a normal expiry cannot silently reuse an older marketing identity. Expired work returns `WORKSPACE_EXPIRED`; the operator starts a new run deliberately.
+State keys are namespaced by environment, reviewer pack, run UUID, and agency. Each agency's saved work is retained for seven days after its latest saved change; viewing it does not extend that retention. Eight-hour login sessions remain independent, and a reviewer pack does not lock users out because of its age. If the state store has already expired an agency's saved work, the next visit restores that agency's starting fixtures. Existing saved work is otherwise left untouched. This restoration preserves the run UUID, profile generation, verified native identities, and CDP history; it does not perform an operator reset. Durable pack metadata retains the latest native generation and restart timestamp.
 
 | Operation | Saved work | Native identity and history |
 | --- | --- | --- |
 | Sign out | Preserved | Client clears supported Sitecore identity state; stored native history remains |
 | `saved-work` reset | Fresh run for the selected pack; all its agencies return to baseline | Same native identifier and historical events |
-| `restart` reset | Fresh run and all existing app sessions for that pack are invalidated | Uses the next preimported, verified generation; earlier profiles and analytics remain historical |
+| `restart` reset | After native verification, a fresh run replaces saved work and all existing app sessions for that pack are invalidated | Provisions a fresh set of seven native profiles on demand, verifies the complete import, then activates it; earlier profiles and analytics remain historical |
 
-Run the operator command with the separate secret in the shell environment. The examples use pack `01`; replace it with the attendee's assigned pack from `01`–`15`, confirm the host and coordinate with that attendee before selecting one reset mode. A pack reset affects all seven personas in that pack, not only the last login:
+Run the operator command with the separate secret in the shell environment. The examples use reserved presenter pack `01`; for an attendee reset, use their assigned pack from `02`–`15`, confirm the host and coordinate with that attendee before selecting one reset mode. A pack reset affects all seven personas in that pack, not only the last login:
 
 ```sh
 node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 saved-work
 node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 restart
 ```
 
-The command reads `PORTAL_OPERATOR_SECRET`; it never accepts or prints that secret as a positional argument. Operators must tell active reviewers to refresh after resetting saved work, and to sign in again after restarting. On restart, the browser integration must clear its supported Sitecore SDK identity, cookies, and queued client state before identifying the next profile. A backend reset cannot erase another browser's client storage. The operator route is intentionally absent from portal navigation.
+The command reads `PORTAL_OPERATOR_SECRET`; it never accepts or prints that secret as a positional argument. The native import endpoint and API key are configured only on the server; the CLI does not receive or store the native API key. Operators must tell active reviewers to refresh after resetting saved work, and to sign in again after restarting. On restart, the browser integration must clear its supported Sitecore SDK identity, cookies, and queued client state before identifying the next profile. A backend reset cannot erase another browser's client storage. The operator route is intentionally absent from portal navigation.
 
-Reset advances the run UUID instead of deleting a shared database. Stale tabs cannot write into the active run, another pack stays intact, and old operational keys expire naturally. Restart stops when no next verified native generation is available. It never attempts to clear native history by reimporting the same person.
+Reset advances the run UUID instead of deleting a shared database. Stale tabs cannot write into the active run, another pack stays intact, and old operational keys expire naturally. A restart creates new native identities for all seven personas in the selected pack; it does not delete existing CDP history or reimport an old identity to erase its events. There is no preallocated four-set ceiling. Native import availability and verification still determine when a restart can complete.
+
+The command first reads the active run, then saves one request UUID and expected run UUID before it starts the restart. The private resume file is stored under `~/.sitecore/liberty-mutual-portal-operations/`, keyed by host and pack. It contains no operator secret, native API key, passwords or customer data. `--operation-file /absolute/path/restart.json` chooses another location. Keep that file until the operation completes.
+
+A restart can take several short requests. The CLI reports progress and repeats the **same request UUID and expected run UUID** while the server imports and verifies the seven profiles. `202` means pending; only a validated `200` receipt with `status: completed` confirms that the new run and profiles are active. The previous run remains active while verification is pending. The command waits up to fifteen minutes, retries transient network errors, throttling and server errors with the same operation identity, and removes the resume file only after verified completion.
+
+If the process stops or the wait expires, rerun the same host/pack/restart command on that workstation. It resumes from its file; it does not create another set. If the file is unavailable, the CLI can recover the pack's active pending operation from the operator endpoint. To resume a known operation explicitly, supply its original UUIDs together:
+
+```sh
+node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 restart \
+  --request-id REQUEST_UUID --expected-run-id ORIGINAL_RUN_UUID
+```
+
+A failed receipt, mismatched receipt or `UPLOAD_UNCERTAIN` stops the command and preserves the operation file. Do not delete that file and blindly rerun: inspect the protected operator status and native import first. An uncertain upload might already have reached Sitecore. Any subsequent attempt must be an explicit operator decision with a new request UUID, the current expected run UUID and a separate operation file. The CLI never silently retries an uncertain upload as a new operation. Saved-work reset remains one POST and does not import profiles; an unavailable response requires checking the current pack state before repeating it.
+
+The protected status endpoint accepts `requestId` to retrieve an immutable operation receipt even after later restarts. Its audit fields retain the profile-set ID, environment scope, payload checksum/size, seven identifier/correlation pairs, and batch ID when known. Completed receipts also retain the seven canonical native profile IDs and verified created/updated/failed counts. Neither payload credentials nor API keys are retained. Use these fields to match an operation to the native import; an old completed receipt proves that operation completed, not that its profile set is still current.
+
+### Find the active native profile
+
+The static `fixtures/udl/profile-identity-map.json` contains the original seed only. After an on-demand restart, look up the live identity instead:
+
+1. Sign in with the assigned persona and pack on the host used for the walkthrough.
+2. In another tab in that same browser, open [production profile details](https://liberty-mutual-agent-portal.vercel.app/api/portal/bootstrap), or [preview profile details](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/api/portal/bootstrap) when using the designated preview. Confirm the `agent.id` matches the persona.
+3. Copy the `id` inside `udlIdentity`; record `session.runId` and `session.profileGeneration` if collecting evidence. If `udlIdentity` is null, stop and ask the operator to verify native identity readiness. Close the temporary details tab.
+4. In SitecoreAI, choose **Performance → Profiles → Search filter → Liberty Mutual agent identity**. Paste the identifier, press **Enter**, open the matching person, then inspect **Overview** or **Engagement**.
+
+The original seed identifiers can share history across production and preview. Each new restart set includes the environment scope and a fresh set UUID, so matching usernames and numeric generations no longer imply the same native identity across hosts. Both hosts still share Sitecore content, native rules and experiment configuration.
 
 ## Native Unified Data Layer mapping
 
-`node scripts/export-udl-profiles.mjs` covers 420 JSONL profiles: 105 logins × four identity generations (`0`–`3`). `fixtures/udl/profile-identity-map.json` maps operator usernames to opaque identifiers; the browser receives only the active identifier. That value is an identifier under provider `liberty-mutual-agent`, not Sitecore's generated profile UUID. All fifteen packs have verified native import receipts; import completion alone does not establish successful runtime identity linking or personalization.
+`node scripts/export-udl-profiles.mjs` describes the historical seed of 420 JSONL profiles: 105 logins × four fixture generations (`0`–`3`). This export is not the limit for on-demand restarts; each restart records and verifies its new profile set in durable operator state. `fixtures/udl/profile-identity-map.json` maps the original seed usernames/generations to opaque identifiers; it does not contain on-demand sets. The browser receives only the active identifier. That value is an identifier under provider `liberty-mutual-agent`, not Sitecore's generated profile UUID. All fifteen packs have verified initial native import receipts; import completion alone does not establish successful runtime identity linking or personalization.
 
 The exported payload follows the [SitecoreAI profile-import schema](https://doc.sitecore.com/sai/en/developers/sitecoreai/profile-import/batch-file-format.html). Create the provider's native identity rule first, import the batch, and verify every result before setting `PORTAL_VERIFIED_PROFILE_GENERATIONS`. No email identifier is reused across generations. Profiles contain fictional names, states, roles, specialties, agency relationships, and production attributes; they contain no passwords, signing secrets, account names, policy numbers, or free-text notes.
 
@@ -143,7 +172,7 @@ For an additive export, write the selected packs to a separate staging directory
 node scripts/export-udl-profiles.mjs /tmp/liberty-mutual-packs-05-15 --packs 05,06,07,08,09,10,11,12,13,14,15
 ```
 
-This creates a selected-pack JSONL file and identity map in that directory. Keep the complete runtime identity map in `fixtures/udl` intact. These packs are already imported; do not reimport a regenerated file to reset native history. Any future import needs its own verified receipt and exact payload.
+This creates a selected-pack JSONL file and identity map for the historical seed in that directory. Keep the archived map in `fixtures/udl` intact. These packs are already imported; do not reimport a regenerated file to reset native history. Ordinary on-demand restarts use the protected operator workflow and its durable verification, not this export command.
 
 The initial payload using extension arrays failed. The verified compatibility shape uses a top-level UUID correlation `id`, the unchanged opaque identifier, first/last name contact fields, and scalar-only extensions. Specializations and licensed states are separate boolean fields. Current Sitecore batch-format and troubleshooting pages differ on array support, so preserve the tenant-verified shape. Regenerating the file creates new transport correlation IDs without changing business/profile identifiers. One successful diagnostic probe may leave `importCompatibilityProbe=true` on Avery's first profile; it is internal diagnostic metadata and does not drive portal decisions.
 
