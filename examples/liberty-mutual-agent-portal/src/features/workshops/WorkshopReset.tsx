@@ -400,10 +400,7 @@ export function WorkshopReset({
               Agentic Studio work, Forms submissions already sent to the
               webhook, and experiment settings.
             </li>
-            <li>
-              Other reviewer numbers, other website environments and guide
-              checkmarks.
-            </li>
+            <li>Other reviewer numbers and other website environments.</li>
           </ul>
         </section>
         <section>

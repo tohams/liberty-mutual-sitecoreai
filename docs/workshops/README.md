@@ -7,7 +7,7 @@ The participant guide is served at `/workshops` on the existing Vercel applicati
 - Marketing and development/architecture indexes organize the walkthroughs by audience and task.
 - Each walkthrough states its purpose, prerequisites, accounts, actions, expected observations and cleanup.
 - Guide instructions adapt shared portal account suffixes to the signed-in reviewer's assigned pack. Local exercises retain their isolated `.01` accounts.
-- Screenshots can be enlarged. Checkmarks are stored in the current browser; clearing them never resets portal data or native profiles.
+- Screenshots can be enlarged.
 - Portal and native Sitecore links open separately. Native Sitecore tools require the reader's own separately authorized account.
 - `/workshops/reset` provides self-service workspace controls. Choose a **Reviewer number** from `01`–`15`; the page initially selects the signed-in reviewer's number and shows that pack's current profile identities.
 - Click **Reset reviewer** for the selected number. This single clean reset always restores starting operational work and imports and verifies seven fresh native profiles together. All seven personas with that suffix must sign in to the portal again after completion.
@@ -41,4 +41,4 @@ The initial content was reconciled against a read-only download of the canonical
 
 Run `npm test`, `npm run lint`, `npm run type-check` and `npm run build` from the app directory. Content tests check procedure coverage, links, complete steps, cleanup, protected screenshots, the actual local-development contract, reset-page instructions and current profile lookup. Authentication tests verify cross-purpose token rejection and safe return paths.
 
-Before releasing, also verify anonymous deep-link redirects, screenshot denial, authenticated images, separate portal identity, guide search, assigned-pack headings, progress retention, screenshot enlargement, code copy and logout. Verify the single reset action, reviewer selector, current-host scope, restored saved work, fresh profiles, required portal sign-in, progress/resume behavior and unaffected comparison packs. Record the exact pack and host used. Read-only screenshot capture does not prove every mutating exercise was rerun; preserve that distinction in release notes.
+Before releasing, also verify anonymous deep-link redirects, screenshot denial, authenticated images, separate portal identity, guide search, assigned-pack headings, screenshot enlargement, code copy and logout. Verify the single reset action, reviewer selector, current-host scope, restored saved work, fresh profiles, required portal sign-in, progress/resume behavior and unaffected comparison packs. Record the exact pack and host used. Read-only screenshot capture does not prove every mutating exercise was rerun; preserve that distinction in release notes.
