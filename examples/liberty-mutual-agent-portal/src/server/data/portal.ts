@@ -10,9 +10,8 @@ import { PortalError } from '../errors';
 import { getStateStore, stateNamespace, type StateStore, type StoredValue } from '../state/store';
 import { fixtures } from './fixtures';
 import { getResourceCatalog } from './cms-resources';
-import { getPack, PACK_METADATA_TTL_SECONDS, packStateKey, type PackMetadata } from './pack-state';
+import { getPack, packStateKey, type PackMetadata } from './pack-state';
 
-const STATE_RETENTION_SECONDS = 7 * 24 * 60 * 60;
 interface AgencyState {
   submissions: Submission[]; bondRequests: BondRequest[]; tasks: Task[]; activity: Activity[];
   favorites: Record<string, string[]>; registrations: Record<string, string[]>;
@@ -98,7 +97,7 @@ async function getContext(session: PortalSession, store: StateStore) {
   const { agent, pack } = await getPackContext(session, store);
   const key = `${stateNamespace()}:pack:${session.reviewerPack}:run:${pack.value.runId}:agency:${agent.agencyId}`;
   const initial = await store.read<AgencyState>(key);
-  const record = initial ?? await store.compareAndSet(key, null, baseline(agent.agencyId), STATE_RETENTION_SECONDS) ?? await store.read<AgencyState>(key);
+  const record = initial ?? await store.compareAndSet(key, null, baseline(agent.agencyId), null) ?? await store.read<AgencyState>(key);
   if (!record) throw new PortalError('STATE_UNAVAILABLE', 'Your workspace could not be opened. Please try again.', 503);
   const resources = await getResourceCatalog();
   return { agent, pack, key, record, resources };
@@ -330,7 +329,7 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
   }
   next.appliedActions[idempotencyKey] = { hash, actor: agent.id };
   if (Object.keys(next.appliedActions).length > 1000) throw new PortalError('WORKSPACE_LIMIT', 'This workspace has reached its activity limit. Contact your portal administrator to restore it.', 409);
-  const saved = await store.compareAndSet(context.key, context.record.version, next, STATE_RETENTION_SECONDS);
+  const saved = await store.compareAndSet(context.key, context.record.version, next, null);
   if (!saved) throw new PortalError('VERSION_CONFLICT', 'Your workspace changed in another window. Refresh and try again.', 409);
   const latestPack = await getPack(store, session.reviewerPack);
   if (latestPack.value.runId !== context.pack.value.runId) throw new PortalError('WORKSPACE_RESET', 'Your workspace was reset. Refresh the page before continuing.', 409);
@@ -343,7 +342,7 @@ export async function resetReviewerPack(reviewerPack: string, mode: 'saved-work'
   const current = await getPack(store, reviewerPack);
   if (current.value.pendingRestart) throw new PortalError('RESTART_PENDING', 'A profile restart is in progress. Complete it before resetting saved work.', 409);
   const next = { ...current.value, runId: randomUUID(), createdAt: Date.now() };
-  const saved = await store.compareAndSet(packStateKey(reviewerPack), current.version, next, PACK_METADATA_TTL_SECONDS);
+  const saved = await store.compareAndSet(packStateKey(reviewerPack), current.version, next, null);
   if (!saved) throw new PortalError('VERSION_CONFLICT', 'This reviewer pack changed. Refresh and try again.', 409);
   return { reviewerPack, mode, runId: next.runId, profileGeneration: next.profileGeneration, clearBrowserIdentity: false };
 }

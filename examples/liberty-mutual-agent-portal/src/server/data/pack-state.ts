@@ -12,7 +12,6 @@ export interface RestartVerificationFailure {
   failedAt?: string;
 }
 
-export const PACK_METADATA_TTL_SECONDS = 10 * 365 * 24 * 60 * 60;
 
 export interface RestartReceipt {
   reviewerPack: string;
@@ -88,7 +87,7 @@ export async function getPack(store: StateStore, reviewerPack: string): Promise<
   if (existing) return existing;
   const created = await store.compareAndSet<PackMetadata>(key, null, {
     runId: randomUUID(), profileGeneration: 0, createdAt: Date.now(), restartedAt: 0,
-  }, PACK_METADATA_TTL_SECONDS);
+  }, null);
   const result = created ?? await store.read<PackMetadata>(key);
   if (!result) throw new PortalError('STATE_UNAVAILABLE', 'Your workspace could not be opened. Please try again.', 503);
   return result;

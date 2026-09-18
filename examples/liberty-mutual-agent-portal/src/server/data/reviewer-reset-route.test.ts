@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { GET, POST } from '../../app/api/portal/operator/reset/route';
 import { getStateStore, stateNamespace } from '../state/store';
-import { getPack, packStateKey, PACK_METADATA_TTL_SECONDS, type RestartReceipt } from './pack-state';
+import { getPack, packStateKey, type RestartReceipt } from './pack-state';
 import { prepareProfileImport } from '../udl/profile-import';
 
 let directory: string;
@@ -84,7 +84,7 @@ test('protected diagnostic GET stays read-only; explicit resume verifies the kno
     targetGeneration: plan.generation, clearBrowserIdentity: false, profileSetId: plan.profileSetId, identityScope: plan.identityScope,
     checksumMd5: plan.checksumMd5, fileSizeBytes: plan.fileSizeBytes, batchId, profiles: plan.profiles,
   };
-  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [requestId]: receipt } }, PACK_METADATA_TTL_SECONDS);
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [requestId]: receipt } }, null);
   const before = await getPack(store, '15');
   const originalFetch = globalThis.fetch;
   const originalUrl = process.env.SITECORE_PROFILE_IMPORT_URL;
@@ -128,4 +128,22 @@ test('protected diagnostic GET stays read-only; explicit resume verifies the kno
     if (originalUrl === undefined) delete process.env.SITECORE_PROFILE_IMPORT_URL; else process.env.SITECORE_PROFILE_IMPORT_URL = originalUrl;
     if (originalKey === undefined) delete process.env.SITECORE_PROFILE_IMPORT_API_KEY; else process.env.SITECORE_PROFILE_IMPORT_API_KEY = originalKey;
   }
+});
+
+test('persistence migration remains operator-only and neither resets a pack nor accesses native services', async (context) => {
+  const before = await (await GET(statusRequest())).json();
+  const unauthorized = await POST(new Request(`${origin}/api/portal/operator/reset`, { method: 'POST',
+    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: 'persist-workspace', reviewerPack: '15' }) }));
+  assert.equal(unauthorized.status, 403);
+  context.mock.method(globalThis, 'fetch', async () => { throw new Error('Migration must not call native services.'); });
+  const response = await POST(postRequest({ mode: 'persist-workspace', reviewerPack: '15' }));
+  assert.equal(response.status, 200);
+  const receipt = await response.json();
+  assert.equal(receipt.mode, 'persist-workspace');
+  assert.equal(receipt.runId, before.runId);
+  assert.equal(receipt.profileGeneration, before.profileGeneration);
+  assert.ok(receipt.records.every((record: { before: { version: number; valueHash: string }; after: { version: number; valueHash: string; expiresAt: null } }) =>
+    record.before.version === record.after.version && record.before.valueHash === record.after.valueHash && record.after.expiresAt === null));
+  assert.equal(JSON.stringify(receipt).includes(secret), false);
+  assert.deepEqual(await (await GET(statusRequest())).json(), before);
 });

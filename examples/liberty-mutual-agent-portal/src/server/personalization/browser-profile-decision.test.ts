@@ -98,7 +98,7 @@ test('missing or malformed cookie, missing identity, failed identity and unavail
     assert.deepEqual(await execute(campaign), { variantId: '' });
   }
   assert.equal(lookups, 0, 'An absent browser should not initialize or look up any identity');
-  for (const resolve of [async () => null, async () => { throw new Error('Workspace expired'); }]) {
+  for (const resolve of [async () => null, async () => { throw new Error('Workspace unavailable'); }]) {
     const execute = createBrowserProfileDecisionExecutor(context, resolve, transport);
     assert.deepEqual(await execute(campaign), { variantId: '' });
     assert.deepEqual(await execute(campaign), { variantId: '' });

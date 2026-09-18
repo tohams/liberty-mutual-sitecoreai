@@ -17,17 +17,24 @@ class MemoryStore implements StateStore {
       this.records.get(key) ?? null,
     ) as StoredValue<T> | null;
   }
+  async persist<T>(key: string) {
+    const before = await this.read<T>(key);
+    if (!before) return null;
+    const after = { ...before, expiresAt: null };
+    this.records.set(key, after);
+    return { before, after, persistent: true as const };
+  }
   async compareAndSet<T>(
     key: string,
     version: number | null,
     value: T,
-    ttl: number,
+    ttl: number | null,
   ): Promise<StoredValue<T> | null> {
     if ((this.records.get(key)?.version ?? null) !== version) return null;
     const next = {
       version: (version ?? -1) + 1,
       value: structuredClone(value),
-      expiresAt: Date.now() + ttl * 1000,
+      expiresAt: ttl === null ? null : Date.now() + ttl * 1000,
     };
     this.records.set(key, next);
     this.writes++;
