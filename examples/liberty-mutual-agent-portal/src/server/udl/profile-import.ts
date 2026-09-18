@@ -40,6 +40,8 @@ export interface ProfileImportDiagnostic {
   fieldTypes?: Readonly<Record<string, string>>;
   recordCount?: number;
   recordIndex?: number;
+  recordType?: 'profile' | 'PROFILE' | 'Profile' | 'other-string';
+  recordTypeCaseInsensitiveProfile?: boolean;
 }
 export type ProfileImportInspection =
   | { status: 'pending'; retryAfterSeconds: number }
@@ -364,7 +366,13 @@ export async function inspectProfileImport(
         const record = json(line);
         const index = record.recordIndex;
         const diagnostic: ProfileImportDiagnostic = { stage,
-          fieldTypes: responseShape(record, ['recordIndex', 'id', 'recordType', 'outcome', 'profileId']) };
+          fieldTypes: responseShape(record, ['recordIndex', 'id', 'recordType', 'outcome', 'profileId']),
+          ...(typeof record.recordType === 'string' ? {
+            recordType: record.recordType === 'profile' || record.recordType === 'PROFILE' || record.recordType === 'Profile'
+              ? record.recordType : 'other-string',
+            recordTypeCaseInsensitiveProfile: record.recordType.toLowerCase() === 'profile',
+          } : {}),
+        };
         if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0 || index >= PROFILE_COUNT ||
             byIndex.has(index)) return failed('RESULT_INDEX_INVALID', diagnostic);
         diagnostic.recordIndex = index;

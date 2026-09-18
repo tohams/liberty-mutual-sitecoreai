@@ -282,6 +282,24 @@ test('failed verification exposes only allowlisted stage and shape diagnostics',
   }
 });
 
+test('record-type diagnostics expose only allowlisted spelling and never relax the strict type guard', async () => {
+  const input = plan();
+  for (const recordType of ['PROFILE', 'Profile', 'pRoFiLe', 'other', credential, null]) {
+    mockResponses(input, { results: records(input).map((record, index) => index === 0 ? { ...record, recordType } : record) });
+    const result = await inspectProfileImport(input, submission(input));
+    assert.equal(result.status, 'failed');
+    if (result.status !== 'failed') assert.fail('Expected strict type guard to reject nonmatching spelling');
+    assert.equal(result.diagnosticCode, 'RESULT_TYPE_MISMATCH');
+    const expectedLabel = recordType === null ? undefined :
+      recordType === 'PROFILE' || recordType === 'Profile' ? recordType : 'other-string';
+    assert.equal(result.diagnostic?.recordType, expectedLabel);
+    assert.equal(result.diagnostic?.recordTypeCaseInsensitiveProfile,
+      recordType === null ? undefined : recordType.toLowerCase() === 'profile');
+    assert.ok(!JSON.stringify(result).includes(credential));
+    assert.ok(!JSON.stringify(result).includes('pRoFiLe'));
+  }
+});
+
 test('malformed and oversized responses cannot leak upstream content or verify a pack', async () => {
   const input = plan();
   for (const body of [credential, '[1,2]', '{"status":Infinity}', 'x'.repeat(65_537)]) {
