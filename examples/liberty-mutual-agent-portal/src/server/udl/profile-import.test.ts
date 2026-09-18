@@ -225,6 +225,24 @@ test('unordered successful results are correlated to all seven agents with uniqu
   assert.ok(Object.isFrozen(result.receipt) && Object.isFrozen(result.receipt.profiles));
 });
 
+test('native uppercase PROFILE results verify all seven exact records, alone or with documented lowercase', async () => {
+  const input = plan();
+  for (const mixed of [false, true]) {
+    const results = records(input).map((record, index) => ({
+      ...record, recordType: mixed && index % 2 ? 'profile' : 'PROFILE',
+    }));
+    mockResponses(input, { results: [...results].reverse() });
+    const result = await inspectProfileImport(input, submission(input));
+    assert.equal(result.status, 'verified');
+    if (result.status !== 'verified') assert.fail('Expected verified native result spelling');
+    assert.deepEqual(result.receipt.counts, { CREATED: 7, UPDATED: 0, FAILED: 0 });
+    assert.deepEqual(result.receipt.profiles,
+      input.profiles.map((profile, index) => ({ ...profile, profileId: results[index].profileId })));
+    assert.equal(result.receipt.checksumMd5, input.checksumMd5);
+    assert.equal(result.receipt.fileSizeBytes, input.fileSizeBytes);
+  }
+});
+
 test('status counts, terminal failures, wrong batch and unknown states fail closed', async () => {
   const input = plan();
   for (const change of [{ status: 'COMPLETED_WITH_ERRORS' }, { status: 'FAILED' }, { status: 'NEW_STATE' },
@@ -282,9 +300,9 @@ test('failed verification exposes only allowlisted stage and shape diagnostics',
   }
 });
 
-test('record-type diagnostics expose only allowlisted spelling and never relax the strict type guard', async () => {
+test('record-type diagnostics redact arbitrary values and reject all unverified spellings', async () => {
   const input = plan();
-  for (const recordType of ['PROFILE', 'Profile', 'pRoFiLe', 'other', credential, null]) {
+  for (const recordType of ['Profile', 'pRoFiLe', 'other', credential, null]) {
     mockResponses(input, { results: records(input).map((record, index) => index === 0 ? { ...record, recordType } : record) });
     const result = await inspectProfileImport(input, submission(input));
     assert.equal(result.status, 'failed');

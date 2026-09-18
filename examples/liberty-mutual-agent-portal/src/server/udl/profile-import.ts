@@ -377,7 +377,8 @@ export async function inspectProfileImport(
             byIndex.has(index)) return failed('RESULT_INDEX_INVALID', diagnostic);
         diagnostic.recordIndex = index;
         if (record.outcome !== 'CREATED') return failed('RESULT_OUTCOME_MISMATCH', diagnostic);
-        if (record.recordType !== 'profile') return failed('RESULT_TYPE_MISMATCH', diagnostic);
+        // Documentation uses lowercase; this tenant's results endpoint returns uppercase.
+        if (record.recordType !== 'profile' && record.recordType !== 'PROFILE') return failed('RESULT_TYPE_MISMATCH', diagnostic);
         if (!uuid(record.id) || record.id.toLowerCase() !== plan.profiles[index].correlationId.toLowerCase())
           return failed('RESULT_CORRELATION_MISMATCH', diagnostic);
         if (!uuid(record.profileId)) return failed('RESULT_PROFILE_ID_INVALID', diagnostic);
