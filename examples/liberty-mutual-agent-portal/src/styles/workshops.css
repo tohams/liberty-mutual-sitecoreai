@@ -1962,3 +1962,9 @@
   margin-top: 16px;
   color: #5e556c;
 }
+
+/* Named labels in instructions stand out without changing the surrounding wording. */
+.workshop-named-entity {
+  font-weight: 700;
+  color: inherit;
+}

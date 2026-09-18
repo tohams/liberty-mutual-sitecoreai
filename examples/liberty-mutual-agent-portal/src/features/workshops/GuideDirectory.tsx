@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Clock3, Search } from "lucide-react";
+import { GuideText } from "./GuideText";
+import { plainGuideText } from "./guide-text";
 import type { WorkshopAudience, WorkshopGuide } from "./types";
 export type GuideSummary = Pick<
   WorkshopGuide,
@@ -17,7 +19,7 @@ export function GuideDirectory({
   const [query, setQuery] = useState("");
   const categories = [...new Set(guides.map((guide) => guide.category))];
   const matches = guides.filter((guide) =>
-    `${guide.title} ${guide.summary} ${guide.category}`
+    plainGuideText(`${guide.title} ${guide.summary} ${guide.category}`)
       .toLowerCase()
       .includes(query.trim().toLowerCase()),
   );
@@ -77,7 +79,9 @@ export function GuideDirectory({
                     >
                       <div>
                         <h3>{guide.title}</h3>
-                        <p>{guide.summary}</p>
+                        <p>
+                          <GuideText text={guide.summary} />
+                        </p>
                         <span>
                           <Clock3 size={14} />
                           {guide.duration}

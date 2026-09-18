@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Check, Copy, LogOut, Maximize2, X } from "lucide-react";
+import { GuideText } from "./GuideText";
 import type { GuideImage } from "./types";
 
 export function WorkshopSignOut() {
@@ -87,7 +88,9 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
           Enlarge screenshot
         </span>
       </button>
-      <figcaption>{image.caption}</figcaption>
+      <figcaption>
+        <GuideText text={image.caption} />
+      </figcaption>
       <dialog
         ref={dialog}
         className="workshop-lightbox"
@@ -106,7 +109,9 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt={image.alt} />
-          <p>{image.caption}</p>
+          <p>
+            <GuideText text={image.caption} />
+          </p>
         </div>
       </dialog>
     </figure>

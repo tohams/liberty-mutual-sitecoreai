@@ -4,7 +4,12 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { workshopGuides } from "./index";
+import { plainGuideText } from "../guide-text";
+
 import type { GuideLink, WorkshopGuide } from "../types";
+
+const readableContent = (value: unknown) =>
+  plainGuideText(JSON.stringify(value));
 
 const appRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const repositoryRoot = resolve(appRoot, "../..");
@@ -203,7 +208,7 @@ test("customer instructions omit attendee details and embedded infrastructure cr
   const privateAssignment =
     /\b(?:PORTAL_OPERATOR_SECRET|PORTAL_SESSION_SECRET|SITECORE_EDITING_SECRET|UPSTASH_REDIS_REST_TOKEN|SITECORE_EDGE_CONTEXT_ID)\s*[=:]\s*["']?[a-zA-Z0-9+/_=-]{16,}/;
   for (const guide of workshopGuides) {
-    const text = JSON.stringify(guide);
+    const text = `${JSON.stringify(guide)}\n${readableContent(guide)}`;
     assert.doesNotMatch(
       text,
       privateAssignment,
@@ -245,7 +250,7 @@ test("the local component and setup instructions still target the actual reposit
   assert.equal(component.accountScope, "local");
   const nodeVersion = readFileSync(join(appRoot, ".nvmrc"), "utf8").trim();
   assert.ok(
-    JSON.stringify(local).includes(nodeVersion),
+    readableContent(local).includes(nodeVersion),
     "Node prerequisite must match the checked-in runtime",
   );
   assert.ok(
@@ -284,8 +289,8 @@ test("the local component and setup instructions still target the actual reposit
       documentedHeadings.some((heading) => source.includes(heading)),
     "the component must contain its documented starting heading or the exercise edit",
   );
-  assert.match(JSON.stringify(local), /http:\/\/localhost:3000\/login/);
-  assert.match(JSON.stringify(local), /Default editing host/);
+  assert.match(readableContent(local), /http:\/\/localhost:3000\/login/);
+  assert.match(readableContent(local), /Default editing host/);
 });
 
 test("reset walkthroughs use the authenticated page and preserve the host, pack and history boundaries", () => {
@@ -301,7 +306,7 @@ test("reset walkthroughs use the authenticated page and preserve the host, pack 
     "liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app",
   ];
   for (const guide of resetGuides) {
-    const text = JSON.stringify(guide);
+    const text = readableContent(guide);
     const resetLinks = linksFor(guide)
       .map((link) => new URL(link.href))
       .filter((url) => url.pathname === "/workshops/reset");
@@ -347,7 +352,7 @@ test("reset walkthroughs use the authenticated page and preserve the host, pack 
       );
     }
   }
-  const saved = JSON.stringify(resetGuides[0]);
+  const saved = readableContent(resetGuides[0]);
   assert.match(
     saved,
     /restores starting operational work and creates seven fresh verified native profiles together/,
@@ -355,13 +360,13 @@ test("reset walkthroughs use the authenticated page and preserve the host, pack 
   assert.match(saved, /profile generation increases by one/);
   assert.match(saved, /all seven Agent identities change/);
   assert.match(saved, /sign in again/i);
-  const fresh = JSON.stringify(resetGuides[1]);
+  const fresh = readableContent(resetGuides[1]);
   assert.match(fresh, /does not require a second reset/);
   assert.match(fresh, /Continue reset/);
   assert.match(fresh, /sign in again/i);
   assert.match(fresh, /earlier profiles/i);
   assert.doesNotMatch(
-    JSON.stringify(workshopGuides),
+    readableContent(workshopGuides),
     /Reset saved work|Start fresh with new profiles/,
     "the reset page has one clean action, not a choice between reset modes",
   );
@@ -372,7 +377,7 @@ test("native profile lookup uses the selected host's current Agent identity with
     (candidate) => candidate.slug === "find-an-agent-profile",
   );
   assert.ok(guide);
-  const text = JSON.stringify(guide);
+  const text = readableContent(guide);
   assert.match(text, /Agent identity/);
   assert.match(text, /Liberty Mutual agent identity/);
   assert.ok(
@@ -385,7 +390,7 @@ test("native profile lookup uses the selected host's current Agent identity with
     text,
     /ask the operator|operator:|\/api\/portal\/bootstrap/i,
   );
-  const allContent = JSON.stringify(workshopGuides);
+  const allContent = readableContent(workshopGuides);
   assert.doesNotMatch(
     allContent,
     /portal has no reset button|ask the operator before any pack reset|operator must complete a verified restart/i,
