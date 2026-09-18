@@ -10,6 +10,7 @@ import { LocalJsonStateStore, stateNamespace, type StateStore } from '../state/s
 import { createSession, verifySession } from '../auth/session';
 import { authenticate } from '../auth/credentials';
 import logins from '../../../fixtures/portal-logins.json';
+import runtimeCredentials from '../../../fixtures/portal-credentials.json';
 import { requireSameOrigin, readJson } from '../http';
 import { PortalError } from '../errors';
 import type { PortalAction, PortalBootstrap } from '../../contracts/portal';
@@ -63,12 +64,46 @@ test('personalization identity reads only pack metadata and honors verified gene
   await assert.rejects(getPortalPersonalizationIdentity({ ...session, agencyId: 'wrong-agency' }, store), errorCode('UNAUTHENTICATED'));
 });
 
-test('all 28 fixture credentials use salted hashes and unknown logins fail', async () => {
-  assert.equal(logins.logins.length, 28);
-  const source = logins.logins.find((entry) => entry.username === 'maya.01')!;
-  assert.equal((await authenticate(source.username, source.password))?.agencyId, 'cedar-ridge');
-  assert.equal(await authenticate(source.username, 'incorrect-password'), null);
-  assert.equal(await authenticate('unknown.01', 'incorrect-password'), null);
+test('all 105 reviewer logins authenticate and establish sessions in their assigned packs', async () => {
+  const expectedPacks = Array.from({ length: 15 }, (_, index) => String(index + 1).padStart(2, '0'));
+  assert.deepEqual(fixtures.manifest.reviewerPacks, expectedPacks);
+  assert.equal(logins.logins.length, 105);
+  assert.equal(runtimeCredentials.logins.length, 105);
+  assert.equal(new Set(runtimeCredentials.logins.map((entry) => entry.salt)).size, 105, 'Each credential keeps its independent salt');
+  const usernames = new Set<string>();
+  for (const pack of expectedPacks) {
+    const packLogins = logins.logins.filter((entry) => entry.reviewerPack === pack);
+    assert.deepEqual(packLogins.map((entry) => entry.agentId).sort(), fixtures.agents.map((agent) => agent.id).sort());
+    for (const source of packLogins) {
+      assert.equal(source.username, `${source.agentId}.${pack}`);
+      assert.equal(source.password, 'Sitecore');
+      assert.equal(source.enabled, true);
+      assert.equal(usernames.has(source.username), false, 'Reviewer usernames must be unique');
+      usernames.add(source.username);
+      const identity = await authenticate(source.username, source.password);
+      assert.ok(identity, `${source.username} must authenticate`);
+      assert.equal(identity.agentId, source.agentId);
+      assert.equal(identity.reviewerPack, pack);
+      assert.equal(identity.agencyId, fixtures.agents.find((agent) => agent.id === source.agentId)!.agencyId);
+      const { token } = await createSession(identity);
+      const session = await verifySession(token);
+      assert.equal(session?.username, source.username, `${source.username} session must survive verification`);
+      assert.equal(session?.reviewerPack, pack);
+    }
+  }
+  assert.equal(await authenticate('maya.15', 'incorrect-password'), null);
+  assert.equal(await authenticate('unknown.15', 'Sitecore'), null);
+});
+
+test('unconfigured and malformed reviewer packs are rejected by authentication, sessions, and resets', async () => {
+  const store = new LocalJsonStateStore(join(directory, 'invalid-packs'));
+  for (const pack of ['00', '16', '1', '015', '99', '']) {
+    assert.equal(await authenticate(`daniel.${pack}`, 'Sitecore'), null);
+    const { token, session } = await createSession({ agentId: 'daniel', agencyId: 'cedar-ridge', reviewerPack: pack, username: `daniel.${pack}` });
+    assert.equal(await verifySession(token), null, `Pack ${JSON.stringify(pack)} must not verify`);
+    await assert.rejects(getPortalBootstrap(session, store), errorCode('UNAUTHENTICATED'));
+    await assert.rejects(resetReviewerPack(pack, 'saved-work', store), errorCode('INVALID_INPUT'));
+  }
 });
 
 test('fixture relationships, dates, and aggregate money are validated', () => {
@@ -107,6 +142,40 @@ test('saved actions survive a new store instance; retries are idempotent and pac
   assert.equal(packTwo.tasks.filter((task) => task.title === action.title).length, 0);
   assert.notEqual(packTwo.udlIdentity?.id, saved.udlIdentity?.id);
   await assert.rejects(applyPortalAction(maya, { ...action, title: 'Changed payload' }, store), errorCode('DUPLICATE_REQUEST'));
+});
+
+test('new two-digit packs isolate saved work and resets from existing and neighboring packs', async () => {
+  const storePath = join(directory, 'fifteen-pack-isolation');
+  const store = new LocalJsonStateStore(storePath);
+  const sessions = await Promise.all(['01', '10', '14', '15'].map((pack) => login('maya', pack)));
+  const original = await Promise.all(sessions.map((session) => getPortalBootstrap(session, store)));
+  assert.equal(new Set(original.map((bootstrap) => bootstrap.udlIdentity?.id)).size, sessions.length);
+  const saved = await applyPortalAction(sessions[3], {
+    type: 'save-follow-up', policyId: 'pol-001', title: 'Pack 15 attendee follow-up', dueDate: '2026-09-22',
+    ...requestMetadata(original[3]),
+  }, store);
+  const persisted = await getPortalBootstrap(sessions[3], new LocalJsonStateStore(storePath));
+  assert.ok(persisted.tasks.some((task) => task.title === 'Pack 15 attendee follow-up'));
+  for (const [index, session] of sessions.slice(0, 3).entries()) {
+    const untouched = await getPortalBootstrap(session, store);
+    assert.equal(untouched.tasks.some((task) => task.title === 'Pack 15 attendee follow-up'), false);
+    assert.equal(untouched.session.runId, original[index].session.runId);
+  }
+  await resetReviewerPack('15', 'saved-work', store);
+  const cleared = await getPortalBootstrap(sessions[3], store);
+  assert.equal(cleared.tasks.some((task) => task.title === 'Pack 15 attendee follow-up'), false);
+  assert.equal(cleared.udlIdentity?.id, saved.udlIdentity?.id, 'Saved-work reset preserves the native identity');
+  const olderSession = { ...sessions[3], issuedAt: new Date(Date.now() - 1000).toISOString() };
+  await resetReviewerPack('15', 'restart', store);
+  await assert.rejects(getPortalBootstrap(olderSession, store), errorCode('UNAUTHENTICATED'));
+  const restarted = await getPortalBootstrap(await login('maya', '15'), store);
+  assert.equal(restarted.session.profileGeneration, 1);
+  assert.notEqual(restarted.udlIdentity?.id, cleared.udlIdentity?.id);
+  for (const [index, session] of sessions.slice(0, 3).entries()) {
+    const untouched = await getPortalBootstrap(session, store);
+    assert.equal(untouched.session.runId, original[index].session.runId);
+    assert.equal(untouched.udlIdentity?.id, original[index].udlIdentity?.id);
+  }
 });
 
 test('concurrent updates cannot lose work and stale tabs cannot restore a reset run', async () => {

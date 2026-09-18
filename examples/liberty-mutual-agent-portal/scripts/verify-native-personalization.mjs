@@ -19,11 +19,14 @@ const PERSONAS = [
   { label: 'Elena', agent: 'elena', variant: 'neutral' },
 ];
 const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36';
+const { reviewerPacks } = JSON.parse(await readFile(new URL('../fixtures/manifest.json', import.meta.url), 'utf8'));
 const HELP = `Native personalization acceptance (no network without explicit arguments)
-  node --import tsx scripts/verify-native-personalization.mjs --origin <allowed-HTTPS-origin> --pack <01|02|03|04> --public-context <reviewed-public-context>
-  node --import tsx scripts/verify-native-personalization.mjs --origin http://localhost:3000 --pack <01|02|03|04> --public-context <reviewed-public-context> --allow-localhost
-  node --import tsx scripts/verify-native-personalization.mjs --origin <allowed-HTTPS-origin> --pack <01|02|03|04> --public-context <reviewed-public-context> --measure-link
+  node --import tsx scripts/verify-native-personalization.mjs --origin <allowed-HTTPS-origin> --pack <reviewer-pack> --public-context <reviewed-public-context>
+  node --import tsx scripts/verify-native-personalization.mjs --origin http://localhost:3000 --pack <reviewer-pack> --public-context <reviewed-public-context> --allow-localhost
+  node --import tsx scripts/verify-native-personalization.mjs --origin <allowed-HTTPS-origin> --pack <reviewer-pack> --public-context <reviewed-public-context> --measure-link
   node --import tsx scripts/verify-native-personalization.mjs --self-test
+
+Configured reviewer packs: ${reviewerPacks.join(', ')}
 
 Allowed remote origins:
 ${[...HOSTS].map((host) => `  https://${host}`).join('\n')}
@@ -49,7 +52,7 @@ function options(args) {
       result[key.slice(2)] = args[++index];
     } else throw new Error('ARGUMENTS');
   }
-  if (!result.origin || !/^0[1-4]$/.test(result.pack ?? '') || !PUBLIC_CONTEXTS.has(result['public-context'])) throw new Error('ARGUMENTS');
+  if (!result.origin || !reviewerPacks.includes(result.pack) || !PUBLIC_CONTEXTS.has(result['public-context'])) throw new Error('ARGUMENTS');
   const url = new URL(result.origin);
   if (url.username || url.password || url.pathname !== '/' || url.search || url.hash) throw new Error('ARGUMENTS');
   const remote = url.protocol === 'https:' && !url.port && HOSTS.has(url.hostname);
@@ -486,10 +489,16 @@ async function selfTest() {
   assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs]).pack, '04');
   assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs, '--measure-link']).measureLink, true);
   assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs]).measureLink, false);
+  for (const pack of reviewerPacks) {
+    assert.equal(options(['--origin', 'http://localhost:3000', '--pack', pack, '--allow-localhost', ...publicArgs]).pack, pack);
+    const fixtures = await expectations(pack);
+    assert.equal(fixtures.length, 4, `Native personalization fixtures are missing for pack ${pack}.`);
+    assert.equal(new Set(fixtures.map((fixture) => fixture.headline)).size, 4);
+  }
+  for (const pack of ['00', '1', '16', '99', 'all', '']) {
+    assert.throws(() => options(['--origin', 'http://localhost:3000', '--pack', pack, '--allow-localhost', ...publicArgs]));
+  }
   assert.equal(safeCacheMetadata(new Headers({ 'cache-control': 'no-cache, no-store', age: '0', 'x-cache': 'Miss from cloudfront', 'set-cookie': 'must-not-appear' })), 'cache-control=no-cache, no-store | age=0 | x-cache=Miss from cloudfront');
-  const fixtures = await expectations('04');
-  assert.equal(fixtures.length, 4);
-  assert.equal(new Set(fixtures.map((fixture) => fixture.headline)).size, 4);
   const sdk = await installedSdkMetadata();
   assert.equal(sdk.analytics.name, '@sitecore-content-sdk/analytics-core');
   assert.equal(sdk.events.name, '@sitecore-content-sdk/events');

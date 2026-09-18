@@ -41,7 +41,7 @@ The HTTP adapter uses a single Redis `EVAL` operation for compare-and-set, rathe
 
 ## Fictional login packs
 
-Four packs (`01`–`04`) each contain seven identities:
+Fifteen packs (`01`–`15`) each contain the same seven identities, for 105 fictional portal accounts:
 
 | Username prefix | Person | Agency | Role |
 | --- | --- | --- | --- |
@@ -53,9 +53,11 @@ Four packs (`01`–`04`) each contain seven identities:
 | `marcus` | Marcus Reed | Harborline Risk Partners | Surety specialist |
 | `elena` | Elena Park | Summit Specialty Partners | Wholesale broker |
 
-For example, `maya.01` and `maya.02` have different saved work and different native profile identifiers. The three Cedar Ridge users within one pack intentionally share the agency's operational work; favorites and learning registrations belong to the individual agent. Sharing the exact same username also shares its native marketing history.
+Assign one pack to each attendee for hosted exercises, and keep that suffix when switching among all seven personas. For example, the attendee assigned pack `12` uses `avery.12`, `maya.12`, `jordan.12`, `daniel.12`, `priya.12`, `marcus.12` and `elena.12`. For a hosted presenter journey, coordinate use of an attendee’s pack and complete the guided work and its required cleanup before that attendee begins. Never reset a pack while an attendee is using it. The seven roles, licenses, appointments and four fictional agencies are unchanged across packs; the suffix selects an isolated copy, not a different role.
 
-The requested readable username/password source is `fixtures/portal-logins.json`. All 28 fictional accounts use the shared password `Sitecore`. Handle that file as operator material even though it contains no customer credentials. It is not imported by runtime code. `node scripts/provision-credentials.mjs` derives `fixtures/portal-credentials.json` using independent salts and scrypt. The server imports only that hashed artifact. Rerun provisioning after changing the source, then release the application. Never put either file into `public`, a download route, or a Sitecore media library.
+For example, `maya.01` and `maya.02` have different saved work and different native profile identifiers. The three Cedar Ridge users within one pack intentionally share the agency's operational work; favorites and learning registrations belong to the individual agent. Sharing the exact same username also shares its native marketing history. The fifteen packs do not change the four native profile generations (`0`–`3`) behind each login. The local developer exercise remains isolated on each workstation and can continue to use `daniel.01` with tracking disabled. Resource authoring uses each attendee’s own Sitecore sign-in and uniquely named unpublished page, not a portal reviewer pack.
+
+The requested readable username/password source is `fixtures/portal-logins.json`. All 105 fictional accounts use the shared password `Sitecore`. Handle that file as operator material even though it contains no customer credentials. It is not imported by runtime code. `node scripts/provision-credentials.mjs` derives `fixtures/portal-credentials.json` using independent salts and scrypt. The server imports only that hashed artifact. Rerun provisioning after changing the source, then release the application. Never put either file into `public`, a download route, or a Sitecore media library.
 
 Login verifies credentials on the server, applies a durable per-username attempt limit, and signs an eight-hour session using `jose`. Cookies are HttpOnly, SameSite=Lax, and Secure in production. The session carries trusted identity keys; permissions come from server-owned fixtures. POST requests from the browser require matching Origin and JSON content type. Body reading is bounded even if Content-Length is missing. Authentication errors do not disclose whether a username exists.
 
@@ -116,7 +118,7 @@ State keys are namespaced by environment, reviewer pack, run UUID, and agency. T
 | `saved-work` reset | Fresh run for the selected pack; all its agencies return to baseline | Same native identifier and historical events |
 | `restart` reset | Fresh run and all existing app sessions for that pack are invalidated | Uses the next preimported, verified generation; earlier profiles and analytics remain historical |
 
-Run the operator command with the separate secret in the shell environment:
+Run the operator command with the separate secret in the shell environment. The examples use pack `01`; replace it with the attendee's assigned pack from `01`–`15`, confirm the host and coordinate with that attendee before selecting one reset mode. A pack reset affects all seven personas in that pack, not only the last login:
 
 ```sh
 node scripts/reset-reviewer-pack.mjs https://portal-host.example 01 saved-work
@@ -129,11 +131,21 @@ Reset advances the run UUID instead of deleting a shared database. Stale tabs ca
 
 ## Native Unified Data Layer mapping
 
-`node scripts/export-udl-profiles.mjs` writes 112 JSONL profiles: 28 logins × four identity generations. `fixtures/udl/profile-identity-map.json` maps operator usernames to opaque identifiers; the browser receives only the active identifier. That value is an identifier under provider `liberty-mutual-agent`, not Sitecore's generated profile UUID.
+`node scripts/export-udl-profiles.mjs` covers 420 JSONL profiles: 105 logins × four identity generations (`0`–`3`). `fixtures/udl/profile-identity-map.json` maps operator usernames to opaque identifiers; the browser receives only the active identifier. That value is an identifier under provider `liberty-mutual-agent`, not Sitecore's generated profile UUID. All fifteen packs have verified native import receipts; import completion alone does not establish successful runtime identity linking or personalization.
 
 The exported payload follows the [SitecoreAI profile-import schema](https://doc.sitecore.com/sai/en/developers/sitecoreai/profile-import/batch-file-format.html). Create the provider's native identity rule first, import the batch, and verify every result before setting `PORTAL_VERIFIED_PROFILE_GENERATIONS`. No email identifier is reused across generations. Profiles contain fictional names, states, roles, specialties, agency relationships, and production attributes; they contain no passwords, signing secrets, account names, policy numbers, or free-text notes.
 
-The provisioned tenant accepted all 112 records in batch `ddb86a67-25c8-4bdd-9232-76c24811022e` on September 10, 2026; the exact file checksum and tenant scope are recorded in `fixtures/udl/import-verification.json`. The initial payload using extension arrays failed. The verified compatibility shape uses a top-level UUID correlation `id`, the unchanged opaque identifier, first/last name contact fields, and scalar-only extensions. Specializations and licensed states are separate boolean fields. Current Sitecore batch-format and troubleshooting pages differ on array support, so preserve the tenant-verified shape. Regenerating the file creates new transport correlation IDs without changing business/profile identifiers. One successful diagnostic probe may leave `importCompatibilityProbe=true` on Avery's first profile; it is internal diagnostic metadata and does not drive portal decisions.
+The original four-pack import accepted all 112 records in batch `ddb86a67-25c8-4bdd-9232-76c24811022e` on September 10, 2026. Its unchanged payload is preserved at `fixtures/udl/imports/packs-01-04-2026-09-10.jsonl`; its checksum and tenant scope remain in `fixtures/udl/import-verification.json`. The additive batch `e538f430-54dc-4606-b4f2-82a3e53104ec` completed in the native UI with all 308 records and zero errors for packs `05`–`15`, generations `0`–`3`. Its exact payload is `fixtures/udl/imports/packs-05-15-2026-09-17.jsonl`, with the separate receipt in `fixtures/udl/import-verification-packs-05-15.json`. The original packs were not reimported or reset.
+
+For an additive export, write the selected packs to a separate staging directory:
+
+```sh
+node scripts/export-udl-profiles.mjs /tmp/liberty-mutual-packs-05-15 --packs 05,06,07,08,09,10,11,12,13,14,15
+```
+
+This creates a selected-pack JSONL file and identity map in that directory. Keep the complete runtime identity map in `fixtures/udl` intact. These packs are already imported; do not reimport a regenerated file to reset native history. Any future import needs its own verified receipt and exact payload.
+
+The initial payload using extension arrays failed. The verified compatibility shape uses a top-level UUID correlation `id`, the unchanged opaque identifier, first/last name contact fields, and scalar-only extensions. Specializations and licensed states are separate boolean fields. Current Sitecore batch-format and troubleshooting pages differ on array support, so preserve the tenant-verified shape. Regenerating the file creates new transport correlation IDs without changing business/profile identifiers. One successful diagnostic probe may leave `importCompatibilityProbe=true` on Avery's first profile; it is internal diagnostic metadata and does not drive portal decisions.
 
 Flat `personalWrittenPremiumCents`, `smallCommercialWrittenPremiumCents`, and corresponding fields retain agency scope for compatibility; `productionMetricScope` makes that explicit. `agencyPersonalWrittenPremiumCents` and its line equivalents are explicit agency aliases. `agentPersonalWrittenPremiumCents`, `agentPersonalPolicyCount`, and `agentPersonalNewBusinessPremiumCents` (and other lines) describe the individual agent. `smallBusinessGrowthAudience` is the seeded agency-level ABM cohort flag. State, role, specialty, and production attributes are available for authored native decisions; server authorization never trusts those marketing attributes.
 
