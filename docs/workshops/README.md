@@ -37,6 +37,8 @@ The isolated local-development workshop keeps tracking disabled and uses local J
 - `src/app/workshops`: server routes; `src/features/workshops`: shared UI.
 - `src/server/workshops` and `src/app/api/workshops`: access and private asset delivery.
 
+Walkthrough prose supports `**named entity**` for bold emphasis on the exact views, controls, fields, apps, components, usernames and files that readers need to find. Use this only in summaries, outcomes, prerequisites, actions, expected observations, notes and cleanup prose. Keep titles, headings, metadata, link labels, URLs, image alt text and copyable code free of these markers. This is limited inline emphasis, not a general Markdown renderer; preserve the original instructions and command text.
+
 The initial content was reconciled against a read-only download of the canonical 149-slide SharePoint deck on 18 September 2026. Hidden facilitator slides and attendee personal information were excluded. `sourceSlides` records coverage without adding slide dependencies to the reader experience. HTML corrections include current account suffixes, date-independent instructions and the verified tenant-scoped Agentic Studio workspace link.
 
 Run `npm test`, `npm run lint`, `npm run type-check` and `npm run build` from the app directory. Content tests check procedure coverage, links, complete steps, cleanup, protected screenshots, the actual local-development contract, reset-page instructions and current profile lookup. Authentication tests verify cross-purpose token rejection and safe return paths.

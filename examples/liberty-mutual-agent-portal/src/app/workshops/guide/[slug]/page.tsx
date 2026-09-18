@@ -20,6 +20,7 @@ import {
   findWorkshopGuide,
   workshopGuides,
 } from "@/features/workshops/content";
+import { GuideText } from "@/features/workshops/GuideText";
 import type { GuideLink } from "@/features/workshops/types";
 function ExternalLinks({ links }: { links?: GuideLink[] }) {
   return links?.length ? (
@@ -95,7 +96,9 @@ export default async function GuidePage({
                   : "DEVELOPER & ARCHITECT WALKTHROUGH"}
               </span>
               <h1>{guide.title}</h1>
-              <p>{contextual(guide.summary)}</p>
+              <p>
+                <GuideText text={contextual(guide.summary)} />
+              </p>
               <div className="workshop-guide-meta">
                 <span>
                   <Clock3 size={16} />
@@ -122,14 +125,18 @@ export default async function GuidePage({
               <Check size={21} />
               <div>
                 <h2>What you will see</h2>
-                <p>{contextual(guide.outcome)}</p>
+                <p>
+                  <GuideText text={contextual(guide.outcome)} />
+                </p>
               </div>
             </section>
             <section className="workshop-preparation" id="before-you-start">
               <h2>Before you start</h2>
               <ul>
                 {guide.prerequisites.map((line, index) => (
-                  <li key={index}>{contextual(line)}</li>
+                  <li key={index}>
+                    <GuideText text={contextual(line)} />
+                  </li>
                 ))}
               </ul>
               {guide.accountScope === "local" && (
@@ -155,7 +162,9 @@ export default async function GuidePage({
                   <div className="workshop-step-body">
                     <div className="workshop-actions">
                       {step.action.map((line, i) => (
-                        <p key={i}>{contextual(line)}</p>
+                        <p key={i}>
+                          <GuideText text={contextual(line)} />
+                        </p>
                       ))}
                     </div>
                     {step.code && <CopyCode code={contextual(step.code)} />}
@@ -167,14 +176,18 @@ export default async function GuidePage({
                           WHAT TO OBSERVE
                         </span>
                         {step.expected.map((line, i) => (
-                          <p key={i}>{contextual(line)}</p>
+                          <p key={i}>
+                            <GuideText text={contextual(line)} />
+                          </p>
                         ))}
                       </div>
                     )}
                     {step.note && (
                       <div className="workshop-note">
                         <Info size={17} />
-                        <p>{contextual(step.note)}</p>
+                        <p>
+                          <GuideText text={contextual(step.note)} />
+                        </p>
                       </div>
                     )}
                     {step.image && <GuideScreenshot image={step.image} />}
@@ -188,7 +201,9 @@ export default async function GuidePage({
               </span>
               <h2>{guide.cleanup.title ?? "Finish & cleanup"}</h2>
               {guide.cleanup.body.map((line, index) => (
-                <p key={index}>{contextual(line)}</p>
+                <p key={index}>
+                  <GuideText text={contextual(line)} />
+                </p>
               ))}
               {guide.cleanup.code && (
                 <CopyCode code={contextual(guide.cleanup.code)} />
