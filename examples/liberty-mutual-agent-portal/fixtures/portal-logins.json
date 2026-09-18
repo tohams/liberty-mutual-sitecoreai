@@ -196,6 +196,545 @@
       "agentId": "elena",
       "reviewerPack": "04",
       "enabled": true
+    },
+    {
+      "username": "avery.05",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "05",
+      "enabled": true
+    },
+    {
+      "username": "maya.05",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "05",
+      "enabled": true
+    },
+    {
+      "username": "jordan.05",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "05",
+      "enabled": true
+    },
+    {
+      "username": "daniel.05",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "05",
+      "enabled": true
+    },
+    {
+      "username": "priya.05",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "05",
+      "enabled": true
+    },
+    {
+      "username": "marcus.05",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "05",
+      "enabled": true
+    },
+    {
+      "username": "elena.05",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "05",
+      "enabled": true
+    },
+    {
+      "username": "avery.06",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "06",
+      "enabled": true
+    },
+    {
+      "username": "maya.06",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "06",
+      "enabled": true
+    },
+    {
+      "username": "jordan.06",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "06",
+      "enabled": true
+    },
+    {
+      "username": "daniel.06",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "06",
+      "enabled": true
+    },
+    {
+      "username": "priya.06",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "06",
+      "enabled": true
+    },
+    {
+      "username": "marcus.06",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "06",
+      "enabled": true
+    },
+    {
+      "username": "elena.06",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "06",
+      "enabled": true
+    },
+    {
+      "username": "avery.07",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "07",
+      "enabled": true
+    },
+    {
+      "username": "maya.07",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "07",
+      "enabled": true
+    },
+    {
+      "username": "jordan.07",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "07",
+      "enabled": true
+    },
+    {
+      "username": "daniel.07",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "07",
+      "enabled": true
+    },
+    {
+      "username": "priya.07",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "07",
+      "enabled": true
+    },
+    {
+      "username": "marcus.07",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "07",
+      "enabled": true
+    },
+    {
+      "username": "elena.07",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "07",
+      "enabled": true
+    },
+    {
+      "username": "avery.08",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "08",
+      "enabled": true
+    },
+    {
+      "username": "maya.08",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "08",
+      "enabled": true
+    },
+    {
+      "username": "jordan.08",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "08",
+      "enabled": true
+    },
+    {
+      "username": "daniel.08",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "08",
+      "enabled": true
+    },
+    {
+      "username": "priya.08",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "08",
+      "enabled": true
+    },
+    {
+      "username": "marcus.08",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "08",
+      "enabled": true
+    },
+    {
+      "username": "elena.08",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "08",
+      "enabled": true
+    },
+    {
+      "username": "avery.09",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "09",
+      "enabled": true
+    },
+    {
+      "username": "maya.09",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "09",
+      "enabled": true
+    },
+    {
+      "username": "jordan.09",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "09",
+      "enabled": true
+    },
+    {
+      "username": "daniel.09",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "09",
+      "enabled": true
+    },
+    {
+      "username": "priya.09",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "09",
+      "enabled": true
+    },
+    {
+      "username": "marcus.09",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "09",
+      "enabled": true
+    },
+    {
+      "username": "elena.09",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "09",
+      "enabled": true
+    },
+    {
+      "username": "avery.10",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "10",
+      "enabled": true
+    },
+    {
+      "username": "maya.10",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "10",
+      "enabled": true
+    },
+    {
+      "username": "jordan.10",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "10",
+      "enabled": true
+    },
+    {
+      "username": "daniel.10",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "10",
+      "enabled": true
+    },
+    {
+      "username": "priya.10",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "10",
+      "enabled": true
+    },
+    {
+      "username": "marcus.10",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "10",
+      "enabled": true
+    },
+    {
+      "username": "elena.10",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "10",
+      "enabled": true
+    },
+    {
+      "username": "avery.11",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "11",
+      "enabled": true
+    },
+    {
+      "username": "maya.11",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "11",
+      "enabled": true
+    },
+    {
+      "username": "jordan.11",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "11",
+      "enabled": true
+    },
+    {
+      "username": "daniel.11",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "11",
+      "enabled": true
+    },
+    {
+      "username": "priya.11",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "11",
+      "enabled": true
+    },
+    {
+      "username": "marcus.11",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "11",
+      "enabled": true
+    },
+    {
+      "username": "elena.11",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "11",
+      "enabled": true
+    },
+    {
+      "username": "avery.12",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "12",
+      "enabled": true
+    },
+    {
+      "username": "maya.12",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "12",
+      "enabled": true
+    },
+    {
+      "username": "jordan.12",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "12",
+      "enabled": true
+    },
+    {
+      "username": "daniel.12",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "12",
+      "enabled": true
+    },
+    {
+      "username": "priya.12",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "12",
+      "enabled": true
+    },
+    {
+      "username": "marcus.12",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "12",
+      "enabled": true
+    },
+    {
+      "username": "elena.12",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "12",
+      "enabled": true
+    },
+    {
+      "username": "avery.13",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "13",
+      "enabled": true
+    },
+    {
+      "username": "maya.13",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "13",
+      "enabled": true
+    },
+    {
+      "username": "jordan.13",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "13",
+      "enabled": true
+    },
+    {
+      "username": "daniel.13",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "13",
+      "enabled": true
+    },
+    {
+      "username": "priya.13",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "13",
+      "enabled": true
+    },
+    {
+      "username": "marcus.13",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "13",
+      "enabled": true
+    },
+    {
+      "username": "elena.13",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "13",
+      "enabled": true
+    },
+    {
+      "username": "avery.14",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "14",
+      "enabled": true
+    },
+    {
+      "username": "maya.14",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "14",
+      "enabled": true
+    },
+    {
+      "username": "jordan.14",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "14",
+      "enabled": true
+    },
+    {
+      "username": "daniel.14",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "14",
+      "enabled": true
+    },
+    {
+      "username": "priya.14",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "14",
+      "enabled": true
+    },
+    {
+      "username": "marcus.14",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "14",
+      "enabled": true
+    },
+    {
+      "username": "elena.14",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "14",
+      "enabled": true
+    },
+    {
+      "username": "avery.15",
+      "password": "Sitecore",
+      "agentId": "avery",
+      "reviewerPack": "15",
+      "enabled": true
+    },
+    {
+      "username": "maya.15",
+      "password": "Sitecore",
+      "agentId": "maya",
+      "reviewerPack": "15",
+      "enabled": true
+    },
+    {
+      "username": "jordan.15",
+      "password": "Sitecore",
+      "agentId": "jordan",
+      "reviewerPack": "15",
+      "enabled": true
+    },
+    {
+      "username": "daniel.15",
+      "password": "Sitecore",
+      "agentId": "daniel",
+      "reviewerPack": "15",
+      "enabled": true
+    },
+    {
+      "username": "priya.15",
+      "password": "Sitecore",
+      "agentId": "priya",
+      "reviewerPack": "15",
+      "enabled": true
+    },
+    {
+      "username": "marcus.15",
+      "password": "Sitecore",
+      "agentId": "marcus",
+      "reviewerPack": "15",
+      "enabled": true
+    },
+    {
+      "username": "elena.15",
+      "password": "Sitecore",
+      "agentId": "elena",
+      "reviewerPack": "15",
+      "enabled": true
     }
   ]
 }
