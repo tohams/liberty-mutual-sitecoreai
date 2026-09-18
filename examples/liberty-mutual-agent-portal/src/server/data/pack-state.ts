@@ -3,7 +3,14 @@ import { randomUUID } from 'node:crypto';
 import manifest from '../../../fixtures/manifest.json';
 import { PortalError } from '../errors';
 import { stateNamespace, type StateStore, type StoredValue } from '../state/store';
-import type { ProfileImportPlan, ProfileImportSubmission, VerifiedProfileImport } from '../udl/profile-import';
+import type { ProfileImportDiagnostic, ProfileImportPlan, ProfileImportSubmission, VerifiedProfileImport } from '../udl/profile-import';
+
+export interface RestartVerificationFailure {
+  code: string;
+  diagnosticCode?: string;
+  diagnostic?: ProfileImportDiagnostic;
+  failedAt?: string;
+}
 
 export const PACK_METADATA_TTL_SECONDS = 10 * 365 * 24 * 60 * 60;
 
@@ -21,6 +28,10 @@ export interface RestartReceipt {
   retryAfterSeconds?: number;
   code?: string;
   message?: string;
+  diagnosticCode?: string;
+  diagnostic?: ProfileImportDiagnostic;
+  failedAt?: string;
+  previousVerificationFailures?: ReadonlyArray<RestartVerificationFailure>;
   profileSetId: string;
   identityScope: string;
   checksumMd5: string;
@@ -41,6 +52,7 @@ export interface RestartJob {
   createdAt: number;
   nextAttemptAt?: number;
   lease?: { id: string; expiresAt: number };
+  previousVerificationFailures?: ReadonlyArray<RestartVerificationFailure>;
 }
 
 export interface ActiveProfileSet {

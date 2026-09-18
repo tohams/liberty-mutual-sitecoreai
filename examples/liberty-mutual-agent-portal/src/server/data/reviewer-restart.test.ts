@@ -4,14 +4,14 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { requestReviewerRestart, getReviewerResetStatus, type ProfileImporter } from './reviewer-restart';
+import { requestReviewerRestart, getReviewerResetStatus, inspectReviewerRestart, type ProfileImporter } from './reviewer-restart';
 import { getPack, packStateKey, PACK_METADATA_TTL_SECONDS, type PackMetadata } from './pack-state';
 import { LocalJsonStateStore, type StateStore } from '../state/store';
 import { fixtures } from './fixtures';
 import { getProfileIdentifier, getFreshProfileIdentifier } from '../auth/profile-identity';
 import { createSession } from '../auth/session';
 import { getPortalBootstrap, getPortalPersonalizationIdentity, resetReviewerPack, applyPortalAction } from './portal';
-import { prepareProfileImport, type ProfileImportPlan, type ProfileImportSubmission, type VerifiedProfileImport, ProfileImportError } from '../udl/profile-import';
+import { prepareProfileImport, restoreProfileImportPlan, type ProfileImportPlan, type ProfileImportSubmission, type VerifiedProfileImport, ProfileImportError } from '../udl/profile-import';
 import { PortalError } from '../errors';
 
 let directory: string;
@@ -29,7 +29,7 @@ const storeFor = (name: string) => new LocalJsonStateStore(join(directory, name)
 function fakeImporter(overrides: Partial<ProfileImporter> = {}) {
   const state = { submissions: 0, inspections: 0, plans: [] as ProfileImportPlan[] };
   const importer: ProfileImporter = {
-    assertConfigured() {}, prepareProfileImport,
+    assertConfigured() {}, prepareProfileImport, restoreProfileImportPlan,
     async submitProfileImport(plan) {
       state.submissions++; state.plans.push(plan);
       return { batchId: randomUUID(), checksumMd5: plan.checksumMd5, fileSizeBytes: plan.fileSizeBytes };
@@ -312,4 +312,107 @@ test('a lost activation response is recovered from the committed receipt without
   const reset = await getPack(store, '15');
   assert.deepEqual(reset.value.profileSet, committed.value.profileSet, 'Saved-work reset retains the verified native profile set');
   assert.deepEqual(reset.value.restartReceipts, committed.value.restartReceipts);
+});
+
+test('read-only reinspection and explicit recovery reuse the original batch and preserve failure history', async () => {
+  const store = storeFor('recover-verification');
+  const request = await intent(store);
+  const staleSession = await session('15', 'maya', new Date(Date.now() - 1000));
+  let repaired = false;
+  const diagnostic = { stage: 'results' as const, recordCount: 7, fieldTypes: { id: 'undefined' } };
+  const { importer, state } = fakeImporter({
+    async inspectProfileImport(plan, submission) {
+      state.inspections++;
+      return repaired ? { status: 'verified', receipt: verifiedReceipt(plan, submission) } : {
+        status: 'failed', code: 'IMPORT_VERIFICATION_FAILED', message: 'Safe adapter message', diagnosticCode: 'RESULT_CORRELATION_MISMATCH', diagnostic,
+      };
+    },
+  });
+  await requestReviewerRestart(request, { store, importer });
+  const failed = await requestReviewerRestart(request, { store, importer });
+  const before = await getPack(store, '15');
+  assert.equal(failed.diagnosticCode, 'RESULT_CORRELATION_MISMATCH');
+  assert.deepEqual(failed.diagnostic, diagnostic);
+  assert.deepEqual(await requestReviewerRestart(request, { store, importer }), failed, 'A normal retry cannot silently reopen a terminal failure');
+  assert.equal(state.inspections, 1);
+  const diagnosis = await inspectReviewerRestart('15', request.requestId, { store, importer });
+  assert.equal(diagnosis.inspection.status, 'failed');
+  assert.equal(diagnosis.canResume, false);
+  assert.deepEqual(await getPack(store, '15'), before, 'Diagnostic GET does not change state or its version');
+  repaired = true;
+  const verified = await inspectReviewerRestart('15', request.requestId, { store, importer });
+  assert.equal(verified.inspection.status, 'verified');
+  assert.equal(verified.canResume, true);
+  assert.deepEqual(await getPack(store, '15'), before, 'Even successful diagnostic verification cannot activate profiles');
+  const completions = await Promise.all(Array.from({ length: 5 }, () => requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer })));
+  assert.ok(completions.some((receipt) => receipt.status === 'completed'));
+  const completed = await requestReviewerRestart(request, { store, importer });
+  assert.equal(completed.status, 'completed');
+  assert.equal(completed.profileGeneration, 1);
+  assert.equal(completed.batchId, failed.batchId);
+  assert.equal(completed.profileSetId, failed.profileSetId);
+  assert.equal(completed.checksumMd5, failed.checksumMd5);
+  assert.deepEqual(completed.previousVerificationFailures, [{ code: failed.code, diagnosticCode: failed.diagnosticCode, diagnostic, failedAt: failed.failedAt }]);
+  assert.equal(state.submissions, 1, 'Recovery never calls submitProfileImport');
+  assert.equal(state.plans.length, 1, 'Recovery never generates a new identity set');
+  await assert.rejects(getPortalBootstrap(staleSession, store), errorCode('UNAUTHENTICATED'));
+  for (const agent of fixtures.agents) {
+    const bootstrap = await getPortalBootstrap(await session('15', agent.id, new Date(Date.now() + 1)), store);
+    assert.equal(bootstrap.udlIdentity?.id, completed.profiles.find((profile) => profile.agentId === agent.id)?.identifier);
+  }
+  assert.deepEqual(await requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), completed);
+  assert.equal((await getPack(store, '15')).value.profileGeneration, 1);
+});
+
+test('resumed verification remains resumable after transient reads and keeps its pending receipt visible', async () => {
+  const store = storeFor('recovery-retry');
+  const request = await intent(store);
+  let now = Date.now();
+  let inspectionCount = 0;
+  const { importer, state } = fakeImporter({
+    async inspectProfileImport(plan, submission) {
+      inspectionCount++;
+      if (inspectionCount === 1) return { status: 'failed', code: 'IMPORT_VERIFICATION_FAILED', message: 'Failed verification' };
+      if (inspectionCount === 2) throw new ProfileImportError('IMPORT_READ_UNAVAILABLE', 'Sensitive upstream text', true);
+      return { status: 'verified', receipt: verifiedReceipt(plan, submission) };
+    },
+  });
+  await requestReviewerRestart(request, { store, importer, now: () => now });
+  await requestReviewerRestart(request, { store, importer, now: () => now });
+  const pending = await requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer, now: () => now });
+  assert.equal(pending.status, 'pending');
+  assert.equal(pending.phase, 'verifying');
+  assert.equal((await getReviewerResetStatus('15', request.requestId, store)).operation?.status, 'pending');
+  now += 4000;
+  const completed = await requestReviewerRestart(request, { store, importer, now: () => now });
+  assert.equal(completed.status, 'completed', 'Normal durable CLI polling can continue an explicitly resumed operation');
+  assert.equal(state.submissions, 1);
+  assert.equal(completed.previousVerificationFailures?.length, 1);
+});
+
+test('recovery refuses unknown, uncertain, altered and superseded imports without uploading', async () => {
+  const store = storeFor('recovery-refusals');
+  const request = await intent(store);
+  const { importer, state } = fakeImporter({ async inspectProfileImport() { return { status: 'failed', code: 'IMPORT_VERIFICATION_FAILED', message: 'Failure' }; } });
+  const before = await getPack(store, '15');
+  await assert.rejects(requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), errorCode('VERIFICATION_NOT_RECOVERABLE'));
+  await assert.rejects(inspectReviewerRestart('15', request.requestId, { store, importer }), errorCode('VERIFICATION_NOT_RECOVERABLE'));
+  assert.deepEqual(await getPack(store, '15'), before);
+  await requestReviewerRestart(request, { store, importer });
+  const failed = await requestReviewerRestart(request, { store, importer });
+  let current = await getPack(store, '15');
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: { ...failed, checksumMd5: '0'.repeat(32) } } }, PACK_METADATA_TTL_SECONDS);
+  current = await getPack(store, '15');
+  await assert.rejects(inspectReviewerRestart('15', request.requestId, { store, importer }), errorCode('IMPORT_PLAN_CHANGED'));
+  await assert.rejects(requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), errorCode('IMPORT_PLAN_CHANGED'));
+  assert.deepEqual(await getPack(store, '15'), current);
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: { ...failed, code: 'UPLOAD_UNCERTAIN' } } }, PACK_METADATA_TTL_SECONDS);
+  await assert.rejects(requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), errorCode('VERIFICATION_NOT_RECOVERABLE'));
+  current = await getPack(store, '15');
+  await store.compareAndSet(packStateKey('15'), current.version, { ...current.value, restartReceipts: { [request.requestId]: failed } }, PACK_METADATA_TTL_SECONDS);
+  await resetReviewerPack('15', 'saved-work', store);
+  const changed = await getPack(store, '15');
+  await assert.rejects(requestReviewerRestart({ ...request, resumeVerification: true }, { store, importer }), errorCode('VERSION_CONFLICT'));
+  assert.deepEqual(await getPack(store, '15'), changed);
+  assert.equal(state.submissions, 1);
 });
