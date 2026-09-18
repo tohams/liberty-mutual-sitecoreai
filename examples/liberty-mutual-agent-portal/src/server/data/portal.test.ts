@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { applyPortalAction, getEditorBootstrap, getPolicyDocument, getPortalBootstrap, getPortalPersonalizationIdentity, resetReviewerPack } from './portal';
 import { fixtures, validateFixtures } from './fixtures';
+import { getPack, packStateKey, PACK_METADATA_TTL_SECONDS, type PackMetadata } from './pack-state';
 import { LocalJsonStateStore, stateNamespace, type StateStore } from '../state/store';
 import { createSession, verifySession } from '../auth/session';
 import { authenticate } from '../auth/credentials';
@@ -42,7 +43,7 @@ test('session signatures reject tampering and expire after eight hours', async (
   assert.equal(await verifySession(token, new Date('2026-09-10T20:00:00Z')), null);
 });
 
-test('personalization identity reads only pack metadata and honors verified generation, restart, expiry and agent scope', async () => {
+test('personalization identity reads only pack metadata and honors verified generation, restart and agent scope without a pack age limit', async () => {
   const session = await login('maya');
   const keys: string[] = [];
   const metadata = { runId: 'identity-test', profileGeneration: 0, createdAt: Date.now(), restartedAt: 0 };
@@ -60,7 +61,7 @@ test('personalization identity reads only pack metadata and honors verified gene
   await assert.rejects(getPortalPersonalizationIdentity(session, store), errorCode('UNAUTHENTICATED'));
   metadata.restartedAt = 0;
   metadata.createdAt = Date.now() - 8 * 24 * 60 * 60 * 1000;
-  await assert.rejects(getPortalPersonalizationIdentity(session, store), errorCode('WORKSPACE_EXPIRED'));
+  assert.deepEqual(await getPortalPersonalizationIdentity(session, store), identity, 'Pack age must not expire a valid native identity');
   await assert.rejects(getPortalPersonalizationIdentity({ ...session, agencyId: 'wrong-agency' }, store), errorCode('UNAUTHENTICATED'));
 });
 
@@ -142,6 +143,73 @@ test('saved actions survive a new store instance; retries are idempotent and pac
   assert.equal(packTwo.tasks.filter((task) => task.title === action.title).length, 0);
   assert.notEqual(packTwo.udlIdentity?.id, saved.udlIdentity?.id);
   await assert.rejects(applyPortalAction(maya, { ...action, title: 'Changed payload' }, store), errorCode('DUPLICATE_REQUEST'));
+});
+
+test('an older pack preserves saved work and renews only agency retention when an action is saved', async () => {
+  const store = new LocalJsonStateStore(join(directory, 'old-pack-active-work'));
+  const maya = await login('maya');
+  const initial = await getPortalBootstrap(maya, store);
+  const saved = await applyPortalAction(maya, { type: 'toggle-favorite', resourceId: 'home-renewal', ...requestMetadata(initial) }, store);
+  const current = await getPack(store, '01');
+  await store.compareAndSet(packStateKey('01'), current.version, {
+    ...current.value, createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000,
+  }, PACK_METADATA_TTL_SECONDS);
+  const metadata = await getPack(store, '01');
+  const key = `${stateNamespace()}:pack:01:run:${metadata.value.runId}:agency:cedar-ridge`;
+  const before = await store.read(key);
+  assert.ok(before);
+  const reopened = await getPortalBootstrap(maya, store);
+  assert.deepEqual(reopened.favorites, saved.favorites);
+  assert.equal(reopened.session.runId, saved.session.runId);
+  assert.equal(reopened.session.profileGeneration, saved.session.profileGeneration);
+  assert.deepEqual(reopened.udlIdentity, saved.udlIdentity);
+  assert.deepEqual(await store.read(key), before, 'Opening existing work does not change its version or TTL');
+  assert.deepEqual(await getPack(store, '01'), metadata, 'Opening an old pack does not restart it');
+  const beforeSave = Date.now();
+  const updated = await applyPortalAction(maya, { type: 'register-learning', courseId: 'household-review', ...requestMetadata(reopened) }, store);
+  const after = await store.read(key);
+  assert.ok(after);
+  assert.ok(updated.registrations.includes('household-review'));
+  assert.deepEqual(updated.favorites, saved.favorites);
+  assert.equal(after.version, before.version + 1);
+  assert.ok(after.expiresAt >= beforeSave + 7 * 24 * 60 * 60 * 1000);
+  assert.ok(after.expiresAt <= Date.now() + 7 * 24 * 60 * 60 * 1000);
+  assert.deepEqual(await getPack(store, '01'), metadata, 'Saving work preserves native profile metadata');
+});
+
+test('expired agency work returns to its baseline without changing the run or verified native profile set', async () => {
+  const store = new LocalJsonStateStore(join(directory, 'old-pack-expired-work'));
+  const maya = await login('maya');
+  const initial = await getPortalBootstrap(maya, store);
+  const saved = await applyPortalAction(maya, { type: 'toggle-favorite', resourceId: 'home-renewal', ...requestMetadata(initial) }, store);
+  assert.equal(saved.favorites.length, 1);
+  const current = await getPack(store, '01');
+  const profiles = fixtures.agents.map((agent) => ({ agentId: agent.id, identifier: `verified-native-${agent.id}`,
+    correlationId: randomUUID(), profileId: randomUUID() }));
+  const value: PackMetadata = { ...current.value, createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000,
+    profileGeneration: 9, profileSet: { version: 2, id: randomUUID(), identityScope: stateNamespace(),
+      identifiers: Object.fromEntries(profiles.map((profile) => [profile.agentId, profile.identifier])),
+      verification: { batchId: randomUUID(), checksumMd5: 'a'.repeat(32), fileSizeBytes: 1000,
+        counts: { CREATED: 7, UPDATED: 0, FAILED: 0 }, profiles, verifiedAt: new Date().toISOString() } } };
+  await store.compareAndSet(packStateKey('01'), current.version, value, PACK_METADATA_TTL_SECONDS);
+  const metadata = await getPack(store, '01');
+  const key = `${stateNamespace()}:pack:01:run:${metadata.value.runId}:agency:cedar-ridge`;
+  const agency = await store.read(key);
+  assert.ok(agency);
+  await store.compareAndSet(key, agency.version, agency.value, -1);
+  assert.equal(await store.read(key), null, 'Simulate an agency key already expired by the state store');
+  const beforeRestore = Date.now();
+  const reopened = await Promise.all([getPortalBootstrap(maya, store), getPortalBootstrap(maya, store)]);
+  for (const workspace of reopened) {
+    assert.deepEqual(workspace.favorites, []);
+    assert.equal(workspace.session.stateVersion, 0);
+    assert.equal(workspace.session.runId, metadata.value.runId);
+    assert.equal(workspace.session.profileGeneration, 9);
+    assert.equal(workspace.udlIdentity?.id, 'verified-native-maya');
+  }
+  const restored = await store.read(key);
+  assert.ok(restored && restored.expiresAt >= beforeRestore + 7 * 24 * 60 * 60 * 1000);
+  assert.deepEqual(await getPack(store, '01'), metadata, 'Restoring expired agency fixtures never resets native profiles or pack metadata');
 });
 
 test('new two-digit packs isolate saved work and resets from existing and neighboring packs', async () => {

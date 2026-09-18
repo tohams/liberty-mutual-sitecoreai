@@ -12,7 +12,7 @@ import { fixtures } from './fixtures';
 import { getResourceCatalog } from './cms-resources';
 import { getPack, PACK_METADATA_TTL_SECONDS, packStateKey, type PackMetadata } from './pack-state';
 
-const STATE_TTL_SECONDS = 7 * 24 * 60 * 60;
+const STATE_RETENTION_SECONDS = 7 * 24 * 60 * 60;
 interface AgencyState {
   submissions: Submission[]; bondRequests: BondRequest[]; tasks: Task[]; activity: Activity[];
   favorites: Record<string, string[]>; registrations: Record<string, string[]>;
@@ -73,9 +73,7 @@ async function getPackContext(session: PortalSession, store: StateStore) {
   const pack = await getPack(store, session.reviewerPack);
   const issuedAt = Date.parse(session.issuedAt);
   if (!Number.isFinite(issuedAt) || (pack.value.restartedAt > 0 && pack.value.restartedAt >= issuedAt)) throw new PortalError('UNAUTHENTICATED', 'Your workspace was restarted. Please sign in again.', 401);
-  const remainingSeconds = Math.ceil((pack.value.createdAt + STATE_TTL_SECONDS * 1000 - Date.now()) / 1000);
-  if (remainingSeconds <= 0) throw new PortalError('WORKSPACE_EXPIRED', 'This workspace has expired. Contact your portal administrator to restore it.', 409);
-  return { agent, pack, remainingSeconds };
+  return { agent, pack };
 }
 
 function verifiedProfileIdentity(session: PortalSession, agent: Agent, metadata: PackMetadata): PortalBootstrap['udlIdentity'] {
@@ -97,13 +95,13 @@ export async function getPortalPersonalizationIdentity(session: PortalSession, s
 }
 
 async function getContext(session: PortalSession, store: StateStore) {
-  const { agent, pack, remainingSeconds } = await getPackContext(session, store);
+  const { agent, pack } = await getPackContext(session, store);
   const key = `${stateNamespace()}:pack:${session.reviewerPack}:run:${pack.value.runId}:agency:${agent.agencyId}`;
   const initial = await store.read<AgencyState>(key);
-  const record = initial ?? await store.compareAndSet(key, null, baseline(agent.agencyId), remainingSeconds) ?? await store.read<AgencyState>(key);
+  const record = initial ?? await store.compareAndSet(key, null, baseline(agent.agencyId), STATE_RETENTION_SECONDS) ?? await store.read<AgencyState>(key);
   if (!record) throw new PortalError('STATE_UNAVAILABLE', 'Your workspace could not be opened. Please try again.', 503);
   const resources = await getResourceCatalog();
-  return { agent, pack, key, record, remainingSeconds, resources };
+  return { agent, pack, key, record, resources };
 }
 
 function resolveResource(reference: string, resources: Resource[]) {
@@ -332,7 +330,7 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
   }
   next.appliedActions[idempotencyKey] = { hash, actor: agent.id };
   if (Object.keys(next.appliedActions).length > 1000) throw new PortalError('WORKSPACE_LIMIT', 'This workspace has reached its activity limit. Contact your portal administrator to restore it.', 409);
-  const saved = await store.compareAndSet(context.key, context.record.version, next, context.remainingSeconds);
+  const saved = await store.compareAndSet(context.key, context.record.version, next, STATE_RETENTION_SECONDS);
   if (!saved) throw new PortalError('VERSION_CONFLICT', 'Your workspace changed in another window. Refresh and try again.', 409);
   const latestPack = await getPack(store, session.reviewerPack);
   if (latestPack.value.runId !== context.pack.value.runId) throw new PortalError('WORKSPACE_RESET', 'Your workspace was reset. Refresh the page before continuing.', 409);

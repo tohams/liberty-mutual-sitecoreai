@@ -113,7 +113,7 @@ The fixed scenario date makes fixtures repeatable. To advance the scenario, upda
 
 ## Durable work and resetting
 
-State keys are namespaced by environment, reviewer pack, run UUID, and agency. The store retains changes for seven days from the run's start, independently from eight-hour login sessions. Pack metadata retains the latest native generation and reset timestamp so a normal expiry cannot silently reuse an older marketing identity. Expired work returns `WORKSPACE_EXPIRED`; the operator starts a new run deliberately.
+State keys are namespaced by environment, reviewer pack, run UUID, and agency. Each agency's saved work is retained for seven days after its latest saved change; viewing it does not extend that retention. Eight-hour login sessions remain independent, and a reviewer pack does not lock users out because of its age. If the state store has already expired an agency's saved work, the next visit restores that agency's starting fixtures. Existing saved work is otherwise left untouched. This restoration preserves the run UUID, profile generation, verified native identities, and CDP history; it does not perform an operator reset. Durable pack metadata retains the latest native generation and restart timestamp.
 
 | Operation | Saved work | Native identity and history |
 | --- | --- | --- |
