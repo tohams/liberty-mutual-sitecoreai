@@ -7,12 +7,13 @@ import { parseArgs } from 'node:util';
 
 const PREVIEW = 'https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app';
 const PRODUCTION = 'https://liberty-mutual-agent-portal.vercel.app';
+const { reviewerPacks } = JSON.parse(await readFile(new URL('../fixtures/manifest.json', import.meta.url), 'utf8'));
 const { values } = parseArgs({ options: {
   origin: { type: 'string' }, pack: { type: 'string' },
   'exercise-preview': { type: 'boolean', default: false },
 } });
 assert.ok([PREVIEW, PRODUCTION].includes(values.origin), 'Choose the exact reviewed preview or production origin.');
-assert.match(values.pack ?? '', /^0[1-4]$/, 'Choose reviewer pack 01–04.');
+assert.ok(reviewerPacks.includes(values.pack), `Choose a configured reviewer pack: ${reviewerPacks.join(', ')}.`);
 assert.ok(!values['exercise-preview'] || values.origin === PREVIEW, 'Fixture creation is permitted only on the preview host.');
 const origin = values.origin;
 const credentials = JSON.parse(await readFile(new URL('../fixtures/portal-logins.json', import.meta.url), 'utf8')).logins;

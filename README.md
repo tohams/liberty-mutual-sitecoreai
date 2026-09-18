@@ -4,6 +4,8 @@ A SitecoreAI sandbox prepared for customer handoff, for independent agents and t
 
 The application is built on the official [SitecoreAI starter repository](https://github.com/Sitecore/xmcloud-starter-js), using the Content SDK and Next.js App Router. Original starters remain as upstream reference material. The active application and rendering host are **`examples/liberty-mutual-agent-portal`**.
 
+Hosted workshops have **15 reviewer packs (`01`–`15`)**, each with the same seven personas: **105 fictional portal accounts**. Assign one pack per attendee and keep that suffix when switching personas. For a hosted presenter journey, coordinate use of an attendee’s pack and complete the guided work and its required cleanup before that attendee begins. Never reset a pack while an attendee is using it. The roles, licenses and four fictional agencies are unchanged. Each pack isolates saved work and native profile identities from other packs. The four native profile generations (`0`–`3`) remain separate from pack assignment. See the [login and reset runbook](examples/liberty-mutual-agent-portal/docs/auth-and-data.md#fictional-login-packs) for account names, shared-work boundaries and native import verification.
+
 ## Start here
 
 | Audience | Guide |

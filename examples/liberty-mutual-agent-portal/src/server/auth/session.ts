@@ -2,6 +2,7 @@ import 'server-only';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { randomUUID } from 'node:crypto';
+import manifest from '../../../fixtures/manifest.json';
 import { PortalError } from '../errors';
 
 export const SESSION_COOKIE = 'lm_portal_session';
@@ -44,7 +45,7 @@ export async function verifySession(token?: string, now = new Date()): Promise<P
     });
     const fields = ['agentId', 'agencyId', 'reviewerPack', 'username', 'sessionId', 'issuedAt', 'expiresAt'] as const;
     if (fields.some((field) => typeof payload[field] !== 'string')) return null;
-    if (!/^0[1-4]$/.test(String(payload.reviewerPack))) return null;
+    if (!manifest.reviewerPacks.includes(String(payload.reviewerPack))) return null;
     return Object.fromEntries(fields.map((field) => [field, payload[field]])) as unknown as PortalSession;
   } catch {
     return null;

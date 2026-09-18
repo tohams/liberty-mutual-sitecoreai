@@ -8,7 +8,7 @@ Salesforce remains Liberty Mutual's existing business backend. SitecoreAI manage
 
 ## Accounts and preparation
 
-Use an assigned reviewer pack throughout. The examples below use `.04`; substitute your assigned suffix consistently. Every fictional portal password is `Sitecore`. SitecoreAI itself uses your own invited account in **Safeco Insurance Company of America POC** and the **Liberty Mutual Agent Portal** site.
+Assign one of the fifteen reviewer packs (`01`–`15`) to each attendee for hosted exercises. For a hosted presenter journey, coordinate use of an attendee’s pack and complete the guided work and its required cleanup before that attendee begins. Never reset a pack while an attendee is using it. Use that same suffix across all seven personas. Their roles and licenses are unchanged across packs; only their saved work and native profile identities are separate. The examples below use `.04`; substitute your assigned suffix consistently. All 105 fictional portal accounts use the password `Sitecore`. SitecoreAI itself uses your own invited account in **Safeco Insurance Company of America POC** and the **Liberty Mutual Agent Portal** site.
 
 | Workspace | URL | Use |
 |---|---|---|
