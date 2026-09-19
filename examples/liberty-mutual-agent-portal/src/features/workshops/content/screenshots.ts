@@ -1,4 +1,8 @@
 import type { WorkshopGuide, GuideImage } from "../types";
+import { developmentScreenshots } from "./development-screenshots";
+import { marketingScreenshots } from "./marketing-screenshots";
+import { portalScreenshots } from "./portal-screenshots";
+import { resourceScreenshots } from "./resource-screenshots";
 
 // Captured from the connected sandbox on 18 September 2026.
 // Keys are one-based step positions; keep captions explicit about reference state.
@@ -87,6 +91,32 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
     "1": {
       file: "agentic-workflow.png",
       alt: "Agentic Studio showing saved conversation and three connected workflow stages",
+      title: "Agentic Studio: the space’s Agents panel",
+      crop: {
+        x: 932,
+        y: 84,
+        width: 348,
+        height: 453,
+        sourceWidth: 1280,
+        sourceHeight: 720,
+      },
+      annotations: [
+        {
+          x: 4.6,
+          y: 2.6,
+          width: 24.4,
+          height: 14.8,
+          label: "Use the **Agents** tab in the space’s right-hand panel.",
+        },
+        {
+          x: 3.4,
+          y: 44.1,
+          width: 91.7,
+          height: 46.8,
+          label:
+            "Follow **Account Enrichment** → **Brief Generation** → **Content Generation**. The circles link the three stages.",
+        },
+      ],
       caption:
         "The **Agents** panel shows **Account Enrichment** → **Brief Generation** → **Content Generation**. Inspect the saved work without clicking **Run workflow** so everyone can review the same completed research, brief, and emails.",
     },
@@ -116,11 +146,24 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
 };
 
 export function withScreenshots(guide: WorkshopGuide): WorkshopGuide {
+  const imagesByStep = {
+    ...screenshots[guide.slug],
+    ...developmentScreenshots[guide.slug],
+    ...marketingScreenshots[guide.slug],
+    ...resourceScreenshots[guide.slug],
+    ...portalScreenshots[guide.slug],
+  };
   return {
     ...guide,
-    steps: guide.steps.map((step, index) => ({
-      ...step,
-      image: screenshots[guide.slug]?.[index + 1] ?? step.image,
-    })),
+    steps: guide.steps.map((step, index) => {
+      const visual = imagesByStep[index + 1];
+      return visual === undefined
+        ? step
+        : {
+            ...step,
+            image: undefined,
+            images: Array.isArray(visual) ? visual : [visual],
+          };
+    }),
   };
 }

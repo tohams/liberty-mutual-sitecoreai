@@ -45,10 +45,10 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Both partners: open the confirmed practice page",
         action: [
-          "Both partners: use **Open Page Builder** above. If sign-in is required, use the **Sitecore Cloud** email account confirmed by the **Sitecore workshop team**. Select **Safeco Insurance Company of America POC**, if prompted, then verify **Liberty Mutual Agent Portal**, **English**, and the **Default** editing host.",
-          "To check which account is signed in, choose **SitecoreAI Dashboard** at the top left and inspect its profile menu. Confirm that the email matches the account the team gave your **Author** or **Approver** role, then return to **Page Builder**.",
-          "In **Pages**, select **Home** → **Workshop practice**, then the exact page name the team confirmed for your pair. Presenters select **Demo**; attendees select their confirmed **Pair 02** through **Pair 09**. Read the page name and version number to your partner so both browsers display the same **English** version.",
-          "Open the top **Content** tab and copy the complete **Summary** into a local note. Keep it until cleanup is complete; it is the wording you will restore and republish.",
+          "Both partners: click **Open Page Builder** above. If asked to sign in, use the **Sitecore Cloud** email account confirmed by the **Sitecore workshop team**. Select **Safeco Insurance Company of America POC** if prompted. In Page Builder’s top toolbar, check the site selector for **Liberty Mutual Agent Portal** and the language selector for **English**. Above the page preview, keep **Default editing host** selected.",
+          "To check your account, choose **SitecoreAI Dashboard** at the top left. On that dashboard, click the profile avatar at the upper right and read the email address. It must match the account assigned your **Author** or **Approver** role. Use **Open Page Builder** above again to return.",
+          "In Page Builder’s left pane, click the page-shaped **Pages** icon. Expand **Home** > **Workshop practice** in the tree, then click your confirmed page: **Demo** for presenters, or your assigned **Pair 02** through **Pair 09**. Open the version dropdown above the preview, immediately left of **Default editing host**, and read its selected version number to your partner. Both browsers must show the same page and **English** version.",
+          "Click **Content** in the top navigation. In the selected page’s fields, locate **Summary** and copy all of its text into a local note. Keep this note for the final restoration and publication.",
         ],
         expected: [
           "Both partners see the same page name, version number, and **Summary**. These practice pages use the configured **Liberty Mutual Workshop Review** workflow.",
@@ -58,11 +58,11 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Author: create a draft and preview one summary change",
         action: [
-          "The partner with the **Author** role: select the main portal's **Home** page and inspect the **Content** tab without changing anything. Return to the practice page you and your partner opened in the previous step. This compares a page outside your editing scope with the page you can change.",
-          "If the page shows **Live** or **Approved**, open the version selector, choose **Create version**, leave the optional version name blank, and select **Create**. If it already shows **Draft**, keep that version.",
+          "The partner with the **Author** role: click the main **Home** item in the content tree and read its fields in **Content**. Check that its content is read-only. Return to **Home** > **Workshop practice** > your pair’s page to compare it with the content your role permits you to edit.",
+          "Read the workflow status in the page header. If it shows **Live** or **Approved**, open the version dropdown above the preview, choose **Create version**, leave the optional name blank, and click **Create**. If the status is already **Draft**, keep that version.",
           "After creating a version, reopen the version selector and select the newest **Draft**. Wait until the header shows **Draft Version [number]** and **Summary** has reloaded. Note the actual version number; your partner will review this version.",
           "In your practice page's **Content** tab, keep the original **Summary** and append this sentence: Our team is preparing this resource for the next client conversation.",
-          "Click outside **Summary** and wait for **Saved**. Open the **Editor** tab to see the revised summary on the page.",
+          "Click outside **Summary** and wait for the **Saved** checkmark. Click **Editor** in the top navigation. In the page preview, read the summary below the page title and confirm that it includes your added sentence.",
         ],
         expected: [
           "The main portal's **Home** content is read-only for the scoped **Author** role; your pair's practice page can be edited. If these permissions differ, ask the **Sitecore workshop team** to check your account and pair assignment before continuing.",
@@ -75,7 +75,7 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Author: submit the draft for review",
         action: [
-          "As the **Author**, keep the edited **Draft** selected and choose **Actions** → **Submit**. In the **Comment** dialog, enter Please review the new summary sentence, then select **Submit**. This sends the saved version to the **Approver** for review.",
+          "As the **Author**, keep the edited **Draft** selected and open **Actions** in the page header. Choose **Submit**. In the dialog’s **Comment** field, enter Please review the new summary sentence, then click **Submit** in that dialog to send the saved version for review.",
           "Tell the **Approver** the exact practice-page name and version number shown in the header. Both partners continue using **English**.",
         ],
         expected: [
@@ -86,8 +86,8 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Approver: request a specific revision",
         action: [
-          "The partner with the **Approver** role: refresh the practice page in **Page Builder**. Use the version selector to choose the version number the **Author** provided, and confirm **English** and **Awaiting approval**. Open **Content** and read the added sentence in **Summary**.",
-          "Choose **Actions** → **Return to author**. In the **Comment** dialog, enter Please change preparing to reviewing, then select **Submit**.",
+          "The partner with the **Approver** role: refresh the same practice page in **Page Builder**. Open the version dropdown above the preview and select the number supplied by the **Author**. Confirm **English** and status **Awaiting approval**. Click the top **Content** tab, locate **Summary**, and read the sentence the Author added.",
+          "In the page header, open **Actions** and choose **Return to author**. In the dialog’s **Comment** field, enter Please change preparing to reviewing, then click **Submit**.",
           "Tell the **Author** to replace preparing with reviewing in the sentence they added. **Author**: refresh that same page and version, then confirm the header shows **Draft** before revising it.",
         ],
         expected: [
@@ -98,8 +98,8 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Author: revise and resubmit",
         action: [
-          "As the **Author**, keep the returned **Draft** selected and open **Content** → **Summary**. Change only the added sentence to Our team is reviewing this resource for the next client conversation. Click outside the field and wait for **Saved**.",
-          "Choose **Actions** → **Submit**. In the **Comment** dialog, enter Updated the summary as requested, then select **Submit**.",
+          "As the **Author**, keep the returned **Draft** selected. Click **Content** in the top navigation and locate **Summary**. Change only the added sentence to Our team is reviewing this resource for the next client conversation. Click outside the field and wait for **Saved**.",
+          "Open **Actions** in the page header and choose **Submit**. Enter Updated the summary as requested in the dialog’s **Comment** field, then click **Submit**.",
           "Tell the **Approver** that the revision is ready, and repeat the practice-page name and version number so your partner reviews the same content.",
         ],
         expected: [
@@ -110,8 +110,8 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Approver: approve the wording and trigger publication",
         action: [
-          "As the **Approver**, refresh the same practice page and select the version number the **Author** resubmitted. Confirm **English** and **Awaiting approval**, then open **Content** and check that **Summary** contains reviewing instead of preparing.",
-          "Choose **Actions** → **Approve**. In the **Comment** dialog, enter Approved for publication, then select **Submit**.",
+          "As the **Approver**, refresh the same practice page. Open the version dropdown above the preview and select the version the **Author** resubmitted. Confirm **English** and **Awaiting approval**, then click the top **Content** tab and check the added **Summary** sentence for reviewing.",
+          "Open **Actions** in the page header and choose **Approve**. Enter Approved for publication in the dialog’s **Comment** field, then click **Submit**.",
           "Confirm the page becomes **Approved**. The workflow's **Auto Publish** action publishes this page in **English** automatically. Wait for publication; the page may show **Approved** before changing to **Live**.",
         ],
         expected: [
@@ -124,7 +124,7 @@ export const governanceGuides: WorkshopGuide[] = [
         action: [
           "Use the live-page links above to open the exact page your pair edited: **Demo live page** for the presenters, or **Pair 02 live page** through **Pair 09 live page** matching your practice-page name. These links open the published portal so you can check the result as an agent.",
           "If the portal asks you to sign in, use **daniel.01** and the workshop portal password **Sitecore**. The username shown in this guide uses the reviewer number from your workshop sign-in; confirm that number against your name in **Attendee assignments**. After sign-in opens **My workspace**, open your practice-page link again. Continue using your **Sitecore Cloud** account for authoring and this portal account for live checks.",
-          "Compare the live summary with the wording your partner approved. Refresh the live page after publication if necessary.",
+          "On the published page, read the summary directly below the title. Compare its added sentence with your partner’s approved wording: Our team is reviewing this resource for the next client conversation. If the previous text remains, refresh after publication completes.",
         ],
         expected: [
           "The live page shows the approved summary, confirming that the reviewed wording has reached the published portal.",
@@ -137,7 +137,7 @@ export const governanceGuides: WorkshopGuide[] = [
       body: [
         "Both partners complete this cleanup before leaving. Restore the original live wording on the same practice page in **English**. The exercise's versions remain available in its history.",
         "As the **Author**, refresh your practice page. Open the version selector, choose **Create version**, leave the optional version name blank, and select **Create**. Reopen the selector and select the newest **Draft**; wait for **Draft Version [number]** in the header and for **Summary** to reload. Give this new version number to the **Approver**.",
-        "In **Content** → **Summary**, restore the original wording recorded at the start. Click outside the field and wait for **Saved**. Choose **Actions** → **Submit**, enter a restoration note in **Comment**, then select **Submit**.",
+        "Click the top **Content** tab and replace **Summary** with the original text saved in your note. Click outside the field and wait for **Saved**. Open **Actions** in the page header > **Submit**, enter Restored the starting summary in **Comment**, and click **Submit** in the dialog.",
         "As the **Approver**, refresh **Page Builder** and select the new version number supplied by the **Author**. Confirm **English** and **Awaiting approval**, then compare **Summary** with the original note. Choose **Actions** → **Approve**, add a restoration **Comment**, and select **Submit**. Wait for automatic publication, then refresh the same live-page link and verify the original wording is visible.",
         "Complete both the **Author** submission and **Approver** approval to restore the live page. If either partner cannot finish, give the **Sitecore workshop team** the page name, version number, and original summary so they can complete the restoration.",
         "Leave other pairs' pages unchanged. Use the workflow above to restore this CMS page. **Reset a reviewer number** applies to portal personas and saved work, so this content exercise needs no reviewer reset.",

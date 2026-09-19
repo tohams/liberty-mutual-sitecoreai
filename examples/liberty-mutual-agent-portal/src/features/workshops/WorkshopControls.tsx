@@ -1,9 +1,14 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useId } from "react";
 import { useRouter } from "next/navigation";
 import { Check, Copy, LogOut, Maximize2, X } from "lucide-react";
 import { GuideText } from "./GuideText";
 import type { GuideImage } from "./types";
+import {
+  guideCropGeometry,
+  guideImageAssetUrl,
+  validImageAnnotation,
+} from "./guide-images";
 
 export function WorkshopSignOut() {
   const router = useRouter();
@@ -69,37 +74,133 @@ export function CopyCode({ code }: { code: string }) {
     </div>
   );
 }
+function ScreenshotCanvas({ image }: { image: GuideImage }) {
+  const crop = image.crop ? guideCropGeometry(image.crop) : null;
+  const annotations = image.annotations?.filter(validImageAnnotation) ?? [];
+  return (
+    <span className="workshop-screenshot-canvas">
+      <span
+        className={`workshop-screenshot-viewport${crop ? " is-cropped" : ""}`}
+        style={crop ? { aspectRatio: crop.aspectRatio } : undefined}
+      >
+        {/* Authenticated images bypass the shared image optimizer cache. Crops use CSS only. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={guideImageAssetUrl(image.file)}
+          alt={image.alt}
+          loading="lazy"
+          style={crop?.image}
+        />
+      </span>
+      <span className="workshop-screenshot-overlay" aria-hidden="true">
+        {annotations.map((annotation, index) => (
+          <span className="workshop-screenshot-highlight" key={index}>
+            <span
+              className="workshop-screenshot-box"
+              style={{
+                left: `${annotation.x}%`,
+                top: `${annotation.y}%`,
+                width: `${annotation.width}%`,
+                height: `${annotation.height}%`,
+              }}
+            />
+            <span
+              className="workshop-screenshot-number"
+              style={{
+                left: `clamp(15px, ${annotation.x}%, calc(100% - 15px))`,
+                top: `clamp(15px, ${annotation.y}%, calc(100% - 15px))`,
+              }}
+            >
+              {index + 1}
+            </span>
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+function ScreenshotDetails({ image }: { image: GuideImage }) {
+  const annotations = image.annotations?.filter(validImageAnnotation) ?? [];
+  return (
+    <>
+      <p className="workshop-screenshot-caption">
+        <GuideText text={image.caption} />
+      </p>
+      {annotations.length > 0 && (
+        <ol
+          className="workshop-screenshot-legend"
+          aria-label="Numbered screenshot highlights"
+        >
+          {annotations.map((annotation, index) => (
+            <li key={index}>
+              <span className="workshop-legend-number" aria-hidden="true">
+                {index + 1}
+              </span>
+              <span>
+                <span className="sr-only">Highlight {index + 1}: </span>
+                <GuideText text={annotation.label} />
+              </span>
+            </li>
+          ))}
+        </ol>
+      )}
+    </>
+  );
+}
+
 export function GuideScreenshot({ image }: { image: GuideImage }) {
   const dialog = useRef<HTMLDialogElement>(null);
-  const src = `/api/workshops/assets/${image.file}`;
+  const id = useId();
   return (
     <figure className="workshop-figure">
+      {image.title && (
+        <h3 className="workshop-screenshot-title">
+          <GuideText text={image.title} />
+        </h3>
+      )}
       <button
         className="workshop-image-button"
+        style={
+          image.crop
+            ? { maxWidth: Math.max(320, image.crop.width * 1.5) }
+            : undefined
+        }
         type="button"
         onClick={() => dialog.current?.showModal()}
         aria-label={`Enlarge screenshot: ${image.alt}`}
+        aria-describedby={`${id}-caption`}
       >
-        {/* These authenticated images must not pass through a shared image optimizer cache. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={image.alt} loading="lazy" />
-        <span>
+        <ScreenshotCanvas image={image} />
+        <span className="workshop-image-enlarge">
           <Maximize2 size={14} />
-          Enlarge screenshot
+          Enlarge image and highlights
         </span>
       </button>
-      <figcaption>
-        <GuideText text={image.caption} />
+      <figcaption id={`${id}-caption`}>
+        <ScreenshotDetails image={image} />
       </figcaption>
       <dialog
         ref={dialog}
         className="workshop-lightbox"
+        style={
+          image.crop
+            ? {
+                width: `min(${Math.min(1440, Math.max(520, image.crop.width * 1.7 + 40))}px, calc(${(image.crop.width / image.crop.height) * 60}vh + 40px))`,
+              }
+            : undefined
+        }
+        aria-labelledby={`${id}-dialog-title`}
         onClick={(event) => {
           if (event.target === dialog.current) dialog.current.close();
         }}
       >
         <div>
+          <h2 id={`${id}-dialog-title`} className="workshop-lightbox-title">
+            <GuideText text={image.title ?? "Screenshot details"} />
+          </h2>
           <button
+            className="workshop-lightbox-close"
             autoFocus
             type="button"
             onClick={() => dialog.current?.close()}
@@ -107,11 +208,8 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
           >
             <X size={22} />
           </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={image.alt} />
-          <p>
-            <GuideText text={image.caption} />
-          </p>
+          <ScreenshotCanvas image={image} />
+          <ScreenshotDetails image={image} />
         </div>
       </dialog>
     </figure>
