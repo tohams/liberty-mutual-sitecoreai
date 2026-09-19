@@ -310,22 +310,24 @@ export function WorkshopReset({
           Match the website in your browser’s address bar to the portal used in
           the walkthrough. <strong>Live portal</strong> and{" "}
           <strong>Preview portal</strong> have separate saved work. A reset
-          creates fresh profile identities for the selected website only; it
-          does not reset the other website. Open <HostedResetLinks /> to use the
+          creates fresh agent profiles for the selected website only; it does
+          not reset the other website. Open <HostedResetLinks /> to use the
           reset page for the website on which you completed the exercise.
         </p>
         <div className="workshop-reset-explanation">
           <h2>A clean start, every time</h2>
           <p>
             Restore tasks, bookmarks, and submissions to their starting state
-            and create seven new, verified SitecoreAI profiles with no earlier
-            browsing behavior.
+            and create seven new SitecoreAI profiles. A <strong>profile</strong>{" "}
+            is the record of one agent’s attributes and browsing activity used
+            by personalization. The new profiles retain the starting agent
+            attributes and have no earlier browsing history.
           </p>
           <p>
             Use this when you want to repeat a walkthrough without earlier saved
             actions or browsing interests affecting the result. After it
             finishes, sign out of the Agent Portal, then sign in again so that
-            your session uses the new profile identity.
+            your portal session connects to the new profile.
           </p>
         </div>
         {status && !status.restartAvailable && (
@@ -440,11 +442,12 @@ export function WorkshopReset({
           <h2>What stays in place</h2>
           <ul>
             <li>
-              Authored content, Search configuration, and published pages.
+              Pages and images managed in SitecoreAI, Search settings, and
+              published pages visible to agents.
             </li>
             <li>
-              Agentic Studio work, Forms submissions already sent to the
-              webhook, and experiment settings.
+              Saved Agentic Studio work, form requests already received in the
+              receipt inbox, and A/B test settings.
             </li>
             <li>Other workshop numbers and other website environments.</li>
           </ul>
@@ -457,8 +460,8 @@ export function WorkshopReset({
             sign-in uses their new identities.
           </p>
           <p>
-            A fresh start does not delete experiment results or guarantee a
-            particular A/B test variant.
+            A fresh start does not delete A/B test results or guarantee which
+            version of the tested content an agent sees.
           </p>
         </section>
         <Link href="/workshops/guide/saved-work-reset">
@@ -471,11 +474,23 @@ export function WorkshopReset({
         </span>
         <h2>Current profile identities for {pack}</h2>
         <p>
-          In SitecoreAI, open <strong>Performance → Profiles</strong> and search
-          using <strong>Search filter → Liberty Mutual agent identity</strong>{" "}
-          and an identity below. These are the currently active identities for
-          this website. Copy the row matching the portal username you used in
-          the exercise. After each reset, copy the latest
+          An <strong>Agent identity</strong> is the lookup value that connects a
+          portal username to its current SitecoreAI profile. You need it only
+          when a walkthrough asks you to inspect that agent’s data or browsing
+          history. Open{" "}
+          <a
+            className="workshop-inline-link"
+            href="https://app.sitecorecloud.io/performance/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong>SitecoreAI Profiles</strong>
+          </a>
+          , under <strong>Performance → Profiles</strong>, and search using{" "}
+          <strong>Search filter → Liberty Mutual agent identity</strong> and an
+          identity below. These are the currently active identities for this
+          website. Copy the row matching the portal username you used in the
+          exercise. After each reset, copy the latest
           <strong> Agent identity</strong> from this table to open the profile
           now linked to that username.
         </p>

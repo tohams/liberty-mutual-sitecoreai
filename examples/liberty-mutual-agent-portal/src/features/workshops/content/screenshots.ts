@@ -20,7 +20,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "resource-search.png",
       alt: "Learning and resources search interface with licensed-state filter controls",
       caption:
-        "**Learning & resources**: use the search field and **Risk state** filter. This reference shows Daniel’s library; result counts and treatment copy may vary.",
+        "**Learning & resources**: use the search field and **Risk state** filter. This reference shows Daniel’s library; result counts and personalized wording may vary.",
     },
   },
   "native-contact-form": {
@@ -28,7 +28,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "native-contact-form.png",
       alt: "Contact your team form below the relationship-team cards on Support",
       caption:
-        "On **Support**, scroll below the relationship-team cards to find the native **Contact your team** form.",
+        "On **Support**, scroll below the relationship-team cards to find **Contact your team**, the form created in SitecoreAI Forms.",
     },
   },
   "resource-content-workflow": {
@@ -70,7 +70,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "products-texas.png",
       alt: "Products page with the workers compensation spotlight",
       caption:
-        "Daniel’s workers-compensation treatment appears above the product filters. This reference image shows **Texas**; keep **Illinois** selected for this walkthrough to check that the action preserves your selected state. Confirm both native profile evidence and the current rendered treatment.",
+        "Daniel’s personalized workers-compensation banner appears above the product filters. This reference image shows **Texas**; keep **Illinois** selected for this walkthrough to check that the action preserves your selected state. Compare the interests recorded in Daniel’s SitecoreAI profile with the banner currently shown in the portal.",
     },
   },
   "agentic-studio-workflow": {

@@ -55,8 +55,10 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
           <em>Make it yours.</em>
         </h1>
         <p>
-          A clear path through the agent experience and the platform behind it.
-          Follow each walkthrough at your own pace.
+          This guide walks you through the Liberty Mutual Agent Portal and
+          SitecoreAI, the platform used to manage its content and personalized
+          experiences. Each exercise explains what to do and what the result
+          means.
         </p>
         <div className="workshop-login-tracks">
           <span>
@@ -86,9 +88,11 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
           </div>
           <h2>Welcome to the workshop</h2>
           <p>
-            Use the agent-portal username and password provided by the workshop
-            team. Your <strong>Sitecore Cloud</strong> account is for content
-            authoring and does not sign into this guide.
+            Enter the fictional agent username and password provided by the
+            workshop team, such as the Daniel login with your assigned number.
+            These credentials open the instructions. Your separately invited{" "}
+            <strong>Sitecore Cloud</strong> account opens the platform’s
+            content-editing tools when an exercise requires them.
           </p>
           <form onSubmit={submit}>
             <label htmlFor="workshop-username">Workshop username</label>

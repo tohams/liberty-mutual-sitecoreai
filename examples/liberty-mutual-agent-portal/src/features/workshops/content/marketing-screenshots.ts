@@ -312,7 +312,7 @@ export const marketingScreenshots: Record<
         "ab-test-configuration.png",
         "Select the authored variants in the right panel",
         "Page Builder test panel with A and B tabs, View analytics, and the control content item",
-        "Use the right-hand **A** and **B** tabs to inspect the authored content for each treatment. **View analytics** opens the test’s reporting view. The test’s current status and measured results may differ from this saved reference.",
+        "Use the right-hand **A** and **B** tabs to inspect the wording prepared for each test variation. **View analytics** opens the test’s reporting view. The test’s current status and measured results may differ from this saved reference.",
         [972, 99, 300, 610],
         [
           [
@@ -325,7 +325,7 @@ export const marketingScreenshots: Record<
           ],
           [
             [1093, 252, 153, 38],
-            "**View analytics** opens native test reporting. The report is examined later in this guide.",
+            "**View analytics** opens SitecoreAI’s test reporting. The report is examined later in this guide.",
           ],
         ],
       ),
@@ -379,7 +379,7 @@ export const marketingScreenshots: Record<
         "growth-avery-test.png",
         "Avery’s test result: true",
         "Test custom value dialog showing Response and a true result",
-        "After loading Avery’s current native profile and clicking **Run test**, read **Response**. This verified reference returns **true**, matching Cedar Ridge’s 14.46% small-commercial share. Use the current profile UUID obtained in the guide.",
+        "After loading Avery’s current SitecoreAI profile and clicking **Run test**, read **Response**. This verified reference returns **true**, matching Cedar Ridge’s 14.46% small-commercial share. Use the current profile UUID obtained in the guide.",
         [136, 47, 1006, 169],
         [
           [[279, 98, 102, 40], "Select **Response** after the test completes."],
@@ -393,7 +393,7 @@ export const marketingScreenshots: Record<
         "growth-daniel-test.png",
         "Daniel’s test result: false",
         "Test custom value dialog showing Response and a false result",
-        "Repeat with Daniel’s current native profile. This verified reference returns **false**, matching Prairie Oak’s 36.86% share. The comparison evaluates the saved calculation without changing either profile.",
+        "Repeat with Daniel’s current SitecoreAI profile. This verified reference returns **false**, matching Prairie Oak’s 36.86% share. The comparison evaluates the saved calculation without changing either profile.",
         [136, 47, 1006, 169],
         [
           [

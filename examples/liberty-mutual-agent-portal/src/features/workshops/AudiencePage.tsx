@@ -49,11 +49,17 @@ export async function AudiencePage({
           {marketing
             ? "These exercises address your marketing priorities: simpler content creation, controlled publishing, and relevant agent engagement."
             : "These exercises address your platform priorities: less maintenance, faster delivery, and a dependable agent experience."}{" "}
-          Use the section links to jump to the part you need. Begin each guide
-          with <strong>Before you start</strong>; it identifies the account,
-          website, and starting state. <strong>Presenter demonstration</strong>{" "}
-          means the workshop team makes the shared changes while you follow
-          along.
+          If this is your first visit, read{" "}
+          <Link className="workshop-inline-link" href="/workshops#your-tools">
+            how the workshop guide, Agent Portal, and SitecoreAI relate
+          </Link>
+          . The sections follow the workshop sequence; their navigation links
+          also let you return to a topic later. Open a walkthrough, read{" "}
+          <strong>Before you start</strong>, and follow its numbered steps.{" "}
+          <strong>What to observe and why</strong> explains the result to check.{" "}
+          <strong>Presenter demonstration</strong> means the workshop team
+          changes shared content while you watch, so participants do not
+          overwrite each other’s edits.
         </p>
         <GuideDirectory guides={guides} audience={audience} />
       </main>
