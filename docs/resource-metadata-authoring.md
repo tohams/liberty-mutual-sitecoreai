@@ -115,9 +115,9 @@ authoring/scripts/deploy-content.sh demo --seed-taxonomy --what-if
 authoring/scripts/deploy-content.sh demo --seed-taxonomy
 ```
 
-Inspect every proposed Model and SitePresentation change before applying a release to an existing environment. `--seed-taxonomy` limits the additional seed to taxonomy; it still runs the normal Model and SitePresentation pushes. If `--what-if` shows unrelated native overrides changing, stop and reconcile the intended model before applying the release.
+Inspect every proposed Model, SitePresentation and SupportForm change before applying a release to an existing environment. `--seed-taxonomy` limits the additional seed to taxonomy; it still runs the normal Model, SitePresentation and SupportForm pushes. If `--what-if` shows unrelated native overrides changing, stop and reconcile the intended model before applying the release.
 
-`--seed` includes the content, taxonomy and blank resource-page branch when creating a new site. A normal release updates Model and SitePresentation without seeding or recreating editorial items. All three seed modules are CreateOnly and stay outside Items as Resources (IAR). See the [release procedure](developer-handoff.md#vercel-release-process) for the exact module order and seed flags. The additive generator creates missing local files; it rejects changes to existing files instead of overwriting captured seed content. Capture intentional vocabulary changes into source through a reviewed serialization update.
+`--seed` includes the content, taxonomy and blank resource-page branch when creating a new site. A normal release updates Model, SitePresentation and SupportForm without seeding or recreating editorial items. All three seed modules are CreateOnly and stay outside Items as Resources (IAR). See the [release procedure](developer-handoff.md#vercel-release-process) for the exact module order and seed flags. The additive generator creates missing local files; it rejects changes to existing files instead of overwriting captured seed content. Capture intentional vocabulary changes into source through a reviewed serialization update.
 
 After any indexed-field change, publish the intended content, reindex **Liberty Mutual Agent Resources**, and run the native verifier from the application folder:
 
