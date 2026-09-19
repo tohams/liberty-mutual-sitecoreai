@@ -9,7 +9,8 @@ import {
 import { WorkshopShell } from "@/features/workshops/WorkshopShell";
 
 export const metadata: Metadata = {
-  title: "Attendees and reviewer numbers | Liberty Mutual workshop guide",
+  title:
+    "Your workshop number and agent logins | Liberty Mutual workshop guide",
 };
 
 export default async function WorkshopAttendeesPage() {
@@ -23,9 +24,9 @@ export default async function WorkshopAttendeesPage() {
         </Link>
         <header className="workshop-attendees-heading">
           <span className="workshop-eyebrow">YOUR WORKSHOP ACCOUNTS</span>
-          <h1>Attendees and reviewer numbers</h1>
+          <h1>Your workshop number and agent logins</h1>
           <p>
-            A reviewer number groups seven fictional agent logins for one
+            A workshop number identifies seven fictional agent logins for one
             attendee. Find your name below, then keep that number when switching
             personas so your portal work and profile history remain separate
             from other attendees’ work. Number <strong>01</strong> is reserved
@@ -34,7 +35,7 @@ export default async function WorkshopAttendeesPage() {
         </header>
         <div className="workshop-attendees-layout">
           <section aria-labelledby="workshop-roster-heading">
-            <h2 id="workshop-roster-heading">Reviewer assignments</h2>
+            <h2 id="workshop-roster-heading">Find your workshop number</h2>
             <p className="workshop-attendees-caption">
               The highlighted row matches your current workshop sign-in. If your
               name is missing, ask the Sitecore workshop team to assign one of
@@ -43,7 +44,7 @@ export default async function WorkshopAttendeesPage() {
             </p>
             <table className="workshop-attendees-table">
               <caption className="sr-only">
-                Workshop attendees and their assigned reviewer numbers
+                Workshop attendees and their assigned workshop numbers
               </caption>
               <thead>
                 <tr>
@@ -88,7 +89,7 @@ export default async function WorkshopAttendeesPage() {
               <Users size={24} />
               <span className="workshop-eyebrow">YOUR CURRENT SIGN-IN</span>
               <h2 id="workshop-usernames-heading">
-                Reviewer {session.reviewerPack}
+                Workshop {session.reviewerPack}
               </h2>
               <p>
                 Use the persona named in each walkthrough with suffix{" "}
@@ -108,9 +109,9 @@ export default async function WorkshopAttendeesPage() {
                 If your assigned number differs from the highlighted row, sign
                 out of this guide and sign in with a full portal username ending
                 in your assigned suffix. The examples will then use that number.
-                For example, choose the Daniel username in your pack when a
+                For example, choose the Daniel username with your number when a
                 guide asks you to inspect Daniel’s experience; changing personas
-                does not change your reviewer number.
+                does not change your workshop number.
               </p>
             </div>
             <section
@@ -133,20 +134,14 @@ export default async function WorkshopAttendeesPage() {
                 permissions.
               </p>
               <p>
-                Attendee <strong>Author</strong> and <strong>Approver</strong>{" "}
-                roles and practice pairs are pending assignment. The Sitecore
-                workshop team—Angela Gustafson, Allen Blanton, and Thomas
-                Lin—will provide your role, partner, and practice-page number.
-                Follow the presenter until those are confirmed. A practice pair
-                identifies a shared CMS page; it is not inferred from your
-                portal reviewer number.
-              </p>
-              <p>
-                The scoped roles support the assigned practice-page exercise.
-                Resource-page creation, image editing, and the{" "}
-                <strong>Resource metadata</strong> app require additional
-                access. Follow the presenter for those guides unless the
-                required access has been assigned to your Sitecore account.
+                Guides marked <strong>Presenter demonstration</strong> use
+                shared content. The workshop team makes those changes while
+                attendees observe. For{" "}
+                <strong>Review and publish content</strong>, the presenters use
+                separate <strong>Author</strong> and
+                <strong> Approver</strong> accounts to show who can edit,
+                submit, and approve a page. Attendees do not need a partner or
+                two Sitecore accounts.
               </p>
               <p>
                 Local development guides use <strong>daniel.01</strong> at
@@ -156,7 +151,8 @@ export default async function WorkshopAttendeesPage() {
                 <strong> Page Builder</strong> still affect the shared CMS.
               </p>
               <Link href="/workshops/guide/author-approver-workflow">
-                View the author and approver exercise <ArrowRight size={16} />
+                View the publishing workflow demonstration{" "}
+                <ArrowRight size={16} />
               </Link>
             </section>
             <nav
@@ -171,7 +167,7 @@ export default async function WorkshopAttendeesPage() {
                 Local development prerequisites <ArrowRight size={16} />
               </Link>
               <Link href="/workshops/reset">
-                Reset your reviewer number <ArrowRight size={16} />
+                Reset your workshop number <ArrowRight size={16} />
               </Link>
             </nav>
           </aside>

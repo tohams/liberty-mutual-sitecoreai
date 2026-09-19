@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Clock3, Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { GuideText } from "./GuideText";
 import { plainGuideText } from "./guide-text";
 import type { WorkshopAudience, WorkshopGuide } from "./types";
 import type { WorkshopFocus } from "./content/priorities";
 export type GuideSummary = Pick<
   WorkshopGuide,
-  "slug" | "audience" | "category" | "title" | "summary" | "duration"
+  "slug" | "audience" | "category" | "title" | "summary"
 > & { stepCount: number; focus: WorkshopFocus };
 export function GuideDirectory({
   guides,
@@ -25,7 +25,7 @@ export function GuideDirectory({
   );
   const matches = guides.filter((guide) =>
     plainGuideText(
-      `${guide.title} ${guide.summary} ${guide.category} ${guide.focus.priority.label} ${guide.focus.relevance}`,
+      `${guide.title} ${guide.summary} ${guide.category} ${guide.focus.priority.label} ${guide.focus.relevance} ${guide.focus.section.label}`,
     )
       .toLowerCase()
       .includes(query.trim().toLowerCase()),
@@ -49,15 +49,21 @@ export function GuideDirectory({
       </div>
       <div className="workshop-directory-layout">
         <aside>
-          <span className="workshop-eyebrow">IN THIS SECTION</span>
+          <span className="workshop-eyebrow">JUMP TO A SECTION</span>
           <nav aria-label={`${audience} categories`}>
             {sections.map(
-              (section) =>
+              (section, index) =>
                 matches.some(
                   (guide) => guide.focus.section.id === section.id,
                 ) && (
                   <a key={section.id} href={`#section-${section.id}`}>
-                    {section.label}
+                    <span
+                      className="workshop-section-marker"
+                      aria-hidden="true"
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{section.label}</span>
                   </a>
                 ),
             )}
@@ -73,7 +79,7 @@ export function GuideDirectory({
           </div>
         </aside>
         <div>
-          {sections.map((section) => {
+          {sections.map((section, sectionIndex) => {
             const selected = matches.filter(
               (guide) => guide.focus.section.id === section.id,
             );
@@ -83,10 +89,18 @@ export function GuideDirectory({
                 id={`section-${section.id}`}
                 className="workshop-guide-group"
               >
-                <h2>{section.label}</h2>
-                <p className="workshop-group-description">
-                  {section.description}
-                </p>
+                <header className="workshop-group-heading">
+                  <span className="workshop-section-marker" aria-hidden="true">
+                    {String(sectionIndex + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <span className="workshop-eyebrow">{section.location}</span>
+                    <h2>{section.label}</h2>
+                    <p className="workshop-group-description">
+                      {section.description}
+                    </p>
+                  </div>
+                </header>
                 <div>
                   {selected.map((guide) => (
                     <Link
@@ -103,12 +117,7 @@ export function GuideDirectory({
                         <p>
                           <GuideText text={guide.summary} />
                         </p>
-                        <span>
-                          <Clock3 size={14} />
-                          {guide.duration}
-                          <i />
-                          {guide.stepCount} steps
-                        </span>
+                        <span>{guide.stepCount} steps</span>
                       </div>
                       <ArrowRight size={21} />
                     </Link>

@@ -10,6 +10,10 @@ const PAGES = `https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-
 const PROFILES = `https://app.sitecorecloud.io/performance/profiles?organization=${ORG}&tenantId=${TENANT}`;
 const STUDIO = `https://agentic-studio-use.sitecorecloud.io/spaces/21e4d9d9-ba94-498e-808e-1b1ae125066c?organization=${ORG}&tenantName=scaipocusem400b-sitecoreai950c-demo4418`;
 const FORMS = `https://forms.sitecorecloud.io/design/preview?organization=${ORG}&tenantName=scaipocusem400b-sitecoreai950c-demo4418&entityId=980983421c624d078ccf2fd29e4ae665-use`;
+const receiptInbox: GuideLink = {
+  label: "Open the form receipt inbox",
+  href: "https://webhook.site/#!/view/951f9e7b-3dd6-49dc-8fb1-3beda2cc034e",
+};
 const REPO = "https://github.com/tohams/liberty-mutual-sitecoreai/blob/main";
 
 const liveLogin: GuideLink = {
@@ -21,11 +25,11 @@ const previewLogin: GuideLink = {
   href: `${PREVIEW}/login`,
 };
 const liveReset: GuideLink = {
-  label: "Live portal: Reset a reviewer number and current identities",
+  label: "Live portal: Reset a workshop number and current identities",
   href: `${LIVE}/workshops/reset`,
 };
 const previewReset: GuideLink = {
-  label: "Transaction preview: Reset a reviewer number and current identities",
+  label: "Transaction preview: Reset a workshop number and current identities",
   href: `${PREVIEW}/workshops/reset`,
 };
 const pageBuilder: GuideLink = { label: "Open Page Builder", href: PAGES };
@@ -40,15 +44,15 @@ const profileLink: GuideLink = {
 const platformPrerequisite =
   "Open the Sitecore tool linked in this guide and sign in with the email address that received your **Sitecore Cloud** invitation. The link targets **Safeco Insurance Company of America POC** and its **SitecoreAI / Demo** environment. If a step uses **Page Builder**, confirm **Liberty Mutual Agent Portal** is selected there. If access is denied or another organization opens, ask the workshop team to check your invitation; a portal username such as **daniel.01** cannot provide this access.";
 const authorPrerequisite =
-  "In **Page Builder**, keep the editing host at **Default** so the canvas uses the hosted portal. CMS pages are shared across the workshop; your portal reviewer number does not create a separate CMS copy. Follow the editing mode stated in this guide. Scoped workshop **Author** and **Approver** roles permit the paired workflow exercise, not edits to every resource or campaign page.";
-const packPrerequisite =
-  "Find your name and reviewer number in **Attendee assignments** on this workshop website. Use that same number after the dot in every portal username. Number 01 is for presenters; attendees use their listed number from 02–15. If your name is not listed, ask the workshop team for a number before starting. The workshop team provides Sitecore authoring roles and practice-pair assignments separately.";
+  "In **Page Builder**, keep the editing host at **Default** so the canvas uses the hosted portal. CMS pages are shared across the workshop; your portal workshop number does not create a separate CMS copy. Follow the editing mode stated in this guide. Shared-content editing is presenter-led. The separate **Author** and **Approver** accounts are used for the publishing demonstration. No partner assignment is needed.";
+const workshopNumberPrerequisite =
+  "Find your name and workshop number in **Attendee assignments** on this workshop website. Use that same number after the dot in every portal username. Number 01 is for presenters; attendees use their listed number from 02–15. If your name is not listed, ask the workshop team for a number before starting. This workshop number applies to portal logins. Sitecore authoring uses a separate invited account; follow the presenter for shared-content editing.";
 const signOut =
   "Click the signed-in person’s name or avatar in the upper right, then **Sign out**. Wait for **Welcome back** before switching to another persona.";
 const persistentWork =
   "Saved work has no automatic expiry. Signing out ends the session but keeps saved work and native **SitecoreAI** profile history.";
 const sharedReset =
-  "To keep your new record for review, sign out without resetting. To repeat from the starting data, use the **Transaction preview: Reset a reviewer number and current identities** link below. Sign in to that workshop website if requested, select your number from **Attendee assignments** under **Reviewer number**, and wait until anyone using that number has finished. Click **Reset reviewer {{pack}}**, wait for **Reviewer {{pack}} is ready**, and sign in to the portal again. This removes saved changes for all seven personas with that number on the transaction-preview host and activates seven clean native profiles. It does not reset the live portal. Earlier native profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts, and webhook receipts are unchanged.";
+  "To keep your new record for review, sign out without resetting. To repeat from the starting data, use the **Transaction preview: Reset a workshop number and current identities** link below. Sign in to that workshop website if requested, select your number from **Attendee assignments** under **Workshop number**, and wait until anyone using that number has finished. Click **Reset workshop {{pack}}**, wait for **Workshop {{pack}} is ready**, and sign in to the portal again. This removes saved changes for all seven personas with that number on the transaction-preview host and activates seven clean native profiles. It does not reset the live portal. Earlier native profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts, and webhook receipts are unchanged.";
 
 const personaNames = {
   avery: "Avery Brooks",
@@ -79,12 +83,11 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "start-and-switch-agents",
     audience: "marketing",
     category: "Start here",
-    title: "Portal accounts and SitecoreAI workspaces",
+    title: "Sign in and find your workshop number",
     summary:
-      "Use the named portal persona and login link in each guide, find your reviewer number, and recognize when a separate Sitecore account is required.",
+      "Use the named portal persona and login link in each guide, find your workshop number, and recognize when a separate Sitecore account is required.",
     outcome:
       "You can sign in, select a persona for its business role, and distinguish portal access from **Sitecore** authoring access.",
-    duration: "5 minutes",
     personas: [
       "avery.01",
       "maya.01",
@@ -95,8 +98,8 @@ export const marketingGuides: WorkshopGuide[] = [
       "elena.01",
     ],
     prerequisites: [
-      packPrerequisite,
-      "The workshop team provides your initial portal sign-in details and any separate **Sitecore Cloud** invitation. After workshop sign-in, **Attendee assignments** and **Reset a reviewer number** require no additional credentials.",
+      workshopNumberPrerequisite,
+      "The workshop team provides your initial portal sign-in details and any separate **Sitecore Cloud** invitation. After workshop sign-in, **Attendee assignments** and **Reset a workshop number** require no additional credentials.",
     ],
     links: [
       {
@@ -118,7 +121,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Use the login link supplied by each walkthrough",
         action: [
           "For browsing, personalization, **Search**, and publication checks, use **Open the live portal login** below. These guides link to liberty-mutual-agent-portal.vercel.app, which displays published content.",
-          "The **Portal components: connect campaign content to a saved request** guide names the point at which to use **Open the transaction-preview login** below. Its one saved conversation shows how a custom component can connect an authored campaign to agency work while keeping practice changes separate from the live portal.",
+          "The **Save a request from a campaign** guide names the point at which to use **Open the transaction-preview login** below. Its one saved conversation shows how a custom component can connect an authored campaign to agency work while keeping practice changes separate from the live portal.",
         ],
         expected: [
           "Production and preview keep saved operational work separate.",
@@ -147,7 +150,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "All three have Texas, Florida, and Illinois licenses. Their product and transaction authority still differs.",
         ],
         expected: [
-          "Colleagues in the same agency and pack share that agency’s saved work. Favorites and learning registrations belong to individual agents. Each attendee’s pack is separate.",
+          "Agent logins with the same workshop number share work within their agency. Favorites and learning registrations belong to individual agents. Different workshop numbers keep attendees’ activity separate.",
         ],
       },
       login("maya"),
@@ -155,17 +158,17 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Switch the person without resetting the exercise",
         action: [
           signOut,
-          "For this orientation, sign in as **daniel.01** with password **Sitecore**. Use the same reviewer number as Maya. On later exercises, follow the persona named in that guide. Close any unsaved dialog with its × button or Escape before signing out.",
+          "For this orientation, sign in as **daniel.01** with password **Sitecore**. Use the same workshop number as Maya. On later exercises, follow the persona named in that guide. Close any unsaved dialog with its × button or Escape before signing out.",
         ],
         expected: [
           persistentWork,
-          "Signing in again resumes the same profile and browsing history. Use **Reset a reviewer number** when you want to repeat an exercise with clean profiles and starting data.",
+          "Signing in again resumes the same profile and browsing history. Use **Reset a workshop number** when you want to repeat an exercise with clean profiles and starting data.",
         ],
       },
       {
         title: "Use a separate Sitecore login for authoring",
         action: [
-          "Open **SitecoreAI** using the link above. Use the email address that received your **Sitecore Cloud** invitation, not a portal persona. The workshop team supplies any **Author** or **Approver** role and practice-pair assignment separately.",
+          "Open **SitecoreAI** using the link above. Use the email address that received your **Sitecore Cloud** invitation, not a portal persona. The presenters use separate **Author** and **Approver** accounts for the publishing demonstration; you can follow that demonstration without an authoring role.",
           "The **Open SitecoreAI** link goes directly to the POC environment. If you instead begin at the **Sitecore Cloud Portal**, select **Safeco Insurance Company of America POC**, then **SitecoreAI / Demo**. For editing, open **Page Builder** and select **Liberty Mutual Agent Portal**. If access is denied, follow the presenter while the workshop team checks your invitation.",
         ],
         expected: [
@@ -177,7 +180,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "This orientation needs no reset: signing out is enough. If you deliberately want a clean start, use **Live portal: Reset a reviewer number and current identities** for live activity or the **Transaction preview** reset link for preview activity. Select your number from **Attendee assignments**, check that nobody is still using it, and click **Reset reviewer** for that number. Wait for **Reviewer [selected number] is ready** before signing in again. Reset restores baseline saved work and clean profiles for all seven personas with that number on that host. It leaves the other host, previous profiles, experiment history, CMS content, **Search**, **Agentic** artifacts, and webhook receipts unchanged.",
+        "This orientation needs no reset: signing out is enough. If you deliberately want a clean start, use **Live portal: Reset a workshop number and current identities** for live activity or the **Transaction preview** reset link for preview activity. Select your number from **Attendee assignments**, check that nobody is still using it, and click **Reset workshop** for that number. Wait for **Workshop [selected number] is ready** before signing in again. Reset restores baseline saved work and clean profiles for all seven personas with that number on that host. It leaves the other host, previous profiles, experiment history, CMS content, **Search**, **Agentic** artifacts, and webhook receipts unchanged.",
       ],
       links: [liveReset, previewReset],
     },
@@ -192,15 +195,14 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "personalization-by-role",
     audience: "marketing",
     category: "Agent experience",
-    title: "Personalization: compare four roles in the same portal",
+    title: "Compare role-based personalization",
     summary:
       "See how known agent attributes change **Agency growth** guidance while role and state permissions shape the working book.",
     outcome:
       "You can explain the difference between relevant marketing guidance and authority to view or transact business.",
-    duration: "12 minutes",
     personas: ["avery.01", "jordan.01", "maya.01", "elena.01"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       "Use the live portal. This comparison leaves existing submissions and policies unchanged.",
     ],
     links: [liveLogin],
@@ -261,7 +263,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "No reviewer reset is needed. Browsing may add native engagement history.",
+        "No workshop-number reset is needed. Browsing may add native engagement history.",
       ],
     },
     related: [
@@ -275,15 +277,14 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "state-aware-search",
     audience: "marketing",
     category: "Agent experience",
-    title: "Search: find licensed-state guidance and save a resource",
+    title: "Find and save a resource",
     summary:
       "Search the native **SitecoreAI** index, narrow by state, recover from no results, and verify a personal bookmark.",
     outcome:
       "Daniel sees Illinois, Texas, and nationwide guidance; Maya can also find Florida guidance. A bookmark persists after reload and can be removed independently.",
-    duration: "12 minutes",
     personas: ["daniel.01", "maya.01"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       "Use the live portal. Result totals can change as published content and the **Search** index change.",
     ],
     links: [liveLogin],
@@ -352,7 +353,7 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Undo only a bookmark created by this walkthrough, leave any pre-existing favorite intact, then sign out. No pack reset is needed.",
+        "Undo only a bookmark created by this walkthrough, leave any pre-existing favorite intact, then sign out. No workshop-number reset is needed.",
         "Normal article visits remain in **SitecoreAI** history and may build affinities.",
       ],
     },
@@ -363,15 +364,14 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "campaign-and-conversation",
     audience: "marketing",
     category: "Forms and campaigns",
-    title: "Portal components: connect campaign content to a saved request",
+    title: "Save a request from a campaign",
     summary:
       "See how a SitecoreAI portal combines marketer-managed navigation, accordions, and resource links with a custom component that saves an agent’s request.",
     outcome:
       "You can explain how **SitecoreAI** content and custom application components work together: marketers manage the campaign, and application code connects an agent’s next action to saved business data.",
-    duration: "10 minutes",
     personas: ["daniel.01"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       "Use **Open the live portal login** for the first browsing step. At **Switch to the preview before saving work**, use **Open the transaction-preview login**; that host keeps the saved conversation separate from live portal work.",
     ],
     links: [liveLogin, previewLogin],
@@ -416,7 +416,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "The dialog closes and **Request saved.** appears.",
           "The custom component saves the topic through the portal’s server API, and the request remains available after reload. This demonstrates an interactive portal that brings authored content and business actions into one experience.",
           "The sandbox uses synthetic agency data and application-managed storage. A deployed business solution would connect this component to the appropriate system, such as **Salesforce**. That integration requires implementation; saving this request does not send email or create a Salesforce record.",
-          "This one example represents the portal’s other working submission, policy, and surety components, which remain available for exploration. The separate **Native Forms: trace Contact your team to a webhook** guide shows the marketer-managed form and actual webhook delivery.",
+          "This one example represents the portal’s other working submission, policy, and surety components, which remain available for exploration. The separate **Submit a contact form** guide shows the marketer-managed form and actual webhook delivery.",
         ],
       },
     ],
@@ -436,21 +436,21 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "native-contact-form",
     audience: "marketing",
     category: "Forms and campaigns",
-    title: "Native Forms: trace Contact your team to a webhook",
+    title: "Submit a contact form",
     summary:
       "Inspect the marketer-managed form, submit fictional details, and match the message to its receiving webhook record.",
     outcome:
       "You see the SitecoreAI form-to-webhook path and where a business database or **Salesforce** integration would connect.",
-    duration: "10 minutes",
     personas: ["daniel.01", "Sitecore form administrator"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       platformPrerequisite,
-      "Review the existing form configuration without editing it, then submit fictional details through the portal. Before starting, ask the workshop team for the current **Demo Webhook** receipt-inbox link and confirmation that its receiver is active. If you lack Forms administration or receiver access, follow the presenter for configuration and receipt inspection.",
+      "Review the existing form configuration with the presenter, then submit fictional details through the portal. **Open the form receipt inbox** links directly to the receiver used by **Demo Webhook**. The presenter checks this receiver before the session; follow the presenter for configuration and receipt inspection if you lack Forms administration access.",
       "Use fictional contact details. The workshop receiver collects submitted data for inspection; a business backend would handle **Salesforce** activity or email delivery.",
     ],
     links: [
       { label: "Open Contact your team in SitecoreAI Forms", href: FORMS },
+      receiptInbox,
       {
         label: "Open Contact your team in the portal",
         href: `${LIVE}/support#contact-your-team`,
@@ -495,41 +495,42 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Find your form submission in the receiver",
         action: [
-          "Open the receipt-inbox link supplied by the workshop team, or follow the presenter’s receiver view. Find the **POST** request containing the exact **LM-NATIVE-…** marker you entered; do not use another attendee’s receipt.",
+          "Click **Open the form receipt inbox** below. In **Webhook.site**, clear any existing text in the **Search** box at the top of the left-hand **INBOX** list, then press **Enter** so previous search filters do not hide your request. Select the newest **POST** request and look for your exact **LM-NATIVE-…** marker in **Request Content**. If it belongs to another attendee, select the preceding request until you find your marker.",
           "Open that receipt’s **Request Content** or **Raw Content** view and compare the name, email, agency, topic, and discussion text with your entries. This confirms delivery beyond the form’s on-screen success message.",
         ],
         expected: [
           "The matching JSON and **Contact your team** metadata establish receipt of this specific request.",
-          "The matching marker connects the portal submission to its received data. Use the receipt-inbox link supplied by the workshop team to inspect these records.",
+          "The **x-formname** header reads **Contact your team**. Your unique marker connects the portal submission to this received record.",
         ],
+        links: [receiptInbox],
       },
     ],
     cleanup: {
       body: [
         "Reload the form to clear the confirmation, then sign out. Keep earlier receipts unchanged; any optional repeat uses a new marker.",
-        "No reviewer reset is needed, and a pack reset cannot delete webhook receipts.",
+        "No reset is needed. Resetting a workshop number cannot delete webhook receipts.",
         "**Native Forms** owns the form design and webhook delivery. A governed backend is needed to persist business records, create **Salesforce** activity, send email, or implement a production database.",
       ],
     },
-    related: ["campaign-and-conversation", "marketing-capability-boundaries"],
+    related: ["campaign-and-conversation"],
     sourceSlides: [89, 90],
   },
   {
     slug: "resource-content-workflow",
+    accountScope: "presenter",
     audience: "marketing",
     category: "Content authoring",
-    title: "Author, classify, publish, and restore a resource",
+    title: "Edit and publish a resource",
     summary:
       "**Presenter-led:** Follow one shared Texas article from a new **Draft** through managed metadata, approval, publication, **Search** refresh, and exact restoration.",
     outcome:
       "The article and **Search** result show the same approved wording, then both return to the recorded starting content.",
-    duration: "25–35 minutes, including publish and index time",
     personas: ["daniel.01", "Authorized Sitecore author"],
     prerequisites: [
-      packPrerequisite,
+      "The presenter uses **daniel.01** with password **Sitecore** for the live-portal checks. Attendees follow that screen while the shared article is edited and restored.",
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team selects one presenter to edit the shared Texas article; everyone else follows that screen. The presenter needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. For hands-on editing with a scoped **Author** or **Approver** role, use **Author and approver: review and publish content together** on your team-assigned pair page.",
+      "The workshop team selects one presenter to edit the shared Texas article; everyone else follows that screen. The presenter needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. The separate **Review and publish content** demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
       "Reserve enough time to complete publication, **Search** refresh, and restoration. Do not leave the temporary summary published.",
     ],
     links: [
@@ -657,21 +658,20 @@ export const marketingGuides: WorkshopGuide[] = [
           "Record the restoration version and publish/index outcomes.",
         ],
         expected: [
-          "The original wording and all five metadata values are restored. A reviewer-pack reset cannot undo or replace these CMS restoration steps.",
+          "The original wording and all five metadata values are restored. A workshop-number reset cannot undo or replace these CMS restoration steps.",
         ],
       },
     ],
     cleanup: {
       body: [
         "Complete the final restoration and verify both live article delivery and **Search** before leaving. **Sign out** of the portal.",
-        "If a temporary metadata value was accidentally published, restore it in a new **Draft**, approve and publish the exact page, then reindex the same **Search** source. A reviewer reset has no effect on CMS content.",
+        "If a temporary metadata value was accidentally published, restore it in a new **Draft**, approve and publish the exact page, then reindex the same **Search** source. A workshop-number reset has no effect on CMS content.",
       ],
     },
     related: [
       "author-approver-workflow",
       "create-resource-and-media",
       "state-aware-search",
-      "marketing-capability-boundaries",
     ],
     sourceSlides: [17, 18, 19, 20, 21, 22, 23],
   },
@@ -679,12 +679,11 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "create-resource-and-media",
     audience: "marketing",
     category: "Content authoring",
-    title: "Create a resource page with local content and Modern Media",
+    title: "Create a page",
     summary:
       "**Presenter-led:** Create a uniquely named **Resource page** with blank fields and its own local **Data** folder, then select an image and inspect its accessible description.",
     outcome:
       "The new unpublished page has its own image content item and can be removed without changing existing articles or shared assets.",
-    duration: "15 minutes",
     personas: ["Your Sitecore author account"],
     prerequisites: [
       platformPrerequisite,
@@ -779,82 +778,79 @@ export const marketingGuides: WorkshopGuide[] = [
         "When publishing a resource with a new image, include the page and **Resource image**: keep **Page**, **English**, and **All references** on; clear **Include related items**, leave **Subpages** off, and inspect **View references** before publishing. For this exercise, keep the practice page unpublished and delete it as described above.",
       ],
     },
-    related: ["resource-content-workflow", "marketing-capability-boundaries"],
+    related: ["resource-content-workflow"],
     sourceSlides: [24, 25, 26, 27],
   },
   {
     slug: "campaign-composition",
     audience: "marketing",
     category: "Content authoring",
-    title: "Compose a campaign using approved components",
+    title: "Edit page content",
     summary:
-      "**Presenter-led:** On the shared **Campaign practice** page, duplicate a component with its own content, reorder it, and inspect the allowed choices for main and sidebar regions.",
+      "**Presenter-led:** Change one heading on the shared **Campaign practice** page, see it in the page preview, and restore the original text.",
     outcome:
-      "You see how native authoring controls provide flexibility within the page’s approved structure.",
-    duration: "10 minutes",
-    personas: ["Sitecore author"],
+      "You see how a marketer updates an existing component in **Page Builder** without changing application code or deploying the website.",
+    personas: ["Presenter with campaign-content access"],
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team identifies one presenter with access to **Home** > **Agency growth** > **Campaign practice** and its **Data** items. Everyone else follows that screen. All attendees observe the same practice page; its content is separate from the live campaign. Keep it unpublished, and record its starting component order and local **Data** items before changing them.",
+      "One presenter with edit access to **Campaign practice** and its **Data** items makes the change while everyone else follows that screen. This unpublished page and its content are separate from the live campaign. Keep it unpublished, and record the original **Title** before editing so you can restore it exactly.",
     ],
     links: [pageBuilder],
     steps: [
       {
-        title: "Open the shared campaign practice page",
+        title: "Find and record the heading",
         action: [
-          "Open **Page Builder** > **Home** > **Agency growth** > **Campaign practice**.",
-          "In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane. Select the first **CampaignAccordion** in that list. Record its position and datasource—the content item supplying its text—so you can identify the duplicate during cleanup.",
+          "Click **Open Page Builder** below. Select **Content** in the top navigation, then expand **Home** > **Agency growth** > **Campaign practice** > **Data** and select **Growth opportunity**.",
+          "Find **Title**, above the **Body** rich-text editor. Copy the complete current **Title** into a local note. This is the heading you will change and restore; leave the other fields unchanged.",
         ],
         expected: [
-          "The component toolbar is available on the shared, unpublished practice page. Its local content is separate from the live campaign, so the presenter can demonstrate changes without editing the live campaign.",
+          "**Growth opportunity** is the content for the campaign’s callout card. **Title** controls its heading; **Body** and **Action link** supply the supporting text and button.",
         ],
         links: [pageBuilder],
       },
       {
-        title: "Duplicate and reorder the component",
+        title: "Change the heading",
         action: [
-          "In the floating toolbar, click **Duplicate component**. Record the new copy and its datasource.",
-          "Select **Move up** on the new copy to change its position. Open **Swap with another component**, inspect the offered replacements, and cancel without swapping. The choices demonstrate the placement rules supplied by developers.",
+          "Replace **Title** with: Prepare for your next small-business conversation.",
+          "Click outside the field and wait for the **Saved** checkmark. Keep the page unpublished.",
         ],
         expected: [
-          "The copy has independent local content, such as **Start the conversation_var2**; later runs can use another suffix.",
-          "The main region offers **CampaignAccordion**, **CampaignAlert**, and **CampaignCallout**. The component remains in an approved location.",
+          "The new heading is saved in SitecoreAI. No application-code change or website deployment is required.",
         ],
       },
       {
-        title: "Compare the sidebar’s allowed components",
+        title: "See the change on the page",
         action: [
-          "In the **Layers** list, select **CampaignLinkList**. On its component toolbar, click **Swap with another component**.",
-          "Read the component names in the selection dialog, then click **Cancel** to keep the current sidebar component.",
+          "Select **Campaign practice** in the content tree, then click **Editor** in the top navigation. Keep **Default editing host** selected above the canvas.",
+          "Open the stacked-layers **Layers** icon in the left pane and select **CampaignCallout**. Read the heading on that card in the canvas. If it still shows the previous text, reload the page after the save completes.",
         ],
         expected: [
-          "The sidebar offers **CampaignContact** and **CampaignLinkList**, distinct from the main region’s options.",
-          "**Page Builder** supports drag-and-drop; these native toolbar actions provide a reproducible way to inspect and change the composition.",
+          "The callout shows **Prepare for your next small-business conversation.** Its supporting text, button, and page position remain the same.",
+          "The change is visible in the authoring preview. The live campaign remains unchanged because this practice page has not been published.",
         ],
-        note: "**What to notice:** Arrange approved components in the visual **Page Builder** canvas and inspect the choices allowed in each region. Once developers have supplied the components and placement rules, marketers can compose pages without changing component code.",
+        note: "**What to notice:** In **Page Builder**, a marketer can find a field, change it, and see the result on the page. The component’s existing design and behavior remain available without developer involvement.",
       },
       {
-        title: "Restore the original practice layout",
+        title: "Restore the original heading",
         action: [
-          "In **Layers**, select the duplicate recorded in step 2 and click **Delete** for that component. Compare the remaining order with your notes from step 1; the original accordion must remain.",
-          "Open **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data**. Select only the new datasource name recorded in step 2, use **More options (…)** > **Delete**, and confirm that exact name. The page no longer needs this item after its duplicate component is removed.",
-          "Reopen **Layers** and compare the original component list and **Data** items.",
+          "Return to **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data** > **Growth opportunity**. Replace **Title** with the exact text recorded in step 1.",
+          "Click outside the field, wait for **Saved**, and reload. Compare **Title** with your note. Return to **Campaign practice** > **Editor** and confirm the original heading appears on **CampaignCallout**.",
         ],
         expected: [
-          "The practice page returns to its exact starting structure. Original components and content remain intact.",
+          "The saved field and page preview match the starting heading. The practice page remains unpublished.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Keep **Campaign practice** unpublished. Restore the original layout and remove only the datasource created by this run.",
-        "For another campaign, the **Campaign page** branch supplies a starting layout with blank content. Restore this practice page through the editing steps above; reviewer resets affect portal work, while CMS layout changes require CMS cleanup.",
+        "Confirm the original **Title** is restored in both **Content** and **Editor**. Keep **Campaign practice** unpublished.",
+        "This exercise changes CMS content, so restore it in **Page Builder** as described above. Resetting a workshop number affects agent activity and cannot restore this heading.",
       ],
     },
     related: [
       "ai-assisted-authoring",
-      "bulk-copy-maintenance",
+      "author-approver-workflow",
       "campaign-and-conversation",
     ],
     sourceSlides: [91],
@@ -863,12 +859,11 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "ai-assisted-authoring",
     audience: "marketing",
     category: "Content authoring",
-    title: "Use AI to improve and draft campaign copy",
+    title: "Improve content with AI",
     summary:
       "**Presenter-led:** On the shared **Campaign practice** page, fix a deliberate spelling error, review a prompted rewrite, and restore the original rich text.",
     outcome:
       "You can accept, reject, and verify AI-assisted edits while retaining editorial control.",
-    duration: "10 minutes",
     personas: ["Sitecore author"],
     prerequisites: [
       platformPrerequisite,
@@ -923,89 +918,21 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Keep the page unpublished and verify exact restoration after reload. Named versions provide a recovery point before substantial edits. Restore CMS content in Page Builder; a reviewer reset applies to portal work.",
+        "Keep the page unpublished and verify exact restoration after reload. Named versions provide a recovery point before substantial edits. Restore CMS content in Page Builder; a workshop-number reset applies to portal work.",
       ],
     },
-    related: [
-      "campaign-composition",
-      "bulk-copy-maintenance",
-      "agentic-studio-workflow",
-    ],
+    related: ["campaign-composition", "agentic-studio-workflow"],
     sourceSlides: [92],
-  },
-  {
-    slug: "bulk-copy-maintenance",
-    audience: "marketing",
-    category: "Content authoring",
-    title: "Bulk editing: inspect the need and implementation options",
-    summary:
-      "**Read-only:** Inspect repeated wording across four **Page Builder** content items, then compare content reuse with a bulk-update tool.",
-    outcome:
-      "You can identify repeated content and compare shared content with tools for updating several items together.",
-    duration: "5 minutes",
-    personas: ["Sitecore content reviewer"],
-    prerequisites: [
-      platformPrerequisite,
-      "This is a read-only discussion. Use an account with access to **Campaign practice** and its **Data** items, or follow the presenter if your role is limited to a **Workshop practice** page.",
-    ],
-    links: [pageBuilder],
-    steps: [
-      {
-        title: "Locate the separate content items in Page Builder",
-        action: [
-          "Open **Page Builder** > **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data**.",
-          "Expand **Data** and find **Growth opportunity**, **Preparation update**, **Prepare for review**, and **Your next step**. Do not change their fields.",
-        ],
-        expected: [
-          "These are separate content items beneath the unpublished practice page. Their text can be edited independently; the live campaign has its own content.",
-        ],
-        links: [pageBuilder],
-      },
-      {
-        title: "Inspect why repeated copy creates maintenance work",
-        action: [
-          "Select **Growth opportunity** and read **Body**, then **Preparation update** and its **Body**.",
-          "Read **Prepare for review** > **Answer**, then **Your next step** > **Title**. Look for the phrase relationship team in each field.",
-        ],
-        expected: [
-          "The practice content repeats wording across four independently editable fields. Note where the phrase appears and any differences between items; leave their current content unchanged.",
-        ],
-      },
-      {
-        title: "Identify the bulk-editing gap and alternatives",
-        action: [
-          "For wording that should always stay identical, discuss using one shared content item for multiple components.",
-          "For a one-time change across independent items, record the exact items, fields, languages, and versions that a bulk-update process would need to include. Consider a scoped API workflow or **Marketplace** **Content Export/Import Tool** for evaluation.",
-        ],
-        expected: [
-          "**Page Builder** edits these items individually. A shared content item can reduce repeated maintenance, while updating several independent items together requires a bulk-editing tool or implementation.",
-          "A bulk-update tool would need review, workflow, publication, and a tested restoration process. The suggested extension has not been installed or validated in this sandbox.",
-        ],
-      },
-    ],
-    cleanup: {
-      body: [
-        "Close the practice page without changing or publishing content. No reviewer reset is needed. Keep the bulk-editing requirement and the chosen evaluation questions in your workshop notes.",
-      ],
-    },
-    related: [
-      "campaign-composition",
-      "ai-assisted-authoring",
-      "marketing-capability-boundaries",
-    ],
-    sourceSlides: [93],
   },
   {
     slug: "alert-dates-and-publication",
     audience: "marketing",
     category: "Content authoring",
-    title: "Control alert visibility and understand scheduled releases",
+    title: "Review alert dates and publishing",
     summary:
       "**Read-only review:** Inspect rich-text alert dates. An optional presenter-led demonstration then shows scheduled publication and expiration on a dedicated sample page.",
     outcome:
       "You can explain which settings hide an alert and which publishing actions change **Live Experience Edge** delivery.",
-    duration:
-      "10 minutes to inspect; allow the agreed UTC window for a timed release",
     personas: ["Sitecore author", "Developer with publication API access"],
     prerequisites: [
       platformPrerequisite,
@@ -1074,39 +1001,38 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "The standard alert inspection changes nothing, so no reset is needed. If someone edited a value, restore the recorded **Body** and dates, wait for **Saved**, and reload to verify. Keep **Campaign practice** unpublished.",
-        "For the optional timed run, have that developer record both publish-operation IDs and confirm the script exited. The dedicated sample items remain for inspection. A reviewer-pack reset cannot cancel publication jobs or restore CMS content.",
+        "For the optional timed run, have that developer record both publish-operation IDs and confirm the script exited. The dedicated sample items remain for inspection. A workshop-number reset cannot cancel publication jobs or restore CMS content.",
       ],
     },
-    related: ["resource-content-workflow", "marketing-capability-boundaries"],
+    related: ["resource-content-workflow"],
     sourceSlides: [94, 95],
   },
   {
     slug: "find-an-agent-profile",
     audience: "marketing",
     category: "Personalization and measurement",
-    title: "Find the active SitecoreAI profile for an agent",
+    title: "Find an agent profile",
     summary:
       "Match a portal login to its current native profile before interpreting affinities, page views, or experiment activity.",
     outcome:
-      "You match the username and reviewer number to the profile currently receiving that person’s browsing events.",
-    duration: "5 minutes",
+      "You match the username and workshop number to the profile currently receiving that person’s browsing events.",
     personas: ["daniel.01", "maya.01", "elena.01", "Sitecore profile reviewer"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       platformPrerequisite,
-      "Use the live portal and **daniel.01** with your reviewer number for this example. If the calculation or affinity guide sent you here, repeat these lookup steps for the named Avery, Maya, or Elena account with that same number. If a guide explicitly uses the transaction preview, use its reset link instead; lookup and browsing must use the same host.",
+      "Use the live portal and **daniel.01** with your workshop number for this example. If the calculation or affinity guide sent you here, repeat these lookup steps for the named Avery, Maya, or Elena account with that same number. If a guide explicitly uses the transaction preview, use its reset link instead; lookup and browsing must use the same host.",
     ],
     links: [liveLogin, profileLink, liveReset, previewReset],
     steps: [
       {
         title: "Copy Daniel’s current live-portal identity",
         action: [
-          "Click **Live portal: Reset a reviewer number and current identities** below. Sign in to the workshop website if requested, then select your number from **Attendee assignments** under **Reviewer number**. Do not click **Reset reviewer** for this lookup.",
-          "Under **current profile identities**, find **daniel.01** with your reviewer number and copy its **Agent identity**. This value identifies the profile currently receiving that account’s browsing activity.",
+          "Click **Live portal: Reset a workshop number and current identities** below. Sign in to the workshop website if requested, then select your number from **Attendee assignments** under **Workshop number**. Do not click **Reset workshop** for this lookup.",
+          "Under **current profile identities**, find **daniel.01** with your workshop number and copy its **Agent identity**. This value identifies the profile currently receiving that account’s browsing activity.",
           "For the affinity guide, also copy **maya.01** and **elena.01** from this same list. All seven identities are visible without signing into each persona. A reset changes the active values, so recopy them after any reset rather than using an earlier note.",
         ],
         expected: [
-          "Use **Agent identity** with the **Liberty Mutual agent identity** search filter in the next step. Each reviewer reset supplies new values, so copy the currently displayed identifier.",
+          "Use **Agent identity** with the **Liberty Mutual agent identity** search filter in the next step. Each workshop-number reset supplies new values, so copy the currently displayed identifier.",
         ],
         links: [liveReset, previewReset],
       },
@@ -1129,14 +1055,14 @@ export const marketingGuides: WorkshopGuide[] = [
           "Click **Engagement** on the profile and open the session whose time matches your portal sign-in. Read its page-view events and note their times so you can recognize later activity. A profile that has not yet browsed may have no session.",
         ],
         expected: [
-          "Earlier walkthroughs may already have added history. Signing out and signing in does not clear affinity scores; a reviewer reset activates clean profiles instead. Record any existing scores before making a comparison.",
+          "Earlier walkthroughs may already have added history. Signing out and signing in does not clear affinity scores; a workshop-number reset activates clean profiles instead. Record any existing scores before making a comparison.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Close the **Reset a reviewer number** tab when the identity lookup is complete. Keep only the profile and portal tabs needed for the next exercise.",
-        "Lookup changes nothing, so no reset is required. If you later need a fresh comparison, use the reset link for the same host, select your number, and wait until anyone using it has finished before clicking **Reset reviewer**. Wait for **Reviewer [selected number] is ready**, sign into the portal again, and copy the new **Agent identity** values. This resets saved work and activates clean profiles for all seven personas with that number; it retains older native profiles.",
+        "Close the **Reset a workshop number** tab when the identity lookup is complete. Keep only the profile and portal tabs needed for the next exercise.",
+        "Lookup changes nothing, so no reset is required. If you later need a fresh comparison, use the reset link for the same host, select your number, and wait until anyone using it has finished before clicking **Reset workshop**. Wait for **Workshop [selected number] is ready**, sign into the portal again, and copy the new **Agent identity** values. This resets saved work and activates clean profiles for all seven personas with that number; it retains older native profiles.",
       ],
       links: [liveReset, previewReset],
     },
@@ -1151,17 +1077,16 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "calculated-growth-personalization",
     audience: "marketing",
     category: "Personalization and measurement",
-    title: "Personalization: target a calculated agency opportunity",
+    title: "Review calculated personalization",
     summary:
       "Inspect a reusable JavaScript targeting value, then compare the delivered campaign callout for Avery and Daniel.",
     outcome:
       "You connect known agency production attributes to a transparent calculation and a marketer-controlled content choice.",
-    duration: "10 minutes",
     personas: ["avery.01", "daniel.01", "Sitecore personalization reviewer"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       platformPrerequisite,
-      "Use the live portal. Follow **Find the active SitecoreAI profile for an agent** for Avery and Daniel with your number from **Attendee assignments**. Keep both native profile tabs open; the test needs their profile UUIDs, not the **Agent identity** values used to find them. Leave the saved JavaScript and rules unchanged.",
+      "Use the live portal. Follow **Find an agent profile** for Avery and Daniel with your number from **Attendee assignments**. Keep both native profile tabs open; the test needs their profile UUIDs, not the **Agent identity** values used to find them. Leave the saved JavaScript and rules unchanged.",
     ],
     links: [
       pageBuilder,
@@ -1228,7 +1153,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "**Cancel** or close rule and custom-value editors without saving. No reviewer reset is needed.",
+        "**Cancel** or close rule and custom-value editors without saving. No workshop-number reset is needed.",
       ],
     },
     related: [
@@ -1242,18 +1167,17 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "affinity-personalization",
     audience: "marketing",
     category: "Personalization and measurement",
-    title: "Personalization: let browsing interests shape the next step",
+    title: "Personalize by browsing interest",
     summary:
       "Build two different SitecoreAI affinities by visiting resources and connect the scores to the **Products** spotlight.",
     outcome:
       "Daniel’s workers-compensation interest and Maya’s **household** interest select distinct authored guidance while an independently checked Elena profile provides a neutral comparison.",
-    duration: "15–20 minutes",
     personas: ["daniel.01", "maya.01", "elena.01", "Sitecore profile reviewer"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       platformPrerequisite,
-      "Use **Open the live portal login** throughout. Follow **Find the active SitecoreAI profile for an agent** for Daniel, Maya, and Elena with your reviewer number. Keep those profile tabs open so you can compare scores before and after browsing.",
-      "For the neutral-to-personalized comparison, begin with clean profiles: use **Live portal: Reset a reviewer number and current identities**, select your reviewer number, and wait until anyone using it has finished before clicking **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready**, then look up the new identities and sign in. Reset also restores baseline saved work for all seven personas with that number. If you keep existing work instead, record the starting scores and expect that a personalized headline may already appear.",
+      "Use **Open the live portal login** throughout. Follow **Find an agent profile** for Daniel, Maya, and Elena with your workshop number. Keep those profile tabs open so you can compare scores before and after browsing.",
+      "For the neutral-to-personalized comparison, begin with clean profiles: use **Live portal: Reset a workshop number and current identities**, select your workshop number, and wait until anyone using it has finished before clicking **Reset workshop {{pack}}**. Wait for **Workshop {{pack}} is ready**, then look up the new identities and sign in. Reset also restores baseline saved work for all seven personas with that number. If you keep existing work instead, record the starting scores and expect that a personalized headline may already appear.",
     ],
     links: [
       liveLogin,
@@ -1355,7 +1279,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "Preserve the authored rules. To replay a fresh journey, open **Reset a reviewer number** on production, select your pack under **Reviewer number**, and click **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready**, then sign into the live portal again and look up its new **Agent identity** values. The reset restores baseline saved work and activates seven new native profiles with clean browsing history. All seven same-suffix personas change together on production only. Previous native profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts, and webhook receipts are unaffected.",
+        "Preserve the authored rules. To replay a fresh journey, open **Reset a workshop number** on production, select your number under **Workshop number**, and click **Reset workshop {{pack}}**. Wait for **Workshop {{pack}} is ready**, then sign into the live portal again and look up its new **Agent identity** values. The reset restores baseline saved work and activates seven new native profiles with clean browsing history. All seven same-suffix personas change together on production only. Previous native profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts, and webhook receipts are unaffected.",
         "This walkthrough uses browsing signals to select content variants that marketers have authored. Broader predictive recommendations are an additional capability to evaluate.",
       ],
       links: [liveReset],
@@ -1367,17 +1291,16 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "ab-testing",
     audience: "marketing",
     category: "Personalization and measurement",
-    title: "A/B testing: compare a CTA and inspect its measured goal",
+    title: "Review an A/B test",
     summary:
       "Preview two button labels, follow Daniel’s portal experience, and review the page activity and goals recorded in SitecoreAI.",
     outcome:
       "You can compare the two button labels, trace a guide visit, and read the test’s goals and confidence before drawing conclusions.",
-    duration: "12 minutes",
     personas: ["daniel.01", "Sitecore experiment reviewer"],
     prerequisites: [
-      packPrerequisite,
+      workshopNumberPrerequisite,
       platformPrerequisite,
-      "Review the existing test configuration without editing it, then use your reviewer number for the portal interaction. Open **Live portal: Reset a reviewer number and current identities**, select your number from **Attendee assignments**, and copy Daniel’s **Agent identity**. Do not reset merely to view this value. Your invited Sitecore account needs access to the existing test and profile reports; otherwise, follow the presenter for those steps. Leave the test running.",
+      "Review the existing test configuration without editing it, then use your workshop number for the portal interaction. Open **Live portal: Reset a workshop number and current identities**, select your number from **Attendee assignments**, and copy Daniel’s **Agent identity**. Do not reset merely to view this value. Your invited Sitecore account needs access to the existing test and profile reports; otherwise, follow the presenter for those steps. Leave the test running.",
     ],
     links: [pageBuilder, liveLogin, profileLink, liveReset],
     steps: [
@@ -1443,7 +1366,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "**Sign out** and leave the test running with its existing variations and history. The shared results remain available for later review.",
-        "A reviewer reset creates fresh profiles and restores baseline saved work, but does not clear the experiment’s history or settings. Recheck the current **Agent identity** after any reset.",
+        "A workshop-number reset creates fresh profiles and restores baseline saved work, but does not clear the experiment’s history or settings. Recheck the current **Agent identity** after any reset.",
       ],
     },
     related: ["find-an-agent-profile", "affinity-personalization"],
@@ -1453,13 +1376,11 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "agentic-studio-workflow",
     audience: "marketing",
     category: "Agentic Studio",
-    title:
-      "Agentic Studio: inspect connected work, brand context, and artifacts",
+    title: "Explore Agentic Studio",
     summary:
       "**Read-only:** Use the saved Watkins example to understand reusable instructions, research tools, brand retrieval, and human refinement.",
     outcome:
       "You can follow how **Agentic Studio** carries research and brand guidance into content drafts that marketers can review and refine.",
-    duration: "15 minutes",
     personas: ["Your Sitecore marketing account"],
     prerequisites: [
       platformPrerequisite,
@@ -1544,76 +1465,7 @@ export const marketingGuides: WorkshopGuide[] = [
         "Close the artifact viewer and leave the saved conversation and artifacts available for the next reviewer. No reset is needed.",
       ],
     },
-    related: ["ai-assisted-authoring", "marketing-capability-boundaries"],
+    related: ["ai-assisted-authoring"],
     sourceSlides: [105, 106, 107],
-  },
-  {
-    slug: "marketing-capability-boundaries",
-    audience: "marketing",
-    category: "Start here",
-    title: "Understand the demonstrated capabilities and remaining choices",
-    summary:
-      "Separate working sandbox capabilities from optional integrations, additional validation, and future implementation decisions.",
-    outcome:
-      "You can record the capabilities you tried and the integrations, access decisions, or further validation your team would need.",
-    duration: "5 minutes",
-    personas: ["Marketing reviewers", "Architects and developers"],
-    prerequisites: [
-      "Use this reference alongside the related walkthroughs. It does not require changes to any shared configuration.",
-    ],
-    steps: [
-      {
-        title: "Distinguish personalization methods",
-        action: [
-          "Compare known-attribute guidance, a calculated **UDL** targeting value, browsing affinity, and A/B testing using their separate walkthroughs.",
-        ],
-        expected: [
-          "These show authored rules and variants, native interest signals, and measured experiments. Autonomous machine-learning recommendations or audience discovery are separate scope requiring confirmation of product capabilities, entitlement, and suitable data.",
-        ],
-      },
-      {
-        title: "State the authoring and recovery boundaries",
-        action: [
-          "In the authoring walkthroughs, look for the **Saved** checkmark after an edit and the named **Draft** created before substantial changes. These provide evidence of a server save and a version to review; this reference requires no new edit.",
-          "Open **Bulk editing: inspect the need and implementation options** to compare repeated wording with wider field updates. Page Builder edits these items individually; a bulk-update workflow or extension is an additional implementation choice.",
-        ],
-        expected: [
-          "The **Saved** checkmark confirms that changes reached Sitecore. Recovery of work typed while offline or before saving requires separate validation.",
-          "For wider field updates, a scoped API workflow or **Marketplace** **Content Export/Import Tool** is a possibility. Raw field formats, versions, workflow, and restoration need validation.",
-        ],
-      },
-      {
-        title: "Identify integration and governance work explicitly",
-        action: [
-          "Compare **Native Contact your team** with the campaign’s custom saved request. Identify where a business backend would receive the data.",
-          "Review **Author and approver: review and publish content together**. The workshop team supplies your Sitecore role, practice-pair number, and page; these are separate from your portal reviewer number. Record any missing attendee assignments and the accessibility acceptance still required.",
-        ],
-        expected: [
-          "**Native Forms** delivers to a webhook. A database or **Salesforce** workflow would connect through an implemented backend. The campaign’s custom form saves a request in the portal’s agency work.",
-          "Controlled component placement and separate non-administrator **Author** and **Approver** permissions are demonstrated. Attendee role and practice-pair assignments remain pending. Full accessibility acceptance requires additional validation.",
-        ],
-      },
-      {
-        title: "Treat Marketplace extensions as evaluated options",
-        action: [
-          "Match a remaining requirement to a possible extension: **Content Score** for accessibility review, **Workbox Pro** for workflow collaboration, or **Content Export/Import Tool** for wider content maintenance. Record the behavior and permissions you would need to validate before selecting an app.",
-        ],
-        expected: [
-          "These **Marketplace** apps are options to evaluate; they are not installed or validated in this sandbox. Assess each against your access controls, publishing workflow, and acceptance criteria.",
-        ],
-      },
-    ],
-    cleanup: {
-      body: [
-        "Record observations and remaining questions. No configuration change or reset is needed.",
-      ],
-    },
-    related: [
-      "native-contact-form",
-      "alert-dates-and-publication",
-      "resource-content-workflow",
-      "agentic-studio-workflow",
-    ],
-    sourceSlides: [108],
   },
 ];

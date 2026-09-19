@@ -76,7 +76,7 @@ export function recoverResetState(
   };
   const intent = parsePersistedResetIntent(status.reviewerPack, stored);
   const changed =
-    "This reviewer number changed since that request. The current identities are shown below. Start a new reset only if you still need one.";
+    "The saved work for this workshop number changed since that request. The current identities are shown below. Start a new reset only if you still need one.";
   const pending =
     status.pendingOperation?.status === "pending"
       ? status.pendingOperation
@@ -91,7 +91,7 @@ export function recoverResetState(
       result.intent = requestFor(pending);
     } else {
       result.error =
-        "The pending reset does not match the current reviewer state. Refresh status before continuing.";
+        "The pending reset does not match the current workshop state. Refresh status before continuing.";
       result.blockNewRequest = true;
     }
     return result;
@@ -100,7 +100,7 @@ export function recoverResetState(
   const operation = status.operation;
   if (operation && operation.reviewerPack !== status.reviewerPack) {
     result.error =
-      "The reset receipt belongs to another reviewer number. Refresh status before continuing.";
+      "The reset receipt belongs to another workshop number. Refresh status before continuing.";
     result.blockNewRequest = true;
     return result;
   }
