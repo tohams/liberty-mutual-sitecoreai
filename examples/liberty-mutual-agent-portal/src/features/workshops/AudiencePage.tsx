@@ -14,14 +14,13 @@ export async function AudiencePage({
   const marketing = audience === "marketing";
   const guides = workshopGuides
     .filter((guide) => guide.audience === audience)
-    .map(({ slug, audience, category, title, summary, steps, focus }) => ({
+    .map(({ slug, audience, category, title, summary, focus }) => ({
       slug,
       audience,
       category,
       title,
       summary,
       focus,
-      stepCount: steps.length,
     }));
   return (
     <WorkshopShell session={session} active={audience}>

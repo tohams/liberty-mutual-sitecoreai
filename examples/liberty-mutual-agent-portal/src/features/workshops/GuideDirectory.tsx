@@ -9,7 +9,7 @@ import type { WorkshopFocus } from "./content/priorities";
 export type GuideSummary = Pick<
   WorkshopGuide,
   "slug" | "audience" | "category" | "title" | "summary"
-> & { stepCount: number; focus: WorkshopFocus };
+> & { focus: WorkshopFocus };
 export function GuideDirectory({
   guides,
   audience,
@@ -120,7 +120,6 @@ export function GuideDirectory({
                             linksEnabled={false}
                           />
                         </p>
-                        <span>{guide.stepCount} steps</span>
                       </div>
                       <ArrowRight size={21} />
                     </Link>

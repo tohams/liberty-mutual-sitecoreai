@@ -1031,14 +1031,6 @@
   font-size: 13px;
   line-height: 1.85;
 }
-.workshop-guide-row > div > span {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10px;
-  color: #837f93;
-  margin-top: 11px;
-}
 .workshop-guide-row > svg {
   color: #817696;
   flex-shrink: 0;
@@ -1126,20 +1118,6 @@
   font-size: 16px;
   line-height: 1.8;
   color: #717184;
-}
-.workshop-guide-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 21px;
-  color: #8b8396;
-  font-size: 11px;
-  margin-top: 22px;
-}
-.workshop-guide-meta > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 .workshop-outcome {
   display: flex;
@@ -2130,10 +2108,6 @@
   }
   .workshop-guide-heading > p {
     font-size: 14px;
-  }
-  .workshop-guide-meta {
-    font-size: 10px;
-    gap: 8px 14px;
   }
   .workshop-outcome {
     padding: 20px;
