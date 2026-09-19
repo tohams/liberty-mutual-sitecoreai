@@ -4,8 +4,6 @@ const repository = "https://github.com/tohams/liberty-mutual-sitecoreai";
 const appSource = `${repository}/blob/main/examples/liberty-mutual-agent-portal`;
 const repositoryDocs = `${repository}/blob/main/docs`;
 const portal = "https://liberty-mutual-agent-portal.vercel.app";
-const preview =
-  "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app";
 const sitecore =
   "https://portal.sitecorecloud.io/?organization=org_XqL3u1MSNVuubOTb";
 const pageBuilder =
@@ -155,119 +153,11 @@ export const developmentGuides: WorkshopGuide[] = [
         "**Sign out** of the portal and close temporary inspection tabs. No reset, publication or redeployment is needed for this read-only exercise.",
       ],
     },
-    related: ["state-authorization", "local-setup", "release-and-recovery"],
+    related: ["local-setup", "release-and-recovery"],
     sourceSlides: [
       33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 113, 114, 115, 116, 117, 118, 119,
       120, 121, 122,
     ],
-  },
-  {
-    slug: "state-authorization",
-    audience: "development",
-    category: "Guided engineering exercise",
-    title: "Authorization: one Florida draft, two different permissions",
-    summary:
-      "Create a shared draft as Avery, inspect Jordan’s restrictions, then trace the enforcement into the server.",
-    outcome:
-      "See that shared record visibility, current transaction authority and personalized content are separate concerns.",
-    duration: "20–25 minutes",
-    personas: ["avery", "jordan"],
-    prerequisites: [
-      "Use the designated preview and the same assigned reviewer suffix for Avery and Jordan. Pack 01 is reserved for presenters; attendees use their assigned pack from 02–15.",
-      "Coordinate with anyone using that pack. Use a unique account name and a future effective date, and leave pre-existing records untouched.",
-      "**GitHub** read access is required for the code trace. Use the reset page in this guide if you want to restore the preview pack after the exercise.",
-    ],
-    links: [
-      { label: "Open designated preview login", href: `${preview}/login` },
-    ],
-    steps: [
-      {
-        title: "Create a Florida Businessowners draft as Avery",
-        action: [
-          "**Sign in** as **avery.01** with password **Sitecore**. Select **Products & appetite** → **Risk state**: **Florida** → **Small business** → **Businessowners policy** → **Prepare account**.",
-          "Choose **Retail**, then **Continue to account information**. Enter a unique **Named insured / account name**, such as Cedar Ridge Florida Retail followed by your initials and today’s date.",
-          "Choose a suitable future **Requested effective date**. Enter 8 for **Number of employees** and 800000 for **Annual revenue ($)**. Select **Save & review requirements**.",
-          "Record the reference and account name. Keep the record in **Draft**, close it, then use the name menu to **Sign out**.",
-        ],
-        expected: [
-          "Avery can prepare a Florida BOP account. Florida and BOP remain the saved record’s context.",
-          "The new record is **Draft**. Do not submit it yet: Jordan must inspect its draft controls before Avery completes it.",
-        ],
-      },
-      {
-        title: "Inspect the same draft as Jordan",
-        action: [
-          "**Sign in** as **jordan.01** on the same preview host. Select **Quote & submit** and open the new Florida account using its name and reference.",
-          "Read the state-authority explanation. Inspect **Edit account**, the three requirements checklist controls and **Submit for review**.",
-        ],
-        expected: [
-          "Jordan can see the agency’s shared draft and its true Florida state.",
-          "The message explains that current licenses do not authorize transactions in this state. **Edit account**, the checklist controls and **Submit for review** are disabled.",
-          "The record is not silently converted to another state, assigned a different owner or hidden merely to avoid the authorization decision.",
-        ],
-      },
-      {
-        title: "Complete the unchanged draft as Avery",
-        action: [
-          "Close the draft and **Sign out**. **Sign in** as **avery.01** and reopen the same reference in **Quote & submit**.",
-          "Complete every displayed preparation requirement and select **Submit for review**. Reload the page and reopen the record.",
-          "Record the status, reference and Florida state, then **Sign out**.",
-        ],
-        expected: [
-          "Avery can complete and submit the same shared record. Its reference and Florida context persist as **Submitted**.",
-          "This is an illustrative operational workflow using fictional account data; it does not send a submission to an insurance system.",
-        ],
-      },
-      {
-        title: "Trace the decision into the server",
-        action: [
-          "Open **src/contracts/portal.ts**, then **src/domain/eligibility.ts** in the application. Inspect the dated license, product/state and appointment decisions.",
-          "Open **src/server/data/portal.ts** and **src/server/data/eligibility-authorization.test.ts**. Locate the checks for the actor, agency, assigned producer, saved jurisdiction and current requirements.",
-          "Open **src/server/state/store.ts** to inspect environment/pack/run/agency scoping, expected versions, idempotency and atomic writes.",
-        ],
-        expected: [
-          "Current authority uses the current UTC date and inclusive license validity boundaries. An old draft can become restricted if authority or product rules change.",
-          "Denied direct-request tests require HTTP 403 and unchanged records/versions. Disabled buttons make the rule visible; the server enforces it.",
-          "Content personalization cannot override licensing or transaction authorization. Production systems would supply the approved authority data through integrations.",
-        ],
-        links: [
-          {
-            label: "Eligibility rules",
-            href: `${appSource}/src/domain/eligibility.ts`,
-          },
-          {
-            label: "Server enforcement tests",
-            href: `${appSource}/src/server/data/eligibility-authorization.test.ts`,
-          },
-          {
-            label: "Server actions",
-            href: `${appSource}/src/server/data/portal.ts`,
-          },
-          {
-            label: "Durable store",
-            href: `${appSource}/src/server/state/store.ts`,
-          },
-        ],
-      },
-    ],
-    cleanup: {
-      body: [
-        "Keep the created account name and reference with your session notes. To start again, open the preview reset page, select the same **Reviewer number** and click **Reset reviewer** for that number.",
-        "Use the same preview host and pack as this exercise. The reset affects all seven personas and all agencies in that pack. It restores starting work and creates seven fresh native profiles while retaining older profiles and analytics as history.",
-      ],
-      links: [
-        {
-          label: "Preview: reset the exercise workspace",
-          href: `${preview}/workshops/reset`,
-        },
-      ],
-    },
-    related: [
-      "release-and-recovery",
-      "saved-work-reset",
-      "architecture-and-ownership",
-    ],
-    sourceSlides: [43, 44, 45, 114, 115],
   },
   {
     slug: "local-setup",
@@ -930,7 +820,6 @@ export const developmentGuides: WorkshopGuide[] = [
     },
     related: [
       "fresh-profile-restart",
-      "state-authorization",
       "release-and-recovery",
     ],
     sourceSlides: [135, 136, 137, 138, 141],
