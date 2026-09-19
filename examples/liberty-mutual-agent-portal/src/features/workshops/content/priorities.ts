@@ -25,7 +25,7 @@ export const workshopSections = {
   content: {
     label: "Create and manage content in SitecoreAI",
     description:
-      "See how marketers create pages, edit content, set up personalization, and review results. These exercises use SitecoreAI; follow the presenter where the guide is marked Presenter demonstration.",
+      "See how marketers create pages, edit content, review personalization rules, and review results. These exercises use SitecoreAI; follow the presenter where the guide is marked Presenter demonstration.",
     location: "SitecoreAI · separate Sitecore login",
     kind: "core",
   },

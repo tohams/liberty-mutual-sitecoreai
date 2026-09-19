@@ -522,7 +522,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Edit and publish a resource",
     summary:
-      "**Presenter-led:** Follow one shared Texas article from a new **Draft** through managed metadata, approval, publication, **Search** refresh, and exact restoration.",
+      "**Presenter demonstration:** Follow one shared Texas article from a new **Draft** through managed metadata, approval, publication, **Search** refresh, and exact restoration.",
     outcome:
       "The article and **Search** result show the same approved wording, then both return to the recorded starting content.",
     personas: ["daniel.01", "Authorized Sitecore author"],
@@ -681,7 +681,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Create a page",
     summary:
-      "**Presenter-led:** Create a uniquely named **Resource page** with blank fields and its own local **Data** folder, then select an image and inspect its accessible description.",
+      "**Presenter demonstration:** Create a uniquely named **Resource page** with blank fields and its own local **Data** folder, then select an image and inspect its accessible description.",
     outcome:
       "The new unpublished page has its own image content item and can be removed without changing existing articles or shared assets.",
     personas: ["Your Sitecore author account"],
@@ -787,7 +787,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Edit page content",
     summary:
-      "**Presenter-led:** Change one heading on the shared **Campaign practice** page, see it in the page preview, and restore the original text.",
+      "**Presenter demonstration:** Change one heading on the shared **Campaign practice** page, see it in the page preview, and restore the original text.",
     outcome:
       "You see how a marketer updates an existing component in **Page Builder** without changing application code or deploying the website.",
     personas: ["Presenter with campaign-content access"],
@@ -861,7 +861,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Improve content with AI",
     summary:
-      "**Presenter-led:** On the shared **Campaign practice** page, fix a deliberate spelling error, review a prompted rewrite, and restore the original rich text.",
+      "**Presenter demonstration:** On the shared **Campaign practice** page, fix a deliberate spelling error, review a prompted rewrite, and restore the original rich text.",
     outcome:
       "You can accept, reject, and verify AI-assisted edits while retaining editorial control.",
     personas: ["Sitecore author"],

@@ -8,7 +8,7 @@ export const governanceGuides: WorkshopGuide[] = [
     category: "Content governance",
     title: "Review and publish content",
     summary:
-      "**Presenter-led:** Watch separate **Author** and **Approver** accounts move one page through **Draft**, **Awaiting approval**, and **Approved**, then verify the published result.",
+      "**Presenter demonstration:** Watch separate **Author** and **Approver** accounts move one page through **Draft**, **Awaiting approval**, and **Approved**, then verify the published result.",
     outcome:
       "You see how page permissions and publishing approval let marketers manage content with clear responsibilities, all within **Page Builder**.",
     personas: ["Presenter: Sitecore Author", "Presenter: Sitecore Approver"],
