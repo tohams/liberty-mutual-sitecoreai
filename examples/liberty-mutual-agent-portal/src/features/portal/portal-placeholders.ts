@@ -39,7 +39,11 @@ export type PortalPlaceholderPlacement = {
 function placeholdersForRoute(route: string): PortalPlaceholder[] {
   const [section, child] = route.split("/").filter(Boolean);
   if (section === "growth" && child) return ["campaignPage"];
-  if (section === "resources" && child) return ["resourceArticle"];
+  if (
+    (section === "resources" && child) ||
+    /^\/workshop-practice(?:\/pair-0[1-9])?\/?$/.test(route)
+  )
+    return ["resourceArticle"];
   if (section === "resources" || section === "learning")
     return ["resourceSearch", "guidance"];
   if (section === "products" && !child) return ["guidance", "productSpotlight"];
