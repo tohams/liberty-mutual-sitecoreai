@@ -125,7 +125,7 @@ export default async function GuidePage({
             <section className="workshop-outcome">
               <Check size={21} />
               <div>
-                <h2>What you will see</h2>
+                <h2>What this demonstrates</h2>
                 <p>
                   <GuideText text={contextual(guide.outcome)} />
                 </p>
@@ -134,11 +134,24 @@ export default async function GuidePage({
             <section className="workshop-preparation" id="before-you-start">
               <h2>Before you start</h2>
               <p>
-                Check the account, website, and starting state below before
-                following the steps.{" "}
-                <Link href="/workshops/attendees">Attendee assignments</Link>{" "}
+                Read these preparations before following the numbered steps.
+                They identify where you will work, which account to use, and
+                whether you will make changes or follow a presenter.{" "}
+                <Link
+                  className="workshop-inline-link"
+                  href="/workshops/attendees"
+                >
+                  <strong>Attendee assignments</strong>
+                </Link>{" "}
                 lists your agent logins and explains the separate Sitecore
-                authoring access.
+                authoring access. New to these websites? Read{" "}
+                <Link
+                  className="workshop-inline-link"
+                  href="/workshops#your-tools"
+                >
+                  how the three websites relate
+                </Link>
+                .
               </p>
               <ul>
                 {guide.prerequisites.map((line, index) => (
@@ -199,7 +212,7 @@ export default async function GuidePage({
                       <div className="workshop-expected">
                         <span>
                           <Check size={16} />
-                          WHAT TO OBSERVE
+                          WHAT TO OBSERVE AND WHY
                         </span>
                         {step.expected.map((line, i) => (
                           <p key={i}>

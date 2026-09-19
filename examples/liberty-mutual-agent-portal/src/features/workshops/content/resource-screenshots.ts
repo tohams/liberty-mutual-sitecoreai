@@ -232,7 +232,7 @@ export const resourceScreenshots: Record<
     1: focus(
       {
         file: "native-affinities.png",
-        title: "Find the native affinity assignments",
+        title: "Find the SitecoreAI affinity assignments",
         alt: "SitecoreAI Performance Settings Affinities with Liberty Mutual Agent Portal and insurance_interest page assignments",
         caption:
           "These settings map resource-page visits to **insurance_interest** values. Use this view to inspect the configuration; the agent’s profile shows the scores accumulated from those visits.",
