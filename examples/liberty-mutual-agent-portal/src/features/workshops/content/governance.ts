@@ -9,15 +9,15 @@ export const governanceGuides: WorkshopGuide[] = [
     summary:
       "Use two **Sitecore Cloud** accounts to edit one practice page in **Page Builder**: one partner writes as the **Author**, and the other reviews as the **Approver**. Complete a revision cycle, publish the approved wording, and restore the page.",
     outcome:
-      "See how page permissions limit the content an author can change, while separate **Author** and **Approver** roles control review and approval. Verify that approval publishes the content without a code release.",
+      "See how page permissions limit the content an author can change, while separate **Author** and **Approver** roles control review and approval. Verify publication through the configured approval workflow.",
     duration: "20–25 minutes for a pair",
     personas: ["Sitecore Author", "Sitecore Approver"],
     prerequisites: [
-      "Each partner needs an accepted **Sitecore Cloud** invitation to **Safeco Insurance Company of America POC** and access to its **SitecoreAI** application. Use the email account that received that invitation. Your **Agent Portal** persona login does not open **Page Builder**.",
-      "Before starting, ask the **Sitecore workshop team** to confirm three things for each partner: the **Sitecore Cloud** email account, the **Author** or **Approver** role installed for that account, and the shared practice-page name. Attendee roles and practice pairs are pending assignment; follow the presenters until the team has completed yours. Do not use an administrator account for this exercise, because its permissions bypass the role restrictions being demonstrated.",
-      "The presenters use **Demo**. The team allocates each attendee pair one page named **Pair 02** through **Pair 09** under **Home** → **Workshop practice**. Both partners use that same page. **Attendee assignments** lists portal reviewer numbers, not authoring pairs; a portal suffix such as **.02** does not determine your practice page.",
-      "Each partner uses their own computer. If demonstrating both roles on one computer, use separate **Chrome** profiles; two tabs in the same browser profile share the same Sitecore login. In **Page Builder**, select **Liberty Mutual Agent Portal**, use **English**, and keep **Default** selected as the editing host. **Default** previews the shared hosted site; a localhost editing host is unnecessary for this content-only exercise.",
-      "Change **Summary** only, and record its starting wording before editing. Leave images, component placement, and **Resource metadata** unchanged. Reserve time for the final restoration cycle so the live page does not retain your practice text.",
+      "Each partner needs an accepted **Sitecore Cloud** invitation to **Safeco Insurance Company of America POC** and access to its **SitecoreAI** application. Use the invited email account for **Page Builder**. You will use an **Agent Portal** persona later to inspect the published page.",
+      "Before starting, ask the **Sitecore workshop team** to confirm three things for each partner: the **Sitecore Cloud** email account, the **Author** or **Approver** role installed for that account, and the shared practice-page name. Attendee roles and practice pairs are pending assignment; follow the presenters until the team has completed yours. Use a non-administrator account so you experience the permissions of your **Author** or **Approver** role.",
+      "The presenters use **Demo**. The team allocates each attendee pair one page named **Pair 02** through **Pair 09** under **Home** → **Workshop practice**. Both partners use that same page. The team provides this authoring pair separately from your portal reviewer number, which is listed in **Attendee assignments**.",
+      "Each partner uses their own computer. If demonstrating both roles on one computer, use separate **Chrome** profiles; two tabs in the same browser profile share the same Sitecore login. In **Page Builder**, select **Liberty Mutual Agent Portal**, use **English**, and keep **Default** selected as the editing host to preview the shared hosted site.",
+      "Change **Summary** only, and record its starting wording before editing. Leave images, component placement, and **Resource metadata** unchanged. Reserve time for the final restoration cycle so the live page returns to its starting wording.",
       "If your partner is unavailable, tell the **Sitecore workshop team** before starting. A presenter can use the demonstration **Approver** account to review an **Author** participant's page; an **Approver** participant still needs an **Author** to prepare and submit content.",
     ],
     links: [
@@ -66,7 +66,7 @@ export const governanceGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The main portal's **Home** content is read-only for the scoped **Author** role; your pair's practice page can be edited. If these permissions differ, ask the **Sitecore workshop team** to check your account and pair assignment before continuing.",
-          "The saved wording appears in the page preview. Saving the draft does not publish it.",
+          "The saved wording appears in the page preview. The draft is ready for review; publication follows approval.",
           "Creating a **Draft** preserves the previous approved version. Your new wording reaches the live page only after review and approval.",
           "The **Author** can **Submit** the draft but cannot **Approve** it.",
         ],
@@ -75,12 +75,12 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Author: submit the draft for review",
         action: [
-          "As the **Author**, keep the edited **Draft** selected and choose **Actions** → **Submit**. In the **Comment** dialog, enter Please review the new summary sentence, then select **Submit**. This sends the saved version for review; it does not publish the page.",
+          "As the **Author**, keep the edited **Draft** selected and choose **Actions** → **Submit**. In the **Comment** dialog, enter Please review the new summary sentence, then select **Submit**. This sends the saved version to the **Approver** for review.",
           "Tell the **Approver** the exact practice-page name and version number shown in the header. Both partners continue using **English**.",
         ],
         expected: [
           "The page moves from **Draft** to **Awaiting approval**.",
-          "The **Approver** now has a submitted version to review; the **Author** does not have the **Approve** action.",
+          "The **Approver** now has a submitted version to review using the page name and version number provided by the **Author**.",
         ],
       },
       {
@@ -104,7 +104,7 @@ export const governanceGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The revised version returns to **Awaiting approval** for the **Approver** to review.",
-          "The draft has changed without a code commit or a frontend deployment.",
+          "The content revision is saved in SitecoreAI; the frontend application code remains unchanged.",
         ],
       },
       {
@@ -116,18 +116,18 @@ export const governanceGuides: WorkshopGuide[] = [
         ],
         expected: [
           "Approval triggers publication of the approved page in **English**, without publishing child pages or related items.",
-          "No separate **Publish** action, Git commit, or frontend deployment is needed for this content change.",
+          "The configured workflow handles publication automatically after **Approve**, while the frontend application code remains unchanged.",
         ],
       },
       {
         title: "Verify the approved wording on the live page",
         action: [
-          "Use the live-page links above to open the exact page your pair edited: **Demo live page** for the presenters, or **Pair 02 live page** through **Pair 09 live page** matching your practice-page name. Choose the link by the practice pair, not your portal reviewer number. These links open the published portal, separate from the **Page Builder** preview.",
-          "If the portal asks you to sign in, use **daniel.01** and the workshop portal password **Sitecore**. The username shown in this guide uses the reviewer number from your workshop sign-in; confirm that number against your name in **Attendee assignments**. After sign-in opens **My workspace**, open your practice-page link again. This portal login lets you view the result; it does not change your **Author** or **Approver** role.",
+          "Use the live-page links above to open the exact page your pair edited: **Demo live page** for the presenters, or **Pair 02 live page** through **Pair 09 live page** matching your practice-page name. These links open the published portal so you can check the result as an agent.",
+          "If the portal asks you to sign in, use **daniel.01** and the workshop portal password **Sitecore**. The username shown in this guide uses the reviewer number from your workshop sign-in; confirm that number against your name in **Attendee assignments**. After sign-in opens **My workspace**, open your practice-page link again. Continue using your **Sitecore Cloud** account for authoring and this portal account for live checks.",
           "Compare the live summary with the wording your partner approved. Refresh the live page after publication if necessary.",
         ],
         expected: [
-          "The live page shows the approved summary. The **Page Builder** preview alone does not establish that publication completed.",
+          "The live page shows the approved summary, confirming that the reviewed wording has reached the published portal.",
           "The two roles have completed a review cycle: the **Author** prepared and revised the content, and the **Approver** returned and approved it.",
         ],
       },
@@ -135,12 +135,12 @@ export const governanceGuides: WorkshopGuide[] = [
     cleanup: {
       title: "Restore and republish the original summary",
       body: [
-        "Both partners complete this cleanup before leaving. Use the same practice page and **English** language as the exercise; the goal is to restore the original live wording, not to erase the workflow's version history.",
+        "Both partners complete this cleanup before leaving. Restore the original live wording on the same practice page in **English**. The exercise's versions remain available in its history.",
         "As the **Author**, refresh your practice page. Open the version selector, choose **Create version**, leave the optional version name blank, and select **Create**. Reopen the selector and select the newest **Draft**; wait for **Draft Version [number]** in the header and for **Summary** to reload. Give this new version number to the **Approver**.",
         "In **Content** → **Summary**, restore the original wording recorded at the start. Click outside the field and wait for **Saved**. Choose **Actions** → **Submit**, enter a restoration note in **Comment**, then select **Submit**.",
         "As the **Approver**, refresh **Page Builder** and select the new version number supplied by the **Author**. Confirm **English** and **Awaiting approval**, then compare **Summary** with the original note. Choose **Actions** → **Approve**, add a restoration **Comment**, and select **Submit**. Wait for automatic publication, then refresh the same live-page link and verify the original wording is visible.",
-        "Saving the restored draft alone does not restore the live page; the **Approver** must approve that version. If either partner cannot finish, give the **Sitecore workshop team** the page name, version number, and original summary so they can complete the restoration.",
-        "Leave other pairs' pages unchanged. **Reset a reviewer number** resets portal personas and saved work; it does not restore Sitecore page content or workflow. Do not use it as a substitute for this cleanup.",
+        "Complete both the **Author** submission and **Approver** approval to restore the live page. If either partner cannot finish, give the **Sitecore workshop team** the page name, version number, and original summary so they can complete the restoration.",
+        "Leave other pairs' pages unchanged. Use the workflow above to restore this CMS page. **Reset a reviewer number** applies to portal personas and saved work, so this content exercise needs no reviewer reset.",
         "Close the extra practice-page and **Page Builder** preview tabs when finished. Keep the workshop guide open for the next exercise.",
       ],
     },

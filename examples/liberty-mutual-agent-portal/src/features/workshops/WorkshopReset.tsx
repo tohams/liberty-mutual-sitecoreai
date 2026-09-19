@@ -455,10 +455,9 @@ export function WorkshopReset({
           using <strong>Search filter → Liberty Mutual agent identity</strong>{" "}
           and an identity below. These are the currently active identities for
           this website. Copy the row matching the portal username you used in
-          the exercise. Do not choose <strong>Client ID</strong>: that filter
-          expects a different identifier. After a reset, copy the new
-          <strong> Agent identity</strong> because the previous value finds the
-          earlier profile and its old history.
+          the exercise. After each reset, copy the latest
+          <strong> Agent identity</strong> from this table to open the profile
+          now linked to that username.
         </p>
         {status && (
           <div className="workshop-reset-table">
@@ -510,8 +509,8 @@ export function WorkshopReset({
               )}
             </dl>
             <p>
-              These values help connect the reset to the current profile set.
-              They are information only; reading them does not change anything.
+              Share these details with the workshop team if you need help with a
+              reset. They identify the request and its active profile set.
             </p>
           </details>
         )}
