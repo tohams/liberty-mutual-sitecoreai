@@ -35,7 +35,10 @@ export function GuideDirectory({
             onChange={(event) => setQuery(event.target.value)}
           />
         </label>
-        <span>{matches.length} walkthroughs</span>
+        <span>
+          {matches.length}{" "}
+          {matches.length === 1 ? "walkthrough" : "walkthroughs"}
+        </span>
       </div>
       <div className="workshop-directory-layout">
         <aside>

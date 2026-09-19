@@ -1,6 +1,7 @@
 "use client";
 
 import { Text, useSitecore } from "@sitecore-content-sdk/nextjs";
+import { PortalLink } from "@/components/ui/portal-link";
 import { CampaignIcon } from "@/features/growth/campaign-ui";
 import type { CampaignProps } from "./campaign.props";
 
@@ -41,9 +42,9 @@ export function Default({ fields, params }: CampaignProps) {
       </header>
       <nav className="cms-campaign-jump" aria-label="On this page">
         <span>ON THIS PAGE</span>
-        <a href="#growth-opportunity">Opportunity</a>
-        <a href="#growth-questions">Your questions</a>
-        <a href="#growth-contact">Your next step</a>
+        <PortalLink href="#growth-opportunity">Opportunity</PortalLink>
+        <PortalLink href="#growth-questions">Your questions</PortalLink>
+        <PortalLink href="#growth-contact">Your next step</PortalLink>
       </nav>
     </>
   );
