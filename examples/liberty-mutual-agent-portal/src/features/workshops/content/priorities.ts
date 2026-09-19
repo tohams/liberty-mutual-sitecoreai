@@ -1,0 +1,298 @@
+import type { WorkshopGuide } from "../types";
+
+// These headings come from the current shared deck's Marketing priorities
+// (slides 3–4) and Platform priorities (slide 5), reviewed September 19, 2026.
+export const customerPriorities = {
+  creation: { label: "Easy content creation", slide: 3 },
+  publishing: { label: "Controlled publishing", slide: 3 },
+  management: { label: "Content and access management", slide: 3 },
+  components: { label: "Flexible components", slide: 4 },
+  relevance: { label: "Relevant agent experience", slide: 4 },
+  engagement: { label: "Connected engagement and optimization", slide: 4 },
+  maintenance: { label: "Less platform maintenance", slide: 5 },
+  delivery: { label: "Faster delivery", slide: 5 },
+  dependable: { label: "Dependable agent experience", slide: 5 },
+} as const;
+
+export const workshopSections = {
+  start: {
+    label: "Start here",
+    description:
+      "Choose your workshop account, then follow the capabilities that address your priorities.",
+    kind: "core",
+  },
+  relevance: {
+    label: "Relevance, Search, and measurement",
+    description:
+      "Help independent agents find useful guidance, personalize their next step, and measure the response.",
+    kind: "core",
+  },
+  content: {
+    label: "Easier content creation",
+    description:
+      "Create and compose content visually, with reusable components and AI assistance.",
+    kind: "core",
+  },
+  governance: {
+    label: "Content governance and publishing",
+    description:
+      "Practice roles, approvals, and controlled content changes in the authoring experience.",
+    kind: "core",
+  },
+  engagement: {
+    label: "Components, Forms, and connected engagement",
+    description:
+      "Explore campaign building blocks and see where a submitted form connects to business systems.",
+    kind: "core",
+  },
+  architecture: {
+    label: "Platform stability and ownership",
+    description:
+      "Understand managed services, application responsibilities, and the release paths that support a dependable portal.",
+    kind: "core",
+  },
+  development: {
+    label: "Faster local development",
+    description:
+      "Run the frontend locally, make a component change, and see the result in Page Builder.",
+    kind: "core",
+  },
+  scenarios: {
+    label: "Optional agent scenarios",
+    description:
+      "Use these additional insurance journeys to explore the portal. Their transactions and business records use synthetic integrations.",
+    kind: "optional",
+  },
+  tools: {
+    label: "Optional AI tools",
+    description:
+      "Explore supporting tools for simpler content and development work after the priority walkthroughs.",
+    kind: "optional",
+  },
+  support: {
+    label: "Workshop support and reference",
+    description:
+      "Use these guides when you need a profile lookup, a clean reset, or clarification of the sandbox's scope.",
+    kind: "support",
+  },
+} as const;
+
+type PriorityKey = keyof typeof customerPriorities;
+type SectionKey = keyof typeof workshopSections;
+interface GuideFocusDefinition {
+  priority: PriorityKey;
+  section: SectionKey;
+  relevance: string;
+}
+
+export interface WorkshopFocus {
+  priority: (typeof customerPriorities)[PriorityKey];
+  section: (typeof workshopSections)[SectionKey] & { id: SectionKey };
+  relevance: string;
+}
+export type PrioritizedWorkshopGuide = WorkshopGuide & { focus: WorkshopFocus };
+
+export const guidePriorities: Record<string, GuideFocusDefinition> = {
+  "start-and-switch-agents": {
+    priority: "relevance",
+    section: "start",
+    relevance:
+      "Use known agent profiles to compare the same portal from different business perspectives. This preparation supports the personalization exercises.",
+  },
+  "personalization-by-role": {
+    priority: "relevance",
+    section: "relevance",
+    relevance:
+      "See component-level personalization use known agent attributes to select more useful guidance. The aim is to help Liberty Mutual earn more of each independent agent's business.",
+  },
+  "state-aware-search": {
+    priority: "dependable",
+    section: "relevance",
+    relevance:
+      "Evaluate robust site search and reference-material retrieval using the agent's licensed states. Native **Search** supplies results; the portal applies its state-access rules.",
+  },
+  "bop-submission": {
+    priority: "relevance",
+    section: "scenarios",
+    relevance:
+      "Explore how relevant product guidance can lead into an agent's next task. Submission processing is a custom, synthetic example, not a native **SitecoreAI** insurance system.",
+  },
+  "renewal-follow-up": {
+    priority: "relevance",
+    section: "scenarios",
+    relevance:
+      "Explore a useful next action within an agent's working day. Saved follow-ups illustrate a custom portal integration using synthetic policy data.",
+  },
+  "commercial-and-wholesale": {
+    priority: "relevance",
+    section: "scenarios",
+    relevance:
+      "Compare guidance for different distribution channels. The policy records and protected policy-document links are synthetic examples, separate from native content and reference-material management.",
+  },
+  "surety-request": {
+    priority: "relevance",
+    section: "scenarios",
+    relevance:
+      "Explore a specialist agent's next task after relevant guidance. The request is saved by the custom portal against synthetic business data.",
+  },
+  "campaign-and-conversation": {
+    priority: "components",
+    section: "engagement",
+    relevance:
+      "Inspect navigation, accordions, resource links, and a contact modal in one campaign. The saved conversation request uses a custom form; the separate Native Forms guide demonstrates the marketer-managed form.",
+  },
+  "native-contact-form": {
+    priority: "engagement",
+    section: "engagement",
+    relevance:
+      "Trace a native form submission to a webhook. A database backend or **Salesforce** connection requires an implemented integration beyond this receiving webhook.",
+  },
+  "author-approver-workflow": {
+    priority: "publishing",
+    section: "governance",
+    relevance:
+      "Practice content roles, assigned-page permissions, and approval workflow in **Page Builder**. Separate **Author** and **Approver** accounts demonstrate who can edit, review, and approve publication.",
+  },
+  "resource-content-workflow": {
+    priority: "publishing",
+    section: "governance",
+    relevance:
+      "Follow versioned resource content through classification, publication, and **Search** refresh. This connects controlled publishing to the guidance agents actually find.",
+  },
+  "create-resource-and-media": {
+    priority: "management",
+    section: "content",
+    relevance:
+      "Create a consistently structured resource page, select a managed image, and inspect its alt text. This addresses content and media organization while supporting accessible authoring.",
+  },
+  "campaign-composition": {
+    priority: "creation",
+    section: "content",
+    relevance:
+      "Use visual placement and component copying to compose a page within developer-defined boundaries. Marketers can make these content changes without a frontend deployment.",
+  },
+  "ai-assisted-authoring": {
+    priority: "creation",
+    section: "content",
+    relevance:
+      "Try spelling correction and AI-assisted copy generation while retaining editorial control. Review the suggested wording before accepting any change.",
+  },
+  "bulk-copy-maintenance": {
+    priority: "publishing",
+    section: "governance",
+    relevance:
+      "Update several reviewed text fields with native **Search and replace**. The exercise demonstrates scoped bulk text maintenance; it does not establish a general bulk editor for every field type.",
+  },
+  "alert-dates-and-publication": {
+    priority: "publishing",
+    section: "governance",
+    relevance:
+      "Inspect rich-text alerts and visibility dates, then distinguish them from scheduled publishing and expiration. This makes the demonstrated behavior and the remaining scheduling setup clear.",
+  },
+  "find-an-agent-profile": {
+    priority: "relevance",
+    section: "support",
+    relevance:
+      "Find the active profile before evaluating known attributes, behavior, or experiment activity. This supporting lookup helps you verify the personalization exercises.",
+  },
+  "calculated-growth-personalization": {
+    priority: "relevance",
+    section: "relevance",
+    relevance:
+      "Inspect a reusable JavaScript calculation using agency production attributes, then see content selected by a marketer-managed rule. Synthetic data illustrates the contract a **Salesforce** or **Snowflake** integration would need to supply.",
+  },
+  "affinity-personalization": {
+    priority: "relevance",
+    section: "relevance",
+    relevance:
+      "Use native browsing affinities to select relevant guidance with less custom behavior tracking. The exercise uses an explicit targeting rule, not a claim of autonomous AI recommendations or segmentation.",
+  },
+  "ab-testing": {
+    priority: "engagement",
+    section: "relevance",
+    relevance:
+      "Compare authored CTA variants and inspect their native goal reporting. Marketers can test a content choice without releasing new frontend code; a small workshop sample does not establish a winner.",
+  },
+  "agentic-studio-workflow": {
+    priority: "creation",
+    section: "content",
+    relevance:
+      "Extend AI-assisted content creation with connected research, reusable brand context, and reviewable outputs. The outreach campaign is an example of the tooling, not an additional campaign requirement or sent communication.",
+  },
+  "marketing-capability-boundaries": {
+    priority: "engagement",
+    section: "support",
+    relevance:
+      "Review evidence and remaining implementation choices against the marketing requests, including forms, data connections, and AI capabilities. Use this reference to distinguish a working feature from an integration or further validation.",
+  },
+  "architecture-and-ownership": {
+    priority: "maintenance",
+    section: "architecture",
+    relevance:
+      "Understand how managed **SitecoreAI** services reduce platform upgrade and infrastructure work while **Experience Edge** supports content delivery. The team still owns application dependencies, integrations, access, and operational validation.",
+  },
+  "local-setup": {
+    priority: "delivery",
+    section: "development",
+    relevance:
+      "Reduce developer onboarding to the repository, a supported **Node.js** runtime, and local configuration. Run the frontend against shared **SitecoreAI** without installing a local Sitecore instance or preparing an XP virtual machine.",
+  },
+  "component-development": {
+    priority: "delivery",
+    section: "development",
+    relevance:
+      "Make a small **React** change and inspect it in **Page Builder** through the local editing host. This demonstrates a shorter development feedback loop without deploying to the shared site.",
+  },
+  "vscode-mcp": {
+    priority: "delivery",
+    section: "tools",
+    relevance:
+      "Explore optional AI assistance grounded in the site's content and Sitecore documentation. These connections can support developer understanding; they are not prerequisites for the local workshop.",
+  },
+  "release-and-recovery": {
+    priority: "dependable",
+    section: "architecture",
+    relevance:
+      "Trace separate release paths for content, frontend code, and CMS definitions, including recovery responsibilities. This is an architecture discussion; attendees do not need **Vercel** access or a deployment exercise.",
+  },
+  "resource-taxonomy": {
+    priority: "dependable",
+    section: "architecture",
+    relevance:
+      "Trace author-managed classification choices to stable **Search** filters. The custom **Resource metadata** app preserves the indexed field contract so useful reference material remains findable.",
+  },
+  "saved-work-reset": {
+    priority: "relevance",
+    section: "support",
+    relevance:
+      "Reset your reviewer number to repeat personalization with fresh profiles and baseline saved work. This is a workshop utility, not a customer platform requirement.",
+  },
+  "fresh-profile-restart": {
+    priority: "relevance",
+    section: "support",
+    relevance:
+      "Verify that a reset created new profiles before repeating a behavior-based exercise. The procedure supports reliable evaluation of the personalization walkthroughs.",
+  },
+};
+
+export function withPriorities(guide: WorkshopGuide): PrioritizedWorkshopGuide {
+  const focus = guidePriorities[guide.slug];
+  if (!focus) throw new Error(`Missing customer priority for ${guide.slug}`);
+  return {
+    ...guide,
+    focus: {
+      priority: customerPriorities[focus.priority],
+      section: { ...workshopSections[focus.section], id: focus.section },
+      relevance: focus.relevance,
+    },
+  };
+}
+
+export function orderByWorkshopSection(guides: PrioritizedWorkshopGuide[]) {
+  const sectionOrder = Object.keys(workshopSections);
+  return [...guides].sort(
+    (left, right) =>
+      sectionOrder.indexOf(left.focus.section.id) -
+      sectionOrder.indexOf(right.focus.section.id),
+  );
+}

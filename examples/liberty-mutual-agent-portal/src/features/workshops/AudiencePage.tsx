@@ -14,15 +14,27 @@ export async function AudiencePage({
   const marketing = audience === "marketing";
   const guides = workshopGuides
     .filter((guide) => guide.audience === audience)
-    .map(({ slug, audience, category, title, summary, duration, steps }) => ({
-      slug,
-      audience,
-      category,
-      title,
-      summary,
-      duration,
-      stepCount: steps.length,
-    }));
+    .map(
+      ({
+        slug,
+        audience,
+        category,
+        title,
+        summary,
+        duration,
+        steps,
+        focus,
+      }) => ({
+        slug,
+        audience,
+        category,
+        title,
+        summary,
+        duration,
+        focus,
+        stepCount: steps.length,
+      }),
+    );
   return (
     <WorkshopShell session={session} active={audience}>
       <main className="workshop-directory-page" id="workshop-main">
@@ -46,10 +58,17 @@ export async function AudiencePage({
           </h1>
           <p>
             {marketing
-              ? "Follow the agent journey, then explore the tools that help marketing create, personalize and improve it."
-              : "Connect the experience to its implementation. Start locally, inspect the contracts and follow changes into delivery."}
+              ? "Explore your marketing priorities: easier content creation, controlled publishing, and relevant engagement that helps Liberty Mutual earn independent agents’ business."
+              : "Explore your platform priorities: less maintenance, faster delivery, and a dependable agent experience. Begin with the architecture, then make a local component change."}
           </p>
         </header>
+        <p className="workshop-directory-intro">
+          {marketing
+            ? "The main walkthroughs address the Marketing priorities on presentation slides 3–4."
+            : "The main walkthroughs address the Platform priorities on presentation slide 5."}{" "}
+          Optional scenarios and supporting tools appear afterward, so you can
+          focus on the capabilities most relevant to your work.
+        </p>
         <GuideDirectory guides={guides} audience={audience} />
       </main>
     </WorkshopShell>

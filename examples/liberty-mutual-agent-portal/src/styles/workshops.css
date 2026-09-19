@@ -719,6 +719,13 @@
   padding-bottom: 27px;
   border-bottom: 1px solid var(--w-line);
 }
+.workshop-directory-intro {
+  max-width: 790px;
+  margin: 0 0 24px;
+  color: var(--w-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
 .workshop-directory-tools label {
   display: flex;
   align-items: center;
@@ -787,7 +794,14 @@
 .workshop-guide-group > h2 {
   font-size: 19px;
   letter-spacing: -0.3px;
-  margin-bottom: 16px;
+  margin-bottom: 7px;
+}
+.workshop-group-description {
+  font-size: 13px;
+  color: var(--w-muted);
+  line-height: 1.8;
+  margin-bottom: 17px;
+  max-width: 720px;
 }
 .workshop-guide-group > div {
   border-top: 1px solid var(--w-line);
@@ -816,6 +830,25 @@
   line-height: 1.75;
   color: var(--w-muted);
   max-width: 680px;
+}
+.workshop-guide-row .workshop-guide-priority {
+  font-size: 11px;
+  color: #6d647e;
+  margin-bottom: 6px;
+}
+.workshop-priority {
+  border-left: 3px solid var(--w-yellow);
+  padding: 3px 0 4px 20px;
+  margin: 27px 0;
+}
+.workshop-priority h2 {
+  font-size: 19px;
+  margin: 8px 0;
+}
+.workshop-priority p {
+  color: var(--w-muted);
+  font-size: 13px;
+  line-height: 1.85;
 }
 .workshop-guide-row > div > span {
   display: flex;

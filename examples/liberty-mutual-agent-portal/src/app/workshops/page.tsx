@@ -27,8 +27,9 @@ export default async function WorkshopHome() {
               <em>Your pace.</em>
             </h1>
             <p>
-              Experience the agent portal, explore the marketing tools, and
-              understand how the implementation fits together.
+              Explore the priorities you shared: simpler daily work, a stable
+              platform, and relevant experiences that help Liberty Mutual earn
+              independent agents’ business.
             </p>
             <div className="workshop-hero-meta">
               <span className="workshop-tag">
@@ -42,7 +43,7 @@ export default async function WorkshopHome() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/api/workshops/assets/agent-workspace.png"
-              alt="Liberty Mutual Agent Portal workspace with navigation, agency metrics and priorities"
+              alt="Liberty Mutual Agent Portal workspace with navigation, agency metrics, and priorities"
               width="1304"
               height="998"
             />
@@ -58,9 +59,10 @@ export default async function WorkshopHome() {
               Then see how it is built.
             </h2>
             <p>
-              Both sections are available to everyone. Begin with the workshop
-              for your role, or go directly to the capability you want to
-              explore.
+              Both sections follow the marketing and platform priorities in the
+              presentation. Each walkthrough explains the request it addresses.
+              Additional agent scenarios and workshop support remain available
+              for optional exploration.
             </p>
           </div>
           <div className="workshop-paths">
@@ -77,8 +79,8 @@ export default async function WorkshopHome() {
                 more relevant.
               </h3>
               <p>
-                Explore personalization, Search, content authoring, Forms,
-                experimentation and Agentic Studio.
+                Create and govern content with less effort. Use personalization,
+                Search, Forms, and A/B testing to improve agent engagement.
               </p>
               <div>
                 <span>
@@ -109,8 +111,8 @@ export default async function WorkshopHome() {
                 Make a change.
               </h3>
               <p>
-                Trace the architecture, run the project locally, edit a
-                component and follow the release paths.
+                Understand managed services and platform stability. Run the
+                frontend locally, edit a component, and see it in Page Builder.
               </p>
               <div>
                 <span>
@@ -129,7 +131,7 @@ export default async function WorkshopHome() {
           <section className="workshop-before">
             <div>
               <span className="workshop-eyebrow">BEFORE YOU BEGIN</span>
-              <h2>A few things to keep close.</h2>
+              <h2>Prepare for the workshop.</h2>
             </div>
             <div>
               <MousePointer2 size={22} />

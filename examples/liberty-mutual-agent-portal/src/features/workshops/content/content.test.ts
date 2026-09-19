@@ -4,6 +4,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { workshopGuides } from "./index";
+import { guidePriorities } from "./priorities";
 import { plainGuideText } from "../guide-text";
 
 import type { GuideLink, WorkshopGuide } from "../types";
@@ -24,7 +25,7 @@ function linksFor(guide: WorkshopGuide): GuideLink[] {
   ];
 }
 
-test("every workshop has a unique routable slug, meaningful steps, prerequisites and cleanup", () => {
+test("every workshop has a unique routable slug, meaningful steps, prerequisites, and cleanup", () => {
   const slugs = new Set<string>();
   for (const guide of workshopGuides) {
     assert.match(
@@ -84,6 +85,32 @@ test("every workshop has a unique routable slug, meaningful steps, prerequisites
         guide.slug,
         `${guide.slug}: related route should not link to itself`,
       );
+    }
+  }
+});
+
+test("every guide has a customer priority and optional material follows the main walkthroughs", () => {
+  assert.deepEqual(
+    Object.keys(guidePriorities).sort(),
+    workshopGuides.map((guide) => guide.slug).sort(),
+    "priority mapping must cover the live routes without stale entries",
+  );
+  const kindOrder = { core: 0, optional: 1, support: 2 };
+  for (const audience of ["marketing", "development"] as const) {
+    let previousKind = 0;
+    for (const guide of workshopGuides.filter(
+      (item) => item.audience === audience,
+    )) {
+      assert.ok([3, 4, 5].includes(guide.focus.priority.slide));
+      assert.ok(guide.focus.priority.label.trim());
+      assert.ok(guide.focus.relevance.trim());
+      assert.ok(guide.focus.section.description.trim());
+      const kind = kindOrder[guide.focus.section.kind];
+      assert.ok(
+        kind >= previousKind,
+        `${guide.slug}: supporting material must follow the main path`,
+      );
+      previousKind = kind;
     }
   }
 });
