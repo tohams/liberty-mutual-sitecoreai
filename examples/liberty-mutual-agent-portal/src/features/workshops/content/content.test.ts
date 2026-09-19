@@ -90,10 +90,11 @@ test("every workshop has a unique routable slug, meaningful steps, prerequisites
 
 test("the extracted SharePoint clickthrough coverage is retained without hidden presenter content", () => {
   // Coverage was reconciled against the read-only September 18 SharePoint copy.
-  // These ranges cover the actual workshop procedures, not dividers or indexes.
+  // These ranges cover the retained workshop procedures, not dividers or indexes.
+  // The custom portal authorization exercise (slides 43–45) was intentionally removed.
   const expected = {
     marketing: [...range(17, 27), ...range(58, 65), ...range(68, 108)],
-    development: [...range(43, 54), ...range(123, 133), ...range(135, 142)],
+    development: [...range(46, 54), ...range(123, 133), ...range(135, 142)],
   };
   for (const [audience, slides] of Object.entries(expected)) {
     const covered = new Set(
