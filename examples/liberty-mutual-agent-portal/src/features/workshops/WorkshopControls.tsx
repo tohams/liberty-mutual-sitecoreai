@@ -19,6 +19,7 @@ export function WorkshopSignOut() {
       <button
         type="button"
         className="workshop-signout"
+        aria-label="Sign out of workshop guide"
         disabled={busy}
         onClick={async () => {
           setBusy(true);
@@ -74,11 +75,27 @@ export function CopyCode({ code }: { code: string }) {
     </div>
   );
 }
-function ScreenshotCanvas({ image }: { image: GuideImage }) {
+function ScreenshotCanvas({
+  image,
+  enlarged = false,
+}: {
+  image: GuideImage;
+  enlarged?: boolean;
+}) {
   const crop = image.crop ? guideCropGeometry(image.crop) : null;
   const annotations = image.annotations?.filter(validImageAnnotation) ?? [];
   return (
-    <span className="workshop-screenshot-canvas">
+    <span
+      className="workshop-screenshot-canvas"
+      style={
+        enlarged && crop && image.crop
+          ? {
+              maxWidth: `min(${image.crop.width * 1.7}px, ${(image.crop.width / image.crop.height) * 60}vh)`,
+              marginInline: "auto",
+            }
+          : undefined
+      }
+    >
       <span
         className={`workshop-screenshot-viewport${crop ? " is-cropped" : ""}`}
         style={crop ? { aspectRatio: crop.aspectRatio } : undefined}
@@ -186,7 +203,10 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
         style={
           image.crop
             ? {
-                width: `min(${Math.min(1440, Math.max(520, image.crop.width * 1.7 + 40))}px, calc(${(image.crop.width / image.crop.height) * 60}vh + 40px))`,
+                width: Math.min(
+                  1440,
+                  Math.max(520, image.crop.width * 1.7 + 40),
+                ),
               }
             : undefined
         }
@@ -196,19 +216,21 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
         }}
       >
         <div>
-          <h2 id={`${id}-dialog-title`} className="workshop-lightbox-title">
-            <GuideText text={image.title ?? "Screenshot details"} />
-          </h2>
-          <button
-            className="workshop-lightbox-close"
-            autoFocus
-            type="button"
-            onClick={() => dialog.current?.close()}
-            aria-label="Close enlarged screenshot"
-          >
-            <X size={22} />
-          </button>
-          <ScreenshotCanvas image={image} />
+          <div className="workshop-lightbox-heading">
+            <h2 id={`${id}-dialog-title`} className="workshop-lightbox-title">
+              <GuideText text={image.title ?? "Screenshot details"} />
+            </h2>
+            <button
+              className="workshop-lightbox-close"
+              autoFocus
+              type="button"
+              onClick={() => dialog.current?.close()}
+              aria-label="Close enlarged screenshot"
+            >
+              <X size={22} />
+            </button>
+          </div>
+          <ScreenshotCanvas image={image} enlarged />
           <ScreenshotDetails image={image} />
         </div>
       </dialog>
