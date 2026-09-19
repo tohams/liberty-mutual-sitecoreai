@@ -64,6 +64,7 @@ export const governanceGuides: WorkshopGuide[] = [
           "Creating a **Draft** preserves the previous approved version. Your new wording reaches the live page only after review and approval.",
           "The **Author** can **Submit** the draft but cannot **Approve** it.",
         ],
+        note: "**What to notice:** If you know **Sitecore XP**, focus on the authoring experience here: edit a field, let it autosave, see it on the page and submit it for review within **Page Builder**. The familiar draft-and-approval process stays close to the page you are working on.",
       },
       {
         title: "Author: submit the draft for review",

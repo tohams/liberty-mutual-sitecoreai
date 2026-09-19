@@ -80,6 +80,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "**Sitecore** operates its platform; **Vercel** operates hosting infrastructure. The application still depends on its code, configuration, identity, Search, decisioning and saved-work services.",
           "Managed services reduce infrastructure and upgrade work. They do not remove application dependency, access, integration or compatibility responsibilities. Contractual production SLAs are not a guarantee for this temporary POC or for the entire portal.",
         ],
+        note: "**What to notice:** Managed **SitecoreAI** authoring and delivery reduce the platform infrastructure and core upgrade work your team operates. Your frontend dependencies, integrations, access configuration and compatibility checks still need ownership.",
       },
       {
         title: "Locate the operational integration boundary",
@@ -192,6 +193,7 @@ export const developmentGuides: WorkshopGuide[] = [
         expected: [
           "**Node** reports v24.19.0. npm and **Git** each report an installed version. **TypeScript** will be installed with the application; no global **TypeScript** installation is needed.",
         ],
+        note: "**What to notice:** For this workshop, you run **Next.js** locally and connect to hosted **SitecoreAI**. No local **Sitecore CM**, **SQL Server**, **Solr**, **IIS**, **Docker** or VM is needed.",
       },
       {
         title: "Clone into your projects directory and make a personal branch",
@@ -349,6 +351,7 @@ export const developmentGuides: WorkshopGuide[] = [
         expected: [
           "The canvas displays **Find guidance for your next client conversation** from your local React code without a CMS publish or deployment. If needed, click **Reload canvas** and confirm **Local host** is still selected.",
         ],
+        note: "**What to notice:** Your **React** edit appears in **Page Builder** through **Local host**, with content still hosted in **SitecoreAI**. Your code change stays local; CMS content remains shared, so leave content fields unchanged during this exercise.",
       },
       {
         title: "Verify the integrated behavior still works",
@@ -818,10 +821,7 @@ export const developmentGuides: WorkshopGuide[] = [
         "Continue to the next walkthrough after signing in again, or close the reset page. There is no need to reset a second time merely to finish this procedure.",
       ],
     },
-    related: [
-      "fresh-profile-restart",
-      "release-and-recovery",
-    ],
+    related: ["fresh-profile-restart", "release-and-recovery"],
     sourceSlides: [135, 136, 137, 138, 141],
   },
   {
