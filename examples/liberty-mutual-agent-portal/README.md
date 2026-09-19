@@ -34,7 +34,7 @@ From the repository root, validate scoped content with `dotnet sitecore ser vali
 
 The [authored campaign component guide](docs/campaign-components.md) covers the small-business campaign, nested placeholders, alert visibility dates and the integrated conversation request.
 
-The [author and approver workshop setup](docs/workshop-authoring-workflow.md) explains the separate native review workflow, paired practice pages and role-provisioning tools. It also lists the real-user permission checks required before publishing participant instructions.
+The [author and approver workshop setup](docs/workshop-authoring-workflow.md) explains the **Page Builder** review-and-approval exercise, its native workflow, paired practice pages and role-provisioning tools. The presenter cycle has been verified with real non-admin accounts. Attendee role assignments and the listed per-account permission checks remain part of workshop preparation.
 
 ## Where work belongs
 
