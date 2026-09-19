@@ -1072,6 +1072,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "The sidebar offers **CampaignContact** and **CampaignLinkList**, distinct from the main region’s options.",
           "**Page Builder** supports drag-and-drop; these native toolbar actions provide a reproducible way to inspect and change the composition.",
         ],
+        note: "**What to notice:** Arrange approved components in the visual **Page Builder** canvas and inspect the choices allowed in each region. Once developers have supplied the components and placement rules, marketers can compose pages without changing component code.",
       },
       {
         title: "Restore the original practice layout",
@@ -1440,6 +1441,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "The calculation requires an identified principal or producer. Missing, invalid or zero-total data returns neutral guidance.",
           "The imported production metrics are fictional **UDL** inputs. A **Salesforce** or **Snowflake** connection would require governed identifiers, mappings, freshness and source access.",
         ],
+        note: "**What to notice:** Developers supply a reusable JavaScript calculation; marketers use its result in a visual personalization rule to select authored content. The calculation and data connection are implementation work, while the content choice is managed in **SitecoreAI**.",
         links: [
           {
             label: "Open the saved JavaScript custom value",
@@ -1593,6 +1595,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "The **Live** rules map each native interest to authored content in **headless-products-spotlight**.",
           "**Top Affinity** considers profile groups; the current site uses **insurance_interest**. Equal scores have no promised business-priority order. Interest changes editorial relevance, not licensing or transaction permission.",
         ],
+        note: "**What to notice:** Inspect the audience rule on the component itself in **Page Builder**. With profile tracking and affinity tags already configured, **SitecoreAI** builds the interest scores and **Top Affinity** selects authored variants. Marketers can see how each interest maps to the guidance shown.",
         links: [pageBuilder],
       },
     ],
@@ -1637,6 +1640,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Eligible traffic is split 50/50 with 100% participation. The goal is a visit to the small-business guide.",
           "**Editor** preview proves authored variations, not live allocation or conversion. This **Resources** page is kept separate from personalized pages because **SitecoreAI** does not allow an A/B/n test on a page with personalization configured.",
         ],
+        note: "**What to notice:** The component’s variations, traffic split and goal are configured through **Page Builder**, with results in **Performance**. For this authored button-label comparison, the test uses the existing component and tracking setup; changing its copy does not require a new React component or frontend release.",
         links: [pageBuilder],
       },
       login("daniel"),
