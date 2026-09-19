@@ -16,6 +16,16 @@ export const workshopGuides = orderByWorkshopSection(
     .map(withScreenshots)
     .map(withPriorities),
 );
+// Previously shared transaction links now lead to the single component example.
+const consolidatedTransactionGuides = new Set([
+  "bop-submission",
+  "renewal-follow-up",
+  "commercial-and-wholesale",
+  "surety-request",
+]);
 export function findWorkshopGuide(slug: string) {
-  return workshopGuides.find((guide) => guide.slug === slug);
+  const canonicalSlug = consolidatedTransactionGuides.has(slug)
+    ? "campaign-and-conversation"
+    : slug;
+  return workshopGuides.find((guide) => guide.slug === canonicalSlug);
 }

@@ -57,12 +57,6 @@ export const workshopSections = {
       "Run the frontend locally, make a component change, and see the result in Page Builder.",
     kind: "core",
   },
-  scenarios: {
-    label: "Optional agent scenarios",
-    description:
-      "Use these additional insurance journeys to explore the portal. Their transactions and business records use synthetic integrations.",
-    kind: "optional",
-  },
   tools: {
     label: "Optional AI tools",
     description:
@@ -111,35 +105,11 @@ export const guidePriorities: Record<string, GuideFocusDefinition> = {
     relevance:
       "Evaluate robust site search and reference-material retrieval using the agent's licensed states. Native **Search** supplies results; the portal applies its state-access rules.",
   },
-  "bop-submission": {
-    priority: "relevance",
-    section: "scenarios",
-    relevance:
-      "Explore how relevant product guidance can lead into an agent's next task. Submission processing is a custom, synthetic example, not a native **SitecoreAI** insurance system.",
-  },
-  "renewal-follow-up": {
-    priority: "relevance",
-    section: "scenarios",
-    relevance:
-      "Explore a useful next action within an agent's working day. Saved follow-ups illustrate a custom portal integration using synthetic policy data.",
-  },
-  "commercial-and-wholesale": {
-    priority: "relevance",
-    section: "scenarios",
-    relevance:
-      "Compare guidance for different distribution channels. The policy records and protected policy-document links are synthetic examples, separate from native content and reference-material management.",
-  },
-  "surety-request": {
-    priority: "relevance",
-    section: "scenarios",
-    relevance:
-      "Explore a specialist agent's next task after relevant guidance. The request is saved by the custom portal against synthetic business data.",
-  },
   "campaign-and-conversation": {
     priority: "components",
     section: "engagement",
     relevance:
-      "Inspect navigation, accordions, resource links, and a contact modal in one campaign. The saved conversation request uses a custom form; the separate Native Forms guide demonstrates the marketer-managed form.",
+      "See **SitecoreAI** support a portal with both authored content and functional, integrated components. One campaign connects navigation, accordions, and a contact modal to a saved request. The custom server API is the point at which a business-system integration would connect; the separate Native Forms guide demonstrates the marketer-managed form and webhook.",
   },
   "native-contact-form": {
     priority: "engagement",

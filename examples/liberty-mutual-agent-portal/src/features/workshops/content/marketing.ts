@@ -118,7 +118,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Use the login link supplied by each walkthrough",
         action: [
           "For browsing, personalization, **Search**, and publication checks, use **Open the live portal login** below. These guides link to liberty-mutual-agent-portal.vercel.app, which displays published content.",
-          "For new submissions, renewal follow-ups, bond requests, and saved conversations, use **Open the transaction-preview login** below. Those guides explicitly say to use the transaction preview so your practice transactions stay separate from the live portal’s saved work.",
+          "The **Portal components: connect campaign content to a saved request** guide names the point at which to use **Open the transaction-preview login** below. Its one saved conversation shows how a custom component can connect an authored campaign to agency work while keeping practice changes separate from the live portal.",
         ],
         expected: [
           "Production and preview keep saved operational work separate.",
@@ -360,276 +360,14 @@ export const marketingGuides: WorkshopGuide[] = [
     sourceSlides: [73, 74, 75, 76],
   },
   {
-    slug: "bop-submission",
-    audience: "marketing",
-    category: "Agent experience",
-    title: "Prepare and submit a Texas BOP account",
-    summary:
-      "Carry the selected state from product guidance into a saved submission, complete requirements, and verify the result after reload.",
-    outcome:
-      "A new fictional Texas submission retains its reference, effective date, and **Submitted** status.",
-    duration: "10 minutes",
-    personas: ["daniel.01"],
-    prerequisites: [
-      packPrerequisite,
-      "Use **Open the transaction-preview login** below and your number from **Attendee assignments**. Add your initials and today’s date to the new fictional account name so you can find your own saved record; leave existing submissions unchanged.",
-      "Use **October 1, 2026** as the **Requested effective date** for this fictional account. That date is within the sandbox’s configured eligibility period.",
-    ],
-    links: [previewLogin],
-    steps: [
-      login("daniel", true),
-      {
-        title: "Carry Texas from guidance to account preparation",
-        action: [
-          "Open **Products & appetite** and set **Risk state** to Texas.",
-          "Below the page’s introductory spotlight, click the **Small business** tab. On the **Businessowners policy** card, click **Explore coverage**.",
-          "Click **Back to products & appetite**. Confirm the **Small business** tab is selected, then click **Prepare account** on **Businessowners policy**. This checks that the selected state carries from guidance into the intake.",
-          "Choose **Retail** and click **Continue to account information**.",
-        ],
-        expected: [
-          "The product page says **Product preparation for Texas**. Illinois and Texas are the available states.",
-          "Texas remains selected after returning from guidance. **Prepare your submission** retains **Businessowners policy** and Texas.",
-        ],
-      },
-      {
-        title: "Save a uniquely named fictional account",
-        action: [
-          "**Named insured / account name**: Prairie Market Partners [your initials] [today’s date/time]. Set **Requested effective date** to **October 1, 2026**. The unique name distinguishes this run from earlier practice records.",
-          "**Number of employees**: 8. **Annual revenue ($)**: 750000.",
-          "**Account notes**: Single-location retail business. Review operations, location details, and loss history.",
-          "Click **Save & review requirements**. Record the generated reference.",
-        ],
-        expected: [
-          "**Your submission draft is saved**. The new **Draft** opens in **Quote & submit**.",
-          "**Risk location / business** reads Texas · **Retail** and the effective date matches your entry.",
-        ],
-      },
-      {
-        title: "Complete the requirements and submit",
-        action: [
-          "Check **Business operations summary** and wait for **Requirement marked complete**.",
-          "Check **Property and location details**, then **Three-year loss history**, waiting for each save.",
-          "After all three requirements show as complete and **Submit for review** is enabled, click it once. If it remains disabled, read the displayed requirement or eligibility message rather than changing an existing account.",
-        ],
-        expected: [
-          "**Submit for review** stays disabled until every current requirement and authority check passes.",
-          "**Submission sent for review** appears and the status becomes **Submitted**. This does not rate or bind insurance coverage.",
-        ],
-        note: "Completed requirements cannot be unchecked. The portal has no **Submitted**-to-**Draft** action.",
-      },
-      {
-        title: "Verify the same saved record after reload",
-        action: [
-          "Close the dialog and reload. Type your unique account name in **Search account or reference**; the table filters as you type.",
-          "Open the account and compare its reference, Texas risk state, effective date, and **Submitted** status.",
-          "Close the dialog, clear the table search, and sign out of the portal. Retain the reference with your walkthrough notes.",
-        ],
-        expected: [
-          "The reference, state, effective date, and status persist after reload. Use the reviewer reset described below when you want to return the pack to its starting data.",
-        ],
-      },
-    ],
-    cleanup: { body: [sharedReset], links: [previewReset] },
-    related: ["renewal-follow-up", "surety-request"],
-    sourceSlides: [77, 78, 79, 80],
-  },
-  {
-    slug: "renewal-follow-up",
-    audience: "marketing",
-    category: "Agent experience",
-    title: "Turn a household renewal into a saved follow-up",
-    summary:
-      "Create a policy-specific priority with a due date and useful notes, then return to the same policy from the saved task.",
-    outcome:
-      "The new follow-up survives reload under **All priorities** and opens **Morgan household**, **Homeowners**, policy **LM-8426101**.",
-    duration: "7 minutes",
-    personas: ["maya.01"],
-    prerequisites: [
-      packPrerequisite,
-      "Use **Open the transaction-preview login** below. This exercise creates a saved follow-up for your number from **Attendee assignments**; it does not update an actual insurance system.",
-    ],
-    links: [previewLogin],
-    steps: [
-      login("maya", true),
-      {
-        title: "Open the Morgan homeowners renewal",
-        action: [
-          "Click **Clients & policies** > **Review renewals**.",
-          "In the policy table, click the **Morgan household** row whose product is **Homeowners** and whose policy number is **LM-8426101**.",
-          "In the policy details dialog, open the **Renewal review** tab and click **Save a renewal follow-up**.",
-        ],
-        expected: [
-          "The status filter becomes **Renewal review**.",
-          "**Keep the conversation moving** opens for **Morgan Homeowners**, policy **LM-8426101**. Check the policy number because the household also has an auto policy.",
-        ],
-      },
-      {
-        title: "Save a useful next action",
-        action: [
-          "**Follow-up title**: Morgan home renewal [your initials] [today’s date/time]. Set **Due date** to tomorrow using the date picker. A unique title lets you identify this run after reloading.",
-          "**Notes**: Confirm home improvements and household changes before renewal.",
-          "Click **Save follow-up**.",
-        ],
-        expected: [
-          "**Follow-up saved to your priorities** appears, and the policy dialog stays open. The follow-up records your next action while leaving the policy unchanged.",
-        ],
-      },
-      {
-        title: "Verify the task and policy link",
-        action: [
-          "Close the policy dialog. Open **My workspace** > **All priorities**, then reload.",
-          "Under **Your priorities**, keep **All priorities** selected. Locate the **Morgan home renewal** title containing your initials and date, check its due date, and click that title to reopen the policy.",
-          "Close the dialog, return to **My workspace**, and compare **Renewals** with **All priorities**.",
-        ],
-        expected: [
-          "The follow-up and its policy link persist. Opening it returns to **Morgan household**, **Homeowners**, policy **LM-8426101**, confirming that the task retains its policy context.",
-          "Your new task appears under **All priorities**. **Renewals** shows renewal tasks, so return to **All priorities** to find this follow-up.",
-        ],
-      },
-    ],
-    cleanup: {
-      body: [
-        signOut,
-        "Record the task title if you want to revisit it. To remove practice work and repeat from the starting data, use the reviewer reset below.",
-        sharedReset,
-      ],
-      links: [previewReset],
-    },
-    related: ["commercial-and-wholesale", "bop-submission"],
-    sourceSlides: [81, 82],
-  },
-  {
-    slug: "commercial-and-wholesale",
-    audience: "marketing",
-    category: "Agent experience",
-    title: "Compare commercial and wholesale specialty journeys",
-    summary:
-      "Inspect policy details and protected document links, then see how distribution channel changes specialty guidance.",
-    outcome:
-      "Priya reaches retail-specialty guidance and Elena reaches wholesale-specialty guidance without changing policy records.",
-    duration: "8 minutes",
-    personas: ["priya.01", "elena.01"],
-    prerequisites: [
-      packPrerequisite,
-      "Use the live portal. This is a read-only account and guidance comparison.",
-    ],
-    links: [liveLogin],
-    steps: [
-      login("priya"),
-      {
-        title: "Inspect a commercial property account",
-        action: [
-          "Click **Clients & policies** in the left sidebar. In the table, select **Coastal Fabrication Group** with product **Commercial property** and policy number **LM-8426108**.",
-          "In the policy details dialog, click **Overview** and read the product, state, and policy dates. Click **Renewal review** to read the renewal guidance, then **Documents** > **Coverage summary** to download the account summary.",
-        ],
-        expected: [
-          "The selected policy is **Commercial property**, **LM-8426108**, in Florida. Confirm the product and number because this account also has a general-liability policy.",
-          "**Documents** offers two protected links. **Coverage summary** downloads a text summary generated from the fictional account data, demonstrating retrieval for a signed-in agent. Connecting issued policy documents would require a business document service.",
-        ],
-      },
-      {
-        title: "Follow the independent-agency specialty route",
-        action: [
-          "Close the policy. Open **Products & appetite** > **Commercial** > **Commercial property** > **Explore coverage**.",
-          "Click **Back to products & appetite** > **Specialty** > **Specialty casualty** > **Explore coverage**.",
-          "Use the upper-right profile menu > **Sign out**.",
-        ],
-        expected: [
-          "The first link opens midsize and large commercial guidance. The specialty link opens retail-specialty guidance for Priya’s independent-agency channel.",
-        ],
-      },
-      login("elena"),
-      {
-        title: "Compare the wholesale route",
-        action: [
-          "Open **Clients & policies** > **Northpoint Property Partners**, **Specialty casualty**, LM-8426111.",
-          "In the policy details dialog, click **Overview**, **Documents**, and **Renewal review** in turn. Compare the policy information, available document links, and renewal guidance, then close the dialog.",
-          "Open **Products & appetite** > **Specialty** > **Specialty casualty** > **Explore coverage**.",
-          "Click **Elena Park** in the upper-right profile menu to open **Your profile**. Read **Distribution channel** and **Licensed states** and compare them with the specialty guidance you just opened.",
-        ],
-        expected: [
-          "The account belongs to **Summit Specialty Partners** and remains unchanged.",
-          "Elena reaches wholesale-specialty guidance. Her distribution channel shapes the content, and her licensed states continue to limit eligible business actions.",
-        ],
-      },
-    ],
-    cleanup: {
-      body: [
-        signOut,
-        "Close any downloaded document preview. No reviewer reset is needed.",
-      ],
-    },
-    related: ["surety-request", "personalization-by-role"],
-    sourceSlides: [83, 84],
-  },
-  {
-    slug: "surety-request",
-    audience: "marketing",
-    category: "Agent experience",
-    title: "Save and submit a surety request",
-    summary:
-      "Use Marcus’s specialist workflow for a fictional contract-performance bond request and verify its saved details.",
-    outcome:
-      "The same request reference, Florida state, $250,000 amount, and **Submitted** status survive reload.",
-    duration: "8 minutes",
-    personas: ["marcus.01"],
-    prerequisites: [
-      packPrerequisite,
-      "Use **Open the transaction-preview login** below and your number from **Attendee assignments**. The new request is fictional; keep existing bond requests unchanged.",
-    ],
-    links: [previewLogin],
-    steps: [
-      login("marcus", true),
-      {
-        title: "Create a new bond request",
-        action: [
-          "Click **Quote & submit** in the left sidebar, then click **New bond request** above the submissions table.",
-          "**Principal legal name**: Bayline Construction [your initials] [today’s date/time]. **Obligee**: City of Clearwater Facilities. The unique principal name identifies the record created during this run.",
-          "**Bond type**: **Contract performance**. **State**: Florida. **Bond amount ($)**: 250000.",
-          "**Project / request notes**: Municipal facility improvement. Gather principal financials and project details.",
-          "Click **Save bond request** and record the new reference.",
-        ],
-        expected: [
-          "The new **Draft** opens automatically with the principal, obligee, bond type, state, and amount ready for review.",
-          "The sandbox stores a fictional request for this exercise.",
-        ],
-      },
-      {
-        title: "Submit the saved request",
-        action: [
-          "Compare **Obligee**, **Bond type**, **Bond amount**, and **State** with your entries.",
-          "Click **Submit bond request**.",
-        ],
-        expected: [
-          "The details are City of Clearwater Facilities, **Contract performance**, $250,000, and Florida.",
-          "**Bond request submitted for review** appears and the status becomes **Submitted**. No bond is issued.",
-        ],
-      },
-      {
-        title: "Verify persistence",
-        action: [
-          "Close the dialog and reload. In **Your submissions**, select the **Bond requests ([N])** tab so the table shows surety requests rather than insurance submissions.",
-          "Open your unique principal name and compare the reference, status, state, and amount.",
-          "Close the dialog, sign out, and retain the reference with your walkthrough notes.",
-        ],
-        expected: [
-          "The reference, status, state, and amount persist after reload. Use the reviewer reset below to return the pack to its starting data.",
-        ],
-      },
-    ],
-    cleanup: { body: [sharedReset], links: [previewReset] },
-    related: ["bop-submission", "commercial-and-wholesale"],
-    sourceSlides: [85, 86],
-  },
-  {
     slug: "campaign-and-conversation",
     audience: "marketing",
     category: "Forms and campaigns",
-    title: "Explore a campaign and save a conversation request",
+    title: "Portal components: connect campaign content to a saved request",
     summary:
-      "Follow authored navigation, accordions, and resource links, then try the campaign’s accessible contact dialog.",
+      "See how a SitecoreAI portal combines marketer-managed navigation, accordions, and resource links with a custom component that saves an agent’s request.",
     outcome:
-      "You can distinguish campaign content from the custom form that persists a request in the agency’s saved work.",
+      "You can explain how **SitecoreAI** content and custom application components work together: marketers manage the campaign, and application code connects an agent’s next action to saved business data.",
     duration: "10 minutes",
     personas: ["daniel.01"],
     prerequisites: [
@@ -650,7 +388,7 @@ export const marketingGuides: WorkshopGuide[] = [
         expected: [
           "**Small business growth** opens with an introduction and links to the campaign’s main sections.",
           "Each section link scrolls to its matching heading, the title includes a growth icon, and each accordion reveals authored rich text.",
-          "The resource, preparation, and product links help an agent move from the campaign message to useful guidance.",
+          "The resource, preparation, and product links help an agent move from the campaign message to useful guidance. Marketers manage the campaign content and composition in **Page Builder**; developers implement the components’ behavior.",
         ],
       },
       {
@@ -676,7 +414,9 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The dialog closes and **Request saved.** appears.",
-          "The custom form saves the topic in the agency’s work, where it remains available after reload. Email delivery or **Salesforce** activity would require an added integration. The **Native Contact your team** walkthrough demonstrates SitecoreAI Forms and webhook delivery.",
+          "The custom component saves the topic through the portal’s server API, and the request remains available after reload. This demonstrates an interactive portal that brings authored content and business actions into one experience.",
+          "The sandbox uses synthetic agency data and application-managed storage. A deployed business solution would connect this component to the appropriate system, such as **Salesforce**. That integration requires implementation; saving this request does not send email or create a Salesforce record.",
+          "This one example represents the portal’s other working submission, policy, and surety components, which remain available for exploration. The separate **Native Forms: trace Contact your team to a webhook** guide shows the marketer-managed form and actual webhook delivery.",
         ],
       },
     ],
@@ -688,6 +428,7 @@ export const marketingGuides: WorkshopGuide[] = [
       "native-contact-form",
       "campaign-composition",
       "calculated-growth-personalization",
+      "architecture-and-ownership",
     ],
     sourceSlides: [87, 88],
   },
