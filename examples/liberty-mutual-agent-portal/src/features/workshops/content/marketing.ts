@@ -209,9 +209,9 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Read the principal’s growth guidance",
         action: [
-          "On **My workspace**, find the **Agency growth** card below **Your priorities**.",
+          "On **My workspace**, scroll below the **Your priorities** list to the card headed **Agency growth**. Read its headline and the button beneath the description.",
           "Click **Explore the growth path** to see the article chosen for a principal. Then click **Clients & policies** in the sidebar. If a policy filter is active, select **All policies** so you compare the full visible book.",
-          "Open **Products & appetite** and inspect the **Risk state** choices to compare Avery’s licenses with the next persona. Then use the upper-right profile menu > **Sign out**.",
+          "Click **Products & appetite** in the left sidebar, then open the **Risk state** dropdown. Read the available state names to compare Avery’s licenses with the next persona. Then use the upper-right profile menu > **Sign out**.",
         ],
         expected: [
           "**Cedar Ridge**’s principal sees **Build your next chapter in small business**. The action opens the small-business practice resource.",
@@ -223,9 +223,9 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Compare the small-commercial producer",
         action: [
-          "Find **Agency growth** below **Your priorities**. Click **Prepare a BOP submission**.",
+          "On **My workspace**, scroll below **Your priorities** to the **Agency growth** card. Read its headline, then click **Prepare a BOP submission** within that card.",
           "Click **Clients & policies** in the sidebar to compare Jordan’s book with Avery’s. Then open **Products & appetite** and inspect **Risk state**.",
-          "Open **Quote & submit** > **Pecan Street Design**. Inspect the existing **Draft** and leave its checklist and status unchanged; close it and sign out.",
+          "Click **Quote & submit** in the left sidebar, then the **Pecan Street Design** row. In its details dialog, check reference **SUB-2609-1042**, status **Draft**, and risk state **Texas**. Leave the checklist unchanged, close the dialog, and sign out.",
         ],
         expected: [
           "**Bring a stronger submission to the table** opens an article that helps Jordan prepare a BOP submission.",
@@ -237,7 +237,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Compare the personal-lines account manager",
         action: [
-          "Find **Agency growth** below **Your priorities** and click **Start the learning path**.",
+          "On **My workspace**, scroll below **Your priorities** to the **Agency growth** card and click its **Start the learning path** button.",
           "Click **Clients & policies** in the sidebar to compare Maya’s personal-lines book with the earlier roles, then use the upper-right profile menu > **Sign out**.",
         ],
         expected: [
@@ -249,7 +249,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "See guidance for a wholesale broker",
         action: [
-          "Find **Agency growth** and click **Browse resources**.",
+          "On **My workspace**, scroll below **Your priorities** to the **Agency growth** card. Read the headline **Resources for your next client conversation**, then click **Browse resources** in the same card.",
           "Click **Elena Park** in the upper right to open **Your profile**. Inspect **Distribution channel** and **Licensed states**.",
         ],
         expected: [
@@ -329,7 +329,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Verify the saved resource after reload",
         action: [
           "Reload the article. Click **Back to learning & resources**, then the **[N] saved resource(s)** button.",
-          "Find the article under **Saved for your next conversation**.",
+          "In the **Saved for your next conversation** section, look for **Workers compensation: a Texas starting point**. Its presence confirms that Daniel’s bookmark survived the reload.",
           "If you added the bookmark during this run, reopen it and click **Saved to your resources** to remove it. Preserve a pre-existing bookmark. Then sign out.",
         ],
         expected: [
@@ -382,7 +382,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Carry Texas from guidance to account preparation",
         action: [
           "Open **Products & appetite** and set **Risk state** to Texas.",
-          "Select **Small business** > **Businessowners policy** > **Explore coverage**.",
+          "Below the page’s introductory spotlight, click the **Small business** tab. On the **Businessowners policy** card, click **Explore coverage**.",
           "Click **Back to products & appetite**. Confirm the **Small business** tab is selected, then click **Prepare account** on **Businessowners policy**. This checks that the selected state carries from guidance into the intake.",
           "Choose **Retail** and click **Continue to account information**.",
         ],
@@ -455,8 +455,8 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Open the Morgan homeowners renewal",
         action: [
           "Click **Clients & policies** > **Review renewals**.",
-          "Open **Morgan household**, **Homeowners**, policy LM-8426101.",
-          "Click **Renewal review** > **Save a renewal follow-up**.",
+          "In the policy table, click the **Morgan household** row whose product is **Homeowners** and whose policy number is **LM-8426101**.",
+          "In the policy details dialog, open the **Renewal review** tab and click **Save a renewal follow-up**.",
         ],
         expected: [
           "The status filter becomes **Renewal review**.",
@@ -478,7 +478,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Verify the task and policy link",
         action: [
           "Close the policy dialog. Open **My workspace** > **All priorities**, then reload.",
-          "Find your new title and due date. Click its title to return to the policy.",
+          "Under **Your priorities**, keep **All priorities** selected. Locate the **Morgan home renewal** title containing your initials and date, check its due date, and click that title to reopen the policy.",
           "Close the dialog, return to **My workspace**, and compare **Renewals** with **All priorities**.",
         ],
         expected: [
@@ -519,8 +519,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect a commercial property account",
         action: [
-          "Open **Clients & policies** > **Coastal Fabrication Group**, **Commercial property**, LM-8426108.",
-          "Inspect **Overview** and **Renewal review** to see the same account context. Open **Documents** and click **Coverage summary** to inspect how a signed-in agent retrieves a protected account document.",
+          "Click **Clients & policies** in the left sidebar. In the table, select **Coastal Fabrication Group** with product **Commercial property** and policy number **LM-8426108**.",
+          "In the policy details dialog, click **Overview** and read the product, state, and policy dates. Click **Renewal review** to read the renewal guidance, then **Documents** > **Coverage summary** to download the account summary.",
         ],
         expected: [
           "The selected policy is **Commercial property**, **LM-8426108**, in Florida. Confirm the product and number because this account also has a general-liability policy.",
@@ -543,9 +543,9 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Compare the wholesale route",
         action: [
           "Open **Clients & policies** > **Northpoint Property Partners**, **Specialty casualty**, LM-8426111.",
-          "Inspect **Overview**, **Documents**, and **Renewal review**; close the dialog.",
+          "In the policy details dialog, click **Overview**, **Documents**, and **Renewal review** in turn. Compare the policy information, available document links, and renewal guidance, then close the dialog.",
           "Open **Products & appetite** > **Specialty** > **Specialty casualty** > **Explore coverage**.",
-          "Open **Elena Park**’s profile and inspect **Distribution channel** and **Licensed states**.",
+          "Click **Elena Park** in the upper-right profile menu to open **Your profile**. Read **Distribution channel** and **Licensed states** and compare them with the specialty guidance you just opened.",
         ],
         expected: [
           "The account belongs to **Summit Specialty Partners** and remains unchanged.",
@@ -583,7 +583,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Create a new bond request",
         action: [
-          "Open **Quote & submit** > **New bond request**.",
+          "Click **Quote & submit** in the left sidebar, then click **New bond request** above the submissions table.",
           "**Principal legal name**: Bayline Construction [your initials] [today’s date/time]. **Obligee**: City of Clearwater Facilities. The unique principal name identifies the record created during this run.",
           "**Bond type**: **Contract performance**. **State**: Florida. **Bond amount ($)**: 250000.",
           "**Project / request notes**: Municipal facility improvement. Gather principal financials and project details.",
@@ -720,9 +720,9 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the native form configuration",
         action: [
-          "Open **Contact your team** in **SitecoreAI Forms**. Select **Edit form**, then **Edit** to inspect the active designer.",
-          "Inspect **Your name**, **Work email**, **Agency name**, **How can we help?**, and **What would you like to discuss?**.",
-          "Open **Settings** using the gear. Inspect **Demo Webhook**, site availability, and the success message.",
+          "Click **Open the native form** below. In **SitecoreAI Forms**, confirm the form name is **Contact your team**, select **Edit form**, and then select **Edit** to open the designer.",
+          "On the form canvas, read the five field labels: **Your name**, **Work email**, **Agency name**, **How can we help?**, and **What would you like to discuss?**. These are the fields you will complete in the portal.",
+          "Click the **Settings** gear in the form designer. Read the selected webhook name **Demo Webhook**, check **Site** availability for **liberty-mutual-agent-portal**, and read the configured success message. Leave these settings unchanged.",
         ],
         expected: [
           "The form is **Active** for **liberty-mutual-agent-portal**. All five fields are required.",
@@ -735,7 +735,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Complete the agent-facing form",
         action: [
-          "Open **Support** > **Contact your team**.",
+          "Click **Support** in the left sidebar, then scroll below the relationship-team cards to the form headed **Contact your team**.",
           "Optionally click **Send request** while the form is blank to inspect the five required-field errors. Fill **Your name**: **Daniel Ortiz**; **Work email**: **daniel.01@example.com**; **Agency name**: **Prairie Oak Insurance**.",
           "Select **How can we help?** > **Agency growth**. In **What would you like to discuss?**, enter a unique marker such as LM-NATIVE-[your initials]-[date-time].",
           "Click **Send request** once.",
@@ -815,9 +815,9 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Create one named English Draft",
         action: [
-          "In **Page Builder**, select **Home** > **Learning & resources** > **Workers compensation: a Texas starting point**. In **Layers**, select **ResourceArticle**.",
-          "Record the selected **English** version number. Open the version selector above the canvas > **Create version**, name it resource-review-[your initials]-[date-time], and click **Create**. The name makes this exercise’s version identifiable later.",
-          "Reopen the version selector and select the newest **English** **Draft**. Wait for that version’s header and fields to load, then open **Apps** > **Resource metadata**. Confirm the selected version matches the new name before editing.",
+          "Click **Open Page Builder** below. In the left page tree, expand **Home** > **Learning & resources**, then select **Workers compensation: a Texas starting point**. Click the stacked-layers **Layers** icon above the tree and select **ResourceArticle**.",
+          "Above the page canvas, the version dropdown is immediately left of **Default editing host**. Open it, record the selected **English** version number, then choose **Create version**. Name the version resource-review-[your initials]-[date-time] and click **Create** so you can recognize it later.",
+          "Reopen that version dropdown and select the newest **English** **Draft** with your version name. Wait for its fields to load. In the top toolbar, click the puzzle-piece **Apps** icon, then **Resource metadata**. Check the selected page, language, and version shown in the panel.",
         ],
         expected: [
           "The panel displays the metadata for the selected resource page. Check its page name, language, and version before changing a value.",
@@ -829,7 +829,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Understand the managed choices",
         action: [
           "Record all five loaded values. The baseline is **Risk state**: Texas; **Business family**: **Small commercial**; **Product**: **Workers’ compensation**; **Distribution channel**: **Independent agent**; **Resource type**: **State guidance**.",
-          "Read the help under each dropdown to see what its choice means for finding the resource. Keep a record of the loaded values so you can restore them after testing the panel.",
+          "Scroll within the **Resource metadata** panel to read all five dropdowns and their help text. Copy each current value into your notes so you can restore it after testing.",
         ],
         expected: [
           "Each field permits one selection, giving authors consistent choices for describing the resource.",
@@ -840,7 +840,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Try an unsaved change and discard it",
         action: [
           "Select **Resource type** > **Preparation guide**.",
-          "Observe the unsaved-change count, then click **Discard changes**.",
+          "At the bottom of the panel, check for **1 unsaved change** and an enabled **Save metadata** button. Click **Discard changes** beside that button.",
         ],
         expected: [
           "**1 unsaved change** appears and **Save metadata** becomes available; the canvas retains the saved classification.",
@@ -850,7 +850,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Save metadata, read it back, then restore it",
         action: [
-          "Select **Preparation guide** again and click **Save metadata**. Click **Refresh** in the panel.",
+          "Set **Resource type** to **Preparation guide** again and click **Save metadata** at the bottom of the panel. After **Metadata saved** appears, click **Refresh** beside the selected-resource details near the top of the panel.",
           "Restore the original **Resource type** recorded earlier. Click **Save metadata**, then **Refresh**.",
           "Select **Learning & resources**, then return to the Texas article and the same **English** **Draft**. Verify all five original values.",
         ],
@@ -863,12 +863,12 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Edit and preview the temporary summary",
         action: [
-          "Close the metadata app. Open **Content mode** > **Summary**.",
+          "Close **Resource metadata** with the × at the panel’s upper right. Click the **Content** tab in Page Builder’s top navigation, then locate the **Summary** field for the selected Texas article.",
           "Enter: Prepare your next Texas employer conversation using this source-linked overview.",
-          "Click outside **Summary** and wait for the **Saved** checkmark. Return to **Editor** view for the same **Draft** with **Default** editing host.",
+          "Click outside **Summary** and wait for the **Saved** checkmark. Click **Editor** in the top navigation. Keep the same **Draft** and **Default editing host**, then read the summary immediately below the article title in the page preview.",
         ],
         expected: [
-          "**Content mode** saves when you click outside the field. The **Saved** checkmark confirms the change, and the canvas shows the temporary summary with the original source and body.",
+          "The **Content** tab saves when you click outside the field. The **Saved** checkmark confirms the change, and the page preview shows the temporary summary with the original source and body.",
         ],
       },
       {
@@ -962,7 +962,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Create a page from the resource branch",
         action: [
-          "In **Page Builder**, select **Liberty Mutual Agent Portal**. At **Learning & resources**, click … > **Create a subpage**.",
+          "In **Page Builder**, confirm **Liberty Mutual Agent Portal** in the site selector at the upper left. In the left page tree, expand **Home**, select **Learning & resources**, and open its … menu > **Create a subpage**.",
           "Choose **Resource page** > **Select**. Enter a unique lowercase, hyphen-separated name such as resource-practice-jd-20260918-1430, replacing the initials and date/time with your own. Press Enter.",
           "Click **Reload tree** and select your new page.",
         ],
@@ -975,8 +975,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Add practice content and a Media image",
         action: [
-          "In **Content mode**, set **Title** to Resource practice [your initials] and **Summary** to Practice guidance for an agent conversation. Click outside each field and wait for **Saved**. This gives the new page visible content without changing an existing article.",
-          "Return to **Editor**. Click the blank image area between summary and body > **Browse media library** > **Media BETA**.",
+          "With your new page selected, click **Content** in the top navigation. Set **Title** to Resource practice [your initials] and **Summary** to Practice guidance for an agent conversation. Click outside each field and wait for **Saved**.",
+          "Click **Editor** in the top navigation. In the page preview, click the blank image area between the summary and body, then **Browse media library** > **Media BETA**.",
           "Select **liberty-mutual-businessowner-preparing-submission.jpg**. Inspect **Details** > **Alt text** and **Delivery** > **Public link**.",
           "Under **Image transformation**, set **Width** to 640 with aspect ratio locked, then click **Insert**.",
         ],
@@ -988,7 +988,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect metadata without changing classification",
         action: [
-          "Open **Apps** > **Resource metadata** on the new resource.",
+          "Keep the new resource page selected. Click the puzzle-piece **Apps** icon in the top toolbar, then **Resource metadata**.",
           "Inspect the five dropdowns. Set **Resource type** to **Preparation guide**, observe the unsaved-change indicator, then click **Discard changes** to return to the blank starting classification.",
         ],
         expected: [
@@ -1063,7 +1063,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the isolated practice component",
         action: [
           "Open **Page Builder** > **Home** > **Agency growth** > **Campaign practice**.",
-          "In **Layers**, select the first **CampaignAccordion**. Record its position and the content item shown as its datasource, meaning the item that supplies its text. This distinguishes the original from the copy you will remove during cleanup.",
+          "In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane. Select the first **CampaignAccordion** in that list. Record its position and datasource—the content item supplying its text—so you can identify the duplicate during cleanup.",
         ],
         expected: [
           "The unpublished page has independent local content and the component toolbar is available. The live campaign uses different content.",
@@ -1084,8 +1084,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Compare the sidebar’s allowed components",
         action: [
-          "Select **CampaignLinkList** > **Swap with another component**.",
-          "Inspect the options, then cancel.",
+          "In the **Layers** list, select **CampaignLinkList**. On its component toolbar, click **Swap with another component**.",
+          "Read the component names in the selection dialog, then click **Cancel** to keep the current sidebar component.",
         ],
         expected: [
           "The sidebar offers **CampaignContact** and **CampaignLinkList**, distinct from the main region’s options.",
@@ -1139,7 +1139,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Record the original practice Body field",
         action: [
-          "Open **Page Builder** > **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data** > **Growth opportunity**.",
+          "Click **Open Page Builder** below, then **Content** in the top navigation. In the content tree, expand **Home** > **Agency growth** > **Campaign practice** > **Data**, and select **Growth opportunity**. Locate its **Body** rich-text editor.",
           "Copy the complete original **Body**, including formatting, into your notes. Replace it temporarily with: We help your agnecy prepare for the next client conversation. The deliberate misspelling lets you see what the AI correction changes.",
         ],
         expected: [
@@ -1150,8 +1150,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Review and keep a grammar correction",
         action: [
-          "Select **Optimize with AI** > **Fix spelling and grammar**.",
-          "Compare the original and proposed text. Click **Keep optimized**.",
+          "Click inside the **Body** rich-text editor to expose its editing toolbar. Select **Optimize with AI**, then **Fix spelling and grammar**.",
+          "In the AI result view, compare your sentence with the proposed correction. Confirm that **agnecy** becomes **agency**, then click **Keep optimized**.",
           "Wait for the save checkmark and reload the item.",
         ],
         expected: [
@@ -1372,8 +1372,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Search by the native agent identifier",
         action: [
-          "In **SitecoreAI**, open **Performance** > **Profiles**.",
-          "Open **Search filter** > **Liberty Mutual agent identity**. Paste the copied **Agent identity** value into **Search by Liberty Mutual agent identity** and press Enter.",
+          "In **SitecoreAI**, click **Performance** in the top navigation, then **Profiles** in the left sidebar.",
+          "Above the profile results, open the **Search filter** dropdown beside the search input and select **Liberty Mutual agent identity**. Paste the copied identifier into **Search by Liberty Mutual agent identity** and press Enter.",
           "Wait for the matching person, then click their name.",
         ],
         expected: [
@@ -1384,8 +1384,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Record a baseline before browsing tagged pages",
         action: [
-          "Open **Overview** > **Top affinities**. Record existing topic names and scores, or note that no affinities are shown. This is the starting point for measuring what subsequent page visits add.",
-          "Open **Engagement** and find the most recent session following your portal sign-in. Note its time and page views so later clicks can be matched to newly recorded activity. If you have not browsed with this profile yet, there may be no session to inspect.",
+          "On the open profile, select **Overview** and scroll to the **Top affinities** section. Record its topic names and scores, or note that it is empty. These starting values let you compare what later resource visits add.",
+          "Click **Engagement** on the profile and open the session whose time matches your portal sign-in. Read its page-view events and note their times so you can recognize later activity. A profile that has not yet browsed may have no session.",
         ],
         expected: [
           "Earlier walkthroughs may already have added history. Signing out and signing in does not clear affinity scores; a reviewer reset activates clean profiles instead. Record any existing scores before making a comparison.",
@@ -1435,8 +1435,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Find the rule on its own component",
         action: [
-          "In **Page Builder**, open **Home** > **Agency growth** > **Small-business growth**.",
-          "Select **CampaignCallout** in **Layers** and click **Edit personalization rules**.",
+          "In Page Builder’s left page tree, expand **Home** > **Agency growth** and click **Small-business growth**. Keep **Editor** selected in the top navigation.",
+          "Click the stacked-layers **Layers** icon at the top of the left pane and select **CampaignCallout**. Open **Edit personalization rules** for that selected component to see which audience receives its personalized content.",
         ],
         expected: [
           "The panel shows **Personalized** and the rule **Liberty Mutual - Small business growth opportunity**. This rule chooses the campaign callout based on the calculated agency opportunity.",
@@ -1446,7 +1446,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Understand the business calculation",
         action: [
-          "Open the saved custom value and inspect its JavaScript without changing it.",
+          "Click **Open the saved JavaScript custom value** below. Confirm the name **Liberty Mutual - Small business growth opportunity**, then read the code displayed in its editor. Leave the code unchanged.",
           "Read the ratio as small-commercial premium divided by personal plus small-commercial premium. **Growth opportunity** requires a share below 20%.",
         ],
         expected: [
@@ -1475,7 +1475,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Compare the campaign for Avery and Daniel",
         action: [
-          "Open **Agency growth** > **Small business growth** and read the campaign callout.",
+          "In the portal sidebar, click **Show Agency growth pages** beside **Agency growth**, then **Small business growth**. Under **ON THIS PAGE**, click **Opportunity** and read the callout headline in that section.",
           "**Sign out**, sign in as **daniel.01** with password **Sitecore**, then open the same page.",
         ],
         expected: [
@@ -1528,8 +1528,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the tagged-page setup and starting profiles",
         action: [
-          "Open **Performance** > **Settings** > **Affinities** and select **Liberty Mutual Agent Portal**.",
-          "Inspect the **insurance_interest** assignments without changing them.",
+          "In **SitecoreAI**, click **Performance** in the top navigation. Click the **Settings** gear at the bottom of the left sidebar, then **Affinities**. In the site list beside the settings menu, select **Liberty Mutual Agent Portal**.",
+          "In the table on the right, read the **Affinity Name**, **Affinity Value**, and **Page** columns. Compare the pages mapped to **workers_compensation** and **household** under **insurance_interest**. Leave these assignments unchanged.",
           "Open the current Daniel, Maya, and Elena profiles and record existing scores before any tagged visits.",
         ],
         expected: [
@@ -1541,7 +1541,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Record Daniel’s starting Products experience",
         action: [
-          "Open **Products & appetite** > **Risk state**: Illinois.",
+          "Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the product-category tabs.",
           "Record the displayed headline and compare it with Daniel’s starting **Top affinities**.",
         ],
         expected: [
@@ -1563,7 +1563,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Connect Daniel’s score to the rendered spotlight",
         action: [
           "On Daniel’s current native profile, open **Engagement** and look for the two resource visits, then **Overview** > **Top affinities** for **workers_compensation**. Refresh the profile if new events have not appeared yet. If they remain absent, recheck the current **Agent identity** before interpreting the portal headline.",
-          "Return to **Products & appetite** with Illinois selected. Read the headline and click **Review account preparation**.",
+          "Return to **Products & appetite**, confirm **Illinois** in **Risk state**, and read the large spotlight card above the product-category tabs. Click **Review account preparation** within that card.",
           "Confirm Illinois remains in the destination context, then sign out.",
         ],
         expected: [
@@ -1575,7 +1575,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Build Maya’s distinct household interest",
         action: [
-          "Open **Products & appetite** > **Risk state**: Texas and record the starting headline.",
+          "Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Texas**. Record the headline in the large spotlight card above the product-category tabs.",
           "Select **Personal lines** > **Homeowners** > **Explore coverage**. On **Personal insurance**, click **Explore the preparation guide**.",
           "Click **Products & appetite** in the sidebar and confirm **Risk state** remains **Texas**. In Maya’s current profile, inspect **Engagement** for those visits and **Overview** > **Top affinities** for **household**. Refresh if the new events are not yet visible.",
         ],
@@ -1588,7 +1588,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Check the household action and switch identities",
         action: [
           "Click **Review the household renewal checklist** and verify Texas in the destination context.",
-          "**Sign out**, then sign in as **elena.01** with password **Sitecore**. Open **Products & appetite** > **Risk state**: Illinois.",
+          "**Sign out**, then sign in as **elena.01** with password **Sitecore**. Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the product-category tabs.",
           "Compare Elena’s headline with her independently checked native scores.",
         ],
         expected: [
@@ -1599,8 +1599,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the authored mapping behind the result",
         action: [
-          "In **Page Builder**, select **Products & appetite**. After the canvas loads, open **Layers** > **ProductSpotlight** > **Edit personalization rules**.",
-          "Inspect **Liberty Mutual - Product interest spotlight** and the **Top Affinity** equality rows for **workers_compensation** and **household**.",
+          "In Page Builder’s left page tree, select **Home** > **Products & appetite**. In **Editor**, click the stacked-layers **Layers** icon, select **ProductSpotlight**, and click **Edit personalization rules** for that component.",
+          "In the rules panel, read **Liberty Mutual - Product interest spotlight**. Locate the two rows using **Top Affinity**: one equals **workers_compensation**, and one equals **household**. Compare each row’s content choice with the headlines you saw in the portal.",
           "Click **Cancel** and record the ending profiles, scores, and displayed headlines.",
         ],
         expected: [
@@ -1643,9 +1643,9 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Preview the current authored variations",
         action: [
-          "In **Page Builder**, select **Home** > **Learning & resources** > **Layers**. Click the test icon beside **AgentGuidance**.",
-          "Open **Liberty Mutual Small Business Guide CTA**. **Preview** A, then B.",
-          "Compare the heading, body, button destination, and applied configuration. Return the editor selection to **A**.",
+          "In Page Builder’s left page tree, select **Home** > **Learning & resources**. In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane. Locate **AgentGuidance** in the list and click its test icon.",
+          "In the test panel, open **Liberty Mutual Small Business Guide CTA**. Select variation **A** and click **Preview**, then select **B** and click **Preview**. Read the guidance button in each preview.",
+          "Compare the button labels and check that the surrounding heading, description, and destination stay the same. In the test’s configuration, read the traffic split and goal. Return the variation selector to **A**.",
         ],
         expected: [
           "**A** says **Start with small business**. **B** says **Build your small-business practice**. Only the button label differs.",
@@ -1659,7 +1659,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Follow the button shown to Daniel",
         action: [
-          "Open **Learning & resources**. Below the search results, find **Useful guidance, easier to find**.",
+          "Click **Learning & resources** in the portal’s left sidebar. Scroll below the search results to the card headed **Useful guidance, easier to find**. Its button will show one of the two labels you previewed.",
           "Record the visible action label, then click it.",
           "Return once to **Learning & resources** and record the action label again. Record the visit time, then sign out.",
         ],
@@ -1672,7 +1672,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the corresponding native page events",
         action: [
           "Open **Performance** > **Profiles**. Select **Search filter** > **Liberty Mutual agent identity**, enter Daniel’s current identifier, and open **Daniel Ortiz**.",
-          "Open **Engagement**, then the session whose timestamp matches your portal visit. Find **Resources**, **growth-guide**, and the return to **Resources**. Compare their times with your notes; refresh if the new events have not yet appeared.",
+          "On Daniel’s profile, click **Engagement** and open the session matching the time you recorded in step 3. Read its page-view events for **Resources**, **growth-guide**, and the return to **Resources**. Compare the event times with your notes, and refresh if the new events have not appeared yet.",
         ],
         expected: [
           "The matching timestamps connect Daniel’s portal journey to the recorded page visits. The experiment report in the next step shows which visits and goals were credited to the test.",
@@ -1682,8 +1682,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Review goals, confidence, and test status",
         action: [
-          "Open **Performance** > **Component A/B/n tests**. Select **Site**: **liberty-mutual-agent-portal** and **Test**: **Liberty Mutual Small Business Guide CTA**.",
-          "Record current visits, goals, goal rates, confidence, and test status for each treatment.",
+          "Click **Open the existing component test report** below to open **Performance** > **Component A/B/n tests**. In the report’s filters, set **Site** to **liberty-mutual-agent-portal** and **Test** to **Liberty Mutual Small Business Guide CTA**.",
+          "Read the result row for **A**, then **B**. Record each row’s visits, goals, and goal rate, along with the report’s confidence and test status, to compare the two labels.",
           "Close the report without changing the experiment.",
         ],
         expected: [
@@ -1733,7 +1733,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Inspect the connected workflow",
         action: [
           "Click **Open the saved workspace** below and confirm the space title is **Liberty Mutual | Watkins Insurance Group outreach**. If another space opens, use **Open SitecoreAI** above, confirm **Safeco Insurance Company of America POC**, and open **Agentic** > **Spaces** > **Liberty Mutual | Watkins Insurance Group outreach**.",
-          "Select **Chat**, then **Agents**. Inspect **Connected workflow**: **Account Enrichment**, **Brief Generation**, and **Content Generation**. These stages show how research supplies a brief and how the brief supplies content tasks.",
+          "At the top of the space, select the **Chat** view. In the right-hand panel, select **Agents** and read the three stages under **Connected workflow**: **Account Enrichment**, **Brief Generation**, and **Content Generation**. Follow their top-to-bottom order from research to a brief and content tasks.",
         ],
         expected: [
           "Three connected stages organize research, a brief, and content tasks alongside saved run history and artifacts.",
@@ -1744,7 +1744,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Read reusable and per-run instructions",
         action: [
-          "Click **Instructions** and read **Space Context**: **Objective**, **Constraints**, and **Brand Guidance**. Identify the goal, source restrictions, and output expectations that the space retains for repeat work.",
+          "In the space’s right-hand panel, click **Instructions**, beside **Agents**. Under **Space Context**, read **Objective**, **Constraints**, and **Brand Guidance**. Note the goal, source restrictions, and output format that these instructions establish.",
           "Read **Agent Context** below **Space Context** to distinguish instructions for the next execution from the shared space requirements. Return to **Agents** without editing.",
         ],
         expected: [
@@ -1755,7 +1755,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the run’s research and tool context",
         action: [
-          "In **Chat**, below the workflow outputs, find the prompt beginning **Create the final, readable Watkins**. If its **Context** and **Tools** are hidden, expand **Prompt details** to inspect what the agent could use for that response.",
+          "In the center **Chat** conversation, scroll to the message beginning **Create the final, readable Watkins** below the workflow outputs. Expand that message’s **Prompt details** to reveal **Context** and **Tools**.",
           "Inspect that prompt’s **Context** and **Tools**, then the **Web Search** results below it. Open a source link if you want to compare a research claim with its evidence; return to the saved conversation afterward.",
         ],
         expected: [
@@ -1766,7 +1766,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the Brand Kit used in the conversation",
         action: [
-          "Find and expand the completed **Get Brand Kit** tool result in the saved conversation. Read the returned kit name to confirm which brand instructions the agent retrieved.",
+          "In the same **Chat** conversation, scroll through the response beneath **Create the final, readable Watkins**. Expand the completed **Get Brand Kit** tool result and read its returned kit name, **Liberty Mutual — Independent Agents**.",
           "Expand **Get Brand Kit Section**. Check **Input** for sectionName: **Visual Guidelines** and read **Output**. Inspect the retrieved **Tone of Voice** and **Brand Context** sections where shown.",
         ],
         expected: [
@@ -1777,7 +1777,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Open the saved research and HTML artifacts",
         action: [
-          "Select **Artifacts** > **Watkins | Account research and campaign brief**. Open its card with the expand arrows.",
+          "Click **Artifacts** at the top of the space, beside the view selectors. Select **Watkins | Account research and campaign brief**, then click the expand arrows on that card to open the artifact viewer.",
           "In the dialog’s left list, choose **Watkins | Principal email preview | Patrick Watkins** and click **Preview** to see the readable email layout.",
           "Next select **Watkins | Advisor email preview | Clint Bradford**, then **Watkins | Client service email preview**, choosing **Preview** for each. Compare the audience, message, and call to action. **Content**, **JSON**, or **HTML** views, when offered, expose the output structure for a technical review.",
         ],
@@ -1790,7 +1790,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the human review behind the final output",
         action: [
           "Close the artifact dialog and read the later refinement prompts in **Chat**. Look for requested factual corrections and presentation changes to understand where people improved the generated output.",
-          "Select **Artifacts** > **Watkins outreach | Evidence and editorial review** and expand its card.",
+          "Click **Artifacts** at the top of the space, select **Watkins outreach | Evidence and editorial review**, and click that card’s expand arrows. Read the review notes to see which facts and presentation details received human attention.",
         ],
         expected: [
           "The saved history records corrections, editorial decisions, and refined output. Evidence stays separate from recipient-facing content.",
