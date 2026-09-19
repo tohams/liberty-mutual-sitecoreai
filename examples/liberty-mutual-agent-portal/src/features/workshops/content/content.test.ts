@@ -6,6 +6,7 @@ import test from "node:test";
 import { workshopGuides } from "./index";
 import { guidePriorities } from "./priorities";
 import { plainGuideText } from "../guide-text";
+import { guideStepImages } from "../guide-images";
 
 import type { GuideLink, WorkshopGuide } from "../types";
 
@@ -213,26 +214,28 @@ test("guide links use safe destinations and repository file links resolve in the
 
 test("screenshots are present in protected assets and have useful alternative text", () => {
   for (const guide of workshopGuides) {
-    for (const step of guide.steps) {
-      if (!step.image) continue;
-      assert.match(
-        step.image.file,
-        /^[a-z0-9][a-z0-9-]{0,79}\.(png|webp)$/,
-        `${guide.slug}: screenshot name`,
-      );
-      assert.ok(
-        step.image.alt.trim() && step.image.caption.trim(),
-        `${guide.slug}: screenshot context`,
-      );
-      assert.ok(
-        existsSync(join(appRoot, "workshop-assets", step.image.file)),
-        `${guide.slug}: screenshot file missing`,
-      );
-      assert.ok(
-        !existsSync(join(appRoot, "public", step.image.file)) &&
-          !existsSync(join(appRoot, "public/workshop-assets", step.image.file)),
-        `${guide.slug}: private screenshot must not be copied into public assets`,
-      );
+    for (const [stepIndex, step] of guide.steps.entries()) {
+      for (const image of guideStepImages(step)) {
+        const context = `${guide.slug}, step ${stepIndex + 1}, ${image.file}`;
+        assert.match(
+          image.file,
+          /^[a-z0-9][a-z0-9-]{0,79}\.(png|webp)$/,
+          `${context}: screenshot name`,
+        );
+        assert.ok(
+          image.alt.trim() && image.caption.trim(),
+          `${context}: screenshot context`,
+        );
+        assert.ok(
+          existsSync(join(appRoot, "workshop-assets", image.file)),
+          `${context}: screenshot file missing`,
+        );
+        assert.ok(
+          !existsSync(join(appRoot, "public", image.file)) &&
+            !existsSync(join(appRoot, "public/workshop-assets", image.file)),
+          `${context}: private screenshot must not be copied into public assets`,
+        );
+      }
     }
   }
 });

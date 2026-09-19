@@ -21,6 +21,7 @@ import {
   workshopGuides,
 } from "@/features/workshops/content";
 import { GuideText } from "@/features/workshops/GuideText";
+import { guideStepImages } from "@/features/workshops/guide-images";
 import type { GuideLink } from "@/features/workshops/types";
 function ExternalLinks({ links }: { links?: GuideLink[] }) {
   return links?.length ? (
@@ -220,7 +221,23 @@ export default async function GuidePage({
                         </p>
                       </div>
                     )}
-                    {step.image && <GuideScreenshot image={step.image} />}
+                    {guideStepImages(step).map((image, imageIndex) => (
+                      <GuideScreenshot
+                        key={`${image.file}-${imageIndex}`}
+                        image={{
+                          ...image,
+                          title: image.title
+                            ? contextual(image.title)
+                            : undefined,
+                          alt: contextual(image.alt),
+                          caption: contextual(image.caption),
+                          annotations: image.annotations?.map((annotation) => ({
+                            ...annotation,
+                            label: contextual(annotation.label),
+                          })),
+                        }}
+                      />
+                    ))}
                   </div>
                 </section>
               ))}

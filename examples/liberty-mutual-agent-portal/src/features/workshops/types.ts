@@ -7,6 +7,26 @@ export interface GuideImage {
   file: string;
   alt: string;
   caption: string;
+  title?: string;
+  /** Pixel bounds within the untouched source screenshot. */
+  crop?: GuideImageCrop;
+  /** Percentages of the displayed image, after any crop. Order sets the numbers. */
+  annotations?: GuideImageAnnotation[];
+}
+export interface GuideImageCrop {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  sourceWidth: number;
+  sourceHeight: number;
+}
+export interface GuideImageAnnotation {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  label: string;
 }
 export interface GuideStep {
   id?: string;
@@ -17,6 +37,8 @@ export interface GuideStep {
   code?: string;
   links?: GuideLink[];
   image?: GuideImage;
+  /** Ordered screenshots; when provided, this replaces the legacy single image. */
+  images?: GuideImage[];
 }
 export interface WorkshopGuide {
   slug: string;

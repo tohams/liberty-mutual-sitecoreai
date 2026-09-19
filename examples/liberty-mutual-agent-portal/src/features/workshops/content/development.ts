@@ -43,8 +43,9 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Start with three visible experiences",
         action: [
-          "Use the **Open the agent portal** link below and **Sign in** as **daniel.01** with password **Sitecore**. On **My workspace**, find **Agency Growth**. Open **Learning & resources**, then **Products & appetite** from the portal navigation.",
-          "On **Learning & resources**, find **Useful guidance, easier to find** below the search results; its button label is the A/B comparison. On **Products & appetite**, inspect the banner above the product content. These are separate components from the **Agency Growth** card on Home, so each relevance method has its own visible example.",
+          "Use **Open the agent portal** below and **Sign in** as **daniel.01** with password **Sitecore**. Select **My workspace** in the left navigation. Scroll below **Your priorities** to the white card labeled **Agency Growth**, immediately above **Recent activity**. Read its heading and yellow button; the first close-up below shows this card.",
+          "Select **Learning & resources** in the left navigation. Scroll below the search-result cards and page-number controls to **Useful guidance, easier to find**, immediately above **Your next learning opportunity**. Its yellow button is the A/B test comparison; the second close-up shows the location and an example button label.",
+          "Select **Products & appetite** in the left navigation. Look directly below the page title and **Risk state**, above the **All solutions** filter. This wide illustrated banner is **ProductSpotlight**, shown in the third close-up. Record its heading before browsing resources; your current interests may already have changed the text.",
         ],
         expected: [
           "**My workspace** is the portal’s home page. In **Page Builder**, select **Home** to inspect its content and components.",
@@ -55,8 +56,9 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Find the authored content and its React implementation",
         action: [
-          "Open the **Page Builder** link with your invited Sitecore account. Confirm **Liberty Mutual Agent Portal** in the site selector. Leave the editing-host selector on **Default editing host**; if a previous local exercise left **Local host** selected, switch back to **Default editing host**.",
+          "Open the **Page Builder** link with your invited Sitecore account. Confirm **Liberty Mutual Agent Portal** in the site selector. Leave the editing-host selector on **Default editing host**; if a previous local exercise left **Local host** selected, choose **Default editing host**, then click **Save**.",
           "Select **Pages**, expand **Home**, and select **Home**, then **Learning & resources**. Inspect the canvas without changing fields or clicking **Publish**.",
+          "Expand **Learning & resources** and select **Workers compensation: a Texas starting point**. Select **Editor** in the top navigation, then click the stacked-layers **Layers** icon above the left tree. Find **ResourceArticle** and expand its image placeholder to see **ResourceImage**, matching the screenshot below. This connects the rendered article and photograph to the component names you will inspect in the source.",
           "Open **Browse component implementations** below. This opens **examples/liberty-mutual-agent-portal/src/components** on GitHub; a local clone is not required. Inspect **agent-guidance/AgentGuidance.tsx**, **resource-search/ResourceSearch.tsx**, **resource-article/ResourceArticle.tsx**, **resource-image/ResourceImage.tsx**, and **product-spotlight/ProductSpotlight.tsx**, and compare their rendered elements with the portal.",
         ],
         expected: [
@@ -315,7 +317,7 @@ export const developmentGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Continue to the component exercise with the terminal, **Page Builder**, and localhost tabs open. If stopping here, select **Default editing host** in the editing-host selector, sign out of the localhost portal with **Daniel Ortiz** → **Sign out**, then press Ctrl+C in the terminal.",
+        "Continue to the component exercise with the terminal, **Page Builder**, and localhost tabs open. If stopping here, select **Default editing host** in the editing-host selector and click **Save**, sign out of the localhost portal with **Daniel Ortiz** → **Sign out**, then press Ctrl+C in the terminal.",
         "Keep **.env.local** and **.portal-state** to reuse the setup, and keep them out of **Git**. This setup needs no shared portal reset or CMS publish.",
       ],
     },
@@ -412,7 +414,7 @@ export const developmentGuides: WorkshopGuide[] = [
         action: [
           "Review the diff. If this file contains only the uncommitted workshop edit, run the following restore command. If it also contains other work, manually restore only this heading instead.",
           "Restart npm run dev. In **Learning & resources**, click **Clear filters** if it is shown, erase the query text, then click **Search**.",
-          "Confirm the original heading and default licensed-state resource view. In **Page Builder**, confirm the original heading on **Local host**, then switch the editing-host selector back to **Default editing host**. Use **Daniel Ortiz** → **Sign out** in the localhost portal, then stop dev with Ctrl+C.",
+          "Confirm the original heading and default licensed-state resource view. In **Page Builder**, confirm the original heading on **Local host**, then select **Default editing host** and click **Save**. Use **Daniel Ortiz** → **Sign out** in the localhost portal, then stop dev with Ctrl+C.",
           "Run npm run build once more with dev stopped to return generated metadata to the build state. Leave generated **next-env.d.ts** changes out of a commit.",
         ],
         code: "git restore -- src/components/resource-search/ResourceSearch.tsx\nnpm run dev",
@@ -625,7 +627,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Keep local editing separate from shared hosting",
         action: [
           "Recall how **Page Builder**’s **Local host** option rendered your code at **http://localhost:3000**. Each developer’s browser connects to that developer’s machine.",
-          "The shared **Default editing host** uses the hosted preview frontend for normal authoring. If Page Builder remains open from the component exercise, open its editing-host selector and select **Default editing host** now. This returns your canvas to the shared frontend before you stop your local server.",
+          "The shared **Default editing host** uses the hosted preview frontend for normal authoring. If Page Builder remains open from the component exercise, open its editing-host selector, select **Default editing host**, then click **Save**. This returns your canvas to the shared frontend before you stop your local server.",
         ],
         expected: [
           "The local app needs Preview server content access and the matching editing secret, supplied automatically by setup:local for this POC. The browser uses its separate public-scoped context.",
