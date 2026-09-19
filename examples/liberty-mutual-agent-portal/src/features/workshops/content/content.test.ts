@@ -289,8 +289,44 @@ test("the local component and setup instructions still target the actual reposit
       documentedHeadings.some((heading) => source.includes(heading)),
     "the component must contain its documented starting heading or the exercise edit",
   );
-  assert.match(readableContent(local), /http:\/\/localhost:3000\/login/);
-  assert.match(readableContent(local), /Default editing host/);
+  const setupText = readableContent(local);
+  const componentText = readableContent(component);
+  assert.match(setupText, /http:\/\/localhost:3000\/login/);
+  assert.match(setupText, /Preview server context/);
+  assert.match(setupText, /matching editing secret/);
+  assert.match(setupText, /No manual copy\/paste/);
+  assert.match(setupText, /Chrome/);
+  assert.match(setupText, /Local host/);
+  assert.match(setupText, /Enter the editing host url/);
+  assert.match(componentText, /Page Builder.*canvas/);
+  assert.match(componentText, /separate.*http:\/\/localhost:3000\/resources/);
+  assert.match(
+    componentText,
+    /switch the editing-host selector back to.*Default editing host/,
+  );
+  assert.doesNotMatch(
+    componentText,
+    /have the Vercel project owner demonstrate a hosted preview/,
+  );
+  assert.match(readableContent(local.cleanup), /Default editing host/);
+});
+
+test("release teaching does not make hosting access an attendee prerequisite", () => {
+  const guide = workshopGuides.find(
+    (candidate) => candidate.slug === "release-and-recovery",
+  );
+  assert.ok(guide);
+  assert.match(readableContent(guide.prerequisites), /No Vercel access/);
+  assert.match(
+    readableContent(guide),
+    /No deployment or rollback is performed/,
+  );
+  assert.ok(
+    linksFor(guide).every(
+      (link) => new URL(link.href).hostname !== "vercel.com",
+    ),
+  );
+  assert.ok(guide.steps.every((step) => !step.code));
 });
 
 test("reset walkthroughs use the authenticated page and preserve the host, pack and history boundaries", () => {
