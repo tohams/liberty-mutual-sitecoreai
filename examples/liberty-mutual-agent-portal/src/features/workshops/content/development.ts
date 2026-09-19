@@ -23,9 +23,9 @@ export const developmentGuides: WorkshopGuide[] = [
       "Explain which service owns each part of the experience and which release path changes it.",
     personas: ["daniel"],
     prerequisites: [
-      "Use **daniel.01** with password **Sitecore** on the live portal linked below. The username displayed in this guide uses the workshop number with which you signed into the workshop website; confirm your number on **Attendee assignments**.",
-      "Open the repository link while signed into your own **GitHub** account. If it shows **404** or denies access, ask Angela, Allen, or Thomas to confirm your repository invitation before continuing with the source inspection.",
-      "For authoring inspection, use the email that received your **Sitecore Cloud** invitation. Open the organization link, sign in with that account, and confirm **Safeco Insurance Company of America POC**. The Page Builder link targets this organization’s portal environment; select **Liberty Mutual Agent Portal**. If either is missing, ask the workshop team to check your access; the fictional Daniel login cannot open SitecoreAI.",
+      `Use **daniel.01** with password **Sitecore** on the [**live portal**](${portal}/login). The username displayed in this guide uses the workshop number with which you signed into the workshop website; confirm your number on [**Attendee assignments**](/workshops/attendees).`,
+      `Open the [**repository**](${repository}) while signed into your own **GitHub** account. If it shows **404** or denies access, ask Angela, Allen, or Thomas to confirm your repository invitation before continuing with the source inspection.`,
+      `For authoring inspection, use the email that received your **Sitecore Cloud** invitation. Open the [**Sitecore organization**](${sitecore}), sign in with that account, and confirm **Safeco Insurance Company of America POC**. [**Page Builder**](${pageBuilder}) targets this organization’s portal environment; select **Liberty Mutual Agent Portal**. If either is missing, ask the workshop team to check your access; the fictional Daniel login cannot open SitecoreAI.`,
       "This is an inspection exercise. Do not change content, configuration, targeting, or saved records.",
     ],
     links: [
@@ -42,7 +42,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Start with three visible experiences",
         action: [
-          "Use **Open the agent portal** below and **Sign in** as **daniel.01** with password **Sitecore**. Select **My workspace** in the left navigation. Scroll below **Your priorities** to the white card labeled **Agency Growth**, immediately above **Recent activity**. Read its heading and yellow button; the first close-up below shows this card.",
+          `Open the [**agent portal**](${portal}/login) and **Sign in** as **daniel.01** with password **Sitecore**. Select **My workspace** in the left navigation. Scroll below **Your priorities** to the white card labeled **Agency Growth**, immediately above **Recent activity**. Read its heading and yellow button; the first close-up below shows this card.`,
           "Select **Learning & resources** in the left navigation. Scroll below the search-result cards and page-number controls to **Useful guidance, easier to find**, immediately above **Your next learning opportunity**. Its yellow button is the A/B test comparison; the second close-up shows the location and an example button label.",
           "Select **Products & appetite** in the left navigation. Look directly below the page title and **Risk state**, above the **All solutions** filter. This wide illustrated banner is **ProductSpotlight**, shown in the third close-up. Record its heading before browsing resources; your current interests may already have changed the text.",
         ],
@@ -55,10 +55,10 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Find the authored content and its React implementation",
         action: [
-          "Open the **Page Builder** link with your invited Sitecore account. Confirm **Liberty Mutual Agent Portal** in the site selector. Leave the editing-host selector on **Default editing host**; if a previous local exercise left **Local host** selected, choose **Default editing host**, then click **Save**.",
+          `Open [**Page Builder**](${pageBuilder}) with your invited Sitecore account. Confirm **Liberty Mutual Agent Portal** in the site selector. Leave the editing-host selector on **Default editing host**; if a previous local exercise left **Local host** selected, choose **Default editing host**, then click **Save**.`,
           "Select **Pages**, expand **Home**, and select **Home**, then **Learning & resources**. Inspect the canvas without changing fields or clicking **Publish**.",
           "Expand **Learning & resources** and select **Workers compensation: a Texas starting point**. Select **Editor** in the top navigation, then click the stacked-layers **Layers** icon above the left tree. Find **ResourceArticle** and expand its image placeholder to see **ResourceImage**, matching the screenshot below. This connects the rendered article and photograph to the component names you will inspect in the source.",
-          "Open **Browse component implementations** below. This opens **examples/liberty-mutual-agent-portal/src/components** on GitHub; a local clone is not required. Inspect **agent-guidance/AgentGuidance.tsx**, **resource-search/ResourceSearch.tsx**, **resource-article/ResourceArticle.tsx**, **resource-image/ResourceImage.tsx**, and **product-spotlight/ProductSpotlight.tsx**, and compare their rendered elements with the portal.",
+          `Open [**Browse component implementations**](${repository}/tree/main/examples/liberty-mutual-agent-portal/src/components). This opens **examples/liberty-mutual-agent-portal/src/components** on GitHub; a local clone is not required. Inspect **agent-guidance/AgentGuidance.tsx**, **resource-search/ResourceSearch.tsx**, **resource-article/ResourceArticle.tsx**, **resource-image/ResourceImage.tsx**, and **product-spotlight/ProductSpotlight.tsx**, and compare their rendered elements with the portal.`,
         ],
         expected: [
           "**Sitecore** stores page fields, component placement, and **datasources**—content items that supply a component’s fields. The **Content SDK** renders those fields through React and connects them to the visual editing tools.",
@@ -85,7 +85,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Trace content delivery separately from application hosting",
         action: [
           "Read this delivery sequence: an author publishes a **SitecoreAI** page; **Experience Edge** serves its published content; the **Next.js** frontend on **Vercel** renders it for the agent. This step explains the existing architecture; do not publish or deploy anything.",
-          "Compare the two login links below. **Live portal** uses liberty-mutual-agent-portal.vercel.app and reads published content. **Shared preview portal** uses the longer git-c8199e hostname and can read unpublished content. Use the live portal for this walkthrough; the preview link identifies the separate host used for normal editing and saved-work exercises.",
+          `Compare the two environments. [**Live portal**](${portal}/login) uses liberty-mutual-agent-portal.vercel.app and reads published content. [**Shared preview portal**](${previewPortal}/login) uses the longer git-c8199e hostname and can read unpublished content. Use the live portal for this walkthrough; the preview link identifies the separate host used for normal editing and saved-work exercises.`,
         ],
         expected: [
           "**Experience Edge** distributes published content separately from authoring. An authoring-only interruption need not prevent the website from reading previously published content.",
@@ -101,8 +101,8 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Locate the operational integration boundary",
         action: [
-          "Open the three source links below in GitHub. All three paths are relative to **examples/liberty-mutual-agent-portal**, not the repository root.",
-          "In **Portal API contracts**, find **PortalBootstrap** and **PortalAction** to see the data exchanged with the browser. In **Server actions and authorization**, inspect the checks before an action changes data. In **Durable state implementation**, compare the local JSON and deployed Redis adapters. This traces one request across the application without executing it.",
+          "The three source files are in **examples/liberty-mutual-agent-portal**. Inspect them on GitHub without running an action or changing saved work.",
+          `In [**Portal API contracts**](${appSource}/src/contracts/portal.ts), find **PortalBootstrap** and **PortalAction** to see the data exchanged with the browser. In [**Server actions and authorization**](${appSource}/src/server/data/portal.ts), inspect the checks before an action changes data. In [**Durable state implementation**](${appSource}/src/server/state/store.ts), compare the local JSON and deployed Redis adapters. This traces one request across the application without executing it.`,
         ],
         expected: [
           "Insurance records and production history come from replaceable JSON-backed adapters. Submission actions illustrate workflows; they do not rate, bind, issue coverage, or contact an underwriter.",
@@ -128,8 +128,8 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Understand identity, Search, and personalization evidence",
         action: [
-          "Open **Identity and saved-work contract** and **Native affinity implementation** below. Read how portal sign-in identifies a native **UDL** profile and how **Top Affinity** selects an authored variant. For an actual profile lookup, use the linked **Check fresh profiles in SitecoreAI** guide; this architecture step does not reset or train a profile.",
-          "Open **ResourceSearch implementation**, find **useSearch**, and inspect the licensed-state filters. Compare the documented Search source refresh with the publication step: saving or publishing an article and refreshing the Search index are separate operations.",
+          `Open [**Identity and saved-work contract**](${appSource}/docs/auth-and-data.md) and [**Native affinity implementation**](${repositoryDocs}/affinity-personalization.md). Read how portal sign-in identifies a native **UDL** profile and how **Top Affinity** selects an authored variant. For an actual profile lookup, use [**Check fresh profiles in SitecoreAI**](/workshops/guide/fresh-profile-restart); this architecture step does not reset or train a profile.`,
+          `Open [**ResourceSearch implementation**](${appSource}/src/components/resource-search/ResourceSearch.tsx), find **useSearch**, and inspect the licensed-state filters. Compare the documented Search source refresh with the publication step: saving or publishing an article and refreshing the Search index are separate operations.`,
         ],
         expected: [
           "Portal sign-in sends an **IDENTITY** event to link the agent to a native **UDL** profile. Inspect that profile and the resulting portal content to follow the complete personalization flow.",
@@ -161,7 +161,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Match a proposed change to its release path",
         action: [
           "Classify a proposed change: editorial copy or image, React behavior, CMS model, native targeting/Search, or operational data integration.",
-          "Open **Understand deployment and recovery** below and compare your example with its frontend, content, and CMS model sections. Keep private server contexts, session secrets, editing secrets, operator credentials, and Redis credentials outside browser code.",
+          "Open [**Understand deployment and recovery**](/workshops/guide/release-and-recovery) and compare your example with its frontend, content, and CMS model sections. Keep private server contexts, session secrets, editing secrets, operator credentials, and Redis credentials outside browser code.",
         ],
         links: [
           {
@@ -199,8 +199,8 @@ export const developmentGuides: WorkshopGuide[] = [
     personas: ["daniel"],
     prerequisites: [
       "Install **Git**, **VS Code**, and **Node.js** 24.19.0 with its included npm. The app’s **.nvmrc** records that version; a **Node** version manager is optional.",
-      "Open the private repository link below while signed into your own **GitHub** account. Confirm that you can see its files before cloning. If the link shows **404** or access is denied, ask Angela, Allen, or Thomas to confirm your invitation. Use that same GitHub identity for Git or VS Code authentication; **GitHub CLI** and repository write access are not required.",
-      "Use **Chrome** for Page Builder. Accept your **Sitecore Cloud** invitation and sign in with the email that received it. The organization must be **Safeco Insurance Company of America POC**, and the site must be **Liberty Mutual Agent Portal**. If the links below do not open that organization and site, ask the workshop team to check your access before starting; **daniel.01** is only a portal login.",
+      `Open the [**private repository**](${repository}) while signed into your own **GitHub** account. Confirm that you can see its files before cloning. If the link shows **404** or access is denied, ask Angela, Allen, or Thomas to confirm your invitation. Use that same GitHub identity for Git or VS Code authentication; **GitHub CLI** and repository write access are not required.`,
+      `Use **Chrome** for Page Builder. Accept your **Sitecore Cloud** invitation and sign in with the email that received it. Open the [**Sitecore organization**](${sitecore}), confirm **Safeco Insurance Company of America POC**, then open [**Page Builder**](${pageBuilder}) and select **Liberty Mutual Agent Portal**. If that organization or site is unavailable, ask the workshop team to check your access before starting; **daniel.01** is only a portal login.`,
       "Allow Internet access to **GitHub**, npm, and the hosted **Sitecore** services. This exercise runs the frontend on your machine and reads shared hosted content. It requires no **Vercel** account, Sitecore installation, Docker environment, or deployment.",
       "Use a new checkout for the exercise. Preserve any existing checkout containing your work; do not delete it to make room.",
     ],
@@ -280,7 +280,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Start the frontend and sign in locally",
         action: [
-          "Run npm run dev in the application terminal and leave it running. Wait for **Ready** and confirm its **Local** address uses port 3000 before opening the local login link below.",
+          "Run npm run dev in the application terminal and leave it running. Wait for **Ready** and confirm its **Local** address uses port 3000 before opening the [**local portal login**](http://localhost:3000/login).",
           "**Sign in** as **daniel.01** with password **Sitecore**. Each separate local checkout may reuse this login because its saved-work files are isolated.",
           "Select **Learning & resources**. Find **What can we help you find?** and the **My licensed states** default.",
         ],
@@ -301,7 +301,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Connect Page Builder to your running local frontend",
         action: [
-          "In **Chrome** on the machine running npm run dev, open the **Page Builder** link below. Sign in with your invited Sitecore Cloud email, confirm **Safeco Insurance Company of America POC**, and select **Liberty Mutual Agent Portal**. Your GitHub and Daniel logins are not authoring accounts.",
+          `In **Chrome** on the machine running npm run dev, open [**Page Builder**](${pageBuilder}). Sign in with your invited Sitecore Cloud email, confirm **Safeco Insurance Company of America POC**, and select **Liberty Mutual Agent Portal**. Your GitHub and Daniel logins are not authoring accounts.`,
           "Open **Default editing host**, select **Local host**, enter **http://localhost:3000** in **Enter the editing host url**, and click **Save**. Keep npm run dev running on this same machine.",
           "Select **Pages**, expand **Home**, and select **Learning & resources**. Find the **ResourceSearch** heading **What can we help you find?** on the canvas. This confirms that the editor can reach the local frontend before you change its code.",
         ],
@@ -334,13 +334,16 @@ export const developmentGuides: WorkshopGuide[] = [
       "Experience the local React feedback loop and verify a small change without publishing shared content.",
     personas: ["daniel"],
     prerequisites: [
-      "Complete **Local setup** using the link below. Keep the cloned **liberty-mutual-sitecoreai** root open in **VS Code** and its integrated terminal in **examples/liberty-mutual-agent-portal**. All commands in this guide run from that application folder.",
+      "Complete [**Run the portal locally**](/workshops/guide/local-setup). Keep the cloned **liberty-mutual-sitecoreai** root open in **VS Code** and its integrated terminal in **examples/liberty-mutual-agent-portal**. All commands in this guide run from that application folder.",
       "Check the branch name in VS Code’s lower-left status bar: use the **workshop/your-name-resource-search** branch created during setup. Open **Source Control** and confirm **ResourceSearch.tsx** has no existing edits. If it does, preserve that work in a different checkout before starting this one-file exercise.",
       "Keep two Chrome tabs: Page Builder for **Liberty Mutual Agent Portal**, connected to **Local host** at **http://localhost:3000**, and the localhost portal signed in as **daniel.01** with password **Sitecore**. Your Sitecore Cloud invitation supplies the authoring account; Daniel supplies only the portal session.",
       "Keep npm run dev running. This exercise needs no CMS publish, shared CDP training, **Vercel** access, or deployment.",
     ],
     links: [
-      { label: "Local setup", href: `${portal}/workshops/guide/local-setup` },
+      {
+        label: "Run the portal locally",
+        href: `${portal}/workshops/guide/local-setup`,
+      },
       {
         label: "Open local Learning & resources",
         href: "http://localhost:3000/resources",
@@ -441,14 +444,17 @@ export const developmentGuides: WorkshopGuide[] = [
       "Inspect real **Sitecore** results beside the local **ResourceSearch** component and propose a change without making it.",
     personas: [],
     prerequisites: [
-      "Complete the clone and **Open Folder** steps in **Local setup** first. In VS Code’s **Explorer**, confirm **liberty-mutual-sitecoreai** is the root and **authoring**, **docs**, and **examples** are its children. This exercise reads that checkout but does not require a running frontend.",
+      "Complete the clone and **Open Folder** steps in [**Run the portal locally**](/workshops/guide/local-setup) first. In VS Code’s **Explorer**, confirm **liberty-mutual-sitecoreai** is the root and **authoring**, **docs**, and **examples** are its children. This exercise reads that checkout but does not require a running frontend.",
       "Open **Copilot Chat** in your current **VS Code** and confirm that **Agent** mode is available. Sign in with the GitHub account that has your organization’s Copilot access. If Agent mode or MCP tools are unavailable, ask your organization’s development support team to confirm the extension, license, and policy before continuing.",
       "The content connection requires your own **Sitecore Cloud** account with a **SitecoreAI** application **Admin** role in **Safeco Insurance Company of America POC**. Ask Angela, Allen, or Thomas to confirm that access before this optional exercise; a scoped workshop **Author** or **Approver** role is not the required application Admin role.",
       "The documentation connection has a separate **Google** sign-in. Use a Google account permitted by your organization for that service. If company policy does not allow either connection, skip this optional guide; the local component exercise still works.",
-      "MCP lets your coding assistant use external tools for documentation and content inspection. This optional exercise uses the two connections below; you can leave the local development server stopped.",
+      "MCP lets your coding assistant use external tools for documentation and content inspection. This optional exercise connects **liberty-mutual-sitecoreai** and **sitecore-documentation**; you can leave the local development server stopped.",
     ],
     links: [
-      { label: "Local setup", href: `${portal}/workshops/guide/local-setup` },
+      {
+        label: "Run the portal locally",
+        href: `${portal}/workshops/guide/local-setup`,
+      },
       { label: "Open the Sitecore organization", href: sitecore },
       {
         label: "Open the checked-in configuration example",
@@ -472,8 +478,8 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         code: '{\n  "servers": {\n    "liberty-mutual-sitecoreai": {\n      "type": "http",\n      "url": "https://marketer.sitecorecloud.io/mcp/marketer-mcp-prod"\n    },\n    "sitecore-documentation": {\n      "type": "http",\n      "url": "https://sitecore.mcp.kapa.ai"\n    }\n  }\n}',
         expected: [
-          "**VS Code** loads the connections from **.vscode/mcp.json** at the repository root. The linked **docs/examples/mcp.vscode.json** provides a reference copy of this configuration.",
-          "The file contains each connection’s type and URL. **VS Code** uses the browser sign-in steps below to manage account authorization separately from this configuration.",
+          `**VS Code** loads the connections from **.vscode/mcp.json** at the repository root. [**docs/examples/mcp.vscode.json**](${repositoryDocs}/examples/mcp.vscode.json) provides a reference copy of this configuration.`,
+          "The file contains each connection’s type and URL. **VS Code** manages account authorization separately from this configuration. Continue to [**Authorize the Sitecore connection for the Liberty Mutual environment**](#step-2).",
         ],
       },
       {
@@ -528,7 +534,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Connect the results to the checked-out component",
         action: [
           "Open **examples/liberty-mutual-agent-portal/src/components/resource-search/ResourceSearch.tsx** in **VS Code** and submit the following prompt.",
-          "Compare the proposed heading and file path with the open file, and compare its CMS claims with the native results from the preceding step. Do not apply the proposal in this guide; **Component development** below provides the separate edit, verification, and restoration sequence.",
+          "Compare the proposed heading and file path with the open file, and compare its CMS claims with the native results from the preceding step. Do not apply the proposal in this guide; [**Change a React component**](/workshops/guide/component-development) provides the separate edit, verification, and restoration sequence.",
         ],
         code: "Use the Sitecore results, sitecore-documentation, and ResourceSearch.tsx in this workspace to explain which resource-search content is authored in Sitecore and which text lives in code. Compare the implementation with the current Content SDK guidance. Propose one small heading edit, with the file path and relevant documentation links. Do not edit files or Sitecore content.",
         expected: [
@@ -536,7 +542,7 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         links: [
           {
-            label: "Component development",
+            label: "Change a React component",
             href: `${portal}/workshops/guide/component-development`,
           },
         ],
@@ -563,13 +569,13 @@ export const developmentGuides: WorkshopGuide[] = [
       "Explain the release path for each change without requiring an attendee deployment or hosting account.",
     personas: [],
     prerequisites: [
-      "Complete **Component development** or observe the presenter’s heading change. This guide is a read-only explanation of how that kind of change could reach a shared website. No **Vercel** access, hosting transfer, branch push, or deployment is required.",
-      "To inspect the optional GitHub references, use the account that can open the private **tohams/liberty-mutual-sitecoreai** repository. If you lack that access, the explanations below remain usable; ask the presenter to show the existing checks rather than creating your own deployment.",
+      "Complete [**Change a React component**](/workshops/guide/component-development) or observe the presenter’s heading change. This guide is a read-only explanation of how that kind of change could reach a shared website. No **Vercel** access, hosting transfer, branch push, or deployment is required.",
+      `To inspect the optional GitHub references, use the account that can open the [**tohams/liberty-mutual-sitecoreai** repository](${repository}). If you lack that access, the explanations below remain usable; ask the presenter to show the existing checks rather than creating your own deployment.`,
       "Use this discussion to understand release responsibilities for a future operational site. Your workshop environment is available for the agreed evaluation period.",
     ],
     links: [
       {
-        label: "Component development",
+        label: "Change a React component",
         href: `${portal}/workshops/guide/component-development`,
       },
       {
@@ -586,12 +592,12 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Follow a frontend change from GitHub to Vercel",
         action: [
           "Read the release sequence for the heading change: create a local branch and verify the edit → push for a reviewed pull request and checks → inspect its **Vercel** preview → merge reviewed code into **main** → verify the live deployment. These are explanatory stages; do not push or merge during this workshop.",
-          "Open **Optional: inspect Portal validation** below. Find its **pull_request** and **push** triggers and the **Offline validation** and **Connected production build** jobs. These explain which checks are automated; a local commit alone does not trigger them or deploy the app.",
+          `Open [**Portal validation**](${repository}/blob/main/.github/workflows/portal-validation.yml). Find its **pull_request** and **push** triggers and the **Offline validation** and **Connected production build** jobs. These explain which checks are automated; a local commit alone does not trigger them or deploy the app.`,
         ],
         expected: [
           "**Portal validation** runs **Offline validation** and **Connected production build**. **Vercel** independently builds and hosts the frontend from **examples/liberty-mutual-agent-portal** using **Node** 24, npm ci, and npm run build.",
           "A successful build and **Ready** deployment still need checks of the changed experience on that host. Review its source commit, environment, and relevant native services.",
-          "The **SitecoreAI Vercel Deploy App** can provide a deployment entry point inside SitecoreAI when that integration is configured. This portal’s release sequence uses the GitHub-to-Vercel connection described above.",
+          "The **SitecoreAI Vercel Deploy App** can provide a deployment entry point inside SitecoreAI when that integration is configured. This portal deploys frontend changes through its existing **GitHub-to-Vercel** connection.",
         ],
         links: [
           {
@@ -604,7 +610,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Distinguish authored content from CMS model changes",
         action: [
           "For ordinary page text, layout, or images, follow **SitecoreAI** authoring → editorial review → publication to **Experience Edge**. No frontend deployment is needed for an ordinary content edit.",
-          "Open **Optional: inspect authoring build configuration** below and find **deployItems.modules**. These are the CMS definitions included in an authoring deployment through **SitecoreAI Deploy**: templates, rendering definitions, and placeholder rules. A frontend push does not automatically deploy authoring; that trigger must be configured separately. Do not run a Deploy App release for this discussion.",
+          `Open the [**authoring build configuration**](${repository}/blob/main/xmcloud.build.json) and find **deployItems.modules**. These are the CMS definitions included in an authoring deployment through **SitecoreAI Deploy**: templates, rendering definitions, and placeholder rules. A frontend push does not automatically deploy authoring; that trigger must be configured separately. Do not run a Deploy App release for this discussion.`,
         ],
         expected: [
           "The authoring resource package includes **nextjs-starter**, **LibertyMutual.Model**, **LibertyMutual.SitePresentation**, and **LibertyMutual.SupportForm**. renderingHosts is empty because **Vercel** hosts the frontend and shared editing alias.",
@@ -672,8 +678,8 @@ export const developmentGuides: WorkshopGuide[] = [
     personas: [],
     prerequisites: [
       "Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**. This optional inspection requires organization administrator/owner access to the installed **Resource metadata** Marketplace app. Ask Angela, Allen, or Thomas to confirm that access; a presenter **Author** or **Approver** account does not imply access to this app.",
-      "Open the organization and Page Builder links below before starting. Confirm **Liberty Mutual Agent Portal** and **Default editing host** in Page Builder. If the app is unavailable to your account, observe a presenter with that access instead of changing your workshop role.",
-      "The first step reads the checked-in taxonomy definition on GitHub. Sign into the GitHub account that can open **tohams/liberty-mutual-sitecoreai**; if you lack repository access, follow the presenter’s source inspection. No clone or source edit is required.",
+      `Open the [**Sitecore organization**](${sitecore}) and [**Page Builder**](${pageBuilder}) before starting. Confirm **Liberty Mutual Agent Portal** and **Default editing host** in Page Builder. If the app is unavailable to your account, observe a presenter with that access instead of changing your workshop role.`,
+      `The first step reads the checked-in taxonomy definition on GitHub. Sign into the GitHub account that can open [**tohams/liberty-mutual-sitecoreai**](${repository}); if you lack repository access, follow the presenter’s source inspection. No clone or source edit is required.`,
       "This guide inspects shared configuration without editing it. Do not create taxonomy options, change article metadata, publish content, or reindex Search during the inspection. Separate authoring guides cover deliberate resource changes and their cleanup.",
     ],
     links: [
@@ -684,7 +690,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Trace the Texas choice to its managed taxonomy definition",
         action: [
-          "Open **Inspect the Texas taxonomy definition** below. In this read-only GitHub file, find **Path**: **/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Risk states/TX**. This locates the managed choice in the site-level **Data** folder, outside **Home**.",
+          `Open the [**Texas taxonomy definition**](${repository}/blob/main/authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk%20states/TX.yml). In this read-only GitHub file, find **Path**: **/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Risk states/TX**. This locates the managed choice in the site-level **Data** folder, outside **Home**.`,
           "Find **Hint: __Display name** with **Value: Texas**, then **Hint: description** with **Value: Resource guidance specific to a Texas risk.** The final item name in the path is **TX**. Comparing these values explains how authors see a readable label while Search keeps a stable state value.",
         ],
         expected: [
@@ -702,7 +708,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "See the choices in the installed Page Builder panel",
         action: [
-          "Open the **Page Builder** link below, select **Liberty Mutual Agent Portal**, and keep **Default editing host** selected. Under **Pages** → **Home** → **Learning & resources**, open **Workers compensation: a Texas starting point**. Its item path ends in **/Home/resources/texas-workers-compensation**. Use this article so its state metadata can be compared with the **TX** definition from the first step.",
+          `Open [**Page Builder**](${pageBuilder}), select **Liberty Mutual Agent Portal**, and keep **Default editing host** selected. Under **Pages** → **Home** → **Learning & resources**, open **Workers compensation: a Texas starting point**. Its item path ends in **/Home/resources/texas-workers-compensation**. Use this article so its state metadata can be compared with the **TX** definition from the first step.`,
           "Select **English** and note the displayed version and workflow status. Use that same Texas article and version throughout this inspection; do not create a new version.",
           "Open **Apps** → **Resource metadata**. Inspect **Risk state**, **Business family**, **Product**, **Distribution channel**, and **Resource type**.",
           "Select the **Learning & resources** landing page to see the panel’s non-resource guard, then return to **Workers compensation: a Texas starting point** and the version you recorded.",
@@ -717,7 +723,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Understand the save and concurrency boundaries",
         action: [
-          "Open the source and authoring-guide links below. The source path is relative to **examples/liberty-mutual-agent-portal**. Read the save validation and native readback behavior; do not call the save operation.",
+          `Open [**Metadata validation and save service**](${appSource}/src/features/resource-metadata/metadata-service.ts) and [**Resource metadata authoring and access scope**](${repositoryDocs}/resource-metadata-authoring.md). The source path is relative to **examples/liberty-mutual-agent-portal**. Read the save validation and native readback behavior; do not call the save operation.`,
           "Return to the Texas article’s panel and select **Refresh** to reload the selected version and managed choices. If you accidentally changed a dropdown, choose **Discard changes** before refreshing. Compare **Risk state: Texas** and its help text with the **TX** definition from the first step. If another workshop edit has changed the current value, record the difference without saving over it.",
         ],
         expected: [
@@ -740,7 +746,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Review dependencies before adding or renaming a value",
         action: [
-          "Open **Inspect the managed taxonomy folders** below to see **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Then open **Inspect the taxonomy preservation rule** and find **allowedPushOperations: CreateOnly**. These source references explain where the choices originate and why the seed does not overwrite later author changes; do not edit or deploy these files.",
+          `Open the [**managed taxonomy folders**](${repository}/tree/main/authoring/items/liberty-mutual/items/taxonomy/Taxonomy) to see **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Then open the [**taxonomy preservation rule**](${repository}/blob/main/authoring/items/liberty-mutual/LibertyMutual.Taxonomy.module.json) and find **allowedPushOperations: CreateOnly**. These source references explain where the choices originate and why the seed does not overwrite later author changes; do not edit or deploy these files.`,
           "Consider adding a new state as a design example: compare its stable item name, readable label, application mappings, agent eligibility, existing resource values, and Search validation. This explains why editing a label and adding a new supported state have different consequences.",
         ],
         expected: [
@@ -792,8 +798,8 @@ export const developmentGuides: WorkshopGuide[] = [
     personas: [],
     prerequisites: [
       "Use a portal username such as **daniel.01** with password **Sitecore** to sign into the workshop website. This is separate from the Sitecore Cloud account used for Page Builder. No separate operator account, secret, terminal command, or approval is needed.",
-      "Identify the website where you performed the exercise by its browser address: **liberty-mutual-agent-portal.vercel.app** is live; **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** is the shared transaction preview. Their saved work is separate. Choose the matching reset link below; do not use either link to reset the isolated localhost exercise.",
-      "Check **Attendee assignments** if you need your portal workshop number. Use your assigned number from 01–15. Number 01 belongs to the presenters. This number identifies portal logins; it does not grant Sitecore authoring access. The reset page initially selects the number from your workshop website sign-in, but it also allows you to choose another number.",
+      `Identify the website where you performed the exercise by its browser address: **liberty-mutual-agent-portal.vercel.app** is live; **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** is the shared transaction preview. Their saved work is separate. Open [**Live portal: reset a workshop number**](${portal}/workshops/reset) or [**Transaction preview: reset a workshop number**](${previewPortal}/workshops/reset) to match that hostname; do not use either link to reset the isolated localhost exercise.`,
+      "Check [**Attendee assignments**](/workshops/attendees) if you need your portal workshop number. Use your assigned number from 01–15. Number 01 belongs to the presenters. This number identifies portal logins; it does not grant Sitecore authoring access. The reset page initially selects the number from your workshop website sign-in, but it also allows you to choose another number.",
       "A reset affects all seven personas and every agency with that suffix. Check the displayed number so you do not replace another attendee’s work by mistake.",
     ],
     links: [
@@ -814,8 +820,8 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Open the reset page for the website you used",
         action: [
-          "Use **Live portal: reset a workshop number** if your exercise used the shorter liberty-mutual-agent-portal hostname. Use **Transaction preview: reset a workshop number** if it used the longer git-c8199e hostname. If prompted, sign into the workshop website with **daniel.01** and password **Sitecore**.",
-          "Check the browser hostname and the environment label above **Workshop number**. Select your portal workshop number from **Attendee assignments**, and check that every username listed below has that suffix. For example, resetting 02 includes all seven .02 accounts. The reset does not change Sitecore authoring accounts or practice-page content.",
+          `Use [**Live portal: reset a workshop number**](${portal}/workshops/reset) if your exercise used the shorter liberty-mutual-agent-portal hostname. Use [**Transaction preview: reset a workshop number**](${previewPortal}/workshops/reset) if it used the longer git-c8199e hostname. If prompted, sign into the workshop website with **daniel.01** and password **Sitecore**.`,
+          "Check the browser hostname and the environment label above **Workshop number**. Select your portal workshop number from [**Attendee assignments**](/workshops/attendees), and check that every username listed below has that suffix. For example, resetting 02 includes all seven .02 accounts. The reset does not change Sitecore authoring accounts or practice-page content.",
         ],
         expected: [
           "The page shows the selected group’s saved-work status and current **Agent identity** for each persona.",
@@ -867,7 +873,7 @@ export const developmentGuides: WorkshopGuide[] = [
         expected: [
           "Previous portal sessions for all seven personas are invalidated. The new active workspace contains starting records; new examples, favorites, and learning registrations from the earlier run have cleared.",
           "The browser links to the fresh **Agent identity**. Known role and agency attributes still personalize guidance, while the earlier profile’s browsing affinities are absent from the new profile.",
-          "Use **Check fresh profiles in SitecoreAI** to find the newly linked profile and inspect its starting browsing interests.",
+          "Use [**Check fresh profiles in SitecoreAI**](/workshops/guide/fresh-profile-restart) to find the newly linked profile and inspect its starting browsing interests.",
         ],
       },
       {
@@ -901,10 +907,10 @@ export const developmentGuides: WorkshopGuide[] = [
       "Connect one completed clean reset to its new saved-work run, verified UDL profiles, and fresh browsing history.",
     personas: [],
     prerequisites: [
-      "Complete **Reset your workshop number** using the link below. Keep its reset page open after success, and note the browser hostname and **Workshop number**. This guide inspects that completed reset; it does not require a second reset.",
+      "Complete [**Reset your workshop number**](/workshops/guide/saved-work-reset). Keep its reset page open after success, and note the browser hostname and **Workshop number**. This guide inspects that completed reset; it does not require a second reset.",
       "Use that same hostname and workshop number. The completed reset affected all seven personas with that suffix on that host. The live site uses **liberty-mutual-agent-portal.vercel.app**; transaction preview uses the longer **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** hostname. Resetting one does not reset the other or your localhost checkout.",
       "Keep any before-reset Agent identities if you want to compare them with the new set. Older native profiles are retained as history.",
-      "Open the **SitecoreAI Profiles** link below with the email that received your Sitecore Cloud invitation. Confirm **Safeco Insurance Company of America POC** and that **Performance** → **Profiles** is available. If access is missing, ask Angela, Allen, or Thomas to check your application permissions; the fictional portal credentials cannot open native profiles.",
+      "Open [**SitecoreAI Profiles**](https://app.sitecorecloud.io/performance/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df) with the email that received your Sitecore Cloud invitation. Confirm **Safeco Insurance Company of America POC** and that **Performance** → **Profiles** is available. If access is missing, ask Angela, Allen, or Thomas to check your application permissions; the fictional portal credentials cannot open native profiles.",
     ],
     links: [
       {
@@ -928,7 +934,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Read the completed reset status",
         action: [
-          "Return to the reset page left open after your completed reset. If it is closed, use the matching live or transaction-preview link below, and select the workshop number you recorded. Click **Refresh status**; this reads the status without resetting anything.",
+          `Return to the reset page left open after your completed reset. If it is closed, open [**Live portal: reset a workshop number**](${portal}/workshops/reset) or [**Transaction preview: reset a workshop number**](${previewPortal}/workshops/reset) to match your recorded hostname, and select the workshop number you recorded. Click **Refresh status**; this reads the status without resetting anything.`,
           "Expand **Reset details** to inspect **Last reset status**, **Saved-work run**, and **Profile generation**. Inspect the seven **Agent identity** values in the preceding table. Do not click **Reset workshop {{pack}}** again just to inspect the result.",
         ],
         expected: [
@@ -962,7 +968,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Open the current native profile",
         action: [
-          "Open **SitecoreAI Profiles** below. In **Performance** → **Profiles**, open the **Search filter** selector and choose **Liberty Mutual agent identity**.",
+          "Open [**SitecoreAI Profiles**](https://app.sitecorecloud.io/performance/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df). In **Performance** → **Profiles**, open the **Search filter** selector and choose **Liberty Mutual agent identity**.",
           "Paste the **Agent identity** copied from the reset-page row, press Enter, and open the matching person.",
           "Check the persona and its known attributes. Do not select a profile solely by display name when earlier sets have the same names.",
         ],
@@ -981,7 +987,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Inspect the new browsing baseline",
         action: [
           "In the matched native profile, inspect **Overview** → **Top affinities** and **Engagement** before opening tagged articles. Record any starting scores. In the portal tab for the same host and username, open **Products & appetite** and record the banner; this is the baseline against which later browsing is compared.",
-          "Continue the affinity walkthrough on production using that host’s current identifier and baseline. If you verified a transaction-preview reset, first open the production **Reset a workshop number** page, select the same **Workshop number**, and copy the intended persona’s current production **Agent identity**. Viewing identities does not require another reset.",
+          `Continue [**Personalize by browsing interest**](/workshops/guide/affinity-personalization) on production using that host’s current identifier and baseline. If you verified a transaction-preview reset, first open the production [**Reset a workshop number**](${portal}/workshops/reset) page, select the same **Workshop number**, and copy the intended persona’s current production **Agent identity**. Viewing identities does not require another reset.`,
           "Sign in to production and inspect that production profile’s starting scores and **Products** banner before following the affinity walkthrough. Compare the resulting page views, native score, and content with this production baseline.",
         ],
         expected: [
