@@ -318,11 +318,13 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Open the root in VS Code; move the terminal into the app",
         action: [
           "Select **File** → **Open Folder** and choose **liberty-mutual-sitecoreai**, the repository root. Select **Terminal** → **New Terminal**.",
-          "Keep that root open in **Explorer**. In the integrated terminal, run the directory change below once before any npm command.",
+          "Keep that root open in **Explorer**. In the integrated terminal, run the commands below one at a time before any npm command.",
+          "Check **Node** again after changing into the application directory. If it is not v24.19.0, select that version with your installer or existing version manager, then repeat the check in this terminal before continuing.",
         ],
-        code: "cd examples/liberty-mutual-agent-portal",
+        code: "cd examples/liberty-mutual-agent-portal\nnode --version",
         expected: [
           "**Explorer** still shows the whole repository, while the terminal now points to **liberty-mutual-sitecoreai/examples/liberty-mutual-agent-portal**.",
+          "**Node** reports v24.19.0 in the same application terminal that will run npm. A version shown in an earlier terminal does not establish this terminal’s version.",
           "The application directory contains **package.json** and **package-lock.json**. The repository root has no **package.json**; npm run or npm install there would fail with ENOENT.",
         ],
       },
@@ -470,13 +472,13 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Restore only your exercise edit",
         action: [
           "Review the diff. If this file contains only the uncommitted workshop edit, run the restore command below. If it also contains other work, manually restore only this heading instead.",
-          "Restart npm run dev. In **Learning & resources**, click **Clear filters**, erase the query text, then click **Search**.",
+          "Restart npm run dev. In **Learning & resources**, click **Clear filters** if it is shown, erase the query text, then click **Search**.",
           "Confirm the original heading and default licensed-state resource view. Use **Daniel Ortiz** → **Sign out**, then stop dev with Ctrl+C.",
           "Run npm run build once more with dev stopped to return generated metadata to the build state. Leave generated **next-env.d.ts** changes out of a commit.",
         ],
         code: "git restore -- src/components/resource-search/ResourceSearch.tsx\nnpm run dev",
         expected: [
-          "The original heading returns. **Clear filters** resets facets but does not erase the typed query; clearing both restores the baseline view. Only the intended exercise file was restored.",
+          "The original heading returns. **Clear filters** appears only when facets or Risk state differ from their defaults; it does not erase the typed query. Default filters and an empty query restore the baseline view. Only the intended exercise file was restored.",
         ],
       },
       {
@@ -1054,10 +1056,11 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Inspect the new browsing baseline",
         action: [
           "Open **Overview** → **Top affinities** and **Engagement** before visiting tagged articles. Record the starting scores and the **Products** banner on the same host.",
-          "Continue the affinity walkthrough using the current identifier. Compare the resulting page views, native score and **Products** content with this baseline.",
+          "Continue the affinity walkthrough on production using that host’s current identifier and baseline. If you verified a transaction-preview reset, first open production **Reset a reviewer number**, select the same **Reviewer number** and copy the intended persona’s current production **Agent identity**. Viewing identities does not require another reset.",
+          "Sign in to production and inspect that production profile’s starting scores and **Products** banner before following the affinity walkthrough. Compare the resulting page views, native score and content with this production baseline.",
         ],
         expected: [
-          "The fresh profile does not carry the earlier set’s browsing history. Normal visits after signing in add new engagement, so inspect the actual starting scores before training a topic.",
+          "The fresh profile on the host you reset does not carry the earlier set’s browsing history. If you switch from transaction preview to production, its current production profile retains its existing history. Inspect the actual starting scores before training a topic; normal visits after signing in add new engagement.",
           "Native experiment history remains historical; a clean reviewer reset does not reset experiment configuration or its aggregate report.",
           "CMS content, Search, media, **Brand Kits**, Agentic artifacts and webhook receipts were not changed by the reset.",
         ],
