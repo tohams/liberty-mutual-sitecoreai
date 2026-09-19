@@ -5,10 +5,11 @@ import { ArrowRight, Clock3, Search } from "lucide-react";
 import { GuideText } from "./GuideText";
 import { plainGuideText } from "./guide-text";
 import type { WorkshopAudience, WorkshopGuide } from "./types";
+import type { WorkshopFocus } from "./content/priorities";
 export type GuideSummary = Pick<
   WorkshopGuide,
   "slug" | "audience" | "category" | "title" | "summary" | "duration"
-> & { stepCount: number };
+> & { stepCount: number; focus: WorkshopFocus };
 export function GuideDirectory({
   guides,
   audience,
@@ -17,9 +18,15 @@ export function GuideDirectory({
   audience: WorkshopAudience;
 }) {
   const [query, setQuery] = useState("");
-  const categories = [...new Set(guides.map((guide) => guide.category))];
+  const sections = Array.from(
+    new Map(
+      guides.map((guide) => [guide.focus.section.id, guide.focus.section]),
+    ).values(),
+  );
   const matches = guides.filter((guide) =>
-    plainGuideText(`${guide.title} ${guide.summary} ${guide.category}`)
+    plainGuideText(
+      `${guide.title} ${guide.summary} ${guide.category} ${guide.focus.priority.label} ${guide.focus.relevance}`,
+    )
       .toLowerCase()
       .includes(query.trim().toLowerCase()),
   );
@@ -44,11 +51,13 @@ export function GuideDirectory({
         <aside>
           <span className="workshop-eyebrow">IN THIS SECTION</span>
           <nav aria-label={`${audience} categories`}>
-            {categories.map(
-              (category, index) =>
-                matches.some((guide) => guide.category === category) && (
-                  <a key={category} href={`#category-${index}`}>
-                    {category}
+            {sections.map(
+              (section) =>
+                matches.some(
+                  (guide) => guide.focus.section.id === section.id,
+                ) && (
+                  <a key={section.id} href={`#section-${section.id}`}>
+                    {section.label}
                   </a>
                 ),
             )}
@@ -56,23 +65,27 @@ export function GuideDirectory({
           <div className="workshop-side-note">
             <strong>Follow at your own pace</strong>
             <p>
-              Each guide includes accounts, exact steps, expected results and
-              cleanup instructions.
+              Start with your priorities. Each guide includes accounts, exact
+              steps, expected results, and cleanup instructions. Optional
+              scenarios and support follow the main walkthroughs.
             </p>
           </div>
         </aside>
         <div>
-          {categories.map((category, index) => {
+          {sections.map((section) => {
             const selected = matches.filter(
-              (guide) => guide.category === category,
+              (guide) => guide.focus.section.id === section.id,
             );
             return selected.length ? (
               <section
-                key={category}
-                id={`category-${index}`}
+                key={section.id}
+                id={`section-${section.id}`}
                 className="workshop-guide-group"
               >
-                <h2>{category}</h2>
+                <h2>{section.label}</h2>
+                <p className="workshop-group-description">
+                  {section.description}
+                </p>
                 <div>
                   {selected.map((guide) => (
                     <Link
@@ -82,6 +95,10 @@ export function GuideDirectory({
                     >
                       <div>
                         <h3>{guide.title}</h3>
+                        <p className="workshop-guide-priority">
+                          Your priority:{" "}
+                          <strong>{guide.focus.priority.label}</strong>
+                        </p>
                         <p>
                           <GuideText text={guide.summary} />
                         </p>
@@ -103,8 +120,8 @@ export function GuideDirectory({
             <div className="workshop-empty">
               <h2>No matching walkthroughs</h2>
               <p>
-                Try a capability such as Search, personalization, content or
-                deployment.
+                Try a capability or priority such as Search, personalization,
+                content, or faster delivery.
               </p>
               <button type="button" onClick={() => setQuery("")}>
                 Clear search

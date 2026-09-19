@@ -50,7 +50,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
     },
     "4": {
       file: "resource-metadata.png",
-      alt: "Resource metadata app with managed risk state, business family, product and distribution choices",
+      alt: "Resource metadata app with managed risk state, business family, product, and distribution choices",
       caption:
         "**Apps** → **Resource metadata**. This screenshot shows the existing **Live** version, so fields are read-only. The guide creates a **Draft** before making changes.",
     },

@@ -7,7 +7,7 @@ export const governanceGuides: WorkshopGuide[] = [
     category: "Content governance",
     title: "Author and approver: review and publish content together",
     summary:
-      "Work with a partner in **Page Builder** to prepare a page, request a revision and approve the final wording for publication.",
+      "Work with a partner in **Page Builder** to prepare a page, request a revision, and approve the final wording for publication.",
     outcome:
       "See how assigned pages and separate **Author** and **Approver** roles support a review process, with publication triggered by approval.",
     duration: "20–25 minutes for a pair",
@@ -15,8 +15,8 @@ export const governanceGuides: WorkshopGuide[] = [
     prerequisites: [
       "Use your invited **Sitecore Cloud** account with your assigned **Author** or **Approver** role. Your **Agent Portal** username is a separate login.",
       "The presenters use **Demo**. Attendees use their assigned **Pair** page under **Home** → **Workshop practice**. This pair number is separate from your **Agent Portal** reviewer number.",
-      "Each pair works on its own page. In **Page Builder**, select **Liberty Mutual Agent Portal**, use **English** and keep **Default** selected as the editing host.",
-      "This exercise changes **Summary** only. Leave images, component placement and **Resource metadata** unchanged.",
+      "Each pair works on its own page. In **Page Builder**, select **Liberty Mutual Agent Portal**, use **English**, and keep **Default** selected as the editing host.",
+      "This exercise changes **Summary** only. Leave images, component placement, and **Resource metadata** unchanged.",
       "If your partner is unavailable, a presenter can use the demonstration **Approver** account to review your practice page.",
     ],
     links: [
@@ -53,7 +53,7 @@ export const governanceGuides: WorkshopGuide[] = [
         title: "Author: edit your assigned page and preview the change",
         action: [
           "As the **Author**, select the main portal's **Home** page and inspect the **Content** tab without changing anything. Then return to your assigned page under **Workshop practice**.",
-          "If the page shows **Live** or **Approved**, open the version selector, choose **Create version**, leave the optional version name blank and select **Create**. If it already shows **Draft**, keep that version.",
+          "If the page shows **Live** or **Approved**, open the version selector, choose **Create version**, leave the optional version name blank, and select **Create**. If it already shows **Draft**, keep that version.",
           "After creating a version, reopen the version selector and select the newest **Draft**. Wait until the header shows **Draft Version [number]** and **Summary** has reloaded before continuing.",
           "In your practice page's **Content** tab, add this sentence to **Summary**: Our team is preparing this resource for the next client conversation.",
           "Click outside **Summary** and wait for **Saved**. Open the **Editor** tab to see the revised summary on the page.",
@@ -64,7 +64,7 @@ export const governanceGuides: WorkshopGuide[] = [
           "Creating a **Draft** preserves the previous approved version. Your new wording reaches the live page only after review and approval.",
           "The **Author** can **Submit** the draft but cannot **Approve** it.",
         ],
-        note: "**What to notice:** If you know **Sitecore XP**, focus on the authoring experience here: edit a field, let it autosave, see it on the page and submit it for review within **Page Builder**. The familiar draft-and-approval process stays close to the page you are working on.",
+        note: "**What to notice:** If you know **Sitecore XP**, focus on the authoring experience here: edit a field, let it autosave, see it on the page, and submit it for review within **Page Builder**. The familiar draft-and-approval process stays close to the page being edited.",
       },
       {
         title: "Author: submit the draft for review",
@@ -103,13 +103,13 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Approver: approve the wording and trigger publication",
         action: [
-          "As the **Approver**, refresh the submitted page, open **Content** and review the corrected **Summary**.",
+          "As the **Approver**, refresh the submitted page, open **Content**, and review the corrected **Summary**.",
           "Choose **Actions** → **Approve**. In the **Comment** dialog, enter Approved for publication, then select **Submit**.",
           "Confirm the page becomes **Approved**. The workflow's **Auto Publish** action publishes this page in **English** automatically. Wait for publication; the page may show **Approved** before changing to **Live**.",
         ],
         expected: [
           "Approval triggers publication of the approved page in **English**, without publishing child pages or related items.",
-          "No separate **Publish** action, Git commit or frontend deployment is needed for this content change.",
+          "No separate **Publish** action, Git commit, or frontend deployment is needed for this content change.",
         ],
       },
       {
@@ -127,9 +127,9 @@ export const governanceGuides: WorkshopGuide[] = [
     cleanup: {
       title: "Restore your page through the same workflow",
       body: [
-        "As the **Author**, refresh your practice page. Open the version selector, choose **Create version**, leave the optional version name blank and select **Create**. Reopen the selector and select the newest **Draft**; wait for **Draft Version [number]** in the header and for **Summary** to reload.",
+        "As the **Author**, refresh your practice page. Open the version selector, choose **Create version**, leave the optional version name blank, and select **Create**. Reopen the selector and select the newest **Draft**; wait for **Draft Version [number]** in the header and for **Summary** to reload.",
         "In **Content** → **Summary**, restore the original wording recorded at the start. Click outside the field and wait for **Saved**. Choose **Actions** → **Submit**, enter a restoration note in **Comment**, then select **Submit**.",
-        "As the **Approver**, refresh **Page Builder** and select the newly submitted **English** version. Review the restored **Summary**. Choose **Actions** → **Approve**, add a **Comment** and select **Submit**. Wait for automatic publication, then verify the live page shows the original wording.",
+        "As the **Approver**, refresh **Page Builder** and select the newly submitted **English** version. Review the restored **Summary**. Choose **Actions** → **Approve**, add a **Comment**, and select **Submit**. Wait for automatic publication, then verify the live page shows the original wording.",
         "Leave other pairs' pages unchanged. The **Agent Portal** reviewer reset does not reset Sitecore page content or workflow.",
         "Close extra practice and preview tabs when finished.",
       ],

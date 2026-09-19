@@ -72,7 +72,7 @@ export default async function GuidePage({
               ? "Marketing walkthroughs"
               : "Development & architecture"}
           </Link>
-          <span>{guide.category}</span>
+          <span>{guide.focus.section.label}</span>
         </div>
         <div className="workshop-reading-layout">
           <aside className="workshop-guide-toc">
@@ -121,6 +121,22 @@ export default async function GuidePage({
                 )}
               </div>
             </header>
+            <section
+              className="workshop-priority"
+              aria-labelledby="workshop-priority-title"
+            >
+              <span className="workshop-eyebrow">
+                {guide.focus.section.kind === "core"
+                  ? "YOUR PRIORITY"
+                  : guide.focus.section.kind === "optional"
+                    ? "OPTIONAL EXPLORATION"
+                    : "WORKSHOP SUPPORT"}
+              </span>
+              <h2 id="workshop-priority-title">{guide.focus.priority.label}</h2>
+              <p>
+                <GuideText text={guide.focus.relevance} />
+              </p>
+            </section>
             <section className="workshop-outcome">
               <Check size={21} />
               <div>
