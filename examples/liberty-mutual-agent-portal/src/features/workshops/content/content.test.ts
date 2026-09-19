@@ -109,7 +109,12 @@ test("the extracted SharePoint clickthrough coverage is retained without hidden 
     );
   }
   for (const guide of workshopGuides) {
-    assert.ok(guide.sourceSlides.length > 0, `${guide.slug}: source coverage`);
+    // This paired exercise was added directly to HTML after the deck migration.
+    assert.ok(
+      guide.sourceSlides.length > 0 ||
+        guide.slug === "author-approver-workflow",
+      `${guide.slug}: source coverage`,
+    );
     assert.ok(
       guide.sourceSlides.every(
         (slide) => Number.isInteger(slide) && slide >= 1 && slide <= 147,
