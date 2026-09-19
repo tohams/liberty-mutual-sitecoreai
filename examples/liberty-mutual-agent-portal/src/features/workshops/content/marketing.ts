@@ -1347,7 +1347,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Get the current identity for the intended login",
         action: [
           "Open **Reset a reviewer number** on the same host as the portal you will use. Sign in to the workshop guide if needed, then select the intended pack under **Reviewer number**; the page starts with your assigned pack.",
-          "Under **current profile identities**, find the intended username and copy its **Agent identity** value. Note the active profile generation when recording the starting state.",
+          "Under **current profile identities**, find the intended username and copy its **Agent identity** value. Expand **Reset details** below the identities and record **Profile generation** with the starting state.",
           "Copy the displayed **Agent identity** values for Maya or Elena if needed. You can inspect all seven personas without switching portal logins. Do not reset merely to look up identities or rely on the historical seed map after a reviewer reset.",
         ],
         expected: [
@@ -1496,13 +1496,12 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Use one chosen host throughout. Obtain current identifiers for Daniel, Maya and Elena using **Find the active SitecoreAI profile for an agent**.",
-      "Inspect starting scores before tagged browsing. For a clean replay, open **Reset a reviewer number** on the intended host, select your pack under **Reviewer number** and click **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready** before signing into the portal again. The reset restores saved-work baseline and creates seven fresh profiles with clean browsing history. Signing out alone preserves the current profile and its affinities.",
+      "Use the live production portal throughout. Obtain current production identifiers for Daniel, Maya and Elena using **Find the active SitecoreAI profile for an agent**.",
+      "Inspect starting scores before tagged browsing. For a clean replay, open **Reset a reviewer number** on production, select your pack under **Reviewer number** and click **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready** before signing into the live portal again. The reset restores saved-work baseline and creates seven fresh profiles with clean browsing history. Signing out alone preserves the current profile and its affinities.",
     ],
     links: [
       liveLogin,
       liveReset,
-      previewReset,
       profileLink,
       {
         label: "Open native Affinities",
@@ -1599,10 +1598,10 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "Preserve the authored rules. To replay a fresh journey, open **Reset a reviewer number** on the intended host, select your pack under **Reviewer number** and click **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready**, then sign into the portal again and look up its new **Agent identity** values. The reset restores baseline saved work and activates seven new native profiles with clean browsing history. All seven same-suffix personas change together on this host only. Previous native profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts and webhook receipts are unaffected.",
+        "Preserve the authored rules. To replay a fresh journey, open **Reset a reviewer number** on production, select your pack under **Reviewer number** and click **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready**, then sign into the live portal again and look up its new **Agent identity** values. The reset restores baseline saved work and activates seven new native profiles with clean browsing history. All seven same-suffix personas change together on production only. Previous native profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts and webhook receipts are unaffected.",
         "Affinity here selects authored variants from browsing signals; it does not demonstrate autonomous machine-learning recommendations or business eligibility.",
       ],
-      links: [liveReset, previewReset],
+      links: [liveReset],
     },
     related: ["find-an-agent-profile", "ab-testing", "personalization-by-role"],
     sourceSlides: [96, 98, 99, 100, 101],
