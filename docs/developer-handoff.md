@@ -181,6 +181,10 @@ The helper does not approve or publish the page, alter the shared layout, or con
 
 ### Dedicated editing host
 
+For the local developer workshop, run `npm run setup:local` and `npm run dev`, then open Page Builder in **Chrome**, select **Local host**, enter **http://localhost:3000** and click **Save**. Setup automatically supplies this POC’s Preview server context, separate public browser context and matching editing secret, while keeping operational state local. This browser-level local selection does not replace the shared Default editing host or require the maintenance script below. Return to **Default editing host** after the exercise. See the [developer quickstart](developer-quickstart.md) for the complete verified sequence.
+
+The rest of this section covers maintaining the **shared** hosted editing environment.
+
 The SDK's editing request headers select the page, language, version and edit mode; they do not replace its configured server context ID. The deployed editing host therefore needs a Preview server context, while production uses Live content. A Preview context was verified to return `pageEditing: true` with editable metadata for the owned home page; Live returned normal delivery fields.
 
 Use the [published portal](https://liberty-mutual-agent-portal.vercel.app/login) to verify publication, expiration, personalized delivery and A/B behavior. The editing host can show unpublished and expired CMS items, including in a normal authenticated browser outside Page builder. On September 16, the completed scheduling exercise was absent from Live Experience Edge and returned 404 on production while the editing preview still rendered it. Both HTTP responses were uncached. That difference is expected from the content context, not evidence of a failed unpublish. Use preview for draft authoring and isolated operational work, and validate its content separately from published delivery.

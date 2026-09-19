@@ -13,9 +13,9 @@ npm ci
 npm run dev
 ```
 
-The setup helper creates `.env.local` with the approved scoped POC contexts before dependency installation. Rerunning it fills only missing/blank contexts while preserving custom values and existing secrets. `npm ci` installs the locked dependencies; neither it nor `npm install` creates the environment file. If npm reports `ENOENT` for the repository-root `package.json`, change into the application directory first.
+The setup helper creates `.env.local` with this POC’s Preview server context, separate public browser context and matching editing secret before dependency installation. Rerunning it upgrades recognized earlier workshop defaults while preserving custom configuration and local saved work. `npm ci` installs the locked dependencies; neither it nor `npm install` creates the environment file. If npm reports `ENOENT` for the repository-root `package.json`, change into the application directory first.
 
-The helper generates independent local secrets, a unique namespace and local JSON state; it leaves portal tracking disabled while retaining native content and Search. Keep Redis credentials absent from all local environment files and the terminal. Open http://localhost:3000/login and sign in as `daniel.01` with password `Sitecore`. The [authentication and data guide](docs/auth-and-data.md) covers operational state and resets; a production runtime requires Redis and cannot use the local JSON adapter.
+In **Chrome**, open **Page Builder**, select **Local host**, enter `http://localhost:3000` and click **Save**. The canvas renders shared Preview content with your local code. Keep Redis credentials absent from all local environment files and the terminal. The helper generates independent session/operator secrets, a unique namespace and local JSON state, with portal tracking disabled. In a separate ordinary browser tab, open http://localhost:3000/login and sign in as `daniel.01` with password `Sitecore` to test Search; its controls are intentionally disabled in the editor. Return Page Builder to **Default editing host** when finished. No attendee Vercel access or deployment is needed. The [authentication and data guide](docs/auth-and-data.md) covers operational state and resets; a production runtime requires Redis and cannot use the local JSON adapter.
 
 ## Verify changes
 

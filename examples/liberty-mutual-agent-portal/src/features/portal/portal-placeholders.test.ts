@@ -80,6 +80,36 @@ test("only the appropriate named slots are exposed for each page and operational
   );
 });
 
+test("workshop practice pages render their native article in editing and delivery", () => {
+  for (const mode of [editing, delivery]) {
+    assert.ok(
+      getPortalPlaceholders("/workshop-practice", allSlots, mode)
+        .resourceArticle,
+    );
+    for (const number of ["01", "02", "09"]) {
+      const route = `/workshop-practice/pair-${number}`;
+      const placement = getPortalPlaceholders(route, allSlots, mode);
+      assert.deepEqual(Object.keys(placement), ["resourceArticle"]);
+      assert.equal(
+        placement.resourceArticle?.rendering.placeholders[
+          "headless-resource-article"
+        ][0],
+        article,
+        "Native article identity and editing data are retained",
+      );
+    }
+    for (const route of [
+      "/workshop-practice/pair-99",
+      "/workshop-practice/pair-01/other",
+    ]) {
+      assert.equal(
+        getPortalPlaceholders(route, allSlots, mode).resourceArticle,
+        undefined,
+      );
+    }
+  }
+});
+
 test("misplaced components cannot render in another component's placeholder", () => {
   for (const mode of [delivery, editing]) {
     const resources = getPortalPlaceholders("/resources", allSlots, mode);

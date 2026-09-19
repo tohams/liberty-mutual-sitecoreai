@@ -4,14 +4,10 @@ const repository = "https://github.com/tohams/liberty-mutual-sitecoreai";
 const appSource = `${repository}/blob/main/examples/liberty-mutual-agent-portal`;
 const repositoryDocs = `${repository}/blob/main/docs`;
 const portal = "https://liberty-mutual-agent-portal.vercel.app";
-const preview =
-  "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app";
 const sitecore =
   "https://portal.sitecorecloud.io/?organization=org_XqL3u1MSNVuubOTb";
 const pageBuilder =
   "https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb";
-const deployments =
-  "https://vercel.com/thomas-lins-projects-67630b98/liberty-mutual-sitecoreai/deployments";
 
 export const developmentGuides: WorkshopGuide[] = [
   {
@@ -148,7 +144,7 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         expected: [
           "Content authors review and publish ordinary content. Developers release frontend code through **GitHub** and **Vercel**. CMS definitions have their own scoped authoring release. Native configuration has its own publication or activation and runtime verification.",
-          "The browser receives only its limited public child context. Local frontend development uses a separate local state namespace; changing a local editing secret does not register a new **Page Builder** host.",
+          "The browser receives only its limited public child context. Developers use **Page Builder**’s **Local host** option to preview their own running frontend; the shared **Default** editing host remains available to everyone else.",
         ],
       },
     ],
@@ -157,119 +153,11 @@ export const developmentGuides: WorkshopGuide[] = [
         "**Sign out** of the portal and close temporary inspection tabs. No reset, publication or redeployment is needed for this read-only exercise.",
       ],
     },
-    related: ["state-authorization", "local-setup", "release-and-recovery"],
+    related: ["local-setup", "release-and-recovery"],
     sourceSlides: [
       33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 113, 114, 115, 116, 117, 118, 119,
       120, 121, 122,
     ],
-  },
-  {
-    slug: "state-authorization",
-    audience: "development",
-    category: "Guided engineering exercise",
-    title: "Authorization: one Florida draft, two different permissions",
-    summary:
-      "Create a shared draft as Avery, inspect Jordan’s restrictions, then trace the enforcement into the server.",
-    outcome:
-      "See that shared record visibility, current transaction authority and personalized content are separate concerns.",
-    duration: "20–25 minutes",
-    personas: ["avery", "jordan"],
-    prerequisites: [
-      "Use the designated preview and the same assigned reviewer suffix for Avery and Jordan. Pack 01 is reserved for presenters; attendees use their assigned pack from 02–15.",
-      "Coordinate with anyone using that pack. Use a unique account name and a future effective date, and leave pre-existing records untouched.",
-      "**GitHub** read access is required for the code trace. Use the reset page in this guide if you want to restore the preview pack after the exercise.",
-    ],
-    links: [
-      { label: "Open designated preview login", href: `${preview}/login` },
-    ],
-    steps: [
-      {
-        title: "Create a Florida Businessowners draft as Avery",
-        action: [
-          "**Sign in** as **avery.01** with password **Sitecore**. Select **Products & appetite** → **Risk state**: **Florida** → **Small business** → **Businessowners policy** → **Prepare account**.",
-          "Choose **Retail**, then **Continue to account information**. Enter a unique **Named insured / account name**, such as Cedar Ridge Florida Retail followed by your initials and today’s date.",
-          "Choose a suitable future **Requested effective date**. Enter 8 for **Number of employees** and 800000 for **Annual revenue ($)**. Select **Save & review requirements**.",
-          "Record the reference and account name. Keep the record in **Draft**, close it, then use the name menu to **Sign out**.",
-        ],
-        expected: [
-          "Avery can prepare a Florida BOP account. Florida and BOP remain the saved record’s context.",
-          "The new record is **Draft**. Do not submit it yet: Jordan must inspect its draft controls before Avery completes it.",
-        ],
-      },
-      {
-        title: "Inspect the same draft as Jordan",
-        action: [
-          "**Sign in** as **jordan.01** on the same preview host. Select **Quote & submit** and open the new Florida account using its name and reference.",
-          "Read the state-authority explanation. Inspect **Edit account**, the three requirements checklist controls and **Submit for review**.",
-        ],
-        expected: [
-          "Jordan can see the agency’s shared draft and its true Florida state.",
-          "The message explains that current licenses do not authorize transactions in this state. **Edit account**, the checklist controls and **Submit for review** are disabled.",
-          "The record is not silently converted to another state, assigned a different owner or hidden merely to avoid the authorization decision.",
-        ],
-      },
-      {
-        title: "Complete the unchanged draft as Avery",
-        action: [
-          "Close the draft and **Sign out**. **Sign in** as **avery.01** and reopen the same reference in **Quote & submit**.",
-          "Complete every displayed preparation requirement and select **Submit for review**. Reload the page and reopen the record.",
-          "Record the status, reference and Florida state, then **Sign out**.",
-        ],
-        expected: [
-          "Avery can complete and submit the same shared record. Its reference and Florida context persist as **Submitted**.",
-          "This is an illustrative operational workflow using fictional account data; it does not send a submission to an insurance system.",
-        ],
-      },
-      {
-        title: "Trace the decision into the server",
-        action: [
-          "Open **src/contracts/portal.ts**, then **src/domain/eligibility.ts** in the application. Inspect the dated license, product/state and appointment decisions.",
-          "Open **src/server/data/portal.ts** and **src/server/data/eligibility-authorization.test.ts**. Locate the checks for the actor, agency, assigned producer, saved jurisdiction and current requirements.",
-          "Open **src/server/state/store.ts** to inspect environment/pack/run/agency scoping, expected versions, idempotency and atomic writes.",
-        ],
-        expected: [
-          "Current authority uses the current UTC date and inclusive license validity boundaries. An old draft can become restricted if authority or product rules change.",
-          "Denied direct-request tests require HTTP 403 and unchanged records/versions. Disabled buttons make the rule visible; the server enforces it.",
-          "Content personalization cannot override licensing or transaction authorization. Production systems would supply the approved authority data through integrations.",
-        ],
-        links: [
-          {
-            label: "Eligibility rules",
-            href: `${appSource}/src/domain/eligibility.ts`,
-          },
-          {
-            label: "Server enforcement tests",
-            href: `${appSource}/src/server/data/eligibility-authorization.test.ts`,
-          },
-          {
-            label: "Server actions",
-            href: `${appSource}/src/server/data/portal.ts`,
-          },
-          {
-            label: "Durable store",
-            href: `${appSource}/src/server/state/store.ts`,
-          },
-        ],
-      },
-    ],
-    cleanup: {
-      body: [
-        "Keep the created account name and reference with your session notes. To start again, open the preview reset page, select the same **Reviewer number** and click **Reset reviewer** for that number.",
-        "Use the same preview host and pack as this exercise. The reset affects all seven personas and all agencies in that pack. It restores starting work and creates seven fresh native profiles while retaining older profiles and analytics as history.",
-      ],
-      links: [
-        {
-          label: "Preview: reset the exercise workspace",
-          href: `${preview}/workshops/reset`,
-        },
-      ],
-    },
-    related: [
-      "release-and-recovery",
-      "saved-work-reset",
-      "architecture-and-ownership",
-    ],
-    sourceSlides: [43, 44, 45, 114, 115],
   },
   {
     slug: "local-setup",
@@ -278,18 +166,21 @@ export const developmentGuides: WorkshopGuide[] = [
     category: "Individual developer workshop",
     title: "Local setup: clone, configure and run the portal",
     summary:
-      "Run the frontend against hosted **Sitecore** content and Search with isolated work on your own machine.",
+      "Run your own frontend and open it in **SitecoreAI Page Builder**, using shared content and isolated local portal work.",
     outcome:
-      "Open a working local portal without installing a local CMS, VM, **Docker** or .NET runtime.",
+      "See shared **SitecoreAI** pages rendered by the React code running on your own machine.",
     duration: "20–30 minutes after tools are installed",
     personas: ["daniel"],
     prerequisites: [
       "Install **Git**, **VS Code** and **Node.js** 24.19.0 with its included npm. The app’s **.nvmrc** records that version; a **Node** version manager is optional.",
       "Authenticate **Git** or **VS Code** to your approved **GitHub** account with read access to the private repository. **GitHub CLI** and write access are not required for the local exercise.",
-      "Allow Internet access to **GitHub**, npm and the hosted **Sitecore** content/Search services.",
+      "Use **Chrome** for the local **Page Builder** exercise, with your own **SitecoreAI** account that has access to this site. Allow Internet access to **GitHub**, npm and the hosted **Sitecore** services. **Vercel** access is not required.",
       "Use a new checkout for the exercise. Preserve any existing checkout containing your work; do not delete it to make room.",
     ],
-    links: [{ label: "Open the private repository", href: repository }],
+    links: [
+      { label: "Open the private repository", href: repository },
+      { label: "Open Page Builder", href: pageBuilder },
+    ],
     steps: [
       {
         title: "Check the tools in a new terminal",
@@ -337,12 +228,12 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         code: "npm run setup:local",
         expected: [
-          "Fresh setup reports **Created** and fills this POC’s approved, distinct server Live and public browser contexts automatically. No manual context entry is required.",
-          "It generates independent session, operator and editing secrets, a unique PORTAL_ENVIRONMENT, PORTAL_STATE_ADAPTER=local-json, PORTAL_LOCAL_STATE_DIRECTORY=**.portal-state** and NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false.",
-          "Rerunning fills missing or blank contexts, preserves nonempty values and other settings, or reports left unchanged. A conflicting or ambiguous environment stops safely for review.",
-          "Saved work stays in your ignored **.portal-state** directory without automatic expiry. Published content and Search remain shared services. Do not copy a deployed **.env** file or shared Redis credentials into this checkout.",
+          "Fresh setup reports **Created** and automatically configures this POC’s Preview server context, separate public browser context, site name and matching editing secret. No manual copy/paste of keys is needed.",
+          "The editing secret matches this **SitecoreAI** environment. Session and operator secrets are generated independently for your machine, with a unique PORTAL_ENVIRONMENT, PORTAL_STATE_ADAPTER=local-json, PORTAL_LOCAL_STATE_DIRECTORY=**.portal-state** and NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false.",
+          "Rerunning upgrades recognized earlier workshop defaults, fills missing settings and preserves custom configuration and existing local saved work. Resolve any reported custom-configuration conflict before continuing.",
+          "Saved work stays in your ignored **.portal-state** directory without automatic expiry. Preview content and the published Search index remain shared services. Do not copy a deployed **.env** file or shared Redis credentials into this checkout.",
         ],
-        note: "Redis settings take precedence over local JSON. Resolve any setup warning rather than bypassing it. A generated local editing secret does not change **Sitecore**’s configured editing host.",
+        note: "Redis settings take precedence over local JSON. Resolve any setup warning rather than bypassing it. Setup configures your local app; selecting **Local host** in **Page Builder** connects your canvas to it.",
       },
       {
         title: "Install the locked dependencies and align VS Code",
@@ -372,15 +263,29 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The command generates **Content SDK** component maps, site metadata and import maps, then starts **Next.js** and the component-map watcher.",
-          "The local portal reads published content and native Search. Daniel’s resource scope includes Illinois, Texas and nationwide guidance.",
+          "The local portal reads Preview content and the native published Search index. Daniel’s resource scope includes Illinois, Texas and nationwide guidance. Preview content can include unpublished pages; use the hosted production portal to verify publication.",
           "Native tracking and personalization are disabled for this isolated local exercise. Use the configured HTTPS portal for UDL, affinity and A/B walkthroughs.",
         ],
-        note: "Use HTTP, not HTTPS, for this local server. If **Next.js** selects another port, update NEXT_PUBLIC_SITE_URL to that local origin and restart. Leave **Page Builder**’s **Default** editing host unchanged.",
+        note: "Use HTTP, not HTTPS, for this local server. If **Next.js** selects another port, update NEXT_PUBLIC_SITE_URL to that local origin, restart, and use the same port in **Page Builder**.",
+      },
+      {
+        title: "Connect Page Builder to your running local frontend",
+        action: [
+          "In **Chrome**, open **Page Builder** with your own **SitecoreAI** account and select **Liberty Mutual Agent Portal**.",
+          "Open **Default editing host**, select **Local host**, enter **http://localhost:3000** in **Enter the editing host url**, and click **Save**. Keep npm run dev running on this same machine.",
+          "In the page tree, select **Learning & resources**. Find the **ResourceSearch** heading **What can we help you find?** on the canvas.",
+        ],
+        links: [{ label: "Open Page Builder", href: pageBuilder }],
+        expected: [
+          "The canvas now uses your local React components with shared **SitecoreAI** Preview content. This local selection does not replace the shared **Default** editing host or deploy your branch.",
+          "The editor uses safe preview data without an agent login. Search controls are intentionally disabled on the canvas; test actual Search in the separate signed-in localhost tab.",
+        ],
+        note: "Use **Chrome** if an embedded-browser canvas stays loading. Do not edit or publish shared CMS fields during this code exercise: local code and saved work are individual, but **SitecoreAI** content is shared.",
       },
     ],
     cleanup: {
       body: [
-        "Continue to the component exercise with this terminal and browser. If stopping here, use **Daniel Ortiz** → **Sign out**, then Ctrl+C in the terminal.",
+        "Continue to the component exercise with the terminal, **Page Builder** and localhost tabs open. If stopping here, select **Default editing host** in the editing-host selector, sign out of the localhost portal with **Daniel Ortiz** → **Sign out**, then press Ctrl+C in the terminal.",
         "Keep **.env.local** and **.portal-state** to reuse the setup, and keep them out of **Git**. This setup needs no shared portal reset or CMS publish.",
       ],
     },
@@ -394,29 +299,30 @@ export const developmentGuides: WorkshopGuide[] = [
     category: "Individual developer workshop",
     title: "Component development: edit, observe, test and restore",
     summary:
-      "Change one heading in **ResourceSearch** while its native Search integration continues to work.",
+      "Change one **ResourceSearch** heading in **VS Code**, see it in **Page Builder**, and verify Search in the local portal.",
     outcome:
       "Experience the local React feedback loop and verify a small change without publishing shared content.",
     duration: "20–30 minutes",
     personas: ["daniel"],
     prerequisites: [
       "Finish Local setup and keep the repository root open in **VS Code**. Run all commands from **examples/liberty-mutual-agent-portal**.",
-      "Use your own clean workshop branch and the local browser. The default exercise is an uncommitted, reversible edit.",
-      "Leave **Sitecore** **Page Builder**’s **Default** editing host unchanged. This exercise needs no CMS publish, shared CDP training or deployment.",
+      "Use your own clean workshop branch, **Page Builder** connected to **Local host**, and a separate localhost portal tab. The exercise is an uncommitted, reversible edit.",
+      "Keep npm run dev running. This exercise needs no CMS publish, shared CDP training, **Vercel** access or deployment.",
     ],
     links: [
       {
         label: "Open local Learning & resources",
         href: "http://localhost:3000/resources",
       },
+      { label: "Open Page Builder", href: pageBuilder },
     ],
     steps: [
       {
-        title: "Record the native Search baseline",
+        title: "Record the canvas and functional Search baseline",
         action: [
           "In your local browser, sign in as **daniel.01** with password **Sitecore**. Select **Learning & resources**.",
           "Confirm the heading **What can we help you find?** Enter workers compensation and click **Search**.",
-          "Keep **My licensed states** selected and record the Illinois, Texas and nationwide result titles you see.",
+          "Keep **My licensed states** selected and record the Illinois, Texas and nationwide result titles you see. Then return to **Page Builder** → **Learning & resources**, with **Local host** selected, and confirm the same starting heading.",
         ],
         expected: [
           "Native Search returns the currently published, indexed resources within Daniel’s licensed scope. Record actual titles rather than relying on a fixed result count, because the shared catalog can change.",
@@ -437,21 +343,21 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Change only the heading and save",
         action: [
           "Replace only the text inside the existing h2 with **Find guidance for your next client conversation**. Preserve the element and surrounding code.",
-          "Save the file and return to the same localhost browser tab.",
+          "Save the file and return to the **Page Builder** canvas for **Learning & resources**, keeping **Local host** selected.",
         ],
         code: "<h2>Find guidance for your next client conversation</h2>",
         expected: [
-          "Fast Refresh displays the new heading without a CMS publish or remote deployment. If the tab has been idle, reload once and confirm its address still starts with http://localhost.",
+          "The canvas displays **Find guidance for your next client conversation** from your local React code without a CMS publish or deployment. If needed, click **Reload canvas** and confirm **Local host** is still selected.",
         ],
       },
       {
         title: "Verify the integrated behavior still works",
         action: [
-          "Click **Search** with the same workers compensation query. Under **Risk state**, select **Illinois**.",
+          "Return to the separate **http://localhost:3000/resources** portal tab. Confirm the changed heading, then click **Search** with the same workers compensation query. Under **Risk state**, select **Illinois**.",
           "Compare the results to the baseline. Return to **My licensed states** after the comparison.",
         ],
         expected: [
-          "Illinois and nationwide guidance remain; the Texas-specific result drops out when Illinois is selected. The one-line copy edit has not changed native retrieval or licensing filters.",
+          "Illinois and nationwide guidance remain; the Texas-specific result drops out when Illinois is selected. The one-line copy edit has not changed native retrieval or licensing filters. These functional controls are tested in the portal, not the read-only editor canvas.",
         ],
       },
       {
@@ -473,7 +379,7 @@ export const developmentGuides: WorkshopGuide[] = [
         action: [
           "Review the diff. If this file contains only the uncommitted workshop edit, run the restore command below. If it also contains other work, manually restore only this heading instead.",
           "Restart npm run dev. In **Learning & resources**, click **Clear filters** if it is shown, erase the query text, then click **Search**.",
-          "Confirm the original heading and default licensed-state resource view. Use **Daniel Ortiz** → **Sign out**, then stop dev with Ctrl+C.",
+          "Confirm the original heading and default licensed-state resource view. In **Page Builder**, confirm the original heading on **Local host**, then switch the editing-host selector back to **Default editing host**. Use **Daniel Ortiz** → **Sign out** in the localhost portal, then stop dev with Ctrl+C.",
           "Run npm run build once more with dev stopped to return generated metadata to the build state. Leave generated **next-env.d.ts** changes out of a commit.",
         ],
         code: "git restore -- src/components/resource-search/ResourceSearch.tsx\nnpm run dev",
@@ -481,23 +387,11 @@ export const developmentGuides: WorkshopGuide[] = [
           "The original heading returns. **Clear filters** appears only when facets or Risk state differ from their defaults; it does not erase the typed query. Default filters and an empty query restore the baseline view. Only the intended exercise file was restored.",
         ],
       },
-      {
-        title:
-          "Optional: have the Vercel project owner demonstrate a hosted preview",
-        action: [
-          "If requested, the **Vercel** Hobby project owner reproduces the reviewed one-line edit, makes their own commit on a workshop branch and opens a pull request.",
-          "The **Vercel** project owner verifies CI, the exact source commit, configured preview credentials, durable state and an isolated namespace before testing the preview URL.",
-        ],
-        expected: [
-          "A local commit, a **GitHub** push and a deployed preview are separate events. **GitHub** write access alone does not establish deployment eligibility for the private Hobby project.",
-          "The branch preview does not automatically become the **Page Builder** editing host. The exercise requires no production merge or authoring-environment deployment.",
-        ],
-      },
     ],
     cleanup: {
       body: [
-        "Keep your local setup and state files private and untracked. No shared workspace reset or CMS restoration is needed for the default local exercise.",
-        "If the **Vercel** project owner created a shared preview, close the unmerged practice PR and follow the agreed branch cleanup process. Do not force-push shared work or merge a practice edit into **main** merely to finish the workshop.",
+        "Keep your local setup and state files private and untracked. Confirm **Page Builder** is back on **Default editing host**. No shared workspace reset or CMS restoration is needed for this local exercise.",
+        "The workshop ends with local verification. The release-path discussion explains how reviewed code would reach a shared environment; attendees do not need to push a branch, open a PR or access **Vercel**.",
       ],
     },
     related: ["local-setup", "vscode-mcp", "release-and-recovery"],
@@ -618,118 +512,79 @@ export const developmentGuides: WorkshopGuide[] = [
     slug: "release-and-recovery",
     audience: "development",
     category: "Understand the implementation",
-    title:
-      "Releases: follow code, content and configuration on their own paths",
+    title: "Release paths: from local changes to shared experiences",
     summary:
-      "Inspect real release evidence, then choose the appropriate release or recovery procedure for a proposed change.",
+      "Discuss how frontend code, CMS definitions and authored content reach their shared environments after local verification.",
     outcome:
-      "Distinguish CI success, deployed code and native runtime acceptance without triggering a release during the walkthrough.",
-    duration: "20–25 minutes",
+      "Explain the release path for each change without requiring an attendee deployment or hosting account.",
+    duration: "10–15 minutes",
     personas: [],
     prerequisites: [
-      "**GitHub** read access and permission to view the **Vercel** project. Your own authorized **Sitecore** account is needed for native inspection.",
-      "This walkthrough inspects existing releases. A person with the relevant **GitHub**, **Vercel** or **Sitecore** access performs deployments, model changes, editing-host changes and rollback through the corresponding release procedure.",
-      "The temporary evaluation is not a production handoff. Future operating standards are discussion points, not required attendee setup.",
+      "Complete the local component exercise or observe the presenter’s example. No **Vercel** access, hosting transfer, branch push or deployment is required.",
+      "The linked repository files are optional implementation references. The presenter can show existing release evidence if useful.",
+      "This temporary evaluation is not a production handoff. Future operating standards are discussion points, not required attendee setup.",
     ],
     links: [
       {
-        label: "Open historical release PR #21",
+        label: "Optional: inspect a historical release PR",
         href: `${repository}/pull/21`,
       },
-      { label: "Open current Vercel deployments", href: deployments },
       {
-        label: "Open the release runbook",
+        label: "Release runbook",
         href: `${repositoryDocs}/developer-handoff.md#vercel-release-process`,
       },
     ],
     steps: [
       {
-        title: "Connect a code change to its independent checks",
+        title: "Follow a frontend change from GitHub to Vercel",
         action: [
-          "Open PR #21 → **Conversation**. Expand the successful checks beside commit cac3e38, historically shown as **4 / 4 checks OK**.",
-          "Inspect **Offline validation** and **Connected production build**. Follow the **Vercel** status row’s **Details** link to the deployment, rather than relying only on the PR **Checks** tab.",
+          "Discuss the path for the heading you changed: local branch → reviewed pull request and checks → **Vercel** preview → approved merge → production deployment.",
+          "Compare local verification with shared release verification. A local commit deploys nothing; a configured **Vercel** Git integration builds the selected branch after a push.",
         ],
         expected: [
-          "**Offline validation** checks source behavior and owned serialization contracts. **Connected production build** generates real SDK artifacts and compiles against published content.",
-          "The historical affinity change merged as b99e3ca. Its successful record does not prove a later release; inspect the current source commit separately.",
-          "Workflow YAML defines checks but does not establish enforced repository review policy. Required jobs, latest-push review and direct/force-push restrictions must be verified in remote repository settings.",
+          "**Portal validation** runs **Offline validation** and **Connected production build**. **Vercel** independently builds and hosts the frontend from **examples/liberty-mutual-agent-portal** using **Node** 24, npm ci and npm run build.",
+          "A successful build and **Ready** deployment still need checks of the changed experience on that host. Review its source commit, environment and relevant native services.",
+          "The **SitecoreAI Vercel Deploy App** is a separate integration. A working Git-connected deployment does not by itself establish that app connection. Attendees do not need either integration to develop locally.",
         ],
         links: [
           {
-            label: "Inspect Portal validation workflow",
+            label: "Optional: inspect Portal validation",
             href: `${repository}/blob/main/.github/workflows/portal-validation.yml`,
           },
         ],
       },
       {
-        title: "Compare Ready with native runtime evidence",
+        title: "Distinguish authored content from CMS model changes",
         action: [
-          "In **Vercel**, record the deployment’s environment, source commit and **Ready** status. Open the corresponding portal URL.",
-          "Open the September 13 native affinity verification record and compare its exact host and commit to the historical release.",
-          "For a new release, separately record its tester, time, persona, pack and affected journeys. Do not reuse an older native result as evidence for a new commit.",
+          "For ordinary page text, layout or images, follow **SitecoreAI** authoring → editorial review → publication to **Experience Edge**. No frontend deployment is needed for an ordinary content edit.",
+          "For templates, rendering definitions and placeholder rules, review the owned serialized CMS model and its separate authoring deployment through **SitecoreAI Deploy**. A frontend push does not automatically deploy authoring; that trigger must be configured separately.",
         ],
         expected: [
-          "A build, a deployed application and verified native identity/Search/decisioning are distinct checkpoints.",
-          "**Queued** or **Building** is not **Ready**. A **Ready** deployment still needs relevant runtime checks, including authorization and saved work when those paths change.",
-        ],
-        links: [
-          { label: "Open the production portal", href: `${portal}/login` },
-          {
-            label: "Read historical native runtime evidence",
-            href: `${repositoryDocs}/qa-affinity-personalization-2026-09-13.md`,
-          },
-        ],
-      },
-      {
-        title: "Choose the frontend or editorial path",
-        action: [
-          "For React, styles or server-code changes, review a branch/PR, the two CI jobs and a correctly configured **Vercel** preview before an approved merge to **main**.",
-          "For ordinary page text, layout or image changes, use native authoring review and publication to **Experience Edge**. Reindex **Liberty Mutual Agent Resources** only when indexed fields change.",
-        ],
-        expected: [
-          "**Vercel**’s **Git** integration deploys the configured branch. The app root is **examples/liberty-mutual-agent-portal**, with **Node** 24, npm ci and npm run build.",
-          "A local commit alone deploys nothing. A **Git** push does not automatically run a **Sitecore** authoring deployment; its trigger must be configured separately.",
-          "Native editorial publication does not need an ordinary frontend rebuild. Native Search and decisioning configuration retain their own refresh or activation steps.",
-          "The **SitecoreAI Vercel Deploy App** or hosting-provider connection is a separate integration to verify; Git-connected **Vercel** deployment alone does not prove that connection is configured.",
-        ],
-      },
-      {
-        title: "Inspect the owned CMS model scope before a model release",
-        action: [
-          "Read **authoring/scripts/deploy-content.sh** and **xmcloud.build.json** from the repository root. Review their owned paths and the runbook’s --what-if procedure; do not apply it during this inspection.",
-          "Compare the **Model**, **SitePresentation** and **SupportForm** definitions with the **CreateOnly** **Content**, **Taxonomy** and **ResourcePageBranch** seeds and the separately provisioned **CampaignPageBranch**.",
-        ],
-        expected: [
-          "The current scoped CLI updates owned model definitions and exact presentation restrictions. It does not broadly overwrite authored pages or shared **Sitecore** trees.",
-          "Initial content, taxonomy and the editable Resource page branch remain outside **Items as Resources**. **CreateOnly** adds missing seed items and preserves existing authored content; it is not a restore mechanism.",
-          "The authoring resource package includes **nextjs-starter**, **LibertyMutual.Model**, **LibertyMutual.SitePresentation** and **LibertyMutual.SupportForm**. renderingHosts is empty because **Vercel** hosts the frontend and editing alias.",
-          "A future integrated authoring deployment uses reviewed **Git** source and **SitecoreAI Deploy** configuration. It still requires schema, rendering and editing checks separate from **Vercel**.",
+          "The authoring resource package includes **nextjs-starter**, **LibertyMutual.Model**, **LibertyMutual.SitePresentation** and **LibertyMutual.SupportForm**. renderingHosts is empty because **Vercel** hosts the frontend and shared editing alias.",
+          "Initial **Content**, **Taxonomy** and **ResourcePageBranch** seeds stay outside **Items as Resources**, preserving editable content. The runbook also documents the current scoped CLI model-release procedure.",
+          "Search indexing, personalization activation and CMS publication have distinct steps. Code deployment alone does not publish content, refresh the index or activate a rule.",
         ],
         links: [
           {
-            label: "Inspect scoped CMS release script",
-            href: `${repository}/blob/main/authoring/scripts/deploy-content.sh`,
-          },
-          {
-            label: "Inspect authoring build configuration",
+            label: "Optional: inspect authoring build configuration",
             href: `${repository}/blob/main/xmcloud.build.json`,
           },
         ],
       },
       {
-        title: "Keep the Page Builder editing host intentional",
+        title: "Keep local editing separate from shared hosting",
         action: [
-          "In **Page Builder**, inspect the configured **Default** editing host. Keep it unchanged for local development.",
-          "For a future intentional host change, have the platform owner review **configure-portal-host.cjs** without --apply first, using the intended CLI environment, editing origin and delivery origin.",
+          "Recall how **Page Builder**’s **Local host** option rendered your code at **http://localhost:3000**. Each developer’s browser connects to that developer’s machine.",
+          "Contrast this with the shared **Default** editing host, which uses the configured hosted frontend for normal authoring. Return to **Default editing host** after the local exercise.",
         ],
         expected: [
-          "The registered alias must be reachable by **Sitecore**, use the Preview server context and matching editing secret, and keep its own state namespace.",
-          "A branch preview or localhost is not automatically a registered editing host. An intentional host change requires its own application, site-grouping publication, SDK metadata regeneration and real canvas verification.",
-          "Editing routes suppress engagement tracking and use safe fixture data; editing access does not grant operational account access.",
+          "The local app needs Preview server content access and the matching editing secret, supplied automatically by setup:local for this POC. The browser uses its separate public-scoped context.",
+          "Selecting **Local host** does not change the registered shared host, require a CMS publication or deploy code. Changing the shared **Default** host is a separate platform maintenance operation.",
+          "Editing routes use safe preview data and suppress engagement tracking. Local code is individual; shared CMS field edits still affect the common authoring environment.",
         ],
         links: [
           {
-            label: "Inspect editing-host maintenance procedure",
+            label: "Shared editing-host maintenance reference",
             href: `${repositoryDocs}/developer-handoff.md#dedicated-editing-host`,
           },
         ],
@@ -737,25 +592,23 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Choose recovery for the layer that changed",
         action: [
-          "For an application regression, the **Vercel** project owner restores a compatible known deployment and the developer prepares a reviewed source-code revert. For an editorial regression, a **Sitecore** author restores the intended native version, reviews and republishes it.",
-          "For model changes, apply a compatible correction in the owned scope. Protect durable data before any schema migration.",
-          "Discuss future monitoring, dependency triage, patch approval and escalation ownership separately from this temporary evaluation.",
+          "For an application regression, restore a compatible known hosting deployment and prepare a reviewed source-code correction. For an editorial regression, restore the intended native content version, review and republish it.",
+          "For model changes, apply a compatible correction in the owned scope. Discuss future monitoring, dependency maintenance and support ownership separately from this temporary evaluation.",
         ],
         expected: [
-          "Application rollback does not reset Redis, undo CMS publication or reverse experiment history. A workspace reset cannot restore authored content.",
-          "The repo already includes a lockfile, weekly **Dependabot**, pinned CI actions, bounded service requests and checks for configured private values in browser bundles. A production operating model would add its own monitoring, support and security acceptance.",
+          "An application rollback does not reset saved work, undo CMS publication or reverse experiment history. A workshop workspace reset does not restore authored content.",
+          "No deployment or rollback is performed in this discussion. The local developer exercise is complete without sharing a **Vercel** account.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Close engineering inspection tabs. No redeploy, rollback, credential change, content publish or reset is needed for this walkthrough.",
+        "Close optional reference tabs. This discussion changes no code, content, hosting or saved work.",
       ],
     },
     related: [
-      "architecture-and-ownership",
-      "state-authorization",
       "component-development",
+      "architecture-and-ownership",
       "saved-work-reset",
     ],
     sourceSlides: [41, 42, 46, 128, 129, 130, 131, 132, 133],
@@ -967,7 +820,6 @@ export const developmentGuides: WorkshopGuide[] = [
     },
     related: [
       "fresh-profile-restart",
-      "state-authorization",
       "release-and-recovery",
     ],
     sourceSlides: [135, 136, 137, 138, 141],
