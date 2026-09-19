@@ -324,23 +324,33 @@ test("the local component and setup instructions still target the actual reposit
   );
   const setupText = readableContent(local);
   const componentText = readableContent(component);
-  assert.match(setupText, /http:\/\/localhost:3000\/login/);
-  assert.match(setupText, /Preview server context/);
-  assert.match(setupText, /matching editing secret/);
-  assert.match(setupText, /No manual copy\/paste/);
+  const setupCommands = local.steps.map((step) => step.code ?? "").join("\n");
+  assert.match(setupCommands, /^cd examples\/liberty-mutual-agent-portal$/m);
+  for (const command of ["npm run setup:local", "npm ci", "npm run dev"]) {
+    assert.ok(
+      setupCommands.split("\n").includes(command),
+      `local setup must include the actual command: ${command}`,
+    );
+  }
+  assert.ok(
+    linksFor(local).some((link) => link.href === "http://localhost:3000/login"),
+    "local setup must link to the local portal login",
+  );
+  assert.ok(
+    linksFor(component).some(
+      (link) => link.href === "http://localhost:3000/resources",
+    ),
+    "component exercise must link to functional Search outside the editor",
+  );
+  // Pin controls and configuration entry points, not their explanatory sentences.
+  // The setup helper's behavior is covered by scripts/setup-local.test.mjs.
+  assert.match(setupText, /\.env\.local/);
   assert.match(setupText, /Chrome/);
   assert.match(setupText, /Local host/);
   assert.match(setupText, /Enter the editing host url/);
-  assert.match(componentText, /Page Builder.*canvas/);
-  assert.match(componentText, /separate.*http:\/\/localhost:3000\/resources/);
-  assert.match(
-    componentText,
-    /switch the editing-host selector back to.*Default editing host/,
-  );
-  assert.doesNotMatch(
-    componentText,
-    /have the Vercel project owner demonstrate a hosted preview/,
-  );
+  assert.match(componentText, /Page Builder/);
+  assert.match(componentText, /Local host/);
+  assert.match(readableContent(component.cleanup), /Default editing host/);
   assert.match(readableContent(local.cleanup), /Default editing host/);
 });
 
@@ -349,17 +359,16 @@ test("release teaching does not make hosting access an attendee prerequisite", (
     (candidate) => candidate.slug === "release-and-recovery",
   );
   assert.ok(guide);
-  assert.match(readableContent(guide.prerequisites), /No Vercel access/);
-  assert.match(
-    readableContent(guide),
-    /No deployment or rollback is performed/,
-  );
   assert.ok(
     linksFor(guide).every(
       (link) => new URL(link.href).hostname !== "vercel.com",
     ),
+    "release references must be readable without entering the Vercel console",
   );
-  assert.ok(guide.steps.every((step) => !step.code));
+  assert.ok(
+    guide.steps.every((step) => !step.code) && !guide.cleanup.code,
+    "release teaching must not add executable deployment or rollback steps",
+  );
 });
 
 test("reset walkthroughs use the authenticated page and preserve the host, pack and history boundaries", () => {
@@ -397,14 +406,25 @@ test("reset walkthroughs use the authenticated page and preserve the host, pack 
     );
     assert.match(
       text,
-      /all seven personas/i,
+      /\b(?:seven|7)\s+(?:personas|logins|usernames|accounts)\b/i,
       `${guide.slug}: explain the whole-pack effect`,
     );
     assert.match(
       text,
-      /other host|current host only|host shown/i,
+      /\b(?:same|selected|current|other)\s+(?:host|website|environment)\b|\bhost shown\b/i,
       `${guide.slug}: distinguish host scope`,
     );
+    for (const control of [
+      "Agent identity",
+      "Refresh status",
+      "Continue reset",
+      "Sign in",
+    ]) {
+      assert.ok(
+        text.includes(control),
+        `${guide.slug}: identify the reset page control or field ${control}`,
+      );
+    }
     assert.doesNotMatch(
       text,
       /Operator-only|PORTAL_OPERATOR_SECRET|reset-reviewer-pack\.mjs|DEMO_PORTAL|coordinator.{0,80}approv/i,
@@ -414,26 +434,50 @@ test("reset walkthroughs use the authenticated page and preserve the host, pack 
       guide.steps.every((step) => step.code === undefined),
       `${guide.slug}: reset walkthrough must be usable through the page`,
     );
-    for (const unaffected of ["CMS", "Search", "webhook", "history"]) {
-      assert.ok(
-        text.toLowerCase().includes(unaffected.toLowerCase()),
-        `${guide.slug}: explain separate ${unaffected} lifecycle`,
+    for (const [concept, terms] of [
+      ["authored content", /\b(?:CMS|(?:Sitecore|authored|page)\s+content)\b/i],
+      ["Search", /\bSearch\b/i],
+      ["webhook receipts", /\bwebhooks?\b/i],
+      ["history", /\b(?:history|historical)\b/i],
+    ] as const) {
+      assert.match(
+        text,
+        terms,
+        `${guide.slug}: explain the separate ${concept} lifecycle`,
       );
     }
+    assert.match(
+      text,
+      /(?:earlier|older|previous|historical)[^."\n]*(?:profiles|history)[^."\n]*(?:remain|retain|available|keep)|(?:profiles|history)[^."\n]*(?:remain|retain|preserv|kept)/i,
+      `${guide.slug}: explain that existing profile history is retained`,
+    );
   }
   const saved = readableContent(resetGuides[0]);
+  // Check the reset concepts without pinning a complete customer-facing sentence.
   assert.match(
     saved,
-    /restores starting operational work and creates seven fresh verified native profiles together/,
+    /\b(?:starting|baseline|original)\s+(?:(?:operational|saved)\s+)?(?:work|records|tasks)\b/i,
+    "the reset guide must explain restoration of starting work",
   );
-  assert.match(saved, /profile generation increases by one/);
-  assert.match(saved, /all seven Agent identities change/);
-  assert.match(saved, /sign in again/i);
+  assert.match(
+    saved,
+    /\b(?:new|fresh)(?:\s+\w+){0,3}\s+profiles\b/i,
+    "the reset guide must explain creation of fresh profiles",
+  );
   const fresh = readableContent(resetGuides[1]);
-  assert.match(fresh, /does not require a second reset/);
-  assert.match(fresh, /Continue reset/);
-  assert.match(fresh, /sign in again/i);
-  assert.match(fresh, /earlier profiles/i);
+  for (const field of ["Saved-work run", "Profile generation"]) {
+    assert.ok(
+      fresh.includes(field),
+      `profile verification must identify the reset status field ${field}`,
+    );
+  }
+  assert.ok(
+    linksFor(resetGuides[1]).some(
+      (link) =>
+        new URL(link.href).pathname === "/workshops/guide/saved-work-reset",
+    ),
+    "profile verification must link to the reset procedure it follows",
+  );
   assert.doesNotMatch(
     readableContent(workshopGuides),
     /Reset saved work|Start fresh with new profiles/,
