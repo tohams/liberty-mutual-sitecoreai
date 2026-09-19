@@ -172,14 +172,18 @@ This is external scheduling automation. Native **Schedule publishing availabilit
 
 ### Shared content and bulk maintenance
 
+This is a read-only **Page Builder** exercise. Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**, select **Liberty Mutual Agent Portal**, and use **English** with the **Default** editing host. If your role only permits the paired **Workshop practice** exercise, follow the presenter for this inspection. Leave **Campaign practice** unpublished and do not change its fields.
+
 | Step | Click or inspect | Observe |
 |---|---|---|
-| C17 | Open [Content editor](https://xmc-scaipocusem400b-sitecoreai950c-demo4418.sitecorecloud.io/sitecore/shell/Applications/Content%20Editor.aspx?sc_bw=1&organization=org_XqL3u1MSNVuubOTb), also available in Page Builder's top-left navigation menu. Paste `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/campaign-practice/Data` into the left search. Select **Direct Hit → Data**, then the magnifier beside **Content**. | The content search opens within the practice Data folder. |
-| C18 | Enter `*` and press Enter. Review all results and record original copy. Select the down arrow **More search options → Search operations → Search and replace**. | Eight results: the Data folder and seven local datasource items. The live campaign is outside the scope. |
-| C19 | At **What word would you like to replace?**, enter `relationship team\|relationship colleagues` and select **OK**. Dismiss the completion message with **OK**. | Four fields change across **Growth opportunity**, **Preparation update**, **Prepare for review** and **Your next step**. |
-| C20 | Select the **Search [1]** tab. Repeat **Search and replace** with `relationship colleagues\|relationship team`. Inspect the four affected fields. | All original wording returns. Leave the practice page unpublished. |
+| C17 | Open **Page Builder → Content → Home → Agency growth → Campaign practice → Data**. Find **Growth opportunity**, **Preparation update**, **Prepare for review**, and **Your next step**. | These are separate local content items beneath the unpublished practice page. The live campaign has its own content. |
+| C18 | Read **Growth opportunity → Body**, then **Preparation update → Body**. Look for the phrase relationship team without changing either field. | The same wording occurs in independently editable content. Changing one item would not automatically change the other. |
+| C19 | Read **Prepare for review → Answer**, then **Your next step → Title**. Look for relationship team again. If a colleague has changed the wording, note the difference without restoring it. | The seeded phrase appears in four independent fields. This demonstrates the maintenance need, not a bulk replacement operation. |
+| C20 | Discuss a shared content item for wording that should always stay identical. For a one-time bulk change, record the exact items, fields, languages, and versions to include, then consider a scoped API workflow or the **Marketplace Content Export/Import Tool** for evaluation. | Content reuse and bulk updates solve different needs. This workshop does not demonstrate a multi-item replacement command in **Page Builder**; the suggested extension is not installed or validated in this sandbox. |
 
-For frequently reused approved copy, a shared datasource is easier to maintain than many independent copies. Search and replace demonstrates multi-item text maintenance; it is not a generic spreadsheet editor for arbitrary field changes. Follow versions, review and normal publication for real bulk changes. The [campaign authoring guide](../authoring/CAMPAIGN-AUTHORING.md#workflow-versions-and-safe-exercises) describes the exercise scope.
+A bulk-update implementation would need review, workflow, publication, and a tested restoration process. The [campaign authoring guide](../authoring/CAMPAIGN-AUTHORING.md#workflow-versions-and-safe-exercises) describes this read-only exercise and its boundaries.
+
+**Finish:** close the practice page without changing or publishing content. No reviewer reset is needed. Keep the bulk-editing requirement and evaluation questions in your workshop notes.
 
 ## 7. Target by known data, calculated criteria and browsing interest
 
@@ -255,7 +259,7 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 | 28 | Auto-save and draft recovery | C16 and named versions. Persisted changes can be reopened; unsaved keystrokes are outside that promise. |
 | 29 | Forms | F1–F8 cover native **Contact your team**. Native authoring, preview validation and production submission/receipt are verified. C5–C8 separately demonstrate custom durable portal requests. The inspection receiver is not a production database or CRM. |
 | 30 | A/B testing | Section 8 and the native Resources experiment. Keep it on a page without configured personalization. Custom application feature tests may need broader instrumentation. |
-| 31 | Bulk edit of fields and content | C17–C20: native Content Editor Search and replace over reviewed practice fields. Shared datasource reuse remains a distinct technique. |
+| 31 | Bulk edit of fields and content | C17–C20: read-only Page Builder inspection of repeated wording. A multi-item replacement tool is not demonstrated; evaluate a scoped API workflow or Marketplace extension. Shared datasource reuse remains a distinct technique. |
 | 32 | Scheduled unpublish / content expiration | Section 6: scoped restriction and republish automation, distinct from hiding an alert. |
 | 33 | Personalization variant preview | Page Builder's selected variants and decision-table profile tests, followed by ordinary signed-in delivery. |
 
@@ -284,6 +288,5 @@ The precise UI and enabled features depend on the tenant. New SitecoreAI capabil
 - [A/B/n settings and goals](https://doc.sitecore.com/sai/en/users/sitecoreai/a-b-n-testing/get-started-with-a-b-n-testing/configure-a-b-n-test-settings.html)
 - [Native Forms and webhook destinations](https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/forms/forms.html)
 - [Forms data delivery and storage boundary](https://doc.sitecore.com/sai/en/developers/sitecoreai/data-privacy.html)
-- [Content Editor search operations](https://doc.sitecore.com/sai/en/users/sitecoreai/the-search-operations.html)
 - [Sitecore Search AI-driven experiences](https://doc.sitecore.com/search/en/users/search-user-guide/ai-driven-experiences.html)
 - [Analytical models in Sitecore Personalize](https://doc.sitecore.com/personalize/en/users/sitecore-personalize/managing-analytical-models-in-sitecore-personalize.html)
