@@ -40,7 +40,7 @@ const profileLink: GuideLink = {
 const platformPrerequisite =
   "Open the Sitecore tool linked in this guide and sign in with the email address that received your **Sitecore Cloud** invitation. The link targets **Safeco Insurance Company of America POC** and its **SitecoreAI / Demo** environment. If a step uses **Page Builder**, confirm **Liberty Mutual Agent Portal** is selected there. If access is denied or another organization opens, ask the workshop team to check your invitation; a portal username such as **daniel.01** cannot provide this access.";
 const authorPrerequisite =
-  "In **Page Builder**, keep the editing host at **Default** so the canvas uses the hosted portal. Everyone uses the same CMS content, so coordinate edits to shared pages. The workshop team identifies one editor with access to the named page; other attendees follow that editor’s screen. Scoped workshop **Author** and **Approver** roles do not grant access to every resource or campaign page.";
+  "In **Page Builder**, keep the editing host at **Default** so the canvas uses the hosted portal. CMS pages are shared across the workshop; your portal reviewer number does not create a separate CMS copy. Follow the editing mode stated in this guide. Scoped workshop **Author** and **Approver** roles permit the paired workflow exercise, not edits to every resource or campaign page.";
 const packPrerequisite =
   "Find your name and reviewer number in **Attendee assignments** on this workshop website. Use that same number after the dot in every portal username. Number 01 is for presenters; attendees use their listed number from 02–15. If your name is not listed, ask the workshop team for a number before starting. The workshop team provides Sitecore authoring roles and practice-pair assignments separately.";
 const signOut =
@@ -446,7 +446,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Before starting, ask the workshop team for the current **Demo Webhook** receipt-inbox link and confirmation that its receiver is active. If you lack Forms administration or receiver access, follow the presenter for configuration and receipt inspection.",
+      "Review the existing form configuration without editing it, then submit fictional details through the portal. Before starting, ask the workshop team for the current **Demo Webhook** receipt-inbox link and confirmation that its receiver is active. If you lack Forms administration or receiver access, follow the presenter for configuration and receipt inspection.",
       "Use fictional contact details. The workshop receiver collects submitted data for inspection; a business backend would handle **Salesforce** activity or email delivery.",
     ],
     links: [
@@ -520,7 +520,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Author, classify, publish, and restore a resource",
     summary:
-      "Follow one shared Texas article from a new **Draft** through managed metadata, approval, publication, **Search** refresh, and exact restoration.",
+      "**Presenter-led:** Follow one shared Texas article from a new **Draft** through managed metadata, approval, publication, **Search** refresh, and exact restoration.",
     outcome:
       "The article and **Search** result show the same approved wording, then both return to the recorded starting content.",
     duration: "25–35 minutes, including publish and index time",
@@ -529,7 +529,7 @@ export const marketingGuides: WorkshopGuide[] = [
       packPrerequisite,
       platformPrerequisite,
       authorPrerequisite,
-      "This is a presenter-led shared-item exercise. The editor needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. If you have only a scoped workshop **Author** or **Approver** role, follow the presenter here and use **Author and approver: review and publish content together** for the **Workshop practice** page named in your role and pair assignment from the workshop team.",
+      "The workshop team selects one presenter to edit the shared Texas article; everyone else follows that screen. The presenter needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. For hands-on editing with a scoped **Author** or **Approver** role, use **Author and approver: review and publish content together** on your team-assigned pair page.",
       "Reserve enough time to complete publication, **Search** refresh, and restoration. Do not leave the temporary summary published.",
     ],
     links: [
@@ -562,7 +562,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The panel displays the metadata for the selected resource page. Check its page name, language, and version before changing a value.",
-          "A new **Draft** preserves earlier versions. The panel identifies the selected page, **English** language, and version. **Approved** versions are read-only.",
+          "A new **Draft** preserves earlier versions of this same shared article; it does not create a separate attendee page. Only the presenter edits this version. The panel identifies the page, **English** language, and version. **Approved** versions are read-only.",
         ],
         links: [pageBuilder],
       },
@@ -681,16 +681,16 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Create a resource page with local content and Modern Media",
     summary:
-      "Start from the **Resource page** branch, fill blank fields, select a reusable image, and inspect its accessible description.",
+      "**Presenter-led:** Create a uniquely named **Resource page** with blank fields and its own local **Data** folder, then select an image and inspect its accessible description.",
     outcome:
-      "Your unpublished practice page has its own image datasource and can be removed without changing existing articles or shared assets.",
+      "The new unpublished page has its own image content item and can be removed without changing existing articles or shared assets.",
     duration: "15 minutes",
     personas: ["Your Sitecore author account"],
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The editor needs permission to create pages under **Learning & resources**, edit local image content, and use **Modern Media Library**. **Resource metadata** additionally requires organization administrator/owner access. If you have only a scoped workshop **Author** or **Approver** role, follow the presenter for this guide.",
-      "Use a unique practice-page name and keep the page unpublished.",
+      "Follow the presenter for this guide. The presenter needs permission to create and delete pages under **Learning & resources**, edit local image content, and use **Modern Media Library**. **Resource metadata** additionally requires organization administrator/owner access. Scoped workshop **Author** and **Approver** roles do not include these permissions.",
+      "The presenter creates one uniquely named page with its own **Data**/**Resource image**, keeping existing resources unchanged. Keep this page unpublished and delete it at the end. Attendees do not need to create copies.",
     ],
     links: [
       pageBuilder,
@@ -788,7 +788,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Compose a campaign using approved components",
     summary:
-      "Duplicate a component with its own content, reorder it, and inspect the allowed choices for main and sidebar regions.",
+      "**Presenter-led:** On the shared **Campaign practice** page, duplicate a component with its own content, reorder it, and inspect the allowed choices for main and sidebar regions.",
     outcome:
       "You see how native authoring controls provide flexibility within the page’s approved structure.",
     duration: "10 minutes",
@@ -796,18 +796,18 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team must identify one editor with access to **Home** > **Agency growth** > **Campaign practice** and its **Data** items. Other attendees follow that editor’s screen. Keep this shared page unpublished, and record its starting component order and local **Data** items before changing them.",
+      "The workshop team identifies one presenter with access to **Home** > **Agency growth** > **Campaign practice** and its **Data** items. Everyone else follows that screen. All attendees observe the same practice page; its content is separate from the live campaign. Keep it unpublished, and record its starting component order and local **Data** items before changing them.",
     ],
     links: [pageBuilder],
     steps: [
       {
-        title: "Find the isolated practice component",
+        title: "Open the shared campaign practice page",
         action: [
           "Open **Page Builder** > **Home** > **Agency growth** > **Campaign practice**.",
           "In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane. Select the first **CampaignAccordion** in that list. Record its position and datasource—the content item supplying its text—so you can identify the duplicate during cleanup.",
         ],
         expected: [
-          "The unpublished page has independent local content and the component toolbar is available. The live campaign uses different content.",
+          "The component toolbar is available on the shared, unpublished practice page. Its local content is separate from the live campaign, so the presenter can demonstrate changes without editing the live campaign.",
         ],
         links: [pageBuilder],
       },
@@ -865,7 +865,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Use AI to improve and draft campaign copy",
     summary:
-      "Fix a deliberate spelling error, review a prompted rewrite, and restore the original rich text after testing both actions.",
+      "**Presenter-led:** On the shared **Campaign practice** page, fix a deliberate spelling error, review a prompted rewrite, and restore the original rich text.",
     outcome:
       "You can accept, reject, and verify AI-assisted edits while retaining editorial control.",
     duration: "10 minutes",
@@ -873,7 +873,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team identifies one editor with access to the unpublished **Campaign practice** page, its **Data** items, and **Optimize with AI**. Other attendees follow that editor’s screen. Record and restore the exact original **Body**, including formatting.",
+      "The workshop team identifies one presenter with access to the unpublished **Campaign practice** page, its **Data** items, and **Optimize with AI**. Everyone else follows that screen because the **Growth opportunity** content item is shared. The presenter records and restores the exact original **Body**, including formatting.",
     ],
     links: [pageBuilder],
     steps: [
@@ -939,7 +939,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Bulk editing: inspect the need and implementation options",
     summary:
-      "Inspect repeated wording across four Page Builder content items, then distinguish content reuse from a bulk-update tool.",
+      "**Read-only:** Inspect repeated wording across four **Page Builder** content items, then compare content reuse with a bulk-update tool.",
     outcome:
       "You can identify repeated content and compare shared content with tools for updating several items together.",
     duration: "5 minutes",
@@ -1001,7 +1001,7 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Control alert visibility and understand scheduled releases",
     summary:
-      "Inspect rich-text alert dates, then see how display windows, publication, and expiration work together.",
+      "**Read-only review:** Inspect rich-text alert dates. An optional presenter-led demonstration then shows scheduled publication and expiration on a dedicated sample page.",
     outcome:
       "You can explain which settings hide an alert and which publishing actions change **Live Experience Edge** delivery.",
     duration:
@@ -1377,7 +1377,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Use the live portal. Open **Live portal: Reset a reviewer number and current identities**, select your number from **Attendee assignments**, and copy Daniel’s **Agent identity**. Do not reset merely to view this value. Your invited Sitecore account needs access to the existing test and profile reports; otherwise, follow the presenter for those steps. Leave the test running.",
+      "Review the existing test configuration without editing it, then use your reviewer number for the portal interaction. Open **Live portal: Reset a reviewer number and current identities**, select your number from **Attendee assignments**, and copy Daniel’s **Agent identity**. Do not reset merely to view this value. Your invited Sitecore account needs access to the existing test and profile reports; otherwise, follow the presenter for those steps. Leave the test running.",
     ],
     links: [pageBuilder, liveLogin, profileLink, liveReset],
     steps: [
@@ -1456,7 +1456,7 @@ export const marketingGuides: WorkshopGuide[] = [
     title:
       "Agentic Studio: inspect connected work, brand context, and artifacts",
     summary:
-      "Use the saved Watkins example to understand reusable instructions, research tools, brand retrieval, and human refinement.",
+      "**Read-only:** Use the saved Watkins example to understand reusable instructions, research tools, brand retrieval, and human refinement.",
     outcome:
       "You can follow how **Agentic Studio** carries research and brand guidance into content drafts that marketers can review and refine.",
     duration: "15 minutes",
