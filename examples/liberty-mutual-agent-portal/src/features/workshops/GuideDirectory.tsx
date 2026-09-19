@@ -65,9 +65,10 @@ export function GuideDirectory({
           <div className="workshop-side-note">
             <strong>Follow at your own pace</strong>
             <p>
-              Start with your priorities. Each guide includes accounts, exact
-              steps, expected results, and cleanup instructions. Optional
-              scenarios and support follow the main walkthroughs.
+              Read <strong>Before you start</strong>, follow the numbered steps,
+              compare your result with <strong>What to observe</strong>, and
+              finish with cleanup. If the result differs, check the named
+              account, website, and starting state before continuing.
             </p>
           </div>
         </aside>

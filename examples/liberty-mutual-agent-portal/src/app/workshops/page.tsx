@@ -137,8 +137,10 @@ export default async function WorkshopHome() {
               <MousePointer2 size={22} />
               <h3>Keep two tabs open</h3>
               <p>
-                Read the guide here and follow the steps in the portal or
-                SitecoreAI in another tab.
+                Keep these instructions open while you work in the second tab.
+                Portal steps use a fictional agent login; authoring steps use
+                your invited <strong>Sitecore Cloud</strong> account. Each
+                walkthrough names the website and account it needs.
               </p>
               <a href="/login" target="_blank" rel="noreferrer">
                 Open Agent Portal <ArrowUpRight size={15} />
@@ -146,11 +148,15 @@ export default async function WorkshopHome() {
             </div>
             <div>
               <Users size={22} />
-              <h3>Use your assigned pack</h3>
+              <h3>Find your reviewer number</h3>
               <p>
-                Your examples use suffix{" "}
-                <strong>.{session.reviewerPack}</strong>. Switch personas as
-                directed. Local development uses an isolated .01 account.
+                Find your name in <strong>Attendee assignments</strong>. Your
+                guide currently shows suffix{" "}
+                <strong>.{session.reviewerPack}</strong>; if that number differs
+                from your assignment, sign out of the guide and sign in with a
+                portal username ending in your assigned number. The assignment
+                page lists the full usernames. Keeping one number separates your
+                portal work from other attendees’ work.
               </p>
               <Link href="/workshops/attendees">
                 Find your attendee assignment <ArrowRight size={15} />
@@ -160,24 +166,35 @@ export default async function WorkshopHome() {
               <CircleCheck size={22} />
               <h3>Finish with cleanup</h3>
               <p>
-                Each walkthrough explains what to restore. Sign-out keeps saved
-                work. Use the reset page to restore a reviewer number whenever
-                you want to repeat a walkthrough.
+                Follow the walkthrough’s <strong>Finish &amp; cleanup</strong>{" "}
+                section so the next exercise begins from a known state. Signing
+                out preserves saved work. A reviewer reset restores portal work
+                and creates fresh profiles; it does not undo shared Sitecore
+                content edits.
               </p>
             </div>
             <Link href="/workshops/reset" className="workshop-home-reset-link">
               Reset a reviewer number <ArrowRight size={16} />
             </Link>
           </section>
+          <p className="workshop-directory-intro">
+            First visit? Start with{" "}
+            <Link href="/workshops/guide/start-and-switch-agents">
+              Portal accounts and SitecoreAI workspaces
+            </Link>{" "}
+            to distinguish agent browsing, content authoring, and local
+            development before making changes.
+          </p>
           <div className="workshop-evaluation-note">
             <strong>An environment for exploration</strong>
             <p>
               Insurance and agency data are synthetic. This sandbox is available
-              for the agreed evaluation period and will then be deleted.
-              SitecoreAI administration requires your separately assigned
-              Sitecore access. During the two-week evaluation, Tuesday and
-              Thursday office hours are available; the workshop team will
-              provide the schedule.
+              for the agreed evaluation period and will then be deleted. Portal
+              logins do not grant SitecoreAI authoring or administration access.
+              The Sitecore workshop team—Angela Gustafson, Allen Blanton, and
+              Thomas Lin—provides sign-in help, confirms authoring roles and
+              practice pairs, and shares the schedule for Tuesday and Thursday
+              office hours during the two-week evaluation.
             </p>
           </div>
         </section>

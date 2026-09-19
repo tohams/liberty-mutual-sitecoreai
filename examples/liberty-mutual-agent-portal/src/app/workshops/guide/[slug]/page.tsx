@@ -148,6 +148,13 @@ export default async function GuidePage({
             </section>
             <section className="workshop-preparation" id="before-you-start">
               <h2>Before you start</h2>
+              <p>
+                Check the account, website, and starting state below before
+                following the steps.{" "}
+                <Link href="/workshops/attendees">Attendee assignments</Link>{" "}
+                lists your portal usernames and explains the separate Sitecore
+                authoring roles.
+              </p>
               <ul>
                 {guide.prerequisites.map((line, index) => (
                   <li key={index}>
@@ -158,8 +165,15 @@ export default async function GuidePage({
               {guide.accountScope === "local" && (
                 <p className="workshop-callout">
                   <Info size={17} />
-                  This exercise runs on your own machine. Its .01 account is
-                  isolated from the shared workshop packs.
+                  <span>
+                    When a step opens the local Agent Portal, use the full .01
+                    username shown in that step at{" "}
+                    <strong>localhost:3000</strong>. The default local setup
+                    keeps portal work on your computer, separate from the hosted
+                    workshop packs. Local code changes affect your frontend;
+                    content edits in <strong>Page Builder</strong> still change
+                    the shared CMS.
+                  </span>
                 </p>
               )}
               <ExternalLinks links={guide.links} />

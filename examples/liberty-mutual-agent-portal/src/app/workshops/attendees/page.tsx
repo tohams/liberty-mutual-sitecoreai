@@ -25,17 +25,21 @@ export default async function WorkshopAttendeesPage() {
           <span className="workshop-eyebrow">YOUR WORKSHOP ACCOUNTS</span>
           <h1>Attendees and reviewer numbers</h1>
           <p>
-            Find your name, then keep the same number across all seven agent
-            personas. Reviewer number <strong>01</strong> is reserved for the
-            workshop presenters.
+            A reviewer number groups seven fictional agent logins for one
+            attendee. Find your name below, then keep that number when switching
+            personas so your portal work and profile history remain separate
+            from other attendees’ work. Number <strong>01</strong> is reserved
+            for the workshop presenters.
           </p>
         </header>
         <div className="workshop-attendees-layout">
           <section aria-labelledby="workshop-roster-heading">
             <h2 id="workshop-roster-heading">Reviewer assignments</h2>
             <p className="workshop-attendees-caption">
-              The highlighted row matches your current workshop sign-in.
-              Unassigned numbers are available for additional attendees.
+              The highlighted row matches your current workshop sign-in. If your
+              name is missing, ask the Sitecore workshop team to assign one of
+              the unassigned numbers before beginning. This avoids two attendees
+              changing the same portal workspace.
             </p>
             <table className="workshop-attendees-table">
               <caption className="sr-only">
@@ -102,8 +106,11 @@ export default async function WorkshopAttendeesPage() {
               </p>
               <p>
                 If your assigned number differs from the highlighted row, sign
-                out of this guide and sign in with your assigned suffix. The
-                examples will then use that number.
+                out of this guide and sign in with a full portal username ending
+                in your assigned suffix. The examples will then use that number.
+                For example, choose the Daniel username in your pack when a
+                guide asks you to inspect Daniel’s experience; changing personas
+                does not change your reviewer number.
               </p>
             </div>
             <section
@@ -115,14 +122,24 @@ export default async function WorkshopAttendeesPage() {
               </h2>
               <p>
                 Use your invited <strong>Sitecore Cloud</strong> account for
-                authoring. The persona usernames above do not sign into
-                SitecoreAI or grant authoring permissions.
+                authoring. In <strong>Sitecore Cloud Portal</strong>, select
+                <strong> Safeco Insurance Company of America POC</strong>, then
+                <strong> SitecoreAI / Demo</strong>. Open{" "}
+                <strong>Page Builder</strong>, and choose the site
+                <strong> Liberty Mutual Agent Portal</strong> (site name:
+                <strong> liberty-mutual-agent-portal</strong>). These names
+                identify this shared customer sandbox. The persona usernames
+                above do not sign into SitecoreAI or grant authoring
+                permissions.
               </p>
               <p>
                 Attendee <strong>Author</strong> and <strong>Approver</strong>{" "}
-                roles and practice pairs are pending assignment. Confirm your
-                role and pair before beginning the paired exercise. A practice
-                pair number is different from your reviewer number.
+                roles and practice pairs are pending assignment. The Sitecore
+                workshop team—Angela Gustafson, Allen Blanton, and Thomas
+                Lin—will provide your role, partner, and practice-page number.
+                Follow the presenter until those are confirmed. A practice pair
+                identifies a shared CMS page; it is not inferred from your
+                portal reviewer number.
               </p>
               <p>
                 The scoped roles support the assigned practice-page exercise.
@@ -130,6 +147,13 @@ export default async function WorkshopAttendeesPage() {
                 <strong>Resource metadata</strong> app require additional
                 access. Follow the presenter for those guides unless the
                 required access has been assigned to your Sitecore account.
+              </p>
+              <p>
+                Local development guides use <strong>daniel.01</strong> at
+                <strong> http://localhost:3000</strong> because the default
+                local setup stores portal work on your computer. Local
+                source-code edits stay on that computer; edits to content in
+                <strong> Page Builder</strong> still affect the shared CMS.
               </p>
               <Link href="/workshops/guide/author-approver-workflow">
                 View the author and approver exercise <ArrowRight size={16} />

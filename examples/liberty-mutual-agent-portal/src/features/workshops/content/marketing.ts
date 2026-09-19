@@ -21,7 +21,7 @@ const previewLogin: GuideLink = {
   href: `${PREVIEW}/login`,
 };
 const liveReset: GuideLink = {
-  label: "Production: Reset a reviewer number and current identities",
+  label: "Live portal: Reset a reviewer number and current identities",
   href: `${LIVE}/workshops/reset`,
 };
 const previewReset: GuideLink = {
@@ -38,27 +38,37 @@ const profileLink: GuideLink = {
   href: PROFILES,
 };
 const platformPrerequisite =
-  "Use your own authorized **Sitecore** account in **Safeco Insurance Company of America POC**, with **Liberty Mutual Agent Portal** selected. Portal usernames do not grant **Sitecore** access.";
+  "Open the Sitecore tool linked in this guide and sign in with the email address that received your **Sitecore Cloud** invitation. The link targets **Safeco Insurance Company of America POC** and its **SitecoreAI / Demo** environment. If a step uses **Page Builder**, confirm **Liberty Mutual Agent Portal** is selected there. If access is denied or another organization opens, ask the workshop team to check your invitation; a portal username such as **daniel.01** cannot provide this access.";
 const authorPrerequisite =
-  "Keep **Default** as the **Page Builder** editing host. Agree shared-item edits with the **Sitecore** author responsible for that content; do not edit the same version concurrently.";
+  "In **Page Builder**, keep the editing host at **Default** so the canvas uses the hosted portal. This is a shared CMS: a portal reviewer number does not create a separate content tree. The workshop team identifies one editor with access to the named page; other attendees follow that editor’s screen. Scoped workshop **Author** and **Approver** roles do not grant access to every resource or campaign page.";
 const packPrerequisite =
-  "Use your assigned reviewer pack consistently across all personas. Pack 01 is the presenter example; attendees use their assigned pack from 02–15.";
+  "Find your name and reviewer number in **Attendee assignments** on this workshop website. Use that same number after the dot in every portal username. Number 01 is for presenters; attendees use their listed number from 02–15. If your name is not listed, ask the workshop team for a number before starting. This number does not assign a Sitecore authoring role or practice pair.";
 const signOut =
   "Click the signed-in person’s name or avatar in the upper right, then **Sign out**. Wait for **Welcome back** before switching to another persona.";
 const persistentWork =
   "Saved work has no automatic expiry. Signing out ends the session but keeps saved work and native **SitecoreAI** profile history.";
 const sharedReset =
-  "Retain the example for review, or open **Reset a reviewer number** on the designated preview and sign in to the workshop guide. Select your assigned pack under **Reviewer number**. Make sure everyone using that pack has finished, check the number on the button, then click **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready** and sign into the **Agent Portal** again. This one action restores baseline saved work and activates seven newly verified native profiles with clean browsing history, for this reviewer number on this host only. Previous native profiles and experiment history remain. CMS content, **Search**, **Agentic** artifacts, and webhook receipts are unchanged.";
+  "To keep your new record for review, sign out without resetting. To repeat from the starting data, use the **Transaction preview: Reset a reviewer number and current identities** link below. Sign in to that workshop website if requested, select your number from **Attendee assignments** under **Reviewer number**, and wait until anyone using that number has finished. Click **Reset reviewer {{pack}}**, wait for **Reviewer {{pack}} is ready**, and sign in to the portal again. This removes saved changes for all seven personas with that number on the transaction-preview host and activates seven clean native profiles. It does not reset the live portal. Earlier native profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts, and webhook receipts are unchanged.";
 
-function login(persona: string, preview = false): GuideStep {
+const personaNames = {
+  avery: "Avery Brooks",
+  maya: "Maya Chen",
+  jordan: "Jordan Ellis",
+  daniel: "Daniel Ortiz",
+  priya: "Priya Shah",
+  marcus: "Marcus Reed",
+  elena: "Elena Park",
+};
+
+function login(persona: keyof typeof personaNames, preview = false): GuideStep {
   return {
     title: `Sign in as ${persona}.01`,
     action: [
-      `Open the ${preview ? "transaction-preview" : "live"} portal login. If another person is signed in, use their profile menu > **Sign out** first.`,
+      `Click **${preview ? "Open the transaction-preview login" : "Open the live portal login"}** below. ${preview ? "This host keeps saved practice transactions separate from the live portal." : "This host shows published portal content."} If another person is signed in, click their name or avatar in the upper right, then **Sign out**.`,
       `Enter username **${persona}.01** and password **Sitecore**, then click **Sign in**.`,
     ],
     expected: [
-      "**My workspace** opens at /. Confirm the person and agency shown before continuing.",
+      `**My workspace** opens at /. The upper-right profile menu must show **${personaNames[persona]}**. If it shows someone else, sign out and repeat this step before comparing content or saving work.`,
     ],
     links: [preview ? previewLogin : liveLogin],
   };
@@ -69,9 +79,9 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "start-and-switch-agents",
     audience: "marketing",
     category: "Start here",
-    title: "Get ready and switch between agent personas",
+    title: "Portal accounts and SitecoreAI workspaces",
     summary:
-      "Choose the right account and environment, understand shared work, and finish a walkthrough without losing the next person’s place.",
+      "Use the named portal persona and login link in each guide, find your reviewer number, and recognize when a separate Sitecore account is required.",
     outcome:
       "You can sign in, select a persona for its business role, and distinguish portal access from **Sitecore** authoring access.",
     duration: "5 minutes",
@@ -86,7 +96,7 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     prerequisites: [
       packPrerequisite,
-      "Open **Attendee assignments** to find your reviewer number. The **Sitecore** workshop team provides your initial sign-in details and any separate **Sitecore** invitation. **Reset a reviewer number** is available to signed-in workshop reviewers with no additional credentials.",
+      "The workshop team provides your initial portal sign-in details and any separate **Sitecore Cloud** invitation. After workshop sign-in, **Attendee assignments** and **Reset a reviewer number** require no additional credentials.",
     ],
     links: [
       {
@@ -96,15 +106,19 @@ export const marketingGuides: WorkshopGuide[] = [
       liveLogin,
       previewLogin,
       sitecoreWorkspace,
+      {
+        label: "Open the Sitecore Cloud Portal",
+        href: `https://portal.sitecorecloud.io/?organization=${ORG}`,
+      },
       liveReset,
       previewReset,
     ],
     steps: [
       {
-        title: "Choose the environment for the exercise",
+        title: "Use the login link supplied by each walkthrough",
         action: [
-          "Use the live portal for browsing, personalization, **Search**, and checking published content.",
-          "Use the designated transaction preview for new submissions, renewal follow-ups, bonds, and saved conversation requests.",
+          "For browsing, personalization, **Search**, and publication checks, use **Open the live portal login** below. These guides link to liberty-mutual-agent-portal.vercel.app, which displays published content.",
+          "For new submissions, renewal follow-ups, bond requests, and saved conversations, use **Open the transaction-preview login** below. Those guides explicitly say to use the transaction preview so your practice transactions stay separate from the live portal’s saved work.",
         ],
         expected: [
           "Production and preview keep saved operational work separate.",
@@ -113,7 +127,7 @@ export const marketingGuides: WorkshopGuide[] = [
         links: [liveLogin, previewLogin],
       },
       {
-        title: "Choose a personal or small-commercial persona",
+        title: "Recognize the personal and small-commercial accounts",
         action: [
           "**Avery Brooks**: **avery.01**, **Cedar Ridge** agency principal; licensed in Texas, Florida, and Illinois.",
           "**Maya Chen**: **maya.01**, **Cedar Ridge** personal-lines account manager; licensed in Texas, Florida, and Illinois.",
@@ -121,11 +135,11 @@ export const marketingGuides: WorkshopGuide[] = [
           "**Daniel Ortiz**: **daniel.01**, **Prairie Oak** business-insurance producer; licensed in Illinois and Texas.",
         ],
         expected: [
-          "The role, agency, and individual licenses explain differences in guidance and business actions. Seeing shared agency work does not automatically grant permission to advance it.",
+          "Each guide names the account to use; you do not need to choose one from this list. The account’s role, agency, and licenses explain differences in guidance and business actions. Seeing agency work does not automatically grant permission to advance it.",
         ],
       },
       {
-        title: "Choose a commercial, surety, or wholesale persona",
+        title: "Recognize the specialist accounts and shared agency work",
         action: [
           "**Priya Shah**: **priya.01**, **Harborline** commercial account executive.",
           "**Marcus Reed**: **marcus.01**, **Harborline** surety specialist.",
@@ -141,7 +155,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Switch the person without resetting the exercise",
         action: [
           signOut,
-          "Sign in with another persona and the same pack suffix. Close an unsaved dialog with its × button or Escape before switching.",
+          "For this orientation, sign in as **daniel.01** with password **Sitecore**. Use the same reviewer number as Maya. On later exercises, follow the persona named in that guide. Close any unsaved dialog with its × button or Escape before signing out.",
         ],
         expected: [
           persistentWork,
@@ -149,13 +163,13 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Keep the clocks and permissions distinct",
+        title: "Use a separate Sitecore login for authoring",
         action: [
-          "After an eight-hour session, sign in again to resume saved work.",
-          "Use your own invited **Sitecore** account for authoring, review, publishing, and platform inspection.",
+          "Open **SitecoreAI** using the link above. Use the email address that received your **Sitecore Cloud** invitation, not a portal persona. The workshop team supplies any **Author** or **Approver** role and practice-pair assignment separately.",
+          "The **Open SitecoreAI** link goes directly to the POC environment. If you instead begin at the **Sitecore Cloud Portal**, select **Safeco Insurance Company of America POC**, then **SitecoreAI / Demo**. For editing, open **Page Builder** and select **Liberty Mutual Agent Portal**. If access is denied, follow the presenter while the workshop team checks your invitation.",
         ],
         expected: [
-          "The fictional business metrics use a September 10, 2026 scenario and the September 2025–August 2026 reporting period. Authority checks use the current UTC date.",
+          "The portal and Sitecore have separate sign-ins and permissions. Portal sessions last eight hours; signing in again resumes saved work. Fictional production metrics use the September 2025–August 2026 reporting period, while authority checks use the current UTC date.",
           "Known profile attributes help personalize guidance. The application separately checks record ownership, licenses, appointments, and product eligibility before protected actions. General guidance remains valid if native personalization context is unavailable.",
         ],
       },
@@ -163,7 +177,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        "For a clean reset, open **Reset a reviewer number** on the host you used. **Reviewer number** offers 01–15 and starts at your assigned pack. Check the selected number, then click **Reset reviewer** for that number. There are no reset modes to choose. Wait for **Reviewer [selected number] is ready** and sign into the **Agent Portal** again. The action restores baseline saved work and activates seven newly verified native profiles with clean browsing history. All seven same-suffix personas change together on this host only. Previous profiles and experiment history remain; CMS content, **Search**, **Agentic** artifacts, and webhook receipts are unaffected.",
+        "This orientation needs no reset: signing out is enough. If you deliberately want a clean start, use **Live portal: Reset a reviewer number and current identities** for live activity or the **Transaction preview** reset link for preview activity. Select your number from **Attendee assignments**, check that nobody is still using it, and click **Reset reviewer** for that number. Wait for **Reviewer [selected number] is ready** before signing in again. Reset restores baseline saved work and clean profiles for all seven personas with that number on that host. It leaves the other host, previous profiles, experiment history, CMS content, **Search**, **Agentic** artifacts, and webhook receipts unchanged.",
       ],
       links: [liveReset, previewReset],
     },
@@ -196,8 +210,8 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Read the principal’s growth guidance",
         action: [
           "On **My workspace**, find the **Agency growth** card below **Your priorities**.",
-          "Click **Explore the growth path**. Return and open **Clients & policies**; choose **All policies** if needed.",
-          "Open **Products & appetite** > **Risk state**, then sign out.",
+          "Click **Explore the growth path** to see the article chosen for a principal. Then click **Clients & policies** in the sidebar. If a policy filter is active, select **All policies** so you compare the full visible book.",
+          "Open **Products & appetite** and inspect the **Risk state** choices to compare Avery’s licenses with the next persona. Then use the upper-right profile menu > **Sign out**.",
         ],
         expected: [
           "**Cedar Ridge**’s principal sees **Build your next chapter in small business**. The action opens the small-business practice resource.",
@@ -210,7 +224,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Compare the small-commercial producer",
         action: [
           "Find **Agency growth** below **Your priorities**. Click **Prepare a BOP submission**.",
-          "Return to **Clients & policies**, then **Products & appetite** > **Risk state**.",
+          "Click **Clients & policies** in the sidebar to compare Jordan’s book with Avery’s. Then open **Products & appetite** and inspect **Risk state**.",
           "Open **Quote & submit** > **Pecan Street Design**. Inspect the seed **Draft** without changing its checklist or status; close it and sign out.",
         ],
         expected: [
@@ -224,7 +238,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Compare the personal-lines account manager",
         action: [
           "Find **Agency growth** below **Your priorities** and click **Start the learning path**.",
-          "Return to **Clients & policies**, then sign out.",
+          "Click **Clients & policies** in the sidebar to compare Maya’s personal-lines book with the earlier roles, then use the upper-right profile menu > **Sign out**.",
         ],
         expected: [
           "**Connect everyday conversations to new needs** leads to the small-business practice article. Opening the article does not register for a course.",
@@ -279,11 +293,11 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Search within Daniel’s licensed states",
         action: [
           "Click **Learning & resources**. Click the **Workers compensation** suggestion, or enter **Workers compensation** in the library search field and click **Search**.",
-          "Set **Risk state** to Texas, then Illinois. Inspect the available choices.",
+          "Set **Risk state** to **Texas** and inspect the labels on the results. Then select **Illinois** and compare. Open the dropdown again to check whether **Florida** is offered.",
         ],
         expected: [
           "**Risk state** starts at **My licensed states**. Daniel’s scope includes Illinois, Texas, and nationwide guidance; Florida-only guidance is absent.",
-          "Each selected state includes that state and nationwide content. Florida and **All states** are not offered. The recorded baseline had four matches, but state inclusion and exclusion are the acceptance criteria.",
+          "Each selected state includes that state and nationwide content. **Florida** and **All states** are not offered. Result counts may vary; confirm the state labels rather than expecting a fixed total.",
         ],
       },
       {
@@ -303,7 +317,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Read the Texas article and record its bookmark state",
         action: [
           "Click **Workers compensation** again. On **Workers compensation: a Texas starting point**, click **Read resource**.",
-          "Read the source and reviewed date. Record whether the bookmark button starts as **Save resource** or **Saved to your resources**.",
+          "Read the source and reviewed date to identify the article’s provenance. Note whether the bookmark button starts as **Save resource** or **Saved to your resources**; this tells you whether cleanup should remove a bookmark that you add.",
           "If it says **Save resource**, click it. If already saved, keep it unchanged.",
         ],
         expected: [
@@ -328,8 +342,8 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Compare the same search with Maya",
         action: [
           "Open **Learning & resources** and click **Workers compensation**.",
-          "Compare the state labels with Daniel’s results.",
-          "Clear the search input, click **Search**, and leave **Risk state** at **My licensed states**.",
+          "Compare the state labels with Daniel’s results and inspect **Risk state** for **Florida**. This checks licensing-based relevance using the same query, rather than comparing unrelated searches.",
+          "Clear the search input, click **Search**, and leave **Risk state** at **My licensed states** to include all published resource topics. Look for Florida guidance as well as Illinois, Texas, and nationwide guidance.",
         ],
         expected: [
           "Maya’s default scope includes Florida because she holds that license. Guidance eligibility follows licensed states even when the resource is outside her product specialization.",
@@ -358,8 +372,8 @@ export const marketingGuides: WorkshopGuide[] = [
     personas: ["daniel.01"],
     prerequisites: [
       packPrerequisite,
-      "Use the designated transaction preview and your assigned pack. Create a uniquely named fictional record; leave existing submissions unchanged.",
-      "Choose an appropriate future requested effective date within the configured rules.",
+      "Use **Open the transaction-preview login** below and your number from **Attendee assignments**. Add your initials and today’s date to the new fictional account name so you can find your own saved record; leave existing submissions unchanged.",
+      "Use **October 1, 2026** as the **Requested effective date** for this fictional account. That date is within the sandbox’s configured eligibility period; this exercise does not quote an actual policy.",
     ],
     links: [previewLogin],
     steps: [
@@ -369,7 +383,7 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Open **Products & appetite** and set **Risk state** to Texas.",
           "Select **Small business** > **Businessowners policy** > **Explore coverage**.",
-          "Click **Back to products & appetite**. Select **Small business** again if needed, then **Businessowners policy** > **Prepare account**.",
+          "Click **Back to products & appetite**. Confirm the **Small business** tab is selected, then click **Prepare account** on **Businessowners policy**. This checks that the selected state carries from guidance into the intake.",
           "Choose **Retail** and click **Continue to account information**.",
         ],
         expected: [
@@ -380,7 +394,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Save a uniquely named fictional account",
         action: [
-          "**Named insured / account name**: Prairie Market Partners [your initials] [today’s date]. Enter your chosen future **Requested effective date**.",
+          "**Named insured / account name**: Prairie Market Partners [your initials] [today’s date/time]. Set **Requested effective date** to **October 1, 2026**. The unique name distinguishes this run from earlier practice records.",
           "**Number of employees**: 8. **Annual revenue ($)**: 750000.",
           "**Account notes**: Single-location retail business. Review operations, location details, and loss history.",
           "Click **Save & review requirements**. Record the generated reference.",
@@ -395,7 +409,7 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Check **Business operations summary** and wait for **Requirement marked complete**.",
           "Check **Property and location details**, then **Three-year loss history**, waiting for each save.",
-          "When available, click **Submit for review**.",
+          "After all three requirements show as complete and **Submit for review** is enabled, click it once. If it remains disabled, read the displayed requirement or eligibility message rather than changing an existing account.",
         ],
         expected: [
           "**Submit for review** stays disabled until every current requirement and authority check passes.",
@@ -411,7 +425,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Close the dialog, clear the table search, and sign out of the portal. Retain the reference with your walkthrough notes.",
         ],
         expected: [
-          "All recorded values persist. There is no separate table **Search** button or per-submission **Delete**/Undo control.",
+          "All recorded values persist, showing that the application saved the transaction rather than only updating the screen. There is no separate table **Search** button or per-submission **Delete**/Undo control.",
         ],
       },
     ],
@@ -427,18 +441,18 @@ export const marketingGuides: WorkshopGuide[] = [
     summary:
       "Create a policy-specific priority with a due date and useful notes, then return to the same policy from the saved task.",
     outcome:
-      "The new follow-up survives reload under **All priorities** with a link to the correct Morgan homeowners policy.",
+      "The new follow-up survives reload under **All priorities** and opens **Morgan household**, **Homeowners**, policy **LM-8426101**.",
     duration: "7 minutes",
     personas: ["maya.01"],
     prerequisites: [
       packPrerequisite,
-      "Use the designated transaction preview. Before resetting, make sure other people using the same pack have finished.",
+      "Use **Open the transaction-preview login** below. This exercise creates a saved follow-up for your number from **Attendee assignments**; it does not update an actual insurance system.",
     ],
     links: [previewLogin],
     steps: [
       login("maya", true),
       {
-        title: "Open the correct renewal policy",
+        title: "Open the Morgan homeowners renewal",
         action: [
           "Click **Clients & policies** > **Review renewals**.",
           "Open **Morgan household**, **Homeowners**, policy LM-8426101.",
@@ -452,7 +466,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Save a useful next action",
         action: [
-          "**Follow-up title**: Morgan home renewal [your initials] [today’s date]. Choose an appropriate future **Due date**.",
+          "**Follow-up title**: Morgan home renewal [your initials] [today’s date/time]. Set **Due date** to tomorrow using the date picker. A unique title lets you identify this run after reloading.",
           "**Notes**: Confirm home improvements and household changes before renewal.",
           "Click **Save follow-up**.",
         ],
@@ -468,7 +482,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Close the dialog, return to **My workspace**, and compare **Renewals** with **All priorities**.",
         ],
         expected: [
-          "The follow-up and its policy link persist.",
+          "The follow-up and its policy link persist. Opening it returns to **Morgan household**, **Homeowners**, policy **LM-8426101**, confirming that the task retains its policy context.",
           "The new item is a follow-up under **All priorities**, not a **Renewals**-filter task. Completing it would not restore the original baseline.",
         ],
       },
@@ -506,7 +520,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Inspect a commercial property account",
         action: [
           "Open **Clients & policies** > **Coastal Fabrication Group**, **Commercial property**, LM-8426108.",
-          "Inspect **Overview** and **Renewal review**. Open **Documents** and optionally download **Coverage summary**.",
+          "Inspect **Overview** and **Renewal review** to see the same account context. Open **Documents** and click **Coverage summary** to inspect how a signed-in agent retrieves a protected account document.",
         ],
         expected: [
           "This is the Florida property policy, distinct from same-name **General liability** LM-8426109.",
@@ -518,7 +532,7 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Close the policy. Open **Products & appetite** > **Commercial** > **Commercial property** > **Explore coverage**.",
           "Click **Back to products & appetite** > **Specialty** > **Specialty casualty** > **Explore coverage**.",
-          "**Sign out**.",
+          "Use the upper-right profile menu > **Sign out**.",
         ],
         expected: [
           "The first link opens midsize and large commercial guidance. The specialty link opens retail-specialty guidance for Priya’s independent-agency channel.",
@@ -561,7 +575,7 @@ export const marketingGuides: WorkshopGuide[] = [
     personas: ["marcus.01"],
     prerequisites: [
       packPrerequisite,
-      "Use the designated transaction preview and your assigned pack. Keep existing bond requests unchanged.",
+      "Use **Open the transaction-preview login** below and your number from **Attendee assignments**. The new request is fictional; keep existing bond requests unchanged.",
     ],
     links: [previewLogin],
     steps: [
@@ -570,7 +584,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Create a new bond request",
         action: [
           "Open **Quote & submit** > **New bond request**.",
-          "**Principal legal name**: Bayline Construction [your initials] [today’s date]. **Obligee**: City of Clearwater Facilities.",
+          "**Principal legal name**: Bayline Construction [your initials] [today’s date/time]. **Obligee**: City of Clearwater Facilities. The unique principal name identifies the record created during this run.",
           "**Bond type**: **Contract performance**. **State**: Florida. **Bond amount ($)**: 250000.",
           "**Project / request notes**: Municipal facility improvement. Gather principal financials and project details.",
           "Click **Save bond request** and record the new reference.",
@@ -594,7 +608,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Verify persistence",
         action: [
-          "Close the dialog and reload. In **Your submissions**, select **Bond requests ([N])** if needed.",
+          "Close the dialog and reload. In **Your submissions**, select the **Bond requests ([N])** tab so the table shows surety requests rather than insurance submissions.",
           "Open your unique principal name and compare the reference, status, state, and amount.",
           "Close the dialog, sign out, and retain the reference with your walkthrough notes.",
         ],
@@ -620,7 +634,7 @@ export const marketingGuides: WorkshopGuide[] = [
     personas: ["daniel.01"],
     prerequisites: [
       packPrerequisite,
-      "Browse on production first. Switch to the designated preview before saving a request.",
+      "Use **Open the live portal login** for the first browsing step. At **Switch to the preview before saving work**, use **Open the transaction-preview login**; that host keeps the saved conversation separate from live portal work.",
     ],
     links: [liveLogin, previewLogin],
     steps: [
@@ -630,12 +644,12 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Beside **Agency growth** in the sidebar, click **Show Agency growth pages**, then **Small business growth**.",
           "Under **ON THIS PAGE**, select **Opportunity**, **Your questions**, and **Your next step**.",
-          "Expand **Where should my team begin?** and **What should we prepare before asking for a review?** Try keyboard navigation as well.",
-          "Under **Keep useful guidance close**, open **Develop your small-business practice**; return to the campaign.",
+          "Expand **Where should my team begin?** and **What should we prepare before asking for a review?** To inspect keyboard access, press Tab until an accordion heading has focus, then press Enter to open or close it.",
+          "Under **Keep useful guidance close**, open **Develop your small-business practice**. Use the browser’s Back button to return to the campaign; this checks that the linked guidance supports the campaign message.",
         ],
         expected: [
           "The campaign opens at /growth/small-business. **Overview** and the child-page links remain distinct.",
-          "Section links move to the intended part of the page, the title includes a growth icon, and each accordion reveals authored rich text.",
+          "Each section link scrolls to its matching heading, the title includes a growth icon, and each accordion reveals authored rich text.",
           "Resource, preparation, and product links are explicit actions. This inspection creates no saved insurance or contact record.",
         ],
       },
@@ -646,7 +660,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Check dialog focus and dismissal",
         action: [
-          "Open **Small business growth** > **Your next step** > **Plan a conversation**.",
+          "On the transaction preview, expand **Agency growth** in the sidebar, open **Small business growth**, select **Your next step**, and click **Plan a conversation**.",
           "Press Escape, then reopen **Plan a conversation**.",
         ],
         expected: [
@@ -691,7 +705,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Before submitting, ask the person who manages **Demo Webhook** to confirm its receiver is active and provide the current receipt-inbox link. The original temporary receiver expires September 23, 2026; its owner must replace the URL and retest it before expiry.",
+      "Before starting, ask the workshop team for the current **Demo Webhook** receipt-inbox link and confirmation that its receiver is active. The original temporary receiver expires September 23, 2026; its owner must replace and retest it before expiry. If you lack Forms administration or receiver access, follow the presenter for configuration and receipt inspection.",
       "Use fictional contact details. The receiver is a demonstration collector, not a **Salesforce** or email integration.",
     ],
     links: [
@@ -740,8 +754,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Match the actual receipt",
         action: [
-          "Open the current receiver inbox with the person who has access. Select the POST containing your unique marker.",
-          "Inspect **Request Content** or **Raw Content** and compare all five entered values with the form.",
+          "Open the receipt-inbox link supplied by the workshop team, or follow the presenter’s receiver view. Find the **POST** request containing the exact **LM-NATIVE-…** marker you entered; do not use another attendee’s receipt.",
+          "Open that receipt’s **Request Content** or **Raw Content** view and compare the name, email, agency, topic, and discussion text with your entries. This confirms delivery beyond the form’s on-screen success message.",
         ],
         expected: [
           "The matching JSON and **Contact your team** metadata establish receipt of this specific request.",
@@ -774,7 +788,7 @@ export const marketingGuides: WorkshopGuide[] = [
       packPrerequisite,
       platformPrerequisite,
       authorPrerequisite,
-      "This is a presenter-led shared-item exercise. The editor needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. If you have only a scoped workshop **Author** or **Approver** role, follow the presenter here and use **Author and approver: review and publish content together** for your assigned-page exercise.",
+      "This is a presenter-led shared-item exercise. The editor needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. If you have only a scoped workshop **Author** or **Approver** role, follow the presenter here and use **Author and approver: review and publish content together** for the **Workshop practice** page named in your role and pair assignment from the workshop team.",
       "Reserve enough time to complete publication, **Search** refresh, and restoration. Do not leave the temporary summary published.",
     ],
     links: [
@@ -791,7 +805,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Record the live article’s starting content",
         action: [
           "Open **Learning & resources**, search **Workers compensation**, and open **Workers compensation: a Texas starting point**.",
-          "Record the exact summary, source, and body before editing. The expected starting summary is A source-linked overview for discussions with Texas employers.",
+          "Copy the exact summary, source, and body into your notes before editing; you will restore these values at the end. The seeded summary is A source-linked overview for discussions with Texas employers. If the current summary differs, preserve the current text rather than replacing another author’s work with the seed.",
           "Keep this live portal tab for publication checks.",
         ],
         expected: [
@@ -802,8 +816,8 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Create one named English Draft",
         action: [
           "In **Page Builder**, select **Home** > **Learning & resources** > **Workers compensation: a Texas starting point**. In **Layers**, select **ResourceArticle**.",
-          "Record the selected **English** version number. Open the version selector above the canvas > **Create version**, enter an optional unique name, and click **Create**.",
-          "Keep the new **English** **Draft** selected. Open **Apps** > **Resource metadata**.",
+          "Record the selected **English** version number. Open the version selector above the canvas > **Create version**, name it resource-review-[your initials]-[date-time], and click **Create**. The name makes this exercise’s version identifiable later.",
+          "Reopen the version selector and select the newest **English** **Draft**. Wait for that version’s header and fields to load, then open **Apps** > **Resource metadata**. Creating a version alone is not enough if the previous version is still selected.",
         ],
         expected: [
           "The active **ResourcePage** itself stores the article and **Search** metadata. **Data/Resources** copies are not the active datasource.",
@@ -815,7 +829,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Understand the managed choices",
         action: [
           "Record all five loaded values. The baseline is **Risk state**: Texas; **Business family**: **Small commercial**; **Product**: **Workers’ compensation**; **Distribution channel**: **Independent agent**; **Resource type**: **State guidance**.",
-          "Read the help under each dropdown.",
+          "Read the help under each dropdown to see what its choice means for finding the resource. Keep a record of the loaded values so you can restore them after testing the panel.",
         ],
         expected: [
           "Each field currently permits one selection. The labels store TX, small-commercial, workers-compensation, independent-agent, and **State guidance**.",
@@ -860,7 +874,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Approve and publish only this page",
         action: [
-          "Choose **Actions** > **Approve**. Add a comment if needed and click **Submit**. Confirm **Approved**.",
+          "Choose **Actions** > **Approve**, enter the comment Workshop resource summary review, and click **Submit**. Confirm **Approved** before publishing.",
           "Open **Publish**. Uncheck **Include related items** first, then **All references**. Keep **Page** and **Current language (English)** checked; leave **Subpages** off.",
           "Click **Start publish** and wait for completion.",
         ],
@@ -886,7 +900,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Restore through a new version and publication",
         action: [
-          "Create another named **English** **Draft** of the same Texas page. Restore the exact summary recorded at the start.",
+          "On the same Texas page, open the version selector > **Create version**, enter resource-restore-[your initials]-[date-time], and click **Create**. Reopen the selector, select this newest **English** **Draft**, and wait for its fields to load. Restore the summary recorded at the start.",
           "Click outside the field, wait for **Saved**, and inspect the restored **Draft**.",
           "**Actions** > **Approve** > **Submit**. Confirm **Approved**. **Publish** with **Include related items** off first, then **All references** off; **Page** and **Current language (English)** on, **Subpages** off.",
           "Confirm publication, then run **Reindex Content** once on the same **Liberty Mutual Agent Resources** source and wait for success.",
@@ -898,7 +912,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Check the complete restoration",
         action: [
-          "Reload Daniel’s live article and repeat the **Search**. Compare the starting summary, source, and body in both the article and result card.",
+          "Reload Daniel’s live article and repeat the **Search**. Compare the starting **Summary** in both the article and result card. Check that **Source** and **Body** remain unchanged in the article; those fields do not appear on the result card.",
           "Record the restoration version and publish/index outcomes.",
         ],
         expected: [
@@ -954,14 +968,14 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "**Page created from branch template** appears. The title starts with the page name you entered; summary, body, reviewed date, source, and metadata start empty.",
-          "The branch creates the intended layout and a local **Data**/**Resource image** item. Existing articles are unchanged.",
+          "The branch supplies **ResourceArticle** and its nested **ResourceImage**, plus a local **Data**/**Resource image** item. You can fill the new page without assembling the layout or changing existing articles.",
         ],
         links: [pageBuilder],
       },
       {
         title: "Add practice content and a Media image",
         action: [
-          "In **Content mode**, enter a practice title and summary. Click outside each field and wait for **Saved**.",
+          "In **Content mode**, set **Title** to Resource practice [your initials] and **Summary** to Practice guidance for an agent conversation. Click outside each field and wait for **Saved**. This gives the new page visible content without changing an existing article.",
           "Return to **Editor**. Click the blank image area between summary and body > **Browse media library** > **Media BETA**.",
           "Select **liberty-mutual-businessowner-preparing-submission.jpg**. Inspect **Details** > **Alt text** and **Delivery** > **Public link**.",
           "Under **Image transformation**, set **Width** to 640 with aspect ratio locked, then click **Insert**.",
@@ -975,7 +989,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Inspect metadata without changing classification",
         action: [
           "Open **Apps** > **Resource metadata** on the new resource.",
-          "Inspect the five managed choices. Try one selection, then click **Discard changes**.",
+          "Inspect the five dropdowns. Set **Resource type** to **Preparation guide**, observe the unsaved-change indicator, then click **Discard changes** to return to the blank starting classification.",
         ],
         expected: [
           "The loaded values return. Each field currently accepts one choice and this page remains unpublished.",
@@ -1009,7 +1023,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Remove only your unpublished practice page",
         action: [
           "Select your practice page in **Content**. Choose **More options (…)** > **Delete**.",
-          "In **Delete item**, confirm the exact practice name, then click **Delete**. Reload the tree if needed.",
+          "In **Delete item**, confirm the dialog names only the resource-practice page you created, then click **Delete**. Click **Reload tree** if the deleted page still appears.",
           "Return to **Learning & resources**. Leave the **Resource page** branch and both **Media** assets intact.",
         ],
         expected: [
@@ -1041,7 +1055,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Use the shared unpublished **Campaign practice** page with one **Sitecore** author making changes at a time. Record the starting component order and local **Data** items before changing anything.",
+      "The workshop team must identify one editor with access to **Home** > **Agency growth** > **Campaign practice** and its **Data** items. Other attendees follow that editor’s screen. Keep this shared page unpublished, and record its starting component order and local **Data** items before changing them.",
     ],
     links: [pageBuilder],
     steps: [
@@ -1049,7 +1063,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the isolated practice component",
         action: [
           "Open **Page Builder** > **Home** > **Agency growth** > **Campaign practice**.",
-          "In **Layers**, select the first **CampaignAccordion**. Record its position and datasource.",
+          "In **Layers**, select the first **CampaignAccordion**. Record its position and the content item shown as its datasource, meaning the item that supplies its text. This distinguishes the original from the copy you will remove during cleanup.",
         ],
         expected: [
           "The unpublished page has independent local content and the component toolbar is available. The live campaign uses different content.",
@@ -1060,7 +1074,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Duplicate and reorder the component",
         action: [
           "In the floating toolbar, click **Duplicate component**. Record the new copy and its datasource.",
-          "Select **Move up**. Open **Swap with another component**, inspect the choices, and cancel without swapping.",
+          "Select **Move up** on the new copy to change its position. Open **Swap with another component**, inspect the offered replacements, and cancel without swapping. The choices demonstrate the placement rules supplied by developers.",
         ],
         expected: [
           "The copy has independent local content, such as **Start the conversation_var2**; later runs can use another suffix.",
@@ -1082,8 +1096,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Restore the original practice layout",
         action: [
-          "Have the same **Sitecore** author remove the newly added component and restore the recorded original order and layout.",
-          "After confirming it is no longer used, recycle only the duplicate’s newly created local datasource.",
+          "In **Layers**, select the duplicate recorded in step 2 and click **Delete** for that component. Compare the remaining order with your notes from step 1; the original accordion must remain.",
+          "Open **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data**. Select only the new datasource name recorded in step 2, use **More options (…)** > **Delete**, and confirm that exact name. The page no longer needs this item after its duplicate component is removed.",
           "Reopen **Layers** and compare the original component list and **Data** items.",
         ],
         expected: [
@@ -1118,15 +1132,15 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Use the unpublished **Campaign practice** item only. One editor records and restores the exact original **Body**, including formatting.",
+      "The workshop team identifies one editor with access to the unpublished **Campaign practice** page, its **Data** items, and **Optimize with AI**. Other attendees follow that editor’s screen. Record and restore the exact original **Body**, including formatting.",
     ],
     links: [pageBuilder],
     steps: [
       {
-        title: "Record the correct rich-text field",
+        title: "Record the original practice Body field",
         action: [
           "Open **Page Builder** > **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data** > **Growth opportunity**.",
-          "Record the complete original **Body** before entering a temporary sentence with a spelling error.",
+          "Copy the complete original **Body**, including formatting, into your notes. Replace it temporarily with: We help your agnecy prepare for the next client conversation. The deliberate misspelling lets you see what the AI correction changes.",
         ],
         expected: [
           "**Body** is a rich-text field on this practice datasource, not the campaign hero **Summary**. The live campaign is separate.",
@@ -1148,7 +1162,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Try a short drafting prompt and reject the rewrite",
         action: [
           "Reopen **Optimize with AI** and enter: Write two concise sentences for an agency preparing a small-business submission.",
-          "Inspect the new wording and the available assigned **Brand Kit** option.",
+          "Inspect the proposed wording. If a **Brand Kit** is shown, read its name and leave the selection unchanged; this exercise tests drafting, while **Agentic Studio** has a separate walkthrough that verifies use of **Liberty Mutual — Independent Agents**.",
           "Select **Revert to original** for this current AI rewrite.",
         ],
         expected: [
@@ -1182,62 +1196,55 @@ export const marketingGuides: WorkshopGuide[] = [
     slug: "bulk-copy-maintenance",
     audience: "marketing",
     category: "Content authoring",
-    title: "Apply and reverse a scoped bulk text change",
+    title: "Bulk editing: inspect the need and implementation options",
     summary:
-      "Use native **Search and replace** on reviewed local practice content, then verify the inverse replacement restores all affected fields.",
+      "Inspect repeated wording across four Page Builder content items, then distinguish content reuse from a bulk-update tool.",
     outcome:
-      "Four known practice fields change together and return to their original wording, with live content outside the scope.",
-    duration: "10 minutes",
-    personas: ["Sitecore content author"],
+      "You can describe the bulk-editing requirement and its implementation choices without assuming Page Builder provides a multi-item replacement command.",
+    duration: "5 minutes",
+    personas: ["Sitecore content reviewer"],
     prerequisites: [
       platformPrerequisite,
-      "Use one **Sitecore** author for this shared-folder exercise. Record the exact starting text in all affected fields and confirm no other author is changing this practice folder.",
-      "Scope the operation to the full **Campaign practice**/**Data** path shown below. Do not run **Search and replace** across the site.",
+      "This is a read-only discussion. Use an account with access to **Campaign practice** and its **Data** items, or follow the presenter if your role is limited to a **Workshop practice** page.",
     ],
-    links: [
-      {
-        label: "Open Content Editor",
-        href: `https://xmc-scaipocusem400b-sitecoreai950c-demo4418.sitecorecloud.io/sitecore/shell/Applications/Content%20Editor.aspx?sc_bw=1&organization=${ORG}`,
-      },
-    ],
+    links: [pageBuilder],
     steps: [
       {
-        title: "Open the exact practice search scope",
+        title: "Locate the separate content items in Page Builder",
         action: [
-          "In **Content Editor**’s left search, paste the path below. Select **Direct Hit** > **Data**, then the magnifier beside **Content**.",
-          "Enter * and press Enter. Review the entire result set before proceeding.",
+          "Open **Page Builder** > **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data**.",
+          "Expand **Data** and find **Growth opportunity**, **Preparation update**, **Prepare for review**, and **Your next step**. Do not change their fields.",
         ],
-        code: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/campaign-practice/Data",
         expected: [
-          "The baseline has eight results: the **Data** folder and seven local items. The live campaign is outside this scope. If the set differs, compare the items with the **Sitecore** author responsible for the practice page before replacing text.",
+          "These are separate content items beneath the unpublished practice page. Their text can be edited independently; the live campaign has its own content.",
+        ],
+        links: [pageBuilder],
+      },
+      {
+        title: "Inspect why repeated copy creates maintenance work",
+        action: [
+          "Select **Growth opportunity** and read **Body**, then **Preparation update** and its **Body**.",
+          "Read **Prepare for review** > **Answer**, then **Your next step** > **Title**. Look for the phrase relationship team in each field.",
+        ],
+        expected: [
+          "The seeded wording repeats across four independent fields. Changing one item would not automatically update the other three. If a colleague has changed a phrase, note the difference without restoring it during this read-only review.",
         ],
       },
       {
-        title: "Apply a reviewed replacement",
+        title: "Identify the bulk-editing gap and alternatives",
         action: [
-          "Record the original text in **Growth opportunity** **Body**, **Preparation update** **Body**, **Prepare for review** **Answer**, and **Your next step** **Title**.",
-          "Open **More search options** > **Search operations** > **Search and replace**.",
-          "Enter relationship team|relationship colleagues. Select **OK**, then **OK** again when completed.",
+          "For wording that should always stay identical, discuss using one shared content item for multiple components.",
+          "For a one-time change across independent items, record the exact items, fields, languages, and versions that a bulk-update process would need to include. Consider a scoped API workflow or **Marketplace** **Content Export/Import Tool** for evaluation.",
         ],
         expected: [
-          "The case-sensitive operation changes the four known practice fields. The pipe separates the original phrase from its replacement.",
-        ],
-      },
-      {
-        title: "Restore and inspect every affected field",
-        action: [
-          "Select **Search [1]**. Open **Search and replace** again and enter relationship colleagues|relationship team.",
-          "Confirm completion, then inspect all four fields against your recorded starting values.",
-        ],
-        expected: [
-          "The original wording returns in all four fields. A shared datasource is a separate reuse technique; bulk replacement changes multiple independent items.",
+          "This workshop does not demonstrate a multi-item replacement command in **Page Builder**. Editing each field here remains a separate action; content reuse is a different way to reduce repeated maintenance.",
+          "A bulk-update tool would need review, workflow, publication, and a tested restoration process. The suggested extension has not been installed or validated in this sandbox.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Verify every affected field and leave **Campaign practice** unpublished. A reviewer reset cannot reverse content changes.",
-        "For broader structured field updates, evaluate a scoped API workflow or a **Marketplace** export/import tool with versions, raw field formats, and restoration validated first. Native text replacement is not a universal bulk field editor.",
+        "Close the practice page without changing or publishing content. No reviewer reset is needed. Keep the bulk-editing requirement and the chosen evaluation questions in your workshop notes.",
       ],
     },
     related: [
@@ -1262,7 +1269,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Inspect the unpublished **Campaign practice** page. A full timed publication run requires a developer with protected publication API access and an agreed UTC window.",
+      "The workshop team identifies a presenter with access to **Campaign practice** for the first two, read-only steps. The final two steps are an optional developer demonstration: before attempting them, the team must supply a developer with publication API access, a prepared sample, and the UTC start and end times.",
     ],
     links: [
       pageBuilder,
@@ -1275,8 +1282,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the alert’s authored message and dates",
         action: [
-          "Open **Campaign practice** > **Data** > **Preparation update** in **Page Builder** **Content**.",
-          "Inspect **Title**, **Body**, **Visible from (UTC)**, and **Visible until (UTC)**. Record original values before any practice edit.",
+          "In **Page Builder** > **Content**, open **Home** > **Agency growth** > **Campaign practice** > **Data** > **Preparation update**.",
+          "Read **Title**, **Body**, **Visible from (UTC)**, and **Visible until (UTC)** without changing them. The dates determine when this component is displayed after publication.",
         ],
         expected: [
           "**Body** is **Rich Text** and can contain meaningful formatting and links.",
@@ -1287,8 +1294,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Keep inactive content editable",
         action: [
-          "With **Default** editing host, inspect the **CampaignAlert** in **Editor**, including an inactive window if the **Sitecore** author has prepared one.",
-          "Restore any body or date values changed during practice and verify them after reload.",
+          "Select **Campaign practice**, return to **Editor**, and find **CampaignAlert** in **Layers**. Keep the **Default** editing host so you inspect the hosted authoring view.",
+          "Compare the canvas with the dates read in step 1. If both dates are empty, no display window is configured. If the recorded window is inactive, the alert remains visible to authors so they can edit it; leave the dates unchanged.",
         ],
         expected: [
           "Authors can still find and edit an alert whose live visibility window is inactive. These fields control presentation; they do not themselves publish or delete content.",
@@ -1297,8 +1304,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Prepare an optional real publication-and-expiration run",
         action: [
-          "Have the developer with publication API access follow the linked bounded scheduling guide, clean only its expired sample, and prepare a new dedicated **campaign-schedule-check** page.",
-          "Record **English** content, the exact subtree, and the UTC start/end window. Verify that the page is initially absent from **Live Experience Edge**.",
+          "For the optional timed demonstration, follow the developer identified by the workshop team. That developer uses the linked scheduling guide to verify any earlier run, remove only its expired sample, and prepare **campaign-schedule-check**. Without that preparation, stop after the read-only alert inspection.",
+          "Record the page URL and UTC start and end times supplied by the developer. The developer verifies the **English** page and its local content are initially absent from **Live Experience Edge**, establishing the before-publication baseline.",
         ],
         expected: [
           "The scheduling example uses a dedicated page and matching native availability dates on its local content. It does not change the live small-business campaign.",
@@ -1313,7 +1320,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Observe the two delivery boundaries",
         action: [
-          "Have that developer start the bounded scheduler. At the start, inspect the scoped publish operation and wait for live propagation.",
+          "Follow the same developer’s screen as they start the scheduling script. At the agreed start time, observe its publish operation and allow time for the published content to reach **Live Experience Edge**.",
           "Open the production route supplied by that developer and confirm the page appears.",
           "At the end, inspect the second scoped publish operation applying expiration, then confirm the page is absent from **Live Experience Edge** and unavailable on the production route.",
         ],
@@ -1325,7 +1332,7 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Restore any edited practice alert body and dates; keep **Campaign practice** unpublished.",
+        "The standard alert inspection changes nothing, so no reset is needed. If someone edited a value, restore the recorded **Body** and dates, wait for **Saved**, and reload to verify. Keep **Campaign practice** unpublished.",
         "For the optional timed run, have that developer record both publish-operation IDs and confirm the script exited. The dedicated sample items remain for inspection. A reviewer-pack reset cannot cancel publication jobs or restore CMS content.",
       ],
     },
@@ -1340,22 +1347,22 @@ export const marketingGuides: WorkshopGuide[] = [
     summary:
       "Match a portal login to its current native profile before interpreting affinities, page views, or experiment activity.",
     outcome:
-      "You inspect the correct person, pack, and current profile set rather than an old seed or browser alias.",
+      "You match the username and reviewer number to the profile currently receiving that person’s browsing events.",
     duration: "5 minutes",
     personas: ["daniel.01", "maya.01", "elena.01", "Sitecore profile reviewer"],
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Choose one portal host and complete any planned reviewer reset before portal sign-in. Keep that host throughout profile lookup and browsing.",
+      "Use the live portal and **daniel.01** with your reviewer number for this example. If the calculation or affinity guide sent you here, repeat these lookup steps for the named Avery, Maya, or Elena account with that same number. If a guide explicitly uses the transaction preview, use its reset link instead; lookup and browsing must use the same host.",
     ],
     links: [liveLogin, profileLink, liveReset, previewReset],
     steps: [
       {
-        title: "Get the current identity for the intended login",
+        title: "Copy Daniel’s current live-portal identity",
         action: [
-          "Open **Reset a reviewer number** on the same host as the portal you will use. Sign in to the workshop guide if needed, then select the intended pack under **Reviewer number**; the page starts with your assigned pack.",
-          "Under **current profile identities**, find the intended username and copy its **Agent identity** value. Expand **Reset details** below the identities and record **Profile generation** with the starting state.",
-          "Copy the displayed **Agent identity** values for Maya or Elena if needed. You can inspect all seven personas without switching portal logins. Do not reset merely to look up identities or rely on the historical seed map after a reviewer reset.",
+          "Click **Live portal: Reset a reviewer number and current identities** below. Sign in to the workshop website if requested, then select your number from **Attendee assignments** under **Reviewer number**. Do not click **Reset reviewer** for this lookup.",
+          "Under **current profile identities**, find **daniel.01** with your reviewer number and copy its **Agent identity**. This value identifies the active native profile after any earlier reset. **Reset details** > **Profile generation** records which reset created that set; it is not another portal login.",
+          "For the affinity guide, also copy **maya.01** and **elena.01** from this same list. All seven identities are visible without signing into each persona. A reset changes the active values, so recopy them after any reset rather than using an earlier note.",
         ],
         expected: [
           "**Agent identity** is the active Liberty Mutual agent identifier for that username, pack, and host, not a profile UUID. A completed reviewer reset changes these identifiers to the new profiles while retaining earlier native history.",
@@ -1370,25 +1377,25 @@ export const marketingGuides: WorkshopGuide[] = [
           "Wait for the matching person, then click their name.",
         ],
         expected: [
-          "The canonical profile matches the intended person and current identity. A name alone is insufficient when older profile sets exist.",
+          "For this example, the result must match **Daniel Ortiz** and the copied identity. When repeating for Avery, Maya, or Elena, match that person’s name and copied identity instead. Older profiles can have the same name. The **Agent identity** is not a UUID: using the **Client ID** filter would produce a validation error.",
         ],
         links: [profileLink],
       },
       {
         title: "Record a baseline before browsing tagged pages",
         action: [
-          "Open **Overview** > **Top affinities**. Record existing topic scores.",
-          "Open **Engagement** and inspect the relevant session and page views.",
+          "Open **Overview** > **Top affinities**. Record existing topic names and scores, or note that no affinities are shown. This is the starting point for measuring what subsequent page visits add.",
+          "Open **Engagement** and find the most recent session following your portal sign-in. Note its time and page views so later clicks can be matched to newly recorded activity. If you have not browsed with this profile yet, there may be no session to inspect.",
         ],
         expected: [
-          "Earlier walkthroughs may already have added history. A clean login does not establish a no-affinity baseline.",
+          "Earlier walkthroughs may already have added history. Signing out and signing in does not clear affinity scores; a reviewer reset activates clean profiles instead. Record any existing scores before making a comparison.",
         ],
       },
     ],
     cleanup: {
       body: [
         "Close the **Reset a reviewer number** tab when the identity lookup is complete. Keep only the profile and portal tabs needed for the next exercise.",
-        "Do not edit or delete profile data. For a fresh comparison, open **Reset a reviewer number** on the intended host, select the pack under **Reviewer number**, and click **Reset reviewer** for that number. Wait for **Reviewer [selected number] is ready**, then sign into the portal again and use the newly displayed **Agent identity** values. This also restores baseline saved work for all seven personas in the selected pack.",
+        "Lookup changes nothing, so no reset is required. If you later need a fresh comparison, use the reset link for the same host, select your number, and wait until anyone using it has finished before clicking **Reset reviewer**. Wait for **Reviewer [selected number] is ready**, sign into the portal again, and copy the new **Agent identity** values. This resets saved work and activates clean profiles for all seven personas with that number; it retains older native profiles.",
       ],
       links: [liveReset, previewReset],
     },
@@ -1413,7 +1420,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Use the live portal. Open production **Reset a reviewer number**, choose your pack under **Reviewer number**, and copy Avery’s and Daniel’s **Agent identity** values from the **current profile identities**. Keep the saved custom value and rules unchanged.",
+      "Use the live portal. Follow **Find the active SitecoreAI profile for an agent** for Avery and Daniel with your number from **Attendee assignments**. Keep both native profile tabs open; the test needs their profile UUIDs, not the **Agent identity** values used to find them. Leave the saved JavaScript and rules unchanged.",
     ],
     links: [
       pageBuilder,
@@ -1457,8 +1464,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Compare the native profile test",
         action: [
-          "Use the custom value’s native test with Avery’s current profile, then Daniel’s current profile from the same pack.",
-          "Compare the results with their agency metrics. Leave the code and rules unchanged.",
+          "In each current native profile tab, copy the UUID in the address’s final path segment after /profiles/, stopping before the question mark. This is not the **Agent identity** from the reset page. Return to **Liberty Mutual - Small business growth opportunity**, open **Test**, load Avery’s profile with that UUID, and run the test. Repeat with Daniel’s UUID so both evaluations use known profile attributes.",
+          "Compare the returned true/false result with the small-commercial share described in the previous step. Loading a test profile supplies inputs for evaluation; do not edit the stored profile, JavaScript, or published rule.",
         ],
         expected: [
           "**Cedar Ridge**’s 14.46% share matches the criterion. **Prairie Oak**’s 36.86% share gives Daniel neutral guidance.",
@@ -1504,8 +1511,8 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Use the live production portal throughout. Obtain current production identifiers for Daniel, Maya, and Elena using **Find the active SitecoreAI profile for an agent**.",
-      "Inspect starting scores before tagged browsing. For a clean replay, open **Reset a reviewer number** on production, select your pack under **Reviewer number**, and click **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready** before signing into the live portal again. The reset restores saved-work baseline and creates seven fresh profiles with clean browsing history. Signing out alone preserves the current profile and its affinities.",
+      "Use **Open the live portal login** throughout. Follow **Find the active SitecoreAI profile for an agent** for Daniel, Maya, and Elena with your reviewer number. Keep those profile tabs open so you can compare scores before and after browsing.",
+      "For the neutral-to-personalized comparison, begin with clean profiles: use **Live portal: Reset a reviewer number and current identities**, select your reviewer number, and wait until anyone using it has finished before clicking **Reset reviewer {{pack}}**. Wait for **Reviewer {{pack}} is ready**, then look up the new identities and sign in. Reset also restores baseline saved work for all seven personas with that number. If you keep existing work instead, record the starting scores and expect that a personalized headline may already appear.",
     ],
     links: [
       liveLogin,
@@ -1555,12 +1562,12 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Connect Daniel’s score to the rendered spotlight",
         action: [
-          "On Daniel’s current native profile, open **Overview** > **Top affinities** and **Engagement**. Inspect the two visits and **workers_compensation** interest.",
+          "On Daniel’s current native profile, open **Engagement** and look for the two resource visits, then **Overview** > **Top affinities** for **workers_compensation**. Refresh the profile if new events have not appeared yet. If they remain absent, recheck the current **Agent identity** before interpreting the portal headline.",
           "Return to **Products & appetite** with Illinois selected. Read the headline and click **Review account preparation**.",
           "Confirm Illinois remains in the destination context, then sign out.",
         ],
         expected: [
-          "An accepted fresh run showed 2 views and score 1.00. This is recorded evidence, not a guaranteed timing, threshold, or count for a profile with existing history.",
+          "The resource visits add native **workers_compensation** interest. Scores and event counts depend on recorded history and processing; the important comparison is the new visits, the top interest, and the corresponding authored headline.",
           "For the corresponding top interest, the spotlight says **Build a stronger workers compensation conversation**. Its action opens BOP preparation retaining Illinois.",
         ],
       },
@@ -1570,11 +1577,11 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Open **Products & appetite** > **Risk state**: Texas and record the starting headline.",
           "Select **Personal lines** > **Homeowners** > **Explore coverage**. On **Personal insurance**, click **Explore the preparation guide**.",
-          "Return to **Products** with Texas retained. In Maya’s current profile, inspect **Overview** > **Top affinities** and **Engagement** before the final checklist revisit.",
+          "Click **Products & appetite** in the sidebar and confirm **Risk state** remains **Texas**. In Maya’s current profile, inspect **Engagement** for those visits and **Overview** > **Top affinities** for **household**. Refresh if the new events are not yet visible.",
         ],
         expected: [
           "The **household**-renewal resource opens with state=TX.",
-          "The accepted fresh journey recorded 2 views and score 1.00 for **household**; current counts can differ. The corresponding spotlight says **Make the next household renewal conversation count**.",
+          "The visits build **household** interest on Maya’s profile. When that is her top interest, the spotlight says **Make the next household renewal conversation count**. Compare the topic and headline; a fixed score or visit count is not required.",
         ],
       },
       {
@@ -1629,7 +1636,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       packPrerequisite,
       platformPrerequisite,
-      "Use production. Open **Reset a reviewer number**, choose your pack under **Reviewer number**, and copy Daniel’s current **Agent identity**; viewing identities does not require a reset. Inspect the existing test without starting, stopping, or selecting a winner.",
+      "Use the live portal. Open **Live portal: Reset a reviewer number and current identities**, select your number from **Attendee assignments**, and copy Daniel’s **Agent identity**. Do not reset merely to view this value. Your invited Sitecore account needs access to the existing test and profile reports; otherwise, follow the presenter for those steps. Leave the test running.",
     ],
     links: [pageBuilder, liveLogin, profileLink, liveReset],
     steps: [
@@ -1665,7 +1672,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the corresponding native page events",
         action: [
           "Open **Performance** > **Profiles**. Select **Search filter** > **Liberty Mutual agent identity**, enter Daniel’s current identifier, and open **Daniel Ortiz**.",
-          "Open **Engagement** and the relevant session. Inspect **Resources**, **growth-guide**, and return events against the recorded time.",
+          "Open **Engagement**, then the session whose timestamp matches your portal visit. Find **Resources**, **growth-guide**, and the return to **Resources**. Compare their times with your notes; refresh if the new events have not yet appeared.",
         ],
         expected: [
           "Timestamps and page variants show the recorded pages for that session. The same destination could also be reached from another link, so a page visit does not prove that a specific CTA was visible.",
@@ -1681,7 +1688,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "Native aggregate reporting separates credited experiment goals from raw profile events.",
-          "Historical September 15 rehearsal results were **A**: 8 visits and 2 goals (25%); **B**: 4 visits and no goals, with 89.75% confidence and **Test in progress**. Read the current report rather than treating those counts as fixed.",
+          "The report combines eligible activity across participants and earlier runs. It will not necessarily increase immediately after your visit, and its totals are not specific to Daniel. Read the current counts and status; a portal label or raw page event alone does not establish an attributed conversion.",
           "The small sample does not establish a winner or business lift. The goal measures reaching the guide, not a policy sale.",
         ],
         links: [
@@ -1715,7 +1722,7 @@ export const marketingGuides: WorkshopGuide[] = [
     personas: ["Your Sitecore marketing account"],
     prerequisites: [
       platformPrerequisite,
-      "This is read-only inspection of a saved workspace. Leave **Run workflow**, all instructions, **Brand Kit** content, and existing artifacts unchanged.",
+      "Your invited Sitecore account must be able to open the saved **Liberty Mutual | Watkins Insurance Group outreach** space. If it is unavailable, follow the presenter and ask the workshop team to check access. This walkthrough inspects saved work so everyone can compare the same outputs; do not click **Run workflow** or change instructions, **Brand Kit** content, or artifacts.",
     ],
     links: [
       { label: "Open the saved Agentic Studio workspace", href: STUDIO },
@@ -1725,8 +1732,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the connected workflow",
         action: [
-          "Open the saved **Liberty Mutual | Watkins Insurance Group outreach** space. If the direct link does not open the intended tenant, return to **SitecoreAI** > **Agentic** > **Recent** or **Spaces**, then select **Liberty Mutual | Watkins Insurance Group outreach**.",
-          "Select **Chat**, then **Agents**. Inspect **Connected workflow**: **Account Enrichment**, **Brief Generation**, and **Content Generation**.",
+          "Click **Open the saved workspace** below and confirm the space title is **Liberty Mutual | Watkins Insurance Group outreach**. If another space opens, use **Open SitecoreAI** above, confirm **Safeco Insurance Company of America POC**, and open **Agentic** > **Spaces** > **Liberty Mutual | Watkins Insurance Group outreach**.",
+          "Select **Chat**, then **Agents**. Inspect **Connected workflow**: **Account Enrichment**, **Brief Generation**, and **Content Generation**. These stages show how research supplies a brief and how the brief supplies content tasks.",
         ],
         expected: [
           "Three connected stages organize research, a brief, and content tasks alongside saved run history and artifacts.",
@@ -1737,8 +1744,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Read reusable and per-run instructions",
         action: [
-          "Click **Instructions**. Read **Space Context**: **Objective**, **Constraints**, and **Brand Guidance**.",
-          "Read **Agent Context** below **Space Context**, then return to **Agents** without editing.",
+          "Click **Instructions** and read **Space Context**: **Objective**, **Constraints**, and **Brand Guidance**. Identify the goal, source restrictions, and output expectations that the space retains for repeat work.",
+          "Read **Agent Context** below **Space Context** to distinguish instructions for the next execution from the shared space requirements. Return to **Agents** without editing.",
         ],
         expected: [
           "**Space Context** retains shared requirements, source rules, brand guidance, and output format. **Agent Context** supplies additional instructions for the next execution.",
@@ -1748,8 +1755,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the run’s research and tool context",
         action: [
-          "In **Chat**, below the workflow outputs, find the prompt beginning **Create the final, readable Watkins**. Expand **Prompt details** if needed.",
-          "Inspect its **Context** and **Tools**, then the **Web Search** results below that saved prompt.",
+          "In **Chat**, below the workflow outputs, find the prompt beginning **Create the final, readable Watkins**. If its **Context** and **Tools** are hidden, expand **Prompt details** to inspect what the agent could use for that response.",
+          "Inspect that prompt’s **Context** and **Tools**, then the **Web Search** results below it. Open a source link if you want to compare a research claim with its evidence; return to the saved conversation afterward.",
         ],
         expected: [
           "**Context** includes the attached **Brand Kit**. **Tools** includes retrieval, artifacts, web search, and **Sitecore** capabilities.",
@@ -1759,7 +1766,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Verify actual Brand Kit retrieval",
         action: [
-          "Expand **Get Brand Kit** in the saved conversation.",
+          "Find and expand the completed **Get Brand Kit** tool result in the saved conversation. Read the returned kit name to confirm which brand instructions the agent retrieved.",
           "Expand **Get Brand Kit Section**. Check **Input** for sectionName: **Visual Guidelines** and read **Output**. Inspect the retrieved **Tone of Voice** and **Brand Context** sections where shown.",
         ],
         expected: [
@@ -1771,8 +1778,8 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Open the saved research and HTML artifacts",
         action: [
           "Select **Artifacts** > **Watkins | Account research and campaign brief**. Open its card with the expand arrows.",
-          "In the dialog’s left list, choose **Watkins | Principal email preview | Patrick Watkins** and click **Preview**.",
-          "Choose **Watkins | Advisor email preview | Clint Bradford**, then **Watkins | Client service email preview**. Compare **Preview** and inspect **Content**, **JSON**, or **HTML** as useful.",
+          "In the dialog’s left list, choose **Watkins | Principal email preview | Patrick Watkins** and click **Preview** to see the readable email layout rather than its source markup.",
+          "Next select **Watkins | Advisor email preview | Clint Bradford**, then **Watkins | Client service email preview**, choosing **Preview** for each. Compare the audience, message, and call to action. **Content**, **JSON**, or **HTML** views, when offered, expose the output structure for a technical review.",
         ],
         expected: [
           "The research artifact separates source facts, the brief, and proposed direction.",
@@ -1782,7 +1789,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Find the human review behind the final output",
         action: [
-          "Close the dialog and read the later refinement prompts.",
+          "Close the artifact dialog and read the later refinement prompts in **Chat**. Look for requested factual corrections and presentation changes to understand where people improved the generated output.",
           "Select **Artifacts** > **Watkins outreach | Evidence and editorial review** and expand its card.",
         ],
         expected: [
@@ -1826,8 +1833,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "State the authoring and recovery boundaries",
         action: [
-          "Wait for **Saved** after content edits. Create a named version before substantial work.",
-          "For bulk maintenance, inspect the native **Search and replace** example and identify whether the actual requirement concerns text or broader field data.",
+          "In the authoring walkthroughs, look for the **Saved** checkmark after an edit and the named **Draft** created before substantial changes. These provide evidence of a server save and a version to review; this reference requires no new edit.",
+          "Open **Bulk editing: inspect the need and implementation options** to compare repeated wording with wider field updates. The Page Builder exercise is a read-only review; it does not demonstrate a multi-item replacement command.",
         ],
         expected: [
           "Autosave retains server-saved changes; it is not a guarantee of recovering offline or unsaved keystrokes.",
@@ -1838,7 +1845,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Identify integration and governance work explicitly",
         action: [
           "Compare **Native Contact your team** with the campaign’s custom saved request. Identify where a business backend would receive the data.",
-          "Review the paired **Author** and **Approver** exercise, then record the attendee role assignments and accessibility acceptance still needed.",
+          "Review **Author and approver: review and publish content together**. The workshop team supplies your Sitecore role, practice-pair number, and page; these are separate from your portal reviewer number. Record any missing attendee assignments and the accessibility acceptance still required.",
         ],
         expected: [
           "**Native Forms** delivers to a webhook; a real database or **Salesforce** workflow requires an implemented backend. The custom campaign request instead saves to **Upstash**.",
@@ -1848,7 +1855,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Treat Marketplace extensions as evaluated options",
         action: [
-          "Consider **Content Score** for accessibility review, **Workbox Pro** for workflow collaboration, and **Content Export/Import Tool** for broader content maintenance when those use cases apply.",
+          "Match a remaining requirement to a possible extension: **Content Score** for accessibility review, **Workbox Pro** for workflow collaboration, or **Content Export/Import Tool** for wider content maintenance. Record the behavior and permissions you would need to validate before selecting an app.",
         ],
         expected: [
           "These are possible **Marketplace** options, not installed or validated capabilities of this sandbox. They complement rather than replace access control, sound workflow design, and accessibility acceptance.",
