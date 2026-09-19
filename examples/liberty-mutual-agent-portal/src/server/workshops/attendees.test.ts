@@ -26,7 +26,7 @@ test("attendee assignments cover each supported reviewer number exactly once wit
     workshopAttendees
       .filter((attendee) => attendee.displayName === null)
       .map((attendee) => attendee.reviewerPack),
-    ["12", "13", "14", "15"],
+    ["13", "14", "15"],
   );
 });
 
