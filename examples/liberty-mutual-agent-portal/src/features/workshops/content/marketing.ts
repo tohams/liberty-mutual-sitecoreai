@@ -947,7 +947,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Click **Reload tree** and select your new page.",
         ],
         expected: [
-          "**Page created from branch template** appears. The title starts with your name; summary, body, reviewed date, source and metadata start empty.",
+          "**Page created from branch template** appears. The title starts with the page name you entered; summary, body, reviewed date, source and metadata start empty.",
           "The branch creates the intended layout and a local **Data**/**Resource image** item. Existing articles are unchanged.",
         ],
         links: [pageBuilder],
@@ -962,7 +962,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The canvas shows your practice content. The selected photograph has descriptive alt text and an active public link.",
-          "The image saves to this page’s **Data**/**Resource image**. The 640-pixel rendition preserves the source aspect ratio without enlarging the 669-pixel original.",
+          "The image saves to this page’s **Data**/**Resource image**. The resized rendition preserves the source aspect ratio without enlarging the 669-pixel original. Check the saved dimensions after reloading.",
         ],
       },
       {
