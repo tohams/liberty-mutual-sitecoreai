@@ -26,10 +26,12 @@ export default async function WorkshopAttendeesPage() {
           <span className="workshop-eyebrow">YOUR WORKSHOP ACCOUNTS</span>
           <h1>Your workshop number and agent logins</h1>
           <p>
-            A workshop number identifies seven fictional agent logins for one
-            attendee. Find your name below, then keep that number when switching
-            personas so your portal work and profile history remain separate
-            from other attendees’ work. Number <strong>01</strong> is reserved
+            Each attendee receives seven fictional agent accounts, with
+            different roles, licenses, and business histories. The guides call
+            these agents <strong>personas</strong> and tell you which one to use
+            for each exercise. Your workshop number is the part after the dot in
+            every username; keeping it the same separates your activity from
+            other attendees’ activity. Number <strong>01</strong> is reserved
             for the workshop presenters.
           </p>
         </header>
@@ -92,7 +94,8 @@ export default async function WorkshopAttendeesPage() {
                 Workshop {session.reviewerPack}
               </h2>
               <p>
-                Use the persona named in each walkthrough with suffix{" "}
+                When a walkthrough names an agent, use that agent’s username
+                from this list. Every account assigned to you ends in{" "}
                 <strong>.{session.reviewerPack}</strong>:
               </p>
               <ul className="workshop-persona-usernames">
@@ -122,11 +125,30 @@ export default async function WorkshopAttendeesPage() {
                 SitecoreAI authoring access is separate
               </h2>
               <p>
-                Use your invited <strong>Sitecore Cloud</strong> account for
-                authoring. In <strong>Sitecore Cloud Portal</strong>, select
+                <strong>SitecoreAI</strong> is the platform used to manage the
+                portal’s content and personalized experiences. Editing content
+                is called <strong>authoring</strong>; it uses your invited
+                <strong> Sitecore Cloud</strong> account. Open the{" "}
+                <a
+                  className="workshop-inline-link"
+                  href="https://portal.sitecorecloud.io/?organization=org_XqL3u1MSNVuubOTb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Sitecore Cloud Portal
+                </a>
+                , and select
                 <strong> Safeco Insurance Company of America POC</strong>, then
                 <strong> SitecoreAI / Demo</strong>. Open{" "}
-                <strong>Page Builder</strong>, and choose the site
+                <a
+                  className="workshop-inline-link"
+                  href="https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>Page Builder</strong>
+                </a>
+                , the visual page editor, and choose the site
                 <strong> Liberty Mutual Agent Portal</strong> (site name:
                 <strong> liberty-mutual-agent-portal</strong>). These names
                 identify this shared customer sandbox. The persona usernames
@@ -144,11 +166,13 @@ export default async function WorkshopAttendeesPage() {
                 two Sitecore accounts.
               </p>
               <p>
-                Local development guides use <strong>daniel.01</strong> at
-                <strong> http://localhost:3000</strong> because the default
-                local setup stores portal work on your computer. Local
-                source-code edits stay on that computer; edits to content in
-                <strong> Page Builder</strong> still affect the shared CMS.
+                Developer exercises run a copy of the portal’s frontend—the
+                website’s display and interaction code—on your computer at
+                <strong> http://localhost:3000</strong>. Those exercises use
+                <strong> daniel.01</strong> because their saved portal work is
+                stored locally. Code changes affect that local copy; content
+                edits in <strong>Page Builder</strong> still change the shared
+                content in SitecoreAI.
               </p>
               <Link href="/workshops/guide/author-approver-workflow">
                 View the publishing workflow demonstration{" "}

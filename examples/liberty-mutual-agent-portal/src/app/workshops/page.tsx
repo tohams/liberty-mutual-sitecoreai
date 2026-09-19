@@ -27,9 +27,10 @@ export default async function WorkshopHome() {
               <em>Your pace.</em>
             </h1>
             <p>
-              Explore the priorities you shared: simpler daily work, a stable
-              platform, and relevant experiences that help Liberty Mutual earn
-              independent agents’ business.
+              Explore the Liberty Mutual Agent Portal built for this workshop.
+              See how SitecoreAI helps your teams manage content, tailor an
+              agent’s experience, and deliver changes with less platform
+              maintenance. These guides explain each action and its result.
             </p>
             <div className="workshop-hero-meta">
               <span className="workshop-tag">
@@ -51,6 +52,70 @@ export default async function WorkshopHome() {
           </div>
         </section>
         <section className="workshop-home-content">
+          <section
+            className="workshop-orientation"
+            id="your-tools"
+            aria-labelledby="workshop-tools-title"
+          >
+            <span className="workshop-eyebrow">START HERE</span>
+            <h2 id="workshop-tools-title">Know which website you are using</h2>
+            <p>
+              You will move between three websites. Keep this guide open, and
+              use each step’s link to open the tool you need in another tab.
+            </p>
+            <div className="workshop-orientation-cards">
+              <div>
+                <h3>Workshop guide</h3>
+                <p>
+                  You are here. This website contains the instructions,
+                  screenshots, and account assignments. Sign in with the
+                  fictional agent username provided by the workshop team. Its
+                  number selects your examples throughout the guides.
+                </p>
+                <Link
+                  className="workshop-inline-link"
+                  href="/workshops/attendees"
+                >
+                  Find your workshop number and logins
+                </Link>
+              </div>
+              <div>
+                <h3>Agent Portal</h3>
+                <p>
+                  This is the website an independent agent would use. You will
+                  sign in as fictional agents to see their guidance, resources,
+                  and agency work. The portal requires its own sign-in, using
+                  the same usernames and password as this guide.
+                </p>
+                <a
+                  className="workshop-inline-link"
+                  href="/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open the Agent Portal login
+                </a>
+              </div>
+              <div>
+                <h3>SitecoreAI</h3>
+                <p>
+                  This is the platform behind the portal. Marketers use it to
+                  manage pages, images, forms, personalization, and results. Its
+                  visual page editor is called <strong>Page Builder</strong>.
+                  Use your separately invited <strong>Sitecore Cloud</strong>{" "}
+                  account when a guide opens these tools.
+                </p>
+                <a
+                  className="workshop-inline-link"
+                  href="https://app.sitecorecloud.io/?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open the SitecoreAI workshop environment
+                </a>
+              </div>
+            </div>
+          </section>
           <div className="workshop-section-intro">
             <span className="workshop-eyebrow">CHOOSE YOUR PATH</span>
             <h2>
@@ -59,10 +124,12 @@ export default async function WorkshopHome() {
               Then see how it is built.
             </h2>
             <p>
-              Marketing separates the agent-facing portal from content authoring
-              in SitecoreAI. Development separates the architecture from
-              hands-on local development. Each guide names the account, website,
-              and result for its exercise.
+              Begin with <strong>Marketing</strong> to see what an agent
+              experiences and how a marketer manages it. Continue to{" "}
+              <strong>Development &amp; architecture</strong> to understand the
+              services and change the website’s code on your computer. Follow
+              the session’s selected exercises, then explore the others during
+              the evaluation.
             </p>
           </div>
           <div className="workshop-paths">
@@ -133,13 +200,15 @@ export default async function WorkshopHome() {
             </div>
             <div>
               <MousePointer2 size={22} />
-              <h3>Keep two tabs open</h3>
+              <h3>Follow one step at a time</h3>
               <p>
-                Keep these instructions open while you work in the second tab.
-                Portal steps use a fictional agent login; authoring steps use a
-                separate <strong>Sitecore Cloud</strong> account. Watch the
-                workshop team perform guides marked{" "}
-                <strong>Presenter demonstration</strong>.
+                Read <strong>Before you start</strong> to identify the account
+                and website for an exercise. Follow its numbered steps in order.
+                After each action, compare your screen with{" "}
+                <strong>What to observe and why</strong> before continuing.
+                Enlarge screenshots when you need help finding a control; the
+                fuchsia outlines and numbered notes identify the important
+                parts.
               </p>
               <a href="/login" target="_blank" rel="noreferrer">
                 Open Agent Portal <ArrowUpRight size={15} />
@@ -149,8 +218,14 @@ export default async function WorkshopHome() {
               <Users size={22} />
               <h3>Find your workshop number</h3>
               <p>
-                Find your name in <strong>Attendee assignments</strong>. Your
-                guide currently shows suffix{" "}
+                Find your name in{" "}
+                <Link
+                  className="workshop-inline-link"
+                  href="/workshops/attendees"
+                >
+                  Attendee assignments
+                </Link>
+                . Your guide currently shows suffix{" "}
                 <strong>.{session.reviewerPack}</strong>; if that number differs
                 from your assignment, sign out of the guide and sign in with a
                 portal username ending in your assigned number. The assignment
@@ -166,10 +241,11 @@ export default async function WorkshopHome() {
               <h3>Finish with cleanup</h3>
               <p>
                 Follow the walkthrough’s <strong>Finish &amp; cleanup</strong>{" "}
-                section so the next exercise begins from a known state. Signing
-                out preserves saved work. A workshop-number reset restores
-                portal work and creates fresh profiles; it does not undo shared
-                Sitecore content edits.
+                section to leave the exercise ready for another visit. Signing
+                out keeps saved work. A reset restores the starting portal data
+                and gives your seven agents new profiles with no browsing
+                history. Content changes in SitecoreAI have their own
+                restoration steps.
               </p>
             </div>
             <Link href="/workshops/reset" className="workshop-home-reset-link">
@@ -177,6 +253,10 @@ export default async function WorkshopHome() {
             </Link>
           </section>
           <p className="workshop-directory-intro">
+            <strong>Presenter demonstration</strong> means Angela, Allen, or
+            Thomas makes changes to shared content while you watch. This keeps
+            everyone from editing the same page. Other exercises specify what
+            you can do with your assigned portal accounts or on your computer.{" "}
             First visit? Start with{" "}
             <Link href="/workshops/guide/start-and-switch-agents">
               Sign in and find your workshop number
