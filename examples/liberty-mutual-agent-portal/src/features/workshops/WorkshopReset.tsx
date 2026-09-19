@@ -282,8 +282,8 @@ export function WorkshopReset({
         <div className="workshop-reset-explanation">
           <h2>A clean start, every time</h2>
           <p>
-            Restore tasks, bookmarks and submissions to their starting state and
-            create seven new, verified SitecoreAI profiles with no earlier
+            Restore tasks, bookmarks, and submissions to their starting state
+            and create seven new, verified SitecoreAI profiles with no earlier
             browsing behavior.
           </p>
           <p>
@@ -395,7 +395,9 @@ export function WorkshopReset({
         <section>
           <h2>What stays in place</h2>
           <ul>
-            <li>Authored content, Search configuration and published pages.</li>
+            <li>
+              Authored content, Search configuration, and published pages.
+            </li>
             <li>
               Agentic Studio work, Forms submissions already sent to the
               webhook, and experiment settings.
