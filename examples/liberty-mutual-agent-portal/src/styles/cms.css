@@ -1,3 +1,8 @@
+.cms-editorial-slot {
+  display: grid;
+  gap: 24px;
+  margin-block: 24px;
+}
 .cms-guidance {
   display: flex;
   flex-wrap: wrap;
