@@ -114,7 +114,7 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "Verify the approved wording on the live page",
         action: [
-          "Open **Demo live page** or the **Pair** live-page link above that matches your assigned page. Sign into the **Agent Portal** using your assigned portal account if prompted.",
+          "Open **Demo live page** or the **Pair** live-page link above that matches your assigned page. If prompted, sign into the **Agent Portal** using your assigned portal account, then open the same practice-page link again; sign-in takes you to **My workspace**.",
           "Compare the live summary with the wording your partner approved. Refresh the live page after publication if necessary.",
         ],
         expected: [
