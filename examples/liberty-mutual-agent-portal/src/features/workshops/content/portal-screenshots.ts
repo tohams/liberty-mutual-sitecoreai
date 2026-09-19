@@ -83,7 +83,7 @@ const productSpotlight = capture(
 const workshopNumber = capture(
   "reviewer-reset-controls.png",
   "Reset page: choose your workshop number",
-  "Use the reset link for the website used in your exercise. This reference shows **Live portal** and the presenters’ **01**. Choose your assigned **Workshop number** before resetting.",
+  "Open [**Live portal reset**](https://liberty-mutual-agent-portal.vercel.app/workshops/reset) or [**Transaction preview reset**](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset), matching the website used in your exercise. This reference shows **Live portal** and the presenters’ **01**. Choose your assigned **Workshop number** before resetting.",
   [84, 356, 634, 231],
   [
     [

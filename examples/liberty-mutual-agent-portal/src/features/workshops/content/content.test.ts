@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { workshopGuides } from "./index";
 import { guidePriorities } from "./priorities";
-import { plainGuideText } from "../guide-text";
+import { guideTextParts, plainGuideText } from "../guide-text";
 import { guideStepImages } from "../guide-images";
 
 import type { GuideLink, WorkshopGuide } from "../types";
@@ -19,10 +19,25 @@ const range = (first: number, last: number) =>
   Array.from({ length: last - first + 1 }, (_, index) => first + index);
 
 function linksFor(guide: WorkshopGuide): GuideLink[] {
+  function inlineLinks(value: unknown): GuideLink[] {
+    if (typeof value === "string") {
+      return guideTextParts(value)
+        .filter((part) => part.kind === "link")
+        .map((part) => ({
+          href: part.href,
+          label: part.children.map((child) => child.text).join(""),
+        }));
+    }
+    if (Array.isArray(value)) return value.flatMap(inlineLinks);
+    if (value && typeof value === "object")
+      return Object.values(value).flatMap(inlineLinks);
+    return [];
+  }
   return [
     ...(guide.links ?? []),
     ...guide.steps.flatMap((step) => step.links ?? []),
     ...(guide.cleanup.links ?? []),
+    ...inlineLinks(guide),
   ];
 }
 
@@ -167,7 +182,28 @@ test("guide links use safe destinations and repository file links resolve in the
         link.label.trim(),
         `${guide.slug}: every link needs a useful label`,
       );
-      const url = new URL(link.href);
+      const url = new URL(
+        link.href,
+        "https://liberty-mutual-agent-portal.vercel.app",
+      );
+      if (url.pathname.startsWith("/workshops/guide/")) {
+        const destination = workshopGuides.find(
+          (item) => `/workshops/guide/${item.slug}` === url.pathname,
+        );
+        assert.ok(
+          destination,
+          `${guide.slug}: linked walkthrough does not exist: ${link.href}`,
+        );
+        if (url.hash.startsWith("#step-")) {
+          const stepNumber = Number(url.hash.slice(6));
+          assert.ok(
+            Number.isInteger(stepNumber) &&
+              stepNumber >= 1 &&
+              stepNumber <= destination.steps.length,
+            `${guide.slug}: linked step does not exist: ${link.href}`,
+          );
+        }
+      }
       assert.ok(
         url.protocol === "https:" ||
           (url.protocol === "http:" && url.hostname === "localhost"),
@@ -372,7 +408,9 @@ test("release teaching does not make hosting access an attendee prerequisite", (
   assert.ok(guide);
   assert.ok(
     linksFor(guide).every(
-      (link) => new URL(link.href).hostname !== "vercel.com",
+      (link) =>
+        new URL(link.href, "https://liberty-mutual-agent-portal.vercel.app")
+          .hostname !== "vercel.com",
     ),
     "release references must be readable without entering the Vercel console",
   );
@@ -397,7 +435,10 @@ test("reset walkthroughs use the authenticated page and preserve the host, works
   for (const guide of resetGuides) {
     const text = readableContent(guide);
     const resetLinks = linksFor(guide)
-      .map((link) => new URL(link.href))
+      .map(
+        (link) =>
+          new URL(link.href, "https://liberty-mutual-agent-portal.vercel.app"),
+      )
       .filter((url) => url.pathname === "/workshops/reset");
     for (const host of expectedHosts) {
       assert.ok(
@@ -485,7 +526,8 @@ test("reset walkthroughs use the authenticated page and preserve the host, works
   assert.ok(
     linksFor(resetGuides[1]).some(
       (link) =>
-        new URL(link.href).pathname === "/workshops/guide/saved-work-reset",
+        new URL(link.href, "https://liberty-mutual-agent-portal.vercel.app")
+          .pathname === "/workshops/guide/saved-work-reset",
     ),
     "profile verification must link to the reset procedure it follows",
   );
@@ -506,7 +548,9 @@ test("native profile lookup uses the selected host's current Agent identity with
   assert.match(text, /Liberty Mutual agent identity/);
   assert.ok(
     linksFor(guide).some(
-      (link) => new URL(link.href).pathname === "/workshops/reset",
+      (link) =>
+        new URL(link.href, "https://liberty-mutual-agent-portal.vercel.app")
+          .pathname === "/workshops/reset",
     ),
     "profile lookup must link to the current-identity page",
   );
