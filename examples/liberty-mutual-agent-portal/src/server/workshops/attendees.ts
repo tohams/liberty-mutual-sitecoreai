@@ -18,7 +18,7 @@ export const workshopAttendees: ReadonlyArray<{
   { reviewerPack: "09", displayName: "Bruno Koppel" },
   { reviewerPack: "10", displayName: "Jack Meyers" },
   { reviewerPack: "11", displayName: "Jeff Swanso" },
-  { reviewerPack: "12", displayName: null },
+  { reviewerPack: "12", displayName: "Zach Holle" },
   { reviewerPack: "13", displayName: null },
   { reviewerPack: "14", displayName: null },
   { reviewerPack: "15", displayName: null },
