@@ -14,27 +14,15 @@ export async function AudiencePage({
   const marketing = audience === "marketing";
   const guides = workshopGuides
     .filter((guide) => guide.audience === audience)
-    .map(
-      ({
-        slug,
-        audience,
-        category,
-        title,
-        summary,
-        duration,
-        steps,
-        focus,
-      }) => ({
-        slug,
-        audience,
-        category,
-        title,
-        summary,
-        duration,
-        focus,
-        stepCount: steps.length,
-      }),
-    );
+    .map(({ slug, audience, category, title, summary, steps, focus }) => ({
+      slug,
+      audience,
+      category,
+      title,
+      summary,
+      focus,
+      stepCount: steps.length,
+    }));
   return (
     <WorkshopShell session={session} active={audience}>
       <main className="workshop-directory-page" id="workshop-main">
@@ -51,30 +39,22 @@ export async function AudiencePage({
               ? "RELEVANT EXPERIENCES. EASIER DAILY WORK."
               : "STABLE SERVICES. CLEAR OWNERSHIP. FAST FEEDBACK."}
           </span>
-          <h1>
-            {marketing
-              ? "Agent experience & marketing"
-              : "Development & architecture"}
-          </h1>
+          <h1>{marketing ? "Marketing" : "Development & architecture"}</h1>
           <p>
             {marketing
-              ? "Explore your marketing priorities: easier content creation, controlled publishing, and relevant engagement that helps Liberty Mutual earn independent agents’ business."
-              : "Explore your platform priorities: less maintenance, faster delivery, and a dependable agent experience. Begin with the architecture, then make a local component change."}
+              ? "First experience the portal as an agent. Then see how marketers create and manage that experience in SitecoreAI."
+              : "First understand how the platform works. Then run the frontend on your computer and make a component change."}
           </p>
         </header>
         <p className="workshop-directory-intro">
           {marketing
-            ? "The main walkthroughs address the Marketing priorities on presentation slides 3–4."
-            : "The main walkthroughs address the Platform priorities on presentation slide 5."}{" "}
-          {marketing
-            ? "One campaign example shows how authored content and a custom portal component connect to saved business data."
-            : "The architecture guide traces custom portal components to server APIs and replaceable business-data adapters."}{" "}
-          Supporting tools and reference guides appear after the main
-          capabilities. Begin with each guide’s{" "}
-          <strong>Before you start</strong> section: it identifies the login,
-          access, and starting state that produce the expected result. If you do
-          not yet have the listed Sitecore access, follow the presenter for that
-          exercise.
+            ? "These exercises address your marketing priorities: simpler content creation, controlled publishing, and relevant agent engagement."
+            : "These exercises address your platform priorities: less maintenance, faster delivery, and a dependable agent experience."}{" "}
+          Use the section links to jump to the part you need. Begin each guide
+          with <strong>Before you start</strong>; it identifies the account,
+          website, and starting state. <strong>Presenter demonstration</strong>{" "}
+          means the workshop team makes the shared changes while you follow
+          along.
         </p>
         <GuideDirectory guides={guides} audience={audience} />
       </main>

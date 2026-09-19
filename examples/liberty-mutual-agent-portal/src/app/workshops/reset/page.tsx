@@ -5,7 +5,7 @@ import { WorkshopReset } from "@/features/workshops/WorkshopReset";
 import manifest from "../../../../fixtures/manifest.json";
 
 export const metadata: Metadata = {
-  title: "Reset users | Liberty Mutual workshop guide",
+  title: "Reset a workshop number | Liberty Mutual workshop guide",
 };
 
 export default async function WorkshopResetPage() {
@@ -23,12 +23,13 @@ export default async function WorkshopResetPage() {
           <span className="workshop-eyebrow">
             READY FOR ANOTHER WALKTHROUGH
           </span>
-          <h1>Reset a reviewer number</h1>
+          <h1>Reset a workshop number</h1>
           <p>
             Restore the portal workspace and browsing profiles for the number
-            assigned to you. A reset includes all seven personas in that pack,
-            so repeat exercises begin without earlier saved work or interests.
-            Anyone signed in to this guide can run the reset directly.
+            assigned to you. A reset includes all seven agent logins with that
+            number, so repeat exercises begin without earlier saved work or
+            interests. Anyone signed in to this guide can run the reset
+            directly.
           </p>
         </header>
         <WorkshopReset

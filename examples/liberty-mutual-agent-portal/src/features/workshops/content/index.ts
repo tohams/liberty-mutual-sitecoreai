@@ -4,6 +4,14 @@ import { governanceGuides } from "./governance";
 import { developmentGuides } from "./development";
 import { withScreenshots } from "./screenshots";
 import { orderByWorkshopSection, withPriorities } from "./priorities";
+// Retired exercises remain recognized so previously shared links reach the directory.
+const retiredWorkshopGuides = new Set([
+  "bulk-copy-maintenance",
+  "marketing-capability-boundaries",
+]);
+export function workshopGuideRedirect(slug: string) {
+  return retiredWorkshopGuides.has(slug) ? "/workshops/marketing" : null;
+}
 export const workshopGuides = orderByWorkshopSection(
   [
     ...marketingGuides.flatMap((guide) =>
@@ -13,6 +21,7 @@ export const workshopGuides = orderByWorkshopSection(
     ),
     ...developmentGuides,
   ]
+    .filter((guide) => !retiredWorkshopGuides.has(guide.slug))
     .map(withScreenshots)
     .map(withPriorities),
 );

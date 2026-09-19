@@ -1,23 +1,21 @@
 # Author and approver workshop
 
-This exercise demonstrates how SitecoreAI separates content preparation from approval. Two participants work on one practice page: an **Author** changes its content and submits it, and an **Approver** reviews the change. Approval triggers publication of that page through the workflow. Each participant uses their own SitecoreAI identity, so workflow history can identify who performed each action.
+This presenter-led demonstration shows how SitecoreAI separates content preparation from approval. The presenter **Author** changes the **Demo** page and submits it; the presenter **Approver** reviews and approves it. Approval publishes that page through the workflow. Attendees observe the two distinct non-admin identities rather than coordinating with an assigned partner.
 
-This document describes the native configuration, setup tools and acceptance checks supporting the **Page Builder** workshop. The dedicated workflow, page ACLs, presenter account assignments and automatic publishing have been configured and checked. Real non-admin presenter sessions have demonstrated author edits, submission, return to Draft, resubmission, approval and automatic publication of the revised summary to the live practice page. The Author did not have the **Approve** command.
+This document describes the native configuration, setup tools, and acceptance checks supporting the **Page Builder** demonstration. The dedicated workflow, page ACLs, presenter account assignments, and automatic publishing have been configured and checked. Real non-admin presenter sessions have demonstrated author edits, submission, return to Draft, resubmission, approval, and automatic publication of the revised summary to the live practice page. The Author did not have the **Approve** command.
 
-Attendee accounts have not yet been assigned workshop roles. The paired-page permissions are configured, but each attendee's access still needs the actual-session checks below after assignment. The verified presenter cycle does not establish that every attendee account or pair has passed those checks.
+No attendee role or pair assignment is required for the current workshop. The additional scoped pages and role-assignment tools remain available for a future supervised exercise; they are not instructions for attendees to edit shared content now.
 
-## Accounts and practice pages
+## Presenter accounts and practice page
 
-SitecoreAI accounts are separate from the portal's synthetic agent logins. A portal username such as `daniel.01` does not grant access to Page Builder or determine an authoring role.
+SitecoreAI accounts are separate from the portal's synthetic agent logins. A portal username such as `daniel.01` does not grant access to Page Builder or determine an authoring role. Its suffix is the participant's **workshop number**, used only for portal accounts and saved work.
 
 | Assignment | Native role | Content scope |
 | --- | --- | --- |
 | Presenter Author | **Liberty Mutual Workshop Author** | **Demo**, the `pair-01` page |
-| Presenter Approver | **Liberty Mutual Workshop Approver** | All nine practice pages; can help any pair |
-| Participant Author | **Liberty Mutual Workshop Author** | Their assigned pair page |
-| Participant Approver | **Liberty Mutual Workshop Approver** | The same page as their paired Author |
+| Presenter Approver | **Liberty Mutual Workshop Approver** | All nine prepared practice pages; this demonstration uses **Demo** only |
 
-**Pair 01** is reserved for the presenters. **Pairs 02–09** provide eight attendee practice pages. Workshop pair numbers are independent of portal reviewer numbers **01–15**. The presenter provides each participant's role and pair assignment; the private account roster is not stored in the repository.
+Keep the two presenter identities in separate browser profiles. Both open **Pages → Home → Workshop practice → Demo**. Attendees can follow the guide without signing into either presenter account. **Pairs 02–09** are prepared but unused by the current workshop; they must not be treated as attendee assignments.
 
 The content tree is:
 
@@ -30,7 +28,7 @@ The content tree is:
     └── pair-09                       Pair 09
 ```
 
-Both members of a pair can read their practice page. Page permissions are configured to limit editing to the assigned pair, and workflow permissions control the available commands. The exercise changes the page's versioned **Summary** field; **Title** and **Body** are also versioned. Local **Data** items and the optional image remain read-only; the Resource Metadata Marketplace app is outside this exercise.
+The presenter Author can edit **Demo**, and the presenter Approver can review it. Page permissions limit content access, and workflow permissions control the available commands. Other prepared pages retain their existing scoped permissions. The exercise changes the page's versioned **Summary** field; **Title** and **Body** are also versioned. Local **Data** items and the optional image remain read-only; the Resource Metadata Marketplace app is outside this exercise.
 
 Practice pages use the dedicated **WorkshopPracticePage** template. It inherits directly from **PortalPage**, alongside **ResourcePage**, so practice pages are excluded from the native Search source's **ResourcePage** selection. They reuse the article rendering without becoming agent reference resources. Confirm that exclusion in the live Search results as part of acceptance.
 
@@ -48,30 +46,34 @@ The dedicated workflow is **Liberty Mutual Workshop Review**, under `/sitecore/s
 
 Neither workshop role receives **Sitecore Client Publishing**. Publication is controlled by the Approver's permission to execute **Approve** on the assigned practice page. This avoids exposing the broad manual publishing controls available through that client role.
 
-The exercise uses **Page Builder** for editing and workflow actions:
+The presenters use **Page Builder** for editing and workflow actions while attendees observe:
 
-1. Both participants open **Page Builder**, select **liberty-mutual-agent-portal**, and open **Pages → Home → Workshop practice**. Select **Demo** for presenters, or the assigned **Pair 02–09** for attendees. Use **English**, the same version and **Default editing host**.
-2. If the page is **Live**, the Author opens the version selector, selects **Create version**, leaves the optional name blank and selects **Create**. Reopen the selector, select the newest **Draft**, and wait for **Draft Version [number]** and its **Summary** to finish loading before editing. On that draft, open the **Content** tab, record the original **Summary**, change it and wait for the change to save. Select **Actions → Submit**, enter a comment in the **Comment** dialog and select **Submit**. The page moves to **Awaiting approval**; the Author does not have **Approve**.
-3. The Approver refreshes the same page and version, reviews the summary and selects **Actions → Return to author**. Enter a comment in the **Comment** dialog and select **Submit**. The page returns to **Draft**. The Author refreshes, revises **Summary**, waits for the save and resubmits using **Actions → Submit**.
-4. The Approver refreshes the submitted version and selects **Actions → Approve**, enters a comment in the **Comment** dialog and selects **Submit**. Approval triggers publication without a separate **Publish** click. Wait for Page Builder to progress from **Approved** to **Live**.
-5. Open the assigned page's portal URL in a separate tab and compare its content with the approved version. If prompted, sign in with a portal agent account, then reopen the same practice-page URL because sign-in lands on **My workspace**. The live **Demo** page showed the approved revised summary after the actual Approver's approval. A Page Builder preview of draft content is not a published-result check.
-6. For another review cycle, the Author uses **Create version** again, leaves the optional name blank and selects **Create**. Reopen the selector, select the newest **Draft** and wait for its header and **Summary** to load before editing. The previously published version remains unchanged; the new draft needs its own **Submit** and **Approve** before its changes go live. To restore the starting content, use the original summary recorded at the beginning and complete the same review cycle.
+1. Both presenters open **Page Builder**, select **liberty-mutual-agent-portal**, and open **Pages → Home → Workshop practice → Demo**. Use **English**, the same version, and **Default editing host**.
+2. If the page is **Live**, the Author opens the version selector, selects **Create version**, leaves the optional name blank, and selects **Create**. Reopen the selector, select the newest **Draft**, and wait for **Draft Version [number]** and its **Summary** to finish loading before editing. On that draft, open the **Content** tab, record the original **Summary**, change it, and wait for the change to save. Select **Actions → Submit**, enter a comment in the **Comment** dialog, and select **Submit**. The page moves to **Awaiting approval**; the Author does not have **Approve**.
+3. The Approver refreshes the same page and version, reviews the summary, and selects **Actions → Return to author**. Enter a comment in the **Comment** dialog, and select **Submit**. The page returns to **Draft**. The Author refreshes, revises **Summary**, waits for the save, and resubmits using **Actions → Submit**.
+4. The Approver refreshes the submitted version, selects **Actions → Approve**, enters a comment in the **Comment** dialog, and selects **Submit**. Approval triggers publication without a separate **Publish** click. Wait for Page Builder to progress from **Approved** to **Live**.
+5. Open the [published Demo page](https://liberty-mutual-agent-portal.vercel.app/workshop-practice/pair-01) in a separate tab and compare its content with the approved version. If prompted, sign in with a portal agent account, then reopen the same practice-page URL because sign-in lands on **My workspace**. The live **Demo** page showed the approved revised summary after the actual Approver's approval. A Page Builder preview of draft content is not a published-result check.
+6. For another review cycle, the Author uses **Create version** again, leaves the optional name blank, and selects **Create**. Reopen the selector, select the newest **Draft**, and wait for its header and **Summary** to load before editing. The previously published version remains unchanged; the new draft needs its own **Submit** and **Approve** before its changes go live. To restore the starting content, use the original summary recorded at the beginning and complete the same review cycle.
 
-Editing a **Live** version also created a new **Draft** automatically in the verified Author session; the workshop uses explicit **Create version** so participants select the intended draft before changing content.
+Editing a **Live** version also created a new **Draft** automatically in the verified Author session; the workshop uses explicit **Create version** so the presenter selects the intended draft before changing content.
 
-The role configuration prevents Authors from approving and Approvers from submitting drafts. Do not give one participant both roles. Do not demonstrate the permissions with an administrator account: administrators bypass workflow restrictions and do not represent the participant experience.
+The role configuration prevents Authors from approving and Approvers from submitting drafts. Do not give one presenter identity both roles. Do not demonstrate the permissions with an administrator account: administrators bypass workflow restrictions and do not demonstrate these scoped authoring roles.
 
-## Access prerequisites
+## Maintainer reference: optional future attendee authoring
+
+The following provisioning details preserve the existing implementation for a future workshop that explicitly includes attendee authoring. They are not prerequisites for this presenter-led demonstration. Before introducing hands-on collaboration, assign distinct Sitecore identities and a practice page to each pair, communicate those assignments, and verify each account in an actual browser session. Portal workshop numbers do not assign CMS roles or pages.
+
+### Access prerequisites
 
 Before assigning native roles:
 
 1. Invite each participant to the correct Sitecore Cloud organization and grant access to this SitecoreAI application using a non-admin account.
 2. Each participant accepts their invitation and opens **Page Builder** at least once. This first sign-in establishes the native user record that the assignment tool must find.
-3. Check that the account does not already have administrator, developer, designer, site-management, security-management or another broad authoring role. The assignment tool refuses conflicting privileges; it does not silently remove them.
+3. Check that the account does not already have administrator, developer, designer, site-management, security-management, or another broad authoring role. The assignment tool refuses conflicting privileges; it does not silently remove them.
 4. Assign exactly one workflow role and one pair scope. Only the presenter Approver receives **All pages**.
 5. Sign out and sign in again after role assignment, then test the actual account session. Use separate browser profiles for presenter Author and Approver so their sessions remain distinct.
 
-Cloud access, native role membership and actual page permissions are separate checks. A successful invitation or provisioning command alone does not prove that the workshop works.
+Cloud access, native role membership, and actual page permissions are separate checks. A successful invitation or provisioning command alone does not prove that the workshop works.
 
 ### Assign roles in User Manager
 
@@ -100,7 +102,7 @@ query {
 }
 ```
 
-Repeat for **Approver**, **All pages** and the pair roles, following pagination when required. This verifies membership of those roles only. It does not establish the full user profile, administrator status or absence of unrelated roles; retain the **User Manager** and actual-session checks for those facts. Keep returned account names in private setup records.
+Repeat for **Approver**, **All pages**, and the pair roles, following pagination when required. This verifies membership of those roles only. It does not establish the full user profile, administrator status, or absence of unrelated roles; retain the **User Manager** and actual-session checks for those facts. Keep returned account names in private setup records.
 
 ## Configuration and setup tools
 
@@ -108,12 +110,12 @@ Run these tools from the **repository root**, using the configured Sitecore CLI 
 
 | Tool | Purpose |
 | --- | --- |
-| [configure-workshop-editorial-workflow.cjs](../../../authoring/scripts/configure-workshop-editorial-workflow.cjs) | Creates or reconciles only the dedicated workflow, its roles and explicit practice-page ACLs |
+| [configure-workshop-editorial-workflow.cjs](../../../authoring/scripts/configure-workshop-editorial-workflow.cjs) | Creates or reconciles only the dedicated workflow, its roles, and explicit practice-page ACLs |
 | [configure-workshop-practice-template.cjs](../../../authoring/scripts/configure-workshop-practice-template.cjs) | Creates or verifies the isolated **WorkshopPracticePage** template without changing **ResourcePage** |
 | [provision-workshop-practice-content.cjs](../../../authoring/scripts/provision-workshop-practice-content.cjs) | Creates missing practice pages and their local data; records generated native item IDs and preserves existing participant edits |
 | [assign-workshop-user-roles.cjs](../../../authoring/scripts/assign-workshop-user-roles.cjs) | Adds the selected workshop roles to existing, non-admin Cloud users after verifying both the exact native username and profile email |
 
-These tools are read-only by default. Changes require `--apply`. Snapshots, native ID manifests, identity assignments and mutation journals must use absolute paths **outside the repository**. Keep these private files with the environment's setup records: they identify the exact items and accounts involved and support safe readback after an interrupted request.
+These tools are read-only by default. Changes require `--apply`. Snapshots, native ID manifests, identity assignments, and mutation journals must use absolute paths **outside the repository**. Keep these private files with the environment's setup records: they identify the exact items and accounts involved and support safe readback after an interrupted request.
 
 Use this order:
 
@@ -163,11 +165,11 @@ node authoring/scripts/configure-workshop-editorial-workflow.cjs demo \
   --manifest /absolute/private/workshop/page-acls-manifest.json
 ```
 
-On later template checks, supply its existing `--manifest`. On later practice-content checks, supply both `--template-manifest` and its existing content `--manifest` so the tool can verify previously created items. Legacy practice manifests that used **ResourcePage** are not accepted for new ACL changes. Provisioning does not reset participant edits, approve content, publish content or create user accounts. If a request's outcome is uncertain, inspect the journal and read back its recorded item before retrying.
+On later template checks, supply its existing `--manifest`. On later practice-content checks, supply both `--template-manifest` and its existing content `--manifest` so the tool can verify previously created items. Legacy practice manifests that used **ResourcePage** are not accepted for new ACL changes. Provisioning does not reset participant edits, approve content, publish content, or create user accounts. If a request's outcome is uncertain, inspect the journal and read back its recorded item before retrying.
 
 ### Upgrade the initial workflow to publish on approval
 
-The initial configuration gave the Approver **Sitecore Client Publishing** and did not contain an automatic publishing action. The scoped migration removes that global parent role and adds **Approved → Auto Publish**. It does not change any account assignments, page content or other workflow.
+The initial configuration gave the Approver **Sitecore Client Publishing** and did not contain an automatic publishing action. The scoped migration removes that global parent role and adds **Approved → Auto Publish**. It does not change any account assignments, page content, or other workflow.
 
 Use `--migrate-publishing` only when capturing the reviewed migration baseline:
 
@@ -185,7 +187,7 @@ node authoring/scripts/configure-workshop-editorial-workflow.cjs demo \
   --manifest /absolute/private/workshop/publishing-manifest.json
 ```
 
-The migration accepts only the exact previously installed Approver parent set: **Sitecore Client Users**, **Sitecore Client Authoring** and **Sitecore Client Publishing**. It removes only **Sitecore Client Publishing**, verifies readback, then installs the action. Any other inherited privilege stops provisioning for review. A fresh installation already uses the restricted model and does not need this migration flag.
+The migration accepts only the exact previously installed Approver parent set: **Sitecore Client Users**, **Sitecore Client Authoring**, and **Sitecore Client Publishing**. It removes only **Sitecore Client Publishing**, verifies readback, then installs the action. Any other inherited privilege stops provisioning for review. A fresh installation already uses the restricted model and does not need this migration flag.
 
 The action uses the native type `Sitecore.Workflows.Simple.PublishAction, Sitecore.Kernel` with:
 
@@ -208,11 +210,11 @@ node authoring/scripts/assign-workshop-user-roles.cjs demo \
   --report /absolute/private/workshop/assignment-result.json
 ```
 
-The entire assignment batch is checked before the first change. Missing users, ambiguous native usernames, mismatched profile emails, disabled accounts, administrator flags, conflicting effective roles or accounts requiring User Manager stop the batch. Discovery first lists only native usernames and administrator flags, then reads the full profile and roles of each requested `sitecore\<accepted email>` identity. The tool adds only the intended memberships and verifies them afterward; it never invites users, changes passwords, removes unrelated roles or grants administrator access.
+The entire assignment batch is checked before the first change. Missing users, ambiguous native usernames, mismatched profile emails, disabled accounts, administrator flags, conflicting effective roles, or accounts requiring User Manager stop the batch. Discovery first lists only native usernames and administrator flags, then reads the full profile and roles of each requested `sitecore\<accepted email>` identity. The tool adds only the intended memberships and verifies them afterward; it never invites users, changes passwords, removes unrelated roles, or grants administrator access.
 
 ## Publishing prerequisites and account acceptance checks
 
-The setup maintainer must ensure **Workshop practice**, its ancestors, the isolated page template and required static rendering definitions are published before testing approval-triggered publication of a practice page. The practice root initially inherits **Basic Workflow**; it is not one of the paired pages in **Liberty Mutual Workshop Review**. Approve and publish the root as a separate setup action when required, without including its children or related items. Publish required definitions as a separate setup action; do not publish the paired drafts. Confirm that practice content is excluded from agent-facing navigation and Search before publishing practice pages.
+The setup maintainer must ensure **Workshop practice**, its ancestors, the isolated page template, and required static rendering definitions are published before testing approval-triggered publication of a practice page. The practice root initially inherits **Basic Workflow**; it is not one of the paired pages in **Liberty Mutual Workshop Review**. Approve and publish the root as a separate setup action when required, without including its children or related items. Publish required definitions as a separate setup action; do not publish the paired drafts. Confirm that practice content is excluded from agent-facing navigation and Search before publishing practice pages.
 
 **Use actual browser sessions to verify the publishing boundary.** The initial Approver could open the manual **Publish** controls on read-only **Home** because of **Sitecore Client Publishing**. Pair-level write access did not restrict those controls. After the migration, the real Approver's **Publish** button was disabled on **Home** in both Page Builder **Editor** and **Content** modes. Complete the remaining checks on the assigned page and unrelated content, and verify that **Approve** publishes only the permitted practice page.
 
@@ -226,15 +228,15 @@ Use real Author and Approver sessions to verify:
 | Author opens another pair's page or an existing portal page | They cannot edit that content |
 | Author submits | **Actions → Submit → Comment → Submit** moves the page to **Awaiting approval**; the Author does not have **Approve** |
 | Approver opens their assigned submitted page | **Actions** offers **Approve** and **Return to author**, but not the Author's workflow **Submit** command |
-| Approver opens another pair's submitted page | They cannot approve or return it |
+| Optional attendee Approver opens another pair's submitted page | They cannot approve or return it; the presenter Approver intentionally has broader practice-page access |
 | Approver returns a page | Author can revise it in **Draft** and resubmit |
 | Approver approves | **Actions → Approve → Comment → Submit** moves the item to **Approved** and triggers publication of the approved English page to **Experience Edge**; Page Builder shows **Live** after publication |
 | Publication result is checked | The approved text appears at that practice page's portal URL after publication; other pair pages and unrelated portal content remain unchanged |
-| Manual publishing controls are inspected | After a fresh sign-in, **Publish** is disabled for both roles on their own page, another pair's page, **Home** and an existing portal resource |
+| Manual publishing controls are inspected | After a fresh sign-in, **Publish** is disabled for both roles on their own page, another pair's page, **Home**, and an existing portal resource |
 | Author edits an Approved page again | A new Draft version is created and the previously published version remains unchanged |
-| Presenter Approver helps another pair | They can review every paired page without administrator privileges |
+| Presenter Approver scope is checked | They can review every prepared practice page without administrator privileges; the current demonstration uses **Demo** only |
 
-Native role and ACL readback is useful configuration evidence. Administrator-token API results, **canPublish** and unit tests are not substitutes for these real-user checks.
+Native role and ACL readback is useful configuration evidence. Administrator-token API results, **canPublish**, and unit tests are not substitutes for these real-user checks.
 
 Run the provisioning-model tests from the repository root:
 
@@ -242,11 +244,11 @@ Run the provisioning-model tests from the repository root:
 node --test authoring/scripts/*workshop*.test.cjs
 ```
 
-## Repeating the exercise
+## Repeating the presenter demonstration
 
-The portal's reviewer reset does not reset Sitecore content or workflow history. To repeat, the Author opens their assigned page's version selector, selects **Create version**, leaves the optional name blank and selects **Create**. Reopen the selector, select the newest **Draft** and wait for its header and **Summary** to load before editing. The published version stays unchanged until the new draft is approved. To restore starter wording, use the original summary recorded at the start and submit it for approval again; approval triggers publication. There is no bulk reset or deletion action in these provisioning tools.
+The portal's workshop-number reset does not reset Sitecore content or workflow history. To repeat, the presenter Author opens **Demo** and its version selector, selects **Create version**, leaves the optional name blank, and selects **Create**. Reopen the selector, select the newest **Draft**, and wait for its header and **Summary** to load before editing. The published version stays unchanged until the new draft is approved. To restore starter wording, use the original summary recorded at the start and submit it for approval again; approval triggers publication. There is no bulk reset or deletion action in these provisioning tools.
 
-This is a practice area for the time-limited Liberty Mutual sandbox. It does not establish production identity, publishing or governance policies.
+This is a practice area for the time-limited Liberty Mutual sandbox. It does not establish production identity, publishing, or governance policies.
 
 ## Sitecore reference
 

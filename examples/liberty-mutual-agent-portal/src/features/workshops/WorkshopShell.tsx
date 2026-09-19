@@ -65,10 +65,10 @@ export function WorkshopShell({
         <div className="workshop-account">
           <Link
             href="/workshops/attendees"
-            aria-label={`Attendee assignments: reviewer pack ${session.reviewerPack}`}
+            aria-label={`Attendee assignments: workshop number ${session.reviewerPack}`}
             aria-current={active === "attendees" ? "page" : undefined}
           >
-            Reviewer pack <strong>{session.reviewerPack}</strong>
+            Workshop number <strong>{session.reviewerPack}</strong>
           </Link>
           <WorkshopSignOut />
         </div>
@@ -89,7 +89,7 @@ export function WorkshopShell({
           href="/workshops/reset"
           aria-current={active === "reset" ? "page" : undefined}
         >
-          <RotateCcw size={14} /> Reset users
+          <RotateCcw size={14} /> Reset a workshop number
         </Link>
         <span>Evaluation sandbox · September 2026</span>
       </footer>

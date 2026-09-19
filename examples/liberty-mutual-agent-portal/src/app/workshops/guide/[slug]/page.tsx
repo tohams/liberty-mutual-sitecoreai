@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Clock3,
   Info,
   RotateCcw,
   Users,
@@ -18,6 +17,7 @@ import {
 } from "@/features/workshops/WorkshopControls";
 import {
   findWorkshopGuide,
+  workshopGuideRedirect,
   workshopGuides,
 } from "@/features/workshops/content";
 import { GuideText } from "@/features/workshops/GuideText";
@@ -47,10 +47,15 @@ export default async function GuidePage({
 }) {
   const { slug } = await params;
   const session = await requireWorkshopSession(`/workshops/guide/${slug}`);
+  const directoryRedirect = workshopGuideRedirect(slug);
+  if (directoryRedirect) redirect(directoryRedirect);
   const guide = findWorkshopGuide(slug);
   if (!guide) notFound();
   if (guide.slug !== slug) redirect(`/workshops/guide/${guide.slug}`);
-  const pack = guide.accountScope === "local" ? "01" : session.reviewerPack;
+  const pack =
+    guide.accountScope === "local" || guide.accountScope === "presenter"
+      ? "01"
+      : session.reviewerPack;
   function contextual(text: string) {
     return text
       .replace(
@@ -102,10 +107,6 @@ export default async function GuidePage({
                 <GuideText text={contextual(guide.summary)} />
               </p>
               <div className="workshop-guide-meta">
-                <span>
-                  <Clock3 size={16} />
-                  {guide.duration}
-                </span>
                 <span>{guide.steps.length} steps</span>
                 {guide.personas.length > 0 && (
                   <span>
@@ -154,8 +155,8 @@ export default async function GuidePage({
                 Check the account, website, and starting state below before
                 following the steps.{" "}
                 <Link href="/workshops/attendees">Attendee assignments</Link>{" "}
-                lists your portal usernames and explains the separate Sitecore
-                authoring roles.
+                lists your agent logins and explains the separate Sitecore
+                authoring access.
               </p>
               <ul>
                 {guide.prerequisites.map((line, index) => (
@@ -164,6 +165,17 @@ export default async function GuidePage({
                   </li>
                 ))}
               </ul>
+              {guide.accountScope === "presenter" && (
+                <p className="workshop-callout">
+                  <Info size={17} />
+                  <span>
+                    <strong>Presenter demonstration:</strong> the workshop team
+                    makes the shared content changes and uses agent logins
+                    ending in <strong>.01</strong> for the portal preview.
+                    Follow the presenter rather than editing the same page.
+                  </span>
+                </p>
+              )}
               {guide.accountScope === "local" && (
                 <p className="workshop-callout">
                   <Info size={17} />
@@ -172,7 +184,7 @@ export default async function GuidePage({
                     username shown in that step at{" "}
                     <strong>localhost:3000</strong>. The default local setup
                     keeps portal work on your computer, separate from the hosted
-                    workshop packs. Local code changes affect your frontend;
+                    workshop accounts. Local code changes affect your frontend;
                     content edits in <strong>Page Builder</strong> still change
                     the shared CMS.
                   </span>

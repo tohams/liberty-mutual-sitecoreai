@@ -254,7 +254,7 @@ export function WorkshopReset({
           className="workshop-reset-select-label"
           htmlFor="reviewer-number"
         >
-          Reviewer number
+          Workshop number
         </label>
         <select
           id="reviewer-number"
@@ -278,8 +278,8 @@ export function WorkshopReset({
           This resets all seven <strong>.{pack}</strong> accounts together.
           Select the number beside your name in{" "}
           <Link href="/workshops/attendees">Attendee assignments</Link>. Use{" "}
-          <strong>01</strong> only for the presenter pack. Other reviewer
-          numbers are unchanged; anyone using the selected pack will need to
+          <strong>01</strong> only for the presenters’ number. Other workshop
+          numbers are unchanged; anyone using the selected number will need to
           sign in again.
         </p>
         <p className="workshop-reset-scope">
@@ -317,14 +317,14 @@ export function WorkshopReset({
           </p>
         )}
         <div className="workshop-reset-status" role="status" aria-live="polite">
-          {loading && <p>Loading reviewer {pack}…</p>}
+          {loading && <p>Loading workshop {pack}…</p>}
           {(busy || pending) && (
             <>
               <strong>Reset in progress</strong>
               <p>
                 {operation?.phase === "verifying"
                   ? "Verifying all seven profiles in SitecoreAI before activating them."
-                  : "Preparing the reviewer pack. Fresh profiles can take a few minutes."}{" "}
+                  : "Preparing the seven agent logins. Fresh profiles can take a few minutes."}{" "}
                 {busy
                   ? "You can leave this page and use Continue reset when you return."
                   : "Select Continue reset to finish the existing request."}
@@ -335,7 +335,7 @@ export function WorkshopReset({
             <div className="workshop-reset-success">
               <Check size={22} />
               <div>
-                <strong>Reviewer {pack} is ready</strong>
+                <strong>Workshop {pack} is ready</strong>
                 <p>
                   Seven new profiles are verified and active. Saved work is back
                   at its starting state. Sign out of the Agent Portal, then sign
@@ -375,7 +375,7 @@ export function WorkshopReset({
               ? "Reset in progress…"
               : resumable
                 ? "Continue reset"
-                : `Reset reviewer ${pack}`}
+                : `Reset workshop ${pack}`}
           </button>
           <button
             type="button"
@@ -405,7 +405,7 @@ export function WorkshopReset({
       <aside className="workshop-reset-help">
         <section>
           <Users size={23} />
-          <h2>Seven personas. One number.</h2>
+          <h2>Seven agent logins. One number.</h2>
           <p>
             Resetting {pack} includes every account listed below. Usernames and
             the password <strong>Sitecore</strong> stay the same.
@@ -426,7 +426,7 @@ export function WorkshopReset({
               Agentic Studio work, Forms submissions already sent to the
               webhook, and experiment settings.
             </li>
-            <li>Other reviewer numbers and other website environments.</li>
+            <li>Other workshop numbers and other website environments.</li>
           </ul>
         </section>
         <section>

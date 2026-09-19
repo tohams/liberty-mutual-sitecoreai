@@ -44,11 +44,10 @@ export interface WorkshopGuide {
   slug: string;
   audience: WorkshopAudience;
   category: string;
-  accountScope?: "local" | "assigned";
+  accountScope?: "local" | "assigned" | "presenter";
   title: string;
   summary: string;
   outcome: string;
-  duration: string;
   personas: string[];
   prerequisites: string[];
   links?: GuideLink[];
