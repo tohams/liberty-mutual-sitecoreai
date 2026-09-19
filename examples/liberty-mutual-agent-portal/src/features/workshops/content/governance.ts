@@ -7,7 +7,7 @@ export const governanceGuides: WorkshopGuide[] = [
     category: "Content governance",
     title: "Author and approver: review and publish content together",
     summary:
-      "Use two **Sitecore Cloud** accounts to edit one practice page in **Page Builder**: one partner writes as the **Author**, and the other reviews as the **Approver**. Complete a revision cycle, publish the approved wording, and restore the page.",
+      "**Paired hands-on:** Edit your pair’s separate practice page in **Page Builder**. One partner writes as the **Author**, and the other reviews as the **Approver**. Complete a revision cycle, publish the approved wording, and restore the page.",
     outcome:
       "See how page permissions limit the content an author can change, while separate **Author** and **Approver** roles control review and approval. Verify publication through the configured approval workflow.",
     duration: "20–25 minutes for a pair",
@@ -15,7 +15,7 @@ export const governanceGuides: WorkshopGuide[] = [
     prerequisites: [
       "Each partner needs an accepted **Sitecore Cloud** invitation to **Safeco Insurance Company of America POC** and access to its **SitecoreAI** application. Use the invited email account for **Page Builder**. You will use an **Agent Portal** persona later to inspect the published page.",
       "Before starting, ask the **Sitecore workshop team** to confirm three things for each partner: the **Sitecore Cloud** email account, the **Author** or **Approver** role installed for that account, and the shared practice-page name. Attendee roles and practice pairs are pending assignment; follow the presenters until the team has completed yours. Use a non-administrator account so you experience the permissions of your **Author** or **Approver** role.",
-      "The presenters use **Demo**. The team allocates each attendee pair one page named **Pair 02** through **Pair 09** under **Home** → **Workshop practice**. Both partners use that same page. The team provides this authoring pair separately from your portal reviewer number, which is listed in **Attendee assignments**.",
+      "The practice pages are already prepared under **Home** → **Workshop practice**. Presenters use **Demo**; the team allocates each attendee pair a different page from **Pair 02** through **Pair 09**. Both partners use only their pair’s page, keeping their work separate from other pairs. Use that page as provided; no duplication is needed. The team provides this authoring pair separately from your portal reviewer number in **Attendee assignments**.",
       "Each partner uses their own computer. If demonstrating both roles on one computer, use separate **Chrome** profiles; two tabs in the same browser profile share the same Sitecore login. In **Page Builder**, select **Liberty Mutual Agent Portal**, use **English**, and keep **Default** selected as the editing host to preview the shared hosted site.",
       "Change **Summary** only, and record its starting wording before editing. Leave images, component placement, and **Resource metadata** unchanged. Reserve time for the final restoration cycle so the live page returns to its starting wording.",
       "If your partner is unavailable, tell the **Sitecore workshop team** before starting. A presenter can use the demonstration **Approver** account to review an **Author** participant's page; an **Approver** participant still needs an **Author** to prepare and submit content.",
@@ -67,7 +67,7 @@ export const governanceGuides: WorkshopGuide[] = [
         expected: [
           "The main portal's **Home** content is read-only for the scoped **Author** role; your pair's practice page can be edited. If these permissions differ, ask the **Sitecore workshop team** to check your account and pair assignment before continuing.",
           "The saved wording appears in the page preview. The draft is ready for review; publication follows approval.",
-          "Creating a **Draft** preserves the previous approved version. Your new wording reaches the live page only after review and approval.",
+          "Creating a **Draft** adds a version to your pair’s existing page and preserves its previous approved version. It does not create a separate attendee copy; the assigned pair page keeps your work separate from other pairs. Your new wording reaches that page’s live URL only after review and approval.",
           "The **Author** can **Submit** the draft but cannot **Approve** it.",
         ],
         note: "**What to notice:** If you know **Sitecore XP**, focus on the authoring experience here: edit a field, let it autosave, see it on the page, and submit it for review within **Page Builder**. The familiar draft-and-approval process stays close to the page being edited.",
