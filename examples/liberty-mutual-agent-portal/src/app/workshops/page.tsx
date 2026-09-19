@@ -61,8 +61,9 @@ export default async function WorkshopHome() {
             <p>
               Both sections follow the marketing and platform priorities in the
               presentation. Each walkthrough explains the request it addresses.
-              Additional agent scenarios and workshop support remain available
-              for optional exploration.
+              One campaign example shows how authored content and a custom
+              component connect to saved business data. The portal’s other
+              business functions remain available for exploration.
             </p>
           </div>
           <div className="workshop-paths">

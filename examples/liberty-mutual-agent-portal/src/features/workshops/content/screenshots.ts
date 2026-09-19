@@ -23,20 +23,6 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
         "**Learning & resources**: use the search field and **Risk state** filter. This reference shows Daniel’s library; result counts and treatment copy may vary.",
     },
   },
-  "bop-submission": {
-    "2": {
-      file: "products-texas.png",
-      alt: "Products and appetite with Texas selected and Prepare account buttons",
-      caption:
-        "Confirm **Texas** in **Risk state** before choosing **Prepare account** on the **Businessowners policy** card.",
-    },
-    "3": {
-      file: "bop-preparation.png",
-      alt: "Prepare your submission dialog with Texas risk state and coverage selection",
-      caption:
-        "The preparation dialog carries the selected risk state forward. Complete the account fields using a unique fictional name for your exercise.",
-    },
-  },
   "native-contact-form": {
     "3": {
       file: "native-contact-form.png",
