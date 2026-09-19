@@ -80,10 +80,10 @@ const productSpotlight = capture(
   ],
 );
 
-const reviewerNumber = capture(
+const workshopNumber = capture(
   "reviewer-reset-controls.png",
-  "Reset page: choose your reviewer number",
-  "Use the reset link for the website used in your exercise. This reference shows **Live portal** and the presenters’ **01**. Select the number assigned to you before taking a reset action.",
+  "Reset page: choose your workshop number",
+  "Use the reset link for the website used in your exercise. This reference shows **Live portal** and the presenters’ **01**. The selector is now labeled **Workshop number**. Select your assigned number before resetting.",
   [84, 356, 634, 231],
   [
     [
@@ -92,7 +92,7 @@ const reviewerNumber = capture(
     ],
     [
       [99, 456, 608, 56],
-      "Open **Reviewer number**, then choose your assigned number. **01** belongs to the presenters.",
+      "Open **Workshop number**, then choose your assigned number. **01** belongs to the presenters.",
     ],
   ],
 );
@@ -100,7 +100,7 @@ const reviewerNumber = capture(
 const currentIdentity = capture(
   "current-profile-identity.png",
   "Current profile identities: copy the matching agent’s row",
-  "Scroll to **Current profile identities** on the reset page. This example locates Daniel’s row. Use the row for your own reviewer number and copy its current value; the value pictured here is only a reference and changes after a reset.",
+  "Scroll to **Current profile identities** on the reset page. This example locates Daniel’s row. Use the row for your own workshop number and copy its current value; the value pictured here is only a reference and changes after a reset.",
   [75, 315, 1125, 89],
   [
     [
@@ -144,7 +144,7 @@ const profileOverview = capture(
     ],
     [
       [127, 633, 173, 39],
-      "Scroll within the page to read **Additional data**, including **agentId**, **reviewerPack**, and licensing attributes.",
+      "Scroll within the page to read **Additional data**, including **agentId**, licensing attributes, and **reviewerPack**, the stored field for your workshop number.",
     ],
   ],
 );
@@ -161,7 +161,7 @@ const profileResult = capture(
     ],
     [
       [792, 490, 442, 83],
-      "Open the matching result, then confirm the agent and reviewer number in the profile.",
+      "Open the matching result, then confirm the agent and workshop number in the profile.",
     ],
   ],
 );
@@ -187,12 +187,12 @@ const profileEngagement = capture(
 const resetActions = capture(
   "reset-action-buttons.png",
   "Reset page: start a reset or refresh its status",
-  "Below **A clean start, every time**, the dark **Reset reviewer** button starts the reset for the selected number. The adjacent **Refresh status** button reads the current result without starting another reset.",
+  "Below **A clean start, every time**, the dark **Reset workshop** button starts the reset for the selected number. The adjacent **Refresh status** button reads the current result without starting another reset. The reference image shows the earlier button label; the current button reads **Reset workshop** followed by the selected number.",
   [87, 314, 632, 341],
   [
     [
       [99, 539, 169, 57],
-      "Select **Reset reviewer** only after checking the number shown on the button.",
+      "Select **Reset workshop** only after checking the number shown on the button.",
     ],
     [
       [272, 539, 145, 57],
@@ -203,13 +203,13 @@ const resetActions = capture(
 
 const summaryField = capture(
   "pagebuilder-summary-field.png",
-  "Page Builder: select your practice page and open Content",
-  "This reference shows the presenters’ **Demo** page. Attendees choose their assigned **Pair** page. Use the top **Content** tab to read the **Summary** field, and keep the starting wording in a local note before editing.",
+  "Page Builder: open the Demo page in Content",
+  "The presenters use **Home** → **Workshop practice** → **Demo** for the review demonstration. Use the top **Content** tab to read **Summary**, and keep the starting wording in a local note before editing. Attendees follow the presenters’ screens.",
   [0, 0, 1270, 523],
   [
     [
       [44, 214, 231, 64],
-      "Expand **Home** → **Workshop practice**, then select your assigned page.",
+      "Expand **Home** → **Workshop practice**, then select **Demo**.",
     ],
     [
       [594, 1, 53, 55],
@@ -270,9 +270,6 @@ export const portalScreenshots: Record<
   Record<number, GuideImage | GuideImage[]>
 > = {
   "architecture-and-ownership": {
-    1: [homeGuidance, learningGuidance, productSpotlight],
-  },
-  "marketing-capability-boundaries": {
     1: [homeGuidance, learningGuidance, productSpotlight],
   },
   "start-and-switch-agents": {
@@ -360,7 +357,7 @@ export const portalScreenshots: Record<
   },
   "ab-testing": { 3: learningGuidance, 4: profileEngagement },
   "find-an-agent-profile": {
-    1: [reviewerNumber, currentIdentity],
+    1: [workshopNumber, currentIdentity],
     2: [profileFilter, profileResult],
     3: [profileOverview, profileEngagement],
   },
@@ -376,7 +373,7 @@ export const portalScreenshots: Record<
     3: [profileFilter, profileResult],
     4: profileOverview,
   },
-  "saved-work-reset": { 1: reviewerNumber, 3: resetActions },
+  "saved-work-reset": { 1: workshopNumber, 3: resetActions },
   "create-resource-and-media": {
     1: [
       capture(
@@ -411,10 +408,9 @@ export const portalScreenshots: Record<
     ],
   },
   "author-approver-workflow": {
-    1: summaryField,
-    2: versionMenu,
+    1: [summaryField, versionMenu],
+    2: summaryField,
     3: [submitAction, workflowComment],
-    5: submitAction,
-    6: workflowComment,
+    4: workflowComment,
   },
 };

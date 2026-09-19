@@ -124,7 +124,7 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
           <p className="workshop-login-help">
             Need your initial sign-in details? Ask the Sitecore workshop team.
             After signing in, open <strong>Attendee assignments</strong> to
-            match your name to your reviewer number. The guide uses that number
+            match your name to your workshop number. The guide uses that number
             in its examples. Signing into the guide does not also sign you into
             the <strong>Agent Portal</strong>; open the portal and sign in there
             when a step asks you to view an agent’s experience.

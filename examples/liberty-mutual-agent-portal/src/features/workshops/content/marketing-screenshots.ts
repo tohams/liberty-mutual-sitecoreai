@@ -75,24 +75,21 @@ export const marketingScreenshots: Record<
     ),
   },
   "campaign-composition": {
-    2: reference(
-      "campaign-component-choices.png",
-      "Compare the main region’s permitted components",
-      "Page Builder Layers, the selected CampaignAccordion toolbar, and the open Components selection panel",
-      "This reference shows **Swap with another component** open during the duplication exercise. The **Components** panel offers the choices permitted in the selected main region. Component-card labels may be shortened; read the complete name before selecting anything, then close the panel without swapping.",
-      [0, 55, 965, 665],
+    1: reference(
+      "campaign-ai-grammar.png",
+      "Find the campaign heading in Content",
+      "Page Builder Content tree with Campaign practice, Growth opportunity, and its Title field",
+      "Open **Content**, then select **Campaign practice** → **Data** → **Growth opportunity**. Record the text in **Title** before changing it. This reference shows where the field is located; use the current text in your environment for restoration.",
+      [0, 0, 812, 447],
       [
+        [[600, 2, 40, 48], "Select **Content** in the top navigation."],
         [
-          [8, 505, 270, 40],
-          "The selected **CampaignAccordion** is highlighted in **Layers**. Your recorded duplicate may appear at a different position.",
+          [57, 315, 225, 130],
+          "Expand **Campaign practice** and **Data**, then select **Growth opportunity**.",
         ],
         [
-          [350, 258, 280, 81],
-          "These are the three replacement choices for the main region. Compare them with the sidebar choices in the next step.",
-        ],
-        [
-          [713, 405, 55, 33],
-          "**Move up** and **Move down** reorder the selected component. Close the selection panel before using the toolbar.",
+          [319, 335, 486, 58],
+          "Copy the complete **Title** before editing. This field supplies the callout’s heading.",
         ],
       ],
     ),
@@ -141,26 +138,6 @@ export const marketingScreenshots: Record<
         [
           [834, 455, 145, 36],
           "**Revert to original** rejects this proposal; it does not restore text recorded before earlier edits.",
-        ],
-      ],
-    ),
-  },
-  "bulk-copy-maintenance": {
-    1: reference(
-      "campaign-ai-grammar.png",
-      "Locate the four independently editable items",
-      "Page Builder content tree showing the Campaign practice Data items",
-      "The **Data** folder contains the four items used in this read-only comparison. This crop shows their location in **Page Builder**. Open each item individually to read the field named in step 2; no bulk-editing control is shown or used.",
-      [7, 280, 289, 328],
-      [
-        [[75, 345, 105, 32], "Expand **Data** beneath **Campaign practice**."],
-        [
-          [101, 410, 179, 96],
-          "Compare **Growth opportunity**, **Preparation update**, and **Prepare for review**. Longer names may be shortened in the tree.",
-        ],
-        [
-          [101, 573, 167, 31],
-          "**Your next step** contains the fourth field to inspect.",
         ],
       ],
     ),

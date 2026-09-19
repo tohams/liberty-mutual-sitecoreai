@@ -34,7 +34,7 @@ export default async function WorkshopHome() {
             <div className="workshop-hero-meta">
               <span className="workshop-tag">
                 <Users size={15} />
-                Reviewer pack {session.reviewerPack}
+                Workshop number {session.reviewerPack}
               </span>
               <span>Guided steps. Clear results. Room to explore.</span>
             </div>
@@ -59,11 +59,10 @@ export default async function WorkshopHome() {
               Then see how it is built.
             </h2>
             <p>
-              Both sections follow the marketing and platform priorities in the
-              presentation. Each walkthrough explains the request it addresses.
-              One campaign example shows how authored content and a custom
-              component connect to saved business data. The portal’s other
-              business functions remain available for exploration.
+              Marketing separates the agent-facing portal from content authoring
+              in SitecoreAI. Development separates the architecture from
+              hands-on local development. Each guide names the account, website,
+              and result for its exercise.
             </p>
           </div>
           <div className="workshop-paths">
@@ -71,17 +70,15 @@ export default async function WorkshopHome() {
               <span className="workshop-path-icon">
                 <BookOpen size={25} />
               </span>
-              <span className="workshop-eyebrow">
-                AGENT EXPERIENCE & MARKETING
-              </span>
+              <span className="workshop-eyebrow">MARKETING</span>
               <h3>
                 Make every interaction
                 <br />
                 more relevant.
               </h3>
               <p>
-                Create and govern content with less effort. Use personalization,
-                Search, Forms, and A/B testing to improve agent engagement.
+                Explore the Agent Portal, then create and manage content in
+                SitecoreAI. See personalization, Search, Forms, and A/B testing.
               </p>
               <div>
                 <span>
@@ -139,9 +136,10 @@ export default async function WorkshopHome() {
               <h3>Keep two tabs open</h3>
               <p>
                 Keep these instructions open while you work in the second tab.
-                Portal steps use a fictional agent login; authoring steps use
-                your invited <strong>Sitecore Cloud</strong> account. Each
-                walkthrough names the website and account it needs.
+                Portal steps use a fictional agent login; authoring steps use a
+                separate <strong>Sitecore Cloud</strong> account. Watch the
+                workshop team perform guides marked{" "}
+                <strong>Presenter demonstration</strong>.
               </p>
               <a href="/login" target="_blank" rel="noreferrer">
                 Open Agent Portal <ArrowUpRight size={15} />
@@ -149,7 +147,7 @@ export default async function WorkshopHome() {
             </div>
             <div>
               <Users size={22} />
-              <h3>Find your reviewer number</h3>
+              <h3>Find your workshop number</h3>
               <p>
                 Find your name in <strong>Attendee assignments</strong>. Your
                 guide currently shows suffix{" "}
@@ -169,19 +167,19 @@ export default async function WorkshopHome() {
               <p>
                 Follow the walkthrough’s <strong>Finish &amp; cleanup</strong>{" "}
                 section so the next exercise begins from a known state. Signing
-                out preserves saved work. A reviewer reset restores portal work
-                and creates fresh profiles; it does not undo shared Sitecore
-                content edits.
+                out preserves saved work. A workshop-number reset restores
+                portal work and creates fresh profiles; it does not undo shared
+                Sitecore content edits.
               </p>
             </div>
             <Link href="/workshops/reset" className="workshop-home-reset-link">
-              Reset a reviewer number <ArrowRight size={16} />
+              Reset a workshop number <ArrowRight size={16} />
             </Link>
           </section>
           <p className="workshop-directory-intro">
             First visit? Start with{" "}
             <Link href="/workshops/guide/start-and-switch-agents">
-              Portal accounts and SitecoreAI workspaces
+              Sign in and find your workshop number
             </Link>{" "}
             to distinguish agent browsing, content authoring, and local
             development before making changes.
@@ -193,9 +191,9 @@ export default async function WorkshopHome() {
               for the agreed evaluation period and will then be deleted. Portal
               logins do not grant SitecoreAI authoring or administration access.
               The Sitecore workshop team—Angela Gustafson, Allen Blanton, and
-              Thomas Lin—provides sign-in help, confirms authoring roles and
-              practice pairs, and shares the schedule for Tuesday and Thursday
-              office hours during the two-week evaluation.
+              Thomas Lin—provides sign-in help, demonstrates authoring, and
+              shares the schedule for Tuesday and Thursday office hours during
+              the two-week evaluation.
             </p>
           </div>
         </section>

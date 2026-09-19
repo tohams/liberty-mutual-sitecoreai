@@ -102,7 +102,7 @@ export const resourceScreenshots: Record<
           width: 738,
           height: 72,
           label:
-            "Enter **Work email**, using your own reviewer number in the fictional address.",
+            "Enter **Work email**, using your own workshop number in the fictional address.",
         },
         {
           x: 402,

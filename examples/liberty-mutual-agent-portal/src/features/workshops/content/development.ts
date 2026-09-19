@@ -15,16 +15,15 @@ export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "architecture-and-ownership",
     audience: "development",
-    category: "Understand the implementation",
-    title: "Architecture: follow an agent experience through the platform",
+    category: "Understand the architecture",
+    title: "Understand the architecture",
     summary:
       "Connect the portal you have seen to authored content, React components, native relevance services, and saved work.",
     outcome:
       "Explain which service owns each part of the experience and which release path changes it.",
-    duration: "15–20 minutes",
     personas: ["daniel"],
     prerequisites: [
-      "Use **daniel.01** with password **Sitecore** on the live portal linked below. The username displayed in this guide uses the reviewer number with which you signed into the workshop website; confirm your number on **Attendee assignments**.",
+      "Use **daniel.01** with password **Sitecore** on the live portal linked below. The username displayed in this guide uses the workshop number with which you signed into the workshop website; confirm your number on **Attendee assignments**.",
       "Open the repository link while signed into your own **GitHub** account. If it shows **404** or denies access, ask Angela, Allen, or Thomas to confirm your repository invitation before continuing with the source inspection.",
       "For authoring inspection, use the email that received your **Sitecore Cloud** invitation. Open the organization link, sign in with that account, and confirm **Safeco Insurance Company of America POC**. The Page Builder link targets this organization’s portal environment; select **Liberty Mutual Agent Portal**. If either is missing, ask the workshop team to check your access; the fictional Daniel login cannot open SitecoreAI.",
       "This is an inspection exercise. Do not change content, configuration, targeting, or saved records.",
@@ -107,9 +106,9 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         expected: [
           "Insurance records and production history come from replaceable JSON-backed adapters. Submission actions illustrate workflows; they do not rate, bind, issue coverage, or contact an underwriter.",
-          "Protected server requests validate the signed-in agent, agency, reviewer pack, and active run. expectedVersion detects stale work; idempotency keys avoid duplicate successful retries; Redis writes use atomic compare-and-set.",
+          "Protected server requests validate the signed-in agent, agency, workshop number, and active run. expectedVersion detects stale work; idempotency keys avoid duplicate successful retries; Redis writes use atomic compare-and-set.",
           "Saved work persists across deployments until an explicit reset or instance deletion. Eight-hour login sessions are separate from that persistence.",
-          "**Contact your team** sends a native **Sitecore Forms** submission to **Demo Webhook**, where you can inspect the received payload. Connecting that payload to Salesforce or durable business storage is the next integration step for an operational solution.",
+          "**Contact your team** sends a native **Sitecore Forms** submission to **Demo Webhook**, where the presenter can inspect the received payload. Connecting that payload to Salesforce or durable business storage is the next integration step for an operational solution.",
         ],
         links: [
           {
@@ -129,7 +128,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Understand identity, Search, and personalization evidence",
         action: [
-          "Open **Identity and saved-work contract** and **Native affinity implementation** below. Read how portal sign-in identifies a native **UDL** profile and how **Top Affinity** selects an authored variant. For an actual profile lookup, use the linked **Verify a clean reset in SitecoreAI** guide; this architecture step does not reset or train a profile.",
+          "Open **Identity and saved-work contract** and **Native affinity implementation** below. Read how portal sign-in identifies a native **UDL** profile and how **Top Affinity** selects an authored variant. For an actual profile lookup, use the linked **Check fresh profiles in SitecoreAI** guide; this architecture step does not reset or train a profile.",
           "Open **ResourceSearch implementation**, find **useSearch**, and inspect the licensed-state filters. Compare the documented Search source refresh with the publication step: saving or publishing an article and refreshing the Search index are separate operations.",
         ],
         expected: [
@@ -153,7 +152,7 @@ export const developmentGuides: WorkshopGuide[] = [
             href: `${appSource}/src/components/resource-search/ResourceSearch.tsx`,
           },
           {
-            label: "Verify a clean reset in SitecoreAI",
+            label: "Check fresh profiles in SitecoreAI",
             href: `${portal}/workshops/guide/fresh-profile-restart`,
           },
         ],
@@ -162,11 +161,11 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Match a proposed change to its release path",
         action: [
           "Classify a proposed change: editorial copy or image, React behavior, CMS model, native targeting/Search, or operational data integration.",
-          "Open **Release paths** below and compare your example with its frontend, content, and CMS model sections. Keep private server contexts, session secrets, editing secrets, operator credentials, and Redis credentials outside browser code.",
+          "Open **Understand deployment and recovery** below and compare your example with its frontend, content, and CMS model sections. Keep private server contexts, session secrets, editing secrets, operator credentials, and Redis credentials outside browser code.",
         ],
         links: [
           {
-            label: "Release paths",
+            label: "Understand deployment and recovery",
             href: `${portal}/workshops/guide/release-and-recovery`,
           },
         ],
@@ -191,13 +190,12 @@ export const developmentGuides: WorkshopGuide[] = [
     slug: "local-setup",
     audience: "development",
     accountScope: "local",
-    category: "Individual developer workshop",
-    title: "Local setup: clone, configure, and run the portal",
+    category: "Develop locally",
+    title: "Run the portal locally",
     summary:
       "Run your own frontend and open it in **SitecoreAI Page Builder**, using shared content and isolated local portal work.",
     outcome:
       "See shared **SitecoreAI** pages rendered by the React code running on your own machine.",
-    duration: "20–30 minutes after tools are installed",
     personas: ["daniel"],
     prerequisites: [
       "Install **Git**, **VS Code**, and **Node.js** 24.19.0 with its included npm. The app’s **.nvmrc** records that version; a **Node** version manager is optional.",
@@ -328,13 +326,12 @@ export const developmentGuides: WorkshopGuide[] = [
     slug: "component-development",
     audience: "development",
     accountScope: "local",
-    category: "Individual developer workshop",
-    title: "Component development: edit, observe, test, and restore",
+    category: "Develop locally",
+    title: "Change a React component",
     summary:
       "Change one **ResourceSearch** heading in **VS Code**, see it in **Page Builder**, and verify Search in the local portal.",
     outcome:
       "Experience the local React feedback loop and verify a small change without publishing shared content.",
-    duration: "20–30 minutes",
     personas: ["daniel"],
     prerequisites: [
       "Complete **Local setup** using the link below. Keep the cloned **liberty-mutual-sitecoreai** root open in **VS Code** and its integrated terminal in **examples/liberty-mutual-agent-portal**. All commands in this guide run from that application folder.",
@@ -436,13 +433,12 @@ export const developmentGuides: WorkshopGuide[] = [
     slug: "vscode-mcp",
     audience: "development",
     accountScope: "local",
-    category: "Optional developer tools",
-    title: "VS Code MCP: connect documentation, content, and code",
+    category: "Develop locally",
+    title: "Connect VS Code to SitecoreAI",
     summary:
       "Use two remote MCP connections for a read-only explanation grounded in this portal and current **Sitecore** documentation.",
     outcome:
       "Inspect real **Sitecore** results beside the local **ResourceSearch** component and propose a change without making it.",
-    duration: "15–20 minutes",
     personas: [],
     prerequisites: [
       "Complete the clone and **Open Folder** steps in **Local setup** first. In VS Code’s **Explorer**, confirm **liberty-mutual-sitecoreai** is the root and **authoring**, **docs**, and **examples** are its children. This exercise reads that checkout but does not require a running frontend.",
@@ -559,13 +555,12 @@ export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "release-and-recovery",
     audience: "development",
-    category: "Understand the implementation",
-    title: "Release paths: from local changes to shared experiences",
+    category: "Understand the architecture",
+    title: "Understand deployment and recovery",
     summary:
       "Discuss how frontend code, CMS definitions, and authored content reach their shared environments after local verification.",
     outcome:
       "Explain the release path for each change without requiring an attendee deployment or hosting account.",
-    duration: "10–15 minutes",
     personas: [],
     prerequisites: [
       "Complete **Component development** or observe the presenter’s heading change. This guide is a read-only explanation of how that kind of change could reach a shared website. No **Vercel** access, hosting transfer, branch push, or deployment is required.",
@@ -668,16 +663,15 @@ export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "resource-taxonomy",
     audience: "development",
-    category: "Content administration",
-    title: "Resource metadata: inspect the author-managed choices",
+    category: "Understand the architecture",
+    title: "Inspect resource metadata",
     summary:
       "Trace readable dropdown labels to stable Search values and see why the custom Marketplace panel preserves text fields.",
     outcome:
       "Know where to maintain the vocabulary without accidentally broadening state authority or breaking indexed content.",
-    duration: "10–15 minutes",
     personas: [],
     prerequisites: [
-      "Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**. This optional inspection requires organization administrator/owner access to the installed **Resource metadata** Marketplace app. Ask Angela, Allen, or Thomas to confirm that access; a paired-workflow **Author** or **Approver** account does not imply access to this app.",
+      "Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**. This optional inspection requires organization administrator/owner access to the installed **Resource metadata** Marketplace app. Ask Angela, Allen, or Thomas to confirm that access; a presenter **Author** or **Approver** account does not imply access to this app.",
       "Open the organization and Page Builder links below before starting. Confirm **Liberty Mutual Agent Portal** and **Default editing host** in Page Builder. If the app is unavailable to your account, observe a presenter with that access instead of changing your workshop role.",
       "The first step reads the checked-in taxonomy definition on GitHub. Sign into the GitHub account that can open **tohams/liberty-mutual-sitecoreai**; if you lack repository access, follow the presenter’s source inspection. No clone or source edit is required.",
       "This guide inspects shared configuration without editing it. Do not create taxonomy options, change article metadata, publish content, or reindex Search during the inspection. Separate authoring guides cover deliberate resource changes and their cleanup.",
@@ -780,7 +774,7 @@ export const developmentGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "Use **Discard changes** if you made any unsaved panel selections, and close temporary authoring tabs. This inspection saves no changes, so it needs no publication, Search refresh, or portal reset.",
-        "If you accidentally saved a CMS change, stop and tell the workshop team which item and version changed. A portal reviewer reset cannot restore taxonomy or article content; recovery must use the recorded native content and its workflow.",
+        "If you accidentally saved a CMS change, stop and tell the workshop team which item and version changed. A portal workshop reset cannot restore taxonomy or article content; recovery must use the recorded native content and its workflow.",
       ],
     },
     related: ["architecture-and-ownership", "release-and-recovery"],
@@ -789,18 +783,17 @@ export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "saved-work-reset",
     audience: "development",
-    category: "Workspace controls",
-    title: "Reset a reviewer number and repeat an exercise",
+    category: "Reset and repeat",
+    title: "Reset your workshop number",
     summary:
-      "Choose a reviewer number to restore starting work and create seven fresh native profiles in one action.",
+      "Choose a workshop number to restore starting work and create seven fresh native profiles in one action.",
     outcome:
       "Repeat the walkthrough with baseline operational records and new profiles that do not carry the previous browsing history.",
-    duration: "Allow a few minutes for profile import verification",
     personas: [],
     prerequisites: [
       "Use a portal username such as **daniel.01** with password **Sitecore** to sign into the workshop website. This is separate from the Sitecore Cloud account used for Page Builder. No separate operator account, secret, terminal command, or approval is needed.",
       "Identify the website where you performed the exercise by its browser address: **liberty-mutual-agent-portal.vercel.app** is live; **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** is the shared transaction preview. Their saved work is separate. Choose the matching reset link below; do not use either link to reset the isolated localhost exercise.",
-      "Check **Attendee assignments** if you need your portal reviewer number. Use that number from 01–15, not a Sitecore Author/Approver pair number. Number 01 belongs to the presenters. The reset page initially selects the number from your workshop website sign-in, but it also allows you to choose another number.",
+      "Check **Attendee assignments** if you need your portal workshop number. Use your assigned number from 01–15. Number 01 belongs to the presenters. This number identifies portal logins; it does not grant Sitecore authoring access. The reset page initially selects the number from your workshop website sign-in, but it also allows you to choose another number.",
       "A reset affects all seven personas and every agency with that suffix. Check the displayed number so you do not replace another attendee’s work by mistake.",
     ],
     links: [
@@ -809,11 +802,11 @@ export const developmentGuides: WorkshopGuide[] = [
         href: `${portal}/workshops/attendees`,
       },
       {
-        label: "Live portal: reset a reviewer number",
+        label: "Live portal: reset a workshop number",
         href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
       },
       {
-        label: "Transaction preview: reset a reviewer number",
+        label: "Transaction preview: reset a workshop number",
         href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
       },
     ],
@@ -821,8 +814,8 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Open the reset page for the website you used",
         action: [
-          "Use **Live portal: reset a reviewer number** if your exercise used the shorter liberty-mutual-agent-portal hostname. Use **Transaction preview: reset a reviewer number** if it used the longer git-c8199e hostname. If prompted, sign into the workshop website with **daniel.01** and password **Sitecore**.",
-          "Check the browser hostname and the environment label above **Reviewer number**. Select your portal reviewer number from **Attendee assignments**, and check that every username listed below has that suffix. For example, resetting 02 includes all seven .02 accounts, not Sitecore workflow Pair 02.",
+          "Use **Live portal: reset a workshop number** if your exercise used the shorter liberty-mutual-agent-portal hostname. Use **Transaction preview: reset a workshop number** if it used the longer git-c8199e hostname. If prompted, sign into the workshop website with **daniel.01** and password **Sitecore**.",
+          "Check the browser hostname and the environment label above **Workshop number**. Select your portal workshop number from **Attendee assignments**, and check that every username listed below has that suffix. For example, resetting 02 includes all seven .02 accounts. The reset does not change Sitecore authoring accounts or practice-page content.",
         ],
         expected: [
           "The page shows the selected group’s saved-work status and current **Agent identity** for each persona.",
@@ -830,11 +823,11 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         links: [
           {
-            label: "Live portal: reset a reviewer number",
+            label: "Live portal: reset a workshop number",
             href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
           },
           {
-            label: "Transaction preview: reset a reviewer number",
+            label: "Transaction preview: reset a workshop number",
             href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
           },
         ],
@@ -842,7 +835,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Check what the clean reset includes",
         action: [
-          "Review the selected reviewer number and its seven usernames. The reset always restores starting operational work and creates seven fresh verified native profiles together.",
+          "Review the selected workshop number and its seven usernames. The reset always restores starting operational work and creates seven fresh verified native profiles together.",
           "Record any submission references, saved resource names, or learning registrations you want to discuss later; these will be replaced by starting records. If you only want to leave and return to the same saved work later, **Sign out** instead of resetting.",
         ],
         expected: [
@@ -854,37 +847,37 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Start the reset and wait for completion",
         action: [
-          "Click **Reset reviewer** for the selected number, for example **Reset reviewer {{pack}}**. This starts the clean reset immediately; there is no separate approval or confirmation dialog.",
-          "Keep the page open while **Reset in progress** is shown. Wait for the success message, such as **Reviewer {{pack}} is ready**, before signing into the portal again. A pending import is not a completed reset.",
+          "Click **Reset workshop {{pack}}** for the selected number. This starts the clean reset immediately; there is no separate approval or confirmation dialog.",
+          "Keep the page open while **Reset in progress** is shown. Wait for the success message, such as **Workshop {{pack}} is ready**, before signing into the portal again. A pending import is not a completed reset.",
         ],
         expected: [
           "Seven new profiles are imported and verified before activation. Pending progress does not mean the new set is active.",
           "When completed, the saved-work run changes, the profile generation increases by one, and all seven Agent identities change.",
-          "The other packs and the other host’s saved-work run stay unchanged. The workshop-guide login remains separate from the portal sessions being replaced.",
+          "The other workshop numbers and the other host’s saved-work run stay unchanged. The workshop-guide login remains separate from the portal sessions being replaced.",
         ],
         note: "If the connection is interrupted, reopen the same page and click **Refresh status**. Use **Continue reset** if a pending operation is shown, rather than starting another profile set.",
       },
       {
         title: "Sign in again and inspect starting work",
         action: [
-          "Click **Open this Agent Portal** on the reset page to stay on the same host. **Sign in** again with the persona you used, the reviewer suffix you just reset, and password **Sitecore**.",
+          "Click **Open this Agent Portal** on the reset page to stay on the same host. **Sign in** again with the persona you used, the workshop number you just reset, and password **Sitecore**.",
           "Open the areas used in your exercise. Compare the starting submissions, tasks, and saved resources with the example references you recorded.",
-          "Use the same reviewer suffix when switching among personas. Other browser tabs for that reviewer number must also sign in again.",
+          "Use the same workshop number when switching among personas. Other browser tabs for that workshop number must also sign in again.",
         ],
         expected: [
           "Previous portal sessions for all seven personas are invalidated. The new active workspace contains starting records; new examples, favorites, and learning registrations from the earlier run have cleared.",
           "The browser links to the fresh **Agent identity**. Known role and agency attributes still personalize guidance, while the earlier profile’s browsing affinities are absent from the new profile.",
-          "Use **Verify a clean reset in SitecoreAI** to find the newly linked profile and inspect its starting browsing interests.",
+          "Use **Check fresh profiles in SitecoreAI** to find the newly linked profile and inspect its starting browsing interests.",
         ],
       },
       {
         title: "Keep platform content recovery separate",
         action: [
-          "If you also changed a **Sitecore** page, return to the authoring walkthrough’s **Cleanup** section. It explains how to restore that content through its native review and publication process; a reviewer reset does not restore it.",
+          "If you also changed a **Sitecore** page, return to the authoring walkthrough’s **Cleanup** section. It explains how to restore that content through its native review and publication process; a workshop reset does not restore it.",
           "For **Brand Kit** or **Agentic Studio** changes, follow those guides’ cleanup steps. Webhook receipts and experiment history remain available for reviewing earlier activity.",
         ],
         expected: [
-          "Resetting the reviewer number does not change CMS content, Search configuration, media, **Brand Kits**, Agentic artifacts, webhook receipts, or native experiment history.",
+          "Resetting the workshop number does not change CMS content, Search configuration, media, **Brand Kits**, Agentic artifacts, webhook receipts, or native experiment history.",
           "You can repeat the reset whenever you need another clean starting point; each completed reset creates a fresh profile set.",
         ],
       },
@@ -900,23 +893,22 @@ export const developmentGuides: WorkshopGuide[] = [
   {
     slug: "fresh-profile-restart",
     audience: "development",
-    category: "Workspace controls",
-    title: "Verify a clean reset in SitecoreAI",
+    category: "Reset and repeat",
+    title: "Check fresh profiles in SitecoreAI",
     summary:
-      "Inspect the new native identities and starting profile history after resetting a reviewer number.",
+      "Inspect the new native identities and starting profile history after resetting a workshop number.",
     outcome:
       "Connect one completed clean reset to its new saved-work run, verified UDL profiles, and fresh browsing history.",
-    duration: "5–10 minutes after reset completes",
     personas: [],
     prerequisites: [
-      "Complete **Reset a reviewer number and repeat an exercise** using the link below. Keep its reset page open after success, and note the browser hostname and **Reviewer number**. This guide inspects that completed reset; it does not require a second reset.",
-      "Use that same hostname and reviewer number. The completed reset affected all seven personas with that suffix on that host. The live site uses **liberty-mutual-agent-portal.vercel.app**; transaction preview uses the longer **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** hostname. Resetting one does not reset the other or your localhost checkout.",
+      "Complete **Reset your workshop number** using the link below. Keep its reset page open after success, and note the browser hostname and **Workshop number**. This guide inspects that completed reset; it does not require a second reset.",
+      "Use that same hostname and workshop number. The completed reset affected all seven personas with that suffix on that host. The live site uses **liberty-mutual-agent-portal.vercel.app**; transaction preview uses the longer **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** hostname. Resetting one does not reset the other or your localhost checkout.",
       "Keep any before-reset Agent identities if you want to compare them with the new set. Older native profiles are retained as history.",
       "Open the **SitecoreAI Profiles** link below with the email that received your Sitecore Cloud invitation. Confirm **Safeco Insurance Company of America POC** and that **Performance** → **Profiles** is available. If access is missing, ask Angela, Allen, or Thomas to check your application permissions; the fictional portal credentials cannot open native profiles.",
     ],
     links: [
       {
-        label: "Reset a reviewer number and repeat an exercise",
+        label: "Reset your workshop number",
         href: `${portal}/workshops/guide/saved-work-reset`,
       },
       {
@@ -924,11 +916,11 @@ export const developmentGuides: WorkshopGuide[] = [
         href: "https://app.sitecorecloud.io/performance/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df",
       },
       {
-        label: "Live portal: reset a reviewer number",
+        label: "Live portal: reset a workshop number",
         href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
       },
       {
-        label: "Transaction preview: reset a reviewer number",
+        label: "Transaction preview: reset a workshop number",
         href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
       },
     ],
@@ -936,21 +928,21 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Read the completed reset status",
         action: [
-          "Return to the reset page left open after your completed reset. If it is closed, use the matching live or transaction-preview link below, and select the reviewer number you recorded. Click **Refresh status**; this reads the status without resetting anything.",
-          "Expand **Reset details** to inspect **Last reset status**, **Saved-work run**, and **Profile generation**. Inspect the seven **Agent identity** values in the preceding table. Do not click **Reset reviewer** again just to inspect the result.",
+          "Return to the reset page left open after your completed reset. If it is closed, use the matching live or transaction-preview link below, and select the workshop number you recorded. Click **Refresh status**; this reads the status without resetting anything.",
+          "Expand **Reset details** to inspect **Last reset status**, **Saved-work run**, and **Profile generation**. Inspect the seven **Agent identity** values in the preceding table. Do not click **Reset workshop {{pack}}** again just to inspect the result.",
         ],
         expected: [
           "Your completed reset restored the starting saved work and created fresh profiles. This walkthrough shows where to inspect those profiles and their browsing interests in SitecoreAI.",
-          "A reviewer suffix identifies the group of seven logins. A saved-work run identifies its operational records; a profile generation identifies its active native profile set.",
-          "The other host and other reviewer numbers are unchanged. Reading status does not make another change.",
+          "A workshop number identifies the group of seven logins. A saved-work run identifies its operational records; a profile generation identifies its active native profile set.",
+          "The other host and other workshop numbers are unchanged. Reading status does not make another change.",
         ],
         links: [
           {
-            label: "Live portal: reset a reviewer number",
+            label: "Live portal: reset a workshop number",
             href: "https://liberty-mutual-agent-portal.vercel.app/workshops/reset",
           },
           {
-            label: "Transaction preview: reset a reviewer number",
+            label: "Transaction preview: reset a workshop number",
             href: "https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset",
           },
         ],
@@ -958,11 +950,11 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Match the same login to its new Agent identity",
         action: [
-          "In **Current profile identities**, find the row for the username you will inspect, such as **daniel.01**. Copy that row’s **Agent identity** exactly. Compare it with the same username’s before-reset identifier if you recorded one; do not use an identifier from another host or reviewer number.",
+          "In **Current profile identities**, find the row for the username you will inspect, such as **daniel.01**. Copy that row’s **Agent identity** exactly. Compare it with the same username’s before-reset identifier if you recorded one; do not use an identifier from another host or workshop number.",
           "Click **Open this Agent Portal**, then **Sign in** again with that exact username and password **Sitecore**. The unchanged username now identifies the newly created native profile.",
         ],
         expected: [
-          "The username is unchanged: **daniel.01** remains **daniel.01**. Its new **Agent identity** belongs to the fresh native profile for this reviewer number and host.",
+          "The username is unchanged: **daniel.01** remains **daniel.01**. Its new **Agent identity** belongs to the fresh native profile for this workshop number and host.",
           "Use the current **Agent identity** from this table to find the profile. The table is refreshed after each reset, so it identifies the profile now linked to that portal username.",
           "Sign in to the portal again after reset to link your browser session to the new profile.",
         ],
@@ -975,7 +967,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "Check the persona and its known attributes. Do not select a profile solely by display name when earlier sets have the same names.",
         ],
         expected: [
-          "The native result matches the current persona, reviewer number, and host. The new profile retains the known agent attributes needed for the scenarios.",
+          "The native result matches the current persona, workshop number, and host. The new profile retains the known agent attributes needed for the scenarios.",
           "Earlier profiles remain available as history. The identity you copied from the reset page leads to the agent’s currently active profile.",
         ],
         links: [
@@ -989,12 +981,12 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Inspect the new browsing baseline",
         action: [
           "In the matched native profile, inspect **Overview** → **Top affinities** and **Engagement** before opening tagged articles. Record any starting scores. In the portal tab for the same host and username, open **Products & appetite** and record the banner; this is the baseline against which later browsing is compared.",
-          "Continue the affinity walkthrough on production using that host’s current identifier and baseline. If you verified a transaction-preview reset, first open production **Reset a reviewer number**, select the same **Reviewer number**, and copy the intended persona’s current production **Agent identity**. Viewing identities does not require another reset.",
+          "Continue the affinity walkthrough on production using that host’s current identifier and baseline. If you verified a transaction-preview reset, first open the production **Reset a workshop number** page, select the same **Workshop number**, and copy the intended persona’s current production **Agent identity**. Viewing identities does not require another reset.",
           "Sign in to production and inspect that production profile’s starting scores and **Products** banner before following the affinity walkthrough. Compare the resulting page views, native score, and content with this production baseline.",
         ],
         expected: [
           "The fresh profile on the host you reset does not carry the earlier set’s browsing history. If you switch from transaction preview to production, its current production profile retains its existing history. Inspect the actual starting scores before training a topic; normal visits after signing in add new engagement.",
-          "Native experiment history remains historical; a clean reviewer reset does not reset experiment configuration or its aggregate report.",
+          "Native experiment history remains historical; a clean workshop reset does not reset experiment configuration or its aggregate report.",
           "CMS content, Search, media, **Brand Kits**, Agentic artifacts, and webhook receipts were not changed by the reset.",
         ],
         links: [
@@ -1008,11 +1000,11 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Recognize pending work and resume the same operation",
         action: [
           "If status still shows an import in progress, wait for completion before interpreting the new profile list. After a connection interruption, use **Refresh status** and **Continue reset** when offered.",
-          "Do not start another reset while the current operation is unresolved. If it reports a failed or uncertain import, record the browser hostname, reviewer number, and displayed error, and give those details to Angela, Allen, or Thomas. These identify the operation to investigate without creating another profile set.",
+          "Do not start another reset while the current operation is unresolved. If it reports a failed or uncertain import, record the browser hostname, workshop number, and displayed error, and give those details to Angela, Allen, or Thomas. These identify the operation to investigate without creating another profile set.",
         ],
         expected: [
           "**Continue reset** resumes the same request. The success message appears after the new profiles have been verified and activated.",
-          "Each completed reset verifies all seven new profiles before activation, giving every persona in your pack a clean starting point.",
+          "Each completed reset verifies all seven new profiles before activation, giving all seven personas with your workshop number a clean starting point.",
           "Current status identifies the active set; an older completed receipt only describes its earlier operation.",
         ],
       },

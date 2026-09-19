@@ -45,7 +45,6 @@ test("every workshop has a unique routable slug, meaningful steps, prerequisites
       guide.summary,
       guide.outcome,
       guide.category,
-      guide.duration,
     ]) {
       assert.ok(
         value.trim().length > 0,
@@ -121,12 +120,15 @@ test("the extracted SharePoint clickthrough coverage is retained without hidden 
   // These ranges cover the retained workshop procedures, not dividers or indexes.
   // The custom authorization exercise (43–45) and transaction loops (77–86)
   // were intentionally retired; the campaign retains one custom integration example.
+  // Bulk maintenance (93) and the standalone capability review (108) were
+  // retired when the workshop was simplified; their slides are historical references.
   const expected = {
     marketing: [
       ...range(17, 27),
       ...range(58, 65),
       ...range(68, 76),
-      ...range(87, 108),
+      ...range(87, 92),
+      ...range(94, 107),
     ],
     development: [...range(46, 54), ...range(123, 133), ...range(135, 142)],
   };
@@ -143,7 +145,7 @@ test("the extracted SharePoint clickthrough coverage is retained without hidden 
     );
   }
   for (const guide of workshopGuides) {
-    // This paired exercise was added directly to HTML after the deck migration.
+    // This presenter-led workflow was added directly to HTML after the deck migration.
     assert.ok(
       guide.sourceSlides.length > 0 ||
         guide.slug === "author-approver-workflow",
@@ -272,7 +274,7 @@ test("customer instructions omit attendee details and embedded infrastructure cr
       ) ?? [];
     assert.ok(
       personas.every((persona) => persona.endsWith(".01")),
-      `${guide.slug}: examples must use the contextual .01 token, never another attendee's pack`,
+      `${guide.slug}: examples must use the contextual .01 token, never another attendee's workshop number`,
     );
     assert.doesNotMatch(
       text,
@@ -380,7 +382,7 @@ test("release teaching does not make hosting access an attendee prerequisite", (
   );
 });
 
-test("reset walkthroughs use the authenticated page and preserve the host, pack and history boundaries", () => {
+test("reset walkthroughs use the authenticated page and preserve the host, workshop-number, and history boundaries", () => {
   const resetGuides = ["saved-work-reset", "fresh-profile-restart"].map(
     (slug) => {
       const guide = workshopGuides.find((candidate) => candidate.slug === slug);
@@ -405,18 +407,18 @@ test("reset walkthroughs use the authenticated page and preserve the host, pack 
     }
     assert.match(
       text,
-      /Reviewer number/,
+      /Workshop number/,
       `${guide.slug}: identify the selector`,
     );
     assert.match(
       text,
-      /Reset reviewer/,
+      /Reset workshop/,
       `${guide.slug}: identify the actual action button`,
     );
     assert.match(
       text,
       /\b(?:seven|7)\s+(?:personas|logins|usernames|accounts)\b/i,
-      `${guide.slug}: explain the whole-pack effect`,
+      `${guide.slug}: explain the effect on all seven accounts`,
     );
     assert.match(
       text,
