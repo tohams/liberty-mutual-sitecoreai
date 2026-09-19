@@ -83,7 +83,7 @@ const productSpotlight = capture(
 const workshopNumber = capture(
   "reviewer-reset-controls.png",
   "Reset page: choose your workshop number",
-  "Use the reset link for the website used in your exercise. This reference shows **Live portal** and the presenters’ **01**. The selector is now labeled **Workshop number**. Select your assigned number before resetting.",
+  "Use the reset link for the website used in your exercise. This reference shows **Live portal** and the presenters’ **01**. Choose your assigned **Workshop number** before resetting.",
   [84, 356, 634, 231],
   [
     [
@@ -187,15 +187,15 @@ const profileEngagement = capture(
 const resetActions = capture(
   "reset-action-buttons.png",
   "Reset page: start a reset or refresh its status",
-  "Below **A clean start, every time**, the dark **Reset workshop** button starts the reset for the selected number. The adjacent **Refresh status** button reads the current result without starting another reset. The reference image shows the earlier button label; the current button reads **Reset workshop** followed by the selected number.",
-  [87, 314, 632, 341],
+  "Below **A clean start, every time**, the dark **Reset workshop** button starts the reset for the selected number. The adjacent **Refresh status** button reads the current result without starting another reset. The button includes the selected number so you can check it before continuing.",
+  [87, 185, 632, 344],
   [
     [
-      [99, 539, 169, 57],
+      [99, 415, 174, 53],
       "Select **Reset workshop** only after checking the number shown on the button.",
     ],
     [
-      [272, 539, 145, 57],
+      [278, 415, 146, 53],
       "Use **Refresh status** to check progress. If **Continue reset** appears, it resumes the existing request.",
     ],
   ],
