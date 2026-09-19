@@ -9,15 +9,17 @@ const redisKeys = ['PORTAL_REDIS_REST_URL', 'PORTAL_REDIS_REST_TOKEN', 'KV_REST_
 
 // Owner-approved defaults for this PRIVATE POC repository. Setup tooling only:
 // never import this module into application code or a browser bundle.
-const pocContexts = {
-  SITECORE_EDGE_CONTEXT_ID: '1bgqAWOiQogyKMCKoecyEY',
+const pocSettings = {
+  SITECORE_EDGE_CONTEXT_ID: '66F013htW9aRcYNXn5EyMA',
   NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID: '6SCkrPfaQoiQEiAK6wMIEe',
+  NEXT_PUBLIC_DEFAULT_SITE_NAME: 'liberty-mutual-agent-portal',
+  SITECORE_EDITING_SECRET: 'HMi1EYl96aEZutHZLpug3',
 };
 
-function contextAssignments(contents, key) {
+function settingAssignments(contents, key) {
   const pattern = new RegExp(`^([ \\t]*(?:export[ \\t]+)?)(${key})([ \\t]*=[ \\t]*)([^\\r\\n]*)`, 'gm');
   const values = parseEnv(contents);
-  let probe = '__PORTAL_SETUP_CONTEXT_PROBE__';
+  let probe = '__PORTAL_SETUP_SETTING_PROBE__';
   while (Object.hasOwn(values, probe)) probe += '_';
   return [...contents.matchAll(pattern)].filter(match => {
     // Let Node's dotenv parser distinguish real assignments from lookalike text
@@ -28,29 +30,60 @@ function contextAssignments(contents, key) {
   });
 }
 
-function completeContexts(contents) {
+function completeSitecoreSettings(contents) {
   const originalValues = parseEnv(contents);
+  // Upgrade only the recognizable configuration created by the previous helper.
+  // A developer's custom contexts, editing credentials and state stay intact.
+  const legacySetup = originalValues.SITECORE_EDGE_CONTEXT_ID === '1bgqAWOiQogyKMCKoecyEY'
+    && originalValues.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID === pocSettings.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID
+    && originalValues.PORTAL_STATE_ADAPTER === 'local-json'
+    && /^liberty-mutual-local-[0-9a-f]{12}$/.test(originalValues.PORTAL_ENVIRONMENT ?? '')
+    && /^[0-9a-f]{64}$/.test(originalValues.SITECORE_EDITING_SECRET ?? '');
   const newline = contents.includes('\r\n') ? '\r\n' : '\n';
   let next = contents;
-  for (const [key, fallback] of Object.entries(pocContexts)) {
-    const assignments = contextAssignments(next, key);
+  for (const [key, fallback] of Object.entries(pocSettings)) {
+    const assignments = settingAssignments(next, key);
     if (assignments.length > 1) {
       throw new Error(`Resolve duplicate ${key} assignments in .env.local before running setup:local. The file was not changed.`);
     }
-    if (originalValues[key]?.trim()) continue;
+    const migrate = legacySetup && ['SITECORE_EDGE_CONTEXT_ID', 'SITECORE_EDITING_SECRET'].includes(key);
+    if (originalValues[key]?.trim() && !migrate) continue;
     if (!assignments.length) {
       next += (next && !next.endsWith('\n') ? newline : '') + `${key}=${fallback}${newline}`;
       continue;
     }
     const match = assignments[0];
     const raw = match[4];
-    const quoted = /^(["'`])[ \t]*\1([ \t]*(?:#.*)?)$/.exec(raw);
+    const quoted = /^(["'`])([^"'`\r\n]*)\1([ \t]*(?:#.*)?)$/.exec(raw);
     let value;
-    if (quoted) value = quoted[1] + fallback + quoted[1] + quoted[2];
-    else if (/^[ \t]*(?:#.*)?$/.test(raw)) value = fallback + (raw.includes('#') ? ' ' : '') + raw;
-    else throw new Error(`Cannot safely fill the blank ${key} assignment in .env.local. Put this context value on one line and rerun setup:local. The file was not changed.`);
+    if (quoted && (migrate || !quoted[2].trim())) value = quoted[1] + fallback + quoted[1] + quoted[3];
+    else if (migrate && /^[^#"'`\r\n]+(?:#.*)?$/.test(raw)) {
+      const suffix = /[ \t]*(?:#.*)?$/.exec(raw)[0];
+      value = fallback + suffix;
+    } else if (/^[ \t]*(?:#.*)?$/.test(raw)) value = fallback + (raw.includes('#') ? ' ' : '') + raw;
+    else throw new Error(`Cannot safely update the ${key} assignment in .env.local. Put this setting on one line and rerun setup:local. The file was not changed.`);
     const replacement = match[1] + match[2] + match[3] + value;
     next = next.slice(0, match.index) + replacement + next.slice(match.index + match[0].length);
+  }
+  if (legacySetup) {
+    const generatedComment = '# Generated for this machine only. Never copy production secrets or Redis settings here.';
+    for (const [key, previous, before, after] of [
+      ['SITECORE_EDGE_CONTEXT_ID',
+        '# Server: approved Live content context. Browser: public-scoped child context.',
+        '# Server: Preview content and Page Builder. Browser: public-scoped Search/analytics context.', ''],
+      ['SITECORE_EDITING_SECRET', generatedComment,
+        '# Matches this POC authoring environment so Page Builder can use Local host.',
+        `${newline}${newline}${generatedComment}`],
+    ]) {
+      const assignment = settingAssignments(next, key)[0];
+      const commentStart = assignment.index - previous.length - newline.length;
+      // Only replace the exact helper comment directly above a real assignment.
+      // Similar comments elsewhere (including quoted multiline text) stay intact.
+      if (commentStart < 0 || (commentStart > 0 && next[commentStart - 1] !== '\n')
+        || next.slice(commentStart, assignment.index) !== previous + newline) continue;
+      next = next.slice(0, commentStart) + before + newline + assignment[0] + after
+        + next.slice(assignment.index + assignment[0].length);
+    }
   }
   const completed = parseEnv(next);
   if (completed.SITECORE_EDGE_CONTEXT_ID?.trim() === completed.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID?.trim()) {
@@ -76,7 +109,7 @@ export async function setupLocal(directory, environment = process.env) {
   try { existing = await readFile(path, 'utf8'); }
   catch (error) { if (error?.code !== 'ENOENT') throw error; }
   if (existing !== undefined) {
-    const completed = completeContexts(existing);
+    const completed = completeSitecoreSettings(existing);
     if (completed === existing) return 'unchanged';
     // Abort if the file changed since our read; do not knowingly replace stale text.
     if (await readFile(path, 'utf8') !== existing) {
@@ -87,17 +120,19 @@ export async function setupLocal(directory, environment = process.env) {
   }
   const secret = () => randomBytes(32).toString('hex');
   const contents = `# Local connected frontend workshop. Keep this file out of Git.
-# Owner-approved defaults for this POC; replace both for another environment.
-# Server: approved Live content context. Browser: public-scoped child context.
-SITECORE_EDGE_CONTEXT_ID=${pocContexts.SITECORE_EDGE_CONTEXT_ID}
-NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID=${pocContexts.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID}
+# Owner-approved defaults for this POC; replace Sitecore settings for another environment.
+# Server: Preview content and Page Builder. Browser: public-scoped Search/analytics context.
+SITECORE_EDGE_CONTEXT_ID=${pocSettings.SITECORE_EDGE_CONTEXT_ID}
+NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID=${pocSettings.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID}
 NEXT_PUBLIC_SITECORE_EDGE_PLATFORM_HOSTNAME=https://edge-platform.sitecorecloud.io
-NEXT_PUBLIC_DEFAULT_SITE_NAME=liberty-mutual-agent-portal
+NEXT_PUBLIC_DEFAULT_SITE_NAME=${pocSettings.NEXT_PUBLIC_DEFAULT_SITE_NAME}
 NEXT_PUBLIC_DEFAULT_LANGUAGE=en
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
+# Matches this POC authoring environment so Page Builder can use Local host.
+SITECORE_EDITING_SECRET=${pocSettings.SITECORE_EDITING_SECRET}
+
 # Generated for this machine only. Never copy production secrets or Redis settings here.
-SITECORE_EDITING_SECRET=${secret()}
 PORTAL_SESSION_SECRET=${secret()}
 PORTAL_OPERATOR_SECRET=${secret()}
 PORTAL_ENVIRONMENT=liberty-mutual-local-${randomBytes(6).toString('hex')}
@@ -115,7 +150,7 @@ PORTAL_PERSONALIZATION_DIAGNOSTICS=false
     return 'created';
   } catch (error) {
     if (error?.code === 'EEXIST') {
-      throw new Error('.env.local was created during setup. Rerun setup:local to safely check its context values.');
+      throw new Error('.env.local was created during setup. Rerun setup:local to safely check its Sitecore settings.');
     }
     throw error;
   }
@@ -125,9 +160,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   try {
     const status = await setupLocal(process.cwd());
     const messages = {
-      created: 'Created .env.local with approved POC contexts, isolated local state and new local secrets. Run npm ci, then npm run dev.',
-      updated: 'Filled missing or blank Sitecore contexts in .env.local. Existing values, secrets and other settings were preserved. Run npm ci, then npm run dev.',
-      unchanged: '.env.local already has context values and was left unchanged. Run npm ci, then npm run dev.',
+      created: 'Created .env.local with POC Preview settings for Page Builder, the public browser context and isolated local state. Run npm ci, then npm run dev.',
+      updated: 'Updated .env.local with missing POC settings or upgraded the previous local setup to Preview. Custom settings and local workspace state were preserved. Run npm ci, then npm run dev.',
+      unchanged: '.env.local already has Sitecore settings and was left unchanged. Run npm ci, then npm run dev.',
     };
     console.log(messages[status]);
     console.log('Keep Redis settings absent from every local .env file and your terminal environment. Restart the dev server after changing environment values.');

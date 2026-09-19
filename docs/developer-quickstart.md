@@ -1,48 +1,34 @@
-# Developer quickstart: change a component on your machine
+# Developer quickstart: see your component change in Page Builder
 
-Run the Liberty Mutual agent portal locally, change one React heading in VS Code, and see the result in your browser. This exercise reads published Sitecore content and uses native Search while keeping saved portal work on your machine. It does not require a CMS content change or a deployment.
+Clone the repository, run the frontend on your machine, and connect **SitecoreAI Page Builder** to **http://localhost:3000**. Change a React heading in VS Code and see your code on the Page Builder canvas. Verify the component’s functional Search behavior in a separate localhost portal tab.
 
-For optional chat-assisted CMS and documentation inspection, see [Sitecore tools in VS Code](vscode-sitecore-mcp.md). That separate MCP exercise does not change the Node/npm prerequisites below.
+SitecoreAI supplies the hosted authoring environment and content. Only the Next.js frontend runs locally. No local Sitecore server, VM, Docker or .NET installation is required for this exercise. Each developer has separate code and local saved work; CMS content remains shared.
 
 ## Before you begin
 
-Install Git, **Node.js 24.19.0 with npm**, and VS Code or your preferred TypeScript editor. The application’s `.nvmrc` records the Node version; `package-lock.json` records the dependency versions. Use the existing lockfile rather than updating packages during this exercise.
+- Install **Git**, **VS Code** and **Node.js 24.19.0 with npm**. The application’s `.nvmrc` records the runtime and `package-lock.json` records dependencies. A Node version manager is optional; the Node installer works too.
+- Authenticate Git or VS Code with approved read access to the private repository. GitHub CLI and GitHub write access are not required.
+- Use **Chrome** for the local Page Builder exercise, with your own **SitecoreAI** account that has access to **Liberty Mutual Agent Portal**. Fictional portal logins do not grant CMS access.
+- Allow Internet access to GitHub, npm and the hosted Sitecore services. **Vercel access and deployment are not required.**
+- Use a new checkout without other local `.env` files or inherited portal configuration. Preserve any existing checkout containing your work.
 
-A Node version manager such as `nvm` is optional, not an additional prerequisite. You can use the Node installer instead. After installing Node or changing its PATH, open a new VS Code terminal and confirm the version there; an older terminal may still use a previously installed Node version. TypeScript is installed with the application dependencies below; a separate global TypeScript installation is not needed.
+TypeScript comes with the application dependencies; do not install it globally. Open a new terminal after installing Node or changing its PATH, and check the version again after moving into the application directory.
 
-You need approved read access to the **private** GitHub repository and an authenticated Git client. Local setup supplies the owner-approved POC contexts automatically:
+## 1. Clone, branch and open VS Code
 
-| Environment variable | Value supplied by local setup |
-| --- | --- |
-| `SITECORE_EDGE_CONTEXT_ID` | The server-only scoped **Live** delivery context for this portal |
-| `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | The separate public browser context for this portal |
-
-The scoped defaults belong to this private POC and are held in setup-only tooling, which must not be imported into application or browser code. Session, editing and operator secrets are generated independently on each machine. For another environment, obtain the correct scoped contexts through the owner-approved restricted workshop deck or secret-sharing channel and replace the POC defaults. A master Live or Preview context must never be placed in a `NEXT_PUBLIC_` variable; keep server context values out of browser bundles and public materials.
-
-GitHub write access is needed only if you later submit a pull request. Sitecore authoring and Vercel access are needed only for the corresponding content and release tasks. This frontend exercise does not require a Sitecore VM, Docker, a local Sitecore server, or a .NET installation.
-
-## 1. Clone and open the repository
-
-Run these commands in a terminal in your preferred projects directory:
+In your preferred projects directory, run:
 
 ```sh
 git clone https://github.com/tohams/liberty-mutual-sitecoreai.git
 cd liberty-mutual-sitecoreai
-```
-
-If Git asks you to authenticate, use your organization’s approved GitHub sign-in method. Alternatively, use VS Code’s **Git: Clone** command, sign in to GitHub, select `tohams/liberty-mutual-sitecoreai`, and open the cloned repository. The GitHub CLI is optional.
-
-Create your own local workshop branch before editing. Replace `your-name` with a short, unique name using lowercase letters and hyphens:
-
-```sh
 git switch -c workshop/your-name-resource-search
 ```
 
-Creating this local branch does not require GitHub write access and does not deploy anything.
+Replace `your-name` with your own lowercase identifier. Authenticate with your approved GitHub account if prompted. Alternatively, use **VS Code → View → Command Palette → Git: Clone**, select the same repository and open it. Creating the local branch does not deploy anything.
 
-Open the repository root, **`liberty-mutual-sitecoreai`**, in VS Code with **File → Open Folder**. If the VS Code command is on your PATH, run `code .` from the repository root. Explorer should show the root configuration files, `authoring`, `.github`, and the portal application under `examples`.
+Open the repository root, **liberty-mutual-sitecoreai**, with **File → Open Folder**. If the `code` command is available, run `code .` from that root. Explorer should show `examples`, `authoring`, `docs` and `.github`.
 
-Keep that repository root open in VS Code. **npm uses the terminal’s current directory, not the folder shown in Explorer. The repository root has no `package.json`.** In the integrated terminal, change to the application directory before running any npm command:
+Select **Terminal → New Terminal**. Keep the repository root open in Explorer, but move the terminal into the application:
 
 ```sh
 cd examples/liberty-mutual-agent-portal
@@ -50,162 +36,152 @@ node --version
 npm --version
 ```
 
-`node --version` should report `v24.19.0`. If you use a Node version manager, select the version in the application directory’s `.nvmrc` before continuing. On macOS or Linux with `nvm` already installed, run `nvm install` and then `nvm use` from this directory. On Windows, select the same version using your installed version manager or Node installer.
+**npm uses the terminal’s current directory, not the folder open in Explorer. The repository root has no `package.json`.** Every npm command below runs in **examples/liberty-mutual-agent-portal**.
 
-The remaining terminal commands run from `examples/liberty-mutual-agent-portal`. Editor file paths below start at the repository root. The other starter examples are reference projects.
+Node must report **v24.19.0** in this terminal. Select it using your installer or existing version manager if necessary. On macOS/Linux with `nvm` already installed, run `nvm install` and `nvm use` from this directory. No new version manager is required.
 
-## 2. Create an isolated local configuration
+## 2. Configure the POC automatically
 
-**Terminal directory: `liberty-mutual-sitecoreai/examples/liberty-mutual-agent-portal`.** If your terminal is still at the repository root, first run `cd examples/liberty-mutual-agent-portal`.
-
-If you cloned an earlier workshop version, first update that checkout with `git pull --ff-only origin main` from the application directory. Coordinate any outstanding branch changes if Git cannot fast-forward; keep your existing work. Then run setup:
+From the application directory, run:
 
 ```sh
 npm run setup:local
 ```
 
-Use a fresh checkout with no other local `.env` files and a clean terminal without inherited portal configuration. The setup helper creates an ignored `.env.local` file with both approved POC contexts, three independent local secrets, a unique state namespace, `PORTAL_STATE_ADAPTER=local-json`, and tracking disabled. It uses Node’s built-in modules and creates the environment file **before dependency installation**; `node_modules` is not required.
+This command uses Node’s built-in modules, so it runs before dependency installation. It creates the ignored **.env.local** with the POC values required for local Page Builder:
 
-No manual context entry is needed for this POC. In VS Code, `examples/liberty-mutual-agent-portal/.env.local` is ready after setup reports **Created**. Rerunning setup reports **Filled missing or blank Sitecore contexts** when upgrading an earlier file, or **left unchanged** when both values already exist. It preserves nonempty custom contexts, generated secrets, comments and all other settings. Duplicate context assignments, unsupported blank formatting or identical server/browser contexts stop the update without changing the file.
+| Setting | What setup supplies |
+| --- | --- |
+| `SITECORE_EDGE_CONTEXT_ID` | This POC’s **Preview** server content context |
+| `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | The separate public-scoped browser context |
+| `SITECORE_EDITING_SECRET` | The matching editing secret from this SitecoreAI environment |
+| `NEXT_PUBLIC_DEFAULT_SITE_NAME` | `liberty-mutual-agent-portal` |
+| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` |
+| Session/operator settings | Independent local secrets and a unique local namespace |
+| State and tracking | `local-json`, `.portal-state`, and portal tracking disabled |
 
-Keep `PORTAL_CONTENT_ADAPTER=sitecore` and `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` for this exercise. Completing the two contexts does not reconfigure the other settings in an existing custom environment file.
+**No manual key copy/paste is needed for this POC.** The Preview context and matching editing secret correspond to the environment’s developer settings in **SitecoreAI Deploy**. The separate browser context preserves the portal’s existing browser access scope. These automatic defaults are specific to this temporary POC; configure another environment with its own values.
 
-Local saved work is stored in the application’s ignored `.portal-state` directory without automatic expiry. It remains across development-server restarts until you explicitly reset the local pack or remove that local state directory. Existing local records upgrade automatically when read or saved after a code update; keep `.env.local` and `.portal-state` to preserve your work. Every developer can use the same fictional `daniel.01` login on their own machine because those files are separate. The published content and Search index remain shared, read-only services.
+Rerunning setup upgrades recognized earlier workshop defaults and fills missing settings while preserving custom configuration and local saved work. Read and resolve any reported configuration conflict. Restart the development server after an environment change.
 
-Do not copy production or preview environment files into this checkout. The state adapter selects Redis whenever it finds a Redis URL and token, even if `PORTAL_STATE_ADAPTER` says `local-json`. The helper checks for inherited Redis and hosted-runtime settings. Resolve its message before continuing; do not add shared Redis credentials to bypass it.
+Open **examples/liberty-mutual-agent-portal/.env.local** in VS Code to inspect the settings; keep that file untracked. Do not copy an entire hosted environment file or add Redis credentials. Redis takes precedence over local JSON whenever a URL and token are present.
 
-## 3. Install and start
+Your ignored **.portal-state** directory stores local saved work without automatic expiry. Every developer can use `daniel.01` on their own machine because these files are separate. Preview content and the published Search index are shared services; authoring changes remain shared too.
 
-Stay in the same application directory after setup completes:
+## 3. Install and start the frontend
+
+Run from the same application directory:
 
 ```sh
 npm ci
 ```
 
-`npm ci` installs dependencies from the committed `package-lock.json`; it does not create `.env.local`. `npm install` also requires the application directory and does not replace the setup helper. Use `npm ci` for this workshop to preserve the locked dependency versions.
+This installs the locked dependencies. `npm install` also needs the application directory and does not replace the setup helper.
 
-After installation, open `examples/liberty-mutual-agent-portal/src/components/resource-search/ResourceSearch.tsx` in VS Code. If asked to use the workspace TypeScript version, select **Allow**. Otherwise, open the Command Palette, run **TypeScript: Select TypeScript Version**, and select **Use Workspace Version**. Confirm **5.9.3**, the version installed by this lockfile. The repository's `.vscode/settings.json` points VS Code to that application dependency so editor diagnostics use the same TypeScript version as the build. It does not switch versions without your selection. See [VS Code's workspace TypeScript instructions](https://code.visualstudio.com/docs/typescript/typescript-transpiling#_using-the-workspace-version-of-typescript).
+Open **examples/liberty-mutual-agent-portal/src/components/resource-search/ResourceSearch.tsx**. If VS Code asks to use the workspace TypeScript version, select **Allow**. Otherwise use **View → Command Palette → TypeScript: Select TypeScript Version → Use Workspace Version**. Confirm **5.9.3**, supplied by this lockfile. The editor’s bundled compiler may be a different version.
 
-Then start the application in the integrated terminal:
+Start the frontend:
 
 ```sh
 npm run dev
 ```
 
-The development command generates Sitecore component maps, metadata, and import maps, then starts Next.js and the component-map watcher. Leave this terminal running.
+The command generates Content SDK component maps, metadata and import maps, then starts Next.js and the component-map watcher. Leave the terminal running and wait for **Ready**.
 
-When the terminal says **Ready**, open [http://localhost:3000/login](http://localhost:3000/login). If Next.js selects another port because 3000 is occupied, set `NEXT_PUBLIC_SITE_URL` to that reported local origin in `.env.local` and restart the server before using it.
+Open [http://localhost:3000/login](http://localhost:3000/login). Sign in as **daniel.01** with password **Sitecore** and select **Learning & resources**. Find **What can we help you find?** and the **My licensed states** default.
 
-Sign in with:
+Use HTTP, not HTTPS. If Next.js selects another port, update `NEXT_PUBLIC_SITE_URL` to that origin, restart, and use the same address in Page Builder.
 
-| Field | Value |
-| --- | --- |
-| Username | `daniel.01` |
-| Password | `Sitecore` |
+## 4. Open your local frontend in Page Builder
 
-Open **Learning & resources** in the left navigation. Find the search heading **What can we help you find?** and the search box beneath it. **My licensed states** is the default; Daniel has Illinois and Texas licenses, so the default includes those states and nationwide guidance.
+1. In **Chrome**, open [Page Builder](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb) with your SitecoreAI account. Select **Liberty Mutual Agent Portal**.
+2. Open **Default editing host** and select **Local host**.
+3. Enter **http://localhost:3000** in **Enter the editing host url**, then click **Save**.
+4. Select **Learning & resources** in the page tree. Confirm **What can we help you find?** appears on the canvas.
 
-## 4. Change one component and verify it
+The canvas uses the React code running on **your machine** and the shared Preview content. Selecting Local host does not replace the shared Default editing host, change site grouping, publish content or deploy your branch. Keep the dev server running while the canvas is connected.
 
-In VS Code, open:
+The editor uses safe preview data without an agent login. Search controls are deliberately disabled in editing mode. Use the separate signed-in localhost tab for functional Search checks; do not edit or publish shared CMS fields during this code exercise.
 
-```text
-examples/liberty-mutual-agent-portal/src/components/resource-search/ResourceSearch.tsx
-```
+## 5. Change the component and verify both views
 
-Find this JSX:
+In the ordinary localhost portal tab, enter **workers compensation** and click **Search**. Keep **My licensed states** selected and record the Illinois, Texas and nationwide titles. The shared index can change, so compare actual titles rather than assuming a fixed count.
+
+In VS Code, find this JSX in **ResourceSearch.tsx**:
 
 ```tsx
 <h2>What can we help you find?</h2>
 ```
 
-Replace only that heading with:
+Replace only the heading text:
 
 ```tsx
 <h2>Find guidance for your next client conversation</h2>
 ```
 
-Save the file and return to **Learning & resources** in the local browser. Next.js Fast Refresh should display the new heading. If the tab has been idle, reload once. Check the browser address still starts with `http://localhost`.
+Save and return to **Page Builder → Learning & resources** with **Local host** selected. The canvas should show the new heading. If needed, click **Reload canvas**. No CMS publication or deployment is involved.
 
-Enter `workers compensation` in the search box and click **Search**. Confirm that resource cards still load and the licensed-state selector still works. The component’s native `useSearch` integration, filters, and result rendering are unchanged; this exercise changes the heading only.
+Return to [http://localhost:3000/resources](http://localhost:3000/resources). Confirm the new heading, repeat **workers compensation**, and select **Illinois** under **Risk state**. Illinois and nationwide guidance remain; the Texas-specific result drops out. The one-line heading change preserves the native Search integration and licensed-state filtering.
 
-With the current published library, that query returns **4 results** for Daniel’s licensed default. Select **Illinois** under **Risk state** to see **3 results**, with the Texas-specific result removed. Approved content/index changes may change these counts. Return to **My licensed states**, erase the text in the search box, and click **Search** again. **Clear filters** resets the facets but does not clear the text query.
+The heading is React code. Resource titles, summaries and article bodies are Sitecore content. Component maps are generated by the development watcher; do not edit `.sitecore` files by hand.
 
-This heading belongs to React code. Resource titles, summaries, article bodies, and authored guidance belong to Sitecore content. Edit those fields in Sitecore and use the editorial publishing workflow; changing this JSX does not update them. Component registration is generated automatically by the development watcher when component files are added or removed. Do not hand-edit `.sitecore` generated files.
+## 6. Review, check and restore
 
-## 5. Review, check, and finish
-
-Use VS Code **Source Control** or the following command to confirm that the intended heading is the only application change:
+Use **VS Code → Source Control** to confirm the heading is the only application change. Stop the dev server with **Ctrl+C**, then run each command separately from the application directory:
 
 ```sh
 git diff -- src/components/resource-search/ResourceSearch.tsx
-```
-
-For a practice run, replace the heading with its original text and save. Confirm the original heading returns in the browser. This restores the exercise without discarding anyone else’s changes.
-
-Run the normal application checks in a second terminal, from the same application directory. If that terminal starts at the repository root, first run `cd examples/liberty-mutual-agent-portal`:
-
-```sh
-npm run lint
 npm test
 npm run test:setup
+npm run lint
 npm run type-check
-```
-
-The development startup has already generated the SDK files needed for type checking. In a fresh checkout that has not been started, run `npm run sitecore-tools:generate-map` and `npm run sitecore-tools:build` before `npm run type-check`.
-
-After verifying the browser, open **Daniel Ortiz** in the header and click **Sign out**. The heading exercise does not create saved portal work, so no portal reset is needed. If you later experiment with saved work, use the operator reset procedure in [the authentication and data guide](../examples/liberty-mutual-agent-portal/docs/auth-and-data.md#durable-work-and-resetting), targeting your local host with your local operator secret. Shared preview and production resets are separate actions.
-
-To check a production compilation, stop the development server with **Ctrl+C**, then run:
-
-```sh
 npm run build
 ```
 
-This command checks the two context settings, regenerates SDK files, builds Next.js, and scans browser bundles for private context or editing-secret exposure. It also returns Next’s generated `next-env.d.ts` reference from development types to build types. A successful build does not deploy the application or verify its production runtime services. Keep `.env.local`, `.portal-state`, `.sitecore`, and generated metadata out of your commit.
+Development startup already generated the SDK files required by type checking. If you have not started the app in a fresh checkout, first run `npm run sitecore-tools:generate-map` and `npm run sitecore-tools:build`.
 
-`npm start` serves an existing production build, but authenticated operation requires a separately configured Redis provider and runtime secrets. The application intentionally rejects `local-json` in production mode. Use `npm run dev` for this local exercise; use an isolated, correctly configured preview deployment for production-runtime acceptance.
+A build checks compilation and configured private-value exposure in browser assets; it does not deploy or prove hosted runtime behavior. Use `npm run dev` for local operation. Authenticated `npm start` requires a separately configured durable store because production mode rejects the local JSON adapter.
 
-## Optional: submit a reviewed change
-
-The workshop already has its own local branch. Coordinate this extension with the current Vercel Hobby project owner: private-repository deployment commits must be authored by that owner, so GitHub write access alone does not grant preview deployment eligibility. See [Vercel’s Hobby collaboration rules](https://vercel.com/docs/deployments/troubleshoot-project-collaboration#hobby-teams). The owner can keep the intended heading change, review its diff, and pass the applicable checks before submitting it. If you restored the heading during practice, make the intended change again first.
+If the file contains only your uncommitted workshop edit, restore it and restart:
 
 ```sh
-git add src/components/resource-search/ResourceSearch.tsx
-git commit -m "Clarify the resource search heading"
-git push -u origin HEAD
+git restore -- src/components/resource-search/ResourceSearch.tsx
+npm run dev
 ```
 
-Open a pull request targeting `main`. GitHub’s **Portal validation** workflow runs offline checks and a connected production build. Vercel’s Git integration independently creates a branch preview when configured for the project. Inspect the latest commit’s status indicator on the pull request’s **Conversation** tab, then follow the **Vercel → Details** link to the deployment. Confirm its source commit, environment, and **Ready** status before testing that preview URL.
+If it also contains other work, manually restore only the heading instead.
 
-An ordinary branch preview is not automatically the dedicated Sitecore editing host. Its environment and state namespace must be configured for its purpose. Merging into the configured production branch `main` triggers the Vercel production deployment. Only merge a change that is intended for that environment.
+- In the localhost portal, click **Clear filters** if shown, erase the query and click **Search**. Confirm the original heading and default resource view. Clear filters alone does not erase query text.
+- In Page Builder, confirm the original heading on **Local host**, then select **Default editing host** in the editing-host selector.
+- In the localhost portal, use **Daniel Ortiz → Sign out**. Stop dev with **Ctrl+C** and run **npm run build** once more to return generated metadata to its build state.
+- Keep `.env.local`, `.portal-state`, `.sitecore` and generated metadata out of commits. No shared reset or CMS restoration is needed for this exercise.
 
-| Change | Release path |
+## How the reviewed change would be released
+
+Deployment is an explanation, not an attendee task. The local workshop needs no Vercel account, transfer, branch push or PR.
+
+| Change | Shared release path |
 | --- | --- |
-| React components, styles, server code | Feature branch → pull request and checks → Vercel preview → approved merge → Vercel production |
-| Page fields, layouts, resource copy, guidance | Sitecore authoring and editorial review → publish to Experience Edge; no frontend build for an ordinary content edit |
-| Templates, rendering definitions, placeholders | Review the owned serialized model and follow the scoped authoring-release procedure in [the developer handoff](developer-handoff.md) |
+| React components, styles, server code | GitHub branch → reviewed PR and checks → Vercel preview → approved merge → production deployment |
+| Page copy, images and layout | SitecoreAI authoring → editorial review → publish to Experience Edge |
+| Templates, rendering definitions, placeholders | Reviewed owned CMS model → separate SitecoreAI authoring deployment and validation |
 
-The repository’s validation workflow does not deploy the Sitecore authoring environment. Sitecore Deploy’s branch automation is a separate, opt-in configuration. `xmcloud.build.json` explicitly packages only `nextjs-starter`, `LibertyMutual.Model` and `LibertyMutual.SitePresentation` as Items as Resources for authoring deployments. The editable `LibertyMutual.Content`, `LibertyMutual.Taxonomy` and `LibertyMutual.ResourcePageBranch` seed modules stay outside that package, as do unused Starter Kit modules. Ordinary frontend changes still use the Git-connected Vercel build. See [the release process](developer-handoff.md#vercel-release-process) for the scoped CLI model procedure, explicit seed flags and authoring-environment deployment.
+The repository’s **Portal validation** workflow checks source and performs a connected build. Vercel’s configured Git integration hosts the frontend; it does not automatically deploy Sitecore authoring. The SitecoreAI Vercel Deploy App is a separate integration. See the [release runbook](developer-handoff.md#vercel-release-process) for implementation details and recovery procedures.
 
-## Configuration reference and troubleshooting
+## Troubleshooting
 
-The application’s [.env.remote.example](../examples/liberty-mutual-agent-portal/.env.remote.example) documents the full connected-host contract. The local helper intentionally enables a smaller subset.
-
-| Setting or symptom | What to check |
+| Symptom | Check |
 | --- | --- |
-| `ENOENT` opening `liberty-mutual-sitecoreai/package.json` | npm is running from the repository root, which has no package manifest. Run `cd examples/liberty-mutual-agent-portal` from that root, then `npm run setup:local`, `npm ci` and `npm run dev`. Setup supplies the POC contexts automatically. Switching to `npm install` does not fix the directory or create the environment file. |
-| `SITECORE_EDGE_CONTEXT_ID` / `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | Both must be present, distinct, and correctly scoped. Restart the dev server after changing environment values. |
-| `PORTAL_SESSION_SECRET`, `PORTAL_OPERATOR_SECRET`, `SITECORE_EDITING_SECRET` | Local setup generates independent secrets. Keep deployed secrets in the hosting platform’s server-only configuration. A local editing secret does not register localhost as a Sitecore rendering host. |
-| `PORTAL_ENVIRONMENT`, `PORTAL_STATE_ADAPTER`, `PORTAL_LOCAL_STATE_DIRECTORY` | Keep the generated local namespace, `local-json`, and `.portal-state` for this exercise. |
-| “The portal workspace service is not configured.” | Confirm the local configuration is loaded, the state adapter is `local-json`, and you are running `npm run dev`. Production runtime requires Redis. |
-| Setup refuses to continue | Read the named setting or ambiguity message. Inherited Redis/hosted settings, duplicate context assignments and server/browser context collisions require review. Existing configuration is preserved. |
-| Missing generated SDK files or type errors on first install | Run the two `sitecore-tools` generation commands above, or start `npm run dev`, before type checking. |
-| VS Code reports a `baseUrl` deprecation error while command-line type checking passes | Open a `.tsx` file, run **TypeScript: Select TypeScript Version** from the Command Palette, and select **Use Workspace Version** (5.9.3 for this lockfile). The editor's bundled TypeScript can be newer than the application's compiler. Do not change `tsconfig.json` just to suppress an error from the wrong editor version. |
-| Native content or Search does not load | Check connectivity, the correct site name, the scoped contexts, and the shared published content/index. A local UI build does not create content or provision a Search index. |
-| `PORTAL_CONTENT_ADAPTER=fixtures` | An engineering-test option for bootstrap resource metadata only. It does not provide a complete offline portal; routes still retrieve native Sitecore page composition. |
-| `NEXT_PUBLIC_PORTAL_TRACKING_ENABLED=false` | Keeps portal engagement tracking and native personalization disabled for local development. Use the configured HTTPS hosts for the UDL, A/B, and affinity walkthroughs. |
-| Preview content and Page Builder integration | Use the approved Preview server context, registered editing host, matching editing secret, and isolated runtime state. Follow [the developer handoff](developer-handoff.md), rather than changing this local workshop’s defaults. |
-| Design Library client credentials | `SITECORE_AUTH_CLIENT_ID` and `SITECORE_AUTH_CLIENT_SECRET` are for that separate integration; they are not needed for the heading exercise. |
+| `ENOENT` for root `package.json` | Move the terminal into `examples/liberty-mutual-agent-portal`. Run setup, install and dev there. |
+| Wrong Node version | Check `node --version` after entering the app directory in the same terminal that runs npm. Select 24.19.0. |
+| Setup reports a configuration conflict | Preserve custom work and resolve the named setting. Do not bypass Redis or context-scope checks. |
+| Page Builder cannot connect | Confirm dev says Ready, the local address/port matches, Local host is selected, and setup supplied the correct Preview context and matching editing secret. Restart dev after environment changes. |
+| Embedded-browser canvas stays blank or loading | Open Page Builder in **Chrome** and select Local host there; this is the browser verified for the local exercise. |
+| Canvas still shows old React text | Save the correct component file, confirm Local host, and click Reload canvas. |
+| Search is disabled on the canvas | Expected editor behavior. Test in the separate signed-in localhost portal tab. |
+| Local page content differs from production | Local Page Builder setup reads Preview content, which can include unpublished pages. Production is the publication check; Search uses the published index. |
+| VS Code compiler diagnostics disagree with CLI | Select workspace TypeScript 5.9.3 instead of the editor’s bundled compiler. |
+| “The portal workspace service is not configured.” | Use `npm run dev`, local JSON state, and no Redis settings. Production runtime has a different persistence requirement. |
+| UDL, affinity or A/B behavior stays neutral locally | Tracking and personalization are intentionally disabled for this local exercise. Use the configured HTTPS workshop hosts for those loops. |
 
-For the application structure, adapters, model ownership, and transfer process, continue with [the developer handoff](developer-handoff.md). For local and hosted saved-work handling, use [the authentication and data guide](../examples/liberty-mutual-agent-portal/docs/auth-and-data.md).
+For optional chat-assisted inspection, continue to [Sitecore tools in VS Code](vscode-sitecore-mcp.md). For component ownership and hosting details, see the [developer handoff](developer-handoff.md).
