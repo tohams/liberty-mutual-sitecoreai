@@ -1,6 +1,7 @@
 'use client';
 
 import { AppPlaceholder, Text, RichText, DateField, useSitecore } from '@sitecore-content-sdk/nextjs';
+import { isFieldValueEmpty } from '@sitecore-content-sdk/content/layout';
 import { PortalContentLink as Link } from '@/components/ui/portal-link';
 import type { ResourceArticleProps } from './resource-article.props';
 import { getResourceImagePlaceholder } from '@/features/resources/resource-image-placeholder';
@@ -17,7 +18,7 @@ export function Default({ fields, params, rendering }: ResourceArticleProps) {
       {imagePlaceholder && <AppPlaceholder {...imagePlaceholder} page={page} componentMap={componentMap} />}
       <RichText field={fields.body} className="cms-rich-text" />
       <footer>
-        {(fields.reviewedAt?.value || page.mode.isEditing) && <p>Reviewed <DateField field={fields.reviewedAt ?? { value: '' }} render={date => date ? new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(date) : ''} /></p>}
+        {(!isFieldValueEmpty(fields.reviewedAt) || page.mode.isEditing) && <p>Reviewed <DateField field={fields.reviewedAt ?? { value: '' }} render={date => date ? new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(date) : ''} /></p>}
         {(fields.sourceLink?.value?.href || page.mode.isEditing) && <Link field={fields.sourceLink ?? { value: {} }} />}
       </footer>
     </article>
