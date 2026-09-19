@@ -76,5 +76,5 @@
       }
     ]
   },
-  "description": "Initial site and editorial content. CreateOnly preserves marketer changes; normal releases push LibertyMutual.Model only."
+  "description": "Initial site and editorial content. CreateOnly preserves marketer changes; normal releases push LibertyMutual.Model, LibertyMutual.SitePresentation and LibertyMutual.SupportForm."
 }
