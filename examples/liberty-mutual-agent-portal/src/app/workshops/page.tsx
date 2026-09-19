@@ -152,6 +152,9 @@ export default async function WorkshopHome() {
                 <strong>.{session.reviewerPack}</strong>. Switch personas as
                 directed. Local development uses an isolated .01 account.
               </p>
+              <Link href="/workshops/attendees">
+                Find your attendee assignment <ArrowRight size={15} />
+              </Link>
             </div>
             <div>
               <CircleCheck size={22} />
@@ -172,7 +175,9 @@ export default async function WorkshopHome() {
               Insurance and agency data are synthetic. This sandbox is available
               for the agreed evaluation period and will then be deleted.
               SitecoreAI administration requires your separately assigned
-              Sitecore access.
+              Sitecore access. During the two-week evaluation, Tuesday and
+              Thursday office hours are available; the workshop team will
+              provide the schedule.
             </p>
           </div>
         </section>

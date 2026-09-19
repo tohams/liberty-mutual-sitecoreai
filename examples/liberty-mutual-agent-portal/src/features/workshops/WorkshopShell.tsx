@@ -5,6 +5,7 @@ import {
   Code2,
   Compass,
   RotateCcw,
+  Users,
 } from "lucide-react";
 import { WorkshopSignOut } from "./WorkshopControls";
 import type { WorkshopSession } from "@/server/workshops/auth";
@@ -15,7 +16,7 @@ export function WorkshopShell({
   children,
 }: {
   session: WorkshopSession;
-  active?: "marketing" | "development" | "reset";
+  active?: "marketing" | "development" | "reset" | "attendees";
   children: React.ReactNode;
 }) {
   return (
@@ -62,9 +63,13 @@ export function WorkshopShell({
           </Link>
         </nav>
         <div className="workshop-account">
-          <span>
+          <Link
+            href="/workshops/attendees"
+            aria-label={`Attendee assignments: reviewer pack ${session.reviewerPack}`}
+            aria-current={active === "attendees" ? "page" : undefined}
+          >
             Reviewer pack <strong>{session.reviewerPack}</strong>
-          </span>
+          </Link>
           <WorkshopSignOut />
         </div>
       </header>
@@ -74,6 +79,12 @@ export function WorkshopShell({
         <a href="/login" target="_blank" rel="noreferrer">
           Open Agent Portal <ArrowUpRight size={14} />
         </a>
+        <Link
+          href="/workshops/attendees"
+          aria-current={active === "attendees" ? "page" : undefined}
+        >
+          <Users size={14} /> Attendee assignments
+        </Link>
         <Link
           href="/workshops/reset"
           aria-current={active === "reset" ? "page" : undefined}

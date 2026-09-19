@@ -14,12 +14,17 @@ export const governanceGuides: WorkshopGuide[] = [
     personas: ["Sitecore Author", "Sitecore Approver"],
     prerequisites: [
       "Use your invited **Sitecore Cloud** account with your assigned **Author** or **Approver** role. Your **Agent Portal** username is a separate login.",
+      "**Attendee assignments** lists portal reviewer numbers. Native authoring roles and practice pairs are assigned separately; confirm both with the workshop team before starting this exercise.",
       "The presenters use **Demo**. Attendees use their assigned **Pair** page under **Home** → **Workshop practice**. This pair number is separate from your **Agent Portal** reviewer number.",
       "Each pair works on its own page. In **Page Builder**, select **Liberty Mutual Agent Portal**, use **English**, and keep **Default** selected as the editing host.",
       "This exercise changes **Summary** only. Leave images, component placement, and **Resource metadata** unchanged.",
       "If your partner is unavailable, a presenter can use the demonstration **Approver** account to review your practice page.",
     ],
     links: [
+      {
+        label: "Attendee assignments and authoring access",
+        href: "https://liberty-mutual-agent-portal.vercel.app/workshops/attendees",
+      },
       {
         label: "Open Sitecore Cloud",
         href: "https://portal.sitecorecloud.io/?organization=org_XqL3u1MSNVuubOTb",

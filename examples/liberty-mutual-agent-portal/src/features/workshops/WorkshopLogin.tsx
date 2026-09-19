@@ -118,8 +118,10 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
             </button>
           </form>
           <p className="workshop-login-help">
-            Use any persona in your assigned reviewer pack. Your guide sign-in
-            is separate from your Agent Portal sign-in.
+            The workshop team provides your initial sign-in details. After
+            signing in, open <strong>Attendee assignments</strong> to confirm
+            your reviewer number. Your guide sign-in is separate from your Agent
+            Portal sign-in.
           </p>
         </div>
       </section>

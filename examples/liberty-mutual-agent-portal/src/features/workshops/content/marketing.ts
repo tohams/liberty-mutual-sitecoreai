@@ -86,9 +86,13 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     prerequisites: [
       packPrerequisite,
-      "The **Sitecore** workshop team supplies your pack assignment and any separate **Sitecore** invitation. **Reset a reviewer number** is available to signed-in workshop reviewers with no additional credentials.",
+      "Open **Attendee assignments** to find your reviewer number. The **Sitecore** workshop team provides your initial sign-in details and any separate **Sitecore** invitation. **Reset a reviewer number** is available to signed-in workshop reviewers with no additional credentials.",
     ],
     links: [
+      {
+        label: "Attendee assignments",
+        href: "https://liberty-mutual-agent-portal.vercel.app/workshops/attendees",
+      },
       liveLogin,
       previewLogin,
       sitecoreWorkspace,
@@ -770,7 +774,7 @@ export const marketingGuides: WorkshopGuide[] = [
       packPrerequisite,
       platformPrerequisite,
       authorPrerequisite,
-      "This is a shared-item exercise: one authorized **Sitecore** author edits while others observe. **Resource metadata** access is currently limited to organization administrators/owners; use **Author and approver: review and publish content together** for the separate paired-roles exercise on scoped practice pages.",
+      "This is a presenter-led shared-item exercise. The editor needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. If you have only a scoped workshop **Author** or **Approver** role, follow the presenter here and use **Author and approver: review and publish content together** for your assigned-page exercise.",
       "Reserve enough time to complete publication, **Search** refresh, and restoration. Do not leave the temporary summary published.",
     ],
     links: [
@@ -930,7 +934,8 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Use a unique practice-page name and keep the page unpublished. Access to the metadata panel requires an authorized administrator/owner.",
+      "The editor needs permission to create pages under **Learning & resources**, edit local image content, and use **Modern Media Library**. **Resource metadata** additionally requires organization administrator/owner access. If you have only a scoped workshop **Author** or **Approver** role, follow the presenter for this guide.",
+      "Use a unique practice-page name and keep the page unpublished.",
     ],
     links: [
       pageBuilder,
@@ -1833,11 +1838,11 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Identify integration and governance work explicitly",
         action: [
           "Compare **Native Contact your team** with the campaign’s custom saved request. Identify where a business backend would receive the data.",
-          "Record the customer roles and accessibility acceptance needed beyond the exercises performed with administrator access.",
+          "Review the paired **Author** and **Approver** exercise, then record the attendee role assignments and accessibility acceptance still needed.",
         ],
         expected: [
           "**Native Forms** delivers to a webhook; a real database or **Salesforce** workflow requires an implemented backend. The custom campaign request instead saves to **Upstash**.",
-          "Controlled component placement and reviewed interactions are demonstrated. Separate customer author/approver permissions and full accessibility acceptance still require validation.",
+          "Controlled component placement and separate non-administrator **Author** and **Approver** permissions are demonstrated. Attendee role and practice-pair assignments remain pending. Full accessibility acceptance requires additional validation.",
         ],
       },
       {
