@@ -7,7 +7,6 @@ import {
   Check,
   Info,
   RotateCcw,
-  Users,
 } from "lucide-react";
 import { requireWorkshopSession } from "@/server/workshops/auth";
 import { WorkshopShell } from "@/features/workshops/WorkshopShell";
@@ -106,23 +105,6 @@ export default async function GuidePage({
               <p>
                 <GuideText text={contextual(guide.summary)} />
               </p>
-              <div className="workshop-guide-meta">
-                <span>{guide.steps.length} steps</span>
-                {guide.personas.length > 0 && (
-                  <span>
-                    <Users size={16} />
-                    {guide.personas
-                      .map((persona) =>
-                        /^(avery|maya|jordan|daniel|priya|marcus|elena)$/.test(
-                          persona,
-                        )
-                          ? `${persona}.${pack}`
-                          : contextual(persona),
-                      )
-                      .join(" · ")}
-                  </span>
-                )}
-              </div>
             </header>
             <section
               className="workshop-priority"
