@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
@@ -49,6 +49,7 @@ export default async function GuidePage({
   const session = await requireWorkshopSession(`/workshops/guide/${slug}`);
   const guide = findWorkshopGuide(slug);
   if (!guide) notFound();
+  if (guide.slug !== slug) redirect(`/workshops/guide/${guide.slug}`);
   const pack = guide.accountScope === "local" ? "01" : session.reviewerPack;
   function contextual(text: string) {
     return text

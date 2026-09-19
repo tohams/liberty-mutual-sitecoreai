@@ -417,40 +417,4 @@ export const portalScreenshots: Record<
     5: submitAction,
     6: workflowComment,
   },
-  "renewal-follow-up": {
-    2: capture(
-      "renewal-review-dialog.png",
-      "Morgan household: open the Renewal review tab",
-      "Check the **Homeowners** label and policy **LM-8426101** so you review the intended Morgan policy. Read the checklist before opening the follow-up form.",
-      [220, 70, 839, 580],
-      [
-        [
-          [251, 102, 258, 62],
-          "Confirm **Morgan household** and policy **LM-8426101**.",
-        ],
-        [[405, 245, 103, 47], "Select **Renewal review**."],
-        [
-          [251, 563, 214, 57],
-          "Select **Save a renewal follow-up** to open the form.",
-        ],
-      ],
-    ),
-    3: capture(
-      "renewal-follow-up-form.png",
-      "Follow-up form: title, due date, notes, and Save",
-      "The form opens over the policy dialog. Use the title, date, and notes specified in your step; the date shown in this capture is only the form’s starting value.",
-      [334, 89, 612, 542],
-      [
-        [
-          [369, 227, 542, 163],
-          "Enter your **Follow-up title** and **Due date**.",
-        ],
-        [[369, 402, 542, 137], "Enter the conversation details in **Notes**."],
-        [
-          [369, 544, 542, 54],
-          "Select **Save follow-up**, then verify the task as instructed.",
-        ],
-      ],
-    ),
-  },
 };
