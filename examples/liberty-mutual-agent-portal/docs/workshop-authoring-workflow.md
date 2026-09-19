@@ -84,7 +84,7 @@ The setup maintainer can assign the same scoped roles through the native interfa
 3. Open **Member Of**, then choose **Edit**.
 4. In **Available Roles**, select **Liberty Mutual Workshop Author** or **Liberty Mutual Workshop Approver**, plus the assigned **Liberty Mutual Workshop Pair NN** role, and choose **Add**. For the presenter Approver, use **Liberty Mutual Workshop All pages** instead of a pair role.
 5. Confirm the role-selection dialog and save the user. Reopen **Member Of** to verify the two direct memberships. Inherited **Sitecore Client Authoring** and **Sitecore Client Users** roles are expected. Neither account should have **Sitecore Client Publishing** or **Sitecore Client Advanced Publishing**.
-6. Test a fresh session as that user against the acceptance checks below.
+6. Test a fresh session as that user against the [account acceptance checks](#publishing-prerequisites-and-account-acceptance-checks).
 
 This path is required for the presenter accounts containing a `+` email alias in the current environment: User Manager can display and update them, while the authoring GraphQL API rejects their profile/role lookup during native username validation. The assignment helper reports **requiresNativeUserManager** for that API limitation. It does not infer profile values or claim that UI-assigned roles have been verified by the API. Keep these manual assignments out of an automated attendee batch; unrelated plus-alias accounts do not prevent checks for ordinary attendee identities.
 
@@ -124,7 +124,7 @@ Use this order:
 3. Run the practice-content tool read-only with `--template-manifest`, then apply it with its separate content manifest. It verifies both the dedicated workflow and the isolated template before creating page content.
 4. Capture a second workflow baseline with `--content-manifest` pointing to the practice-content manifest. Review and apply it to set the exact page ACLs. The ACL tool verifies the recorded template's native identity and its direct **PortalPage** base before changing a page.
 5. Prepare and validate private user assignments, then apply them only when every intended account is ready.
-6. Complete the publishing prerequisites and true-user acceptance checks below.
+6. Complete the [publishing prerequisites and account acceptance checks](#publishing-prerequisites-and-account-acceptance-checks).
 
 For example, replace `/absolute/private/workshop` with a real directory outside the checkout. Use new baseline, journal and workflow output filenames for each separate application:
 

@@ -2333,3 +2333,22 @@
   font-weight: 700;
   color: inherit;
 }
+
+.workshop-inline-link {
+  color: #70208c;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.workshop-inline-link:hover {
+  color: #4b155f;
+  text-decoration-thickness: 2px;
+}
+
+.workshop-inline-link:focus-visible {
+  outline: 2px solid #a8008c;
+  outline-offset: 3px;
+  border-radius: 2px;
+}

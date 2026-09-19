@@ -115,7 +115,10 @@ export function GuideDirectory({
                           <strong>{guide.focus.priority.label}</strong>
                         </p>
                         <p>
-                          <GuideText text={guide.summary} />
+                          <GuideText
+                            text={guide.summary}
+                            linksEnabled={false}
+                          />
                         </p>
                         <span>{guide.stepCount} steps</span>
                       </div>

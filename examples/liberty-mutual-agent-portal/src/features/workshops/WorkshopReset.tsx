@@ -18,6 +18,30 @@ import type {
 
 import { parsePersistedResetIntent, recoverResetState } from "./reset-recovery";
 
+function HostedResetLinks() {
+  return (
+    <>
+      <a
+        className="workshop-inline-link"
+        href="https://liberty-mutual-agent-portal.vercel.app/workshops/reset"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <strong>Live portal reset</strong>
+      </a>{" "}
+      or{" "}
+      <a
+        className="workshop-inline-link"
+        href="https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <strong>Transaction preview reset</strong>
+      </a>
+    </>
+  );
+}
+
 const intentKey = (pack: string) => `lm-workshop-reset:v1:${pack}`;
 
 function savedIntent(pack: string): WorkshopResetRequest | null {
@@ -287,8 +311,8 @@ export function WorkshopReset({
           the walkthrough. <strong>Live portal</strong> and{" "}
           <strong>Preview portal</strong> have separate saved work. A reset
           creates fresh profile identities for the selected website only; it
-          does not reset the other website. The reset walkthrough below links to
-          both.
+          does not reset the other website. Open <HostedResetLinks /> to use the
+          reset page for the website on which you completed the exercise.
         </p>
         <div className="workshop-reset-explanation">
           <h2>A clean start, every time</h2>
@@ -306,13 +330,9 @@ export function WorkshopReset({
         </div>
         {status && !status.restartAvailable && (
           <p className="workshop-reset-error" role="status">
-            Fresh-profile resets are not configured on this website. Open the
-            <Link href="/workshops/guide/saved-work-reset">
-              {" "}
-              reset walkthrough
-            </Link>{" "}
-            and use its link for the hosted portal on which you completed the
-            exercise. A local-development workspace does not reset hosted
+            Fresh-profile resets are not configured on this website. Open{" "}
+            <HostedResetLinks /> for the hosted portal on which you completed
+            the exercise. A local-development workspace does not reset hosted
             profiles.
           </p>
         )}
