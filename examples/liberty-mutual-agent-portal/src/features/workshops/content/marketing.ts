@@ -770,7 +770,7 @@ export const marketingGuides: WorkshopGuide[] = [
       packPrerequisite,
       platformPrerequisite,
       authorPrerequisite,
-      "This is a shared-item exercise: one authorized **Sitecore** author edits while others observe. **Resource metadata** access is currently limited to organization administrators/owners; separate customer author and approver permissions still require verification.",
+      "This is a shared-item exercise: one authorized **Sitecore** author edits while others observe. **Resource metadata** access is currently limited to organization administrators/owners; use **Author and approver: review and publish content together** for the separate paired-roles exercise on scoped practice pages.",
       "Reserve enough time to complete publication, **Search** refresh and restoration. Do not leave the temporary summary published.",
     ],
     links: [
@@ -861,7 +861,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Click **Start publish** and wait for completion.",
         ],
         expected: [
-          "This tenant moves directly from **Draft** to **Approved**; there is no separate **Submitted** workflow state.",
+          "This resource uses **Basic Workflow**, which moves directly from **Draft** to **Approved**. The separate **Workshop practice** pages use **Draft** → **Awaiting approval** → **Approved**.",
           "The exact **English** page publishes without a Git release. The image datasource is unchanged, so this exercise does not include references.",
         ],
       },
@@ -909,6 +909,7 @@ export const marketingGuides: WorkshopGuide[] = [
       ],
     },
     related: [
+      "author-approver-workflow",
       "create-resource-and-media",
       "state-aware-search",
       "marketing-capability-boundaries",
