@@ -67,7 +67,11 @@ export async function AudiencePage({
             ? "The main walkthroughs address the Marketing priorities on presentation slides 3–4."
             : "The main walkthroughs address the Platform priorities on presentation slide 5."}{" "}
           Optional scenarios and supporting tools appear afterward, so you can
-          focus on the capabilities most relevant to your work.
+          focus on the capabilities most relevant to your work. Begin with each
+          guide’s <strong>Before you start</strong> section: it identifies the
+          login, access, and starting state that produce the expected result. If
+          you do not yet have the listed Sitecore access, follow the presenter
+          for that exercise.
         </p>
         <GuideDirectory guides={guides} audience={audience} />
       </main>

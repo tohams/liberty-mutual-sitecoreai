@@ -18,7 +18,7 @@ export const workshopSections = {
   start: {
     label: "Start here",
     description:
-      "Choose your workshop account, then follow the capabilities that address your priorities.",
+      "Find your reviewer number, distinguish portal logins from Sitecore authoring accounts, and identify the website each exercise uses.",
     kind: "core",
   },
   relevance: {
@@ -181,7 +181,7 @@ export const guidePriorities: Record<string, GuideFocusDefinition> = {
     priority: "publishing",
     section: "governance",
     relevance:
-      "Update several reviewed text fields with native **Search and replace**. The exercise demonstrates scoped bulk text maintenance; it does not establish a general bulk editor for every field type.",
+      "Inspect repeated content in **Page Builder**, then review options for a controlled bulk change. This addresses the bulk-edit request without claiming that Page Builder supplies a general bulk editor for every field type.",
   },
   "alert-dates-and-publication": {
     priority: "publishing",

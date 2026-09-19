@@ -276,8 +276,19 @@ export function WorkshopReset({
         </select>
         <p className="workshop-reset-scope">
           This resets all seven <strong>.{pack}</strong> accounts together.
-          Other reviewer numbers are unchanged. Choose the number you intend to
-          reset; anyone using it will need to sign in again.
+          Select the number beside your name in{" "}
+          <Link href="/workshops/attendees">Attendee assignments</Link>. Use{" "}
+          <strong>01</strong> only for the presenter pack. Other reviewer
+          numbers are unchanged; anyone using the selected pack will need to
+          sign in again.
+        </p>
+        <p className="workshop-reset-scope">
+          Match the website in your browser’s address bar to the portal used in
+          the walkthrough. <strong>Live portal</strong> and{" "}
+          <strong>Preview portal</strong> have separate saved work. A reset
+          creates fresh profile identities for the selected website only; it
+          does not reset the other website. The reset walkthrough below links to
+          both.
         </p>
         <div className="workshop-reset-explanation">
           <h2>A clean start, every time</h2>
@@ -287,15 +298,22 @@ export function WorkshopReset({
             browsing behavior.
           </p>
           <p>
-            Sign in again afterward to repeat the walkthrough with fresh
-            profiles.
+            Use this when you want to repeat a walkthrough without earlier saved
+            actions or browsing interests affecting the result. After it
+            finishes, sign out of the Agent Portal, then sign in again so that
+            your session uses the new profile identity.
           </p>
         </div>
         {status && !status.restartAvailable && (
           <p className="workshop-reset-error" role="status">
-            Fresh-profile resets are not configured on this website. Use the
-            reset page on the live portal or editing preview for a clean
-            workshop reset.
+            Fresh-profile resets are not configured on this website. Open the
+            <Link href="/workshops/guide/saved-work-reset">
+              {" "}
+              reset walkthrough
+            </Link>{" "}
+            and use its link for the hosted portal on which you completed the
+            exercise. A local-development workspace does not reset hosted
+            profiles.
           </p>
         )}
         <div className="workshop-reset-status" role="status" aria-live="polite">
@@ -369,6 +387,12 @@ export function WorkshopReset({
             Refresh status
           </button>
         </div>
+        <p className="workshop-reset-scope">
+          <strong>Refresh status</strong> checks the existing reset and current
+          identities without starting another reset. If{" "}
+          <strong>Continue reset</strong> appears, it finishes the request
+          already in progress.
+        </p>
         <a
           className="workshop-reset-portal"
           href="/login"
@@ -430,8 +454,11 @@ export function WorkshopReset({
           In SitecoreAI, open <strong>Performance → Profiles</strong> and search
           using <strong>Search filter → Liberty Mutual agent identity</strong>{" "}
           and an identity below. These are the currently active identities for
-          this website. After a fresh-profile reset, refresh your profile
-          search.
+          this website. Copy the row matching the portal username you used in
+          the exercise. Do not choose <strong>Client ID</strong>: that filter
+          expects a different identifier. After a reset, copy the new
+          <strong> Agent identity</strong> because the previous value finds the
+          earlier profile and its old history.
         </p>
         {status && (
           <div className="workshop-reset-table">

@@ -46,7 +46,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "pagebuilder-resource.png",
       alt: "Page Builder showing the Texas resource and its ResourceArticle and ResourceImage layers",
       caption:
-        "Reference layout for the Texas resource. **Layers** identifies the article and its nested image. The version shown is **Live**; create the coordinated **Draft** before editing.",
+        "Reference layout for the Texas resource. **Layers** identifies the article and its nested image. The version shown is **Live**; follow this guide’s **Draft** creation step before editing so published content remains unchanged during preparation.",
     },
     "4": {
       file: "resource-metadata.png",
@@ -60,7 +60,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "modern-media-library.png",
       alt: "Modern Media Library showing the twelve Liberty Mutual resource images",
       caption:
-        "**Content** → **Media BETA** opens the **Modern Media Library**. Reuse the prepared asset that fits the practice article.",
+        "**Content** → **Media BETA** opens the **Modern Media Library**. This exercise reuses **liberty-mutual-businessowner-preparing-submission.jpg** so you can add an image without uploading or changing a shared asset.",
     },
     "5": {
       file: "pagebuilder-resource.png",
@@ -80,7 +80,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "products-texas.png",
       alt: "Products page with the workers compensation spotlight",
       caption:
-        "Daniel’s workers-compensation treatment appears above the product filters. Confirm both native profile evidence and the current rendered treatment.",
+        "Daniel’s workers-compensation treatment appears above the product filters. This reference image shows **Texas**; keep **Illinois** selected for this walkthrough to check that the action preserves your selected state. Confirm both native profile evidence and the current rendered treatment.",
     },
   },
   "agentic-studio-workflow": {
@@ -88,7 +88,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "agentic-workflow.png",
       alt: "Agentic Studio showing saved conversation and three connected workflow stages",
       caption:
-        "The **Agents** panel shows **Account Enrichment** → **Brief Generation** → **Content Generation**. Inspect the saved work without clicking **Run workflow**.",
+        "The **Agents** panel shows **Account Enrichment** → **Brief Generation** → **Content Generation**. Inspect the saved work without clicking **Run workflow** so everyone can review the same completed research, brief, and emails.",
     },
     "5": {
       file: "agentic-email-preview.png",

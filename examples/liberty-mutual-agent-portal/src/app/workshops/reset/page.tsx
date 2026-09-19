@@ -25,8 +25,10 @@ export default async function WorkshopResetPage() {
           </span>
           <h1>Reset a reviewer number</h1>
           <p>
-            Choose a number to reset all seven personas in that reviewer pack.
-            Anyone signed in to this guide can run a reset directly.
+            Restore the portal workspace and browsing profiles for the number
+            assigned to you. A reset includes all seven personas in that pack,
+            so repeat exercises begin without earlier saved work or interests.
+            Anyone signed in to this guide can run the reset directly.
           </p>
         </header>
         <WorkshopReset

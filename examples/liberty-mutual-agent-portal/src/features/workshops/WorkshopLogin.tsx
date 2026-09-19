@@ -85,7 +85,11 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
             <LockKeyhole size={20} />
           </div>
           <h2>Welcome to the workshop</h2>
-          <p>Sign in with your assigned workshop username and password.</p>
+          <p>
+            Use the agent-portal username and password provided by the workshop
+            team. Your <strong>Sitecore Cloud</strong> account is for content
+            authoring and does not sign into this guide.
+          </p>
           <form onSubmit={submit}>
             <label htmlFor="workshop-username">Workshop username</label>
             <input
@@ -118,10 +122,12 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
             </button>
           </form>
           <p className="workshop-login-help">
-            The workshop team provides your initial sign-in details. After
-            signing in, open <strong>Attendee assignments</strong> to confirm
-            your reviewer number. Your guide sign-in is separate from your Agent
-            Portal sign-in.
+            Need your initial sign-in details? Ask the Sitecore workshop team.
+            After signing in, open <strong>Attendee assignments</strong> to
+            match your name to your reviewer number. The guide uses that number
+            in its examples. Signing into the guide does not also sign you into
+            the <strong>Agent Portal</strong>; open the portal and sign in there
+            when a step asks you to view an agent’s experience.
           </p>
         </div>
       </section>
