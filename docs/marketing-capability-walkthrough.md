@@ -57,7 +57,7 @@ The separate native **Contact your team** form below demonstrates SitecoreAI For
 
 ## Native Forms: Contact your team
 
-This exercise connects a marketer-managed SitecoreAI form to its configured receiver. **Verified September 16, 2026:** native activation and Test webhook delivery work; preview checks cover required-field/email validation and a 390-pixel layout without horizontal overflow. A production submission by `daniel.04` reached the receiver with all five fields, displayed the success message and left saved portal requests unchanged. Reloading clears the form and message. The current free receiver expires September 23, 2026; follow the [receiver preparation](native-forms-operator-guide.md#receiver-availability) before later runs and repeat the [acceptance checks](native-forms-operator-guide.md#acceptance-and-reset) after configuration changes.
+This exercise connects a marketer-managed SitecoreAI form to **Demo Webhook**, its configured receiving URL. Submit fictional details, then inspect the received request in the inbox. Reloading clears the form and success message. The free receiving inbox can expire; [receiver configuration](native-forms-operator-guide.md#receiver-availability) explains how to replace it in SitecoreAI if needed.
 
 | Step | Click or inspect | Observe |
 |---|---|---|
@@ -152,7 +152,7 @@ SitecoreAI's Modern Media image-upload workflow can generate editable alt text a
 
 The Texas resource loop supplies the deliberate release path: create a named English Draft, edit Summary, wait for Saved, preview using Default, approve, publish only the intended English page and explicitly reindex **Liberty Mutual Agent Resources**. Verify the live article and Search result. Restore the original through a new version and the same publication/indexing sequence.
 
-This shows the operator workflow. Separate customer author and approver accounts need their own access acceptance before the workflow is described as proven separation of duties. Portal agent roles and Sitecore staff roles serve different purposes.
+For separate author and approver responsibilities, follow [Review and publish content](https://liberty-mutual-agent-portal.vercel.app/workshops/guide/author-approver-workflow). The presenters use two SitecoreAI accounts to move a practice page through **Draft → Awaiting approval → Approved**, followed by publication.
 
 ### Rich-text alerts
 
@@ -233,7 +233,7 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 | 2 | Personalize by state | Daniel/Maya journeys show licensed-state filtering in the portal and Search. Native state-based page/component variants are a separate configuration option; the current native examples use role, calculated share and affinity. |
 | 3 | Accordions | C3: two authored questions on the campaign. |
 | 4 | Content Organization & Media | Sections 3 and 5: local Data folders, branches, taxonomy and Modern Media. |
-| 5 | Workflow & Collaboration | Section 6: versions and approval/publication. Separate customer author/approver access still requires acceptance. |
+| 5 | Workflow & Collaboration | Section 6: versions, approval, and publication. The linked Page Builder exercise shows the separate Author and Approver responsibilities. |
 | 6 | Versioning & Publishing | The Texas loop retains original, temporary and restoring versions. |
 | 7 | Governance, Security & Access | Restricted placeholders, staff roles and portal server authorization have distinct responsibilities. |
 | 8 | Accessibility & Compliance | Campaign semantic controls, keyboard operation, dialog focus, labels and descriptive images. Validation supports accessibility; it is not a compliance certification. |

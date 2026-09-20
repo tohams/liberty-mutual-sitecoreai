@@ -443,7 +443,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       workshopNumberPrerequisite,
       platformPrerequisite,
-      `Review the existing form configuration with the presenter, then submit fictional details through the portal. [**The form receipt inbox**](${receiptInbox.href}) opens the receiver used by **Demo Webhook**. The presenter checks this receiver before the session; follow the presenter for configuration and receipt inspection if you lack Forms administration access.`,
+      `Review the existing form configuration with the presenter, then submit fictional details through the portal. [**The form receipt inbox**](${receiptInbox.href}) opens the receiver used by **Demo Webhook**. Follow the presenter for configuration and receipt inspection if you lack Forms administration access.`,
       "Use fictional contact details. **Demo Webhook** is the configured delivery connection, and **Webhook.site** is its temporary receiving inbox. A **receipt** here means the received request record, not an email confirmation. A business backend would handle Salesforce activity or email delivery.",
     ],
     links: [
@@ -528,7 +528,7 @@ export const marketingGuides: WorkshopGuide[] = [
       "The presenter uses **daniel.01** with password **Sitecore** for the live-portal checks. Attendees follow that screen while the shared article is edited and restored.",
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team selects one presenter to edit the shared Texas article; everyone else follows that screen. The presenter needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. The separate [**Review and publish content**](/workshops/guide/author-approver-workflow) demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
+      "Follow the presenter as they edit the shared Texas article. Editing and publishing require access to this resource; **Resource metadata** currently requires organization administrator/owner access. The separate [**Review and publish content**](/workshops/guide/author-approver-workflow) demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
       "A **version** retains a revision of this article in a selected language. A **Draft** can be edited; approval makes it eligible for publication in this configured workflow. **Metadata** describes the article’s state, product, and other classifications used by Search. Complete publication, Search refresh, and restoration so the temporary summary is not left live.",
     ],
     links: [
@@ -866,7 +866,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team identifies one presenter with access to the unpublished **Campaign practice** page, its **Data** items, and **Optimize with AI**. Everyone else follows that screen because the **Growth opportunity** content item is shared. The presenter records and restores the exact original **Body**, including formatting.",
+      "Follow the presenter in the unpublished **Campaign practice** page. This exercise uses **Optimize with AI** on the shared **Growth opportunity** content item, so everyone follows the same screen. The presenter records and restores the exact original **Body**, including formatting.",
     ],
     links: [pageBuilder],
     steps: [
@@ -935,7 +935,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team identifies a presenter with access to **Campaign practice** for the first two, read-only steps. **UTC** is the common time zone used by these date fields; compare times in UTC rather than your computer’s local time. The final two steps are an optional developer demonstration requiring publication API access, a prepared sample, and agreed UTC start and end times.",
+      "Follow the presenter in **Campaign practice** for the first two, read-only steps. **UTC** is the common time zone used by these date fields; compare times in UTC rather than your computer’s local time. The final two steps are an optional developer demonstration requiring publication API access, a prepared sample, and agreed UTC start and end times.",
     ],
     links: [
       pageBuilder,
@@ -970,7 +970,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Prepare the optional scheduled-publication demonstration",
         action: [
-          `For the optional timed demonstration, follow the developer identified by the workshop team. That developer prepares **campaign-schedule-check** using [**the scheduling guide**](${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise). Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.`,
+          `For the optional timed demonstration, follow the developer’s screen. That developer prepares **campaign-schedule-check** using [**the scheduling guide**](${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise). Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.`,
           "Record the page URL and UTC start and end times supplied by the developer. The developer verifies the **English** page and its local content are initially absent from **Live Experience Edge**, establishing the before-publication baseline.",
         ],
         expected: [
@@ -1197,7 +1197,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "Five pages carry interest tags. **Products & appetite** itself is untagged, so checking its guidance card does not add a topic score. The resource visits in this exercise supply the browsing signal.",
-          "Existing history can already select a topic. The default message is expected only for an independently confirmed profile with no relevant affinity.",
+          "Existing browsing history can already select a topic. A profile with no relevant browsing interest shows the default message.",
         ],
       },
       login("daniel"),
@@ -1397,7 +1397,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "A **space** groups one body of work, its instructions, conversation, and outputs. A **workflow** connects its stages. Here **Account Enrichment** gathers account context, **Brief Generation** organizes direction, and **Content Generation** produces content tasks and drafts. **Chat** preserves the execution and follow-up conversation.",
-          "An **AI agent** performs an assigned task using the instructions and tools available to it; it is unrelated to an insurance agent. This workflow uses Sitecore’s built-in agent definitions unchanged. The space’s instructions provide the task and brand context.",
+          "An **AI agent** performs an assigned task using the instructions and tools available to it. This workflow uses Sitecore’s built-in agent definitions unchanged. The space’s instructions provide the task and brand context.",
         ],
         links: [{ label: "Open the saved workspace", href: STUDIO }],
       },
@@ -1453,7 +1453,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Click **Artifacts** at the top of the space, select **Watkins outreach | Evidence and editorial review**, and click that card’s expand arrows. Read the review notes to see which facts and presentation details received human attention.",
         ],
         expected: [
-          "The saved history records corrections, editorial decisions, and refined output. Evidence stays separate from recipient-facing content.",
+          "The saved history shows how human feedback improved the generated content.",
           "These artifacts are saved email drafts for human review. Sending outreach and establishing a formal approval process would be separate steps.",
         ],
       },

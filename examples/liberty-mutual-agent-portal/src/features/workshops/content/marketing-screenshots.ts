@@ -222,7 +222,7 @@ export const marketingScreenshots: Record<
           ],
           [
             [157, 441, 610, 36],
-            "The **brandKitId** identifies the kit used for this saved run. This is reference evidence; no value needs to be copied.",
+            "The **brandKitId** identifies the kit used for this saved run. No value needs to be copied.",
           ],
         ],
       ),
@@ -376,7 +376,7 @@ export const marketingScreenshots: Record<
         "growth-avery-test.png",
         "Avery’s test result: true",
         "Test custom value dialog showing Response and a true result",
-        "After loading Avery’s current SitecoreAI profile and clicking **Run test**, read **Response**. This verified reference returns **true**, matching Cedar Ridge’s 14.46% small-commercial share. Use the current profile UUID obtained in the guide.",
+        "After loading Avery’s current SitecoreAI profile and clicking **Run test**, read **Response**. This example returns **true**, matching Cedar Ridge’s 14.46% small-commercial share. Use the current profile UUID obtained in the guide.",
         [136, 47, 1006, 169],
         [
           [[279, 98, 102, 40], "Select **Response** after the test completes."],
@@ -390,7 +390,7 @@ export const marketingScreenshots: Record<
         "growth-daniel-test.png",
         "Daniel’s test result: false",
         "Test custom value dialog showing Response and a false result",
-        "Repeat with Daniel’s current SitecoreAI profile. This verified reference returns **false**, matching Prairie Oak’s 36.86% share. The comparison evaluates the saved calculation without changing either profile.",
+        "Repeat with Daniel’s current SitecoreAI profile. This example returns **false**, matching Prairie Oak’s 36.86% share. The comparison evaluates the saved calculation without changing either profile.",
         [136, 47, 1006, 169],
         [
           [
