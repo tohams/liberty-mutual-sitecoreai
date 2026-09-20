@@ -38,7 +38,11 @@ export type PortalPlaceholderPlacement = {
 /** Operational aliases use the same authored composition as their owning page. */
 function placeholdersForRoute(route: string): PortalPlaceholder[] {
   const [section, child] = route.split("/").filter(Boolean);
-  if (section === "growth" && child) return ["campaignPage"];
+  if (
+    (section === "growth" && child) ||
+    /^\/practice\/practice-(?:0[1-9]|1[0-5])\/?$/.test(route)
+  )
+    return ["campaignPage"];
   if (
     (section === "resources" && child) ||
     /^\/workshop-practice(?:\/pair-0[1-9])?\/?$/.test(route)
