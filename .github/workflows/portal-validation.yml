@@ -66,10 +66,10 @@ jobs:
       - name: Validate resource creation and local image authoring safeguards
         working-directory: .
         run: node --test authoring/scripts/configure-resource-page-authoring.test.cjs
-      - name: Validate campaign composition and scoped scheduling safeguards
+      - name: Validate campaign composition, practice isolation, and scoped scheduling safeguards
         working-directory: .
         run: |
-          node --test authoring/scripts/campaign-authoring.test.cjs authoring/scripts/schedule-campaign-publication.test.cjs authoring/scripts/configure-support-native-form.test.cjs
+          node --test authoring/scripts/campaign-authoring.test.cjs authoring/scripts/provision-authoring-practice-content.test.cjs authoring/scripts/schedule-campaign-publication.test.cjs authoring/scripts/configure-support-native-form.test.cjs
           node authoring/personalization/verify-small-business-growth-opportunity.cjs
       - name: Validate editable content deployment safeguards
         working-directory: .
