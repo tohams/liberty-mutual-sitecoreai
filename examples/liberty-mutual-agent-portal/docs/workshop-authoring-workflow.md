@@ -4,7 +4,7 @@ This presenter-led demonstration shows how SitecoreAI separates content preparat
 
 This document describes the native configuration, setup tools, and acceptance checks supporting the **Page Builder** demonstration. The dedicated workflow, page ACLs, presenter account assignments, and automatic publishing have been configured and checked. Real non-admin presenter sessions have demonstrated author edits, submission, return to Draft, resubmission, approval, and automatic publication of the revised summary to the live practice page. The Author did not have the **Approve** command.
 
-No attendee role or pair assignment is required for the current workshop. The additional scoped pages and role-assignment tools remain available for a future supervised exercise; they are not instructions for attendees to edit shared content now.
+No attendee Author/Approver role or pair assignment is required for this demonstration. The additional scoped workflow pages and role-assignment tools remain available for a future supervised workflow exercise. The separate [Practice page authoring](../../../docs/authoring-practice.md) guides let attendees edit their own unpublished numbered Campaign pages and local Data items; they do not use these workflow pair pages or authorize shared-content publication.
 
 ## Presenter accounts and practice page
 
@@ -30,7 +30,7 @@ The content tree is:
 
 The presenter Author can edit **Demo**, and the presenter Approver can review it. Page permissions limit content access, and workflow permissions control the available commands. Other prepared pages retain their existing scoped permissions. The exercise changes the page's versioned **Summary** field; **Title** and **Body** are also versioned. Local **Data** items and the optional image remain read-only; the Resource Metadata Marketplace app is outside this exercise.
 
-Practice pages use the dedicated **WorkshopPracticePage** template. It inherits directly from **PortalPage**, alongside **ResourcePage**, so practice pages are excluded from the native Search source's **ResourcePage** selection. They reuse the article rendering without becoming agent reference resources. Confirm that exclusion in the live Search results as part of acceptance.
+The workflow pages under **Workshop practice** use the dedicated **WorkshopPracticePage** template. It inherits directly from **PortalPage**, alongside **ResourcePage**, so practice pages are excluded from the native Search source's **ResourcePage** selection. They reuse the article rendering without becoming agent reference resources. Confirm that exclusion in the live Search results as part of acceptance.
 
 ## Workflow and expected behavior
 
@@ -61,7 +61,7 @@ The role configuration prevents Authors from approving and Approvers from submit
 
 ## Maintainer reference: optional future attendee authoring
 
-The following provisioning details preserve the existing implementation for a future workshop that explicitly includes attendee authoring. They are not prerequisites for this presenter-led demonstration. Before introducing hands-on collaboration, assign distinct Sitecore identities and a practice page to each pair, communicate those assignments, and verify each account in an actual browser session. Portal workshop numbers do not assign CMS roles or pages.
+The following provisioning details preserve the existing implementation for a future workshop that explicitly includes an attendee Author/Approver workflow. They are not prerequisites for this presenter-led demonstration. Before introducing that hands-on review workflow, assign distinct Sitecore identities and a practice page to each pair, communicate those assignments, and verify each account in an actual browser session. Portal workshop numbers identify the separate numbered Practice pages for the content-editing guides; they do not assign these workflow pair scopes or CMS roles.
 
 ### Access prerequisites
 

@@ -3,7 +3,7 @@ import type { GuideImage } from "../types";
 type Bounds = [x: number, y: number, width: number, height: number];
 type Target = [bounds: Bounds, label: string];
 
-// Untouched captures from the connected sandbox on 18–19 September 2026.
+// Untouched captures from the connected sandbox on 18–20 September 2026.
 // Authoring these bounds in source pixels keeps each callout tied to its control.
 // The renderer receives crop pixels and annotation percentages, as required.
 function reference(
@@ -75,47 +75,75 @@ export const marketingScreenshots: Record<
     ),
   },
   "campaign-composition": {
-    1: reference(
-      "campaign-ai-grammar.png",
-      "Find the campaign heading in Content",
-      "Page Builder Content tree with Campaign practice, Growth opportunity, and its Title field",
-      "Open **Content**, then select **Campaign practice** → **Data** → **Growth opportunity**. Record the text in **Title** before changing it. This reference shows where the field is located; use the current text in your environment for restoration.",
-      [0, 0, 812, 447],
+    2: reference(
+      "practice-local-content.png",
+      "Edit the heading in your page’s own content",
+      "Page Builder Content tree expanded through Home, Practice, Practice 01, and Data to Growth opportunity, with the temporary Title text visible",
+      "This presenter capture uses **Practice 01**. Open **Practice** and your own assigned number, then **Data** > **Growth opportunity**. The screenshot shows the temporary heading after the edit; restore the original title from your notes when you finish.",
+      [4, 5, 1266, 546],
       [
-        [[600, 2, 40, 48], "Select **Content** in the top navigation."],
+        [[594, 5, 47, 48], "Select **Content** to edit the stored fields."],
         [
-          [57, 315, 225, 130],
-          "Expand **Campaign practice** and **Data**, then select **Growth opportunity**.",
+          [42, 145, 246, 199],
+          "Use your assigned **Practice** page’s **Data** > **Growth opportunity**. **Practice 01** belongs to the presenters.",
         ],
         [
-          [319, 335, 486, 58],
-          "Copy the complete **Title** before editing. This field supplies the callout’s heading.",
+          [318, 456, 941, 62],
+          "Edit **Title**, then click outside the field and wait for **Saved**. This title supplies the callout’s heading.",
+        ],
+      ],
+    ),
+    3: [
+      reference(
+        "practice-main-component-choices.png",
+        "Main area: Alert, Callout, and Accordion",
+        "Native Components picker showing only Alert, Callout, and Accordion in the Campaign group for the main area",
+        "Open **Insert into** for the main area, **headless-campaign-main-1**. Its native **Components** picker offers these three choices. Compare this with the sidebar picker.",
+        [330, 58, 320, 296],
+        [
+          [
+            [350, 260, 279, 74],
+            "The main area accepts **Alert**, **Callout**, and **Accordion**. **Heading**, **Links**, and **Contact** are absent.",
+          ],
+        ],
+      ),
+      reference(
+        "practice-sidebar-component-choices.png",
+        "Sidebar: Links and Contact",
+        "Native Components picker showing only Links and Contact in the Campaign group for the sidebar",
+        "Open **Insert into** for the sidebar, **headless-campaign-sidebar-1**. This picker has **Links** and **Contact**, with no **Accordion** choice. The contrast demonstrates that each area has its own allowed components.",
+        [330, 58, 320, 296],
+        [
+          [
+            [350, 260, 177, 74],
+            "The sidebar accepts **Links** and **Contact**. An **Accordion** cannot be selected in this picker.",
+          ],
+        ],
+      ),
+    ],
+    4: reference(
+      "practice-assign-content.png",
+      "Assign the existing content from your page",
+      "Assign content item dialog showing the local Data folder, Prepare for review selected, and the Assign button",
+      "After dragging an **Accordion** onto your page, the **Assign content item** dialog opens at that page’s **Data** folder. Choose **Prepare for review** and **Assign** to reuse the existing local content. Usage counts in the reference image can differ from your page.",
+      [128, 65, 1023, 590],
+      [
+        [
+          [168, 257, 106, 32],
+          "The dialog starts at the selected page’s own **Data** folder. Confirm your assigned **Practice** page before adding the component.",
+        ],
+        [
+          [205, 410, 224, 34],
+          "Choose **Prepare for review**. Leave its existing question and answer unchanged.",
+        ],
+        [
+          [1043, 595, 81, 41],
+          "Click **Assign** to reuse this item. **Duplicate and assign** would create a second item.",
         ],
       ],
     ),
   },
   "ai-assisted-authoring": {
-    1: reference(
-      "campaign-ai-grammar.png",
-      "Open the practice content item",
-      "Page Builder Content navigation and the expanded Campaign practice Data tree with Growth opportunity selected",
-      "Choose **Content**, then expand **Home** → **Agency growth** → **Campaign practice** → **Data**. Select **Growth opportunity** before recording its original **Body**. This crop shows the navigation; the temporary AI edit is shown separately in the next step.",
-      [0, 0, 715, 635],
-      [
-        [
-          [600, 2, 40, 48],
-          "Select **Content** in Page Builder’s top navigation.",
-        ],
-        [
-          [57, 315, 225, 130],
-          "Expand **Campaign practice** and **Data**, then select **Growth opportunity**.",
-        ],
-        [
-          [319, 437, 94, 29],
-          "**Body** is the rich-text field below **Title**. Record its original wording and formatting before editing.",
-        ],
-      ],
-    ),
     2: reference(
       "campaign-ai-grammar.png",
       "Review the proposed change before accepting it",

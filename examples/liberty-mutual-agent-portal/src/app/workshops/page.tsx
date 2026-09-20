@@ -230,7 +230,8 @@ export default async function WorkshopHome() {
                 from your assignment, sign out of the guide and sign in with a
                 portal username ending in your assigned number. The assignment
                 page lists the full usernames. Keeping one number separates your
-                portal work from other attendees’ work.
+                portal work and assigned Practice page content from other
+                attendees’ work. Shared site settings remain shared.
               </p>
               <Link href="/workshops/attendees">
                 Find your attendee assignment <ArrowRight size={15} />
@@ -253,11 +254,12 @@ export default async function WorkshopHome() {
             </Link>
           </section>
           <p className="workshop-directory-intro">
-            <strong>Presenter demonstration</strong> means Angela, Allen, or
-            Thomas makes changes to shared content while you watch. This keeps
-            everyone from editing the same page. Other exercises specify what
-            you can do with your assigned portal accounts or on your computer.{" "}
-            First visit? Start with{" "}
+            <strong>Presenter demonstration</strong> means a presenter makes
+            changes to shared content while you watch. For hands-on page
+            editing, use your assigned <strong>Practice</strong> page and its
+            own content in SitecoreAI. Keep it unpublished and complete its
+            cleanup. Other exercises specify what you can do with your assigned
+            portal accounts or on your computer. First visit? Start with{" "}
             <Link href="/workshops/guide/start-and-switch-agents">
               Sign in and find your workshop number
             </Link>{" "}
