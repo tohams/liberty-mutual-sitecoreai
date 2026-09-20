@@ -5,7 +5,9 @@
  * Create-only workshop practice pages. Default is read-only; never publishes,
  * changes workflow definitions, updates templates, or overwrites author edits.
  * Native createItem generates IDs; the external manifest records each ID before
- * the next write. All operations are restricted to 28 declared paths.
+ * the next write. Normal provisioning is restricted to four active paths: the
+ * practice root, presenter Demo, and its local Data folder and image. Historical
+ * pair 02–09 manifest records remain valid but never become creation targets.
  *
  * Review: ... demo --template-manifest /absolute/private/practice-template.json
  * Apply:  ... demo --template-manifest /absolute/private/practice-template.json --apply --manifest /absolute/private/practice-content.json
@@ -88,7 +90,7 @@ async function run({ query, origin, apply = false, manifest, templateManifest, p
   if (apply) assert(workflow.ids, "Provision and verify the workshop workflow before creating practice pages.");
   if (journal.workflow && workflow.ids) assert.deepEqual(journal.workflow, workflow.ids, "Recorded workshop workflow IDs changed.");
   const plans = [], inventory = new Map();
-  const specs = M.targets(workflow.ids, template.itemId);
+  const specs = M.activeTargets(workflow.ids, template.itemId);
   for (const spec of specs) {
     const item = await read(query, { path: spec.path });
     const recorded = journal.items.find(entry => entry.path === spec.path);
@@ -150,9 +152,10 @@ async function run({ query, origin, apply = false, manifest, templateManifest, p
     record({ phase: "layout-verified", path: spec.path, itemId: current.itemId });
   }
   journal.root = journal.items.find(item => item.kind === "root");
-  journal.pages = journal.items.filter(item => item.kind === "page").map(({ pair, path, itemId }) => ({ pair, path, itemId }));
+  // Retain historical item receipts, but expose only active pages to ACL tooling.
+  journal.pages = journal.items.filter(item => item.kind === "page" && specs.some(spec => spec.path === item.path)).map(({ pair, path, itemId }) => ({ pair, path, itemId }));
   persist(journal);
-  return { mode: "applied", scope: W.CONTENT_ROOT, template, workflow: workflow.ids, root: journal.root, pages: journal.pages, itemCount: journal.items.length, published: false, discovery: DISCOVERY };
+  return { mode: "applied", scope: W.CONTENT_ROOT, template, workflow: workflow.ids, root: journal.root, pages: journal.pages, itemCount: specs.length, published: false, discovery: DISCOVERY };
 }
 
 async function main(args = process.argv.slice(2)) {
