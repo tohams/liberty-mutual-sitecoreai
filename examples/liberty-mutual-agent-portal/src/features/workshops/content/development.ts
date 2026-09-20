@@ -46,11 +46,11 @@ export const developmentGuides: WorkshopGuide[] = [
           "Start as an agent so the architecture has a visible purpose. You will locate three components: guidance selected from known agent attributes, a tested call to action, and a banner selected from browsing interests. A **component** is a reusable part of a page, such as a card, search panel, or banner.",
           `Open the [**agent portal**](${portal}/login) and **Sign in** as **daniel.01** with password **Sitecore**. Select **My workspace** in the left navigation. Scroll below **Your priorities** to the white card labeled **Agency Growth**, immediately above **Recent activity**. Read its heading and yellow button; the first close-up below shows this card.`,
           "Select **Learning & resources** in the left navigation. Scroll below the search-result cards and page-number controls to **Useful guidance, easier to find**, immediately above **Your next learning opportunity**. Its yellow button is the A/B test comparison; the second close-up shows the location and an example button label.",
-          "Select **Products & appetite** in the left navigation. Look directly below the page title and **Risk state**, above the **All solutions** filter. This wide illustrated banner is **ProductSpotlight**, shown in the third close-up. Record its heading before browsing resources; your current interests may already have changed the text.",
+          "Select **Products & appetite** in the left navigation. Look directly below the page title and **Risk state**, above the **All solutions** filter. This wide illustrated banner is the **Spotlight** component, shown in the third close-up. Record its heading before browsing resources; your current interests may already have changed the text.",
         ],
         expected: [
           "**My workspace** is the portal’s home page. In **Page Builder**, select **Home** to inspect its content and components.",
-          "The **Unified Data Layer (UDL)** is SitecoreAI’s profile and engagement data layer. **Agency Growth** uses known agent attributes from that profile. **Learning & resources** compares call-to-action variations in an **A/B test**, and **ProductSpotlight** adapts to recorded browsing interests. You are locating these examples here; the marketing walkthroughs demonstrate their behavior and measurement.",
+          "The **Unified Data Layer (UDL)** is SitecoreAI’s profile and engagement data layer. **Agency Growth** uses known agent attributes from that profile. **Learning & resources** compares call-to-action variations in an **A/B test**, and **Spotlight** adapts to recorded browsing interests. You are locating these examples here; the marketing walkthroughs demonstrate their behavior and measurement.",
         ],
         links: [{ label: "Open the agent portal", href: `${portal}/login` }],
       },
@@ -60,13 +60,13 @@ export const developmentGuides: WorkshopGuide[] = [
           "Now switch from viewing the portal to inspecting its composition. **Page Builder** shows the page tree and an editable page preview, called the **canvas**. Its **editing host** is the frontend that renders that canvas; **Default editing host** uses the shared hosted version.",
           `Open [**Page Builder**](${pageBuilder}) with your invited Sitecore account. Confirm **Liberty Mutual Agent Portal** in the site selector. Leave the editing-host selector on **Default editing host**; if a previous local exercise left **Local host** selected, choose **Default editing host**, then click **Save**.`,
           "Select **Pages**, expand **Home**, and select **Home**, then **Learning & resources**. Inspect the canvas without changing fields or clicking **Publish**.",
-          "Expand **Learning & resources** and select **Workers compensation: a Texas starting point**. Select **Editor** in the top navigation, then click the stacked-layers **Layers** icon above the left tree. Find **ResourceArticle** and expand its image placeholder to see **ResourceImage**, matching the screenshot below. This connects the rendered article and photograph to the component names you will inspect in the source.",
+          "Expand **Learning & resources** and select **Workers compensation: a Texas starting point**. Select **Editor** in the top navigation, then click the stacked-layers **Layers** icon above the left tree. Find **Article** and expand its image placeholder to see **Image**, matching the screenshot below. The **Resources** section of the component library groups **Article**, **Image**, and **Search**. Their React implementations are named **ResourceArticle**, **ResourceImage**, and **ResourceSearch**, respectively.",
           `Open [**Browse component implementations**](${repository}/tree/main/examples/liberty-mutual-agent-portal/src/components). This opens **examples/liberty-mutual-agent-portal/src/components** on GitHub; a local clone is not required. Inspect **agent-guidance/AgentGuidance.tsx**, **resource-search/ResourceSearch.tsx**, **resource-article/ResourceArticle.tsx**, **resource-image/ResourceImage.tsx**, and **product-spotlight/ProductSpotlight.tsx**, and compare their rendered elements with the portal.`,
         ],
         expected: [
           "**Sitecore** stores page fields, component placement, and **datasources**—content items that supply a component’s fields. The **Sitecore Content SDK** is the developer library that renders those fields through React and connects them to visual editing tools.",
           "A component can expose rendering variants through named React exports such as **Default** and **Highlight**. The **Content SDK** generates the component maps and metadata that make these implementations available to Sitecore.",
-          "**ResourceArticle** reads its text from the resource page itself. Each article also has a **Data/Resource image** child item that supplies its photograph. The article’s image **placeholder** is a named slot for another component, and its settings permit only **ResourceImage**. This keeps authors from inserting an unrelated component into that slot.",
+          "**Article** (implemented by **ResourceArticle**) reads its text from the resource page itself. Each article also has a **Data/Resource image** child item that supplies its photograph. The article’s image **placeholder** is a named slot for another component, and its settings permit only **Image** (implemented by **ResourceImage**). This keeps authors from inserting an unrelated component into that slot.",
         ],
         links: [
           { label: "Open Page Builder", href: pageBuilder },
@@ -129,7 +129,7 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Understand identity, Search, and personalization evidence",
+        title: "Understand identity, Search, and personalization",
         action: [
           "The portal login identifies a fictional agent; its linked **UDL profile** stores the agent’s known attributes and observed engagement. An **affinity** is a browsing-interest score. These profile values select authored content variants, while server-side application checks continue to control access to protected data.",
           `Open [**Identity and saved-work contract**](${appSource}/docs/auth-and-data.md) and [**Native affinity implementation**](${repositoryDocs}/affinity-personalization.md). Read how portal sign-in identifies a native **UDL** profile and how **Top Affinity** selects an authored variant. For an actual profile lookup, use [**Check fresh profiles in SitecoreAI**](/workshops/guide/fresh-profile-restart); this architecture step does not reset or train a profile.`,
@@ -309,7 +309,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "An **editing host** is the frontend used to draw Page Builder’s page preview, called the **canvas**. Selecting **Local host** makes that preview use your code at localhost, while the content remains in the shared SitecoreAI environment.",
           `In **Chrome** on the machine running npm run dev, open [**Page Builder**](${pageBuilder}). Sign in with your invited Sitecore Cloud email, confirm **Safeco Insurance Company of America POC**, and select **Liberty Mutual Agent Portal**. Your GitHub and Daniel logins are not authoring accounts.`,
           "Open **Default editing host**, select **Local host**, enter **http://localhost:3000** in **Enter the editing host url**, and click **Save**. Keep npm run dev running on this same machine.",
-          "Select **Pages**, expand **Home**, and select **Learning & resources**. Find the **ResourceSearch** heading **What can we help you find?** on the canvas. This confirms that the editor can reach the local frontend before you change its code.",
+          "Select **Pages**, expand **Home**, and select **Learning & resources**. Find **What can we help you find?**, the heading of the **Search** component, on the canvas. This confirms that the editor can reach the local frontend before you change its code.",
         ],
         links: [{ label: "Open Page Builder", href: pageBuilder }],
         expected: [
@@ -340,7 +340,7 @@ export const developmentGuides: WorkshopGuide[] = [
       "See a code change appear in the visual editor, confirm that native Search still works, and restore the original code without affecting other attendees.",
     personas: ["daniel"],
     prerequisites: [
-      "**ResourceSearch** is the React component containing the search heading, filters, and results on **Learning & resources**. You will change one heading that lives in code while leaving its SitecoreAI Search integration intact. This shows the development loop on a functional component, not just a static page.",
+      "**Search** is the Page Builder component containing the search heading, filters, and results on **Learning & resources**. Its React implementation is **ResourceSearch**. You will change one heading that lives in code while leaving its SitecoreAI Search integration intact. This shows the development loop on a functional component, not just a static page.",
       "Complete [**Run the portal locally**](/workshops/guide/local-setup). Keep the cloned **liberty-mutual-sitecoreai** root open in **VS Code** and its integrated terminal in **examples/liberty-mutual-agent-portal**. All commands in this guide run from that application folder.",
       "Check the branch name in VS Code’s lower-left status bar: use the **workshop/your-name-resource-search** branch created during setup. Open **Source Control** and confirm **ResourceSearch.tsx** has no existing edits. If it does, preserve that work in a different checkout before starting this one-file exercise.",
       `Keep two **Chrome** tabs: [**Page Builder**](${pageBuilder}) for **Liberty Mutual Agent Portal**, connected to **Local host** at **http://localhost:3000**, and the [**local portal**](http://localhost:3000/login), signed in as **daniel.01** with password **Sitecore**. Page Builder shows how an author sees your component; the portal shows how an agent uses it. Your invited Sitecore account opens Page Builder; Daniel supplies only the portal session.`,
@@ -589,7 +589,7 @@ export const developmentGuides: WorkshopGuide[] = [
         href: `${portal}/workshops/guide/component-development`,
       },
       {
-        label: "Optional: inspect a historical release PR",
+        label: "Optional: inspect an example release PR",
         href: `${repository}/pull/21`,
       },
       {
@@ -742,7 +742,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "The panel rereads labels and help text from the managed lists. No change is expected during this read-only check. An author can maintain a label without a code deployment while preserving the stable item name and stored Search value.",
           "**Save metadata** validates selected **Draft** fields and reads changes back. The panel does not autosave, create versions, approve, publish, or reindex.",
           "**Discard changes** restores unsaved selections only. After an uncertain save, **Refresh** and inspect the actual native values before deciding what to do next.",
-          "This custom app uses an API with administrator privileges, so app access is restricted; it does not demonstrate separate Author and Approver permissions. Its underlying GraphQL save also cannot reject a competing update atomically. Coordinate edits to one article version instead of treating the panel as a simultaneous editing tool.",
+          "This custom app uses an API with administrator privileges, so app access is restricted. Its underlying GraphQL save cannot reject a competing update atomically. Have one person edit a given article version at a time to avoid overwriting another person’s change.",
         ],
         links: [
           {

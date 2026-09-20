@@ -75,7 +75,7 @@ const productSpotlight = capture(
     ],
     [
       [306, 273, 530, 160],
-      "Read the banner’s heading and supporting text. This is the **ProductSpotlight** component.",
+      "Read the banner’s heading and supporting text. This is the **Spotlight** component.",
     ],
   ],
 );

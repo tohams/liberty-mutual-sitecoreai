@@ -1,7 +1,30 @@
+/* Composition owns spacing, including when pagination or a variant is absent. */
+.cms-component-stack,
 .cms-editorial-slot {
   display: grid;
-  gap: 24px;
-  margin-block: 24px;
+  align-content: start;
+  min-width: 0;
+  gap: var(--component-gap);
+}
+.cms-editorial-slot {
+  margin-block: var(--component-gap);
+}
+.cms-component-stack:empty {
+  display: none;
+}
+/* Keep Page Builder's metadata in the DOM without allocating grid tracks. */
+.cms-component-stack > code.scpm,
+.cms-editorial-slot > code.scpm {
+  display: none;
+}
+.cms-component-stack > .panel {
+  margin-block: 0;
+}
+.cms-component-stack .resource-search-component > .panel:last-child {
+  margin-bottom: 0;
+}
+.cms-component-stack .search-pagination {
+  margin-bottom: 0;
 }
 .cms-guidance {
   display: flex;

@@ -3,7 +3,7 @@ import type { GuideImage } from "../types";
 type Bounds = [x: number, y: number, width: number, height: number];
 type Target = [bounds: Bounds, label: string];
 
-// Untouched captures from the connected sandbox on 18 September 2026.
+// Untouched captures from the connected sandbox on 18–19 September 2026.
 // Authoring these bounds in source pixels keeps each callout tied to its control.
 // The renderer receives crop pixels and annotation percentages, as required.
 function reference(
@@ -146,20 +146,20 @@ export const marketingScreenshots: Record<
     2: reference(
       "campaign-alert-editor.png",
       "Select the alert in the authoring canvas",
-      "Page Builder Layers with CampaignAlert selected and its alert message visible in the canvas",
-      "Select **CampaignAlert** in **Layers** to locate the alert on the page. This reference has no start or end date, as its display-window note confirms. Read your current values in **Content**; this image does not demonstrate a timed publication.",
+      "Page Builder Layers with Alert selected and its alert message visible in the canvas",
+      "Select **Alert** in **Layers** to locate the alert on the page. This reference has no start or end date, as its display-window note confirms. Read your current values in **Content**; this image does not demonstrate a timed publication.",
       [0, 125, 963, 465],
       [
         [
-          [2, 405, 280, 39],
-          "Select **CampaignAlert** beneath the main campaign region in **Layers**.",
+          [2, 463, 275, 36],
+          "Select **Alert** beneath the main campaign region in **Layers**.",
         ],
         [
-          [534, 326, 424, 248],
+          [533, 326, 427, 249],
           "The selected alert is outlined in the page preview. Authors can inspect its rich text here.",
         ],
         [
-          [596, 489, 363, 66],
+          [594, 492, 365, 64],
           "The **Display window (UTC)** note explains the authored visibility window. Empty dates impose no start or end limit.",
         ],
       ],
@@ -222,7 +222,7 @@ export const marketingScreenshots: Record<
           ],
           [
             [157, 441, 610, 36],
-            "The **brandKitId** identifies the kit used for this saved run. This is reference evidence; no value needs to be copied.",
+            "The **brandKitId** identifies the kit used for this saved run. No value needs to be copied.",
           ],
         ],
       ),
@@ -290,13 +290,13 @@ export const marketingScreenshots: Record<
       reference(
         "ab-test-configuration.png",
         "Locate the component test and its applied settings",
-        "Page Builder showing AgentGuidance, its test icon, and the Applied configurations panel with an equal traffic split",
-        "Select **AgentGuidance** in **Layers**, open its test, and choose **Applied configurations**. This captured configuration shows equal traffic allocation to **A** and **B**. Read the current saved configuration without changing or ending the test.",
+        "Page Builder showing Guidance, its test icon, and the Applied configurations panel with an equal traffic split",
+        "Select **Guidance** in **Layers**, open its test, and choose **Applied configurations**. This captured configuration shows equal traffic allocation to **A** and **B**. Read the current saved configuration without changing or ending the test.",
         [0, 122, 784, 507],
         [
           [
             [6, 298, 272, 38],
-            "The flask icon identifies the test on **AgentGuidance**.",
+            "The flask icon identifies the test on **Guidance**.",
           ],
           [
             [484, 173, 184, 35],
@@ -335,14 +335,11 @@ export const marketingScreenshots: Record<
     1: reference(
       "growth-personalization-rule.png",
       "Read the calculation used by the component rule",
-      "Personalization Builder for the CampaignCallout showing the small business growth opportunity custom value and Is true condition",
-      "The rule builder identifies **CampaignCallout** as the base component. Its row matches when **Liberty Mutual - Small business growth opportunity** returns **Is true**. Inspect the row, then close without saving changes.",
+      "Personalization Builder for the Callout showing the small business growth opportunity custom value and Is true condition",
+      "The rule builder identifies **Callout** as the base component. Its row matches when **Liberty Mutual - Small business growth opportunity** returns **Is true**. Inspect the row, then close without saving changes.",
       [31, 28, 1217, 390],
       [
-        [
-          [46, 174, 332, 30],
-          "Confirm the base component is **CampaignCallout**.",
-        ],
+        [[46, 174, 332, 30], "Confirm the base component is **Callout**."],
         [
           [141, 296, 506, 49],
           "The column names the reusable **Liberty Mutual - Small business growth opportunity** calculation.",
@@ -379,7 +376,7 @@ export const marketingScreenshots: Record<
         "growth-avery-test.png",
         "Avery’s test result: true",
         "Test custom value dialog showing Response and a true result",
-        "After loading Avery’s current SitecoreAI profile and clicking **Run test**, read **Response**. This verified reference returns **true**, matching Cedar Ridge’s 14.46% small-commercial share. Use the current profile UUID obtained in the guide.",
+        "After loading Avery’s current SitecoreAI profile and clicking **Run test**, read **Response**. This example returns **true**, matching Cedar Ridge’s 14.46% small-commercial share. Use the current profile UUID obtained in the guide.",
         [136, 47, 1006, 169],
         [
           [[279, 98, 102, 40], "Select **Response** after the test completes."],
@@ -393,7 +390,7 @@ export const marketingScreenshots: Record<
         "growth-daniel-test.png",
         "Daniel’s test result: false",
         "Test custom value dialog showing Response and a false result",
-        "Repeat with Daniel’s current SitecoreAI profile. This verified reference returns **false**, matching Prairie Oak’s 36.86% share. The comparison evaluates the saved calculation without changing either profile.",
+        "Repeat with Daniel’s current SitecoreAI profile. This example returns **false**, matching Prairie Oak’s 36.86% share. The comparison evaluates the saved calculation without changing either profile.",
         [136, 47, 1006, 169],
         [
           [

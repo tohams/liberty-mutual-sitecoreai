@@ -12,7 +12,7 @@ SharedFields:
   Value: /sitecore/templates/Project/LibertyMutual/ResourcePage
 - ID: b5b27af1-25ef-405c-87ce-369b3a004016
   Hint: Datasource Location
-  Value:
+  Value: null
 - ID: a77e8568-1ab3-44f1-a664-b7c37ec7810d
   Hint: Parameters Template
   Value: "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
@@ -28,8 +28,15 @@ SharedFields:
 - ID: e829c217-5e94-4306-9c48-2634b094fdc2
   Hint: OtherProperties
   Value: IsRenderingsWithDynamicPlaceholders=true
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
 Languages:
 - Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Article
   Versions:
   - Version: 1
     Fields:

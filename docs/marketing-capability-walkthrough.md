@@ -57,7 +57,7 @@ The separate native **Contact your team** form below demonstrates SitecoreAI For
 
 ## Native Forms: Contact your team
 
-This exercise connects a marketer-managed SitecoreAI form to its configured receiver. **Verified September 16, 2026:** native activation and Test webhook delivery work; preview checks cover required-field/email validation and a 390-pixel layout without horizontal overflow. A production submission by `daniel.04` reached the receiver with all five fields, displayed the success message and left saved portal requests unchanged. Reloading clears the form and message. The current free receiver expires September 23, 2026; follow the [receiver preparation](native-forms-operator-guide.md#receiver-availability) before later runs and repeat the [acceptance checks](native-forms-operator-guide.md#acceptance-and-reset) after configuration changes.
+This exercise connects a marketer-managed SitecoreAI form to **Demo Webhook**, its configured receiving URL. Submit fictional details, then inspect the received request in the inbox. Reloading clears the form and success message. The free receiving inbox can expire; [receiver configuration](native-forms-operator-guide.md#receiver-availability) explains how to replace it in SitecoreAI if needed.
 
 | Step | Click or inspect | Observe |
 |---|---|---|
@@ -88,21 +88,21 @@ This component-copy exercise needs a coordinator. Before starting, the coordinat
 
 | Step | Click or inspect | Observe |
 |---|---|---|
-| C9 | Open **Page Builder → Liberty Mutual Agent Portal → Home → Agency growth → Campaign practice**. In **Layers**, select the first **CampaignAccordion**. | The floating component toolbar is available. Keep **Default** as the editing host. |
+| C9 | Open **Page Builder → Liberty Mutual Agent Portal → Home → Agency growth → Campaign practice**. In **Layers**, select the first **Accordion**. | The floating component toolbar is available. Keep **Default** as the editing host. |
 | C10 | Select **Duplicate component**. Inspect the copy and its datasource. | The duplicate has its own local content item, for example **Start the conversation_var2**. Later copies can use another suffix. |
-| C11 | Select **Move up**. Open **Swap with another component** and inspect the choices; cancel without swapping. | Main offers **CampaignAccordion**, **CampaignAlert** and **CampaignCallout**. |
-| C12 | Select **CampaignLinkList → Swap with another component**, inspect, then cancel. Have the coordinator restore the recorded practice layout. | Sidebar offers **CampaignContact** and **CampaignLinkList**. The coordinator recycles only the duplicate's new datasource and verifies the original layout; the page remains unpublished. |
+| C11 | Select **Move up**. Open **Swap with another component** and inspect the choices; cancel without swapping. | Main offers **Accordion**, **Alert** and **Callout**. |
+| C12 | Select **Links → Swap with another component**, inspect, then cancel. Have the coordinator restore the recorded practice layout. | Sidebar offers **Contact** and **Links**. The coordinator recycles only the duplicate's new datasource and verifies the original layout; the page remains unpublished. |
 
-The **Content** panel exposes the fields appropriate to the selected component. Page Builder supports drag-and-drop composition; this walkthrough uses the verified native toolbar controls. Inspect the campaign at a narrow browser width as part of the responsive rendering review. Content/layout changes do not require an application Git deployment.
+The **Campaign** section of the component library groups **Layout**, **Heading**, **Alert**, **Callout**, **Accordion**, **Links**, and **Contact**. Each uses a short name and a purpose-specific icon. The **Content** panel exposes the fields appropriate to the selected component. Page Builder supports drag-and-drop composition; this walkthrough uses the verified native toolbar controls. Inspect the campaign at a narrow browser width as part of the responsive rendering review. Content/layout changes do not require an application Git deployment.
 
 | Component | Author-managed fields | Intended location |
 |---|---|---|
-| CampaignHero | Eyebrow, Title, Summary, Icon | Hero |
-| CampaignAlert | Title, rich-text Body, Visible from (UTC), Visible until (UTC) | Main |
-| CampaignCallout | Eyebrow, Title, rich-text Body, Action link | Main |
-| CampaignAccordion | Question, rich-text Answer | Main |
-| CampaignLinkList | Title, Icon, First link, Second link, Third link | Sidebar |
-| CampaignContact | Title, Summary, Button label | Sidebar |
+| **Heading** (`CampaignHero`) | Eyebrow, Title, Summary, Icon | Hero |
+| **Alert** (`CampaignAlert`) | Title, rich-text Body, Visible from (UTC), Visible until (UTC) | Main |
+| **Callout** (`CampaignCallout`) | Eyebrow, Title, rich-text Body, Action link | Main |
+| **Accordion** (`CampaignAccordion`) | Question, rich-text Answer | Main |
+| **Links** (`CampaignLinkList`) | Title, Icon, First link, Second link, Third link | Sidebar |
+| **Contact** (`CampaignContact`) | Title, Summary, Button label | Sidebar |
 
 The local Data items have descriptive names: **Campaign introduction**, **Preparation update**, **Growth opportunity**, **Start the conversation**, **Prepare for review**, **Useful resources** and **Your next step**. Authors can find content by its purpose instead of tracing anonymous items.
 
@@ -152,7 +152,7 @@ SitecoreAI's Modern Media image-upload workflow can generate editable alt text a
 
 The Texas resource loop supplies the deliberate release path: create a named English Draft, edit Summary, wait for Saved, preview using Default, approve, publish only the intended English page and explicitly reindex **Liberty Mutual Agent Resources**. Verify the live article and Search result. Restore the original through a new version and the same publication/indexing sequence.
 
-This shows the operator workflow. Separate customer author and approver accounts need their own access acceptance before the workflow is described as proven separation of duties. Portal agent roles and Sitecore staff roles serve different purposes.
+For separate author and approver responsibilities, follow [Review and publish content](https://liberty-mutual-agent-portal.vercel.app/workshops/guide/author-approver-workflow). The presenters use two SitecoreAI accounts to move a practice page through **Draft → Awaiting approval → Approved**, followed by publication.
 
 ### Rich-text alerts
 
@@ -204,7 +204,7 @@ The growth criterion is below 20%. Cedar Ridge's seeded share is about 14.46%, w
 
 | Step | Click or inspect | Observe |
 |---|---|---|
-| P1 | In Page Builder, open **Home → Agency growth → Small-business growth**. Select **CampaignCallout** in **Layers** and click **Edit personalization rules**. | The right panel shows **Personalized**. Its variant selector offers **Original** and **1 Liberty Mutual - Small business growth opportunity is true**. Leave the active rules running. |
+| P1 | In Page Builder, open **Home → Agency growth → Small-business growth**. Select **Callout** in **Layers** and click **Edit personalization rules**. | The right panel shows **Personalized**. Its variant selector offers **Original** and **1 Liberty Mutual - Small business growth opportunity is true**. Leave the active rules running. |
 | P2 | Open the [custom JavaScript value](https://app.sitecorecloud.io/personalize/custom-values/9faad837-0e23-4b5b-af10-c6883dba86ac?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df) and inspect its input attributes. | The threshold, identity/role requirements and neutral fallback are explicit. |
 | P3 | Load Avery's actual Sitecore profile, then Daniel's from the same pack. Use [profile lookup](demo-loops.md) to obtain the native profile ID. | Avery meets the growth criterion; Daniel follows neutral guidance. The portal's imported identifier is not necessarily the native profile ID. |
 | P4 | [Sign in](https://liberty-mutual-agent-portal.vercel.app/login) as `avery.01` and open the campaign. Sign out, then repeat as `daniel.01`. | Avery sees **Build on your personal-lines relationships**. Daniel sees **Turn local knowledge into a stronger submission**. Compare those headings with the native test. |
@@ -233,7 +233,7 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 | 2 | Personalize by state | Daniel/Maya journeys show licensed-state filtering in the portal and Search. Native state-based page/component variants are a separate configuration option; the current native examples use role, calculated share and affinity. |
 | 3 | Accordions | C3: two authored questions on the campaign. |
 | 4 | Content Organization & Media | Sections 3 and 5: local Data folders, branches, taxonomy and Modern Media. |
-| 5 | Workflow & Collaboration | Section 6: versions and approval/publication. Separate customer author/approver access still requires acceptance. |
+| 5 | Workflow & Collaboration | Section 6: versions, approval, and publication. The linked Page Builder exercise shows the separate Author and Approver responsibilities. |
 | 6 | Versioning & Publishing | The Texas loop retains original, temporary and restoring versions. |
 | 7 | Governance, Security & Access | Restricted placeholders, staff roles and portal server authorization have distinct responsibilities. |
 | 8 | Accessibility & Compliance | Campaign semantic controls, keyboard operation, dialog focus, labels and descriptive images. Validation supports accessibility; it is not a compliance certification. |
@@ -242,12 +242,12 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 | 11 | Caching controls | Published delivery plus application retrieval/revalidation settings. Architecture owns the CMS, Edge, frontend and CDN boundaries. |
 | 12 | Responsive rendering | Review the actual campaign at desktop and narrow browser widths, including navigation, accordions and the dialog. |
 | 13 | L2 Navigation | C1/C2: Agency growth child navigation and campaign section anchors. |
-| 14 | Call out | The authored CampaignCallout with heading, rich text and action link. |
+| 14 | Call out | The authored **Callout** with a heading, rich text, and action link. |
 | 15 | Link box component | **Keep useful guidance close**: titled, icon-led list of three authored links. |
 | 16 | Main navigation | Portal navigation and the Agency growth child. State/MI/reward navigation targeting needs an agreed data model and component rules; no live MI feed is implied. |
 | 17 | Modal | C5: triggered contact dialog with keyboard behavior. Event/MI triggers need the relevant integration and display logic. |
 | 18 | CTA Buttons | Campaign preparation and conversation actions, plus the existing Resources A/B CTA. |
-| 19 | Page title | CampaignHero's authored title and icon. |
+| 19 | Page title | The **Heading** component’s authored title and icon. |
 | 20 | Salesforce/Snowflake data connectors | Salesforce is the existing backend; its live connection remains integration work. The POC uses replaceable JSON-backed adapters and imported profile extensions. Confirm Snowflake requirements separately. |
 | 21 | Alerts | Section 6: rich-text alert body and explicit UTC visibility dates. |
 | 22 | Dynamic data-driven personalization rules | P1–P4: native JavaScript calculation, decision table and browser comparison. |

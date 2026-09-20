@@ -14,6 +14,7 @@ import json
 import subprocess
 import sys
 import yaml
+from component_library_model import apply_rendering_metadata
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'authoring/items/liberty-mutual'
@@ -77,6 +78,9 @@ def records(manifest):
         ]))
     result.append(item(VARIANT, '19a63bdd-f9c6-403b-8068-c1884e9bb413', '49c111d0-6867-4798-a724-1f103166e6e9'))
     result.append(item(VARIANT + '/Default', uid(VARIANT), '4d50cdae-c2d9-4de8-b080-8f992bfb1b55'))
+    for record in result:
+        if record['Path'] == RENDERING:
+            apply_rendering_metadata(record)
     return result
 
 

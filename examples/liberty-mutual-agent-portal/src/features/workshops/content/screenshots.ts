@@ -34,7 +34,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
   "resource-content-workflow": {
     "3": {
       file: "pagebuilder-resource.png",
-      alt: "Page Builder showing the Texas resource and its ResourceArticle and ResourceImage layers",
+      alt: "Page Builder showing the Texas resource and its Article and Image layers",
       caption:
         "Reference layout for the Texas resource. **Layers** identifies the article and its nested image. The version shown is **Live**; follow this guide’s **Draft** creation step before editing so published content remains unchanged during preparation.",
     },
@@ -54,9 +54,9 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
     },
     "5": {
       file: "pagebuilder-resource.png",
-      alt: "Page Builder Layers showing the nested ResourceImage component",
+      alt: "Page Builder Layers showing the nested Image component",
       caption:
-        "Existing article for reference: **ResourceImage** belongs inside **ResourceArticle**’s image placeholder. Your new page has its own local image datasource.",
+        "Existing article for reference: **Image** belongs inside **Article**’s image placeholder. Your new page has its own local image datasource.",
     },
   },
   "affinity-personalization": {
@@ -116,7 +116,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
   "architecture-and-ownership": {
     "2": {
       file: "pagebuilder-resource.png",
-      alt: "ResourceArticle and ResourceImage layers in Page Builder",
+      alt: "Article and Image layers in Page Builder",
       caption:
         "Authored page fields and local image data are rendered by the corresponding React components.",
     },

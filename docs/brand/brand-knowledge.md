@@ -346,7 +346,7 @@ assets/ | Official logo geometry and open-source Roboto font with license.
 
 Update and handoff
 
-Assign a brand/content owner and a technical owner. On change, update the source date and version, review affected copy, refresh the native kit and record any component-token changes. Retain previous versions and native IDs in the handoff record. Customer corporate brand approval remains a separate process; this pack was prepared from public sources for the authorized sandbox.
+Assign a brand/content owner and a technical owner. On change, update the source date and version, review affected copy, refresh the native kit and record any component-token changes. Retain previous versions and native IDs in the handoff record. We assembled this sample Brand Kit for the Liberty Mutual Agent Portal workshop.
 
 BRAND KNOWLEDGE / 11
 

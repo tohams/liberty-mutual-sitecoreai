@@ -4,10 +4,10 @@ This directory preserves source and evidence for native SitecoreAI personalizati
 
 ## Choose the relevant surface
 
-- Workspace **AgentGuidance** uses the known role and agency growth flag described below.
+- Home **Guidance** (`AgentGuidance`) uses the known role and agency growth flag described below.
 - Learning & resources has a separate [native Resources A/B test](../../docs/ab-testing.md).
-- Products & appetite uses **ProductSpotlight** and the built-in Top Affinity value, with [page assignments, model, native decision and verified browsing journeys](../../docs/affinity-personalization.md).
-- Small business growth uses **CampaignCallout** and the calculated premium-share condition described below.
+- Products & appetite uses **Spotlight** (`ProductSpotlight`) and the built-in Top Affinity value, with [page assignments, model, native decision and verified browsing journeys](../../docs/affinity-personalization.md).
+- Small business growth uses **Callout** (`CampaignCallout`) and the calculated premium-share condition described below.
 
 These configurations are independent. Changing a serialized datasource does not configure cloud decisions, transfer native history or authorize insurance transactions.
 
@@ -21,7 +21,7 @@ The active **Liberty Mutual - Campaign growth opportunity** decision table appli
 - [Native configuration identifiers](custom-values/small-business-growth-opportunity.metadata.json)
 - [Native profile tests and published browser observations](verification/small-business-growth-opportunity.native-tests.json)
 
-In Page Builder, select **Small-business growth → Layers → CampaignCallout → Edit personalization rules** to inspect the table. Select **Original** or the **is true** variant to preview its authored copy. Avoid stopping the running personalization during a walkthrough.
+In Page Builder, select **Small-business growth → Layers → Callout → Edit personalization rules** to inspect the table. Select **Original** or the **is true** variant to preview its authored copy. Avoid stopping the running personalization during a walkthrough.
 
 To see actual decisions, use the [published portal login](https://liberty-mutual-agent-portal.vercel.app/login). Avery sees **Build on your personal-lines relationships**; Daniel and Maya see **Turn local knowledge into a stronger submission**. Sign out between personas. The editing preview can show unpublished content and is not the acceptance surface for Live delivery or expiration.
 

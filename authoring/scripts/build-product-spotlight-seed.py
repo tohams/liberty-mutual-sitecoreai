@@ -21,6 +21,7 @@ import re
 import uuid
 
 import yaml
+from component_library_model import apply_rendering_metadata
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -209,6 +210,9 @@ def build_items(manifest):
         records.append(item(DATASOURCE_PATH + '/' + name, uid(DATASOURCE_PATH), uid(TEMPLATE_PATH),
                             shared=[field('a4f985d9-98b3-4b52-aaaf-4344f6e747c6', '__Workflow', brace(DATASOURCE_WORKFLOW))],
                             values=content_fields))
+    for record in records:
+        if record['Path'] == RENDERING_PATH:
+            apply_rendering_metadata(record)
     return records
 
 

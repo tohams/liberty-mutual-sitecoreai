@@ -9,6 +9,8 @@ const fs = require("node:fs"),
   assert = require("node:assert/strict"),
   crypto = require("node:crypto");
 const M = require("./campaign-authoring-model.cjs");
+const LIBRARY = require("../items/liberty-mutual/component-library-manifest.json");
+const CAMPAIGN_LIBRARY = LIBRARY.sections.find((section) => section.name === "Campaign");
 const {
   connection,
   read,
@@ -44,10 +46,12 @@ desired.push({
   fields: [
     {
       name: "Renderings",
-      value: ["CampaignPage", ...Object.keys(COMPONENTS)]
+      value: CAMPAIGN_LIBRARY.components
         .map((c) => brace(uid(RP + "/" + c)))
         .join("|"),
     },
+    { name: "__Display name", value: CAMPAIGN_LIBRARY.displayName },
+    { name: "__Sortorder", value: String(CAMPAIGN_LIBRARY.sortOrder) },
   ],
 });
 for (const [page, title, approved] of [

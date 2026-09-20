@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.ComponentLibrary",
+  "description": "Four exact developer-owned component-library configuration items. Only section grouping, membership, order, and English display names; no editorial content or other native groups.",
+  "items": {
+    "includes": [
+      {
+        "name": "component-library-root",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "component-library-campaign",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Campaign",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "component-library-resources",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Resources",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "component-library-agent-portal",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      }
+    ]
+  }
+}

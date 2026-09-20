@@ -110,6 +110,86 @@ test("workshop practice pages render their native article in editing and deliver
   }
 });
 
+test("all fifteen authoring practice routes retain their native campaign composition", () => {
+  const hero: ComponentRendering = {
+    componentName: "CampaignHero",
+    uid: "practice-hero-instance",
+    dataSource: "page:/Data/Campaign introduction",
+    fields: { title: { value: "Practice campaign" } },
+  };
+  const campaign: ComponentRendering = {
+    componentName: "CampaignPage",
+    uid: "practice-campaign-instance",
+    params: { DynamicPlaceholderId: "1" },
+    placeholders: { "headless-campaign-hero-1": [hero] },
+  };
+  const layout: RouteData = {
+    name: "Practice",
+    placeholders: { "headless-campaign-page": [campaign, guidance] },
+  };
+  const before = structuredClone(layout);
+  for (const mode of [
+    editing,
+    { isEditing: false, isPreview: true },
+    delivery,
+  ]) {
+    for (let number = 1; number <= 15; number++) {
+      const route = `/practice/practice-${String(number).padStart(2, "0")}`;
+      for (const path of [route, `${route}/`]) {
+        const placements = getPortalPlaceholders(path, layout, mode);
+        assert.deepEqual(Object.keys(placements), ["campaignPage"], path);
+        assert.equal(placements.campaignPage?.name, "headless-campaign-page");
+        assert.deepEqual(placements.campaignPage?.rendering.placeholders, {
+          "headless-campaign-page": [campaign],
+        });
+        assert.equal(
+          placements.campaignPage?.rendering.placeholders[
+            "headless-campaign-page"
+          ][0],
+          campaign,
+          "Native composition, local datasource, UIDs, and editable fields survive",
+        );
+      }
+    }
+  }
+  assert.deepEqual(layout, before, "Native layout data is not mutated");
+});
+
+test("practice folder, invalid numbers, and nested paths do not expose the campaign slot", () => {
+  const layout: RouteData = {
+    name: "Invalid practice route",
+    placeholders: {
+      "headless-campaign-page": [{ componentName: "CampaignPage" }],
+    },
+  };
+  for (const mode of [
+    editing,
+    { isEditing: false, isPreview: true },
+    delivery,
+  ]) {
+    for (const route of [
+      "/practice",
+      "/practice/",
+      "/practice/practice-00",
+      "/practice/practice-16",
+      "/practice/practice-99",
+      "/practice/practice-1",
+      "/practice/practice-001",
+      "/practice/practice-01/other",
+      "/practice/practice-15/Data",
+      "/practice/other/practice-01",
+      "/other/practice/practice-01",
+      "/practice//practice-01",
+    ]) {
+      assert.equal(
+        getPortalPlaceholders(route, layout, mode).campaignPage,
+        undefined,
+        route,
+      );
+    }
+  }
+});
+
 test("misplaced components cannot render in another component's placeholder", () => {
   for (const mode of [delivery, editing]) {
     const resources = getPortalPlaceholders("/resources", allSlots, mode);

@@ -141,7 +141,7 @@
 }
 .workshop-persona-usernames {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 8px 12px;
   padding: 0;
   margin: 20px 0;
@@ -169,7 +169,8 @@
 .workshop-attendee-resources h2 {
   font-size: 18px;
 }
-.workshop-attendee-accounts a {
+.workshop-attendee-sitecore > a,
+.workshop-attendee-resources > a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -439,6 +440,15 @@
   color: var(--w-navy);
 }
 @media (max-width: 850px) {
+  .workshop-attendees-layout {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+  .workshop-attendees-layout > * {
+    width: 100%;
+    min-width: 0;
+  }
   .workshop-reset-layout {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -813,7 +823,8 @@
 .workshop-before > div > svg {
   color: #746892;
 }
-.workshop-before a {
+.workshop-before > div > a,
+.workshop-before > a {
   font-size: 11px;
   font-weight: 700;
   display: inline-flex;
@@ -910,6 +921,9 @@
   color: var(--w-muted);
   font-size: 13px;
   line-height: 1.8;
+}
+.workshop-before + .workshop-directory-intro {
+  margin-top: 28px;
 }
 .workshop-directory-tools label {
   display: flex;
@@ -1207,6 +1221,9 @@
   font-size: 13px;
   color: #666577;
   line-height: 1.9;
+}
+.workshop-preparation > p + ul {
+  margin-top: 14px;
 }
 .workshop-preparation li {
   padding-left: 4px;
@@ -2014,14 +2031,6 @@
   .workshop-attendees-page {
     padding: 24px 22px 45px;
   }
-  .workshop-attendees-layout {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 32px;
-  }
-  .workshop-attendees-layout > * {
-    width: 100%;
-  }
   .workshop-attendees-heading {
     margin: 28px 0;
   }
@@ -2341,7 +2350,17 @@
   margin: 15px 0;
 }
 .workshop-reset-details dd {
+  margin: 0;
   overflow-wrap: anywhere;
+}
+@media (max-width: 620px) {
+  .workshop-reset-details dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .workshop-reset-details dd + dt {
+    margin-top: 12px;
+  }
 }
 
 .workshop-reset-notice {

@@ -16,6 +16,7 @@
   --green: #2c7055;
   --radius: 12px;
   --shadow: 0 8px 30px #16132e06;
+  --component-gap: 24px;
 }
 * {
   box-sizing: border-box;
@@ -685,7 +686,7 @@ p {
 .workspace-primary {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--component-gap);
 }
 .workspace-primary > .panel {
   margin-bottom: 0;

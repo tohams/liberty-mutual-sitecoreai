@@ -443,7 +443,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       workshopNumberPrerequisite,
       platformPrerequisite,
-      `Review the existing form configuration with the presenter, then submit fictional details through the portal. [**The form receipt inbox**](${receiptInbox.href}) opens the receiver used by **Demo Webhook**. The presenter checks this receiver before the session; follow the presenter for configuration and receipt inspection if you lack Forms administration access.`,
+      `Review the existing form configuration with the presenter, then submit fictional details through the portal. [**The form receipt inbox**](${receiptInbox.href}) opens the receiver used by **Demo Webhook**. Follow the presenter for configuration and receipt inspection if you lack Forms administration access.`,
       "Use fictional contact details. **Demo Webhook** is the configured delivery connection, and **Webhook.site** is its temporary receiving inbox. A **receipt** here means the received request record, not an email confirmation. A business backend would handle Salesforce activity or email delivery.",
     ],
     links: [
@@ -528,7 +528,7 @@ export const marketingGuides: WorkshopGuide[] = [
       "The presenter uses **daniel.01** with password **Sitecore** for the live-portal checks. Attendees follow that screen while the shared article is edited and restored.",
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team selects one presenter to edit the shared Texas article; everyone else follows that screen. The presenter needs permission to edit and publish the resource; **Resource metadata** currently requires organization administrator/owner access. The separate [**Review and publish content**](/workshops/guide/author-approver-workflow) demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
+      "Follow the presenter as they edit the shared Texas article. Editing and publishing require access to this resource; **Resource metadata** currently requires organization administrator/owner access. The separate [**Review and publish content**](/workshops/guide/author-approver-workflow) demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
       "A **version** retains a revision of this article in a selected language. A **Draft** can be edited; approval makes it eligible for publication in this configured workflow. **Metadata** describes the article’s state, product, and other classifications used by Search. Complete publication, Search refresh, and restoration so the temporary summary is not left live.",
     ],
     links: [
@@ -555,7 +555,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Create one named English Draft",
         action: [
-          `Open [**Page Builder**](${PAGES}). In the left page tree, expand **Home** > **Learning & resources**, then select **Workers compensation: a Texas starting point**. Click the stacked-layers **Layers** icon above the tree and select **ResourceArticle**.`,
+          `Open [**Page Builder**](${PAGES}). In the left page tree, expand **Home** > **Learning & resources**, then select **Workers compensation: a Texas starting point**. Click the stacked-layers **Layers** icon above the tree and select **Article**.`,
           "Above the page canvas, the version dropdown is immediately left of **Default editing host**. Open it, record the selected **English** version number, then choose **Create version**. Name the version resource-review-[your initials]-[date-time] and click **Create** so you can recognize it later.",
           "Reopen that version dropdown and select the newest **English** **Draft** with your version name. Wait for its fields to load. In the top toolbar, click the puzzle-piece **Apps** icon, then **Resource metadata**. Check the selected page, language, and version shown in the panel.",
         ],
@@ -706,7 +706,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "**Page created from branch template** appears. The title starts with the page name you entered; summary, body, reviewed date, source, and metadata start empty.",
-          "The branch supplies the **ResourceArticle** page section and its nested **ResourceImage** section. It also creates **Data** > **Resource image**, the content item that feeds the image component, often called its **datasource**. You can fill this page without assembling the layout or changing existing articles.",
+          "The branch supplies the **Article** page section and its nested **Image** section. It also creates **Data** > **Resource image**, the content item that feeds the image component, often called its **datasource**. You can fill this page without assembling the layout or changing existing articles.",
         ],
         links: [pageBuilder],
       },
@@ -803,7 +803,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Find **Title**, above the **Body** rich-text editor. Copy the complete current **Title** into a local note. This is the heading you will change and restore; leave the other fields unchanged.",
         ],
         expected: [
-          "**CampaignCallout** is the reusable page component that draws the card. **Growth opportunity** is its content item, or **datasource**, stored beneath **Data**. Its **Title**, **Body**, and **Action link** supply the heading, supporting text, and button. You are changing one content field while retaining the component’s design.",
+          "**Callout**, in the **Campaign** component-library section, is the reusable page component that draws the card. **Growth opportunity** is its content item, or **datasource**, stored beneath **Data**. Its **Title**, **Body**, and **Action link** supply the heading, supporting text, and button. You are changing one content field while retaining the component’s design.",
         ],
         links: [pageBuilder],
       },
@@ -821,7 +821,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "See the change on the page",
         action: [
           "Select **Campaign practice** in the content tree, then click **Editor** in the top navigation. Keep **Default editing host** selected above the canvas.",
-          "Open the stacked-layers **Layers** icon in the left pane and select **CampaignCallout**. Read the heading on that card in the canvas. If it still shows the previous text, reload the page after the save completes.",
+          "Open the stacked-layers **Layers** icon in the left pane and select **Callout**. Read the heading on that card in the canvas. If it still shows the previous text, reload the page after the save completes.",
         ],
         expected: [
           "The callout shows **Prepare for your next small-business conversation.** Its supporting text, button, and page position remain the same.",
@@ -833,7 +833,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Restore the original heading",
         action: [
           "Return to **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data** > **Growth opportunity**. Replace **Title** with the exact text recorded in step 1.",
-          "Click outside the field, wait for **Saved**, and reload. Compare **Title** with your note. Return to **Campaign practice** > **Editor** and confirm the original heading appears on **CampaignCallout**.",
+          "Click outside the field, wait for **Saved**, and reload. Compare **Title** with your note. Return to **Campaign practice** > **Editor** and confirm the original heading appears on **Callout**.",
         ],
         expected: [
           "The saved field and page preview match the starting heading. The practice page remains unpublished.",
@@ -866,7 +866,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team identifies one presenter with access to the unpublished **Campaign practice** page, its **Data** items, and **Optimize with AI**. Everyone else follows that screen because the **Growth opportunity** content item is shared. The presenter records and restores the exact original **Body**, including formatting.",
+      "Follow the presenter in the unpublished **Campaign practice** page. This exercise uses **Optimize with AI** on the shared **Growth opportunity** content item, so everyone follows the same screen. The presenter records and restores the exact original **Body**, including formatting.",
     ],
     links: [pageBuilder],
     steps: [
@@ -935,7 +935,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "The workshop team identifies a presenter with access to **Campaign practice** for the first two, read-only steps. **UTC** is the common time zone used by these date fields; compare times in UTC rather than your computer’s local time. The final two steps are an optional developer demonstration requiring publication API access, a prepared sample, and agreed UTC start and end times.",
+      "Follow the presenter in **Campaign practice** for the first two, read-only steps. **UTC** is the common time zone used by these date fields; compare times in UTC rather than your computer’s local time. The final two steps are an optional developer demonstration requiring publication API access, a prepared sample, and agreed UTC start and end times.",
     ],
     links: [
       pageBuilder,
@@ -960,7 +960,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Keep inactive content editable",
         action: [
-          "Select **Campaign practice**, return to **Editor**, and find **CampaignAlert** in **Layers**. Keep the **Default** editing host so you inspect the hosted authoring view.",
+          "Select **Campaign practice**, return to **Editor**, and find **Alert** in **Layers**. Keep the **Default** editing host so you inspect the hosted authoring view.",
           "Compare the canvas with the dates read in step 1. If both dates are empty, no display window is configured. If the recorded window is inactive, the alert remains visible to authors so they can edit it; leave the dates unchanged.",
         ],
         expected: [
@@ -970,7 +970,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Prepare the optional scheduled-publication demonstration",
         action: [
-          `For the optional timed demonstration, follow the developer identified by the workshop team. That developer prepares **campaign-schedule-check** using [**the scheduling guide**](${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise). Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.`,
+          `For the optional timed demonstration, follow the developer’s screen. That developer prepares **campaign-schedule-check** using [**the scheduling guide**](${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise). Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.`,
           "Record the page URL and UTC start and end times supplied by the developer. The developer verifies the **English** page and its local content are initially absent from **Live Experience Edge**, establishing the before-publication baseline.",
         ],
         expected: [
@@ -1100,10 +1100,10 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the rule on its own component",
         action: [
           `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, expand **Home** > **Agency growth** and click **Small-business growth**. Keep **Editor** selected in the top navigation.`,
-          "Click the stacked-layers **Layers** icon at the top of the left pane. **Layers** lists the page’s components, or sections. Select **CampaignCallout**, the campaign’s guidance card, then open **Edit personalization rules** to see how an audience is matched to content.",
+          "Click the stacked-layers **Layers** icon at the top of the left pane. **Layers** lists the page’s components, or sections. Select **Callout**, the campaign’s guidance card, then open **Edit personalization rules** to see how an audience is matched to content.",
         ],
         expected: [
-          "**CampaignCallout** is the campaign’s guidance card. Its **Personalized** panel shows **Liberty Mutual - Small business growth opportunity**. The rule connects a calculated audience condition to an authored content **variant**, an alternative version of the card’s message and action.",
+          "**Callout** is the campaign’s guidance card. Its **Personalized** panel shows **Liberty Mutual - Small business growth opportunity**. The rule connects a calculated audience condition to an authored content **variant**, an alternative version of the card’s message and action.",
         ],
         links: [pageBuilder],
       },
@@ -1197,7 +1197,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "Five pages carry interest tags. **Products & appetite** itself is untagged, so checking its guidance card does not add a topic score. The resource visits in this exercise supply the browsing signal.",
-          "Existing history can already select a topic. The default message is expected only for an independently confirmed profile with no relevant affinity.",
+          "Existing browsing history can already select a topic. A profile with no relevant browsing interest shows the default message.",
         ],
       },
       login("daniel"),
@@ -1262,12 +1262,12 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the authored mapping behind the result",
         action: [
-          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Products & appetite**. In **Editor**, click the stacked-layers **Layers** icon to list the page’s components, or sections. Select **ProductSpotlight**, the guidance card you inspected in the portal, and click **Edit personalization rules**.`,
+          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Products & appetite**. In **Editor**, click the stacked-layers **Layers** icon to list the page’s components, or sections. Select **Spotlight**, the guidance card you inspected in the portal, and click **Edit personalization rules**.`,
           "In the rules panel, read **Liberty Mutual - Product interest spotlight**. Locate the two rows using **Top Affinity**: one equals **workers_compensation**, and one equals **household**. Compare each row’s content choice with the headlines you saw in the portal.",
           "Click **Cancel** and record the ending profiles, scores, and displayed headlines.",
         ],
         expected: [
-          "The **Live** rules connect each interest to the headline and action shown in **ProductSpotlight**.",
+          "The **Live** rules connect each interest to the headline and action shown in **Spotlight**.",
           "**Top Affinity** is the highest recorded interest used by this rule. It selects the corresponding content **variant**, meaning the headline and action authored for that topic. The rule changes relevant guidance while the agent’s licensed-state and business permissions remain in effect.",
         ],
         note: "**What to notice:** Inspect the audience rule on the component itself in **Page Builder**. With profile tracking and affinity tags already configured, **SitecoreAI** builds the interest scores and **Top Affinity** selects authored variants. Marketers can see how each interest maps to the guidance shown.",
@@ -1305,12 +1305,12 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Preview the current authored variations",
         action: [
-          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Learning & resources**. In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane to list the page’s components, or sections. Locate **AgentGuidance**, the guidance card whose button is being tested, and click its test icon.`,
+          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Learning & resources**. Open the version selector above the canvas and choose **Small-business CTA experiment (v2)**, the version containing this test. In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane to list the page’s components, or sections. Locate **Guidance**, the guidance card whose button is being tested, and click its test icon.`,
           "In the test panel, open **Liberty Mutual Small Business Guide CTA**. Select variation **A** and click **Preview**, then select **B** and click **Preview**. Read the guidance button in each preview.",
           "Compare the button labels and check that the surrounding heading, description, and destination stay the same. In the test’s configuration, read the traffic split and goal. Return the variation selector to **A**.",
         ],
         expected: [
-          "**AgentGuidance** is the card headed **Useful guidance, easier to find**. Its **A** variation says **Start with small business**; **B** says **Build your small-business practice**. A variation is one option in the test. Only the button label changes, so the comparison focuses on that wording.",
+          "**Guidance** is the card headed **Useful guidance, easier to find**. Its **A** variation says **Start with small business**; **B** says **Build your small-business practice**. A variation is one option in the test. Only the button label changes, so the comparison focuses on that wording.",
           "The configured 50/50 split gives each variation an equal share of eligible traffic; 100% participation includes all eligible traffic in the test. A **goal** is the measured outcome, here a visit to the small-business guide.",
           "**Editor** preview lets you compare the authored variations before browsing. This page uses A/B testing; the portal’s other walkthroughs show personalization. SitecoreAI supports A/B/n testing on pages without personalization configured.",
         ],
@@ -1397,7 +1397,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "A **space** groups one body of work, its instructions, conversation, and outputs. A **workflow** connects its stages. Here **Account Enrichment** gathers account context, **Brief Generation** organizes direction, and **Content Generation** produces content tasks and drafts. **Chat** preserves the execution and follow-up conversation.",
-          "An **AI agent** performs an assigned task using the instructions and tools available to it; it is unrelated to an insurance agent. This workflow uses Sitecore’s built-in agent definitions unchanged. The space’s instructions provide the task and brand context.",
+          "An **AI agent** performs an assigned task using the instructions and tools available to it. This workflow uses Sitecore’s built-in agent definitions unchanged. The space’s instructions provide the task and brand context.",
         ],
         links: [{ label: "Open the saved workspace", href: STUDIO }],
       },
@@ -1431,7 +1431,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "A **Brand Kit** collects reusable guidance such as visual style, tone, and brand context. **Get Brand Kit** identifies **Liberty Mutual — Independent Agents**, and **Get Brand Kit Section** retrieves specific instructions. Here the output includes palette, typography, and logo guidance supplied to the response.",
-          "These results show the brand instructions retrieved for the response. The workshop kit uses public-source guidance; Liberty Mutual’s brand team can review and refine it for future use.",
+          "These results show the brand instructions retrieved for the response. We assembled a sample **Brand Kit** for the Liberty Mutual Agent Portal workshop.",
         ],
       },
       {
@@ -1453,7 +1453,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Click **Artifacts** at the top of the space, select **Watkins outreach | Evidence and editorial review**, and click that card’s expand arrows. Read the review notes to see which facts and presentation details received human attention.",
         ],
         expected: [
-          "The saved history records corrections, editorial decisions, and refined output. Evidence stays separate from recipient-facing content.",
+          "The saved history shows how human feedback improved the generated content.",
           "These artifacts are saved email drafts for human review. Sending outreach and establishing a formal approval process would be separate steps.",
         ],
       },

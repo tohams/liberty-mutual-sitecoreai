@@ -1,0 +1,19 @@
+---
+ID: 7d7d9503-2339-4218-97bb-261956c46e95
+Parent: 2bcfce89-293c-4ddb-870a-78bce4777859
+Template: 76da0a8d-fc7e-42b2-af1e-205b49e43f98
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Campaign
+SharedFields:
+- ID: 715ae6c0-71c8-4744-ab4f-65362d20ad65
+  Hint: Renderings
+  Value: "{B6EFD6F3-3107-542C-B1B1-0B6F30A8791F}|{C479A19F-2857-5D96-ACE8-F24A5812C19F}|{3D98EC75-765F-590B-AF51-5D0132A648ED}|{01B5CA5B-14DB-564E-A109-6E77462D9E52}|{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}|{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}|{E7E25E1F-7479-5D71-B846-91AA45BE58D9}"
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Campaign
+  Versions: []
