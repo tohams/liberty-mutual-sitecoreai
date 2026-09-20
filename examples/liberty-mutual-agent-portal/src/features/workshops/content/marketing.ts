@@ -1431,7 +1431,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "A **Brand Kit** collects reusable guidance such as visual style, tone, and brand context. **Get Brand Kit** identifies **Liberty Mutual — Independent Agents**, and **Get Brand Kit Section** retrieves specific instructions. Here the output includes palette, typography, and logo guidance supplied to the response.",
-          "These results show the brand instructions retrieved for the response. The workshop kit uses public-source guidance; Liberty Mutual’s brand team can review and refine it for future use.",
+          "These results show the brand instructions retrieved for the response. We assembled a sample **Brand Kit** for the Liberty Mutual Agent Portal workshop.",
         ],
       },
       {
