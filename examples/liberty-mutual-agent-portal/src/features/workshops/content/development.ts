@@ -129,7 +129,7 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Understand identity, Search, and personalization evidence",
+        title: "Understand identity, Search, and personalization",
         action: [
           "The portal login identifies a fictional agent; its linked **UDL profile** stores the agent’s known attributes and observed engagement. An **affinity** is a browsing-interest score. These profile values select authored content variants, while server-side application checks continue to control access to protected data.",
           `Open [**Identity and saved-work contract**](${appSource}/docs/auth-and-data.md) and [**Native affinity implementation**](${repositoryDocs}/affinity-personalization.md). Read how portal sign-in identifies a native **UDL** profile and how **Top Affinity** selects an authored variant. For an actual profile lookup, use [**Check fresh profiles in SitecoreAI**](/workshops/guide/fresh-profile-restart); this architecture step does not reset or train a profile.`,
@@ -589,7 +589,7 @@ export const developmentGuides: WorkshopGuide[] = [
         href: `${portal}/workshops/guide/component-development`,
       },
       {
-        label: "Optional: inspect a historical release PR",
+        label: "Optional: inspect an example release PR",
         href: `${repository}/pull/21`,
       },
       {
@@ -742,7 +742,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "The panel rereads labels and help text from the managed lists. No change is expected during this read-only check. An author can maintain a label without a code deployment while preserving the stable item name and stored Search value.",
           "**Save metadata** validates selected **Draft** fields and reads changes back. The panel does not autosave, create versions, approve, publish, or reindex.",
           "**Discard changes** restores unsaved selections only. After an uncertain save, **Refresh** and inspect the actual native values before deciding what to do next.",
-          "This custom app uses an API with administrator privileges, so app access is restricted; it does not demonstrate separate Author and Approver permissions. Its underlying GraphQL save also cannot reject a competing update atomically. Coordinate edits to one article version instead of treating the panel as a simultaneous editing tool.",
+          "This custom app uses an API with administrator privileges, so app access is restricted. Its underlying GraphQL save cannot reject a competing update atomically. Have one person edit a given article version at a time to avoid overwriting another person’s change.",
         ],
         links: [
           {
