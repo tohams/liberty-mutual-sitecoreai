@@ -1,0 +1,19 @@
+---
+ID: e49da1ae-6054-5b18-b221-384f51d1e376
+Parent: 2bcfce89-293c-4ddb-870a-78bce4777859
+Template: 76da0a8d-fc7e-42b2-af1e-205b49e43f98
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal
+SharedFields:
+- ID: 715ae6c0-71c8-4744-ab4f-65362d20ad65
+  Hint: Renderings
+  Value: "{193A0299-B5B6-5668-B792-9F3552463163}|{1962D596-4187-51C9-A91F-4D39A9318B51}"
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "300"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Agent tools
+  Versions: []

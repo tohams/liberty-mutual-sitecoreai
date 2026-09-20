@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.LibrarySeed",
+  "description": "Six existing native component-library groups. Explicit CreateOnly seed after the Available Renderings parent exists; never part of ordinary authoring resource packages.",
+  "items": {
+    "includes": [
+      {
+        "name": "library-seed-feaas",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/FEaaS",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateOnly"
+      },
+      {
+        "name": "library-seed-forms",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Forms",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateOnly"
+      },
+      {
+        "name": "library-seed-media",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Media",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateOnly"
+      },
+      {
+        "name": "library-seed-navigation",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Navigation",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateOnly"
+      },
+      {
+        "name": "library-seed-page-content",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Page Content",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateOnly"
+      },
+      {
+        "name": "library-seed-page-structure",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Page Structure",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # Author and extend the small-business growth campaign
 
-The campaign is a CMS-composed page with independent local content items. Marketers can edit, duplicate, reorder, preview and approve its components without changing application code. Its alert has a rich text body and a date window. Its conversation form uses the portal's existing saved-work service; it does not send an email or create a record in Salesforce or Snowflake.
+The campaign is a CMS-composed page with independent local content items. Marketers can edit, duplicate, reorder, preview, and approve its components without changing application code. Its alert has a rich text body and a date window. Its conversation form uses the portal's existing saved-work service; it does not send an email or create a record in Salesforce or Snowflake.
 
 ## Pages and content ownership
 
@@ -8,23 +8,23 @@ The campaign is a CMS-composed page with independent local content items. Market
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Home/growth/small-business`               | Published campaign. Open [Small-business growth](https://liberty-mutual-agent-portal.vercel.app/growth/small-business) after signing in.          |
 | `Home/growth/campaign-practice`            | Unpublished working copy for Page builder exercises. Open **Agency growth → Campaign practice** in Page builder.                                  |
-| `Presentation/Page Branches/Campaign page` | Blank branch for creating another campaign under **Agency growth**. It creates a page, a local `Data` folder and seven independent content items. |
+| `Presentation/Page Branches/Campaign page` | Blank branch for creating another campaign under **Agency growth**. It creates a page, a local `Data` folder, and seven independent content items. |
 | `Home/growth/campaign-schedule-check`      | Created only when an operator prepares the bounded scheduled-publication exercise. It is separate from the marketing practice page.               |
 
-All paths are beneath `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal`. The published page and its practice copies are created through the Authoring API. They are explicitly excluded from the broad content serialization module, are not deployed as item resources, and remain editable. The blank branch is an explicit `CreateOnly` seed, also excluded from authoring resource packages. Normal releases update developer-owned templates, rendering definitions, layouts and placement restrictions.
+All paths are beneath `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal`. The published page and its practice copies are created through the Authoring API. They are explicitly excluded from the broad content serialization module, are not deployed as item resources, and remain editable. The blank branch is an explicit `CreateOnly` seed, also excluded from authoring resource packages. Normal releases update developer-owned templates, rendering definitions, layouts, placement restrictions, and component-library labels, icons, and groups.
 
 ## Components and placement
 
-| Region                | Components          | Author fields                                                  |
+| Region                | Page Builder name / React component | Author fields                                                  |
 | --------------------- | ------------------- | -------------------------------------------------------------- |
-| Campaign introduction | `CampaignHero`      | Eyebrow, Title, Summary, Icon                                  |
-| Main content          | `CampaignAlert`     | Title, rich text Body, Visible from (UTC), Visible until (UTC) |
-| Main content          | `CampaignCallout`   | Eyebrow, Title, rich text Body, Action link                    |
-| Main content          | `CampaignAccordion` | Question, rich text Answer                                     |
-| Sidebar               | `CampaignLinkList`  | Title, Icon, three General Link fields                         |
-| Sidebar               | `CampaignContact`   | Title, Summary, Button label                                   |
+| Campaign introduction | **Heading** / `CampaignHero` | Eyebrow, Title, Summary, Icon                                  |
+| Main content          | **Alert** / `CampaignAlert` | Title, rich text Body, Visible from (UTC), Visible until (UTC) |
+| Main content          | **Callout** / `CampaignCallout` | Eyebrow, Title, rich text Body, Action link                    |
+| Main content          | **Accordion** / `CampaignAccordion` | Question, rich text Answer                                     |
+| Sidebar               | **Links** / `CampaignLinkList` | Title, Icon, three General Link fields                         |
+| Sidebar               | **Contact** / `CampaignContact` | Title, Summary, Button label                                   |
 
-`CampaignPage` provides the three nested regions. The top-level `headless-campaign-page` placeholder permits only that container. Its hero, main and sidebar placeholders have explicit allowlists; a contact component cannot be placed in an accordion region. `CampaignPage` is restricted to the `CampaignPage` template. Dynamic placeholder identifiers keep nested components associated with their parent when the page is duplicated.
+**Campaign** is the component-library section. Its **Layout** component (`CampaignPage`) provides the three nested regions. The short labels and distinct icons identify each component in Page Builder; the React names, item IDs, and placeholder rules remain stable. The top-level `headless-campaign-page` placeholder permits only that container. Its hero, main, and sidebar placeholders have explicit allowlists; a contact component cannot be placed in an accordion region. `CampaignPage` is restricted to the `CampaignPage` template. Dynamic placeholder identifiers keep nested components associated with their parent when the page is duplicated.
 
 The branch uses page-relative datasource paths such as `page:/Data/Growth opportunity`. A page duplicate receives its own data, and the branch's fields begin blank. The campaign's default callout is independent from the local **Personal lines growth opportunity** datasource used for calculated-profile personalization.
 
@@ -85,7 +85,7 @@ Deleting the expired exercise page does not publish its siblings or reset agent 
 
 ## Provision another environment
 
-1. Deploy the normal `LibertyMutual.Model` and `LibertyMutual.SitePresentation` modules through the existing deployment process.
+1. Deploy the normal `LibertyMutual.Model`, `LibertyMutual.SitePresentation`, and `LibertyMutual.ComponentLibrary` modules through the existing deployment process.
 2. Validate and explicitly create the blank branch, once the site exists:
 
    ```sh
@@ -110,6 +110,7 @@ The seed never replaces existing editorial fields or publishes content. It appen
 
 ```sh
 python authoring/scripts/build-campaign-seed.py --check
+python authoring/scripts/build-component-library.py --check
 python authoring/scripts/validate-content-seed.py
 node --test authoring/scripts/campaign-authoring.test.cjs authoring/scripts/schedule-campaign-publication.test.cjs
 ```

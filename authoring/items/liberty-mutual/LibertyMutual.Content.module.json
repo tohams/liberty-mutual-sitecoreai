@@ -71,10 +71,14 @@
           {
             "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-support-form",
             "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Available Renderings",
+            "scope": "Ignored"
           }
         ]
       }
     ]
   },
-  "description": "Initial site and editorial content. CreateOnly preserves marketer changes; normal releases push LibertyMutual.Model, LibertyMutual.SitePresentation and LibertyMutual.SupportForm."
+  "description": "Initial site and editorial content. CreateOnly preserves marketer changes; developer-owned component library, placeholders, and support layout are deployed by their narrow configuration modules."
 }

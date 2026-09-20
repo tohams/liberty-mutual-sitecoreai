@@ -555,7 +555,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Create one named English Draft",
         action: [
-          `Open [**Page Builder**](${PAGES}). In the left page tree, expand **Home** > **Learning & resources**, then select **Workers compensation: a Texas starting point**. Click the stacked-layers **Layers** icon above the tree and select **ResourceArticle**.`,
+          `Open [**Page Builder**](${PAGES}). In the left page tree, expand **Home** > **Learning & resources**, then select **Workers compensation: a Texas starting point**. Click the stacked-layers **Layers** icon above the tree and select **Article**.`,
           "Above the page canvas, the version dropdown is immediately left of **Default editing host**. Open it, record the selected **English** version number, then choose **Create version**. Name the version resource-review-[your initials]-[date-time] and click **Create** so you can recognize it later.",
           "Reopen that version dropdown and select the newest **English** **Draft** with your version name. Wait for its fields to load. In the top toolbar, click the puzzle-piece **Apps** icon, then **Resource metadata**. Check the selected page, language, and version shown in the panel.",
         ],
@@ -706,7 +706,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "**Page created from branch template** appears. The title starts with the page name you entered; summary, body, reviewed date, source, and metadata start empty.",
-          "The branch supplies the **ResourceArticle** page section and its nested **ResourceImage** section. It also creates **Data** > **Resource image**, the content item that feeds the image component, often called its **datasource**. You can fill this page without assembling the layout or changing existing articles.",
+          "The branch supplies the **Article** page section and its nested **Image** section. It also creates **Data** > **Resource image**, the content item that feeds the image component, often called its **datasource**. You can fill this page without assembling the layout or changing existing articles.",
         ],
         links: [pageBuilder],
       },
@@ -803,7 +803,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Find **Title**, above the **Body** rich-text editor. Copy the complete current **Title** into a local note. This is the heading you will change and restore; leave the other fields unchanged.",
         ],
         expected: [
-          "**CampaignCallout** is the reusable page component that draws the card. **Growth opportunity** is its content item, or **datasource**, stored beneath **Data**. Its **Title**, **Body**, and **Action link** supply the heading, supporting text, and button. You are changing one content field while retaining the component’s design.",
+          "**Callout**, in the **Campaign** component-library section, is the reusable page component that draws the card. **Growth opportunity** is its content item, or **datasource**, stored beneath **Data**. Its **Title**, **Body**, and **Action link** supply the heading, supporting text, and button. You are changing one content field while retaining the component’s design.",
         ],
         links: [pageBuilder],
       },
@@ -821,7 +821,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "See the change on the page",
         action: [
           "Select **Campaign practice** in the content tree, then click **Editor** in the top navigation. Keep **Default editing host** selected above the canvas.",
-          "Open the stacked-layers **Layers** icon in the left pane and select **CampaignCallout**. Read the heading on that card in the canvas. If it still shows the previous text, reload the page after the save completes.",
+          "Open the stacked-layers **Layers** icon in the left pane and select **Callout**. Read the heading on that card in the canvas. If it still shows the previous text, reload the page after the save completes.",
         ],
         expected: [
           "The callout shows **Prepare for your next small-business conversation.** Its supporting text, button, and page position remain the same.",
@@ -833,7 +833,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Restore the original heading",
         action: [
           "Return to **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data** > **Growth opportunity**. Replace **Title** with the exact text recorded in step 1.",
-          "Click outside the field, wait for **Saved**, and reload. Compare **Title** with your note. Return to **Campaign practice** > **Editor** and confirm the original heading appears on **CampaignCallout**.",
+          "Click outside the field, wait for **Saved**, and reload. Compare **Title** with your note. Return to **Campaign practice** > **Editor** and confirm the original heading appears on **Callout**.",
         ],
         expected: [
           "The saved field and page preview match the starting heading. The practice page remains unpublished.",
@@ -960,7 +960,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Keep inactive content editable",
         action: [
-          "Select **Campaign practice**, return to **Editor**, and find **CampaignAlert** in **Layers**. Keep the **Default** editing host so you inspect the hosted authoring view.",
+          "Select **Campaign practice**, return to **Editor**, and find **Alert** in **Layers**. Keep the **Default** editing host so you inspect the hosted authoring view.",
           "Compare the canvas with the dates read in step 1. If both dates are empty, no display window is configured. If the recorded window is inactive, the alert remains visible to authors so they can edit it; leave the dates unchanged.",
         ],
         expected: [
@@ -1100,10 +1100,10 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the rule on its own component",
         action: [
           `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, expand **Home** > **Agency growth** and click **Small-business growth**. Keep **Editor** selected in the top navigation.`,
-          "Click the stacked-layers **Layers** icon at the top of the left pane. **Layers** lists the page’s components, or sections. Select **CampaignCallout**, the campaign’s guidance card, then open **Edit personalization rules** to see how an audience is matched to content.",
+          "Click the stacked-layers **Layers** icon at the top of the left pane. **Layers** lists the page’s components, or sections. Select **Callout**, the campaign’s guidance card, then open **Edit personalization rules** to see how an audience is matched to content.",
         ],
         expected: [
-          "**CampaignCallout** is the campaign’s guidance card. Its **Personalized** panel shows **Liberty Mutual - Small business growth opportunity**. The rule connects a calculated audience condition to an authored content **variant**, an alternative version of the card’s message and action.",
+          "**Callout** is the campaign’s guidance card. Its **Personalized** panel shows **Liberty Mutual - Small business growth opportunity**. The rule connects a calculated audience condition to an authored content **variant**, an alternative version of the card’s message and action.",
         ],
         links: [pageBuilder],
       },
@@ -1262,12 +1262,12 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the authored mapping behind the result",
         action: [
-          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Products & appetite**. In **Editor**, click the stacked-layers **Layers** icon to list the page’s components, or sections. Select **ProductSpotlight**, the guidance card you inspected in the portal, and click **Edit personalization rules**.`,
+          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Products & appetite**. In **Editor**, click the stacked-layers **Layers** icon to list the page’s components, or sections. Select **Spotlight**, the guidance card you inspected in the portal, and click **Edit personalization rules**.`,
           "In the rules panel, read **Liberty Mutual - Product interest spotlight**. Locate the two rows using **Top Affinity**: one equals **workers_compensation**, and one equals **household**. Compare each row’s content choice with the headlines you saw in the portal.",
           "Click **Cancel** and record the ending profiles, scores, and displayed headlines.",
         ],
         expected: [
-          "The **Live** rules connect each interest to the headline and action shown in **ProductSpotlight**.",
+          "The **Live** rules connect each interest to the headline and action shown in **Spotlight**.",
           "**Top Affinity** is the highest recorded interest used by this rule. It selects the corresponding content **variant**, meaning the headline and action authored for that topic. The rule changes relevant guidance while the agent’s licensed-state and business permissions remain in effect.",
         ],
         note: "**What to notice:** Inspect the audience rule on the component itself in **Page Builder**. With profile tracking and affinity tags already configured, **SitecoreAI** builds the interest scores and **Top Affinity** selects authored variants. Marketers can see how each interest maps to the guidance shown.",
@@ -1305,12 +1305,12 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Preview the current authored variations",
         action: [
-          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Learning & resources**. In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane to list the page’s components, or sections. Locate **AgentGuidance**, the guidance card whose button is being tested, and click its test icon.`,
+          `Open [**Page Builder**](${PAGES}), SitecoreAI’s visual page-authoring tool. In the left page tree, select **Home** > **Learning & resources**. Open the version selector above the canvas and choose **Small-business CTA experiment (v2)**, the version containing this test. In **Editor**, click the stacked-layers **Layers** icon at the top of the left pane to list the page’s components, or sections. Locate **Guidance**, the guidance card whose button is being tested, and click its test icon.`,
           "In the test panel, open **Liberty Mutual Small Business Guide CTA**. Select variation **A** and click **Preview**, then select **B** and click **Preview**. Read the guidance button in each preview.",
           "Compare the button labels and check that the surrounding heading, description, and destination stay the same. In the test’s configuration, read the traffic split and goal. Return the variation selector to **A**.",
         ],
         expected: [
-          "**AgentGuidance** is the card headed **Useful guidance, easier to find**. Its **A** variation says **Start with small business**; **B** says **Build your small-business practice**. A variation is one option in the test. Only the button label changes, so the comparison focuses on that wording.",
+          "**Guidance** is the card headed **Useful guidance, easier to find**. Its **A** variation says **Start with small business**; **B** says **Build your small-business practice**. A variation is one option in the test. Only the button label changes, so the comparison focuses on that wording.",
           "The configured 50/50 split gives each variation an equal share of eligible traffic; 100% participation includes all eligible traffic in the test. A **goal** is the measured outcome, here a visit to the small-business guide.",
           "**Editor** preview lets you compare the authored variations before browsing. This page uses A/B testing; the portal’s other walkthroughs show personalization. SitecoreAI supports A/B/n testing on pages without personalization configured.",
         ],

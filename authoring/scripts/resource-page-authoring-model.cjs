@@ -40,7 +40,7 @@ const IDS = Object.freeze({
   articleLayout: 'bb11e9d7-11d7-5c71-9ab7-1dd37267c4d3',
   articleVariant: 'b46f708f-be88-5805-9799-e2dd4d37f0aa',
   variant: uuidV5(SITE + '/Presentation/Headless Variants/ResourceImage/Default'),
-  available: 'e49da1ae-6054-5b18-b221-384f51d1e376',
+  available: '89e36bd1-f0bf-4ce6-a16d-40a2a985ba75',
   availableTemplate: '76da0a8d-fc7e-42b2-af1e-205b49e43f98',
   device: 'fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3',
   ruleField: 'bb3391dd-f8be-4b2e-ae9f-47bb63c166ce',

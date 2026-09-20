@@ -1,0 +1,9 @@
+---
+ID: 2bcfce89-293c-4ddb-870a-78bce4777859
+Parent: 2f3c0590-0ad6-4b0d-ad71-2590e6c91fcb
+Template: 26ec1d18-11b2-4dd9-8326-f6115f4fd7eb
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings
+SharedFields:
+- ID: 878c9a33-e760-4cb8-aad3-b2309383bf10
+  Hint: Group renderings in sections
+  Value: "1"

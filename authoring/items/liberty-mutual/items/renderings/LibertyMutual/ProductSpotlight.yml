@@ -1,45 +1,52 @@
-﻿---
-ID: "1962d596-4187-51c9-a91f-4d39a9318b51"
-Parent: "705f29fc-a5de-489e-9e2e-2dac8e03d084"
-Template: "04646a89-996f-4ee7-878a-ffdbf1f0ef0d"
+---
+ID: 1962d596-4187-51c9-a91f-4d39a9318b51
+Parent: 705f29fc-a5de-489e-9e2e-2dac8e03d084
+Template: 04646a89-996f-4ee7-878a-ffdbf1f0ef0d
 Path: /sitecore/layout/Renderings/Project/LibertyMutual/ProductSpotlight
 SharedFields:
-- ID: "037fe404-dd19-4bf7-8e30-4dadf68b27b0"
+- ID: 037fe404-dd19-4bf7-8e30-4dadf68b27b0
   Hint: componentName
   Value: ProductSpotlight
-- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Office/32x32/document_text.png
-- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+  Value: Office/32x32/window_star.png
+- ID: 1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f
   Hint: Datasource Template
   Value: /sitecore/templates/Project/LibertyMutual/ProductSpotlight
-- ID: "a77e8568-1ab3-44f1-a664-b7c37ec7810d"
+- ID: a77e8568-1ab3-44f1-a664-b7c37ec7810d
   Hint: Parameters Template
   Value: "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
-- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+- ID: b5b27af1-25ef-405c-87ce-369b3a004016
   Hint: Datasource Location
-  Value: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight"
-- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Value: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductSpotlight
+- ID: dbbbeca1-21c7-4906-9dd2-493c1efa59a2
   Hint: __Shared revision
-  Value: "a9659ea8-30a1-4a3e-b826-a121f8e7968f"
+  Value: a9659ea8-30a1-4a3e-b826-a121f8e7968f
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "200"
 Languages:
 - Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Spotlight
   Versions:
   - Version: 1
     Fields:
-    - ID: "1b58d065-fe74-43e3-ba20-54c9588b3011"
+    - ID: 1b58d065-fe74-43e3-ba20-54c9588b3011
       Hint: AllowedOnTemplates
       Value: "{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}"
-    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
       Hint: __Created
       Value: 20260912T000000Z
-    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+    - ID: 8cdc337e-a112-42fb-bbb4-4143751e123f
       Hint: __Revision
-      Value: "8fbcdef1-1d60-4ecf-9ad1-773c8a93279c"
-    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Value: 8fbcdef1-1d60-4ecf-9ad1-773c8a93279c
+    - ID: badd9cf9-53e0-4d0c-bcc0-2d784c282f6a
       Hint: __Updated by
       Value: |
         sitecore\thomas.lin@sitecore.com
-    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+    - ID: d9cf14b1-fa16-4ba6-9288-e8a174d4d522
       Hint: __Updated
       Value: 20260913T040117Z
