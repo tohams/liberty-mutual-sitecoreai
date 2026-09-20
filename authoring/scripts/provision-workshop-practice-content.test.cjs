@@ -9,7 +9,7 @@ const T = require("./configure-workshop-practice-template.cjs");
 const Recycle = require("./recycle-original-workshop-practice.cjs");
 
 function fakeNative({ workflow = true, template = true } = {}) {
-  const store = new Map(), writes = [];
+  const store = new Map(), writes = [], reads = [];
   function put(path, templateId, values, itemId = R.uuidV5(path)) {
     const item = { itemId: R.norm(itemId), path, name: path.split("/").at(-1), template: { templateId: R.norm(templateId) }, version: 1, language: { name: "en" }, versions: [{ version: 1, language: { name: "en" } }], values: { "__Created": "20260919T000000Z", "__Revision": R.uuidV5(path + "/revision"), ...values } };
     store.set(path, item); return item;
@@ -39,6 +39,7 @@ function fakeNative({ workflow = true, template = true } = {}) {
   async function query(q, variables) {
     if (q.startsWith("query")) {
       const where = variables.where;
+      reads.push(structuredClone(where));
       const item = where.path ? store.get(where.path) : [...store.values()].find(item => R.norm(item.itemId) === R.norm(where.itemId));
       return response(item);
     }
@@ -65,27 +66,36 @@ function fakeNative({ workflow = true, template = true } = {}) {
     Object.assign(item.values, Object.fromEntries(input.fields.map(field => [field.name, field.value])));
     return { updateItem: { item: { itemId: item.itemId } } };
   }
-  return { query, store, writes, put, templateManifest };
+  return { query, store, writes, reads, put, templateManifest };
 }
 const origin = "https://test.sitecorecloud.io";
 
-test("read-only plan lists the bounded 28 items and never mutates without a workflow", async () => {
+test("read-only plan inventories only four active Demo items without reading retired pairs or mutating without a workflow", async () => {
   const native = fakeNative({ workflow: false });
   const report = await run({ query: native.query, origin, templateManifest: native.templateManifest });
-  assert.equal(report.plans.length, 28);
+  assert.equal(report.plans.length, 4);
+  assert.deepEqual(report.plans.map(item => item.path), [W.CONTENT_ROOT, W.pagePath("01"), W.pagePath("01") + "/Data", W.pagePath("01") + "/Data/Resource image"]);
+  assert(native.reads.every(where => !/\/pair-0[2-9](?:\/|$)/.test(where.path || "")));
   assert.equal(report.missingWorkflow.length, 4);
   assert.equal(native.writes.length, 0);
   await assert.rejects(run({ query: native.query, origin, templateManifest: native.templateManifest, apply: true }), /Provision and verify/);
   assert.equal(native.writes.length, 0);
 });
 
-test("creation uses the actual native workflow and generated local datasource IDs", async () => {
+test("fresh provisioning creates only Demo and its local data with the actual workflow, never retired pairs", async () => {
   const native = fakeNative(); let manifest;
   const report = await run({ query: native.query, origin, templateManifest: native.templateManifest, apply: true, persist: state => { manifest = structuredClone(state); } });
-  assert.equal(report.pages.length, 9);
-  assert.equal(report.itemCount, 28);
+  assert.equal(report.pages.length, 1);
+  assert.equal(report.pages[0].pair, "01");
+  assert.equal(report.itemCount, 4);
   assert.equal(report.published, false);
-  assert.equal(native.writes.length, 38); // 28 creates and 10 layout completions.
+  assert.equal(native.writes.length, 6); // Four creates and root/Demo layout completions.
+  assert.equal(native.writes.filter(write => write.q.includes("createItem(")).length, 4);
+  assert.equal(manifest.items.length, 4);
+  assert(native.reads.every(where => !/\/pair-0[2-9](?:\/|$)/.test(where.path || "")));
+  assert([...native.store.keys()].every(path => !/\/pair-0[2-9](?:\/|$)/.test(path)));
+  assert.equal(native.store.get(W.CONTENT_ROOT).values.summary, "See how an author prepares content and an approver reviews it before publication.");
+  assert.match(native.store.get(W.CONTENT_ROOT).values.body, /Demo/);
   assert(manifest.items.every(item => item.complete));
   const workflow = native.store.get(W.PATHS.workflow);
   const draft = native.store.get(W.PATHS.draft);
@@ -107,7 +117,7 @@ test("rerunning preserves participant edits, versions and current workflow state
   const native = fakeNative(); let manifest;
   await run({ query: native.query, origin, templateManifest: native.templateManifest, apply: true, persist: state => { manifest = structuredClone(state); } });
   native.writes.length = 0;
-  const item = native.store.get(W.pagePath("03"));
+  const item = native.store.get(W.pagePath("01"));
   item.values.Title = "Customer-authored title";
   item.values["__Workflow state"] = M.idField(native.store.get(W.PATHS.awaiting).itemId);
   item.version = 2; item.versions.push({ version: 2, language: { name: "en" } });
@@ -119,7 +129,7 @@ test("rerunning preserves participant edits, versions and current workflow state
 
 test("existing unrelated content blocks all writes before provisioning starts", async () => {
   const native = fakeNative();
-  native.put(W.pagePath("09"), native.templateManifest.template.itemId, { "__Short description": M.MARKER });
+  native.put(W.pagePath("01"), native.templateManifest.template.itemId, { "__Short description": M.MARKER });
   await assert.rejects(run({ query: native.query, origin, templateManifest: native.templateManifest, apply: true }), /recorded manifest ID/);
   assert.equal(native.writes.length, 0);
 });
@@ -183,6 +193,43 @@ test("a recorded incomplete native template is completed without recreating it",
   assert(native.writes[0].q.includes("updateItem("));
 });
 
+test("a historical 28-item manifest preserves retired inventory while absent pairs are neither read nor recreated", async () => {
+  const native = fakeNative(); let manifest;
+  await run({ query: native.query, origin, templateManifest: native.templateManifest, apply: true, persist: state => { manifest = structuredClone(state); } });
+  const retired = M.targets(manifest.workflow, native.templateManifest.template.itemId).filter(spec => spec.pair && spec.pair !== "01");
+  assert.equal(retired.length, 24);
+  for (const spec of retired) {
+    const item = native.put(spec.path, spec.templateId, { ...spec.fields });
+    manifest.items.push({ path: spec.path, itemId: item.itemId, kind: spec.kind, pair: spec.pair, complete: true });
+  }
+  manifest.pages = manifest.items.filter(item => item.kind === "page").map(({ pair, path, itemId }) => ({ pair, path, itemId }));
+  assert.equal(manifest.pages.length, 9);
+  assert.equal(manifest.items.length, 28);
+  validateManifest(manifest, origin);
+  const historicalRoot = M.targets(manifest.workflow, native.templateManifest.template.itemId).find(spec => spec.kind === "root");
+  assert.match(historicalRoot.fields.body, /assigned to your workshop pair/);
+  Object.assign(native.store.get(W.CONTENT_ROOT).values, { summary: historicalRoot.fields.summary, body: historicalRoot.fields.body });
+  const historicalInventory = structuredClone(manifest.items);
+  const retiredPaths = new Set(retired.map(spec => spec.path));
+  const retiredIds = new Set(manifest.items.filter(item => retiredPaths.has(item.path)).map(item => R.norm(item.itemId)));
+  for (const path of retiredPaths) native.store.delete(path);
+  native.writes.length = 0;
+  native.reads.length = 0;
+  const before = structuredClone([...native.store.entries()]);
+
+  const plan = await run({ query: native.query, origin, manifest, templateManifest: native.templateManifest });
+  assert.equal(plan.plans.length, 4);
+  assert(plan.plans.every(item => item.action === "preserve-existing"));
+  const report = await run({ query: native.query, origin, manifest, templateManifest: native.templateManifest, apply: true, persist: state => { manifest = structuredClone(state); } });
+  assert.equal(report.itemCount, 4);
+  assert.deepEqual(report.pages.map(page => page.pair), ["01"]);
+  assert.deepEqual(manifest.pages.map(page => page.pair), ["01"], "Future ACL setup must receive Demo only");
+  assert.deepEqual(manifest.items, historicalInventory, "Retired recorded IDs remain in the private manifest for historical recovery");
+  assert(native.reads.every(where => !retiredPaths.has(where.path) && (!where.itemId || !retiredIds.has(R.norm(where.itemId)))));
+  assert.equal(native.writes.length, 0);
+  assert.deepEqual([...native.store.entries()], before);
+});
+
 function originalSeed(native) {
   const workflow = Object.fromEntries(["workflow", "draft", "awaiting", "approved"].map(key => [key + "Id", native.store.get(W.PATHS[key]).itemId]));
   const manifest = { schemaVersion: 1, origin, scope: W.CONTENT_ROOT, workflow, items: [], events: [] };
@@ -198,6 +245,10 @@ function originalSeed(native) {
 }
 test("original untouched subtree is recycled once with permanently false", async () => {
   const native = fakeNative(), manifest = originalSeed(native);
+  assert.equal(M.targets().length, 28, "Historical recycling keeps the complete original nine-pair contract");
+  assert.deepEqual(M.ACTIVE_PAIRS, ["01"]);
+  assert.equal(M.activeTargets().length, 4);
+  validateManifest(manifest, origin);
   const before = await Recycle.capture(native.query, origin, manifest, native.templateManifest);
   assert.equal(before.items.length, 28);
   await Recycle.run({ query: native.query, origin, before }); assert.equal(native.writes.length, 0);
@@ -208,7 +259,7 @@ test("original untouched subtree is recycled once with permanently false", async
   assert(native.store.has(M.TEMPLATE_PATH));
   assert(native.store.has(R.TEMPLATES + "/ResourcePage"));
 });
-test("recycle refuses changed text and refuses revision changes after capture", async () => {
+test("historical recycling still refuses edited retired pair-02 content and revision changes after capture", async () => {
   const native = fakeNative(), manifest = originalSeed(native);
   const page = native.store.get(W.pagePath("02"));
   const original = page.values.Title; page.values.Title = "Participant work";

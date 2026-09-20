@@ -4,31 +4,30 @@ This presenter-led demonstration shows how SitecoreAI separates content preparat
 
 This document describes the native configuration, setup tools, and acceptance checks supporting the **Page Builder** demonstration. The dedicated workflow, page ACLs, presenter account assignments, and automatic publishing have been configured and checked. Real non-admin presenter sessions have demonstrated author edits, submission, return to Draft, resubmission, approval, and automatic publication of the revised summary to the live practice page. The Author did not have the **Approve** command.
 
-No attendee Author/Approver role or pair assignment is required for this demonstration. The additional scoped workflow pages and role-assignment tools remain available for a future supervised workflow exercise. The separate [Practice page authoring](../../../docs/authoring-practice.md) guides let attendees edit their own unpublished numbered Campaign pages and local Data items; they do not use these workflow pair pages or authorize shared-content publication.
+No attendee Author/Approver role or pair assignment is required for this demonstration. **Demo** is the only page in **Workshop practice**. The former **Pair 02–09** pages and their local Data items have been moved to Sitecore’s recycle bin; normal provisioning does not recreate them. The separate [Practice page authoring](../../../docs/authoring-practice.md) guides let attendees edit their own unpublished numbered Campaign pages and local Data items; they do not use these workflow pair pages or authorize shared-content publication.
 
 ## Presenter accounts and practice page
 
-SitecoreAI accounts are separate from the portal's synthetic agent logins. A portal username such as `daniel.01` does not grant access to Page Builder or determine an authoring role. Its suffix is the participant's **workshop number**, used only for portal accounts and saved work.
+SitecoreAI accounts are separate from the portal's synthetic agent logins. A portal username such as `daniel.01` does not grant access to Page Builder or determine an authoring role. Its suffix is the participant's **workshop number**, used for portal accounts, saved work, and the separate numbered **Practice** pages; it does not assign CMS permissions.
 
 | Assignment | Native role | Content scope |
 | --- | --- | --- |
 | Presenter Author | **Liberty Mutual Workshop Author** | **Demo**, the `pair-01` page |
-| Presenter Approver | **Liberty Mutual Workshop Approver** | All nine prepared practice pages; this demonstration uses **Demo** only |
+| Presenter Approver | **Liberty Mutual Workshop Approver** | **Demo**, the only active workflow practice page |
 
-Keep the two presenter identities in separate browser profiles. Both open **Pages → Home → Workshop practice → Demo**. Attendees can follow the guide without signing into either presenter account. **Pairs 02–09** are prepared but unused by the current workshop; they must not be treated as attendee assignments.
+Keep the two presenter identities in separate browser profiles. Both open **Pages → Home → Workshop practice → Demo**. Attendees can follow the guide without signing into either presenter account.
 
 The content tree is:
 
 ```text
 /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home
 └── workshop-practice                 Workshop practice
-    ├── pair-01                       Demo
-    ├── pair-02                       Pair 02
-    ├── …
-    └── pair-09                       Pair 09
+    └── pair-01                       Demo
+        └── Data
+            └── Resource image
 ```
 
-The presenter Author can edit **Demo**, and the presenter Approver can review it. Page permissions limit content access, and workflow permissions control the available commands. Other prepared pages retain their existing scoped permissions. The exercise changes the page's versioned **Summary** field; **Title** and **Body** are also versioned. Local **Data** items and the optional image remain read-only; the Resource Metadata Marketplace app is outside this exercise.
+The presenter Author can edit **Demo**, and the presenter Approver can review it. Page permissions limit content access, and workflow permissions control the available commands. The existing workflow roles remain configured; roles for retired pair numbers have no active practice page. The exercise changes the page's versioned **Summary** field; **Title** and **Body** are also versioned. Local **Data** items and the optional image remain read-only; the Resource Metadata Marketplace app is outside this exercise.
 
 The workflow pages under **Workshop practice** use the dedicated **WorkshopPracticePage** template. It inherits directly from **PortalPage**, alongside **ResourcePage**, so practice pages are excluded from the native Search source's **ResourcePage** selection. They reuse the article rendering without becoming agent reference resources. Confirm that exclusion in the live Search results as part of acceptance.
 
@@ -59,9 +58,9 @@ Editing a **Live** version also created a new **Draft** automatically in the ver
 
 The role configuration prevents Authors from approving and Approvers from submitting drafts. Do not give one presenter identity both roles. Do not demonstrate the permissions with an administrator account: administrators bypass workflow restrictions and do not demonstrate these scoped authoring roles.
 
-## Maintainer reference: optional future attendee authoring
+## Maintainer reference: presenter account configuration
 
-The following provisioning details preserve the existing implementation for a future workshop that explicitly includes an attendee Author/Approver workflow. They are not prerequisites for this presenter-led demonstration. Before introducing that hands-on review workflow, assign distinct Sitecore identities and a practice page to each pair, communicate those assignments, and verify each account in an actual browser session. Portal workshop numbers identify the separate numbered Practice pages for the content-editing guides; they do not assign these workflow pair scopes or CMS roles.
+The following tools support the presenter Author and Approver accounts. Use scope **01** for the Author and **all** for the Approver. Historical pair roles **02–09** remain in the role model, but their pages are retired; do not assign those scopes for the current workshop. Portal workshop numbers identify the separate numbered Practice pages for the content-editing guides; they do not assign workflow scopes or CMS roles.
 
 ### Access prerequisites
 
@@ -112,7 +111,7 @@ Run these tools from the **repository root**, using the configured Sitecore CLI 
 | --- | --- |
 | [configure-workshop-editorial-workflow.cjs](../../../authoring/scripts/configure-workshop-editorial-workflow.cjs) | Creates or reconciles only the dedicated workflow, its roles, and explicit practice-page ACLs |
 | [configure-workshop-practice-template.cjs](../../../authoring/scripts/configure-workshop-practice-template.cjs) | Creates or verifies the isolated **WorkshopPracticePage** template without changing **ResourcePage** |
-| [provision-workshop-practice-content.cjs](../../../authoring/scripts/provision-workshop-practice-content.cjs) | Creates missing practice pages and their local data; records generated native item IDs and preserves existing participant edits |
+| [provision-workshop-practice-content.cjs](../../../authoring/scripts/provision-workshop-practice-content.cjs) | Creates only the Workshop practice root, Demo page, and its local Data and Resource image items; preserves existing content and records native IDs |
 | [assign-workshop-user-roles.cjs](../../../authoring/scripts/assign-workshop-user-roles.cjs) | Adds the selected workshop roles to existing, non-admin Cloud users after verifying both the exact native username and profile email |
 
 These tools are read-only by default. Changes require `--apply`. Snapshots, native ID manifests, identity assignments, and mutation journals must use absolute paths **outside the repository**. Keep these private files with the environment's setup records: they identify the exact items and accounts involved and support safe readback after an interrupted request.
@@ -126,7 +125,7 @@ Use this order:
 5. Prepare and validate private user assignments, then apply them only when every intended account is ready.
 6. Complete the [publishing prerequisites and account acceptance checks](#publishing-prerequisites-and-account-acceptance-checks).
 
-For example, replace `/absolute/private/workshop` with a real directory outside the checkout. Use new baseline, journal and workflow output filenames for each separate application:
+For example, replace `/absolute/private/workshop` with a real directory outside the checkout. Use new baseline, journal, and workflow output filenames for each separate application:
 
 ```bash
 node authoring/scripts/configure-workshop-editorial-workflow.cjs demo \
@@ -165,6 +164,8 @@ node authoring/scripts/configure-workshop-editorial-workflow.cjs demo \
   --manifest /absolute/private/workshop/page-acls-manifest.json
 ```
 
+Normal content provisioning targets only **Workshop practice**, **Demo**, **Demo/Data**, and **Demo/Data/Resource image**. Historical manifests retain the retired item records for recovery, while their active `pages` list contains only Demo. Normal provisioning preserves authored Demo content and does not recreate Pair 02–09.
+
 On later template checks, supply its existing `--manifest`. On later practice-content checks, supply both `--template-manifest` and its existing content `--manifest` so the tool can verify previously created items. Legacy practice manifests that used **ResourcePage** are not accepted for new ACL changes. Provisioning does not reset participant edits, approve content, publish content, or create user accounts. If a request's outcome is uncertain, inspect the journal and read back its recorded item before retrying.
 
 ### Upgrade the initial workflow to publish on approval
@@ -197,7 +198,7 @@ deep=0&related=0&smart=1&targets=experienceedge&alllanguages=0&languages=en&item
 
 The action's `targets` parameter is the database name **experienceedge**, configured on the **Edge** publishing-target item. Recheck this target when setting up another environment. The parameters limit the publishing request to the current page and English; they also compare revisions to avoid republishing unchanged content. They do not grant users a general publishing role.
 
-The private role-assignment JSON uses `schemaVersion: 1` and an `assignments` array. Each entry has `email`, `role` (`author` or `approver`) and `pair` (`01`–`09`, or `all` for the presenter Approver). Use the exact email from the accepted SitecoreAI identity, preserving any plus alias.
+The private role-assignment JSON uses `schemaVersion: 1` and an `assignments` array. Each entry has `email`, `role` (`author` or `approver`), and `pair`. Use `01` for the presenter Author and `all` for the presenter Approver. The parser retains historical pair values `02`–`09`, but those scopes have no active page in this workshop. Use the exact email from the accepted SitecoreAI identity, preserving any plus alias.
 
 ```bash
 node authoring/scripts/assign-workshop-user-roles.cjs demo \
@@ -214,7 +215,7 @@ The entire assignment batch is checked before the first change. Missing users, a
 
 ## Publishing prerequisites and account acceptance checks
 
-The setup maintainer must ensure **Workshop practice**, its ancestors, the isolated page template, and required static rendering definitions are published before testing approval-triggered publication of a practice page. The practice root initially inherits **Basic Workflow**; it is not one of the paired pages in **Liberty Mutual Workshop Review**. Approve and publish the root as a separate setup action when required, without including its children or related items. Publish required definitions as a separate setup action; do not publish the paired drafts. Confirm that practice content is excluded from agent-facing navigation and Search before publishing practice pages.
+The setup maintainer must ensure **Workshop practice**, its ancestors, the isolated page template, and required static rendering definitions are published before testing approval-triggered publication of a practice page. The practice root initially inherits **Basic Workflow**; it is separate from **Demo** in **Liberty Mutual Workshop Review**. Approve and publish the root as a separate setup action when required, without including its children or related items. Publish required definitions as a separate setup action; let Demo follow its approval workflow. Confirm that practice content is excluded from agent-facing navigation and Search before publishing practice pages.
 
 **Use actual browser sessions to verify the publishing boundary.** The initial Approver could open the manual **Publish** controls on read-only **Home** because of **Sitecore Client Publishing**. Pair-level write access did not restrict those controls. After the migration, the real Approver's **Publish** button was disabled on **Home** in both Page Builder **Editor** and **Content** modes. Complete the remaining checks on the assigned page and unrelated content, and verify that **Approve** publishes only the permitted practice page.
 
