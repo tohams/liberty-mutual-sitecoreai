@@ -39,7 +39,7 @@ const TARGETS = [
     fields: [['Rule', IDS.ruleField, appendRule]] },
   { id: IDS.prototype, path: M.PROTOTYPE_PATH, template: IDS.pageTemplate,
     fields: [['__Masters', FIELDS.masters, () => brace(IDS.dataTemplate)], ['__Renderings', FIELDS.renderings, branchLayout]] },
-  { id: IDS.available, path: SITE + '/Presentation/Available Renderings/Agent portal', template: IDS.availableTemplate,
+  { id: IDS.available, path: SITE + '/Presentation/Available Renderings/Resources', template: IDS.availableTemplate,
     fields: [['Renderings', FIELDS.availableRenderings, current => appendId(current, IDS.rendering)]] },
   // Set child/page overrides before changing their parent standard value.
   // Otherwise the parent's new value becomes an unplanned intermediate value

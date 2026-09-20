@@ -18,13 +18,20 @@ SharedFields:
   Value: "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Office/32x32/document_text.png
+  Value: Office/32x32/signpost.png
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
 Languages:
 - Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Guidance
   Versions:
   - Version: 1
     Fields:
-    - ID: "1b58d065-fe74-43e3-ba20-54c9588b3011"
+    - ID: 1b58d065-fe74-43e3-ba20-54c9588b3011
       Hint: AllowedOnTemplates
       Value: |
         {2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}

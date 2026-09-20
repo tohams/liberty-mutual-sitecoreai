@@ -88,21 +88,21 @@ This component-copy exercise needs a coordinator. Before starting, the coordinat
 
 | Step | Click or inspect | Observe |
 |---|---|---|
-| C9 | Open **Page Builder → Liberty Mutual Agent Portal → Home → Agency growth → Campaign practice**. In **Layers**, select the first **CampaignAccordion**. | The floating component toolbar is available. Keep **Default** as the editing host. |
+| C9 | Open **Page Builder → Liberty Mutual Agent Portal → Home → Agency growth → Campaign practice**. In **Layers**, select the first **Accordion**. | The floating component toolbar is available. Keep **Default** as the editing host. |
 | C10 | Select **Duplicate component**. Inspect the copy and its datasource. | The duplicate has its own local content item, for example **Start the conversation_var2**. Later copies can use another suffix. |
-| C11 | Select **Move up**. Open **Swap with another component** and inspect the choices; cancel without swapping. | Main offers **CampaignAccordion**, **CampaignAlert** and **CampaignCallout**. |
-| C12 | Select **CampaignLinkList → Swap with another component**, inspect, then cancel. Have the coordinator restore the recorded practice layout. | Sidebar offers **CampaignContact** and **CampaignLinkList**. The coordinator recycles only the duplicate's new datasource and verifies the original layout; the page remains unpublished. |
+| C11 | Select **Move up**. Open **Swap with another component** and inspect the choices; cancel without swapping. | Main offers **Accordion**, **Alert** and **Callout**. |
+| C12 | Select **Links → Swap with another component**, inspect, then cancel. Have the coordinator restore the recorded practice layout. | Sidebar offers **Contact** and **Links**. The coordinator recycles only the duplicate's new datasource and verifies the original layout; the page remains unpublished. |
 
-The **Content** panel exposes the fields appropriate to the selected component. Page Builder supports drag-and-drop composition; this walkthrough uses the verified native toolbar controls. Inspect the campaign at a narrow browser width as part of the responsive rendering review. Content/layout changes do not require an application Git deployment.
+The **Campaign** section of the component library groups **Layout**, **Heading**, **Alert**, **Callout**, **Accordion**, **Links**, and **Contact**. Each uses a short name and a purpose-specific icon. The **Content** panel exposes the fields appropriate to the selected component. Page Builder supports drag-and-drop composition; this walkthrough uses the verified native toolbar controls. Inspect the campaign at a narrow browser width as part of the responsive rendering review. Content/layout changes do not require an application Git deployment.
 
 | Component | Author-managed fields | Intended location |
 |---|---|---|
-| CampaignHero | Eyebrow, Title, Summary, Icon | Hero |
-| CampaignAlert | Title, rich-text Body, Visible from (UTC), Visible until (UTC) | Main |
-| CampaignCallout | Eyebrow, Title, rich-text Body, Action link | Main |
-| CampaignAccordion | Question, rich-text Answer | Main |
-| CampaignLinkList | Title, Icon, First link, Second link, Third link | Sidebar |
-| CampaignContact | Title, Summary, Button label | Sidebar |
+| **Heading** (`CampaignHero`) | Eyebrow, Title, Summary, Icon | Hero |
+| **Alert** (`CampaignAlert`) | Title, rich-text Body, Visible from (UTC), Visible until (UTC) | Main |
+| **Callout** (`CampaignCallout`) | Eyebrow, Title, rich-text Body, Action link | Main |
+| **Accordion** (`CampaignAccordion`) | Question, rich-text Answer | Main |
+| **Links** (`CampaignLinkList`) | Title, Icon, First link, Second link, Third link | Sidebar |
+| **Contact** (`CampaignContact`) | Title, Summary, Button label | Sidebar |
 
 The local Data items have descriptive names: **Campaign introduction**, **Preparation update**, **Growth opportunity**, **Start the conversation**, **Prepare for review**, **Useful resources** and **Your next step**. Authors can find content by its purpose instead of tracing anonymous items.
 
@@ -204,7 +204,7 @@ The growth criterion is below 20%. Cedar Ridge's seeded share is about 14.46%, w
 
 | Step | Click or inspect | Observe |
 |---|---|---|
-| P1 | In Page Builder, open **Home → Agency growth → Small-business growth**. Select **CampaignCallout** in **Layers** and click **Edit personalization rules**. | The right panel shows **Personalized**. Its variant selector offers **Original** and **1 Liberty Mutual - Small business growth opportunity is true**. Leave the active rules running. |
+| P1 | In Page Builder, open **Home → Agency growth → Small-business growth**. Select **Callout** in **Layers** and click **Edit personalization rules**. | The right panel shows **Personalized**. Its variant selector offers **Original** and **1 Liberty Mutual - Small business growth opportunity is true**. Leave the active rules running. |
 | P2 | Open the [custom JavaScript value](https://app.sitecorecloud.io/personalize/custom-values/9faad837-0e23-4b5b-af10-c6883dba86ac?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df) and inspect its input attributes. | The threshold, identity/role requirements and neutral fallback are explicit. |
 | P3 | Load Avery's actual Sitecore profile, then Daniel's from the same pack. Use [profile lookup](demo-loops.md) to obtain the native profile ID. | Avery meets the growth criterion; Daniel follows neutral guidance. The portal's imported identifier is not necessarily the native profile ID. |
 | P4 | [Sign in](https://liberty-mutual-agent-portal.vercel.app/login) as `avery.01` and open the campaign. Sign out, then repeat as `daniel.01`. | Avery sees **Build on your personal-lines relationships**. Daniel sees **Turn local knowledge into a stronger submission**. Compare those headings with the native test. |
@@ -242,12 +242,12 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 | 11 | Caching controls | Published delivery plus application retrieval/revalidation settings. Architecture owns the CMS, Edge, frontend and CDN boundaries. |
 | 12 | Responsive rendering | Review the actual campaign at desktop and narrow browser widths, including navigation, accordions and the dialog. |
 | 13 | L2 Navigation | C1/C2: Agency growth child navigation and campaign section anchors. |
-| 14 | Call out | The authored CampaignCallout with heading, rich text and action link. |
+| 14 | Call out | The authored **Callout** with a heading, rich text, and action link. |
 | 15 | Link box component | **Keep useful guidance close**: titled, icon-led list of three authored links. |
 | 16 | Main navigation | Portal navigation and the Agency growth child. State/MI/reward navigation targeting needs an agreed data model and component rules; no live MI feed is implied. |
 | 17 | Modal | C5: triggered contact dialog with keyboard behavior. Event/MI triggers need the relevant integration and display logic. |
 | 18 | CTA Buttons | Campaign preparation and conversation actions, plus the existing Resources A/B CTA. |
-| 19 | Page title | CampaignHero's authored title and icon. |
+| 19 | Page title | The **Heading** component’s authored title and icon. |
 | 20 | Salesforce/Snowflake data connectors | Salesforce is the existing backend; its live connection remains integration work. The POC uses replaceable JSON-backed adapters and imported profile extensions. Confirm Snowflake requirements separately. |
 | 21 | Alerts | Section 6: rich-text alert body and explicit UTC visibility dates. |
 | 22 | Dynamic data-driven personalization rules | P1–P4: native JavaScript calculation, decision table and browser comparison. |

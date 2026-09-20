@@ -12,15 +12,22 @@ SharedFields:
   Value: "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Office/32x32/document_text.png
+  Value: Office/32x32/layout_horizontal.png
 - ID: e829c217-5e94-4306-9c48-2634b094fdc2
   Hint: OtherProperties
   Value: IsRenderingsWithDynamicPlaceholders=true
 - ID: 069a8361-b1cd-437c-8c32-a3be78941446
   Hint: Placeholders
   Value: "{181B852B-5DED-5E77-B410-79CDE2F8B0D0}|{9DA47519-713A-5EC1-86B6-534861A6F33F}|{12CF067A-4040-5590-8632-02EA8E271C3E}"
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
 Languages:
 - Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Layout
   Versions:
   - Version: 1
     Fields:

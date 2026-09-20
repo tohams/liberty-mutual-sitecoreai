@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "site": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal",
+  "renderingRoot": "/sitecore/layout/Renderings/Project/LibertyMutual",
+  "availableRoot": {
+    "itemId": "2bcfce89-293c-4ddb-870a-78bce4777859",
+    "parentId": "2f3c0590-0ad6-4b0d-ad71-2590e6c91fcb",
+    "templateId": "26ec1d18-11b2-4dd9-8326-f6115f4fd7eb",
+    "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings"
+  },
+  "sectionTemplateId": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+  "fields": {
+    "group": "878c9a33-e760-4cb8-aad3-b2309383bf10",
+    "renderings": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+    "display": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+    "icon": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+    "sort": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  },
+  "sections": [
+    {
+      "name": "Campaign",
+      "displayName": "Campaign",
+      "itemId": "7d7d9503-2339-4218-97bb-261956c46e95",
+      "sortOrder": 100,
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Campaign",
+      "components": [
+        "CampaignPage",
+        "CampaignHero",
+        "CampaignAlert",
+        "CampaignCallout",
+        "CampaignAccordion",
+        "CampaignLinkList",
+        "CampaignContact"
+      ]
+    },
+    {
+      "name": "Resources",
+      "displayName": "Resources",
+      "itemId": "89e36bd1-f0bf-4ce6-a16d-40a2a985ba75",
+      "sortOrder": 200,
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Resources",
+      "components": [
+        "ResourceArticle",
+        "ResourceImage",
+        "ResourceSearch"
+      ]
+    },
+    {
+      "name": "Agent portal",
+      "displayName": "Agent tools",
+      "itemId": "e49da1ae-6054-5b18-b221-384f51d1e376",
+      "sortOrder": 300,
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal",
+      "components": [
+        "AgentGuidance",
+        "ProductSpotlight"
+      ]
+    }
+  ],
+  "renderings": {
+    "CampaignPage": {
+      "itemId": "b6efd6f3-3107-542c-b1b1-0b6f30a8791f",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignPage",
+      "displayName": "Layout",
+      "icon": "Office/32x32/layout_horizontal.png",
+      "sortOrder": 100,
+      "section": "Campaign"
+    },
+    "CampaignHero": {
+      "itemId": "c479a19f-2857-5d96-ace8-f24a5812c19f",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignHero",
+      "displayName": "Heading",
+      "icon": "Office/32x32/document_header.png",
+      "sortOrder": 200,
+      "section": "Campaign"
+    },
+    "CampaignAlert": {
+      "itemId": "3d98ec75-765f-590b-af51-5d0132a648ed",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignAlert",
+      "displayName": "Alert",
+      "icon": "Office/32x32/megaphone.png",
+      "sortOrder": 300,
+      "section": "Campaign"
+    },
+    "CampaignCallout": {
+      "itemId": "01b5ca5b-14db-564e-a109-6e77462d9e52",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignCallout",
+      "displayName": "Callout",
+      "icon": "Office/32x32/message.png",
+      "sortOrder": 400,
+      "section": "Campaign"
+    },
+    "CampaignAccordion": {
+      "itemId": "67b675ad-5f2e-5325-8fa7-76a1b44aa9d4",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignAccordion",
+      "displayName": "Accordion",
+      "icon": "SXA/16x16/accordion.png",
+      "sortOrder": 500,
+      "section": "Campaign"
+    },
+    "CampaignLinkList": {
+      "itemId": "f5bc5aad-4800-5854-b8b2-55ef3c76c0ae",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignLinkList",
+      "displayName": "Links",
+      "icon": "Office/32x32/list_style_bullets.png",
+      "sortOrder": 600,
+      "section": "Campaign"
+    },
+    "CampaignContact": {
+      "itemId": "e7e25e1f-7479-5d71-b846-91aa45be58d9",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignContact",
+      "displayName": "Contact",
+      "icon": "Applications/32x32/form_green.png",
+      "sortOrder": 700,
+      "section": "Campaign"
+    },
+    "ResourceArticle": {
+      "itemId": "980ad02c-08e5-5f27-9f08-f28e829ca94d",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/ResourceArticle",
+      "displayName": "Article",
+      "icon": "Office/32x32/document_text.png",
+      "sortOrder": 100,
+      "section": "Resources"
+    },
+    "ResourceImage": {
+      "itemId": "2958922f-9832-5a46-b489-a4408eb363b1",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/ResourceImage",
+      "displayName": "Image",
+      "icon": "Office/32x32/photo_landscape.png",
+      "sortOrder": 200,
+      "section": "Resources"
+    },
+    "ResourceSearch": {
+      "itemId": "15cf6efa-c180-563a-b229-c08f2dac3dad",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/ResourceSearch",
+      "displayName": "Search",
+      "icon": "apps/32x32/Search (1).png",
+      "sortOrder": 300,
+      "section": "Resources"
+    },
+    "AgentGuidance": {
+      "itemId": "193a0299-b5b6-5668-b792-9f3552463163",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/AgentGuidance",
+      "displayName": "Guidance",
+      "icon": "Office/32x32/signpost.png",
+      "sortOrder": 100,
+      "section": "Agent portal"
+    },
+    "ProductSpotlight": {
+      "itemId": "1962d596-4187-51c9-a91f-4d39a9318b51",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/ProductSpotlight",
+      "displayName": "Spotlight",
+      "icon": "Office/32x32/window_star.png",
+      "sortOrder": 200,
+      "section": "Agent portal"
+    }
+  }
+}

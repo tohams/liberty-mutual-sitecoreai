@@ -14,7 +14,7 @@ function fixture(t) {
   const files = [
     "authoring/scripts/deploy-content.sh",
     "xmcloud.build.json",
-    ...["Content", "Taxonomy", "ResourcePageBranch", "SupportForm"].map(
+    ...["Content", "Taxonomy", "ResourcePageBranch", "SupportForm", "ComponentLibrary", "LibrarySeed"].map(
       (name) => `${MODULES}/LibertyMutual.${name}.module.json`,
     ),
   ];
@@ -81,6 +81,7 @@ test("normal release never seeds or recreates editorial content or taxonomy opti
     "LibertyMutual.Model",
     "LibertyMutual.SitePresentation",
     "LibertyMutual.SupportForm",
+    "LibertyMutual.ComponentLibrary",
   ]);
   assert.equal(
     result.commands.some((command) => command.startsWith("sitecore publish ")),
@@ -97,10 +98,11 @@ test("taxonomy seeding is explicit and follows its model definitions", (t) => {
     "LibertyMutual.Taxonomy",
     "LibertyMutual.SitePresentation",
     "LibertyMutual.SupportForm",
+    "LibertyMutual.ComponentLibrary",
   ]);
 });
 
-test("fresh-site seeding creates the Data parent before managed metadata lists", (t) => {
+test("fresh-site seeding creates content and library parents before dependent seeds", (t) => {
   const result = fixture(t).run("--seed");
   assert.equal(result.status, 0, result.stderr);
   assert.deepEqual(pushedModules(result), [
@@ -110,6 +112,8 @@ test("fresh-site seeding creates the Data parent before managed metadata lists",
     "LibertyMutual.ResourcePageBranch",
     "LibertyMutual.SitePresentation",
     "LibertyMutual.SupportForm",
+    "LibertyMutual.ComponentLibrary",
+    "LibertyMutual.LibrarySeed",
   ]);
 });
 
@@ -126,7 +130,7 @@ test("combined seed flags do not push the taxonomy twice", (t) => {
 test("what-if protects every requested push and suppresses publication", (t) => {
   const result = fixture(t).run("--seed", "--publish", "--what-if");
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.pushes.length, 6);
+  assert.equal(result.pushes.length, 8);
   assert.ok(result.pushes.every((command) => command.endsWith(" --what-if")));
   assert.equal(
     result.commands.some((command) => command.startsWith("sitecore publish ")),
@@ -193,6 +197,7 @@ for (const module of [
   "LibertyMutual.Taxonomy",
   "LibertyMutual.ResourcePageBranch",
   "LibertyMutual.CampaignPageBranch",
+  "LibertyMutual.LibrarySeed",
   "*",
 ]) {
   test(`rejects ${module} in authoring resource packages before the first native operation`, (t) => {
@@ -222,6 +227,7 @@ test("branch seeding is explicit and never seeds unrelated content or taxonomy",
     "LibertyMutual.ResourcePageBranch",
     "LibertyMutual.SitePresentation",
     "LibertyMutual.SupportForm",
+    "LibertyMutual.ComponentLibrary",
   ]);
 });
 
@@ -265,4 +271,26 @@ test("rejects widening the native Form module before the first native operation"
   assert.notEqual(result.status,0);
   assert.match(result.stderr,/Support Form/);
   assert.deepEqual(result.commands,[]);
+});
+
+test("rejects widening component-library ownership before the first native operation", (t) => {
+  const context = fixture(t);
+  context.edit(`${MODULES}/LibertyMutual.ComponentLibrary.module.json`, module => {
+    module.items.includes[0].scope = "ItemAndDescendants";
+  });
+  const result = context.run();
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Refusing Component Library push/);
+  assert.deepEqual(result.commands, []);
+});
+
+test("rejects updates to native library seed groups before the first native operation", (t) => {
+  const context = fixture(t);
+  context.edit(`${MODULES}/LibertyMutual.LibrarySeed.module.json`, module => {
+    module.items.includes[0].allowedPushOperations = "CreateAndUpdate";
+  });
+  const result = context.run();
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Refusing library seed/);
+  assert.deepEqual(result.commands, []);
 });

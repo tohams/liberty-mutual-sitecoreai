@@ -120,7 +120,7 @@ export const resourceScreenshots: Record<
       {
         file: "pagebuilder-resource.png",
         title: "Locate Layers, the version selector, and Apps",
-        alt: "Page Builder toolbar and ResourceArticle layer on the Texas resource",
+        alt: "Page Builder toolbar and Article layer on the Texas resource",
         caption:
           "This reference shows an existing version of **Workers compensation: a Texas starting point**. Use the version selector to create and select your named **English Draft** before editing; the version name shown here will differ.",
       },
@@ -139,7 +139,7 @@ export const resourceScreenshots: Record<
           y: 229,
           width: 172,
           height: 32,
-          label: "Select **ResourceArticle** in the layer tree.",
+          label: "Select **Article** in the layer tree.",
         },
         {
           x: 327,

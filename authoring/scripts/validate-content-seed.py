@@ -57,10 +57,17 @@ require({i['path'] for i in site_presentation['items']['includes']} == site_plac
 for include in site_presentation['items']['includes']:
     require(include.get('scope') == 'SingleItem' and include.get('allowedPushOperations') == 'CreateAndUpdate'
             and not include.get('rules'), 'SitePresentation must use non-deleting SingleItem includes only.')
+available_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings'
+core_groups = ['FEaaS', 'Forms', 'Media', 'Navigation', 'Page Content', 'Page Structure']
+expected_core = [{'name': 'library-seed-' + name.lower().replace(' ', '-'), 'path': available_root + '/' + name, 'scope': 'SingleItem', 'allowedPushOperations': 'CreateOnly'} for name in core_groups]
 require(len(content['items']['includes']) == 1, 'Content requires one owned include.')
+library_seed = read_json(BASE / 'LibertyMutual.LibrarySeed.module.json')
+require(library_seed['items']['includes'] == expected_core, 'Native library groups require six exact CreateOnly seed includes.')
 include = content['items']['includes'][0]
 expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
                          for path in sorted(site_placeholder_paths | {site_placeholder_root + '/headless-support-form'} | api_owned_campaign_paths | {taxonomy_root, resource_branch_path, resource_branch_path.replace('Resource page', 'Campaign page')})]
+expected_ignore_rules.append({'path': available_root.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'})
+expected_ignore_rules.sort(key=lambda rule: rule['path'])
 require(include['path'] == '/sitecore/content/LibertyMutual' and
         include.get('allowedPushOperations') == 'CreateOnly' and
         include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and
@@ -75,9 +82,14 @@ require(include['path'] == taxonomy_root and include.get('allowedPushOperations'
         and include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and not include.get('rules'),
         'Taxonomy must remain CreateOnly and restricted to its owned subtree.')
 resource_modules = read_json(ROOT / 'xmcloud.build.json')['deployItems']['modules']
-require(len(resource_modules) == 4 and set(resource_modules) ==
-        {'nextjs-starter', 'LibertyMutual.Model', 'LibertyMutual.SitePresentation', 'LibertyMutual.SupportForm'},
+require(len(resource_modules) == 5 and set(resource_modules) ==
+        {'nextjs-starter', 'LibertyMutual.Model', 'LibertyMutual.SitePresentation', 'LibertyMutual.SupportForm', 'LibertyMutual.ComponentLibrary'},
         'Editable content and taxonomy must remain outside authoring resource packages.')
+
+library_module = read_json(BASE / 'LibertyMutual.ComponentLibrary.module.json')
+expected_library = [{'name': 'component-library-' + key, 'path': available_root + suffix, 'scope': 'SingleItem', 'allowedPushOperations': 'CreateAndUpdate'} for key, suffix in [('root', ''), ('campaign', '/Campaign'), ('resources', '/Resources'), ('agent-portal', '/Agent portal')]]
+require(library_module['items']['includes'] == expected_library,
+        'Component library configuration must remain in four exact developer-owned SingleItem includes.')
 
 support_module = read_json(BASE / 'LibertyMutual.SupportForm.module.json')
 require(support_module['items']['includes'] == [

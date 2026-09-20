@@ -3,7 +3,7 @@
 set -euo pipefail
 if [[ $# -lt 1 || "$1" == "--help" ]]; then
   echo 'Usage: authoring/scripts/deploy-content.sh ENVIRONMENT [--seed | --seed-taxonomy | --seed-branch] [--publish] [--what-if]'
-  echo 'Normal release updates Model, SitePresentation and SupportForm only. --seed creates missing editorial, taxonomy and branch items; --seed-taxonomy creates missing metadata lists; --seed-branch creates the missing Resource page branch only.'
+  echo 'Normal release updates Model, SitePresentation, SupportForm, and ComponentLibrary only. --seed creates missing editorial, taxonomy and branch items; --seed-taxonomy creates missing metadata lists; --seed-branch creates the missing Resource page branch only.'
   exit 0
 fi
 portal_environment="$1"
@@ -37,9 +37,16 @@ expected.append({'path':'/liberty-mutual-agent-portal/Data/Taxonomy','scope':'Ig
 expected.append({'path':'/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page','scope':'Ignored'})
 expected.append({'path':'/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page','scope':'Ignored'})
 expected.extend({'path':'/liberty-mutual-agent-portal/Home/growth/'+slug,'scope':'Ignored'} for slug in ['small-business','campaign-practice','campaign-schedule-check'])
+available='/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings'
+expected.append({'path':available.removeprefix('/sitecore/content/LibertyMutual'),'scope':'Ignored'})
 expected.sort(key=lambda rule:rule['path'])
+core_groups=['FEaaS','Forms','Media','Navigation','Page Content','Page Structure']
+expected_core=[{'name':'library-seed-'+name.lower().replace(' ','-'),'path':available+'/'+name,'scope':'SingleItem','allowedPushOperations':'CreateOnly'} for name in core_groups]
 if len(d['items']['includes'])!=1:
     raise SystemExit('Refusing seed push: expected one owned content include.')
+library_seed=json.loads((base/'LibertyMutual.LibrarySeed.module.json').read_text())
+if library_seed['items']['includes']!=expected_core:
+    raise SystemExit('Refusing library seed: expected six exact CreateOnly native library groups.')
 for include in d['items']['includes']:
     if (include['path']!='/sitecore/content/LibertyMutual' or include['allowedPushOperations']!='CreateOnly'
             or include.get('scope','ItemAndDescendants')!='ItemAndDescendants'
@@ -63,11 +70,15 @@ expected_support=[
 ]
 if support['items']['includes']!=expected_support:
     raise SystemExit('Refusing Support Form push: expected exactly three owned layout/placeholder definitions.')
+library=json.loads((base/'LibertyMutual.ComponentLibrary.module.json').read_text())
+expected_library=[{'name':'component-library-'+key,'path':available+suffix,'scope':'SingleItem','allowedPushOperations':'CreateAndUpdate'} for key,suffix in [('root',''),('campaign','/Campaign'),('resources','/Resources'),('agent-portal','/Agent portal')]]
+if library['items']['includes']!=expected_library:
+    raise SystemExit('Refusing Component Library push: expected exactly four owned SingleItem library configuration records.')
 deployed=json.loads(Path('xmcloud.build.json').read_text())['deployItems']['modules']
-if len(deployed)!=4 or set(deployed)!={'nextjs-starter','LibertyMutual.Model','LibertyMutual.SitePresentation','LibertyMutual.SupportForm'}:
+if len(deployed)!=5 or set(deployed)!={'nextjs-starter','LibertyMutual.Model','LibertyMutual.SitePresentation','LibertyMutual.SupportForm','LibertyMutual.ComponentLibrary'}:
     raise SystemExit('Refusing deployment: editorial content, taxonomy and branches must remain outside authoring resource packages.')
 PY
-dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch -i LibertyMutual.SupportForm
+dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch -i LibertyMutual.SupportForm -i LibertyMutual.ComponentLibrary -i LibertyMutual.LibrarySeed
 if [[ "$portal_what_if" == true ]]; then
   dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.Model --what-if
 else
@@ -110,6 +121,20 @@ if [[ "$portal_what_if" == true ]]; then
   dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SupportForm --what-if
 else
   dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.SupportForm
+fi
+# Library sections are developer-owned configuration, never editorial pages.
+if [[ "$portal_what_if" == true ]]; then
+  dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.ComponentLibrary --what-if
+else
+  dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.ComponentLibrary
+fi
+# Preserve native groups; create missing ones only after the library parent exists.
+if [[ "$portal_seed" == true ]]; then
+  if [[ "$portal_what_if" == true ]]; then
+    dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.LibrarySeed --what-if
+  else
+    dotnet sitecore ser push -n "$portal_environment" -i LibertyMutual.LibrarySeed
+  fi
 fi
 if [[ "$portal_publish" == true && "$portal_what_if" == false ]]; then
   for portal_path in \

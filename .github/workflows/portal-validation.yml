@@ -57,6 +57,7 @@ jobs:
           python authoring/scripts/build-resource-taxonomy-seed.py --check
           python authoring/scripts/build-resource-page-seed.py --check
           python authoring/scripts/build-campaign-seed.py --check
+          python authoring/scripts/build-component-library.py --check
           python authoring/scripts/build-support-form-seed.py --check
           python authoring/scripts/validate-content-seed.py
       - name: Validate placement migration and preservation safeguards
@@ -80,7 +81,7 @@ jobs:
         working-directory: .
         run: |
           dotnet tool restore
-          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch -i LibertyMutual.CampaignPageBranch -i LibertyMutual.SupportForm
+          dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch -i LibertyMutual.CampaignPageBranch -i LibertyMutual.SupportForm -i LibertyMutual.ComponentLibrary -i LibertyMutual.LibrarySeed
         env:
           DOTNET_ROLL_FORWARD: Major
           DOTNET_CLI_TELEMETRY_OPTOUT: '1'

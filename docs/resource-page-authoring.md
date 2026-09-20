@@ -2,6 +2,8 @@
 
 Use the **Resource page** page branch under **Learning & resources**. It creates a complete article structure with empty authoring fields and its own **Data → Resource image** item. Authors enter the content once: the page supplies the article, native Search metadata, and Resource metadata app.
 
+In **Page Builder → Layers**, the article and photograph are labeled **Article** and **Image**. The **Resources** section of the component library groups these with **Search**. Their implementation names remain `ResourceArticle`, `ResourceImage`, and `ResourceSearch`.
+
 ## Create an article
 
 1. Open [Page Builder](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb) and select **Liberty Mutual Agent Portal**. Use your Sitecore sign-in; the fictional agent usernames do not authorize CMS editing. Keep the site's **Default** editing host selected.

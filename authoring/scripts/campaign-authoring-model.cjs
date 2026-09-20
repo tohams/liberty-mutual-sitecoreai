@@ -1,5 +1,6 @@
 "use strict";
 /** Shared, deterministic CMS contract. No network access and no authoring writes. */
+const LIBRARY = require("../items/liberty-mutual/component-library-manifest.json");
 const {
   uuidV5: uid,
   brace,
@@ -360,6 +361,7 @@ function modelRecords() {
     );
   }
   for (const name of ["CampaignPage", ...Object.keys(COMPONENTS)]) {
+    const libraryItem = LIBRARY.renderings[name];
     const shared = [
       field("037fe404-dd19-4bf7-8e30-4dadf68b27b0", "componentName", name),
       field(
@@ -367,7 +369,7 @@ function modelRecords() {
         "Parameters Template",
         brace(IDS.parameters),
       ),
-      field(F.icon, "__Icon", "Office/32x32/document_text.png"),
+      field(F.icon, "__Icon", libraryItem.icon),
     ];
     if (name === "CampaignPage")
       shared.push(
@@ -398,6 +400,7 @@ function modelRecords() {
           "query:./Data",
         ),
       );
+    shared.push(field(F.sort, "__Sortorder", libraryItem.sortOrder));
     result.push(
       record(
         RP + "/" + name,
@@ -411,6 +414,7 @@ function modelRecords() {
             brace(uid(TP + "/CampaignPage")),
           ),
         ],
+        [field(F.display, "__Display name", libraryItem.displayName)],
       ),
     );
   }
