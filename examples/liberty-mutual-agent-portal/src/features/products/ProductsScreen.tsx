@@ -94,7 +94,9 @@ export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
             : "No licensed states are available. Contact your relationship team to review your access."}
         </p>
       )}
-      {spotlight ?? <ProductSpotlightFallback />}
+      <div className="cms-component-stack">
+        {spotlight ?? <ProductSpotlightFallback />}
+      </div>
       <div
         className="catalog-filter"
         aria-label="Filter products by business line"

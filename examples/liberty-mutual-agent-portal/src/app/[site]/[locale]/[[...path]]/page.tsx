@@ -97,12 +97,16 @@ export default async function PortalPage({ params }: PageProps) {
     placement ? (
       <AppPlaceholder page={page} componentMap={components} {...placement} />
     ) : undefined;
-  const guidance = renderPlaceholder(placements.guidance);
+  const guidance = placements.guidance ? (
+    <div className="cms-component-stack">
+      {renderPlaceholder(placements.guidance)}
+    </div>
+  ) : undefined;
   const resourcesSearch = placements.resourceSearch ? (
-    <>
+    <div className="cms-component-stack">
       {renderPlaceholder(placements.resourceSearch)}
       {guidance}
-    </>
+    </div>
   ) : undefined;
   const pageContent = placements.campaignPage
     ? renderPlaceholder(placements.campaignPage)
