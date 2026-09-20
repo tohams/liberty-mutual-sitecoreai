@@ -25,7 +25,7 @@ export const workshopSections = {
   content: {
     label: "Create and manage content in SitecoreAI",
     description:
-      "SitecoreAI is where Liberty Mutual’s team manages the pages, content, and rules that shape the agent experience. Use your separate SitecoreAI account to explore these tools. A guide marked Presenter demonstration asks you to watch the presenters make a shared change; other guides explain the page or activity you can use yourself.",
+      "SitecoreAI is where Liberty Mutual’s team manages the pages, content, and rules that shape the agent experience. Use your separate SitecoreAI account to edit your assigned Practice page and its local content in the hands-on guides. A guide marked Presenter demonstration asks you to watch the presenters make a shared change. Keep your practice page unpublished and follow its cleanup steps.",
     location: "SitecoreAI · separate Sitecore login",
     kind: "core",
   },
@@ -127,13 +127,13 @@ export const guidePriorities: Record<string, GuideFocusDefinition> = {
     priority: "creation",
     section: "content",
     relevance:
-      "A component is one section of a page, such as a heading or a content card. Edit a component’s heading in **Page Builder** and view the result on the page. This demonstrates a routine copy change that a marketer can make without asking a developer to change or deploy website code.",
+      "A component is one section of a page, such as a heading or a content card. On your assigned **Practice** page, edit a heading, add an accordion, move it, and remove it in **Page Builder**. Check which components each area allows. This demonstrates how a marketer can compose a page within native rules without changing or deploying website code.",
   },
   "ai-assisted-authoring": {
     priority: "creation",
     section: "content",
     relevance:
-      "Use AI assistance while editing content to correct spelling or suggest wording. Compare the suggestion with the original copy before choosing whether to accept it. This shows how the tools can speed content preparation while the marketer remains responsible for the final wording.",
+      "Use AI assistance on your assigned **Practice** page’s content to correct spelling or suggest wording. Compare the suggestion with the original copy before choosing whether to accept it. This shows how the tools can speed content preparation while the marketer remains responsible for the final wording.",
   },
   "alert-dates-and-publication": {
     priority: "publishing",

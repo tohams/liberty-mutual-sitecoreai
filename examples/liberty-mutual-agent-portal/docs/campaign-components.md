@@ -2,6 +2,8 @@
 
 `/growth/small-business` is composed in Sitecore Page Builder. Its title, introduction, alerts, callout, questions, resource links and conversation card are authored fields. The existing `/growth` page remains the agency production overview. Both are available under **Agency growth**; the disclosure button opens **Overview** and **Small business growth**.
 
+The hands-on workshop reuses this model in unpublished **Home → Practice → Practice 01–15** pages. Each number owns its page composition and local Data items. See [Practice page authoring](../../../docs/authoring-practice.md) for assignments, native component choices, and required restoration.
+
 ## Composition and authoring boundaries
 
 The campaign layout exposes `headless-campaign-page`, which accepts only `CampaignPage`. The container owns three dynamic placeholders. They preserve native rendering UIDs, datasource references and selected personalization variants.

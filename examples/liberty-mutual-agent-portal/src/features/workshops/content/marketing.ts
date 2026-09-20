@@ -43,9 +43,11 @@ const profileLink: GuideLink = {
 };
 const platformPrerequisite = `**SitecoreAI** is the platform behind the Agent Portal: your team uses it to manage content, personalize experiences, and review engagement. Open [**SitecoreAI**](${SITECORE}) and sign in with the email address that received your **Sitecore Cloud** invitation. This opens **Safeco Insurance Company of America POC** and its **SitecoreAI / Demo** environment. If a step uses **Page Builder**, confirm **Liberty Mutual Agent Portal** is selected there. If access is denied or another organization opens, ask the workshop team to check your invitation; a portal username such as **daniel.01** cannot provide this access.`;
 const authorPrerequisite =
-  "**Page Builder** is SitecoreAI’s page-authoring tool. **Editor** shows the page preview, or canvas; **Content** shows the stored fields and content tree. A **component** is a page section, such as an image or guidance card. Keep **Default editing host** selected so the canvas uses the hosted website. These content-management-system (**CMS**) pages are shared, so presenters make the changes while attendees follow their screen. Portal workshop numbers do not create separate page copies. The publishing demonstration uses separate **Author** and **Approver** accounts to show their different permissions.";
+  "**Page Builder** is SitecoreAI’s page-authoring tool. **Editor** shows the page preview, or canvas; **Content** shows the stored fields and content tree. A **component** is a page section, such as an image or guidance card. Keep **Default editing host** selected so the canvas uses the hosted website. For hands-on content editing, use only your assigned **Practice {{pack}}** page and its local **Data** items. Other content-management-system (**CMS**) pages and settings are shared; follow the presenter when a guide says **Presenter demonstration**. The publishing demonstration uses separate **Author** and **Approver** accounts to show their different permissions.";
+const practicePagePrerequisite =
+  "Find your assigned **workshop number** in [**Attendee assignments**](/workshops/attendees). In **Page Builder**, open **Home** > **Practice** > **Practice {{pack}}**. Number **01** is reserved for presenters; attendees use their assigned page from **02–15**. Each page owns a separate **Data** folder, so these exercises keep your page layout and content separate from other numbers. The number does not isolate shared media, component definitions, publishing, or other site settings, and it does not replace your separate SitecoreAI login or grant CMS permissions. If you cannot edit your assigned page and its Data items, ask the workshop team to check your access. Keep this page unpublished and restore your changes when finished; a portal reset does not reset CMS content.";
 const workshopNumberPrerequisite =
-  "A **persona** is a fictional agent with a defined role, agency, and licenses. Your **workshop number** gives you a set of seven persona logins for the exercises. Find your name and number in [**Attendee assignments**](/workshops/attendees). Use that same number after the dot in every portal username. Number 01 is for presenters; attendees use their listed number from 02–15. If your name is not listed, ask the workshop team for a number before starting. This workshop number applies to portal logins. Sitecore authoring uses a separate invited account; follow the presenter for shared-content editing.";
+  "A **persona** is a fictional agent with a defined role, agency, and licenses. Your **workshop number** gives you a set of seven persona logins for the exercises. Find your name and number in [**Attendee assignments**](/workshops/attendees). Use that same number after the dot in every portal username. Number 01 is for presenters; attendees use their listed number from 02–15. If your name is not listed, ask the workshop team for a number before starting. This workshop number also identifies your own **Practice {{pack}}** page and its local **Data** items for the hands-on authoring guides. Sitecore authoring uses a separate invited account. Other pages and site settings are shared; follow the presenter when a guide asks you to observe a shared-content change.";
 const signOut =
   "Click the signed-in person’s name or avatar in the upper right, then **Sign out**. Wait for **Welcome back** before switching to another persona.";
 const persistentWork =
@@ -781,69 +783,92 @@ export const marketingGuides: WorkshopGuide[] = [
   },
   {
     slug: "campaign-composition",
+    accountScope: "assigned",
     audience: "marketing",
     category: "Content authoring",
     title: "Edit page content",
     summary:
-      "**Presenter demonstration:** Change a guidance card’s heading in **Page Builder**, SitecoreAI’s visual authoring tool, and see the result in the page preview. This is the simplest example of maintaining page content without a code change.",
+      "Use your assigned **Practice** page to edit a guidance card, add an accordion, move it, and remove it. Explore the component choices that keep each area of the page consistent, then restore the starting page.",
     outcome:
-      "You see how a marketer updates an existing component in **Page Builder** without changing application code or deploying the website.",
-    personas: ["Presenter with campaign-content access"],
+      "You can edit content and arrange approved components in **Page Builder** without changing application code. You see how native placeholder rules govern which components can go in each area, while your page and its content stay separate from other workshop numbers.",
+    personas: ["Your Sitecore author account"],
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "One presenter with edit access to **Campaign practice** and its **Data** items makes the change while everyone else follows that screen. This unpublished page and its content are separate from the live campaign. Keep it unpublished, and record the original **Title** before editing so you can restore it exactly.",
+      practicePagePrerequisite,
+      "A **datasource** is the content item that supplies a component’s fields. Your practice page owns seven items under **Data**: **Campaign introduction**, **Preparation update**, **Growth opportunity**, **Start the conversation**, **Prepare for review**, **Useful resources**, and **Your next step**. Use only items beneath **Practice {{pack}}** throughout this exercise. Record the original **Title** and component order so you can restore them exactly.",
     ],
     links: [pageBuilder],
     steps: [
       {
-        title: "Find and record the heading",
+        title: "Open your page and record its starting content",
         action: [
-          `Open [**Page Builder**](${PAGES}). Select **Content** in the top navigation, then expand **Home** > **Agency growth** > **Campaign practice** > **Data** and select **Growth opportunity**.`,
-          "Find **Title**, above the **Body** rich-text editor. Copy the complete current **Title** into a local note. This is the heading you will change and restore; leave the other fields unchanged.",
+          `Open [**Page Builder**](${PAGES}) and confirm **Liberty Mutual Agent Portal** in the site selector. Select **Content** in the top navigation, then expand **Home** > **Practice** > **Practice {{pack}}** > **Data** and select **Growth opportunity**.`,
+          "Confirm that **Practice {{pack}}** matches your assigned workshop number before making a change. Find **Title**, above the **Body** rich-text editor, and copy the complete current title into a local note.",
         ],
         expected: [
-          "**Callout**, in the **Campaign** component-library section, is the reusable page component that draws the card. **Growth opportunity** is its content item, or **datasource**, stored beneath **Data**. Its **Title**, **Body**, and **Action link** supply the heading, supporting text, and button. You are changing one content field while retaining the component’s design.",
+          "**Growth opportunity** is a datasource owned by your practice page. The **Callout** component reads its **Title**, **Body**, and **Action link** to show a heading, supporting text, and button. Another number’s practice page has its own copy of these fields.",
         ],
         links: [pageBuilder],
       },
       {
-        title: "Change the heading",
+        title: "Edit the guidance card and check the preview",
         action: [
-          "Replace **Title** with: Prepare for your next small-business conversation.",
-          "Click outside the field and wait for the **Saved** checkmark. Keep the page unpublished.",
+          "Replace **Title** with: Prepare for your next small-business conversation. Click outside the field and wait for the **Saved** checkmark.",
+          "Select **Practice {{pack}}**, then click **Editor** in the top navigation. Keep **Default editing host** selected above the canvas. Open the stacked-layers **Layers** icon in the left pane and select **Callout**. If the previous heading remains after saving, reload the page.",
+          "In **Layers**, expand **Layout**. Its named areas, or **placeholders**, map to the page: **headless-campaign-hero-1** is the title area, **headless-campaign-main-1** is the main area, and **headless-campaign-sidebar-1** is the sidebar. Record the starting order: **Heading** in the title area; **Alert**, **Callout**, and two **Accordion** components in the main area; **Links** and **Contact** in the sidebar. Keep **Layout** in place.",
         ],
         expected: [
-          "The new heading is saved in SitecoreAI. No application-code change or website deployment is required.",
+          "The callout shows **Prepare for your next small-business conversation.** The edit is saved in CMS authoring and visible in the editor preview. **Practice {{pack}}** remains unpublished; no application-code change or website deployment is needed.",
         ],
       },
       {
-        title: "See the change on the page",
+        title: "Check the component choices for each area",
         action: [
-          "Select **Campaign practice** in the content tree, then click **Editor** in the top navigation. Keep **Default editing host** selected above the canvas.",
-          "Open the stacked-layers **Layers** icon in the left pane and select **Callout**. Read the heading on that card in the canvas. If it still shows the previous text, reload the page after the save completes.",
+          "In **Layers**, move the pointer between the **headless-campaign-main-1** heading and its first component to reveal **Insert into** (the **+** control), then click **+**. This is the main area. In the **Components** picker, open **Campaign**. Confirm that the choices are **Alert**, **Callout**, and **Accordion**. **Heading**, **Links**, and **Contact** are not offered here. Dismiss the picker without selecting a component.",
+          "Repeat **Insert into** for **headless-campaign-hero-1**, the title area: only **Heading** is offered. Repeat it for **headless-campaign-sidebar-1**, the sidebar: only **Links** and **Contact** are offered, with no **Accordion** choice. Dismiss the picker. Leave the placeholder settings unchanged.",
         ],
         expected: [
-          "The callout shows **Prepare for your next small-business conversation.** Its supporting text, button, and page position remain the same.",
-          "The change is visible in the authoring preview. The live campaign remains unchanged because this practice page has not been published.",
+          "Native placeholder rules govern which components fit each page area. An offered **Accordion** in the main area and no **Accordion** choice in the sidebar demonstrate both sides of the rule. The general component library can list components that a particular area does not accept.",
         ],
-        note: "**What to notice:** In **Page Builder**, a marketer can find a field, change it, and see the result on the page. The component’s existing design and behavior remain available without developer involvement.",
       },
       {
-        title: "Restore the original heading",
+        title: "Add one temporary Accordion",
         action: [
-          "Return to **Content** > **Home** > **Agency growth** > **Campaign practice** > **Data** > **Growth opportunity**. Replace **Title** with the exact text recorded in step 1.",
-          "Click outside the field, wait for **Saved**, and reload. Compare **Title** with your note. Return to **Campaign practice** > **Editor** and confirm the original heading appears on **Callout**.",
+          "Confirm **Practice {{pack}}** is still selected. Open **Components** using its icon in the left pane, then expand **Campaign**. Drag **Accordion** onto the canvas into the gap between the yellow **Make the next conversation count** alert and the white **Prepare for your next small-business conversation.** callout.",
+          "The **Assign content item** dialog opens at your selected page’s **Data** folder. Select **Prepare for review**, then click **Assign**. Use **Assign**, because this exercise reuses your existing content; **Duplicate and assign** would create another item. Leave the datasource fields unchanged.",
+          "Wait for **Saved**. Identify the extra **Accordion** between the yellow alert and the white callout. This is the temporary component you will move and remove; the original two accordions remain below the callout.",
         ],
         expected: [
-          "The saved field and page preview match the starting heading. The practice page remains unpublished.",
+          "The main area now has three accordions. The added one shows **What should we prepare before asking for a review?** between the alert and callout. It uses **Practice {{pack}}** > **Data** > **Prepare for review**, also used by the last original accordion. The assignment dialog offers only this page’s suitable items, **Prepare for review** and **Start the conversation**.",
+        ],
+      },
+      {
+        title: "Move the temporary component",
+        action: [
+          "Click **What should we prepare before asking for a review?** in the temporary accordion between the alert and callout. If this selects its text field, select the parent **Accordion** in the right pane to select the whole component. In the component toolbar, click the **Move down** arrow once.",
+          "Wait for **Saved**, then compare **Layers** and the canvas. The extra accordion now sits below **Callout**, immediately before the original **Where should my team begin?** accordion. Its question and answer stay the same.",
+        ],
+        expected: [
+          "The component order changes on your page while the datasource content stays the same. Native placeholder rules keep this accordion in an allowed area.",
+        ],
+      },
+      {
+        title: "Remove the extra component and restore the heading",
+        action: [
+          "Select the temporary **What should we prepare before asking for a review?** accordion directly below **Callout** and above **Where should my team begin?** If its text field is selected, choose the parent **Accordion** in the right pane. Click **Delete** (the trash icon) in the component toolbar, then **Delete** in the **Delete component** confirmation. Wait for **Saved**. This removes the temporary placement; keep the original two accordions and the **Prepare for review** item under **Data**.",
+          "Return to **Content** > **Home** > **Practice** > **Practice {{pack}}** > **Data** > **Growth opportunity**. Restore the exact **Title** recorded in step 1, click outside the field, and wait for **Saved**.",
+          "Reload the page. Check **Title** against your note, then return to **Practice {{pack}}** > **Editor**. Confirm the original heading and component order, with only the original two accordions. Leave the page unpublished.",
+        ],
+        expected: [
+          "Your page matches its starting content and layout. Removing the added component removes its placement; the existing **Prepare for review** datasource is still available for the original component.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Confirm the original **Title** is restored in both **Content** and **Editor**. Keep **Campaign practice** unpublished.",
-        "This exercise changes CMS content, so restore it in **Page Builder** using **Restore the original heading** in step 4. Resetting a workshop number affects agent activity and cannot restore this heading.",
+        "Restore the recorded **Title**, remove only the extra **Accordion** placement, and verify the original component order after reload. Keep all seven original **Data** items, the containing **Layout**, and **Practice {{pack}}** itself. Keep the page unpublished.",
+        "These CMS changes do not reset automatically. A workshop-number reset restores portal work and profiles; it cannot restore the practice page’s fields or component order. Finish the restoration in **Page Builder** before leaving.",
       ],
     },
     related: [
@@ -855,26 +880,28 @@ export const marketingGuides: WorkshopGuide[] = [
   },
   {
     slug: "ai-assisted-authoring",
+    accountScope: "assigned",
     audience: "marketing",
     category: "Content authoring",
     title: "Improve content with AI",
     summary:
-      "**Presenter demonstration:** Use **Optimize with AI** inside a content field to correct spelling and propose a short rewrite. Compare the suggestions before accepting or rejecting them, then restore the practice content.",
+      "Use **Optimize with AI** in your assigned **Practice** page’s content field to correct spelling and propose a short rewrite. Compare the suggestions before accepting or rejecting them, then restore the practice content.",
     outcome:
-      "You see how AI assistance fits into everyday authoring: the tool proposes changes, the author reviews them, and only an accepted result becomes saved content. A separate publishing action would make that content live.",
+      "You learn how AI assistance fits into everyday authoring: the tool proposes changes, the author reviews them, and only an accepted result becomes saved content. Saving updates authoring content; your practice page stays unpublished.",
     personas: ["Sitecore author"],
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Follow the presenter in the unpublished **Campaign practice** page. This exercise uses **Optimize with AI** on the shared **Growth opportunity** content item, so everyone follows the same screen. The presenter records and restores the exact original **Body**, including formatting.",
+      practicePagePrerequisite,
+      "Use **Optimize with AI** on your own **Growth opportunity** item beneath **Practice {{pack}}** > **Data**. Record and restore the exact original **Body**, including formatting. If you just completed **Edit page content**, finish its cleanup before starting this exercise.",
     ],
     links: [pageBuilder],
     steps: [
       {
         title: "Record the original practice Body field",
         action: [
-          `Open [**Page Builder**](${PAGES}), then select **Content** in the top navigation. In the content tree, expand **Home** > **Agency growth** > **Campaign practice** > **Data**, and select **Growth opportunity**. Locate its **Body** rich-text editor.`,
-          "Copy the complete original **Body**, including formatting, into your notes. Replace it temporarily with: We help your agnecy prepare for the next client conversation. The deliberate misspelling lets you see what the AI correction changes.",
+          `Open [**Page Builder**](${PAGES}), then select **Content** in the top navigation. In the content tree, expand **Home** > **Practice** > **Practice {{pack}}** > **Data**, and select **Growth opportunity**. Locate its **Body** rich-text editor.`,
+          "Confirm **Practice {{pack}}** matches your assignment, then copy the complete original **Body**, including formatting, into your notes. Replace it temporarily with: We help your agnecy prepare for the next client conversation. The deliberate misspelling lets you see what the AI correction changes.",
         ],
         expected: [
           "**Growth opportunity** supplies the page’s guidance card. Its **Body** is a rich-text field, which can hold formatted paragraphs and links. The editor provides **Optimize with AI** for this field, so the author can improve the copy without leaving the content item.",
@@ -889,7 +916,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Wait for the save checkmark and reload the item.",
         ],
         expected: [
-          "The accepted correction appears in **Body** and persists after reload. A suggested change remains subject to author review.",
+          "The accepted correction appears in your own **Body** and persists after reload. This saves authoring content only; the page remains unpublished. A suggested change remains subject to author review.",
         ],
       },
       {
@@ -906,7 +933,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Restore the recorded starting content",
         action: [
-          "Restore the exact **Body** recorded before the first temporary edit.",
+          "In **Practice {{pack}}** > **Data** > **Growth opportunity**, restore the exact **Body** recorded before the first temporary edit.",
           "Click outside the field, wait for the saved checkmark, and reload. Compare wording and formatting.",
         ],
         expected: [
@@ -916,7 +943,7 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Keep the page unpublished and verify exact restoration after reload. Named versions provide a recovery point before substantial edits. Restore CMS content in Page Builder; a workshop-number reset applies to portal work.",
+        "Keep **Practice {{pack}}** unpublished and verify the original **Body** wording and formatting after reload. CMS content does not reset automatically: restore it in **Page Builder**. A workshop-number reset applies to portal work and profiles, not your page or its Data items.",
       ],
     },
     related: ["campaign-composition", "agentic-studio-workflow"],
