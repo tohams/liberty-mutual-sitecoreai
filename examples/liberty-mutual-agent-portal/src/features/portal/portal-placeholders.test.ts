@@ -110,7 +110,7 @@ test("workshop practice pages render their native article in editing and deliver
   }
 });
 
-test("all fifteen authoring practice routes retain their native campaign composition", () => {
+test("all twenty authoring practice routes retain their native campaign composition", () => {
   const hero: ComponentRendering = {
     componentName: "CampaignHero",
     uid: "practice-hero-instance",
@@ -133,7 +133,7 @@ test("all fifteen authoring practice routes retain their native campaign composi
     { isEditing: false, isPreview: true },
     delivery,
   ]) {
-    for (let number = 1; number <= 15; number++) {
+    for (let number = 1; number <= 20; number++) {
       const route = `/practice/practice-${String(number).padStart(2, "0")}`;
       for (const path of [route, `${route}/`]) {
         const placements = getPortalPlaceholders(path, layout, mode);
@@ -171,12 +171,12 @@ test("practice folder, invalid numbers, and nested paths do not expose the campa
       "/practice",
       "/practice/",
       "/practice/practice-00",
-      "/practice/practice-16",
+      "/practice/practice-21",
       "/practice/practice-99",
       "/practice/practice-1",
       "/practice/practice-001",
       "/practice/practice-01/other",
-      "/practice/practice-15/Data",
+      "/practice/practice-20/Data",
       "/practice/other/practice-01",
       "/other/practice/practice-01",
       "/practice//practice-01",

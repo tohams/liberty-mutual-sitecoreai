@@ -59,7 +59,7 @@ test('missing metadata is reported without creating a new run or records', async
   assert.equal(result.missingRecords, 1);
   assert.deepEqual(result.records, []);
   assert.deepEqual(await readdir(path), []);
-  await assert.rejects(persistReviewerWorkspace('16', store), failCode('INVALID_INPUT'));
+  await assert.rejects(persistReviewerWorkspace('21', store), failCode('INVALID_INPUT'));
 });
 
 test('a concurrent run or profile-metadata update causes conflict without overwriting it', async () => {

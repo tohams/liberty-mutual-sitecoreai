@@ -6,7 +6,9 @@ const W = require("./workshop-editorial-workflow-model.cjs");
 
 const MARKER = "Liberty Mutual workshop practice content v1";
 const TEMPLATE_PATH = R.TEMPLATES + "/WorkshopPracticePage";
+// Historical scope remains stable for recorded manifests and the original recycler.
 const PAIRS = Object.freeze(Array.from({ length: 9 }, (_, i) => String(i + 1).padStart(2, "0")));
+const ACTIVE_PAIRS = Object.freeze(["01"]);
 const TITLE_FIELDS = Object.freeze({
   Title: "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
   summary: "ca57c6ef-fb0b-5513-9c6e-a6b511e3af9a",
@@ -70,10 +72,24 @@ function targets(workflow, pageTemplateId = R.IDS.pageTemplate) {
   return result;
 }
 
+/** Normal provisioning retains only the presenter Demo and its local content. */
+function activeTargets(workflow, pageTemplateId = R.IDS.pageTemplate) {
+  return targets(workflow, pageTemplateId)
+    .filter(spec => spec.kind === "root" || ACTIVE_PAIRS.includes(spec.pair))
+    .map(spec => spec.kind === "root" ? {
+      ...spec,
+      fields: {
+        ...spec.fields,
+        summary: "See how an author prepares content and an approver reviews it before publication.",
+        body: "<p>Open the Demo page in Page Builder. The Author prepares and submits an update; the Approver reviews it and approves it for publication.</p>",
+      },
+    } : spec);
+}
+
 function assertTarget(spec, pageTemplateId = R.IDS.pageTemplate) {
   const known = targets(undefined, pageTemplateId).find(target => target.path === spec.path);
   assert(known && known.kind === spec.kind && known.parentPath === spec.parentPath && R.norm(known.templateId) === R.norm(spec.templateId), "Unknown practice-content target.");
   return known;
 }
 
-module.exports = { MARKER, TEMPLATE_PATH, PAIRS, TITLE_FIELDS, METADATA, validId, idField, pageLayout, targets, assertTarget };
+module.exports = { MARKER, TEMPLATE_PATH, PAIRS, ACTIVE_PAIRS, TITLE_FIELDS, METADATA, validId, idField, pageLayout, targets, activeTargets, assertTarget };

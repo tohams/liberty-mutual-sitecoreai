@@ -1,10 +1,10 @@
 # Practice page authoring
 
-The two hands-on guides, **Edit page content** and **Improve content with AI**, use **Page Builder → Home → Practice → Practice NN**. Participants replace `NN` with their assigned workshop number. The source guides use `{{pack}}`, which the workshop guide resolves to the signed-in participant’s number. **Practice 01** is reserved for presenters; attendees use **Practice 02–15** as assigned. Item names are `practice-01` through `practice-15`, under `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/practice`. **Practice** is a native Common/Folder item; expand it and select the assigned numbered page rather than trying to edit the folder as a page.
+The two hands-on guides, **Edit page content** and **Improve content with AI**, use **Page Builder → Home → Practice → Practice NN**. Participants replace `NN` with their assigned workshop number. The source guides use `{{pack}}`, which the workshop guide resolves to the signed-in participant’s number. **Practice 01** is reserved for presenters; attendees use **Practice 02–20** as assigned. Item names are `practice-01` through `practice-20`, under `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/practice`. **Practice** is a native Common/Folder item; expand it and select the assigned numbered page rather than trying to edit the folder as a page.
 
 Each page uses the existing `CampaignPage` template and `CampaignLayout` page layout and owns a separate `Data` folder with **Campaign introduction**, **Preparation update**, **Growth opportunity**, **Start the conversation**, **Prepare for review**, **Useful resources**, and **Your next step**. Page composition and datasource references must stay within the same numbered page. A workshop number identifies these copies; it does not grant CMS access or isolate shared media, component definitions, presentation settings, or other global configuration. Participants sign into SitecoreAI with their own invited identity and require edit access to their assigned page and Data items.
 
-Keep every numbered Practice page unpublished. The provisioning model sets `__Never publish` on the Practice folder, pages, and local Data items; leave that protection in place. Saving updates CMS authoring and the Page Builder preview. It does not publish the page. Shared resource publication, creation of a resource page, and the existing Author/Approver workflow remain presenter demonstrations. The existing **Workshop practice → Demo** workflow page and its prepared pair scopes serve a separate exercise.
+Keep every numbered Practice page unpublished. The provisioning model sets `__Never publish` on the Practice folder, pages, and local Data items; leave that protection in place. Saving updates CMS authoring and the Page Builder preview. It does not publish the page. Shared resource publication, creation of a resource page, and the existing Author/Approver workflow remain presenter demonstrations. The single **Workshop practice → Demo** workflow page serves the separate presenter-led publishing exercise. The unused workflow pair pages have been removed.
 
 ## Native component choices
 
@@ -37,3 +37,15 @@ There is no automatic CMS reset. The portal’s workshop-number reset restores p
 ## Verification boundary
 
 The repository model supplies the component names and allowlists above. Native Page Builder verification must cover the assigned page route, saved content edits, allowed and disallowed insertion choices, selection of the page-local datasource, add/reorder/remove controls, saved layout after reload, and restoration. Keep a record of the workshop number and what was actually exercised. Source review or screenshot inspection alone does not establish that every mutating step has been rehearsed.
+
+## Adding workshop numbers
+
+The practice model and route allowlist use the workshop numbers in `examples/liberty-mutual-agent-portal/fixtures/manifest.json`. To extend the existing 01–15 set to 01–20, retain the external native manifest that records the existing items, including the repaired Common/Folder identity. Review a scoped plan before applying it:
+
+```sh
+node authoring/scripts/provision-authoring-practice-content.cjs demo --manifest /absolute/private/native-manifest.json --numbers 16,17,18,19,20
+```
+
+The expected plan preserves 136 existing items and creates 45 items: Practice 16–20, their five Data folders, and thirty-five local datasources. Add `--apply` to the reviewed command to create those items. The command stops if any existing item is missing, has a different native identity or ownership marker, or if a new path already contains unrecorded content. It never updates existing content, creates versions, changes permissions, or publishes. The original 01–15 ownership marker remains unchanged as provenance, and the external manifest records the additive contract extension.
+
+Capture and compare the existing page and datasource fields, native versions, layout, workflow, and identities before and after apply. Verify the five new pages in native Page Builder and retain their `__Never publish` protection. This procedure only creates numbered Practice content; the retired Workshop practice pair pages remain retired. SitecoreAI identity invitations and access are separate from the workshop portal accounts.

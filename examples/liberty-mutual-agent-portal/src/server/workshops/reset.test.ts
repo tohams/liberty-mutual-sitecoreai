@@ -18,6 +18,7 @@ import {
   requestWorkshopReset,
 } from "./reset";
 import type { WorkshopResetRequest } from "@/features/workshops/reset.types";
+import manifest from "../../../fixtures/manifest.json";
 
 let directory: string;
 let oldEnvironment: Record<string, string | undefined>;
@@ -103,12 +104,15 @@ test("only bounded packs and explicit reset contracts are accepted", () => {
     requestId: randomUUID(),
     expectedRunId: randomUUID(),
   };
-  assert.deepEqual(parseWorkshopResetRequest(valid), valid);
+  for (const reviewerPack of manifest.reviewerPacks) {
+    const selected = { ...valid, reviewerPack };
+    assert.deepEqual(parseWorkshopResetRequest(selected), selected);
+  }
   for (const invalid of [
     null,
     [],
     { ...valid, reviewerPack: "00" },
-    { ...valid, reviewerPack: "16" },
+    { ...valid, reviewerPack: "21" },
     { ...valid, mode: "persist-workspace" },
     { ...valid, host: "https://elsewhere.example" },
     { ...valid, url: "/api/portal/operator/reset" },
@@ -158,71 +162,83 @@ test("GET exposes a resumable native operation without advancing it; another req
   );
 });
 
-test("native completion resets the selected run and returns all seven verified identities idempotently", async () => {
-  const store = storeFor("native-complete");
-  const request = await intent(store, "restart");
-  const { importer, calls } = fakeImporter();
-  const untouched = await getPack(store, "14");
-  const priorProfiles = (
-    await getWorkshopResetStatus("15", undefined, { store })
-  ).profiles;
-  await requestWorkshopReset(request, { store, importer });
-  const completed = await requestWorkshopReset(request, { store, importer });
-  assert.equal(completed.operation.status, "completed");
-  assert.equal(completed.operation.requiresPortalSignIn, true);
-  assert.equal(completed.profileGeneration, 1);
-  assert.notEqual(completed.runId, request.expectedRunId);
-  assert.deepEqual(await getPack(store, "14"), untouched);
-  assert.equal(completed.profiles.length, 7);
-  assert.ok(
-    completed.profiles.every(
-      (profile) =>
-        priorProfiles.find((prior) => prior.username === profile.username)
-          ?.identifier !== profile.identifier,
-    ),
-  );
-  assert.ok(
-    completed.profiles.every(
-      (profile) =>
-        profile.profileId &&
-        profile.identifier &&
-        profile.username.endsWith(".15"),
-    ),
-  );
-  assert.deepEqual(
-    await requestWorkshopReset(request, { store, importer }),
-    completed,
-  );
-  assert.equal(calls.uploads, 1);
-  const active = await getPack(store, "15");
-  await assert.rejects(
-    () =>
-      requestWorkshopReset(
-        { ...request, requestId: randomUUID() },
-        { store, importer },
+for (const reviewerPack of manifest.reviewerPacks.filter(
+  (pack) => Number(pack) >= 15,
+)) {
+  test(`native completion resets only pack ${reviewerPack} and returns all seven verified identities idempotently`, async () => {
+    const store = storeFor(`native-complete-${reviewerPack}`);
+    const request = await intent(store, "restart", reviewerPack);
+    const { importer, calls } = fakeImporter();
+    const otherPacks = ["01", "14", "15", "16", "17", "18", "19", "20"].filter(
+      (pack) => pack !== reviewerPack,
+    );
+    const untouched = await Promise.all(
+      otherPacks.map((pack) => getPack(store, pack)),
+    );
+    const priorProfiles = (
+      await getWorkshopResetStatus(reviewerPack, undefined, { store })
+    ).profiles;
+    await requestWorkshopReset(request, { store, importer });
+    const completed = await requestWorkshopReset(request, { store, importer });
+    assert.equal(completed.operation.status, "completed");
+    assert.equal(completed.operation.requiresPortalSignIn, true);
+    assert.equal(completed.profileGeneration, 1);
+    assert.notEqual(completed.runId, request.expectedRunId);
+    assert.deepEqual(
+      await Promise.all(otherPacks.map((pack) => getPack(store, pack))),
+      untouched,
+    );
+    assert.equal(completed.profiles.length, 7);
+    assert.ok(
+      completed.profiles.every(
+        (profile) =>
+          priorProfiles.find((prior) => prior.username === profile.username)
+            ?.identifier !== profile.identifier,
       ),
-    code("VERSION_CONFLICT"),
-  );
-  await assert.rejects(
-    () =>
-      requestWorkshopReset(
-        { ...request, expectedRunId: randomUUID() },
-        { store, importer },
+    );
+    assert.ok(
+      completed.profiles.every(
+        (profile) =>
+          profile.profileId &&
+          profile.identifier &&
+          profile.username.endsWith(`.${reviewerPack}`),
       ),
-    code("IDEMPOTENCY_CONFLICT"),
-  );
-  assert.deepEqual(await getPack(store, "15"), active);
-  for (const privateField of [
-    "checksumMd5",
-    "correlationId",
-    "identityScope",
-    "batchId",
-    "plan",
-    "synthetic-private-key",
-  ]) {
-    assert.equal(JSON.stringify(completed).includes(privateField), false);
-  }
-});
+    );
+    assert.deepEqual(
+      await requestWorkshopReset(request, { store, importer }),
+      completed,
+    );
+    assert.equal(calls.uploads, 1);
+    const active = await getPack(store, reviewerPack);
+    await assert.rejects(
+      () =>
+        requestWorkshopReset(
+          { ...request, requestId: randomUUID() },
+          { store, importer },
+        ),
+      code("VERSION_CONFLICT"),
+    );
+    await assert.rejects(
+      () =>
+        requestWorkshopReset(
+          { ...request, expectedRunId: randomUUID() },
+          { store, importer },
+        ),
+      code("IDEMPOTENCY_CONFLICT"),
+    );
+    assert.deepEqual(await getPack(store, reviewerPack), active);
+    for (const privateField of [
+      "checksumMd5",
+      "correlationId",
+      "identityScope",
+      "batchId",
+      "plan",
+      "synthetic-private-key",
+    ]) {
+      assert.equal(JSON.stringify(completed).includes(privateField), false);
+    }
+  });
+}
 
 test("failed native verification can resume the same import without uploading again", async () => {
   const store = storeFor("resume");

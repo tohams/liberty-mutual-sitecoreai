@@ -108,27 +108,105 @@ async function provision(native = fakeNative()) {
   return { native, report, manifest };
 }
 
-test("dry run inventories all 136 bounded targets without creating content or persisting a manifest", async () => {
+function legacyProvision() {
+  const native = fakeNative();
+  const manifest = { ...emptyManifest(), contractSha256: M.LEGACY_CONTRACT_SHA256, complete: true };
+  for (const spec of M.targets().filter(item => !item.number || M.LEGACY_NUMBERS.includes(item.number))) {
+    const item = native.put(spec.path, spec.templateId, spec.fields);
+    manifest.items.push({ path: spec.path, kind: spec.kind, number: spec.number, itemId: item.itemId, complete: true });
+  }
+  return { native, manifest };
+}
+
+test("the original 01–15 contract and ownership marker remain unchanged", () => {
+  assert.equal(M.LEGACY_CONTRACT_SHA256, "16ce77ace44a659afcba136a56bf388d42e7392c9460fbd1a000460ec97436d1");
+  assert.equal(M.MARKER, "Liberty Mutual isolated authoring practice — numbered pages 01–15");
+  assert.deepEqual(M.NUMBERS, require("../../examples/liberty-mutual-agent-portal/fixtures/manifest.json").reviewerPacks);
+  assert.equal(legacyProvision().manifest.items.length, 136);
+});
+
+test("scoped 16–20 extension preserves all 136 recorded items and creates only 45 local items", async () => {
+  const { native, manifest } = legacyProvision();
+  const page = native.store.get(M.pagePath("15"));
+  page.values.Title = "Keep participant-authored title";
+  page.values.__Renderings = "<r>Participant-authored composition</r>";
+  page.values["__Workflow state"] = M.idField(C.IDS.approved);
+  page.version = 2;
+  page.versions.push({ version: 2, language: { name: "en" } });
+  native.put(page.path + "/Data/Participant addition", C.uid(C.TP + "/CampaignCallout"), { title: "Keep extra datasource" });
+  const before = structuredClone([...native.store.entries()]);
+  const beforeManifest = structuredClone(manifest);
+  let persisted = 0;
+  const preview = await run({ query: native.query, origin, manifest, numbers: ["16", "17", "18", "19", "20"], persist: () => { persisted++; } });
+  assert.equal(preview.plans.filter(item => item.action === "create").length, 45);
+  assert.equal(preview.plans.filter(item => item.action === "preserve-existing").length, 136);
+  assert(preview.plans.filter(item => item.action === "create").every(item => ["16", "17", "18", "19", "20"].includes(item.number)));
+  assert.equal(persisted, 0);
+  assert.deepEqual(manifest, beforeManifest, "Read-only review does not migrate the manifest");
+  assert.equal(native.writes.length, 0);
+  const report = await run({ query: native.query, origin, apply: true, manifest, numbers: ["16", "17", "18", "19", "20"] });
+  assert.equal(report.createdCount, 45);
+  assert.equal(report.preservedCount, 136);
+  assert.equal(report.itemCount, 181);
+  assert.equal(native.writes.length, 45);
+  for (const [path, item] of before) assert.deepEqual(native.store.get(path), item, path);
+  assert.equal(manifest.contractSha256, M.CONTRACT_SHA256);
+  assert.equal(manifest.events[0].phase, "contract-extended");
+  assert.equal(manifest.events[0].previousContractSha256, M.LEGACY_CONTRACT_SHA256);
+  assert.deepEqual(manifest.items.slice(0, 136), beforeManifest.items);
+  assert.deepEqual(new Set(manifest.items.slice(136).map(item => item.number)), new Set(["16", "17", "18", "19", "20"]));
+  const resumed = await run({ query: native.query, origin, apply: true, manifest, numbers: ["16", "17", "18", "19", "20"] });
+  assert.equal(resumed.createdCount, 0);
+  assert.equal(native.writes.length, 45, "The extension is idempotent");
+});
+
+test("scoped extensions cannot recreate a missing legacy item or use an unrecorded root", async () => {
+  for (const removeRecord of [false, true]) {
+    const { native, manifest } = legacyProvision();
+    const missing = manifest.items.at(-1);
+    native.store.delete(missing.path);
+    if (removeRecord) manifest.items.pop();
+    await assert.rejects(run({ query: native.query, origin, apply: true, manifest, numbers: ["16", "17", "18", "19", "20"] }), /disappeared|outside the selected/);
+    assert.equal(native.writes.length, 0);
+    assert.equal(manifest.contractSha256, M.LEGACY_CONTRACT_SHA256, "Failed inventory cannot migrate the manifest");
+  }
+  const native = fakeNative();
+  await assert.rejects(run({ query: native.query, origin, apply: true, numbers: ["16", "17", "18", "19", "20"] }), /recorded native manifest/);
+  assert.equal(native.writes.length, 0);
+});
+
+test("scoped extensions reject invalid selections and legacy manifests claiming newly added pages", async () => {
+  const { native, manifest } = legacyProvision();
+  for (const numbers of [[], ["16", "16"], ["21"], ["1"], ["01", "../resources"], "16,17"]) {
+    await assert.rejects(run({ query: native.query, origin, apply: true, manifest, numbers }), /distinct practice numbers/);
+  }
+  const added = M.targets().find(item => item.number === "16");
+  manifest.items.push({ path: added.path, kind: added.kind, number: added.number, itemId: C.uid(added.path), complete: true });
+  assert.throws(() => validateManifest(manifest, origin), /unknown, duplicated or invalid/);
+  assert.equal(native.writes.length, 0);
+});
+
+test("dry run inventories all 181 bounded targets without creating content or persisting a manifest", async () => {
   const native = fakeNative();
   let persisted = 0;
   const report = await run({ query: native.query, origin, persist: () => { persisted++; } });
-  assert.equal(report.plans.length, 136);
-  assert.equal(report.plans.filter(item => item.kind === "page").length, 15);
+  assert.equal(report.plans.length, 181);
+  assert.equal(report.plans.filter(item => item.kind === "page").length, 20);
   assert(report.plans.every(item => item.action === "create"));
   assert(report.plans.every(item => item.path === M.ROOT_PATH || item.path.startsWith(M.ROOT_PATH + "/")));
   assert.equal(native.writes.length, 0);
   assert.equal(persisted, 0);
 });
 
-test("creation isolates fifteen pages and their seven local datasources, with unique rendering UIDs and Draft workflows", async () => {
+test("creation isolates twenty pages and their seven local datasources, with unique rendering UIDs and Draft workflows", async () => {
   const { native, report, manifest } = await provision();
-  assert.equal(report.itemCount, 136);
-  assert.equal(report.pages.length, 15);
+  assert.equal(report.itemCount, 181);
+  assert.equal(report.pages.length, 20);
   assert.equal(report.published, false);
-  assert.equal(native.writes.length, 136);
-  assert.equal(manifest.items.length, 136);
+  assert.equal(native.writes.length, 181);
+  assert.equal(manifest.items.length, 181);
   assert(manifest.items.every(item => item.complete));
-  assert.equal(new Set(manifest.items.map(item => C.norm(item.itemId))).size, 136);
+  assert.equal(new Set(manifest.items.map(item => C.norm(item.itemId))).size, 181);
   assert.equal(manifest.contractSha256, M.CONTRACT_SHA256);
   assert.deepEqual(new Set(manifest.items.map(item => item.path)), new Set(M.targets().map(item => item.path)));
   for (const item of manifest.items) assert.equal(native.store.get(item.path).values["__Never publish"], "1");
@@ -142,7 +220,7 @@ test("creation isolates fifteen pages and their seven local datasources, with un
     "__Short description": M.MARKER,
   });
   for (const name of ["Title", "NavigationTitle", "__Renderings", "__Final Renderings"]) assert.equal(Object.hasOwn(root.values, name), false, "The Practice folder must not become a routable page");
-  assert.deepEqual(report.pages.map(page => page.number).sort(), Array.from({ length: 15 }, (_, i) => String(i + 1).padStart(2, "0")));
+  assert.deepEqual(report.pages.map(page => page.number).sort(), Array.from({ length: 20 }, (_, i) => String(i + 1).padStart(2, "0")));
   assert.equal(C.CONTENT["Campaign introduction"].eyebrow, "Agency growth", "Practice labels must not mutate shared campaign defaults");
   assert.equal(C.CONTENT["Campaign introduction"].title, "Build your next chapter in small business");
   assert.match(C.CONTENT["Campaign introduction"].summary, /your client knowledge and a clear/);
@@ -186,8 +264,8 @@ test("creation isolates fifteen pages and their seven local datasources, with un
     assert.deepEqual(new Set(sourcesInLayout), new Set(sources.map(item => "page:/Data/" + item.name)));
     assert.equal(page.version, 1);
   }
-  assert.equal(datasourceIds.size, 105);
-  assert.equal(uids.size, 120);
+  assert.equal(datasourceIds.size, 140);
+  assert.equal(uids.size, 160);
   assert(native.writes.every(write => write.input.database === "master" && write.input.language === "en"));
   assert(native.writes.every(write => !/publish|updateItem|deleteItem|addItemVersion/i.test(write.q)));
 });
@@ -253,8 +331,8 @@ test("resume uses the persisted confirmed native ID after interrupted readback a
   existing.versions.push({ version: 2, language: { name: "en" } });
   const before = structuredClone(existing);
   const report = await run({ query: native.query, origin, apply: true, manifest, persist: state => { manifest = structuredClone(state); } });
-  assert.equal(report.itemCount, 136);
-  assert.equal(native.writes.length, 136, "Resuming creates only the remaining 135 items");
+  assert.equal(report.itemCount, 181);
+  assert.equal(native.writes.length, 181, "Resuming creates only the remaining 180 items");
   assert.deepEqual(native.store.get(recorded.path), before);
   assert(manifest.items.every(item => item.complete));
 });

@@ -92,40 +92,14 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
         expected: [
           "**Experience Edge** distributes published content separately from authoring. An authoring-only interruption need not prevent the website from reading previously published content.",
-          "**Sitecore** operates its platform, and **Vercel** operates hosting infrastructure. The application connects those services with its code, configuration, identity, Search, personalization, and saved work.",
+          "**Sitecore** operates its platform, and **Vercel** operates hosting infrastructure. The application connects those services with its code, configuration, identity, Search, and personalization.",
+          "The portal’s business components use sample data. In a production implementation, they would connect to **Salesforce** and other middleware services.",
           "Managed services reduce infrastructure and platform upgrade work. For a future operational site, your team would own application dependencies, access, and integrations, and confirm each service’s SLA as part of the overall availability design.",
         ],
         note: "**What to notice:** Managed **SitecoreAI** authoring and delivery reduce the platform infrastructure and core upgrade work your team operates. Your frontend dependencies, integrations, access configuration, and compatibility checks still need ownership.",
         links: [
           { label: "Live portal", href: `${portal}/login` },
           { label: "Shared preview portal", href: `${previewPortal}/login` },
-        ],
-      },
-      {
-        title: "Locate the operational integration boundary",
-        action: [
-          "The portal also saves tasks, submissions, favorites, and learning registrations. These operational records are application data, separate from the articles and page layouts authored in SitecoreAI. Inspect the three source files in **examples/liberty-mutual-agent-portal** to see where an integration with a system such as Salesforce would connect; do not change saved work.",
-          `In [**Portal API contracts**](${appSource}/src/contracts/portal.ts), find **PortalBootstrap** and **PortalAction** to see the data exchanged with the browser. In [**Server actions and authorization**](${appSource}/src/server/data/portal.ts), inspect the checks before an action changes data. In [**Durable state implementation**](${appSource}/src/server/state/store.ts), compare the local JSON and deployed Redis adapters. This traces one request across the application without executing it.`,
-        ],
-        expected: [
-          "Insurance records and production history come from replaceable JSON-backed adapters. Submission actions illustrate workflows; they do not rate, bind, issue coverage, or contact an underwriter.",
-          "Protected server requests validate the signed-in agent, agency, workshop number, and active run before saving. **expectedVersion** detects an edit based on old data; **idempotency keys** prevent a successful retry from creating duplicate work; atomic Redis writes prevent competing updates from silently replacing one another.",
-          "Saved work persists across deployments until an explicit reset or instance deletion. Eight-hour login sessions are separate from that persistence.",
-          "**Contact your team** sends a native **Sitecore Forms** submission to **Demo Webhook**, where the presenter can inspect the received payload. Connecting that payload to Salesforce or durable business storage is the next integration step for an operational solution.",
-        ],
-        links: [
-          {
-            label: "Portal API contracts",
-            href: `${appSource}/src/contracts/portal.ts`,
-          },
-          {
-            label: "Server actions and authorization",
-            href: `${appSource}/src/server/data/portal.ts`,
-          },
-          {
-            label: "Durable state implementation",
-            href: `${appSource}/src/server/state/store.ts`,
-          },
         ],
       },
       {
@@ -164,7 +138,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Match a proposed change to its release path",
         action: [
-          "Classify a proposed change: editorial copy or an image; React behavior; the **CMS model**, which defines fields and allowed page structure; SitecoreAI personalization or Search configuration; or an operational data integration. This identifies the team and release process responsible for the change.",
+          "Classify a proposed change: editorial copy or an image; React behavior; the **CMS model**, which defines fields and allowed page structure; or SitecoreAI personalization or Search configuration. This identifies the team and release process responsible for the change.",
           "Open [**Understand deployment and recovery**](/workshops/guide/release-and-recovery) and compare your example with its frontend, content, and CMS model sections. Keep private server contexts, session secrets, editing secrets, operator credentials, and Redis credentials outside browser code.",
         ],
         links: [
@@ -812,7 +786,7 @@ export const developmentGuides: WorkshopGuide[] = [
       "Your **workshop number** is the suffix shared by your seven fictional agent logins, such as **daniel.01** and **maya.01**. Each agent has a different scenario and known attributes. A reset restores the group’s sample saved work and creates fresh **SitecoreAI profiles**, the records used to connect those attributes with browsing behavior.",
       "Use a portal username such as **daniel.01** with password **Sitecore** to sign into the workshop website. This is separate from the Sitecore Cloud account used for Page Builder. No separate operator account, secret, terminal command, or approval is needed.",
       `Identify the website where you performed the exercise by its browser address: **liberty-mutual-agent-portal.vercel.app** is live; **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** is the shared transaction preview. Their saved work is separate. Open [**Live portal: reset a workshop number**](${portal}/workshops/reset) or [**Transaction preview: reset a workshop number**](${previewPortal}/workshops/reset) to match that hostname; do not use either link to reset the isolated localhost exercise.`,
-      "Check [**Attendee assignments**](/workshops/attendees) if you need your portal workshop number. Use your assigned number from 01–15. Number 01 belongs to the presenters. This number identifies portal logins; it does not grant Sitecore authoring access. The reset page initially selects the number from your workshop website sign-in, but it also allows you to choose another number.",
+      "Check [**Attendee assignments**](/workshops/attendees) if you need your portal workshop number. Use your assigned number from 01–20. Number 01 belongs to the presenters. This number identifies portal logins; it does not grant Sitecore authoring access. The reset page initially selects the number from your workshop website sign-in, but it also allows you to choose another number.",
       "A reset affects all seven personas and every agency with that suffix. Check the displayed number so you do not replace another attendee’s work by mistake.",
     ],
     links: [

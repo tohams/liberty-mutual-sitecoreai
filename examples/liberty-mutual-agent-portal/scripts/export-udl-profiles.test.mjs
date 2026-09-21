@@ -14,7 +14,7 @@ const agents = JSON.parse(await readFile(new URL('agents.json', fixture), 'utf8'
 test('UDL exports all attendees or an additive pack batch without changing identity semantics', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'portal-udl-export-'));
   try {
-    for (const packs of [manifest.reviewerPacks, manifest.reviewerPacks.filter((pack) => Number(pack) >= 5)]) {
+    for (const packs of [manifest.reviewerPacks, ['16', '17', '18', '19', '20']]) {
       const result = spawnSync(process.execPath, [script.pathname, directory, '--packs', packs.join(',')], { encoding: 'utf8' });
       assert.equal(result.status, 0, result.stderr);
       const records = (await readFile(join(directory, 'liberty-mutual-profiles.jsonl'), 'utf8')).trim().split('\n').map(JSON.parse);
@@ -34,7 +34,7 @@ test('UDL exports all attendees or an additive pack batch without changing ident
         assert.equal(record.contact.email, undefined);
       }
     }
-    for (const packs of ['00', '16', '1', '05,05', '']) {
+    for (const packs of ['00', '21', '1', '05,05', '']) {
       const result = spawnSync(process.execPath, [script.pathname, directory, '--packs', packs], { encoding: 'utf8' });
       assert.notEqual(result.status, 0);
     }

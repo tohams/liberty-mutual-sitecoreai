@@ -66,12 +66,12 @@ test('personalization identity reads only pack metadata and honors verified gene
   await assert.rejects(getPortalPersonalizationIdentity({ ...session, agencyId: 'wrong-agency' }, store), errorCode('UNAUTHENTICATED'));
 });
 
-test('all 105 reviewer logins authenticate and establish sessions in their assigned packs', async () => {
-  const expectedPacks = Array.from({ length: 15 }, (_, index) => String(index + 1).padStart(2, '0'));
+test('all 140 reviewer logins authenticate and establish sessions in their assigned packs', async () => {
+  const expectedPacks = Array.from({ length: 20 }, (_, index) => String(index + 1).padStart(2, '0'));
   assert.deepEqual(fixtures.manifest.reviewerPacks, expectedPacks);
-  assert.equal(logins.logins.length, 105);
-  assert.equal(runtimeCredentials.logins.length, 105);
-  assert.equal(new Set(runtimeCredentials.logins.map((entry) => entry.salt)).size, 105, 'Each credential keeps its independent salt');
+  assert.equal(logins.logins.length, 140);
+  assert.equal(runtimeCredentials.logins.length, 140);
+  assert.equal(new Set(runtimeCredentials.logins.map((entry) => entry.salt)).size, 140, 'Each credential keeps its independent salt');
   const usernames = new Set<string>();
   for (const pack of expectedPacks) {
     const packLogins = logins.logins.filter((entry) => entry.reviewerPack === pack);
@@ -99,7 +99,7 @@ test('all 105 reviewer logins authenticate and establish sessions in their assig
 
 test('unconfigured and malformed reviewer packs are rejected by authentication, sessions, and resets', async () => {
   const store = new LocalJsonStateStore(join(directory, 'invalid-packs'));
-  for (const pack of ['00', '16', '1', '015', '99', '']) {
+  for (const pack of ['00', '21', '1', '020', '99', '']) {
     assert.equal(await authenticate(`daniel.${pack}`, 'Sitecore'), null);
     const { token, session } = await createSession({ agentId: 'daniel', agencyId: 'cedar-ridge', reviewerPack: pack, username: `daniel.${pack}` });
     assert.equal(await verifySession(token), null, `Pack ${JSON.stringify(pack)} must not verify`);
@@ -214,31 +214,46 @@ test('legacy local agency work with an elapsed expiry is preserved without chang
   assert.deepEqual(await getPack(store, '01'), metadata, 'Removing legacy expiry never resets saved work, native profiles or pack metadata');
 });
 
-test('new two-digit packs isolate saved work and resets from existing and neighboring packs', async () => {
-  const storePath = join(directory, 'fifteen-pack-isolation');
+test('packs 16 through 20 isolate saved work and resets from existing and neighboring packs', async () => {
+  const storePath = join(directory, 'twenty-pack-isolation');
   const store = new LocalJsonStateStore(storePath);
-  const sessions = await Promise.all(['01', '10', '14', '15'].map((pack) => login('maya', pack)));
+  const packs = ['01', '10', '15', '16', '17', '18', '19', '20'];
+  const sessions = await Promise.all(packs.map((pack) => login('maya', pack)));
   const original = await Promise.all(sessions.map((session) => getPortalBootstrap(session, store)));
   assert.equal(new Set(original.map((bootstrap) => bootstrap.udlIdentity?.id)).size, sessions.length);
-  const saved = await applyPortalAction(sessions[3], {
-    type: 'save-follow-up', policyId: 'pol-001', title: 'Pack 15 attendee follow-up', dueDate: '2026-09-22',
-    ...requestMetadata(original[3]),
-  }, store);
-  const persisted = await getPortalBootstrap(sessions[3], new LocalJsonStateStore(storePath));
-  assert.ok(persisted.tasks.some((task) => task.title === 'Pack 15 attendee follow-up'));
-  for (const [index, session] of sessions.slice(0, 3).entries()) {
-    const untouched = await getPortalBootstrap(session, store);
-    assert.equal(untouched.tasks.some((task) => task.title === 'Pack 15 attendee follow-up'), false);
-    assert.equal(untouched.session.runId, original[index].session.runId);
-  }
-  await resetReviewerPack('15', 'saved-work', store);
-  const cleared = await getPortalBootstrap(sessions[3], store);
-  assert.equal(cleared.tasks.some((task) => task.title === 'Pack 15 attendee follow-up'), false);
-  assert.equal(cleared.udlIdentity?.id, saved.udlIdentity?.id, 'Saved-work reset preserves the native identity');
-  for (const [index, session] of sessions.slice(0, 3).entries()) {
-    const untouched = await getPortalBootstrap(session, store);
-    assert.equal(untouched.session.runId, original[index].session.runId);
-    assert.equal(untouched.udlIdentity?.id, original[index].udlIdentity?.id);
+  const metadata = await Promise.all(packs.map((pack) => getPack(store, pack)));
+  for (const pack of ['16', '17', '18', '19', '20']) {
+    const index = packs.indexOf(pack);
+    const title = `Pack ${pack} attendee follow-up`;
+    const before = await getPortalBootstrap(sessions[index], store);
+    const saved = await applyPortalAction(sessions[index], {
+      type: 'save-follow-up', policyId: 'pol-001', title, dueDate: '2026-09-22',
+      ...requestMetadata(before),
+    }, store);
+    const persisted = await getPortalBootstrap(sessions[index], new LocalJsonStateStore(storePath));
+    assert.ok(persisted.tasks.some((task) => task.title === title));
+    for (const [otherIndex, session] of sessions.entries()) {
+      if (otherIndex === index) continue;
+      const untouched = await getPortalBootstrap(session, store);
+      assert.equal(untouched.tasks.some((task) => task.title === title), false);
+      assert.equal(untouched.udlIdentity?.id, original[otherIndex].udlIdentity?.id);
+      if (Number(packs[otherIndex]) <= 15) {
+        assert.deepEqual(await getPack(store, packs[otherIndex]), metadata[otherIndex], 'New pack activity preserves existing pack metadata');
+      }
+    }
+    await resetReviewerPack(pack, 'saved-work', store);
+    const cleared = await getPortalBootstrap(sessions[index], store);
+    assert.equal(cleared.tasks.some((task) => task.title === title), false);
+    assert.equal(cleared.udlIdentity?.id, saved.udlIdentity?.id, 'Saved-work reset preserves the native identity');
+    for (const [otherIndex, session] of sessions.entries()) {
+      if (otherIndex === index) continue;
+      const untouched = await getPortalBootstrap(session, store);
+      assert.equal(untouched.udlIdentity?.id, original[otherIndex].udlIdentity?.id);
+      if (Number(packs[otherIndex]) <= 15) {
+        assert.equal(untouched.session.runId, original[otherIndex].session.runId);
+        assert.deepEqual(await getPack(store, packs[otherIndex]), metadata[otherIndex], 'New pack resets preserve existing pack metadata');
+      }
+    }
   }
 });
 

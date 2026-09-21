@@ -3,9 +3,14 @@
 const assert = require("node:assert/strict");
 const crypto = require("node:crypto");
 const C = require("./campaign-authoring-model.cjs");
+const { reviewerPacks } = require("../../examples/liberty-mutual-agent-portal/fixtures/manifest.json");
 const ROOT_PATH = C.SITE + "/Home/practice";
 const FOLDER_TEMPLATE = "a87a00b1-e6db-45ab-8b54-636fec3b5523";
-const NUMBERS = Object.freeze(Array.from({ length: 15 }, (_, i) => String(i + 1).padStart(2, "0")));
+const NUMBERS = Object.freeze([...reviewerPacks]);
+assert(NUMBERS.length && NUMBERS.every((number, i) => number === String(i + 1).padStart(2, "0")), "Practice numbers must match the ordered workshop manifest.");
+const LEGACY_NUMBERS = Object.freeze(Array.from({ length: 15 }, (_, i) => String(i + 1).padStart(2, "0")));
+// This is immutable provenance, not a display label. Keep the original value so
+// extending the numbered range never changes ownership of existing CMS content.
 const MARKER = "Liberty Mutual isolated authoring practice — numbered pages 01–15";
 function validId(id) {
   if (typeof id !== "string") return false;
@@ -18,7 +23,7 @@ function idField(id) {
   return `{${n.slice(0, 8)}-${n.slice(8, 12)}-${n.slice(12, 16)}-${n.slice(16, 20)}-${n.slice(20)}}`;
 }
 function pagePath(number) {
-  assert(NUMBERS.includes(number), "Practice number is outside 01–15.");
+  assert(NUMBERS.includes(number), "Practice number is outside the workshop manifest.");
   return ROOT_PATH + "/practice-" + number;
 }
 function practiceContent(number, instanceName) {
@@ -66,5 +71,9 @@ function targets() {
   }
   return result;
 }
-const CONTRACT_SHA256 = crypto.createHash("sha256").update(JSON.stringify(targets())).digest("hex");
-module.exports = { ROOT_PATH, FOLDER_TEMPLATE, NUMBERS, MARKER, validId, idField, pagePath, targets, CONTRACT_SHA256 };
+const digest = specs => crypto.createHash("sha256").update(JSON.stringify(specs)).digest("hex");
+const CONTRACT_SHA256 = digest(targets());
+// Only the unchanged original contract can be extended. Changes to its fields,
+// templates, or layout invalidate its digest instead of adopting an old manifest.
+const LEGACY_CONTRACT_SHA256 = digest(targets().filter(spec => !spec.number || LEGACY_NUMBERS.includes(spec.number)));
+module.exports = { ROOT_PATH, FOLDER_TEMPLATE, NUMBERS, LEGACY_NUMBERS, MARKER, validId, idField, pagePath, targets, CONTRACT_SHA256, LEGACY_CONTRACT_SHA256 };

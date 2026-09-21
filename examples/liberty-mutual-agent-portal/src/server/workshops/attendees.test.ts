@@ -26,7 +26,7 @@ test("attendee assignments cover each supported reviewer number exactly once wit
     workshopAttendees
       .filter((attendee) => attendee.displayName === null)
       .map((attendee) => attendee.reviewerPack),
-    ["13", "14", "15"],
+    ["18", "19", "20"],
   );
 });
 
@@ -41,6 +41,7 @@ test("each reviewer receives the seven actual enabled persona usernames for only
       ["avery", "daniel", "elena", "jordan", "marcus", "maya", "priya"],
     );
   }
-  assert.deepEqual(workshopUsernamesForPack("16"), []);
+  assert.deepEqual(workshopUsernamesForPack("21"), []);
+  assert.deepEqual(workshopUsernamesForPack("99"), []);
   assert.deepEqual(workshopUsernamesForPack(""), []);
 });
