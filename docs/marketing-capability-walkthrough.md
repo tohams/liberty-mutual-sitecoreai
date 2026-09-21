@@ -8,7 +8,7 @@ Salesforce remains Liberty Mutual's existing business backend. SitecoreAI manage
 
 ## Accounts and preparation
 
-Reserve pack `01` for workshop presenters. Assign attendee/spare packs from `02`–`15` (14 non-presenter packs). Never reset a pack while an attendee is using it. Use that same suffix across all seven personas. Their roles and licenses are unchanged across packs; only their saved work and native profile identities are separate. The examples below use presenter pack `.01`; attendees substitute their assigned suffix consistently. All 105 fictional portal accounts use the password `Sitecore`. SitecoreAI itself uses your own invited account in **Safeco Insurance Company of America POC** and the **Liberty Mutual Agent Portal** site.
+Reserve pack `01` for workshop presenters. Assign attendee and spare packs from `02`–`20` (19 non-presenter packs). Never reset a pack while an attendee is using it. Use that same suffix across all seven personas. Their roles and licenses are unchanged across packs; only their saved work and native profile identities are separate. The examples below use presenter pack `.01`; attendees substitute their assigned suffix consistently. All 140 fictional portal accounts use the password `Sitecore`. SitecoreAI itself uses your own invited account in **Safeco Insurance Company of America POC** and the **Liberty Mutual Agent Portal** site.
 
 | Workspace | URL | Use |
 |---|---|---|

@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 "use strict";
 /**
- * Create the 15 independent campaign practice pages and their local data.
+ * Create independent campaign practice pages for the workshop manifest and their local data.
  * Defaults to read-only. Apply performs createItem only: no updates, publishing,
  * role changes, shared-model edits, resets, or native version creation.
  *
  * Review: node authoring/scripts/provision-authoring-practice-content.cjs ENV
  * Apply:  node authoring/scripts/provision-authoring-practice-content.cjs ENV --apply --manifest /absolute/private/authoring-practice.json
  * Resume/review: use the same --manifest, adding --apply only to create missing items.
+ * Extend: add --numbers 16,17,18,19,20 to require every item outside those pages to exist.
  * Keep the external manifest: it records native IDs and establishes ownership.
  */
 const fs = require("node:fs");
@@ -106,16 +107,21 @@ function identity(item, spec, recorded) {
   assert(value(item, "__Short description") === M.MARKER, "Practice ownership marker differs; preserve the item and inspect it.");
 }
 function validateManifest(manifest, origin) {
-  assert(manifest?.schemaVersion === 1 && manifest.origin === origin && manifest.scope === M.ROOT_PATH && manifest.contractSha256 === M.CONTRACT_SHA256 && Array.isArray(manifest.items) && Array.isArray(manifest.events), "Practice manifest belongs to a different environment, scope or contract.");
-  const specs = M.targets(), seenPaths = new Set(), seenIds = new Set();
+  assert(manifest?.schemaVersion === 1 && manifest.origin === origin && manifest.scope === M.ROOT_PATH && [M.CONTRACT_SHA256, M.LEGACY_CONTRACT_SHA256].includes(manifest.contractSha256) && Array.isArray(manifest.items) && Array.isArray(manifest.events), "Practice manifest belongs to a different environment, scope or contract.");
+  const legacy = manifest.contractSha256 !== M.CONTRACT_SHA256;
+  const specs = M.targets().filter(spec => !legacy || !spec.number || M.LEGACY_NUMBERS.includes(spec.number)), seenPaths = new Set(), seenIds = new Set();
   for (const item of manifest.items) {
     const spec = specs.find(target => target.path === item.path);
     assert(spec && !seenPaths.has(item.path) && M.validId(item.itemId) && !seenIds.has(C.norm(item.itemId)) && item.kind === spec.kind && item.number === spec.number && typeof item.complete === "boolean", "Practice manifest contains an unknown, duplicated or invalid item.");
     seenPaths.add(item.path); seenIds.add(C.norm(item.itemId));
   }
 }
-async function run({ query, origin, apply = false, manifest, persist = () => {} }) {
+async function run({ query, origin, apply = false, manifest, numbers, persist = () => {} }) {
   assert(typeof origin === "string" && new URL(origin).protocol === "https:", "HTTPS authoring origin required.");
+  if (numbers !== undefined) {
+    assert(Array.isArray(numbers) && numbers.length && new Set(numbers).size === numbers.length && numbers.every(number => M.NUMBERS.includes(number)), "Select distinct practice numbers from the workshop manifest.");
+    assert(manifest, "Scoped extension requires the recorded native manifest.");
+  }
   const journal = manifest || { schemaVersion: 1, origin, scope: M.ROOT_PATH, contractSha256: M.CONTRACT_SHA256, items: [], events: [] };
   validateManifest(journal, origin);
   const checks = await preflight(query);
@@ -126,10 +132,17 @@ async function run({ query, origin, apply = false, manifest, persist = () => {} 
     const item = await read(query, { path: spec.path });
     const recorded = journal.items.find(entry => entry.path === spec.path);
     if (item) { identity(item, spec, recorded); inventory.set(spec.path, item); }
-    else assert(!recorded, "A recorded practice item disappeared; do not recreate it automatically.");
+    else {
+      assert(!recorded, "A recorded practice item disappeared; do not recreate it automatically.");
+      assert(!numbers || numbers.includes(spec.number), "A practice item outside the selected numbers is missing; scoped extension cannot recreate it.");
+    }
     plans.push({ path: spec.path, kind: spec.kind, number: spec.number, action: item ? "preserve-existing" : "create", itemId: item?.itemId || null });
   }
   if (!apply) return { mode: "read-only", scope: M.ROOT_PATH, preflight: checks, plans, published: false };
+  if (journal.contractSha256 !== M.CONTRACT_SHA256) {
+    journal.events.push({ at: new Date().toISOString(), phase: "contract-extended", previousContractSha256: journal.contractSha256, contractSha256: M.CONTRACT_SHA256 });
+    journal.contractSha256 = M.CONTRACT_SHA256;
+  }
   persist(journal);
   const record = event => { journal.events.push({ at: new Date().toISOString(), ...event }); persist(journal); };
   let createdCount = 0;
@@ -184,16 +197,17 @@ function persistManifest(file, state) {
 async function main(args = process.argv.slice(2)) {
   const [environment, ...rest] = args;
   assert(environment && !environment.startsWith("--"), "Specify the configured Sitecore environment.");
-  let apply = false, file;
+  let apply = false, file, numbers;
   for (let i = 0; i < rest.length; i++) {
     if (rest[i] === "--apply") { assert(!apply, "Duplicate apply flag."); apply = true; }
     else if (rest[i] === "--manifest") { assert(!file && rest[i + 1] && !rest[i + 1].startsWith("--"), "Supply exactly one manifest path."); file = manifestPath(rest[++i]); }
+    else if (rest[i] === "--numbers") { assert(!numbers && rest[i + 1] && !rest[i + 1].startsWith("--"), "Supply exactly one comma-separated practice-number selection."); numbers = rest[++i].split(","); }
     else throw new Error("Unknown authoring-practice option.");
   }
   assert(!apply || file, "Apply requires an external manifest to record generated native IDs.");
   const manifest = file && fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : undefined;
   const { query, origin } = connection(environment, apply);
-  console.log(JSON.stringify(await run({ query, origin, apply, manifest, persist: state => persistManifest(file, state) }), null, 2));
+  console.log(JSON.stringify(await run({ query, origin, apply, manifest, numbers, persist: state => persistManifest(file, state) }), null, 2));
 }
 module.exports = { preflight, identity, validateManifest, run, manifestPath, main };
 if (require.main === module) main().catch(error => { console.error("Authoring practice: " + (error?.message || "Operation failed.")); process.exitCode = 1; });

@@ -15,6 +15,7 @@ import { createSession, SESSION_COOKIE } from "../auth/session";
 import { getPack } from "../data/pack-state";
 import { getStateStore } from "../state/store";
 import type { ProfileImportPlan } from "../udl/profile-import";
+import manifest from "../../../fixtures/manifest.json";
 
 let directory: string;
 let previous: Record<string, string | undefined>;
@@ -117,47 +118,55 @@ test("GET rejects foreign Origin and POST requires a verified same origin", asyn
     assert.equal((await POST(post({}, rejected))).status, 403);
 });
 
-test("GET accepts any allowed pack for an attendee, does not advance work and exposes only safe profile lookup fields", async () => {
-  const response = await GET(get());
-  assert.equal(response.status, 200);
-  assert.match(
-    response.headers.get("Cache-Control") ?? "",
-    /private, no-store/,
-  );
-  const status = await response.json();
-  assert.equal(
-    status.reviewerPack,
-    "15",
-    "A pack02 attendee may select pack15 by the explicit sandbox authorization",
-  );
-  assert.equal(status.restartAvailable, false);
-  assert.equal(status.profiles.length, 7);
-  assert.ok(
-    status.profiles.every(
-      (profile: { username: string; identifier: string }) =>
-        profile.username.endsWith(".15") &&
-        /^[a-f0-9]{32}$/.test(profile.identifier),
-    ),
-  );
-  assert.equal(status.pendingOperation, null);
-  assert.deepEqual(await (await GET(get())).json(), status);
-  assert.deepEqual(response.headers.getSetCookie(), []);
-  assert.equal((await verifyWorkshopSession(docsToken))?.username, "daniel.02");
-  for (const key of [
-    "operator",
-    "secret",
-    "checksum",
-    "payload",
-    "correlationId",
-    "identityScope",
-  ])
-    assert.equal(JSON.stringify(status).includes(key), false);
-});
+for (const reviewerPack of manifest.reviewerPacks) {
+  test(`GET accepts pack ${reviewerPack} for an attendee without advancing work or exposing private fields`, async () => {
+    const response = await GET(get(`reviewerPack=${reviewerPack}`));
+    assert.equal(response.status, 200);
+    assert.match(
+      response.headers.get("Cache-Control") ?? "",
+      /private, no-store/,
+    );
+    const status = await response.json();
+    assert.equal(
+      status.reviewerPack,
+      reviewerPack,
+      `A pack02 attendee may select pack${reviewerPack} by the explicit sandbox authorization`,
+    );
+    assert.equal(status.restartAvailable, false);
+    assert.equal(status.profiles.length, 7);
+    assert.ok(
+      status.profiles.every(
+        (profile: { username: string; identifier: string }) =>
+          profile.username.endsWith(`.${reviewerPack}`) &&
+          /^[a-f0-9]{32}$/.test(profile.identifier),
+      ),
+    );
+    assert.equal(status.pendingOperation, null);
+    assert.deepEqual(
+      await (await GET(get(`reviewerPack=${reviewerPack}`))).json(),
+      status,
+    );
+    assert.deepEqual(response.headers.getSetCookie(), []);
+    assert.equal(
+      (await verifyWorkshopSession(docsToken))?.username,
+      "daniel.02",
+    );
+    for (const key of [
+      "operator",
+      "secret",
+      "checksum",
+      "payload",
+      "correlationId",
+      "identityScope",
+    ])
+      assert.equal(JSON.stringify(status).includes(key), false);
+  });
+}
 
 test("route rejects out-of-bounds packs, duplicate selectors, arbitrary hosts and unsupported operations", async () => {
   for (const query of [
     "reviewerPack=00",
-    "reviewerPack=16",
+    "reviewerPack=21",
     "reviewerPack=1",
     "reviewerPack=15&reviewerPack=01",
     "reviewerPack=15&host=https://foreign.example",
@@ -175,7 +184,7 @@ test("route rejects out-of-bounds packs, duplicate selectors, arbitrary hosts an
   for (const body of [
     { ...valid, mode: "persist-workspace" },
     { ...valid, mode: "saved-work" },
-    { ...valid, reviewerPack: "16" },
+    { ...valid, reviewerPack: "21" },
     { ...valid, host: origin },
     { ...valid, requestId: "" },
   ]) {
