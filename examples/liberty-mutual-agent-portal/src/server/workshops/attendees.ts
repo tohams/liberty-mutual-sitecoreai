@@ -19,9 +19,14 @@ export const workshopAttendees: ReadonlyArray<{
   { reviewerPack: "10", displayName: "Jack Meyers" },
   { reviewerPack: "11", displayName: "Jeff Swanso" },
   { reviewerPack: "12", displayName: "Zach Holle" },
-  { reviewerPack: "13", displayName: null },
-  { reviewerPack: "14", displayName: null },
-  { reviewerPack: "15", displayName: null },
+  { reviewerPack: "13", displayName: "Kevin Kim-Murphy" },
+  { reviewerPack: "14", displayName: "Sean Duddy" },
+  { reviewerPack: "15", displayName: "Dianne Cykert" },
+  { reviewerPack: "16", displayName: "David Swayne" },
+  { reviewerPack: "17", displayName: "Angela Cornejo" },
+  { reviewerPack: "18", displayName: null },
+  { reviewerPack: "19", displayName: null },
+  { reviewerPack: "20", displayName: null },
 ];
 
 export function workshopUsernamesForPack(reviewerPack: string): string[] {

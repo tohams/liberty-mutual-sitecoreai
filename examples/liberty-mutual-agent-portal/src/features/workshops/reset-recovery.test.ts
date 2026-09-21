@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import manifest from "../../../fixtures/manifest.json";
 import { parsePersistedResetIntent, recoverResetState } from "./reset-recovery";
 import type {
   WorkshopResetOperation,
@@ -43,6 +44,20 @@ function operation(
 }
 
 test("persisted reset references accept only the chosen pack, restart and valid UUIDs", () => {
+  for (const reviewerPack of manifest.reviewerPacks) {
+    const selected = { ...intent, reviewerPack };
+    assert.deepEqual(
+      parsePersistedResetIntent(reviewerPack, JSON.stringify(selected)),
+      selected,
+    );
+    assert.deepEqual(
+      parsePersistedResetIntent(reviewerPack, {
+        ...selected,
+        resumeVerification: true,
+      }),
+      { ...selected, resumeVerification: true },
+    );
+  }
   assert.deepEqual(
     parsePersistedResetIntent("01", JSON.stringify(intent)),
     intent,
@@ -68,7 +83,7 @@ test("persisted reset references accept only the chosen pack, restart and valid 
     assert.equal(parsePersistedResetIntent("01", value), null);
   }
   assert.equal(
-    parsePersistedResetIntent("16", { ...intent, reviewerPack: "16" }),
+    parsePersistedResetIntent("21", { ...intent, reviewerPack: "21" }),
     null,
   );
 });
