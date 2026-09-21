@@ -167,7 +167,7 @@ test('resume files reject a different host, pack or explicit request before send
 test('invalid arguments and missing authorization make no requests', async (t) => {
   const h = await harness(t, () => assert.fail('Invalid command may not send a request'));
   for (const input of [
-    [ORIGIN, '16', 'restart'], [ORIGIN, '1', 'restart'], [ORIGIN, PACK, 'delete'],
+    [ORIGIN, '21', 'restart'], [ORIGIN, '1', 'restart'], [ORIGIN, PACK, 'delete'],
     ['http://external.example', PACK, 'restart'], ['https://user:password@portal.example', PACK, 'restart'],
     [ORIGIN + '/path', PACK, 'restart'], [...args, '--request-id', REQUEST],
     [...args, '--request-id', 'bad', '--expected-run-id', RUN],
