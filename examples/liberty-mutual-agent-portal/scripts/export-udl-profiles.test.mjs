@@ -25,7 +25,9 @@ test('UDL exports all attendees or an additive pack batch without changing ident
       for (const record of records) {
         const { reviewerPack, agentId, profileGeneration, role } = record.extensions;
         assert.ok(packs.includes(reviewerPack));
-        assert.equal(role, agents.find((agent) => agent.id === agentId).role);
+        const agent = agents.find((entry) => entry.id === agentId);
+        assert.equal(role, agent.role);
+        assert.deepEqual(record.contact, { firstName: agent.firstName, lastName: `${agent.lastName} - ${reviewerPack}` });
         assert.ok([0, 1, 2, 3].includes(profileGeneration));
         const expectedId = createHash('sha256').update(`liberty-mutual-agent:v1:${reviewerPack}:${agentId}:${profileGeneration}`).digest('hex').slice(0, 32);
         assert.equal(record.identifiers[0].id, expectedId);
@@ -48,5 +50,24 @@ test('UDL exports all attendees or an additive pack batch without changing ident
     assert.equal(await readFile(join(canonicalDirectory, 'profile-identity-map.json'), 'utf8'), before);
   } finally {
     await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('committed seed profiles display their workshop number while preserving the identity map', async () => {
+  const records = (await readFile(new URL('udl/liberty-mutual-profiles.jsonl', fixture), 'utf8')).trim().split('\n').map(JSON.parse);
+  const { mapping } = JSON.parse(await readFile(new URL('udl/profile-identity-map.json', fixture), 'utf8'));
+  assert.equal(records.length, mapping.length);
+  assert.equal(new Set(records.map((record) => record.id)).size, records.length);
+  const byIdentifier = new Map(records.map((record) => [record.identifiers[0].id, record]));
+  assert.equal(byIdentifier.size, records.length);
+  for (const identity of mapping) {
+    const record = byIdentifier.get(identity.identifier);
+    assert.ok(record);
+    const agent = agents.find((entry) => entry.id === identity.agentId);
+    assert.deepEqual(record.contact, { firstName: agent.firstName, lastName: `${agent.lastName} - ${identity.reviewerPack}` });
+    assert.deepEqual(record.identifiers, [{ provider: identity.provider, id: identity.identifier }]);
+    assert.equal(record.extensions.reviewerPack, identity.reviewerPack);
+    assert.equal(record.extensions.agentId, identity.agentId);
+    assert.equal(record.extensions.profileGeneration, identity.generation);
   }
 });

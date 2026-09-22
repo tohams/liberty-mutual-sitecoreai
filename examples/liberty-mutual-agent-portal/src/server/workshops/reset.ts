@@ -203,7 +203,7 @@ function statusFrom(
       )?.profileId;
       return {
         username: `${agent.id}.${reviewerPack}`,
-        name: agent.name,
+        name: `${agent.name} - ${reviewerPack}`,
         identifier:
           metadata.profileSet?.identifiers[agent.id] ??
           getProfileIdentifier(

@@ -201,7 +201,8 @@ for (const reviewerPack of manifest.reviewerPacks.filter(
         (profile) =>
           profile.profileId &&
           profile.identifier &&
-          profile.username.endsWith(`.${reviewerPack}`),
+          profile.username.endsWith(`.${reviewerPack}`) &&
+          profile.name.endsWith(` - ${reviewerPack}`),
       ),
     );
     assert.deepEqual(
