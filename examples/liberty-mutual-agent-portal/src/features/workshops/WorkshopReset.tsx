@@ -474,6 +474,12 @@ export function WorkshopReset({
         </span>
         <h2>Current profile identities for {pack}</h2>
         <p>
+          SitecoreAI profile names end with your workshop number. For example,
+          <strong> daniel.{pack}</strong> appears as
+          <strong> Daniel Ortiz - {pack}</strong>. After a reset, use the current
+          Agent identity below to find the profile used by your next portal sign-in.
+        </p>
+        <p>
           An <strong>Agent identity</strong> is the lookup value that connects a
           portal username to its current SitecoreAI profile. You need it only
           when a walkthrough asks you to inspect that agent’s data or browsing

@@ -51,7 +51,7 @@ for (const pack of packs) {
         extensions[`agent${capitalized}PolicyCount`] = agentProduction?.policyCount ?? 0;
         extensions[`agent${capitalized}NewBusinessPremiumCents`] = agentProduction?.newBusinessPremiumCents ?? 0;
       }
-      records.push({ id: randomUUID(), recordType: 'profile', identifiers: [{ provider: 'liberty-mutual-agent', id }], contact: { firstName: agent.firstName, lastName: agent.lastName }, extensions });
+      records.push({ id: randomUUID(), recordType: 'profile', identifiers: [{ provider: 'liberty-mutual-agent', id }], contact: { firstName: agent.firstName, lastName: `${agent.lastName} - ${pack}` }, extensions });
       mapping.push({ username: `${agent.id}.${pack}`, reviewerPack: pack, agentId: agent.id, generation, provider: 'liberty-mutual-agent', identifier: id });
     }
   }

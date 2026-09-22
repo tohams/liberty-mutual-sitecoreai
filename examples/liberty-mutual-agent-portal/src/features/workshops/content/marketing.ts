@@ -1069,7 +1069,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Wait for the matching person, then click their name.",
         ],
         expected: [
-          "For this example, the result matches **Daniel Ortiz** and the copied identity. When repeating for Avery, Maya, or Elena, match that person’s name and copied identity. Checking both values selects the current profile even when earlier profiles have the same name.",
+          "For this example, the result matches **Daniel Ortiz - 01**, using your workshop number, and the copied identity. When repeating for Avery, Maya, or Elena, match that person’s name and copied identity. Checking both values selects the current profile even when earlier profiles have the same name.",
         ],
         links: [profileLink],
       },

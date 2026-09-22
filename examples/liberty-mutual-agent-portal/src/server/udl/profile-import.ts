@@ -96,7 +96,11 @@ export interface ProfileImportRestoreDescriptor extends ProfileImportInput {
   fileSizeBytes: number;
 }
 
-function buildProfileImport(input: ProfileImportInput, originalProfiles?: ProfileImportPlan['profiles']): ProfileImportPlan {
+function buildProfileImport(
+  input: ProfileImportInput,
+  originalProfiles?: ProfileImportPlan['profiles'],
+  numberedNames = true,
+): ProfileImportPlan {
   if (!input || !fixtures.manifest.reviewerPacks.includes(input.reviewerPack) ||
       !Number.isSafeInteger(input.generation) || input.generation < 0 ||
       !UUID.test(input.profileSetId) || typeof input.identityScope !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9:_-]{0,127}$/.test(input.identityScope) ||
@@ -144,7 +148,10 @@ function buildProfileImport(input: ProfileImportInput, originalProfiles?: Profil
     return {
       id: profiles[index].correlationId, recordType: 'profile',
       identifiers: [{ provider: 'liberty-mutual-agent', id: profiles[index].identifier }],
-      contact: { firstName: agent.firstName, lastName: agent.lastName }, extensions,
+      contact: {
+        firstName: agent.firstName,
+        lastName: numberedNames ? `${agent.lastName} - ${input.reviewerPack}` : agent.lastName,
+      }, extensions,
     };
   });
   const payload = records.map((record) => JSON.stringify(record)).join('\n') + '\n';
@@ -163,11 +170,16 @@ export function prepareProfileImport(input: ProfileImportInput): ProfileImportPl
 /** Rebuilds an existing upload only when retained descriptors reproduce its exact bytes. */
 export function restoreProfileImportPlan(input: ProfileImportRestoreDescriptor): ProfileImportPlan {
   if (!input || !Array.isArray(input.profiles) || !MD5.test(input.checksumMd5) || !Number.isSafeInteger(input.fileSizeBytes)) invalidPlan();
-  const plan = buildProfileImport({ reviewerPack: input.reviewerPack, generation: input.generation,
-    profileSetId: input.profileSetId, identityScope: input.identityScope }, input.profiles);
-  assertPlan(plan);
-  if (plan.checksumMd5 !== input.checksumMd5 || plan.fileSizeBytes !== input.fileSizeBytes) invalidPlan();
-  return plan;
+  const descriptor = { reviewerPack: input.reviewerPack, generation: input.generation,
+    profileSetId: input.profileSetId, identityScope: input.identityScope };
+  // An upload started before numbered display names must retain its exact bytes
+  // when a later deployment resumes verification. Never replace its identities.
+  for (const numberedNames of [true, false]) {
+    const plan = buildProfileImport(descriptor, input.profiles, numberedNames);
+    assertPlan(plan);
+    if (plan.checksumMd5 === input.checksumMd5 && plan.fileSizeBytes === input.fileSizeBytes) return plan;
+  }
+  return invalidPlan();
 }
 
 function assertPlan(plan: ProfileImportPlan): void {
