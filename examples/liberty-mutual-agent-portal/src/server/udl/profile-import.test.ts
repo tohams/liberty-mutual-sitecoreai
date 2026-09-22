@@ -81,7 +81,7 @@ test('seven immutable profiles preserve the accepted scalar attributes and isola
     const agent = fixtures.agents[index];
     assert.equal(row.id, input.profiles[index].correlationId);
     assert.deepEqual(row.identifiers, [{ provider: 'liberty-mutual-agent', id: input.profiles[index].identifier }]);
-    assert.deepEqual(row.contact, { firstName: agent.firstName, lastName: agent.lastName });
+    assert.deepEqual(row.contact, { firstName: agent.firstName, lastName: `${agent.lastName} - 01` });
     assert.equal(row.extensions.agentId, agent.id);
     assert.equal(row.extensions.role, agent.role);
     assert.equal(row.extensions.licensedInTexas, agent.licensedStates.includes('TX'));
@@ -96,6 +96,29 @@ test('seven immutable profiles preserve the accepted scalar attributes and isola
   assert.notEqual(same.profiles[0].correlationId, input.profiles[0].correlationId);
   assert.notEqual(prepareProfileImport({ ...input, identityScope: 'preview' }).profiles[0].identifier, input.profiles[0].identifier);
   assert.notEqual(plan().profiles[0].identifier, input.profiles[0].identifier);
+});
+
+test('every workshop number labels all seven profiles without changing their identities', () => {
+  for (const reviewerPack of fixtures.manifest.reviewerPacks) {
+    const input = prepareProfileImport({ ...plan(), reviewerPack });
+    const rows = input.payload.trim().split('\n').map((line) => JSON.parse(line));
+    for (const [index, row] of rows.entries()) {
+      assert.equal(row.contact.lastName, `${fixtures.agents[index].lastName} - ${reviewerPack}`);
+      assert.equal(row.identifiers[0].id, input.profiles[index].identifier);
+    }
+  }
+});
+
+test('pending imports from before numbered names retain their exact payload on resume', () => {
+  const input = plan();
+  const payload = input.payload.trim().split('\n').map((line, index) => {
+    const record = JSON.parse(line);
+    record.contact.lastName = fixtures.agents[index].lastName;
+    return JSON.stringify(record);
+  }).join('\n') + '\n';
+  const legacy = { ...input, payload, checksumMd5: createHash('md5').update(payload).digest('hex'),
+    fileSizeBytes: Buffer.byteLength(payload) };
+  assert.deepEqual(restoreProfileImportPlan(legacy), legacy);
 });
 
 test('builder rejects unknown packs, noninteger generations and invalid identity inputs', () => {

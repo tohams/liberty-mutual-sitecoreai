@@ -944,7 +944,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Match the same login to its new Agent identity",
         action: [
-          "In **Current profile identities**, find the row for the username you will inspect, such as **daniel.01**. Copy that row’s **Agent identity** exactly. This identifier, rather than the display name Daniel Ortiz, distinguishes the current profile from earlier profiles with the same name. Compare it with the same username’s before-reset identifier if you recorded one.",
+          "In **Current profile identities**, find the row for the username you will inspect, such as **daniel.01**. Copy that row’s **Agent identity** exactly. The profile name includes your workshop number, such as **Daniel Ortiz - 01**. Its current **Agent identity** distinguishes it from profiles retained after an earlier reset. Compare it with the same username’s before-reset identifier if you recorded one.",
           "Click **Open this Agent Portal**, then **Sign in** again with that exact username and password **Sitecore**. The unchanged username now identifies the newly created native profile.",
         ],
         expected: [
