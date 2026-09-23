@@ -1,32 +1,36 @@
 # Developer quickstart: see your component change in Page Builder
 
-Clone the repository, run the frontend on your machine, and connect **SitecoreAI Page Builder** to **http://localhost:3000**. Change a React heading in VS Code and see your code on the Page Builder canvas. Verify the component’s functional Search behavior in a separate localhost portal tab.
+Clone Liberty Mutual’s copy of the repository, run the frontend on your machine, and connect **SitecoreAI Page Builder** to **http://localhost:3000**. Change a React heading in VS Code and see your code on the Page Builder canvas. Verify the component’s functional Search behavior in a separate localhost portal tab.
 
-SitecoreAI supplies the hosted authoring environment and content. Only the Next.js frontend runs locally. No local Sitecore server, VM, Docker or .NET installation is required for this exercise. Each developer has separate code and local saved work; CMS content remains shared.
+SitecoreAI supplies the hosted authoring environment and content. Only the Next.js frontend runs locally. No local Sitecore server, VM, Docker, or .NET installation is required for this exercise. Each developer has separate code and local saved work; CMS content remains shared.
 
 ## Before you begin
 
-- Install **Git**, **VS Code** and **Node.js 24.19.0 with npm**. The application’s `.nvmrc` records the runtime and `package-lock.json` records dependencies. A Node version manager is optional; the Node installer works too.
-- Authenticate Git or VS Code with approved read access to the private repository. GitHub CLI and GitHub write access are not required.
+- Install **Git**, **VS Code**, and **Node.js 24.19.0 with npm**. The application’s `.nvmrc` records the runtime and `package-lock.json` records dependencies. A Node version manager is optional; the Node installer works too.
+- Use the **Liberty Mutual GitHub repository** supplied by your workshop team. Sign in with your authorized GitHub account and confirm that you can view its files. Ask your Liberty Mutual workshop contact for its address or access if needed. GitHub CLI and repository write access are not required.
 - Use **Chrome** for the local Page Builder exercise, with your own **SitecoreAI** account that has access to **Liberty Mutual Agent Portal**. Fictional portal logins do not grant CMS access.
-- Allow Internet access to GitHub, npm and the hosted Sitecore services. **Vercel access and deployment are not required.**
+- Allow Internet access to GitHub, npm, and the hosted Sitecore services. **Vercel access and deployment are not required.**
 - Use a new checkout without other local `.env` files or inherited portal configuration. Preserve any existing checkout containing your work.
 
 TypeScript comes with the application dependencies; do not install it globally. Open a new terminal after installing Node or changing its PATH, and check the version again after moving into the application directory.
 
-## 1. Clone, branch and open VS Code
+## 1. Clone, branch, and open VS Code
+
+In Liberty Mutual’s GitHub repository, select **Code → Local → HTTPS**, and copy its clone URL. Replace `YOUR_LIBERTY_MUTUAL_REPOSITORY_URL` below with that URL. If your organization requires SSH, copy the **SSH** URL instead and use your configured SSH identity. Replace `your-name` with your own lowercase identifier.
 
 In your preferred projects directory, run:
 
 ```sh
-git clone https://github.com/tohams/liberty-mutual-sitecoreai.git
+git clone YOUR_LIBERTY_MUTUAL_REPOSITORY_URL liberty-mutual-sitecoreai
 cd liberty-mutual-sitecoreai
 git switch -c workshop/your-name-resource-search
 ```
 
-Replace `your-name` with your own lowercase identifier. Authenticate with your approved GitHub account if prompted. Alternatively, use **VS Code → View → Command Palette → Git: Clone**, select the same repository and open it. Creating the local branch does not deploy anything.
+The final `liberty-mutual-sitecoreai` argument sets the local folder name, regardless of the name of Liberty Mutual’s repository. Authenticate with your authorized GitHub account if prompted. Alternatively, use **VS Code → View → Command Palette → Git: Clone**, paste the copied URL, and open the folder it creates. That method uses the repository’s name for the local folder. Later references to the local `liberty-mutual-sitecoreai` root mean your cloned folder, whatever its name. Creating the local branch does not deploy anything.
 
-Open the repository root, **liberty-mutual-sitecoreai**, with **File → Open Folder**. If the `code` command is available, run `code .` from that root. Explorer should show `examples`, `authoring`, `docs` and `.github`.
+All file paths in this guide start at the repository root, the top-level file list containing `authoring`, `docs`, and `examples`. You can browse those same paths in Liberty Mutual’s GitHub repository or in VS Code’s **Explorer**.
+
+Open the repository root, **liberty-mutual-sitecoreai**, with **File → Open Folder**. If the `code` command is available, run `code .` from that root. Explorer should show `examples`, `authoring`, `docs`, and `.github`.
 
 Select **Terminal → New Terminal**. Keep the repository root open in Explorer, but move the terminal into the application:
 

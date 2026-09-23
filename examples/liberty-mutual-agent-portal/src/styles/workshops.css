@@ -1385,6 +1385,29 @@
 .workshop-code code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
 }
+.workshop-repository-files {
+  margin: 20px 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--w-line);
+}
+.workshop-repository-files h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.workshop-repository-files > p {
+  margin: 0 0 14px;
+}
+.workshop-repository-path > div {
+  gap: 16px;
+}
+.workshop-repository-path button {
+  flex-shrink: 0;
+}
+.workshop-repository-path pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .workshop-figure {
   margin: 23px 0 15px;
   --workshop-highlight: #df007f;

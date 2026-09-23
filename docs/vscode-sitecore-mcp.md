@@ -4,7 +4,7 @@ Connect VS Code's chat to the Liberty Mutual SitecoreAI content and current Site
 
 ## Before you begin
 
-- Open the **`liberty-mutual-sitecoreai` repository root** in a current VS Code version with MCP support.
+- Open the root of your **Liberty Mutual repository checkout** in a current VS Code version with MCP support. The quickstart names the local folder `liberty-mutual-sitecoreai`; your GitHub repository can have a different name.
 - Enable GitHub Copilot Chat, sign in with an approved GitHub account and confirm **Agent** mode is available. Your organization must allow the requested MCP connections.
 - Use your own Sitecore account with an **Admin role in the SitecoreAI application** and access to **Safeco Insurance Company of America POC**. The fictional portal agent logins are unrelated to developer authentication.
 - Have a Google account available for the Documentation MCP's separate sign-in. Sitecore's current developer workshop describes this authentication for human verification and usage tracking.
@@ -18,7 +18,7 @@ Both URLs are public service endpoints. The descriptive local server name does n
 
 ## 1. Save the configuration at the repository root
 
-In VS Code Explorer, the root folder is **`liberty-mutual-sitecoreai`**, with `authoring`, `.github`, `docs` and `examples` beneath it. The MCP file belongs here:
+In VS Code Explorer, the root is your cloned repository folder, with `authoring`, `.github`, `docs`, and `examples` beneath it. The folder is named **`liberty-mutual-sitecoreai`** if you followed the quickstart’s terminal commands. The MCP file belongs here:
 
 ```text
 liberty-mutual-sitecoreai/
@@ -31,7 +31,7 @@ liberty-mutual-sitecoreai/
     liberty-mutual-agent-portal/
 ```
 
-Open the checked-in [configuration example](examples/mcp.vscode.json). Choose **View → Command Palette** and select **MCP: Open Workspace Folder MCP Configuration** to open or create the root `.vscode/mcp.json`. Copy the example's two entries into it and save. If a configuration already exists, merge these entries into its `servers` object and preserve other connections.
+Open the checked-in [configuration example](examples/mcp.vscode.json) at **`docs/examples/mcp.vscode.json`** from the repository root. You can browse that same path in Liberty Mutual’s GitHub repository. Choose **View → Command Palette** and select **MCP: Open Workspace Folder MCP Configuration** to open or create the root `.vscode/mcp.json`. Copy the example's two entries into it and save. If a configuration already exists, merge these entries into its `servers` object and preserve other connections.
 
 ```json
 {

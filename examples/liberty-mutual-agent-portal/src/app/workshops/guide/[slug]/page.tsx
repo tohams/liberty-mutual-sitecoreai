@@ -21,7 +21,31 @@ import {
 } from "@/features/workshops/content";
 import { GuideText } from "@/features/workshops/GuideText";
 import { guideStepImages } from "@/features/workshops/guide-images";
-import type { GuideLink } from "@/features/workshops/types";
+import type { GuideLink, RepositoryFile } from "@/features/workshops/types";
+function RepositoryFiles({ files }: { files?: RepositoryFile[] }) {
+  return files?.length ? (
+    <div className="workshop-repository-files">
+      <h3>Find in Liberty Mutual’s repository</h3>
+      <p>
+        Open the GitHub repository supplied by your Liberty Mutual workshop
+        team. Each path starts at its top-level file list, called the{" "}
+        <strong>repository root</strong>. Follow the path to the file or folder.
+        If you have cloned the repository, use the same path in{" "}
+        <strong>VS Code’s Explorer</strong>.
+      </p>
+      {files.map((file) => (
+        <div key={`${file.path}-${file.section ?? ""}`}>
+          <CopyCode code={file.path} label={file.label} repositoryPath />
+          {file.section && (
+            <p>
+              In that file, find <strong>{file.section}</strong>.
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  ) : null;
+}
 function ExternalLinks({ links }: { links?: GuideLink[] }) {
   return links?.length ? (
     <div className="workshop-resource-links">
@@ -186,6 +210,7 @@ export default async function GuidePage({
                 </p>
               )}
               <ExternalLinks links={guide.links} />
+              <RepositoryFiles files={guide.repositoryFiles} />
             </section>
             <div className="workshop-steps">
               {guide.steps.map((step, index) => (
@@ -208,6 +233,7 @@ export default async function GuidePage({
                     </div>
                     {step.code && <CopyCode code={contextual(step.code)} />}
                     <ExternalLinks links={step.links} />
+                    <RepositoryFiles files={step.repositoryFiles} />
                     {step.expected.length > 0 && (
                       <div className="workshop-expected">
                         <span>
@@ -264,6 +290,7 @@ export default async function GuidePage({
                 <CopyCode code={contextual(guide.cleanup.code)} />
               )}
               <ExternalLinks links={guide.cleanup.links} />
+              <RepositoryFiles files={guide.cleanup.repositoryFiles} />
             </section>
             {(related.length > 0 || next) && (
               <section className="workshop-next">
