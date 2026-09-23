@@ -3,7 +3,7 @@
 set -euo pipefail
 if [[ $# -lt 1 || "$1" == "--help" ]]; then
   echo 'Usage: authoring/scripts/deploy-content.sh ENVIRONMENT [--seed | --seed-taxonomy | --seed-branch | --seed-products] [--publish] [--what-if]'
-  echo 'Normal release updates Model, SitePresentation, SupportForm, and ComponentLibrary only. --seed creates missing editorial, taxonomy, product reference, and branch items; --seed-taxonomy creates missing metadata lists; --seed-branch creates the missing Resource page branch; --seed-products creates missing product references and the Product page branch.'
+  echo 'Normal release updates Model, SitePresentation, SupportForm, and ComponentLibrary only. --seed creates missing editorial, taxonomy, product catalog, and branch items; --seed-taxonomy creates missing metadata lists; --seed-branch creates the missing Resource page branch; --seed-products creates missing product references, distribution channel choices, and the Product page branch.'
   exit 0
 fi
 portal_environment="$1"

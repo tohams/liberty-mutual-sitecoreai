@@ -40,7 +40,8 @@
     "products": "a62901c2-6bc7-58cb-8f5b-88e3d98c017d",
     "variant": "346ef416-4fcc-5f95-98ef-eb21deb0b14d",
     "pageDefaults": "3f91adb8-d68f-5ec3-a181-b89f46ca4ec0",
-    "productsPage": "d8898b95-6720-5acf-86b6-b434c3fe7f57"
+    "productsPage": "d8898b95-6720-5acf-86b6-b434c3fe7f57",
+    "channels": "edbf38d5-6de4-5633-8884-df9dc30a5b25"
   },
   "branchLayout": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{D638DA0C-350E-5D77-BDA5-B12CFA6F4DA7}\"><r uid=\"{400659A4-B626-51EF-8DBB-5153CA689841}\" id=\"{610D1DC8-96D3-5F38-8D15-D23279413214}\" ph=\"headless-product-details\" ds=\"$id\" par=\"FieldNames={346EF416-4FCC-5F95-98EF-EB21DEB0B14D}\" /></d></r>",
   "branchInsertRule": "<ruleset><rule uid=\"{CD13D257-94B0-5B23-B463-77196801BD1F}\" name=\"Product page beneath Products\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{BA864C2C-FCBE-5B82-A5DF-2096F6918B50}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{D8898B95-6720-5ACF-86B6-B434C3FE7F57}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{AFAB6538-5A0D-5D5A-8283-88EE71BEB47E}\" PageBranchId=\"{9FFF5DA3-6598-57C2-BAE0-D82D46101C48}\" /></actions></rule></ruleset>",
@@ -158,6 +159,10 @@
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductDetails.yml",
     "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductDetails/Default.yml",
     "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels/all.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels/independent.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels/wholesale.yml",
     "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products.yml",
     "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/auto.yml",
     "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/home.yml",
@@ -181,5 +186,20 @@
     "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name.yml",
     "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name/Data.yml"
   ],
-  "deploymentScope": "Additive model and CreateOnly initial references/branch. Configure the branch insertion rule and component library separately. Existing pages and shared layouts are preserved."
+  "deploymentScope": "Additive model and CreateOnly initial references, channel choices, and branch. Configure the branch insertion rule and component library separately. Existing pages and shared layouts are preserved.",
+  "channelsRoot": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductCatalog/Channels",
+  "channelChoices": [
+    {
+      "id": "9f6cf50c-b770-56b6-8992-25fdc46015c9",
+      "name": "all"
+    },
+    {
+      "id": "6bac7176-ecc9-53e7-9fe7-e854dcb9b870",
+      "name": "independent"
+    },
+    {
+      "id": "53866984-e82c-5292-8c21-565b36e69561",
+      "name": "wholesale"
+    }
+  ]
 }

@@ -194,6 +194,23 @@ def id_list(value):
 
 
 product_contract = read_json(BASE / 'product-catalog-authoring-manifest.json')
+channel_root = product_catalog_root + '/Channels'
+require(product_contract['channelsRoot'] == channel_root, 'Product channel choices must be beneath ProductCatalog.')
+channel_field = paths[TEMPLATE_ROOT + '/ProductPage/Content/catalogChannel']
+require(field_value(channel_field.get('SharedFields', []), 'Type') == 'Droplist'
+        and field_value(channel_field.get('SharedFields', []), 'Source') == channel_root,
+        'Distribution channel must use its native managed-choice folder as the Droplist source.')
+channel_folder = paths[channel_root]
+require(normalized_id(channel_folder['ID']) == product_contract['ids']['channels']
+        and normalized_id(channel_folder['Parent']) == product_contract['ids']['catalog'],
+        'Product channel choice folder identity or parent differs.')
+require([choice['name'] for choice in product_contract['channelChoices']] == ['all', 'independent', 'wholesale'],
+        'Product channel choice names must preserve the existing scalar values.')
+for choice in product_contract['channelChoices']:
+    channel_item = paths[channel_root + '/' + choice['name']]
+    require(normalized_id(channel_item['ID']) == choice['id']
+            and normalized_id(channel_item['Parent']) == normalized_id(channel_folder['ID']),
+            'Product channel choice identity or parent differs: ' + choice['name'])
 products_page = paths[manifest['site'] + '/Home/products']
 require(product_contract['ids']['branch'] in id_list(field_value(products_page.get('SharedFields', []), '__Masters')),
         'The initial Products parent must offer the Product page branch.')

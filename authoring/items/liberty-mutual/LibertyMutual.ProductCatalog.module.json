@@ -1,7 +1,7 @@
 {
   "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
   "namespace": "LibertyMutual.ProductCatalog",
-  "description": "Initial operational product references. CreateOnly preserves author labels; excluded from authoring resource packages.",
+  "description": "Initial operational product references and distribution channel choices. CreateOnly preserves author labels; excluded from authoring resource packages.",
   "items": {
     "includes": [
       {

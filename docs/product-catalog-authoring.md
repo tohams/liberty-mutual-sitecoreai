@@ -17,7 +17,7 @@
 | **Catalog image** | An optional image with meaningful alternative text. A card without an image uses its business-line icon. |
 | **Product details** | The rich-text guidance displayed on the new page. |
 | **Related products** | One or more existing operational products described by the page. Select the managed references rather than entering product IDs. |
-| **Distribution channel** | `all`, `independent`, or `wholesale`. New pages default to `all`. |
+| **Distribution channel** | Choose `all`, `independent`, or `wholesale` from the managed Sitecore list. New pages default to `all`. |
 
 The branch is available beneath the Products parent, and the catalog reads its direct children. A different page type or a page nested beneath another product page does not become a catalog card automatically. Existing product guidance pages retain their current authored guidance, links, and composition; their catalog fields control their cards.
 
@@ -36,3 +36,5 @@ If a new card is absent, confirm the page’s parent, template, published langua
 For a later update, create a new **Draft** version, edit and review the page fields, and choose **Approve**. Confirm **Approved**, publish, and verify the live card and destination again. Follow the same sequence to restore earlier wording. A workshop-number reset changes saved portal work and profile identities; it does not restore product pages, media, or CMS publication.
 
 The managed references live under **Data → ProductCatalog → Products**. Their readable labels help authors select the 18 existing operational products; their IDs connect to the application’s availability rules. Introducing a new operational product requires an integration change and its own review. The [content model](content-model.md#product-catalog-authoring) documents the separate model and initial-content ownership.
+
+The distribution channel choices live under **Data → ProductCatalog → Channels**. Select one when editing a page. The managed list keeps the same three values and `all` default; product availability and eligibility checks remain unchanged.
