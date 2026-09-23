@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.ProductPageBranch",
+  "description": "Editable blank Product page branch. CreateOnly; excluded from authoring resource packages.",
+  "items": {
+    "includes": [
+      {
+        "name": "product-page-branch",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Product page",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  }
+}

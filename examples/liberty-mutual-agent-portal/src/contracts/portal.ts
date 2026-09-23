@@ -19,6 +19,16 @@ export interface Product {
   id: string; name: string; line: BusinessLine; description: string; industries: string[];
   states: StateCode[]; requirements: string[]; highlights: string[];
 }
+/** Published editorial pages reference the separate operational product registry. */
+export interface ProductCatalogPage {
+  id: string;
+  href: string;
+  title: string;
+  summary: string;
+  image?: { src: string; alt: string; width?: number; height?: number };
+  productIds: string[];
+  channel: 'all' | 'independent' | 'wholesale';
+}
 export type LegalLineOfAuthority = 'property' | 'casualty' | 'personal-lines' | 'surety';
 export type AuthorityStatus = 'active' | 'suspended' | 'revoked';
 export interface AuthorityValidity { status: AuthorityStatus; validFrom: string; validThrough: string; }

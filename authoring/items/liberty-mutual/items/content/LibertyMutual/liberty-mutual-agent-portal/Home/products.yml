@@ -4,6 +4,9 @@ Parent: "ae9e45ca-f127-4abe-9ca7-2ff109981998"
 Template: "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc"
 Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/products"
 SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}|{9FFF5DA3-6598-57C2-BAE0-D82D46101C48}"
 - ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
   Hint: __Workflow
   Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"

@@ -24,6 +24,10 @@ export const PORTAL_PLACEHOLDERS = {
     name: "headless-products-spotlight",
     componentName: "ProductSpotlight",
   },
+  productDetails: {
+    name: "headless-product-details",
+    componentName: "ProductDetails",
+  },
   supportForm: {
     name: "headless-support-form",
     componentName: "Form",
@@ -53,6 +57,7 @@ function placeholdersForRoute(route: string): PortalPlaceholder[] {
   if (section === "resources" || section === "learning")
     return ["resourceSearch", "guidance"];
   if (section === "products" && !child) return ["guidance", "productSpotlight"];
+  if (section === "products" && child) return ["productDetails", "guidance"];
   if (section === "support" && !child) return ["guidance", "supportForm"];
   return ["guidance"];
 }
@@ -73,6 +78,7 @@ export function getPortalPlaceholders(
   for (const slot of placeholdersForRoute(route)) {
     const setting = PORTAL_PLACEHOLDERS[slot];
     const hasCanonicalKey = Object.hasOwn(rendering.placeholders, setting.name);
+    if (slot === "productDetails" && !hasCanonicalKey) continue;
     // Delivery stays compatible while the earlier published layout is replaced.
     // Page Builder and preview only expose the restricted, canonical placeholders.
     const useLegacy =
@@ -80,6 +86,7 @@ export function getPortalPlaceholders(
       !mode.isPreview &&
       !hasCanonicalKey &&
       slot !== "productSpotlight" &&
+      slot !== "productDetails" &&
       slot !== "supportForm" &&
       slot !== "campaignPage";
     const name = useLegacy ? "headless-main" : setting.name;
@@ -90,7 +97,7 @@ export function getPortalPlaceholders(
         (mode.isEditing && component.componentName === HIDDEN_RENDERING_NAME),
     );
     if (
-      (slot === "productSpotlight" || slot === "supportForm") &&
+      (slot === "productSpotlight" || slot === "supportForm" || slot === "productDetails") &&
       !mode.isEditing &&
       contents.length === 0
     )

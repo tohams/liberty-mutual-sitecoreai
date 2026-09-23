@@ -2045,6 +2045,29 @@ p {
   flex-direction: column;
   transition: box-shadow 0.2s;
 }
+.product-card-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+.product-preparation-picker {
+  display: grid;
+  gap: 6px;
+  font-size: 11px;
+  color: #6e6079;
+}
+.product-preparation-picker select {
+  width: 100%;
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: white;
+  color: var(--navy);
+}
 .product-card:hover {
   box-shadow: 0 10px 25px #2115380b;
 }

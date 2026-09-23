@@ -1,0 +1,44 @@
+---
+ID: b238803d-3da7-5939-9172-942b3bc9ee9b
+Parent: 9fff5da3-6598-57c2-bae0-d82d46101c48
+Template: 80228789-b957-573c-a1c5-1b511d7281dc
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Product page/$name
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{D638DA0C-350E-5D77-BDA5-B12CFA6F4DA7}"><r uid="{400659A4-B626-51EF-8DBB-5153CA689841}" id="{610D1DC8-96D3-5F38-8D15-D23279413214}" ph="headless-product-details" ds="$id" par="FieldNames={346EF416-4FCC-5F95-98EF-EB21DEB0B14D}" /></d></r>
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: $name
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: $name
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{57CC7DCE-E6B1-4564-9581-0E5850B8BDF2}"
+    - ID: d8d02f2c-edac-52c5-b9a0-7e19a1f40472
+      Hint: catalogSummary
+      Value:
+    - ID: 83c4b5d0-fc5b-5b60-a97c-804b8cbb776f
+      Hint: catalogImage
+      Value:
+    - ID: a855fd36-1b4c-5210-b3c8-f9b6171d925c
+      Hint: catalogProducts
+      Value:
+    - ID: 1a9d46aa-1e80-53b1-b519-331993a4e617
+      Hint: catalogChannel
+      Value: all
+    - ID: c7004eb6-def5-5424-8541-9c5cfb29728b
+      Hint: catalogBody
+      Value:

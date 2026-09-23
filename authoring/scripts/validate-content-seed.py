@@ -30,11 +30,14 @@ site_presentation = read_json(BASE / 'LibertyMutual.SitePresentation.module.json
 taxonomy = read_json(BASE / 'LibertyMutual.Taxonomy.module.json')
 resource_branch = read_json(BASE / 'LibertyMutual.ResourcePageBranch.module.json')
 resource_branch_path = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page'
+product_branch_path = resource_branch_path.replace('Resource page', 'Product page')
+product_catalog_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductCatalog'
 taxonomy_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy'
 site_placeholder_root = '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings'
 site_placeholder_keys = ['headless-agent-guidance', 'headless-resource-search',
                          'headless-resource-article', 'headless-products-spotlight', 'headless-resource-image',
-                         'headless-campaign-page', 'headless-campaign-hero', 'headless-campaign-main', 'headless-campaign-sidebar']
+                         'headless-campaign-page', 'headless-campaign-hero', 'headless-campaign-main', 'headless-campaign-sidebar',
+                         'headless-product-details']
 site_placeholder_paths = {site_placeholder_root + '/' + key for key in site_placeholder_keys}
 api_owned_campaign_paths = {'/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/' + slug
                             for slug in ['small-business', 'campaign-practice', 'campaign-schedule-check']}
@@ -53,7 +56,7 @@ for include in model['items']['includes']:
     require(include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants',
             'Model roots must retain their bounded descendant scope.')
 require({i['path'] for i in site_presentation['items']['includes']} == site_placeholder_paths,
-        'SitePresentation includes must contain only the nine exact site placeholder items.')
+        'SitePresentation includes must contain only the declared exact site placeholder items.')
 for include in site_presentation['items']['includes']:
     require(include.get('scope') == 'SingleItem' and include.get('allowedPushOperations') == 'CreateAndUpdate'
             and not include.get('rules'), 'SitePresentation must use non-deleting SingleItem includes only.')
@@ -65,7 +68,7 @@ library_seed = read_json(BASE / 'LibertyMutual.LibrarySeed.module.json')
 require(library_seed['items']['includes'] == expected_core, 'Native library groups require six exact CreateOnly seed includes.')
 include = content['items']['includes'][0]
 expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
-                         for path in sorted(site_placeholder_paths | {site_placeholder_root + '/headless-support-form'} | api_owned_campaign_paths | {taxonomy_root, resource_branch_path, resource_branch_path.replace('Resource page', 'Campaign page')})]
+                         for path in sorted(site_placeholder_paths | {site_placeholder_root + '/headless-support-form'} | api_owned_campaign_paths | {taxonomy_root, resource_branch_path, resource_branch_path.replace('Resource page', 'Campaign page'), product_branch_path, product_catalog_root})]
 expected_ignore_rules.append({'path': available_root.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'})
 expected_ignore_rules.sort(key=lambda rule: rule['path'])
 require(include['path'] == '/sitecore/content/LibertyMutual' and
@@ -76,6 +79,11 @@ require(include['path'] == '/sitecore/content/LibertyMutual' and
 require(resource_branch['items']['includes'] == [{'name': 'resource-page-branch', 'path': resource_branch_path,
                                                  'allowedPushOperations': 'CreateOnly'}],
         'Editable resource branch must remain in one CreateOnly subtree.')
+for namespace, name, path in [('ProductPageBranch', 'product-page-branch', product_branch_path),
+                              ('ProductCatalog', 'product-catalog', product_catalog_root)]:
+    module = read_json(BASE / ('LibertyMutual.' + namespace + '.module.json'))
+    require(module['items']['includes'] == [{'name': name, 'path': path, 'allowedPushOperations': 'CreateOnly'}],
+            'Product branches and reference seeds require their exact isolated CreateOnly subtrees.')
 require(len(taxonomy['items']['includes']) == 1, 'Taxonomy requires one isolated include.')
 include = taxonomy['items']['includes'][0]
 require(include['path'] == taxonomy_root and include.get('allowedPushOperations') == 'CreateOnly'
@@ -161,12 +169,14 @@ PLACEMENTS = {
     'ResourceArticle': 'headless-resource-article',
     'ProductSpotlight': 'headless-products-spotlight',
     'ResourceImage': 'headless-resource-image',
+    'ProductDetails': 'headless-product-details',
 }
 LAYOUT_COMPONENTS = {
     'PortalLayout': ['AgentGuidance'],
     'ResourcesLayout': ['ResourceSearch', 'AgentGuidance'],
     'ResourceArticleLayout': ['ResourceArticle'],
     'ProductsLayout': ['AgentGuidance', 'ProductSpotlight'],
+    'ProductPageLayout': ['ProductDetails'],
 }
 
 
@@ -181,6 +191,19 @@ def field_value(fields, hint):
 
 def id_list(value):
     return [normalized_id(value) for value in re.findall(r'\{([0-9a-fA-F-]{36})\}', value)]
+
+
+product_contract = read_json(BASE / 'product-catalog-authoring-manifest.json')
+products_page = paths[manifest['site'] + '/Home/products']
+require(product_contract['ids']['branch'] in id_list(field_value(products_page.get('SharedFields', []), '__Masters')),
+        'The initial Products parent must offer the Product page branch.')
+branch_settings = paths[manifest['site'] + '/Presentation/Page Branches']
+branch_rules = ET.fromstring(field_value(branch_settings.get('SharedFields', []), 'Rule'))
+product_rules = [rule for rule in branch_rules.findall('rule')
+                 if normalized_id(rule.get('uid')) == product_contract['branchRuleId']]
+expected_product_rule = ET.fromstring(product_contract['branchInsertRule']).find('rule')
+require(len(product_rules) == 1 and ET.tostring(product_rules[0]) == ET.tostring(expected_product_rule),
+        'The initial page branch settings must retain the exact bounded Product page rule.')
 
 
 # Managed choices remain native editable content. Their names are existing scalar
@@ -287,6 +310,7 @@ for component, template_names in {
     'ResourceArticle': ['ResourcePage'],
     'ProductSpotlight': ['PortalPage'],
     'ResourceImage': ['ResourcePage'],
+    'ProductDetails': ['ProductPage'],
 }.items():
     rendering = items[normalized_id(manifest['renderingIds'][component])]
     require(not field_value(rendering.get('SharedFields', []), 'AllowedOnTemplates'),
@@ -380,21 +404,26 @@ def validate_placement(presentation, expected_layout, label):
 
 
 for template_name, layout_name in [('Page', 'PortalLayout'), ('PortalPage', 'PortalLayout'),
-                                   ('ResourcePage', 'ResourceArticleLayout')]:
+                                   ('ResourcePage', 'ResourceArticleLayout'), ('ProductPage', 'ProductPageLayout')]:
     template = paths[TEMPLATE_ROOT + '/' + template_name]
     validate_placement(template_presentation(template['ID']), layout_name, template['Path'] + ' defaults')
 
 page_count = version_count = 0
 resource_template = normalized_id(manifest['templateIds']['ResourcePage'])
+product_template = normalized_id(manifest['templateIds']['ProductPage'])
+preserved_product_paths = {manifest['site'] + '/Home/products/' + hub['family']
+                           for hub in read_json(ROOT / 'docs/brand/portal-content-seeds.json')['productHubs']}
 page_templates = {normalized_id(paths[TEMPLATE_ROOT + '/' + name]['ID'])
-                  for name in ('Page', 'PortalPage', 'ResourcePage')}
+                  for name in ('Page', 'PortalPage', 'ResourcePage', 'ProductPage')}
 for item in items.values():
     if normalized_id(item['Template']) not in page_templates or not (
             item['Path'] == manifest['site'] + '/Home' or item['Path'].startswith(manifest['site'] + '/Home/')):
         continue
-    expected_layout = 'ResourceArticleLayout' if normalized_id(item['Template']) == resource_template else (
+    expected_layout = ('ProductPageLayout' if normalized_id(item['Template']) == product_template
+                       and item['Path'] not in preserved_product_paths else
+        'ResourceArticleLayout' if normalized_id(item['Template']) == resource_template else (
         'ResourcesLayout' if item['Path'] == manifest['site'] + '/Home/resources' else
-        'ProductsLayout' if item['Path'] == manifest['site'] + '/Home/products' else 'PortalLayout')
+        'ProductsLayout' if item['Path'] == manifest['site'] + '/Home/products' else 'PortalLayout'))
     shared = merge_presentation(field_value(item.get('SharedFields', []), '__Renderings'),
                                 template_presentation(item['Template']), item['Path'] + ' shared')
     validate_placement(shared, expected_layout, item['Path'] + ' shared')

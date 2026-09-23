@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import type { Product, Resource } from "@/contracts/portal";
-import { productHref, resourceHref, portalContentPath, isPortalNavigationActive } from "./content-routes";
+import type { Resource } from "@/contracts/portal";
+import { resourceHref, portalContentPath, isPortalNavigationActive } from "./content-routes";
 import { getPersonalizedRewrite, getPersonalizedRewriteData, normalizePersonalizedRewrite } from '@sitecore-content-sdk/content/personalize';
 
 const manifest = JSON.parse(
@@ -23,13 +23,6 @@ const resources = JSON.parse(
     "utf8",
   ),
 ) as Resource[];
-const products = JSON.parse(
-  readFileSync(
-    new URL("../../../fixtures/products.json", import.meta.url),
-    "utf8",
-  ),
-) as Product[];
-
 test('operational aliases preserve native page and component variant selections in explicit page options', () => {
   for (const [route, content] of [['/learning/household-review', 'resources'], ['/submissions/sub-001', 'quote'], ['/renewals/pol-001', 'clients']]) {
     const rewritten = getPersonalizedRewrite(route, ['page-campaign', 'component_principal']);
@@ -54,21 +47,6 @@ test("Every resource card points to a serialized CMS page", () => {
       `Missing native CMS route for resource ${resource.id}`,
     );
 });
-
-test("Every operational product has an authored hub in both distribution channels", () => {
-  for (const product of products) {
-    for (const channel of ["independent", "wholesale"] as const) {
-      const path = productHref(product, channel);
-      assert.ok(
-        manifest.generatedFiles.some((file) =>
-          file.endsWith(`/Home${path}.yml`),
-        ),
-        `Missing native CMS hub for ${product.id} in ${channel}`,
-      );
-    }
-  }
-});
-
 
 test("Home keeps the native root path and SDK personalization selection", () => {
   const plainPath: string[] = [];

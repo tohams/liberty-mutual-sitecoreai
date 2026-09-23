@@ -1,0 +1,39 @@
+---
+ID: 610d1dc8-96d3-5f38-8d15-d23279413214
+Parent: 705f29fc-a5de-489e-9e2e-2dac8e03d084
+Template: 04646a89-996f-4ee7-878a-ffdbf1f0ef0d
+Path: /sitecore/layout/Renderings/Project/LibertyMutual/ProductDetails
+SharedFields:
+- ID: 037fe404-dd19-4bf7-8e30-4dadf68b27b0
+  Hint: componentName
+  Value: ProductDetails
+- ID: 1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f
+  Hint: Datasource Template
+  Value: /sitecore/templates/Project/LibertyMutual/ProductPage
+- ID: b5b27af1-25ef-405c-87ce-369b3a004016
+  Hint: Datasource Location
+  Value:
+- ID: a3411ff6-c978-40aa-b059-a49b9ca2209b
+  Hint: Can select Page as a data source
+  Value: "1"
+- ID: a77e8568-1ab3-44f1-a664-b7c37ec7810d
+  Hint: Parameters Template
+  Value: "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Office/32x32/document_text.png
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "300"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Product details
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 1b58d065-fe74-43e3-ba20-54c9588b3011
+      Hint: AllowedOnTemplates
+      Value: "{80228789-B957-573C-A1C5-1B511D7281DC}"

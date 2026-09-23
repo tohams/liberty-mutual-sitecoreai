@@ -1,7 +1,7 @@
 {
   "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
   "namespace": "LibertyMutual.SitePresentation",
-  "description": "Nine exact SXA site placeholder restriction items. Developer-owned placement rules only; no editorial pages.",
+  "description": "Exact SXA site placeholder restriction items. Developer-owned placement rules only; no editorial pages.",
   "items": {
     "includes": [
       {
@@ -55,6 +55,12 @@
       {
         "name": "site-campaign-sidebar",
         "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-sidebar",
+        "scope": "SingleItem",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "site-product-details",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-product-details",
         "scope": "SingleItem",
         "allowedPushOperations": "CreateAndUpdate"
       }
