@@ -14,6 +14,7 @@ Hosted workshops have **20 reviewer packs (`01`–`20`)**, each with the same se
 | Developers using an optional AI assistant | [SitecoreAI and Documentation MCP in VS Code](docs/vscode-sitecore-mcp.md) |
 | Developers and platform administrators | [Developer handoff](docs/developer-handoff.md) |
 | Marketers and content implementers | [Content model and publishing](docs/content-model.md) |
+| Authors managing product cards and detail pages | [Product catalog authoring](docs/product-catalog-authoring.md) |
 | Workshop maintainers restoring CMS content | [Capture and restore a serialized content baseline](docs/content-baseline.md) |
 | Marketing and platform walkthrough | [Guided portal walkthrough](docs/marketing-walkthrough.md) |
 | Form authors and integration owners | [Native Forms and webhook verification](docs/native-forms-operator-guide.md) |

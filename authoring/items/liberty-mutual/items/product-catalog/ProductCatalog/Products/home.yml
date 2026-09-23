@@ -1,0 +1,21 @@
+---
+ID: 86c91d7d-13e3-508c-9f11-80ab45bf44cb
+Parent: a62901c2-6bc7-58cb-8f5b-88e3d98c017d
+Template: fecd2390-6430-5dca-93a2-458e78b37df5
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductCatalog/Products/home
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "200"
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Homeowners
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 001e2840-810d-567e-9799-63b3719ad934
+      Hint: productId
+      Value: home

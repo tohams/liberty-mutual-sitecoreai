@@ -1,23 +1,20 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { Image } from "@sitecore-content-sdk/nextjs";
 import { PortalLink as Link } from "@/components/ui/portal-link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PortalIcon, type IconName } from "@/components/ui/portal-icon";
 import { PortalDialog } from "@/components/ui/portal-dialog";
-import type { BusinessLine } from "@/contracts/portal";
+import type { BusinessLine, ProductCatalogPage } from "@/contracts/portal";
 import { lineNames, stateNames, usePortal } from "../portal/portal-context";
 import { SubmissionForm } from "../submissions/SubmissionForm";
-import { productHref } from "../portal/content-routes";
 import {
   initialRiskState,
   readRiskState,
   withRiskState,
 } from "../portal/risk-state-navigation";
-import {
-  evaluateProductAvailability,
-  evaluateProductEligibility,
-} from "@/domain/eligibility";
+import { productPagesForState } from "./product-catalog";
 import { ProductSpotlightFallback } from "./product-spotlight-view";
 
 const lineIcons: Record<BusinessLine, IconName> = {
@@ -28,29 +25,37 @@ const lineIcons: Record<BusinessLine, IconName> = {
   surety: "file",
 };
 
-export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
-  const { data } = usePortal();
+export function ProductsScreen({
+  spotlight,
+  catalog,
+}: {
+  spotlight?: ReactNode;
+  catalog?: ProductCatalogPage[] | null;
+}) {
+  const { data, busy } = usePortal();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [line, setLine] = useState("all");
+  const [line, setLine] = useState<BusinessLine | "all">("all");
   const queryState = searchParams.get("state");
   const state = initialRiskState({
     queryState,
     homeState: data.agent.state,
     licensedStates: data.agent.licensedStates,
   });
-  const [intakeId, setIntakeId] = useState("");
-  const visible = data.products.filter(
-    (product) =>
-      (line === "all" || product.line === line) &&
-      !!state &&
-      evaluateProductAvailability({
-        product,
-        state,
-        eligibility: data.eligibility,
-      }).allowed,
-  );
+  const [intake, setIntake] = useState<{
+    productId: string;
+    state: string;
+  } | null>(null);
+  const [selections, setSelections] = useState<Record<string, string>>({});
+  const visible = productPagesForState(catalog ?? [], data, state, line);
+  const activeIntake =
+    intake?.state === state &&
+    visible.some(({ eligibleProducts }) =>
+      eligibleProducts.some((product) => product.id === intake.productId),
+    )
+      ? intake.productId
+      : "";
   return (
     <>
       <div className="page-heading">
@@ -70,11 +75,13 @@ export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
                   event.target.value,
                   data.agent.licensedStates,
                 );
-                if (nextState)
+                if (nextState) {
+                  setIntake(null);
                   router.replace(
                     withRiskState(`${pathname}?${searchParams}`, nextState),
                     { scroll: false },
                   );
+                }
               }}
             >
               {!state && <option value="">Choose a licensed state</option>}
@@ -103,7 +110,10 @@ export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
       >
         <button
           className={line === "all" ? "active" : ""}
-          onClick={() => setLine("all")}
+          onClick={() => {
+            setIntake(null);
+            setLine("all");
+          }}
           aria-pressed={line === "all"}
         >
           All solutions
@@ -112,7 +122,10 @@ export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
           <button
             key={key}
             className={line === key ? "active" : ""}
-            onClick={() => setLine(key)}
+            onClick={() => {
+              setIntake(null);
+              setLine(key as BusinessLine);
+            }}
             aria-pressed={line === key}
           >
             {name}
@@ -131,60 +144,111 @@ export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
             : "Choose a risk state"}
         </span>
       </div>
+      {catalog == null ? (
+        <p className="note-box" role="status">
+          Product pages are temporarily unavailable. Please try again shortly.
+        </p>
+      ) : state && visible.length === 0 ? (
+        <p className="note-box" role="status">
+          No product pages are available for this state and business line.
+        </p>
+      ) : null}
       <div className="product-grid">
-        {visible.map((product) => (
-          <article className="product-card" key={product.id}>
-            <header>
-              <span className={`product-icon product-icon-${product.line}`}>
-                <PortalIcon
-                  name={lineIcons[product.line]}
-                  width="28"
-                  height="28"
+        {visible.map(({ page, products, eligibleProducts }) => {
+          const lines = [...new Set(products.map((product) => product.line))];
+          const selectedProduct =
+            eligibleProducts.length === 1
+              ? eligibleProducts[0]
+              : eligibleProducts.find(
+                  (product) => product.id === selections[page.id],
+                );
+          return (
+            <article className="product-card" key={page.id}>
+              {page.image && (
+                <Image
+                  field={{ value: page.image }}
+                  alt={page.image.alt}
+                  className="product-card-image"
+                  loading="lazy"
+                  decoding="async"
                 />
-              </span>
-              <span className="eyebrow">{lineNames[product.line]}</span>
-            </header>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <ul>
-              {product.highlights.slice(0, 2).map((highlight) => (
-                <li key={highlight}>
-                  <PortalIcon name="check" width="13" />
-                  {highlight}
-                </li>
-              ))}
-            </ul>
-            <footer>
-              <Link
-                className="text-link"
-                href={withRiskState(
-                  productHref(product, data.agency.channel),
-                  state || undefined,
+              )}
+              <header>
+                {!page.image && (
+                  <span className={`product-icon product-icon-${lines[0]}`}>
+                    <PortalIcon
+                      name={lineIcons[lines[0]]}
+                      width="28"
+                      height="28"
+                    />
+                  </span>
                 )}
-              >
-                Explore coverage
-                <PortalIcon name="arrow" width="17" />
-              </Link>
-              {product.line !== "surety" &&
-                state &&
-                evaluateProductEligibility({
-                  agent: data.agent,
-                  agency: data.agency,
-                  product,
-                  state,
-                  eligibility: data.eligibility,
-                }).allowed && (
+                <span className="eyebrow">
+                  {lines.map((value) => lineNames[value]).join(" · ")}
+                </span>
+              </header>
+              <h2>{page.title}</h2>
+              <p>{page.summary}</p>
+              <ul aria-label="Products available in this state">
+                {products.map((product) => (
+                  <li key={product.id}>
+                    <PortalIcon name="check" width="13" />
+                    {product.name}
+                  </li>
+                ))}
+              </ul>
+              <footer>
+                <Link
+                  className="text-link"
+                  href={withRiskState(page.href, state || undefined)}
+                >
+                  Explore coverage
+                  <PortalIcon name="arrow" width="17" />
+                </Link>
+                {eligibleProducts.length > 1 && (
+                  <label className="product-preparation-picker">
+                    Product to prepare
+                    <select
+                      value={selectedProduct?.id ?? ""}
+                      onChange={(event) =>
+                        setSelections({
+                          ...selections,
+                          [page.id]: event.target.value,
+                        })
+                      }
+                      disabled={busy}
+                    >
+                      <option value="">Choose a product</option>
+                      {eligibleProducts.map((product) => (
+                        <option key={product.id} value={product.id}>
+                          {product.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                )}
+                {eligibleProducts.length > 0 && (
                   <button
                     type="button"
                     className="product-availability borderless"
-                    onClick={() => setIntakeId(product.id)}
+                    disabled={busy || !selectedProduct}
+                    aria-label={
+                      selectedProduct
+                        ? `Prepare account for ${selectedProduct.name}`
+                        : `Prepare account from ${page.title}`
+                    }
+                    onClick={() => {
+                      if (selectedProduct && state)
+                        setIntake({ productId: selectedProduct.id, state });
+                    }}
                   >
                     Prepare account
                   </button>
                 )}
-            </footer>
-          </article>
-        ))}
+              </footer>
+            </article>
+          );
+        })}
       </div>
       <div className="source-note">
         <PortalIcon name="info" width="15" />
@@ -197,18 +261,20 @@ export function ProductsScreen({ spotlight }: { spotlight?: ReactNode }) {
       <PortalDialog
         title="Prepare your submission"
         eyebrow="FROM OPPORTUNITY TO ACTION"
-        open={!!intakeId}
-        onClose={() => setIntakeId("")}
+        open={!!activeIntake}
+        onClose={() => setIntake(null)}
         wide
       >
-        <SubmissionForm
-          productId={intakeId}
-          initialState={state || undefined}
-          key={`${intakeId}:${state}`}
-          onSaved={(id, savedState) =>
-            router.push(withRiskState(`/quote?submission=${id}`, savedState))
-          }
-        />
+        {activeIntake && (
+          <SubmissionForm
+            productId={activeIntake}
+            initialState={state || undefined}
+            key={`${activeIntake}:${state}`}
+            onSaved={(id, savedState) =>
+              router.push(withRiskState(`/quote?submission=${id}`, savedState))
+            }
+          />
+        )}
       </PortalDialog>
     </>
   );

@@ -697,6 +697,10 @@ export const marketingGuides: WorkshopGuide[] = [
         label: "Resource page authoring guide",
         path: "docs/resource-page-authoring.md",
       },
+      {
+        label: "Product catalog authoring guide",
+        path: "docs/product-catalog-authoring.md",
+      },
     ],
     steps: [
       {
@@ -710,6 +714,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "**Page created from branch template** appears. The title starts with the page name you entered; summary, body, reviewed date, source, and metadata start empty.",
           "The branch supplies the **Article** page section and its nested **Image** section. It also creates **Data** > **Resource image**, the content item that feeds the image component, often called its **datasource**. You can fill this page without assembling the layout or changing existing articles.",
         ],
+        note: "**Product catalog authoring:** Under **Home** > **Products & appetite**, the **Product page** branch creates a Draft page. Authors edit **Title**, **Catalog summary**, optional **Catalog image**, and **Product details**, select existing **Related products**, and set **Distribution channel** (default **all**). Approving and publishing a complete page adds its card on the next portal refresh, without a code deployment or Search reindex. An omitted image uses an icon. Incomplete pages and invalid product references are omitted; state, license, and **Prepare account** checks still apply. This resource exercise does not create a product page.",
         links: [pageBuilder],
       },
       {
@@ -1233,7 +1238,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Record Daniel’s starting Products experience",
         action: [
-          "Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the product-category tabs.",
+          "Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the business-line filters.",
           "Record the displayed headline and compare it with Daniel’s starting **Top affinities**.",
         ],
         expected: [
@@ -1255,7 +1260,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Connect Daniel’s score to the rendered spotlight",
         action: [
           "On Daniel’s current SitecoreAI profile, open **Engagement** and look for the two resource visits, then **Overview** > **Top affinities** for **workers_compensation**. Refresh the profile if new events have not appeared yet. If they remain absent, recheck the current **Agent identity** before interpreting the portal headline.",
-          "Return to **Products & appetite**, confirm **Illinois** in **Risk state**, and read the large spotlight card above the product-category tabs. Click **Review account preparation** within that card.",
+          "Return to **Products & appetite**, confirm **Illinois** in **Risk state**, and read the large spotlight card above the business-line filters. Click **Review account preparation** within that card.",
           "In the browser’s address bar, confirm the destination URL contains **state=IL**, which carries the selected Illinois context into the resource. Then sign out.",
         ],
         expected: [
@@ -1267,8 +1272,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Build Maya’s distinct household interest",
         action: [
-          "Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Texas**. Record the headline in the large spotlight card above the product-category tabs.",
-          "Select **Personal lines** > **Homeowners** > **Explore coverage**. On **Personal insurance**, click **Explore the preparation guide**.",
+          "Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Texas**. Record the headline in the large spotlight card above the business-line filters.",
+          "Select **Personal lines**, then click **Explore coverage** on the **Personal insurance** card. On the page that opens, click **Explore the preparation guide**.",
           "Click **Products & appetite** in the sidebar and confirm **Risk state** remains **Texas**. In Maya’s current profile, inspect **Engagement** for those visits and **Overview** > **Top affinities** for **household**. Refresh if the new events are not yet visible.",
         ],
         expected: [
@@ -1280,7 +1285,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Check the household action and switch identities",
         action: [
           "Click **Review the household renewal checklist**. In the browser’s address bar, confirm the destination URL contains **state=TX**, which carries the selected Texas context into the resource.",
-          "**Sign out**, then sign in as **elena.01** with password **Sitecore**. Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the product-category tabs.",
+          "**Sign out**, then sign in as **elena.01** with password **Sitecore**. Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the business-line filters.",
           "Compare Elena’s headline with the scores you recorded on her SitecoreAI profile.",
         ],
         expected: [

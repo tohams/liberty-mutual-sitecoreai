@@ -1,0 +1,23 @@
+---
+ID: 3f91adb8-d68f-5ec3-a181-b89f46ca4ec0
+Parent: 80228789-b957-573c-a1c5-1b511d7281dc
+Template: 80228789-b957-573c-a1c5-1b511d7281dc
+Path: /sitecore/templates/Project/LibertyMutual/ProductPage/__Standard Values
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{D638DA0C-350E-5D77-BDA5-B12CFA6F4DA7}"><r uid="{400659A4-B626-51EF-8DBB-5153CA689841}" id="{610D1DC8-96D3-5F38-8D15-D23279413214}" ph="headless-product-details" ds="$id" par="FieldNames={346EF416-4FCC-5F95-98EF-EB21DEB0B14D}" /></d></r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: $name
+    - ID: 1a9d46aa-1e80-53b1-b519-331993a4e617
+      Hint: catalogChannel
+      Value: all

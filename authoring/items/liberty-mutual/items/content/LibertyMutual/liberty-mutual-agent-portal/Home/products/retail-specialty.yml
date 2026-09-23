@@ -1,16 +1,16 @@
-﻿---
-ID: "59a26e6b-29e0-5b89-8cf2-c9ddb2344940"
-Parent: "d8898b95-6720-5acf-86b6-b434c3fe7f57"
-Template: "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc"
-Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/products/retail-specialty"
+---
+ID: 59a26e6b-29e0-5b89-8cf2-c9ddb2344940
+Parent: d8898b95-6720-5acf-86b6-b434c3fe7f57
+Template: 80228789-b957-573c-a1c5-1b511d7281dc
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/products/retail-specialty
 SharedFields:
-- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
   Hint: __Workflow
   Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
-- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
   Value: 100
-- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
   Value: |
     <r>
@@ -28,18 +28,30 @@ SharedFields:
 Languages:
 - Language: en
   Fields:
-  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
     Value: Retail specialty
   Versions:
   - Version: 1
     Fields:
-    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
       Hint: __Workflow state
       Value: "{F7FE5BDD-A991-4A58-9735-CD08F9B097AB}"
-    - ID: "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8"
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
       Hint: NavigationTitle
       Value: Retail specialty
-    - ID: "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b"
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
       Hint: Title
       Value: Retail specialty
+    - ID: d8d02f2c-edac-52c5-b9a0-7e19a1f40472
+      Hint: catalogSummary
+      Value: Organize complex needs and route the right questions to your specialist team.
+    - ID: 83c4b5d0-fc5b-5b60-a97c-804b8cbb776f
+      Hint: catalogImage
+      Value: <Image height="384" src="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/9d58090ca88a4572a6cb341065f8033a?transform=true&amp;format=auto&amp;width=1440&amp;height=384" dam-id="KQPVnDqDSaWMRYwgX5ol7g" thumbnailsrc="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/9d58090ca88a4572a6cb341065f8033a?transform=true&amp;format=auto&amp;width=1440&amp;height=384" width="1440" dam-content-type="Image" alt="Two colleagues discussing information on a tablet in an office corridor." />
+    - ID: a855fd36-1b4c-5210-b3c8-f9b6171d925c
+      Hint: catalogProducts
+      Value: "{EE3344CA-C4D7-5F28-8DDE-6F3A1B534E99}|{E9FBA6BF-20AA-5CD4-8452-DBBD609E5476}"
+    - ID: 1a9d46aa-1e80-53b1-b519-331993a4e617
+      Hint: catalogChannel
+      Value: independent

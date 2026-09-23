@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "site": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal",
+  "templateIds": {
+    "ProductPage": "80228789-b957-573c-a1c5-1b511d7281dc",
+    "ProductReference": "fecd2390-6430-5dca-93a2-458e78b37df5"
+  },
+  "fieldIds": {
+    "ProductPage.catalogSummary": "d8d02f2c-edac-52c5-b9a0-7e19a1f40472",
+    "ProductPage.catalogImage": "83c4b5d0-fc5b-5b60-a97c-804b8cbb776f",
+    "ProductPage.catalogProducts": "a855fd36-1b4c-5210-b3c8-f9b6171d925c",
+    "ProductPage.catalogChannel": "1a9d46aa-1e80-53b1-b519-331993a4e617",
+    "ProductPage.catalogBody": "c7004eb6-def5-5424-8541-9c5cfb29728b",
+    "ProductReference.productId": "001e2840-810d-567e-9799-63b3719ad934"
+  },
+  "renderingIds": {
+    "ProductDetails": "610d1dc8-96d3-5f38-8d15-d23279413214"
+  },
+  "placeholderIds": {
+    "headless-product-details": "8a74c476-c983-5b58-96f0-412c0b0bef95"
+  },
+  "sitePlaceholderIds": {
+    "headless-product-details": "add2677f-e4c4-5360-a3ee-1815f5a20808"
+  },
+  "layoutIds": {
+    "ProductPageLayout": "d638da0c-350e-5d77-bda5-b12cfa6f4da7"
+  },
+  "catalogRoot": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductCatalog",
+  "productsRoot": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductCatalog/Products",
+  "branchPath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Product page",
+  "prototypePath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Product page/$name",
+  "dataPath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Product page/$name/Data",
+  "placeholderKey": "headless-product-details",
+  "ids": {
+    "branch": "9fff5da3-6598-57c2-bae0-d82d46101c48",
+    "prototype": "b238803d-3da7-5939-9172-942b3bc9ee9b",
+    "data": "6ac8da26-bb2a-5328-8d45-10844655ee59",
+    "branchFolder": "303950e1-bb10-4155-b993-9435c33f9aeb",
+    "catalog": "9658f863-cffe-58c2-a073-04691b88f284",
+    "products": "a62901c2-6bc7-58cb-8f5b-88e3d98c017d",
+    "variant": "346ef416-4fcc-5f95-98ef-eb21deb0b14d",
+    "pageDefaults": "3f91adb8-d68f-5ec3-a181-b89f46ca4ec0",
+    "productsPage": "d8898b95-6720-5acf-86b6-b434c3fe7f57"
+  },
+  "branchLayout": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{D638DA0C-350E-5D77-BDA5-B12CFA6F4DA7}\"><r uid=\"{400659A4-B626-51EF-8DBB-5153CA689841}\" id=\"{610D1DC8-96D3-5F38-8D15-D23279413214}\" ph=\"headless-product-details\" ds=\"$id\" par=\"FieldNames={346EF416-4FCC-5F95-98EF-EB21DEB0B14D}\" /></d></r>",
+  "branchInsertRule": "<ruleset><rule uid=\"{CD13D257-94B0-5B23-B463-77196801BD1F}\" name=\"Product page beneath Products\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{BA864C2C-FCBE-5B82-A5DF-2096F6918B50}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{D8898B95-6720-5ACF-86B6-B434C3FE7F57}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{AFAB6538-5A0D-5D5A-8283-88EE71BEB47E}\" PageBranchId=\"{9FFF5DA3-6598-57C2-BAE0-D82D46101C48}\" /></actions></rule></ruleset>",
+  "branchRuleId": "cd13d257-94b0-5b23-b463-77196801bd1f",
+  "branchRuleFieldId": "bb3391dd-f8be-4b2e-ae9f-47bb63c166ce",
+  "productReferences": [
+    {
+      "id": "ec6a3360-6be3-5ad1-8ddb-17e8f3e15c37",
+      "productId": "auto",
+      "displayName": "Personal auto"
+    },
+    {
+      "id": "86c91d7d-13e3-508c-9f11-80ab45bf44cb",
+      "productId": "home",
+      "displayName": "Homeowners"
+    },
+    {
+      "id": "0f979919-9a7e-5d38-97e5-5f92a84fabd9",
+      "productId": "renters",
+      "displayName": "Renters & condo"
+    },
+    {
+      "id": "86e4bc52-b096-59e7-806a-29eb907863f0",
+      "productId": "personal-umbrella",
+      "displayName": "Personal umbrella"
+    },
+    {
+      "id": "34d5b04b-b3f3-51c2-ad02-4feb7cbaa8f2",
+      "productId": "recreation",
+      "displayName": "Recreational vehicles"
+    },
+    {
+      "id": "bbd4443d-d2f6-5de5-bc4a-a9d7b6934e35",
+      "productId": "bop",
+      "displayName": "Businessowners policy"
+    },
+    {
+      "id": "0be36e6a-a9e9-5038-ac53-a70e50b7ae65",
+      "productId": "workers-comp",
+      "displayName": "Workers compensation"
+    },
+    {
+      "id": "911f839b-6b7a-5c5d-8793-3fb2e550583b",
+      "productId": "commercial-auto",
+      "displayName": "Commercial auto"
+    },
+    {
+      "id": "e184bde9-b325-5b73-b386-f34969375603",
+      "productId": "commercial-umbrella",
+      "displayName": "Commercial umbrella"
+    },
+    {
+      "id": "637d7a86-5240-5127-8a94-1b8c207727b4",
+      "productId": "inland-marine",
+      "displayName": "Inland marine"
+    },
+    {
+      "id": "6fce13cf-ca2c-5c56-a986-508b4ad8bed2",
+      "productId": "commercial-property",
+      "displayName": "Commercial property"
+    },
+    {
+      "id": "13663b17-46ff-57c2-a795-4e42d71d4174",
+      "productId": "general-liability",
+      "displayName": "General liability"
+    },
+    {
+      "id": "34356b2c-907c-5667-9388-2bd6d1a461fb",
+      "productId": "fleet",
+      "displayName": "Commercial fleet"
+    },
+    {
+      "id": "ad8ee9f9-853e-5c68-b7b4-61b110201b0e",
+      "productId": "farm-ranch",
+      "displayName": "Farm & ranch"
+    },
+    {
+      "id": "ee3344ca-c4d7-5f28-8dde-6f3a1b534e99",
+      "productId": "specialty-casualty",
+      "displayName": "Specialty casualty"
+    },
+    {
+      "id": "e9fba6bf-20aa-5cd4-8452-dbbd609e5476",
+      "productId": "professional-liability",
+      "displayName": "Professional liability"
+    },
+    {
+      "id": "0c0636d4-3706-55b0-9b49-e35d931a8b7e",
+      "productId": "contract-surety",
+      "displayName": "Contract surety"
+    },
+    {
+      "id": "a9eb91cb-0c1e-518a-868e-f5c23a5690b7",
+      "productId": "commercial-surety",
+      "displayName": "Commercial surety"
+    }
+  ],
+  "generatedFiles": [
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogSummary.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogImage.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogProducts.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogChannel.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogBody.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference/Content.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference/Content/productId.yml",
+    "authoring/items/liberty-mutual/items/renderings/LibertyMutual/ProductDetails.yml",
+    "authoring/items/liberty-mutual/items/placeholders/LibertyMutual/headless-product-details.yml",
+    "authoring/items/liberty-mutual/items/site-product-details/headless-product-details.yml",
+    "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ProductPageLayout.yml",
+    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductDetails.yml",
+    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductDetails/Default.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/auto.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/home.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/renters.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/personal-umbrella.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/recreation.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/bop.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/workers-comp.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-auto.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-umbrella.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/inland-marine.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-property.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/general-liability.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/fleet.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/farm-ranch.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/specialty-casualty.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/professional-liability.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/contract-surety.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-surety.yml",
+    "authoring/items/liberty-mutual/items/product-page-branch/Product page.yml",
+    "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name.yml",
+    "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name/Data.yml"
+  ],
+  "deploymentScope": "Additive model and CreateOnly initial references/branch. Configure the branch insertion rule and component library separately. Existing pages and shared layouts are preserved."
+}

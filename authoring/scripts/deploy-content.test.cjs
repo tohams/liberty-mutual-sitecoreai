@@ -14,7 +14,7 @@ function fixture(t) {
   const files = [
     "authoring/scripts/deploy-content.sh",
     "xmcloud.build.json",
-    ...["Content", "Taxonomy", "ResourcePageBranch", "SupportForm", "ComponentLibrary", "LibrarySeed"].map(
+    ...["Content", "Taxonomy", "ResourcePageBranch", "ProductPageBranch", "ProductCatalog", "SupportForm", "ComponentLibrary", "LibrarySeed"].map(
       (name) => `${MODULES}/LibertyMutual.${name}.module.json`,
     ),
   ];
@@ -110,6 +110,8 @@ test("fresh-site seeding creates content and library parents before dependent se
     "LibertyMutual.Content",
     "LibertyMutual.Taxonomy",
     "LibertyMutual.ResourcePageBranch",
+    "LibertyMutual.ProductCatalog",
+    "LibertyMutual.ProductPageBranch",
     "LibertyMutual.SitePresentation",
     "LibertyMutual.SupportForm",
     "LibertyMutual.ComponentLibrary",
@@ -130,7 +132,7 @@ test("combined seed flags do not push the taxonomy twice", (t) => {
 test("what-if protects every requested push and suppresses publication", (t) => {
   const result = fixture(t).run("--seed", "--publish", "--what-if");
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.pushes.length, 8);
+  assert.equal(result.pushes.length, 10);
   assert.ok(result.pushes.every((command) => command.endsWith(" --what-if")));
   assert.equal(
     result.commands.some((command) => command.startsWith("sitecore publish ")),
@@ -197,6 +199,8 @@ for (const module of [
   "LibertyMutual.Taxonomy",
   "LibertyMutual.ResourcePageBranch",
   "LibertyMutual.CampaignPageBranch",
+  "LibertyMutual.ProductPageBranch",
+  "LibertyMutual.ProductCatalog",
   "LibertyMutual.LibrarySeed",
   "*",
 ]) {
@@ -244,6 +248,32 @@ test("rejects branch update permissions before any native operation", (t) => {
   assert.match(result.stderr, /Refusing branch seed/);
   assert.deepEqual(result.commands, []);
 });
+
+test("product seeding is explicit and preserves unrelated editorial seed scope", (t) => {
+  const result = fixture(t).run("--seed-products");
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(pushedModules(result), [
+    "LibertyMutual.Model",
+    "LibertyMutual.ProductCatalog",
+    "LibertyMutual.ProductPageBranch",
+    "LibertyMutual.SitePresentation",
+    "LibertyMutual.SupportForm",
+    "LibertyMutual.ComponentLibrary",
+  ]);
+});
+
+for (const name of ["ProductCatalog", "ProductPageBranch"]) {
+  test(`rejects updates to ${name} before any native operation`, (t) => {
+    const context = fixture(t);
+    context.edit(`${MODULES}/LibertyMutual.${name}.module.json`, (module) => {
+      module.items.includes[0].allowedPushOperations = "CreateAndUpdate";
+    });
+    const result = context.run("--seed-products");
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /Refusing product seed/);
+    assert.deepEqual(result.commands, []);
+  });
+}
 
 for (const slug of [
   "small-business",
