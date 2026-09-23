@@ -31,6 +31,8 @@ PAGE = TEMPLATES + '/ProductPage'
 REFERENCE = TEMPLATES + '/ProductReference'
 CATALOG = SITE + '/Data/ProductCatalog'
 PRODUCTS = CATALOG + '/Products'
+CHANNELS = CATALOG + '/Channels'
+CHANNEL_NAMES = ['all', 'independent', 'wholesale']
 BRANCH = SITE + '/Presentation/Page Branches/Product page'
 PROTOTYPE = BRANCH + '/$name'
 DATA = PROTOTYPE + '/Data'
@@ -49,7 +51,7 @@ FIELD_DEFINITIONS = [
     ('catalogSummary', 'Catalog summary', 'Multi-Line Text', '', 'A short introduction shown on the product catalog card.'),
     ('catalogImage', 'Catalog image', 'Image', '', 'Choose a product image and meaningful alternative text.'),
     ('catalogProducts', 'Related products', 'Multilist', PRODUCTS, 'Select existing operational products. This selection does not grant product or transaction access.'),
-    ('catalogChannel', 'Distribution channel', 'Droplist', 'all|independent|wholesale', 'Choose the audience for this page: all, independent, or wholesale. Operational permissions remain separate.'),
+    ('catalogChannel', 'Distribution channel', 'Droplist', CHANNELS, 'Choose the audience for this page: all, independent, or wholesale. Operational permissions remain separate.'),
     ('catalogBody', 'Product details', 'Rich Text', 'query:$xaRichTextProfile', 'Author the product guidance shown on this page. Do not include private customer or agency data.'),
 ]
 
@@ -122,6 +124,10 @@ def records(manifest, products):
     result.append(item(VARIANT, '19a63bdd-f9c6-403b-8068-c1884e9bb413', '49c111d0-6867-4798-a724-1f103166e6e9'))
     result.append(item(VARIANT + '/Default', uid(VARIANT), '4d50cdae-c2d9-4de8-b080-8f992bfb1b55'))
     result.append(item(CATALOG, '20e904a1-9b60-43a1-a8d0-8e3aee45b115', FOLDER_TEMPLATE))
+    result.append(item(CHANNELS, uid(CATALOG), FOLDER_TEMPLATE))
+    for index, name in enumerate(CHANNEL_NAMES, 1):
+        result.append(item(CHANNELS + '/' + name, uid(CHANNELS), FOLDER_TEMPLATE,
+            shared=[field('ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e', '__Sortorder', index * 100)]))
     result.append(item(PRODUCTS, uid(CATALOG), FOLDER_TEMPLATE, shared=[
         field('1172f251-dad4-4efb-a329-0c63500e4f1e', '__Masters', brace(uid(REFERENCE))),
     ]))
@@ -215,18 +221,19 @@ def prepare():
         writes[manifest_path] = json.dumps(manifest, indent=2) + '\n'
     contract = {
         'schemaVersion': 1, 'site': SITE, **updates,
-        'catalogRoot': CATALOG, 'productsRoot': PRODUCTS, 'branchPath': BRANCH,
+        'catalogRoot': CATALOG, 'productsRoot': PRODUCTS, 'channelsRoot': CHANNELS, 'branchPath': BRANCH,
         'prototypePath': PROTOTYPE, 'dataPath': DATA, 'placeholderKey': KEY,
         'ids': {'branch': uid(BRANCH), 'prototype': uid(PROTOTYPE), 'data': uid(DATA),
                 'branchFolder': '303950e1-bb10-4155-b993-9435c33f9aeb', 'catalog': uid(CATALOG),
-                'products': uid(PRODUCTS), 'variant': uid(VARIANT + '/Default'),
+                'products': uid(PRODUCTS), 'channels': uid(CHANNELS), 'variant': uid(VARIANT + '/Default'),
                 'pageDefaults': uid(PAGE + '/__Standard Values'), 'productsPage': manifest['routePageIds']['products']},
         'branchLayout': branch_layout(), 'branchInsertRule': '<ruleset>' + branch_rule(manifest['routePageIds']['products']) + '</ruleset>',
         'branchRuleId': uid(BRANCH + '/insert-rule'),
         'branchRuleFieldId': 'bb3391dd-f8be-4b2e-ae9f-47bb63c166ce',
         'productReferences': [{'id': uid(PRODUCTS + '/' + p['id']), 'productId': p['id'], 'displayName': p['name']} for p in products],
+        'channelChoices': [{'id': uid(CHANNELS + '/' + name), 'name': name} for name in CHANNEL_NAMES],
         'generatedFiles': generated,
-        'deploymentScope': 'Additive model and CreateOnly initial references/branch. Configure the branch insertion rule and component library separately. Existing pages and shared layouts are preserved.',
+        'deploymentScope': 'Additive model and CreateOnly initial references, channel choices, and branch. Configure the branch insertion rule and component library separately. Existing pages and shared layouts are preserved.',
     }
     ET.fromstring(contract['branchLayout'])
     ET.fromstring(contract['branchInsertRule'])
@@ -238,7 +245,7 @@ def prepare():
         writes[contract_path] = json.dumps(contract, indent=2) + '\n'
     for namespace, name, path, description in [
         ('ProductPageBranch', 'product-page-branch', BRANCH, 'Editable blank Product page branch. CreateOnly; excluded from authoring resource packages.'),
-        ('ProductCatalog', 'product-catalog', CATALOG, 'Initial operational product references. CreateOnly preserves author labels; excluded from authoring resource packages.'),
+        ('ProductCatalog', 'product-catalog', CATALOG, 'Initial operational product references and distribution channel choices. CreateOnly preserves author labels; excluded from authoring resource packages.'),
     ]:
         module = {'$schema': '../../../.sitecore/schemas/ModuleFile.schema.json', 'namespace': 'LibertyMutual.' + namespace,
                   'description': description, 'items': {'includes': [{'name': name, 'path': path, 'allowedPushOperations': 'CreateOnly'}]}}
