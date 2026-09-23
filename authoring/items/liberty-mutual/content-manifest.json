@@ -364,7 +364,11 @@
     "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-surety.yml",
     "authoring/items/liberty-mutual/items/product-page-branch/Product page.yml",
     "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name.yml",
-    "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name/Data.yml"
+    "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name/Data.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels/all.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels/independent.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Channels/wholesale.yml"
   ],
   "placeholderIds": {
     "headless-products-spotlight": "8428148d-9f3b-5323-a166-88d0c5ea56ac",
