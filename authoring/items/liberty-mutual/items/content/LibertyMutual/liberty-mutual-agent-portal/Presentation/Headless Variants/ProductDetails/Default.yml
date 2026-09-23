@@ -1,0 +1,13 @@
+---
+ID: 346ef416-4fcc-5f95-98ef-eb21deb0b14d
+Parent: 03dddc2d-70c5-500e-8ffa-7d594df62547
+Template: 4d50cdae-c2d9-4de8-b080-8f992bfb1b55
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductDetails/Default
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20260912T000000Z

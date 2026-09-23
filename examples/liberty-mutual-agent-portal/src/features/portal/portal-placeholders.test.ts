@@ -110,6 +110,27 @@ test("workshop practice pages render their native article in editing and deliver
   }
 });
 
+test("Product page detail slots keep only the governed component and preserve its page datasource", () => {
+  const details: ComponentRendering = {
+    componentName: "ProductDetails",
+    uid: "product-details-instance",
+    dataSource: "page-item-id",
+    fields: { Title: { value: "Authored product title" } },
+  };
+  const layout: RouteData = {
+    name: "product-page",
+    placeholders: { "headless-product-details": [details, guidance, search] },
+  };
+  for (const mode of [editing, delivery]) {
+    const slot = getPortalPlaceholders("/products/new-guidance", layout, mode).productDetails;
+    assert.deepEqual(slot?.rendering.placeholders["headless-product-details"], [details]);
+    assert.equal(slot?.rendering.placeholders["headless-product-details"][0], details);
+    assert.equal(getPortalPlaceholders("/resources/new-guidance", layout, mode).productDetails, undefined);
+    assert.equal(getPortalPlaceholders("/products", layout, mode).productDetails, undefined);
+    assert.equal(getPortalPlaceholders("/products/personal", allSlots, mode).productDetails, undefined);
+  }
+});
+
 test("all twenty authoring practice routes retain their native campaign composition", () => {
   const hero: ComponentRendering = {
     componentName: "CampaignHero",

@@ -297,7 +297,7 @@ function ResourceSearchExperience({
     <div className={`resource-search-component ${styles || ""}`} id={id}>
       <section className="resource-search-hero">
         <span className="eyebrow">YOUR KNOWLEDGE ADVANTAGE</span>
-        <h2>What can we help you find?</h2>
+        <h2>Find guidance for your next client conversation</h2>
         <p>
           Find practical guidance for the accounts, industries, and states you
           work with.

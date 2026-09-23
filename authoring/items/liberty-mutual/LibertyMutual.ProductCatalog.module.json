@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.ProductCatalog",
+  "description": "Initial operational product references. CreateOnly preserves author labels; excluded from authoring resource packages.",
+  "items": {
+    "includes": [
+      {
+        "name": "product-catalog",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/ProductCatalog",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  }
+}

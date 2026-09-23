@@ -75,6 +75,18 @@
           {
             "path": "/liberty-mutual-agent-portal/Presentation/Available Renderings",
             "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-product-details",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Page Branches/Product page",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Data/ProductCatalog",
+            "scope": "Ignored"
           }
         ]
       }

@@ -28,7 +28,13 @@
     "ProductSpotlight.body": "fdbff5cf-246a-5c1f-bcf2-cf38cc14de3e",
     "ProductSpotlight.actionLink": "1041b290-9cb7-5d63-ade0-4bb88fcdacfb",
     "ResourceImage.image": "ca9a643a-07b6-5945-8fa5-af13e02af584",
-    "ResourceImage.caption": "a8d126c1-34ee-5679-9cf6-8d699a788cd8"
+    "ResourceImage.caption": "a8d126c1-34ee-5679-9cf6-8d699a788cd8",
+    "ProductPage.catalogSummary": "d8d02f2c-edac-52c5-b9a0-7e19a1f40472",
+    "ProductPage.catalogImage": "83c4b5d0-fc5b-5b60-a97c-804b8cbb776f",
+    "ProductPage.catalogProducts": "a855fd36-1b4c-5210-b3c8-f9b6171d925c",
+    "ProductPage.catalogChannel": "1a9d46aa-1e80-53b1-b519-331993a4e617",
+    "ProductPage.catalogBody": "c7004eb6-def5-5424-8541-9c5cfb29728b",
+    "ProductReference.productId": "001e2840-810d-567e-9799-63b3719ad934"
   },
   "templateIds": {
     "AgentGuidance": "c241fdcc-057e-501f-a45b-c893b061f04d",
@@ -42,14 +48,17 @@
     "SearchFolder": "20baf2c0-296c-52d1-8058-1ae58c9b8fb8",
     "ProductSpotlight": "df47f749-485c-5e86-88e4-85ab46a7d7ca",
     "ProductSpotlightFolder": "386f0378-6076-52b4-8251-d240af07ea30",
-    "ResourceImage": "57ee0749-a33c-50ff-b20b-0337974b7bd6"
+    "ResourceImage": "57ee0749-a33c-50ff-b20b-0337974b7bd6",
+    "ProductPage": "80228789-b957-573c-a1c5-1b511d7281dc",
+    "ProductReference": "fecd2390-6430-5dca-93a2-458e78b37df5"
   },
   "renderingIds": {
     "AgentGuidance": "193a0299-b5b6-5668-b792-9f3552463163",
     "ResourceArticle": "980ad02c-08e5-5f27-9f08-f28e829ca94d",
     "ResourceSearch": "15cf6efa-c180-563a-b229-c08f2dac3dad",
     "ProductSpotlight": "1962d596-4187-51c9-a91f-4d39a9318b51",
-    "ResourceImage": "2958922f-9832-5a46-b489-a4408eb363b1"
+    "ResourceImage": "2958922f-9832-5a46-b489-a4408eb363b1",
+    "ProductDetails": "610d1dc8-96d3-5f38-8d15-d23279413214"
   },
   "routePageIds": {
     "home": "ae9e45ca-f127-4abe-9ca7-2ff109981998",
@@ -314,20 +323,63 @@
     "authoring/items/liberty-mutual/items/resource-page-branch/Resource page.yml",
     "authoring/items/liberty-mutual/items/resource-page-branch/Resource page/#name.yml",
     "authoring/items/liberty-mutual/items/resource-page-branch/Resource page/#name/Data.yml",
-    "authoring/items/liberty-mutual/items/resource-page-branch/Resource page/#name/Data/Resource image.yml"
+    "authoring/items/liberty-mutual/items/resource-page-branch/Resource page/#name/Data/Resource image.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogSummary.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogImage.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogProducts.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogChannel.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductPage/Content/catalogBody.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference/__Standard Values.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference/Content.yml",
+    "authoring/items/liberty-mutual/items/templates/LibertyMutual/ProductReference/Content/productId.yml",
+    "authoring/items/liberty-mutual/items/renderings/LibertyMutual/ProductDetails.yml",
+    "authoring/items/liberty-mutual/items/placeholders/LibertyMutual/headless-product-details.yml",
+    "authoring/items/liberty-mutual/items/site-product-details/headless-product-details.yml",
+    "authoring/items/liberty-mutual/items/layouts/LibertyMutual/ProductPageLayout.yml",
+    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductDetails.yml",
+    "authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/ProductDetails/Default.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/auto.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/home.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/renters.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/personal-umbrella.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/recreation.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/bop.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/workers-comp.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-auto.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-umbrella.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/inland-marine.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-property.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/general-liability.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/fleet.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/farm-ranch.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/specialty-casualty.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/professional-liability.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/contract-surety.yml",
+    "authoring/items/liberty-mutual/items/product-catalog/ProductCatalog/Products/commercial-surety.yml",
+    "authoring/items/liberty-mutual/items/product-page-branch/Product page.yml",
+    "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name.yml",
+    "authoring/items/liberty-mutual/items/product-page-branch/Product page/#name/Data.yml"
   ],
   "placeholderIds": {
     "headless-products-spotlight": "8428148d-9f3b-5323-a166-88d0c5ea56ac",
     "headless-agent-guidance": "427c0c0a-38cb-5c1b-aa2d-34b20594a9aa",
     "headless-resource-search": "f64643c1-6280-57c2-8695-02d4c563b4ae",
     "headless-resource-article": "27225f95-329c-5193-b6d9-8ea86c0010a5",
-    "headless-resource-image": "74d15b03-b221-57bb-a21c-313a5ce0c461"
+    "headless-resource-image": "74d15b03-b221-57bb-a21c-313a5ce0c461",
+    "headless-product-details": "8a74c476-c983-5b58-96f0-412c0b0bef95"
   },
   "layoutIds": {
     "ProductsLayout": "75cfc4f6-9a69-52b3-97c3-11a6f1fabe89",
     "PortalLayout": "3d40b9c9-8126-5ff8-81e1-a48afb1ba1a8",
     "ResourcesLayout": "2dac85b2-7271-519e-a454-5a841ac1ad0d",
-    "ResourceArticleLayout": "bb11e9d7-11d7-5c71-9ab7-1dd37267c4d3"
+    "ResourceArticleLayout": "bb11e9d7-11d7-5c71-9ab7-1dd37267c4d3",
+    "ProductPageLayout": "d638da0c-350e-5d77-bda5-b12cfa6f4da7"
   },
   "productSpotlight": {
     "placeholderKey": "headless-products-spotlight",
@@ -349,6 +401,7 @@
     "headless-resource-search": "30300f08-7257-5684-973d-37bfac7f859a",
     "headless-resource-article": "841765c3-50d9-5a1c-b7d2-a709c2e9085e",
     "headless-products-spotlight": "26cea173-788c-504b-afe6-14fa57a94946",
-    "headless-resource-image": "5ce737cc-1f1d-5aa2-bd70-f8a513967738"
+    "headless-resource-image": "5ce737cc-1f1d-5aa2-bd70-f8a513967738",
+    "headless-product-details": "add2677f-e4c4-5360-a3ee-1815f5a20808"
   }
 }

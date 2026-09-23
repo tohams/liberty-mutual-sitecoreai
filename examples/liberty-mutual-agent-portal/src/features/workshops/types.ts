@@ -3,6 +3,12 @@ export interface GuideLink {
   label: string;
   href: string;
 }
+export interface RepositoryFile {
+  label: string;
+  /** Path from the repository root, independent of its GitHub owner or name. */
+  path: string;
+  section?: string;
+}
 export interface GuideImage {
   file: string;
   alt: string;
@@ -36,6 +42,7 @@ export interface GuideStep {
   note?: string;
   code?: string;
   links?: GuideLink[];
+  repositoryFiles?: RepositoryFile[];
   image?: GuideImage;
   /** Ordered screenshots; when provided, this replaces the legacy single image. */
   images?: GuideImage[];
@@ -51,12 +58,14 @@ export interface WorkshopGuide {
   personas: string[];
   prerequisites: string[];
   links?: GuideLink[];
+  repositoryFiles?: RepositoryFile[];
   steps: GuideStep[];
   cleanup: {
     title?: string;
     body: string[];
     code?: string;
     links?: GuideLink[];
+    repositoryFiles?: RepositoryFile[];
   };
   related?: string[];
   sourceSlides: number[];

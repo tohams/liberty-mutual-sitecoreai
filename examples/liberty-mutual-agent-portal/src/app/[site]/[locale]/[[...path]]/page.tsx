@@ -12,6 +12,13 @@ import client from "@/lib/sitecore-client";
 import { getSession } from "@/server/auth/session";
 import { getPortalBootstrap, getEditorBootstrap } from "@/server/data/portal";
 import { canAccessResourcePage } from "@/server/data/resource-page-access";
+import { getProductCatalog } from "@/server/data/cms-products";
+import {
+  canAccessProductPage,
+  isProductCatalogPage,
+  availableProductCatalog,
+} from "@/server/data/product-page-access";
+import type { ProductCatalogPage } from "@/contracts/portal";
 import { PortalError } from "@/server/errors";
 import { PortalApp } from "@/features/portal/PortalApp";
 import { PortalEditorProvider } from "@/features/portal/PortalEditorProvider";
@@ -30,13 +37,14 @@ export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ site: string; locale: string; path?: string[] }>;
+  searchParams: Promise<{ state?: string | string[] }>;
 };
 
 // Identity-dependent page variants must not be cached across agents.
 const uncachedFetch: typeof fetch = (input, init) =>
   fetch(input, { ...init, cache: "no-store" });
 
-export default async function PortalPage({ params }: PageProps) {
+export default async function PortalPage({ params, searchParams }: PageProps) {
   const { site, locale, path = [] } = await params;
   if (site !== scConfig.defaultSite || locale !== scConfig.defaultLanguage)
     notFound();
@@ -88,6 +96,36 @@ export default async function PortalPage({ params }: PageProps) {
     )
   )
     notFound();
+  let productCatalog: ProductCatalogPage[] | null | undefined;
+  if (
+    route === "/products" ||
+    (!draft.isEnabled && isProductCatalogPage(page.layout.sitecore.route))
+  ) {
+    try {
+      productCatalog = await getProductCatalog(locale);
+    } catch {
+      // A catalog outage must not replace authored content with operational fixtures.
+      console.warn("Portal product catalog is temporarily unavailable");
+      productCatalog = null;
+    }
+  }
+  const productQuery = await searchParams;
+  const queryState = Array.isArray(productQuery.state)
+    ? ""
+    : productQuery.state;
+  if (
+    !canAccessProductPage(
+      page.layout.sitecore.route,
+      productCatalog,
+      data,
+      queryState,
+      draft.isEnabled,
+    )
+  )
+    notFound();
+  if (route !== "/products") productCatalog = undefined;
+  else if (productCatalog && !draft.isEnabled)
+    productCatalog = availableProductCatalog(productCatalog, data, queryState);
   const placements = getPortalPlaceholders(
     route,
     page.layout.sitecore.route,
@@ -113,7 +151,9 @@ export default async function PortalPage({ params }: PageProps) {
     : placements.resourceArticle
       ? renderPlaceholder(placements.resourceArticle)
       : /^\/products\/.+/.test(route)
-        ? guidance
+        ? placements.productDetails
+          ? renderPlaceholder(placements.productDetails)
+          : guidance
         : undefined;
   return (
     <NextIntlClientProvider locale={locale} messages={{}}>
@@ -141,6 +181,7 @@ export default async function PortalPage({ params }: PageProps) {
             workspaceEditorial={resourcesSearch ? undefined : guidance}
             resourcesSearch={resourcesSearch}
             productsSpotlight={renderPlaceholder(placements.productSpotlight)}
+            productCatalog={productCatalog}
             supportForm={renderPlaceholder(placements.supportForm)}
             pageContent={pageContent}
           />

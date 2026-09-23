@@ -1,5 +1,9 @@
 import type { ReactNode } from "react";
-import type { PortalAction, PortalBootstrap } from "@/contracts/portal";
+import type {
+  PortalAction,
+  PortalBootstrap,
+  ProductCatalogPage,
+} from "@/contracts/portal";
 
 export type ActionInput = PortalAction extends infer Action
   ? Action extends PortalAction
@@ -12,6 +16,7 @@ export interface PortalAppProps {
   workspaceEditorial?: ReactNode;
   resourcesSearch?: ReactNode;
   productsSpotlight?: ReactNode;
+  productCatalog?: ProductCatalogPage[] | null;
   supportForm?: ReactNode;
   pageContent?: ReactNode;
   isEditing?: boolean;

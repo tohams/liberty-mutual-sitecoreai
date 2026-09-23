@@ -1,16 +1,16 @@
-﻿---
-ID: "86485ec4-7c2c-5fcb-86a8-773892361ec7"
-Parent: "d8898b95-6720-5acf-86b6-b434c3fe7f57"
-Template: "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc"
-Path: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/products/surety"
+---
+ID: 86485ec4-7c2c-5fcb-86a8-773892361ec7
+Parent: d8898b95-6720-5acf-86b6-b434c3fe7f57
+Template: 80228789-b957-573c-a1c5-1b511d7281dc
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/products/surety
 SharedFields:
-- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
   Hint: __Workflow
   Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
-- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
   Value: 100
-- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
   Value: |
     <r>
@@ -28,18 +28,30 @@ SharedFields:
 Languages:
 - Language: en
   Fields:
-  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
     Value: Surety
   Versions:
   - Version: 1
     Fields:
-    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
       Hint: __Workflow state
       Value: "{F7FE5BDD-A991-4A58-9735-CD08F9B097AB}"
-    - ID: "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8"
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
       Hint: NavigationTitle
       Value: Surety
-    - ID: "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b"
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
       Hint: Title
       Value: Surety
+    - ID: d8d02f2c-edac-52c5-b9a0-7e19a1f40472
+      Hint: catalogSummary
+      Value: Prepare bond requests and servicing needs with clear parties, requirements, and status.
+    - ID: 83c4b5d0-fc5b-5b60-a97c-804b8cbb776f
+      Hint: catalogImage
+      Value: <Image height="420" src="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/aedca0ce7ed1481298e7e34204fdc694?transform=true&amp;format=auto&amp;width=745&amp;height=420" dam-id="v04jEJTXT0eUkH6BSo8e9Q" thumbnailsrc="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/aedca0ce7ed1481298e7e34204fdc694?transform=true&amp;format=auto&amp;width=745&amp;height=420" width="745" dam-content-type="Image" alt="Two contractors in hard hats and safety glasses examining work together." />
+    - ID: a855fd36-1b4c-5210-b3c8-f9b6171d925c
+      Hint: catalogProducts
+      Value: "{0C0636D4-3706-55B0-9B49-E35D931A8B7E}|{A9EB91CB-0C1E-518A-868E-F5C23A5690B7}"
+    - ID: 1a9d46aa-1e80-53b1-b519-331993a4e617
+      Hint: catalogChannel
+      Value: all

@@ -53,7 +53,8 @@
       "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal",
       "components": [
         "AgentGuidance",
-        "ProductSpotlight"
+        "ProductSpotlight",
+        "ProductDetails"
       ]
     }
   ],
@@ -152,6 +153,14 @@
       "displayName": "Spotlight",
       "icon": "Office/32x32/window_star.png",
       "sortOrder": 200,
+      "section": "Agent portal"
+    },
+    "ProductDetails": {
+      "itemId": "610d1dc8-96d3-5f38-8d15-d23279413214",
+      "path": "/sitecore/layout/Renderings/Project/LibertyMutual/ProductDetails",
+      "displayName": "Product details",
+      "icon": "Office/32x32/document_text.png",
+      "sortOrder": 300,
       "section": "Agent portal"
     }
   }

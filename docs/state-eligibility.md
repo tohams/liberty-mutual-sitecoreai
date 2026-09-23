@@ -37,15 +37,17 @@ No durable namespace is changed or reset by this release. Existing saved records
 
 ## Interface behavior
 
-- Products & appetite offers currently active licensed states. It filters products by the dated product/state availability rule. Browsing another business line remains possible where a product is available; Prepare account additionally requires the acting agent's full transaction eligibility.
+- **Products & appetite** lists published, complete Product pages directly beneath **Home → Products & appetite**. Page title, summary, optional image, selected product references, and distribution channel come from Sitecore. The portal offers currently active licensed states and filters each page’s referenced products by the dated product/state availability rule. A page appears only when its channel matches and at least one referenced product is available for the selected state and business line. **Prepare account** additionally requires the acting agent’s full transaction eligibility; when several products qualify, choose one under **Product to prepare** first.
 - The selected risk state is carried in the `state` query parameter through product guidance, return links and intake. Only recognized, licensed states are accepted as new-work preferences. An explicit invalid or unavailable preference requires a choice instead of silently falling back to home state.
 - Existing submissions always begin with their saved state. An unavailable state remains visible, with an explanation and blocked actions; it is never replaced by the first option in a dropdown.
 - State and product changes are deliberate choices. The form checks their preparation requirements and eligibility together, and the server validates the submitted combination again.
 - Native AgentGuidance links carry valid operational context while retaining Content SDK field metadata. External sources, authentication/API links and editor/preview field rendering remain unchanged.
 - Home state is labeled as home state. It is a default for new work only when there is no explicit risk-state selection; it is not the account's jurisdiction.
 - Search, workspace recommendations, resource bootstrap and saved-resource views receive the active licensed-state projection. **Risk state** offers **My licensed states**, the agent's active licensed states, and **Nationwide guidance only**. There is no broader **All states** override.
-- A direct URL does not bypass the resource article's server-side state check. Native, verified Sitecore authoring remains able to edit every article; it is separate from an agent portal session.
+- A direct URL does not bypass a product page’s catalog eligibility check or the resource article's server-side state check. Native, verified Sitecore authoring remains able to edit every article; it is separate from an agent portal session.
 - If a previously saved resource falls outside the agent's current licenses, it is hidden from the current view without deleting the saved record. A workspace reset is not needed to enforce the changed scope.
+
+Publishing a new [Product page](product-catalog-authoring.md) can add a catalog card without a code release. Its **Related products** selections refer to existing operational products; they cannot create a new licensed product, expand a state rule, or authorize an agent. The channel defaults to `all`, but state and transaction checks still apply. Pages with incomplete metadata or invalid references are omitted.
 
 ## Illustrative state differences
 

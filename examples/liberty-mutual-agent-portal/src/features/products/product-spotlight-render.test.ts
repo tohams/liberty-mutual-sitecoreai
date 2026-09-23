@@ -27,5 +27,5 @@ test("product spotlight preserves native composition, fallback and risk-state bo
     ],
     { env: environment, timeout: 15000 },
   );
-  assert.match(stdout, /pass 4/);
+  assert.match(stdout, /pass 8/);
 });
