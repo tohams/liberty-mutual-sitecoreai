@@ -44,15 +44,28 @@ export function WorkshopSignOut() {
     </>
   );
 }
-export function CopyCode({ code }: { code: string }) {
+export function CopyCode({
+  code,
+  label = "Command / configuration",
+  repositoryPath = false,
+}: {
+  code: string;
+  label?: string;
+  repositoryPath?: boolean;
+}) {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(false);
   return (
-    <div className="workshop-code">
+    <div
+      className={`workshop-code${repositoryPath ? " workshop-repository-path" : ""}`}
+    >
       <div>
-        <span>Command / configuration</span>
+        <span>{label}</span>
         <button
           type="button"
+          aria-label={
+            repositoryPath ? `Copy repository path: ${code}` : undefined
+          }
           onClick={async () => {
             try {
               await navigator.clipboard.writeText(code);
@@ -65,13 +78,17 @@ export function CopyCode({ code }: { code: string }) {
           }}
         >
           {copied ? <Check size={14} /> : <Copy size={14} />}
-          {copied ? "Copied" : "Copy"}
+          {copied ? "Copied" : repositoryPath ? "Copy path" : "Copy"}
         </button>
       </div>
       <pre>
         <code>{code}</code>
       </pre>
-      {error && <p role="status">Select the command to copy it manually.</p>}
+      {error && (
+        <p role="status">
+          Select the {repositoryPath ? "path" : "command"} to copy it manually.
+        </p>
+      )}
     </div>
   );
 }

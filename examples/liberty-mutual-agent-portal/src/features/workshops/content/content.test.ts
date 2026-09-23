@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, statSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { existsSync, readFileSync, realpathSync, statSync } from "node:fs";
+import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { workshopGuides } from "./index";
@@ -175,8 +175,65 @@ test("the extracted SharePoint clickthrough coverage is retained without hidden 
   }
 });
 
-test("guide links use safe destinations and repository file links resolve in the checkout", () => {
+test("guide links use safe destinations and repository file references resolve within the checkout", () => {
+  const realRepositoryRoot = realpathSync(repositoryRoot);
   for (const guide of workshopGuides) {
+    const text = `${JSON.stringify(guide)}\n${readableContent(guide)}`;
+    assert.doesNotMatch(
+      text,
+      /\btohams\/liberty-mutual-sitecoreai\b/i,
+      `${guide.slug}: customer references must not point to the presenter repository`,
+    );
+    assert.doesNotMatch(
+      text,
+      /\b(?:PR|pull request)\s*#?\s*21\b|\/pull\/21\b/i,
+      `${guide.slug}: customer references must not depend on the presenter pull request`,
+    );
+    const repositoryFiles = [
+      ...(guide.repositoryFiles ?? []),
+      ...guide.steps.flatMap((step) => step.repositoryFiles ?? []),
+      ...(guide.cleanup.repositoryFiles ?? []),
+    ];
+    for (const reference of repositoryFiles) {
+      const context = `${guide.slug}: repository reference ${reference.path}`;
+      assert.ok(reference.label.trim(), `${context}: useful label required`);
+      assert.ok(
+        reference.path.trim() &&
+          reference.path === reference.path.trim() &&
+          !isAbsolute(reference.path) &&
+          !reference.path.includes("\\"),
+        `${context}: use a repository-root-relative path`,
+      );
+      const path = resolve(repositoryRoot, reference.path);
+      const relativePath = relative(repositoryRoot, path);
+      assert.ok(
+        relativePath &&
+          !isAbsolute(relativePath) &&
+          relativePath !== ".." &&
+          !relativePath.startsWith(`..${sep}`),
+        `${context}: repository path escape`,
+      );
+      assert.ok(existsSync(path), `${context}: path does not exist`);
+      const realRelativePath = relative(realRepositoryRoot, realpathSync(path));
+      assert.ok(
+        realRelativePath &&
+          !isAbsolute(realRelativePath) &&
+          realRelativePath !== ".." &&
+          !realRelativePath.startsWith(`..${sep}`),
+        `${context}: resolved path escapes the repository`,
+      );
+      const entry = statSync(path);
+      assert.ok(
+        entry.isFile() || entry.isDirectory(),
+        `${context}: path must name a file or directory`,
+      );
+      if (reference.section !== undefined) {
+        assert.ok(
+          reference.section.trim(),
+          `${context}: section must be useful`,
+        );
+      }
+    }
     for (const link of linksFor(guide)) {
       assert.ok(
         link.label.trim(),
@@ -225,33 +282,6 @@ test("guide links use safe destinations and repository file links resolve in the
           "local",
           `${guide.slug}: localhost requires the local account scope`,
         );
-      const repositoryPath = url.pathname.match(
-        /^\/tohams\/liberty-mutual-sitecoreai\/(blob|tree)\/main\/(.+)$/,
-      );
-      if (url.hostname === "github.com" && repositoryPath) {
-        const path = resolve(
-          repositoryRoot,
-          decodeURIComponent(repositoryPath[2]),
-        );
-        assert.ok(
-          path.startsWith(repositoryRoot + "/"),
-          `${guide.slug}: repository path escape`,
-        );
-        assert.ok(
-          existsSync(path),
-          `${guide.slug}: linked repository path missing: ${repositoryPath[2]}`,
-        );
-        if (repositoryPath[1] === "blob")
-          assert.ok(
-            statSync(path).isFile(),
-            `${guide.slug}: blob link must name a file`,
-          );
-        if (repositoryPath[1] === "tree")
-          assert.ok(
-            statSync(path).isDirectory(),
-            `${guide.slug}: tree link must name a directory`,
-          );
-      }
     }
   }
 });
@@ -372,6 +402,19 @@ test("the local component and setup instructions still target the actual reposit
   const setupText = readableContent(local);
   const componentText = readableContent(component);
   const setupCommands = local.steps.map((step) => step.code ?? "").join("\n");
+  assert.match(
+    setupCommands,
+    /^git clone YOUR_LIBERTY_MUTUAL_REPOSITORY_URL liberty-mutual-sitecoreai$/m,
+    "clone must use the customer repository placeholder and a predictable checkout folder",
+  );
+  assert.match(setupCommands, /^cd liberty-mutual-sitecoreai$/m);
+  assert.match(
+    setupCommands,
+    /^git switch -c workshop\/your-name-resource-search$/m,
+  );
+  assert.match(setupText, /YOUR_LIBERTY_MUTUAL_REPOSITORY_URL/);
+  assert.match(setupText, /\bCode\b/);
+  assert.match(setupText, /\bHTTPS\b/);
   assert.match(setupCommands, /^cd examples\/liberty-mutual-agent-portal$/m);
   for (const command of ["npm run setup:local", "npm ci", "npm run dev"]) {
     assert.ok(

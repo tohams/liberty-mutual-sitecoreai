@@ -14,7 +14,6 @@ const receiptInbox: GuideLink = {
   label: "Open the form receipt inbox",
   href: "https://webhook.site/#!/view/951f9e7b-3dd6-49dc-8fb1-3beda2cc034e",
 };
-const REPO = "https://github.com/tohams/liberty-mutual-sitecoreai/blob/main";
 
 const liveLogin: GuideLink = {
   label: "Open the live portal login",
@@ -532,13 +531,13 @@ export const marketingGuides: WorkshopGuide[] = [
       authorPrerequisite,
       "Follow the presenter as they edit the shared Texas article. Editing and publishing require access to this resource; **Resource metadata** currently requires organization administrator/owner access. The separate [**Review and publish content**](/workshops/guide/author-approver-workflow) demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
       "A **version** retains a revision of this article in a selected language. A **Draft** can be edited; approval makes it eligible for publication in this configured workflow. **Metadata** describes the article’s state, product, and other classifications used by Search. Complete publication, Search refresh, and restoration so the temporary summary is not left live.",
+      "For the supporting authoring instructions, open **Liberty Mutual’s GitHub repository** and browse to **docs/resource-metadata-authoring.md** from the repository root (its top-level folder).",
     ],
-    links: [
-      pageBuilder,
-      liveLogin,
+    links: [pageBuilder, liveLogin],
+    repositoryFiles: [
       {
         label: "Resource metadata authoring guide",
-        href: `${REPO}/docs/resource-metadata-authoring.md`,
+        path: "docs/resource-metadata-authoring.md",
       },
     ],
     steps: [
@@ -690,12 +689,13 @@ export const marketingGuides: WorkshopGuide[] = [
       authorPrerequisite,
       "Follow the presenter for this guide. The presenter needs permission to create and delete pages under **Learning & resources**, edit local image content, and use **Modern Media Library**. **Resource metadata** additionally requires organization administrator/owner access. Scoped workshop **Author** and **Approver** roles do not include these permissions.",
       "A **page branch** is a prepared starting structure that creates a page and its supporting content together. Here it creates a local **Data** folder containing **Resource image**, the item that stores this page’s image choice. The presenter creates one uniquely named, unpublished page and deletes it at the end. Attendees follow the demonstration without creating copies.",
+      "For the supporting authoring instructions, open **Liberty Mutual’s GitHub repository** and browse to **docs/resource-page-authoring.md** from the repository root (its top-level folder).",
     ],
-    links: [
-      pageBuilder,
+    links: [pageBuilder],
+    repositoryFiles: [
       {
         label: "Resource page authoring guide",
-        href: `${REPO}/docs/resource-page-authoring.md`,
+        path: "docs/resource-page-authoring.md",
       },
     ],
     steps: [
@@ -964,11 +964,12 @@ export const marketingGuides: WorkshopGuide[] = [
       authorPrerequisite,
       "Follow the presenter in **Campaign practice** for the first two, read-only steps. **UTC** is the common time zone used by these date fields; compare times in UTC rather than your computer’s local time. The final two steps are an optional developer demonstration requiring publication API access, a prepared sample, and agreed UTC start and end times.",
     ],
-    links: [
-      pageBuilder,
+    links: [pageBuilder],
+    repositoryFiles: [
       {
-        label: "Open the bounded scheduling guide",
-        href: `${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise`,
+        label: "Bounded scheduling guide",
+        path: "authoring/CAMPAIGN-AUTHORING.md",
+        section: "Run the bounded publication and expiration exercise",
       },
     ],
     steps: [
@@ -997,16 +998,17 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Prepare the optional scheduled-publication demonstration",
         action: [
-          `For the optional timed demonstration, follow the developer’s screen. That developer prepares **campaign-schedule-check** using [**the scheduling guide**](${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise). Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.`,
+          "For the optional timed demonstration, follow the developer’s screen. That developer opens **Liberty Mutual’s GitHub repository**, browses to **authoring/CAMPAIGN-AUTHORING.md** from the repository root (its top-level folder), and follows **Run the bounded publication and expiration exercise** to prepare **campaign-schedule-check**. Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.",
           "Record the page URL and UTC start and end times supplied by the developer. The developer verifies the **English** page and its local content are initially absent from **Live Experience Edge**, establishing the before-publication baseline.",
         ],
         expected: [
           "The scheduling example uses a dedicated page and matching publishing-availability dates for its content, keeping the exercise scoped to that page.",
         ],
-        links: [
+        repositoryFiles: [
           {
             label: "Scheduling procedure and cleanup",
-            href: `${REPO}/authoring/CAMPAIGN-AUTHORING.md#run-the-bounded-publication-and-expiration-exercise`,
+            path: "authoring/CAMPAIGN-AUTHORING.md",
+            section: "Run the bounded publication and expiration exercise",
           },
         ],
       },
