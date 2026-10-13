@@ -43,6 +43,8 @@ The three datasource seeds under `Data/ProductSpotlight` are:
 | `workers_compensation` | Build a stronger workers compensation conversation | `/resources/build-a-bop-submission` — “Review account preparation” |
 | `household` | Make the next household renewal conversation count | `/resources/prepare-a-household-renewal` — “Review the household renewal checklist” |
 
+These are the original seed headlines. Authors can change the published default spotlight without changing affinity rules; compare a no-affinity profile with the currently authored default content rather than requiring the seed wording.
+
 Seeds start in workflow Draft. All three native datasources have now been approved through the verified datasource workflow and published; both topic variants map to these existing items. Approval, publication and decision mapping remain separate operations when reproducing the setup. The workers-compensation CTA currently leads to the general account-preparation resource shown above; it should not be described as a dedicated workers-compensation checklist.
 
 ## Saved native affinity assignments
