@@ -75,31 +75,44 @@ export async function waitForPortalProfileLink(
   const timeout = setTimeout(() => controller.abort(), budget);
   const withinDeadline = () => !controller.signal.aborted && now() < deadline;
   try {
-    const baseline = await abortable(
-      () => operations.readProfileRef(controller.signal),
-      controller.signal,
-    );
-    if (!baseline || !withinDeadline()) return false;
-    const receipt = await abortable(
-      () => operations.identify(controller.signal),
-      controller.signal,
-    );
-    if (!receipt || !withinDeadline()) return false;
+    // A newly created browser may not be readable immediately. Transient reads
+    // consume this same deadline; they must not prevent the one IDENTITY event.
+    let baseline: string | null = null;
     let attempt = 0;
-    while (withinDeadline()) {
-      const current = await abortable(
-        () => operations.readProfileRef(controller.signal),
-        controller.signal,
-      );
-      if (!current || !withinDeadline()) return false;
-      if (current !== baseline) return true;
+    const waitForNextRead = async () => {
       const remaining = deadline - now();
       const delay = Math.min(
         [200, 350, 500][Math.min(attempt++, 2)],
         remaining,
       );
-      if (delay <= 0) return false;
+      if (delay <= 0 || !withinDeadline()) return false;
       await abortable(() => pause(delay, controller.signal), controller.signal);
+      return withinDeadline();
+    };
+    while (withinDeadline()) {
+      baseline = await abortable(
+        () => operations.readProfileRef(controller.signal),
+        controller.signal,
+      );
+      if (!withinDeadline()) return false;
+      if (baseline) break;
+      if (!(await waitForNextRead())) return false;
+    }
+    if (!baseline) return false;
+    const receipt = await abortable(
+      () => operations.identify(controller.signal),
+      controller.signal,
+    );
+    if (!receipt || !withinDeadline()) return false;
+    attempt = 0;
+    while (withinDeadline()) {
+      const current = await abortable(
+        () => operations.readProfileRef(controller.signal),
+        controller.signal,
+      );
+      if (!withinDeadline()) return false;
+      if (current && current !== baseline) return true;
+      if (!(await waitForNextRead())) return false;
     }
     return false;
   } catch {
@@ -143,15 +156,26 @@ export async function readPortalBrowserProfileRef(
     if (!response.ok) return null;
     const body: unknown = await response.json();
     // The response must describe this browser, never a stale or mismatched identity.
-    if (signal.aborted || !body || typeof body !== "object" ||
-        !("ref" in body) || body.ref !== browser.browserId || !("customer" in body)) return null;
+    if (
+      signal.aborted ||
+      !body ||
+      typeof body !== "object" ||
+      !("ref" in body) ||
+      body.ref !== browser.browserId ||
+      !("customer" in body)
+    )
+      return null;
     const customer = body.customer;
     if (!customer || typeof customer !== "object" || !("ref" in customer))
       return null;
     // Native refs are opaque; do not confuse them with imported external identity IDs.
-    return typeof customer.ref === "string" && customer.ref.length > 0 &&
-      customer.ref.length <= 200 && customer.ref.trim() === customer.ref &&
-      !/[\u0000-\u001f\u007f]/.test(customer.ref) ? customer.ref : null;
+    return typeof customer.ref === "string" &&
+      customer.ref.length > 0 &&
+      customer.ref.length <= 200 &&
+      customer.ref.trim() === customer.ref &&
+      !/[\u0000-\u001f\u007f]/.test(customer.ref)
+      ? customer.ref
+      : null;
   } catch {
     return null;
   }

@@ -16,8 +16,12 @@ const PERSONAS = [
   { label: 'Avery', agent: 'avery', variant: 'principal' },
   { label: 'Jordan', agent: 'jordan', variant: 'producer' },
   { label: 'Maya', agent: 'maya', variant: 'account-manager' },
+  { label: 'Daniel', agent: 'daniel', variant: 'neutral' },
+  { label: 'Priya', agent: 'priya', variant: 'neutral' },
+  { label: 'Marcus', agent: 'marcus', variant: 'neutral' },
   { label: 'Elena', agent: 'elena', variant: 'neutral' },
 ];
+const DEFAULT_PERSONAS = ['avery', 'jordan', 'maya', 'elena'];
 const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36';
 const { reviewerPacks } = JSON.parse(await readFile(new URL('../fixtures/manifest.json', import.meta.url), 'utf8'));
 const HELP = `Native personalization acceptance (no network without explicit arguments)
@@ -27,12 +31,17 @@ const HELP = `Native personalization acceptance (no network without explicit arg
   node --import tsx scripts/verify-native-personalization.mjs --self-test
 
 Configured reviewer packs: ${reviewerPacks.join(', ')}
+Optional persona selection: --personas <comma-separated-agent-ids|all>
+Known agent IDs: ${PERSONAS.map((persona) => persona.agent).join(', ')}
+Default agent IDs: ${DEFAULT_PERSONAS.join(', ')}
 
 Allowed remote origins:
 ${[...HOSTS].map((host) => `  https://${host}`).join('\n')}
 
 Uses the private fixtures/portal-logins.json file. Does not print credentials,
-cookies, response bodies, or identifiers. Does not reset saved work or profiles.
+cookies, raw response bodies, or identifiers. Headline mismatches print only
+bounded authored guidance text and the serialized expectation; they never alter
+the expectation. Does not reset saved work or profiles.
 The public context must match the compiled deployment; master IDs are rejected.
 Reproduces login's public browser/IDENTITY/profile-link sequence. Two workspace
 requests are strict separate assertions, never decision retries.
@@ -41,13 +50,22 @@ to 10 seconds, makes no workspace/decision requests, and does not change or pass
 the strict six-second acceptance gate. Prints only statuses, timings, and safe
 cache-control/age/x-cache metadata; preserves all previous acceptance results.`;
 
+function selectPersonas(value) {
+  const selected = value === undefined ? [...DEFAULT_PERSONAS] : value === 'all'
+    ? PERSONAS.map((persona) => persona.agent)
+    : value.split(',').map((agent) => agent.trim());
+  if (!selected.length || new Set(selected).size !== selected.length ||
+      selected.some((agent) => !PERSONAS.some((persona) => persona.agent === agent))) throw new Error('ARGUMENTS');
+  return selected;
+}
+
 function options(args) {
   const result = {};
   for (let index = 0; index < args.length; index++) {
     const key = args[index];
     if (key === '--allow-localhost') result.local = true;
     else if (key === '--measure-link') result.measureLink = true;
-    else if (['--origin', '--pack', '--public-context'].includes(key) && args[index + 1] && !args[index + 1].startsWith('--')) {
+    else if (['--origin', '--pack', '--public-context', '--personas'].includes(key) && args[index + 1] && !args[index + 1].startsWith('--')) {
       if (result[key.slice(2)]) throw new Error('ARGUMENTS');
       result[key.slice(2)] = args[++index];
     } else throw new Error('ARGUMENTS');
@@ -58,7 +76,8 @@ function options(args) {
   const remote = url.protocol === 'https:' && !url.port && HOSTS.has(url.hostname);
   const local = result.local === true && url.hostname === 'localhost' && ['http:', 'https:'].includes(url.protocol);
   if (!remote && !local) throw new Error('ARGUMENTS');
-  return { origin: url.origin, pack: result.pack, publicContext: result['public-context'], measureLink: result.measureLink === true };
+  return { origin: url.origin, pack: result.pack, publicContext: result['public-context'], measureLink: result.measureLink === true,
+    personas: selectPersonas(result.personas) };
 }
 
 function decodeText(value) {
@@ -138,6 +157,17 @@ function renderedGuidanceHeadlines(html) {
   }
   if (stack.some((element) => element.heading)) throw new Error('MARKUP');
   return headlines;
+}
+
+// Public editorial text only: never print the document, payloads or identifiers.
+function headlineDiagnostic(expected, observed) {
+  const bounded = (value) => {
+    const clean = value.replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029]/g, ' ').replace(/\s+/g, ' ').trim();
+    return clean.length > 240 ? `${clean.slice(0, 240)}…` : clean;
+  };
+  const actual = observed === undefined ? '[unavailable: invalid markup]' :
+    `${JSON.stringify(observed.slice(0, 3).map(bounded))}${observed.length > 3 ? ` (${observed.length} total)` : ''}`;
+  return `expected serialized headline ${JSON.stringify(bounded(expected))} | observed guidance headlines ${actual}`;
 }
 
 class MemoryCookies {
@@ -235,9 +265,11 @@ async function request(origin, path, jar, body, content = 'none') {
   }
 }
 
-async function expectations(pack) {
+async function expectations(pack, selected = DEFAULT_PERSONAS) {
   const source = JSON.parse(await readFile(new URL('../fixtures/portal-logins.json', import.meta.url), 'utf8'));
-  return Promise.all(PERSONAS.map(async (persona) => {
+  return Promise.all(selected.map(async (agent) => {
+    const persona = PERSONAS.find((entry) => entry.agent === agent);
+    if (!persona) throw new Error('FIXTURES');
     const logins = source.logins.filter((login) => login.agentId === persona.agent && login.reviewerPack === pack && login.enabled === true);
     if (logins.length !== 1 || typeof logins[0].username !== 'string' || typeof logins[0].password !== 'string') throw new Error('FIXTURES');
     const seed = await readFile(new URL(`../../../authoring/items/liberty-mutual/items/content/LibertyMutual/liberty-mutual-agent-portal/Data/Guidance/commercial-growth-${persona.variant}.yml`, import.meta.url), 'utf8');
@@ -300,7 +332,7 @@ async function linkNativeBrowser(config, verifiedIdentity, jar, label, report) {
       return ref;
     },
     identify: async (signal) => {
-      // Exact documented identity payload, sourced only from authenticated bootstrap.
+      // Exact documented identity payload, sourced only from authenticated login identity.
       identityReceipt = await nativeRequest(config, '/v1/events/v1.2/events?siteId=liberty-mutual-agent-portal', {
         type: 'IDENTITY', identifiers: [verifiedIdentity], browser_id: browserId,
         channel: 'WEB', client_key: '', currency: 'USD', language: 'EN',
@@ -315,7 +347,7 @@ async function linkNativeBrowser(config, verifiedIdentity, jar, label, report) {
 }
 
 async function acceptance(config) {
-  const personas = await expectations(config.pack); // Validate local inputs before any network operation.
+  const personas = await expectations(config.pack, config.personas); // Validate local inputs before any network operation.
   config.sdk = await installedSdkMetadata();
   let failures = 0;
   const report = (label, step, result, match) => {
@@ -333,12 +365,12 @@ async function acceptance(config) {
       const authenticated = login.ok && login.status === 200 && jar.hasProtectedSession(config.origin);
       report(persona.label, 'login and protected session', login, authenticated);
       if (authenticated) {
-        const bootstrap = await request(config.origin, '/api/portal/bootstrap', jar, undefined, 'json');
+        const bootstrap = await request(config.origin, '/api/portal/identity', jar, undefined, 'json');
         const verifiedIdentity = bootstrap.json?.udlIdentity;
         const hasVerifiedIdentity = bootstrap.status === 200 && bootstrap.ok &&
           verifiedIdentity?.provider === 'liberty-mutual-agent' &&
           typeof verifiedIdentity.id === 'string' && verifiedIdentity.id.length > 0;
-        report(persona.label, 'authenticated bootstrap identity', bootstrap, hasVerifiedIdentity);
+        report(persona.label, 'authenticated login identity', bootstrap, hasVerifiedIdentity);
         if (hasVerifiedIdentity) {
           await linkNativeBrowser(config, { provider: verifiedIdentity.provider, id: verifiedIdentity.id }, jar, persona.label, report);
         }
@@ -346,11 +378,13 @@ async function acceptance(config) {
         for (const step of ['firstMatched', 'secondMatched']) {
           const page = await request(config.origin, '/', jar, undefined, 'html');
           let match = false;
+          let headlines;
           try {
-            const headlines = renderedGuidanceHeadlines(page.html);
+            headlines = renderedGuidanceHeadlines(page.html);
             match = page.ok && page.status === 200 && headlines.length === 1 && headlines[0] === persona.headline;
           } catch { /* A malformed or ambiguous document fails closed. */ }
           report(persona.label, step, page, match);
+          if (!match) console.log(`${persona.label} | ${step} | ${headlineDiagnostic(persona.headline, headlines)}`);
         }
       }
     } finally {
@@ -436,7 +470,7 @@ async function measureBrowserLink(config, verifiedIdentity, jar, label) {
 }
 
 async function measureLinks(config) {
-  const personas = await expectations(config.pack);
+  const personas = await expectations(config.pack, config.personas);
   config.sdk = await installedSdkMetadata();
   let failures = 0;
   console.log('Link measurement only. No workspace/decision requests. Strict acceptance remains unchanged.');
@@ -447,10 +481,10 @@ async function measureLinks(config) {
       const authenticated = login.ok && login.status === 200 && jar.hasProtectedSession(config.origin);
       console.log(`${persona.label} | login | HTTP ${login.status || 'unavailable'} | ${login.ms} ms`);
       if (!authenticated) { failures++; continue; }
-      const bootstrap = await request(config.origin, '/api/portal/bootstrap', jar, undefined, 'json');
+      const bootstrap = await request(config.origin, '/api/portal/identity', jar, undefined, 'json');
       const identity = bootstrap.json?.udlIdentity;
       const verified = bootstrap.ok && bootstrap.status === 200 && identity?.provider === 'liberty-mutual-agent' && typeof identity.id === 'string' && identity.id.length > 0;
-      console.log(`${persona.label} | authenticated bootstrap | HTTP ${bootstrap.status || 'unavailable'} | ${bootstrap.ms} ms`);
+      console.log(`${persona.label} | authenticated login identity | HTTP ${bootstrap.status || 'unavailable'} | ${bootstrap.ms} ms`);
       if (!verified) { failures++; continue; }
       const linked = await measureBrowserLink(config, { provider: identity.provider, id: identity.id }, jar, persona.label);
       if (!linked) failures++;
@@ -459,8 +493,8 @@ async function measureLinks(config) {
       console.log(`${persona.label} | logout | HTTP ${logout.status || 'unavailable'} | ${logout.ms} ms`);
       if (!logout.ok || logout.status !== 200) failures++;
       // An API check proves sign-out without triggering a page personalization decision.
-      const anonymous = await request(config.origin, '/api/portal/bootstrap', jar);
-      console.log(`${persona.label} | signed-out bootstrap | HTTP ${anonymous.status || 'unavailable'} | ${anonymous.ms} ms`);
+      const anonymous = await request(config.origin, '/api/portal/identity', jar);
+      console.log(`${persona.label} | signed-out identity | HTTP ${anonymous.status || 'unavailable'} | ${anonymous.ms} ms`);
       if (!anonymous.ok || anonymous.status !== 401) failures++;
       jar.clear();
     }
@@ -489,13 +523,34 @@ async function selfTest() {
   assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs]).pack, '04');
   assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs, '--measure-link']).measureLink, true);
   assert.equal(options(['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs]).measureLink, false);
+  const localArgs = ['--origin', 'http://localhost:3000', '--pack', '04', '--allow-localhost', ...publicArgs];
+  assert.deepEqual(options(localArgs).personas, DEFAULT_PERSONAS);
+  assert.deepEqual(options([...localArgs, '--personas', 'all']).personas, PERSONAS.map((persona) => persona.agent));
+  assert.deepEqual(options([...localArgs, '--personas', 'elena, daniel']).personas, ['elena', 'daniel']);
+  for (const selected of ['', 'ALL', 'avery,', 'avery,avery', 'avery,unknown', 'avery,all']) {
+    assert.throws(() => options([...localArgs, '--personas', selected]));
+  }
+  assert.throws(() => options([...localArgs, '--personas', 'elena', '--personas', 'maya']));
+  assert.equal(headlineDiagnostic('Expected headline', ['Observed\nheadline']),
+    'expected serialized headline "Expected headline" | observed guidance headlines ["Observed headline"]');
+  assert.equal(headlineDiagnostic('Expected', undefined),
+    'expected serialized headline "Expected" | observed guidance headlines [unavailable: invalid markup]');
+  assert.ok(headlineDiagnostic('Expected', ['x'.repeat(1000)]).includes(`${'x'.repeat(240)}…`));
+  assert.ok(!headlineDiagnostic('Expected', ['x'.repeat(1000)]).includes('x'.repeat(241)));
+  assert.ok(headlineDiagnostic('Expected', ['one', 'two', 'three', 'four']).endsWith('["one","two","three"] (4 total)'));
   for (const pack of reviewerPacks) {
     assert.equal(options(['--origin', 'http://localhost:3000', '--pack', pack, '--allow-localhost', ...publicArgs]).pack, pack);
     const fixtures = await expectations(pack);
     assert.equal(fixtures.length, 4, `Native personalization fixtures are missing for pack ${pack}.`);
     assert.equal(new Set(fixtures.map((fixture) => fixture.headline)).size, 4);
+    const allFixtures = await expectations(pack, selectPersonas('all'));
+    assert.equal(allFixtures.length, 7, `Seven-persona fixtures are missing for pack ${pack}.`);
+    assert.equal(new Set(allFixtures.map((fixture) => fixture.headline)).size, 4);
+    assert.ok(allFixtures.filter((fixture) => ['daniel', 'priya', 'marcus', 'elena'].includes(fixture.agent))
+      .every((fixture) => fixture.variant === 'neutral' && fixture.headline === fixtures.find((fixture) => fixture.agent === 'elena').headline));
   }
-  for (const pack of ['00', '1', '16', '99', 'all', '']) {
+  const nextUnconfiguredPack = String(Math.max(...reviewerPacks.map(Number)) + 1).padStart(2, '0');
+  for (const pack of ['00', '1', nextUnconfiguredPack, 'all', '']) {
     assert.throws(() => options(['--origin', 'http://localhost:3000', '--pack', pack, '--allow-localhost', ...publicArgs]));
   }
   assert.equal(safeCacheMetadata(new Headers({ 'cache-control': 'no-cache, no-store', age: '0', 'x-cache': 'Miss from cloudfront', 'set-cookie': 'must-not-appear' })), 'cache-control=no-cache, no-store | age=0 | x-cache=Miss from cloudfront');

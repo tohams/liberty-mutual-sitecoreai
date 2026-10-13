@@ -63,7 +63,7 @@ The insurance records, premium figures, authority records and operational action
 | Avery | Build your next chapter in small business |
 | Jordan | Bring a stronger submission to the table |
 | Maya | Connect everyday conversations to new needs |
-| Elena | Resources for your next client conversation |
+| Elena | Resources for your next client conversations |
 
 **Explain:** “One agency opportunity can produce different next steps for its principal, producer and account manager.” Native UDL identity and decisioning select CMS content. The agency growth cohort is a seeded attribute; the display is not calculating a new live segment from a policy system. Marketing attributes never grant transaction permissions.
 

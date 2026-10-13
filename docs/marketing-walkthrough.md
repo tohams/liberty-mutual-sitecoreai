@@ -21,7 +21,7 @@ Return to **My workspace** and find the **Agency growth** card below **Your prio
 | Avery Brooks | Principal: **Build your next chapter in small business** | Explore the agency growth learning path |
 | Jordan Ellis | Small commercial producer: **Bring a stronger submission to the table** | Read the BOP preparation checklist, then inspect **Quote & submit** |
 | Maya Chen | Personal lines account manager: **Connect everyday conversations to new needs** | Learn discovery questions and involve the appropriate teammate |
-| Elena Park | Wholesale broker outside the growth cohort: **Resources for your next client conversation** | Browse relevant resources without the small-business campaign |
+| Elena Park | Wholesale broker outside the growth cohort: **Resources for your next client conversations** | Browse relevant resources without the small-business campaign |
 
 Avery, Jordan and Maya belong to the same agency but have different responsibilities. Their operational views also reflect server-enforced role and specialty scope. **The native campaign changes guidance; it does not grant access to policies or submission actions.** Neutral guidance is also the fallback when native identity or decisioning is unavailable. Record an unexpected neutral result during the positive-persona checks rather than presenting it as successful targeting.
 
