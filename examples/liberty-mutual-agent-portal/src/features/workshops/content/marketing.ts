@@ -250,11 +250,11 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "See guidance for a wholesale broker",
         action: [
-          "On **My workspace**, scroll below **Your priorities** to the **Agency growth** card. Read the headline **Resources for your next client conversation**, then click **Browse resources** in the same card.",
+          "On **My workspace**, scroll below **Your priorities** to the **Agency growth** card. Read the headline **Resources for your next client conversations**, then click **Browse resources** in the same card.",
           "Click **Elena Park** in the upper right to open **Your profile**. Inspect **Distribution channel** and **Licensed states**.",
         ],
         expected: [
-          "**Summit Specialty** receives **Resources for your next client conversation** and opens **Learning & resources**, providing a broad resource starting point for Elena.",
+          "**Summit Specialty** receives **Resources for your next client conversations** and opens **Learning & resources**, providing a broad resource starting point for Elena.",
           "The profile shows **Wholesale** and Illinois, Texas, and Florida. Compare those attributes with the roles and guidance you saw for Avery, Jordan, and Maya.",
         ],
       },
