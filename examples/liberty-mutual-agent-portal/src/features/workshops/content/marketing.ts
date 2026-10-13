@@ -1242,7 +1242,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Record the displayed headline and compare it with Daniel’s starting **Top affinities**.",
         ],
         expected: [
-          "An unused no-affinity profile shows **Protection built around the business you know**. Existing history may already show workers-compensation guidance.",
+          "An unused no-affinity profile shows the currently authored default spotlight. Its wording can change through content editing. Existing history may already show workers-compensation guidance.",
         ],
       },
       {
@@ -1290,7 +1290,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The checklist opens the household-renewal resource with **state=TX** in its URL and can add another tagged visit to Maya’s profile.",
-          "With no recorded affinity, Elena sees **Protection built around the business you know**. Each agent’s profile reflects that agent’s own browsing.",
+          "With no recorded affinity, Elena sees the currently authored default spotlight. Each agent’s profile reflects that agent’s own browsing.",
         ],
       },
       {
