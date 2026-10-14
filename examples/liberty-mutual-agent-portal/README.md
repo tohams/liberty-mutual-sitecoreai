@@ -17,6 +17,10 @@ The setup helper creates `.env.local` with this POC’s Preview server context, 
 
 In **Chrome**, open **Page Builder**, select **Local host**, enter `http://localhost:3000` and click **Save**. The canvas renders shared Preview content with your local code. Keep Redis credentials absent from all local environment files and the terminal. The helper generates independent session/operator secrets, a unique namespace and local JSON state, with portal tracking disabled. In a separate ordinary browser tab, open http://localhost:3000/login and sign in as `daniel.01` with password `Sitecore` to test Search; its controls are intentionally disabled in the editor. Return Page Builder to **Default editing host** when finished. No attendee Vercel access or deployment is needed. The [authentication and data guide](docs/auth-and-data.md) covers operational state and resets; a production runtime requires Redis and cannot use the local JSON adapter.
 
+### Test visitor personalization locally
+
+Follow [the local production personalization guide](tools/local-personalization/README.txt) to run `npm run build` and `npm run start` with tracking enabled, trusted localhost HTTPS, and an isolated local workspace service. The tools are included in the repository; no additional patch, download, Vercel credentials, or hosted Redis credentials are needed. Use the normal browser at `https://localhost:3000/login`. Content, profile linking, and personalization remain native SitecoreAI calls, while saved portal work stays local. This testing mode is separate from the Page Builder component-edit workflow above.
+
 ## Verify changes
 
 ```bash
