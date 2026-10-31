@@ -268,7 +268,7 @@ export const developmentGuides: WorkshopGuide[] = [
         action: [
           "Run npm run dev in the application terminal and leave it running. Wait for **Ready** and confirm its **Local** address uses port 3000 before opening the [**local portal login**](http://localhost:3000/login).",
           "**Sign in** as **daniel.01** with password **password**. Each separate local checkout may reuse this login because its saved-work files are isolated.",
-          "Select **Learning & resources**. Find **What can we help you find?** and the **My licensed states** default.",
+          "Select **Learning & resources**. Locate the heading **Find guidance for your next client conversation** and the **My licensed states** default.",
         ],
         code: "npm run dev",
         links: [
@@ -290,7 +290,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "An **editing host** is the frontend used to draw Page Builder’s page preview, called the **canvas**. Selecting **Local host** makes that preview use your code at localhost, while the content remains in the shared SitecoreAI environment.",
           `In **Chrome** on the machine running npm run dev, open [**Page Builder**](${pageBuilder}). Sign in with your invited Sitecore Cloud email, confirm **Safeco Insurance Company of America POC**, and select **Liberty Mutual Agent Portal**. Your GitHub and Daniel logins are not authoring accounts.`,
           "Open **Default editing host**, select **Local host**, enter **http://localhost:3000** in **Enter the editing host url**, and click **Save**. Keep npm run dev running on this same machine.",
-          "Select **Pages**, expand **Home**, and select **Learning & resources**. Find **What can we help you find?**, the heading of the **Search** component, on the canvas. This confirms that the editor can reach the local frontend before you change its code.",
+          "Select **Pages**, expand **Home**, and select **Learning & resources**. Locate **Find guidance for your next client conversation**, the heading of the **Search** component, on the canvas. This confirms that the editor can reach the local frontend before you change its code.",
         ],
         links: [{ label: "Open Page Builder", href: pageBuilder }],
         expected: [
@@ -343,7 +343,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Record the canvas and functional Search baseline",
         action: [
           "Open the [**local portal login**](http://localhost:3000/login), sign in as **daniel.01** with password **password**, and select **Learning & resources** in the left navigation. Record a baseline so you can distinguish your text change from any unintended change to Search behavior.",
-          "Confirm the heading **What can we help you find?** Enter workers compensation and click **Search**.",
+          "Confirm the heading **Find guidance for your next client conversation**. Enter workers compensation and click **Search**.",
           "Keep **My licensed states** selected in **Risk state** and record the Illinois, Texas, and nationwide result titles you see. In the separate Page Builder tab, select **Pages** → **Home** → **Learning & resources**, keep **Local host** selected, and confirm the same starting heading.",
         ],
         expected: [
@@ -354,9 +354,9 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Find the code-owned heading",
         action: [
           "In the root **Explorer**, expand **examples** → **liberty-mutual-agent-portal** → **src** → **components** → **resource-search**, then open **ResourceSearch.tsx**.",
-          "Use the editor’s **Find** command to search for **What can we help you find?** The matching h2 should match the example below. Inspect the surrounding **useSearch** integration without changing hooks, filters, fields, or registration.",
+          "Use the editor’s **Find** command to search for **Find guidance for your next client conversation**. The matching h2 should match the example below. Inspect the surrounding **useSearch** integration without changing hooks, filters, fields, or registration.",
         ],
-        code: "<h2>What can we help you find?</h2>",
+        code: "<h2>Find guidance for your next client conversation</h2>",
         expected: [
           "The heading is literal React text, so a developer changes it in this file. Resource article titles, summaries, and bodies are content fields maintained by authors in **SitecoreAI**. Recognizing that ownership tells you whether a change requires a code release or content publication.",
         ],
@@ -364,12 +364,12 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Change only the heading and save",
         action: [
-          "Replace only the text inside the existing h2 with **Find guidance for your next client conversation**. Preserve the element and surrounding code.",
+          "Replace only the text inside the existing h2 with **Find the right resource for your next conversation**. Preserve the element and surrounding code.",
           "Save the file and return to the **Page Builder** canvas for **Learning & resources**, keeping **Local host** selected.",
         ],
-        code: "<h2>Find guidance for your next client conversation</h2>",
+        code: "<h2>Find the right resource for your next conversation</h2>",
         expected: [
-          "The canvas displays **Find guidance for your next client conversation** from your local React code. If the original heading remains, confirm the file is saved, check the dev terminal for compile errors, and confirm **Local host** is selected; then click **Reload canvas**.",
+          "The canvas displays **Find the right resource for your next conversation** from your local React code. If the original heading remains, confirm the file is saved, check the dev terminal for compile errors, and confirm **Local host** is selected; then click **Reload canvas**.",
         ],
         note: "**What to notice:** Your **React** edit appears in **Page Builder** through **Local host**, with content still hosted in **SitecoreAI**. Your code change stays local; CMS content remains shared, so leave content fields unchanged during this exercise.",
       },
@@ -400,14 +400,14 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Restore only your exercise edit",
         action: [
-          "Review the diff. If this file contains only the uncommitted workshop edit, run the following restore command. If it also contains other work, manually restore only this heading instead.",
+          "Review the diff. If this file contains only the uncommitted workshop edit, run the following restore command. If it also contains other work, manually restore only the heading to **Find guidance for your next client conversation** instead.",
           "Restart npm run dev. In **Learning & resources**, click **Clear filters** if it is shown, erase the query text, then click **Search**.",
-          "Confirm the original heading and default licensed-state resource view. In **Page Builder**, confirm the original heading on **Local host**, then select **Default editing host** and click **Save**. Use **Daniel Ortiz** → **Sign out** in the localhost portal, then stop dev with Ctrl+C.",
+          "Confirm **Find guidance for your next client conversation** and the default licensed-state resource view. In **Page Builder**, confirm the same restored heading on **Local host**, then select **Default editing host** and click **Save**. Use **Daniel Ortiz** → **Sign out** in the localhost portal, then stop dev with Ctrl+C.",
           "Run npm run build once more with dev stopped to return generated metadata to the build state. Leave generated **next-env.d.ts** changes out of a commit.",
         ],
         code: "git restore -- src/components/resource-search/ResourceSearch.tsx\nnpm run dev",
         expected: [
-          "The original heading returns. **Clear filters** appears only when facets or Risk state differ from their defaults; it does not erase the typed query. Default filters and an empty query restore the baseline view. Only the intended exercise file was restored.",
+          "The heading **Find guidance for your next client conversation** returns. **Clear filters** appears only when facets or Risk state differ from their defaults; it does not erase the typed query. Default filters and an empty query restore the baseline view. Only the intended exercise file was restored.",
         ],
       },
     ],
