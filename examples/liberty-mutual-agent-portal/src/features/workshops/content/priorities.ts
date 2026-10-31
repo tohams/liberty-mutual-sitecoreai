@@ -25,7 +25,7 @@ export const workshopSections = {
   content: {
     label: "Create and manage content in SitecoreAI",
     description:
-      "SitecoreAI is where Liberty Mutual’s team manages the pages, content, and rules that shape the agent experience. Use your separate SitecoreAI account to edit your assigned Practice page and its local content in the hands-on guides. A guide marked Presenter demonstration asks you to watch the presenters make a shared change. Keep your practice page unpublished and follow its cleanup steps.",
+      "SitecoreAI manages the pages, content, and rules that shape the agent experience. Use your authorized SitecoreAI account for these guides. CMS pages and settings are shared, so follow the presenter for shared changes, record starting values, and complete each guide’s cleanup.",
     location: "SitecoreAI · separate Sitecore login",
     kind: "core",
   },
@@ -105,12 +105,6 @@ export const guidePriorities: Record<string, GuideFocusDefinition> = {
     relevance:
       "See how a form created in **SitecoreAI Forms** collects an agent’s request and sends it to another service. The workshop’s **Demo Webhook** is a receiving URL, and its receipt inbox lets you inspect the submitted data. Saving that data in a business database or creating a **Salesforce** record would require an integration with that system.",
   },
-  "author-approver-workflow": {
-    priority: "publishing",
-    section: "content",
-    relevance:
-      "A publishing workflow is a sequence of review states that controls when new wording reaches agents. Watch an **Author** prepare a page and an **Approver** review it in **Page Builder**, SitecoreAI’s visual page-editing tool. Page permissions control where each person can work; workflow permissions control the review actions available to that person.",
-  },
   "resource-content-workflow": {
     priority: "publishing",
     section: "content",
@@ -122,24 +116,6 @@ export const guidePriorities: Record<string, GuideFocusDefinition> = {
     section: "content",
     relevance:
       "Create a resource page from a prepared starting structure so its fields and layout are already in place. Select an image from the **Modern Media Library**, where the team manages reusable media, and inspect its alternative text, the description used when an image cannot be seen. This connects easier page creation with consistent content and media organization.",
-  },
-  "campaign-composition": {
-    priority: "creation",
-    section: "content",
-    relevance:
-      "A component is one section of a page, such as a heading or a content card. On your assigned **Practice** page, edit a heading, add an accordion, move it, and remove it in **Page Builder**. Check which components each area allows. This demonstrates how a marketer can compose a page within native rules without changing or deploying website code.",
-  },
-  "ai-assisted-authoring": {
-    priority: "creation",
-    section: "content",
-    relevance:
-      "Use AI assistance on your assigned **Practice** page’s content to correct spelling or suggest wording. Compare the suggestion with the original copy before choosing whether to accept it. This shows how the tools can speed content preparation while the marketer remains responsible for the final wording.",
-  },
-  "alert-dates-and-publication": {
-    priority: "publishing",
-    section: "content",
-    relevance:
-      "An alert is a message displayed to agents on a page. Inspect its formatted text and the dates that this portal’s custom alert component uses to decide when to display it. Compare that behavior with SitecoreAI publishing controls: hiding a message by date and publishing or expiring a page are different operations.",
   },
   "find-an-agent-profile": {
     priority: "relevance",
@@ -242,11 +218,7 @@ const walkthroughOrder = [
   "affinity-personalization",
   "campaign-and-conversation",
   "create-resource-and-media",
-  "campaign-composition",
-  "ai-assisted-authoring",
-  "author-approver-workflow",
   "resource-content-workflow",
-  "alert-dates-and-publication",
   "calculated-growth-personalization",
   "ab-testing",
   "native-contact-form",

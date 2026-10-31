@@ -26,32 +26,32 @@ export default async function WorkshopAttendeesPage() {
           <span className="workshop-eyebrow">YOUR WORKSHOP ACCOUNTS</span>
           <h1>Your workshop number and agent logins</h1>
           <p>
-            Each attendee receives seven fictional agent accounts, with
+            Each workshop number provides seven fictional agent accounts, with
             different roles, licenses, and business histories. The guides call
             these agents <strong>personas</strong> and tell you which one to use
             for each exercise. Your workshop number is the part after the dot in
             every username; keeping it the same separates your activity from
-            other attendees’ activity. Number <strong>01</strong> is reserved
-            for the workshop presenters.
+            other testers’ activity. Use number <strong>01</strong> for Sitecore
+            demonstrations; <strong>02–20</strong> are unassigned test numbers.
           </p>
         </header>
         <div className="workshop-attendees-layout">
           <section aria-labelledby="workshop-roster-heading">
             <h2 id="workshop-roster-heading">Find your workshop number</h2>
             <p className="workshop-attendees-caption">
-              The highlighted row matches your current workshop sign-in. If your
-              name is missing, ask the Sitecore workshop team to assign one of
-              the unassigned numbers before beginning. This avoids two attendees
-              changing the same portal workspace.
+              The highlighted row matches your current sign-in. For parallel
+              testing, agree on a separate unassigned number for each tester,
+              then sign in with a username ending in that number. This keeps
+              portal work and browsing histories separate.
             </p>
             <table className="workshop-attendees-table">
               <caption className="sr-only">
-                Workshop attendees and their assigned workshop numbers
+                Demonstration account numbers and their use
               </caption>
               <thead>
                 <tr>
                   <th scope="col">Number</th>
-                  <th scope="col">Attendee</th>
+                  <th scope="col">Use</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,7 +95,7 @@ export default async function WorkshopAttendeesPage() {
               </h2>
               <p>
                 When a walkthrough names an agent, use that agent’s username
-                from this list. Every account assigned to you ends in{" "}
+                from this list. Every account for this number ends in{" "}
                 <strong>.{session.reviewerPack}</strong>:
               </p>
               <ul className="workshop-persona-usernames">
@@ -109,12 +109,12 @@ export default async function WorkshopAttendeesPage() {
                 Portal and workshop password: <strong>password</strong>
               </p>
               <p>
-                If your assigned number differs from the highlighted row, sign
-                out of this guide and sign in with a full portal username ending
-                in your assigned suffix. The examples will then use that number.
-                For example, choose the Daniel username with your number when a
-                guide asks you to inspect Daniel’s experience; changing personas
-                does not change your workshop number.
+                To use another number, sign out of this guide and sign in with a
+                full portal username ending in that suffix. The examples will
+                then use that number. For example, choose the Daniel username
+                with your number when a guide asks you to inspect Daniel’s
+                experience; changing personas does not change your workshop
+                number.
               </p>
             </div>
             <section
@@ -151,19 +151,15 @@ export default async function WorkshopAttendeesPage() {
                 , the visual page editor, and choose the site
                 <strong> Liberty Mutual Agent Portal</strong> (site name:
                 <strong> liberty-mutual-agent-portal</strong>). These names
-                identify this shared customer sandbox. The persona usernames
-                above do not sign into SitecoreAI or grant authoring
+                identify this shared demonstration environment. The persona
+                usernames above do not sign into SitecoreAI or grant authoring
                 permissions.
               </p>
               <p>
                 Guides marked <strong>Presenter demonstration</strong> use
-                shared content. The workshop team makes those changes while
-                attendees observe. For{" "}
-                <strong>Review and publish content</strong>, the presenters use
-                separate <strong>Author</strong> and
-                <strong> Approver</strong> accounts to show who can edit,
-                submit, and approve a page. Attendees do not need a partner or
-                two Sitecore accounts.
+                shared content. One presenter makes those changes while the
+                others observe. Record the starting fields, follow the guide’s
+                cleanup, and verify the restored content before leaving it.
               </p>
               <p>
                 Developer exercises run a copy of the portal’s frontend—the
@@ -174,8 +170,8 @@ export default async function WorkshopAttendeesPage() {
                 edits in <strong>Page Builder</strong> still change the shared
                 content in SitecoreAI.
               </p>
-              <Link href="/workshops/guide/author-approver-workflow">
-                View the publishing workflow demonstration{" "}
+              <Link href="/workshops/guide/resource-content-workflow">
+                View the resource publishing demonstration{" "}
                 <ArrowRight size={16} />
               </Link>
             </section>

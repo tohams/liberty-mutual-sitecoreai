@@ -12,7 +12,7 @@ const STUDIO = `https://agentic-studio-use.sitecorecloud.io/spaces/c7b405d0-efc0
 const FORMS = `https://forms.sitecorecloud.io/design/preview?organization=${ORG}&tenantName=scaipocusem400b-sitecoreai950c-demo4418&entityId=980983421c624d078ccf2fd29e4ae665-use`;
 const receiptInbox: GuideLink = {
   label: "Open the form receipt inbox",
-  href: "https://webhook.site/#!/view/951f9e7b-3dd6-49dc-8fb1-3beda2cc034e",
+  href: "https://webhook.site/#!/view/7ee85ead-8be7-4ffb-bcb1-8836c02dd22f",
 };
 
 const liveLogin: GuideLink = {
@@ -42,16 +42,16 @@ const profileLink: GuideLink = {
 };
 const platformPrerequisite = `**SitecoreAI** is the platform behind the Agent Portal: your team uses it to manage content, personalize experiences, and review engagement. Open [**SitecoreAI**](${SITECORE}) and sign in with the email address that received your **Sitecore Cloud** invitation. This opens **Safeco Insurance Company of America POC** and its **SitecoreAI / Demo** environment. If a step uses **Page Builder**, confirm **Liberty Mutual Agent Portal** is selected there. If access is denied or another organization opens, ask the workshop team to check your invitation; a portal username such as **daniel.01** cannot provide this access.`;
 const authorPrerequisite =
-  "**Page Builder** is SitecoreAI’s page-authoring tool. **Editor** shows the page preview, or canvas; **Content** shows the stored fields and content tree. A **component** is a page section, such as an image or guidance card. Keep **Default editing host** selected so the canvas uses the hosted website. For hands-on content editing, use only your assigned **Practice {{pack}}** page and its local **Data** items. Other content-management-system (**CMS**) pages and settings are shared; follow the presenter when a guide says **Presenter demonstration**. The publishing demonstration uses separate **Author** and **Approver** accounts to show their different permissions.";
+  "**Page Builder** is SitecoreAI’s page-authoring tool. **Editor** shows the page preview, or canvas; **Content** shows the stored fields and content tree. A **component** is a page section, such as an image or guidance card. Keep **Default editing host** selected so the canvas uses the hosted website. Content-management-system (**CMS**) pages and settings are shared. Follow the presenter when a guide says **Presenter demonstration**, record starting values before an edit, and complete the guide’s cleanup before leaving the page. A portal reset does not restore CMS content.";
 const practicePagePrerequisite =
-  "Find your assigned **workshop number** in [**Attendee assignments**](/workshops/attendees). In **Page Builder**, open **Home** > **Practice** > **Practice {{pack}}**. Number **01** is reserved for presenters; attendees use their assigned page from **02–20**. Each page owns a separate **Data** folder, so these exercises keep your page layout and content separate from other numbers. The number does not isolate shared media, component definitions, publishing, or other site settings, and it does not replace your separate SitecoreAI login or grant CMS permissions. If you cannot edit your assigned page and its Data items, ask the workshop team to check your access. Keep this page unpublished and restore your changes when finished; a portal reset does not reset CMS content.";
+  "Find your assigned **workshop number** in [**Demo account numbers**](/workshops/attendees). In **Page Builder**, open **Home** > **Practice** > **Practice {{pack}}**. Number **01** is reserved for presenters; attendees use their assigned page from **02–20**. Each page owns a separate **Data** folder, so these exercises keep your page layout and content separate from other numbers. The number does not isolate shared media, component definitions, publishing, or other site settings, and it does not replace your separate SitecoreAI login or grant CMS permissions. If you cannot edit your assigned page and its Data items, ask the workshop team to check your access. Keep this page unpublished and restore your changes when finished; a portal reset does not reset CMS content.";
 const workshopNumberPrerequisite =
-  "A **persona** is a fictional agent with a defined role, agency, and licenses. Your **workshop number** gives you a set of seven persona logins for the exercises. Find your name and number in [**Attendee assignments**](/workshops/attendees). Use that same number after the dot in every portal username. Number 01 is for presenters; attendees use their listed number from 02–20. If your name is not listed, ask the workshop team for a number before starting. This workshop number also identifies your own **Practice {{pack}}** page and its local **Data** items for the hands-on authoring guides. Sitecore authoring uses a separate invited account. Other pages and site settings are shared; follow the presenter when a guide asks you to observe a shared-content change.";
+  "A **persona** is a fictional agent with a defined role, agency, and licenses. A **workshop number** groups seven persona logins with the same suffix. Use **01** for Sitecore demonstrations. For parallel testing, choose an unassigned number from **02–20** on [**Demo account numbers**](/workshops/attendees), and agree with the other testers to keep each number separate. Use the same number after the dot in every portal username. The number separates portal work and profile histories; CMS pages and settings remain shared. Sitecore authoring uses your separate authorized Sitecore account.";
 const signOut =
   "Click the signed-in person’s name or avatar in the upper right, then **Sign out**. Wait for **Welcome back** before switching to another persona.";
 const persistentWork =
   "Saved work has no automatic expiry. Signing out ends the session but keeps saved work and **SitecoreAI** profile history.";
-const sharedReset = `To keep your new record for review, sign out without resetting. To repeat from the starting data, open [**Transaction preview: Reset a workshop number and current identities**](${previewReset.href}). Sign in to that workshop website if requested, select your number from [**Attendee assignments**](/workshops/attendees) under **Workshop number**, and wait until anyone using that number has finished. Click **Reset workshop {{pack}}**, wait for **Workshop {{pack}} is ready**, and sign in to the portal again. This removes saved changes for all seven personas with that number on the transaction-preview website and activates seven clean SitecoreAI profiles. It does not reset the live portal. Earlier SitecoreAI profiles and test history remain. Authored pages, search content, saved Agentic Studio outputs, and delivered form requests are unchanged.`;
+const sharedReset = `To keep your new record for review, sign out without resetting. To repeat from the starting data, open [**Transaction preview: Reset a workshop number and current identities**](${previewReset.href}). Sign in to that workshop website if requested, select your number from [**Demo account numbers**](/workshops/attendees) under **Workshop number**, and wait until anyone using that number has finished. Click **Reset workshop {{pack}}**, wait for **Workshop {{pack}} is ready**, and sign in to the portal again. This removes saved changes for all seven personas with that number on the transaction-preview website and activates seven clean SitecoreAI profiles. It does not reset the live portal. Earlier SitecoreAI profiles and test history remain. Authored pages, search content, saved Agentic Studio outputs, and delivered form requests are unchanged.`;
 
 const personaNames = {
   avery: "Avery Brooks",
@@ -98,11 +98,11 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     prerequisites: [
       workshopNumberPrerequisite,
-      `The workshop team provides your initial portal sign-in details and any separate **Sitecore Cloud** invitation. After workshop sign-in, [**Attendee assignments**](/workshops/attendees) and [**Reset a workshop number**](${liveReset.href}) require no additional credentials.`,
+      `The workshop team provides your initial portal sign-in details and any separate **Sitecore Cloud** invitation. After workshop sign-in, [**Demo account numbers**](/workshops/attendees) and [**Reset a workshop number**](${liveReset.href}) require no additional credentials.`,
     ],
     links: [
       {
-        label: "Attendee assignments",
+        label: "Demo account numbers",
         href: "https://liberty-mutual-agent-portal.vercel.app/workshops/attendees",
       },
       liveLogin,
@@ -179,7 +179,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         signOut,
-        `This orientation needs no reset: signing out is enough. If you deliberately want a clean start, open [**Live portal: Reset a workshop number and current identities**](${liveReset.href}) for live activity or [**Transaction preview: Reset a workshop number and current identities**](${previewReset.href}) for preview activity. Select your number from [**Attendee assignments**](/workshops/attendees), check that nobody is still using it, and click **Reset workshop** for that number. Wait for **Workshop [selected number] is ready** before signing in again. Reset restores baseline saved work and clean profiles for all seven personas with that number on that website. It leaves the other website and earlier profile/test history unchanged. Authored pages, search content, saved Agentic Studio outputs, and delivered form requests are also unchanged.`,
+        `This orientation needs no reset: signing out is enough. If you deliberately want a clean start, open [**Live portal: Reset a workshop number and current identities**](${liveReset.href}) for live activity or [**Transaction preview: Reset a workshop number and current identities**](${previewReset.href}) for preview activity. Select your number from [**Demo account numbers**](/workshops/attendees), check that nobody is still using it, and click **Reset workshop** for that number. Wait for **Workshop [selected number] is ready** before signing in again. Reset restores baseline saved work and clean profiles for all seven personas with that number on that website. It leaves the other website and earlier profile/test history unchanged. Authored pages, search content, saved Agentic Studio outputs, and delivered form requests are also unchanged.`,
       ],
       links: [liveReset, previewReset],
     },
@@ -529,9 +529,9 @@ export const marketingGuides: WorkshopGuide[] = [
       "The presenter uses **daniel.01** with password **password** for the live-portal checks. Attendees follow that screen while the shared article is edited and restored.",
       platformPrerequisite,
       authorPrerequisite,
-      "Follow the presenter as they edit the shared Texas article. Editing and publishing require access to this resource; **Resource metadata** currently requires organization administrator/owner access. The separate [**Review and publish content**](/workshops/guide/author-approver-workflow) demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
+      "Follow the presenter as they edit the shared Texas article. Editing and publishing require access to this resource; **Resource metadata** currently requires organization administrator/owner access.",
       "A **version** retains a revision of this article in a selected language. A **Draft** can be edited; approval makes it eligible for publication in this configured workflow. **Metadata** describes the article’s state, product, and other classifications used by Search. Complete publication, Search refresh, and restoration so the temporary summary is not left live.",
-      "For the supporting authoring instructions, open **Liberty Mutual’s GitHub repository** and browse to **docs/resource-metadata-authoring.md** from the repository root (its top-level folder).",
+      "For the supporting authoring instructions, open [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai) and browse to **docs/resource-metadata-authoring.md** from the repository root (its top-level folder).",
     ],
     links: [pageBuilder, liveLogin],
     repositoryFiles: [
@@ -620,7 +620,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "Click **Start publish** and wait for completion.",
         ],
         expected: [
-          "This resource uses **Basic Workflow**, which moves directly from **Draft** to **Approved**. The separate **Workshop practice** pages use **Draft** → **Awaiting approval** → **Approved**.",
+          "This resource uses **Basic Workflow**, which moves directly from **Draft** to **Approved**.",
           "Publication sends the approved **English** article to the live portal. Because this exercise changes only the article summary, publish the page with its existing image left unchanged.",
         ],
       },
@@ -687,9 +687,9 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Follow the presenter for this guide. The presenter needs permission to create and delete pages under **Learning & resources**, edit local image content, and use **Modern Media Library**. **Resource metadata** additionally requires organization administrator/owner access. Scoped workshop **Author** and **Approver** roles do not include these permissions.",
+      "Follow the presenter for this guide. The presenter needs permission to create and delete pages under **Learning & resources**, edit local image content, and use **Modern Media Library**. **Resource metadata** additionally requires organization administrator/owner access.",
       "A **page branch** is a prepared starting structure that creates a page and its supporting content together. Here it creates a local **Data** folder containing **Resource image**, the item that stores this page’s image choice. The presenter creates one uniquely named, unpublished page and deletes it at the end. Attendees follow the demonstration without creating copies.",
-      "For the supporting authoring instructions, open **Liberty Mutual’s GitHub repository** and browse to **docs/resource-page-authoring.md** from the repository root (its top-level folder).",
+      "For the supporting authoring instructions, open [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai) and browse to **docs/resource-page-authoring.md** from the repository root (its top-level folder).",
     ],
     links: [pageBuilder],
     repositoryFiles: [
@@ -1003,7 +1003,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Prepare the optional scheduled-publication demonstration",
         action: [
-          "For the optional timed demonstration, follow the developer’s screen. That developer opens **Liberty Mutual’s GitHub repository**, browses to **authoring/CAMPAIGN-AUTHORING.md** from the repository root (its top-level folder), and follows **Run the bounded publication and expiration exercise** to prepare **campaign-schedule-check**. Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.",
+          "For the optional timed demonstration, follow the developer’s screen. That developer opens [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai), browses to **authoring/CAMPAIGN-AUTHORING.md** from the repository root (its top-level folder), and follows **Run the bounded publication and expiration exercise** to prepare **campaign-schedule-check**. Continue once they provide the page URL and schedule; otherwise, finish after the alert inspection.",
           "Record the page URL and UTC start and end times supplied by the developer. The developer verifies the **English** page and its local content are initially absent from **Live Experience Edge**, establishing the before-publication baseline.",
         ],
         expected: [
@@ -1059,7 +1059,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Copy Daniel’s current live-portal identity",
         action: [
-          `Open [**Live portal: Reset a workshop number and current identities**](${liveReset.href}). Sign in to the workshop website if requested, then select your number from [**Attendee assignments**](/workshops/attendees) under **Workshop number**. Do not click **Reset workshop** for this lookup.`,
+          `Open [**Live portal: Reset a workshop number and current identities**](${liveReset.href}). Sign in to the workshop website if requested, then select your number from [**Demo account numbers**](/workshops/attendees) under **Workshop number**. Do not click **Reset workshop** for this lookup.`,
           "Under **current profile identities**, find **daniel.01** with your workshop number and copy its **Agent identity**. This value identifies the profile currently receiving that account’s browsing activity.",
           "For the affinity guide, also copy **maya.01** and **elena.01** from this same list. All seven identities are visible without signing into each persona. A reset changes the active values, so recopy them after any reset rather than using an earlier note.",
         ],
@@ -1071,7 +1071,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Search using the copied Agent identity",
         action: [
-          `Open [**SitecoreAI Profiles**](${PROFILES}). This is **Performance** > **Profiles** in SitecoreAI.`,
+          `Open [**SitecoreAI Profiles**](${PROFILES}). This is **Optimization** > **Profiles** in SitecoreAI.`,
           "Above the profile results, open the **Search filter** dropdown beside the search input and select **Liberty Mutual agent identity**. Paste the copied identifier into **Search by Liberty Mutual agent identity** and press Enter.",
           "Wait for the matching person, then click their name.",
         ],
@@ -1118,7 +1118,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       workshopNumberPrerequisite,
       platformPrerequisite,
-      "Use the live portal. Follow [**Find an agent profile**](/workshops/guide/find-an-agent-profile) for Avery and Daniel with your number from [**Attendee assignments**](/workshops/attendees). Keep both SitecoreAI profile tabs open. The rule’s testing tool needs each profile’s **UUID**, its unique identifier in the profile URL, rather than the portal’s **Agent identity** lookup value. Leave the saved JavaScript and rules unchanged.",
+      "Use the live portal. Follow [**Find an agent profile**](/workshops/guide/find-an-agent-profile) for Avery and Daniel with your number from [**Demo account numbers**](/workshops/attendees). Keep both SitecoreAI profile tabs open. The rule’s testing tool needs each profile’s **UUID**, its unique identifier in the profile URL, rather than the portal’s **Agent identity** lookup value. Leave the saved JavaScript and rules unchanged.",
     ],
     links: [
       pageBuilder,
@@ -1225,7 +1225,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the tagged-page setup and starting profiles",
         action: [
-          `Open [**SitecoreAI Affinities**](https://app.sitecorecloud.io/performance/settings/affinities?organization=${ORG}&tenantId=${TENANT}). This is **Performance** > **Settings** > **Affinities** in SitecoreAI. In the site list beside the settings menu, select **Liberty Mutual Agent Portal**.`,
+          `Open [**SitecoreAI Affinities**](https://app.sitecorecloud.io/performance/settings/affinities?organization=${ORG}&tenantId=${TENANT}). This is **Optimization** > **Settings** > **Affinities** in SitecoreAI. In the site list beside the settings menu, select **Liberty Mutual Agent Portal**.`,
           "In the table on the right, read **Affinity Name**, **Affinity Value**, and **Page**. **insurance_interest** is the interest category; **workers_compensation** and **household** are its topic values. The page assignments tell SitecoreAI which visits contribute to each topic. Compare those assignments and leave them unchanged.",
           "Open the current Daniel, Maya, and Elena profiles and record existing scores before any tagged visits.",
         ],
@@ -1332,7 +1332,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       workshopNumberPrerequisite,
       platformPrerequisite,
-      `Review the existing test configuration without editing it, then use your workshop number for the portal interaction. Open [**Live portal: Reset a workshop number and current identities**](${liveReset.href}), select your number from [**Attendee assignments**](/workshops/attendees), and copy Daniel’s **Agent identity**. Do not reset merely to view this value. Your invited Sitecore account needs access to the existing test and profile reports; otherwise, follow the presenter for those steps. Leave the test running.`,
+      `Review the existing test configuration without editing it, then use your workshop number for the portal interaction. Open [**Live portal: Reset a workshop number and current identities**](${liveReset.href}), select your number from [**Demo account numbers**](/workshops/attendees), and copy Daniel’s **Agent identity**. Do not reset merely to view this value. Your invited Sitecore account needs access to the existing test and profile reports; otherwise, follow the presenter for those steps. Leave the test running.`,
     ],
     links: [pageBuilder, liveLogin, profileLink, liveReset],
     steps: [
@@ -1348,7 +1348,7 @@ export const marketingGuides: WorkshopGuide[] = [
           "The configured 50/50 split gives each variation an equal share of eligible traffic; 100% participation includes all eligible traffic in the test. A **goal** is the measured outcome, here a visit to the small-business guide.",
           "**Editor** preview lets you compare the authored variations before browsing. This page uses A/B testing; the portal’s other walkthroughs show personalization. SitecoreAI supports A/B/n testing on pages without personalization configured.",
         ],
-        note: "**What to notice:** Marketers configure the component’s copy variations, traffic split, and goal in **Page Builder**, then review results in **Performance**. This comparison uses the existing component and tracking setup, so the copy test can be managed through authoring tools.",
+        note: "**What to notice:** Marketers configure the component’s copy variations, traffic split, and goal in **Page Builder**, then review results in **Optimization**. This comparison uses the existing component and tracking setup, so the copy test can be managed through authoring tools.",
         links: [pageBuilder],
       },
       login("daniel"),
@@ -1368,7 +1368,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Find the corresponding page visits in SitecoreAI",
         action: [
           `Open [**SitecoreAI Profiles**](${PROFILES}). Select **Search filter** > **Liberty Mutual agent identity**, enter Daniel’s current identifier, and open **Daniel Ortiz**.`,
-          "On Daniel’s profile, click **Engagement** and open the session matching the time you recorded in step 3. Read its page-view events for **Resources**, **growth-guide**, and the return to **Resources**. Compare the event times with your notes, and refresh if the new events have not appeared yet.",
+          "On Daniel’s profile, click **Engagement** and open the session matching the time you recorded in step 3. Read its page-view events for **resources**, **expand-small-business-practice**, and the return to **resources**. These are the stored page names for Learning & resources and its linked growth article. Compare the event times with your notes, and refresh if the new events have not appeared yet.",
         ],
         expected: [
           "The matching timestamps connect Daniel’s portal journey to the recorded page visits. The experiment report in the next step shows which visits and goals were credited to the test.",
@@ -1378,7 +1378,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Review goals, confidence, and test status",
         action: [
-          `Open [**the existing component test report**](https://app.sitecorecloud.io/performance/dashboards/ab-tests?test=component_c9b4e46b3b7250d4a96e732c4d181b6a_e144a961809e570f9e26c1cdd5d4e99b_en_20260914t022704347z&site=&page=&organization=${ORG}&tenantId=${TENANT}) in **Performance** > **Component A/B/n tests**. In the report’s filters, set **Site** to **liberty-mutual-agent-portal** and **Test** to **Liberty Mutual Small Business Guide CTA**.`,
+          `Open [**the existing component test report**](https://app.sitecorecloud.io/performance/dashboards/ab-tests?test=component_c9b4e46b3b7250d4a96e732c4d181b6a_e144a961809e570f9e26c1cdd5d4e99b_en_20260914t022704347z&site=&page=&organization=${ORG}&tenantId=${TENANT}) in **Optimization** > **Component A/B/n tests**. In the report’s filters, set **Site** to **liberty-mutual-agent-portal** and **Test** to **Liberty Mutual Small Business Guide CTA**.`,
           "Read the result row for **A**, then **B**. Record each row’s visits, goals, and goal rate, along with the report’s confidence and test status, to compare the two labels.",
           "Close the report without changing the experiment.",
         ],
@@ -1497,7 +1497,7 @@ export const marketingGuides: WorkshopGuide[] = [
         "Close the artifact viewer and leave the saved conversation and artifacts available for the next reviewer. No reset is needed.",
       ],
     },
-    related: ["ai-assisted-authoring"],
+    related: ["create-resource-and-media"],
     sourceSlides: [105, 106, 107],
   },
 ];

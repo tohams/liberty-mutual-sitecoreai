@@ -218,23 +218,24 @@ export default async function WorkshopHome() {
               <Users size={22} />
               <h3>Find your workshop number</h3>
               <p>
-                Find your name in{" "}
+                Open{" "}
                 <Link
                   className="workshop-inline-link"
                   href="/workshops/attendees"
                 >
-                  Attendee assignments
+                  Demo account numbers
                 </Link>
                 . Your guide currently shows suffix{" "}
-                <strong>.{session.reviewerPack}</strong>; if that number differs
-                from your assignment, sign out of the guide and sign in with a
-                portal username ending in your assigned number. The assignment
-                page lists the full usernames. Keeping one number separates your
-                portal work and assigned Practice page content from other
-                attendees’ work. Shared site settings remain shared.
+                <strong>.{session.reviewerPack}</strong>; use{" "}
+                <strong>01</strong> for Sitecore demonstrations. Numbers
+                <strong> 02–20</strong> are unassigned and available for
+                parallel testing. Agree on separate numbers before testing, and
+                keep the same suffix when switching personas. A number separates
+                portal work and profile histories; CMS content and settings
+                remain shared.
               </p>
               <Link href="/workshops/attendees">
-                Find your attendee assignment <ArrowRight size={15} />
+                Find your demo account numbers <ArrowRight size={15} />
               </Link>
             </div>
             <div>
@@ -255,11 +256,10 @@ export default async function WorkshopHome() {
           </section>
           <p className="workshop-directory-intro">
             <strong>Presenter demonstration</strong> means a presenter makes
-            changes to shared content while you watch. For hands-on page
-            editing, use your assigned <strong>Practice</strong> page and its
-            own content in SitecoreAI. Keep it unpublished and complete its
-            cleanup. Other exercises specify what you can do with your assigned
-            portal accounts or on your computer. First visit? Start with{" "}
+            changes to shared content while you watch. Record starting values
+            before editing shared CMS content, and complete the guide’s cleanup.
+            Other exercises use fictional portal accounts or a local frontend on
+            your computer. First visit? Start with{" "}
             <Link href="/workshops/guide/start-and-switch-agents">
               Sign in and find your workshop number
             </Link>{" "}
@@ -267,15 +267,13 @@ export default async function WorkshopHome() {
             development before making changes.
           </p>
           <div className="workshop-evaluation-note">
-            <strong>An environment for exploration</strong>
+            <strong>An environment for Sitecore demonstrations</strong>
             <p>
-              Insurance and agency data are synthetic. This sandbox is available
-              for the agreed evaluation period and will then be deleted. Portal
-              logins do not grant SitecoreAI authoring or administration access.
-              The Sitecore workshop team—Angela Gustafson, Allen Blanton, and
-              Thomas Lin—provides sign-in help, demonstrates authoring, and
-              shares the schedule for Tuesday and Thursday office hours during
-              the two-week evaluation.
+              Insurance and agency data are synthetic. Use fictional agent
+              accounts to explore the portal and your authorized Sitecore
+              account to manage its content and experiences. Portal logins do
+              not grant SitecoreAI authoring or administration access. Complete
+              the cleanup steps so the next demonstration starts cleanly.
             </p>
           </div>
         </section>

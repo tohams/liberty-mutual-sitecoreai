@@ -6,9 +6,9 @@ This exercise shows how a marketer manages a native SitecoreAI form and how an a
 
 ## What the two contact experiences demonstrate
 
-| Experience | What handles submission | Where to verify the result | How to repeat |
-|---|---|---|---|
-| **Contact your team** on Support | Native SitecoreAI Forms and its assigned **Demo Webhook** | The configured webhook.site receiver | Reload the form and use a fresh unique message marker; retain receiver history |
+| Experience                                                                                | What handles submission                                              | Where to verify the result                       | How to repeat                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Contact your team** on Support                                                          | Native SitecoreAI Forms and its assigned **Demo Webhook**            | The configured webhook.site receiver             | Reload the form and use a fresh unique message marker; retain receiver history                                                                                                                  |
 | Relationship cards' **Request a conversation** and the campaign's **Plan a conversation** | The portal's authenticated action service and Redis saved-work store | **Your service & follow-up requests** on Support | Reset the assigned workshop number on the same preview host using [Reset a workshop number](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/workshops/reset) |
 
 Submitting the native form does not create an item in the portal's saved-request list. The receiver is an inspection endpoint, not a connected Salesforce instance, mailbox, or production case database. Use fictional contact details and an `example.com` email address for this exercise. The configured receiver uses no authentication; replacement with a business backend requires an explicit authentication, payload, error-handling, and retention design.
@@ -19,16 +19,16 @@ The participant instructions are in [Submit a contact form](https://liberty-mutu
 
 The protected [Submit a contact form](https://liberty-mutual-agent-portal.vercel.app/workshops/guide/native-contact-form) guide now includes a direct receipt-inbox link. The presenter should open that link before the session, clear any saved **Search** filter, and confirm that requests are visible. A saved filter can hide the matching request even when delivery succeeded. The URL configured in **Demo Webhook** settings is the **POST destination**; the guide links to the corresponding inspection inbox. Keep the inbox in a separate tab and use a unique message marker to distinguish each submission from earlier requests. The inbox contains synthetic workshop data and uses no authentication; keep this repository private.
 
-| Step | Click or inspect | Observe |
-|---|---|---|
-| 1 | In SitecoreAI, open **Forms → Active → Contact your team**. From the preview, select **Edit form**, then **Edit**. | The active form designer opens. The form is available for `liberty-mutual-agent-portal`. |
-| 2 | Inspect **Your name**, **Work email**, **Agency name**, **How can we help?**, and **What would you like to discuss?** | All five fields are required. Topic choices are **Agency growth**, **Product guidance**, and **Portal support**. |
-| 3 | Open **Settings** using the gear. Inspect **Demo Webhook**, site availability, and the success message. | **Demo Webhook** is selected. Site availability shows **1 out of 1**. The success message is configured. |
-| 4 | Inspect **Push changes**, then return to the form preview without changing the form. | The action updates an active form. This inspection leaves the form and its live behavior unchanged. |
-| 5 | As the presenter, sign in as `daniel.01`, password `password`, at the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Enter `Daniel Ortiz`, `daniel.01@example.com`, and `Prairie Oak Insurance`. Attendees use their own workshop-number login and a fictional `example.com` address. | **Your name**, **Work email**, and **Agency name** contain those fictional values. |
-| 6 | In **How can we help?**, select **Agency growth**. In **What would you like to discuss?**, enter a unique marker such as `LM-NATIVE-yourname-date-time`. Select **Send request**. | **Thank you. Your request has been received.** appears. The fields clear and the form remains visible. |
-| 7 | Open the [**form receipt inbox**](https://webhook.site/#!/view/951f9e7b-3dd6-49dc-8fb1-3beda2cc034e), clear a saved **Search** filter if present, select the **POST** with your marker, then inspect **Request Content** or **Raw Content**. | JSON matches the five submitted values; request metadata identifies **Contact your team**. Match the unique message marker. |
-| 8 | Reload to clear the confirmation. Repeat with a new message marker and leave earlier receipts unchanged. | No saved-work reset is needed. Portal reset does not erase webhook receipts. |
+| Step | Click or inspect                                                                                                                                                                                                                                                                                                                                                                                                           | Observe                                                                                                                     |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 1    | In SitecoreAI, open **Forms → Active → Contact your team**. From the preview, select **Edit form**, then **Edit**.                                                                                                                                                                                                                                                                                                         | The active form designer opens. The form is available for `liberty-mutual-agent-portal`.                                    |
+| 2    | Inspect **Your name**, **Work email**, **Agency name**, **How can we help?**, and **What would you like to discuss?**                                                                                                                                                                                                                                                                                                      | All five fields are required. Topic choices are **Agency growth**, **Product guidance**, and **Portal support**.            |
+| 3    | Open **Settings** using the gear. Inspect **Demo Webhook**, site availability, and the success message.                                                                                                                                                                                                                                                                                                                    | **Demo Webhook** is selected. Site availability shows **1 out of 1**. The success message is configured.                    |
+| 4    | Inspect **Push changes**, then return to the form preview without changing the form.                                                                                                                                                                                                                                                                                                                                       | The action updates an active form. This inspection leaves the form and its live behavior unchanged.                         |
+| 5    | As the presenter, sign in as `daniel.01`, password `password`, at the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Enter `Daniel Ortiz`, `daniel.01@example.com`, and `Prairie Oak Insurance`. Attendees use their own workshop-number login and a fictional `example.com` address. | **Your name**, **Work email**, and **Agency name** contain those fictional values.                                          |
+| 6    | In **How can we help?**, select **Agency growth**. In **What would you like to discuss?**, enter a unique marker such as `LM-NATIVE-yourname-date-time`. Select **Send request**.                                                                                                                                                                                                                                          | **Thank you. Your request has been received.** appears. The fields clear and the form remains visible.                      |
+| 7    | Open the [**form receipt inbox**](https://webhook.site/#!/view/7ee85ead-8be7-4ffb-bcb1-8836c02dd22f), clear a saved **Search** filter if present, select the **POST** with your marker, then inspect **Request Content** or **Raw Content**.                                                                                                                                                                               | JSON matches the five submitted values; request metadata identifies **Contact your team**. Match the unique message marker. |
+| 8    | Reload to clear the confirmation. Repeat with a new message marker and leave earlier receipts unchanged.                                                                                                                                                                                                                                                                                                                   | No saved-work reset is needed. Portal reset does not erase webhook receipts.                                                |
 
 Before entering the fictional values at step 5, you can optionally select **Send request** with empty fields, then try an invalid **Work email**. Five required-field errors appear; an invalid email shows **Email address must follow the format user@example.com**. Neither invalid attempt sends a receipt. Native submissions remain separate from **Your service & follow-up requests**, which lists the custom conversation flow.
 
@@ -54,13 +54,13 @@ The form definition and its webhook live in native Forms. Pushing changes to the
 
 The verified test receipt contained these five submitted values. Use a new message marker for every repeat. These payload keys are integration identifiers, not a claim that the on-screen field labels use camelCase.
 
-| Payload key | Verified fictional value |
-|---|---|
-| `agentName` | `Daniel Ortiz` |
-| `workEmail` | `daniel.04@example.com` |
-| `agencyName` | `Prairie Oak Insurance` |
-| `requestTopic` | `Agency growth` |
-| `message` | A small-business growth conversation request with the marker `LM-FORMS-20260916-01` |
+| Payload key    | Verified fictional value                                                            |
+| -------------- | ----------------------------------------------------------------------------------- |
+| `agentName`    | `Daniel Ortiz`                                                                      |
+| `workEmail`    | `daniel.04@example.com`                                                             |
+| `agencyName`   | `Prairie Oak Insurance`                                                             |
+| `requestTopic` | `Agency growth`                                                                     |
+| `message`      | A small-business growth conversation request with the marker `LM-FORMS-20260916-01` |
 
 The portal form uses these visible controls:
 
@@ -74,15 +74,15 @@ All five fields are required. Invalid email displays **Email address must follow
 
 The existing **Support** page uses a dedicated `headless-support-form` placeholder. It permits only Sitecore's native **Form** rendering. The application maps that rendering to the Content SDK's Form component and passes the native `FormId` rendering parameter. It does not translate the submission into a custom portal request.
 
-| Item | Value or responsibility |
-|---|---|
-| Native form | `Contact your team` — `980983421c624d078ccf2fd29e4ae665-use` |
-| Page | `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/support` |
-| Native rendering | `62DD1639-9F28-4040-8738-C886480B2127` |
-| Placement | `headless-support-form`, above the saved-request history |
-| Application/model release | Form component mapping, Support layout, and explicit placement restrictions |
-| CMS page release | The page's selected form and its `FormId` binding |
-| Forms release | Native field design, validation, completion action, activation, and webhook settings |
+| Item                      | Value or responsibility                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| Native form               | `Contact your team` — `980983421c624d078ccf2fd29e4ae665-use`                         |
+| Page                      | `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/support`           |
+| Native rendering          | `62DD1639-9F28-4040-8738-C886480B2127`                                               |
+| Placement                 | `headless-support-form`, above the saved-request history                             |
+| Application/model release | Form component mapping, Support layout, and explicit placement restrictions          |
+| CMS page release          | The page's selected form and its `FormId` binding                                    |
+| Forms release             | Native field design, validation, completion action, activation, and webhook settings |
 
 The site must list the native rendering in **Available Renderings**, and the placeholder's **Allowed Controls** must include it. Preserve the explicit allowlist: an empty Allowed Controls field permits all available renderings. The shared Sitecore rendering is referenced, not copied into Liberty Mutual's owned model. [Enable Forms in Page Builder](https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/forms/enable-forms-in-the-page-builder.html).
 

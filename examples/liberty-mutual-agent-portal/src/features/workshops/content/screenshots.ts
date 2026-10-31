@@ -64,7 +64,7 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       file: "native-affinities.png",
       alt: "SitecoreAI Affinities showing insurance_interest page mappings",
       caption:
-        "**Performance** → **Settings** → **Affinities** shows the tagged pages. These settings define signals; inspect the current agent’s profile to verify accumulated scores.",
+        "**Optimization** → **Settings** → **Affinities** shows the tagged pages. These settings define signals; inspect the current agent’s profile to verify accumulated scores.",
     },
     "5": {
       file: "products-texas.png",

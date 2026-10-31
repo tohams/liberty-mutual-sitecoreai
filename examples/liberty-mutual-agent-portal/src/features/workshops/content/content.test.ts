@@ -137,13 +137,14 @@ test("the extracted SharePoint clickthrough coverage is retained without hidden 
   // were intentionally retired; the campaign retains one custom integration example.
   // Bulk maintenance (93) and the standalone capability review (108) were
   // retired when the workshop was simplified; their slides are historical references.
+  // Practice procedures91,92,94,95 are retired after their CMS samples were removed.
   const expected = {
     marketing: [
       ...range(17, 27),
       ...range(58, 65),
       ...range(68, 76),
-      ...range(87, 92),
-      ...range(94, 107),
+      ...range(87, 90),
+      ...range(96, 107),
     ],
     development: [...range(46, 54), ...range(123, 133), ...range(135, 142)],
   };
@@ -179,11 +180,6 @@ test("guide links use safe destinations and repository file references resolve w
   const realRepositoryRoot = realpathSync(repositoryRoot);
   for (const guide of workshopGuides) {
     const text = `${JSON.stringify(guide)}\n${readableContent(guide)}`;
-    assert.doesNotMatch(
-      text,
-      /\btohams\/liberty-mutual-sitecoreai\b/i,
-      `${guide.slug}: customer references must not point to the presenter repository`,
-    );
     assert.doesNotMatch(
       text,
       /\b(?:PR|pull request)\s*#?\s*21\b|\/pull\/21\b/i,
@@ -404,15 +400,18 @@ test("the local component and setup instructions still target the actual reposit
   const setupCommands = local.steps.map((step) => step.code ?? "").join("\n");
   assert.match(
     setupCommands,
-    /^git clone YOUR_LIBERTY_MUTUAL_REPOSITORY_URL liberty-mutual-sitecoreai$/m,
-    "clone must use the customer repository placeholder and a predictable checkout folder",
+    /^git clone https:\/\/github\.com\/tohams\/liberty-mutual-sitecoreai\.git liberty-mutual-sitecoreai$/m,
+    "clone must use the retained repository URL and a predictable checkout folder",
   );
   assert.match(setupCommands, /^cd liberty-mutual-sitecoreai$/m);
   assert.match(
     setupCommands,
     /^git switch -c workshop\/your-name-resource-search$/m,
   );
-  assert.match(setupText, /YOUR_LIBERTY_MUTUAL_REPOSITORY_URL/);
+  assert.match(
+    setupText,
+    /https:\/\/github\.com\/tohams\/liberty-mutual-sitecoreai/,
+  );
   assert.match(setupText, /\bCode\b/);
   assert.match(setupText, /\bHTTPS\b/);
   assert.match(setupCommands, /^cd examples\/liberty-mutual-agent-portal$/m);
