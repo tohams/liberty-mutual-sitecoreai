@@ -8,6 +8,10 @@ import { orderByWorkshopSection, withPriorities } from "./priorities";
 const retiredWorkshopGuides = new Set([
   "bulk-copy-maintenance",
   "marketing-capability-boundaries",
+  "campaign-composition",
+  "ai-assisted-authoring",
+  "author-approver-workflow",
+  "alert-dates-and-publication",
 ]);
 export function workshopGuideRedirect(slug: string) {
   return retiredWorkshopGuides.has(slug) ? "/workshops/marketing" : null;
@@ -22,6 +26,12 @@ export const workshopGuides = orderByWorkshopSection(
     ...developmentGuides,
   ]
     .filter((guide) => !retiredWorkshopGuides.has(guide.slug))
+    .map((guide) => ({
+      ...guide,
+      related: guide.related?.filter(
+        (slug) => !retiredWorkshopGuides.has(slug),
+      ),
+    }))
     .map(withScreenshots)
     .map(withPriorities),
 );

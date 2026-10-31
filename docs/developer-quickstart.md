@@ -1,13 +1,13 @@
 # Developer quickstart: see your component change in Page Builder
 
-Clone Liberty Mutual’s copy of the repository, run the frontend on your machine, and connect **SitecoreAI Page Builder** to **http://localhost:3000**. Change a React heading in VS Code and see your code on the Page Builder canvas. Verify the component’s functional Search behavior in a separate localhost portal tab.
+Clone the [Agent Portal source repository](https://github.com/tohams/liberty-mutual-sitecoreai), run the frontend on your machine, and connect **SitecoreAI Page Builder** to **http://localhost:3000**. Change a React heading in VS Code and see your code on the Page Builder canvas. Verify the component’s functional Search behavior in a separate localhost portal tab.
 
 SitecoreAI supplies the hosted authoring environment and content. Only the Next.js frontend runs locally. No local Sitecore server, VM, Docker, or .NET installation is required for this exercise. Each developer has separate code and local saved work; CMS content remains shared.
 
 ## Before you begin
 
 - Install **Git**, **VS Code**, and **Node.js 24.19.0 with npm**. The application’s `.nvmrc` records the runtime and `package-lock.json` records dependencies. A Node version manager is optional; the Node installer works too.
-- Use the **Liberty Mutual GitHub repository** supplied by your workshop team. Sign in with your authorized GitHub account and confirm that you can view its files. Ask your Liberty Mutual workshop contact for its address or access if needed. GitHub CLI and repository write access are not required.
+- Use the [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai). Use your authorized GitHub account if prompted, and confirm that you can view its files. GitHub CLI and repository write access are not required.
 - Use **Chrome** for the local Page Builder exercise, with your own **SitecoreAI** account that has access to **Liberty Mutual Agent Portal**. Fictional portal logins do not grant CMS access.
 - Allow Internet access to GitHub, npm, and the hosted Sitecore services. **Vercel access and deployment are not required.**
 - Use a new checkout without other local `.env` files or inherited portal configuration. Preserve any existing checkout containing your work.
@@ -16,19 +16,19 @@ TypeScript comes with the application dependencies; do not install it globally. 
 
 ## 1. Clone, branch, and open VS Code
 
-In Liberty Mutual’s GitHub repository, select **Code → Local → HTTPS**, and copy its clone URL. Replace `YOUR_LIBERTY_MUTUAL_REPOSITORY_URL` below with that URL. If your organization requires SSH, copy the **SSH** URL instead and use your configured SSH identity. Replace `your-name` with your own lowercase identifier.
+In the [Agent Portal source repository](https://github.com/tohams/liberty-mutual-sitecoreai), select **Code → Local → HTTPS** to inspect its clone URL. The command below already uses that URL. If your organization requires SSH, copy the **SSH** URL instead and use your configured SSH identity. Replace `your-name` with your own lowercase identifier.
 
 In your preferred projects directory, run:
 
 ```sh
-git clone YOUR_LIBERTY_MUTUAL_REPOSITORY_URL liberty-mutual-sitecoreai
+git clone https://github.com/tohams/liberty-mutual-sitecoreai.git liberty-mutual-sitecoreai
 cd liberty-mutual-sitecoreai
 git switch -c workshop/your-name-resource-search
 ```
 
-The final `liberty-mutual-sitecoreai` argument sets the local folder name, regardless of the name of Liberty Mutual’s repository. Authenticate with your authorized GitHub account if prompted. Alternatively, use **VS Code → View → Command Palette → Git: Clone**, paste the copied URL, and open the folder it creates. That method uses the repository’s name for the local folder. Later references to the local `liberty-mutual-sitecoreai` root mean your cloned folder, whatever its name. Creating the local branch does not deploy anything.
+The final `liberty-mutual-sitecoreai` argument sets the local folder name, regardless of the repository’s name. Authenticate with your authorized GitHub account if prompted. Alternatively, use **VS Code → View → Command Palette → Git: Clone**, paste the copied URL, and open the folder it creates. That method uses the repository’s name for the local folder. Later references to the local `liberty-mutual-sitecoreai` root mean your cloned folder, whatever its name. Creating the local branch does not deploy anything.
 
-All file paths in this guide start at the repository root, the top-level file list containing `authoring`, `docs`, and `examples`. You can browse those same paths in Liberty Mutual’s GitHub repository or in VS Code’s **Explorer**.
+All file paths in this guide start at the repository root, the top-level file list containing `authoring`, `docs`, and `examples`. You can browse those same paths in the source repository or in VS Code’s **Explorer**.
 
 Open the repository root, **liberty-mutual-sitecoreai**, with **File → Open Folder**. If the `code` command is available, run `code .` from that root. Explorer should show `examples`, `authoring`, `docs`, and `.github`.
 
@@ -54,15 +54,15 @@ npm run setup:local
 
 This command uses Node’s built-in modules, so it runs before dependency installation. It creates the ignored **.env.local** with the POC values required for local Page Builder:
 
-| Setting | What setup supplies |
-| --- | --- |
-| `SITECORE_EDGE_CONTEXT_ID` | This POC’s **Preview** server content context |
-| `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | The separate public-scoped browser context |
-| `SITECORE_EDITING_SECRET` | The matching editing secret from this SitecoreAI environment |
-| `NEXT_PUBLIC_DEFAULT_SITE_NAME` | `liberty-mutual-agent-portal` |
-| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` |
-| Session/operator settings | Independent local secrets and a unique local namespace |
-| State and tracking | `local-json`, `.portal-state`, and portal tracking disabled |
+| Setting                                | What setup supplies                                          |
+| -------------------------------------- | ------------------------------------------------------------ |
+| `SITECORE_EDGE_CONTEXT_ID`             | This POC’s **Preview** server content context                |
+| `NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID` | The separate public-scoped browser context                   |
+| `SITECORE_EDITING_SECRET`              | The matching editing secret from this SitecoreAI environment |
+| `NEXT_PUBLIC_DEFAULT_SITE_NAME`        | `liberty-mutual-agent-portal`                                |
+| `NEXT_PUBLIC_SITE_URL`                 | `http://localhost:3000`                                      |
+| Session/operator settings              | Independent local secrets and a unique local namespace       |
+| State and tracking                     | `local-json`, `.portal-state`, and portal tracking disabled  |
 
 **No manual key copy/paste is needed for this POC.** The Preview context and matching editing secret correspond to the environment’s developer settings in **SitecoreAI Deploy**. The separate browser context preserves the portal’s existing browser access scope. These automatic defaults are specific to this temporary POC; configure another environment with its own values.
 
@@ -92,7 +92,7 @@ npm run dev
 
 The command generates Content SDK component maps, metadata and import maps, then starts Next.js and the component-map watcher. Leave the terminal running and wait for **Ready**.
 
-Open [http://localhost:3000/login](http://localhost:3000/login). Sign in as **daniel.01** with password **password** and select **Learning & resources**. Find **What can we help you find?** and the **My licensed states** default.
+Open [http://localhost:3000/login](http://localhost:3000/login). Sign in as **daniel.01** with password **password** and select **Learning & resources**. Locate **Find guidance for your next client conversation** and the **My licensed states** default.
 
 Use HTTP, not HTTPS. If Next.js selects another port, update `NEXT_PUBLIC_SITE_URL` to that origin, restart, and use the same address in Page Builder.
 
@@ -101,7 +101,7 @@ Use HTTP, not HTTPS. If Next.js selects another port, update `NEXT_PUBLIC_SITE_U
 1. In **Chrome**, open [Page Builder](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb) with your SitecoreAI account. Select **Liberty Mutual Agent Portal**.
 2. Open **Default editing host** and select **Local host**.
 3. Enter **http://localhost:3000** in **Enter the editing host url**, then click **Save**.
-4. Select **Learning & resources** in the page tree. Confirm **What can we help you find?** appears on the canvas.
+4. Select **Learning & resources** in the page tree. Confirm **Find guidance for your next client conversation** appears on the canvas.
 
 The canvas uses the React code running on **your machine** and the shared Preview content. Selecting Local host does not replace the shared Default editing host, change site grouping, publish content or deploy your branch. Keep the dev server running while the canvas is connected.
 
@@ -114,13 +114,13 @@ In the ordinary localhost portal tab, enter **workers compensation** and click *
 In VS Code, find this JSX in **ResourceSearch.tsx**:
 
 ```tsx
-<h2>What can we help you find?</h2>
+<h2>Find guidance for your next client conversation</h2>
 ```
 
 Replace only the heading text:
 
 ```tsx
-<h2>Find guidance for your next client conversation</h2>
+<h2>Find the right resource for your next conversation</h2>
 ```
 
 Save and return to **Page Builder → Learning & resources** with **Local host** selected. The canvas should show the new heading. If needed, click **Reload canvas**. No CMS publication or deployment is involved.
@@ -153,9 +153,9 @@ git restore -- src/components/resource-search/ResourceSearch.tsx
 npm run dev
 ```
 
-If it also contains other work, manually restore only the heading instead.
+If it also contains other work, manually restore only the heading to **Find guidance for your next client conversation** instead.
 
-- In the localhost portal, click **Clear filters** if shown, erase the query and click **Search**. Confirm the original heading and default resource view. Clear filters alone does not erase query text.
+- In the localhost portal, click **Clear filters** if shown, erase the query, and click **Search**. Confirm **Find guidance for your next client conversation** and the default resource view. Clear filters alone does not erase query text.
 - In Page Builder, confirm the original heading on **Local host**, then select **Default editing host** in the editing-host selector.
 - In the localhost portal, use **Daniel Ortiz → Sign out**. Stop dev with **Ctrl+C** and run **npm run build** once more to return generated metadata to its build state.
 - Keep `.env.local`, `.portal-state`, `.sitecore` and generated metadata out of commits. No shared reset or CMS restoration is needed for this exercise.
@@ -164,28 +164,28 @@ If it also contains other work, manually restore only the heading instead.
 
 Deployment is an explanation, not an attendee task. The local workshop needs no Vercel account, transfer, branch push or PR.
 
-| Change | Shared release path |
-| --- | --- |
-| React components, styles, server code | GitHub branch → reviewed PR and checks → Vercel preview → approved merge → production deployment |
-| Page copy, images and layout | SitecoreAI authoring → editorial review → publish to Experience Edge |
-| Templates, rendering definitions, placeholders | Reviewed owned CMS model → separate SitecoreAI authoring deployment and validation |
+| Change                                         | Shared release path                                                                              |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| React components, styles, server code          | GitHub branch → reviewed PR and checks → Vercel preview → approved merge → production deployment |
+| Page copy, images and layout                   | SitecoreAI authoring → editorial review → publish to Experience Edge                             |
+| Templates, rendering definitions, placeholders | Reviewed owned CMS model → separate SitecoreAI authoring deployment and validation               |
 
 The repository’s **Portal validation** workflow checks source and performs a connected build. Vercel’s configured Git integration hosts the frontend; it does not automatically deploy Sitecore authoring. The SitecoreAI Vercel Deploy App is a separate integration. See the [release runbook](developer-handoff.md#vercel-release-process) for implementation details and recovery procedures.
 
 ## Troubleshooting
 
-| Symptom | Check |
-| --- | --- |
-| `ENOENT` for root `package.json` | Move the terminal into `examples/liberty-mutual-agent-portal`. Run setup, install and dev there. |
-| Wrong Node version | Check `node --version` after entering the app directory in the same terminal that runs npm. Select 24.19.0. |
-| Setup reports a configuration conflict | Preserve custom work and resolve the named setting. Do not bypass Redis or context-scope checks. |
-| Page Builder cannot connect | Confirm dev says Ready, the local address/port matches, Local host is selected, and setup supplied the correct Preview context and matching editing secret. Restart dev after environment changes. |
-| Embedded-browser canvas stays blank or loading | Open Page Builder in **Chrome** and select Local host there; this is the browser verified for the local exercise. |
-| Canvas still shows old React text | Save the correct component file, confirm Local host, and click Reload canvas. |
-| Search is disabled on the canvas | Expected editor behavior. Test in the separate signed-in localhost portal tab. |
-| Local page content differs from production | Local Page Builder setup reads Preview content, which can include unpublished pages. Production is the publication check; Search uses the published index. |
-| VS Code compiler diagnostics disagree with CLI | Select workspace TypeScript 5.9.3 instead of the editor’s bundled compiler. |
-| “The portal workspace service is not configured.” | Use `npm run dev`, local JSON state, and no Redis settings. Production runtime has a different persistence requirement. |
-| UDL, affinity or A/B behavior stays neutral locally | Tracking and personalization are intentionally disabled for this local exercise. Use the configured HTTPS workshop hosts for those loops. |
+| Symptom                                             | Check                                                                                                                                                                                              |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ENOENT` for root `package.json`                    | Move the terminal into `examples/liberty-mutual-agent-portal`. Run setup, install and dev there.                                                                                                   |
+| Wrong Node version                                  | Check `node --version` after entering the app directory in the same terminal that runs npm. Select 24.19.0.                                                                                        |
+| Setup reports a configuration conflict              | Preserve custom work and resolve the named setting. Do not bypass Redis or context-scope checks.                                                                                                   |
+| Page Builder cannot connect                         | Confirm dev says Ready, the local address/port matches, Local host is selected, and setup supplied the correct Preview context and matching editing secret. Restart dev after environment changes. |
+| Embedded-browser canvas stays blank or loading      | Open Page Builder in **Chrome** and select Local host there; this is the browser verified for the local exercise.                                                                                  |
+| Canvas still shows old React text                   | Save the correct component file, confirm Local host, and click Reload canvas.                                                                                                                      |
+| Search is disabled on the canvas                    | Expected editor behavior. Test in the separate signed-in localhost portal tab.                                                                                                                     |
+| Local page content differs from production          | Local Page Builder setup reads Preview content, which can include unpublished pages. Production is the publication check; Search uses the published index.                                         |
+| VS Code compiler diagnostics disagree with CLI      | Select workspace TypeScript 5.9.3 instead of the editor’s bundled compiler.                                                                                                                        |
+| “The portal workspace service is not configured.”   | Use `npm run dev`, local JSON state, and no Redis settings. Production runtime has a different persistence requirement.                                                                            |
+| UDL, affinity or A/B behavior stays neutral locally | Tracking and personalization are intentionally disabled for this local exercise. Use the configured HTTPS workshop hosts for those loops.                                                          |
 
 For optional chat-assisted inspection, continue to [Sitecore tools in VS Code](vscode-sitecore-mcp.md). For component ownership and hosting details, see the [developer handoff](developer-handoff.md).

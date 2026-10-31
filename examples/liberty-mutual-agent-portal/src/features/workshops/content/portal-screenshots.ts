@@ -117,7 +117,7 @@ const currentIdentity = capture(
 const profileFilter = capture(
   "profile-search-filter.png",
   "Profiles: choose Liberty Mutual agent identity",
-  "In **SitecoreAI**, open **Performance** → **Profiles**. Under **Most recent users**, open the search dropdown that initially shows **Client ID**, then choose **Liberty Mutual agent identity**.",
+  "In **SitecoreAI**, open **Optimization** → **Profiles**. Under **Most recent users**, open the search dropdown that initially shows **Client ID**, then choose **Liberty Mutual agent identity**.",
   [788, 355, 454, 246],
   [
     [[799, 407, 130, 48], "Open this dropdown beside the search box."],
