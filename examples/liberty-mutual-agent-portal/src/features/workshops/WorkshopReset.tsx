@@ -430,7 +430,7 @@ export function WorkshopReset({
           <h2>Seven agent logins. One number.</h2>
           <p>
             Resetting {pack} includes every account listed below. Usernames and
-            the password <strong>Sitecore</strong> stay the same.
+            the password <strong>password</strong> stay the same.
           </p>
           <ul className="workshop-reset-users">
             {status?.profiles.map((profile) => (

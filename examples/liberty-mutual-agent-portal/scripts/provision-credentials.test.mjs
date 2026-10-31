@@ -19,8 +19,11 @@ test('adding a reviewer preserves existing credentials and repeated provisioning
     const target = join(directory, 'fixtures', 'portal-credentials.json');
     await copyFile(new URL('./provision-credentials.mjs', import.meta.url), script);
     const existing = credentials.logins.filter((entry) => ['avery.01', 'maya.15'].includes(entry.username));
-    const newLogin = source.logins.find((entry) => entry.username === 'maya.20');
+    const newLogin = structuredClone(source.logins.find((entry) => entry.username === 'maya.20'));
     assert.ok(newLogin);
+    // Use a distinctive value so the generic word "passwords" in the status
+    // message cannot create a false-positive credential-disclosure failure.
+    newLogin.password = 'provision-test-only-new-reviewer';
     const logins = [...existing.map((credential) => source.logins.find((entry) => entry.username === credential.username)), newLogin];
     await writeFile(join(directory, 'fixtures', 'portal-logins.json'), JSON.stringify({ schemaVersion: 1, logins }));
     await writeFile(target, JSON.stringify({ schemaVersion: 1, logins: existing }));
