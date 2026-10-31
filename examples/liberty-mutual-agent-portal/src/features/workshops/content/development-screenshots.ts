@@ -87,10 +87,10 @@ export const developmentScreenshots: Record<
   "component-development": {
     3: {
       file: "page-builder-local-heading.png",
-      title: "See the saved React change in Page Builder",
-      alt: "Page Builder connected to localhost and showing the changed Learning and resources heading",
+      title: "Locate the heading in the local Page Builder canvas",
+      alt: "Page Builder connected to localhost and showing the starting Learning and resources heading",
       caption:
-        "This captured result shows **Learning & resources** rendered by the local frontend after saving the h2 edit in **ResourceSearch.tsx**. The heading changes without publishing CMS content or deploying the branch.",
+        "This reference shows **Learning & resources** rendered by the local frontend, with the starting heading highlighted. After saving your edit in **ResourceSearch.tsx**, confirm that the heading reads **Find the right resource for your next conversation**. No CMS publication or deployment is needed.",
       crop: {
         x: 0,
         y: 40,
@@ -121,7 +121,7 @@ export const developmentScreenshots: Record<
           width: 27.12,
           height: 6.76,
           label:
-            "The changed heading reads **Find guidance for your next client conversation**.",
+            "The starting heading is **Find guidance for your next client conversation**. Your saved edit should replace it with **Find the right resource for your next conversation**.",
         },
       ],
     },

@@ -71,7 +71,7 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
           </span>
         </div>
         <span className="workshop-login-footnote">
-          Prepared for Liberty Mutual · September 2026
+          Liberty Mutual Agent Portal · SitecoreAI
         </span>
       </section>
       <section className="workshop-login-form">
@@ -89,8 +89,8 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
           <h2>Welcome to the workshop</h2>
           <p>
             Enter the fictional agent username and password provided by the
-            workshop team, such as the Daniel login with your assigned number.
-            These credentials open the instructions. Your separately invited{" "}
+            Sitecore team. Use daniel.01 for the presenter demonstration. These
+            credentials open the instructions. Your separately invited{" "}
             <strong>Sitecore Cloud</strong> account opens the platform’s
             content-editing tools when an exercise requires them.
           </p>
@@ -100,7 +100,7 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
               id="workshop-username"
               name="username"
               autoComplete="username"
-              placeholder="For example, daniel.02"
+              placeholder="For example, daniel.01"
               required
               maxLength={80}
               autoCapitalize="none"
@@ -127,11 +127,12 @@ export function WorkshopLogin({ returnTo }: { returnTo: string }) {
           </form>
           <p className="workshop-login-help">
             Need your initial sign-in details? Ask the Sitecore workshop team.
-            After signing in, open <strong>Attendee assignments</strong> to
-            match your name to your workshop number. The guide uses that number
-            in its examples. Signing into the guide does not also sign you into
-            the <strong>Agent Portal</strong>; open the portal and sign in there
-            when a step asks you to view an agent’s experience.
+            After signing in, open <strong>Demo account numbers</strong> to see
+            the presenter number and unassigned test numbers. The guide uses
+            your signed-in number in its examples. Signing into the guide does
+            not also sign you into the <strong>Agent Portal</strong>; open the
+            portal and sign in there when a step asks you to view an agent’s
+            experience.
           </p>
         </div>
       </section>

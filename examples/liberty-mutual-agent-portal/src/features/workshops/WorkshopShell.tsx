@@ -65,7 +65,7 @@ export function WorkshopShell({
         <div className="workshop-account">
           <Link
             href="/workshops/attendees"
-            aria-label={`Attendee assignments: workshop number ${session.reviewerPack}`}
+            aria-label={`Demo account numbers: workshop number ${session.reviewerPack}`}
             aria-current={active === "attendees" ? "page" : undefined}
           >
             Workshop number <strong>{session.reviewerPack}</strong>
@@ -83,7 +83,7 @@ export function WorkshopShell({
           href="/workshops/attendees"
           aria-current={active === "attendees" ? "page" : undefined}
         >
-          <Users size={14} /> Attendee assignments
+          <Users size={14} /> Demo account numbers
         </Link>
         <Link
           href="/workshops/reset"
@@ -91,7 +91,7 @@ export function WorkshopShell({
         >
           <RotateCcw size={14} /> Reset a workshop number
         </Link>
-        <span>Evaluation sandbox · September 2026</span>
+        <span>Liberty Mutual · SitecoreAI</span>
       </footer>
     </div>
   );

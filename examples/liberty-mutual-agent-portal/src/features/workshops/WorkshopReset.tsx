@@ -476,8 +476,9 @@ export function WorkshopReset({
         <p>
           SitecoreAI profile names end with your workshop number. For example,
           <strong> daniel.{pack}</strong> appears as
-          <strong> Daniel Ortiz - {pack}</strong>. After a reset, use the current
-          Agent identity below to find the profile used by your next portal sign-in.
+          <strong> Daniel Ortiz - {pack}</strong>. After a reset, use the
+          current Agent identity below to find the profile used by your next
+          portal sign-in.
         </p>
         <p>
           An <strong>Agent identity</strong> is the lookup value that connects a
@@ -492,7 +493,7 @@ export function WorkshopReset({
           >
             <strong>SitecoreAI Profiles</strong>
           </a>
-          , under <strong>Performance → Profiles</strong>, and search using{" "}
+          , under <strong>Optimization → Profiles</strong>, and search using{" "}
           <strong>Search filter → Liberty Mutual agent identity</strong> and an
           identity below. These are the currently active identities for this
           website. Copy the row matching the portal username you used in the

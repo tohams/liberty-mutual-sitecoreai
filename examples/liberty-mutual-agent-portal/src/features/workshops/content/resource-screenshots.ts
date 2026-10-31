@@ -233,7 +233,7 @@ export const resourceScreenshots: Record<
       {
         file: "native-affinities.png",
         title: "Find the SitecoreAI affinity assignments",
-        alt: "SitecoreAI Performance Settings Affinities with Liberty Mutual Agent Portal and insurance_interest page assignments",
+        alt: "Reference capture of SitecoreAI Affinities settings with Liberty Mutual Agent Portal and insurance_interest page assignments",
         caption:
           "These settings map resource-page visits to **insurance_interest** values. Use this view to inspect the configuration; the agent’s profile shows the scores accumulated from those visits.",
       },
@@ -244,7 +244,8 @@ export const resourceScreenshots: Record<
           y: 57,
           width: 112,
           height: 40,
-          label: "Open **Performance** from the top navigation.",
+          label:
+            "Open **Optimization** from the top navigation; this reference capture labels it **Performance**.",
         },
         {
           x: 5,

@@ -1,29 +1,29 @@
 import "server-only";
 import logins from "../../../fixtures/portal-logins.json";
 
-// The user authorized this minimal workshop roster in the private repository.
+// Display demonstration account numbers without customer attendee assignments.
 // Keep contact details, native account credentials, and role assignments out.
 export const workshopAttendees: ReadonlyArray<{
   reviewerPack: string;
   displayName: string | null;
 }> = [
-  { reviewerPack: "01", displayName: "Workshop presenters" },
-  { reviewerPack: "02", displayName: "Chris Babcock" },
-  { reviewerPack: "03", displayName: "Yogeshwaran Balasubramaniam" },
-  { reviewerPack: "04", displayName: "Usha Bommasamudram" },
-  { reviewerPack: "05", displayName: "Jessie Dahlquist" },
-  { reviewerPack: "06", displayName: "Matthew Duvall" },
-  { reviewerPack: "07", displayName: "Paul Gaddy" },
-  { reviewerPack: "08", displayName: "Jared Greenblatt" },
-  { reviewerPack: "09", displayName: "Bruno Koppel" },
-  { reviewerPack: "10", displayName: "Jack Meyers" },
-  { reviewerPack: "11", displayName: "Jeff Swanso" },
-  { reviewerPack: "12", displayName: "Zach Holle" },
-  { reviewerPack: "13", displayName: "Kevin Kim-Murphy" },
-  { reviewerPack: "14", displayName: "Sean Duddy" },
-  { reviewerPack: "15", displayName: "Dianne Cykert" },
-  { reviewerPack: "16", displayName: "David Swayne" },
-  { reviewerPack: "17", displayName: "Angela Cornejo" },
+  { reviewerPack: "01", displayName: "Sitecore presenters" },
+  { reviewerPack: "02", displayName: null },
+  { reviewerPack: "03", displayName: null },
+  { reviewerPack: "04", displayName: null },
+  { reviewerPack: "05", displayName: null },
+  { reviewerPack: "06", displayName: null },
+  { reviewerPack: "07", displayName: null },
+  { reviewerPack: "08", displayName: null },
+  { reviewerPack: "09", displayName: null },
+  { reviewerPack: "10", displayName: null },
+  { reviewerPack: "11", displayName: null },
+  { reviewerPack: "12", displayName: null },
+  { reviewerPack: "13", displayName: null },
+  { reviewerPack: "14", displayName: null },
+  { reviewerPack: "15", displayName: null },
+  { reviewerPack: "16", displayName: null },
+  { reviewerPack: "17", displayName: null },
   { reviewerPack: "18", displayName: null },
   { reviewerPack: "19", displayName: null },
   { reviewerPack: "20", displayName: null },

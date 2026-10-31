@@ -21,12 +21,12 @@ test("attendee assignments cover each supported reviewer number exactly once wit
       );
     }
   }
-  assert.equal(workshopAttendees[0].displayName, "Workshop presenters");
+  assert.equal(workshopAttendees[0].displayName, "Sitecore presenters");
   assert.deepEqual(
     workshopAttendees
       .filter((attendee) => attendee.displayName === null)
       .map((attendee) => attendee.reviewerPack),
-    ["18", "19", "20"],
+    manifest.reviewerPacks.slice(1),
   );
 });
 

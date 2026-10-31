@@ -25,10 +25,17 @@ import type { GuideLink, RepositoryFile } from "@/features/workshops/types";
 function RepositoryFiles({ files }: { files?: RepositoryFile[] }) {
   return files?.length ? (
     <div className="workshop-repository-files">
-      <h3>Find in Liberty Mutual’s repository</h3>
+      <h3>Find in the Agent Portal source repository</h3>
       <p>
-        Open the GitHub repository supplied by your Liberty Mutual workshop
-        team. Each path starts at its top-level file list, called the{" "}
+        Open the{" "}
+        <a
+          href="https://github.com/tohams/liberty-mutual-sitecoreai"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agent Portal source repository
+        </a>
+        . Each path starts at its top-level file list, called the{" "}
         <strong>repository root</strong>. Follow the path to the file or folder.
         If you have cloned the repository, use the same path in{" "}
         <strong>VS Code’s Explorer</strong>.
@@ -165,7 +172,7 @@ export default async function GuidePage({
                   className="workshop-inline-link"
                   href="/workshops/attendees"
                 >
-                  <strong>Attendee assignments</strong>
+                  <strong>Demo account numbers</strong>
                 </Link>{" "}
                 lists your agent logins and explains the separate Sitecore
                 authoring access. New to these websites? Read{" "}
