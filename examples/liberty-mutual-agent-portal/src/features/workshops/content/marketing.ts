@@ -8,7 +8,7 @@ const TENANT = "97eea84c-ac47-4d91-7e4f-08defdaaa7df";
 const SITECORE = `https://app.sitecorecloud.io/?organization=${ORG}&tenantId=${TENANT}`;
 const PAGES = `https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=${ORG}`;
 const PROFILES = `https://app.sitecorecloud.io/performance/profiles?organization=${ORG}&tenantId=${TENANT}`;
-const STUDIO = `https://agentic-studio-use.sitecorecloud.io/spaces/21e4d9d9-ba94-498e-808e-1b1ae125066c?organization=${ORG}&tenantName=scaipocusem400b-sitecoreai950c-demo4418`;
+const STUDIO = `https://agentic-studio-use.sitecorecloud.io/spaces/c7b405d0-efc0-4bac-9cb4-86e7a67c4251?organization=${ORG}&tenantName=scaipocusem400b-sitecoreai950c-demo4418`;
 const FORMS = `https://forms.sitecorecloud.io/design/preview?organization=${ORG}&tenantName=scaipocusem400b-sitecoreai950c-demo4418&entityId=980983421c624d078ccf2fd29e4ae665-use`;
 const receiptInbox: GuideLink = {
   label: "Open the form receipt inbox",
