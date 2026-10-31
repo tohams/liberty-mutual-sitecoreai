@@ -11,6 +11,7 @@ Hosted workshops have **20 reviewer packs (`01`–`20`)**, each with the same se
 | Audience | Guide |
 | --- | --- |
 | Developers starting on a new machine | [Local setup and component-edit workshop](docs/developer-quickstart.md) |
+| Developers testing visitor personalization locally | [Local production personalization setup](examples/liberty-mutual-agent-portal/tools/local-personalization/README.txt) |
 | Developers using an optional AI assistant | [SitecoreAI and Documentation MCP in VS Code](docs/vscode-sitecore-mcp.md) |
 | Developers and platform administrators | [Developer handoff](docs/developer-handoff.md) |
 | Marketers and content implementers | [Content model and publishing](docs/content-model.md) |
@@ -39,7 +40,11 @@ npm run dev
 
 `setup:local` creates `.env.local` with this POC’s Preview server context, separate public browser context and matching editing secret before dependencies are installed. A rerun upgrades recognized earlier workshop defaults while preserving custom configuration and local saved work. `npm ci` installs dependencies using the committed lockfile. An `ENOENT` error referring to the root `package.json` means the terminal has not changed into the application directory. `npm install` also needs that directory and does not create the environment file.
 
-Open **Page Builder** in **Chrome**, select **Local host**, enter `http://localhost:3000`, and click **Save** to render the shared pages with your local React code. In a separate ordinary browser tab, open `http://localhost:3000/login` and use `daniel.01` with password `Sitecore` for functional Search checks. Setup creates independent local session/operator secrets, a unique namespace, local JSON state and disabled portal tracking. Keep Redis credentials absent from every local environment file and your terminal: Redis takes precedence over local JSON. Each developer’s code and saved work stay on their own machine; Preview content and the published Search index are shared reads. Return Page Builder to **Default editing host** when finished. No attendee Vercel access or deployment is required. Deployed environments require the configured HTTP Redis provider. The explicit fixture content adapter is an engineering-test seam, not a complete offline portal.
+Open **Page Builder** in **Chrome**, select **Local host**, enter `http://localhost:3000`, and click **Save** to render the shared pages with your local React code. In a separate ordinary browser tab, open `http://localhost:3000/login` and use `daniel.01` with password `password` for functional Search checks. Setup creates independent local session/operator secrets, a unique namespace, local JSON state and disabled portal tracking. Keep Redis credentials absent from every local environment file and your terminal: Redis takes precedence over local JSON. Each developer’s code and saved work stay on their own machine; Preview content and the published Search index are shared reads. Return Page Builder to **Default editing host** when finished. No attendee Vercel access or deployment is required. Deployed environments require the configured HTTP Redis provider. The explicit fixture content adapter is an engineering-test seam, not a complete offline portal.
+
+### Test personalization locally
+
+For visitor personalization checks, follow the [local production personalization guide](examples/liberty-mutual-agent-portal/tools/local-personalization/README.txt). The included tools run `npm run build` and `npm run start` with tracking enabled, provide trusted localhost HTTPS, and supply isolated local workspace storage. No Vercel or hosted Redis credentials are required. Browse the normal portal at `https://localhost:3000/login`; the Page Builder component-edit exercise continues to use the development setup above. Content, profile linking, and personalization decisions remain connected to SitecoreAI, so local browsing updates the shared fictional agent profiles.
 
 ## Repository map
 
@@ -52,6 +57,7 @@ examples/liberty-mutual-agent-portal/
   src/server/               Authentication, authorization, fixtures, CMS and state adapters
   fixtures/                 Synthetic accounts, operational data and UDL import artifacts
   scripts/                  Credential provisioning and operator reset tools
+  tools/local-personalization/  Local production testing launcher and guide
   docs/auth-and-data.md      Detailed integration and operations runbook
 
 authoring/items/liberty-mutual/   Scoped content model and CreateOnly initial seed

@@ -346,7 +346,7 @@ export const portalScreenshots: Record<
       [
         [
           [300, 317, 405, 58],
-          "Elena sees **Resources for your next client conversation**.",
+          "Elena sees **Resources for your next client conversations**.",
         ],
         [
           [766, 351, 160, 57],

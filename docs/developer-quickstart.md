@@ -92,7 +92,7 @@ npm run dev
 
 The command generates Content SDK component maps, metadata and import maps, then starts Next.js and the component-map watcher. Leave the terminal running and wait for **Ready**.
 
-Open [http://localhost:3000/login](http://localhost:3000/login). Sign in as **daniel.01** with password **Sitecore** and select **Learning & resources**. Find **What can we help you find?** and the **My licensed states** default.
+Open [http://localhost:3000/login](http://localhost:3000/login). Sign in as **daniel.01** with password **password** and select **Learning & resources**. Find **What can we help you find?** and the **My licensed states** default.
 
 Use HTTP, not HTTPS. If Next.js selects another port, update `NEXT_PUBLIC_SITE_URL` to that origin, restart, and use the same address in Page Builder.
 

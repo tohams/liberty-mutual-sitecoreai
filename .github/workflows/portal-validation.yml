@@ -37,6 +37,8 @@ jobs:
       - run: npm ci
       - name: Validate local setup safeguards
         run: npm run test:setup
+      - name: Validate local production personalization tools
+        run: node --test tools/local-personalization/run.test.mjs tools/local-personalization/local-services.test.mjs
       - name: Validate fictional portal credential provisioning
         run: node --test scripts/provision-credentials.test.mjs
       - name: Validate complete and additive UDL profile exports

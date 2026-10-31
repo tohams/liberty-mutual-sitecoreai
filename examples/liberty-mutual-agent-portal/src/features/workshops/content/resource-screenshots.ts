@@ -283,7 +283,7 @@ export const resourceScreenshots: Record<
         title: "Record the spotlight before visiting tagged resources",
         alt: "Products and appetite with Illinois selected and the neutral product spotlight",
         caption:
-          "This reference shows the neutral **Protection built around the business you know** spotlight with **Illinois** selected. Compare your current headline with Daniel’s starting profile; existing browsing may already select a different variant.",
+          "This reference shows the earlier default spotlight with **Illinois** selected. Authors may change the default wording. Compare your current headline with Daniel’s starting profile; existing browsing may already select a different variant.",
       },
       { ...native, x: 260, y: 115, width: 994, height: 371 },
       [

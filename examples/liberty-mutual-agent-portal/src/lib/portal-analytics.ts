@@ -162,14 +162,14 @@ export function preparePortalLoginIdentity(): Promise<boolean> {
   activeIdentity = undefined;
   recordedViews.clear();
   const preparation = boundedIdentityPreparation(async (signal) => {
-    const response = await fetch("/api/portal/bootstrap", {
+    const response = await fetch("/api/portal/identity", {
       cache: "no-store",
       signal,
     });
     if (!response.ok) return false;
-    const bootstrap = await response.json();
+    const body = await response.json();
     if (signal.aborted || !sdkWork.isCurrent(generation)) return false;
-    const profile: PortalIdentity | undefined = bootstrap?.udlIdentity;
+    const profile: PortalIdentity | undefined = body?.udlIdentity;
     if (
       profile?.provider !== "liberty-mutual-agent" ||
       typeof profile.id !== "string" ||
@@ -194,7 +194,12 @@ export async function recordPortalPageView(
   const generation = sdkWork.current();
   const identityKey = `${profile.provider}:${profile.id}`;
   // Navigation deduplication uses the URL; Sitecore event metadata uses the CMS route.
-  const key = JSON.stringify([identityKey, runId, path, pageData.pageVariantId]);
+  const key = JSON.stringify([
+    identityKey,
+    runId,
+    path,
+    pageData.pageVariantId,
+  ]);
   return recordedViews.record(
     key,
     async () =>

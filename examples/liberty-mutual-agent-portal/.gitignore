@@ -27,3 +27,6 @@
 # Isolated local scenario state and operator settings
 .portal-state/
 *.tsbuildinfo
+
+certificates/
+.portal-local-production/

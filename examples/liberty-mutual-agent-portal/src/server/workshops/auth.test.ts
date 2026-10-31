@@ -124,7 +124,7 @@ test("workshop login sets only its separate session and creates no workspace or 
       loginRequest(
         {
           username: " Daniel.01 ",
-          password: "Sitecore",
+          password: "password",
           returnTo: "/workshops/marketing/personalization",
         },
         {
@@ -184,13 +184,13 @@ test("invalid credentials and bad origins never issue or clear session cookies",
     ];
     for (const headers of rejectedHeaders) {
       const rejected = await login(
-        loginRequest({ username: "daniel.01", password: "Sitecore" }, headers),
+        loginRequest({ username: "daniel.01", password: "password" }, headers),
       );
       assert.equal(rejected.status, 403);
       assert.deepEqual(rejected.headers.getSetCookie(), []);
     }
     const malformed = await login(
-      loginRequest({ username: [], password: "Sitecore" }),
+      loginRequest({ username: [], password: "password" }),
     );
     assert.equal(malformed.status, 400);
   });

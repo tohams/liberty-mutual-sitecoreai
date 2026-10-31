@@ -12,6 +12,7 @@ import scConfig from 'sitecore.config';
 import { routing } from './i18n/routing';
 import client from './lib/sitecore-client';
 import { PortalPersonalizeProxy } from './server/personalization/PortalPersonalizeProxy';
+import { extractPortalVisitorGeo } from './server/personalization/visitor-geolocation';
 import { getPortalPersonalizationIdentity } from './server/data/portal';
 import { reportPersonalizationDiagnostic } from './server/personalization/diagnostics';
 import { privateHeaders } from './server/http';
@@ -73,6 +74,7 @@ const personalize = new PortalPersonalizeProxy({
   sites,
   ...scConfig.api.edge,
   ...scConfig.personalize,
+  extractGeoDataCb: extractPortalVisitorGeo,
   // This function determines if the middleware should be turned off on per-request basis.
   // Certain paths are ignored by default (e.g. Next.js API routes), but you may wish to disable more.
   // By default it is disabled while in development mode.
