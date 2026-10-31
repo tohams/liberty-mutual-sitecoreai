@@ -68,7 +68,7 @@ function login(persona: keyof typeof personaNames, preview = false): GuideStep {
     title: `Sign in as ${persona}.01`,
     action: [
       `Open [**${preview ? "the transaction-preview login" : "the live portal login"}**](${preview ? previewLogin.href : liveLogin.href}). ${preview ? "This website keeps saved practice transactions separate from the live portal." : "This website shows published portal content."} If another person is signed in, click their name or avatar in the upper right, then **Sign out**.`,
-      `Enter username **${persona}.01** and password **Sitecore**, then click **Sign in**.`,
+      `Enter username **${persona}.01** and password **password**, then click **Sign in**.`,
     ],
     expected: [
       `**My workspace**, the portal’s home page, opens with this agent’s priorities and guidance. The upper-right profile menu must show **${personaNames[persona]}**. Checking the name ensures you are observing the intended agent’s experience. If it shows someone else, sign out and repeat this step.`,
@@ -157,7 +157,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Switch the person without resetting the exercise",
         action: [
           signOut,
-          "For this orientation, sign in as **daniel.01** with password **Sitecore**. Use the same workshop number as Maya. On later exercises, follow the persona named in that guide. Close any unsaved dialog with its × button or Escape before signing out.",
+          "For this orientation, sign in as **daniel.01** with password **password**. Use the same workshop number as Maya. On later exercises, follow the persona named in that guide. Close any unsaved dialog with its × button or Escape before signing out.",
         ],
         expected: [
           persistentWork,
@@ -526,7 +526,7 @@ export const marketingGuides: WorkshopGuide[] = [
       "You understand why saving, publishing, and refreshing Search are separate actions: saving updates authoring content, publishing delivers reviewed content to agents, and indexing updates the searchable copy.",
     personas: ["daniel.01", "Authorized Sitecore author"],
     prerequisites: [
-      "The presenter uses **daniel.01** with password **Sitecore** for the live-portal checks. Attendees follow that screen while the shared article is edited and restored.",
+      "The presenter uses **daniel.01** with password **password** for the live-portal checks. Attendees follow that screen while the shared article is edited and restored.",
       platformPrerequisite,
       authorPrerequisite,
       "Follow the presenter as they edit the shared Texas article. Editing and publishing require access to this resource; **Resource metadata** currently requires organization administrator/owner access. The separate [**Review and publish content**](/workshops/guide/author-approver-workflow) demonstration uses the scoped **Author** and **Approver** accounts to show review permissions.",
@@ -1174,7 +1174,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Compare the campaign for Avery and Daniel",
         action: [
           "In the portal sidebar, click **Show Agency growth pages** beside **Agency growth**, then **Small business growth**. Under **ON THIS PAGE**, click **Opportunity** and read the callout headline in that section.",
-          "**Sign out**, sign in as **daniel.01** with password **Sitecore**, then open the same page.",
+          "**Sign out**, sign in as **daniel.01** with password **password**, then open the same page.",
         ],
         expected: [
           "Avery sees **Build on your personal-lines relationships**.",
@@ -1285,7 +1285,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Check the household action and switch identities",
         action: [
           "Click **Review the household renewal checklist**. In the browser’s address bar, confirm the destination URL contains **state=TX**, which carries the selected Texas context into the resource.",
-          "**Sign out**, then sign in as **elena.01** with password **Sitecore**. Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the business-line filters.",
+          "**Sign out**, then sign in as **elena.01** with password **password**. Click **Products & appetite** in the portal’s left sidebar and set **Risk state** to **Illinois**. The personalized spotlight is the large card above the business-line filters.",
           "Compare Elena’s headline with the scores you recorded on her SitecoreAI profile.",
         ],
         expected: [
