@@ -9,6 +9,7 @@ import {
   type FormEvent,
   type MouseEvent,
 } from "react";
+import { usePathname } from "next/navigation";
 import { Image, Link, Text, useSitecore } from "@sitecore-content-sdk/nextjs";
 import type { PublicHeaderProps } from "./public-header.props";
 
@@ -54,7 +55,12 @@ const LockIcon = () => (
   </svg>
 );
 
-export const Default = ({ fields, params }: PublicHeaderProps) => {
+export const Default = (props: PublicHeaderProps) => {
+  const pathname = usePathname();
+  return <PublicHeader key={pathname} {...props} />;
+};
+
+function PublicHeader({ fields, params }: PublicHeaderProps) {
   const { page } = useSitecore();
   const searchId = useId();
   const headerRef = useRef<HTMLDivElement>(null);
@@ -275,4 +281,4 @@ export const Default = ({ fields, params }: PublicHeaderProps) => {
       </div>
     </div>
   );
-};
+}
