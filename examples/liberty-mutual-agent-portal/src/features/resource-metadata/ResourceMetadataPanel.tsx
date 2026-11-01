@@ -10,7 +10,7 @@ import {
   RefreshCw,
   SlidersHorizontal,
 } from "lucide-react";
-import { METADATA_FIELDS, type MetadataField } from "./metadata-contract";
+import { fieldsForMetadata, type MetadataField } from "./metadata-contract";
 import { useResourceMetadataPanel } from "./useResourceMetadataPanel";
 import styles from "./ResourceMetadataPanel.module.css";
 
@@ -22,6 +22,7 @@ const FIELD_HELP: Record<MetadataField, string> = {
   product: "Choose the product this resource supports.",
   channel: "Choose the distribution channel this resource is written for.",
   resourceType: "Choose the kind of material agents will find.",
+  audience: "Choose the audience for which this approved guidance is written.",
 };
 
 export default function ResourceMetadataPanel() {
@@ -36,8 +37,12 @@ export default function ResourceMetadataPanel() {
           <SlidersHorizontal size={21} strokeWidth={1.8} />
         </div>
         <div>
-          <h1 id="metadata-panel-title">Resource metadata</h1>
-          <p>Choose how this resource is found and filtered.</p>
+          <h1 id="metadata-panel-title">
+            {panel.snapshot?.targets
+              ? "Public website metadata"
+              : "Resource metadata"}
+          </h1>
+          <p>Choose how this content is found and filtered.</p>
         </div>
       </header>
 
@@ -46,7 +51,8 @@ export default function ResourceMetadataPanel() {
           <Info size={25} aria-hidden="true" />
           <h2 id="open-in-pages">Open Resource metadata from Page Builder</h2>
           <p>
-            In SitecoreAI Page Builder, select the Liberty Mutual Agent Portal and open a resource article. Then select{" "}
+            In SitecoreAI Page Builder, open an Agent Portal resource article or
+            a Liberty Mutual public website page. Then select{" "}
             <strong>Apps → Resource metadata</strong>.
           </p>
           <p>The panel uses your current page, language, and version.</p>
@@ -105,13 +111,53 @@ export default function ResourceMetadataPanel() {
           }}
           aria-busy={panel.saving}
         >
+          {panel.snapshot.targets && panel.snapshot.target && (
+            <div className={styles.field}>
+              <label htmlFor="metadata-content-target">
+                Content to classify
+              </label>
+              <div className={styles.selectWrap}>
+                <select
+                  id="metadata-content-target"
+                  value={panel.snapshot.target.itemId}
+                  onChange={(event) => panel.selectTarget(event.target.value)}
+                  disabled={
+                    panel.saving || panel.stale || panel.changedCount > 0
+                  }
+                >
+                  {panel.snapshot.targets.map((target) => (
+                    <option key={target.itemId} value={target.itemId}>
+                      {target.kind === "page" ? "Page" : "Approved answer"}:{" "}
+                      {target.title}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown size={16} aria-hidden="true" />
+              </div>
+              <p className={styles.help}>
+                Page choices classify this page. Approved-answer choices
+                classify that reused answer in Search and the content API,
+                wherever it appears.
+              </p>
+              {panel.changedCount > 0 && (
+                <p className={styles.help}>
+                  Save or discard your selections before choosing different
+                  content.
+                </p>
+              )}
+            </div>
+          )}
           <section className={styles.resource} aria-label="Selected resource">
-            <p className={styles.eyebrow}>Selected resource</p>
+            <p className={styles.eyebrow}>Selected content</p>
             <h2>{panel.snapshot.title}</h2>
+            {panel.snapshot.target && (
+              <p className={styles.help}>{panel.snapshot.target.path}</p>
+            )}
             <div className={styles.resourceDetails}>
               <span>
                 {panel.snapshot.context.language.toUpperCase()} · Version{" "}
-                {panel.snapshot.context.version}
+                {panel.snapshot.target?.version ??
+                  panel.snapshot.context.version}
               </span>
               <span
                 className={
@@ -163,7 +209,7 @@ export default function ResourceMetadataPanel() {
             <legend className={styles.visuallyHidden}>
               Resource search metadata
             </legend>
-            {METADATA_FIELDS.map(({ name, label }) => {
+            {fieldsForMetadata(panel.snapshot).map(({ name, label }) => {
               const value = panel.values![name];
               const choices = panel.snapshot!.options[name];
               const selected = choices.find((option) => option.value === value);
@@ -253,9 +299,13 @@ export default function ResourceMetadataPanel() {
               </button>
             </div>
             <p className={styles.saveHelp}>
-              Saves to this resource version. After review and publication, open
-              Content → Search Sources → Liberty Mutual Agent Resources and
-              select Reindex Content to update search.
+              {panel.snapshot.publicationHelp || (
+                <>
+                  Saves to this resource version. After review and publication,
+                  open Content → Search Sources → Liberty Mutual Agent Resources
+                  and select Reindex Content to update search.
+                </>
+              )}
             </p>
           </footer>
         </form>

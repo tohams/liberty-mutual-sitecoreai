@@ -1,0 +1,64 @@
+{
+  "siteName": "liberty-mutual-public-site",
+  "sitePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site",
+  "pageRoot": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home",
+  "answerRoot": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers",
+  "pageTemplateId": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+  "answerTemplateId": "1a9400ee-e47b-5992-9431-56ae5586f90d",
+  "answerRenderingId": "4585a48f-e841-50ca-b2a3-0d3fc9893875",
+  "taxonomyRoot": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy",
+  "taxonomyRootId": "e3b0587e-2861-545c-a4c2-dfbed358bcb5",
+  "optionTemplateId": "9dc18d3c-9944-507a-aeab-9787c8fc4d9c",
+  "folderTemplateId": "d840055e-6e1a-50ae-b00a-c1db50375d42",
+  "descriptionFieldId": "6a9542b0-b66e-5b22-82ea-74c3c774215b",
+  "workflowId": "1bb54766-6a38-5c47-b0ee-c57570679d14",
+  "draftStateId": "ce5c0c95-af32-5457-849b-11e8efaf72d7",
+  "fields": {
+    "page": [
+      {
+        "name": "state",
+        "label": "State applicability",
+        "fieldId": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
+        "definitionPath": "/sitecore/templates/Project/LibertyMutualPublic/PublicPage/Content/state",
+        "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/States"
+      },
+      {
+        "name": "product",
+        "label": "Product",
+        "fieldId": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
+        "definitionPath": "/sitecore/templates/Project/LibertyMutualPublic/PublicPage/Content/product",
+        "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Products"
+      },
+      {
+        "name": "audience",
+        "label": "Audience",
+        "fieldId": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
+        "definitionPath": "/sitecore/templates/Project/LibertyMutualPublic/PublicPage/Content/audience",
+        "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Audiences"
+      }
+    ],
+    "answer": [
+      {
+        "name": "state",
+        "label": "State applicability",
+        "fieldId": "69a206de-38f4-5302-8142-5e2cff09168f",
+        "definitionPath": "/sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer/Content/state",
+        "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/States"
+      },
+      {
+        "name": "product",
+        "label": "Product",
+        "fieldId": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
+        "definitionPath": "/sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer/Content/product",
+        "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Products"
+      },
+      {
+        "name": "audience",
+        "label": "Audience",
+        "fieldId": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
+        "definitionPath": "/sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer/Content/audience",
+        "sourcePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Audiences"
+      }
+    ]
+  }
+}

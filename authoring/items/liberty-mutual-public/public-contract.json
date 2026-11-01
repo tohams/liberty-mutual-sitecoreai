@@ -2097,8 +2097,11 @@
         "Datasource Location": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
         "__Icon": "Office/32x32/folder_heart.png",
+        "Content Dependencies": "{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}",
         "__Display name": "Agency priorities",
-        "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}|{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}|{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}"
+        "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}|{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}|{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}",
+        "__Created by": "sitecore\\thomas.lin@sitecore.com",
+        "__Created": "20261101T161216Z"
       }
     },
     {

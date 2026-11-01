@@ -5,7 +5,7 @@ import { ClientSDK, type PagesContext } from "@sitecore-marketplace-sdk/client";
 import { XMC } from "@sitecore-marketplace-sdk/xmc";
 import { createMetadataService } from "./metadata-service";
 import {
-  METADATA_FIELDS,
+  fieldsForMetadata,
   MetadataError,
   type MetadataField,
   type MetadataSnapshot,
@@ -89,19 +89,19 @@ export function useResourceMetadataPanel() {
   const requestRef = useRef(0);
   const contextRevisionRef = useRef(0);
   const fieldRevisionRef = useRef(0);
-  const loadRef = useRef<(notice?: PanelNotice | null) => Promise<void>>(
-    async () => {},
-  );
+  const loadRef = useRef<
+    (notice?: PanelNotice | null, targetId?: string) => Promise<void>
+  >(async () => {});
 
   const changedFields =
     snapshot && values
-      ? METADATA_FIELDS.filter(
+      ? fieldsForMetadata(snapshot).filter(
           ({ name }) => values[name] !== snapshot.values[name],
         )
       : [];
   const invalidFields =
     snapshot && values
-      ? METADATA_FIELDS.filter(
+      ? fieldsForMetadata(snapshot).filter(
           ({ name }) =>
             !snapshot.options[name].some(
               (option) => option.value === values[name],
@@ -124,7 +124,10 @@ export function useResourceMetadataPanel() {
     let selectedCapabilitiesKey: string | null = null;
     let selectedContext: PagesContext | undefined;
 
-    const load = async (nextNotice: PanelNotice | null = null) => {
+    const load = async (
+      nextNotice: PanelNotice | null = null,
+      targetId?: string,
+    ) => {
       const service = serviceRef.current;
       if (!active || !service) return;
       const request = ++requestRef.current;
@@ -136,7 +139,7 @@ export function useResourceMetadataPanel() {
       setStale(false);
       setNotice(nextNotice);
       try {
-        const loaded = await service.load();
+        const loaded = await service.load(targetId);
         if (!active || request !== requestRef.current) return;
         setSnapshot(loaded);
         setValues({ ...loaded.values });
@@ -318,11 +321,17 @@ export function useResourceMetadataPanel() {
           client.subscribe("pages.content.fieldsUpdated", {
             onData: (update) => {
               const page = selectedContext?.pageInfo;
+              const target = snapshotRef.current?.target;
               if (
                 !active ||
-                normalizedId(update.itemId) !== normalizedId(page?.id) ||
+                (normalizedId(update.itemId) !== normalizedId(page?.id) &&
+                  normalizedId(update.itemId) !==
+                    normalizedId(target?.itemId)) ||
                 update.language !== page?.language ||
-                update.itemVersion !== page?.version
+                update.itemVersion !==
+                  (normalizedId(update.itemId) === normalizedId(target?.itemId)
+                    ? target?.version
+                    : page?.version)
               )
                 return;
               // Invalidate preflight even during a save; its own post-write event is resolved by readback.
@@ -373,7 +382,7 @@ export function useResourceMetadataPanel() {
     if (status !== "ready" || stale || saving || !snapshot?.editable || !values)
       return;
     const nextValues = { ...values, [field]: value };
-    dirtyRef.current = METADATA_FIELDS.some(
+    dirtyRef.current = fieldsForMetadata(snapshot).some(
       ({ name }) => nextValues[name] !== snapshot.values[name],
     );
     setValues(nextValues);
@@ -389,7 +398,8 @@ export function useResourceMetadataPanel() {
 
   const refresh = () => {
     if (saving) return;
-    if (serviceRef.current) void loadRef.current();
+    if (serviceRef.current)
+      void loadRef.current(null, snapshotRef.current?.target?.itemId);
     else {
       setStatus("connecting");
       setNotice(null);
@@ -442,7 +452,9 @@ export function useResourceMetadataPanel() {
       setStale(false);
       setNotice({
         kind: "success",
-        text: "Metadata saved. Review and publish this resource to update the live site. Then open Content → Search Sources → Liberty Mutual Agent Resources and select Reindex Content to update search.",
+        text: result.snapshot.publicationHelp
+          ? `Metadata saved. ${result.snapshot.publicationHelp}`
+          : "Metadata saved. Review and publish this resource to update the live site. Then open Content → Search Sources → Liberty Mutual Agent Resources and select Reindex Content to update search.",
       });
       if (result.changedFields.length > 0) {
         try {
@@ -496,6 +508,10 @@ export function useResourceMetadataPanel() {
       changedFields.length > 0 &&
       invalidFields.length === 0,
     update,
+    selectTarget: (targetId: string) => {
+      if (saving || stale || changedFields.length > 0) return;
+      void loadRef.current(null, targetId);
+    },
     discard,
     refresh,
     save,

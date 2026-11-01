@@ -121,11 +121,19 @@ def build(include_editorial=True):
     for name,label,ds,location,icon in contracts:
         RENDERINGS[name]=uid(RP+"/"+name)
         sf=[field("037fe404-dd19-4bf7-8e30-4dadf68b27b0","componentName",name),field("1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f","Datasource Template",TP+"/"+ds if ds else ""),field("b5b27af1-25ef-405c-87ce-369b3a004016","Datasource Location",location),field("a77e8568-1ab3-44f1-a664-b7c37ec7810d","Parameters Template",brace(TEMPLATES["PublicRenderingParameters"])),field(F["icon"],"__Icon",icon)]
+        # The ordered collection renders linked native cards. Record those
+        # content dependencies when its layout is published to Experience Edge.
+        if name=="AgencyPriorities": sf += [field("b4bbc0be-7619-4678-b2f7-947d84aa77a9","Content Dependencies","{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}")]
         if name=="PublicPageBody": sf += [field("e829c217-5e94-4306-9c48-2634b094fdc2","OtherProperties","IsRenderingsWithDynamicPlaceholders=true"),field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-hero"))+"|"+brace(uid(PP+"/headless-public-content")))]
         allowed=[page]
         if name in ["PublicHeader","PublicFooter","PublicPageBody"]: allowed.append(T["partial"])
         if name in ["AgencyPriorities","SharedDisclosure"]: allowed += [I["portalPage"],I["collectionPage"]]
-        item(RP+"/"+name,uid(RP),T["rendering"],"renderings",shared=sf,label=label,values=[field("1b58d065-fe74-43e3-ba20-54c9588b3011","AllowedOnTemplates","|".join(brace(x) for x in allowed))])
+        vf=[field("1b58d065-fe74-43e3-ba20-54c9588b3011","AllowedOnTemplates","|".join(brace(x) for x in allowed))]
+        if name=="AgencyPriorities":
+            # Preserve the native provenance of the first database override of
+            # this resource-backed definition rather than resetting it on deploy.
+            vf += [field("5dd74568-4d4b-44c1-b513-0af5f4cda34f","__Created by","sitecore\\thomas.lin@sitecore.com"),field("25bed78c-4957-4165-998a-ca1b52f67497","__Created","20261101T161216Z")]
+        item(RP+"/"+name,uid(RP),T["rendering"],"renderings",shared=sf,label=label,values=vf)
         vp=SITE+"/Presentation/Headless Variants/"+name
         item(vp,uid(SITE+"/Presentation/Headless Variants"),T["variantFolder"],"presentation")
         for n,v in enumerate(["Default","Compact"] if name=="PublicPromotion" else ["Default","Centered"] if name=="PublicHero" else ["Default"],1):
