@@ -1,0 +1,23 @@
+---
+ID: f6a04295-fd99-5f0e-969f-3cfea1601ba3
+Parent: 8af750e7-2018-5ab1-9cb4-c60e287e1447
+Template: 8fb0a60a-31d7-5009-abca-636a6a3f40b5
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/contact-an-agent/Data/Introduction
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 3f27b5a0-0044-5085-b90f-a55499fc260a
+      Hint: heading
+      Value: Get help with the details
+    - ID: 3abbd930-ac1b-5420-9c68-9db3df0aef7e
+      Hint: body
+      Value: <p>Keep the question and resource you were reviewing available for your conversation. Use Liberty Mutual’s agent finder to look for a local independent agent.</p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

@@ -1,0 +1,13 @@
+---
+ID: 60ef0eea-6fce-5738-bf22-ff4f3dc2f25e
+Parent: 824a2dde-d100-591c-a91b-1d9edb4f925e
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicCard/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

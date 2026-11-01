@@ -1,0 +1,13 @@
+---
+ID: 56557fb0-e0a6-5384-ba06-ed8fd4791838
+Parent: 449b1df9-4734-5f5f-b456-bde2842ed640
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicCta/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

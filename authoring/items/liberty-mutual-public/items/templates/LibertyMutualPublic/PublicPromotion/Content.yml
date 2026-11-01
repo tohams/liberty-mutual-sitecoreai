@@ -1,0 +1,13 @@
+---
+ID: 7775b771-74ac-58f4-aa7d-035de712a47b
+Parent: 55e09033-7e8f-56d2-ba6b-4be68e2f65df
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicPromotion/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

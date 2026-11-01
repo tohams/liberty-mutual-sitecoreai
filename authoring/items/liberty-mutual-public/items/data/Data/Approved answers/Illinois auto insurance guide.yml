@@ -1,0 +1,59 @@
+---
+ID: 6a3295f8-a2d7-5109-bb7a-86704729b888
+Parent: 0a7f4afc-ba36-5b17-9fa5-b82287d5e883
+Template: 1a9400ee-e47b-5992-9431-56ae5586f90d
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Illinois auto insurance guide
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: de4a7a26-6fe3-571d-9b4c-6e117690f9b5
+      Hint: question
+      Value: What should I review when choosing auto insurance in Illinois?
+    - ID: 43f7eef1-6cba-5b10-94cb-17e86f19726d
+      Hint: canonicalUrl
+      Value: https://liberty-mutual-public-site.vercel.app/insurance-resources/illinois-auto-insurance-guide
+    - ID: 54e5a9a7-a8e8-54f9-b163-f6cf04fe0119
+      Hint: answer
+      Value: Use Illinois-specific guidance when comparing car insurance. Review liability and uninsured motorist bodily injury coverage, and consider the protection you want for your own vehicle. The state minimum is a starting point for a conversation about your needs.
+    - ID: 47041dc1-a183-5516-85ea-afdea936289c
+      Hint: formalWording
+      Value: <p>Illinois coverage requirements and the policy terms apply. General information does not replace a review of your limits, deductibles, selected coverages, and individual circumstances.</p>
+    - ID: db533ede-0a22-5a9b-ae03-f3298cfc2e70
+      Hint: explanation
+      Value: "<p>Compare quotes with equivalent limits and deductibles. The Illinois Department of Insurance shopping guide explains required and optional coverages, and an independent agent can help you discuss the choices that fit your vehicle and budget.</p><ul><li><a href=\"https://idoi.illinois.gov/consumers/consumerinsurance/auto-insurance-shopping-guide.html\" target=\"_blank\" rel=\"noopener noreferrer\">Illinois Department of Insurance: Auto Insurance Shopping Guide</a></li></ul>"
+    - ID: b6cfeb53-9864-5c4a-b920-d5d283af71fd
+      Hint: owner
+      Value: Liberty Mutual
+    - ID: c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe
+      Hint: effectiveDate
+      Value: 20261031T000000Z
+    - ID: 17ea77c7-9126-5fcc-a6a1-82da22fc8df5
+      Hint: reviewDate
+      Value: 20270131T000000Z
+    - ID: 69a206de-38f4-5302-8142-5e2cff09168f
+      Hint: state
+      Value: IL
+    - ID: 4acbbd9e-68fd-58d5-8f05-374d157b26d9
+      Hint: product
+      Value: auto
+    - ID: c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2
+      Hint: audience
+      Value: consumer
+    - ID: 3305647a-51b7-5a4e-ba7a-530eef8312c5
+      Hint: sourceLink
+      Value: "<link text=\"Liberty Mutual: Illinois car insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/state/illinois\" />"
+    - ID: 07a77a0f-36c5-5e6e-867e-cc75a35820d8
+      Hint: nextStep
+      Value: <link text="Explore Illinois auto options" linktype="external" url="/get-a-quote" querystring="product=auto&amp;state=IL&amp;source=illinois-auto-insurance-guide" />
+    - ID: 6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d
+      Hint: disclosure
+      Value: "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

@@ -1,0 +1,13 @@
+---
+ID: cd8b9244-7f4f-5846-806e-47d069081013
+Parent: afad2c4c-2dc6-5428-b357-28fca18b611d
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

@@ -1,0 +1,51 @@
+---
+ID: bb22d3af-9e67-5853-9207-6d11248f58b0
+Parent: 578cb239-8d3d-45f7-bc34-4e6e2f07f091
+Template: fd2059fd-6043-4dfe-8c04-e2437ce87634
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer
+SharedFields:
+- ID: 55faae90-3bba-4f7f-96fe-13c3f40055ff
+  Hint: Signature
+  Value: public-footer
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <r
+          uid="{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}"
+          id="{5A7D5D76-D30D-5E47-8969-31835B870856}"
+          ph="headless-footer"
+          ds="local:/Data/Footer"
+          par="FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1" />
+      </d>
+    </r>
+- ID: c7c26117-dbb1-42b2-ab5e-f7223845cca3
+  Hint: __Thumbnail
+  Value: |
+    <image mediaid="{781A4318-0D45-480C-A9E0-373068FA74FF}" />
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 04bf00db-f5fb-41f7-8ab7-22408372a981
+      Hint: __Final Renderings
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}"
+              s:id="{5A7D5D76-D30D-5E47-8969-31835B870856}"
+              s:ph="headless-footer"
+              s:ds="local:/Data/Footer"
+              s:par="FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1" />
+          </d>
+        </r>
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

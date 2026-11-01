@@ -1,11 +1,15 @@
 {
   "deployItems": {
     "modules": [
-      "nextjs-starter",
       "LibertyMutual.Model",
       "LibertyMutual.SitePresentation",
       "LibertyMutual.SupportForm",
-      "LibertyMutual.ComponentLibrary"
+      "LibertyMutual.ComponentLibrary",
+      "LibertyMutual.PublicWorkflow",
+      "LibertyMutual.PublicModel",
+      "LibertyMutual.PublicPresentation",
+      "LibertyMutual.PublicPartialPlaceholders",
+      "LibertyMutual.PortalRelevancePresentation"
     ]
   },
   "renderingHosts": {},

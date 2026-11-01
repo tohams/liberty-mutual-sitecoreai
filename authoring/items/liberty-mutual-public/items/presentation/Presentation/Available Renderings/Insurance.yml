@@ -1,0 +1,19 @@
+---
+ID: a12fa65f-4b9d-5788-bfee-d47aaee116ce
+Parent: cc296536-020c-4b8f-8274-52f97d6afbe2
+Template: 76da0a8d-fc7e-42b2-af1e-205b49e43f98
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Insurance
+SharedFields:
+- ID: 715ae6c0-71c8-4744-ab4f-65362d20ad65
+  Hint: Renderings
+  Value: |
+    {FF280574-45AE-5A99-B5E0-5E290B91D9B0}
+    {D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

@@ -1,0 +1,350 @@
+{
+  "retrieved": "2026-10-31",
+  "assets": [
+    {
+      "file": "/fonts/roboto-latin-normal.woff2",
+      "source": "https://www.libertymutual.com/fonts/roboto-latin-normal.woff2",
+      "description": "Roboto variable Latin font used by the reference public website."
+    },
+    {
+      "file": "/images/family-basketball.jpg",
+      "source": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/dmlp/bundling_family_basketball.jpg?width=2304&height=1018",
+      "description": "Family playing basketball, the Bundling page image."
+    },
+    {
+      "file": "src/app/favicon.ico",
+      "source": "https://www.libertymutual.com/favicon.ico?v=1",
+      "description": "Authentic public-site browser icon, replacing the inherited starter icon.",
+      "retrieved": "2026-10-31",
+      "sha256": "e1d648fd86177062675e19e22dda6c660035c18e2674cb7b101acd13084e3fef",
+      "bytes": 5430
+    }
+  ],
+  "additionalAssetsPrepared": [
+    {
+      "key": "auto-family",
+      "referencePage": "https://www.libertymutual.com/vehicle/auto-insurance",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/auto/car/family_walking_in_field.png?width=1152&height=300",
+      "file": "public/images/family-car-field.png",
+      "publicPath": "/images/family-car-field.png",
+      "alt": "Family walking away from their car in a field",
+      "sha256": "51fb3aaef05b1103e9451d78bb3e2a7264edd93a82875dbedc09320633cd0fca",
+      "bytes": 552862,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    },
+    {
+      "key": "coverage-preparation",
+      "referencePage": "https://www.libertymutual.com/vehicle/auto-insurance/coverage",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/auto/auto-coverage-landing/CoverageDirectory-Header.jpg",
+      "file": "public/images/coverage-preparation.jpg",
+      "publicPath": "/images/coverage-preparation.jpg",
+      "alt": "Parent packing a car before a soccer game",
+      "sha256": "749f1b500b5f3ae6f2146804cb62a9262ed5370d9557943b6b71a0fa0a3dd7ef",
+      "bytes": 417509,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    },
+    {
+      "key": "texas-driving",
+      "referencePage": "https://www.libertymutual.com/vehicle/auto-insurance/state/texas",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/states/texas-auto-insurance-driving.jpg?width=616&height=2304",
+      "file": "public/images/texas-driving.jpg",
+      "publicPath": "/images/texas-driving.jpg",
+      "alt": "Dallas skyline with cars driving on a highway",
+      "sha256": "e23782e2920cc4ac34a97d8b1393209cf4fda520ae738d1f611c044495ad239f",
+      "bytes": 96647,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    },
+    {
+      "key": "florida-keys",
+      "referencePage": "https://www.libertymutual.com/vehicle/auto-insurance/state/florida",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/states/florida-new-template.jpg?height=616&width=2304",
+      "file": "public/images/florida-keys.jpg",
+      "publicPath": "/images/florida-keys.jpg",
+      "alt": "Florida Keys at sunset",
+      "sha256": "733a4e890f0ee58e6eb778a6f1e59220dca867f9f6e01db11f944b6abbe700c6",
+      "bytes": 589576,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    },
+    {
+      "key": "illinois-chicago",
+      "referencePage": "https://www.libertymutual.com/vehicle/auto-insurance/state/illinois",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/states/illinois-auto-new-template.png?height=616&width=2304",
+      "file": "public/images/illinois-chicago.png",
+      "publicPath": "/images/illinois-chicago.png",
+      "alt": "Chicago skyline overlooking Lake Michigan",
+      "sha256": "352707d0fb8601bb4af76e3974474d9470b706518d7f037242b23001121c3476",
+      "bytes": 1830420,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    },
+    {
+      "key": "renters-car",
+      "referencePage": "https://www.libertymutual.com/bundling/renters",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/dmlp/car-apartment.jpg",
+      "file": "public/images/car-apartment.jpg",
+      "publicPath": "/images/car-apartment.jpg",
+      "alt": "Red hatchback in front of an apartment building",
+      "sha256": "8121aa9b26a6b6a30aa5b5a08e5014d077ddb58e4650065e4da127a1cd18b290",
+      "bytes": 962682,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    },
+    {
+      "key": "condo-moving",
+      "referencePage": "https://www.libertymutual.com/bundling/condo",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/dmlp/couple_moving_condo.png",
+      "file": "public/images/couple-moving-condo.png",
+      "publicPath": "/images/couple-moving-condo.png",
+      "alt": "Couple moving into a condo",
+      "sha256": "2aea05bba3e210614f991c776ffb2485f7212a88e36de66c2d689e4e6ca17c1c",
+      "bytes": 856833,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    },
+    {
+      "key": "agent-clients",
+      "referencePage": "https://agents.libertymutual.com/",
+      "sourceUrl": "https://public.libertymutual-cdn.com/agent-search/agent_with_clients_size_2880X1088.png?height=580&width=1536",
+      "file": "public/images/agent-with-clients.png",
+      "publicPath": "/images/agent-with-clients.png",
+      "alt": "Illustration of an insurance agent helping clients",
+      "sha256": "cef5a5627e82bbfff54193857e3f00422ae0fe5f998ddf936c4f5b32193f4e28",
+      "bytes": 154416,
+      "retrieved": "2026-10-31",
+      "cmsMediaItemId": null
+    }
+  ],
+  "fidelityAssets": [
+    {
+      "key": "home-emu-doug",
+      "file": "public/images/home-emu-doug.jpg",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/homepage/LM-Homepage-HeroImage.jpg?width=2304&height=616",
+      "alt": "Limu Emu and Doug",
+      "bytes": 21209,
+      "sha256": "700cc494a56e93947f3bb709402cd3554c0704e4a8bbad35be87ee124d4f2b1c",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "claims-tow",
+      "file": "public/images/claims-tow.svg",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/homepage/towing.svg",
+      "alt": "Flatbed tow truck towing a car that was in an accident",
+      "bytes": 56648,
+      "sha256": "23ec6bb9b7272aae95245c5031412e5e9c6cec53d7390f74aa6a86d2ffe58c32",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "quote-on-your-own",
+      "file": "public/images/quote-on-your-own.png",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/homepage/man-sitting-in-chair-on-laptop-illustration.png",
+      "alt": "Man sitting in a chair with a laptop",
+      "bytes": 200670,
+      "sha256": "5b568bbc2f0ca529caf1307fa48026b572954356c4a79027e93780be7116eb15",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "quote-with-an-agent",
+      "file": "public/images/quote-with-an-agent.png",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/homepage/woman-and-man-sitting-at-table-illustration.png",
+      "alt": "Woman and man sitting at a table talking",
+      "bytes": 239650,
+      "sha256": "adf48ce828c2787fe0fe2659e61e31b85bc39e7f0a19985ec7fad6b0e7911e05",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "manage-policy",
+      "file": "public/images/manage-policy.jpg",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/homepage/ManWritingWithPen.jpg",
+      "alt": "Man writing down information about his car insurance",
+      "bytes": 225805,
+      "sha256": "5751a69f27c6f8fc989a24fb81a6189f6172445ff3a90e815fb6a1239fc27aa2",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "pay-bill",
+      "file": "public/images/pay-bill.jpg",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/homepage/WomanLookingAtPhone.jpg",
+      "alt": "Woman paying her car insurance bill on her smartphone",
+      "bytes": 371559,
+      "sha256": "596211313d3746c5b22de2ea8e964009bf352621c47700fac7a5fc034abd009c",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "bundle-garage",
+      "file": "public/images/bundle-garage.svg",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/auto/car/house_garage.svg",
+      "alt": "Woman walking to her garage with balloons",
+      "bytes": 522419,
+      "sha256": "02adaefc3b7a2fc27ac9cf8a53e94fff4ce7c88764b769b4268765bd769e02a2",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "bundle-man-desk",
+      "file": "public/images/bundle-man-desk.png",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/auto/car/man_at_desk.png",
+      "alt": "Man sitting at a desk",
+      "bytes": 29765,
+      "sha256": "696d5998ddc935e6c1fc327d5401ee2dd3ca1ef443e8b8a56d4e91fd1f331b44",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "auto-bike-car",
+      "file": "public/images/auto-bike-car.svg",
+      "sourceUrl": "https://public.libertymutual-cdn.com/lm-media-assets/content-images/products/auto/car/blue-car-illustration.svg",
+      "alt": "Blue car with a bike on top of it",
+      "bytes": 10276,
+      "sha256": "ecd26c0f9d9430426e9c258ea01c058135e06b5242a8624ff80ad73ff6990356",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-auto",
+      "file": "public/images/product-auto.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 1651,
+      "sha256": "04b994136e3204929a37f501a9d57909d6e54e1565ac53523f7cfc7eaad517d3",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-home",
+      "file": "public/images/product-home.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 907,
+      "sha256": "4b61155726aaac837960b0dadde60654b6866470435955759ce2d73889915c9d",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-condo",
+      "file": "public/images/product-condo.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 1157,
+      "sha256": "0e6c5b9a858929f478d1b1f057ff2ba8ca91d4aa27fb8d1db81e9375b328bf7e",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-renters",
+      "file": "public/images/product-renters.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 1750,
+      "sha256": "0b53b0e5a8f9354bde7652821155e103ee369bbb46e0d2a2cf31622b5d7640d7",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-pet",
+      "file": "public/images/product-pet.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 2901,
+      "sha256": "433a895fcd0a176200aca428a8080343577bdd36ffbdc09fa37eae8407d444d6",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-motorcycle",
+      "file": "public/images/product-motorcycle.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 1652,
+      "sha256": "e6a98787a258bfad5e244fe5fd0349f6c76a112cd04402aed6c3636afc23b3a2",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-life",
+      "file": "public/images/product-life.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 1345,
+      "sha256": "ce5ce16ba47118f53e05cbdf8af067706df4472c345c775d7328a95542079992",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "product-small-business",
+      "file": "public/images/product-small-business.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual rendered public-site SVG icon. Standalone fill attribute added to preserve its original navy color.",
+      "bytes": 1733,
+      "sha256": "99fb209786cdca740e4a69aba881b084be4d0cd221ba30513abbd12f234a815c",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "social-facebook",
+      "file": "public/brand/social-facebook.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual public footer social SVG, with standalone navy fill.",
+      "bytes": 452,
+      "sha256": "0497b211a0058f2678b801720727ffe8f1777137a1eb82ada2b99bc3328b927a",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "social-instagram",
+      "file": "public/brand/social-instagram.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual public footer social SVG, with standalone navy fill.",
+      "bytes": 1371,
+      "sha256": "0b560f98597a412151d53960f5fde69209553ce8e81a374998ec968c13db37eb",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "social-youtube",
+      "file": "public/brand/social-youtube.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual public footer social SVG, with standalone navy fill.",
+      "bytes": 630,
+      "sha256": "3ceda7f8382a6a9ca23edf29a8ed4f2f20fcb77cb6d123602d8bade5ceb786c6",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "social-linkedin",
+      "file": "public/brand/social-linkedin.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Actual public footer social SVG, with standalone navy fill.",
+      "bytes": 500,
+      "sha256": "6a2eb228fffa3a72d57d7544bd0076063b51d6daeae1fc18d538624fae47deae",
+      "retrieved": "2026-10-31"
+    },
+    {
+      "key": "logo-header",
+      "file": "public/brand/liberty-mutual-header.svg",
+      "width": 360,
+      "height": 92,
+      "bytes": 39764,
+      "sha256": "fa641a347e51babf2d9e4ee8fcc2894d81ca225c66182fc10de5e79a63875932",
+      "source": "https://www.libertymutual.com/",
+      "description": "Actual rendered source SVG, intrinsic dimensions restored from its viewBox and computed CSS paints preserved inline."
+    },
+    {
+      "key": "logo-footer-medallion",
+      "file": "public/brand/liberty-mutual-footer-medallion.svg",
+      "width": 65,
+      "height": 87,
+      "bytes": 30346,
+      "sha256": "b2292b3cb970f566b2bc12764fcf66e7268968b9f3bebe820fc688effd5dc2c3",
+      "source": "https://www.libertymutual.com/",
+      "description": "Actual rendered source SVG, intrinsic dimensions restored from its viewBox and computed CSS paints preserved inline."
+    },
+    {
+      "key": "logo-footer-vertical",
+      "file": "public/brand/liberty-mutual-footer-vertical.svg",
+      "width": 184,
+      "height": 102,
+      "bytes": 36602,
+      "sha256": "a1b1faff8d6e1dbca2130b4a4a019f05677a19cc3011dc4bed04b0b1f6c7968c",
+      "source": "https://www.libertymutual.com/",
+      "description": "Actual rendered source SVG, intrinsic dimensions restored from its viewBox and computed CSS paints preserved inline."
+    },
+    {
+      "key": "logo-header-compatible-local-path",
+      "file": "public/brand/liberty-mutual-logo.svg",
+      "sourceUrl": "https://www.libertymutual.com/",
+      "description": "Same authentic horizontal header SVG at the original local asset path.",
+      "sha256": "fa641a347e51babf2d9e4ee8fcc2894d81ca225c66182fc10de5e79a63875932",
+      "retrieved": "2026-10-31"
+    }
+  ]
+}

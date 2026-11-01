@@ -1,0 +1,36 @@
+---
+ID: 9610856e-28f7-5333-8923-80ac8a880e94
+Parent: 950bf621-edc3-5d97-bc09-2b0f3dad6e56
+Template: 55e09033-7e8f-56d2-ba6b-4be68e2f65df
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Promotions/Bundle and save
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: fdcb8ccc-d218-5faa-b4b9-22202de6e660
+      Hint: eyebrow
+      Value: BETTER TOGETHER
+    - ID: 47a086a8-80a6-5e3c-9a16-cff615cafa0c
+      Hint: headline
+      Value: Bundle your home and auto insurance
+    - ID: 66096299-84db-5594-a3a7-9df389460203
+      Hint: body
+      Value: <p>Keep your home and auto coverage together. Explore your options and see what works for you.</p>
+    - ID: 82f2d7b4-cc9b-506e-a0f4-1e704f8d2460
+      Hint: image
+      Value: |
+
+    - ID: 0daef26d-0917-58d9-89b3-d1758e4607dd
+      Hint: actionLink
+      Value: <link text="Explore bundling" linktype="external" url="/bundling" />
+    - ID: ea24474f-ad36-5cd4-b4ff-f0928803f322
+      Hint: disclosure
+      Value: "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

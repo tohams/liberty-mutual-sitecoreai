@@ -1,0 +1,696 @@
+{
+  "schemaVersion": 1,
+  "portalPath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal",
+  "libraryPath": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities",
+  "workflow": {
+    "id": "1bb54766-6a38-5c47-b0ee-c57570679d14",
+    "draft": "ce5c0c95-af32-5457-849b-11e8efaf72d7",
+    "awaitingApproval": "2598d5b1-953b-57ec-9086-14afb798ab06",
+    "approved": "44581197-9864-590b-92eb-6d620f36fbe1"
+  },
+  "datasources": {
+    "neutral": {
+      "id": "649f5db2-d1cd-5fc4-bd87-e31047fbe8e9",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/For all agencies"
+    },
+    "principal": {
+      "id": "3127968e-4b21-50c3-ad79-b6bbbe5303b8",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Agency growth priorities"
+    },
+    "producer": {
+      "id": "077bbcf9-ce80-5f76-ae6a-8a8b5580f1c0",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Producer priorities"
+    }
+  },
+  "recommendations": {
+    "Home and auto conversations": "5a9ed21c-3f7f-59b8-bfd3-6b81236d9956",
+    "Small business growth": "5b76c25a-fed2-5163-b8da-8cfe8dd87d9a",
+    "Texas workers compensation": "ca1dfb2d-8792-5834-8a27-62fda68c2305",
+    "Illinois workers compensation": "647a18a9-a6dc-5859-82f3-6873923f1e4e"
+  },
+  "renderings": {
+    "AgencyPriorities": {
+      "id": "a2e85f2d-7dbc-5640-8040-0b688d7912a6",
+      "variantId": "caeeda9e-4914-5c0d-ad58-61ed6716300b"
+    },
+    "SharedDisclosure": {
+      "id": "4bc5c522-23de-54e1-8420-169bdcf996e9",
+      "variantId": "468dcf82-4789-5cc6-9e4b-6896d549bcae"
+    }
+  },
+  "sharedDisclosureId": "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca",
+  "placeholderIds": {
+    "headless-agency-priorities": {
+      "global": "70ecc2ae-dca2-5402-9b89-feef26aec8ed",
+      "site": "a106f923-9ce5-5093-b299-b8afd33f06e3"
+    },
+    "headless-shared-disclosure": {
+      "global": "05f06dd4-011a-5855-8738-43b4b3a0d4eb",
+      "site": "ea5698b5-a7a7-5d48-a3a1-ecb20f7ae9ea"
+    }
+  },
+  "instances": {
+    "homePriorities": "c293373f-7f75-5cfe-a495-f62ed2a70920",
+    "homeDisclosure": "9edac7d0-4015-5a3c-8f1c-045931486f4b",
+    "resourcesDisclosure": "449b3a67-e435-5650-a588-2257aad71b10"
+  },
+  "records": [
+    {
+      "ID": "19314938-5d93-57cc-b572-a548026d43dd",
+      "Parent": "20e904a1-9b60-43a1-a8d0-8e3aee45b115",
+      "Template": "a87a00b1-e6db-45ab-8b54-636fec3b5523",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities",
+      "SharedFields": [
+        {
+          "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+          "Hint": "__Masters",
+          "Value": "{2EC5A6FA-CEFE-5477-9E13-9AD07609F26C}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ecb84122-fab6-5352-8d31-6349234ef4e6",
+      "Parent": "19314938-5d93-57cc-b572-a548026d43dd",
+      "Template": "a87a00b1-e6db-45ab-8b54-636fec3b5523",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations",
+      "SharedFields": [
+        {
+          "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+          "Hint": "__Masters",
+          "Value": "{B2EAD4D5-0B3A-5FA9-918B-E224162EC526}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5a9ed21c-3f7f-59b8-bfd3-6b81236d9956",
+      "Parent": "ecb84122-fab6-5352-8d31-6349234ef4e6",
+      "Template": "b2ead4d5-0b3a-5fa9-918b-e224162ec526",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations/Home and auto conversations",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "350fd516-f7ed-5655-82b5-8b0fbc8a82e6",
+                  "Hint": "Eyebrow",
+                  "Value": "HOUSEHOLD GROWTH"
+                },
+                {
+                  "ID": "8a29fd20-38ec-5038-b7da-d60ab4598c31",
+                  "Hint": "Heading",
+                  "Value": "Connect home and auto conversations"
+                },
+                {
+                  "ID": "43610941-be36-52fb-b82e-421cd5f1899b",
+                  "Hint": "Body",
+                  "Value": "<p>Help clients consider their home and auto needs together, and prepare for a useful renewal conversation.</p>"
+                },
+                {
+                  "ID": "ea39ce7b-ad09-5270-975f-d64d59728d3b",
+                  "Hint": "Image",
+                  "Value": ""
+                },
+                {
+                  "ID": "03fb7ba7-acb4-5dd7-854d-e53cddabd853",
+                  "Hint": "Link",
+                  "Value": "<link text=\"Review the household guide\" linktype=\"external\" url=\"/resources/prepare-a-household-renewal\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5b76c25a-fed2-5163-b8da-8cfe8dd87d9a",
+      "Parent": "ecb84122-fab6-5352-8d31-6349234ef4e6",
+      "Template": "b2ead4d5-0b3a-5fa9-918b-e224162ec526",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations/Small business growth",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "350fd516-f7ed-5655-82b5-8b0fbc8a82e6",
+                  "Hint": "Eyebrow",
+                  "Value": "SMALL BUSINESS"
+                },
+                {
+                  "ID": "8a29fd20-38ec-5038-b7da-d60ab4598c31",
+                  "Hint": "Heading",
+                  "Value": "Build a stronger small-business practice"
+                },
+                {
+                  "ID": "43610941-be36-52fb-b82e-421cd5f1899b",
+                  "Hint": "Body",
+                  "Value": "<p>Bring approved product guidance and preparation resources into your team\u2019s small-business conversations.</p>"
+                },
+                {
+                  "ID": "ea39ce7b-ad09-5270-975f-d64d59728d3b",
+                  "Hint": "Image",
+                  "Value": ""
+                },
+                {
+                  "ID": "03fb7ba7-acb4-5dd7-854d-e53cddabd853",
+                  "Hint": "Link",
+                  "Value": "<link text=\"Explore the growth guide\" linktype=\"external\" url=\"/resources/expand-small-business-practice\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ca1dfb2d-8792-5834-8a27-62fda68c2305",
+      "Parent": "ecb84122-fab6-5352-8d31-6349234ef4e6",
+      "Template": "b2ead4d5-0b3a-5fa9-918b-e224162ec526",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations/Texas workers compensation",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "350fd516-f7ed-5655-82b5-8b0fbc8a82e6",
+                  "Hint": "Eyebrow",
+                  "Value": "TEXAS GUIDANCE"
+                },
+                {
+                  "ID": "8a29fd20-38ec-5038-b7da-d60ab4598c31",
+                  "Hint": "Heading",
+                  "Value": "Support workers\u2019 compensation conversations in Texas"
+                },
+                {
+                  "ID": "43610941-be36-52fb-b82e-421cd5f1899b",
+                  "Hint": "Body",
+                  "Value": "<p>Use the Texas preparation guide to organize the questions and information needed for your next client conversation.</p>"
+                },
+                {
+                  "ID": "ea39ce7b-ad09-5270-975f-d64d59728d3b",
+                  "Hint": "Image",
+                  "Value": ""
+                },
+                {
+                  "ID": "03fb7ba7-acb4-5dd7-854d-e53cddabd853",
+                  "Hint": "Link",
+                  "Value": "<link text=\"Read Texas guidance\" linktype=\"external\" url=\"/resources/texas-workers-compensation\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "647a18a9-a6dc-5859-82f3-6873923f1e4e",
+      "Parent": "ecb84122-fab6-5352-8d31-6349234ef4e6",
+      "Template": "b2ead4d5-0b3a-5fa9-918b-e224162ec526",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations/Illinois workers compensation",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "350fd516-f7ed-5655-82b5-8b0fbc8a82e6",
+                  "Hint": "Eyebrow",
+                  "Value": "ILLINOIS GUIDANCE"
+                },
+                {
+                  "ID": "8a29fd20-38ec-5038-b7da-d60ab4598c31",
+                  "Hint": "Heading",
+                  "Value": "Support workers\u2019 compensation conversations in Illinois"
+                },
+                {
+                  "ID": "43610941-be36-52fb-b82e-421cd5f1899b",
+                  "Hint": "Body",
+                  "Value": "<p>Find state-specific preparation guidance for the Illinois employers with whom you work.</p>"
+                },
+                {
+                  "ID": "ea39ce7b-ad09-5270-975f-d64d59728d3b",
+                  "Hint": "Image",
+                  "Value": ""
+                },
+                {
+                  "ID": "03fb7ba7-acb4-5dd7-854d-e53cddabd853",
+                  "Hint": "Link",
+                  "Value": "<link text=\"Read Illinois guidance\" linktype=\"external\" url=\"/resources/illinois-workers-compensation\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "649f5db2-d1cd-5fc4-bd87-e31047fbe8e9",
+      "Parent": "19314938-5d93-57cc-b572-a548026d43dd",
+      "Template": "2ec5a6fa-cefe-5477-9e13-9ad07609f26c",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/For all agencies",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "fc9fa1f9-31df-56c7-9fe7-bbd68fdb14fb",
+                  "Hint": "Heading",
+                  "Value": "Priorities for your agency"
+                },
+                {
+                  "ID": "4d579360-2564-5a1d-8e24-57b353bf78f5",
+                  "Hint": "Intro",
+                  "Value": "<p>Explore product conversations and resources that help your agency grow.</p>"
+                },
+                {
+                  "ID": "9ce3391a-d490-5c2e-975b-41c695d206a2",
+                  "Hint": "Recommendations",
+                  "Value": "{5A9ED21C-3F7F-59B8-BFD3-6B81236D9956}|{5B76C25A-FED2-5163-B8DA-8CFE8DD87D9A}"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "3127968e-4b21-50c3-ad79-b6bbbe5303b8",
+      "Parent": "19314938-5d93-57cc-b572-a548026d43dd",
+      "Template": "2ec5a6fa-cefe-5477-9e13-9ad07609f26c",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Agency growth priorities",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "fc9fa1f9-31df-56c7-9fe7-bbd68fdb14fb",
+                  "Hint": "Heading",
+                  "Value": "Priorities for your agency"
+                },
+                {
+                  "ID": "4d579360-2564-5a1d-8e24-57b353bf78f5",
+                  "Hint": "Intro",
+                  "Value": "<p>Help your team develop its small-business opportunities and strengthen relevant client conversations.</p>"
+                },
+                {
+                  "ID": "9ce3391a-d490-5c2e-975b-41c695d206a2",
+                  "Hint": "Recommendations",
+                  "Value": "{5B76C25A-FED2-5163-B8DA-8CFE8DD87D9A}|{CA1DFB2D-8792-5834-8A27-62FDA68C2305}|{5A9ED21C-3F7F-59B8-BFD3-6B81236D9956}"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "077bbcf9-ce80-5f76-ae6a-8a8b5580f1c0",
+      "Parent": "19314938-5d93-57cc-b572-a548026d43dd",
+      "Template": "2ec5a6fa-cefe-5477-9e13-9ad07609f26c",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Producer priorities",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "fc9fa1f9-31df-56c7-9fe7-bbd68fdb14fb",
+                  "Hint": "Heading",
+                  "Value": "Priorities for your agency"
+                },
+                {
+                  "ID": "4d579360-2564-5a1d-8e24-57b353bf78f5",
+                  "Hint": "Intro",
+                  "Value": "<p>Connect your clients with useful product guidance and resources for your next conversation.</p>"
+                },
+                {
+                  "ID": "9ce3391a-d490-5c2e-975b-41c695d206a2",
+                  "Hint": "Recommendations",
+                  "Value": "{5A9ED21C-3F7F-59B8-BFD3-6B81236D9956}|{647A18A9-A6DC-5859-82F3-6873923F1E4E}|{5B76C25A-FED2-5163-B8DA-8CFE8DD87D9A}"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "a106f923-9ce5-5093-b299-b8afd33f06e3",
+      "Parent": "e601261f-f47f-4831-b91e-ef70efab3276",
+      "Template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agency-priorities",
+      "SharedFields": [
+        {
+          "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+          "Hint": "Placeholder Key",
+          "Value": "headless-agency-priorities"
+        },
+        {
+          "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+          "Hint": "Allowed Controls",
+          "Value": "{A2E85F2D-7DBC-5640-8040-0B688D7912A6}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5d138a50-abe4-5d49-a046-7fd60d55de16",
+      "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+      "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Business priorities",
+      "SharedFields": [
+        {
+          "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+          "Hint": "Renderings",
+          "Value": "{A2E85F2D-7DBC-5640-8040-0B688D7912A6}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2dba1f92-dbbb-5a98-99c5-a0d3919e86f9",
+      "Parent": "19a63bdd-f9c6-403b-8068-c1884e9bb413",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "caeeda9e-4914-5c0d-ad58-61ed6716300b",
+      "Parent": "2dba1f92-dbbb-5a98-99c5-a0d3919e86f9",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities/Default",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ea5698b5-a7a7-5d48-a3a1-ecb20f7ae9ea",
+      "Parent": "e601261f-f47f-4831-b91e-ef70efab3276",
+      "Template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-shared-disclosure",
+      "SharedFields": [
+        {
+          "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+          "Hint": "Placeholder Key",
+          "Value": "headless-shared-disclosure"
+        },
+        {
+          "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+          "Hint": "Allowed Controls",
+          "Value": "{4BC5C522-23DE-54E1-8420-169BDCF996E9}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "9dfbadda-296f-5d6b-96f8-7568af043b74",
+      "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+      "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Shared content",
+      "SharedFields": [
+        {
+          "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+          "Hint": "Renderings",
+          "Value": "{4BC5C522-23DE-54E1-8420-169BDCF996E9}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5ec64e1d-869c-56fe-839e-dac0b6eed069",
+      "Parent": "19a63bdd-f9c6-403b-8068-c1884e9bb413",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "468dcf82-4789-5cc6-9e4b-6896d549bcae",
+      "Parent": "5ec64e1d-869c-56fe-839e-dac0b6eed069",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure/Default",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -12,6 +12,14 @@ export const PORTAL_PLACEHOLDERS = {
     name: "headless-agent-guidance",
     componentName: "AgentGuidance",
   },
+  agencyPriorities: {
+    name: "headless-agency-priorities",
+    componentName: "AgencyPriorities",
+  },
+  sharedDisclosure: {
+    name: "headless-shared-disclosure",
+    componentName: "SharedDisclosure",
+  },
   resourceSearch: {
     name: "headless-resource-search",
     componentName: "ResourceSearch",
@@ -43,6 +51,7 @@ export type PortalPlaceholderPlacement = {
 /** Operational aliases use the same authored composition as their owning page. */
 function placeholdersForRoute(route: string): PortalPlaceholder[] {
   const [section, child] = route.split("/").filter(Boolean);
+  if (!section) return ["agencyPriorities", "guidance", "sharedDisclosure"];
   const practiceNumber = /^\/practice\/practice-(\d{2})\/?$/.exec(route)?.[1];
   if (
     (section === "growth" && child) ||
@@ -55,7 +64,9 @@ function placeholdersForRoute(route: string): PortalPlaceholder[] {
   )
     return ["resourceArticle"];
   if (section === "resources" || section === "learning")
-    return ["resourceSearch", "guidance"];
+    return section === "resources"
+      ? ["resourceSearch", "guidance", "sharedDisclosure"]
+      : ["resourceSearch", "guidance"];
   if (section === "products" && !child) return ["guidance", "productSpotlight"];
   if (section === "products" && child) return ["productDetails", "guidance"];
   if (section === "support" && !child) return ["guidance", "supportForm"];
@@ -79,6 +90,11 @@ export function getPortalPlaceholders(
     const setting = PORTAL_PLACEHOLDERS[slot];
     const hasCanonicalKey = Object.hasOwn(rendering.placeholders, setting.name);
     if (slot === "productDetails" && !hasCanonicalKey) continue;
+    if (
+      (slot === "agencyPriorities" || slot === "sharedDisclosure") &&
+      !hasCanonicalKey
+    )
+      continue;
     // Delivery stays compatible while the earlier published layout is replaced.
     // Page Builder and preview only expose the restricted, canonical placeholders.
     const useLegacy =
@@ -97,7 +113,11 @@ export function getPortalPlaceholders(
         (mode.isEditing && component.componentName === HIDDEN_RENDERING_NAME),
     );
     if (
-      (slot === "productSpotlight" || slot === "supportForm" || slot === "productDetails") &&
+      (slot === "productSpotlight" ||
+        slot === "supportForm" ||
+        slot === "productDetails" ||
+        slot === "agencyPriorities" ||
+        slot === "sharedDisclosure") &&
       !mode.isEditing &&
       contents.length === 0
     )

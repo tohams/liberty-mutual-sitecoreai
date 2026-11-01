@@ -155,8 +155,8 @@ export async function getPortalBootstrap(session: PortalSession, store = getStat
 }
 
 /** Only the verified Sitecore editing route may call this. No cookie, identity, or state writes. */
-export function getEditorBootstrap(): PortalBootstrap {
-  const agent = fixtures.agents.find((entry) => entry.id === 'avery')!;
+export function getEditorBootstrap(agentId: 'avery' | 'daniel' = 'avery'): PortalBootstrap {
+  const agent = fixtures.agents.find((entry) => entry.id === agentId)!;
   return makeBootstrap({ agentId: agent.id, agencyId: agent.agencyId, username: '', reviewerPack: '01', sessionId: 'editor', issuedAt: '2026-01-01T00:00:00Z', expiresAt: '2099-01-01T00:00:00Z' }, agent,
     { runId: 'editor', profileGeneration: 0, createdAt: 0, restartedAt: 0 },
     { version: 0, expiresAt: 0, value: baseline(agent.agencyId) }, true);

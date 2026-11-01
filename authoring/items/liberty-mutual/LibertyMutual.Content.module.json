@@ -87,6 +87,30 @@
           {
             "path": "/liberty-mutual-agent-portal/Data/ProductCatalog",
             "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-public-site",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Data/Agency priorities",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agency-priorities",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-shared-disclosure",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure",
+            "scope": "Ignored"
           }
         ]
       }

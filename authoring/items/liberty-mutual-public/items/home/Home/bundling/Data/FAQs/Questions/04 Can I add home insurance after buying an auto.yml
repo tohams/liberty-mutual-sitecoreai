@@ -1,0 +1,23 @@
+---
+ID: 4a640900-e761-5958-b737-a0040a06d96b
+Parent: f81b6316-6ece-5785-a36a-1b037d6cde64
+Template: 7e71c6a1-8f71-5e0c-8983-e35b4166daa7
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/FAQs/Questions/04 Can I add home insurance after buying an auto
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: e0740b71-1b49-514f-89f3-2321e72809f4
+      Hint: question
+      Value: Can I add home insurance after buying an auto policy?
+    - ID: 90ca7aa1-fe73-54e2-b966-8ba57c910e21
+      Hint: answer
+      Value: <p>You can explore adding another policy later. Review available options and any applicable savings when you request your quote.</p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

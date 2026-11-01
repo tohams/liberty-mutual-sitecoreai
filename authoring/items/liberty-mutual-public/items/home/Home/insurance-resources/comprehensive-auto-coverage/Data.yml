@@ -1,0 +1,13 @@
+---
+ID: 94ae00ae-54b2-509b-8369-ec59bd8dbd7b
+Parent: c3984aa4-a22d-539b-a70b-9f0ff93267ad
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/comprehensive-auto-coverage/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

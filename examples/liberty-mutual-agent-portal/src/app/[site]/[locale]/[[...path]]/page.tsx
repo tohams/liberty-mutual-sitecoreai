@@ -11,6 +11,7 @@ import { NextIntlClientProvider } from "next-intl";
 import client from "@/lib/sitecore-client";
 import { getSession } from "@/server/auth/session";
 import { getPortalBootstrap, getEditorBootstrap } from "@/server/data/portal";
+import { editorPreviewAgent } from "@/server/data/editor-preview-agent";
 import { canAccessResourcePage } from "@/server/data/resource-page-access";
 import { getProductCatalog } from "@/server/data/cms-products";
 import {
@@ -80,7 +81,7 @@ export default async function PortalPage({ params, searchParams }: PageProps) {
   let data;
   try {
     data = draft.isEnabled
-      ? getEditorBootstrap()
+      ? getEditorBootstrap(editorPreviewAgent(page, draft.isEnabled))
       : await getPortalBootstrap(session!);
   } catch (error) {
     if (error instanceof PortalError && error.status === 401)
@@ -179,6 +180,8 @@ export default async function PortalPage({ params, searchParams }: PageProps) {
             isEditing={draft.isEnabled}
             route={route}
             workspaceEditorial={resourcesSearch ? undefined : guidance}
+            agencyPriorities={renderPlaceholder(placements.agencyPriorities)}
+            sharedDisclosure={renderPlaceholder(placements.sharedDisclosure)}
             resourcesSearch={resourcesSearch}
             productsSpotlight={renderPlaceholder(placements.productSpotlight)}
             productCatalog={productCatalog}

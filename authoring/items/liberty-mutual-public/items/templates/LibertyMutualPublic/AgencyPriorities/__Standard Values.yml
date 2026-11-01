@@ -1,0 +1,17 @@
+---
+ID: a18da506-4c8f-5f51-a543-2335f8eeb19e
+Parent: 2ec5a6fa-cefe-5477-9e13-9ad07609f26c
+Template: 2ec5a6fa-cefe-5477-9e13-9ad07609f26c
+Path: /sitecore/templates/Project/LibertyMutualPublic/AgencyPriorities/__Standard Values
+SharedFields:
+- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
+  Hint: __Default workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

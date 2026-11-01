@@ -1,0 +1,20 @@
+---
+ID: e0b57cb2-866a-575a-9faa-57d60f701db6
+Parent: db5f0592-7809-5194-8c1c-7afe5b900c1c
+Template: 9e6168b4-3c3e-5764-bfa0-6f4e5210d426
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header/Data/Header/Navigation/01 Shop insurance/Links/06 Insurance resources
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: a13aa6a3-e920-5c27-a58a-69d5543e8071
+      Hint: link
+      Value: <link text="Insurance resources" linktype="external" url="/insurance-resources" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

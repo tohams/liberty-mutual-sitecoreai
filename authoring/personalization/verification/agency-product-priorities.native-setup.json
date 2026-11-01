@@ -1,0 +1,140 @@
+{
+  "recordedOn": "2026-11-01",
+  "evidenceSource": "Native SitecoreAI Chrome UI operated through computer control under the existing Thomas Lin account",
+  "customValueId": "ad7b493b-f768-404c-adc6-9841c2fe1a6e",
+  "name": "Liberty Mutual - Agency product priorities",
+  "friendlyName": "liberty_mutual__agency_product_priorities",
+  "organizationId": "org_XqL3u1MSNVuubOTb",
+  "tenantId": "97eea84c-ac47-4d91-7e4f-08defdaaa7df",
+  "observations": [
+    "Existing Custom Values list contained four published values before creation; none was edited.",
+    "Native creation displayed Custom value created successfully and navigated to the new custom-value ID.",
+    "The new editor displayed Draft.",
+    "The complete reviewed agency-product-priorities.js expression was pasted, and the visible editable code matched it.",
+    "Return type was set to String; the UI displayed Return type saved successfully.",
+    "A 240-character criteria description was entered, and Save was clicked.",
+    "Reload then stalled on Authenticating90%, preventing persisted expression readback; root's already-authenticated IAB must confirm it before profile tests or publication.",
+    "Only the two Chrome tabs created for this task were closed.",
+    "Root subsequently confirmed persisted full expression, String type, and description in the existing authenticated IAB.",
+    "Root tested actual current Avery, Daniel, and Maya profiles with identifier type Profile ID, without modifying their test contexts.",
+    "Root published the custom value and observed Published status plus success notification.",
+    "Configured only the new Home AgencyPriorities component decision table, using this published custom value with agency-growth and producer-priorities rows; Original neutral remains.",
+    "Assigned canonical Agency growth priorities and Producer priorities datasources through native Page Builder; native required duplicates were recorded and are not selected.",
+    "Native draft decision table tests of unmodified actual profiles observed Avery Rule 1 matched, Daniel Rule 2 matched, and Maya No rule matched.",
+    "Opened native Preview for both component variants before Start or publication: Avery / Cedar Ridge / Texas and Daniel / Prairie Oak / Illinois displayed their respective native authored card order.",
+    "Semantic Home audit preserved Shared Renderings and every existing Final rendering node; the new Disclosure delta only materializes equivalent existing parameters.",
+    "After the three actual native decision tests and both prepublication previews, started only this new component personalization; native status is PERSONALIZED PENDING until root publishes Home."
+  ],
+  "persistedExpressionReadbackVerified": true,
+  "nativeProfileTestsExecuted": true,
+  "published": true,
+  "connectedToHomeExperience": true,
+  "publicationEvidence": [
+    "agency-product-priorities-native-saved.png",
+    "agency-product-priorities-native-published.png"
+  ],
+  "tests": [
+    {
+      "persona": "Avery",
+      "nativeProfileId": "c11b7984-ad65-4544-be6c-660807bebdc2",
+      "profileGeneration": 7,
+      "contextSource": "Actual current profile loaded by Profile ID in the native Test UI; root observed execution",
+      "testContextModified": false,
+      "observedResult": "agency-growth",
+      "evidenceFile": "agency-priorities-avery-native-test.png"
+    },
+    {
+      "persona": "Daniel",
+      "nativeProfileId": "b55d8f31-dab0-4e5a-9a14-57f5e549093b",
+      "profileGeneration": 7,
+      "contextSource": "Actual current profile loaded by Profile ID in the native Test UI; root observed execution",
+      "testContextModified": false,
+      "observedResult": "producer-priorities",
+      "evidenceFile": "agency-priorities-daniel-native-test.png"
+    },
+    {
+      "persona": "Maya",
+      "nativeProfileId": "e94a5ee9-82aa-4480-aa55-ac98e02dff7d",
+      "profileGeneration": 7,
+      "contextSource": "Actual current profile loaded by Profile ID in the native Test UI; root observed execution",
+      "testContextModified": false,
+      "observedResult": "neutral",
+      "evidenceFile": "agency-priorities-maya-native-test.png"
+    }
+  ],
+  "homeExperienceStatus": "Started; live variant delivery verified",
+  "homeExperienceStarted": true,
+  "homePublishedAfterBinding": true,
+  "nativeDraftDecisionTestsExecuted": true,
+  "nativePrepublicationPreviewsVerified": 2,
+  "preservedExistingCustomValuesExperimentsAndAgentGuidance": true,
+  "componentDecisionTable": {
+    "name": "Liberty Mutual - Agency product priorities",
+    "componentInstanceUid": "c293373f-7f75-5cfe-a495-f62ed2a70920",
+    "status": "Started; live variant delivery verified",
+    "rules": [
+      {
+        "order": 1,
+        "equals": "agency-growth",
+        "dataSourceId": "3127968e-4b21-50c3-ad79-b6bbbe5303b8",
+        "variantName": "c293373f7f755cfea495f62ed2a70920_6c922be5e7d849358e4f405b8d4051a5"
+      },
+      {
+        "order": 2,
+        "equals": "producer-priorities",
+        "dataSourceId": "077bbcf9-ce80-5f76-ae6a-8a8b5580f1c0",
+        "variantName": "c293373f7f755cfea495f62ed2a70920_f3767f2c987d44b5ae3c8e08cd956bb6"
+      }
+    ],
+    "defaultDataSourceId": "649f5db2-d1cd-5fc4-bd87-e31047fbe8e9"
+  },
+  "draftDecisionTests": [
+    {
+      "persona": "Avery",
+      "result": "Rule 1 matched",
+      "evidenceFile": "agency-priorities-draft-avery-test.png"
+    },
+    {
+      "persona": "Daniel",
+      "result": "Rule 2 matched",
+      "evidenceFile": "agency-priorities-draft-daniel-test.png"
+    },
+    {
+      "persona": "Maya",
+      "result": "No rule matched",
+      "evidenceFile": "agency-priorities-draft-maya-test.png"
+    }
+  ],
+  "prepublicationPreviews": [
+    {
+      "persona": "Avery",
+      "agency": "Cedar Ridge Insurance",
+      "state": "Texas",
+      "cardOrder": [
+        "Build a stronger small-business practice",
+        "Support workers\u2019 compensation conversations in Texas",
+        "Connect home and auto conversations"
+      ],
+      "evidenceFile": "agency-priorities-avery-native-prepublication-preview.png"
+    },
+    {
+      "persona": "Daniel",
+      "agency": "Prairie Oak Insurance",
+      "state": "Illinois",
+      "cardOrder": [
+        "Connect home and auto conversations",
+        "Support workers\u2019 compensation conversations in Illinois",
+        "Build a stronger small-business practice"
+      ],
+      "evidenceFile": "agency-priorities-daniel-native-prepublication-preview.png"
+    }
+  ],
+  "nativeConfigurationReady": true,
+  "actualLiveVariantDeliveryVerified": true,
+  "visitorFirstLoginVerification": {
+    "avery": "Pass, canonical first Home response and diagnostic repeat without refresh",
+    "daniel": "Initial canonical neutral fallback before diagnostics; subsequent clean-origin and canonical same-browser sign-out/switch first responses passed without refresh",
+    "identitySourceCodeChanged": false,
+    "historicalFallbackCauseEstablished": false
+  }
+}

@@ -9,6 +9,7 @@ SharedFields:
   Value: |
     {F64643C1-6280-57C2-8695-02D4C563B4AE}
     {427C0C0A-38CB-5C1B-AA2D-34B20594A9AA}
+    {05F06DD4-011A-5855-8738-43B4B3A0D4EB}
 - ID: "a036b2bc-ba04-44f6-a75f-bae6cd242abf"
   Hint: Path
   Value: /Views/SXA JSS/SXA JSS Layout.cshtml

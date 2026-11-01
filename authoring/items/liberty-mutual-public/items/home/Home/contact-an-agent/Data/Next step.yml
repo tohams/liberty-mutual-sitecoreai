@@ -1,0 +1,36 @@
+---
+ID: c78e1f75-6e47-5fa7-b8c9-b1d9bc58ea74
+Parent: 8af750e7-2018-5ab1-9cb4-c60e287e1447
+Template: feb60c5a-1074-503c-b9f3-dd142f821856
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/contact-an-agent/Data/Next step
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: dee5d997-7be0-5075-909a-bd146335451f
+      Hint: heading
+      Value: Find an independent agent
+    - ID: 29773d2d-19e0-5eed-9fff-97d5e4d3d441
+      Hint: introduction
+      Value: <p>Keep the question and resource you were reviewing available for your conversation. Use Liberty Mutual’s agent finder to look for a local independent agent.</p>
+    - ID: 32292dfc-11ff-5f34-9827-8108256a20a1
+      Hint: products
+      Value: |
+        {03A070DA-DBDA-54AE-B8EF-90438BEAF720}
+        {1D8F4751-DFD3-5D91-A1C8-FD7361802844}
+        {D59DAB7E-ECA1-5D76-A813-9C65E2D1DAC6}
+        {E7808471-9E68-5605-8F41-DA834B7087A6}
+        {8A49D7B9-6CA7-5D14-B561-7A7999A2ADFD}
+        {15909857-248F-52B0-B83A-8640CCE0B38D}
+        {A3F28E7D-1CD2-56FA-966E-374974653472}
+    - ID: e939dc09-771d-534a-803d-3f959501fe2f
+      Hint: agentLink
+      Value: <link text="Find an independent agent" linktype="external" url="https://agents.libertymutual.com/" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

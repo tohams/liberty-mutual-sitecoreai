@@ -1,0 +1,24 @@
+---
+ID: 2598d5b1-953b-57ec-9086-14afb798ab06
+Parent: 1bb54766-6a38-5c47-b0ee-c57570679d14
+Template: 4b7e2da9-de43-4c83-88c3-02f042031d04
+Path: /sitecore/system/Workflows/Liberty Mutual Public Review/Awaiting approval
+SharedFields:
+- ID: fb8abc73-7acf-45a0-898c-d3ccb889c3ee
+  Hint: Final
+  Value: |
+
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "20"
+- ID: dec8d2d5-e3cf-48b6-a653-8e69e2716641
+  Hint: __Security
+  Value: ar|sitecore\Liberty Mutual Workshop Author|pe|+item:read|-item:write|-item:create|-item:delete|-item:rename|-item:admin|-workflowState:write|-workflowState:delete|pd|ar|sitecore\Liberty Mutual Workshop Approver|pe|+item:read|-item:write|-item:create|-item:delete|-item:rename|-item:admin|+workflowState:write|-workflowState:delete|pd|
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: "20261031T160000Z"

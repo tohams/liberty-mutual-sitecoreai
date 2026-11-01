@@ -70,6 +70,14 @@ include = content['items']['includes'][0]
 expected_ignore_rules = [{'path': path.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'}
                          for path in sorted(site_placeholder_paths | {site_placeholder_root + '/headless-support-form'} | api_owned_campaign_paths | {taxonomy_root, resource_branch_path, resource_branch_path.replace('Resource page', 'Campaign page'), product_branch_path, product_catalog_root})]
 expected_ignore_rules.append({'path': available_root.removeprefix('/sitecore/content/LibertyMutual'), 'scope': 'Ignored'})
+expected_ignore_rules.extend({'path': path, 'scope': 'Ignored'} for path in [
+    '/liberty-mutual-public-site',
+    '/liberty-mutual-agent-portal/Data/Agency priorities',
+    '/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agency-priorities',
+    '/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-shared-disclosure',
+    '/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities',
+    '/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure',
+])
 expected_ignore_rules.sort(key=lambda rule: rule['path'])
 require(include['path'] == '/sitecore/content/LibertyMutual' and
         include.get('allowedPushOperations') == 'CreateOnly' and
@@ -90,8 +98,10 @@ require(include['path'] == taxonomy_root and include.get('allowedPushOperations'
         and include.get('scope', 'ItemAndDescendants') == 'ItemAndDescendants' and not include.get('rules'),
         'Taxonomy must remain CreateOnly and restricted to its owned subtree.')
 resource_modules = read_json(ROOT / 'xmcloud.build.json')['deployItems']['modules']
-require(len(resource_modules) == 5 and set(resource_modules) ==
-        {'nextjs-starter', 'LibertyMutual.Model', 'LibertyMutual.SitePresentation', 'LibertyMutual.SupportForm', 'LibertyMutual.ComponentLibrary'},
+require(len(resource_modules) == 9 and set(resource_modules) ==
+        {'LibertyMutual.Model', 'LibertyMutual.SitePresentation', 'LibertyMutual.SupportForm', 'LibertyMutual.ComponentLibrary',
+         'LibertyMutual.PublicWorkflow', 'LibertyMutual.PublicModel', 'LibertyMutual.PublicPresentation',
+         'LibertyMutual.PublicPartialPlaceholders', 'LibertyMutual.PortalRelevancePresentation'},
         'Editable content and taxonomy must remain outside authoring resource packages.')
 
 library_module = read_json(BASE / 'LibertyMutual.ComponentLibrary.module.json')
@@ -310,12 +320,28 @@ require(field_value(article_rendering.get('SharedFields', []), 'OtherProperties'
         'ResourceArticle must enable the native SXA dynamic placeholder resolver.')
 
 layout_ids = {}
+public_contract = read_json(ROOT / 'authoring/items/liberty-mutual-public/public-contract.json')
+relevance_contract = read_json(ROOT / 'authoring/items/liberty-mutual-public/portal-relevance-contract.json')
+new_placeholder_ids = {}
+for key, component in [('headless-agency-priorities', 'AgencyPriorities'),
+                       ('headless-shared-disclosure', 'SharedDisclosure')]:
+    record = next(r for r in public_contract['records'] if r['path'] ==
+                  '/sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic/' + key)
+    require(normalized_id(record['id']) == normalized_id(relevance_contract['placeholderIds'][key]['global'])
+            and record['fields']['Placeholder Key'] == key
+            and id_list(record['fields']['Allowed Controls']) == [normalized_id(public_contract['renderingIds'][component])],
+            'New relevance regions must reference their exact separately owned restricted definitions: ' + key)
+    new_placeholder_ids[key] = normalized_id(record['id'])
 for name, components in LAYOUT_COMPONENTS.items():
     layout = paths[LAYOUT_ROOT + '/' + name]
     identifier = normalized_id(layout['ID'])
     require(manifest['layoutIds'].get(name) == identifier, f'Layout manifest mismatch: {name}')
-    require(id_list(field_value(layout.get('SharedFields', []), 'Placeholders')) ==
-            [placeholder_ids[PLACEMENTS[c]] for c in components],
+    expected_regions = [placeholder_ids[PLACEMENTS[c]] for c in components]
+    if name == 'PortalLayout':
+        expected_regions += [new_placeholder_ids['headless-agency-priorities'], new_placeholder_ids['headless-shared-disclosure']]
+    elif name == 'ResourcesLayout':
+        expected_regions += [new_placeholder_ids['headless-shared-disclosure']]
+    require(id_list(field_value(layout.get('SharedFields', []), 'Placeholders')) == expected_regions,
             f'{name} must expose only its declared component regions in the expected order.')
     layout_ids[name] = identifier
 

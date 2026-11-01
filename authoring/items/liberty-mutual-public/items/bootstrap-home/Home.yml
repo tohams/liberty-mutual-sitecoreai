@@ -1,0 +1,58 @@
+---
+ID: 6d600332-3e21-4c5f-83ec-aae04f83450f
+Parent: 2ad5917e-0fa7-416d-98eb-15ce2c04f06c
+Template: a4de2222-c8a5-54d4-adee-bbad976a457c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"><r uid="{C0F3D089-3B88-58EE-9639-B39384AFA43F}" id="{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Hero" par="FieldNames={843D437A-CF51-5140-B236-AE8E1D3E191C}&amp;DynamicPlaceholderId=10" /><r uid="{B8A74E1F-4DE5-54DE-AADF-E54A557BD9CD}" id="{FF280574-45AE-5A99-B5E0-5E290B91D9B0}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Quote choices" par="FieldNames={D1E3F875-4FEB-504A-B3F4-19A93E10BC85}&amp;DynamicPlaceholderId=11" /><r uid="{9FDAC7AF-6542-517A-AE07-A2165A5C45C5}" id="{F63F0F36-EA5B-5693-85C6-B4DF475C8840}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Customer reviews" par="FieldNames={2C4E0B8C-56A5-5C2B-8C09-7F28C25D0069}&amp;DynamicPlaceholderId=12" /><r uid="{A756A308-5777-5D0C-9750-C92A0FBBAC0D}" id="{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Protection and savings" par="FieldNames={90D58D0A-27F8-500B-810C-835274FC22F2}&amp;DynamicPlaceholderId=13" /><r uid="{FC23E04E-E20E-5632-BAFD-F7B5396A0A60}" id="{44D749A9-68A1-5987-844B-00DE3ABFB287}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Limu Emu and Doug" par="FieldNames={42ECEB7E-E29B-573B-BE9B-B7C120B0E339}&amp;DynamicPlaceholderId=14" /><r uid="{27F1E880-4F06-59C5-B75C-761B6FCE9307}" id="{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Insurance options" par="FieldNames={3833345A-D97C-5483-B1E4-9394FE2ECBE4}&amp;DynamicPlaceholderId=15" /><r uid="{8610344D-0AEA-5A3B-BDF7-3B0C94CFEE2E}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Claims support" par="FieldNames={F9496C71-91A3-586B-B4BB-BE1CFDAA5BD8}&amp;DynamicPlaceholderId=16" /><r uid="{CB7D45D1-D2CE-51C5-845A-4E0672C1ACB6}" id="{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Ways to get a quote" par="FieldNames={FDE894AD-C04E-5E50-8178-4BA91F1F4803}&amp;DynamicPlaceholderId=17" /><r uid="{83795FD7-AB43-5A1A-BE1D-6149DBFEA3D4}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Manage your policy" par="FieldNames={1B8D9769-ABB9-5E7D-A4D1-A4FE12DFA3CA}&amp;DynamicPlaceholderId=18" /><r uid="{FDD0FBD5-AFD1-52C4-9B00-62DC34C4E1E8}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Pay your bill" par="FieldNames={F322362D-A717-59BE-8109-D5BECBB51310}&amp;DynamicPlaceholderId=19" /><r uid="{3529EB39-9FB1-55E0-8A23-3799437C14CC}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Savings disclosure" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=20" /><r uid="{C52E7C13-DA1B-5D89-9AF7-BE2DE8B31130}" id="{3B2349C9-F98B-5C1A-8A5A-3B98BA3535F1}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{9610856E-28F7-5333-8923-80AC8A880E94}" par="FieldNames={5D5B9527-E2E8-5C4F-B1FF-D38F7588CAF1}&amp;DynamicPlaceholderId=4" /><r uid="{75CD3528-774B-5027-AEDD-D523A2EC2891}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5" /></d></r>
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: |
+    {1C82E550-EBCD-4E5D-8ABD-D50D0809541E}
+    {D5784517-B225-55AA-BC9C-8910FA0DB4F2}
+- ID: 508c54c0-cd02-4266-8b68-d71f88de1aa9
+  Hint: ChangeFrequency
+  Value: "{D23B4654-53A5-4589-8B1B-5665A763D144}"
+- ID: 76fb6ffd-4487-4028-a1cf-705fbe360cba
+  Hint: Priority
+  Value: "{19F3E919-4991-495F-9207-E1DADFD06F54}"
+- ID: 1fce966b-b8dc-46f1-8ceb-6ff6816a88f0
+  Hint: baseOgType
+  Value: website
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: Liberty Mutual insurance
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: Liberty Mutual insurance
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+    - ID: 748e2709-fb2f-5f73-9ca6-d8e801b6eafc
+      Hint: metadataTitle
+      Value: Liberty Mutual insurance
+    - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
+      Hint: metadataDescription
+      Value: Explore auto, home, and bundling options with guidance that fits your needs.
+    - ID: a98fdad1-e82c-5380-9954-33b996734100
+      Hint: canonicalUrl
+      Value: https://liberty-mutual-public-site.vercel.app/
+    - ID: 001ac65e-7daa-5a02-af03-2a5ebdabd129
+      Hint: audience
+      Value: consumer
+    - ID: 44cc401f-47ef-5b97-9a35-2bd9a860c066
+      Hint: state
+      Value: All
+    - ID: 9c5ab0fe-bb46-51cc-98f0-412ca7d8e543
+      Hint: product
+      Value: |

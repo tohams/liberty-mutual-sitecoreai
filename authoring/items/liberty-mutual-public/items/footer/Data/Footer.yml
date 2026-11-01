@@ -1,0 +1,62 @@
+---
+ID: 82d42b7c-60f7-5230-9c17-03592feb8d05
+Parent: be5b05b5-24b3-570d-a792-800012e0f280
+Template: 2f8f9387-9e11-53d6-b99c-0b33c2a372c7
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer/Data/Footer
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 517e0df2-5e2d-5e04-aca0-09742ad1b486
+      Hint: body
+      Value: <p>© 2026 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116<br>Liberty Mutual is an <a href="https://www.libertymutualgroup.com/about-lm/our-company/equal-employment-opportunity-and-anti-discrimination-policy">Equal Opportunity Employer</a> and an Equal Housing Insurer.</p>
+    - ID: 179ab06f-b987-5f3a-a681-6b7fa7cb4e1b
+      Hint: contactLink
+      Value: <link text="Contact us" linktype="external" url="/contact-an-agent" />
+    - ID: ec94038d-c2ca-51cc-ba92-e7e87cdb0b7b
+      Hint: privacyLink
+      Value: <link text="Privacy" linktype="external" url="https://www.libertymutual.com/privacy-policy" />
+    - ID: 5ccc39a6-592e-544a-a4c1-7cb8e31eac3f
+      Hint: termsLink
+      Value: <link text="Terms" linktype="external" url="https://www.libertymutual.com/terms-conditions" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+    - ID: 0d0510b3-f4c8-5257-a3a9-90e8b53ab3c3
+      Hint: columns
+      Value: |
+        {2ADEAC33-5BD8-544A-839F-55ACC8EC910A}
+        {67234AE8-4EF3-5AC5-9379-7265C644F590}
+        {E2F76348-53AD-5353-8055-5781CE45D0FA}
+    - ID: 2d3223c2-2922-5844-a5c5-8cf60d492698
+      Hint: socialLinks
+      Value: |
+        {F3ECCFC1-FC4E-5C09-B1A6-E1DD9C55B212}
+        {9BF78D72-D86C-555D-8FC6-76C15780AE98}
+        {562B68D3-DE8F-5C6A-9294-2B4B9A94A66D}
+        {E45316E9-761F-5879-88D6-41175042E349}
+    - ID: 5a6d7e0f-dac4-5bf2-84d3-81b4931ce1f3
+      Hint: legalLinks
+      Value: |
+        {698EBB16-3A78-5279-8568-99A5C49FC8F1}
+        {9B730524-DC5E-5FD0-939B-39F2AD4EA890}
+        {E5036DC5-DBA9-5AE7-AAC2-BFCB12296C0B}
+        {64B4E1E9-7411-52B2-980B-2F38CBDACB56}
+        {17108FBC-BF78-5742-A1FD-D031835AEB99}
+        {10237FE9-09C6-56BA-A24F-C869A172AAE6}
+        {255B8869-A390-5C97-92D2-7D8C782D9198}
+        {C7ECFB58-85BB-5A6C-9B35-6C5E99806659}
+    - ID: e67078b8-6882-5aad-a733-2ce916ebe84c
+      Hint: disclaimer
+      Value: <p>The information on this website is intended to provide a general overview of our insurance policies and coverages. For detailed policy information, refer to your contract. Liberty Mutual offers multiple purchasing options including online, by phone, and by agent. Products, prices, and savings may vary based on state and how you purchase. Go to <a href="https://www.libertymutual.com/ways-to-buy">libertymutual.com/ways-to-buy</a> to learn more.</p>
+    - ID: b5b7288d-b373-5b55-9e83-035b72b4e441
+      Hint: logo
+      Value: <image mediaid="{D10F3BE3-3CD8-4D4A-86D1-05022852ED48}" alt="Liberty Mutual Insurance" />
+    - ID: fa8f1baa-ee13-5b43-bdf0-d434376aa9a4
+      Hint: mobileLogo
+      Value: <image mediaid="{9BC5F4D4-C1A9-4736-9A5E-66ABA0440DC6}" alt="Liberty Mutual Insurance" />

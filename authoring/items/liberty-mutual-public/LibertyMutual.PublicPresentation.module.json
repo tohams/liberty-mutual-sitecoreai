@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PublicPresentation",
+  "description": "Public website developer-owned definitions; preserves editorial content",
+  "items": {
+    "includes": [
+      {
+        "name": "presentation",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation",
+        "allowedPushOperations": "CreateAndUpdate",
+        "rules": [
+          {
+            "path": "/Page Branches",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/Partial Designs/Header/Data",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/Partial Designs/Footer/Data",
+            "scope": "Ignored"
+          },
+          {
+            "path": "/Placeholder Settings/Partial Design",
+            "scope": "Ignored"
+          }
+        ]
+      },
+      {
+        "name": "branch-settings",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      }
+    ]
+  }
+}

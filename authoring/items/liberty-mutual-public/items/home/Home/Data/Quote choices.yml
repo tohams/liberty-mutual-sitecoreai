@@ -1,0 +1,48 @@
+---
+ID: 19f1278a-a49d-5d18-b370-8e1dde1987a7
+Parent: f983e099-7647-5bea-b9d4-f5e5f2fb27a8
+Template: 5ff259c9-c632-56d2-8bb5-4980c9226646
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/Data/Quote choices
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: f6cc3915-269f-5c55-a3ec-f2bec59414e4
+      Hint: heading
+      Value: |
+
+    - ID: 4fc58087-c67b-552f-b662-9f89d84b7fb3
+      Hint: introduction
+      Value: |
+
+    - ID: bc105dbf-3d11-5ddf-b31c-b0b18d09b9fb
+      Hint: products
+      Value: |
+        {03A070DA-DBDA-54AE-B8EF-90438BEAF720}
+        {1D8F4751-DFD3-5D91-A1C8-FD7361802844}
+        {E7808471-9E68-5605-8F41-DA834B7087A6}
+        {D59DAB7E-ECA1-5D76-A813-9C65E2D1DAC6}
+        {61961F51-60A2-5CFB-8626-083567B3380E}
+        {3EC846BA-AF50-59BE-A3F4-B5A882BD7B08}
+        {A27AA718-1DB3-54DF-B5C2-91F5F6017807}
+        {8F8F4EB3-6B0E-5231-A046-D31B8E28168A}
+    - ID: d8dbe169-e992-5ecf-8447-fc2bf1f0b086
+      Hint: defaultProducts
+      Value: auto
+    - ID: d37d62b1-168c-5acd-a17c-c7571a870323
+      Hint: postcodeLabel
+      Value: ZIP Code
+    - ID: 90c71099-638c-58f1-b04c-acab6a2bba9f
+      Hint: actionLink
+      Value: <link text="Get my price" linktype="external" url="/get-a-quote" />
+    - ID: bf61314f-b020-5f0d-889b-302f13cd28af
+      Hint: agentLink
+      Value: <link text="Find a local agent" linktype="external" url="/contact-an-agent" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

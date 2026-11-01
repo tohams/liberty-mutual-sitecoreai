@@ -1,0 +1,17 @@
+---
+ID: 3e82160b-336f-5744-a667-7a1b94bc7307
+Parent: 370f9cc8-4585-560d-9228-881f53a62859
+Template: 4d50cdae-c2d9-4de8-b080-8f992bfb1b55
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicApprovedAnswer/Default
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

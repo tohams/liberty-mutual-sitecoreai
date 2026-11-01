@@ -1,0 +1,13 @@
+---
+ID: 468dcf82-4789-5cc6-9e4b-6896d549bcae
+Parent: 5ec64e1d-869c-56fe-839e-dac0b6eed069
+Template: 4d50cdae-c2d9-4de8-b080-8f992bfb1b55
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure/Default
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

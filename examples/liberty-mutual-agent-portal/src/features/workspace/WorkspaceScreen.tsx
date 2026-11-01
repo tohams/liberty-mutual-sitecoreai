@@ -13,7 +13,13 @@ import {
   usePortal,
 } from "../portal/portal-context";
 
-export function WorkspaceScreen({ editorial }: { editorial?: ReactNode }) {
+export function WorkspaceScreen({
+  editorial,
+  recommendations,
+}: {
+  editorial?: ReactNode;
+  recommendations?: ReactNode;
+}) {
   const { data, busy, act } = usePortal();
   const [taskFilter, setTaskFilter] = useState("All priorities");
   const activeTasks = data.tasks.filter((task) => task.status === "Open");
@@ -168,6 +174,9 @@ export function WorkspaceScreen({ editorial }: { editorial?: ReactNode }) {
           : "Your business lines"}{" "}
         · {data.productionPeriod.label} · Updated {dateLabel(data.asOfDate)}
       </p>
+      {recommendations && (
+        <section className="cms-editorial-slot">{recommendations}</section>
+      )}
       <div className="workspace-columns">
         <div className="workspace-primary">
           <section className="panel priority-panel">

@@ -1,0 +1,13 @@
+---
+ID: 09eaf7eb-ab42-511f-bceb-bf08a7d7e901
+Parent: ba8f6649-9df3-51fd-8652-cc1d76dcd3c3
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicFaq/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

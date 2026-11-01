@@ -1,0 +1,23 @@
+---
+ID: 5cc16b2a-96de-5d24-8c24-586c0c8d7435
+Parent: cd8b9244-7f4f-5846-806e-47d069081013
+Template: 8fb0a60a-31d7-5009-abca-636a6a3f40b5
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/Data/Introduction
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 3f27b5a0-0044-5085-b90f-a55499fc260a
+      Hint: heading
+      Value: Start with your question
+    - ID: 3abbd930-ac1b-5420-9c68-9db3df0aef7e
+      Hint: body
+      Value: <p>Browse the guidance below, or search in your own words. General information helps you explore your options; your policy and circumstances determine your coverage.</p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

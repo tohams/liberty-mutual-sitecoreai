@@ -1,0 +1,33 @@
+---
+ID: e25cbda8-ec5e-5493-a198-801dbc646452
+Parent: 681ab15a-db67-527a-bc05-b815b2998f82
+Template: 824a2dde-d100-591c-a91b-1d9edb4f925e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/Data/Ways to get a quote/Cards/01 Quote on your own
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 818b1b49-589e-5b3c-87ea-f8dc62e674e3
+      Hint: value
+      Value: |
+
+    - ID: 2e0042be-6693-536c-90cb-412fd6b7e104
+      Hint: heading
+      Value: Quote on your own
+    - ID: 4fe5c833-fa49-52d9-86f0-3afc561b9165
+      Hint: body
+      Value: <p>Shop independently and confidently, with an online quote that lets you explore your options.</p>
+    - ID: d94b0c27-d2a9-5a26-87c4-f4ab54db55ab
+      Hint: image
+      Value: <image mediaid="{31945349-A0E5-476F-B6DE-B93B0D3AF045}" alt="Man sitting in a chair with a laptop" />
+    - ID: 989b5d38-8109-53f9-a130-c2fd63873c2d
+      Hint: actionLink
+      Value: <link text="Get a quote" linktype="external" url="/get-a-quote" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

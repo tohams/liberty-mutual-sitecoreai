@@ -1,0 +1,27 @@
+---
+ID: 2adeac33-5bd8-544a-839f-55acc8ec910a
+Parent: 55d54104-5341-5abc-a009-f9a468a99ee3
+Template: 4197034d-2f0e-551b-b3d9-9c18fa9be84f
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer/Data/Footer/Columns/01 Call for a quote
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 9adfb3e7-8677-5a88-88b9-4e2b9e4dace0
+      Hint: heading
+      Value: Call for a quote
+    - ID: 72d4f8bc-e87d-5f2c-88a2-d522a84565db
+      Hint: body
+      Value: <p><a href="tel:844-251-3582">844-251-3582</a><br>(personal insurance)</p><p><a href="tel:844-925-1273">844-925-1273</a><br>(small business insurance)</p><p><a href="/contact-an-agent">Find a local agent</a></p><h2>24/7 Roadside Assistance</h2><p><a href="tel:877-762-3101">877-762-3101</a></p>
+    - ID: 63e3c2ce-499a-5002-8fef-e0e91bcb6b30
+      Hint: links
+      Value: |
+
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

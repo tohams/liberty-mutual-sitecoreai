@@ -1,0 +1,13 @@
+---
+ID: 77e61ea3-3eb0-55f0-8e1c-1ff6b28341d8
+Parent: f1237b46-6c3e-585f-9d4d-325a02f197c4
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/vehicle/auto-insurance/Data/Available discounts/Cards
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

@@ -1,0 +1,13 @@
+---
+ID: 33e46792-1cc2-56b0-a1a3-baf75cf4ae6c
+Parent: daac6096-da7d-55db-8454-a9fc87412db5
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/collision-coverage-and-deductibles/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

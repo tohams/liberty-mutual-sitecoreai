@@ -1,0 +1,13 @@
+---
+ID: 5a3fb625-552f-5591-a552-634f275b03d6
+Parent: 777de2e0-bae0-508b-926f-8e17cc1f95d2
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-auto-and-renters/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

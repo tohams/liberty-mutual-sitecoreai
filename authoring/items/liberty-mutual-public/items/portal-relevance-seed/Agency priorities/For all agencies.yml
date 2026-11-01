@@ -1,0 +1,28 @@
+---
+ID: 649f5db2-d1cd-5fc4-bd87-e31047fbe8e9
+Parent: 19314938-5d93-57cc-b572-a548026d43dd
+Template: 2ec5a6fa-cefe-5477-9e13-9ad07609f26c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/For all agencies
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: fc9fa1f9-31df-56c7-9fe7-bbd68fdb14fb
+      Hint: Heading
+      Value: Priorities for your agency
+    - ID: 4d579360-2564-5a1d-8e24-57b353bf78f5
+      Hint: Intro
+      Value: <p>Explore product conversations and resources that help your agency grow.</p>
+    - ID: 9ce3391a-d490-5c2e-975b-41c695d206a2
+      Hint: Recommendations
+      Value: |
+        {5A9ED21C-3F7F-59B8-BFD3-6B81236D9956}
+        {5B76C25A-FED2-5163-B8DA-8CFE8DD87D9A}
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

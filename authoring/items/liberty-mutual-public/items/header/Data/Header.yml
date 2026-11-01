@@ -1,0 +1,53 @@
+---
+ID: 9d2c44df-1a4c-5040-830c-9b6a0cf47787
+Parent: 04c52f60-b468-5c18-8909-6cb23eed6b90
+Template: 19e06326-2afd-54e0-99fa-df8b005512a4
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header/Data/Header
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 8ee621c5-5aff-5f6e-ab22-6059a1227d89
+      Hint: homeLink
+      Value: <link text="Home" linktype="external" url="/" />
+    - ID: 988531f3-9855-5e98-a395-ce59a2fed953
+      Hint: autoLink
+      Value: <link text="Auto" linktype="external" url="/vehicle/auto-insurance" />
+    - ID: 0c7b23fb-282f-5db0-875a-de5e9fcd8dfd
+      Hint: homeInsuranceLink
+      Value: <link text="Home insurance" linktype="external" url="https://www.libertymutual.com/property/homeowners-insurance" />
+    - ID: 484d8269-b8f3-5184-a60a-dab763f17aac
+      Hint: bundlingLink
+      Value: <link text="Bundle" linktype="external" url="/bundling" />
+    - ID: d2f5a45f-864b-5c20-8c84-047b02f8c028
+      Hint: resourcesLink
+      Value: <link text="Resources" linktype="external" url="/insurance-resources" />
+    - ID: 659b0e5c-4550-5621-9c88-628d7f41e8e9
+      Hint: contactLink
+      Value: <link text="Find a local agent" linktype="external" url="/contact-an-agent" />
+    - ID: 0e0022fb-3897-56da-a82f-19a3ad04e4fb
+      Hint: quoteLink
+      Value: <link text="Get a quote" linktype="external" url="/get-a-quote" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+    - ID: 7d68fcab-74a6-56c6-8947-8ccb7198d34f
+      Hint: navigation
+      Value: |
+        {684A0047-46A9-59D6-A239-8A5653BB346B}
+        {9637FD10-C88D-543B-AF4E-E08BCDC82F96}
+        {21948E88-F14A-579D-8EA1-D7C12C2119F8}
+    - ID: 41cd7137-f263-543b-b965-313d3274641a
+      Hint: searchLink
+      Value: <link text="Search" linktype="external" url="/search" />
+    - ID: 074bfa7d-0186-55e5-8bee-12a4fa4c7568
+      Hint: loginLink
+      Value: <link text="Log in" linktype="external" url="https://eservice.libertymutual.com/account/auth" />
+    - ID: a7ccfc8a-ec93-583c-9101-3cc8058b3601
+      Hint: logo
+      Value: <image mediaid="{95BC6086-73A3-4709-B41D-F44D9E3CEDA9}" alt="Liberty Mutual Insurance" />

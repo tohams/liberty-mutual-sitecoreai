@@ -1,0 +1,20 @@
+---
+ID: 876c9946-1040-555f-b675-f9acc53704e3
+Parent: 57eaa764-f34e-4d7b-97c3-c3c5dbc8eda8
+Template: d2a6884c-04d5-4089-a64e-d27ca9d68d4c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/Partial Design/Page body
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: sxa-public-page-body
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Value: "{5D5C48C3-2103-5CDD-935D-BFA622018ADD}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

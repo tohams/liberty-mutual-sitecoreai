@@ -1,0 +1,34 @@
+---
+ID: de4d3a92-e2e0-59ad-a49d-d879d08816a1
+Parent: f983e099-7647-5bea-b9d4-f5e5f2fb27a8
+Template: fc07715c-5b17-53a5-89ce-1b08d6b2a816
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/Data/Protection and savings
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 265c0d23-68cd-5fa3-ae77-cddc4fd25ab3
+      Hint: heading
+      Value: <h2 class="public-section-heading--accent public-home-heading"><strong>Protection you can trust,</strong><br>at a price that works for you.</h2>
+    - ID: 9a7aa587-fb2b-5828-9471-4013c68c7422
+      Hint: introduction
+      Value: |
+
+    - ID: a7dae70d-8577-536a-bb6f-a63b64fdbe0b
+      Hint: items
+      Value: |
+        {7844CD8D-7F1E-5D3E-AE83-707290EB1607}
+        {926F5B32-5661-5EC5-BCB4-55EA67E0C6F3}
+        {9F12DBC2-F815-5D3E-A607-B3B95182B603}
+    - ID: 3f9c6aaf-39c9-5ebd-950c-4cf2e513c838
+      Hint: actionLink
+      Value: |
+
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

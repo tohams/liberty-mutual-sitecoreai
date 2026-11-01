@@ -1,0 +1,59 @@
+---
+ID: 4c54e28e-f876-5a48-a413-881641ee548b
+Parent: 0a7f4afc-ba36-5b17-9fa5-b82287d5e883
+Template: 1a9400ee-e47b-5992-9431-56ae5586f90d
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Bundle auto and renters
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: de4a7a26-6fe3-571d-9b4c-6e117690f9b5
+      Hint: question
+      Value: Can I bundle auto and renters insurance?
+    - ID: 43f7eef1-6cba-5b10-94cb-17e86f19726d
+      Hint: canonicalUrl
+      Value: https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-auto-and-renters
+    - ID: 54e5a9a7-a8e8-54f9-b163-f6cf04fe0119
+      Hint: answer
+      Value: Liberty Mutual offers auto and renters bundling options for eligible customers. You can explore protecting your car and the belongings in your rental while keeping your policies with one insurer. The savings available to you depend on your circumstances.
+    - ID: 47041dc1-a183-5516-85ea-afdea936289c
+      Hint: formalWording
+      Value: <p>Auto and renters bundling discounts are subject to eligibility, state availability, and the terms of the policies selected.</p>
+    - ID: db533ede-0a22-5a9b-ae03-f3298cfc2e70
+      Hint: explanation
+      Value: <p>Renters insurance and auto insurance address different needs. Review what each policy covers, and compare limits and deductibles before choosing a combination. Start a quote to explore your available options.</p>
+    - ID: b6cfeb53-9864-5c4a-b920-d5d283af71fd
+      Hint: owner
+      Value: Liberty Mutual
+    - ID: c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe
+      Hint: effectiveDate
+      Value: 20261031T000000Z
+    - ID: 17ea77c7-9126-5fcc-a6a1-82da22fc8df5
+      Hint: reviewDate
+      Value: 20270131T000000Z
+    - ID: 69a206de-38f4-5302-8142-5e2cff09168f
+      Hint: state
+      Value: All
+    - ID: 4acbbd9e-68fd-58d5-8f05-374d157b26d9
+      Hint: product
+      Value: auto-renters
+    - ID: c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2
+      Hint: audience
+      Value: consumer
+    - ID: 3305647a-51b7-5a4e-ba7a-530eef8312c5
+      Hint: sourceLink
+      Value: "<link text=\"Liberty Mutual: bundling auto and renters\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/renters\" />"
+    - ID: 07a77a0f-36c5-5e6e-867e-cc75a35820d8
+      Hint: nextStep
+      Value: <link text="Explore auto and renters options" linktype="external" url="/get-a-quote" querystring="product=auto-renters&amp;source=bundle-auto-and-renters" />
+    - ID: 6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d
+      Hint: disclosure
+      Value: "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

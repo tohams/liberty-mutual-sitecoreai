@@ -1,0 +1,13 @@
+---
+ID: 18dd417a-39c9-5fa8-95aa-5665ba319d7b
+Parent: 4478ef85-2a21-54ed-b40c-1d87f7b5134f
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-auto-and-condo/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

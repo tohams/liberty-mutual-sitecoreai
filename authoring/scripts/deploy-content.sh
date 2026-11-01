@@ -43,6 +43,14 @@ expected.append({'path':'/liberty-mutual-agent-portal/Data/ProductCatalog','scop
 expected.extend({'path':'/liberty-mutual-agent-portal/Home/growth/'+slug,'scope':'Ignored'} for slug in ['small-business','campaign-practice','campaign-schedule-check'])
 available='/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings'
 expected.append({'path':available.removeprefix('/sitecore/content/LibertyMutual'),'scope':'Ignored'})
+expected.extend({'path':path,'scope':'Ignored'} for path in [
+    '/liberty-mutual-public-site',
+    '/liberty-mutual-agent-portal/Data/Agency priorities',
+    '/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agency-priorities',
+    '/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-shared-disclosure',
+    '/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities',
+    '/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure',
+])
 expected.sort(key=lambda rule:rule['path'])
 core_groups=['FEaaS','Forms','Media','Navigation','Page Content','Page Structure']
 expected_core=[{'name':'library-seed-'+name.lower().replace(' ','-'),'path':available+'/'+name,'scope':'SingleItem','allowedPushOperations':'CreateOnly'} for name in core_groups]
@@ -83,7 +91,7 @@ expected_library=[{'name':'component-library-'+key,'path':available+suffix,'scop
 if library['items']['includes']!=expected_library:
     raise SystemExit('Refusing Component Library push: expected exactly four owned SingleItem library configuration records.')
 deployed=json.loads(Path('xmcloud.build.json').read_text())['deployItems']['modules']
-if len(deployed)!=5 or set(deployed)!={'nextjs-starter','LibertyMutual.Model','LibertyMutual.SitePresentation','LibertyMutual.SupportForm','LibertyMutual.ComponentLibrary'}:
+if len(deployed)!=9 or set(deployed)!={'LibertyMutual.Model','LibertyMutual.SitePresentation','LibertyMutual.SupportForm','LibertyMutual.ComponentLibrary','LibertyMutual.PublicWorkflow','LibertyMutual.PublicModel','LibertyMutual.PublicPresentation','LibertyMutual.PublicPartialPlaceholders','LibertyMutual.PortalRelevancePresentation'}:
     raise SystemExit('Refusing deployment: editorial content, taxonomy and branches must remain outside authoring resource packages.')
 PY
 dotnet sitecore ser validate -i LibertyMutual.Model -i LibertyMutual.Content -i LibertyMutual.SitePresentation -i LibertyMutual.Taxonomy -i LibertyMutual.ResourcePageBranch -i LibertyMutual.ProductPageBranch -i LibertyMutual.ProductCatalog -i LibertyMutual.SupportForm -i LibertyMutual.ComponentLibrary -i LibertyMutual.LibrarySeed
@@ -161,7 +169,8 @@ if [[ "$portal_publish" == true && "$portal_what_if" == false ]]; then
     '/sitecore/layout/Placeholder Settings/Project/LibertyMutual'; do
     dotnet sitecore publish item -n "$portal_environment" -p "$portal_path" -sub -l en --pt Edge
   done
-  # The requested publication is strictly the owned customer site, with no related-items expansion.
+  # The Portal helper publishes its site only. The sibling public website has
+  # its own reviewed publication, so collection-wide publication is forbidden.
   dotnet sitecore publish item -n "$portal_environment" \
-    -p '/sitecore/content/LibertyMutual' -sub -l en --pt Edge
+    -p '/sitecore/content/LibertyMutual/liberty-mutual-agent-portal' -sub -l en --pt Edge
 fi

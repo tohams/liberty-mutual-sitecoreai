@@ -1,0 +1,13 @@
+---
+ID: bdce184f-cd71-51da-a303-2c41afbb86c2
+Parent: dddb4276-198d-5b3b-bef1-940b8e8f7f26
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/texas-auto-insurance-guide/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

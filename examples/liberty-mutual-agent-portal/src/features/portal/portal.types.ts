@@ -14,6 +14,8 @@ export interface PortalAppProps {
   initialData: PortalBootstrap;
   route: string;
   workspaceEditorial?: ReactNode;
+  agencyPriorities?: ReactNode;
+  sharedDisclosure?: ReactNode;
   resourcesSearch?: ReactNode;
   productsSpotlight?: ReactNode;
   productCatalog?: ProductCatalogPage[] | null;

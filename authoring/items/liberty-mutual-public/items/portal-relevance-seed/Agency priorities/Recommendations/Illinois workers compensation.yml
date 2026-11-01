@@ -1,0 +1,33 @@
+---
+ID: 647a18a9-a6dc-5859-82f3-6873923f1e4e
+Parent: ecb84122-fab6-5352-8d31-6349234ef4e6
+Template: b2ead4d5-0b3a-5fa9-918b-e224162ec526
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations/Illinois workers compensation
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 350fd516-f7ed-5655-82b5-8b0fbc8a82e6
+      Hint: Eyebrow
+      Value: ILLINOIS GUIDANCE
+    - ID: 8a29fd20-38ec-5038-b7da-d60ab4598c31
+      Hint: Heading
+      Value: Support workers’ compensation conversations in Illinois
+    - ID: 43610941-be36-52fb-b82e-421cd5f1899b
+      Hint: Body
+      Value: <p>Find state-specific preparation guidance for the Illinois employers with whom you work.</p>
+    - ID: ea39ce7b-ad09-5270-975f-d64d59728d3b
+      Hint: Image
+      Value: |
+
+    - ID: 03fb7ba7-acb4-5dd7-854d-e53cddabd853
+      Hint: Link
+      Value: <link text="Read Illinois guidance" linktype="external" url="/resources/illinois-workers-compensation" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

@@ -1,0 +1,23 @@
+---
+ID: 5fbd7b63-a16e-553c-bcac-504136d2aaed
+Parent: 89f229e8-25a0-5d20-8892-cfa8326194af
+Template: 8fb0a60a-31d7-5009-abca-636a6a3f40b5
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/search/Data/Introduction
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 3f27b5a0-0044-5085-b90f-a55499fc260a
+      Hint: heading
+      Value: Helpful information, grounded in sources
+    - ID: 3abbd930-ac1b-5420-9c68-9db3df0aef7e
+      Hint: body
+      Value: <p>Search results lead to published resources. For a question about an individual policy or claim, contact your insurer or agent.</p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

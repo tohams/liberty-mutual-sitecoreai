@@ -1,0 +1,30 @@
+---
+ID: 684a0047-46a9-59d6-a239-8a5653bb346b
+Parent: a5fd6880-302e-5b5e-8e59-cb14b4b52fd0
+Template: 8369c5b1-af02-591d-8b12-d0ac6414d41f
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header/Data/Header/Navigation/01 Shop insurance
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 53e384ff-302a-5715-b634-b142ff2cc95e
+      Hint: label
+      Value: Shop insurance
+    - ID: 128a1f1d-8e9f-5094-9dbe-8deff2681d0f
+      Hint: links
+      Value: |
+        {434AF82F-B8CD-55F5-B6C6-3C5F696E366B}
+        {A273A7CC-C5BC-55FB-92EC-257FBC53BF4D}
+        {71613A66-96A9-5990-BDA7-07688828F381}
+        {770E7301-15E6-5C86-B661-D9561A92B91F}
+        {EA77639C-D332-5D55-B64D-39AF2E188F61}
+        {E0B57CB2-866A-575A-9FAA-57D60F701DB6}
+        {26C1E059-7F08-5C5C-B655-1626B848C8FF}
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

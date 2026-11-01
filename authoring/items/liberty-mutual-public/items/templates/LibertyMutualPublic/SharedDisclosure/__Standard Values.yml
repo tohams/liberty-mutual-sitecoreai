@@ -1,0 +1,17 @@
+---
+ID: 3d15ceb7-22f2-5c6a-9404-f2a9c0215f19
+Parent: ba156366-00c4-5c7e-a79a-1c9f8cbce184
+Template: ba156366-00c4-5c7e-a79a-1c9f8cbce184
+Path: /sitecore/templates/Project/LibertyMutualPublic/SharedDisclosure/__Standard Values
+SharedFields:
+- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
+  Hint: __Default workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

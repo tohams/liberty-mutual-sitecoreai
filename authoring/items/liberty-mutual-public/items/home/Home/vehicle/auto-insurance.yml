@@ -1,0 +1,44 @@
+---
+ID: 1eafb9af-ba2b-5495-a42a-32da8777d387
+Parent: 0be9a576-aa38-5e03-896e-675c487235ed
+Template: a4de2222-c8a5-54d4-adee-bbad976a457c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/vehicle/auto-insurance
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"><r uid="{46D89B84-6004-5961-A464-52EA8A07A9ED}" id="{2472C249-4D6A-5BB7-B388-BD4F3CC4EAA1}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Breadcrumbs" par="FieldNames={41780E9B-DA80-5629-9B6F-EF1011D29C0C}&amp;DynamicPlaceholderId=10" /><r uid="{CEC84224-6B09-5235-B4F8-43D3C969B1FA}" id="{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Hero" par="FieldNames={843D437A-CF51-5140-B236-AE8E1D3E191C}&amp;DynamicPlaceholderId=11" /><r uid="{C5E9B45A-7747-534D-B31D-FB0B1A26459A}" id="{FF280574-45AE-5A99-B5E0-5E290B91D9B0}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Quote choices" par="FieldNames={D1E3F875-4FEB-504A-B3F4-19A93E10BC85}&amp;DynamicPlaceholderId=12" /><r uid="{04D0E02D-6904-586A-AFA2-91F6C98E1F8F}" id="{44D749A9-68A1-5987-844B-00DE3ABFB287}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Family car" par="FieldNames={42ECEB7E-E29B-573B-BE9B-B7C120B0E339}&amp;DynamicPlaceholderId=13" /><r uid="{5B07BFFD-C42F-5A1C-936B-68A4550E8793}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Coverage overview" par="FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=14" /><r uid="{DBA4DE7B-4011-56CD-A181-1BA010CF9F2C}" id="{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Available discounts" par="FieldNames={827ADE4F-93AF-5A2A-BDB8-F730B0C63BF2}&amp;DynamicPlaceholderId=15" /><r uid="{FB618728-7182-5B78-8FCB-C14A009A8E45}" id="{F63F0F36-EA5B-5693-85C6-B4DF475C8840}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Auto learning intro" par="FieldNames={C3FAE5B5-007A-5669-9E2E-59816D8D8808}&amp;DynamicPlaceholderId=16" /><r uid="{F90A8D78-2966-5F49-B464-81FBA20E9422}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Auto coverage explained" par="FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=17" /><r uid="{2D1331E7-6C9E-5E97-9632-11CFF736634A}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Auto cost factors" par="FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=18" /><r uid="{2F4AE78F-3CF6-54EB-AF37-D756297BF912}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Auto compare" par="FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=19" /><r uid="{CABFC915-27D6-52BB-A539-C1FE198394F4}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Auto other needs" par="FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=20" /><r uid="{062F8123-6380-5D15-92B4-8CC8C7174566}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Auto state guidance" par="FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=21" /><r uid="{A6C3B18C-4D27-5CB0-8CB8-354D2F850ECF}" id="{F63F0F36-EA5B-5693-85C6-B4DF475C8840}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Auto coverage table" par="FieldNames={6AB48454-3FFD-539C-A93D-0C9AB0D3BE8A}&amp;DynamicPlaceholderId=22" /><r uid="{C9CB9866-03A6-531E-A5D8-B64DD4A47BAB}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Coverage confidence" par="FieldNames={1B8D9769-ABB9-5E7D-A4D1-A4FE12DFA3CA}&amp;DynamicPlaceholderId=23" /><r uid="{FAD06B5B-8DB9-50D5-B8C6-53721DF8664C}" id="{F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/FAQs" par="FieldNames={C39B072D-2A29-55DA-9A57-9D9FACA0F280}&amp;DynamicPlaceholderId=24" /><r uid="{B94ED3DD-FA03-5602-9F68-3A08C4B8CD92}" id="{FF280574-45AE-5A99-B5E0-5E290B91D9B0}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Ready for a quote" par="FieldNames={5E7C88D5-F15C-5742-B88F-AC05787E6BB5}&amp;DynamicPlaceholderId=25" /><r uid="{DAB958DE-8AEE-54FA-88EE-FD314A31C8F1}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Savings disclosure" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=26" /><r uid="{62AF0FCA-32B3-595F-B510-C589429E7CC8}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5" /></d></r>
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: Auto insurance
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: Auto insurance
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+    - ID: 748e2709-fb2f-5f73-9ca6-d8e801b6eafc
+      Hint: metadataTitle
+      Value: Auto insurance
+    - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
+      Hint: metadataDescription
+      Value: Compare coverage choices, understand the tradeoffs, and explore a quote for your circumstances.
+    - ID: a98fdad1-e82c-5380-9954-33b996734100
+      Hint: canonicalUrl
+      Value: https://liberty-mutual-public-site.vercel.app/vehicle/auto-insurance
+    - ID: 001ac65e-7daa-5a02-af03-2a5ebdabd129
+      Hint: audience
+      Value: consumer
+    - ID: 44cc401f-47ef-5b97-9a35-2bd9a860c066
+      Hint: state
+      Value: All
+    - ID: 9c5ab0fe-bb46-51cc-98f0-412ca7d8e543
+      Hint: product
+      Value: |

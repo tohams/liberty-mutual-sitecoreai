@@ -62,6 +62,7 @@ jobs:
           python authoring/scripts/build-resource-page-seed.py --check
           python authoring/scripts/build-product-catalog-seed.py --check
           python authoring/scripts/build-product-catalog-seed.test.py
+          python authoring/scripts/native_definition_baseline.test.py
           python authoring/scripts/build-campaign-seed.py --check
           python authoring/scripts/build-component-library.py --check
           python authoring/scripts/build-support-form-seed.py --check

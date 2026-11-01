@@ -1,0 +1,13 @@
+---
+ID: 3a0ec6bf-e7ba-5dc7-b6e0-24cf9a62ba94
+Parent: ba156366-00c4-5c7e-a79a-1c9f8cbce184
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/SharedDisclosure/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

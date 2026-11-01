@@ -16,6 +16,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 import yaml
+from native_definition_baseline import reconcile_definition
 
 sys.dont_write_bytecode = True
 spec = importlib.util.spec_from_file_location('product_catalog_helpers', Path(__file__).with_name('build-product-spotlight-seed.py'))
@@ -193,6 +194,7 @@ def prepare():
     additions = records(manifest, products)
     writes = {}
     for record in additions:
+        record = reconcile_definition(record)
         destination = file_for(record)
         if destination.exists():
             existing = yaml.safe_load(destination.read_text(encoding='utf-8-sig'))

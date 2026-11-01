@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PublicModel",
+  "description": "Public website developer-owned definitions; preserves editorial content",
+  "items": {
+    "includes": [
+      {
+        "name": "templates",
+        "path": "/sitecore/templates/Project/LibertyMutualPublic",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "renderings",
+        "path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic",
+        "allowedPushOperations": "CreateAndUpdate"
+      },
+      {
+        "name": "placeholders",
+        "path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic",
+        "allowedPushOperations": "CreateAndUpdate"
+      }
+    ]
+  }
+}

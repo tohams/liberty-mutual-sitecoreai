@@ -27,6 +27,8 @@ export function PortalApp({
   initialData,
   route,
   workspaceEditorial,
+  agencyPriorities,
+  sharedDisclosure,
   resourcesSearch,
   productsSpotlight,
   productCatalog,
@@ -155,7 +157,13 @@ export function PortalApp({
     );
   else if (section === "support")
     content = <SupportScreen nativeForm={supportForm} />;
-  else content = <WorkspaceScreen editorial={workspaceEditorial} />;
+  else
+    content = (
+      <WorkspaceScreen
+        editorial={workspaceEditorial}
+        recommendations={agencyPriorities}
+      />
+    );
   return (
     <PortalNoticeContext.Provider value={toast}>
       <PortalContext.Provider
@@ -226,6 +234,9 @@ export function PortalApp({
                   </section>
                 )}
             </>
+          )}
+          {sharedDisclosure && (
+            <section className="cms-editorial-slot">{sharedDisclosure}</section>
           )}
         </PortalShell>
         {toast && (

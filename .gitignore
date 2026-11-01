@@ -1,6 +1,9 @@
 ﻿# may contain OAuth secrets, do not commit
 .sitecore/user.json
 
+# Local Vercel project links and pulled deployment configuration
+.vercel/
+
 # NuGet cache for Sitecore CLI
 .sitecore/package-cache/
 
@@ -49,3 +52,10 @@ packages/
 
 # VS Code settings
 .vscode/
+
+# Generated Python caches
+__pycache__/
+*.py[cod]
+
+# Generated TypeScript incremental build state
+*.tsbuildinfo

@@ -1,0 +1,27 @@
+---
+ID: 16c8710e-a006-53a9-91f1-5e5fbfe1493b
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: ba8f6649-9df3-51fd-8652-cc1d76dcd3c3
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/FAQs
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 26169af1-541a-50a5-92d5-e7a11aae45d1
+      Hint: heading
+      Value: Frequently asked questions about bundling insurance
+    - ID: 80b5b9b2-74f9-5a08-bcb5-d1cbae7cb8f9
+      Hint: items
+      Value: |
+        {8C73B233-9576-52D7-BD5A-A78756A08C14}
+        {E7682FE6-B2A5-5E70-85E1-A8F1F6A45989}
+        {AB3FFB9C-4625-5CE7-BFCC-7DD79417C3F9}
+        {4A640900-E761-5958-B737-A0040A06D96B}
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

@@ -1,0 +1,24 @@
+---
+ID: 4735a2ac-500d-5094-aeaf-b4395d05865e
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: b93ddcbc-a10f-55c0-9b06-d6f3a3e96eb6
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Family basketball
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: eea2687c-48ef-5355-8844-e1c78d4824f4
+      Hint: image
+      Value: <Image height="1018" src="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/47f9e23f20434020ac5e3bdc5eaece5e?transform=true&amp;format=auto&amp;width=2304&amp;height=1018" dam-id="LYzRfhlKQhuySvMJMtJ-Gg" thumbnailsrc="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/47f9e23f20434020ac5e3bdc5eaece5e?transform=true&amp;format=auto&amp;width=2304&amp;height=1018" width="2304" dam-content-type="Image" alt="Family plays basketball in a driveway beside an open garage and parked car." />
+    - ID: b4d0489f-eb4a-5f35-b4a3-94e93a48a29a
+      Hint: caption
+      Value: |
+
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

@@ -1,0 +1,1561 @@
+{
+  "schemaVersion": 1,
+  "ownership": "Seventeen developer definitions reconciled to their authoritative native values; no authored content.",
+  "records": {
+    "/sitecore/templates/Project/LibertyMutual/ProductPage/__Standard Values": {
+      "previous": {
+        "ID": "3f91adb8-d68f-5ec3-a181-b89f46ca4ec0",
+        "Parent": "80228789-b957-573c-a1c5-1b511d7281dc",
+        "Template": "80228789-b957-573c-a1c5-1b511d7281dc",
+        "Path": "/sitecore/templates/Project/LibertyMutual/ProductPage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{D638DA0C-350E-5D77-BDA5-B12CFA6F4DA7}\"><r uid=\"{400659A4-B626-51EF-8DBB-5153CA689841}\" id=\"{610D1DC8-96D3-5F38-8D15-D23279413214}\" ph=\"headless-product-details\" ds=\"$id\" par=\"FieldNames={346EF416-4FCC-5F95-98EF-EB21DEB0B14D}\" /></d></r>"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
+                    "Hint": "Title",
+                    "Value": "$name"
+                  },
+                  {
+                    "ID": "1a9d46aa-1e80-53b1-b519-331993a4e617",
+                    "Hint": "catalogChannel",
+                    "Value": "all"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "3f91adb8-d68f-5ec3-a181-b89f46ca4ec0",
+        "Parent": "80228789-b957-573c-a1c5-1b511d7281dc",
+        "Template": "80228789-b957-573c-a1c5-1b511d7281dc",
+        "Path": "/sitecore/templates/Project/LibertyMutual/ProductPage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r>\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{D638DA0C-350E-5D77-BDA5-B12CFA6F4DA7}\">\n    <r\n      uid=\"{400659A4-B626-51EF-8DBB-5153CA689841}\"\n      id=\"{610D1DC8-96D3-5F38-8D15-D23279413214}\"\n      ph=\"headless-product-details\"\n      ds=\"$id\"\n      par=\"FieldNames={346EF416-4FCC-5F95-98EF-EB21DEB0B14D}\" />\n  </d>\n</r>\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260923T195331Z"
+                  },
+                  {
+                    "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
+                    "Hint": "Title",
+                    "Value": "$name"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/templates/Project/LibertyMutual/ResourcePage/__Standard Values": {
+      "previous": {
+        "ID": "b9063020-dcb9-5e05-9225-9dd340bbcfca",
+        "Parent": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "Template": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "Path": "/sitecore/templates/Project/LibertyMutual/ResourcePage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+            "Hint": "__Default workflow",
+            "Value": "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}\" /></r>"
+          },
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T140000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "b9063020-dcb9-5e05-9225-9dd340bbcfca",
+        "Parent": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "Template": "e9573e8d-00d6-5fd9-9015-2f0aec4a0b60",
+        "Path": "/sitecore/templates/Project/LibertyMutual/ResourcePage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+          },
+          {
+            "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+            "Hint": "__Default workflow",
+            "Value": "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r>\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{BB11E9D7-11D7-5C71-9AB7-1DD37267C4D3}\" />\n</r>\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T140000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/templates/Project/LibertyMutual/Page/__Standard Values": {
+      "previous": {
+        "ID": "c2d26f86-2905-47bf-ad16-825211c17fff",
+        "Parent": "2ec94e3d-439c-4fc6-bd4e-f08c7ddd9203",
+        "Template": "2ec94e3d-439c-4fc6-bd4e-f08c7ddd9203",
+        "Path": "/sitecore/templates/Project/LibertyMutual/Page/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}\n{C14B6289-8AC2-439C-9E5B-40DE9F820C3F}\n"
+          },
+          {
+            "ID": "dbbbeca1-21c7-4906-9dd2-493c1efa59a2",
+            "Hint": "__Shared revision",
+            "Value": "5877a8ca-d5c7-473e-8cef-186a8cad17ca"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}\" /></r>"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T134151Z"
+                  },
+                  {
+                    "ID": "52807595-0f8f-4b20-8d2a-cb71d28c6103",
+                    "Hint": "__Owner",
+                    "Value": "sitecore\\thomas.lin@sitecore.com\n"
+                  },
+                  {
+                    "ID": "5dd74568-4d4b-44c1-b513-0af5f4cda34f",
+                    "Hint": "__Created by",
+                    "Value": "sitecore\\thomas.lin@sitecore.com\n"
+                  },
+                  {
+                    "ID": "8cdc337e-a112-42fb-bbb4-4143751e123f",
+                    "Hint": "__Revision",
+                    "Value": "939dc70c-f939-41ff-b9dd-aa748dab48c9"
+                  },
+                  {
+                    "ID": "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a",
+                    "Hint": "__Updated by",
+                    "Value": "sitecore\\thomas.lin@sitecore.com\n"
+                  },
+                  {
+                    "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
+                    "Hint": "Title",
+                    "Value": "$name"
+                  },
+                  {
+                    "ID": "d9cf14b1-fa16-4ba6-9288-e8a174d4d522",
+                    "Hint": "__Updated",
+                    "Value": "20260910T134157Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "c2d26f86-2905-47bf-ad16-825211c17fff",
+        "Parent": "2ec94e3d-439c-4fc6-bd4e-f08c7ddd9203",
+        "Template": "2ec94e3d-439c-4fc6-bd4e-f08c7ddd9203",
+        "Path": "/sitecore/templates/Project/LibertyMutual/Page/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}\n{C14B6289-8AC2-439C-9E5B-40DE9F820C3F}\n"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}\" />\n</r>\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T134151Z"
+                  },
+                  {
+                    "ID": "52807595-0f8f-4b20-8d2a-cb71d28c6103",
+                    "Hint": "__Owner",
+                    "Value": "sitecore\\thomas.lin@sitecore.com\n"
+                  },
+                  {
+                    "ID": "5dd74568-4d4b-44c1-b513-0af5f4cda34f",
+                    "Hint": "__Created by",
+                    "Value": "sitecore\\thomas.lin@sitecore.com\n"
+                  },
+                  {
+                    "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
+                    "Hint": "Title",
+                    "Value": "$name"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/templates/Project/LibertyMutual/PortalPage/__Standard Values": {
+      "previous": {
+        "ID": "75da39b9-8616-5479-beca-ee38e5be4753",
+        "Parent": "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc",
+        "Template": "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc",
+        "Path": "/sitecore/templates/Project/LibertyMutual/PortalPage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}"
+          },
+          {
+            "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+            "Hint": "__Default workflow",
+            "Value": "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}\" /></r>"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T140000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "75da39b9-8616-5479-beca-ee38e5be4753",
+        "Parent": "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc",
+        "Template": "d8e5d742-1ae3-5b2e-aba9-553d4a53c3fc",
+        "Path": "/sitecore/templates/Project/LibertyMutual/PortalPage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}"
+          },
+          {
+            "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+            "Hint": "__Default workflow",
+            "Value": "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r>\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}\" />\n</r>\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T140000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/templates/Project/LibertyMutual/CampaignPage/__Standard Values": {
+      "previous": {
+        "ID": "ab34f3e0-057b-5b77-91d1-40e7f54af8a1",
+        "Parent": "0611315c-a0e8-59d5-b22d-8f30dd58fcca",
+        "Template": "0611315c-a0e8-59d5-b22d-8f30dd58fcca",
+        "Path": "/sitecore/templates/Project/LibertyMutual/CampaignPage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+            "Hint": "__Default workflow",
+            "Value": "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+          },
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{C18C5EE9-43C0-5FB3-A3B8-BD6A77D08E07}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{3C960D8F-B5DD-5CDA-B645-4D8CA4EF7B4C}\" /></r>"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "ab34f3e0-057b-5b77-91d1-40e7f54af8a1",
+        "Parent": "0611315c-a0e8-59d5-b22d-8f30dd58fcca",
+        "Template": "0611315c-a0e8-59d5-b22d-8f30dd58fcca",
+        "Path": "/sitecore/templates/Project/LibertyMutual/CampaignPage/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{C18C5EE9-43C0-5FB3-A3B8-BD6A77D08E07}"
+          },
+          {
+            "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+            "Hint": "__Default workflow",
+            "Value": "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+          },
+          {
+            "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+            "Hint": "__Renderings",
+            "Value": "<r>\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{3C960D8F-B5DD-5CDA-B645-4D8CA4EF7B4C}\" />\n</r>\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/templates/Project/LibertyMutual/CampaignDataFolder/__Standard Values": {
+      "previous": {
+        "ID": "f36c994f-e5c8-560d-8951-a2d007acea12",
+        "Parent": "c18c5ee9-43c0-5fb3-a3b8-bd6a77d08e07",
+        "Template": "c18c5ee9-43c0-5fb3-a3b8-bd6a77d08e07",
+        "Path": "/sitecore/templates/Project/LibertyMutual/CampaignDataFolder/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{06B545E6-3068-5197-83DF-AF0EBB2F0B1F}|{6F08AD64-AA78-533E-89C8-4BD0579E5324}|{DD639201-740A-52F7-B47B-12E5F4C252AE}|{F5A1C713-7121-51BB-A9CC-4920B3186FEC}|{F10AA78C-6FD9-585C-B264-81B2A772D8C5}|{F89D38F9-867C-5B59-99B2-212A2EE8B89E}"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "f36c994f-e5c8-560d-8951-a2d007acea12",
+        "Parent": "c18c5ee9-43c0-5fb3-a3b8-bd6a77d08e07",
+        "Template": "c18c5ee9-43c0-5fb3-a3b8-bd6a77d08e07",
+        "Path": "/sitecore/templates/Project/LibertyMutual/CampaignDataFolder/__Standard Values",
+        "SharedFields": [
+          {
+            "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+            "Hint": "__Masters",
+            "Value": "{06B545E6-3068-5197-83DF-AF0EBB2F0B1F}\n{6F08AD64-AA78-533E-89C8-4BD0579E5324}\n{DD639201-740A-52F7-B47B-12E5F4C252AE}\n{F5A1C713-7121-51BB-A9CC-4920B3186FEC}\n{F10AA78C-6FD9-585C-B264-81B2A772D8C5}\n{F89D38F9-867C-5B59-99B2-212A2EE8B89E}\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignPage": {
+      "previous": {
+        "ID": "b6efd6f3-3107-542c-b1b1-0b6f30a8791f",
+        "Parent": "705f29fc-a5de-489e-9e2e-2dac8e03d084",
+        "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+        "Path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignPage",
+        "SharedFields": [
+          {
+            "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+            "Hint": "componentName",
+            "Value": "CampaignPage"
+          },
+          {
+            "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+            "Hint": "Parameters Template",
+            "Value": "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
+          },
+          {
+            "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+            "Hint": "__Icon",
+            "Value": "Office/32x32/layout_horizontal.png"
+          },
+          {
+            "ID": "e829c217-5e94-4306-9c48-2634b094fdc2",
+            "Hint": "OtherProperties",
+            "Value": "IsRenderingsWithDynamicPlaceholders=true"
+          },
+          {
+            "ID": "069a8361-b1cd-437c-8c32-a3be78941446",
+            "Hint": "Placeholders",
+            "Value": "{181B852B-5DED-5E77-B410-79CDE2F8B0D0}|{9DA47519-713A-5EC1-86B6-534861A6F33F}|{12CF067A-4040-5590-8632-02EA8E271C3E}"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": "100"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Layout"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  },
+                  {
+                    "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                    "Hint": "AllowedOnTemplates",
+                    "Value": "{0611315C-A0E8-59D5-B22D-8F30DD58FCCA}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "b6efd6f3-3107-542c-b1b1-0b6f30a8791f",
+        "Parent": "705f29fc-a5de-489e-9e2e-2dac8e03d084",
+        "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+        "Path": "/sitecore/layout/Renderings/Project/LibertyMutual/CampaignPage",
+        "SharedFields": [
+          {
+            "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+            "Hint": "componentName",
+            "Value": "CampaignPage"
+          },
+          {
+            "ID": "069a8361-b1cd-437c-8c32-a3be78941446",
+            "Hint": "Placeholders",
+            "Value": "{181B852B-5DED-5E77-B410-79CDE2F8B0D0}\n{9DA47519-713A-5EC1-86B6-534861A6F33F}\n{12CF067A-4040-5590-8632-02EA8E271C3E}\n"
+          },
+          {
+            "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+            "Hint": "__Icon",
+            "Value": "Office/32x32/layout_horizontal.png"
+          },
+          {
+            "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+            "Hint": "Parameters Template",
+            "Value": "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": 100
+          },
+          {
+            "ID": "e829c217-5e94-4306-9c48-2634b094fdc2",
+            "Hint": "OtherProperties",
+            "Value": "IsRenderingsWithDynamicPlaceholders=true"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Layout"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                    "Hint": "AllowedOnTemplates",
+                    "Value": "{0611315C-A0E8-59D5-B22D-8F30DD58FCCA}"
+                  },
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/layout/Renderings/Project/LibertyMutual/ProductDetails": {
+      "previous": {
+        "ID": "610d1dc8-96d3-5f38-8d15-d23279413214",
+        "Parent": "705f29fc-a5de-489e-9e2e-2dac8e03d084",
+        "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+        "Path": "/sitecore/layout/Renderings/Project/LibertyMutual/ProductDetails",
+        "SharedFields": [
+          {
+            "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+            "Hint": "componentName",
+            "Value": "ProductDetails"
+          },
+          {
+            "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+            "Hint": "Datasource Template",
+            "Value": "/sitecore/templates/Project/LibertyMutual/ProductPage"
+          },
+          {
+            "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+            "Hint": "Datasource Location",
+            "Value": null
+          },
+          {
+            "ID": "a3411ff6-c978-40aa-b059-a49b9ca2209b",
+            "Hint": "Can select Page as a data source",
+            "Value": "1"
+          },
+          {
+            "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+            "Hint": "Parameters Template",
+            "Value": "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
+          },
+          {
+            "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+            "Hint": "__Icon",
+            "Value": "Office/32x32/document_text.png"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": "300"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Product details"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                    "Hint": "AllowedOnTemplates",
+                    "Value": "{80228789-B957-573C-A1C5-1B511D7281DC}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "610d1dc8-96d3-5f38-8d15-d23279413214",
+        "Parent": "705f29fc-a5de-489e-9e2e-2dac8e03d084",
+        "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+        "Path": "/sitecore/layout/Renderings/Project/LibertyMutual/ProductDetails",
+        "SharedFields": [
+          {
+            "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+            "Hint": "componentName",
+            "Value": "ProductDetails"
+          },
+          {
+            "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+            "Hint": "__Icon",
+            "Value": "Office/32x32/document_text.png"
+          },
+          {
+            "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+            "Hint": "Datasource Template",
+            "Value": "/sitecore/templates/Project/LibertyMutual/ProductPage"
+          },
+          {
+            "ID": "a3411ff6-c978-40aa-b059-a49b9ca2209b",
+            "Hint": "Can select Page as a data source",
+            "Value": 1
+          },
+          {
+            "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+            "Hint": "Parameters Template",
+            "Value": "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
+          },
+          {
+            "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+            "Hint": "Datasource Location",
+            "Value": null
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": 300
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Product details"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                    "Hint": "AllowedOnTemplates",
+                    "Value": "{80228789-B957-573C-A1C5-1B511D7281DC}"
+                  },
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260923T195332Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/layout/Renderings/Project/LibertyMutual/ResourceArticle": {
+      "previous": {
+        "ID": "980ad02c-08e5-5f27-9f08-f28e829ca94d",
+        "Parent": "705f29fc-a5de-489e-9e2e-2dac8e03d084",
+        "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+        "Path": "/sitecore/layout/Renderings/Project/LibertyMutual/ResourceArticle",
+        "SharedFields": [
+          {
+            "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+            "Hint": "componentName",
+            "Value": "ResourceArticle"
+          },
+          {
+            "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+            "Hint": "Datasource Template",
+            "Value": "/sitecore/templates/Project/LibertyMutual/ResourcePage"
+          },
+          {
+            "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+            "Hint": "Datasource Location",
+            "Value": ""
+          },
+          {
+            "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+            "Hint": "Parameters Template",
+            "Value": "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
+          },
+          {
+            "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+            "Hint": "__Icon",
+            "Value": "Office/32x32/document_text.png"
+          },
+          {
+            "ID": "069a8361-b1cd-437c-8c32-a3be78941446",
+            "Hint": "Placeholders",
+            "Value": "{74D15B03-B221-57BB-A21C-313A5CE0C461}"
+          },
+          {
+            "ID": "a3411ff6-c978-40aa-b059-a49b9ca2209b",
+            "Hint": "Can select Page as a data source",
+            "Value": "1"
+          },
+          {
+            "ID": "e829c217-5e94-4306-9c48-2634b094fdc2",
+            "Hint": "OtherProperties",
+            "Value": "IsRenderingsWithDynamicPlaceholders=true"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": "100"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Article"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                    "Hint": "AllowedOnTemplates",
+                    "Value": "{E9573E8D-00D6-5FD9-9015-2F0AEC4A0B60}"
+                  },
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T140000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "980ad02c-08e5-5f27-9f08-f28e829ca94d",
+        "Parent": "705f29fc-a5de-489e-9e2e-2dac8e03d084",
+        "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+        "Path": "/sitecore/layout/Renderings/Project/LibertyMutual/ResourceArticle",
+        "SharedFields": [
+          {
+            "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+            "Hint": "componentName",
+            "Value": "ResourceArticle"
+          },
+          {
+            "ID": "069a8361-b1cd-437c-8c32-a3be78941446",
+            "Hint": "Placeholders",
+            "Value": "{74D15B03-B221-57BB-A21C-313A5CE0C461}"
+          },
+          {
+            "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+            "Hint": "__Icon",
+            "Value": "Office/32x32/document_text.png"
+          },
+          {
+            "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+            "Hint": "Datasource Template",
+            "Value": "/sitecore/templates/Project/LibertyMutual/ResourcePage"
+          },
+          {
+            "ID": "a3411ff6-c978-40aa-b059-a49b9ca2209b",
+            "Hint": "Can select Page as a data source",
+            "Value": 1
+          },
+          {
+            "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+            "Hint": "Parameters Template",
+            "Value": "{785FFD8A-B31D-51FA-9F9F-5F3475DD6EED}"
+          },
+          {
+            "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+            "Hint": "Datasource Location",
+            "Value": null
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": 100
+          },
+          {
+            "ID": "e829c217-5e94-4306-9c48-2634b094fdc2",
+            "Hint": "OtherProperties",
+            "Value": "IsRenderingsWithDynamicPlaceholders=true"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "30e85e5d-e00a-4864-b358-7624d511deb4",
+                "Hint": "__Unversioned revision",
+                "Value": "14b75d91-1af4-4509-9b8b-396a0258b706"
+              },
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Article"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                    "Hint": "AllowedOnTemplates",
+                    "Value": "{E9573E8D-00D6-5FD9-9015-2F0AEC4A0B60}"
+                  },
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260910T140000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-sidebar": {
+      "previous": {
+        "ID": "12cf067a-4040-5590-8632-02ea8e271c3e",
+        "Parent": "e26a2d36-9ee9-49df-bb07-0073d8e20ccc",
+        "Template": "5c547d4e-7111-4995-95b0-6b561751bf2e",
+        "Path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-sidebar",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-sidebar-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}|{E7E25E1F-7479-5D71-B846-91AA45BE58D9}"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "12cf067a-4040-5590-8632-02ea8e271c3e",
+        "Parent": "e26a2d36-9ee9-49df-bb07-0073d8e20ccc",
+        "Template": "5c547d4e-7111-4995-95b0-6b561751bf2e",
+        "Path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-sidebar",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-sidebar-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}\n{E7E25E1F-7479-5D71-B846-91AA45BE58D9}\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-main": {
+      "previous": {
+        "ID": "9da47519-713a-5ec1-86b6-534861a6f33f",
+        "Parent": "e26a2d36-9ee9-49df-bb07-0073d8e20ccc",
+        "Template": "5c547d4e-7111-4995-95b0-6b561751bf2e",
+        "Path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-main",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-main-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{3D98EC75-765F-590B-AF51-5D0132A648ED}|{01B5CA5B-14DB-564E-A109-6E77462D9E52}|{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "9da47519-713a-5ec1-86b6-534861a6f33f",
+        "Parent": "e26a2d36-9ee9-49df-bb07-0073d8e20ccc",
+        "Template": "5c547d4e-7111-4995-95b0-6b561751bf2e",
+        "Path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutual/headless-campaign-main",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-main-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{3D98EC75-765F-590B-AF51-5D0132A648ED}\n{01B5CA5B-14DB-564E-A109-6E77462D9E52}\n{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-main": {
+      "previous": {
+        "ID": "91754c04-b26f-58e8-8c99-ee5b6e5ff6c8",
+        "Parent": "e601261f-f47f-4831-b91e-ef70efab3276",
+        "Template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-main",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-main-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{3D98EC75-765F-590B-AF51-5D0132A648ED}|{01B5CA5B-14DB-564E-A109-6E77462D9E52}|{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "91754c04-b26f-58e8-8c99-ee5b6e5ff6c8",
+        "Parent": "e601261f-f47f-4831-b91e-ef70efab3276",
+        "Template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-main",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-main-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{3D98EC75-765F-590B-AF51-5D0132A648ED}\n{01B5CA5B-14DB-564E-A109-6E77462D9E52}\n{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-sidebar": {
+      "previous": {
+        "ID": "3f3a1f50-f865-57dc-bed7-9dc280e6850c",
+        "Parent": "e601261f-f47f-4831-b91e-ef70efab3276",
+        "Template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-sidebar",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-sidebar-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}|{E7E25E1F-7479-5D71-B846-91AA45BE58D9}"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "3f3a1f50-f865-57dc-bed7-9dc280e6850c",
+        "Parent": "e601261f-f47f-4831-b91e-ef70efab3276",
+        "Template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-campaign-sidebar",
+        "SharedFields": [
+          {
+            "ID": "7256bdab-1fd2-49dd-b205-cb4873d2917c",
+            "Hint": "Placeholder Key",
+            "Value": "headless-campaign-sidebar-{*}"
+          },
+          {
+            "ID": "e391b526-d0c5-439d-803e-17512eae6222",
+            "Hint": "Allowed Controls",
+            "Value": "{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}\n{E7E25E1F-7479-5D71-B846-91AA45BE58D9}\n"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/layout/Layouts/Project/LibertyMutual/SupportLayout": {
+      "previous": {
+        "ID": "3d7c813e-a3ce-5b25-be14-70265fdef186",
+        "Parent": "306e6bad-84d3-56c5-8f41-5ee83728dfb3",
+        "Template": "e4e11508-04a4-4b0b-a263-5201f811c9cd",
+        "Path": "/sitecore/layout/Layouts/Project/LibertyMutual/SupportLayout",
+        "SharedFields": [
+          {
+            "ID": "a036b2bc-ba04-44f6-a75f-bae6cd242abf",
+            "Hint": "Path",
+            "Value": "/Views/SXA JSS/SXA JSS Layout.cshtml"
+          },
+          {
+            "ID": "80334869-86dc-4472-aa89-44cf1b2f6c9b",
+            "Hint": "Placeholders",
+            "Value": "{427C0C0A-38CB-5C1B-AA2D-34B20594A9AA}|{66BC2895-89A2-536C-8609-8F5E5BBAE8DE}"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "native": {
+        "ID": "3d7c813e-a3ce-5b25-be14-70265fdef186",
+        "Parent": "306e6bad-84d3-56c5-8f41-5ee83728dfb3",
+        "Template": "e4e11508-04a4-4b0b-a263-5201f811c9cd",
+        "Path": "/sitecore/layout/Layouts/Project/LibertyMutual/SupportLayout",
+        "SharedFields": [
+          {
+            "ID": "80334869-86dc-4472-aa89-44cf1b2f6c9b",
+            "Hint": "Placeholders",
+            "Value": "{427C0C0A-38CB-5C1B-AA2D-34B20594A9AA}\n{66BC2895-89A2-536C-8609-8F5E5BBAE8DE}\n"
+          },
+          {
+            "ID": "a036b2bc-ba04-44f6-a75f-bae6cd242abf",
+            "Hint": "Path",
+            "Value": "/Views/SXA JSS/SXA JSS Layout.cshtml"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260916T160000Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Campaign": {
+      "previous": {
+        "ID": "7d7d9503-2339-4218-97bb-261956c46e95",
+        "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+        "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Campaign",
+        "SharedFields": [
+          {
+            "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+            "Hint": "Renderings",
+            "Value": "{B6EFD6F3-3107-542C-B1B1-0B6F30A8791F}|{C479A19F-2857-5D96-ACE8-F24A5812C19F}|{3D98EC75-765F-590B-AF51-5D0132A648ED}|{01B5CA5B-14DB-564E-A109-6E77462D9E52}|{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}|{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}|{E7E25E1F-7479-5D71-B846-91AA45BE58D9}"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": "100"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Campaign"
+              }
+            ],
+            "Versions": []
+          }
+        ]
+      },
+      "native": {
+        "ID": "7d7d9503-2339-4218-97bb-261956c46e95",
+        "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+        "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Campaign",
+        "SharedFields": [
+          {
+            "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+            "Hint": "Renderings",
+            "Value": "{B6EFD6F3-3107-542C-B1B1-0B6F30A8791F}\n{C479A19F-2857-5D96-ACE8-F24A5812C19F}\n{3D98EC75-765F-590B-AF51-5D0132A648ED}\n{01B5CA5B-14DB-564E-A109-6E77462D9E52}\n{67B675AD-5F2E-5325-8FA7-76A1B44AA9D4}\n{F5BC5AAD-4800-5854-B8B2-55EF3C76C0AE}\n{E7E25E1F-7479-5D71-B846-91AA45BE58D9}\n"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": 100
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Campaign"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260923T194449Z"
+                  },
+                  {
+                    "ID": "52807595-0f8f-4b20-8d2a-cb71d28c6103",
+                    "Hint": "__Owner",
+                    "Value": "sitecore\\jared.greenblatt@libertymutual.com\n"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Resources": {
+      "previous": {
+        "ID": "89e36bd1-f0bf-4ce6-a16d-40a2a985ba75",
+        "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+        "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Resources",
+        "SharedFields": [
+          {
+            "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+            "Hint": "Renderings",
+            "Value": "{980AD02C-08E5-5F27-9F08-F28E829CA94D}|{2958922F-9832-5A46-B489-A4408EB363B1}|{15CF6EFA-C180-563A-B229-C08F2DAC3DAD}"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": "200"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Resources"
+              }
+            ],
+            "Versions": []
+          }
+        ]
+      },
+      "native": {
+        "ID": "89e36bd1-f0bf-4ce6-a16d-40a2a985ba75",
+        "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+        "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Resources",
+        "SharedFields": [
+          {
+            "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+            "Hint": "Renderings",
+            "Value": "{980AD02C-08E5-5F27-9F08-F28E829CA94D}\n{2958922F-9832-5A46-B489-A4408EB363B1}\n{15CF6EFA-C180-563A-B229-C08F2DAC3DAD}\n"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": 200
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Resources"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260923T194449Z"
+                  },
+                  {
+                    "ID": "52807595-0f8f-4b20-8d2a-cb71d28c6103",
+                    "Hint": "__Owner",
+                    "Value": "sitecore\\jared.greenblatt@libertymutual.com\n"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal": {
+      "previous": {
+        "ID": "e49da1ae-6054-5b18-b221-384f51d1e376",
+        "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+        "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal",
+        "SharedFields": [
+          {
+            "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+            "Hint": "Renderings",
+            "Value": "{193A0299-B5B6-5668-B792-9F3552463163}|{1962D596-4187-51C9-A91F-4D39A9318B51}|{610D1DC8-96D3-5F38-8D15-D23279413214}"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": "300"
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Agent tools"
+              }
+            ],
+            "Versions": []
+          }
+        ]
+      },
+      "native": {
+        "ID": "e49da1ae-6054-5b18-b221-384f51d1e376",
+        "Parent": "2bcfce89-293c-4ddb-870a-78bce4777859",
+        "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+        "Path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Agent portal",
+        "SharedFields": [
+          {
+            "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+            "Hint": "Renderings",
+            "Value": "{193A0299-B5B6-5668-B792-9F3552463163}\n{1962D596-4187-51C9-A91F-4D39A9318B51}\n{610D1DC8-96D3-5F38-8D15-D23279413214}\n"
+          },
+          {
+            "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+            "Hint": "__Sortorder",
+            "Value": 300
+          }
+        ],
+        "Languages": [
+          {
+            "Language": "en",
+            "Fields": [
+              {
+                "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+                "Hint": "__Display name",
+                "Value": "Agent tools"
+              }
+            ],
+            "Versions": [
+              {
+                "Version": 1,
+                "Fields": [
+                  {
+                    "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                    "Hint": "__Created",
+                    "Value": "20260923T194449Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

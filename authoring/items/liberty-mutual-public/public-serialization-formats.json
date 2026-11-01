@@ -1,0 +1,50 @@
+{
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches": {
+    "Rule": {
+      "semanticValue": "<ruleset><rule uid=\"{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}\" name=\"Landing pages beneath Home\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{55387862-AA7F-5189-B501-91D82B13B423}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{6D600332-3E21-4C5F-83EC-AAE04F83450F}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{CF4A380D-6AD5-5C4A-9EAC-9568B315F24C}\" PageBranchId=\"{D5784517-B225-55AA-BC9C-8910FA0DB4F2}\" /></actions></rule></ruleset>",
+      "serializedValue": "<ruleset>\n  <rule\n    uid=\"{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}\"\n    name=\"Landing pages beneath Home\">\n    <conditions>\n      <condition\n        id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\"\n        uid=\"{55387862-AA7F-5189-B501-91D82B13B423}\"\n        operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\"\n        value=\"{6D600332-3E21-4C5F-83EC-AAE04F83450F}\" />\n    </conditions>\n    <actions>\n      <action\n        id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\"\n        uid=\"{CF4A380D-6AD5-5C4A-9EAC-9568B315F24C}\"\n        PageBranchId=\"{D5784517-B225-55AA-BC9C-8910FA0DB4F2}\" />\n    </actions>\n  </rule>\n</ruleset>\n"
+    }
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header": {
+    "__Thumbnail": {
+      "semanticValue": "<image mediaid=\"{068D96EE-128A-4F64-977C-CE18213A16A6}\" />",
+      "serializedValue": "<image mediaid=\"{068D96EE-128A-4F64-977C-CE18213A16A6}\" />\n"
+    },
+    "__Renderings": {
+      "semanticValue": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{4279968F-9735-5BEC-95B4-C2479C1342BF}\" id=\"{F08A1F43-1C90-5422-A93F-C8E6439D9F04}\" ph=\"headless-header\" ds=\"local:/Data/Header\" par=\"FieldNames={CE22AE2A-FD45-583E-8966-43D7B6B19A03}&amp;DynamicPlaceholderId=1\" /></d></r>",
+      "serializedValue": "<r>\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\">\n    <r\n      uid=\"{4279968F-9735-5BEC-95B4-C2479C1342BF}\"\n      id=\"{F08A1F43-1C90-5422-A93F-C8E6439D9F04}\"\n      ph=\"headless-header\"\n      ds=\"local:/Data/Header\"\n      par=\"FieldNames={CE22AE2A-FD45-583E-8966-43D7B6B19A03}&amp;DynamicPlaceholderId=1\" />\n  </d>\n</r>\n"
+    },
+    "__Final Renderings": {
+      "semanticValue": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{4279968F-9735-5BEC-95B4-C2479C1342BF}\" s:id=\"{F08A1F43-1C90-5422-A93F-C8E6439D9F04}\" s:ph=\"headless-header\" s:ds=\"local:/Data/Header\" s:par=\"FieldNames={CE22AE2A-FD45-583E-8966-43D7B6B19A03}&amp;DynamicPlaceholderId=1\" /></d></r>",
+      "serializedValue": "<r xmlns:p=\"p\" xmlns:s=\"s\"\n  p:p=\"1\">\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\">\n    <r\n      uid=\"{4279968F-9735-5BEC-95B4-C2479C1342BF}\"\n      s:id=\"{F08A1F43-1C90-5422-A93F-C8E6439D9F04}\"\n      s:ph=\"headless-header\"\n      s:ds=\"local:/Data/Header\"\n      s:par=\"FieldNames={CE22AE2A-FD45-583E-8966-43D7B6B19A03}&amp;DynamicPlaceholderId=1\" />\n  </d>\n</r>\n"
+    }
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer": {
+    "__Thumbnail": {
+      "semanticValue": "<image mediaid=\"{781A4318-0D45-480C-A9E0-373068FA74FF}\" />",
+      "serializedValue": "<image mediaid=\"{781A4318-0D45-480C-A9E0-373068FA74FF}\" />\n"
+    },
+    "__Renderings": {
+      "semanticValue": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" ph=\"headless-footer\" ds=\"local:/Data/Footer\" par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /></d></r>",
+      "serializedValue": "<r>\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\">\n    <r\n      uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\"\n      id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\"\n      ph=\"headless-footer\"\n      ds=\"local:/Data/Footer\"\n      par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" />\n  </d>\n</r>\n"
+    },
+    "__Final Renderings": {
+      "semanticValue": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" s:id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" s:ph=\"headless-footer\" s:ds=\"local:/Data/Footer\" s:par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /></d></r>",
+      "serializedValue": "<r xmlns:p=\"p\" xmlns:s=\"s\"\n  p:p=\"1\">\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\">\n    <r\n      uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\"\n      s:id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\"\n      s:ph=\"headless-footer\"\n      s:ds=\"local:/Data/Footer\"\n      s:par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" />\n  </d>\n</r>\n"
+    }
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Page body": {
+    "__Thumbnail": {
+      "semanticValue": "<image mediaid=\"{D26B7066-7289-4A18-84EF-1F85403B9E62}\" />",
+      "serializedValue": "<image mediaid=\"{D26B7066-7289-4A18-84EF-1F85403B9E62}\" />\n"
+    },
+    "__Renderings": {
+      "semanticValue": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\" id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\" ph=\"headless-main\" ds=\"\" par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" /></d></r>",
+      "serializedValue": "<r>\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"\n    l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\">\n    <r\n      uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\"\n      id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\"\n      ph=\"headless-main\"\n      ds=\"\"\n      par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" />\n  </d>\n</r>\n"
+    },
+    "__Final Renderings": {
+      "semanticValue": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\" s:id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\" s:ph=\"headless-main\" s:ds=\"\" s:par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" /></d></r>",
+      "serializedValue": "<r xmlns:p=\"p\" xmlns:s=\"s\"\n  p:p=\"1\">\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\">\n    <r\n      uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\"\n      s:id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\"\n      s:ph=\"headless-main\"\n      s:ds=\"\"\n      s:par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" />\n  </d>\n</r>\n"
+    }
+  }
+}

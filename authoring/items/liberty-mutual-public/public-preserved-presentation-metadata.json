@@ -1,0 +1,50 @@
+{
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header": {
+    "shared": [
+      {
+        "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
+        "Hint": "__Thumbnail",
+        "Value": "<image mediaid=\"{068D96EE-128A-4F64-977C-CE18213A16A6}\" />"
+      }
+    ],
+    "versioned": [
+      {
+        "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+        "Hint": "__Created",
+        "Value": "20261031T160000Z"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer": {
+    "shared": [
+      {
+        "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
+        "Hint": "__Thumbnail",
+        "Value": "<image mediaid=\"{781A4318-0D45-480C-A9E0-373068FA74FF}\" />"
+      }
+    ],
+    "versioned": [
+      {
+        "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+        "Hint": "__Created",
+        "Value": "20261031T160000Z"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Page body": {
+    "shared": [
+      {
+        "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
+        "Hint": "__Thumbnail",
+        "Value": "<image mediaid=\"{D26B7066-7289-4A18-84EF-1F85403B9E62}\" />"
+      }
+    ],
+    "versioned": [
+      {
+        "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+        "Hint": "__Created",
+        "Value": "20261031T160000Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+---
+ID: a94af884-dbf6-5206-818f-1cbc9065df02
+Parent: b7125e2a-f98f-5a33-a53f-089c287de495
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicSearch/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

@@ -1,0 +1,13 @@
+---
+ID: b5f24ff7-b476-5074-935a-5bfcb34c394e
+Parent: 94605a38-49c8-5454-bcba-8a6ba1c9a7dc
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/check-your-policy-for-a-specific-loss/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

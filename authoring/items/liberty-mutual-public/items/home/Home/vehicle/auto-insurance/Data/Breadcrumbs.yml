@@ -1,0 +1,25 @@
+---
+ID: 4c2e4d85-490a-544e-907d-ce18ecd8759a
+Parent: b165c369-f1c3-5b7f-89a9-952c099a164f
+Template: d93e627b-69a3-5fa9-849d-caa19b1d2146
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/vehicle/auto-insurance/Data/Breadcrumbs
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 4d9eb38f-53dd-5509-80ee-c0c9e6062f82
+      Hint: items
+      Value: |
+        {1CA5E469-DB5A-57F2-98BB-7D3FD23D754D}
+        {7BF741D3-C1CA-54DF-A046-76523A00E65B}
+    - ID: 0682270e-9254-5030-915c-97c6e1bac689
+      Hint: currentLabel
+      Value: Car Insurance
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

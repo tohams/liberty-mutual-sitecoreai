@@ -1,0 +1,35 @@
+---
+ID: c5818613-7ddb-501f-aa01-b23a417e0b3c
+Parent: 0ab4d643-27c1-5890-b329-f764f18d559e
+Template: 0d29dd73-62cc-5421-b14c-b8f8d8921540
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/get-a-quote/Data/Hero
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: f6b19f8a-18e0-5550-85ab-7602cecec48c
+      Hint: eyebrow
+      Value: Your next step
+    - ID: 3a61c47e-c996-5a80-ba68-f988ee36554f
+      Hint: heading
+      Value: Explore coverage for your needs
+    - ID: 608c6aac-cdd7-5be1-b727-a1647363b89c
+      Hint: summary
+      Value: <p>Review your product and state choices before continuing to Liberty Mutual for a quote.</p>
+    - ID: f8a68051-c885-5977-aa21-4629eb0f3a2c
+      Hint: image
+      Value: <image mediaid="{451ED505-9D65-4258-A241-CB8510EE449B}" alt="Family walking away from their car in a field" />
+    - ID: ef75886c-587f-5fb0-b3ee-b6163e7f7661
+      Hint: primaryLink
+      Value: <link text="Choose your products" linktype="external" url="/get-a-quote" anchor="your-options" />
+    - ID: cedce3ca-6429-5a30-bae6-ed4e6508a0af
+      Hint: secondaryLink
+      Value: <link text="Work with an agent" linktype="external" url="/contact-an-agent" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

@@ -1,0 +1,5501 @@
+{
+  "schemaVersion": 1,
+  "ownership": "Developer definitions only; editorial snapshots are independently CreateOnly.",
+  "newDefinitions": [
+    {
+      "ID": "b7125e2a-f98f-5a33-a53f-089c287de495",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSearch",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{4B951E00-670A-5A85-B8D5-35FAA9CC2286}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4b951e00-670a-5a85-b8d5-35faa9cc2286",
+      "Parent": "b7125e2a-f98f-5a33-a53f-089c287de495",
+      "Template": "b7125e2a-f98f-5a33-a53f-089c287de495",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSearch/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "a94af884-dbf6-5206-818f-1cbc9065df02",
+      "Parent": "b7125e2a-f98f-5a33-a53f-089c287de495",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSearch/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "be478735-f1a3-560b-be5f-af05bd4f0149",
+      "Parent": "a94af884-dbf6-5206-818f-1cbc9065df02",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSearch/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "70245dcd-8085-5eb8-9882-95ce8255ff14",
+      "Parent": "a94af884-dbf6-5206-818f-1cbc9065df02",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSearch/Content/introduction",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Introduction"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Introduction"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d8ef138b-14ce-5af6-9c68-0ef9053ee50e",
+      "Parent": "a94af884-dbf6-5206-818f-1cbc9065df02",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSearch/Content/search",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multi-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Search configuration"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Search configuration"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f5b68e03-f379-53f5-8292-f4b28917bc67",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductOption",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{03741C3D-01E4-5A7A-AAE5-E7C5A01C8CFF}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/photo_landscape.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "03741c3d-01e4-5a7a-aae5-e7c5a01c8cff",
+      "Parent": "f5b68e03-f379-53f5-8292-f4b28917bc67",
+      "Template": "f5b68e03-f379-53f5-8292-f4b28917bc67",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductOption/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "8618bbcd-24a0-52b8-9e09-3a2618928e12",
+      "Parent": "f5b68e03-f379-53f5-8292-f4b28917bc67",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductOption/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "9493af78-c66d-5a39-b714-8ab68f1d523f",
+      "Parent": "8618bbcd-24a0-52b8-9e09-3a2618928e12",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductOption/Content/label",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Label"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Label"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "7c4c0855-196e-5aea-b4f8-5645eb561cb0",
+      "Parent": "8618bbcd-24a0-52b8-9e09-3a2618928e12",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductOption/Content/productKey",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Product key"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Product key"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "39a17380-602c-5834-a47c-f1a7a89c18ba",
+      "Parent": "8618bbcd-24a0-52b8-9e09-3a2618928e12",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductOption/Content/image",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Image"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Image"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Image"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
+      "Parent": "8618bbcd-24a0-52b8-9e09-3a2618928e12",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductOption/Content/quoteLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Quote destination"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Quote destination"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5ff259c9-c632-56d2-8bb5-4980c9226646",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{22D5EA42-BBB7-5FDD-AEA8-D13F238E821A}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "22d5ea42-bbb7-5fdd-aea8-d13f238e821a",
+      "Parent": "5ff259c9-c632-56d2-8bb5-4980c9226646",
+      "Template": "5ff259c9-c632-56d2-8bb5-4980c9226646",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Parent": "5ff259c9-c632-56d2-8bb5-4980c9226646",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f6cc3915-269f-5c55-a3ec-f2bec59414e4",
+      "Parent": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4fc58087-c67b-552f-b662-9f89d84b7fb3",
+      "Parent": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content/introduction",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Introduction"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Introduction"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "bc105dbf-3d11-5ddf-b31c-b0b18d09b9fb",
+      "Parent": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content/products",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Product options"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered products"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered products"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d8dbe169-e992-5ecf-8447-fc2bf1f0b086",
+      "Parent": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content/defaultProducts",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Initially selected product keys"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Initially selected product keys"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "90c71099-638c-58f1-b04c-acab6a2bba9f",
+      "Parent": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content/actionLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "500"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Continue action"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Continue action"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "bf61314f-b020-5f0d-889b-302f13cd28af",
+      "Parent": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content/agentLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "600"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Agent action"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Agent action"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d37d62b1-168c-5acd-a17c-c7571a870323",
+      "Parent": "57900bd3-63aa-5490-b06c-30e9243f5318",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector/Content/postcodeLabel",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "700"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "ZIP code label"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "ZIP code label"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "feb60c5a-1074-503c-b9f3-dd142f821856",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{D2EC98EB-EE52-5B98-B797-3B1CC2E9C311}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d2ec98eb-ee52-5b98-b797-3b1cc2e9c311",
+      "Parent": "feb60c5a-1074-503c-b9f3-dd142f821856",
+      "Template": "feb60c5a-1074-503c-b9f3-dd142f821856",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "9e71c600-f2bf-5d91-a9de-3e2cc1e77cf8",
+      "Parent": "feb60c5a-1074-503c-b9f3-dd142f821856",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "dee5d997-7be0-5075-909a-bd146335451f",
+      "Parent": "9e71c600-f2bf-5d91-a9de-3e2cc1e77cf8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "29773d2d-19e0-5eed-9fff-97d5e4d3d441",
+      "Parent": "9e71c600-f2bf-5d91-a9de-3e2cc1e77cf8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff/Content/introduction",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Introduction"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Introduction"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "32292dfc-11ff-5f34-9827-8108256a20a1",
+      "Parent": "9e71c600-f2bf-5d91-a9de-3e2cc1e77cf8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff/Content/products",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Product options"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered destinations"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered destinations"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "e939dc09-771d-534a-803d-3f959501fe2f",
+      "Parent": "9e71c600-f2bf-5d91-a9de-3e2cc1e77cf8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff/Content/agentLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Agent finder"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Agent finder"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{98500CC2-79BF-5D91-8EEE-76488F369FEE}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "98500cc2-79bf-5d91-8eee-76488f369fee",
+      "Parent": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "60ef0eea-6fce-5738-bf22-ff4f3dc2f25e",
+      "Parent": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+      "Parent": "60ef0eea-6fce-5738-bf22-ff4f3dc2f25e",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard/Content/value",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Featured value"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Featured value"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+      "Parent": "60ef0eea-6fce-5738-bf22-ff4f3dc2f25e",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+      "Parent": "60ef0eea-6fce-5738-bf22-ff4f3dc2f25e",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard/Content/body",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Body"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Body"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+      "Parent": "60ef0eea-6fce-5738-bf22-ff4f3dc2f25e",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard/Content/image",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Image"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Image"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Image"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+      "Parent": "60ef0eea-6fce-5738-bf22-ff4f3dc2f25e",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicCard/Content/actionLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "500"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Action"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Action"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "fc07715c-5b17-53a5-89ce-1b08d6b2a816",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{80824621-366C-5FB1-989C-9826A462F850}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "80824621-366c-5fb1-989c-9826a462f850",
+      "Parent": "fc07715c-5b17-53a5-89ce-1b08d6b2a816",
+      "Template": "fc07715c-5b17-53a5-89ce-1b08d6b2a816",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "c043fb3c-f4da-5ded-a11b-63958a5696c9",
+      "Parent": "fc07715c-5b17-53a5-89ce-1b08d6b2a816",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "265c0d23-68cd-5fa3-ae77-cddc4fd25ab3",
+      "Parent": "c043fb3c-f4da-5ded-a11b-63958a5696c9",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "9a7aa587-fb2b-5828-9471-4013c68c7422",
+      "Parent": "c043fb3c-f4da-5ded-a11b-63958a5696c9",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection/Content/introduction",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Introduction"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Introduction"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "a7dae70d-8577-536a-bb6f-a63b64fdbe0b",
+      "Parent": "c043fb3c-f4da-5ded-a11b-63958a5696c9",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection/Content/items",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Cards/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered cards"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered cards"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "3f9c6aaf-39c9-5ebd-950c-4cf2e513c838",
+      "Parent": "c043fb3c-f4da-5ded-a11b-63958a5696c9",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection/Content/actionLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Action"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Action"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "efcc13af-1e31-55d3-bca6-f2533d50e674",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{9DB30794-2F3D-51D9-B0C8-8F3F5A850643}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "9db30794-2f3d-51d9-b0c8-8f3f5a850643",
+      "Parent": "efcc13af-1e31-55d3-bca6-f2533d50e674",
+      "Template": "efcc13af-1e31-55d3-bca6-f2533d50e674",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ac8e5a66-6ab3-5436-8fb2-4ec316b1d7e8",
+      "Parent": "efcc13af-1e31-55d3-bca6-f2533d50e674",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "0642f561-976a-5280-ad0b-49591bb6b97f",
+      "Parent": "ac8e5a66-6ab3-5436-8fb2-4ec316b1d7e8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
+      "Parent": "ac8e5a66-6ab3-5436-8fb2-4ec316b1d7e8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent/Content/body",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Body"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Body"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "19c458f6-6177-50d1-9756-15ca31cc5674",
+      "Parent": "ac8e5a66-6ab3-5436-8fb2-4ec316b1d7e8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent/Content/image",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Image"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Image"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Image"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "6f2bb5ea-9611-5298-a6d2-49c85eee3ce8",
+      "Parent": "ac8e5a66-6ab3-5436-8fb2-4ec316b1d7e8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent/Content/primaryLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Primary action"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Primary action"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "c2b8db12-5b8e-5f84-a44d-5f017ba52d66",
+      "Parent": "ac8e5a66-6ab3-5436-8fb2-4ec316b1d7e8",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent/Content/secondaryLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "500"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Secondary action"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Secondary action"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "7e71c6a1-8f71-5e0c-8983-e35b4166daa7",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaqItem",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{4814870B-373D-5EDE-A495-C1EA61D1B984}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4814870b-373d-5ede-a495-c1ea61d1b984",
+      "Parent": "7e71c6a1-8f71-5e0c-8983-e35b4166daa7",
+      "Template": "7e71c6a1-8f71-5e0c-8983-e35b4166daa7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaqItem/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "969c5fac-06e4-56e8-a5f0-2c50f85ae4c3",
+      "Parent": "7e71c6a1-8f71-5e0c-8983-e35b4166daa7",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaqItem/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "e0740b71-1b49-514f-89f3-2321e72809f4",
+      "Parent": "969c5fac-06e4-56e8-a5f0-2c50f85ae4c3",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaqItem/Content/question",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Question"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Question"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
+      "Parent": "969c5fac-06e4-56e8-a5f0-2c50f85ae4c3",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaqItem/Content/answer",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Answer"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Answer"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ba8f6649-9df3-51fd-8652-cc1d76dcd3c3",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaq",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{8832D25A-E68D-5B30-A1E2-2F9E9589D8D6}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "8832d25a-e68d-5b30-a1e2-2f9e9589d8d6",
+      "Parent": "ba8f6649-9df3-51fd-8652-cc1d76dcd3c3",
+      "Template": "ba8f6649-9df3-51fd-8652-cc1d76dcd3c3",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaq/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "09eaf7eb-ab42-511f-bceb-bf08a7d7e901",
+      "Parent": "ba8f6649-9df3-51fd-8652-cc1d76dcd3c3",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaq/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "26169af1-541a-50a5-92d5-e7a11aae45d1",
+      "Parent": "09eaf7eb-ab42-511f-bceb-bf08a7d7e901",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaq/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "80b5b9b2-74f9-5a08-bcb5-d1cbae7cb8f9",
+      "Parent": "09eaf7eb-ab42-511f-bceb-bf08a7d7e901",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaq/Content/items",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Questions/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered questions"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered questions"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "9e6168b4-3c3e-5764-bfa0-6f4e5210d426",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicLink",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{5212C8AB-1533-5B00-82CF-930D4047083B}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5212c8ab-1533-5b00-82cf-930d4047083b",
+      "Parent": "9e6168b4-3c3e-5764-bfa0-6f4e5210d426",
+      "Template": "9e6168b4-3c3e-5764-bfa0-6f4e5210d426",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicLink/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "cce954c6-0374-53f3-8676-3c2fa132ee98",
+      "Parent": "9e6168b4-3c3e-5764-bfa0-6f4e5210d426",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicLink/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "a13aa6a3-e920-5c27-a58a-69d5543e8071",
+      "Parent": "cce954c6-0374-53f3-8676-3c2fa132ee98",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicLink/Content/link",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Link"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Link"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f32883e5-0d6d-54ed-92db-7ed7b0463510",
+      "Parent": "cce954c6-0374-53f3-8676-3c2fa132ee98",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicLink/Content/icon",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Icon name"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Icon name"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d93e627b-69a3-5fa9-849d-caa19b1d2146",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicBreadcrumbs",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{61C5EBA9-1533-5F44-BF95-A14C94A63010}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "61c5eba9-1533-5f44-bf95-a14c94a63010",
+      "Parent": "d93e627b-69a3-5fa9-849d-caa19b1d2146",
+      "Template": "d93e627b-69a3-5fa9-849d-caa19b1d2146",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicBreadcrumbs/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d0a440c3-9d83-573a-90d8-715bea41399d",
+      "Parent": "d93e627b-69a3-5fa9-849d-caa19b1d2146",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicBreadcrumbs/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4d9eb38f-53dd-5509-80ee-c0c9e6062f82",
+      "Parent": "d0a440c3-9d83-573a-90d8-715bea41399d",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicBreadcrumbs/Content/items",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Links/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered breadcrumbs"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered breadcrumbs"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "0682270e-9254-5030-915c-97c6e1bac689",
+      "Parent": "d0a440c3-9d83-573a-90d8-715bea41399d",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicBreadcrumbs/Content/currentLabel",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Current page"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Current page"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "8369c5b1-af02-591d-8b12-d0ac6414d41f",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicNavigationGroup",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{BBBDDC75-D920-5A09-9F4E-DB0EC3CC13BA}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "bbbddc75-d920-5a09-9f4e-db0ec3cc13ba",
+      "Parent": "8369c5b1-af02-591d-8b12-d0ac6414d41f",
+      "Template": "8369c5b1-af02-591d-8b12-d0ac6414d41f",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicNavigationGroup/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "20658aee-2b87-59c3-b6d3-5f6d90f62f14",
+      "Parent": "8369c5b1-af02-591d-8b12-d0ac6414d41f",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicNavigationGroup/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "53e384ff-302a-5715-b634-b142ff2cc95e",
+      "Parent": "20658aee-2b87-59c3-b6d3-5f6d90f62f14",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicNavigationGroup/Content/label",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Label"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Label"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "128a1f1d-8e9f-5094-9dbe-8deff2681d0f",
+      "Parent": "20658aee-2b87-59c3-b6d3-5f6d90f62f14",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicNavigationGroup/Content/links",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Links/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered links"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered links"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4197034d-2f0e-551b-b3d9-9c18fa9be84f",
+      "Parent": "96246a36-0e25-54a1-b2b4-802a78a8aead",
+      "Template": "ab86861a-6030-46c5-b394-e8f99e8b87db",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooterColumn",
+      "SharedFields": [
+        {
+          "ID": "12c33f3f-86c5-43a5-aeb4-5598cec45116",
+          "Hint": "__Base template",
+          "Value": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+        },
+        {
+          "ID": "f7d48a55-2158-4f02-9356-756654404f73",
+          "Hint": "__Standard values",
+          "Value": "{3BEAD02E-8E49-527E-8726-739E8B5ED5DF}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_text.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "3bead02e-8e49-527e-8726-739e8b5ed5df",
+      "Parent": "4197034d-2f0e-551b-b3d9-9c18fa9be84f",
+      "Template": "4197034d-2f0e-551b-b3d9-9c18fa9be84f",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooterColumn/__Standard Values",
+      "SharedFields": [
+        {
+          "ID": "ca9b9f52-4fb0-4f87-a79f-24dea62cda65",
+          "Hint": "__Default workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "aaa88fd8-aca3-5531-9844-c40fec1679a9",
+      "Parent": "4197034d-2f0e-551b-b3d9-9c18fa9be84f",
+      "Template": "e269fbb5-3750-427a-9149-7aa950b49301",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooterColumn/Content",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "9adfb3e7-8677-5a88-88b9-4e2b9e4dace0",
+      "Parent": "aaa88fd8-aca3-5531-9844-c40fec1679a9",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooterColumn/Content/heading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Single-Line Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "72d4f8bc-e87d-5f2c-88a2-d522a84565db",
+      "Parent": "aaa88fd8-aca3-5531-9844-c40fec1679a9",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooterColumn/Content/body",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Body"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Body"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "63e3c2ce-499a-5002-8fef-e0e91bcb6b30",
+      "Parent": "aaa88fd8-aca3-5531-9844-c40fec1679a9",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooterColumn/Content/links",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Links/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered links"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered links"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d21d8f34-ec3e-54ad-80cd-184f33b7ff5c",
+      "Parent": "2cd35c0b-954b-57aa-bbd7-c8ece990a2df",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicHero/Content/quoteHeading",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1100"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Quote heading"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Quote heading"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "7d68fcab-74a6-56c6-8947-8ccb7198d34f",
+      "Parent": "0ed48933-0654-54ec-b09e-fe3538ee721b",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicHeader/Content/navigation",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1100"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Navigation/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered navigation groups"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered navigation groups"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "41cd7137-f263-543b-b965-313d3274641a",
+      "Parent": "0ed48933-0654-54ec-b09e-fe3538ee721b",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicHeader/Content/searchLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Search"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Search"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "074bfa7d-0186-55e5-8bee-12a4fa4c7568",
+      "Parent": "0ed48933-0654-54ec-b09e-fe3538ee721b",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicHeader/Content/loginLink",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "General Link"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Log in"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Log in"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "0d0510b3-f4c8-5257-a3a9-90e8b53ab3c3",
+      "Parent": "4539f207-0a45-5d0e-b484-7bff73680ec7",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooter/Content/columns",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1100"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Columns/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Ordered columns"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Ordered columns"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2d3223c2-2922-5844-a5c5-8cf60d492698",
+      "Parent": "4539f207-0a45-5d0e-b484-7bff73680ec7",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooter/Content/socialLinks",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1200"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Social/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Social links"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Social links"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5a6d7e0f-dac4-5bf2-84d3-81b4931ce1f3",
+      "Parent": "4539f207-0a45-5d0e-b484-7bff73680ec7",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooter/Content/legalLinks",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Multilist"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1300"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:./Legal/*"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Legal links"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Legal links"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "e67078b8-6882-5aad-a733-2ce916ebe84c",
+      "Parent": "4539f207-0a45-5d0e-b484-7bff73680ec7",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooter/Content/disclaimer",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Rich Text"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1400"
+        },
+        {
+          "ID": "1eb8ae32-e190-44a6-968d-ed904c794ebf",
+          "Hint": "Source",
+          "Value": "query:$xaRichTextProfile"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Disclaimer"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Disclaimer"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "fa8f1baa-ee13-5b43-bdf0-d434376aa9a4",
+      "Parent": "4539f207-0a45-5d0e-b484-7bff73680ec7",
+      "Template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "Path": "/sitecore/templates/Project/LibertyMutualPublic/PublicFooter/Content/mobileLogo",
+      "SharedFields": [
+        {
+          "ID": "ab162cc0-dc80-4abf-8871-998ee5d7ba32",
+          "Hint": "Type",
+          "Value": "Image"
+        },
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "1500"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "19a69332-a23e-4e70-8d16-b2640cb24cc8",
+              "Hint": "Title",
+              "Value": "Mobile logo"
+            },
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Mobile logo"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2967923c-52c6-5e80-946f-533ce8c2148e",
+      "Parent": "95969f19-1bc9-5989-ad0c-8b37ca06f36a",
+      "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+      "Path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicSearch",
+      "SharedFields": [
+        {
+          "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+          "Hint": "componentName",
+          "Value": "PublicSearch"
+        },
+        {
+          "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+          "Hint": "Datasource Template",
+          "Value": "/sitecore/templates/Project/LibertyMutualPublic/PublicSearch"
+        },
+        {
+          "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+          "Hint": "Datasource Location",
+          "Value": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Search"
+        },
+        {
+          "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+          "Hint": "Parameters Template",
+          "Value": "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "apps/32x32/Search (1).png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Knowledge search"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                  "Hint": "AllowedOnTemplates",
+                  "Value": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
+                },
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261101T035443Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f78c26b7-28dd-53c4-a74f-db30d94e12b5",
+      "Parent": "edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSearch",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "53e17a98-82ba-5ead-996b-536397733442",
+      "Parent": "f78c26b7-28dd-53c4-a74f-db30d94e12b5",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSearch/Default",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ff280574-45ae-5a99-b5e0-5e290b91d9b0",
+      "Parent": "95969f19-1bc9-5989-ad0c-8b37ca06f36a",
+      "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+      "Path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicProductSelector",
+      "SharedFields": [
+        {
+          "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+          "Hint": "componentName",
+          "Value": "PublicProductSelector"
+        },
+        {
+          "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+          "Hint": "Datasource Template",
+          "Value": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector"
+        },
+        {
+          "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+          "Hint": "Datasource Location",
+          "Value": "query:./Data"
+        },
+        {
+          "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+          "Hint": "Parameters Template",
+          "Value": "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/check_box.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Product choices"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                  "Hint": "AllowedOnTemplates",
+                  "Value": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
+                },
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261101T035443Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "82cdc646-009f-5276-80b0-d7b047535291",
+      "Parent": "edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicProductSelector",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "e87c07d2-5bd5-5047-9660-2a931c23cc11",
+      "Parent": "82cdc646-009f-5276-80b0-d7b047535291",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicProductSelector/Default",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d1e3f875-4feb-504a-b3f4-19a93e10bc85",
+      "Parent": "82cdc646-009f-5276-80b0-d7b047535291",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicProductSelector/Quote",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5e7c88d5-f15c-5742-b88f-ac05787e6bb5",
+      "Parent": "82cdc646-009f-5276-80b0-d7b047535291",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicProductSelector/Compact",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d371fbc9-d8d2-5310-9660-3d5f7c3bb9e4",
+      "Parent": "95969f19-1bc9-5989-ad0c-8b37ca06f36a",
+      "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+      "Path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicQuoteHandoff",
+      "SharedFields": [
+        {
+          "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+          "Hint": "componentName",
+          "Value": "PublicQuoteHandoff"
+        },
+        {
+          "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+          "Hint": "Datasource Template",
+          "Value": "/sitecore/templates/Project/LibertyMutualPublic/PublicQuoteHandoff"
+        },
+        {
+          "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+          "Hint": "Datasource Location",
+          "Value": "query:./Data"
+        },
+        {
+          "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+          "Hint": "Parameters Template",
+          "Value": "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/navigate_right.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Next step"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                  "Hint": "AllowedOnTemplates",
+                  "Value": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
+                },
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261101T035443Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "85f08d69-f6e9-5ca3-ab30-dc8bf6a41dcd",
+      "Parent": "edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicQuoteHandoff",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "845e1229-db23-56cd-8ccd-0cff2445d063",
+      "Parent": "85f08d69-f6e9-5ca3-ab30-dc8bf6a41dcd",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicQuoteHandoff/Default",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f00502bf-be3f-5dce-852c-76bf019c21b6",
+      "Parent": "85f08d69-f6e9-5ca3-ab30-dc8bf6a41dcd",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicQuoteHandoff/Agent",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "7efb74e9-a17b-5a27-9118-6b78ae1b2d8c",
+      "Parent": "95969f19-1bc9-5989-ad0c-8b37ca06f36a",
+      "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+      "Path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicSection",
+      "SharedFields": [
+        {
+          "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+          "Hint": "componentName",
+          "Value": "PublicSection"
+        },
+        {
+          "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+          "Hint": "Datasource Template",
+          "Value": "/sitecore/templates/Project/LibertyMutualPublic/PublicSection"
+        },
+        {
+          "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+          "Hint": "Datasource Location",
+          "Value": "query:./Data"
+        },
+        {
+          "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+          "Hint": "Parameters Template",
+          "Value": "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/elements.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Card section"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                  "Hint": "AllowedOnTemplates",
+                  "Value": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
+                },
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261101T035443Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "8675d2f0-ae9e-558e-8828-27225d05a793",
+      "Parent": "edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSection",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "d73950b6-f0fe-5378-a3df-a4efe4fe3c98",
+      "Parent": "8675d2f0-ae9e-558e-8828-27225d05a793",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSection/Default",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "90d58d0a-27f8-500b-810c-835274fc22f2",
+      "Parent": "8675d2f0-ae9e-558e-8828-27225d05a793",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSection/ProofCards",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "3833345a-d97c-5483-b1e4-9394fe2ecbe4",
+      "Parent": "8675d2f0-ae9e-558e-8828-27225d05a793",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSection/NumberedLinks",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "5ccc53c8-3ed0-5b32-8d79-4ead7232fa46",
+      "Parent": "8675d2f0-ae9e-558e-8828-27225d05a793",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSection/ImageCards",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "827ade4f-93af-5a2a-bdb8-f730b0c63bf2",
+      "Parent": "8675d2f0-ae9e-558e-8828-27225d05a793",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSection/Bundles",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "500"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "fde894ad-c04e-5e50-8178-4ba91f1f4803",
+      "Parent": "8675d2f0-ae9e-558e-8828-27225d05a793",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSection/QuoteCards",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "600"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "0839d907-b33b-5aad-8030-635f1451794f",
+      "Parent": "95969f19-1bc9-5989-ad0c-8b37ca06f36a",
+      "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+      "Path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicSplitContent",
+      "SharedFields": [
+        {
+          "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+          "Hint": "componentName",
+          "Value": "PublicSplitContent"
+        },
+        {
+          "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+          "Hint": "Datasource Template",
+          "Value": "/sitecore/templates/Project/LibertyMutualPublic/PublicSplitContent"
+        },
+        {
+          "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+          "Hint": "Datasource Location",
+          "Value": "query:./Data"
+        },
+        {
+          "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+          "Hint": "Parameters Template",
+          "Value": "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/document_orientation_landscape.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Image and text"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                  "Hint": "AllowedOnTemplates",
+                  "Value": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
+                },
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261101T035443Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "aa17d41f-fbe7-5470-8c61-9ae7a9077ca9",
+      "Parent": "edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSplitContent",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "c00cda93-d05e-588f-9676-7bd3efa80339",
+      "Parent": "aa17d41f-fbe7-5470-8c61-9ae7a9077ca9",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSplitContent/Default",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f322362d-a717-59be-8109-d5becbb51310",
+      "Parent": "aa17d41f-fbe7-5470-8c61-9ae7a9077ca9",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSplitContent/ImageLeft",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "200"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "1b8d9769-abb9-5e7d-a4d1-a4fe12dfa3ca",
+      "Parent": "aa17d41f-fbe7-5470-8c61-9ae7a9077ca9",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSplitContent/ImageRight",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "e1344f68-cd05-5c89-9e06-b458018a1fb1",
+      "Parent": "aa17d41f-fbe7-5470-8c61-9ae7a9077ca9",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSplitContent/TextColumns",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f9496c71-91a3-586b-b4bb-be1cfdaa5bd8",
+      "Parent": "aa17d41f-fbe7-5470-8c61-9ae7a9077ca9",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicSplitContent/ImageRightSoft",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "500"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f4ef94bb-096b-5404-9b3e-e0f2b0b041c5",
+      "Parent": "95969f19-1bc9-5989-ad0c-8b37ca06f36a",
+      "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+      "Path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicFaq",
+      "SharedFields": [
+        {
+          "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+          "Hint": "componentName",
+          "Value": "PublicFaq"
+        },
+        {
+          "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+          "Hint": "Datasource Template",
+          "Value": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaq"
+        },
+        {
+          "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+          "Hint": "Datasource Location",
+          "Value": "query:./Data"
+        },
+        {
+          "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+          "Hint": "Parameters Template",
+          "Value": "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/question_and_answer.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Questions and answers"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                  "Hint": "AllowedOnTemplates",
+                  "Value": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
+                },
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261101T035443Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "feed2195-3bed-598a-94d0-d47768ff69fc",
+      "Parent": "edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicFaq",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "c39b072d-2a29-55da-9a57-9d9faca0f280",
+      "Parent": "feed2195-3bed-598a-94d0-d47768ff69fc",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicFaq/Default",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2472c249-4d6a-5bb7-b388-bd4f3cc4eaa1",
+      "Parent": "95969f19-1bc9-5989-ad0c-8b37ca06f36a",
+      "Template": "04646a89-996f-4ee7-878a-ffdbf1f0ef0d",
+      "Path": "/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicBreadcrumbs",
+      "SharedFields": [
+        {
+          "ID": "037fe404-dd19-4bf7-8e30-4dadf68b27b0",
+          "Hint": "componentName",
+          "Value": "PublicBreadcrumbs"
+        },
+        {
+          "ID": "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f",
+          "Hint": "Datasource Template",
+          "Value": "/sitecore/templates/Project/LibertyMutualPublic/PublicBreadcrumbs"
+        },
+        {
+          "ID": "b5b27af1-25ef-405c-87ce-369b3a004016",
+          "Hint": "Datasource Location",
+          "Value": "query:./Data"
+        },
+        {
+          "ID": "a77e8568-1ab3-44f1-a664-b7c37ec7810d",
+          "Hint": "Parameters Template",
+          "Value": "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+        },
+        {
+          "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
+          "Hint": "__Icon",
+          "Value": "Office/32x32/navigate_right.png"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Fields": [
+            {
+              "ID": "b5e02ad9-d56f-4c41-a065-a133db87bdeb",
+              "Hint": "__Display name",
+              "Value": "Breadcrumbs"
+            }
+          ],
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "1b58d065-fe74-43e3-ba20-54c9588b3011",
+                  "Hint": "AllowedOnTemplates",
+                  "Value": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
+                },
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261101T035443Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "650aaaab-d850-5aa7-bb1b-d1a403032281",
+      "Parent": "edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be",
+      "Template": "49c111d0-6867-4798-a724-1f103166e6e9",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicBreadcrumbs",
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "41780e9b-da80-5629-9b6f-ef1011d29c0c",
+      "Parent": "650aaaab-d850-5aa7-bb1b-d1a403032281",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicBreadcrumbs/Default",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "100"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "843d437a-cf51-5140-b236-ae8e1d3e191c",
+      "Parent": "23bef5af-0cdf-5fa5-aed7-c6d09a135eed",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicHero/QuoteIntro",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "42eceb7e-e29b-573b-be9b-b7c120b0e339",
+      "Parent": "bdc5edd8-a810-50a5-af58-e21fa8248d9b",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicImage/Hero",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2c4e0b8c-56a5-5c2b-8c09-7f28c25d0069",
+      "Parent": "f3c38462-1b0c-553a-ac9d-6417738ff60f",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicArticle/TrustStrip",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "c3fae5b5-007a-5669-9e2e-59816d8d8808",
+      "Parent": "f3c38462-1b0c-553a-ac9d-6417738ff60f",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicArticle/Centered",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "6ab48454-3ffd-539c-a93d-0c9ab0d3be8a",
+      "Parent": "f3c38462-1b0c-553a-ac9d-6417738ff60f",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicArticle/CoverageTable",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "300"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "6230a7b4-e2aa-53bc-a90d-ce697e12aed2",
+      "Parent": "cc296536-020c-4b8f-8274-52f97d6afbe2",
+      "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Discovery",
+      "SharedFields": [
+        {
+          "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+          "Hint": "Renderings",
+          "Value": "{2967923C-52C6-5E80-946F-533CE8C2148E}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "a12fa65f-4b9d-5788-bfee-d47aaee116ce",
+      "Parent": "cc296536-020c-4b8f-8274-52f97d6afbe2",
+      "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Insurance",
+      "SharedFields": [
+        {
+          "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+          "Hint": "Renderings",
+          "Value": "{FF280574-45AE-5A99-B5E0-5E290B91D9B0}|{D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "1a37c41a-f00b-5a7a-a0c6-8a751be007f3",
+      "Parent": "cc296536-020c-4b8f-8274-52f97d6afbe2",
+      "Template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Sections",
+      "SharedFields": [
+        {
+          "ID": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+          "Hint": "Renderings",
+          "Value": "{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}|{0839D907-B33B-5AAD-8030-635F1451794F}|{F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}|{2472C249-4D6A-5BB7-B388-BD4F3CC4EAA1}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "boundedPlaceholderUpdates": [
+    {
+      "id": "6a3e8ade-5b98-5cbb-82eb-d0b5837ebccc",
+      "path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic/headless-public-content",
+      "parent": "b783c769-fd0b-5214-bd36-15f86909c094",
+      "template": "5c547d4e-7111-4995-95b0-6b561751bf2e",
+      "bucket": "placeholders",
+      "fields": {
+        "Placeholder Key": "headless-public-content-{*}",
+        "Allowed Controls": "{F63F0F36-EA5B-5693-85C6-B4DF475C8840}|{44D749A9-68A1-5987-844B-00DE3ABFB287}|{26096AD9-95C0-5080-A1CE-58F25913017F}|{3B2349C9-F98B-5C1A-8A5A-3B98BA3535F1}|{4BC5C522-23DE-54E1-8420-169BDCF996E9}|{4585A48F-E841-50CA-B2A3-0D3FC9893875}|{2967923C-52C6-5E80-946F-533CE8C2148E}|{FF280574-45AE-5A99-B5E0-5E290B91D9B0}|{D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}|{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}|{0839D907-B33B-5AAD-8030-635F1451794F}|{F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}",
+        "__Created": "20261031T160000Z"
+      }
+    },
+    {
+      "id": "6d55e8dc-3362-5277-9b9e-66f1874a7eeb",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/headless-public-content",
+      "parent": "04c15fc1-ed5d-4a3b-8b8d-9e2603d2468c",
+      "template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+      "bucket": "presentation",
+      "fields": {
+        "Placeholder Key": "headless-public-content-{*}",
+        "Allowed Controls": "{F63F0F36-EA5B-5693-85C6-B4DF475C8840}|{44D749A9-68A1-5987-844B-00DE3ABFB287}|{26096AD9-95C0-5080-A1CE-58F25913017F}|{3B2349C9-F98B-5C1A-8A5A-3B98BA3535F1}|{4BC5C522-23DE-54E1-8420-169BDCF996E9}|{4585A48F-E841-50CA-B2A3-0D3FC9893875}|{2967923C-52C6-5E80-946F-533CE8C2148E}|{FF280574-45AE-5A99-B5E0-5E290B91D9B0}|{D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}|{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}|{0839D907-B33B-5AAD-8030-635F1451794F}|{F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}",
+        "__Created": "20261031T160000Z"
+      }
+    },
+    {
+      "id": "e1f53b75-62cd-5919-90c9-3d1628da75cf",
+      "path": "/sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic/headless-public-hero",
+      "parent": "b783c769-fd0b-5214-bd36-15f86909c094",
+      "template": "5c547d4e-7111-4995-95b0-6b561751bf2e",
+      "bucket": "placeholders",
+      "fields": {
+        "Placeholder Key": "headless-public-hero-{*}",
+        "Allowed Controls": "{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}|{2472C249-4D6A-5BB7-B388-BD4F3CC4EAA1}",
+        "__Created": "20261031T160000Z"
+      }
+    },
+    {
+      "id": "68eeab65-1e75-541e-9acf-07fb8f376677",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/headless-public-hero",
+      "parent": "04c15fc1-ed5d-4a3b-8b8d-9e2603d2468c",
+      "template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
+      "bucket": "presentation",
+      "fields": {
+        "Placeholder Key": "headless-public-hero-{*}",
+        "Allowed Controls": "{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}|{2472C249-4D6A-5BB7-B388-BD4F3CC4EAA1}",
+        "__Created": "20261031T160000Z"
+      }
+    }
+  ],
+  "templateIds": {
+    "PublicRenderingParameters": "97353208-4c49-506d-a35a-1ea62e35f2a2",
+    "PublicPage": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+    "PublicHero": "0d29dd73-62cc-5421-b14c-b8f8d8921540",
+    "PublicPromotion": "55e09033-7e8f-56d2-ba6b-4be68e2f65df",
+    "SharedDisclosure": "ba156366-00c4-5c7e-a79a-1c9f8cbce184",
+    "PublicArticle": "8fb0a60a-31d7-5009-abca-636a6a3f40b5",
+    "PublicImage": "b93ddcbc-a10f-55c0-9b06-d6f3a3e96eb6",
+    "PublicCta": "449b1df9-4734-5f5f-b456-bde2842ed640",
+    "PublicHeader": "19e06326-2afd-54e0-99fa-df8b005512a4",
+    "PublicFooter": "2f8f9387-9e11-53d6-b99c-0b33c2a372c7",
+    "PublicApprovedAnswer": "1a9400ee-e47b-5992-9431-56ae5586f90d",
+    "AgencyPriority": "b2ead4d5-0b3a-5fa9-918b-e224162ec526",
+    "AgencyPriorities": "2ec5a6fa-cefe-5477-9e13-9ad07609f26c",
+    "PublicSearch": "b7125e2a-f98f-5a33-a53f-089c287de495",
+    "PublicProductOption": "f5b68e03-f379-53f5-8292-f4b28917bc67",
+    "PublicProductSelector": "5ff259c9-c632-56d2-8bb5-4980c9226646",
+    "PublicQuoteHandoff": "feb60c5a-1074-503c-b9f3-dd142f821856",
+    "PublicCard": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+    "PublicSection": "fc07715c-5b17-53a5-89ce-1b08d6b2a816",
+    "PublicSplitContent": "efcc13af-1e31-55d3-bca6-f2533d50e674",
+    "PublicFaqItem": "7e71c6a1-8f71-5e0c-8983-e35b4166daa7",
+    "PublicFaq": "ba8f6649-9df3-51fd-8652-cc1d76dcd3c3",
+    "PublicLink": "9e6168b4-3c3e-5764-bfa0-6f4e5210d426",
+    "PublicBreadcrumbs": "d93e627b-69a3-5fa9-849d-caa19b1d2146",
+    "PublicNavigationGroup": "8369c5b1-af02-591d-8b12-d0ac6414d41f",
+    "PublicFooterColumn": "4197034d-2f0e-551b-b3d9-9c18fa9be84f"
+  },
+  "fieldIds": {
+    "PublicPage.metadataTitle": "748e2709-fb2f-5f73-9ca6-d8e801b6eafc",
+    "PublicPage.metadataDescription": "396bcd2c-e08b-56fa-8d7a-170b9a7a18e8",
+    "PublicPage.ogTitle": "f6223349-c825-5ffa-8642-8e342eea691a",
+    "PublicPage.ogDescription": "d2e7482e-8d84-5af4-a883-194f18815403",
+    "PublicPage.canonicalUrl": "a98fdad1-e82c-5380-9954-33b996734100",
+    "PublicPage.audience": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
+    "PublicPage.state": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
+    "PublicPage.product": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
+    "PublicHero.eyebrow": "f6b19f8a-18e0-5550-85ab-7602cecec48c",
+    "PublicHero.heading": "3a61c47e-c996-5a80-ba68-f988ee36554f",
+    "PublicHero.summary": "608c6aac-cdd7-5be1-b727-a1647363b89c",
+    "PublicHero.image": "f8a68051-c885-5977-aa21-4629eb0f3a2c",
+    "PublicHero.primaryLink": "ef75886c-587f-5fb0-b3ee-b6163e7f7661",
+    "PublicHero.secondaryLink": "cedce3ca-6429-5a30-bae6-ed4e6508a0af",
+    "PublicPromotion.eyebrow": "fdcb8ccc-d218-5faa-b4b9-22202de6e660",
+    "PublicPromotion.headline": "47a086a8-80a6-5e3c-9a16-cff615cafa0c",
+    "PublicPromotion.body": "66096299-84db-5594-a3a7-9df389460203",
+    "PublicPromotion.image": "82f2d7b4-cc9b-506e-a0f4-1e704f8d2460",
+    "PublicPromotion.actionLink": "0daef26d-0917-58d9-89b3-d1758e4607dd",
+    "PublicPromotion.disclosure": "ea24474f-ad36-5cd4-b4ff-f0928803f322",
+    "SharedDisclosure.title": "552f64b5-9e7a-5174-b9bd-7efa7e39fb9a",
+    "SharedDisclosure.body": "ba150841-a581-5472-8222-4e5d344df3bf",
+    "SharedDisclosure.sourceLink": "2d7006b7-39eb-5903-a777-4fe7acaa3f07",
+    "SharedDisclosure.owner": "13f01957-fa4d-5a3d-a7bc-cfd1de78c715",
+    "SharedDisclosure.effectiveDate": "93858bdc-20da-5db9-ad35-75623cc93c35",
+    "SharedDisclosure.reviewDate": "ce191de7-b556-513d-b195-996d021a1949",
+    "PublicArticle.heading": "3f27b5a0-0044-5085-b90f-a55499fc260a",
+    "PublicArticle.body": "3abbd930-ac1b-5420-9c68-9db3df0aef7e",
+    "PublicImage.image": "eea2687c-48ef-5355-8844-e1c78d4824f4",
+    "PublicImage.caption": "b4d0489f-eb4a-5f35-b4a3-94e93a48a29a",
+    "PublicCta.heading": "3da51966-dc2d-5d42-bc75-088111477a91",
+    "PublicCta.body": "0e96cf06-d1c6-58d8-90b0-30f9bbb8d127",
+    "PublicCta.actionLink": "79a1d247-dddf-5665-9a8f-43d10aa32744",
+    "PublicHeader.logo": "a7ccfc8a-ec93-583c-9101-3cc8058b3601",
+    "PublicHeader.homeLink": "8ee621c5-5aff-5f6e-ab22-6059a1227d89",
+    "PublicHeader.autoLink": "988531f3-9855-5e98-a395-ce59a2fed953",
+    "PublicHeader.homeInsuranceLink": "0c7b23fb-282f-5db0-875a-de5e9fcd8dfd",
+    "PublicHeader.bundlingLink": "484d8269-b8f3-5184-a60a-dab763f17aac",
+    "PublicHeader.resourcesLink": "d2f5a45f-864b-5c20-8c84-047b02f8c028",
+    "PublicHeader.contactLink": "659b0e5c-4550-5621-9c88-628d7f41e8e9",
+    "PublicHeader.quoteLink": "0e0022fb-3897-56da-a82f-19a3ad04e4fb",
+    "PublicFooter.logo": "b5b7288d-b373-5b55-9e83-035b72b4e441",
+    "PublicFooter.body": "517e0df2-5e2d-5e04-aca0-09742ad1b486",
+    "PublicFooter.contactLink": "179ab06f-b987-5f3a-a681-6b7fa7cb4e1b",
+    "PublicFooter.privacyLink": "ec94038d-c2ca-51cc-ba92-e7e87cdb0b7b",
+    "PublicFooter.termsLink": "5ccc39a6-592e-544a-a4c1-7cb8e31eac3f",
+    "PublicApprovedAnswer.question": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+    "PublicApprovedAnswer.canonicalUrl": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
+    "PublicApprovedAnswer.answer": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+    "PublicApprovedAnswer.formalWording": "47041dc1-a183-5516-85ea-afdea936289c",
+    "PublicApprovedAnswer.explanation": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+    "PublicApprovedAnswer.sourceLink": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
+    "PublicApprovedAnswer.owner": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+    "PublicApprovedAnswer.effectiveDate": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+    "PublicApprovedAnswer.reviewDate": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+    "PublicApprovedAnswer.state": "69a206de-38f4-5302-8142-5e2cff09168f",
+    "PublicApprovedAnswer.product": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
+    "PublicApprovedAnswer.audience": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
+    "PublicApprovedAnswer.nextStep": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+    "PublicApprovedAnswer.disclosure": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+    "AgencyPriority.Heading": "8a29fd20-38ec-5038-b7da-d60ab4598c31",
+    "AgencyPriority.Body": "43610941-be36-52fb-b82e-421cd5f1899b",
+    "AgencyPriority.Image": "ea39ce7b-ad09-5270-975f-d64d59728d3b",
+    "AgencyPriority.Link": "03fb7ba7-acb4-5dd7-854d-e53cddabd853",
+    "AgencyPriority.Eyebrow": "350fd516-f7ed-5655-82b5-8b0fbc8a82e6",
+    "AgencyPriorities.Heading": "fc9fa1f9-31df-56c7-9fe7-bbd68fdb14fb",
+    "AgencyPriorities.Intro": "4d579360-2564-5a1d-8e24-57b353bf78f5",
+    "AgencyPriorities.Recommendations": "9ce3391a-d490-5c2e-975b-41c695d206a2",
+    "PublicSearch.heading": "be478735-f1a3-560b-be5f-af05bd4f0149",
+    "PublicSearch.introduction": "70245dcd-8085-5eb8-9882-95ce8255ff14",
+    "PublicSearch.search": "d8ef138b-14ce-5af6-9c68-0ef9053ee50e",
+    "PublicProductOption.label": "9493af78-c66d-5a39-b714-8ab68f1d523f",
+    "PublicProductOption.productKey": "7c4c0855-196e-5aea-b4f8-5645eb561cb0",
+    "PublicProductOption.image": "39a17380-602c-5834-a47c-f1a7a89c18ba",
+    "PublicProductOption.quoteLink": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
+    "PublicProductSelector.heading": "f6cc3915-269f-5c55-a3ec-f2bec59414e4",
+    "PublicProductSelector.introduction": "4fc58087-c67b-552f-b662-9f89d84b7fb3",
+    "PublicProductSelector.products": "bc105dbf-3d11-5ddf-b31c-b0b18d09b9fb",
+    "PublicProductSelector.defaultProducts": "d8dbe169-e992-5ecf-8447-fc2bf1f0b086",
+    "PublicProductSelector.actionLink": "90c71099-638c-58f1-b04c-acab6a2bba9f",
+    "PublicProductSelector.agentLink": "bf61314f-b020-5f0d-889b-302f13cd28af",
+    "PublicProductSelector.postcodeLabel": "d37d62b1-168c-5acd-a17c-c7571a870323",
+    "PublicQuoteHandoff.heading": "dee5d997-7be0-5075-909a-bd146335451f",
+    "PublicQuoteHandoff.introduction": "29773d2d-19e0-5eed-9fff-97d5e4d3d441",
+    "PublicQuoteHandoff.products": "32292dfc-11ff-5f34-9827-8108256a20a1",
+    "PublicQuoteHandoff.agentLink": "e939dc09-771d-534a-803d-3f959501fe2f",
+    "PublicCard.value": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+    "PublicCard.heading": "2e0042be-6693-536c-90cb-412fd6b7e104",
+    "PublicCard.body": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+    "PublicCard.image": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+    "PublicCard.actionLink": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+    "PublicSection.heading": "265c0d23-68cd-5fa3-ae77-cddc4fd25ab3",
+    "PublicSection.introduction": "9a7aa587-fb2b-5828-9471-4013c68c7422",
+    "PublicSection.items": "a7dae70d-8577-536a-bb6f-a63b64fdbe0b",
+    "PublicSection.actionLink": "3f9c6aaf-39c9-5ebd-950c-4cf2e513c838",
+    "PublicSplitContent.heading": "0642f561-976a-5280-ad0b-49591bb6b97f",
+    "PublicSplitContent.body": "2bdf3765-4d4d-54af-879e-96a83b50893e",
+    "PublicSplitContent.image": "19c458f6-6177-50d1-9756-15ca31cc5674",
+    "PublicSplitContent.primaryLink": "6f2bb5ea-9611-5298-a6d2-49c85eee3ce8",
+    "PublicSplitContent.secondaryLink": "c2b8db12-5b8e-5f84-a44d-5f017ba52d66",
+    "PublicFaqItem.question": "e0740b71-1b49-514f-89f3-2321e72809f4",
+    "PublicFaqItem.answer": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
+    "PublicFaq.heading": "26169af1-541a-50a5-92d5-e7a11aae45d1",
+    "PublicFaq.items": "80b5b9b2-74f9-5a08-bcb5-d1cbae7cb8f9",
+    "PublicLink.link": "a13aa6a3-e920-5c27-a58a-69d5543e8071",
+    "PublicLink.icon": "f32883e5-0d6d-54ed-92db-7ed7b0463510",
+    "PublicBreadcrumbs.items": "4d9eb38f-53dd-5509-80ee-c0c9e6062f82",
+    "PublicBreadcrumbs.currentLabel": "0682270e-9254-5030-915c-97c6e1bac689",
+    "PublicNavigationGroup.label": "53e384ff-302a-5715-b634-b142ff2cc95e",
+    "PublicNavigationGroup.links": "128a1f1d-8e9f-5094-9dbe-8deff2681d0f",
+    "PublicFooterColumn.heading": "9adfb3e7-8677-5a88-88b9-4e2b9e4dace0",
+    "PublicFooterColumn.body": "72d4f8bc-e87d-5f2c-88a2-d522a84565db",
+    "PublicFooterColumn.links": "63e3c2ce-499a-5002-8fef-e0e91bcb6b30",
+    "PublicHero.quoteHeading": "d21d8f34-ec3e-54ad-80cd-184f33b7ff5c",
+    "PublicHeader.navigation": "7d68fcab-74a6-56c6-8947-8ccb7198d34f",
+    "PublicHeader.searchLink": "41cd7137-f263-543b-b965-313d3274641a",
+    "PublicHeader.loginLink": "074bfa7d-0186-55e5-8bee-12a4fa4c7568",
+    "PublicFooter.columns": "0d0510b3-f4c8-5257-a3a9-90e8b53ab3c3",
+    "PublicFooter.socialLinks": "2d3223c2-2922-5844-a5c5-8cf60d492698",
+    "PublicFooter.legalLinks": "5a6d7e0f-dac4-5bf2-84d3-81b4931ce1f3",
+    "PublicFooter.disclaimer": "e67078b8-6882-5aad-a733-2ce916ebe84c",
+    "PublicFooter.mobileLogo": "fa8f1baa-ee13-5b43-bdf0-d434376aa9a4"
+  },
+  "renderingIds": {
+    "PublicHero": "38a74fc9-3ff2-5e89-8545-daa4b3a164c4",
+    "PublicPromotion": "3b2349c9-f98b-5c1a-8a5a-3b98ba3535f1",
+    "SharedDisclosure": "4bc5c522-23de-54e1-8420-169bdcf996e9",
+    "PublicArticle": "f63f0f36-ea5b-5693-85c6-b4df475c8840",
+    "PublicImage": "44d749a9-68a1-5987-844b-00de3abfb287",
+    "PublicCta": "26096ad9-95c0-5080-a1ce-58f25913017f",
+    "PublicHeader": "f08a1f43-1c90-5422-a93f-c8e6439d9f04",
+    "PublicFooter": "5a7d5d76-d30d-5e47-8969-31835b870856",
+    "PublicPageBody": "5d5c48c3-2103-5cdd-935d-bfa622018add",
+    "PublicApprovedAnswer": "4585a48f-e841-50ca-b2a3-0d3fc9893875",
+    "AgencyPriorities": "a2e85f2d-7dbc-5640-8040-0b688d7912a6",
+    "PublicSearch": "2967923c-52c6-5e80-946f-533ce8c2148e",
+    "PublicProductSelector": "ff280574-45ae-5a99-b5e0-5e290b91d9b0",
+    "PublicQuoteHandoff": "d371fbc9-d8d2-5310-9660-3d5f7c3bb9e4",
+    "PublicSection": "7efb74e9-a17b-5a27-9118-6b78ae1b2d8c",
+    "PublicSplitContent": "0839d907-b33b-5aad-8030-635f1451794f",
+    "PublicFaq": "f4ef94bb-096b-5404-9b3e-e0f2b0b041c5",
+    "PublicBreadcrumbs": "2472c249-4d6a-5bb7-b388-bd4f3cc4eaa1"
+  },
+  "queries": {
+    "referenceContract": "Native Layout Service resolves these reference fields directly; these are inspectable Edge integration queries, not fabricated SDK field objects or unverified custom resolvers.",
+    "productOptions": "query ProductOptions($path: String!, $language: String!) { item(path: $path, language: $language) { id heading: field(name: \"heading\") { jsonValue } products: field(name: \"products\") { ... on MultilistField { targetIds targetItems { id label: field(name: \"label\") { jsonValue } productKey: field(name: \"productKey\") { jsonValue } image: field(name: \"image\") { jsonValue } quoteLink: field(name: \"quoteLink\") { jsonValue } } } } } }",
+    "approvedAnswer": "query ApprovedAnswer($path: String!, $language: String!) { item(path: $path, language: $language) { id version question: field(name: \"question\") { jsonValue } answer: field(name: \"answer\") { jsonValue } sourceLink: field(name: \"sourceLink\") { jsonValue } canonicalUrl: field(name: \"canonicalUrl\") { jsonValue } disclosure: field(name: \"disclosure\") { ... on LookupField { targetItem { id body: field(name: \"body\") { jsonValue } } } } } }",
+    "publicationRule": "Use the Live context for downstream APIs and Search projection. Preview is for native authoring. Draft content is never read from Preview and relabeled as approved."
+  }
+}

@@ -1,0 +1,17 @@
+---
+ID: ecb84122-fab6-5352-8d31-6349234ef4e6
+Parent: 19314938-5d93-57cc-b572-a548026d43dd
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{B2EAD4D5-0B3A-5FA9-918B-E224162EC526}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

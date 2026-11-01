@@ -1,0 +1,17 @@
+---
+ID: ecb2cd83-24f9-5f65-af9b-3f1af3947d5d
+Parent: b93ddcbc-a10f-55c0-9b06-d6f3a3e96eb6
+Template: b93ddcbc-a10f-55c0-9b06-d6f3a3e96eb6
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicImage/__Standard Values
+SharedFields:
+- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
+  Hint: __Default workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z
