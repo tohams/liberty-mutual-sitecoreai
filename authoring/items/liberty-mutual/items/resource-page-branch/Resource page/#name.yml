@@ -13,6 +13,9 @@ SharedFields:
 - ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
   Hint: __Workflow
   Value: "{B4F49B23-4BBA-4C79-BA22-F89F5F0D4E4F}"
+- ID: c7c26117-dbb1-42b2-ab5e-f7223845cca3
+  Hint: __Thumbnail
+  Value: <image mediaid="{B7015D52-019A-4B68-94E8-999ED1E89516}" />
 Languages:
 - Language: en
   Versions:

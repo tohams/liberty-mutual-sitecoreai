@@ -541,7 +541,7 @@
         {
           "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
           "Hint": "__Icon",
-          "Value": "Office/32x32/document_text.png"
+          "Value": "Office/32x32/list_style_bullets.png"
         }
       ],
       "Languages": [
@@ -2423,7 +2423,7 @@
         {
           "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
           "Hint": "__Icon",
-          "Value": "Office/32x32/document_text.png"
+          "Value": "Office/32x32/question.png"
         }
       ],
       "Languages": [
@@ -2802,7 +2802,7 @@
         {
           "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
           "Hint": "__Icon",
-          "Value": "Office/32x32/document_text.png"
+          "Value": "Office/32x32/list_style_numbered.png"
         }
       ],
       "Languages": [
@@ -4008,7 +4008,7 @@
         {
           "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
           "Hint": "__Icon",
-          "Value": "Office/32x32/check_box.png"
+          "Value": "Office/32x32/list_style_bullets.png"
         }
       ],
       "Languages": [
@@ -4828,7 +4828,7 @@
         {
           "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
           "Hint": "__Icon",
-          "Value": "Office/32x32/question_and_answer.png"
+          "Value": "Office/32x32/question.png"
         }
       ],
       "Languages": [
@@ -4943,7 +4943,7 @@
         {
           "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
           "Hint": "__Icon",
-          "Value": "Office/32x32/navigate_right.png"
+          "Value": "Office/32x32/list_style_numbered.png"
         }
       ],
       "Languages": [

@@ -4,7 +4,7 @@
       {
         "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
         "Hint": "__Thumbnail",
-        "Value": "<image mediaid=\"{068D96EE-128A-4F64-977C-CE18213A16A6}\" />"
+        "Value": "<image mediaid=\"{DCBE7940-BC0E-44F7-9076-66E882138504}\" />"
       }
     ],
     "versioned": [
@@ -20,7 +20,7 @@
       {
         "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
         "Hint": "__Thumbnail",
-        "Value": "<image mediaid=\"{781A4318-0D45-480C-A9E0-373068FA74FF}\" />"
+        "Value": "<image mediaid=\"{76EEF150-1D2B-491E-9A68-6A4369F66C8C}\" />"
       }
     ],
     "versioned": [
@@ -36,7 +36,7 @@
       {
         "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
         "Hint": "__Thumbnail",
-        "Value": "<image mediaid=\"{D26B7066-7289-4A18-84EF-1F85403B9E62}\" />"
+        "Value": "<image mediaid=\"{5BA8DBD4-C9BE-4E58-AC7B-8AF86DDF573E}\" />"
       }
     ],
     "versioned": [
@@ -46,5 +46,25 @@
         "Value": "20261031T160000Z"
       }
     ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Designs/Public website": {
+    "shared": [
+      {
+        "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
+        "Hint": "__Thumbnail",
+        "Value": "<image mediaid=\"{FFDDCF62-B915-4E8A-887D-F54646E55ABE}\" />"
+      }
+    ],
+    "versioned": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Landing page/$name": {
+    "shared": [
+      {
+        "ID": "c7c26117-dbb1-42b2-ab5e-f7223845cca3",
+        "Hint": "__Thumbnail",
+        "Value": "<image mediaid=\"{29469E62-F6C9-4AD6-BD95-37A4DA7B4154}\" />"
+      }
+    ],
+    "versioned": []
   }
 }

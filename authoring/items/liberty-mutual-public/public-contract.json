@@ -712,7 +712,7 @@
       "fields": {
         "__Base template": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}",
         "__Standard values": "{3D15CEB7-22F2-5C6A-9404-F2A9C0215F19}",
-        "__Icon": "Office/32x32/document_certificate.png",
+        "__Icon": "Office/32x32/shield.png",
         "__Created": "20261031T160000Z"
       }
     },
@@ -956,7 +956,7 @@
       "fields": {
         "__Base template": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}",
         "__Standard values": "{16C539B2-7350-5B67-A884-CDF8B35068D2}",
-        "__Icon": "Office/32x32/navigate_right.png",
+        "__Icon": "Office/32x32/mouse_pointer.png",
         "__Created": "20261031T160000Z"
       }
     },
@@ -1284,7 +1284,7 @@
       "fields": {
         "__Base template": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}",
         "__Standard values": "{8E276ADD-BC9C-5AB8-9372-7055E15DFB8E}",
-        "__Icon": "Office/32x32/question_and_answer.png",
+        "__Icon": "Office/32x32/check.png",
         "__Created": "20261031T160000Z"
       }
     },
@@ -1622,7 +1622,7 @@
       "fields": {
         "__Base template": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}",
         "__Standard values": "{A18DA506-4C8F-5F51-A543-2335F8EEB19E}",
-        "__Icon": "Office/32x32/folder_heart.png",
+        "__Icon": "Office/32x32/signpost.png",
         "__Created": "20261031T160000Z"
       }
     },
@@ -1798,7 +1798,7 @@
         "Datasource Template": "/sitecore/templates/Project/LibertyMutualPublic/SharedDisclosure",
         "Datasource Location": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
-        "__Icon": "Office/32x32/document_certificate.png",
+        "__Icon": "Office/32x32/shield.png",
         "__Display name": "Disclosure",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}|{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}|{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}"
       }
@@ -1909,7 +1909,7 @@
         "Datasource Template": "/sitecore/templates/Project/LibertyMutualPublic/PublicCta",
         "Datasource Location": "query:./Data",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
-        "__Icon": "Office/32x32/navigate_right.png",
+        "__Icon": "Office/32x32/mouse_pointer.png",
         "__Display name": "Call to action",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
       }
@@ -2059,7 +2059,7 @@
         "Datasource Template": "/sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer",
         "Datasource Location": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
-        "__Icon": "Office/32x32/question_and_answer.png",
+        "__Icon": "Office/32x32/check.png",
         "__Display name": "Approved answer",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"
       }
@@ -2096,7 +2096,7 @@
         "Datasource Template": "/sitecore/templates/Project/LibertyMutualPublic/AgencyPriorities",
         "Datasource Location": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
-        "__Icon": "Office/32x32/folder_heart.png",
+        "__Icon": "Office/32x32/signpost.png",
         "Content Dependencies": "{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{15F0229E-41E0-442B-94C5-243CBA793465}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}",
         "__Display name": "Agency priorities",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}|{D8E5D742-1AE3-5B2E-ABA9-553D4A53C3FC}|{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}",
@@ -2620,7 +2620,7 @@
       "fields": {
         "Signature": "public-header",
         "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{4279968F-9735-5BEC-95B4-C2479C1342BF}\" id=\"{F08A1F43-1C90-5422-A93F-C8E6439D9F04}\" ph=\"headless-header\" ds=\"local:/Data/Header\" par=\"FieldNames={CE22AE2A-FD45-583E-8966-43D7B6B19A03}&amp;DynamicPlaceholderId=1\" /></d></r>",
-        "__Thumbnail": "<image mediaid=\"{068D96EE-128A-4F64-977C-CE18213A16A6}\" />",
+        "__Thumbnail": "<image mediaid=\"{DCBE7940-BC0E-44F7-9076-66E882138504}\" />",
         "__Final Renderings": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{4279968F-9735-5BEC-95B4-C2479C1342BF}\" s:id=\"{F08A1F43-1C90-5422-A93F-C8E6439D9F04}\" s:ph=\"headless-header\" s:ds=\"local:/Data/Header\" s:par=\"FieldNames={CE22AE2A-FD45-583E-8966-43D7B6B19A03}&amp;DynamicPlaceholderId=1\" /></d></r>",
         "__Created": "20261031T160000Z"
       }
@@ -2678,7 +2678,7 @@
       "fields": {
         "Signature": "public-page-body",
         "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\" id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\" ph=\"headless-main\" ds=\"\" par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" /></d></r>",
-        "__Thumbnail": "<image mediaid=\"{D26B7066-7289-4A18-84EF-1F85403B9E62}\" />",
+        "__Thumbnail": "<image mediaid=\"{5BA8DBD4-C9BE-4E58-AC7B-8AF86DDF573E}\" />",
         "__Final Renderings": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\" s:id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\" s:ph=\"headless-main\" s:ds=\"\" s:par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" /></d></r>",
         "__Created": "20261031T160000Z"
       }
@@ -2704,7 +2704,7 @@
       "fields": {
         "Signature": "public-footer",
         "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" ph=\"headless-footer\" ds=\"local:/Data/Footer\" par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /></d></r>",
-        "__Thumbnail": "<image mediaid=\"{781A4318-0D45-480C-A9E0-373068FA74FF}\" />",
+        "__Thumbnail": "<image mediaid=\"{76EEF150-1D2B-491E-9A68-6A4369F66C8C}\" />",
         "__Final Renderings": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" s:id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" s:ph=\"headless-footer\" s:ds=\"local:/Data/Footer\" s:par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /></d></r>",
         "__Created": "20261031T160000Z"
       }
@@ -2760,6 +2760,7 @@
       "bucket": "presentation",
       "fields": {
         "PartialDesigns": "{B8624533-E386-5E21-8420-31A9334081B8}|{63CF5969-DC2E-56D1-B61D-0D371359F0BB}|{BB22D3AF-9E67-5853-9207-6D11248F58B0}",
+        "__Thumbnail": "<image mediaid=\"{FFDDCF62-B915-4E8A-887D-F54646E55ABE}\" />",
         "__Created": "20261031T160000Z"
       }
     },
@@ -2783,6 +2784,7 @@
         "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{C4235048-54A6-5032-813A-1732851F0358}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{3ECC076E-60D5-5217-9BD4-3ACFB28BAB8F}\" id=\"{F63F0F36-EA5B-5693-85C6-B4DF475C8840}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Introduction\" par=\"FieldNames={C64AAA90-DC86-5D1E-9286-1BA1DC0ECE10}&amp;DynamicPlaceholderId=3\" /></d></r>",
         "__Masters": "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}|{D5784517-B225-55AA-BC9C-8910FA0DB4F2}",
         "__Workflow": "{1BB54766-6A38-5C47-B0EE-C57570679D14}",
+        "__Thumbnail": "<image mediaid=\"{29469E62-F6C9-4AD6-BD95-37A4DA7B4154}\" />",
         "Title": "$name",
         "NavigationTitle": "$name",
         "__Workflow state": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
@@ -3168,7 +3170,7 @@
       "fields": {
         "__Base template": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}",
         "__Standard values": "{22D5EA42-BBB7-5FDD-AEA8-D13F238E821A}",
-        "__Icon": "Office/32x32/document_text.png",
+        "__Icon": "Office/32x32/list_style_bullets.png",
         "__Created": "20261031T160000Z"
       }
     },
@@ -3761,7 +3763,7 @@
       "fields": {
         "__Base template": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}",
         "__Standard values": "{8832D25A-E68D-5B30-A1E2-2F9E9589D8D6}",
-        "__Icon": "Office/32x32/document_text.png",
+        "__Icon": "Office/32x32/question.png",
         "__Created": "20261031T160000Z"
       }
     },
@@ -3886,7 +3888,7 @@
       "fields": {
         "__Base template": "{1930BBEB-7805-471A-A3BE-4858AC7CF696}",
         "__Standard values": "{61C5EBA9-1533-5F44-BF95-A14C94A63010}",
-        "__Icon": "Office/32x32/document_text.png",
+        "__Icon": "Office/32x32/list_style_numbered.png",
         "__Created": "20261031T160000Z"
       }
     },
@@ -4262,7 +4264,7 @@
         "Datasource Template": "/sitecore/templates/Project/LibertyMutualPublic/PublicProductSelector",
         "Datasource Location": "query:./Data",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
-        "__Icon": "Office/32x32/check_box.png",
+        "__Icon": "Office/32x32/list_style_bullets.png",
         "__Display name": "Product choices",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}",
         "__Created": "20261101T035443Z"
@@ -4546,7 +4548,7 @@
         "Datasource Template": "/sitecore/templates/Project/LibertyMutualPublic/PublicFaq",
         "Datasource Location": "query:./Data",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
-        "__Icon": "Office/32x32/question_and_answer.png",
+        "__Icon": "Office/32x32/question.png",
         "__Display name": "Questions and answers",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}",
         "__Created": "20261101T035443Z"
@@ -4584,7 +4586,7 @@
         "Datasource Template": "/sitecore/templates/Project/LibertyMutualPublic/PublicBreadcrumbs",
         "Datasource Location": "query:./Data",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
-        "__Icon": "Office/32x32/navigate_right.png",
+        "__Icon": "Office/32x32/list_style_numbered.png",
         "__Display name": "Breadcrumbs",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}",
         "__Created": "20261101T035443Z"

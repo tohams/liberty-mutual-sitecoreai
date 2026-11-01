@@ -7,8 +7,8 @@
   },
   "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header": {
     "__Thumbnail": {
-      "semanticValue": "<image mediaid=\"{068D96EE-128A-4F64-977C-CE18213A16A6}\" />",
-      "serializedValue": "<image mediaid=\"{068D96EE-128A-4F64-977C-CE18213A16A6}\" />\n"
+      "semanticValue": "<image mediaid=\"{DCBE7940-BC0E-44F7-9076-66E882138504}\" />",
+      "serializedValue": "<image mediaid=\"{DCBE7940-BC0E-44F7-9076-66E882138504}\" />\n"
     },
     "__Renderings": {
       "semanticValue": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{4279968F-9735-5BEC-95B4-C2479C1342BF}\" id=\"{F08A1F43-1C90-5422-A93F-C8E6439D9F04}\" ph=\"headless-header\" ds=\"local:/Data/Header\" par=\"FieldNames={CE22AE2A-FD45-583E-8966-43D7B6B19A03}&amp;DynamicPlaceholderId=1\" /></d></r>",
@@ -21,8 +21,8 @@
   },
   "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer": {
     "__Thumbnail": {
-      "semanticValue": "<image mediaid=\"{781A4318-0D45-480C-A9E0-373068FA74FF}\" />",
-      "serializedValue": "<image mediaid=\"{781A4318-0D45-480C-A9E0-373068FA74FF}\" />\n"
+      "semanticValue": "<image mediaid=\"{76EEF150-1D2B-491E-9A68-6A4369F66C8C}\" />",
+      "serializedValue": "<image mediaid=\"{76EEF150-1D2B-491E-9A68-6A4369F66C8C}\" />\n"
     },
     "__Renderings": {
       "semanticValue": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" ph=\"headless-footer\" ds=\"local:/Data/Footer\" par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /></d></r>",
@@ -35,8 +35,8 @@
   },
   "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Page body": {
     "__Thumbnail": {
-      "semanticValue": "<image mediaid=\"{D26B7066-7289-4A18-84EF-1F85403B9E62}\" />",
-      "serializedValue": "<image mediaid=\"{D26B7066-7289-4A18-84EF-1F85403B9E62}\" />\n"
+      "semanticValue": "<image mediaid=\"{5BA8DBD4-C9BE-4E58-AC7B-8AF86DDF573E}\" />",
+      "serializedValue": "<image mediaid=\"{5BA8DBD4-C9BE-4E58-AC7B-8AF86DDF573E}\" />\n"
     },
     "__Renderings": {
       "semanticValue": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\" id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\" ph=\"headless-main\" ds=\"\" par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" /></d></r>",
@@ -45,6 +45,18 @@
     "__Final Renderings": {
       "semanticValue": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\" s:id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\" s:ph=\"headless-main\" s:ds=\"\" s:par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" /></d></r>",
       "serializedValue": "<r xmlns:p=\"p\" xmlns:s=\"s\"\n  p:p=\"1\">\n  <d\n    id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\">\n    <r\n      uid=\"{27C7CFA7-CBA9-5132-961E-0F0BA8EA14FD}\"\n      s:id=\"{5D5C48C3-2103-5CDD-935D-BFA622018ADD}\"\n      s:ph=\"headless-main\"\n      s:ds=\"\"\n      s:par=\"FieldNames={3EBFF9DC-B7A6-5B7C-BCC1-72C2C639E194}&amp;DynamicPlaceholderId=1\" />\n  </d>\n</r>\n"
+    }
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Designs/Public website": {
+    "__Thumbnail": {
+      "semanticValue": "<image mediaid=\"{FFDDCF62-B915-4E8A-887D-F54646E55ABE}\" />",
+      "serializedValue": "<image mediaid=\"{FFDDCF62-B915-4E8A-887D-F54646E55ABE}\" />\n"
+    }
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Landing page/$name": {
+    "__Thumbnail": {
+      "semanticValue": "<image mediaid=\"{29469E62-F6C9-4AD6-BD95-37A4DA7B4154}\" />",
+      "serializedValue": "<image mediaid=\"{29469E62-F6C9-4AD6-BD95-37A4DA7B4154}\" />\n"
     }
   }
 }

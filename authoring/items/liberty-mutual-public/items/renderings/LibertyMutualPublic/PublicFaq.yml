@@ -18,7 +18,7 @@ SharedFields:
   Value: "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Office/32x32/question_and_answer.png
+  Value: Office/32x32/question.png
 Languages:
 - Language: en
   Fields:
