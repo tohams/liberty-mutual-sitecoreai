@@ -31,7 +31,7 @@ SharedFields:
   Value: "{A07EFBB2-5369-4C62-8B06-662166642E0E}"
 - ID: "85a7501a-86d9-4243-9075-0b727c3a6db4"
   Hint: Name
-  Value: Liberty Mutual Agent Portal
+  Value: Agent Portal
 - ID: "89cecf4f-e545-44f2-813d-272c08661d14"
   Hint: Description
   Value: A connected workspace to place business, serve clients, and grow independent agencies.

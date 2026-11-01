@@ -148,7 +148,7 @@ def build(include_editorial=True):
     for key,component in [('headless-agency-priorities','AgencyPriorities'),('headless-shared-disclosure','SharedDisclosure')]:
         item(PP+'/'+key,uid(PP),T['placeholder'],'placeholders',shared=[field('7256bdab-1fd2-49dd-b205-cb4873d2917c','Placeholder Key',key),field('e391b526-d0c5-439d-803e-17512eae6222','Allowed Controls',brace(RENDERINGS[component]))])
     # Native site seed is deliberately separate from model/presentation deploys.
-    item(SITE,I["collection"],T["site"],"site",shared=[field("85a7501a-86d9-4243-9075-0b727c3a6db4","Name","Liberty Mutual Public Website"),field("89cecf4f-e545-44f2-813d-272c08661d14","Description","Insurance guidance and useful next steps for individuals and families.")])
+    item(SITE,I["collection"],T["site"],"site",shared=[field("85a7501a-86d9-4243-9075-0b727c3a6db4","Name","Public Website"),field("89cecf4f-e545-44f2-813d-272c08661d14","Description","Insurance guidance and useful next steps for individuals and families.")])
     for child,tid in [("Data",T["data"]),("Settings",T["settings"]),("Presentation",T["presentation"])]: item(SITE+"/"+child,uid(SITE),tid,"site" if child!="Presentation" else "presentation")
     for folder in ["Promotions","Disclosures","Approved answers","Taxonomy"]:item(SITE+"/Data/"+folder,uid(SITE+"/Data"),T["folder"],"content")
     for child,tid in [("Page Designs",T["designFolder"]),("Partial Designs",T["partialFolder"]),("Headless Variants","da26c636-96e1-45e4-88d6-3fcec70d5699"),("Placeholder Settings","52288e39-7830-4694-b62d-32a54c6ef7ba"),("Available Renderings",T["availableFolder"]),("Page Branches",T["branchFolder"])]:

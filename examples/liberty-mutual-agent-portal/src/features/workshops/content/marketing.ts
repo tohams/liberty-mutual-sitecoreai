@@ -40,7 +40,7 @@ const profileLink: GuideLink = {
   label: "Open SitecoreAI Profiles",
   href: PROFILES,
 };
-const platformPrerequisite = `**SitecoreAI** is the platform behind the Agent Portal: your team uses it to manage content, personalize experiences, and review engagement. Open [**SitecoreAI**](${SITECORE}) and sign in with the email address that received your **Sitecore Cloud** invitation. This opens **Safeco Insurance Company of America POC** and its **SitecoreAI / Demo** environment. If a step uses **Page Builder**, confirm **Liberty Mutual Agent Portal** is selected there. If access is denied or another organization opens, ask the workshop team to check your invitation; a portal username such as **daniel.01** cannot provide this access.`;
+const platformPrerequisite = `**SitecoreAI** is the platform behind the Agent Portal: your team uses it to manage content, personalize experiences, and review engagement. Open [**SitecoreAI**](${SITECORE}) and sign in with the email address that received your **Sitecore Cloud** invitation. This opens **Safeco Insurance Company of America POC** and its **SitecoreAI / Demo** environment. If a step uses **Page Builder**, confirm **Agent Portal** is selected there. If access is denied or another organization opens, ask the workshop team to check your invitation; a portal username such as **daniel.01** cannot provide this access.`;
 const authorPrerequisite =
   "**Page Builder** is SitecoreAI’s page-authoring tool. **Editor** shows the page preview, or canvas; **Content** shows the stored fields and content tree. A **component** is a page section, such as an image or guidance card. Keep **Default editing host** selected so the canvas uses the hosted website. Content-management-system (**CMS**) pages and settings are shared. Follow the presenter when a guide says **Presenter demonstration**, record starting values before an edit, and complete the guide’s cleanup before leaving the page. A portal reset does not restore CMS content.";
 const practicePagePrerequisite =
@@ -168,7 +168,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Use a separate Sitecore login for authoring",
         action: [
           `Open [**SitecoreAI**](${SITECORE}). Use the email address that received your **Sitecore Cloud** invitation, not a portal persona. The presenters use separate **Author** and **Approver** accounts for the publishing demonstration; you can follow that demonstration without an authoring role.`,
-          `[**SitecoreAI**](${SITECORE}) opens the POC environment directly. If you instead begin at the [**Sitecore Cloud Portal**](https://portal.sitecorecloud.io/?organization=${ORG}), select **Safeco Insurance Company of America POC**, then **SitecoreAI / Demo**. For editing, open [**Page Builder**](${PAGES}) and select **Liberty Mutual Agent Portal**. If access is denied, follow the presenter while the workshop team checks your invitation.`,
+          `[**SitecoreAI**](${SITECORE}) opens the POC environment directly. If you instead begin at the [**Sitecore Cloud Portal**](https://portal.sitecorecloud.io/?organization=${ORG}), select **Safeco Insurance Company of America POC**, then **SitecoreAI / Demo**. For editing, open [**Page Builder**](${PAGES}) and select **Agent Portal**. If access is denied, follow the presenter while the workshop team checks your invitation.`,
         ],
         expected: [
           "Your invited Sitecore account opens the authoring tools allowed by its role. Your portal account opens an agent’s workspace. Portal sessions last eight hours; signing in again resumes saved work.",
@@ -706,7 +706,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Create a page from the resource branch",
         action: [
-          `Open [**Page Builder**](${PAGES}) and confirm **Liberty Mutual Agent Portal** in the site selector at the upper left. In the left page tree, expand **Home**, select **Learning & resources**, and open its … menu > **Create a subpage**.`,
+          `Open [**Page Builder**](${PAGES}) and confirm **Agent Portal** in the site selector at the upper left. In the left page tree, expand **Home**, select **Learning & resources**, and open its … menu > **Create a subpage**.`,
           "Choose **Resource page** > **Select**. Enter a unique lowercase, hyphen-separated name such as resource-practice-jd-20260918-1430, replacing the initials and date/time with your own. Press Enter.",
           "Click **Reload tree** and select your new page.",
         ],
@@ -808,7 +808,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Open your page and record its starting content",
         action: [
-          `Open [**Page Builder**](${PAGES}) and confirm **Liberty Mutual Agent Portal** in the site selector. Select **Content** in the top navigation, then expand **Home** > **Practice** > **Practice {{pack}}** > **Data** and select **Growth opportunity**.`,
+          `Open [**Page Builder**](${PAGES}) and confirm **Agent Portal** in the site selector. Select **Content** in the top navigation, then expand **Home** > **Practice** > **Practice {{pack}}** > **Data** and select **Growth opportunity**.`,
           "Confirm that **Practice {{pack}}** matches your assigned workshop number before making a change. Find **Title**, above the **Body** rich-text editor, and copy the complete current title into a local note.",
         ],
         expected: [
@@ -1225,7 +1225,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect the tagged-page setup and starting profiles",
         action: [
-          `Open [**SitecoreAI Affinities**](https://app.sitecorecloud.io/performance/settings/affinities?organization=${ORG}&tenantId=${TENANT}). This is **Optimization** > **Settings** > **Affinities** in SitecoreAI. In the site list beside the settings menu, select **Liberty Mutual Agent Portal**.`,
+          `Open [**SitecoreAI Affinities**](https://app.sitecorecloud.io/performance/settings/affinities?organization=${ORG}&tenantId=${TENANT}). This is **Optimization** > **Settings** > **Affinities** in SitecoreAI. In the site list beside the settings menu, select **Agent Portal**.`,
           "In the table on the right, read **Affinity Name**, **Affinity Value**, and **Page**. **insurance_interest** is the interest category; **workers_compensation** and **household** are its topic values. The page assignments tell SitecoreAI which visits contribute to each topic. Compare those assignments and leave them unchanged.",
           "Open the current Daniel, Maya, and Elena profiles and record existing scores before any tagged visits.",
         ],
@@ -1518,7 +1518,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       "Sign in to this workshop website with a portal username and password **Sitecore1** if requested. The [**Content API experience**](/workshops/content-api) is a protected page on the **Agent Portal** host; it does not require an agent persona or change an agent’s browsing profile.",
       "Steps 1–2 are read-only and suitable for everyone. Steps 3–6 are a **Presenter demonstration** because **Bundle car and home** is shared source content. One presenter makes and restores the change while participants observe.",
-      `For authoring, open [**SitecoreAI**](${SITECORE}) with your authorized **Sitecore Cloud** account. In **Page Builder**, select **Liberty Mutual Public Website**, whose site name is **liberty-mutual-public-site**, and **English**. Keep **Default editing host** selected. This guide uses the public site rather than the Agent Portal site.`,
+      `For authoring, open [**SitecoreAI**](${SITECORE}) with your authorized **Sitecore Cloud** account. In **Page Builder**, select **Public Website**, whose site name is **liberty-mutual-public-site**, and **English**. Keep **Default editing host** selected. This guide uses the public site rather than the Agent Portal site.`,
       "The publishing demonstration uses an **Author** to edit and submit, a separate **Approver** to review, and an **administrator acting as publisher** to publish. Use separate browser profiles for the Sitecore identities so each role’s available actions remain clear. The workshop website’s persona logins do not grant Sitecore authoring access.",
       "An **API** is a structured response another application can request. The public website’s versioned read API returns approved answers published to **Experience Edge Live**. This protected page consumes that actual response and displays it using the Agent Portal application’s own presentation.",
     ],
@@ -1585,7 +1585,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Create a reversible source edit as the Author",
         action: [
-          `As the **Author**, open [**Bundle car and home in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). Confirm the item name, **English**, and the **Liberty Mutual Public Website** site. Its location is **Data** > **Approved answers** > **Bundle car and home**.`,
+          `As the **Author**, open [**Bundle car and home in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). Confirm the item name, **English**, and the **Public Website** site. Its location is **Data** > **Approved answers** > **Bundle car and home**.`,
           "Record the original English version number. Open its version selector, choose **Create version**, name it **Shared answer review**, and click **Create**. Select the new **Draft**.",
           "Find **Detailed explanation**. Preserve the existing text, and append a new paragraph: Review your coverage options with an agent before choosing. Click outside the field and wait for **Saved**. Keep the original version number for restoration.",
           "Open **Actions** > **Submit**, enter a comment explaining the source change, and click **Submit**. Confirm **Awaiting approval**.",
