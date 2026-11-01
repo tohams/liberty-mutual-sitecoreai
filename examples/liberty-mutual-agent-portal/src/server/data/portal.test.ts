@@ -78,7 +78,7 @@ test('all 140 reviewer logins authenticate and establish sessions in their assig
     assert.deepEqual(packLogins.map((entry) => entry.agentId).sort(), fixtures.agents.map((agent) => agent.id).sort());
     for (const source of packLogins) {
       assert.equal(source.username, `${source.agentId}.${pack}`);
-      assert.equal(source.password, 'password');
+      assert.equal(source.password, 'Sitecore1');
       assert.equal(source.enabled, true);
       assert.equal(usernames.has(source.username), false, 'Reviewer usernames must be unique');
       usernames.add(source.username);
@@ -94,11 +94,11 @@ test('all 140 reviewer logins authenticate and establish sessions in their assig
     }
   }
   assert.equal(await authenticate('maya.15', 'incorrect-password'), null);
-  assert.equal(await authenticate('unknown.15', 'password'), null);
+  assert.equal(await authenticate('unknown.15', 'Sitecore1'), null);
 });
 
 test('retired and differently cased shared passwords cannot authenticate', async () => {
-  for (const password of ['Sitecore', 'Password', 'password ']) {
+  for (const password of ['password', 'Sitecore', 'sitecore1', 'Sitecore1 ']) {
     assert.equal(await authenticate('daniel.01', password), null);
   }
 });
@@ -106,7 +106,7 @@ test('retired and differently cased shared passwords cannot authenticate', async
 test('unconfigured and malformed reviewer packs are rejected by authentication, sessions, and resets', async () => {
   const store = new LocalJsonStateStore(join(directory, 'invalid-packs'));
   for (const pack of ['00', '21', '1', '020', '99', '']) {
-    assert.equal(await authenticate(`daniel.${pack}`, 'password'), null);
+    assert.equal(await authenticate(`daniel.${pack}`, 'Sitecore1'), null);
     const { token, session } = await createSession({ agentId: 'daniel', agencyId: 'cedar-ridge', reviewerPack: pack, username: `daniel.${pack}` });
     assert.equal(await verifySession(token), null, `Pack ${JSON.stringify(pack)} must not verify`);
     await assert.rejects(getPortalBootstrap(session, store), errorCode('UNAUTHENTICATED'));

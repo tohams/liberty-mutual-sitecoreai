@@ -106,7 +106,7 @@ export default async function WorkshopAttendeesPage() {
                 ))}
               </ul>
               <p className="workshop-attendee-password">
-                Portal and workshop password: <strong>password</strong>
+                Portal and workshop password: <strong>Sitecore1</strong>
               </p>
               <p>
                 To use another number, sign out of this guide and sign in with a

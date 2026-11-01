@@ -49,7 +49,7 @@ test('successful portal login establishes the agent session and lands on canonic
     const response = await POST(new Request('https://portal.example/api/auth/login', {
       method: 'POST',
       headers: { Origin: 'https://portal.example', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: 'daniel.01', password: 'password' }),
+      body: JSON.stringify({ username: 'daniel.01', password: 'Sitecore1' }),
     }));
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), { success: true, redirectTo: '/' });

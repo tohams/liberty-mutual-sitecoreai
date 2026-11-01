@@ -21,7 +21,7 @@ export const developmentGuides: WorkshopGuide[] = [
     personas: ["daniel"],
     prerequisites: [
       "The **Agent Portal** is the website agents use. **SitecoreAI** is the platform your team uses to manage its content and experiences. This walkthrough moves from the portal to **Page Builder**, SitecoreAI’s visual page editor, and then to the implementation on **GitHub**. You will inspect the existing solution without changing it.",
-      `Use **daniel.01** with password **password** on the [**live portal**](${portal}/login). The username displayed in this guide uses the workshop number with which you signed into the workshop website; confirm your number on [**Demo account numbers**](/workshops/attendees).`,
+      `Use **daniel.01** with password **Sitecore1** on the [**live portal**](${portal}/login). The username displayed in this guide uses the workshop number with which you signed into the workshop website; confirm your number on [**Demo account numbers**](/workshops/attendees).`,
       "Open the [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai), using your authorized GitHub account. If you cannot view its files, ask the Sitecore team to check repository access. All source paths in this guide start at the repository’s top-level file list, called the **repository root**; the repository can have any name.",
       `For authoring inspection, use the email that received your **Sitecore Cloud** invitation. Open the [**Sitecore organization**](${sitecore}), sign in with that account, and confirm **Safeco Insurance Company of America POC**. [**Page Builder**](${pageBuilder}) targets this organization’s portal environment; select **Liberty Mutual Agent Portal**. If either is missing, ask the workshop team to check your access; the fictional Daniel login cannot open SitecoreAI.`,
       "This is an inspection exercise. Do not change content, configuration, targeting, or saved records.",
@@ -40,7 +40,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Start with three visible experiences",
         action: [
           "Start as an agent so the architecture has a visible purpose. You will locate three components: guidance selected from known agent attributes, a tested call to action, and a banner selected from browsing interests. A **component** is a reusable part of a page, such as a card, search panel, or banner.",
-          `Open the [**agent portal**](${portal}/login) and **Sign in** as **daniel.01** with password **password**. Select **My workspace** in the left navigation. Scroll below **Your priorities** to the white card labeled **Agency Growth**, immediately above **Recent activity**. Read its heading and yellow button; the first close-up below shows this card.`,
+          `Open the [**agent portal**](${portal}/login) and **Sign in** as **daniel.01** with password **Sitecore1**. Select **My workspace** in the left navigation. Scroll below **Your priorities** to the white card labeled **Agency Growth**, immediately above **Recent activity**. Read its heading and yellow button; the first close-up below shows this card.`,
           "Select **Learning & resources** in the left navigation. Scroll below the search-result cards and page-number controls to **Useful guidance, easier to find**, immediately above **Your next learning opportunity**. Its yellow button is the A/B test comparison; the second close-up shows the location and an example button label.",
           "Select **Products & appetite** in the left navigation. Look directly below the page title and **Risk state**, above the **All solutions** filter. This wide illustrated banner is the **Spotlight** component, shown in the third close-up. Record its heading before browsing resources; your current interests may already have changed the text.",
         ],
@@ -267,7 +267,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Start the frontend and sign in locally",
         action: [
           "Run npm run dev in the application terminal and leave it running. Wait for **Ready** and confirm its **Local** address uses port 3000 before opening the [**local portal login**](http://localhost:3000/login).",
-          "**Sign in** as **daniel.01** with password **password**. Each separate local checkout may reuse this login because its saved-work files are isolated.",
+          "**Sign in** as **daniel.01** with password **Sitecore1**. Each separate local checkout may reuse this login because its saved-work files are isolated.",
           "Select **Learning & resources**. Locate the heading **Find guidance for your next client conversation** and the **My licensed states** default.",
         ],
         code: "npm run dev",
@@ -324,7 +324,7 @@ export const developmentGuides: WorkshopGuide[] = [
       "**Search** is the Page Builder component containing the search heading, filters, and results on **Learning & resources**. Its React implementation is **ResourceSearch**. You will change one heading that lives in code while leaving its SitecoreAI Search integration intact. This shows the development loop on a functional component, not just a static page.",
       "Complete [**Run the portal locally**](/workshops/guide/local-setup). Keep your **cloned repository root** open in **VS Code** and its integrated terminal in **examples/liberty-mutual-agent-portal**. All commands in this guide run from that application folder.",
       "Check the branch name in VS Code’s lower-left status bar: use the **workshop/your-name-resource-search** branch created during setup. Open **Source Control** and confirm **ResourceSearch.tsx** has no existing edits. If it does, preserve that work in a different checkout before starting this one-file exercise.",
-      `Keep two **Chrome** tabs: [**Page Builder**](${pageBuilder}) for **Liberty Mutual Agent Portal**, connected to **Local host** at **http://localhost:3000**, and the [**local portal**](http://localhost:3000/login), signed in as **daniel.01** with password **password**. Page Builder shows how an author sees your component; the portal shows how an agent uses it. Your invited Sitecore account opens Page Builder; Daniel supplies only the portal session.`,
+      `Keep two **Chrome** tabs: [**Page Builder**](${pageBuilder}) for **Liberty Mutual Agent Portal**, connected to **Local host** at **http://localhost:3000**, and the [**local portal**](http://localhost:3000/login), signed in as **daniel.01** with password **Sitecore1**. Page Builder shows how an author sees your component; the portal shows how an agent uses it. Your invited Sitecore account opens Page Builder; Daniel supplies only the portal session.`,
       "Keep npm run dev running. This exercise needs no Sitecore content publication, personalization-profile activity, **Vercel** access, or deployment.",
     ],
     links: [
@@ -342,7 +342,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Record the canvas and functional Search baseline",
         action: [
-          "Open the [**local portal login**](http://localhost:3000/login), sign in as **daniel.01** with password **password**, and select **Learning & resources** in the left navigation. Record a baseline so you can distinguish your text change from any unintended change to Search behavior.",
+          "Open the [**local portal login**](http://localhost:3000/login), sign in as **daniel.01** with password **Sitecore1**, and select **Learning & resources** in the left navigation. Record a baseline so you can distinguish your text change from any unintended change to Search behavior.",
           "Confirm the heading **Find guidance for your next client conversation**. Enter workers compensation and click **Search**.",
           "Keep **My licensed states** selected in **Risk state** and record the Illinois, Texas, and nationwide result titles you see. In the separate Page Builder tab, select **Pages** → **Home** → **Learning & resources**, keep **Local host** selected, and confirm the same starting heading.",
         ],
@@ -793,7 +793,7 @@ export const developmentGuides: WorkshopGuide[] = [
     personas: [],
     prerequisites: [
       "Your **workshop number** is the suffix shared by your seven fictional agent logins, such as **daniel.01** and **maya.01**. Each agent has a different scenario and known attributes. A reset restores the group’s sample saved work and creates fresh **SitecoreAI profiles**, the records used to connect those attributes with browsing behavior.",
-      "Use a portal username such as **daniel.01** with password **password** to sign into the workshop website. This is separate from the Sitecore Cloud account used for Page Builder. No separate operator account, secret, terminal command, or approval is needed.",
+      "Use a portal username such as **daniel.01** with password **Sitecore1** to sign into the workshop website. This is separate from the Sitecore Cloud account used for Page Builder. No separate operator account, secret, terminal command, or approval is needed.",
       `Identify the website where you performed the exercise by its browser address: **liberty-mutual-agent-portal.vercel.app** is live; **liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app** is the shared transaction preview. Their saved work is separate. Open [**Live portal: reset a workshop number**](${portal}/workshops/reset) or [**Transaction preview: reset a workshop number**](${previewPortal}/workshops/reset) to match that hostname; do not use either link to reset the isolated localhost exercise.`,
       "Check [**Demo account numbers**](/workshops/attendees) if you need your portal workshop number. Use your assigned number from 01–20. Number 01 belongs to the presenters. This number identifies portal logins; it does not grant Sitecore authoring access. The reset page initially selects the number from your workshop website sign-in, but it also allows you to choose another number.",
       "A reset affects all seven personas and every agency with that suffix. Check the displayed number so you do not replace another attendee’s work by mistake.",
@@ -816,7 +816,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Open the reset page for the website you used",
         action: [
-          `Use [**Live portal: reset a workshop number**](${portal}/workshops/reset) if your exercise used the shorter liberty-mutual-agent-portal hostname. Use [**Transaction preview: reset a workshop number**](${previewPortal}/workshops/reset) if it used the longer git-c8199e hostname. If prompted, sign into the workshop website with **daniel.01** and password **password**.`,
+          `Use [**Live portal: reset a workshop number**](${portal}/workshops/reset) if your exercise used the shorter liberty-mutual-agent-portal hostname. Use [**Transaction preview: reset a workshop number**](${previewPortal}/workshops/reset) if it used the longer git-c8199e hostname. If prompted, sign into the workshop website with **daniel.01** and password **Sitecore1**.`,
           "Check the browser hostname and the environment label above **Workshop number**. Select your portal workshop number from [**Demo account numbers**](/workshops/attendees), and check that every username listed below has that suffix. For example, resetting 02 includes all seven .02 accounts. The reset does not change Sitecore authoring accounts or practice-page content.",
         ],
         expected: [
@@ -862,7 +862,7 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Sign in again and inspect starting work",
         action: [
-          "Click **Open this Agent Portal** on the reset page to stay on the same host. **Sign in** again with the persona you used, the workshop number you just reset, and password **password**.",
+          "Click **Open this Agent Portal** on the reset page to stay on the same host. **Sign in** again with the persona you used, the workshop number you just reset, and password **Sitecore1**.",
           "Open the areas used in your exercise. Compare the starting submissions, tasks, and saved resources with the example references you recorded.",
           "Use the same workshop number when switching among personas. Other browser tabs for that workshop number must also sign in again.",
         ],
@@ -954,7 +954,7 @@ export const developmentGuides: WorkshopGuide[] = [
         title: "Match the same login to its new Agent identity",
         action: [
           "In **Current profile identities**, find the row for the username you will inspect, such as **daniel.01**. Copy that row’s **Agent identity** exactly. The profile name includes your workshop number, such as **Daniel Ortiz - 01**. Its current **Agent identity** distinguishes it from profiles retained after an earlier reset. Compare it with the same username’s before-reset identifier if you recorded one.",
-          "Click **Open this Agent Portal**, then **Sign in** again with that exact username and password **password**. The unchanged username now identifies the newly created native profile.",
+          "Click **Open this Agent Portal**, then **Sign in** again with that exact username and password **Sitecore1**. The unchanged username now identifies the newly created native profile.",
         ],
         expected: [
           "The username is unchanged: **daniel.01** remains **daniel.01**. Its new **Agent identity** belongs to the fresh native profile for this workshop number and host.",
