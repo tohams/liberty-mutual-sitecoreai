@@ -39,7 +39,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['PublicPageBody', { ...PublicPageBody }],
   ['PublicImage', { ...PublicImage }],
   ['PublicHero', { ...PublicHero }],
-  ['PublicHeader', { ...PublicHeader }],
+  ['PublicHeader', { ...PublicHeader, componentType: 'client' }],
   ['PublicFooter', { ...PublicFooter }],
   ['PublicFaq', { ...PublicFaq }],
   ['PublicCta', { ...PublicCta }],

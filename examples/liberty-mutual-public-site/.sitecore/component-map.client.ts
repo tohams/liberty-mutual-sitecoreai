@@ -9,6 +9,7 @@ import { Form } from '@sitecore-content-sdk/nextjs';
 import * as PublicSearch from 'src/components/public-search/PublicSearch';
 import * as PublicQuoteHandoff from 'src/components/public-quote-handoff/PublicQuoteHandoff';
 import * as PublicProductSelector from 'src/components/public-product-selector/PublicProductSelector';
+import * as PublicHeader from 'src/components/public-header/PublicHeader';
 
 export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['BYOCWrapper', BYOCClientWrapper],
@@ -17,6 +18,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['PublicSearch', { ...PublicSearch }],
   ['PublicQuoteHandoff', { ...PublicQuoteHandoff }],
   ['PublicProductSelector', { ...PublicProductSelector }],
+  ['PublicHeader', { ...PublicHeader }],
 ]);
 
 export default componentMap;
