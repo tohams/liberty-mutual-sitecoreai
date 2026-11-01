@@ -101,8 +101,9 @@ export default async function MarketingPreferencesPage() {
             profile from its card to inspect its stored attributes, then open
             <strong> Audiences</strong> to inspect the rule that excludes a
             suppressed profile. The{" "}
-            <strong>Agents eligible for marketing</strong>
-            Audience requires <strong>MarketingSuppressed is false</strong>.
+            <strong>Agents eligible for marketing</strong>{" "}
+            Audience requires <strong>Marketing Suppressed</strong> to be{" "}
+            <strong>false</strong>.
             Profiles with a true or unspecified value are excluded. The sample
             input and this page are application code; profile storage, the
             schema, and audience rules are native SitecoreAI capabilities.
@@ -122,11 +123,22 @@ export default async function MarketingPreferencesPage() {
             </Link>
           </div>
           <p>
-            After an import is confirmed, open the Audience’s{" "}
-            <strong>Overview</strong>
-            tab and select <strong>Recalculate</strong> to refresh its
-            <strong> Audience size</strong>. The audience calculation runs
-            separately from the profile import.
+            After an import is confirmed, use this comparison Audience to
+            estimate the matching profiles. If it is <strong>Live</strong>,
+            select <strong>Pause</strong> and wait for <strong>Paused</strong>.
+            Open <strong>Overview</strong>, select <strong>Recalculate</strong>,
+            and wait for the <strong>Audience size</strong> estimate. This sample
+            Audience is not connected to a campaign. Recalculation previews the
+            rule’s result; saved live membership updates on the Audience’s
+            schedule.
+          </p>
+          <p>
+            After reading the estimate, select <strong>Resume</strong>. In{" "}
+            <strong>Change schedule</strong>, set <strong>Every</strong> to{" "}
+            <strong>6 hours</strong>, select <strong>Apply</strong>, and confirm{" "}
+            <strong>Live</strong>. Repeat this pause, estimate, and resume
+            sequence after the opt-out and restoration imports. The live
+            schedule calculates saved membership separately from the estimate.
           </p>
         </section>
 

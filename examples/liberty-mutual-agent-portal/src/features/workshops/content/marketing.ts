@@ -1663,7 +1663,7 @@ export const marketingGuides: WorkshopGuide[] = [
       `Open [**SitecoreAI**](${SITECORE}) using your authorized **Sitecore Cloud** account. Confirm **Safeco Insurance Company of America POC** and **SitecoreAI / Demo**. The portal’s persona logins do not grant access to this administrative and marketing interface.`,
       "This is a **Presenter demonstration** because the two comparison profiles and the Audience calculation are shared. One presenter runs the imports and restores the baseline while participants inspect the same native records.",
       "The comparison uses **Cameron Ellis - Allowed** and **Cameron Ellis - Suppressed** at **Lakeside Independent Insurance**. Both have **Texas** and **producer** attributes. The suffixes identify their starting records; the current **marketingSuppressed** value determines eligibility. The records are separate from the numbered portal logins.",
-      "Imports and Audience calculations are asynchronous. Wait for each recorded operation to finish before starting the next action. Use **Check import status** to inspect an existing import; refreshing the page reads its saved receipt and does not resend it.",
+      "Imports and Audience calculations are asynchronous. Wait for each recorded import to finish before starting the next action. Use **Check import status** to inspect an existing import; refreshing the page reads its saved receipt and does not resend it.",
     ],
     links: [
       {
@@ -1723,14 +1723,15 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Inspect and recalculate the native marketing audience",
+        title: "Inspect the rule and calculate a comparison estimate",
         action: [
-          `Open [**Agents eligible for marketing**](https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}). Inspect the Audience rule **Profile** > **Extensions** > **MarketingSuppressed is false**.`,
-          "Open the Audience’s **Overview** tab. Click **Recalculate** and wait for the calculation to complete, then read **Audience size**. Keep this Audience tab for the opt-out and restoration checks.",
+          `Open [**Agents eligible for marketing**](https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}). Inspect the Audience rule: **Marketing Suppressed** is selected, with **is false** as its condition.`,
+          "This Audience is reserved for the preference comparison and is not connected to a campaign. If its status is **Live**, click **Pause** and wait for **Paused**. Open **Overview**, click **Recalculate**, and wait for the **Audience size** estimate. Keep this Audience tab for the opt-out and restoration checks.",
+          "Click **Resume**. In **Change schedule**, set **Every** to **6 hours**, click **Apply**, and confirm **Live**. This restores the scheduled membership calculation after the estimate.",
         ],
         expected: [
           "The native rule includes a profile only when the stored suppression value is explicitly false. The false-valued Cameron is eligible, while the true-valued Cameron is excluded.",
-          "For the starting comparison, the expected Audience size is **1** after recalculation. Import completion and Audience calculation are separate stages; the count is checked after the calculation finishes.",
+          "For the starting comparison, the expected **Audience size** estimate is **1**. Recalculation previews how many profiles match the rule; it does not immediately refresh the saved membership of a live Audience. Live membership updates on its schedule.",
         ],
       },
       {
@@ -1738,11 +1739,12 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Return to **Communication preferences**, click **Opt out Cameron** once, and wait for **SitecoreAI confirmed the imported records**. Use **Check import status** if necessary.",
           "The action updates the initially Allowed record. Its display name remains **Cameron Ellis - Allowed**, but its submitted **marketingSuppressed** choice is now **true**. Open that native profile, refresh it, and verify the stored true value and unchanged **Native profile ID**.",
-          "Return to **Agents eligible for marketing** > **Overview**. Click **Recalculate**, wait for completion, and inspect **Audience size** again.",
+          "Return to **Agents eligible for marketing**. If it is **Live**, click **Pause** and wait for **Paused**. Open **Overview**, click **Recalculate**, wait for completion, and inspect the **Audience size** estimate again.",
+          "Click **Resume**. In **Change schedule**, set **Every** to **6 hours**, click **Apply**, and confirm **Live**. This restores the scheduled membership calculation after the estimate.",
         ],
         expected: [
           "The existing Cameron profile has been updated, rather than replaced by another identity. Both comparison records now have a true suppression value.",
-          "The native Audience excludes both records. The expected comparison count is now **0** after recalculation. The rule stayed the same; the imported known choice changed eligibility.",
+          "The rule now excludes both comparison records. The expected **Audience size** estimate is **0** after recalculation. The rule stayed the same; the imported known choice changed eligibility. Saved live membership follows the Audience’s schedule.",
         ],
       },
       {
@@ -1750,10 +1752,11 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           "Click **Restore preferences** on **Communication preferences**. Wait for **SitecoreAI confirmed the imported records**, using **Check import status** if needed.",
           "Open the two native profiles again. Verify the original false value for **Cameron Ellis - Allowed**, the original true value for **Cameron Ellis - Suppressed**, and the same **Native profile IDs**.",
-          "On **Agents eligible for marketing** > **Overview**, click **Recalculate**, wait for completion, and verify the starting Audience size of **1**.",
+          "On **Agents eligible for marketing**, click **Pause** if it is **Live**, and wait for **Paused**. Open **Overview**, click **Recalculate**, wait for completion, and verify the starting **Audience size** estimate of **1**.",
+          "Click **Resume**. In **Change schedule**, set **Every** to **6 hours**, click **Apply**, and confirm **Live**. This restores the scheduled membership calculation after the estimate.",
         ],
         expected: [
-          "The original comparison is restored: one eligible record and one suppressed record. The two profiles and their native import history remain available for inspection.",
+          "The original comparison is restored: one eligible record and one suppressed record, with an estimate of **1** and the six-hour live schedule restored. The two profiles and their native import history remain available for inspection.",
         ],
       },
       {
@@ -1770,7 +1773,7 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Complete **Restore preferences**, verify both native profile values, and recalculate the Audience back to the starting comparison before finishing. Leave the two dedicated profiles and their import history available; no profile deletion or numbered-portal reset is needed.",
+        "Complete **Restore preferences**, verify both native profile values, and recalculate the Audience estimate back to **1**. Then click **Resume**, set **Every** to **6 hours** in **Change schedule**, click **Apply**, and confirm **Live**. Leave the two dedicated profiles and their import history available; no profile deletion or numbered-portal reset is needed.",
         "Close extra native profile, Audience, and public website tabs. Your public website browser retains the **Essential only** privacy choice selected in step 6.",
       ],
       links: [
