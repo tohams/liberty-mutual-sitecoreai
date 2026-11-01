@@ -1,0 +1,47 @@
+---
+ID: 2ad5917e-0fa7-416d-98eb-15ce2c04f06c
+Parent: f7db0c93-12c2-4cef-b5c4-f7fb3d5ba017
+Template: 3ac1911c-9089-4304-a8c5-34f36e7fb83a
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site
+SharedFields:
+- ID: 85a7501a-86d9-4243-9075-0b727c3a6db4
+  Hint: Name
+  Value: Liberty Mutual Public Website
+- ID: 89cecf4f-e545-44f2-813d-272c08661d14
+  Hint: Description
+  Value: Insurance guidance and useful next steps for individuals and families.
+- ID: 1230d2cb-4948-4d43-8a3b-b39978f6f1b3
+  Hint: Modules
+  Value: |
+    {5A2F6A6F-3028-4210-AAD3-82C1365C4802}
+    {9F10010E-49E2-4DCD-A5A1-4DA752ADED2A}
+    {4342A029-0186-4B0D-8959-FFEF4FD998C2}
+    {AE5D1384-BB75-4C6B-A8B5-4B008C2AC5DA}
+    {C4658673-5D70-44ED-9004-D66EAC1DC718}
+    {CA502DCF-20D2-4618-A735-E4FCB6D5E114}
+    {E2AF1A41-799E-481B-8FDC-B2D33FB729A1}
+    {66B9C663-2602-42B1-A5A2-3D04DB6C506A}
+    {1FD78E81-59A6-4513-90F1-165A95D4B16B}
+    {BEBF4026-24A3-4EA6-986A-518B76DBD71A}
+    {385F31BE-FF0C-4D84-A627-9ECD21295AFD}
+    {F0EA389E-F78D-440B-9429-F04FE735344A}
+    {AC1A27CA-6BF3-4D23-915E-668326D52CF1}
+    {D7EEAF4D-2B58-4029-B141-844221565EF0}
+    {1F35559F-2140-4774-8BC1-525BB722BAA2}
+- ID: 2b2fe9fd-78a6-40eb-b9f9-28409d8d3700
+  Hint: SitemapMediaItems
+  Value: "{F28273B9-5283-44C3-BA55-B9685E440ECE}"
+- ID: 33d9005e-1f71-415f-b107-53b965c3b037
+  Hint: SiteMediaLibrary
+  Value: "{EF9FBB4D-4284-45E1-BC5C-96424E1B4DBB}"
+- ID: e2bf3c8d-a12e-45f4-98d6-a37f13bcf375
+  Hint: SiteTemplate
+  Value: "{2867D289-8951-458A-AF19-CE93A67BB494}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

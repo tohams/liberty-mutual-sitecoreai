@@ -101,6 +101,7 @@ def serialize(value):
     # The installed native SCS reader retains a quoted empty Value literally.
     # Use its own empty-field convention instead of YAML's quoted empty scalar.
     serialized = re.sub(r'(?m)^(\s*Value:) ""$', r'\1', serialized)
+    serialized = re.sub(r'(?m)^(\s*Value:)(?: null|[ \t]+)$', r'\1', serialized)
     return '---\n' + serialized
 
 

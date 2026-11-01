@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PublicContentSeed",
+  "description": "Public website editable seed; explicit CreateOnly push only",
+  "items": {
+    "includes": [
+      {
+        "name": "home",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home",
+        "allowedPushOperations": "CreateOnly",
+        "scope": "DescendantsOnly"
+      },
+      {
+        "name": "data",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data",
+        "allowedPushOperations": "CreateOnly"
+      },
+      {
+        "name": "header",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header/Data",
+        "allowedPushOperations": "CreateOnly"
+      },
+      {
+        "name": "footer",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer/Data",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  }
+}

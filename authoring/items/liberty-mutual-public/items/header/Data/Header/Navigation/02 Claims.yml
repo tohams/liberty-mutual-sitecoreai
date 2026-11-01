@@ -1,0 +1,25 @@
+---
+ID: 9637fd10-c88d-543b-af4e-e08bcdc82f96
+Parent: a5fd6880-302e-5b5e-8e59-cb14b4b52fd0
+Template: 8369c5b1-af02-591d-8b12-d0ac6414d41f
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header/Data/Header/Navigation/02 Claims
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 53e384ff-302a-5715-b634-b142ff2cc95e
+      Hint: label
+      Value: Claims
+    - ID: 128a1f1d-8e9f-5094-9dbe-8deff2681d0f
+      Hint: links
+      Value: |
+        {63F8558E-21F1-506B-B1A4-5932B642F29C}
+        {2ABDACBE-8788-55D4-9194-8383DEA14540}
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

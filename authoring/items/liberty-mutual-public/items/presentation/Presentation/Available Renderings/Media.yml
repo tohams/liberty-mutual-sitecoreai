@@ -1,0 +1,18 @@
+---
+ID: fef45a1d-2a33-4470-8181-ff2852b79f5d
+Parent: cc296536-020c-4b8f-8274-52f97d6afbe2
+Template: 76da0a8d-fc7e-42b2-af1e-205b49e43f98
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Media
+SharedFields:
+- ID: 715ae6c0-71c8-4744-ab4f-65362d20ad65
+  Hint: Renderings
+  Value: |
+
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

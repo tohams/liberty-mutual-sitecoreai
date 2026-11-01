@@ -1,6 +1,6 @@
 # Liberty Mutual Agent Portal — contributor guidance
 
-This private customer application derives from Sitecore's official Content SDK starter. It is not an upstream starter contribution. The active app is `examples/liberty-mutual-agent-portal`; other examples are preserved reference material.
+These private customer applications derive from Sitecore's official Content SDK starter. They are not upstream starter contributions. The active apps are `examples/liberty-mutual-agent-portal` and `examples/liberty-mutual-public-site`; other examples are preserved reference material. Each active app has its own rendering host, Vercel project, and environment configuration.
 
 - Work on short-lived feature branches from `main`. Open reviewable pull requests into `main`; do not use the inherited upstream DMZ workflow.
 - Keep business authorization and mutable agency data on the server. Sitecore profile rules personalize content; they do not grant permissions.

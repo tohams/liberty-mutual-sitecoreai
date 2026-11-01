@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PublicWorkflow",
+  "description": "Public-only three-state review; reuses scoped Author and Approver roles; administrator publishes separately.",
+  "items": {
+    "includes": [
+      {
+        "name": "workflow",
+        "path": "/sitecore/system/Workflows/Liberty Mutual Public Review",
+        "allowedPushOperations": "CreateAndUpdate"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+---
+ID: ea59ad81-481a-5194-82ea-45e5bb9c227d
+Parent: 7adca005-f6ce-56a8-a5d1-4a5d7f7d54d3
+Template: 1c82e550-ebcd-4e5d-8abd-d50d0809541e
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/florida-auto-insurance-guide/Data
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

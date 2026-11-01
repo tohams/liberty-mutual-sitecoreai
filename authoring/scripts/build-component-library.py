@@ -13,6 +13,7 @@ import sys
 import yaml
 
 from component_library_model import MANIFEST, apply_rendering_metadata
+from native_definition_baseline import reconcile_definition, same_definition_semantics
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'authoring/items/liberty-mutual'
@@ -47,13 +48,14 @@ def generate(check=False):
         target = BASE / 'items/renderings/LibertyMutual' / (name + '.yml')
         before = yaml.safe_load(target.read_text(encoding='utf-8-sig'))
         after = apply_rendering_metadata(json.loads(json.dumps(before)))
-        if check and before != after:
+        if check and not same_definition_semantics(before, after):
             raise ValueError('Component metadata differs: ' + name)
-        if not check and before != after:
+        if not check and not same_definition_semantics(before, after):
             target.write_text(helpers.serialize(after))
         files.append(str(target.relative_to(ROOT)))
     includes = []
     for include_name, record in configuration_records():
+        record = reconcile_definition(record)
         target = BASE / 'items' / include_name / (record['Path'].rsplit('/', 1)[-1] + '.yml')
         includes.append({'name': include_name, 'path': record['Path'], 'scope': 'SingleItem', 'allowedPushOperations': 'CreateAndUpdate'})
         if check:

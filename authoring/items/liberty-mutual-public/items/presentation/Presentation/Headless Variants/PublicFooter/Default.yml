@@ -1,0 +1,17 @@
+---
+ID: 4ba8a91f-dee3-5ef0-8e43-b3d9aa04c70c
+Parent: 6ec2ea0e-c3fe-5d5a-8fad-0aa0418729c9
+Template: 4d50cdae-c2d9-4de8-b080-8f992bfb1b55
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicFooter/Default
+SharedFields:
+- ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
+  Hint: __Sortorder
+  Value: "100"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

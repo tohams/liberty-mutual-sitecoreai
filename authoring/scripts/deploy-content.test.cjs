@@ -89,6 +89,16 @@ test("normal release never seeds or recreates editorial content or taxonomy opti
   );
   assert.match(result.commands[0], /ser validate .*LibertyMutual\.Taxonomy/);
 });
+test("explicit Portal publication cannot publish the sibling public site or collection", (t) => {
+  const result = fixture(t).run("--publish");
+  assert.equal(result.status, 0, result.stderr);
+  const publications = result.commands.filter((command) => command.startsWith("sitecore publish item "));
+  assert.equal(publications.length, 5);
+  const content = publications.filter((command) => command.includes("-p /sitecore/content/"));
+  assert.equal(content.length, 1);
+  assert.match(content[0], /-p \/sitecore\/content\/LibertyMutual\/liberty-mutual-agent-portal -sub/);
+  assert(!publications.some((command) => command.includes("liberty-mutual-public-site")));
+});
 
 test("taxonomy seeding is explicit and follows its model definitions", (t) => {
   const result = fixture(t).run("--seed-taxonomy");
@@ -202,6 +212,11 @@ for (const module of [
   "LibertyMutual.ProductPageBranch",
   "LibertyMutual.ProductCatalog",
   "LibertyMutual.LibrarySeed",
+  "LibertyMutual.PublicBootstrap",
+  "LibertyMutual.PublicContentSeed",
+  "LibertyMutual.PublicBranchSeed",
+  "LibertyMutual.PublicSiteSeed",
+  "LibertyMutual.PortalRelevanceSeed",
   "*",
 ]) {
   test(`rejects ${module} in authoring resource packages before the first native operation`, (t) => {
@@ -212,6 +227,26 @@ for (const module of [
     const result = context.run();
     assert.notEqual(result.status, 0);
     assert.match(result.stderr, /outside authoring resource packages/);
+    assert.deepEqual(result.commands, []);
+  });
+}
+
+for (const ignored of [
+  "/liberty-mutual-public-site",
+  "/liberty-mutual-agent-portal/Data/Agency priorities",
+  "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agency-priorities",
+  "/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-shared-disclosure",
+  "/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities",
+  "/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure",
+]) {
+  test(`refuses legacy seed ownership overlap for ${ignored}`, (t) => {
+    const context = fixture(t);
+    context.edit(`${MODULES}/LibertyMutual.Content.module.json`, (module) => {
+      module.items.includes[0].rules = module.items.includes[0].rules.filter((rule) => rule.path !== ignored);
+    });
+    const result = context.run("--seed");
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /Refusing seed push/);
     assert.deepEqual(result.commands, []);
   });
 }

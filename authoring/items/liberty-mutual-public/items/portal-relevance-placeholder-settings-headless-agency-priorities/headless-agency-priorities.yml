@@ -1,0 +1,20 @@
+---
+ID: a106f923-9ce5-5093-b299-b8afd33f06e3
+Parent: e601261f-f47f-4831-b91e-ef70efab3276
+Template: d2a6884c-04d5-4089-a64e-d27ca9d68d4c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agency-priorities
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: headless-agency-priorities
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Value: "{A2E85F2D-7DBC-5640-8040-0B688D7912A6}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PortalRelevancePresentation",
+  "description": "Portal RFP relevance exact developer-owned site placeholder, palette, and variant definitions",
+  "items": {
+    "includes": [
+      {
+        "name": "portal-relevance-placeholder-settings-headless-agency-priorities",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-agency-priorities",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "portal-relevance-available-renderings-business-priorities",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Business priorities",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "portal-relevance-headless-variants-agencypriorities",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "portal-relevance-headless-variants-agencypriorities-default",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/AgencyPriorities/Default",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "portal-relevance-placeholder-settings-headless-shared-disclosure",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Placeholder Settings/headless-shared-disclosure",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "portal-relevance-available-renderings-shared-content",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Shared content",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "portal-relevance-headless-variants-shareddisclosure",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "portal-relevance-headless-variants-shareddisclosure-default",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Headless Variants/SharedDisclosure/Default",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      }
+    ]
+  }
+}

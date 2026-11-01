@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PortalRelevanceSeed",
+  "description": "Portal RFP relevance editable editorial CreateOnly seed; excluded from ordinary Deploy",
+  "items": {
+    "includes": [
+      {
+        "name": "portal-relevance-seed",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities",
+        "allowedPushOperations": "CreateOnly"
+      }
+    ]
+  }
+}

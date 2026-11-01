@@ -1,0 +1,32 @@
+---
+ID: 6a3e8ade-5b98-5cbb-82eb-d0b5837ebccc
+Parent: b783c769-fd0b-5214-bd36-15f86909c094
+Template: 5c547d4e-7111-4995-95b0-6b561751bf2e
+Path: /sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic/headless-public-content
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: headless-public-content-{*}
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Value: |
+    {F63F0F36-EA5B-5693-85C6-B4DF475C8840}
+    {44D749A9-68A1-5987-844B-00DE3ABFB287}
+    {26096AD9-95C0-5080-A1CE-58F25913017F}
+    {3B2349C9-F98B-5C1A-8A5A-3B98BA3535F1}
+    {4BC5C522-23DE-54E1-8420-169BDCF996E9}
+    {4585A48F-E841-50CA-B2A3-0D3FC9893875}
+    {2967923C-52C6-5E80-946F-533CE8C2148E}
+    {FF280574-45AE-5A99-B5E0-5E290B91D9B0}
+    {D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}
+    {7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}
+    {0839D907-B33B-5AAD-8030-635F1451794F}
+    {F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

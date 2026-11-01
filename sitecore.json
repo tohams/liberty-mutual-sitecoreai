@@ -2,7 +2,8 @@
   "$schema": "./.sitecore/schemas/RootConfigurationFile.schema.json",
   "modules": [
     "authoring/items/nextjs-starter.module.json",
-    "authoring/items/liberty-mutual/*.module.json"
+    "authoring/items/liberty-mutual/*.module.json",
+    "authoring/items/liberty-mutual-public/*.module.json"
   ],
   "plugins": [
     "Sitecore.DevEx.Extensibility.Serialization@6.0.23",
@@ -17,7 +18,24 @@
     "removeOrphansForRoles": true,
     "removeOrphansForUsers": true,
     "continueOnItemFailure": false,
-    "excludedFields": [],
+    "excludedFields": [
+      {
+        "fieldId": "8cdc337e-a112-42fb-bbb4-4143751e123f",
+        "description": "Preserve the native version revision during definition deployment."
+      },
+      {
+        "fieldId": "d9cf14b1-fa16-4ba6-9288-e8a174d4d522",
+        "description": "Preserve the native update timestamp during definition deployment."
+      },
+      {
+        "fieldId": "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a",
+        "description": "Preserve the native last-updated user during definition deployment."
+      },
+      {
+        "fieldId": "dbbbeca1-21c7-4906-9dd2-493c1efa59a2",
+        "description": "Preserve the native shared revision during definition deployment."
+      }
+    ],
     "progressiveMetadataPull": false
   },
   "settings": {

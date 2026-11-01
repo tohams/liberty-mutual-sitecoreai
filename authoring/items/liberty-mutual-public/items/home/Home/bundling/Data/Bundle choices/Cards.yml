@@ -1,0 +1,13 @@
+---
+ID: f5d45af7-7975-5cc8-a3dc-3fb48173ad11
+Parent: b783945e-8c47-5c0d-973a-ee57106f6ac2
+Template: a87a00b1-e6db-45ab-8b54-636fec3b5523
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Bundle choices/Cards
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

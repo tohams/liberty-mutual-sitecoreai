@@ -1,0 +1,22 @@
+---
+ID: 04c15fc1-ed5d-4a3b-8b8d-9e2603d2468c
+Parent: 066197f8-5be3-47e9-856e-6084ba0d2aa1
+Template: 52288e39-7830-4694-b62d-32a54c6ef7ba
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings
+SharedFields:
+- ID: 30d2a0d2-7a60-4f32-86a9-4aa50bfab87b
+  Hint: TemplateForCreation
+  Value: "{D2A6884C-04D5-4089-A64E-D27CA9D68D4C}"
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: |
+    {D2A6884C-04D5-4089-A64E-D27CA9D68D4C}
+    {52288E39-7830-4694-B62D-32A54C6EF7BA}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

@@ -1,0 +1,23 @@
+---
+ID: 7bf1b822-f635-5797-a2c4-c469c94d7cf8
+Parent: f7c6533d-73b0-54ca-80bc-457bb6978c27
+Template: 7e71c6a1-8f71-5e0c-8983-e35b4166daa7
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/vehicle/auto-insurance/Data/FAQs/Questions/02 What do I need to start a car insurance quote
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: e0740b71-1b49-514f-89f3-2321e72809f4
+      Hint: question
+      Value: What do I need to start a car insurance quote?
+    - ID: 90ca7aa1-fe73-54e2-b966-8ba57c910e21
+      Hint: answer
+      Value: <p>Prepare information about your drivers, vehicles, current insurance, and the coverage you want to compare.</p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

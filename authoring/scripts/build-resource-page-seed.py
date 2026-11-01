@@ -14,6 +14,7 @@ import json
 import subprocess
 import sys
 import yaml
+from native_definition_baseline import reconcile_definition
 from component_library_model import apply_rendering_metadata
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -140,6 +141,7 @@ def main():
     model = branch_model()
     additions = records(manifest) + branch_records(manifest, model)
     for record in additions:
+        record = reconcile_definition(record)
         filename = file_for(record)
         if filename.exists():
             existing = yaml.safe_load(filename.read_text(encoding='utf-8-sig'))

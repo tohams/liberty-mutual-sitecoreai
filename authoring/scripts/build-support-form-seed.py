@@ -7,6 +7,7 @@ import json
 import subprocess
 import sys
 import yaml
+from native_definition_baseline import reconcile_definition
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'authoring/items/liberty-mutual'
 sys.dont_write_bytecode = True
@@ -17,6 +18,7 @@ def generate(check=False):
     contract = json.loads(subprocess.check_output(['node', 'authoring/scripts/support-native-form-model.cjs'], cwd=ROOT, text=True))
     includes = []
     for record in contract['model']:
+        record = reconcile_definition(record)
         name = {'SupportLayout': 'support-form-layout', 'headless-support-form': 'support-form-site' if record['Path'].startswith(contract['SP']) else 'support-form-placeholder'}[record['Path'].rsplit('/', 1)[1]]
         target = BASE / 'items' / name / (record['Path'].rsplit('/', 1)[1] + '.yml')
         includes.append({'name': name, 'path': record['Path'], 'scope': 'SingleItem', 'allowedPushOperations': 'CreateAndUpdate'})

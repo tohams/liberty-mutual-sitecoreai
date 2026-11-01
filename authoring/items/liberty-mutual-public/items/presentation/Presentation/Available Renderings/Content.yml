@@ -1,0 +1,21 @@
+---
+ID: 27e6087a-80e6-51cc-832d-9f913a288f77
+Parent: cc296536-020c-4b8f-8274-52f97d6afbe2
+Template: 76da0a8d-fc7e-42b2-af1e-205b49e43f98
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Content
+SharedFields:
+- ID: 715ae6c0-71c8-4744-ab4f-65362d20ad65
+  Hint: Renderings
+  Value: |
+    {38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}
+    {F63F0F36-EA5B-5693-85C6-B4DF475C8840}
+    {44D749A9-68A1-5987-844B-00DE3ABFB287}
+    {26096AD9-95C0-5080-A1CE-58F25913017F}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

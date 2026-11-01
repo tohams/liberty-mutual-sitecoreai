@@ -1,0 +1,52 @@
+.disclosure {
+  min-width: 0;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid #e4e3ed;
+  border-left: 4px solid var(--yellow, #ffd000);
+  border-radius: 12px;
+  background: white;
+  color: var(--navy, #1a1446);
+}
+
+.disclosure h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  margin: 1rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #676080;
+}
+
+.details:empty {
+  display: none;
+}
+
+.details > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.details dt {
+  font-weight: 700;
+}
+
+.details dd {
+  margin: 0;
+}
+
+.source {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

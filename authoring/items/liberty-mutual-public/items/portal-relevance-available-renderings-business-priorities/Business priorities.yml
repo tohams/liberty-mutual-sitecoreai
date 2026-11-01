@@ -1,0 +1,17 @@
+---
+ID: 5d138a50-abe4-5d49-a046-7fd60d55de16
+Parent: 2bcfce89-293c-4ddb-870a-78bce4777859
+Template: 76da0a8d-fc7e-42b2-af1e-205b49e43f98
+Path: /sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Available Renderings/Business priorities
+SharedFields:
+- ID: 715ae6c0-71c8-4744-ab4f-65362d20ad65
+  Hint: Renderings
+  Value: "{A2E85F2D-7DBC-5640-8040-0B688D7912A6}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

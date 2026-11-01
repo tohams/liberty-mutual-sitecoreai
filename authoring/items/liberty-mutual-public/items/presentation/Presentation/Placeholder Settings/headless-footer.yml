@@ -1,0 +1,20 @@
+---
+ID: 72131b77-12ea-5299-ae50-45190750903e
+Parent: 04c15fc1-ed5d-4a3b-8b8d-9e2603d2468c
+Template: d2a6884c-04d5-4089-a64e-d27ca9d68d4c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/headless-footer
+SharedFields:
+- ID: 7256bdab-1fd2-49dd-b205-cb4873d2917c
+  Hint: Placeholder Key
+  Value: headless-footer
+- ID: e391b526-d0c5-439d-803e-17512eae6222
+  Hint: Allowed Controls
+  Value: "{5A7D5D76-D30D-5E47-8969-31835B870856}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

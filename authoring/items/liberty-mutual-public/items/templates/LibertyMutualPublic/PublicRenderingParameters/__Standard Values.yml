@@ -1,0 +1,13 @@
+---
+ID: 073849e0-5c01-52d8-9fbb-1b830b88d5a9
+Parent: 97353208-4c49-506d-a35a-1ea62e35f2a2
+Template: 97353208-4c49-506d-a35a-1ea62e35f2a2
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicRenderingParameters/__Standard Values
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

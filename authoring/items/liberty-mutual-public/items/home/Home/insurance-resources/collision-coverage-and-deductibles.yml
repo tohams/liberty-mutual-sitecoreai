@@ -1,0 +1,44 @@
+---
+ID: daac6096-da7d-55db-8454-a9fc87412db5
+Parent: afad2c4c-2dc6-5428-b357-28fca18b611d
+Template: a4de2222-c8a5-54d4-adee-bbad976a457c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/collision-coverage-and-deductibles
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"><r uid="{30635AFE-EFE2-5A76-AFEC-798480E491CF}" id="{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Hero" par="FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2" /><r uid="{36803FB0-5A3D-592F-AE51-59A65F9F2E4A}" id="{F63F0F36-EA5B-5693-85C6-B4DF475C8840}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Introduction" par="FieldNames={C64AAA90-DC86-5D1E-9286-1BA1DC0ECE10}&amp;DynamicPlaceholderId=3" /><r uid="{583A78DC-9B9D-5806-AAE5-B4628215BF85}" id="{4585A48F-E841-50CA-B2A3-0D3FC9893875}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{787170AA-1871-5741-BDD1-704814C5F6DF}" par="FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6" /><r uid="{2F336B13-EE2B-503E-9FE3-BD662496AC35}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5" /></d></r>
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: How do collision coverage and deductibles work together?
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: How do collision coverage and deductibles work together?
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+    - ID: 748e2709-fb2f-5f73-9ca6-d8e801b6eafc
+      Hint: metadataTitle
+      Value: How do collision coverage and deductibles work together?
+    - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
+      Hint: metadataDescription
+      Value: Understand the options, review the source, and choose a useful next step.
+    - ID: a98fdad1-e82c-5380-9954-33b996734100
+      Hint: canonicalUrl
+      Value: https://liberty-mutual-public-site.vercel.app/insurance-resources/collision-coverage-and-deductibles
+    - ID: 001ac65e-7daa-5a02-af03-2a5ebdabd129
+      Hint: audience
+      Value: consumer
+    - ID: 44cc401f-47ef-5b97-9a35-2bd9a860c066
+      Hint: state
+      Value: All
+    - ID: 9c5ab0fe-bb46-51cc-98f0-412ca7d8e543
+      Hint: product
+      Value: auto

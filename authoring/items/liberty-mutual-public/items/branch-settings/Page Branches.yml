@@ -1,0 +1,39 @@
+---
+ID: 97a7dbe5-4a9e-499d-9ef4-9e96ae833c98
+Parent: 066197f8-5be3-47e9-856e-6084ba0d2aa1
+Template: fbc802e5-4b9e-480f-93da-3f2a80cae5cb
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{FBC802E5-4B9E-480F-93DA-3F2A80CAE5CB}"
+- ID: bb3391dd-f8be-4b2e-ae9f-47bb63c166ce
+  Hint: Rule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}"
+        name="Landing pages beneath Home">
+        <conditions>
+          <condition
+            id="{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}"
+            uid="{55387862-AA7F-5189-B501-91D82B13B423}"
+            operatorid="{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}"
+            value="{6D600332-3E21-4C5F-83EC-AAE04F83450F}" />
+        </conditions>
+        <actions>
+          <action
+            id="{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}"
+            uid="{CF4A380D-6AD5-5C4A-9EAC-9568B315F24C}"
+            PageBranchId="{D5784517-B225-55AA-BC9C-8910FA0DB4F2}" />
+        </actions>
+      </rule>
+    </ruleset>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

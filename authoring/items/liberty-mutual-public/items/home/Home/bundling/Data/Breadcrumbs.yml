@@ -1,0 +1,25 @@
+---
+ID: 36a2e4ab-d502-5582-9161-59b2939c7bab
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: d93e627b-69a3-5fa9-849d-caa19b1d2146
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Breadcrumbs
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 4d9eb38f-53dd-5509-80ee-c0c9e6062f82
+      Hint: items
+      Value: |
+        {524A6F94-5EA0-5D39-A8C0-3C17F5662CA5}
+        {E2BB0052-B45C-5EF6-AB73-D0833BF278F4}
+    - ID: 0682270e-9254-5030-915c-97c6e1bac689
+      Hint: currentLabel
+      Value: Bundle and Save
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

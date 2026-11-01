@@ -1,0 +1,23 @@
+---
+ID: 194c3d3f-6e11-55c7-b9ea-64b13f66f15e
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: 8fb0a60a-31d7-5009-abca-636a6a3f40b5
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Introduction
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 3f27b5a0-0044-5085-b90f-a55499fc260a
+      Hint: heading
+      Value: Choose a combination that fits your needs
+    - ID: 3abbd930-ac1b-5420-9c68-9db3df0aef7e
+      Hint: body
+      Value: <p>Consider what you want to protect, and review the coverages in each policy. Then explore whether combining eligible policies with Liberty Mutual is a good fit.</p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

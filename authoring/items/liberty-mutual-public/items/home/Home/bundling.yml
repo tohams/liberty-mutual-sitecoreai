@@ -1,0 +1,49 @@
+---
+ID: 7d7352f2-0c45-5093-b9e6-fbeae4e08953
+Parent: 6d600332-3e21-4c5f-83ec-aae04f83450f
+Template: a4de2222-c8a5-54d4-adee-bbad976a457c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"><r uid="{97736030-56EB-58D3-9254-8518B6F1178B}" id="{2472C249-4D6A-5BB7-B388-BD4F3CC4EAA1}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Breadcrumbs" par="FieldNames={41780E9B-DA80-5629-9B6F-EF1011D29C0C}&amp;DynamicPlaceholderId=10" /><r uid="{F01F3844-ACC4-5C3A-B756-E9628ED1B14C}" id="{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Hero" par="FieldNames={843D437A-CF51-5140-B236-AE8E1D3E191C}&amp;DynamicPlaceholderId=11" /><r uid="{EF974D60-154F-5889-94D5-381C3207348E}" id="{FF280574-45AE-5A99-B5E0-5E290B91D9B0}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Quote choices" par="FieldNames={D1E3F875-4FEB-504A-B3F4-19A93E10BC85}&amp;DynamicPlaceholderId=12" /><r uid="{238FEFE7-BCB6-54E6-9917-0DF6C6BDAABA}" id="{44D749A9-68A1-5987-844B-00DE3ABFB287}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Family basketball" par="FieldNames={42ECEB7E-E29B-573B-BE9B-B7C120B0E339}&amp;DynamicPlaceholderId=13" /><r uid="{857320CC-3BFF-5CEB-9508-A78B90CF5E36}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Bundle overview" par="FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=14" /><r uid="{B73817BD-E15B-585F-BBCF-03781720DDDC}" id="{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Bundle choices" par="FieldNames={827ADE4F-93AF-5A2A-BDB8-F730B0C63BF2}&amp;DynamicPlaceholderId=15" /><r uid="{6DFA0F66-244D-55D9-9C8A-74972C1B5466}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/How bundling works" par="FieldNames={F322362D-A717-59BE-8109-D5BECBB51310}&amp;DynamicPlaceholderId=16" /><r uid="{4F7E009C-6E93-5A4F-A04C-39C56EF8D6D2}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Why bundle" par="FieldNames={1B8D9769-ABB9-5E7D-A4D1-A4FE12DFA3CA}&amp;DynamicPlaceholderId=17" /><r uid="{DE9EFC0F-F2AB-565A-A95D-8105EA7616AA}" id="{0839D907-B33B-5AAD-8030-635F1451794F}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Bundle confidence" par="FieldNames={1B8D9769-ABB9-5E7D-A4D1-A4FE12DFA3CA}&amp;DynamicPlaceholderId=18" /><r uid="{2D6E1D7D-F1AD-57B8-A38F-5BD2B819474F}" id="{F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/FAQs" par="FieldNames={C39B072D-2A29-55DA-9A57-9D9FACA0F280}&amp;DynamicPlaceholderId=19" /><r uid="{6A78629D-602A-54FD-97DA-DAF8426BB0EF}" id="{FF280574-45AE-5A99-B5E0-5E290B91D9B0}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Ready for a quote" par="FieldNames={5E7C88D5-F15C-5742-B88F-AC05787E6BB5}&amp;DynamicPlaceholderId=20" /><r uid="{7DB767AA-3533-5D6C-B1BD-748419A79E8D}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Savings disclosure" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=21" /><r uid="{3057C476-D9C2-5B42-AA9F-93B3C92B481C}" id="{3B2349C9-F98B-5C1A-8A5A-3B98BA3535F1}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{9610856E-28F7-5333-8923-80AC8A880E94}" par="FieldNames={9740E635-3B9F-57FA-A134-72A97C4ADDFA}&amp;DynamicPlaceholderId=4" /><r uid="{F41E3C0D-445F-56C2-8F7C-103232136E89}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5" /></d></r>
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: |
+    {1C82E550-EBCD-4E5D-8ABD-D50D0809541E}
+    {D5784517-B225-55AA-BC9C-8910FA0DB4F2}
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: Bundle auto and home insurance
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: Bundle auto and home insurance
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+    - ID: 748e2709-fb2f-5f73-9ca6-d8e801b6eafc
+      Hint: metadataTitle
+      Value: Bundle auto and home insurance
+    - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
+      Hint: metadataDescription
+      Value: Explore combining auto with home, renters, or condo insurance. Available options and savings depend on your state and eligibility.
+    - ID: a98fdad1-e82c-5380-9954-33b996734100
+      Hint: canonicalUrl
+      Value: https://liberty-mutual-public-site.vercel.app/bundling
+    - ID: 001ac65e-7daa-5a02-af03-2a5ebdabd129
+      Hint: audience
+      Value: consumer
+    - ID: 44cc401f-47ef-5b97-9a35-2bd9a860c066
+      Hint: state
+      Value: All
+    - ID: 9c5ab0fe-bb46-51cc-98f0-412ca7d8e543
+      Hint: product
+      Value: |

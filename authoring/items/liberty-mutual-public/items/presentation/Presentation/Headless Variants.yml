@@ -1,0 +1,17 @@
+---
+ID: edfaec90-8d4f-4ec3-9a1a-ea9c9fe2e2be
+Parent: 066197f8-5be3-47e9-856e-6084ba0d2aa1
+Template: da26c636-96e1-45e4-88d6-3fcec70d5699
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants
+SharedFields:
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{49C111D0-6867-4798-A724-1F103166E6E9}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

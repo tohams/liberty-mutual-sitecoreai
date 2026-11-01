@@ -1,0 +1,13 @@
+---
+ID: 2cd35c0b-954b-57aa-bbd7-c8ece990a2df
+Parent: 0d29dd73-62cc-5421-b14c-b8f8d8921540
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicHero/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

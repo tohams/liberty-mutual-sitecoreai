@@ -1,0 +1,33 @@
+---
+ID: dd4d1a50-1f5e-5b62-b642-3c439bf8c1cc
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: efcc13af-1e31-55d3-bca6-f2533d50e674
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Why bundle
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 0642f561-976a-5280-ad0b-49591bb6b97f
+      Hint: heading
+      Value: <h2>Why bundle auto and home insurance?</h2>
+    - ID: 2bdf3765-4d4d-54af-879e-96a83b50893e
+      Hint: body
+      Value: <h3>Save money</h3><p>Combining qualifying policies can help you save on insurance.</p><h3>It is more convenient</h3><p>Manage your policies in one place, including policy documents, payments, and claims.</p><h3>Flexibility</h3><p>Access your policies online or with the Liberty Mutual app when it suits you.</p>
+    - ID: 19c458f6-6177-50d1-9756-15ca31cc5674
+      Hint: image
+      Value: <image mediaid="{451ED505-9D65-4258-A241-CB8510EE449B}" alt="Family walking away from their car in a field" />
+    - ID: 6f2bb5ea-9611-5298-a6d2-49c85eee3ce8
+      Hint: primaryLink
+      Value: <link text="Bundle auto and home insurance" linktype="external" url="/get-a-quote" querystring="product=auto-home" />
+    - ID: c2b8db12-5b8e-5f84-a44d-5f017ba52d66
+      Hint: secondaryLink
+      Value: |
+
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

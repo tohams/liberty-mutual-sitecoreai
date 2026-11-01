@@ -1,0 +1,34 @@
+---
+ID: 78d7462a-7e99-5a5b-8e7e-742898e625c3
+Parent: b165c369-f1c3-5b7f-89a9-952c099a164f
+Template: efcc13af-1e31-55d3-bca6-f2533d50e674
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/vehicle/auto-insurance/Data/Auto state guidance
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 0642f561-976a-5280-ad0b-49591bb6b97f
+      Hint: heading
+      Value: <h3>What auto coverage does my state require?</h3>
+    - ID: 2bdf3765-4d4d-54af-879e-96a83b50893e
+      Hint: body
+      Value: <p>Requirements vary by state. Start with the published guidance for your location and review the actual policy terms.</p><ul><li><a href="/insurance-resources/texas-auto-insurance-guide">Texas car insurance guidance</a></li><li><a href="/insurance-resources/florida-auto-insurance-guide">Florida car insurance guidance</a></li><li><a href="/insurance-resources/illinois-auto-insurance-guide">Illinois car insurance guidance</a></li></ul>
+    - ID: 19c458f6-6177-50d1-9756-15ca31cc5674
+      Hint: image
+      Value: |
+
+    - ID: 6f2bb5ea-9611-5298-a6d2-49c85eee3ce8
+      Hint: primaryLink
+      Value: <link text="Find more insurance guidance" linktype="external" url="/search" />
+    - ID: c2b8db12-5b8e-5f84-a44d-5f017ba52d66
+      Hint: secondaryLink
+      Value: |
+
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

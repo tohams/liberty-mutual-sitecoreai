@@ -1,0 +1,33 @@
+---
+ID: c6af286d-c4cd-5d1d-855f-42442663431b
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: efcc13af-1e31-55d3-bca6-f2533d50e674
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Bundle confidence
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 0642f561-976a-5280-ad0b-49591bb6b97f
+      Hint: heading
+      Value: <h2>Why choose Liberty Mutual for car insurance?</h2>
+    - ID: 2bdf3765-4d4d-54af-879e-96a83b50893e
+      Hint: body
+      Value: <p>Explore protection from a company that has helped people insure what matters for more than a century.</p><p>Build a quote around your needs and review your options before you choose.</p>
+    - ID: 19c458f6-6177-50d1-9756-15ca31cc5674
+      Hint: image
+      Value: <image mediaid="{11B56049-2934-4A2D-BCD9-751ACB43116F}" alt="Man sitting at a desk" />
+    - ID: 6f2bb5ea-9611-5298-a6d2-49c85eee3ce8
+      Hint: primaryLink
+      Value: <link text="Start your quote" linktype="external" url="/get-a-quote" querystring="product=auto-home" />
+    - ID: c2b8db12-5b8e-5f84-a44d-5f017ba52d66
+      Hint: secondaryLink
+      Value: |
+
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

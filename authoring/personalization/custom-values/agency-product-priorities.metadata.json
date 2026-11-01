@@ -1,0 +1,22 @@
+{
+  "name": "Liberty Mutual - Agency product priorities",
+  "friendlyName": "liberty_mutual__agency_product_priorities",
+  "returnType": "String",
+  "sourceFile": "agency-product-priorities.js",
+  "nativeId": "ad7b493b-f768-404c-adc6-9841c2fe1a6e",
+  "nativeStatus": "Published",
+  "nativeUrl": "https://app.sitecorecloud.io/optimization/custom-values/ad7b493b-f768-404c-adc6-9841c2fe1a6e?organization=org_XqL3u1MSNVuubOTb&tenantName=scaipocusem400b-sitecoreai950c-demo4418",
+  "nativeSetupEvidence": "../verification/agency-product-priorities.native-setup.json",
+  "organization": "Safeco Insurance Company of America POC",
+  "results": {
+    "agency-growth": "Principal with Texas license and agency small-commercial share below 20% of combined personal and small-commercial written premium",
+    "producer-priorities": "Producer with Illinois license, small-commercial specialization, and positive individual small-commercial written premium",
+    "neutral": "All unmatched, anonymous, incomplete, or unrelated profiles"
+  },
+  "scope": "New Home AgencyPriorities component only; no existing decision or custom value is changed",
+  "sourceOfMetrics": "Existing tenant-accepted UDL profile-import scalar extensions; agency and individual production are kept distinct",
+  "verification": "Persisted native expression, String type, and description verified. Actual current Avery, Daniel, and Maya profiles passed native custom-value and draft component decision-table tests without test-context edits. Both native prepublication variant previews displayed the expected agent shell and authored card order. New component decision started and Home published; actual live agency-growth and producer-priorities choices verified on first sign-in without refresh. An initial Daniel neutral fallback before diagnostics is retained in private acceptance evidence; later clean-origin and canonical identity-switch checks passed without identity code changes.",
+  "persistedExpressionReadbackVerified": true,
+  "nativeProfileTestsVerified": 3,
+  "sourceSha256": "7048d5c4da103fba7e86eb8b19169211107b962ff7597dd0138bc767e3bf97d8"
+}

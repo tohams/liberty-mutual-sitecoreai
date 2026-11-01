@@ -1,0 +1,23 @@
+---
+ID: a4de2222-c8a5-54d4-adee-bbad976a457c
+Parent: 96246a36-0e25-54a1-b2b4-802a78a8aead
+Template: ab86861a-6030-46c5-b394-e8f99e8b87db
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicPage
+SharedFields:
+- ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
+  Hint: __Base template
+  Value: "{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}"
+- ID: f7d48a55-2158-4f02-9356-756654404f73
+  Hint: __Standard values
+  Value: "{D0E01261-227D-5745-A068-6BA52DCBE741}"
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Office/32x32/document_text.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

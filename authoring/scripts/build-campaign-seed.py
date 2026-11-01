@@ -11,6 +11,7 @@ import json
 import subprocess
 import sys
 import yaml
+from native_definition_baseline import reconcile_definition
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'authoring/items/liberty-mutual'
@@ -24,6 +25,7 @@ def generate(check=False):
     model = json.loads(subprocess.check_output(['node', 'authoring/scripts/campaign-authoring-model.cjs'], cwd=ROOT, text=True))
     files = []
     for record in model['model'] + model['branch']:
+        record = reconcile_definition(record)
         path = record['Path']
         if path.startswith(model['BRANCH']):
             target = BASE / 'items/campaign-page-branch' / ('Campaign page' + path[len(model['BRANCH']):].replace('$', '#') + '.yml')

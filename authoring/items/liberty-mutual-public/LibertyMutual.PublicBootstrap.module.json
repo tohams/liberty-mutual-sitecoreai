@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PublicBootstrap",
+  "description": "Public website developer-owned definitions; preserves editorial content",
+  "items": {
+    "includes": [
+      {
+        "name": "bootstrap-site",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "bootstrap-settings",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "bootstrap-home",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      }
+    ]
+  }
+}

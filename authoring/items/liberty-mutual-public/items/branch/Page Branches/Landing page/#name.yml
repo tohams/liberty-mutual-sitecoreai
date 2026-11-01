@@ -1,0 +1,31 @@
+---
+ID: 7e89d193-122c-5d78-ace5-cbf84567c1e5
+Parent: d5784517-b225-55aa-bc9c-8910fa0db4f2
+Template: a4de2222-c8a5-54d4-adee-bbad976a457c
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Landing page/$name
+SharedFields:
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"><r uid="{C4235048-54A6-5032-813A-1732851F0358}" id="{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Hero" par="FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2" /><r uid="{3ECC076E-60D5-5217-9BD4-3ACFB28BAB8F}" id="{F63F0F36-EA5B-5693-85C6-B4DF475C8840}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/Introduction" par="FieldNames={C64AAA90-DC86-5D1E-9286-1BA1DC0ECE10}&amp;DynamicPlaceholderId=3" /></d></r>
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: |
+    {1C82E550-EBCD-4E5D-8ABD-D50D0809541E}
+    {D5784517-B225-55AA-BC9C-8910FA0DB4F2}
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
+      Hint: Title
+      Value: $name
+    - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
+      Hint: NavigationTitle
+      Value: $name
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

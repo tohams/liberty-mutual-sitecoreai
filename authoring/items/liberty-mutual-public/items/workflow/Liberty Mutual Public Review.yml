@@ -1,0 +1,24 @@
+---
+ID: 1bb54766-6a38-5c47-b0ee-c57570679d14
+Parent: 05592656-56d7-4d85-aacf-30919ee494f9
+Template: 1c0acc50-37be-4742-b43c-96a07a7410a5
+Path: /sitecore/system/Workflows/Liberty Mutual Public Review
+SharedFields:
+- ID: b5166b38-e4bf-4410-953c-2037f2bf6a56
+  Hint: Initial state
+  Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+- ID: dec8d2d5-e3cf-48b6-a653-8e69e2716641
+  Hint: __Security
+  Value: ar|sitecore\Liberty Mutual Workshop Author|pe|+item:read|-item:write|-item:create|-item:delete|-item:rename|-item:admin|pd|+item:read|-item:write|-item:create|-item:delete|-item:rename|-item:admin|ar|sitecore\Liberty Mutual Workshop Approver|pe|+item:read|-item:write|-item:create|-item:delete|-item:rename|-item:admin|pd|+item:read|-item:write|-item:create|-item:delete|-item:rename|-item:admin|
+Languages:
+- Language: en
+  Fields:
+  - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
+    Hint: __Short description
+    Value: "Liberty Mutual public editorial review v1"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: "20261031T160000Z"

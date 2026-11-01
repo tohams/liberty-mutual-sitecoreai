@@ -1,0 +1,1995 @@
+{
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site": {
+    "template": "3ac1911c-9089-4304-a8c5-34f36e7fb83a",
+    "fields": [
+      {
+        "id": "1230d2cb-4948-4d43-8a3b-b39978f6f1b3",
+        "name": "Modules",
+        "value": "{5A2F6A6F-3028-4210-AAD3-82C1365C4802}|{9F10010E-49E2-4DCD-A5A1-4DA752ADED2A}|{4342A029-0186-4B0D-8959-FFEF4FD998C2}|{AE5D1384-BB75-4C6B-A8B5-4B008C2AC5DA}|{C4658673-5D70-44ED-9004-D66EAC1DC718}|{CA502DCF-20D2-4618-A735-E4FCB6D5E114}|{E2AF1A41-799E-481B-8FDC-B2D33FB729A1}|{66B9C663-2602-42B1-A5A2-3D04DB6C506A}|{1FD78E81-59A6-4513-90F1-165A95D4B16B}|{BEBF4026-24A3-4EA6-986A-518B76DBD71A}|{385F31BE-FF0C-4D84-A627-9ECD21295AFD}|{F0EA389E-F78D-440B-9429-F04FE735344A}|{AC1A27CA-6BF3-4D23-915E-668326D52CF1}|{D7EEAF4D-2B58-4029-B141-844221565EF0}|{1F35559F-2140-4774-8BC1-525BB722BAA2}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "2b2fe9fd-78a6-40eb-b9f9-28409d8d3700",
+        "name": "SitemapMediaItems",
+        "value": "{F28273B9-5283-44C3-BA55-B9685E440ECE}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "33d9005e-1f71-415f-b107-53b965c3b037",
+        "name": "SiteMediaLibrary",
+        "value": "{EF9FBB4D-4284-45E1-BC5C-96424E1B4DBB}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "e2bf3c8d-a12e-45f4-98d6-a37f13bcf375",
+        "name": "SiteTemplate",
+        "value": "{2867D289-8951-458A-AF19-CE93A67BB494}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home": {
+    "template": "2ec94e3d-439c-4fc6-bd4e-f08c7ddd9203",
+    "fields": [
+      {
+        "id": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
+        "name": "Title",
+        "value": "liberty-mutual-public-site",
+        "versioning": "VERSIONED"
+      },
+      {
+        "id": "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8",
+        "name": "NavigationTitle",
+        "value": "liberty-mutual-public-site",
+        "versioning": "VERSIONED"
+      },
+      {
+        "id": "508c54c0-cd02-4266-8b68-d71f88de1aa9",
+        "name": "ChangeFrequency",
+        "value": "{D23B4654-53A5-4589-8B1B-5665A763D144}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "76fb6ffd-4487-4028-a1cf-705fbe360cba",
+        "name": "Priority",
+        "value": "{19F3E919-4991-495F-9207-E1DADFD06F54}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1fce966b-b8dc-46f1-8ceb-6ff6816a88f0",
+        "name": "baseOgType",
+        "value": "website",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
+        "name": "__Renderings",
+        "value": "<r xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{3D40B9C9-8126-5FF8-81E1-A48AFB1BA1A8}\" /></r>",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{2EC94E3D-439C-4FC6-BD4E-F08C7DDD9203}|{C14B6289-8AC2-439C-9E5B-40DE9F820C3F}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Media": {
+    "template": "e8e8c94f-4248-43c3-a79f-99fbb49d78e6",
+    "fields": [
+      {
+        "id": "de8257d9-43aa-4eff-a2f4-2e9fbbd20e79",
+        "name": "AdditionalChildren",
+        "value": "{EF9FBB4D-4284-45E1-BC5C-96424E1B4DBB}|{2D14C06D-4DAC-4FC0-85E0-9C97A6413A3E}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data": {
+    "template": "a29d272e-9d48-453c-9e9d-b47585fa7f20",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Dictionary": {
+    "template": "0a2847e6-9885-450b-b61e-f9e6528480ef",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{6D1CD897-1936-4A3A-A511-289A94C2A7B1}|{267D9AC7-5D85-4E9D-AF89-99AB296CC218}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation": {
+    "template": "0a70fa73-8923-4a6e-abf3-4134f25f3221",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{A87A00B1-E6DB-45AB-8B54-636FEC3B5523}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings": {
+    "template": "ebed7fed-5598-44d4-ba9e-8a4729cc0130",
+    "fields": [
+      {
+        "id": "812dedeb-c5bd-471c-9f48-b1ce75d0d4a9",
+        "name": "AnalyzeAllowedControls",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "0129da3f-8c86-4591-ae32-6ec923413923",
+        "name": "DictionaryDomain",
+        "value": "{4490CC76-B6C2-41F0-A08C-C9216CAE4119}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "bde120a5-4cc2-4340-9b63-562a139bf197",
+        "name": "FolderTemplate",
+        "value": "{A87A00B1-E6DB-45AB-8B54-636FEC3B5523}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1f14aa04-2868-481f-9247-30dc5c65672c",
+        "name": "ImportDevice",
+        "value": "{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1cc82067-2b48-442a-a352-453d56a49d93",
+        "name": "MediaLibraryFolderTemplate",
+        "value": "{FE5DD826-48C6-436D-B87A-7C4210C7413B}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "5ca117eb-8782-4a4f-9f2f-30de31fc2e34",
+        "name": "PlaceholdersPath",
+        "value": "{E26A2D36-9EE9-49DF-BB07-0073D8E20CCC}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "b0711df7-724a-4c6c-8d4d-be846de6124c",
+        "name": "ProtectDeveloperItems",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "7975673a-aafd-4c5b-96a5-cbcaac500a44",
+        "name": "ServerSideRenderingFunctionName",
+        "value": "renderView",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "3af0e329-6d5e-4d8f-9f82-f48265658a3e",
+        "name": "DefaultWorkflow",
+        "value": "{6C59AE29-D0A1-4B77-9305-0ABAB21D5FE5}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "f87f0d81-c32c-4c1d-8caf-67856c3ab06e",
+        "name": "ImportUser",
+        "value": "sitecore\\JssImport",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "466902a9-6b16-41b1-9d33-7c55094a2713",
+        "name": "LayoutFolderTemplate",
+        "value": "{93227C5D-4FEF-474D-94C0-F252EC8E8219}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "f5821c4c-226e-4953-8213-c0243826f85f",
+        "name": "RenderingsFolderTemplate",
+        "value": "{7EE0975B-0698-493E-B3A2-0B2EF33D0522}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "32ce6bbe-4217-46e5-9335-42793884cbe3",
+        "name": "AppTemplate",
+        "value": "{3AC1911C-9089-4304-A8C5-34F36E7FB83A}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "f29428d5-1285-48b8-a884-44057965829a",
+        "name": "RenderingsPath",
+        "value": "{705F29FC-A5DE-489E-9E2E-2DAC8E03D084}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "72e83c8d-3578-4e50-b4c0-93a78a1729f2",
+        "name": "FilesystemPath",
+        "value": "/dist/liberty-mutual-public-site",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "df376030-46e9-4c77-bc05-debefc86e3d5",
+        "name": "ImportDatabase",
+        "value": "master",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c8d002f9-9518-4c5e-9baa-6617e13f0797",
+        "name": "LayoutPath",
+        "value": "{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "4088f63e-09e5-43fa-ae99-829bd9bdc114",
+        "name": "OptimizeImportIndexing",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "396af2f6-fe48-4fd4-a7e2-3da13ef977eb",
+        "name": "RouteBaseTemplate",
+        "value": "{47151711-26CA-434E-8132-D3E0B7D26683}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "9016141c-ff51-40f2-9135-40f5161b9784",
+        "name": "ServerSideRenderingEngine",
+        "value": "http",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "5764d2d4-724d-4313-a81b-9246c911faff",
+        "name": "AppDatasourcesPath",
+        "value": "{212031C4-4CB5-4205-B174-27C54DAF2475}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "a7bbad73-b933-49ff-95c8-1c269cb35e7c",
+        "name": "DictionaryPath",
+        "value": "{4490CC76-B6C2-41F0-A08C-C9216CAE4119}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "30e0a829-637e-478c-a136-66adb568398d",
+        "name": "GraphQLEndpoint",
+        "value": "/sitecore/api/graph/edge",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "04e6b1f3-ae47-4d95-a154-2271075869a9",
+        "name": "ImportLanguage",
+        "value": "en",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "3e4f559f-8e59-4405-b50d-619811371f6c",
+        "name": "Name",
+        "value": "liberty-mutual-public-site",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "f5594251-f757-429e-a9bd-07f65f6875b9",
+        "name": "PlaceholderSettingsFolderTemplate",
+        "value": "{C3B037A0-46E5-4B67-AC7A-A144B962A56F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "414f61dd-02c2-47d1-ba83-dcfbc3071e52",
+        "name": "RouteDatasourcesPath",
+        "value": "Page Data",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "557d5f36-6f2d-4eb6-a8ce-25f30f7b9397",
+        "name": "ServerSideRenderingEngineEditOnly",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "6224a1ce-d964-4ee8-8e09-ad2f81e0a2b6",
+        "name": "ServerSideRenderingWorkerProcesses",
+        "value": "2",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "218760c0-8001-4c2d-a8b0-61c128276f96",
+        "name": "TemplateFolderTemplate",
+        "value": "{0437FEE2-44C9-46A6-ABE9-28858D9FEE8C}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "f7c6acfb-63f0-4aca-9e44-3133b2b94a5b",
+        "name": "DatasourceStrategy",
+        "value": "sxa",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "e3259313-387a-41f0-b113-962f14b1aa2b",
+        "name": "LayoutServiceConfiguration",
+        "value": "sxa-jss",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "e13c1a83-9d60-4530-b318-3a5effcc6338",
+        "name": "LayoutTemplate",
+        "value": "{E4E11508-04A4-4B0B-A263-5201F811C9CD}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "300fb7a0-b27f-44dd-9af0-b37a19723e0e",
+        "name": "RouteTemplateName",
+        "value": "Settings Route",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "4a3eeba3-a250-44f4-bd97-6e863cc6f0d5",
+        "name": "ServerBundle",
+        "value": "server.bundle",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1864e99d-c29a-40bf-96e0-b3e7896a013b",
+        "name": "UseLanguageSpecificLayout",
+        "value": "0",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "af332c24-fe17-41e7-8caf-8e64c588fe72",
+        "name": "EditingTheme",
+        "value": "{3BCAB9EF-1E4F-4C23-B452-783BB82AA686}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "9cbc4d47-1608-4a43-ac9c-6eb461fe58f5",
+        "name": "ComponentEditorScript",
+        "value": "https://feaasstatic.blob.core.windows.net/packages/page-extension/latest/page.js",
+        "versioning": "VERSIONED"
+      },
+      {
+        "id": "e8881464-38af-4655-be4a-ee10586578a2",
+        "name": "Templates",
+        "value": "{94B480F8-5B0A-4487-99BB-238569489481}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "e41d2d4b-4c5d-4467-a8d6-0cfa23577501",
+        "name": "Link Settings",
+        "value": "{F2674FF9-1F17-4C49-8076-FF9F7D16B9CB}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "ad84cc6b-32ef-49d8-9326-916976cb2520",
+        "name": "Grid Mapping",
+        "value": "%7bFE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3%7d%3d%257B2472CEE0-FBB4-474B-8D1C-D8517199CC08%257D",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "d0ce707c-342f-4c02-ac0a-edb21346dde4",
+        "name": "SupportedLanguages",
+        "value": "{AF584191-45C9-4201-8740-5409F4CF8BDD}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "5a81d794-7364-4cc5-8aa9-a921d5dda4af",
+        "name": "Opening Search Results",
+        "value": "New Tab",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Images": {
+    "template": "f7a45276-87f1-4ea5-bf25-e3c7cb7aa993",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{D885DF8C-B2D6-4007-B34B-2BBAFB527304}|{F7A45276-87F1-4EA5-BF25-E3C7CB7AA993}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Link Lists": {
+    "template": "c237d144-647a-4afe-aa7b-1570f3e3f139",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{F2490B61-7D7D-4BBF-8CF6-3B355FDF4CE4}|{C237D144-647A-4AFE-AA7B-1570F3E3F139}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Navigation Filters": {
+    "template": "9c2d0fdf-4daf-4494-bde7-f857f1924825",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{966B041F-D956-4F71-A40A-68869A7BA6B9}|{9C2D0FDF-4DAF-4494-BDE7-F857F1924825}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Promos": {
+    "template": "8fe7f8dc-cb5d-42c2-99f8-76608c243f10",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{DFED4457-D760-457A-BEC1-C0DCCDC44381}|{8FE7F8DC-CB5D-42C2-99F8-76608C243F10}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Tags": {
+    "template": "25a6b824-672f-4c15-9b98-0b231c80f81c",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{6B40E84C-8785-49FC-8A10-6BCA862FF7EA}|{25A6B824-672F-4C15-9B98-0B231C80F81C}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Texts": {
+    "template": "b762d567-87f5-493c-bb48-0c455d834457",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{0A7AA373-5ED1-4E9B-9678-22D3C5FAF6DF}|{B762D567-87F5-493C-BB48-0C455D834457}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings": {
+    "template": "26ec1d18-11b2-4dd9-8326-f6115f4fd7eb",
+    "fields": [
+      {
+        "id": "7147ca94-cd06-4aba-8af3-e179a24f4de5",
+        "name": "IsShared",
+        "value": "0",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{76DA0A8D-FC7E-42B2-AF1E-205B49E43F98}|{BF70A40B-6D0E-4639-9862-24BB8946094B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants": {
+    "template": "da26c636-96e1-45e4-88d6-3fcec70d5699",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{49C111D0-6867-4798-A724-1F103166E6E9}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches": {
+    "template": "fbc802e5-4b9e-480f-93da-3f2a80cae5cb",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{FBC802E5-4B9E-480F-93DA-3F2A80CAE5CB}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Designs": {
+    "template": "8df682c0-b099-463e-8aa7-b7eb401cf07a",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{07565CBF-B724-4D62-9845-DC96E6D805F0}|{1105B8F8-1E00-426B-BF1F-C840742D827B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs": {
+    "template": "a13a9896-5efa-4481-941c-c388c4284ce2",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4E694731-B445-457B-8E5D-65C9FEBBDFAB}|{FD2059FD-6043-4DFE-8C04-E2437CE87634}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings": {
+    "template": "52288e39-7830-4694-b62d-32a54c6ef7ba",
+    "fields": [
+      {
+        "id": "30d2a0d2-7a60-4f32-86a9-4aa50bfab87b",
+        "name": "TemplateForCreation",
+        "value": "{D2A6884C-04D5-4089-A64E-D27CA9D68D4C}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{D2A6884C-04D5-4089-A64E-D27CA9D68D4C}|{52288E39-7830-4694-B62D-32A54C6EF7BA}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "checkbox-folder",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings/Redirects": {
+    "template": "c2dc4690-af44-48c7-bb21-90d1ad246732",
+    "fields": [
+      {
+        "id": "7147ca94-cd06-4aba-8af3-e179a24f4de5",
+        "name": "IsShared",
+        "value": "0",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{F4FB6125-F113-4373-8AA2-4648C2C1960E}|{E1CF805E-7F49-4EC9-A25A-182DC798CB5F}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings/Shared Sites Settings": {
+    "template": "c14bf746-030f-4e59-8594-395f6d299e61",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings/Site Grouping": {
+    "template": "8357f958-9aaa-46db-8898-36448a96356f",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{E46F3AF2-39FA-4866-A157-7017C4B2A40C}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings/Sitemap": {
+    "template": "c71d8566-35c8-49b7-a84d-9d176e9cbd05",
+    "fields": [
+      {
+        "id": "7f070bc5-5cd4-474f-aa2f-ab2a0a128f00",
+        "name": "GenerateSitemapMediaItems",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "eb78b584-b22e-47cd-88da-e80d6dbb9238",
+        "name": "Generate Alternate Links",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "4369de8a-d99c-441d-8a4d-106b6366a522",
+        "name": "HrefLang",
+        "value": "{1761AA85-9E69-42A7-A5F0-87507340DF26}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "674a7926-436f-4882-add1-0f92ea860c19",
+        "name": "Include xdefault",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "139eb09e-73c4-4f96-a06b-a8bc050954e4",
+        "name": "Cache Expiration",
+        "value": "60",
+        "versioning": "VERSIONED"
+      },
+      {
+        "id": "fcefa910-fd09-439b-ae81-ef00487090ad",
+        "name": "Cache Type",
+        "value": "{AF52EB2D-A852-45A7-ABD6-C931EEDBFC9D}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "e12195e6-3bcd-4c51-9cd4-3ae3c0779b9f",
+        "name": "Refresh Threshold",
+        "value": "60",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "a4da1f5e-cbfe-458d-bac5-7abfb80b3e84",
+        "name": "Crawler",
+        "value": "itemCrawler",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "4e383ce4-6f75-4e0d-9a9a-b3fa3518d7ee",
+        "name": "Language Mode",
+        "value": "{EEEC6C46-AD9E-4CC8-A521-8634EDC69718}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "e35a52f4-12f4-4153-a49e-2b894355a22e",
+        "name": "changefreq",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "0708c430-1ad8-4b9b-b48d-e3b7d4495088",
+        "name": "lastmod",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95c52046-38e4-4d96-bb32-b699891ba215",
+        "name": "priority",
+        "value": "1",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/FEaaS": {
+    "template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+    "fields": [
+      {
+        "id": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+        "name": "Renderings",
+        "value": "{CAA0C742-F052-49FB-825B-A03494798DB7}|{DDC43BE7-D77A-4CE3-9282-03DD036EEC6D}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Forms": {
+    "template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+    "fields": [
+      {
+        "id": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+        "name": "Renderings",
+        "value": "{62DD1639-9F28-4040-8738-C886480B2127}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Media": {
+    "template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+    "fields": [
+      {
+        "id": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+        "name": "Renderings",
+        "value": "{AB2EDBA0-3960-4F12-B765-579DC231894A}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Navigation": {
+    "template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+    "fields": [
+      {
+        "id": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+        "name": "Renderings",
+        "value": "{1DEB067F-0BB1-405E-94F5-2ABB537A6160}|{4956263D-1195-4D6E-931B-800EA625FF6F}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Page Content": {
+    "template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+    "fields": [
+      {
+        "id": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+        "name": "Renderings",
+        "value": "{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}|{2492BAC4-DA07-4C86-87F0-9873D40E2276}|{9C6D53E3-FE57-4638-AF7B-6D68304C7A94}|{3836D951-BB14-43AC-9231-649B7F245DC5}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Page Structure": {
+    "template": "76da0a8d-fc7e-42b2-af1e-205b49e43f98",
+    "fields": [
+      {
+        "id": "715ae6c0-71c8-4744-ab4f-65362d20ad65",
+        "name": "Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}|{15CABDFF-FFD9-48F4-826D-A4C3D7868D3A}|{5F6BF7C9-C80C-4BBD-AD78-8DA749B35206}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Image": {
+    "template": "49c111d0-6867-4798-a724-1f103166e6e9",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4D50CDAE-C2D9-4DE8-B080-8F992BFB1B55}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/LinkList": {
+    "template": "49c111d0-6867-4798-a724-1f103166e6e9",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4D50CDAE-C2D9-4DE8-B080-8F992BFB1B55}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Navigation": {
+    "template": "49c111d0-6867-4798-a724-1f103166e6e9",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4D50CDAE-C2D9-4DE8-B080-8F992BFB1B55}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PageContent": {
+    "template": "49c111d0-6867-4798-a724-1f103166e6e9",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4D50CDAE-C2D9-4DE8-B080-8F992BFB1B55}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Promo": {
+    "template": "49c111d0-6867-4798-a724-1f103166e6e9",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4D50CDAE-C2D9-4DE8-B080-8F992BFB1B55}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/RichText": {
+    "template": "49c111d0-6867-4798-a724-1f103166e6e9",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4D50CDAE-C2D9-4DE8-B080-8F992BFB1B55}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Title": {
+    "template": "49c111d0-6867-4798-a724-1f103166e6e9",
+    "fields": [
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{4D50CDAE-C2D9-4DE8-B080-8F992BFB1B55}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/Partial Design": {
+    "template": "52288e39-7830-4694-b62d-32a54c6ef7ba",
+    "fields": [
+      {
+        "id": "30d2a0d2-7a60-4f32-86a9-4aa50bfab87b",
+        "name": "TemplateForCreation",
+        "value": "{D2A6884C-04D5-4089-A64E-D27CA9D68D4C}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{D2A6884C-04D5-4089-A64E-D27CA9D68D4C}|{52288E39-7830-4694-B62D-32A54C6EF7BA}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Spacing": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "icon-button-group-check",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Add highlight": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "icon-button-group-check",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Content alignment": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "icon-button-group-radio",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background color": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "droplist",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background layout": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "droplist",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Navigation": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "droplist",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Link list": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "checkbox-folder",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Rich text": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "checkbox-folder",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Promo": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "checkbox-folder",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Image": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "checkbox-folder",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Common": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "checkbox-folder",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Container": {
+    "template": "c6dc7393-15bb-4cd7-b798-ab63e77ebac4",
+    "fields": [
+      {
+        "id": "62ca1c9e-71a4-465f-835e-55bda7bb270b",
+        "name": "Type",
+        "value": "checkbox-folder",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "c91e098f-a65c-4625-b166-0ed004adaa75",
+        "name": "AllowEmpty",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1172f251-dad4-4efb-a329-0c63500e4f1e",
+        "name": "__Masters",
+        "value": "{C6DC7393-15BB-4CD7-B798-AB63E77EBAC4}|{6B8AABEF-D650-46E0-97D0-C0B04F7F016B}",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings/Site Grouping/liberty-mutual-public-site": {
+    "template": "e46f3af2-39fa-4866-a157-7017c4b2a40c",
+    "fields": [
+      {
+        "id": "f57099a3-526a-49f2-aebd-635453e48875",
+        "name": "RenderingHost",
+        "value": "Default",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "6dd8a774-2ce5-4c9e-be7f-1eaf65789956",
+        "name": "ThumbnailsRootPath",
+        "value": "{EF9FBB4D-4284-45E1-BC5C-96424E1B4DBB}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "9eaf6dc9-b811-4cda-9edd-9697faba628a",
+        "name": "POS",
+        "value": "en=liberty-mutual-public-site",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "8700cd8f-83cc-42ba-aa78-65bccab44fc7",
+        "name": "GenerateThumbnails",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "8e0dd914-9afb-4d45-bf8b-7ff5d6e5337e",
+        "name": "HostName",
+        "value": "liberty-mutual-public-site.vercel.app",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "a7803a5d-cd03-4eda-abed-1d9af4bf6660",
+        "name": "Database",
+        "value": "master",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "da06d09e-02b6-464a-80fc-9d8d7fc875e3",
+        "name": "Environment",
+        "value": "*",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "301e719a-6f65-4874-b565-a953a7b5ac83",
+        "name": "OtherProperties",
+        "value": "isSiteThumbnailSource=true",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "cb4e9e2e-2b66-43dc-ad3f-9caf363d28d3",
+        "name": "SiteName",
+        "value": "liberty-mutual-public-site",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "1ee576af-ba8e-4312-9fbd-2ccf8395baa1",
+        "name": "StartItem",
+        "value": "{6D600332-3E21-4C5F-83EC-AAE04F83450F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "42ddbe59-96df-4c83-bb22-0f739a603b3d",
+        "name": "FilteredItemsCacheSize",
+        "value": "10",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "f19277fe-1b85-4b0a-8c26-5e74d766b3a3",
+        "name": "Language",
+        "value": "en",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Image/Default": {
+    "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/LinkList/Default": {
+    "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Navigation/Default": {
+    "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PageContent/Default": {
+    "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Promo/Default": {
+    "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/RichText/Default": {
+    "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/Title/Default": {
+    "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+    "fields": []
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Spacing/Indent top": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "indent-top",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "add-spacing-top",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Spacing/Indent bottom": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "indent-bottom",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "add-spacing-bottom",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Spacing/Indent side": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "indent",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "add-spacing-sides",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Add highlight/Highlighted left": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{9C6D53E3-FE57-4638-AF7B-6D68304C7A94}|{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}|{2492BAC4-DA07-4C86-87F0-9873D40E2276}|{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "highlighted-left",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "highlight-left",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Add highlight/Highlighted right": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{9C6D53E3-FE57-4638-AF7B-6D68304C7A94}|{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}|{2492BAC4-DA07-4C86-87F0-9873D40E2276}|{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "highlighted-right",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "highlight-right",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Add highlight/Highlighted top": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{9C6D53E3-FE57-4638-AF7B-6D68304C7A94}|{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}|{2492BAC4-DA07-4C86-87F0-9873D40E2276}|{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "highlighted-top",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "highlight-top",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Add highlight/Highlighted bottom": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{9C6D53E3-FE57-4638-AF7B-6D68304C7A94}|{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}|{2492BAC4-DA07-4C86-87F0-9873D40E2276}|{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "highlighted-bottom",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "highlight-bottom",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Content alignment/Align content left": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "position-left",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "text-align-left",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Content alignment/Align content center": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "position-center",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "text-align-center",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Content alignment/Align content right": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "position-right",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "39816442-74d9-4ce2-beb3-128b204efd40",
+        "name": "Icon",
+        "value": "text-align-right",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background color/Clean background": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "container-clean-background",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background color/Color background": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "container-color-background",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background color/Dark background": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "container-dark-background",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background color/Gray background": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "container-gray-background",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background layout/cover-background": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "cover-background",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background layout/fix-background": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "fix-background",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Background layout/parallax-background": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "parallax-background",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Navigation/navigation-main": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{1DEB067F-0BB1-405E-94F5-2ABB537A6160}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "navigation-main navigation-main-vertical",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Navigation/navigation-main-horizontal": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{1DEB067F-0BB1-405E-94F5-2ABB537A6160}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "navigation-main navigation-main-horizontal",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Navigation/navigation-mobile": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{1DEB067F-0BB1-405E-94F5-2ABB537A6160}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "navigation-mobile",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Navigation/navigation-sidebar": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{1DEB067F-0BB1-405E-94F5-2ABB537A6160}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "navigation-sidebar",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Navigation/Sitemap navigation": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{1DEB067F-0BB1-405E-94F5-2ABB537A6160}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "sitemap-navigation",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Navigation/navigation-fat": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{1DEB067F-0BB1-405E-94F5-2ABB537A6160}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "navigation-fat",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Link list/List vertical": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{4956263D-1195-4D6E-931B-800EA625FF6F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "list-vertical",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Rich text/Custom bullet points": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{9C6D53E3-FE57-4638-AF7B-6D68304C7A94}|{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "rich-text-lists",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Promo/Promo hero": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{2492BAC4-DA07-4C86-87F0-9873D40E2276}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "promo-hero",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Promo/Promo shadow": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{2492BAC4-DA07-4C86-87F0-9873D40E2276}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "promo-shadow",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Promo/promo-bottom-link": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{2492BAC4-DA07-4C86-87F0-9873D40E2276}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "absolute-bottom-link",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Image/Image default size": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{AB2EDBA0-3960-4F12-B765-579DC231894A}|{2492BAC4-DA07-4C86-87F0-9873D40E2276}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "image-default-size",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Common/No borders": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{9C6D53E3-FE57-4638-AF7B-6D68304C7A94}|{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}|{2492BAC4-DA07-4C86-87F0-9873D40E2276}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "promoted-box",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Common/Boxed": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}|{C5F905F8-FD1F-444E-A9E5-AC6B774FF0DE}|{3836D951-BB14-43AC-9231-649B7F245DC5}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "boxed",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Common/Button link style": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{2492BAC4-DA07-4C86-87F0-9873D40E2276}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "link-button",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Container/Centered": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "container",
+        "versioning": "SHARED"
+      }
+    ]
+  },
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Styles/Container/Bordered": {
+    "template": "6b8aabef-d650-46e0-97d0-c0b04f7f016b",
+    "fields": [
+      {
+        "id": "69bb49f3-da64-4b0e-abd6-184b832ff6ab",
+        "name": "Allowed Renderings",
+        "value": "{7A1D9A21-B8D7-42F9-9B0B-92ABF8D1974F}",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "95579875-484e-41f0-b9c2-804eafaf3ccc",
+        "name": "IsVerifiedStyle",
+        "value": "1",
+        "versioning": "SHARED"
+      },
+      {
+        "id": "09147fb2-ebfb-4949-8c8e-26a424409d5e",
+        "name": "Value",
+        "value": "sxa-bordered",
+        "versioning": "SHARED"
+      }
+    ]
+  }
+}

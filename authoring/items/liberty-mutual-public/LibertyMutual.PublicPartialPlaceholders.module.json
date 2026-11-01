@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "LibertyMutual.PublicPartialPlaceholders",
+  "description": "Public website developer-owned definitions; preserves editorial content",
+  "items": {
+    "includes": [
+      {
+        "name": "partial-header",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/Partial Design/Header",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "partial-page-body",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/Partial Design/Page body",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      },
+      {
+        "name": "partial-footer",
+        "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Placeholder Settings/Partial Design/Footer",
+        "allowedPushOperations": "CreateAndUpdate",
+        "scope": "SingleItem"
+      }
+    ]
+  }
+}

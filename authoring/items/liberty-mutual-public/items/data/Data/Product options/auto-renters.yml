@@ -1,0 +1,29 @@
+---
+ID: 15909857-248f-52b0-b83a-8640cce0b38d
+Parent: 55980223-007d-52bd-9b55-72384b295872
+Template: f5b68e03-f379-53f5-8292-f4b28917bc67
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Product options/auto-renters
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 9493af78-c66d-5a39-b714-8ab68f1d523f
+      Hint: label
+      Value: Auto and renters
+    - ID: 7c4c0855-196e-5aea-b4f8-5645eb561cb0
+      Hint: productKey
+      Value: auto-renters
+    - ID: 39a17380-602c-5834-a47c-f1a7a89c18ba
+      Hint: image
+      Value: <image mediaid="{5B43D0F1-66C5-4A37-85A5-5C4570688A4B}" alt="Auto insurance" />
+    - ID: 0c64457c-fa7a-58e7-b05f-0f150572aebd
+      Hint: quoteLink
+      Value: <link text="Continue at Liberty Mutual" linktype="external" url="https://www.libertymutual.com/bundling/renters" />
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

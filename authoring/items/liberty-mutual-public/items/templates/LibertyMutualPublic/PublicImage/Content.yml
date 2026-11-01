@@ -1,0 +1,13 @@
+---
+ID: 1c5cb608-58bd-51b3-9448-6ec04983bbc0
+Parent: b93ddcbc-a10f-55c0-9b06-d6f3a3e96eb6
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicImage/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

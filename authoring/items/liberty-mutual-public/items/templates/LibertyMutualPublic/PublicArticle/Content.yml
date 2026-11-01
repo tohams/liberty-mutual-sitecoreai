@@ -1,0 +1,13 @@
+---
+ID: 1f2a828f-dac8-56a3-a76b-64cce2789046
+Parent: 8fb0a60a-31d7-5009-abca-636a6a3f40b5
+Template: e269fbb5-3750-427a-9149-7aa950b49301
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicArticle/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z

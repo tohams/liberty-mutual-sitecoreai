@@ -1,0 +1,33 @@
+---
+ID: f63f0f36-ea5b-5693-85c6-b4df475c8840
+Parent: 95969f19-1bc9-5989-ad0c-8b37ca06f36a
+Template: 04646a89-996f-4ee7-878a-ffdbf1f0ef0d
+Path: /sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicArticle
+SharedFields:
+- ID: 037fe404-dd19-4bf7-8e30-4dadf68b27b0
+  Hint: componentName
+  Value: PublicArticle
+- ID: 1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f
+  Hint: Datasource Template
+  Value: /sitecore/templates/Project/LibertyMutualPublic/PublicArticle
+- ID: b5b27af1-25ef-405c-87ce-369b3a004016
+  Hint: Datasource Location
+  Value: query:./Data
+- ID: a77e8568-1ab3-44f1-a664-b7c37ec7810d
+  Hint: Parameters Template
+  Value: "{97353208-4C49-506D-A35A-1EA62E35F2A2}"
+- ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
+  Hint: __Icon
+  Value: Office/32x32/document_text.png
+Languages:
+- Language: en
+  Fields:
+  - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
+    Hint: __Display name
+    Value: Article text
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 1b58d065-fe74-43e3-ba20-54c9588b3011
+      Hint: AllowedOnTemplates
+      Value: "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}"

@@ -1,0 +1,35 @@
+---
+ID: afb66a07-f19d-50e8-bf88-e2096b58ae53
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: ba156366-00c4-5c7e-a79a-1c9f8cbce184
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Savings disclosure
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 552f64b5-9e7a-5174-b9bd-7efa7e39fb9a
+      Hint: title
+      Value: Savings information
+    - ID: ba150841-a581-5472-8222-4e5d344df3bf
+      Hint: body
+      Value: <p><sup>1</sup> Average annual savings based on a countrywide survey of new customers who reported savings when they switched to Liberty Mutual between 10/2024 and 09/2025. Savings will vary. Comparison does not apply in MA.</p><p>Discounts and savings are available where state laws and regulations allow, and may vary by state and how you purchase. Certain discounts apply to specific coverages only. To the extent permitted by law, applicants are individually underwritten; not all applicants may qualify.</p>
+    - ID: 2d7006b7-39eb-5903-a777-4fe7acaa3f07
+      Hint: sourceLink
+      Value: <link text="Ways to buy insurance" linktype="external" url="https://www.libertymutual.com/ways-to-buy" />
+    - ID: 13f01957-fa4d-5a3d-a7bc-cfd1de78c715
+      Hint: owner
+      Value: Liberty Mutual
+    - ID: 93858bdc-20da-5db9-ad35-75623cc93c35
+      Hint: effectiveDate
+      Value: "2026-10-31"
+    - ID: ce191de7-b556-513d-b195-996d021a1949
+      Hint: reviewDate
+      Value: "2027-01-31"
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
