@@ -20,6 +20,7 @@ import {
   recordSearchInteraction,
 } from "src/features/analytics/public-analytics";
 import { normalizeSearchQuestion } from "src/features/search/normalize-search-question";
+import { supportedQuestionResults } from "src/features/search/question-evidence";
 import type {
   PublicSearchConfiguration,
   PublicSearchProps,
@@ -153,23 +154,46 @@ function SearchExperience({
   const summaryRef = useRef<HTMLParagraphElement>(null);
   const nativeQuery = normalizeSearchQuestion(query);
   const needsSubject = Boolean(query.trim() && !nativeQuery);
-  const { results, total, totalPages, isLoading, isError, isSuccess, status } =
-    useSearch<SearchDocument>({
-      searchIndexId: configuration.searchIndex,
-      query: nativeQuery,
-      page: currentPage,
-      pageSize: 6,
-      locale: "en",
-      enabled: !editing && !needsSubject,
-      keepPreviousData: true,
-    });
+  const {
+    results,
+    total: nativeTotal,
+    isLoading,
+    isError,
+    isSuccess,
+    status,
+  } = useSearch<SearchDocument>({
+    searchIndexId: configuration.searchIndex,
+    query: nativeQuery,
+    // The approved-answer source is bounded to 100 published items. Retrieve
+    // its ranked candidates once, then page the evidence-supported results.
+    page: 1,
+    pageSize: 100,
+    locale: "en",
+    enabled: !editing && !needsSubject,
+    keepPreviousData: true,
+  });
   const loading = !editing && !needsSubject && (isLoading || status === "idle");
   const mapping = configuration.fieldsMapping;
-  const resultCards = results.flatMap((document) => {
+  const supported = supportedQuestionResults(query, results, (document) =>
+    [
+      mapping.title,
+      mapping.description,
+      "question",
+      "body",
+      mapping.product,
+      mapping.state,
+    ]
+      .map((name) => text(document, name))
+      .join("\n"),
+  );
+  const allCards = supported.flatMap((document) => {
     const href = publicHref(text(document, mapping.link));
     const title = text(document, mapping.title);
     return href && title ? [{ document, href, title }] : [];
   });
+  const total = allCards.length;
+  const totalPages = Math.ceil(total / 6);
+  const resultCards = allCards.slice((currentPage - 1) * 6, currentPage * 6);
   useEffect(() => {
     if (
       editing ||
@@ -288,8 +312,9 @@ function SearchExperience({
             <div className="public-search__empty">
               <h3>Let’s find the right information</h3>
               <p>
-                Try a different question or a product name. An agent can help
-                with questions about your policy or situation.
+                We could not find approved guidance that addresses this
+                question. Try a different question or a product name. An agent
+                can help with your policy or situation.
               </p>
               <NextLink
                 className="public-button"
@@ -300,76 +325,86 @@ function SearchExperience({
             </div>
           ) : (
             <div className="public-search__results" aria-busy={loading}>
-              {resultCards.map(({ document, href, title }, index) => {
-                const source = publicHref(text(document, mapping.source));
-                const description = text(document, mapping.description);
-                const product = text(document, mapping.product);
-                const state = text(document, mapping.state);
-                const owner = text(document, mapping.owner);
-                const effectiveDate = displayDate(
-                  text(document, mapping.effectiveDate),
-                );
-                return (
-                  <article
-                    className="public-search-card"
-                    key={`${href}-${index}`}
-                  >
-                    {(product || state) && (
-                      <p className="public-eyebrow">
-                        {[product, state].filter(Boolean).join(" · ")}
-                      </p>
-                    )}
-                    <h3>
-                      <NextLink
-                        href={href}
-                        onClick={() =>
-                          resultClick(href, index + 1 + (currentPage - 1) * 6)
-                        }
-                      >
-                        {title}
-                      </NextLink>
-                    </h3>
-                    {description && <p>{description}</p>}
-                    {(owner || effectiveDate) && (
-                      <p className="public-search-card__metadata">
-                        {[
-                          owner,
-                          effectiveDate ? `Effective ${effectiveDate}` : "",
-                        ]
-                          .filter(Boolean)
-                          .join(" · ")}
-                      </p>
-                    )}
-                    <div className="public-search-card__footer">
-                      <NextLink
-                        className="public-text-link"
-                        href={href}
-                        onClick={() =>
-                          resultClick(href, index + 1 + (currentPage - 1) * 6)
-                        }
-                      >
-                        Read more <span aria-hidden="true">→</span>
-                      </NextLink>
-                      {source && (
-                        <a
-                          href={source}
-                          className="public-search-card__source"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Source:{" "}
-                          {new URL(
-                            source,
-                            "https://libertymutual.com",
-                          ).hostname.replace(/^www\./, "")}
-                          <span className="sr-only"> (opens in a new tab)</span>
-                        </a>
+              {!loading &&
+                resultCards.map(({ document, href, title }, index) => {
+                  const source = publicHref(text(document, mapping.source));
+                  const description = text(document, mapping.description);
+                  const product = text(document, mapping.product);
+                  const state = text(document, mapping.state);
+                  const owner = text(document, mapping.owner);
+                  const effectiveDate = displayDate(
+                    text(document, mapping.effectiveDate),
+                  );
+                  return (
+                    <article
+                      className="public-search-card"
+                      key={`${href}-${index}`}
+                    >
+                      {(product || state) && (
+                        <p className="public-eyebrow">
+                          {[product, state].filter(Boolean).join(" · ")}
+                        </p>
                       )}
-                    </div>
-                  </article>
-                );
-              })}
+                      <h3>
+                        <NextLink
+                          href={href}
+                          onClick={() =>
+                            resultClick(href, index + 1 + (currentPage - 1) * 6)
+                          }
+                        >
+                          {title}
+                        </NextLink>
+                      </h3>
+                      {description && <p>{description}</p>}
+                      {(owner || effectiveDate) && (
+                        <p className="public-search-card__metadata">
+                          {[
+                            owner,
+                            effectiveDate ? `Effective ${effectiveDate}` : "",
+                          ]
+                            .filter(Boolean)
+                            .join(" · ")}
+                        </p>
+                      )}
+                      <div className="public-search-card__footer">
+                        <NextLink
+                          className="public-text-link"
+                          href={href}
+                          onClick={() =>
+                            resultClick(href, index + 1 + (currentPage - 1) * 6)
+                          }
+                        >
+                          Read more <span aria-hidden="true">→</span>
+                        </NextLink>
+                        {source && (
+                          <a
+                            href={source}
+                            className="public-search-card__source"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Source:{" "}
+                            {new URL(
+                              source,
+                              "https://libertymutual.com",
+                            ).hostname.replace(/^www\./, "")}
+                            <span className="sr-only">
+                              {" "}
+                              (opens in a new tab)
+                            </span>
+                          </a>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
             </div>
+          )}
+          {!loading && !isError && nativeTotal > 100 && (
+            <p className="public-search__status">
+              These matches come from the first 100 search results. Add a
+              product or state to narrow your search.
+            </p>
           )}
           {!needsSubject && !loading && !isError && totalPages > 1 && (
             <nav

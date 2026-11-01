@@ -161,10 +161,14 @@ test("the extracted SharePoint clickthrough coverage is retained without hidden 
     );
   }
   for (const guide of workshopGuides) {
-    // This presenter-led workflow was added directly to HTML after the deck migration.
+    // These presenter-led workflows were added directly to HTML after the deck migration.
     assert.ok(
       guide.sourceSlides.length > 0 ||
-        guide.slug === "author-approver-workflow",
+        [
+          "author-approver-workflow",
+          "publish-to-two-experiences",
+          "honor-communication-preferences",
+        ].includes(guide.slug),
       `${guide.slug}: source coverage`,
     );
     assert.ok(

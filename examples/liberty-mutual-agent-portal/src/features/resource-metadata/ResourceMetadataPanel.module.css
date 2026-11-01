@@ -268,6 +268,9 @@
   color: var(--panel-muted);
   font-size: 12px;
 }
+.resource .help {
+  overflow-wrap: anywhere;
+}
 .panel .fieldError {
   margin-top: 7px;
   color: #a12b37;

@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   outputFileTracingIncludes: {
     "/api/workshops/assets/*": ["./workshop-assets/**"],
+    "/api/workshops/preferences": ["./fixtures/preference-governance/*.jsonl"],
   },
   outputFileTracingExcludes: {
     "*": ["./fixtures/portal-logins.json", "./fixtures/udl/**"],

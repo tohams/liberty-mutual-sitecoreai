@@ -12,6 +12,12 @@ The initial collections live beneath the Agent Portal's **Data → Agency priori
 
 The collections share their recommendation items deliberately. No username, fixture, or browser query selects a collection in the visitor component. Native personalization on the Home component selects a datasource. Existing licensing and authorization remain independent of this marketing emphasis. The seeded state-specific links are limited to Texas and Illinois, for which both selected agents are licensed.
 
+The **Agency priorities** JSON rendering has **Content Dependencies → Related Items** enabled because its ordered selection renders linked native cards. The native rendering inherits the platform Content Dependency template; no platform template patch or frontend replacement of the CMS fields is needed. The setting is owned by `LibertyMutual.PublicModel` and its source generator. After an initial dependency change, publish the rendering and republish the containing Home page once to register the dependency graph. Subsequent editorial changes still follow the native review and publication process.
+
+`configure-agency-priority-dependencies.cjs` applies that one rendering-field change to an existing environment through snapshot, dry-run, and explicit apply modes. It checks the complete rendering before writing, journals native provenance outside the repository, and preserves all unrelated business fields, item identities, versions, layouts, and audience configuration. It does not publish. This is a developer setup action, rather than a step that workshop participants repeat.
+
+See [Sitecore's publishing dependencies documentation](https://doc.sitecore.com/sai/en/developers/sitecoreai/experience-edge/publishing-to-experience-edge/dependencies-and-publishing.html) and the [supported rendering dependency configuration](https://support.sitecore.com/kb?id=kb_article_view&sysparm_article=KB1003056).
+
 **SharedDisclosure** is a separate component on Home and Learning & resources. Both placements reference the single public-owned **Product availability notice** by its native ID. Its copy is not duplicated into the portal.
 
 `portal-relevance-contract.json` records all native IDs, including the three audience datasources, component instances, variants, and placeholder contracts.

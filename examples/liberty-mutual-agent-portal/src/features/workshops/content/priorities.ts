@@ -75,6 +75,18 @@ export interface WorkshopFocus {
 export type PrioritizedWorkshopGuide = WorkshopGuide & { focus: WorkshopFocus };
 
 export const guidePriorities: Record<string, GuideFocusDefinition> = {
+  "honor-communication-preferences": {
+    priority: "management",
+    section: "content",
+    relevance:
+      "Import a known marketing choice into native profiles, then inspect an Audience rule that requires explicit eligibility. Comparing two otherwise matched agents makes the positive and negative outcome clear. A separate website privacy choice controls optional browser collection, so the guide explains the purpose of each control.",
+  },
+  "publish-to-two-experiences": {
+    priority: "publishing",
+    section: "content",
+    relevance:
+      "One approved source can support more than one experience. Compare the same insurance answer on the public website and in a separate application that consumes its versioned API, then follow a reviewed source change through publication and restoration. This connects controlled publishing with reusable, consistently governed content.",
+  },
   "start-and-switch-agents": {
     priority: "relevance",
     section: "portal",

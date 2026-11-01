@@ -1500,4 +1500,287 @@ export const marketingGuides: WorkshopGuide[] = [
     related: ["create-resource-and-media"],
     sourceSlides: [105, 106, 107],
   },
+  {
+    slug: "publish-to-two-experiences",
+    audience: "marketing",
+    category: "Content reuse",
+    accountScope: "presenter",
+    title: "Publish content to two experiences",
+    summary:
+      "Read one approved insurance answer on the **public website** and in a separate **Agent Portal** application. Then follow the presenter as an approved source change reaches both experiences through publication and a versioned content API.",
+    outcome:
+      "You can distinguish the governed source content, its published API response, and each application’s presentation. The same approved answer, citation, and ownership information can serve more than one experience.",
+    personas: [
+      "Authorized Sitecore author",
+      "Approver",
+      "Administrator acting as publisher",
+    ],
+    prerequisites: [
+      "Sign in to this workshop website with a portal username and password **password** if requested. The [**Content API experience**](/workshops/content-api) is a protected page on the **Agent Portal** host; it does not require an agent persona or change an agent’s browsing profile.",
+      "Steps 1–2 are read-only and suitable for everyone. Steps 3–6 are a **Presenter demonstration** because **Bundle car and home** is shared source content. One presenter makes and restores the change while participants observe.",
+      `For authoring, open [**SitecoreAI**](${SITECORE}) with your authorized **Sitecore Cloud** account. In **Page Builder**, select **Liberty Mutual Public Website**, whose site name is **liberty-mutual-public-site**, and **English**. Keep **Default editing host** selected. This guide uses the public site rather than the Agent Portal site.`,
+      "The publishing demonstration uses an **Author** to edit and submit, a separate **Approver** to review, and an **administrator acting as publisher** to publish. Use separate browser profiles for the Sitecore identities so each role’s available actions remain clear. The workshop website’s persona logins do not grant Sitecore authoring access.",
+      "An **API** is a structured response another application can request. The public website’s versioned read API returns approved answers published to **Experience Edge Live**. This protected page consumes that actual response and displays it using the Agent Portal application’s own presentation.",
+    ],
+    links: [
+      {
+        label: "Open the second content experience",
+        href: "/workshops/content-api",
+      },
+      {
+        label: "Open the public car and home article",
+        href: "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home",
+      },
+      {
+        label: "Open the approved answer in Page Builder Content",
+        href: `https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en`,
+      },
+    ],
+    repositoryFiles: [
+      {
+        label: "The public read API contract",
+        path: "examples/liberty-mutual-public-site/src/features/publication/content-http.ts",
+      },
+      {
+        label: "The separate application’s API consumer",
+        path: "examples/liberty-mutual-agent-portal/src/features/workshops/content-api/published-answers.ts",
+      },
+    ],
+    steps: [
+      {
+        title: "Compare the same approved answer in two experiences",
+        action: [
+          "Open the [**public car and home article**](https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home). Read **Can I bundle my car and home insurance?**, its answer, and the **More information** source link.",
+          "Open the [**Content API experience**](/workshops/content-api). Under **Choose an approved answer**, select **Can I bundle my car and home insurance?**, then click **Load answer**. Compare the answer and citation with the public article.",
+          "On the API experience, find **The governance travels with the answer**. Read **Content owner**, **State**, **Product**, **Audience**, **Effective**, and **Review date**. Click **View the public article** to return to the first experience when you want to compare them.",
+        ],
+        expected: [
+          "The two websites display the same approved answer and authoritative source, with different layouts. The public article is delivered by the public-site application; the protected API experience is rendered by the Agent Portal application.",
+          "The ownership, applicability, and dates travel with the answer in the API response. They are not separate copies maintained on the second website.",
+        ],
+        links: [
+          {
+            label: "Open the public article",
+            href: "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home",
+          },
+          {
+            label: "Open the second content experience",
+            href: "/workshops/content-api",
+          },
+        ],
+      },
+      {
+        title: "Inspect the real API request and unchanged response",
+        action: [
+          "On the **Content API experience**, scroll to **A stable contract for other applications**. Record **Stable item ID**, **Native content version**, **Published content fingerprint**, and **Response ETag** so you can compare them after a publication.",
+          "Click the **Actual single-answer request** URL to inspect the structured JSON response. Find **schemaVersion**, **data.question**, **data.answer**, **data.sourceLink**, and **data.revision**. Return to the protected page afterward.",
+          "Click **Check whether the response is unchanged**. Read the confirmation beneath the request links.",
+        ],
+        expected: [
+          "The request uses the stable item ID **70144ef3-4be0-597a-9b22-81e8ee1cc9f6** under **/api/content/v1/answers/**. The **API contract version** identifies the response structure; **Native content version** identifies the authored revision of this answer.",
+          "The normal unchanged result is **304 Not Modified**. The page made a second real request using the API’s **ETag**, the response identifier, in an **If-None-Match** header. An unchanged response avoids sending a duplicate response body. A newly changed response can instead return **200 OK**.",
+          "The fingerprint is a 64-character **SHA-256** value computed from the delivered content. Comparing it helps a developer determine whether the published payload changed.",
+        ],
+      },
+      {
+        title: "Create a reversible source edit as the Author",
+        action: [
+          `As the **Author**, open [**Bundle car and home in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). Confirm the item name, **English**, and the **Liberty Mutual Public Website** site. Its location is **Data** > **Approved answers** > **Bundle car and home**.`,
+          "Record the original English version number. Open its version selector, choose **Create version**, name it **Shared answer review**, and click **Create**. Select the new **Draft**.",
+          "Find **Detailed explanation**. Preserve the existing text, and append a new paragraph: Review your coverage options with an agent before choosing. Click outside the field and wait for **Saved**. Keep the original version number for restoration.",
+          "Open **Actions** > **Submit**, enter a comment explaining the source change, and click **Submit**. Confirm **Awaiting approval**.",
+        ],
+        expected: [
+          "The new **Draft** retains the original version in history. Only this source answer is edited; its question, citation, ownership, and applicability remain unchanged.",
+          "Saving and submission update the authoring environment. The two live experiences continue to use the previously published answer until the reviewed change is published.",
+        ],
+      },
+      {
+        title: "Review the source and publish its article",
+        action: [
+          `In the separate **Approver** browser profile, open [**Bundle car and home**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). Select the submitted English version, read **Detailed explanation**, and use **Actions** > **Approve**. Enter the review comment, click **Submit**, and confirm **Approved**.`,
+          `In the **administrator acting as publisher** browser profile, open the [**car and home article in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Keep its current approved English page version.`,
+          "Click **Publish**. Keep **Page**, **Current language (English)**, **All references**, and **Include related items** checked; leave **Subpages** unchecked. Click **Start publish** and wait for completion. Including references publishes the approved answer that supplies this article.",
+        ],
+        expected: [
+          "The **Author** submits, the **Approver** reviews, and the administrator performs publication. These separate responsibilities make the path from edited text to delivered guidance visible.",
+          "Publication delivers the approved page and referenced answer to **Experience Edge Live**. The public application’s publication service updates its delivery cache and Search projection; a frontend code deployment is not part of this content change.",
+        ],
+      },
+      {
+        title: "Observe one publication in both experiences",
+        action: [
+          "Reload the [**public car and home article**](https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home). Find the new sentence in its explanation beneath the answer.",
+          "Reload the [**Content API experience**](/workshops/content-api) and select the same car and home answer if necessary. Find the same new sentence beneath its answer, then compare the recorded **Stable item ID**, **Native content version**, **Published content fingerprint**, and **Response ETag**.",
+          "After publication completes, allow the API’s shared response cache of up to **15 seconds**, then reload if you are still viewing the previous response. Click **Check whether the response is unchanged** again to inspect the new response’s ETag behavior.",
+        ],
+        expected: [
+          "Both rendered experiences contain the same newly approved source text. The **Stable item ID** remains the same; the delivered version, fingerprint, and response ETag reflect the changed published payload.",
+          "The second application obtains the update through the read API. No one retypes the answer into that website, and no application code release is needed.",
+        ],
+      },
+      {
+        title: "Restore the original source through a new reviewed version",
+        action: [
+          "As the **Author**, return to **Bundle car and home** in **Page Builder Content**. Open the version selector, select the original English version recorded in step 3, then choose **Create version**. Name it **Shared answer restored** and click **Create**. Check that the newest **Draft** contains the original **Detailed explanation**, without the added paragraph.",
+          "Repeat **Submit**, the separate **Approver**’s **Approve**, and the administrator’s article publication with **All references** and **Include related items**. Keep the same article and English language; leave **Subpages** unchecked.",
+          "Reload the public article and the API experience. Compare the original wording and citation with the starting values. Verify the temporary sentence is absent from both.",
+        ],
+        expected: [
+          "The starting business content is restored in both experiences, and the original and temporary revisions remain in version history. The item ID stays stable.",
+          "The restored content has a newer native version. Its API fingerprint and ETag may therefore differ from the initial values even though the wording is restored; those identifiers describe the full delivered payload, including its version.",
+        ],
+      },
+    ],
+    cleanup: {
+      body: [
+        "If you completed only the read-only steps, close the extra article and API tabs; no reset is needed.",
+        "If the presenter edited the source, complete step 6 and confirm the original words and citation in both experiences before finishing. Keep the shared answer and article; do not delete them. A portal workshop-number reset does not restore Sitecore content.",
+      ],
+      links: [
+        {
+          label: "Verify the restored API experience",
+          href: "/workshops/content-api",
+        },
+      ],
+    },
+    related: ["resource-content-workflow"],
+    sourceSlides: [],
+  },
+  {
+    slug: "honor-communication-preferences",
+    audience: "marketing",
+    category: "Data governance",
+    accountScope: "presenter",
+    title: "Honor communication preferences",
+    summary:
+      "Follow a known communication choice from sample preference-center input into real **SitecoreAI Unified Data Layer** profiles and a native **Audience** exclusion. Compare two matched agents, record an opt-out, and restore the starting preferences.",
+    outcome:
+      "You can distinguish an external preference source, native profile storage, a marketer-managed audience rule, and the public website’s optional collection controls. You know how a known opt-out can exclude a profile from marketing eligibility.",
+    personas: ["Authorized Sitecore user"],
+    prerequisites: [
+      "Sign in to this workshop website if requested, then open [**Communication preferences**](/workshops/preferences). Its buttons send fixed sample preference records into SitecoreAI’s real **Profile import** service. The preference-center input is part of this implementation; native profiles, the profile schema, and the Audience are part of SitecoreAI.",
+      `Open [**SitecoreAI**](${SITECORE}) using your authorized **Sitecore Cloud** account. Confirm **Safeco Insurance Company of America POC** and **SitecoreAI / Demo**. The portal’s persona logins do not grant access to this administrative and marketing interface.`,
+      "This is a **Presenter demonstration** because the two comparison profiles and the Audience calculation are shared. One presenter runs the imports and restores the baseline while participants inspect the same native records.",
+      "The comparison uses **Cameron Ellis - Allowed** and **Cameron Ellis - Suppressed** at **Lakeside Independent Insurance**. Both have **Texas** and **producer** attributes. The suffixes identify their starting records; the current **marketingSuppressed** value determines eligibility. The records are separate from the numbered portal logins.",
+      "Imports and Audience calculations are asynchronous. Wait for each recorded operation to finish before starting the next action. Use **Check import status** to inspect an existing import; refreshing the page reads its saved receipt and does not resend it.",
+    ],
+    links: [
+      {
+        label: "Open Communication preferences",
+        href: "/workshops/preferences",
+      },
+      {
+        label: "Open Profile schema",
+        href: `https://app.sitecorecloud.io/optimization/settings/profile-schema?organization=${ORG}&tenantId=${TENANT}`,
+      },
+      {
+        label: "Open Agents eligible for marketing",
+        href: `https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}`,
+      },
+    ],
+    repositoryFiles: [
+      {
+        label: "Fixed comparison input files",
+        path: "examples/liberty-mutual-agent-portal/fixtures/preference-governance",
+      },
+      {
+        label: "Native import coordination and receipt handling",
+        path: "examples/liberty-mutual-agent-portal/src/server/udl/marketing-preferences.ts",
+      },
+    ],
+    steps: [
+      {
+        title: "Load the two preference examples",
+        action: [
+          "Open [**Communication preferences**](/workshops/preferences). Read **Start with two matched agent profiles**, then click **Load preference examples** once.",
+          "Watch the import status. The page checks an accepted import a limited number of times. If processing continues, click **Check import status** until **SitecoreAI confirmed the imported records** appears. Keep the **Native import batch** identifier for comparison with native import history.",
+          "Read the two **Submitted preference** badges: **Cameron Ellis - Allowed** has **marketingSuppressed = false**, and **Cameron Ellis - Suppressed** has **marketingSuppressed = true**.",
+        ],
+        expected: [
+          "The real Profile import creates or updates two dedicated comparison records, depending on whether these examples have been loaded before. A successful import has no failed records.",
+          "The badges describe the submitted input. The completed import receipt confirms native processing; the following step opens SitecoreAI to inspect the actual stored profiles.",
+          "A queued or pending result is an in-progress operation. A request whose acknowledgement is uncertain stays blocked from another upload; use **Check import status** and native **Profile import** history to inspect that same operation.",
+        ],
+        note: `If **Check the recorded import before continuing** appears, open [**Profile import history**](https://app.sitecorecloud.io/optimization/settings/profile-import?organization=${ORG}&tenantId=${TENANT}). Select the current preference import and wait until its status is **Completed**. Copy its **batch ID**, paste it into **Native import batch ID**, and click **Recover completed import**. Recovery verifies the import time and source data, and rejects older or unrelated batches. It does not upload the source again.`,
+        links: [
+          {
+            label: "Open native Profile import history",
+            href: `https://app.sitecorecloud.io/optimization/settings/profile-import?organization=${ORG}&tenantId=${TENANT}`,
+          },
+        ],
+      },
+      {
+        title: "Inspect the native schema and both stored profiles",
+        action: [
+          `Open [**Profile schema**](https://app.sitecorecloud.io/optimization/settings/profile-schema?organization=${ORG}&tenantId=${TENANT}). In **Extensions**, find **marketingSuppressed** and inspect its **Boolean** type and published schema. This field stores a true-or-false marketing preference on the native profile.`,
+          "Return to **Communication preferences**. On each card, click **Open native profile in SitecoreAI**. Inspect the stored extension attributes and compare **marketingSuppressed**: false for the Allowed record and true for the Suppressed record.",
+          "Compare **agencyName**, **role**, and **state** in both profiles. Record each **Native profile ID** from the card so you can verify that later imports update the same records.",
+        ],
+        expected: [
+          "The stored native values match the imported choices. Both profiles describe the same agency, role, and Texas context; the suppression preference provides the meaningful eligibility difference.",
+          "The published schema makes the field available to native rules. An optional Boolean can also be unspecified; the Audience in the next step requires an explicit false value instead of treating a missing choice as permission.",
+        ],
+      },
+      {
+        title: "Inspect and recalculate the native marketing audience",
+        action: [
+          `Open [**Agents eligible for marketing**](https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}). Inspect the Audience rule **Profile** > **Extensions** > **MarketingSuppressed is false**.`,
+          "Open the Audience’s **Overview** tab. Click **Recalculate** and wait for the calculation to complete, then read **Audience size**. Keep this Audience tab for the opt-out and restoration checks.",
+        ],
+        expected: [
+          "The native rule includes a profile only when the stored suppression value is explicitly false. The false-valued Cameron is eligible, while the true-valued Cameron is excluded.",
+          "For the starting comparison, the expected Audience size is **1** after recalculation. Import completion and Audience calculation are separate stages; the count is checked after the calculation finishes.",
+        ],
+      },
+      {
+        title: "Record Cameron’s opt-out and observe exclusion",
+        action: [
+          "Return to **Communication preferences**, click **Opt out Cameron** once, and wait for **SitecoreAI confirmed the imported records**. Use **Check import status** if necessary.",
+          "The action updates the initially Allowed record. Its display name remains **Cameron Ellis - Allowed**, but its submitted **marketingSuppressed** choice is now **true**. Open that native profile, refresh it, and verify the stored true value and unchanged **Native profile ID**.",
+          "Return to **Agents eligible for marketing** > **Overview**. Click **Recalculate**, wait for completion, and inspect **Audience size** again.",
+        ],
+        expected: [
+          "The existing Cameron profile has been updated, rather than replaced by another identity. Both comparison records now have a true suppression value.",
+          "The native Audience excludes both records. The expected comparison count is now **0** after recalculation. The rule stayed the same; the imported known choice changed eligibility.",
+        ],
+      },
+      {
+        title: "Restore the starting preferences and audience",
+        action: [
+          "Click **Restore preferences** on **Communication preferences**. Wait for **SitecoreAI confirmed the imported records**, using **Check import status** if needed.",
+          "Open the two native profiles again. Verify the original false value for **Cameron Ellis - Allowed**, the original true value for **Cameron Ellis - Suppressed**, and the same **Native profile IDs**.",
+          "On **Agents eligible for marketing** > **Overview**, click **Recalculate**, wait for completion, and verify the starting Audience size of **1**.",
+        ],
+        expected: [
+          "The original comparison is restored: one eligible record and one suppressed record. The two profiles and their native import history remain available for inspection.",
+        ],
+      },
+      {
+        title: "Compare a communication choice with website collection",
+        action: [
+          "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/). Click **Privacy choices** at the lower left, then choose **Essential only**.",
+          "Use the public website’s **Search** to ask **Can I bundle my car and home insurance?** and open the matching approved article. Return to this guide afterward.",
+        ],
+        expected: [
+          "The website records this browser’s choice to decline optional analytics and personalization collection. Core information retrieval and the approved article remain available.",
+          "That browser collection choice and the imported communication preference have different purposes. The native Cameron profile’s marketing suppression value remains the source for the Audience rule; the website’s consent controls govern its optional browser events.",
+        ],
+      },
+    ],
+    cleanup: {
+      body: [
+        "Complete **Restore preferences**, verify both native profile values, and recalculate the Audience back to the starting comparison before finishing. Leave the two dedicated profiles and their import history available; no profile deletion or numbered-portal reset is needed.",
+        "Close extra native profile, Audience, and public website tabs. Your public website browser retains the **Essential only** privacy choice selected in step 6.",
+      ],
+      links: [
+        {
+          label: "Restore the comparison preferences",
+          href: "/workshops/preferences",
+        },
+      ],
+    },
+    related: ["publish-to-two-experiences"],
+    sourceSlides: [],
+  },
 ];

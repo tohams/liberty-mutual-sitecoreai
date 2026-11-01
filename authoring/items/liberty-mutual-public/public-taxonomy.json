@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "root": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy",
+  "deploymentPolicy": "CreateOnly editable author-managed content; never part of an ordinary definition deployment.",
+  "lists": [
+    {
+      "folder": "States",
+      "field": "state",
+      "options": [
+        {
+          "value": "All",
+          "label": "All states",
+          "description": "Use only when the approved guidance applies to all supported states."
+        },
+        {
+          "value": "AL",
+          "label": "Alabama",
+          "description": "Use only when the approved guidance applies to alabama."
+        },
+        {
+          "value": "AK",
+          "label": "Alaska",
+          "description": "Use only when the approved guidance applies to alaska."
+        },
+        {
+          "value": "AZ",
+          "label": "Arizona",
+          "description": "Use only when the approved guidance applies to arizona."
+        },
+        {
+          "value": "AR",
+          "label": "Arkansas",
+          "description": "Use only when the approved guidance applies to arkansas."
+        },
+        {
+          "value": "CA",
+          "label": "California",
+          "description": "Use only when the approved guidance applies to california."
+        },
+        {
+          "value": "CO",
+          "label": "Colorado",
+          "description": "Use only when the approved guidance applies to colorado."
+        },
+        {
+          "value": "CT",
+          "label": "Connecticut",
+          "description": "Use only when the approved guidance applies to connecticut."
+        },
+        {
+          "value": "DE",
+          "label": "Delaware",
+          "description": "Use only when the approved guidance applies to delaware."
+        },
+        {
+          "value": "DC",
+          "label": "District of Columbia",
+          "description": "Use only when the approved guidance applies to district of columbia."
+        },
+        {
+          "value": "FL",
+          "label": "Florida",
+          "description": "Use only when the approved guidance applies to florida."
+        },
+        {
+          "value": "GA",
+          "label": "Georgia",
+          "description": "Use only when the approved guidance applies to georgia."
+        },
+        {
+          "value": "HI",
+          "label": "Hawaii",
+          "description": "Use only when the approved guidance applies to hawaii."
+        },
+        {
+          "value": "ID",
+          "label": "Idaho",
+          "description": "Use only when the approved guidance applies to idaho."
+        },
+        {
+          "value": "IL",
+          "label": "Illinois",
+          "description": "Use only when the approved guidance applies to illinois."
+        },
+        {
+          "value": "IN",
+          "label": "Indiana",
+          "description": "Use only when the approved guidance applies to indiana."
+        },
+        {
+          "value": "IA",
+          "label": "Iowa",
+          "description": "Use only when the approved guidance applies to iowa."
+        },
+        {
+          "value": "KS",
+          "label": "Kansas",
+          "description": "Use only when the approved guidance applies to kansas."
+        },
+        {
+          "value": "KY",
+          "label": "Kentucky",
+          "description": "Use only when the approved guidance applies to kentucky."
+        },
+        {
+          "value": "LA",
+          "label": "Louisiana",
+          "description": "Use only when the approved guidance applies to louisiana."
+        },
+        {
+          "value": "ME",
+          "label": "Maine",
+          "description": "Use only when the approved guidance applies to maine."
+        },
+        {
+          "value": "MD",
+          "label": "Maryland",
+          "description": "Use only when the approved guidance applies to maryland."
+        },
+        {
+          "value": "MA",
+          "label": "Massachusetts",
+          "description": "Use only when the approved guidance applies to massachusetts."
+        },
+        {
+          "value": "MI",
+          "label": "Michigan",
+          "description": "Use only when the approved guidance applies to michigan."
+        },
+        {
+          "value": "MN",
+          "label": "Minnesota",
+          "description": "Use only when the approved guidance applies to minnesota."
+        },
+        {
+          "value": "MS",
+          "label": "Mississippi",
+          "description": "Use only when the approved guidance applies to mississippi."
+        },
+        {
+          "value": "MO",
+          "label": "Missouri",
+          "description": "Use only when the approved guidance applies to missouri."
+        },
+        {
+          "value": "MT",
+          "label": "Montana",
+          "description": "Use only when the approved guidance applies to montana."
+        },
+        {
+          "value": "NE",
+          "label": "Nebraska",
+          "description": "Use only when the approved guidance applies to nebraska."
+        },
+        {
+          "value": "NV",
+          "label": "Nevada",
+          "description": "Use only when the approved guidance applies to nevada."
+        },
+        {
+          "value": "NH",
+          "label": "New Hampshire",
+          "description": "Use only when the approved guidance applies to new hampshire."
+        },
+        {
+          "value": "NJ",
+          "label": "New Jersey",
+          "description": "Use only when the approved guidance applies to new jersey."
+        },
+        {
+          "value": "NM",
+          "label": "New Mexico",
+          "description": "Use only when the approved guidance applies to new mexico."
+        },
+        {
+          "value": "NY",
+          "label": "New York",
+          "description": "Use only when the approved guidance applies to new york."
+        },
+        {
+          "value": "NC",
+          "label": "North Carolina",
+          "description": "Use only when the approved guidance applies to north carolina."
+        },
+        {
+          "value": "ND",
+          "label": "North Dakota",
+          "description": "Use only when the approved guidance applies to north dakota."
+        },
+        {
+          "value": "OH",
+          "label": "Ohio",
+          "description": "Use only when the approved guidance applies to ohio."
+        },
+        {
+          "value": "OK",
+          "label": "Oklahoma",
+          "description": "Use only when the approved guidance applies to oklahoma."
+        },
+        {
+          "value": "OR",
+          "label": "Oregon",
+          "description": "Use only when the approved guidance applies to oregon."
+        },
+        {
+          "value": "PA",
+          "label": "Pennsylvania",
+          "description": "Use only when the approved guidance applies to pennsylvania."
+        },
+        {
+          "value": "RI",
+          "label": "Rhode Island",
+          "description": "Use only when the approved guidance applies to rhode island."
+        },
+        {
+          "value": "SC",
+          "label": "South Carolina",
+          "description": "Use only when the approved guidance applies to south carolina."
+        },
+        {
+          "value": "SD",
+          "label": "South Dakota",
+          "description": "Use only when the approved guidance applies to south dakota."
+        },
+        {
+          "value": "TN",
+          "label": "Tennessee",
+          "description": "Use only when the approved guidance applies to tennessee."
+        },
+        {
+          "value": "TX",
+          "label": "Texas",
+          "description": "Use only when the approved guidance applies to texas."
+        },
+        {
+          "value": "UT",
+          "label": "Utah",
+          "description": "Use only when the approved guidance applies to utah."
+        },
+        {
+          "value": "VT",
+          "label": "Vermont",
+          "description": "Use only when the approved guidance applies to vermont."
+        },
+        {
+          "value": "VA",
+          "label": "Virginia",
+          "description": "Use only when the approved guidance applies to virginia."
+        },
+        {
+          "value": "WA",
+          "label": "Washington",
+          "description": "Use only when the approved guidance applies to washington."
+        },
+        {
+          "value": "WV",
+          "label": "West Virginia",
+          "description": "Use only when the approved guidance applies to west virginia."
+        },
+        {
+          "value": "WI",
+          "label": "Wisconsin",
+          "description": "Use only when the approved guidance applies to wisconsin."
+        },
+        {
+          "value": "WY",
+          "label": "Wyoming",
+          "description": "Use only when the approved guidance applies to wyoming."
+        }
+      ]
+    },
+    {
+      "folder": "Products",
+      "field": "product",
+      "options": [
+        {
+          "value": "all",
+          "label": "All products",
+          "description": "Use only when the approved guidance applies to all products."
+        },
+        {
+          "value": "auto",
+          "label": "Auto",
+          "description": "Use only when the approved guidance applies to auto."
+        },
+        {
+          "value": "home",
+          "label": "Homeowners",
+          "description": "Use only when the approved guidance applies to homeowners."
+        },
+        {
+          "value": "condo",
+          "label": "Condo",
+          "description": "Use only when the approved guidance applies to condo."
+        },
+        {
+          "value": "renters",
+          "label": "Renters",
+          "description": "Use only when the approved guidance applies to renters."
+        },
+        {
+          "value": "auto-home",
+          "label": "Auto and home",
+          "description": "Use only when the approved guidance applies to auto and home."
+        },
+        {
+          "value": "auto-condo",
+          "label": "Auto and condo",
+          "description": "Use only when the approved guidance applies to auto and condo."
+        },
+        {
+          "value": "auto-renters",
+          "label": "Auto and renters",
+          "description": "Use only when the approved guidance applies to auto and renters."
+        },
+        {
+          "value": "pet",
+          "label": "Pet",
+          "description": "Use only when the approved guidance applies to pet."
+        },
+        {
+          "value": "motorcycle",
+          "label": "Motorcycle",
+          "description": "Use only when the approved guidance applies to motorcycle."
+        },
+        {
+          "value": "life",
+          "label": "Life",
+          "description": "Use only when the approved guidance applies to life."
+        },
+        {
+          "value": "small-business",
+          "label": "Small business",
+          "description": "Use only when the approved guidance applies to small business."
+        }
+      ]
+    },
+    {
+      "folder": "Audiences",
+      "field": "audience",
+      "options": [
+        {
+          "value": "consumer",
+          "label": "All consumers",
+          "description": "Use only when the approved guidance applies to all consumers."
+        },
+        {
+          "value": "prospective-customer",
+          "label": "Prospective customers",
+          "description": "Use only when the approved guidance applies to prospective customers."
+        },
+        {
+          "value": "customer",
+          "label": "Existing customers",
+          "description": "Use only when the approved guidance applies to existing customers."
+        },
+        {
+          "value": "independent-agent",
+          "label": "Independent agents",
+          "description": "Use only when the approved guidance applies to independent agents."
+        }
+      ]
+    }
+  ]
+}
