@@ -15,7 +15,11 @@ const ID = "a2e85f2d-7dbc-5640-8040-0b688d7912a6";
 const ITEM_PATH = "/sitecore/layout/Renderings/Project/LibertyMutualPublic/AgencyPriorities";
 const FIELD = "Content Dependencies";
 const FIELD_ID = "b4bbc0be76194678b2f7947d84aa77a9";
-const RELATED = "{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}";
+const DEPENDENCIES = Object.freeze([
+  "{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}", // Related Items: selected recommendation cards.
+  "{15F0229E-41E0-442B-94C5-243CBA793465}", // Siblings: the peer collections selected by personalization.
+  "{5E13EE6F-522F-41CA-8929-AEE8EE103862}", // Recursive Related Items: links within those collections.
+]);
 const normalize = (value) => value.replace(/[{}-]/g, "").toLowerCase();
 function businessState(item) {
   const result = semantic(item);
@@ -37,10 +41,11 @@ function planned(item) {
   assert.equal(new Set(values).size, 1, "Shared dependency field differs across versions.");
   const existing = values[0].split(/[|\r\n]+/).filter(Boolean);
   assert(existing.every((id) => /^\{[a-f\d-]{36}\}$/i.test(id)), "Unexpected dependency selection; preserve and review.");
-  const after = existing.some((id) => normalize(id) === normalize(RELATED))
-    ? values[0]
-    : [...existing, RELATED].join("|");
-  return { before: values[0], after };
+  const after = [...existing];
+  for (const required of DEPENDENCIES) {
+    if (!after.some((id) => normalize(id) === normalize(required))) after.push(required);
+  }
+  return { before: values[0], after: after.join("|") };
 }
 
 async function main() {
@@ -78,5 +83,5 @@ async function main() {
   writePrivate(journal, { completedAt: new Date().toISOString(), origin: api.origin, before, after, change });
   console.log("Verified the one-field update and all preserved rendering fields. No publication performed.");
 }
-module.exports = { businessState, planned };
+module.exports = { businessState, planned, DEPENDENCIES };
 if (require.main === module) main().catch((error) => { console.error(error.message); process.exitCode = 1; });

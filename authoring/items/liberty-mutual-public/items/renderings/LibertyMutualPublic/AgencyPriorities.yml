@@ -21,7 +21,10 @@ SharedFields:
   Value: Office/32x32/folder_heart.png
 - ID: b4bbc0be-7619-4678-b2f7-947d84aa77a9
   Hint: Content Dependencies
-  Value: "{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}"
+  Value: |
+    {07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}
+    {15F0229E-41E0-442B-94C5-243CBA793465}
+    {5E13EE6F-522F-41CA-8929-AEE8EE103862}
 Languages:
 - Language: en
   Fields:

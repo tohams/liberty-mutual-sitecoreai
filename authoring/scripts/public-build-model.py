@@ -121,9 +121,9 @@ def build(include_editorial=True):
     for name,label,ds,location,icon in contracts:
         RENDERINGS[name]=uid(RP+"/"+name)
         sf=[field("037fe404-dd19-4bf7-8e30-4dadf68b27b0","componentName",name),field("1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f","Datasource Template",TP+"/"+ds if ds else ""),field("b5b27af1-25ef-405c-87ce-369b3a004016","Datasource Location",location),field("a77e8568-1ab3-44f1-a664-b7c37ec7810d","Parameters Template",brace(TEMPLATES["PublicRenderingParameters"])),field(F["icon"],"__Icon",icon)]
-        # The ordered collection renders linked native cards. Record those
-        # content dependencies when its layout is published to Experience Edge.
-        if name=="AgencyPriorities": sf += [field("b4bbc0be-7619-4678-b2f7-947d84aa77a9","Content Dependencies","{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}")]
+        # Personalized datasource collections are peers of the neutral default.
+        # Register those peers and their linked recommendation cards with Edge.
+        if name=="AgencyPriorities": sf += [field("b4bbc0be-7619-4678-b2f7-947d84aa77a9","Content Dependencies","{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{15F0229E-41E0-442B-94C5-243CBA793465}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}")]
         if name=="PublicPageBody": sf += [field("e829c217-5e94-4306-9c48-2634b094fdc2","OtherProperties","IsRenderingsWithDynamicPlaceholders=true"),field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-hero"))+"|"+brace(uid(PP+"/headless-public-content")))]
         allowed=[page]
         if name in ["PublicHeader","PublicFooter","PublicPageBody"]: allowed.append(T["partial"])
