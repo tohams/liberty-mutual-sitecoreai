@@ -85,7 +85,7 @@ requires HTTPS, and the session cookie is marked Secure. No deployment is needed
 to test these local changes.
 
 4. Check the first personalized page after login
-Sign in with password password. Use the Sign out control before changing users.
+Sign in with password Sitecore1. Use the Sign out control before changing users.
 
     maya.01    Home: Connect everyday conversations to new needs
     avery.01   Home: Build your next chapter in small business
@@ -105,7 +105,7 @@ For concurrent testing, choose different numbers so that participants do not
 change the same shared Sitecore profile's browsing history.
 
 5. Check behavior-driven affinity through normal browsing
-To repeat the verified journey, sign in as maya.15 with password password:
+To repeat the verified journey, sign in as maya.15 with password Sitecore1:
 
     Products & appetite
     Set Risk state to Texas

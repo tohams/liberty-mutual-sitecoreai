@@ -84,7 +84,7 @@ export const governanceGuides: WorkshopGuide[] = [
       {
         title: "See the approved content in the portal",
         action: [
-          "Open [**the Demo live page**](https://liberty-mutual-agent-portal.vercel.app/workshop-practice/pair-01) to check the result as an agent, outside Page Builder’s authoring preview. If asked to sign in, enter **daniel.01** and password **password**. This is the presenters’ fictional agent login; the Author and Approver credentials are used only in SitecoreAI. After sign-in, reopen [**the Demo live page**](https://liberty-mutual-agent-portal.vercel.app/workshop-practice/pair-01).",
+          "Open [**the Demo live page**](https://liberty-mutual-agent-portal.vercel.app/workshop-practice/pair-01) to check the result as an agent, outside Page Builder’s authoring preview. If asked to sign in, enter **daniel.01** and password **Sitecore1**. This is the presenters’ fictional agent login; the Author and Approver credentials are used only in SitecoreAI. After sign-in, reopen [**the Demo live page**](https://liberty-mutual-agent-portal.vercel.app/workshop-practice/pair-01).",
           "Read the summary below the page title. Confirm the sentence **Our team is preparing this resource for the next client conversation.** appears. Refresh after publication completes if the previous text remains.",
         ],
         expected: [
