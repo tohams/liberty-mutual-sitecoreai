@@ -17,12 +17,10 @@ function Section(
     >
       <div className="public-container">
         <RichText className="public-section-heading" field={fields.heading} />
-        {fields.introduction?.value?.trim() && (
-          <RichText
-            className="public-section-intro"
-            field={fields.introduction}
-          />
-        )}
+        <RichText
+          className="public-section-intro"
+          field={fields.introduction}
+        />
         <div className="public-card-grid">
           {items.map((item, index) => (
             <article className="public-content-card" key={item.id}>
@@ -68,11 +66,9 @@ function Section(
             </article>
           ))}
         </div>
-        {fields.actionLink?.value?.href && (
-          <div className="public-card-section__action">
-            <Link className="public-button" field={fields.actionLink} />
-          </div>
-        )}
+        <div className="public-card-section__action">
+          <Link className="public-button" field={fields.actionLink} />
+        </div>
       </div>
     </section>
   );
