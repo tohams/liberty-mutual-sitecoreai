@@ -99,7 +99,7 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Connect the visible answer to its native structured fields, managed classification choices, and search-friendly page metadata.",
         actions: [
-          `Open [**Bundle car and home in Page Builder Content**](${answerContent}). Confirm **Liberty Mutual Public Website**, **English**, and **Data → Approved answers → Bundle car and home**. Inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Authoritative source**, **Content owner**, and the dates.`,
+          `Open [**Bundle car and home in Page Builder Content**](${answerContent}). Confirm **Public Website**, **English**, and **Data → Approved answers → Bundle car and home**. Inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Authoritative source**, **Content owner**, and the dates.`,
           "Expand **Quick Info** and point to the **PublicApprovedAnswer** template. Explain that the template defines the structured fields used by every approved answer; the page’s layout is a separate concern.",
           `Open [**the article in Page Builder Editor**](${articleEditor}), retain **Default editing host**, and choose **Apps → Resource metadata**. Under **Content to classify**, select **Approved answer: Can I bundle my car and home insurance?**. Inspect **State applicability: All states**, **Product: Auto and home**, and **Audience: All consumers**. This approved version is read only; authors choose from the managed lists when editing a draft. Leave this version unchanged.`,
           `On the [**public article**](${ARTICLE}), use the browser’s **View page source**, then **Find**, to locate **application/ld+json**. Point to **FAQPage**, **Question**, and **acceptedAnswer**, and find the page’s **canonical** link. Return to the rendered article.`,
@@ -179,7 +179,7 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Create and preview a governed page, reuse approved content, and show separate Author, Approver, and publisher actions without a frontend release.",
         actions: [
-          `In the designated **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}). Confirm **Liberty Mutual Public Website**, **English**, and **Default editing host**. Select **Home → Create a page**, choose **Landing page**, name it **coverage-guide-live**, and click **Create**.`,
+          `In the designated **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Select **Home → Create a page**, choose **Landing page**, name it **coverage-guide-live**, and click **Create**.`,
           "Select **Content**, then the new page’s **Data → Hero**. Set **Heading** to **Explore coverage with confidence**. Open **Data → Introduction**, set **Heading** to **Guidance for your next decision**, and enter **Review approved information, compare your options, and speak with an agent about your needs.** in **Body**. Click outside each field, and wait for **Saved**.",
           "Return to **Editor**. In the page’s main content area, open the insertion control, choose **Promotion**, and select the existing **Bundle and save** content item. Choose **Assign**, rather than **Duplicate and assign**, and select the **Compact** presentation variant. Point to the allowed choices in this placeholder.",
           "Click **Preview**, then **Preview** in its menu. Confirm the new headings and shared Promotion. The page remains unpublished. Return to the editor and note that **Hero** and **Introduction** belong to this page’s local **Data** folder.",
@@ -474,7 +474,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Connect the consistent visitor experience to reusable components, page structure, and the controls that keep author choices appropriate.",
         actions: [
           "In Avery’s live session, navigate from **My workspace** to **Products & appetite**, then **Learning & resources**. Point to the common navigation, typography, buttons, and cards. On **My workspace** and **Learning & resources**, find the shared **Coverage and availability** disclosure.",
-          `Open [**Agent Portal Home in Page Builder**](${portalEditor}). Confirm **Liberty Mutual Agent Portal**, **English**, and **Default editing host**. Open **Layers** to locate **Agency priorities** and the shared **Disclosure** component.`,
+          `Open [**Agent Portal Home in Page Builder**](${portalEditor}). Confirm **Agent Portal**, **English**, and **Default editing host**. Open **Layers** to locate **Agency priorities** and the shared **Disclosure** component.`,
           "Open **Components** and inspect the component choices for the selected area without inserting or removing anything. Explain that the page design provides shared structure and the placeholder settings limit which components fit each governed area.",
           "Return to the visitor view. Identify the shared disclosure that will be changed in the final part of this flow; that change will provide the visible propagation proof across placements.",
         ],
@@ -508,7 +508,7 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Change the ordered selection of approved product conversations as a draft, keeping the live experience stable until audience preview and approval.",
         actions: [
-          `As the **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}). Confirm **Liberty Mutual Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.`,
+          `As the **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}). Confirm **Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.`,
           "Record the current approved version and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Open the version selector, choose **Create version**, name it **Texas guidance priority**, and click **Create**.",
           "Find **Ordered recommendations**. Click **Remove all items** to clear only this draft’s selection, open the picker, and select **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Click the item heading to close the picker, and wait for **Saved**.",
           "Confirm the selected cards are in the new order and that the version remains **Draft**. Leave it unpublished. The next step previews both audience experiences before completing this same change’s approval and publication.",
@@ -583,7 +583,7 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Update one governed disclosure item and observe its wording on the configured public-site and Agent Portal placements.",
         actions: [
-          `As the **Author**, open [**Product availability notice in Page Builder Content**](${disclosureContent}). Confirm **Liberty Mutual Public Website**, **English**, and **Data → Disclosures → Product availability notice**. Record the current approved version and original **Disclosure** text for the rollback in the next step.`,
+          `As the **Author**, open [**Product availability notice in Page Builder Content**](${disclosureContent}). Confirm **Public Website**, **English**, and **Data → Disclosures → Product availability notice**. Record the current approved version and original **Disclosure** text for the rollback in the next step.`,
           "Open the version selector, choose **Create version**, name it **Shared disclosure review**, and click **Create**. Append **Review available options with your agent before making a coverage decision.** to **Disclosure**. Click outside the field, and wait for **Saved**.",
           "Choose **Actions → Submit**, enter **Review shared disclosure wording**, and click **Submit**. Confirm **Awaiting approval**. In the separate **Approver** session, inspect this version, choose **Actions → Approve**, enter **Approved shared disclosure wording**, and click **Submit**.",
           "In the **administrator acting as publisher** session, open this approved disclosure in **Content**, click **Publish**, keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and select **Start publish**. While the job completes, identify the single source and the four configured page views in the links.",

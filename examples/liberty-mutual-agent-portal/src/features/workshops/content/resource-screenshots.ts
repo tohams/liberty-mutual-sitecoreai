@@ -266,7 +266,7 @@ export const resourceScreenshots: Record<
           y: 274,
           width: 209,
           height: 39,
-          label: "Select **Liberty Mutual Agent Portal** in the site list.",
+          label: "Select **Agent Portal** in the site list.",
         },
         {
           x: 623,
