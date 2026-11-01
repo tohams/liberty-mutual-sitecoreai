@@ -22,23 +22,29 @@ export default async function WorkshopHome() {
               LIBERTY MUTUAL + SITECOREAI
             </span>
             <h1>
-              Your workshop.
+              The customer demo.
               <br />
-              <em>Your pace.</em>
+              <em>Step by step.</em>
             </h1>
             <p>
-              Explore the Liberty Mutual Agent Portal built for this workshop.
-              See how SitecoreAI helps your teams manage content, tailor an
-              agent’s experience, and deliver changes with less platform
-              maintenance. These guides explain each action and its result.
+              Follow Liberty Mutual’s prescribed public-website and Agent Portal
+              demonstration in 45 minutes. The presenter walkthrough combines
+              exact actions, expected results, and a talk track. The reference
+              exercises provide additional detail when needed.
             </p>
             <div className="workshop-hero-meta">
               <span className="workshop-tag">
                 <Users size={15} />
                 Workshop number {session.reviewerPack}
               </span>
-              <span>Guided steps. Clear results. Room to explore.</span>
+              <span>Two use cases. One prescribed sequence.</span>
             </div>
+            <Link
+              className="workshop-customer-demo-link"
+              href="/workshops/demo"
+            >
+              Open the 45-minute customer demonstration <ArrowRight size={18} />
+            </Link>
           </div>
           <div className="workshop-hero-image">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -60,8 +66,8 @@ export default async function WorkshopHome() {
             <span className="workshop-eyebrow">START HERE</span>
             <h2 id="workshop-tools-title">Know which website you are using</h2>
             <p>
-              You will move between three websites. Keep this guide open, and
-              use each step’s link to open the tool you need in another tab.
+              You will move between four websites. Keep this guide open, and use
+              each step’s link to open the tool you need in another tab.
             </p>
             <div className="workshop-orientation-cards">
               <div>
@@ -78,6 +84,24 @@ export default async function WorkshopHome() {
                 >
                   Find your workshop number and logins
                 </Link>
+              </div>
+              <div>
+                <h3>Public website</h3>
+                <p>
+                  This is the customer experience for the first use case. A
+                  visitor finds an approved insurance answer, reviews its
+                  source, and takes a useful next step. It uses its own Sitecore
+                  site and rendering host in the same environment as the Agent
+                  Portal.
+                </p>
+                <a
+                  className="workshop-inline-link"
+                  href="https://liberty-mutual-public-site.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open the Liberty Mutual public website
+                </a>
               </div>
               <div>
                 <h3>Agent Portal</h3>
