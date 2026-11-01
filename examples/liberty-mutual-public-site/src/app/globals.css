@@ -108,6 +108,9 @@ p:last-child {
 .public-section {
   padding-block: 52px;
 }
+main [id] {
+  scroll-margin-top: 128px;
+}
 .public-eyebrow {
   font-size: 0.875rem;
   font-weight: 700;
@@ -403,6 +406,9 @@ code.scpm {
   }
 }
 @media (max-width: 600px) {
+  main [id] {
+    scroll-margin-top: 104px;
+  }
   body {
     font-size: 16px;
   }
