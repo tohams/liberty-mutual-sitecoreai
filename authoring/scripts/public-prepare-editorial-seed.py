@@ -60,6 +60,10 @@ def selector_introduction(value):
     return value.replace('Your state helps keep your next step relevant.',
                          'Your ZIP Code helps keep your next step relevant.')
 
+def quote_hero_summary(value):
+    return value.replace('Review your product and state choices before continuing to Liberty Mutual for a quote.',
+                         'Review your product and ZIP Code choices before continuing to Liberty Mutual for a quote.')
+
 def prepare(source,bindings):
     assert len(source['pages'])==17 and len(source['answers'])==10,'Expected the agreed focused17-page,10-answer inventory.'
     assert len({p['slug'] for p in source['pages']})==17
@@ -90,6 +94,7 @@ def prepare(source,bindings):
     page_summaries=[]
     for page in source['pages']:
         p=root+'/Home'+('' if page['slug']=='/' else page['slug']);d=p+'/Data'
+        hero_summary=quote_hero_summary(page['hero']['summary']) if page['slug']=='/get-a-quote' else page['hero']['summary']
         components=[placement(p,'PublicHero',hero,'page:/Data/Hero',2),placement(p,'PublicArticle',body,'page:/Data/Introduction',3)]
         if page.get('sharedPromotion'):components.append(placement(p,'PublicPromotion',body,BRACE(M['promotionId']),4,'Compact' if page['slug']=='/bundling' else 'Default'))
         if page.get('approvedAnswerSlug'):
@@ -106,11 +111,11 @@ def prepare(source,bindings):
             components.append(placement(p,'PublicQuoteHandoff',body,'page:/Data/Next step',9,q.get('variant','Default'),q.get('RenderingIdentifier')))
         components.append(placement(p,'SharedDisclosure',body,BRACE(M['disclosureId']),5))
         values=[F('d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b','Title',page['title']),F('4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8','NavigationTitle',page['title']),F(h.F['workflowState'],'__Workflow state',BRACE(M['workflow']['draft']))]
-        meta={'metadataTitle':page['title'],'metadataDescription':page['hero']['summary'].replace('<p>','').replace('</p>',''),'canonicalUrl':page['canonicalUrl'],'audience':page.get('audience','consumer'),'state':page.get('state','All'),'product':page.get('product','')}
+        meta={'metadataTitle':page['title'],'metadataDescription':hero_summary.replace('<p>','').replace('</p>',''),'canonicalUrl':page['canonicalUrl'],'audience':page.get('audience','consumer'),'state':page.get('state','All'),'product':page.get('product','')}
         values.extend(F(fieldid('PublicPage',k),k,v) for k,v in meta.items())
         item(p,UID(p.rsplit('/',1)[0]),template('PublicPage'),values,[F(h.F['layout'],'__Renderings',h.layout(components)),F(h.F['workflow'],'__Workflow',BRACE(M['workflow']['id']))])
         item(d,UID(p),h.T['data'])
-        hero_values={**page['hero'],'image':image(page['hero'].get('image'),d+'/Hero',bindings),'primaryLink':link(page['hero'].get('primaryLink')),'secondaryLink':link(page['hero'].get('secondaryLink'))}
+        hero_values={**page['hero'],'summary':hero_summary,'image':image(page['hero'].get('image'),d+'/Hero',bindings),'primaryLink':link(page['hero'].get('primaryLink')),'secondaryLink':link(page['hero'].get('secondaryLink'))}
         data(d+'/Hero','PublicHero',hero_values);data(d+'/Introduction','PublicArticle',page['introduction'])
         page_summaries.append({'route':page['slug'],'id':UID(p),'path':p,'components':[name for name in ['PublicHero','PublicArticle','PublicPromotion','PublicApprovedAnswer','PublicSearch','PublicProductSelector','PublicQuoteHandoff','SharedDisclosure'] if any(BRACE(rendering_id(name)) in c for c in components)]})
     assert len(page_summaries)==17 and len({r['ID'] for r in RECORDS})==len(RECORDS)

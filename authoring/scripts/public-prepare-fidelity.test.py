@@ -17,6 +17,14 @@ assets=load('fidelity_alt_contract','public-prepare-asset-inventory.py')
 editorial=load('search_native_contract','public-prepare-editorial-seed.py')
 
 class NativeReferences(unittest.TestCase):
+    def test_quote_summary_and_metadata_describe_the_zip_control(self):
+        before='Review your product and state choices before continuing to Liberty Mutual for a quote.'
+        after='Review your product and ZIP Code choices before continuing to Liberty Mutual for a quote.'
+        self.assertEqual(editorial.quote_hero_summary(before),after)
+        self.assertEqual(editorial.quote_hero_summary('<p>'+before+'</p>'),'<p>'+after+'</p>')
+        self.assertEqual(editorial.quote_hero_summary(after),after)
+        self.assertEqual(editorial.quote_hero_summary('Review state insurance requirements.'),'Review state insurance requirements.')
+
     def test_factory_search_uses_the_approved_answers_source(self):
         source={'searchIndex':editorial.PREVIOUS_SEARCH_INDEX_ID,'fieldsMapping':{'link':'canonicalUrl'}}
         original=copy.deepcopy(source)

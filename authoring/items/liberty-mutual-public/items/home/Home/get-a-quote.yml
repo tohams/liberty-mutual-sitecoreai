@@ -29,7 +29,7 @@ Languages:
       Value: Explore a quote
     - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
       Hint: metadataDescription
-      Value: Review your product and state choices before continuing to Liberty Mutual for a quote.
+      Value: Review your product and ZIP Code choices before continuing to Liberty Mutual for a quote.
     - ID: a98fdad1-e82c-5380-9954-33b996734100
       Hint: canonicalUrl
       Value: https://liberty-mutual-public-site.vercel.app/get-a-quote
