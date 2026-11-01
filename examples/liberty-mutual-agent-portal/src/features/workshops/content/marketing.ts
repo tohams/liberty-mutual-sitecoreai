@@ -1725,7 +1725,7 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Inspect and recalculate the native marketing audience",
         action: [
-          `Open [**Agents eligible for marketing**](https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}). Inspect the Audience rule **Profile** > **Extensions** > **MarketingSuppressed is false**.`,
+          `Open [**Agents eligible for marketing**](https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}). Inspect the Audience rule: **Marketing Suppressed** is selected, with **is false** as its condition.`,
           "Open the Audience’s **Overview** tab. Click **Recalculate** and wait for the calculation to complete, then read **Audience size**. Keep this Audience tab for the opt-out and restoration checks.",
         ],
         expected: [

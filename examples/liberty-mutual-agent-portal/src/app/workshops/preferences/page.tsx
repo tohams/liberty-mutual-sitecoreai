@@ -101,8 +101,9 @@ export default async function MarketingPreferencesPage() {
             profile from its card to inspect its stored attributes, then open
             <strong> Audiences</strong> to inspect the rule that excludes a
             suppressed profile. The{" "}
-            <strong>Agents eligible for marketing</strong>
-            Audience requires <strong>MarketingSuppressed is false</strong>.
+            <strong>Agents eligible for marketing</strong>{" "}
+            Audience requires <strong>Marketing Suppressed</strong> to be{" "}
+            <strong>false</strong>.
             Profiles with a true or unspecified value are excluded. The sample
             input and this page are application code; profile storage, the
             schema, and audience rules are native SitecoreAI capabilities.
@@ -123,7 +124,7 @@ export default async function MarketingPreferencesPage() {
           </div>
           <p>
             After an import is confirmed, open the Audience’s{" "}
-            <strong>Overview</strong>
+            <strong>Overview</strong>{" "}
             tab and select <strong>Recalculate</strong> to refresh its
             <strong> Audience size</strong>. The audience calculation runs
             separately from the profile import.
