@@ -31,7 +31,7 @@ function Lines({
     <List>
       {lines.map((line, index) => (
         <li key={index}>
-          <GuideText text={line} />
+          <GuideText text={line} openLinksInNewTab />
         </li>
       ))}
     </List>

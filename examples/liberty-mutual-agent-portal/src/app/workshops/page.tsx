@@ -141,19 +141,19 @@ export default async function WorkshopHome() {
             </div>
           </section>
           <div className="workshop-section-intro">
-            <span className="workshop-eyebrow">CHOOSE YOUR PATH</span>
+            <span className="workshop-eyebrow">REFERENCE EXERCISES</span>
             <h2>
-              Start with the experience.
+              Explore the experience.
               <br />
               Then see how it is built.
             </h2>
             <p>
-              Begin with <strong>Marketing</strong> to see what an agent
-              experiences and how a marketer manages it. Continue to{" "}
-              <strong>Development &amp; architecture</strong> to understand the
-              services and change the website’s code on your computer. Follow
-              the session’s selected exercises, then explore the others during
-              the evaluation.
+              These supporting exercises add depth after the{" "}
+              <Link href="/workshops/demo">Customer demo</Link>.{" "}
+              <strong>Marketing</strong> explains the agent experience and its
+              content tools. <strong>Development &amp; architecture</strong>{" "}
+              explains the services and local component development. Open the
+              topics relevant to your role when you want to explore further.
             </p>
           </div>
           <div className="workshop-paths">

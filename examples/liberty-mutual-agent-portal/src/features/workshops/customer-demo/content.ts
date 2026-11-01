@@ -101,7 +101,7 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `Open [**Bundle car and home in Page Builder Content**](${answerContent}). Confirm **Liberty Mutual Public Website**, **English**, and **Data → Approved answers → Bundle car and home**. Inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Authoritative source**, **Content owner**, and the dates.`,
           "Expand **Quick Info** and point to the **PublicApprovedAnswer** template. Explain that the template defines the structured fields used by every approved answer; the page’s layout is a separate concern.",
-          `Open [**the article in Page Builder Editor**](${articleEditor}), retain **Default editing host**, and choose **Apps → Resource metadata**. Under **Content to classify**, select **Approved answer: Can I bundle my car and home insurance?**. Open the **State applicability**, **Product**, and **Audience** choices without saving a change.`,
+          `Open [**the article in Page Builder Editor**](${articleEditor}), retain **Default editing host**, and choose **Apps → Resource metadata**. Under **Content to classify**, select **Approved answer: Can I bundle my car and home insurance?**. Inspect **State applicability: All states**, **Product: Auto and home**, and **Audience: All consumers**. This approved version is read only; authors choose from the managed lists when editing a draft. Leave this version unchanged.`,
           `On the [**public article**](${ARTICLE}), use the browser’s **View page source**, then **Find**, to locate **application/ld+json**. Point to **FAQPage**, **Question**, and **acceptedAnswer**, and find the page’s **canonical** link. Return to the rendered article.`,
         ],
         expected: [
@@ -255,7 +255,7 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `After the publishing jobs complete, open the [**new coverage page**](${PUBLIC}/coverage-guide-live). Confirm **Explore coverage with confidence**, **Guidance for your next decision**, and the shared **Bundle and save** Promotion. Open the [**car-and-home article**](${ARTICLE}), and find the added review sentence.`,
           `Open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site** to **liberty-mutual-public-site** and **Time** to **1 hour**, so the report includes the genuine public-site interactions performed at the start.`,
-          "Inspect **Events over time** and the **Events table**. Identify **pageView**, **LM_PUBLIC_CTA_CLICK**, and the **LM_PUBLIC_SCROLL_25**, **LM_PUBLIC_SCROLL_50**, **LM_PUBLIC_SCROLL_75**, and **LM_PUBLIC_SCROLL_100** events that are present. Match the paths and times to the actual visitor journey.",
+          "Inspect **Events over Time** and the **Events Table**. Identify **pageView**, **LM_PUBLIC_CTA_CLICK**, and the **LM_PUBLIC_SCROLL_25**, **LM_PUBLIC_SCROLL_50**, **LM_PUBLIC_SCROLL_75**, and **LM_PUBLIC_SCROLL_100** events that are present. Match the event types and times to the actual visitor journey.",
           "Point back to **Privacy choices**: the initial **Essential only** choice left Search available; later **Allow personalization** enabled optional measurement for the interaction used here. Keep content engagement separate from a completed quote or policy sale.",
         ],
         expected: [
