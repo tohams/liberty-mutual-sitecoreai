@@ -1,0 +1,674 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Current native authoring thumbnails for the public website and Agent Portal.",
+  "capturedOn": "2026-11-01",
+  "ownership": "Only definitionBindings are serialized into developer-owned presentation/branch sources. Editorial page thumbnails are maintained natively; no page fields or media binaries are deployed by this manifest.",
+  "publication": "Authoring preview media only; not published by this change.",
+  "backup": "Native media IDs and private JPEG captures support backup and recovery. Sitecore serialization does not contain these media binaries; retain the private captures separately.",
+  "media": [
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-home",
+      "mediaId": "ffddcf62b9154e8a887df54646e55abe",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-home",
+      "mimeType": "image/jpeg",
+      "byteCount": 61412,
+      "sha256": "a142def4160c1b57ad7567e243d20dad2a2722563035bf35b5e81c72930e9429",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-home.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-bundling",
+      "mediaId": "29469e62f6c94ad6bd9537a4da7b4154",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-bundling",
+      "mimeType": "image/jpeg",
+      "byteCount": 98664,
+      "sha256": "c0b5abb6744634b934f4da9cee7e5f805ff74ff312dc4b6b7d8f6bdca877865a",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/bundling"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-bundling.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-contact",
+      "mediaId": "cfb453cbac214012ac097d72585a5147",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-contact",
+      "mimeType": "image/jpeg",
+      "byteCount": 68924,
+      "sha256": "23bc4c0aa79478b41191f8bd70788583082de734643b03a973426f2dfc3b5587",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/contact-an-agent"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-contact.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-quote",
+      "mediaId": "f1d0c935c16448a8974f8906c03108ce",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-quote",
+      "mimeType": "image/jpeg",
+      "byteCount": 75148,
+      "sha256": "893aeceab098cdcbca93d16f5994b117696cd5aef6fabaa65c6fef9c4940f57a",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/get-a-quote"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-quote.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-resources",
+      "mediaId": "83ede39469904672b7af5642ea2a5672",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-resources",
+      "mimeType": "image/jpeg",
+      "byteCount": 86150,
+      "sha256": "d3d0e6998ae41ca335b84a4ce031757cb63b33486f8f5b5dba4c5b4af41c5500",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-resources.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-search",
+      "mediaId": "fd024bdad52f4c618920349ddfa2c889",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-search",
+      "mimeType": "image/jpeg",
+      "byteCount": 85398,
+      "sha256": "a63acc767bc8de05d10d6af2089889771c6479f4a5416a93203e6d1a9f0ce175",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/search"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-search.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-auto",
+      "mediaId": "abf0a7c122744eccb09e167ba209a6cd",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-auto",
+      "mimeType": "image/jpeg",
+      "byteCount": 73132,
+      "sha256": "75d1a06f6b62b56d9596236d7535485e65722fc70a4bf21709d91202b768fbad",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/vehicle/auto-insurance"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-auto.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-home",
+      "mediaId": "8e832bc7fa734b40a95507361b73a547",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-home",
+      "mimeType": "image/jpeg",
+      "byteCount": 85899,
+      "sha256": "fb0de83775165513f158573ef2083c97a1ae2cd767293210aca2ee0e208bc231",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-home.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-quote",
+      "mediaId": "5725be378e214c5199851c8d4ce1cfc1",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-quote",
+      "mimeType": "image/jpeg",
+      "byteCount": 68154,
+      "sha256": "504c642b0e830f4c3fae72392106210bd817d9a6a1334ab469a67f3d07b5c88b",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/quote"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-quote.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-clients",
+      "mediaId": "73e9fce17bad4f459ab9bb48fe7d549a",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-clients",
+      "mimeType": "image/jpeg",
+      "byteCount": 69909,
+      "sha256": "d3b76474cde0eca814c94d69e455f90832ee112d6fe569e493603a1c31748f74",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/clients"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-clients.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-products",
+      "mediaId": "4cb1c44b03684493a817a45310e66e83",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-products",
+      "mimeType": "image/jpeg",
+      "byteCount": 68610,
+      "sha256": "0dd3f028fb30ab4e2288b3d3f98e5fccb9ae7aa26f9e84d158297e564d8a8498",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/products"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-products.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-growth",
+      "mediaId": "f3670a166f1d450393eaabbe6467e597",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-growth",
+      "mimeType": "image/jpeg",
+      "byteCount": 73545,
+      "sha256": "bcdebd8f4d01e80e79d8ccc0e6ea224ececd8e903a57613dcaf5271a4b43693f",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/growth"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-growth.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-resources",
+      "mediaId": "02828d56139448199738602140f067b6",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-resources",
+      "mimeType": "image/jpeg",
+      "byteCount": 71304,
+      "sha256": "acd90a08db84c9709f7495dca84b4a0d99c39fc62d66dadeadd0a78419a47803",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-resources.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-support",
+      "mediaId": "750d0b25279a4a88bce909ee48862a6f",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-support",
+      "mimeType": "image/jpeg",
+      "byteCount": 65522,
+      "sha256": "8f6f16de362446b5221a32849e8d52d637211b8bc84702e624f902ffcff259f4",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/support"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-support.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-header",
+      "mediaId": "dcbe7940bc0e44f7907666e882138504",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-header",
+      "mimeType": "image/jpeg",
+      "byteCount": 9492,
+      "sha256": "de41b1591b9899670552692bf5621e1246cc1a573d34778ed0e01094d7392110",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-header.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-footer",
+      "mediaId": "76eef1501d2b491e9a686a4369f66c8c",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-footer",
+      "mimeType": "image/jpeg",
+      "byteCount": 88263,
+      "sha256": "862c4b54367420ee649700964e0e9cf4da7d4096a1c0f63f6b812d11acb42734",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-footer.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-body",
+      "mediaId": "5ba8dbd4c9be4e58ac7b8af86ddf573e",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-body",
+      "mimeType": "image/jpeg",
+      "byteCount": 52350,
+      "sha256": "4c3c035dfd169545b6694edeb2749120d3da36a7a851c18644783f4879f7c56b",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-body.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-campaign-page",
+      "mediaId": "c4bb97fe9c6c4c1f94550d07cc3a6318",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-campaign-page",
+      "mimeType": "image/jpeg",
+      "byteCount": 79492,
+      "sha256": "ede54f4ffc397f3ae0e3382d44f6b02ced7e6681b9a29011180fc33813b6efb8",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/growth/small-business"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-campaign-page.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-build-a-bop-submission",
+      "mediaId": "b7015d52019a4b6894e8999ed1e89516",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-build-a-bop-submission",
+      "mimeType": "image/jpeg",
+      "byteCount": 80063,
+      "sha256": "b12ae2985f66471c9c79a97a65c5b21292e2e861b911b09b5e59ec1e109e95b8",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/build-a-bop-submission"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-build-a-bop-submission.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-product-page",
+      "mediaId": "8b54ffa2eb3e4209964b621526bdb86e",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-product-page",
+      "mimeType": "image/jpeg",
+      "byteCount": 60745,
+      "sha256": "9165f98016272c7c0565327a27308267ec8610b3e3036187bcb558677c3652e6",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/products/small-commercial"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-product-page.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-bond-request-checklist",
+      "mediaId": "1a983c67b8574ba09a701592fb29a872",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-bond-request-checklist",
+      "mimeType": "image/jpeg",
+      "byteCount": 72459,
+      "sha256": "f5d6443c5c6aace7235c0608549ba3b647117a0feb33c111856b6dafd8f114f4",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/bond-request-checklist"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-bond-request-checklist.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-business-vehicles-conversation",
+      "mediaId": "d58280b70d0d421cb4811f38782cdc8b",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-business-vehicles-conversation",
+      "mimeType": "image/jpeg",
+      "byteCount": 77099,
+      "sha256": "60d6edb5d3ce972cdcb5cf42e07ce2ca9abe605716d8a815a3ebf95fcd22a48e",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/business-vehicles-conversation"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-business-vehicles-conversation.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-expand-small-business-practice",
+      "mediaId": "7110cb0860944b94a5e37f889de9a4ce",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-expand-small-business-practice",
+      "mimeType": "image/jpeg",
+      "byteCount": 82362,
+      "sha256": "9eb06a61a424728cba5148463f35023682a4fd37f721c53c66664d263e663163",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/expand-small-business-practice"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-expand-small-business-practice.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-farm-account-information",
+      "mediaId": "73495d1a35344467ac7e14ccd6e897a3",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-farm-account-information",
+      "mimeType": "image/jpeg",
+      "byteCount": 76246,
+      "sha256": "9fce2018dc90d1e95de57798a3de1064ab9438d1ab1482dc13cf7cde6dd0d750",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/farm-account-information"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-farm-account-information.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-florida-workers-compensation",
+      "mediaId": "73402ea8d575432dafc76583c0f6c317",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-florida-workers-compensation",
+      "mimeType": "image/jpeg",
+      "byteCount": 84466,
+      "sha256": "5576fe80981cd06bbc63f28e0414f2c683d23b5b982101068fea077103f594b1",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/florida-workers-compensation"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-florida-workers-compensation.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-illinois-workers-compensation",
+      "mediaId": "1f9514e4b13440308d0ae4333e1dc85a",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-illinois-workers-compensation",
+      "mimeType": "image/jpeg",
+      "byteCount": 82945,
+      "sha256": "b19ba39211a461087b65b436ff331a7e5ac43062a26de586907df5bb52dd79ee",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/illinois-workers-compensation"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-illinois-workers-compensation.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-multi-location-renewal",
+      "mediaId": "e9188903590e4beabd276b82f9e5c9a8",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-multi-location-renewal",
+      "mimeType": "image/jpeg",
+      "byteCount": 76072,
+      "sha256": "6639476f00b62da35050cf1f92151698c27f32b9caab79616c156cff8162c082",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/multi-location-renewal"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-multi-location-renewal.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-prepare-a-household-renewal",
+      "mediaId": "ce626ae4cbc04a3591c9649a51a768b1",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-prepare-a-household-renewal",
+      "mimeType": "image/jpeg",
+      "byteCount": 76320,
+      "sha256": "0b7ac1924ad27c7046f3c9ea2fc49571de6fc52126b9025c0b335ac5a1c0ce88",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/prepare-a-household-renewal"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-prepare-a-household-renewal.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-specialty-referral",
+      "mediaId": "fee67fc68d2b410db7b4509f212fb702",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-specialty-referral",
+      "mimeType": "image/jpeg",
+      "byteCount": 76940,
+      "sha256": "c1dcf0359d3593784d7cde9215d2a78676bb1a58583afb32bcd51d8bd4e9938c",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/specialty-referral"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-specialty-referral.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-texas-workers-compensation",
+      "mediaId": "aafdf9b58ff942c6a5e4183a9480b4d1",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-texas-workers-compensation",
+      "mimeType": "image/jpeg",
+      "byteCount": 86299,
+      "sha256": "093364b144a95fa6c7070d08fe444d9201dd9af9f79b5b4b2bf4160fe74fc567",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/texas-workers-compensation"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-texas-workers-compensation.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-article-wholesale-placement-handoff",
+      "mediaId": "7bea65e5bc4a456384c77a881ef57aed",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-article-wholesale-placement-handoff",
+      "mimeType": "image/jpeg",
+      "byteCount": 74198,
+      "sha256": "c3d2b97bd63ceed70ab0a778031093ce5d9688a04337da5790c19a9c64d866ca",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/resources/wholesale-placement-handoff"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-article-wholesale-placement-handoff.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-bundle-auto-and-condo",
+      "mediaId": "a52db990aca546ed84dbe5cb0c48f268",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-bundle-auto-and-condo",
+      "mimeType": "image/jpeg",
+      "byteCount": 78228,
+      "sha256": "810c165daa0da05a4070cbec56156dfcc9832bef3ec09b29fcc1aa4003e4b8b6",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-auto-and-condo"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-bundle-auto-and-condo.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-bundle-auto-and-renters",
+      "mediaId": "51f493edc83b4d059a9f948ead35380f",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-bundle-auto-and-renters",
+      "mimeType": "image/jpeg",
+      "byteCount": 86186,
+      "sha256": "1b1a29556b689da0dc00618f88fe739474fe68b95d741b8a15d02df7c7017097",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-auto-and-renters"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-bundle-auto-and-renters.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-bundle-car-and-home",
+      "mediaId": "4896732b3bce4de0be2eca3b8aef9437",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-bundle-car-and-home",
+      "mimeType": "image/jpeg",
+      "byteCount": 103475,
+      "sha256": "7cd37ee56c1489db95e3fd2133466d9dd93938379884d41ab73e2519bdae3ca2",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-bundle-car-and-home.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-check-your-policy-for-a-specific-loss",
+      "mediaId": "d2f28111e88e482e964561959683da03",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-check-your-policy-for-a-specific-loss",
+      "mimeType": "image/jpeg",
+      "byteCount": 110347,
+      "sha256": "691e71c951237e87786bee3de1273bedb2eb767629c3fef1a2a9d88fa894d27c",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/check-your-policy-for-a-specific-loss"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-check-your-policy-for-a-specific-loss.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-collision-coverage-and-deductibles",
+      "mediaId": "856228d6d3c14ad78a84ca27ee547198",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-collision-coverage-and-deductibles",
+      "mimeType": "image/jpeg",
+      "byteCount": 89735,
+      "sha256": "e12ca627b8ee84f4236fbc23205cf3c5e701681d1b848f7a8a23f34fc9a614d9",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/collision-coverage-and-deductibles"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-collision-coverage-and-deductibles.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-compare-auto-insurance-quotes",
+      "mediaId": "945a26f35441498991ef40064f0dbb54",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-compare-auto-insurance-quotes",
+      "mimeType": "image/jpeg",
+      "byteCount": 79398,
+      "sha256": "969dd3250fdf77c49e46eb78e3ea2beee3dad6549d1d3e8cb91d6e80902bc534",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/compare-auto-insurance-quotes"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-compare-auto-insurance-quotes.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-comprehensive-auto-coverage",
+      "mediaId": "14f760f9dbe3493cbe0f29ceba9da7ed",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-comprehensive-auto-coverage",
+      "mimeType": "image/jpeg",
+      "byteCount": 88551,
+      "sha256": "9712f9889c8182626c73cce62fce39dd1c16e17e1869ac5226847c5107c9d77f",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/comprehensive-auto-coverage"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-comprehensive-auto-coverage.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-florida-auto-insurance-guide",
+      "mediaId": "ed1fd51fb0894ff685aef964a42fc8df",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-florida-auto-insurance-guide",
+      "mimeType": "image/jpeg",
+      "byteCount": 89512,
+      "sha256": "02c17fb3dbd276ca768a41560fee0dd9ea08af78d7c2cbaabaf5707858e1d27d",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/florida-auto-insurance-guide"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-florida-auto-insurance-guide.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-illinois-auto-insurance-guide",
+      "mediaId": "fa2d1063f49d4734a3ed714ab28f15df",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-illinois-auto-insurance-guide",
+      "mimeType": "image/jpeg",
+      "byteCount": 96704,
+      "sha256": "4f782ad4ddd07707afa8ad13f5149251e148458692cd7ce7cf8391ed16e2cee4",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/illinois-auto-insurance-guide"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-illinois-auto-insurance-guide.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-public-site",
+      "captureKey": "public-article-texas-auto-insurance-guide",
+      "mediaId": "89488ee8c7934b4488096052683e15f3",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/Authoring previews/20261101-public-article-texas-auto-insurance-guide",
+      "mimeType": "image/jpeg",
+      "byteCount": 80275,
+      "sha256": "593f157e9fc289dc587192f65a55503a3b88a37c78788005fb206d46724aa82c",
+      "sourceRoutes": [
+        "https://liberty-mutual-public-site.vercel.app/insurance-resources/texas-auto-insurance-guide"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/public-article-texas-auto-insurance-guide.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-product-farm-ranch",
+      "mediaId": "37a080fb780d4a75852983a3c125be08",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-product-farm-ranch",
+      "mimeType": "image/jpeg",
+      "byteCount": 57666,
+      "sha256": "d74bbe740eb57704528a4c638b84d0c5179d3095cb0f32e337784766d8d9a634",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/products/farm-ranch"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-product-farm-ranch.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-product-midsize-large",
+      "mediaId": "3fbce94c08e04152bac424b5f35bb9b5",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-product-midsize-large",
+      "mimeType": "image/jpeg",
+      "byteCount": 60739,
+      "sha256": "c06f3f4e29f598f5a13f5bb5e5ebfc11c1e1eb1d95ece82c39748725d7418bc0",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/products/midsize-large"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-product-midsize-large.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-product-personal",
+      "mediaId": "2dd50174b75e4f0fb56206071f9ade00",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-product-personal",
+      "mimeType": "image/jpeg",
+      "byteCount": 59242,
+      "sha256": "831e28dcae829c859074e7d501095825e3402e89b0eb66a67dd2027df7ce1beb",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/products/personal"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-product-personal.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-product-retail-specialty",
+      "mediaId": "d5416dec7f0f45eba817354aa9de08d8",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-product-retail-specialty",
+      "mimeType": "image/jpeg",
+      "byteCount": 58975,
+      "sha256": "2e7b6c6cfc8281b8d3de96767269ab48cd4a92f7a67153e9485ab3269665ac91",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/products/retail-specialty"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-product-retail-specialty.jpg"
+    },
+    {
+      "siteName": "liberty-mutual-agent-portal",
+      "captureKey": "portal-product-surety",
+      "mediaId": "765276baf5104f5c96385d0da60bb278",
+      "mediaPath": "/sitecore/media library/Project/LibertyMutual/liberty-mutual-agent-portal/Authoring previews/20261101-portal-product-surety",
+      "mimeType": "image/jpeg",
+      "byteCount": 56374,
+      "sha256": "90dd13a6c85d6554438342b59365a2c99d57215dbdf4276c1f29828f5c5f7e7c",
+      "sourceRoutes": [
+        "https://liberty-mutual-agent-portal.vercel.app/products/surety"
+      ],
+      "privateCapturePath": "audits/component-icons-thumbnails-20261101/fresh/portal-product-surety.jpg"
+    }
+  ],
+  "definitionBindings": [
+    {
+      "itemId": "b8624533e3865e21842031a9334081b8",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Header",
+      "kind": "partial-design",
+      "mediaId": "dcbe7940bc0e44f7907666e882138504",
+      "captureKey": "public-header",
+      "thumbnail": "<image mediaid=\"{DCBE7940-BC0E-44F7-9076-66E882138504}\" />"
+    },
+    {
+      "itemId": "bb22d3af9e67585392076d11248f58b0",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer",
+      "kind": "partial-design",
+      "mediaId": "76eef1501d2b491e9a686a4369f66c8c",
+      "captureKey": "public-footer",
+      "thumbnail": "<image mediaid=\"{76EEF150-1D2B-491E-9A68-6A4369F66C8C}\" />"
+    },
+    {
+      "itemId": "63cf5969dc2e56d1b61d0d371359f0bb",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Page body",
+      "kind": "partial-design",
+      "mediaId": "5ba8dbd4c9be4e58ac7b8af86ddf573e",
+      "captureKey": "public-body",
+      "thumbnail": "<image mediaid=\"{5BA8DBD4-C9BE-4E58-AC7B-8AF86DDF573E}\" />"
+    },
+    {
+      "itemId": "34b431bcc49d5f34b000075cc6b1d7bd",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Designs/Public website",
+      "kind": "page-design",
+      "mediaId": "ffddcf62b9154e8a887df54646e55abe",
+      "captureKey": "public-home",
+      "thumbnail": "<image mediaid=\"{FFDDCF62-B915-4E8A-887D-F54646E55ABE}\" />"
+    },
+    {
+      "itemId": "7e89d193122c5d78ace5cbf84567c1e5",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Landing page/$name",
+      "kind": "branch-prototype",
+      "mediaId": "29469e62f6c94ad6bd9537a4da7b4154",
+      "captureKey": "public-bundling",
+      "thumbnail": "<image mediaid=\"{29469E62-F6C9-4AD6-BD95-37A4DA7B4154}\" />"
+    },
+    {
+      "itemId": "6b763c11deac5afa99fa453f30e4bec6",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Campaign page/$name",
+      "kind": "branch-prototype",
+      "mediaId": "c4bb97fe9c6c4c1f94550d07cc3a6318",
+      "captureKey": "portal-campaign-page",
+      "thumbnail": "<image mediaid=\"{C4BB97FE-9C6C-4C1F-9455-0D07CC3A6318}\" />"
+    },
+    {
+      "itemId": "f88b4735b33d4ad4a0b0bfe60e657572",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Resource page/$name",
+      "kind": "branch-prototype",
+      "mediaId": "b7015d52019a4b6894e8999ed1e89516",
+      "captureKey": "portal-article-build-a-bop-submission",
+      "thumbnail": "<image mediaid=\"{B7015D52-019A-4B68-94E8-999ED1E89516}\" />"
+    },
+    {
+      "itemId": "b238803d3da759399172942b3bc9ee9b",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Presentation/Page Branches/Product page/$name",
+      "kind": "branch-prototype",
+      "mediaId": "8b54ffa2eb3e4209964b621526bdb86e",
+      "captureKey": "portal-product-page",
+      "thumbnail": "<image mediaid=\"{8B54FFA2-EB3E-4209-964B-621526BDB86E}\" />"
+    }
+  ]
+}

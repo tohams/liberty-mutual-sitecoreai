@@ -12,7 +12,7 @@ SharedFields:
   Value: "{16C539B2-7350-5B67-A884-CDF8B35068D2}"
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Office/32x32/navigate_right.png
+  Value: Office/32x32/mouse_pointer.png
 Languages:
 - Language: en
   Versions:

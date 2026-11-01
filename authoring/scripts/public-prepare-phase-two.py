@@ -47,7 +47,8 @@ def records():
       'PublicNavigationGroup':[('label','Label','Single-Line Text'),('links','Ordered links','Multilist','query:./Links/*')],
       'PublicFooterColumn':[('heading','Heading','Single-Line Text'),('body','Body','Rich Text'),('links','Ordered links','Multilist','query:./Links/*')],
     }
-    for name,fields in specs.items():h.template(name,fields,icon='Office/32x32/'+('photo_landscape.png' if name=='PublicProductOption' else 'document_text.png'),workflow=M['workflow']['id'])
+    template_icons={'PublicProductSelector':'Office/32x32/list_style_bullets.png','PublicFaq':'Office/32x32/question.png','PublicBreadcrumbs':'Office/32x32/list_style_numbered.png'}
+    for name,fields in specs.items():h.template(name,fields,icon=template_icons.get(name,'Office/32x32/'+('photo_landscape.png' if name=='PublicProductOption' else 'document_text.png')),workflow=M['workflow']['id'])
     # These new fields extend existing approved datasource templates without
     # modifying their data or standard values. New content needs Draft versions.
     additions={
@@ -63,7 +64,7 @@ def records():
             if source:sf.append(h.field('1eb8ae32-e190-44a6-968d-ed904c794ebf','Source',source[0]))
             elif kind=='Rich Text':sf.append(h.field('1eb8ae32-e190-44a6-968d-ed904c794ebf','Source','query:$xaRichTextProfile'))
             h.item(sec+'/'+key,h.uid(sec),h.T['field'],'templates',shared=sf,identifier=fid,label=label,language_fields=[h.field('19a69332-a23e-4e70-8d16-b2640cb24cc8','Title',label)])
-    rendering_specs=[('PublicSearch','Knowledge search',h.SITE+'/Data/Search','apps/32x32/Search (1).png'),('PublicProductSelector','Product choices','query:./Data','Office/32x32/check_box.png'),('PublicQuoteHandoff','Next step','query:./Data','Office/32x32/navigate_right.png'),('PublicSection','Card section','query:./Data','Office/32x32/elements.png'),('PublicSplitContent','Image and text','query:./Data','Office/32x32/document_orientation_landscape.png'),('PublicFaq','Questions and answers','query:./Data','Office/32x32/question_and_answer.png'),('PublicBreadcrumbs','Breadcrumbs','query:./Data','Office/32x32/navigate_right.png')]
+    rendering_specs=[('PublicSearch','Knowledge search',h.SITE+'/Data/Search','apps/32x32/Search (1).png'),('PublicProductSelector','Product choices','query:./Data','Office/32x32/list_style_bullets.png'),('PublicQuoteHandoff','Next step','query:./Data','Office/32x32/navigate_right.png'),('PublicSection','Card section','query:./Data','Office/32x32/elements.png'),('PublicSplitContent','Image and text','query:./Data','Office/32x32/document_orientation_landscape.png'),('PublicFaq','Questions and answers','query:./Data','Office/32x32/question.png'),('PublicBreadcrumbs','Breadcrumbs','query:./Data','Office/32x32/list_style_numbered.png')]
     variant_names={'PublicQuoteHandoff':['Default','Agent'],'PublicProductSelector':['Default','Quote','Compact'],'PublicSection':['Default','ProofCards','NumberedLinks','ImageCards','Bundles','QuoteCards'],'PublicSplitContent':['Default','ImageLeft','ImageRight','TextColumns','ImageRightSoft']}
     for name,label,location,icon in rendering_specs:
         rid=h.uid(h.RP+'/'+name);h.RENDERINGS[name]=rid
