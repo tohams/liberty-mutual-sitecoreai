@@ -18,15 +18,20 @@ function Emphasis({ parts }: { parts: GuideEmphasisPart[] }) {
 export function GuideText({
   text,
   linksEnabled = true,
+  openLinksInNewTab = false,
 }: {
   text: string;
   linksEnabled?: boolean;
+  openLinksInNewTab?: boolean;
 }) {
   return guideTextParts(text).map((part, index) => {
     if (part.kind !== "link") return <Emphasis key={index} parts={[part]} />;
     const label = <Emphasis parts={part.children} />;
     if (!linksEnabled) return <Fragment key={index}>{label}</Fragment>;
-    if (part.href.startsWith("/") || part.href.startsWith("#")) {
+    if (
+      !openLinksInNewTab &&
+      (part.href.startsWith("/") || part.href.startsWith("#"))
+    ) {
       return (
         <Link className="workshop-inline-link" href={part.href} key={index}>
           {label}

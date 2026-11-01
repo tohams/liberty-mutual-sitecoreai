@@ -180,7 +180,7 @@ export default async function GuidePage({
                   className="workshop-inline-link"
                   href="/workshops#your-tools"
                 >
-                  how the three websites relate
+                  how the websites relate
                 </Link>
                 .
               </p>

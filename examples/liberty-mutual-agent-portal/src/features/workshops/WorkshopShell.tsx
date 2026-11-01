@@ -4,6 +4,7 @@ import {
   BookOpen,
   Code2,
   Compass,
+  Presentation,
   RotateCcw,
   Users,
 } from "lucide-react";
@@ -16,7 +17,7 @@ export function WorkshopShell({
   children,
 }: {
   session: WorkshopSession;
-  active?: "marketing" | "development" | "reset" | "attendees";
+  active?: "demo" | "marketing" | "development" | "reset" | "attendees";
   children: React.ReactNode;
 }) {
   return (
@@ -46,6 +47,14 @@ export function WorkshopShell({
           <Link href="/workshops" className={!active ? "active" : ""}>
             <Compass size={16} />
             Overview
+          </Link>
+          <Link
+            href="/workshops/demo"
+            className={active === "demo" ? "active" : ""}
+            aria-current={active === "demo" ? "page" : undefined}
+          >
+            <Presentation size={16} />
+            Customer demo
           </Link>
           <Link
             href="/workshops/marketing"
