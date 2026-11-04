@@ -270,7 +270,7 @@ test("discovery readiness identifies native structure while keeping external eng
   );
 });
 
-test("Search delivery uses the approved-answer source and verifies a fresh change after authoring", () => {
+test("Search delivery starts an approved-answer publication and verifies the fresh indexed change", () => {
   const indexing = prose(step("public-indexing"));
   for (const required of [
     /OnEnd/,
@@ -285,6 +285,10 @@ test("Search delivery uses the approved-answer source and verifies a fresh chang
   assert.match(
     indexing,
     /ordinary Landing page does not.*approved-answer Search document/i,
+  );
+  assert.match(
+    prose(step("public-indexing").actions),
+    /original wording visible in Search.*prepared revision.*Approved.*Start publish/i,
   );
   const indexedFollowUp = actions("public-api").find((action) =>
     /body.*added sentence/i.test(action),
@@ -314,7 +318,7 @@ test("public page creation previews before publication and reviews every local d
   );
   const approve = actionIndex(
     id,
-    /separate Approver.*coverage-guide-live.*Hero.*Introduction.*Bundle car and home.*Actions → Approve/i,
+    /separate Approver.*coverage-guide-live.*Hero.*Introduction.*Actions → Approve/i,
   );
   const publish = actionIndex(
     id,
