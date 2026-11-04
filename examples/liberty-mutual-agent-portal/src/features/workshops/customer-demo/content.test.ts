@@ -223,8 +223,11 @@ test("each stable card has an objective, actions, observations, controls, a spok
 
 test("the first public card includes source evidence, a useful next action, and an unsupported-question fallback", () => {
   const text = prose(step("public-question"));
+  assert.match(
+    prose(step("public-question").actions),
+    /enter Can I combine home and car coverage\?.*result titled Can I bundle my car and home insurance\?/i,
+  );
   for (const required of [
-    /Can I bundle my car and home insurance\?/i,
     /More information/i,
     /source link/i,
     /Explore a bundled quote/i,
