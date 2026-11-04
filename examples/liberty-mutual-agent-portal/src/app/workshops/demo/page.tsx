@@ -115,16 +115,19 @@ export default async function CustomerDemoPage() {
                   lines={[
                     "Keep this guide signed in. Use presenter agent logins **avery.01** and **daniel.01** at the [**Agent Portal login**](https://liberty-mutual-agent-portal.vercel.app/login). Their shared synthetic portal password is **Sitecore1**. Use separate browser profiles for the two agents so their sessions remain independent.",
                     "Prepare three separate **Sitecore Cloud** browser profiles: **Author** can edit and submit, **Approver** can approve, and an **administrator acting as publisher** performs publication. Open **Safeco Insurance Company of America POC** → **SitecoreAI / Demo**. Keeping these profiles ready demonstrates the actual permission boundaries without spending the live slot signing in.",
-                    "In **Page Builder**, use **English** and **Default editing host**. **Liberty Mutual Public Website** owns the public pages, approved answers, and shared disclosure. **Liberty Mutual Agent Portal** owns the agent Home page and its priority collections. The two sites have separate editing and delivery hosts.",
+                    "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, approved answers, and shared disclosure. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
                     "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/), [**published-answer API experience**](/workshops/content-api), [**communication preferences**](/workshops/preferences), and **SitecoreAI** in the prepared browser profiles. Check that the native comparison profiles and **Agents eligible for marketing** Audience have their restored starting values. The full import/reset exercise is available from [**Honor communication preferences**](/workshops/guide/honor-communication-preferences).",
-                    "Record the current approved versions of **Bundle car and home**, **Agency growth priorities**, and **Product availability notice** before editing. Keep their original versions intact. Confirm that the temporary page name **coverage-guide-live** is available. Set the public visitor’s **Privacy choices** to **Allow personalization** before the analytics journey; demonstrate the choice explicitly in the first step.",
+                    "Record the current published versions of **Bundle car and home**, **Agency growth priorities**, and **Product availability notice** before editing. Keep their original versions intact. Confirm that the temporary page name **coverage-guide-live** is available.",
+                    "Use the [**approved answer’s Page Builder link**](#public-indexing) in step 03. As **Author**, create an English version of **Bundle car and home** named **Shared answer review**. Append **Review your options with your agent before choosing coverage.** to **Detailed explanation**. Save, choose **Actions → Submit**, and have the **Approver** review and approve the new version. Leave it unpublished so the original wording still appears in the article, native Search source, and API. Open the approved revision in the publisher profile before screen sharing.",
                     "Prepare the native **Search sources** page, **Analytics → Events**, and the saved **agency-growth** and **producer-priorities** experiences. Keep the two public article/API tabs open for publication verification. Confirm these links during preflight; refresh a slow page, then open one fresh tab before changing the running demonstration.",
                   ]}
                 />
                 <p className={styles.prepNote}>
-                  The timed flow uses the existing preference records and rule.
-                  Running asynchronous preference imports or rebuilding an index
-                  belongs in preparation or the supporting walkthroughs.
+                  Liberty Mutual plans to keep operating its frontends. Vercel
+                  hosts the demonstration applications and is an optional
+                  hosting approach. Keep Coveo, Ping, and Tealium in the
+                  architecture conversation. Demonstrate the live content paths
+                  here, and discuss external integration patterns in context.
                 </p>
               </div>
             </details>
@@ -133,21 +136,22 @@ export default async function CustomerDemoPage() {
               <span className={styles.timing}>00:00–01:00 · Opening</span>
               <h2>The story and the time budget</h2>
               <p>
-                Two experiences use governed content: a prospective customer
+                Two experiences use governed content. A prospective customer
                 finds a trustworthy answer, and an independent agent receives
-                relevant guidance. Follow all 13 steps; use the reference guides
-                for extra depth after the demonstration.
+                relevant guidance. Follow all 13 steps, and use the reference
+                guides for extra depth after the demonstration.
               </p>
               <div className={styles.talkTrack}>
                 <h3>
                   <Mic2 size={17} aria-hidden="true" /> Talk track
                 </h3>
                 <p>
-                  “We’ll follow your two use cases: first, a customer looking
-                  for an insurance answer; then, an independent agent deciding
-                  where to focus. We’ll show the experience and the controls
-                  behind it, including how marketing makes an approved change
-                  without a code release.”
+                  “We’ll start with your first rollout priority, bringing your
+                  existing LibertyMutual.com content onto a governed foundation.
+                  Then we’ll show how the same approach gives business users
+                  control of the content that your existing Independent Agent
+                  Portal can use. You’ll see an approved change reach both sites
+                  without a frontend release.”
                 </p>
               </div>
               <table className={styles.runOfShow}>
@@ -298,15 +302,17 @@ export default async function CustomerDemoPage() {
                   history.”
                 </p>
                 <p>
-                  “That supports the outcomes you described: simpler routine
-                  changes, consistent information, and more useful conversations
-                  with customers and independent agents. We can now discuss your
-                  questions and the platform’s product direction.”
+                  “Three measures can tell you whether this operating model is
+                  working: time to publish, the share of changes your business
+                  teams make without engineering, and the rate of content reuse.
+                  We can now discuss your questions and the platform’s product
+                  direction.”
                 </p>
               </div>
               <p>
                 Return to the agreed meeting agenda for the separate roadmap and
-                Q&amp;A discussion.
+                Q&amp;A discussion. Use the two-year roadmap horizon requested
+                by Liberty Mutual.
               </p>
             </section>
 

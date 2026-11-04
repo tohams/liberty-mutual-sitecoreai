@@ -73,7 +73,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         talkTrack: [
           "The visitor’s question uses different words from the answer title. SitecoreAI Search uses meaning to reorder keyword results. The site displays Liberty Mutual’s approved answer, source, and next step.",
-          "When the approved sources do not address the subject, the experience offers help from an agent instead of presenting unrelated insurance information as an answer. We are not asking a model to decide whether a particular loss is covered.",
+          "When the approved sources do not address the subject, the experience offers help from an agent. The public Search interface makes the approved-answer pattern tangible. The same governed answer can support other channels through the delivery contract we will show later.",
         ],
         controls: [
           "**SitecoreAI Search** retrieves and ranks the published sources. The application’s conservative authored-evidence check withholds unsupported question results; it is separate from an ML confidence score.",
@@ -134,24 +134,24 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 10,
         durationMinutes: 2,
         objective:
-          "Show the active native Search source, its indexed answer metadata, and the configured publication handoff before making a new governed change.",
+          "Start a live publication of a prepared, approved answer revision, then verify its automatic delivery to the native Search index later in the flow.",
         actions: [
           `Open [**Liberty Mutual Approved Answers**](${SEARCH_SOURCE}). From the SitecoreAI navigation, the same source is under **Content → Search Sources → Liberty Mutual Approved Answers**. Select **Preview**, and leave its settings unchanged.`,
           "In **Search by term**, enter **Can I bundle my car and home insurance?**. Click the matching document row’s chevron, **Toggle document details**, to expand its **14/14 fields**. Point to **question**, **body**, **state**, **product**, **audience**, **canonicalurl**, and **sourceurl**; these values accompany the searchable copy.",
           "Follow the delivery path in **Show the data and controls**: approved publication completes in **Experience Edge**, its **OnEnd** webhook calls the publication service, and that service synchronizes the native Search source. Keep this source tab open for the changed-answer check after authoring.",
-          "Record the current answer wording. The next step changes that existing **Approved answer**, as well as creating a new Landing page. Check the answer’s indexed wording after publication; the new Landing page is a separate page-creation proof.",
+          `With the original wording visible in Search, switch to the **administrator acting as publisher** profile. Open the [**prepared revision of Bundle car and home**](${answerContent}), select **Shared answer review** in the version selector, confirm **Approved** and the new sentence in **Detailed explanation**, then select **Publish** for **Item** and **Current language (English)**. Leave **Subitems** unchecked and select **Start publish**. Keep the Search tab open for the delivery check.`,
         ],
         expected: [
           "The active source contains the published answer and its state, product, audience, and authoritative-source metadata.",
-          "The configured handoff explains why the publisher does not maintain or manually reindex a second copy. The next authoring step supplies a fresh publication to verify this path.",
+          "Publication begins from the prepared approved revision. Keep the original indexed wording as the baseline, then check the changed wording in the Search source after publication.",
         ],
         talkTrack: [
           "The publishing team approves content once. Here is the configured publication-to-Search path, and here is the corresponding approved answer in the Liberty Mutual Approved Answers source, carrying its state, product, and audience metadata.",
-          "This configured integration updates the native Search index after publication. Marketers do not retype the answer or maintain a separate Search copy. Approval makes the content eligible; publication is a separate action, and delivery completes asynchronously.",
+          "I’ll publish the approved revision now. This configured integration updates the native Search index after publication without a separate editorial edit. Approval makes the content eligible, the publisher releases it, and delivery completes asynchronously.",
         ],
         controls: [
           "**Experience Edge OnEnd → /api/sitecore/publication → SitecoreAI Search Push API → Liberty Mutual Approved Answers** is the configured publication path. The publication service reads only approved content delivered through **Live Experience Edge**.",
-          "The source’s **Preview** tab shows the actual indexed document, while **Configuration → Fields** lists its 14 native fields. Stable item IDs and classifications travel with each answer. The scoped integration updates changed published answers and removes retired answers from its complete library.",
+          "The source’s **Preview** tab shows the actual indexed document, while **Configuration → Fields** lists its 14 native fields. Stable item IDs and classifications travel with each answer. Liberty Mutual uses **Coveo** in the IA Portal today; this separate public-site source demonstrates how an index can stay aligned with approved content. The scoped integration updates changed published answers and removes retired answers from its complete library.",
           "This source indexes the public **Approved answers** library. Publishing an ordinary Landing page does not turn that page into an approved-answer Search document.",
         ],
         links: [
@@ -166,7 +166,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "With the delivery path established, create a page and make one approved-answer change through the marketer’s normal tools.",
+          "While the answer publishes, use the marketer’s normal tools to create, preview, and review a new page.",
       },
       {
         id: "public-authoring",
@@ -183,14 +183,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "Select **Content**, then the new page’s **Data → Hero**. Set **Heading** to **Explore coverage with confidence**. Open **Data → Introduction**, set **Heading** to **Guidance for your next decision**, and enter **Review approved information, compare your options, and speak with an agent about your needs.** in **Body**. Click outside each field, and wait for **Saved**.",
           "Return to **Editor**. In the page’s main content area, open the insertion control, choose **Promotion**, and select the existing **Bundle and save** content item. Choose **Assign**, rather than **Duplicate and assign**, and select the **Compact** presentation variant. Point to the allowed choices in this placeholder.",
           "Click **Preview**, then **Preview** in its menu. Confirm the new headings and shared Promotion. The page remains unpublished. Return to the editor and note that **Hero** and **Introduction** belong to this page’s local **Data** folder.",
-          `As the **Author**, open [**Bundle car and home**](${answerContent}), select its current approved English version, and choose **Create version**. Name it **Shared answer review**, and click **Create**. In **Detailed explanation**, preserve the existing wording and append **Review your options with your agent before choosing coverage.** Wait for **Saved**.`,
-          "On the answer, choose **Actions → Submit**, enter **Review approved bundling guidance**, and click **Submit**. Return to **coverage-guide-live**, choose **Actions → Submit**, enter **Review coverage guidance page**, and click **Submit**. Check the page and its local items in **Page items**. For any local item still in **Draft**, select **Content → coverage-guide-live → Data → Hero** or **Introduction**, choose **Actions → Submit**, enter **Review coverage guidance content**, and click **Submit**. Confirm all four items are **Awaiting approval**.",
-          "In the separate **Approver** browser profile, open each submitted English item: **coverage-guide-live**, its **Hero** and **Introduction**, and **Bundle car and home**. Review the changes, choose **Actions → Approve**, enter **Approved coverage guidance**, and click **Submit**. Confirm **Approved**. Point out that this restricted Approver cannot publish.",
-          "In the **administrator acting as publisher** browser profile, open **coverage-guide-live**. Choose **Publish** with **Page**, **Current language (English)**, **All references**, and **Include related items** selected; leave **Subpages** unchecked, and click **Start publish**. Then open **Bundle car and home** in **Content**, choose **Publish**, leave **Subitems** unchecked, and click **Start publish**. Continue to the Profound explanation while publication completes.",
+          "On **coverage-guide-live**, choose **Actions → Submit**, enter **Review coverage guidance page**, and click **Submit**. Check the page and its local items in **Page items**. For any local item still in **Draft**, select **Content → coverage-guide-live → Data → Hero** or **Introduction**, choose **Actions → Submit**, enter **Review coverage guidance content**, and click **Submit**. Confirm the page and its two local items are **Awaiting approval**.",
+          "In the separate **Approver** browser profile, open each submitted English item: **coverage-guide-live**, its **Hero**, and its **Introduction**. Review the changes, choose **Actions → Approve**, enter **Approved coverage guidance**, and click **Submit**. Confirm **Approved**. Point out that this restricted Approver cannot publish.",
+          "In the **administrator acting as publisher** browser profile, open **coverage-guide-live**. Choose **Publish** with **Page**, **Current language (English)**, **All references**, and **Include related items** selected. Leave **Subpages** unchecked, and click **Start publish**. Continue to the Profound explanation while publication completes.",
         ],
         expected: [
           "The Author created a page from the approved structure, edited independent local content, reused the existing Promotion, and previewed the result without code changes.",
-          "Separate restricted Author and Approver identities performed editing and approval. The administrator performed the publisher action. The new page and changed answer are eligible for their downstream delivery checks after the publishing jobs complete.",
+          "Separate restricted Author and Approver identities performed editing and approval. The administrator performed the publisher action. The new page becomes available for the live check after publishing completes.",
         ],
         talkTrack: [
           "The marketer starts with an approved structure and useful building blocks. The template and placeholder rules provide guardrails, while the page’s local content remains independently editable. Preview and approval happen in the platform, without an engineering ticket.",
@@ -200,18 +199,17 @@ export const customerDemoChapters: DemoChapter[] = [
           "**Landing page** supplies the page structure and independent local **Hero** and **Introduction** items. The main placeholder offers only compatible components.",
           "**Assign** reuses **Bundle and save**. The **Compact** variant changes its presentation while retaining the same governed source item.",
           "The configured workflow is **Draft → Awaiting approval → Approved**. Approval does not automatically publish. The selected roles separate editing, approval, and publication.",
-          "The new Landing page proves governed composition. The changed **Bundle car and home** answer proves the approved-answer Search and API publishing path.",
+          "The new Landing page proves governed composition. The **Bundle car and home** revision published in the preceding step supplies the Search and API delivery proof.",
         ],
         links: [
           { label: "Create a page under public Home", href: publicEditor },
-          { label: "Shared answer to edit", href: answerContent },
           {
             label: "New page after publication",
             href: `${PUBLIC}/coverage-guide-live`,
           },
         ],
         transition:
-          "The reviewed changes are publishing. While delivery completes, explain how content from an upstream AI optimization tool enters the same governed process.",
+          "While the page and answer publications complete, explain how content from an upstream AI optimization tool could enter the same governed process.",
       },
       {
         id: "public-profound",
@@ -223,7 +221,7 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 1,
         mode: "explain",
         objective:
-          "Explain the integration pattern expressly permitted by the customer, using the same structured template and review controls just demonstrated.",
+          "Explain a possible Profound intake using the same structured template and review controls just demonstrated.",
         actions: [
           "Trace the proposed intake: **Profound output → scoped integration → SitecoreAI Draft → human review and approval → publication → website, Search, and API consumers**.",
           "Point back to **Bundle car and home** and the page just created. Explain that an integration maps proposed wording, source, owner, applicability, and dates into the appropriate native template, then creates or updates a **Draft** for review.",
@@ -233,7 +231,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The audience understands where upstream content enters, how its meaning maps to governed fields, and why human approval still precedes publication.",
         ],
         talkTrack: [
-          "Profound can improve the upstream content. SitecoreAI is where that proposed content becomes governed, approved guidance that your channels can reuse.",
+          "Profound publishing is an option Liberty Mutual is exploring. Proposed copy could enter SitecoreAI as a draft and follow the same review path you just saw.",
           "An integration maps the output into the appropriate template and carries its source, owner, and applicability into Draft. The normal review and publishing controls still apply. This is the integration pattern; a live Profound connection is not configured in this environment.",
         ],
         controls: [
@@ -264,7 +262,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         talkTrack: [
           "The publishing team can see directional evidence of whether people find and use the content: page visits, the next-step click, and how far visitors read. It is a quick platform view, without a separate analytics request.",
-          "The website’s Privacy choices control optional analytics and personalization collection. Essential only keeps useful guidance and Search available while withholding that optional collection. These events measure engagement; they do not establish a completed quote or policy sale.",
+          "The website’s Privacy choices control optional analytics and personalization collection in this demonstration. Liberty Mutual uses Tealium to manage analytics and consent tags. These events measure engagement; they do not establish a completed quote or policy sale.",
         ],
         controls: [
           "The **Site** filter separates the public application’s events from the Agent Portal. The current time window helps correlate reporting with the actual actions just performed.",
@@ -312,22 +310,21 @@ export const customerDemoChapters: DemoChapter[] = [
           "Open [**One approved answer, two experiences**](/workshops/content-api). Under **Published insurance question**, select **Can I bundle my car and home insurance?**, and click **Load answer**.",
           "Find the added sentence **Review your options with your agent before choosing coverage.** Compare it with the public article. Under **The governance travels with the answer**, inspect **Content owner**, **State**, **Product**, **Audience**, **Effective**, and **Review date**.",
           "Under **A stable contract for other applications**, point to **API contract version**, **Native content version**, **Stable item ID**, **Published content fingerprint**, and **Response ETag**. The stable ID remains the same, while the native version identifies the newly published editorial version.",
-          "Open the **Actual single-answer request** URL. Show **schemaVersion**, **data.answer**, **data.explanation**, **data.sourceLink**, and **data.revision** in the actual JSON response, then return to the rendered experience.",
-          "Click **Check whether the response is unchanged**. Show **304 Not Modified** for an unchanged response. If publication is still converging, wait for that job to complete and reload; the API can reuse its response for up to **15 seconds** after delivery.",
           `Return to [**Liberty Mutual Approved Answers → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, and expand the matching row with **Toggle document details**. Verify that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
+          "For technical Q&A, open **Actual single-answer request** to show **schemaVersion**, **data.answer**, **data.explanation**, **data.sourceLink**, and **data.revision**. Use **Check whether the response is unchanged** to demonstrate **304 Not Modified** for an unchanged response.",
         ],
         expected: [
           "The public article, native Search document, and separate rendered API consumer contain the same approved source change.",
-          "The real request exposes a stable, versioned contract and the content’s governance metadata. Its conditional request confirms whether the delivered response is unchanged.",
+          "The real request exposes a stable, versioned contract and the content’s governance metadata. For technical Q&A, a conditional request can confirm whether the delivered response is unchanged.",
         ],
         talkTrack: [
           "This separate application retrieves the same published answer through a stable API. It receives the wording and governance information together, while presenting them in its own layout. The content team maintains one approved source, and each channel controls its experience.",
-          "The API contract version describes the response format; the native content version identifies the editorial version. The real ETag check confirms whether the response is unchanged. Draft and Preview content remain in authoring.",
+          "The API contract version describes the response format. The native content version identifies the editorial version. This is the kind of approved content feed LibertyAir could consume. The running second application demonstrates the delivery contract, and Draft and Preview content remain in authoring.",
         ],
         controls: [
           "The read endpoint is **/api/content/v1/answers/** followed by the stable Sitecore item ID. It reads approved published content from **Live Experience Edge**.",
-          "The API envelope and this second application are implementation components. Native content ownership, workflow, versioning, and publication supply the governed source.",
-          "The content fingerprint describes the delivered payload. Restoring the original wording later creates a newer reviewed native version, so the fingerprint can change even when the words return to their starting values.",
+          "The API envelope and this second application are implementation components. Native content ownership, workflow, versioning, and publication supply the governed source. LibertyAir is Liberty Mutual’s AI backbone and is an integration target for this pattern.",
+          "If delivery is still converging, check the publishing job and the native Search source. The API can reuse a response for up to **15 seconds** after delivery. Describe any pending step as pending, and use earlier evidence only as a rehearsal example.",
         ],
         links: [
           {
@@ -398,7 +395,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Native profile data and the saved suppression rule show how a known communication choice can govern marketing eligibility. The full preference-change exercise remains available separately.",
         ],
         talkTrack: [
-          "After sign-in, the portal knows the agent’s role, agency, and licensed states. Avery’s agency-growth emphasis differs from Daniel’s producer emphasis. Each agent gets a useful starting point for the next business conversation.",
+          "Liberty Mutual retains Ping for independent-agent sign-in. These sample accounts illustrate the role, license, and agency production context that your existing portal can supply for content decisions. Avery’s agency-growth emphasis differs from Daniel’s producer emphasis.",
           "The profile supplies known context, and native personalization selects the content experience. Here the decision combines licenses, role, specialization, and imported production. The application separately enforces licensed-state eligibility. Native profiles can also carry the person’s communication preference for an exclusion rule.",
         ],
         controls: [
@@ -483,7 +480,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Page structure and allowed component choices provide authoring guardrails. The later shared-source edit will demonstrate actual content propagation.",
         ],
         talkTrack: [
-          "These pages share an intentional design system and reusable components, so each part of the portal feels like the same Liberty Mutual relationship. Authors assemble approved patterns in the places where they belong.",
+          "Liberty Mutual keeps control of its existing portal application and design. These demonstration pages show how authors can work with approved components and structured content while the portal presents them within its own design.",
           "The templates and placeholder settings provide the guardrails. In the shared-content section, we will show an actual update reaching multiple placements from one governed source.",
         ],
         controls: [
@@ -587,20 +584,20 @@ export const customerDemoChapters: DemoChapter[] = [
           "Open the version selector, choose **Create version**, name it **Shared disclosure review**, and click **Create**. Append **Review available options with your agent before making a coverage decision.** to **Disclosure**. Click outside the field, and wait for **Saved**.",
           "Choose **Actions → Submit**, enter **Review shared disclosure wording**, and click **Submit**. Confirm **Awaiting approval**. In the separate **Approver** session, inspect this version, choose **Actions → Approve**, enter **Approved shared disclosure wording**, and click **Submit**.",
           "In the **administrator acting as publisher** session, open this approved disclosure in **Content**, click **Publish**, keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and select **Start publish**. While the job completes, identify the single source and the four configured page views in the links.",
-          `After completion, open [**public Home**](${PUBLIC}/) and [**public Bundling**](${PUBLIC}/bundling), and find the new sentence in **Coverage and availability**. In Avery’s session, check [**My workspace**](${PORTAL}/) and [**Learning & resources**](${PORTAL}/resources) for the same published wording. Reload a page after publication if it was already open.`,
+          `After completion, find the new sentence in **Coverage and availability** on [**public Home**](${PUBLIC}/) and, in Avery’s session, [**My workspace**](${PORTAL}/). Reload those pages if already open. Check [**public Bundling**](${PUBLIC}/bundling) and [**Learning & resources**](${PORTAL}/resources) during rehearsal or Q&A.`,
         ],
         expected: [
-          "The new sentence is present in all four configured page views after one approved disclosure publication. The public site and Agent Portal remain separate sites with separate frontends.",
+          "One approved disclosure publication updates the public and portal Home pages live. The other two placements provide additional verification. Both sites have their own frontends within one SitecoreAI environment.",
           "Each placement presents the same governed disclosure source within its own page layout. No separate copy edit or frontend release is needed for either site.",
         ],
         talkTrack: [
           "The disclosure has one governed owner and one source. Both sites reference that same item, so the content team changes it once and publishes it through the normal controls.",
-          "The Portal and public website remain separate sites and applications. Each keeps its own layout while sharing the approved message. We will verify the changed wording in both, then restore it through the same governed process.",
+          "Here are two sites in one SitecoreAI environment. Each frontend keeps its own layout while drawing on the same approved message. We will verify the change on each site, then restore it through the same review process.",
         ],
         controls: [
           "**Product availability notice** belongs to the public site’s **Data → Disclosures** library. The Portal references that native item; it does not maintain its own copy of the wording.",
-          "The four page views demonstrate cross-site distribution. A native reference count can include multiple layout references to one page, so it should not be described as a distinct-page count.",
-          "Publication delivers the approved shared item through **Experience Edge**. Its configured content dependencies and the public site’s delivery invalidation keep the referencing page views current.",
+          "One placement on each site proves cross-site distribution live. Use the additional links to check the other two placements. A native reference count can include multiple layout references to one page.",
+          "Publication delivers the approved shared item through **Experience Edge**. If the job or delivery is pending, show its actual status and return to the live pages once the new wording is available.",
         ],
         links: [
           { label: "Edit the shared disclosure", href: disclosureContent },
@@ -630,7 +627,7 @@ export const customerDemoChapters: DemoChapter[] = [
           `As the **Author**, return to [**Product availability notice in Content**](${disclosureContent}). In the version selector, select the original approved English version recorded in the prior step, then choose **Create version**. Name it **Original disclosure restored**, click **Create**, and confirm that **Disclosure** contains the preserved original wording without the added sentence.`,
           "Choose **Actions → Submit**, enter **Restore original disclosure wording**, and click **Submit**. In the separate **Approver** session, review the restored wording and choose **Actions → Approve**, enter **Approved restoration of shared disclosure wording**, and click **Submit**.",
           "In the **administrator acting as publisher** session, publish the approved disclosure from **Content** with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, return to **Page items → Product availability notice → Workflow history** to show that the reversal has its own recorded workflow decisions.",
-          `After publication completes, verify the original wording on [**public Home**](${PUBLIC}/), [**public Bundling**](${PUBLIC}/bundling), [**Portal Home**](${PORTAL}/), and [**Learning & resources**](${PORTAL}/resources). The temporary sentence must be absent. Leave the earlier approved versions available in history.`,
+          `After publication completes, verify the original wording on [**public Home**](${PUBLIC}/) and [**Portal Home**](${PORTAL}/). The temporary sentence must be absent. Check [**public Bundling**](${PUBLIC}/bundling) and [**Learning & resources**](${PORTAL}/resources) during rehearsal or Q&A. Leave the earlier approved versions in history.`,
         ],
         expected: [
           "The modern Page Builder history identifies actual workflow transitions, users, times, and review comments.",
