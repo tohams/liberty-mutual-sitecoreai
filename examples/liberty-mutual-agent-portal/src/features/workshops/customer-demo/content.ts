@@ -61,18 +61,18 @@ export const customerDemoChapters: DemoChapter[] = [
           "Show a useful, sourced answer and a clear next action, including the experience when approved sources do not address the question.",
         actions: [
           `Open the [**public Home page**](${PUBLIC}/). Select **Privacy choices**, then **Essential only**. Select **Search** in the header; this demonstrates that finding guidance remains available when optional collection is declined.`,
-          "In **What would you like to know?**, enter **Can I bundle my car and home insurance?**, and click **Search**. Wait for **Finding helpful information…** to finish, then select the result titled **Can I bundle my car and home insurance?**.",
+          "In **What would you like to know?**, enter **Can I combine home and car coverage?**, and click **Search**. Wait for **Finding helpful information…** to finish, then select the result titled **Can I bundle my car and home insurance?**.",
           "Read the answer beneath the question. Expand **Coverage and policy details** to reveal the formal wording. Under **More information**, point to the Liberty Mutual source link, **Liberty Mutual** ownership, **Effective** date, and **Review date**. Open the source, then return to the article.",
           "Click **Explore a bundled quote**. Confirm **Auto** and **Home** are selected and that the quote journey retains the bundling context. Return to the article; a useful next action is the observation, so no quote submission is needed.",
           `Return to [**Search**](${PUBLIC}/search). Enter **Does car insurance cover cyberextortion?**, and click **Search**. Point to **Let’s find the right information** and **Contact an agent**, rather than unrelated insurance result cards.`,
           `Return to [**Home**](${PUBLIC}/), open **Privacy choices**, and select **Allow personalization**. Scroll down the page in stages, then click **Explore bundling**. These genuine page, scroll, and click interactions supply the analytics example later in this flow.`,
         ],
         expected: [
-          "The approved car-and-home answer appears first, its authoritative source is visible, and its next action carries the selected products into the quote journey.",
+          "The approved car-and-home answer appears first even though its title uses different wording. Its authoritative source is visible, and its next action carries the selected products into the quote journey.",
           "The unsupported question offers an agent-assisted next step. Search also worked while **Essential only** was selected.",
         ],
         talkTrack: [
-          "A prospective customer can ask in everyday language. SitecoreAI Search finds published guidance, and this experience keeps Liberty Mutual’s approved answer, authoritative source, and useful next step together.",
+          "The visitor’s question uses different words from the answer title. SitecoreAI Search uses meaning to reorder keyword results. The site displays Liberty Mutual’s approved answer, source, and next step.",
           "When the approved sources do not address the subject, the experience offers help from an agent instead of presenting unrelated insurance information as an answer. We are not asking a model to decide whether a particular loss is covered.",
         ],
         controls: [
