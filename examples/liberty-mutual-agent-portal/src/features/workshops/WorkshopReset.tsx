@@ -76,7 +76,13 @@ function requestFor(operation: WorkshopResetOperation): WorkshopResetRequest {
   };
 }
 
-function Identifier({ value }: { value: string }) {
+function Identifier({
+  value,
+  label = "agent identity",
+}: {
+  value: string;
+  label?: string;
+}) {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(false);
   return (
@@ -84,7 +90,7 @@ function Identifier({ value }: { value: string }) {
       <code>{value}</code>
       <button
         type="button"
-        aria-label={`Copy agent identity ${value}`}
+        aria-label={`Copy ${label} ${value}`}
         onClick={async () => {
           try {
             await navigator.clipboard.writeText(value);
@@ -99,7 +105,7 @@ function Identifier({ value }: { value: string }) {
         {copied ? "Copied" : "Copy"}
       </button>
       {error && (
-        <span role="status">Select the identity to copy it manually.</span>
+        <span role="status">Select the {label} to copy it manually.</span>
       )}
     </div>
   );
@@ -468,7 +474,7 @@ export function WorkshopReset({
           Read the reset walkthrough →
         </Link>
       </aside>
-      <section className="workshop-reset-profiles">
+      <section id="current-profiles" className="workshop-reset-profiles">
         <span className="workshop-eyebrow">
           FOR THE SITECOREAI PROFILE WALKTHROUGH
         </span>
@@ -494,12 +500,22 @@ export function WorkshopReset({
             <strong>SitecoreAI Profiles</strong>
           </a>
           , under <strong>Optimization → Profiles</strong>, and search using{" "}
-          <strong>Search filter → Liberty Mutual agent identity</strong> and an
+          <strong>Search filter → Liberty Mutual agent identity</strong> and the
           identity below. These are the currently active identities for this
           website. Copy the row matching the portal username you used in the
           exercise. After each reset, copy the latest
           <strong> Agent identity</strong> from this table to open the profile
           now linked to that username.
+        </p>
+        <p>
+          For a personalization rule test, use the{" "}
+          <strong>Native profile ID</strong> below. In{" "}
+          <strong>Load profile</strong>, change the default
+          <strong> Client ID</strong> filter to <strong>Profile ID</strong>,
+          then paste that value. Select <strong>Refresh status</strong> after a
+          reset to read the latest IDs before testing again. If a Native profile
+          ID is unavailable, find the profile using its Agent identity, then
+          copy the profile UUID from its address in SitecoreAI.
         </p>
         {status && (
           <div className="workshop-reset-table">
@@ -508,6 +524,7 @@ export function WorkshopReset({
                 <tr>
                   <th>Portal username</th>
                   <th>Agent identity</th>
+                  <th>Native profile ID</th>
                 </tr>
               </thead>
               <tbody>
@@ -522,6 +539,17 @@ export function WorkshopReset({
                         key={profile.identifier}
                         value={profile.identifier}
                       />
+                    </td>
+                    <td>
+                      {profile.profileId ? (
+                        <Identifier
+                          key={profile.profileId}
+                          value={profile.profileId}
+                          label="native profile ID"
+                        />
+                      ) : (
+                        <span>Find the profile using its Agent identity.</span>
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -387,27 +387,42 @@ export const customerDemoChapters: DemoChapter[] = [
           `Open the [**live Agent Portal**](${PORTAL}/login) in the prepared Avery browser session. Sign in as **avery.01** with the supplied portal password. Confirm **Avery Brooks** and **Cedar Ridge Insurance** in the profile menu, then find **Priorities for your agency** beneath the agency overview.`,
           "Point to Avery’s starting order: **Build a stronger small-business practice**, **Support workers’ compensation conversations in Texas**, and **Connect home and auto conversations**. Click Avery’s name or avatar in the upper right to open **Your profile**. Inspect her principal role and **Licensed states**: **Texas**, **Illinois**, and **Florida**.",
           `In the separate Daniel session, open the [**live portal login**](${PORTAL}/login), and sign in as **daniel.01**. Confirm **Daniel Ortiz** and **Prairie Oak Insurance**. Compare his household-first priorities, then inspect **Illinois** and **Texas** licenses and the available state choices in **Products & appetite**.`,
-          `Open the prepared [**Liberty Mutual - Agency product priorities** custom value](${PRIORITY_VALUE}) and its description. Show the combined inputs: role, state license, specialization, and imported production. Avery’s principal/Texas/growth criterion returns **agency-growth**; Daniel’s producer/Illinois/specialization criterion returns **producer-priorities**. Leave the published expression unchanged.`,
+          `In the prepared **administrator** SitecoreAI browser profile, open [**Agent Portal Home in Page Builder**](${portalEditor}). In the **Pages** tree, select **Home**’s personalization icon, whose tooltip is **There are personalization rules on this page**. In **Personalization rules analytics**, open **Liberty Mutual - Agency product priorities**, then choose **Edit personalization rules** to open its **Builder**.`,
+          "Choose **Select profile → Load profile**. Change the default **Client ID** filter to **Profile ID**. Paste Avery’s current **Native profile ID**, copied during preparation from [**Current profile identities for 01**](/workshops/reset#current-profiles), and press **Enter**. Confirm **Testing as: Avery Brooks - 01**. Her **agency-growth** row is green for a match; **producer-priorities** is red for no match. **Test** can rerun this evaluation.",
+          "Use **Load profile** again with Daniel’s current **Native profile ID** and **Profile ID** selected. Confirm **Testing as: Daniel Ortiz - 01**. His **agency-growth** row is red, and **producer-priorities** is green. Click **Cancel** to close the Builder after these read-only tests.",
           `Open [**Agents eligible for marketing**](${AUDIENCE}). Point to **Marketing Suppressed → is false**, its **Live** status, and its current **Audience size**. The prepared comparison includes the explicit false record and excludes the true record. Inspect the rule without pausing it or starting another import.`,
           "For **Q&A**, open [**Honor communication preferences**](/workshops/preferences) for the prepared baseline records, **Cameron Ellis - Allowed** and **Cameron Ellis - Suppressed**. Follow each **Open native profile in SitecoreAI** link, and inspect **marketingSuppressed** under **Additional data**: false for the first record and true for the second.",
         ],
         expected: [
-          "Avery and Daniel see different product priorities through the native content experiences. Daniel’s regulated-content choices remain limited to his licensed states.",
+          "Avery and Daniel see different product priorities through the native content experiences. Native rule tests using their current real profiles confirm the matching experience for each agent. Daniel’s regulated-content choices remain limited to his licensed states.",
           "Native profile data and the saved suppression rule show how a known communication choice can govern marketing eligibility. The full preference-change exercise remains available separately.",
         ],
         talkTrack: [
-          "Liberty Mutual retains Ping for independent-agent sign-in. These sample accounts illustrate the role, license, and agency production context that your existing portal can supply for content decisions. Avery’s agency-growth emphasis differs from Daniel’s producer emphasis.",
-          "The profile supplies known context, and native personalization selects the content experience. Here the decision combines licenses, role, specialization, and imported production. The application separately enforces licensed-state eligibility. Native profiles can also carry the person’s communication preference for an exclusion rule.",
+          "Liberty Mutual retains Ping for independent-agent sign-in. These sample accounts supply the role, license, and agency production context that your existing portal can use for content decisions. We can load Avery’s and Daniel’s actual native profiles and test which content rule matches each person.",
+          "The native tests show Avery matching agency-growth and Daniel matching producer-priorities. The decision combines licenses, role, specialization, and imported production. The application separately enforces licensed-state eligibility. A stored communication preference can also govern marketing eligibility. Later, we will preview the edited content experiences before publication and verify the result in Avery’s signed-in session.",
         ],
         controls: [
           "The published **Liberty Mutual - Agency product priorities** custom value evaluates an identified Liberty agent’s UDL attributes. A Texas-licensed principal with less than 20% agency small-commercial share returns **agency-growth**. An Illinois-licensed producer specializing in small commercial with positive individual small-commercial production returns **producer-priorities**.",
+          "**Load profile → Profile ID** tests the rule with an actual native profile. **Current profile identities** reads the active profile set for this portal host, so **Refresh status** supplies current IDs after a reset. The later Page Builder preview selects a configured content experience; the signed-in portal verifies the delivered result.",
           "The base **state** is an office location, while separate license attributes determine the full licensed-state set. The portal enforces eligibility on its server as well as in its visible filters.",
           "**Profile schema → extensions → marketingSuppressed** is an optional native Boolean. **Agents eligible for marketing** requires an explicit **false**; true and missing values do not qualify. Activations can use that stored preference and Audience rule.",
           "The business records and preference-center input are sample data. The native UDL profiles, schema, import processing, personalization decision, and Audience rule are real platform controls.",
         ],
         links: [
           { label: "Live Agent Portal login", href: `${PORTAL}/login` },
-          { label: "Native priority calculation", href: PRIORITY_VALUE },
+          {
+            label: "Open Home’s native personalization rules",
+            href: portalEditor,
+          },
+          {
+            label: "Current profile IDs for the presenter accounts",
+            href: "/workshops/reset#current-profiles",
+          },
+          {
+            label: "Find a current native profile",
+            href: "/workshops/guide/find-an-agent-profile",
+          },
+          { label: "Priority calculation for Q&A", href: PRIORITY_VALUE },
           {
             label: "Native preference comparison",
             href: "/workshops/preferences",

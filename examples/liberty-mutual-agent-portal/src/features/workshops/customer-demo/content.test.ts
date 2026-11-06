@@ -416,6 +416,27 @@ test("the agent comparison uses two real persona contexts and the prepared suppr
   ])
     assert.match(text, required);
   assert.match(text, /prepared baseline records/i);
+  assert.match(text, /Select profile → Load profile.*Client ID.*Profile ID/i);
+  assert.match(text, /Testing as: Avery Brooks - 01.*agency-growth.*green/i);
+  assert.match(
+    text,
+    /Testing as: Daniel Ortiz - 01.*producer-priorities.*green/i,
+  );
+  assert.match(text, /Refresh status.*current IDs after a reset/i);
+  assert.match(text, /Cancel.*read-only tests/i);
+  assert(
+    linksIn(entry).some(
+      (link) => link.href === "/workshops/reset#current-profiles",
+    ),
+  );
+  for (const action of actions("portal-relevance").filter((line) =>
+    /Native profile ID/.test(line),
+  )) {
+    assert.doesNotMatch(
+      action,
+      /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i,
+    );
+  }
   assert.match(text, /without pausing.*starting another import/i);
   assert.doesNotMatch(
     prose(entry.actions),
