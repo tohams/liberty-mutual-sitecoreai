@@ -419,8 +419,8 @@ export const customerDemoChapters: DemoChapter[] = [
             href: "/workshops/reset#current-profiles",
           },
           {
-            label: "Find a current native profile",
-            href: "/workshops/guide/find-an-agent-profile",
+            label: "Native profiles for Agent identity lookup",
+            href: `https://app.sitecorecloud.io/optimization/profiles?${CONTEXT}`,
           },
           { label: "Priority calculation for Q&A", href: PRIORITY_VALUE },
           {
