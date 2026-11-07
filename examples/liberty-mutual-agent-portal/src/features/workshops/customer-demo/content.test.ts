@@ -329,6 +329,41 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   );
 });
 
+test("indexing preparation requires a clean published baseline and one unpublished revision", () => {
+  const page = readFileSync(
+    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    "utf8",
+  );
+  const preparation = page.slice(
+    page.indexOf('<details id="preparation"'),
+    page.indexOf('<section id="opening"'),
+  );
+  const baseline = preparation.indexOf("Verify the published baseline");
+  const revision = preparation.indexOf("from that verified original named");
+  assert(baseline >= 0 && revision > baseline);
+  assert.match(
+    preparation,
+    /must be absent from the public article.*Search record.*published-answer API experience/,
+  );
+  assert.match(
+    preparation,
+    /sentence is already present.*Bundle car and home.*After the demonstration.*restoration checklist.*Continue only after all three/,
+  );
+  assert.match(
+    preparation,
+    /exactly once.*Leave it unpublished.*sentence must still be absent/,
+  );
+  const firstIndexingAction = actions("public-indexing")[0];
+  assert.match(
+    firstIndexingAction,
+    /Review your options with your agent before choosing coverage\. is absent/,
+  );
+  assert.match(
+    firstIndexingAction,
+    /already visible.*restore the baseline.*existing sentence does not prove a fresh publication/,
+  );
+});
+
 test("public authoring ends with the new page published through separate roles", () => {
   const id = "public-authoring";
   const create = actionIndex(
