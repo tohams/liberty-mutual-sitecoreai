@@ -644,7 +644,7 @@ code.scpm {
   display: flex;
   align-items: flex-end;
   gap: 16px;
-  width: 66.6667%;
+  width: 100%;
 }
 .public-search__form > div {
   flex: 1;
@@ -661,7 +661,8 @@ code.scpm {
   display: block;
 }
 .public-search__form > .public-button {
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 144px;
 }
 .public-search__form input {
   width: 100%;
@@ -679,13 +680,13 @@ code.scpm {
   font-size: 1rem;
   border-top: 1px solid var(--public-border);
   padding-top: 8px;
-  width: 66.6667%;
+  width: 100%;
 }
 .public-search__results {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 20px;
-  width: 66.6667%;
+  width: 100%;
 }
 .public-search__results[aria-busy="true"] {
   opacity: 0.6;
@@ -729,7 +730,7 @@ code.scpm {
   overflow-wrap: anywhere;
 }
 .public-search__empty {
-  width: 66.6667%;
+  width: 100%;
 }
 .public-search__empty h2 {
   font-size: 1.5rem;
@@ -738,7 +739,7 @@ code.scpm {
   margin-top: 22px;
 }
 .public-search__pagination {
-  width: 66.6667%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -763,13 +764,6 @@ code.scpm {
   font-size: 0.9rem;
 }
 @media (max-width: 700px) {
-  .public-search__form,
-  .public-search__results,
-  .public-search__empty,
-  .public-search__pagination,
-  .public-search__status {
-    width: 100%;
-  }
   .public-page-title h1 {
     font-size: 36px;
   }
