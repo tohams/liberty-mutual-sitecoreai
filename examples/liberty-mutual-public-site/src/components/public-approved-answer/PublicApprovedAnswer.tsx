@@ -58,7 +58,12 @@ export const Default = ({
         </div>
         <aside className="public-answer__source" aria-label="More information">
           <h3>More information</h3>
-          <Link className="public-text-link" field={fields.sourceLink} />
+          <Link
+            className="public-text-link"
+            field={fields.sourceLink}
+            target={fields.sourceLink.value?.target || "_blank"}
+            rel="noopener noreferrer"
+          />
           {fields.disclosure?.fields && (
             <RichText
               className="public-answer__disclosure"
