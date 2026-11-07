@@ -7,6 +7,7 @@ import { customerDemoChapters } from "./content";
 import {
   customerDemoSchedule,
   DEMO_CLOSING_MINUTES,
+  DEMO_BUFFER_MINUTES,
   DEMO_OPENING_MINUTES,
   DEMO_TOTAL_MINUTES,
   elapsedTime,
@@ -129,47 +130,50 @@ test("all thirteen customer cards retain the prescribed chapters, rows, and read
   );
 });
 
-test("the live sequence fits exactly forty-five minutes without borrowing preparation or reset time", () => {
+test("the focused live plan leaves four minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [3, 2, 2, 7, 1, 3, 3],
+    [2, 2, 4, 7, 1, 2, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [4, 2, 4, 4, 4, 4],
+    [3, 2, 4, 2, 4, 4],
   );
+  const schedule = customerDemoSchedule(customerDemoChapters);
   assert.equal(DEMO_OPENING_MINUTES, 1);
   assert.equal(DEMO_CLOSING_MINUTES, 1);
+  assert.equal(DEMO_BUFFER_MINUTES, 4);
   assert.equal(DEMO_TOTAL_MINUTES, 45);
-  const schedule = customerDemoSchedule(customerDemoChapters);
   assert.deepEqual(
     schedule.map(({ start, end }) => [start, end]),
     [
-      [1, 4],
-      [4, 6],
-      [6, 8],
-      [8, 15],
-      [15, 16],
-      [16, 19],
-      [19, 22],
-      [22, 26],
-      [26, 28],
-      [28, 32],
+      [1, 3],
+      [3, 5],
+      [5, 9],
+      [9, 16],
+      [16, 17],
+      [17, 19],
+      [19, 21],
+      [21, 24],
+      [24, 26],
+      [26, 30],
+      [30, 32],
       [32, 36],
       [36, 40],
-      [40, 44],
     ],
   );
   assert.deepEqual(
     schedule.map((entry) => entry.id),
     STABLE_ANCHORS,
   );
-  assert.equal(schedule.at(-1)!.end + DEMO_CLOSING_MINUTES, DEMO_TOTAL_MINUTES);
-  assert.deepEqual([0, 1, 22, 44, 45].map(elapsedTime), [
+  const planned = schedule.at(-1)!.end + DEMO_CLOSING_MINUTES;
+  assert.equal(planned, 41);
+  assert.equal(planned + DEMO_BUFFER_MINUTES, DEMO_TOTAL_MINUTES);
+  assert.deepEqual([0, 1, 21, 40, 45].map(elapsedTime), [
     "00:00",
     "01:00",
-    "22:00",
-    "44:00",
+    "21:00",
+    "40:00",
     "45:00",
   ]);
 });
@@ -178,6 +182,17 @@ test("each stable card has an objective, actions, observations, controls, a spok
   assert.deepEqual(
     steps.map((entry) => entry.id),
     STABLE_ANCHORS,
+  );
+  assert(
+    steps.every((entry) => entry.expected.length === 1),
+    "Each card needs one observable outcome",
+  );
+  assert(
+    steps.every(
+      (entry) =>
+        !/for Q&A|during rehearsal|during.*Q&A/i.test(prose(entry.actions)),
+    ),
+    "Live actions must not contain optional tours",
   );
   const reserved = new Set([
     "preparation",
@@ -195,7 +210,10 @@ test("each stable card has an objective, actions, observations, controls, a spok
       `${entry.id}: anchor collides with the page structure`,
     );
     assert(
-      entry.title.trim() && entry.objective.trim() && entry.transition.trim(),
+      entry.title.trim() &&
+        entry.objective.trim() &&
+        entry.stopWhen.trim() &&
+        entry.transition.trim(),
     );
     for (const block of [
       "actions",
@@ -221,31 +239,35 @@ test("each stable card has an objective, actions, observations, controls, a spok
   );
 });
 
-test("the first public card includes source evidence, a useful next action, and an unsupported-question fallback", () => {
-  const text = prose(step("public-question"));
+test("the public Search loop ends at the unsupported-question agent contact option", () => {
+  const entry = step("public-question");
+  const live = prose(entry.actions);
   assert.match(
-    prose(step("public-question").actions),
-    /enter Can I combine home and car coverage\?.*result titled Can I bundle my car and home insurance\?/i,
+    live,
+    /enter Can I combine home and car coverage\?.*Can I bundle my car and home insurance\?/i,
   );
   for (const required of [
     /More information/i,
     /source link/i,
-    /Explore a bundled quote/i,
     /Contact an agent/i,
     /Essential only/i,
+    /Searching…/,
   ])
-    assert.match(text, required);
-  const unsupported = actions("public-question").find((action) =>
-    /Contact an agent/i.test(action),
-  );
-  assert(
-    unsupported,
-    "The uncertain-answer case needs a concrete agent-assisted fallback",
-  );
-  assert.match(unsupported, /Enter [^?]+\?/i);
-  assert.match(unsupported, /Search/);
+    assert.match(live, required);
   assert.match(
-    prose(step("public-question").controls),
+    actions(entry.id).at(-1)!,
+    /No results found.*Contact an agent.*End this loop/i,
+  );
+  assert.match(
+    entry.stopWhen,
+    /unsupported question.*No results found.*Contact an agent/i,
+  );
+  assert.doesNotMatch(
+    live,
+    /Explore bundling|Explore a bundled quote|Allow personalization|scroll|Effective|Review date/i,
+  );
+  assert.match(
+    prose(entry.controls),
     /application.*authored-evidence.*separate.*ML confidence/i,
   );
 });
@@ -270,8 +292,9 @@ test("discovery readiness identifies native structure while keeping external eng
   );
 });
 
-test("Search delivery starts an approved-answer publication and verifies the fresh indexed change", () => {
-  const indexing = prose(step("public-indexing"));
+test("the indexing loop owns both publication and fresh Search-record verification", () => {
+  const entry = step("public-indexing");
+  const text = prose(entry);
   for (const required of [
     /OnEnd/,
     /publication service/i,
@@ -281,31 +304,32 @@ test("Search delivery starts an approved-answer publication and verifies the fre
     /audience/,
     /Approved answers.*library/i,
   ])
-    assert.match(indexing, required);
+    assert.match(text, required);
   assert.match(
-    indexing,
+    text,
     /ordinary Landing page does not.*approved-answer Search document/i,
   );
-  assert.match(
-    prose(step("public-indexing").actions),
-    /original wording visible in Search.*prepared revision.*Approved.*Start publish/i,
+  const publish = actionIndex(
+    entry.id,
+    /prepared revision.*Approved.*Start publish/i,
   );
-  const indexedFollowUp = actions("public-api").find((action) =>
-    /body.*added sentence/i.test(action),
+  const verify = actionIndex(
+    entry.id,
+    /job to complete.*body.*added sentence.*No manual reindex/i,
   );
-  assert(
-    indexedFollowUp,
-    "The fresh authored change must be checked in its indexed body",
+  assert(publish < verify);
+  assert.match(entry.stopWhen, /Search document.*newly published sentence/);
+  assert.doesNotMatch(
+    prose(step("public-api").actions),
+    /Search by term|Toggle document details|native Search/i,
   );
-  assert.match(indexedFollowUp, /source|Approved Answers/i);
-  assert.match(indexedFollowUp, /no manual reindex/i);
-  assert.match(
-    prose(step("public-api").expected),
-    /public article.*Search document.*API consumer.*same approved source change/i,
+  assert.doesNotMatch(
+    prose(step("public-analytics").actions),
+    /coverage-guide-live|publishing job|new sentence|new coverage page/i,
   );
 });
 
-test("public page creation previews before publication and reviews every local datasource with separate roles", () => {
+test("public authoring ends with the new page published through separate roles", () => {
   const id = "public-authoring";
   const create = actionIndex(
     id,
@@ -322,7 +346,7 @@ test("public page creation previews before publication and reviews every local d
   );
   const publish = actionIndex(
     id,
-    /administrator acting as publisher.*Start publish/i,
+    /administrator acting as publisher.*Start publish.*published coverage page/i,
   );
   assert(
     create < preview &&
@@ -339,11 +363,11 @@ test("public page creation previews before publication and reviews every local d
     /All references.*Include related items/i,
   );
   assert.match(actions(id)[submit], /local item.*Draft/i);
-  assert.match(actions(id)[submit], /Actions → Submit/);
   assert.match(
-    prose(step(id).expected),
-    /reused.*Promotion.*previewed.*without code changes/i,
+    step(id).stopWhen,
+    /coverage-guide-live.*authored headings.*shared Promotion/,
   );
+  assert.doesNotMatch(prose(step(id).actions), /Page not found|step 06/);
 });
 
 test("Profound is the customer-permitted governed integration explanation, not a claimed running connector", () => {
@@ -358,10 +382,11 @@ test("Profound is the customer-permitted governed integration explanation, not a
   assert.match(text, /does not represent a packaged Profound connector/i);
 });
 
-test("analytics follows genuine consented interactions and does not promise fabricated or sales evidence", () => {
-  const text = prose(step("public-analytics"));
+test("analytics is a report-only loop using genuine consented preparation", () => {
+  const entry = step("public-analytics");
+  const text = prose(entry);
   for (const required of [
-    /Events table/i,
+    /Events Table/i,
     /Site.*liberty-mutual-public-site/,
     /Time.*1 hour/,
     /pageView/,
@@ -372,34 +397,48 @@ test("analytics follows genuine consented interactions and does not promise fabr
   ])
     assert.match(text, required);
   assert.match(text, /do not establish a completed quote or policy sale/i);
-  assert.match(
-    prose(step("public-question").actions),
-    /Allow personalization.*Scroll.*Explore bundling/i,
+  assert.match(text, /prepar.*consented|consented.*prepar/i);
+  assert.doesNotMatch(
+    prose(entry.actions),
+    /Start publish|Create a page|Explore bundling|Load answer/,
   );
+  const page = readFileSync(
+    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    "utf8",
+  );
+  assert.match(
+    page,
+    /Prepare genuine public-site analytics before presenting.*Allow personalization/,
+  );
+  assert.match(page, /step\.stopWhen/);
 });
 
-test("API reuse demonstrates a separate real consumer and a versioned contract with an actual conditional request", () => {
-  const text = prose(step("public-api"));
+test("API reuse stops after the second experience loads the same published answer", () => {
+  const entry = step("public-api");
+  const text = prose(entry);
   for (const required of [
     /One approved answer, two experiences/i,
-    /Actual single-answer request/i,
-    /schemaVersion/,
-    /data\.sourceLink/,
+    /Load answer/,
     /Native content version/,
-    /Response ETag/,
-    /304 Not Modified/,
+    /Stable item ID/,
+    /API contract version/,
     /implementation components/i,
+    /Live Experience Edge/,
   ])
     assert.match(text, required);
   assert.match(text, /Draft and Preview content remain in authoring/i);
-  assert(
-    linksIn(step("public-api")).some(
-      (link) => link.href === "/workshops/content-api",
-    ),
+  assert.match(
+    entry.stopWhen,
+    /second experience.*newly published sentence.*stable item ID/i,
   );
+  assert.doesNotMatch(
+    prose(entry.actions),
+    /ETag|304 Not Modified|Actual single-answer request|Search by term|Toggle document details/,
+  );
+  assert(linksIn(entry).some((link) => link.href === "/workshops/content-api"));
 });
 
-test("the agent comparison uses two real persona contexts and the prepared suppression baseline without timed mutations", () => {
+test("the relevance loop compares two real profiles and one saved suppression rule", () => {
   const entry = step("portal-relevance");
   const text = prose(entry);
   for (const required of [
@@ -407,7 +446,7 @@ test("the agent comparison uses two real persona contexts and the prepared suppr
     /Cedar Ridge Insurance/,
     /daniel\.01/,
     /Prairie Oak Insurance/,
-    /licensed states/i,
+    /Licensed states/i,
     /role/i,
     /specialization/i,
     /production/i,
@@ -415,12 +454,14 @@ test("the agent comparison uses two real persona contexts and the prepared suppr
     /explicit false/i,
   ])
     assert.match(text, required);
-  assert.match(text, /prepared baseline records/i);
   assert.match(text, /Select profile → Load profile.*Client ID.*Profile ID/i);
-  assert.match(text, /Testing as: Avery Brooks - 01.*agency-growth.*green/i);
   assert.match(
     text,
-    /Testing as: Daniel Ortiz - 01.*producer-priorities.*green/i,
+    /Testing as: Avery Brooks - 01.*agency-growth.*green|Testing as: Avery Brooks - 01.*green.*agency-growth/i,
+  );
+  assert.match(
+    text,
+    /Testing as: Daniel Ortiz - 01.*producer-priorities.*green|Testing as: Daniel Ortiz - 01.*green.*producer-priorities/i,
   );
   assert.match(text, /Refresh status.*current IDs after a reset/i);
   assert.match(text, /Cancel.*read-only tests/i);
@@ -429,18 +470,17 @@ test("the agent comparison uses two real persona contexts and the prepared suppr
       (link) => link.href === "/workshops/reset#current-profiles",
     ),
   );
-  for (const action of actions("portal-relevance").filter((line) =>
+  for (const action of actions(entry.id).filter((line) =>
     /Native profile ID/.test(line),
-  )) {
+  ))
     assert.doesNotMatch(
       action,
       /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i,
     );
-  }
   assert.match(text, /without pausing.*starting another import/i);
   assert.doesNotMatch(
     prose(entry.actions),
-    /(?:click|select|choose)\s+(?:Load preference examples|Opt out Cameron|Restore preferences|Recalculate|Pause)\b/i,
+    /Cameron|Products & appetite|Profile schema|Load preference examples|Opt out|Recalculate/,
   );
   assert.match(
     text,
@@ -450,6 +490,18 @@ test("the agent comparison uses two real persona contexts and the prepared suppr
 
 test("the priority edit remains a draft until both audience previews and approval are complete", () => {
   const edit = prose(step("portal-priority-edit").actions);
+  assert.match(
+    step("portal-priority-edit").objective,
+    /Part 1 of the priority-change loop/,
+  );
+  assert.match(
+    step("portal-preview").objective,
+    /Part 2 of the same priority-change loop/,
+  );
+  assert.match(
+    step("portal-priority-edit").stopWhen,
+    /Checkpoint.*live experience is unchanged.*Continue/,
+  );
   assert.match(edit, /Create version/);
   assert.match(edit, /Ordered recommendations/);
   assert.match(edit, /remains Draft.*Leave it unpublished/i);
@@ -482,7 +534,7 @@ test("the priority edit remains a draft until both audience previews and approva
   );
 });
 
-test("the same governed disclosure reaches both sites and reversal preserves history", () => {
+test("shared disclosure and its reversal stop after the two-site proof", () => {
   const shared = step("portal-shared-content");
   assert(
     linksIn(shared).some((link) =>
@@ -495,19 +547,15 @@ test("the same governed disclosure reaches both sites and reversal preserves his
       return `${url.hostname}${url.pathname}`;
     }),
   );
-  for (const expected of [
-    `${PUBLIC_HOST}/`,
-    `${PUBLIC_HOST}/bundling`,
-    `${PORTAL_HOST}/`,
-    `${PORTAL_HOST}/resources`,
-  ])
-    assert(
-      destinations.has(expected),
-      `Missing shared-disclosure observation: ${expected}`,
-    );
+  for (const expected of [`${PUBLIC_HOST}/`, `${PORTAL_HOST}/`])
+    assert(destinations.has(expected));
   assert.match(
     prose(shared.actions),
-    /record.*original.*Disclosure.*rollback/i,
+    /Record.*original.*Disclosure.*rollback/i,
+  );
+  assert.doesNotMatch(
+    prose(shared.actions),
+    /public Bundling|Learning & resources|four configured|Q&A/,
   );
   const rollback = prose(step("portal-audit-rollback"));
   for (const required of [
@@ -521,9 +569,13 @@ test("the same governed disclosure reaches both sites and reversal preserves his
     /history/,
   ])
     assert.match(rollback, required);
+  assert.doesNotMatch(
+    prose(step("portal-audit-rollback").actions),
+    /Agency growth priorities|Bundle car and home|coverage-guide-live|public Bundling|Learning & resources/,
+  );
   assert.match(
-    rollback,
-    /portal-number reset does not restore authored CMS content/i,
+    step("portal-audit-rollback").stopWhen,
+    /Both Home pages.*restored original wording.*history/,
   );
 });
 

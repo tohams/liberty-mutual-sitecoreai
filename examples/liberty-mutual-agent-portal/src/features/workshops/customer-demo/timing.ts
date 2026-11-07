@@ -1,6 +1,7 @@
 export const DEMO_OPENING_MINUTES = 1;
 export const DEMO_CLOSING_MINUTES = 1;
 export const DEMO_TOTAL_MINUTES = 45;
+export const DEMO_BUFFER_MINUTES = 4;
 
 /** Elapsed presentation time; preparation and reset do not consume the live slot. */
 export function customerDemoSchedule(

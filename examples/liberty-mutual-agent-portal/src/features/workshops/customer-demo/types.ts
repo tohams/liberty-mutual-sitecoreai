@@ -10,6 +10,8 @@ export interface DemoStep {
   sourceSlide: 10 | 11;
   durationMinutes: number;
   objective: string;
+  /** The observable completion condition for this customer-requested outcome. */
+  stopWhen: string;
   actions: string[];
   expected: string[];
   talkTrack: string[];
