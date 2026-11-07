@@ -28,6 +28,17 @@ function Hero({ fields, params }: PublicHeroProps, centered = false) {
 
 export const Default = (props: PublicHeroProps) => Hero(props);
 export const Centered = (props: PublicHeroProps) => Hero(props, true);
+export const PageTitle = ({ fields, params }: PublicHeroProps) =>
+  fields ? (
+    <section
+      className={`component public-page-title ${params.styles || ""}`}
+      id={params.RenderingIdentifier}
+    >
+      <div className="public-container">
+        <Text tag="h1" field={fields.heading} />
+      </div>
+    </section>
+  ) : null;
 export const QuoteIntro = ({ fields, params }: PublicHeroProps) =>
   fields ? (
     <section

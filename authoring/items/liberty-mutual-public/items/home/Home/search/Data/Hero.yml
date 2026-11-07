@@ -14,13 +14,15 @@ Languages:
     Fields:
     - ID: f6b19f8a-18e0-5550-85ab-7602cecec48c
       Hint: eyebrow
-      Value: Search insurance information
+      Value: |
+
     - ID: 3a61c47e-c996-5a80-ba68-f988ee36554f
       Hint: heading
-      Value: Find the information you need
+      Value: Search
     - ID: 608c6aac-cdd7-5be1-b727-a1647363b89c
       Hint: summary
-      Value: <p>Ask about auto, home, or bundling. Review the source and applicability of each result, and follow its next step.</p>
+      Value: |
+
     - ID: f8a68051-c885-5977-aa21-4629eb0f3a2c
       Hint: image
       Value: <image mediaid="{A7B51270-AC99-4766-A0D3-3DFBFE4BD3BD}" alt="Parent packing a car before a soccer game" />

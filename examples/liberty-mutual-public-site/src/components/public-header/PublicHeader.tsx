@@ -117,7 +117,7 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
     input.value = input.value.trim();
     if (!input.value) {
       event.preventDefault();
-      input.setCustomValidity("Enter an insurance question or product name.");
+      input.setCustomValidity("Enter a search term.");
       input.reportValidity();
     }
     // A regular GET navigation also refreshes a query submitted from /search.
@@ -226,7 +226,7 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
         >
           <div className="public-header__search-heading">
             <label id={`${searchId}-label`} htmlFor={`${searchId}-input`}>
-              What would you like to know?
+              Search
             </label>
             <button
               className="public-header__search-close"
@@ -263,7 +263,7 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
               ref={inputRef}
               type="search"
               name="q"
-              placeholder="Ask about auto, home, or bundling"
+              placeholder="Search"
               autoComplete="off"
               maxLength={250}
               required
@@ -274,9 +274,6 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
               Search
             </button>
           </form>
-          <p>
-            Find helpful guidance, review its source, and choose your next step.
-          </p>
         </section>
       </div>
     </div>

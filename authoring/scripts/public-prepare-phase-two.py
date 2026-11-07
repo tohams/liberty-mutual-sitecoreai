@@ -72,7 +72,7 @@ def records():
         vp=h.SITE+'/Presentation/Headless Variants/'+name
         h.item(vp,h.uid(h.SITE+'/Presentation/Headless Variants'),h.T['variantFolder'],'presentation')
         for n,v in enumerate(variant_names.get(name,['Default']),1):h.item(vp+'/'+v,h.uid(vp),h.T['variant'],'presentation',shared=[h.field(h.F['sort'],'__Sortorder',n*100)])
-    for name,variant in [('PublicHero','QuoteIntro'),('PublicImage','Hero'),('PublicArticle','TrustStrip'),('PublicArticle','Centered'),('PublicArticle','CoverageTable')]:
+    for name,variant in [('PublicHero','QuoteIntro'),('PublicHero','PageTitle'),('PublicImage','Hero'),('PublicArticle','TrustStrip'),('PublicArticle','Centered'),('PublicArticle','CoverageTable')]:
         vp=h.SITE+'/Presentation/Headless Variants/'+name
         h.item(vp+'/'+variant,h.uid(vp),h.T['variant'],'presentation',shared=[h.field(h.F['sort'],'__Sortorder',300)])
     for label,names in [('Discovery',['PublicSearch']),('Insurance',['PublicProductSelector','PublicQuoteHandoff']),('Sections',['PublicSection','PublicSplitContent','PublicFaq','PublicBreadcrumbs'])]:

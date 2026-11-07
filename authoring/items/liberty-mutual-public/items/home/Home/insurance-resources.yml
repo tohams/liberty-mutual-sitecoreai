@@ -29,7 +29,7 @@ Languages:
       Value: Insurance resources
     - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
       Hint: metadataDescription
-      Value: Explore bundling, auto coverage, and state-specific information, with sources and useful next steps.
+      Value: Explore tips and information about car insurance, home insurance, and bundling.
     - ID: a98fdad1-e82c-5380-9954-33b996734100
       Hint: canonicalUrl
       Value: https://liberty-mutual-public-site.vercel.app/insurance-resources
