@@ -133,11 +133,11 @@ test("all thirteen customer cards retain the prescribed chapters, rows, and read
 test("the focused live plan leaves four minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [2, 2, 4, 7, 1, 2, 2],
+    [2, 2, 4, 8, 1, 2, 1],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [3, 2, 4, 2, 4, 4],
+    [3, 2, 2, 4, 4, 4],
   );
   const schedule = customerDemoSchedule(customerDemoChapters);
   assert.equal(DEMO_OPENING_MINUTES, 1);
@@ -150,14 +150,14 @@ test("the focused live plan leaves four minutes within the forty-five-minute lim
       [1, 3],
       [3, 5],
       [5, 9],
-      [9, 16],
-      [16, 17],
-      [17, 19],
-      [19, 21],
+      [9, 17],
+      [17, 18],
+      [18, 20],
+      [20, 21],
       [21, 24],
       [24, 26],
-      [26, 30],
-      [30, 32],
+      [26, 28],
+      [28, 32],
       [32, 36],
       [36, 40],
     ],

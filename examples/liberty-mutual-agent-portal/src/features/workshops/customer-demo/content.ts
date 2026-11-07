@@ -130,7 +130,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its state, product, and audience values preserved.",
         actions: [
           `Open [**Liberty Mutual Approved Answers → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          `In the prepared **administrator acting as publisher** session, open [**Bundle car and home**](${answerContent}). Select the prepared revision named **Shared answer review**, confirm **Approved**, and find **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish** with **Item** and **Current language (English)** selected and **Subitems** unchecked, then select **Start publish**.`,
+          `In the prepared **administrator acting as publisher** session, open [**Bundle car and home**](${answerContent}). In the version selector, choose the prepared revision by the **Prepared answer version** number recorded in [**Before presenting**](#preparation)—the new English version created for this run. Confirm **Shared answer review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish** with **Item** and **Current language (English)** selected and **Subitems** unchecked, then select **Start publish**.`,
           `Wait for the publishing job to complete. Return to [**Liberty Mutual Approved Answers → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
@@ -163,18 +163,18 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketing builds and publishes pages from a library of pre-approved components",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
-        durationMinutes: 7,
+        durationMinutes: 8,
         objective:
           "A marketer creates a page from approved components, previews it, and publishes it through separate Author, Approver, and publisher actions.",
         stopWhen:
           "The new coverage-guide-live page shows the authored headings and the shared Promotion on the public website.",
         actions: [
-          `In the prepared **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Select **Home → Create a page**, choose **Landing page**, name it **coverage-guide-live**, and select **Create**.`,
-          "Select **Content → coverage-guide-live → Data → Hero**, and set **Heading** to **Explore coverage with confidence**. Open **Data → Introduction**, set **Heading** to **Guidance for your next decision**, and enter **Review approved information, compare your options, and speak with an agent about your needs.** in **Body**. Click outside each field, and wait for **Saved**.",
-          "Return to **Editor**. Open the main content area’s insertion control, choose **Promotion**, and select the existing **Bundle and save** item. Choose **Assign**, rather than **Duplicate and assign**, and select **Compact**. Identify the allowed components offered for this placeholder.",
+          `In the prepared **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. In the sitemap’s editable **New page** name, type **coverage-guide-live**, press **Enter**, and wait for **Page created from branch template**.`,
+          "Choose **Reload tree** if it appears, then select **coverage-guide-live** in the sitemap. Open **Content → coverage-guide-live → Data → Hero**, and set **Heading** to **Explore coverage with confidence**. Press **Tab**, and wait for **Saved** before opening **Data → Introduction**. Set its **Heading** to **Guidance for your next decision**, press **Tab**, and wait for **Saved**. Enter **Review approved information, compare your options, and speak with an agent about your needs.** in **Body**, click outside **Body**, and wait for **Saved**.",
+          "Return to **Editor → Layers**. Expand **headless-public-content-1**, and choose its **Insert into** button immediately after **Article text**. Choose **Promotions → Promotion**, select the existing **Bundle and save** item, and choose **Assign** to reuse it, rather than **Duplicate and assign**. In the right-hand panel, choose **Design → Variant**, and change **Default** to **Compact**. Identify the allowed components offered for this placeholder.",
           "Click **Preview**, then **Preview** in its menu. Confirm the headings and reused Promotion while the page remains unpublished. Return to the editor. The **Hero** and **Introduction** are independent local content; the Promotion references its shared source.",
           "On **coverage-guide-live**, choose **Actions → Submit**, enter **Review coverage guidance page**, and select **Submit**. In **Page items**, check the page, **Hero**, and **Introduction**. For any local item still in **Draft**, open it in **Content**, choose **Actions → Submit**, enter **Review coverage guidance content**, and select **Submit**. Confirm all three are **Awaiting approval**.",
-          "In the separate **Approver** browser profile, review **coverage-guide-live**, **Hero**, and **Introduction**. For each submitted item, choose **Actions → Approve**, enter **Approved coverage guidance**, and select **Submit**. Confirm **Approved**. This restricted Approver cannot publish.",
+          "In the separate **Approver** browser profile, review **coverage-guide-live** and its **Hero** and **Introduction** content. On **coverage-guide-live**, choose **Actions → Approve**, enter **Approved coverage guidance**, and select **Submit**. Open **Page items**, and confirm the page, **Hero**, and **Introduction** are all **Approved**. If a local item is still **Awaiting approval**, open it, review it, and approve it. This restricted Approver cannot publish.",
           `In the **administrator acting as publisher** profile, open **coverage-guide-live**. Choose **Publish** with **Page**, **Current language (English)**, **All references**, and **Include related items** selected. Leave **Subpages** unchecked, and select **Start publish**. After completion, open the [**published coverage page**](${PUBLIC}/coverage-guide-live), and confirm both headings and the shared Promotion.`,
         ],
         expected: [
@@ -279,7 +279,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Decoupled delivery with a stable content API",
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
-        durationMinutes: 2,
+        durationMinutes: 1,
         objective:
           "A separate application retrieves and presents the same published answer through a stable content API.",
         stopWhen:
@@ -358,7 +358,7 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `In the prepared **avery.01** session, open the [**live Agent Portal Home**](${PORTAL}/). Confirm **Avery Brooks** and **Cedar Ridge Insurance**. Find **Priorities for your agency**: **Build a stronger small-business practice**, **Support workers’ compensation conversations in Texas**, and **Connect home and auto conversations**. Open **Your profile** to identify her principal role and **Licensed states: Texas, Illinois, and Florida**.`,
           `In the separate prepared **daniel.01** session, open [**Home**](${PORTAL}/). Confirm **Daniel Ortiz** and **Prairie Oak Insurance**, then compare his household-first priorities. Open **Your profile** to identify his producer role and **Licensed states: Illinois and Texas**.`,
-          "Open the prepared native **Liberty Mutual - Agency product priorities** rule Builder. Use **Select profile → Load profile**, change **Client ID** to **Profile ID**, and load Avery’s current **Native profile ID** from [**Current profile identities for 01**](/workshops/reset#current-profiles). Confirm **Testing as: Avery Brooks - 01** and a green **agency-growth** match. Load Daniel’s current ID the same way; confirm **Testing as: Daniel Ortiz - 01** and a green **producer-priorities** match. Choose **Cancel** after these read-only tests.",
+          `In the administrator profile, open [**Agent Portal Home in Page Builder**](${portalEditor}), keep **Default editing host**, choose **Layers**, and select **Agency priorities**. In the right-hand component panel, choose **Edit personalization rules**, then confirm the **Liberty Mutual - Agency product priorities** Builder. If it is already open from preparation, continue there. Use **Select profile → Load profile**, change **Client ID** to **Profile ID**, and load Avery’s current **Native profile ID** UUID copied during preparation from [**Current profile identities for 01**](/workshops/reset#current-profiles). Confirm **Testing as: Avery Brooks - 01** and a green **agency-growth** match. Load Daniel’s current ID the same way; confirm **Testing as: Daniel Ortiz - 01** and a green **producer-priorities** match. Choose **Cancel** after these read-only tests.`,
           `Open the prepared [**Agents eligible for marketing**](${AUDIENCE}) Audience. Show its **Live** rule, **Marketing Suppressed → is false**. This requires an explicit false value; true and missing values do not qualify. Leave the rule unchanged, without pausing it or starting another import.`,
         ],
         expected: [
@@ -470,7 +470,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Marketing user changes a priority without development work",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
-        durationMinutes: 4,
+        durationMinutes: 2,
         objective:
           "Part 1 of the priority-change loop: save the new order as a Draft, ready for audience preview, approval, and publication in Part 2.",
         stopWhen:
@@ -503,7 +503,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Marketing user previews the experience for each agent audience",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
-        durationMinutes: 2,
+        durationMinutes: 4,
         objective:
           "Part 2 of the same priority-change loop: preview both experiences, approve and publish the priority change, and verify that it reaches the intended agent without code changes.",
         stopWhen:
@@ -592,7 +592,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Select **Workflow history**. Under **History**, read the **Draft → Awaiting approval** and **Awaiting approval → Approved** transitions, their user and timestamp, and the review **Comment**. Match these to the separate Author and Approver actions just performed.",
           `As the **Author**, return to [**Product availability notice in Content**](${disclosureContent}). Select the original approved English version recorded in the prior loop, then choose **Create version**. Name it **Original disclosure restored**, select **Create**, and confirm that **Disclosure** contains the preserved original wording without the added sentence.`,
           "Choose **Actions → Submit**, enter **Restore original disclosure wording**, and select **Submit**. In the separate **Approver** session, review the restored wording, choose **Actions → Approve**, enter **Approved restoration of shared disclosure wording**, and select **Submit**.",
-          "In the **administrator acting as publisher** session, publish the approved disclosure from **Content** with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, show the original, changed, and restored versions in **Page items → Product availability notice → Workflow history**.",
+          "In the **administrator acting as publisher** session, publish the approved disclosure from **Content** with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Then open **Page items → Product availability notice → Workflow history** to inspect the selected restored version’s submission, approval, and review comments.",
           `After completion, reload [**public Home**](${PUBLIC}/) and Avery’s [**Agent Portal Home**](${PORTAL}/). Confirm that the temporary sentence is absent from both pages and retain all versions in history.`,
         ],
         expected: [
