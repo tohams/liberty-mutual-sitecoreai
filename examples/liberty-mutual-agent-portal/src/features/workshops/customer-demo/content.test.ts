@@ -554,8 +554,8 @@ test("shared disclosure and its reversal stop after the two-site proof", () => {
     /Record.*original.*Disclosure.*rollback/i,
   );
   assert.doesNotMatch(
-    prose(shared.actions),
-    /public Bundling|Learning & resources|four configured|Q&A/,
+    prose(shared),
+    /public Bundling|Learning & resources|four configured|additional links|other two placements|Q&A/,
   );
   const rollback = prose(step("portal-audit-rollback"));
   for (const required of [

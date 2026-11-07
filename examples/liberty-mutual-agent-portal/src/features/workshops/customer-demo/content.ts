@@ -565,7 +565,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         controls: [
           "**Product availability notice** belongs to the public site’s **Data → Disclosures** library. The Portal references that native item; it does not maintain its own copy of the wording.",
-          "One placement on each site proves cross-site distribution live. Use the additional links to check the other two placements. A native reference count can include multiple layout references to one page.",
+          "The public and Agent Portal Home pages provide the complete cross-site verification for this loop.",
           "Publication delivers the approved shared item through **Experience Edge**. If the job or delivery is pending, show its actual status and return to the live pages once the new wording is available.",
         ],
         links: [
