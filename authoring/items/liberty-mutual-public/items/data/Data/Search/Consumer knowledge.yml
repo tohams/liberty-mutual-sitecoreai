@@ -14,10 +14,12 @@ Languages:
     Fields:
     - ID: be478735-f1a3-560b-be5f-af05bd4f0149
       Hint: heading
-      Value: Find answers to your insurance questions
+      Value: |
+
     - ID: 70245dcd-8085-5eb8-9882-95ce8255ff14
       Hint: introduction
-      Value: <p>Explore useful guidance, review its source, and choose your next step.</p>
+      Value: |
+
     - ID: d8ef138b-14ce-5af6-9c68-0ef9053ee50e
       Hint: search
       Value: |

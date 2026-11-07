@@ -5268,6 +5268,36 @@
           ]
         }
       ]
+    },
+    {
+      "ID": "f7c0725c-98fb-4a82-8ccb-49ffb4667894",
+      "Parent": "23bef5af-0cdf-5fa5-aed7-c6d09a135eed",
+      "Template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicHero/PageTitle",
+      "SharedFields": [
+        {
+          "ID": "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+          "Hint": "__Sortorder",
+          "Value": "400"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261031T160000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "boundedPlaceholderUpdates": [

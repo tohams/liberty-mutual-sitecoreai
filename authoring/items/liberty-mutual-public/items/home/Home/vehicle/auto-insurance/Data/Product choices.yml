@@ -17,7 +17,8 @@ Languages:
       Value: Choose what you want to protect
     - ID: 4fc58087-c67b-552f-b662-9f89d84b7fb3
       Hint: introduction
-      Value: <p>Choose auto insurance, one property option, or both. Your state helps keep your next step relevant.</p>
+      Value: |
+
     - ID: bc105dbf-3d11-5ddf-b31c-b0b18d09b9fb
       Hint: products
       Value: |

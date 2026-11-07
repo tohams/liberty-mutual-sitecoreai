@@ -67,23 +67,6 @@ function text(document: SearchDocument, name?: string): string {
     : "";
 }
 
-function displayDate(value: string): string {
-  if (!value) return "";
-  const normalized = value.replace(
-    /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/,
-    "$1-$2-$3T$4:$5:$6Z",
-  );
-  const date = new Date(normalized);
-  return Number.isNaN(date.valueOf())
-    ? ""
-    : date.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-        timeZone: "UTC",
-      });
-}
-
 function publicHref(value: string): string | null {
   if (!value) return null;
   if (value.startsWith("/") && !value.startsWith("//")) return value;
@@ -254,14 +237,14 @@ function SearchExperience({
     <>
       <form className="public-search__form" onSubmit={submit} role="search">
         <div>
-          <label htmlFor={inputId}>What would you like to know?</label>
+          <label htmlFor={inputId}>keyword(s)</label>
           <input
             id={inputId}
             name="q"
             type="search"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="Ask about auto, home, or bundling"
+            placeholder="Search"
             maxLength={250}
             autoComplete="off"
           />
@@ -283,21 +266,21 @@ function SearchExperience({
             aria-live="polite"
           >
             {needsSubject
-              ? "Enter a topic, product name, or specific question to search."
+              ? "Enter a search term."
               : loading
-                ? "Finding helpful information…"
+                ? "Searching…"
                 : isError
                   ? "We could not complete this search."
                   : `${total} ${total === 1 ? "result" : "results"}${query ? ` for “${query}”` : ""}`}
           </p>
           {needsSubject ? (
             <div className="public-search__empty">
-              <h3>Choose a subject to search</h3>
-              <p>Include the topic for which you need information.</p>
+              <h2>Enter a search term</h2>
+              <p>Try a topic or product name.</p>
             </div>
           ) : isError ? (
             <div className="public-search__empty">
-              <h3>Please try again</h3>
+              <h2>Please try again</h2>
               <p>
                 You can search again, or{" "}
                 <NextLink
@@ -310,11 +293,13 @@ function SearchExperience({
             </div>
           ) : !loading && total === 0 ? (
             <div className="public-search__empty">
-              <h3>Let’s find the right information</h3>
+              <h2>No results found</h2>
               <p>
-                We could not find approved guidance that addresses this
-                question. Try a different question or a product name. An agent
-                can help with your policy or situation.
+                Try another search term, or browse our{" "}
+                <NextLink href="/insurance-resources">
+                  insurance resources
+                </NextLink>
+                .
               </p>
               <NextLink
                 className="public-button"
@@ -327,25 +312,13 @@ function SearchExperience({
             <div className="public-search__results" aria-busy={loading}>
               {!loading &&
                 resultCards.map(({ document, href, title }, index) => {
-                  const source = publicHref(text(document, mapping.source));
                   const description = text(document, mapping.description);
-                  const product = text(document, mapping.product);
-                  const state = text(document, mapping.state);
-                  const owner = text(document, mapping.owner);
-                  const effectiveDate = displayDate(
-                    text(document, mapping.effectiveDate),
-                  );
                   return (
                     <article
                       className="public-search-card"
                       key={`${href}-${index}`}
                     >
-                      {(product || state) && (
-                        <p className="public-eyebrow">
-                          {[product, state].filter(Boolean).join(" · ")}
-                        </p>
-                      )}
-                      <h3>
+                      <h2>
                         <NextLink
                           href={href}
                           onClick={() =>
@@ -354,47 +327,8 @@ function SearchExperience({
                         >
                           {title}
                         </NextLink>
-                      </h3>
+                      </h2>
                       {description && <p>{description}</p>}
-                      {(owner || effectiveDate) && (
-                        <p className="public-search-card__metadata">
-                          {[
-                            owner,
-                            effectiveDate ? `Effective ${effectiveDate}` : "",
-                          ]
-                            .filter(Boolean)
-                            .join(" · ")}
-                        </p>
-                      )}
-                      <div className="public-search-card__footer">
-                        <NextLink
-                          className="public-text-link"
-                          href={href}
-                          onClick={() =>
-                            resultClick(href, index + 1 + (currentPage - 1) * 6)
-                          }
-                        >
-                          Read more <span aria-hidden="true">→</span>
-                        </NextLink>
-                        {source && (
-                          <a
-                            href={source}
-                            className="public-search-card__source"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Source:{" "}
-                            {new URL(
-                              source,
-                              "https://libertymutual.com",
-                            ).hostname.replace(/^www\./, "")}
-                            <span className="sr-only">
-                              {" "}
-                              (opens in a new tab)
-                            </span>
-                          </a>
-                        )}
-                      </div>
                     </article>
                   );
                 })}
@@ -402,8 +336,7 @@ function SearchExperience({
           )}
           {!loading && !isError && nativeTotal > 100 && (
             <p className="public-search__status">
-              These matches come from the first 100 search results. Add a
-              product or state to narrow your search.
+              Try a more specific search term.
             </p>
           )}
           {!needsSubject && !loading && !isError && totalPages > 1 && (

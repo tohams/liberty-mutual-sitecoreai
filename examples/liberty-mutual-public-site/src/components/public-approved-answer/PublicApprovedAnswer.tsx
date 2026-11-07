@@ -1,5 +1,4 @@
 import { Link, RichText, Text } from "@sitecore-content-sdk/nextjs";
-import PublicationDate from "components/content-sdk/PublicationDate";
 import { serializeJsonLd } from "src/features/structured-data/serialize-json-ld";
 import type { PublicApprovedAnswerProps } from "./public-approved-answer.props";
 
@@ -57,17 +56,9 @@ export const Default = ({
             <Link className="public-button" field={fields.nextStep} />
           </div>
         </div>
-        <aside
-          className="public-answer__source"
-          aria-label="Source information"
-        >
+        <aside className="public-answer__source" aria-label="More information">
           <h3>More information</h3>
           <Link className="public-text-link" field={fields.sourceLink} />
-          <div className="public-answer__metadata">
-            <Text tag="p" field={fields.owner} />
-            <PublicationDate label="Effective" field={fields.effectiveDate} />
-            <PublicationDate label="Review date" field={fields.reviewDate} />
-          </div>
           {fields.disclosure?.fields && (
             <RichText
               className="public-answer__disclosure"
