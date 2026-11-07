@@ -361,7 +361,7 @@
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{2EF2C7F6-A09E-5165-9F3E-DC69EE4CA647}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{0AF9469F-CAD9-51F7-A5D5-64B6DD2FAEF1}\" id=\"{F63F0F36-EA5B-5693-85C6-B4DF475C8840}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Introduction\" par=\"FieldNames={C64AAA90-DC86-5D1E-9286-1BA1DC0ECE10}&amp;DynamicPlaceholderId=3\" /><r uid=\"{7EBBDF02-A4EB-5A38-967E-A2456DA13575}\" id=\"{D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Next step\" par=\"FieldNames={F00502BF-BE3F-5DCE-852C-76BF019C21B6}&amp;DynamicPlaceholderId=9\" /><r uid=\"{2CA312D3-9D75-5979-837D-F130B75E78ED}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{2EF2C7F6-A09E-5165-9F3E-DC69EE4CA647}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={F7C0725C-98FB-4A82-8CCB-49FFB4667894}&amp;DynamicPlaceholderId=2\" /><r uid=\"{7EBBDF02-A4EB-5A38-967E-A2456DA13575}\" id=\"{D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Next step\" par=\"FieldNames={F00502BF-BE3F-5DCE-852C-76BF019C21B6}&amp;DynamicPlaceholderId=9\" /><r uid=\"{2CA312D3-9D75-5979-837D-F130B75E78ED}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -379,12 +379,12 @@
                 {
                   "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
                   "Hint": "Title",
-                  "Value": "Contact an independent agent"
+                  "Value": "Find a local agent"
                 },
                 {
                   "ID": "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8",
                   "Hint": "NavigationTitle",
-                  "Value": "Contact an independent agent"
+                  "Value": "Find a local agent"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -394,7 +394,7 @@
                 {
                   "ID": "748e2709-fb2f-5f73-9ca6-d8e801b6eafc",
                   "Hint": "metadataTitle",
-                  "Value": "Contact an independent agent"
+                  "Value": "Find a local agent"
                 },
                 {
                   "ID": "396bcd2c-e08b-56fa-8d7a-170b9a7a18e8",
@@ -436,7 +436,7 @@
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{70364DAB-65E3-5ADE-98E0-605D8E3F8289}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{05CC2B0C-FEB8-5345-B723-FDBB502653D2}\" id=\"{F63F0F36-EA5B-5693-85C6-B4DF475C8840}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Introduction\" par=\"FieldNames={C64AAA90-DC86-5D1E-9286-1BA1DC0ECE10}&amp;DynamicPlaceholderId=3\" /><r uid=\"{14099815-A7C6-5A31-9054-C8860B1494A2}\" id=\"{FF280574-45AE-5A99-B5E0-5E290B91D9B0}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Product choices\" par=\"FieldNames={E87C07D2-5BD5-5047-9660-2A931C23CC11}&amp;DynamicPlaceholderId=8&amp;RenderingIdentifier=your-options\" /><r uid=\"{2703DC2B-B062-59BA-8F7E-C9586E887D47}\" id=\"{D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Next step\" par=\"FieldNames={845E1229-DB23-56CD-8CCD-0CFF2445D063}&amp;DynamicPlaceholderId=9&amp;RenderingIdentifier=next-step\" /><r uid=\"{1377CB7E-E017-5D13-B6B1-55D3B4D9FDD6}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{70364DAB-65E3-5ADE-98E0-605D8E3F8289}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={F7C0725C-98FB-4A82-8CCB-49FFB4667894}&amp;DynamicPlaceholderId=2\" /><r uid=\"{14099815-A7C6-5A31-9054-C8860B1494A2}\" id=\"{FF280574-45AE-5A99-B5E0-5E290B91D9B0}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Product choices\" par=\"FieldNames={E87C07D2-5BD5-5047-9660-2A931C23CC11}&amp;DynamicPlaceholderId=8&amp;RenderingIdentifier=your-options\" /><r uid=\"{2703DC2B-B062-59BA-8F7E-C9586E887D47}\" id=\"{D371FBC9-D8D2-5310-9660-3D5F7C3BB9E4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Next step\" par=\"FieldNames={845E1229-DB23-56CD-8CCD-0CFF2445D063}&amp;DynamicPlaceholderId=9&amp;RenderingIdentifier=next-step\" /><r uid=\"{1377CB7E-E017-5D13-B6B1-55D3B4D9FDD6}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -454,12 +454,12 @@
                 {
                   "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
                   "Hint": "Title",
-                  "Value": "Explore a quote"
+                  "Value": "Get an insurance quote"
                 },
                 {
                   "ID": "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8",
                   "Hint": "NavigationTitle",
-                  "Value": "Explore a quote"
+                  "Value": "Get an insurance quote"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -469,7 +469,7 @@
                 {
                   "ID": "748e2709-fb2f-5f73-9ca6-d8e801b6eafc",
                   "Hint": "metadataTitle",
-                  "Value": "Explore a quote"
+                  "Value": "Get an insurance quote"
                 },
                 {
                   "ID": "396bcd2c-e08b-56fa-8d7a-170b9a7a18e8",
@@ -1772,7 +1772,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -1823,7 +1823,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/condo\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/condo\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -1873,7 +1873,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -1923,7 +1923,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/renters\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/renters\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -1973,7 +1973,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -2024,7 +2024,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -2075,7 +2075,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -2125,7 +2125,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -2175,7 +2175,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -2225,7 +2225,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -2276,7 +2276,7 @@
                 {
                   "ID": "0c64457c-fa7a-58e7-b05f-0f150572aebd",
                   "Hint": "quoteLink",
-                  "Value": "<link text=\"Continue at Liberty Mutual\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
+                  "Value": "<link text=\"Get my price\" linktype=\"external\" url=\"https://www.libertymutual.com/get-a-quote\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -4882,7 +4882,7 @@
                 {
                   "ID": "3a61c47e-c996-5a80-ba68-f988ee36554f",
                   "Hint": "heading",
-                  "Value": "Advice for your next insurance decision"
+                  "Value": "Find a local agent"
                 },
                 {
                   "ID": "608c6aac-cdd7-5be1-b727-a1647363b89c",
@@ -4977,7 +4977,7 @@
                 {
                   "ID": "dee5d997-7be0-5075-909a-bd146335451f",
                   "Hint": "heading",
-                  "Value": "Find an independent agent"
+                  "Value": "Find an agent"
                 },
                 {
                   "ID": "29773d2d-19e0-5eed-9fff-97d5e4d3d441",
@@ -4992,7 +4992,7 @@
                 {
                   "ID": "e939dc09-771d-534a-803d-3f959501fe2f",
                   "Hint": "agentLink",
-                  "Value": "<link text=\"Find an independent agent\" linktype=\"external\" url=\"https://agents.libertymutual.com/\" />"
+                  "Value": "<link text=\"Find an agent\" linktype=\"external\" url=\"https://agents.libertymutual.com/\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -5032,7 +5032,7 @@
                 {
                   "ID": "3a61c47e-c996-5a80-ba68-f988ee36554f",
                   "Hint": "heading",
-                  "Value": "Explore coverage for your needs"
+                  "Value": "Get an insurance quote"
                 },
                 {
                   "ID": "608c6aac-cdd7-5be1-b727-a1647363b89c",
@@ -5127,12 +5127,12 @@
                 {
                   "ID": "dee5d997-7be0-5075-909a-bd146335451f",
                   "Hint": "heading",
-                  "Value": "Continue with Liberty Mutual"
+                  "Value": "Get your quote"
                 },
                 {
                   "ID": "29773d2d-19e0-5eed-9fff-97d5e4d3d441",
                   "Hint": "introduction",
-                  "Value": "<p>A quote uses information about you and what you want to insure. Coverage, pricing, and eligibility are determined during the quoting process.</p>"
+                  "Value": ""
                 },
                 {
                   "ID": "32292dfc-11ff-5f34-9827-8108256a20a1",
