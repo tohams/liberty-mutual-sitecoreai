@@ -509,10 +509,10 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "Both configured experiences have been previewed; Avery’s live order changes after publication, while Daniel’s producer order remains unchanged.",
         actions: [
-          `Open [**Agent Portal Home in Page Builder Editor**](${portalEditor}), retain **Default editing host**, select **Layers**, and select **Agency priorities**. Open that component’s personalization experience selector.`,
-          "Choose **agency-growth**. Click the header **Preview** button, then **Preview** in its menu. In the full preview, confirm Texas guidance appears first for the changed principal collection. Close the preview tab when finished.",
+          `Switch to the prepared **administrator acting as publisher** browser profile, and open [**Agent Portal Home in Page Builder Editor**](${portalEditor}). Use this profile to preview Home’s existing personalized component. Retain **Default editing host**, select **Layers**, and select **Agency priorities**. Open that component’s personalization experience selector.`,
+          "Choose **agency-growth**. Click the header **Preview** button, then **Preview** in its menu. In the full preview, confirm Texas guidance appears first for the changed principal collection. Close the preview tab, return to **Editor**, and select **Agency priorities** in **Layers** again.",
           "Choose **producer-priorities** for the same component, and open **Preview** again. Confirm its separate order: household conversations, Illinois workers compensation, and small-business growth. Close that preview tab without changing the producer content.",
-          `Return to [**Agency growth priorities**](${priorityContent}). Select the draft just edited, choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.`,
+          `Switch back to the **Author** browser profile, and open [**Agency growth priorities**](${priorityContent}). Select the draft just edited, choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.`,
           "In the separate **Approver** session, open that submitted collection version, inspect its order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
           "In the **administrator acting as publisher** session, open that collection in **Content**, choose **Publish**, keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, reload Avery’s actual live portal and confirm Texas guidance first. Reload Daniel’s separate producer session and confirm his household-first order remains unchanged.",
         ],
@@ -525,7 +525,7 @@ export const customerDemoChapters: DemoChapter[] = [
         controls: [
           "**agency-growth** and **producer-priorities** are the actual native experience names. Their datasource selections drive the component’s preview; this is not full CDP identity impersonation.",
           "Native profile evaluation selects the live experience. The renderer’s **Related Items**, **Siblings**, and **Recursive Related Items** dependencies keep the peer collections and selected cards associated with the published page.",
-          "The same **Draft → Awaiting approval → Approved** workflow and separate publisher permission govern this business-priority change.",
+          "The prepared administrator profile previews Home; the **Author** edits and submits the priority collection, the **Approver** reviews it, and the administrator publishes it. The **Draft → Awaiting approval → Approved** workflow remains unchanged. The experience selector appears when **Agency priorities** is selected.",
         ],
         links: [
           { label: "Preview Home experiences", href: portalEditor },
