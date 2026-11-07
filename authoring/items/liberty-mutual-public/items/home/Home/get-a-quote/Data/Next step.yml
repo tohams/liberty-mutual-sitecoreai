@@ -14,10 +14,11 @@ Languages:
     Fields:
     - ID: dee5d997-7be0-5075-909a-bd146335451f
       Hint: heading
-      Value: Continue with Liberty Mutual
+      Value: Get your quote
     - ID: 29773d2d-19e0-5eed-9fff-97d5e4d3d441
       Hint: introduction
-      Value: <p>A quote uses information about you and what you want to insure. Coverage, pricing, and eligibility are determined during the quoting process.</p>
+      Value: |
+
     - ID: 32292dfc-11ff-5f34-9827-8108256a20a1
       Hint: products
       Value: |

@@ -33,7 +33,9 @@ function finalPatch({shared,expectedShared,currentFinal,plan,device,variants}){
  const wanted=new Set(ordered.map(p=>norm(p.uid)));
  const deleted=[...existing].filter(([uid])=>!wanted.has(uid));
  assert(deleted.length===1&&deleted[0][0]===norm(plan.retireOnlyOwnedInitialPlacement),'Only the explicitly recorded first-slice Introduction can be retired.');
- let body=deleted.map(([,r])=>'<r uid="'+escape(r.uid)+'" p:delete="" />').join('');
+ // Sitecore's native layout delta removes a shared rendering with a nested
+ // p:d element. An empty p:delete attribute is ignored by the layout resolver.
+ let body=deleted.map(([,r])=>'<r uid="'+escape(r.uid)+'"><p:d /></r>').join('');
  let previous;
  for(const p of ordered){
   assert(p.placeholder&&p.renderingId&&p.dataSource!==undefined&&p.parameters!==undefined,'Incomplete desired native placement.');
