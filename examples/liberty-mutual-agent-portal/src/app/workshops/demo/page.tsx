@@ -8,6 +8,8 @@ import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
 import { customerDemoChapters } from "@/features/workshops/customer-demo/content";
 import {
   customerDemoSchedule,
+  DEMO_BUFFER_MINUTES,
+  DEMO_CLOSING_MINUTES,
   DEMO_TOTAL_MINUTES,
   elapsedTime,
 } from "@/features/workshops/customer-demo/timing";
@@ -41,6 +43,11 @@ function Lines({
 export default async function CustomerDemoPage() {
   const session = await requireWorkshopSession("/workshops/demo");
   const schedule = customerDemoSchedule(customerDemoChapters);
+  const publicEnd = schedule.find(
+    (entry) => entry.id === customerDemoChapters[0].steps.at(-1)!.id,
+  )!.end;
+  const closeStart = schedule.at(-1)!.end;
+  const closeEnd = closeStart + DEMO_CLOSING_MINUTES;
   return (
     <WorkshopShell session={session} active="demo">
       <main id="workshop-main" className={styles.page}>
@@ -51,13 +58,14 @@ export default async function CustomerDemoPage() {
           <h1>Liberty Mutual demonstration walkthrough</h1>
           <p>
             Follow the public-website story, then the Independent Agent Portal
-            story, in the order requested by Liberty Mutual. Each numbered step
-            pairs the on-screen actions with what to observe and what to say.
+            story, in the order requested by Liberty Mutual. Each loop has one
+            requested outcome, the actions needed to show it, and a clear
+            stopping point.
           </p>
           <div className={styles.introLinks}>
             <span className={styles.timeBudget}>
               <Clock3 size={18} aria-hidden="true" />
-              {DEMO_TOTAL_MINUTES} minutes total
+              {DEMO_TOTAL_MINUTES}-minute limit
             </span>
             <a href="#opening" className={styles.startLink}>
               Begin the demonstration{" "}
@@ -99,7 +107,7 @@ export default async function CustomerDemoPage() {
                   })}
                 </div>
               ))}
-              <a href="#closing">44:00 · Close</a>
+              <a href="#closing">{elapsedTime(closeStart)} · Close</a>
               <a href="#reset">After the demonstration</a>
             </nav>
           </aside>
@@ -117,7 +125,8 @@ export default async function CustomerDemoPage() {
                     "Open [**Current profile identities**](/workshops/reset#current-profiles), select **Workshop number 01**, and choose **Refresh status**. Copy the **Native profile ID** for **avery.01** and **daniel.01** for the native rule tests in step 08. Refresh this table after a reset so the tests use the current profiles. If an ID is unavailable, open [**SitecoreAI Profiles**](https://app.sitecorecloud.io/optimization/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df), choose **Search filter → Liberty Mutual agent identity**, and paste that row’s **Agent identity**. Open the matching profile, and copy the UUID from its URL. Reading status does not start a reset.",
                     "Prepare three separate **Sitecore Cloud** browser profiles: **Author** can edit and submit, **Approver** can approve, and an **administrator acting as publisher** performs publication. Open **Safeco Insurance Company of America POC** → **SitecoreAI / Demo**. Keeping these profiles ready demonstrates the actual permission boundaries without spending the live slot signing in.",
                     "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, approved answers, and shared disclosure. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
-                    "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/), [**published-answer API experience**](/workshops/content-api), [**communication preferences**](/workshops/preferences), and **SitecoreAI** in the prepared browser profiles. Check that the native comparison profiles and **Agents eligible for marketing** Audience have their restored starting values. The full import/reset exercise is available from [**Honor communication preferences**](/workshops/guide/honor-communication-preferences).",
+                    "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/), [**published-answer API experience**](/workshops/content-api), and **SitecoreAI** in the prepared browser profiles. Confirm that the comparison profiles and the **Agents eligible for marketing** Audience have their restored starting values.",
+                    "Prepare genuine public-site analytics before presenting. In a visitor browser, choose **Privacy choices → Allow personalization**, use **Search** to find the car-and-home answer, read it while scrolling, and open its Liberty Mutual source link. Confirm the resulting **pageView**, **LM_PUBLIC_CTA_CLICK**, and recorded scroll events in **Analytics → Events** for **liberty-mutual-public-site** within **1 hour**. Record their timestamps. Close the source tab; the live search loop will demonstrate **Essential only** separately.",
                     "Record the current published versions of **Bundle car and home**, **Agency growth priorities**, and **Product availability notice** before editing. Keep their original versions intact. Confirm that the temporary page name **coverage-guide-live** is available.",
                     "Open [**Bundle car and home in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). As **Author**, create an English version of **Bundle car and home** named **Shared answer review**. Append **Review your options with your agent before choosing coverage.** to **Detailed explanation**. Save, choose **Actions → Submit**, and have the **Approver** review and approve the new version. Leave it unpublished so the original wording still appears in the article, native Search source, and API. Open the approved revision in the publisher profile before screen sharing.",
                     "Prepare the native **Search sources** page, **Analytics → Events**, and the saved **agency-growth** and **producer-priorities** experiences. Keep the two public article/API tabs open for publication verification. Confirm these links during preflight; refresh a slow page, then open one fresh tab before changing the running demonstration.",
@@ -171,29 +180,40 @@ export default async function CustomerDemoPage() {
                         Trusted Answers, Wherever the Journey Begins
                       </a>
                     </th>
-                    <td>01:00–22:00</td>
-                    <td>21 minutes</td>
+                    <td>01:00–{elapsedTime(publicEnd)}</td>
+                    <td>{publicEnd - 1} minutes</td>
                   </tr>
                   <tr>
                     <th scope="row">
                       <a href="#portal">One Relevant Liberty Experience</a>
                     </th>
-                    <td>22:00–44:00</td>
-                    <td>22 minutes</td>
+                    <td>
+                      {elapsedTime(publicEnd)}–{elapsedTime(closeStart)}
+                    </td>
+                    <td>{closeStart - publicEnd} minutes</td>
                   </tr>
                   <tr>
                     <th scope="row">Close</th>
-                    <td>44:00–45:00</td>
+                    <td>
+                      {elapsedTime(closeStart)}–{elapsedTime(closeEnd)}
+                    </td>
                     <td>1 minute</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Publication and navigation reserve</th>
+                    <td>Use only when needed</td>
+                    <td>{DEMO_BUFFER_MINUTES} minutes</td>
                   </tr>
                 </tbody>
               </table>
               <p className={styles.pacing}>
-                <strong>Pacing:</strong> begin public publication during step
-                04, explain the Profound intake pattern during step 05, then
-                inspect analytics and published delivery. Keep the Agent Portal
-                priority change in draft until both audience previews in step 11
-                are complete.
+                <strong>Pacing:</strong> the {closeEnd}-minute plan leaves{" "}
+                {DEMO_BUFFER_MINUTES} minutes within the {DEMO_TOTAL_MINUTES}
+                -minute limit. Stop each loop when its stated outcome is
+                visible. Use the reserve for publication or navigation delays.
+                If indexing is still pending, return to that same loop to
+                complete its verification; keep Analytics and API focused on
+                their own outcomes.
               </p>
             </section>
 
@@ -241,7 +261,9 @@ export default async function CustomerDemoPage() {
                         )}
                       </div>
                       <h3>{step.label}</h3>
-                      <p className={styles.objective}>{step.objective}</p>
+                      <p className={styles.objective}>
+                        <strong>Outcome:</strong> {step.objective}
+                      </p>
                       <div className={styles.talkTrack}>
                         <h4>
                           <Mic2 size={17} aria-hidden="true" /> Talk track
@@ -273,6 +295,12 @@ export default async function CustomerDemoPage() {
                         <h4>What to observe</h4>
                         <Lines lines={step.expected} />
                       </div>
+                      <div className={styles.observations}>
+                        <h4>Stop when</h4>
+                        <p>
+                          <GuideText text={step.stopWhen} />
+                        </p>
+                      </div>
                       <h4>Show the data and controls</h4>
                       <Lines lines={step.controls} />
                       {step.images?.map((image) => (
@@ -289,7 +317,9 @@ export default async function CustomerDemoPage() {
             ))}
 
             <section id="closing" className={styles.opening}>
-              <span className={styles.timing}>44:00–45:00 · Close</span>
+              <span className={styles.timing}>
+                {elapsedTime(closeStart)}–{elapsedTime(closeEnd)} · Close
+              </span>
               <h2>Trusted content with clear ownership</h2>
               <div className={styles.talkTrack}>
                 <h3>
