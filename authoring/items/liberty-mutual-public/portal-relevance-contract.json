@@ -65,6 +65,11 @@
           "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
           "Hint": "__Masters",
           "Value": "{2EC5A6FA-CEFE-5477-9E13-9AD07609F26C}"
+        },
+        {
+          "ID": "dec8d2d5-e3cf-48b6-a653-8e69e2716641",
+          "Hint": "__Security",
+          "Value": "ar|sitecore\\Liberty Mutual Workshop Author|pe|+item:read|+item:write|+item:create|-item:delete|+item:rename|-item:admin|pd|+item:read|+item:write|+item:create|-item:delete|+item:rename|-item:admin|ar|sitecore\\Liberty Mutual Workshop Approver|pe|+item:read|+item:write|-item:create|-item:delete|-item:rename|-item:admin|pd|+item:read|+item:write|-item:create|-item:delete|-item:rename|-item:admin|"
         }
       ],
       "Languages": [

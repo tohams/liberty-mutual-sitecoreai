@@ -15,6 +15,13 @@ DATA_PARENT='20e904a1-9b60-43a1-a8d0-8e3aee45b115'
 VARIANTS_PARENT='19a63bdd-f9c6-403b-8068-c1884e9bb413'
 PLACEHOLDERS_PARENT='e601261f-f47f-4831-b91e-ef70efab3276'
 AVAILABLE_PARENT='2bcfce89-293c-4ddb-870a-78bce4777859'
+# Match the existing Public Review library roles when this CreateOnly library is restored.
+EDITORIAL_LIBRARY_ACL=(
+    r'ar|sitecore\Liberty Mutual Workshop Author|pe|+item:read|+item:write|+item:create|-item:delete|+item:rename|-item:admin|'
+    r'pd|+item:read|+item:write|+item:create|-item:delete|+item:rename|-item:admin|'
+    r'ar|sitecore\Liberty Mutual Workshop Approver|pe|+item:read|+item:write|-item:create|-item:delete|-item:rename|-item:admin|'
+    r'pd|+item:read|+item:write|-item:create|-item:delete|-item:rename|-item:admin|'
+)
 RECORDS=[]
 def item(path,parent,template,fields=None,shared=None):
     r={'ID':uid(path),'Parent':parent,'Template':template,'Path':path}
@@ -24,7 +31,7 @@ def item(path,parent,template,fields=None,shared=None):
 def data(path,template,values):
     r=item(path,uid(path.rsplit('/',1)[0]),M['templateIds'][template],[field(M['fieldIds'][template+'.'+name],name,value) for name,value in values.items()]+[field(h.F['workflowState'],'__Workflow state',brace(M['workflow']['draft']))],[field(h.F['workflow'],'__Workflow',brace(M['workflow']['id']))]);return r
 def build():
-    item(LIBRARY,DATA_PARENT,h.T['folder'],shared=[field(h.F['masters'],'__Masters',brace(M['templateIds']['AgencyPriorities']))])
+    item(LIBRARY,DATA_PARENT,h.T['folder'],shared=[field(h.F['masters'],'__Masters',brace(M['templateIds']['AgencyPriorities'])),field('dec8d2d5-e3cf-48b6-a653-8e69e2716641','__Security',EDITORIAL_LIBRARY_ACL)])
     item(LIBRARY+'/Recommendations',uid(LIBRARY),h.T['folder'],shared=[field(h.F['masters'],'__Masters',brace(M['templateIds']['AgencyPriority']))])
     cards=[
       ('Home and auto conversations','HOUSEHOLD GROWTH','Connect home and auto conversations','<p>Help clients consider their home and auto needs together, and prepare for a useful renewal conversation.</p>','Review the household guide','/resources/prepare-a-household-renewal'),

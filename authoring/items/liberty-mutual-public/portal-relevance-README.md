@@ -2,6 +2,8 @@
 
 **Agency priorities** is a marketer-managed collection of product conversations and guidance. Its ordered `Recommendations` field selects native **AgencyPriority** items. Authors can change a recommendation's heading, copy, image, and action, or change the order without a frontend release.
 
+The **Agency priorities** folder grants the existing **Liberty Mutual Workshop Author** and **Approver** roles the same content permissions as the public editorial libraries. Authors can create and submit versions; approvers review submitted versions through **Liberty Mutual Public Review**. Neither role receives delete or administrator rights. The folder ACL is included only in the explicit **CreateOnly** editorial seed so a clean restoration preserves this access without overwriting existing content during normal deployment.
+
 The initial collections live beneath the Agent Portal's **Data → Agency priorities**:
 
 | Collection | Intended native audience variant | Initial emphasis |
