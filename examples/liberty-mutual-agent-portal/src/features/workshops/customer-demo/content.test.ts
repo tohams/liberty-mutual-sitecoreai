@@ -545,19 +545,28 @@ test("the priority edit remains a draft until both audience previews and approva
     /(?:choose|select)\s+Actions → (?:Submit|Approve)|click Start publish/i,
   );
   const id = "portal-preview";
+  const previewRole = actionIndex(
+    id,
+    /Switch to.*administrator acting as publisher.*browser profile.*Page Builder Editor/i,
+  );
   const principal = actionIndex(id, /Choose agency-growth.*Preview/);
   const producer = actionIndex(id, /Choose producer-priorities.*Preview/);
-  const submit = actionIndex(id, /Actions → Submit/);
+  const submit = actionIndex(id, /Switch back.*Author.*Actions → Submit/);
   const approve = actionIndex(id, /separate Approver.*Actions → Approve/i);
   const publish = actionIndex(
     id,
     /administrator acting as publisher.*Start publish/i,
   );
   assert(
-    principal < producer &&
+    previewRole < principal &&
+      principal < producer &&
       producer < submit &&
       submit < approve &&
       approve < publish,
+  );
+  assert.match(
+    prose(step(id).actions[principal]),
+    /Close the preview tab.*Editor.*select Agency priorities in Layers again/i,
   );
   assert.match(
     prose(step(id).controls),
