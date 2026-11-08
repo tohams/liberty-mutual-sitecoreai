@@ -42,19 +42,19 @@ export const customerDemoChapters: DemoChapter[] = [
     id: "public",
     title: "Trusted Answers, Wherever the Journey Begins",
     summary:
-      "A prospective customer asks an insurance question, finds approved guidance and its source, and takes a useful next step. Then follow the publishing team as it creates, governs, publishes, measures, and reuses that content.",
+      "Start with a customer’s question, then follow the approved answer through authoring, review, publication, measurement, and reuse. Business users manage one governed source across delivery channels.",
     sourceSlide: 10,
     steps: [
       {
         id: "public-question",
-        title: "Ask an insurance question",
+        title: "Search in the customer’s own words",
         label:
           "User can ask a question in conversational language in an AI-enabled search field",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
         durationMinutes: 2,
         objective:
-          "A visitor finds a relevant approved answer using conversational language and receives an agent contact option when the subject is unsupported.",
+          "Help a visitor find an approved answer and its source, with an agent-assisted next step when the subject needs further help.",
         stopWhen:
           "The supported answer and its source have been shown, and the unsupported question ends with No results found and Contact an agent.",
         actions: [
@@ -67,11 +67,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "The conversational question retrieves relevant Liberty Mutual guidance with a source. The unsupported subject offers an agent-assisted next step instead of unrelated answers.",
         ],
         talkTrack: [
-          "A customer can ask a question in their own words and reach Liberty Mutual’s approved guidance and source. When the content does not address the subject, the experience offers help from an agent. That is the complete search outcome.",
+          "A customer can ask a question in their own words and reach Liberty Mutual’s approved guidance and source. When the content does not address the subject, the experience offers help from an agent.",
         ],
         controls: [
-          "**SitecoreAI Search** retrieves and ranks the published content. The application’s authored-evidence check withholds unsupported question results; it is separate from an ML confidence score.",
-          "**Essential only** preserves necessary website and Search behavior. The public answer shows its source and coverage details; governance metadata is inspected in the next loop.",
+          "**SitecoreAI Search** retrieves and ranks published guidance. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
+          "**Essential only** keeps website and Search functions available while respecting the visitor’s choice about optional collection.",
         ],
         links: [
           { label: "Public Home", href: `${PUBLIC}/` },
@@ -79,18 +79,18 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Car and home article", href: ARTICLE },
         ],
         transition:
-          "The search loop ends at the agent contact option. Next, open the saved answer in Page Builder to show the structure behind discovery.",
+          "The customer has a sourced answer and a clear next step. Now show how the content team makes that answer consistent and discoverable.",
       },
       {
         id: "public-discovery",
-        title: "Show structured, authoritative content",
+        title: "Make approved answers easier to discover",
         label:
           "Search engines and AI answer engines can find and cite the right LM content",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
         durationMinutes: 2,
         objective:
-          "Show that the approved answer has a native content model, managed classifications, and structured page metadata for discovery.",
+          "Give approved guidance the structure, classifications, and metadata that help search and AI consumers interpret it.",
         stopWhen:
           "The answer template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
         actions: [
@@ -102,11 +102,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "The same governed answer supplies its native fields, managed taxonomy, canonical metadata, and structured answer data.",
         ],
         talkTrack: [
-          "The answer is structured content with a source, owner, applicability, and review dates. Authors use managed choices for consistent classifications. Canonical metadata and structured answer data make that meaning available to search and AI consumers.",
+          "The answer is structured content with a source, owner, applicability, and review dates. Managed choices keep classifications consistent, while canonical metadata and structured answer data give search and AI consumers clear meaning.",
         ],
         controls: [
           "**Page Builder → Content → Quick Info** identifies the native template. **Resource metadata** classifies the referenced **Approved answer** using lists maintained beneath **Data → Taxonomy**.",
-          "The public rendering emits **FAQPage** metadata and a canonical URL. External discovery also depends on crawl permissions and each engine’s policies; this replica is excluded from external crawling.",
+          "The public rendering supplies **FAQPage** metadata and a canonical URL: a structured foundation for discovery by permitted search and AI consumers.",
         ],
         links: [
           { label: "Approved answer fields", href: `${answerContent}` },
@@ -114,18 +114,18 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Public article", href: `${ARTICLE}` },
         ],
         transition:
-          "The answer has an identifiable structure. Now publish its prepared revision and verify that Search receives the same change.",
+          "One structured answer now carries its meaning and governance. Next, publish a reviewed change and see Search stay aligned.",
       },
       {
         id: "public-indexing",
-        title: "Show automatic Search indexing",
+        title: "Keep Search current as content changes",
         label:
           "Published content is automatically indexed by enterprise search platform",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
         durationMinutes: 4,
         objective:
-          "Publish one approved answer revision and verify that the native Search document receives the new wording automatically.",
+          "Publish one approved answer revision and see the updated wording reach Search automatically, with its classifications intact.",
         stopWhen:
           "The native Search document contains the newly published sentence, with its state, product, and audience values preserved.",
         actions: [
@@ -137,11 +137,10 @@ export const customerDemoChapters: DemoChapter[] = [
           "A single approved source publication updates the native Search record automatically, including the changed body and unchanged applicability metadata.",
         ],
         talkTrack: [
-          "The publisher releases the approved answer once. The configured publication event updates Search with the same wording and classifications. The marketer does not retype the answer or request a manual reindex.",
+          "The publisher releases the approved answer once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages one answer across these delivery channels.",
         ],
         controls: [
-          "The **OnEnd** publication event calls the configured publication service, which reconciles approved Live content through the **Search Push API**. The **Approved answers** library is the indexed content source; an ordinary Landing page does not become an approved-answer Search document automatically.",
-          "Publication and indexing finish asynchronously. If the new row is still pending, keep this outcome pending and return to this same loop after the next demonstration. A completed rehearsal receipt may explain the configured path, but it must not be presented as completion of the current publication.",
+          "The **OnEnd** publication event calls the configured publication service, which reconciles approved Live content through the **Search Push API**. This mapping indexes the **Approved answers** library, including the answer’s wording and applicability metadata.",
         ],
         links: [
           {
@@ -154,18 +153,18 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "Once the updated Search record is visible, move to creating a new page from the governed component library.",
+          "The published answer and Search now agree. Next, give a marketer the same control over a complete page.",
       },
       {
         id: "public-authoring",
-        title: "Create, review, and publish content",
+        title: "Create and publish pages with confidence",
         label:
           "Marketing builds and publishes pages from a library of pre-approved components",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
         durationMinutes: 8,
         objective:
-          "A marketer creates a page from approved components, previews it, and publishes it through separate Author, Approver, and publisher actions.",
+          "A marketer creates and previews a page from approved building blocks, with clear Author, Approver, and publisher responsibilities.",
         stopWhen:
           "The new coverage-guide-live page shows the authored headings and the shared Promotion on the public website.",
         actions: [
@@ -185,7 +184,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         controls: [
           "**Landing page** creates local **Hero** and **Introduction** items. Placeholder settings restrict the available components. **Assign** reuses the existing Promotion; **Compact** changes only its presentation.",
-          "The configured workflow is **Draft → Awaiting approval → Approved**. Approval does not automatically publish, and each local content item must complete its review.",
+          "The configured workflow is **Draft → Awaiting approval → Approved**. Each local content item completes its review, and a separate publishing action releases the approved page.",
         ],
         links: [
           { label: "Create a page under public Home", href: publicEditor },
@@ -195,11 +194,11 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The created page is now live. Next, explain where Profound output could enter that same governed authoring process.",
+          "The page is live through a familiar review process. That same governed process can also receive content from an upstream tool such as Profound.",
       },
       {
         id: "public-profound",
-        title: "Explain governed Profound intake",
+        title: "A governed path for Profound content",
         label:
           "Marketing can publish content from Profound directly into the CMS / DXP",
         phase: "Authoring & Content-Operation Flow",
@@ -207,12 +206,12 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 1,
         mode: "explain",
         objective:
-          "Explain how Profound output could enter a governed SitecoreAI draft and follow normal human review before publication.",
+          "Explain the proposed integration path from Profound output to a SitecoreAI Draft, followed by human review and publication.",
         stopWhen:
           "The scoped intake, native Draft, human approval, and downstream publication path have been explained.",
         actions: [
           "Trace **Profound output → scoped integration → SitecoreAI Draft → human review and approval → publication → website, Search, and API consumers**.",
-          "Use the structured answer template and review workflow already shown to explain the mapping of proposed wording, source, owner, applicability, and dates. Identify this as an integration explanation; a live Profound connection is not configured.",
+          "Use the structured answer template and review workflow already shown to explain the mapping of proposed wording, source, owner, applicability, and dates. Present this as the proposed integration design, using the native review process already demonstrated.",
         ],
         expected: [
           "The audience understands where proposed upstream content enters and how native governance controls its publication.",
@@ -221,32 +220,32 @@ export const customerDemoChapters: DemoChapter[] = [
           "Profound publishing is an option Liberty Mutual is exploring. A scoped integration could map proposed content into the appropriate template as a draft. The normal human review, approval, and publication controls would then apply.",
         ],
         controls: [
-          "The integration uses scoped API permissions and the selected template’s fields. This explanation does not represent a packaged Profound connector or a configured live Profound connection.",
+          "Profound intake uses a proposed integration design with scoped API permissions, template mapping, Draft creation, and human review.",
         ],
         transition:
-          "Now use the marketer’s native analytics view to inspect genuine content engagement.",
+          "Content is now created, governed, and delivered. Next, show marketers how engagement signals inform their next improvement.",
       },
       {
         id: "public-analytics",
-        title: "Read content-performance signals",
+        title: "See how people engage with your content",
         label: "Quick-answer analytics for marketers",
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
         durationMinutes: 2,
         objective:
-          "A marketer reads genuine public-site engagement signals directly in the native Events report.",
+          "Help a marketer identify how visitors reach, read, and act on public-site guidance using the native Events report.",
         stopWhen:
           "The site-filtered report shows the prepared page, CTA, and scroll events with their actual timestamps and reporting period.",
         actions: [
           `Open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site** to **liberty-mutual-public-site** and **Time** to **1 hour**, matching the consented visitor interactions completed during preparation.`,
           "Inspect **Events over Time** and **Events Table**. Identify the actual **pageView**, **LM_PUBLIC_CTA_CLICK**, and **LM_PUBLIC_SCROLL_25** or other recorded scroll milestones. Match their timestamps to the prepared visitor journey.",
-          "Explain one use of these signals: identify whether visitors reach and read the answer and select its next action. These engagement events do not establish a completed quote or policy sale.",
+          "Explain one use of these signals: identify whether visitors reach and read the answer and select its next action. Use visits, reading depth, and selected actions to choose where to improve the content.",
         ],
         expected: [
           "A marketer can inspect genuine, consented engagement for the public site without a separate analytics request.",
         ],
         talkTrack: [
-          "The marketer can see page visits, content clicks, and reading depth in one platform view. These are timely engagement signals for improving content; they do not measure completed insurance sales.",
+          "The marketer can see page visits, content clicks, and reading depth in one platform view. Use these timely engagement signals to identify useful content and opportunities to improve the customer journey.",
         ],
         controls: [
           "The **Site** filter separates this application’s events from the Agent Portal, and **Time → 1 hour** defines the reporting period. Use the events and timestamps actually present.",
@@ -271,17 +270,17 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The reporting outcome is complete. Next, retrieve the published answer in a separate application.",
+          "Engagement shows how the website’s content is used. Next, give another application access to that same approved answer.",
       },
       {
         id: "public-api",
-        title: "Retrieve the answer in another experience",
+        title: "Reuse one approved answer in another experience",
         label: "Decoupled delivery with a stable content API",
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
         durationMinutes: 1,
         objective:
-          "A separate application retrieves and presents the same published answer through a stable content API.",
+          "Present the same published answer in a separate application through a stable content API, keeping wording and governance together.",
         stopWhen:
           "The second experience shows the newly published sentence, its source, stable item ID, and native content version.",
         actions: [
@@ -332,7 +331,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The same governed content foundation can support known independent agents with different roles, agencies, and business priorities.",
+          "The content can serve more than one application. Now apply the same governed foundation to an independent agent’s daily priorities.",
       },
     ],
   },
@@ -340,19 +339,19 @@ export const customerDemoChapters: DemoChapter[] = [
     id: "portal",
     title: "One Relevant Liberty Experience",
     summary:
-      "An independent agent sees relevant priorities and consistent design. A marketer changes the emphasis, previews both audiences, and publishes without development work. One shared disclosure then demonstrates cross-site reuse, approval, history, and reversal.",
+      "Help independent agents find priorities relevant to their business. Give marketers control over that experience within a consistent design, and keep shared messages aligned through review, publication, and a clear history.",
     sourceSlide: 11,
     steps: [
       {
         id: "portal-relevance",
-        title: "Compare two known agents",
+        title: "Personalize priorities for each agent",
         label:
           "Agent sees product content, and bundles based on their business, relationship and priorities",
         phase: "Agent Experience",
         sourceSlide: 11,
         durationMinutes: 3,
         objective:
-          "Two known agents receive priorities appropriate to their role, licensed states, and agency production.",
+          "Give each known agent relevant priorities based on their role, licensed states, and agency production.",
         stopWhen:
           "Avery and Daniel’s different Home priorities match their native profile tests, and the saved marketing-eligibility condition has been shown.",
         actions: [
@@ -368,8 +367,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The known agent’s role, licenses, specialization, and agency production inform relevant priorities. Avery and Daniel match different native experiences. A stored communication choice can also govern marketing eligibility. Liberty Mutual can keep Ping for sign-in and supply this context from its existing systems.",
         ],
         controls: [
-          "The native rule uses imported UDL attributes. The application separately enforces licensed-state eligibility; a content decision does not grant access.",
-          "**Load profile → Profile ID** evaluates actual native profiles. **Current profile identities → Refresh status** provides current IDs after a reset. The optional Boolean **marketingSuppressed** must be explicitly false for the saved marketing Audience.",
+          "The native rule uses imported UDL attributes. The application separately enforces licensed-state eligibility alongside the content personalization.",
+          "**Load profile → Profile ID** evaluates actual native profiles. **Current profile identities → Refresh status** provides current IDs after a reset. The optional Boolean **marketingSuppressed** must be explicitly false for the separate saved marketing Audience.",
         ],
         links: [
           { label: "Live Agent Portal Home", href: `${PORTAL}/` },
@@ -427,17 +426,17 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The relevance outcome is visible. Now show the shared design and authoring guardrails that keep the portal consistent.",
+          "The agents receive priorities that fit their business. Next, show how shared design keeps those relevant experiences consistently on brand.",
       },
       {
         id: "portal-design",
-        title: "Show consistent, governed design",
+        title: "Keep the brand consistent as content grows",
         label: "Agent sees consistent brand and design across all portal pages",
         phase: "Agent Experience",
         sourceSlide: 11,
         durationMinutes: 2,
         objective:
-          "Show consistent portal branding and the native composition rules that restrict authors to appropriate components.",
+          "Let business users manage content within a consistent portal design and approved component choices.",
         stopWhen:
           "Two representative portal pages share the same design, and the permitted component choices have been shown without changing a page.",
         actions: [
@@ -462,11 +461,11 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Learning & resources", href: `${PORTAL}/resources` },
         ],
         transition:
-          "Keep the governed structure and change one business priority in its native content collection.",
+          "The design stays consistent while the business changes its emphasis. Next, prepare one priority update in the governed content collection.",
       },
       {
         id: "portal-priority-edit",
-        title: "Change a business priority",
+        title: "Change business priorities without code",
         label: "Marketing user changes a priority without development work",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
@@ -485,7 +484,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The new Draft references the same approved cards in the new order. Avery’s live page retains the published order until the following preview and publication loop completes.",
         ],
         talkTrack: [
-          "The business user changes the ordered selection of approved conversations without an engineering ticket or frontend release. This step ends with a saved draft; the next step previews and releases that same change.",
+          "The business user changes the ordered selection of approved conversations without an engineering ticket or frontend release. The live experience stays consistent while the team prepares and reviews its next priority.",
         ],
         controls: [
           "**Ordered recommendations** is an ordered native item selection. This collection supplies the **agency-growth** experience, while **Producer priorities** supplies a separate experience.",
@@ -495,11 +494,11 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Edit Agency growth priorities", href: priorityContent },
         ],
         transition:
-          "Continue this priority-change loop with audience preview. Inspect the changed principal and unchanged producer experiences before approval and publication.",
+          "Continue the same priority change by previewing both audiences. Confirm the intended effect before approving and publishing it.",
       },
       {
         id: "portal-preview",
-        title: "Preview audiences, then publish",
+        title: "Preview the impact, then release the change",
         label: "Marketing user previews the experience for each agent audience",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
@@ -523,7 +522,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The marketer previews both configured experiences before release. The principal receives the new emphasis, while the producer keeps the appropriate producer guidance. Separate approval and publication then make the intended change visible to the actual agent.",
         ],
         controls: [
-          "**agency-growth** and **producer-priorities** are the actual native experience names. Their datasource selections drive the component’s preview; this is not full CDP identity impersonation.",
+          "**agency-growth** and **producer-priorities** are the native experience names. Their datasource selections display each configured experience in Preview; **Load profile** tests the real profile, and signed-in agent browsers verify the live result.",
           "Native profile evaluation selects the live experience. The renderer’s **Related Items**, **Siblings**, and **Recursive Related Items** dependencies keep the peer collections and selected cards associated with the published page.",
           "The prepared administrator profile previews Home; the **Author** edits and submits the priority collection, the **Approver** reviews it, and the administrator publishes it. The **Draft → Awaiting approval → Approved** workflow remains unchanged. The experience selector appears when **Agency priorities** is selected.",
         ],
@@ -536,18 +535,18 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Verify Avery’s live portal", href: `${PORTAL}/` },
         ],
         transition:
-          "A marketer changed the agent’s emphasis without development work. Next, make one approved disclosure change reach both independent websites.",
+          "The right agent now receives the reviewed priority change. Next, keep approved wording consistent across both independent websites.",
       },
       {
         id: "portal-shared-content",
-        title: "Update one disclosure across sites",
+        title: "Publish one approved message across both sites",
         label:
           "Approved shared content is managed once and distributed to every website",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
         durationMinutes: 4,
         objective:
-          "Publish one approved disclosure change and observe it on the public and Agent Portal Home pages.",
+          "Keep the public website and Agent Portal aligned by publishing one approved disclosure from a shared source.",
         stopWhen:
           "The added disclosure sentence is visible on both Home pages after one source publication.",
         actions: [
@@ -564,9 +563,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "Both sites reference one governed disclosure. The content team changes it once, follows the review process, and publishes the source. Each site keeps its own layout while displaying the same approved message.",
         ],
         controls: [
-          "**Product availability notice** belongs to the public site’s **Data → Disclosures** library. The Portal references that native item; it does not maintain its own copy of the wording.",
-          "The public and Agent Portal Home pages provide the complete cross-site verification for this loop.",
-          "Publication delivers the approved shared item through **Experience Edge**. If the job or delivery is pending, show its actual status and return to the live pages once the new wording is available.",
+          "**Product availability notice** belongs to the public site’s **Data → Disclosures** library. Both sites reference that same native item, keeping the approved wording in one place.",
+          "The public and Agent Portal Home pages show the shared message delivered through **Experience Edge**.",
         ],
         links: [
           { label: "Edit the shared disclosure", href: `${disclosureContent}` },
@@ -574,17 +572,17 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Agent Portal Home", href: `${PORTAL}/` },
         ],
         transition:
-          "The two Home pages show the shared update. Use that same change to inspect accountability and demonstrate a controlled reversal.",
+          "One reviewed update now reaches both sites. Finish by showing who approved it and how the team can restore the original wording with a complete history.",
       },
       {
         id: "portal-audit-rollback",
-        title: "Show history and reverse the change",
+        title: "Review changes and restore with confidence",
         label: "Every change is approved, auditable, and reversible",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
         durationMinutes: 4,
         objective:
-          "Inspect the actual approval history and restore the original disclosure through a new approved version.",
+          "Show clear approval accountability, then restore the original disclosure through a new reviewed version while preserving history.",
         stopWhen:
           "Both Home pages show the restored original wording, and the original, changed, and restored versions remain in history.",
         actions: [
@@ -631,7 +629,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "Close on the customer’s outcomes: trusted and relevant guidance, simpler business-managed changes, and governance that remains visible through publication and reversal.",
+          "Close on what this enables for Liberty Mutual: trusted guidance, more relevant agent experiences, and business-managed changes with clear accountability.",
       },
     ],
   },

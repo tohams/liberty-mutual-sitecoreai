@@ -53,14 +53,14 @@ export default async function CustomerDemoPage() {
       <main id="workshop-main" className={styles.page}>
         <header className={styles.heading}>
           <span className="workshop-eyebrow">
-            THE CUSTOMER’S PRESCRIBED FLOW
+            FROM CUSTOMER NEED TO BUSINESS VALUE
           </span>
           <h1>Liberty Mutual demonstration walkthrough</h1>
           <p>
-            Follow the public-website story, then the Independent Agent Portal
-            story, in the order requested by Liberty Mutual. Each loop has one
-            requested outcome, the actions needed to show it, and a clear
-            stopping point.
+            Show how trusted content helps customers and independent agents,
+            then how business users keep those experiences relevant and current.
+            Follow Liberty Mutual’s requested order, with one clear business
+            outcome and a focused set of actions for each demonstration.
           </p>
           <div className={styles.introLinks}>
             <span className={styles.timeBudget}>
@@ -130,6 +130,9 @@ export default async function CustomerDemoPage() {
                     "Record the version marked **Live** for **Bundle car and home** as **Live baseline version**, along with the current published versions of **Agency growth priorities** and **Product availability notice**. Keep those versions intact. Confirm that the temporary page name **coverage-guide-live** is available.",
                     "Verify the published baseline before preparing the indexing example: **Review your options with your agent before choosing coverage.** must be absent from the public article, the native **Liberty Mutual Approved Answers** Search record, and the [**published-answer API experience**](/workshops/content-api). If the sentence is already present, follow **Bundle car and home** in [**After the demonstration → restoration checklist**](#reset) to restore the preserved original answer through review and publication. Continue only after all three show the original wording.",
                     "Open [**Bundle car and home in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). As **Author**, create an English version from that verified original named **Shared answer review**. Add **Review your options with your agent before choosing coverage.** exactly once to **Detailed explanation**. Save, choose **Actions → Submit**, and have the **Approver** review and approve the new version. After approval, record this new English version number as **Prepared answer version**. It must be newer than the recorded **Live baseline version**. Leave it unpublished; the sentence must still be absent from the live article, Search, and API. In the publisher profile, open that exact recorded version number and confirm **Shared answer review** and **Approved**. Earlier rehearsals can reuse the same version name, so the version number identifies the revision prepared for this run.",
+                    "The Profound section explains a proposed integration design, rather than a configured live connection or packaged connector. Trace the proposed API, Draft, and review path using the native content model and workflow already shown.",
+                    "External discovery uses the structured metadata shown in step 02, together with crawl permissions and each engine’s policies. This replica is excluded from external crawling; demonstrate discovery readiness rather than a live external-engine citation.",
+                    "Allow publication, Search updates, and delivery to complete. Confirm the new wording from the current publication before marking its loop complete. Use the reserve for delivery waits, and return to that same loop if necessary. Keep Analytics and API focused on their own outcomes.",
                     "Prepare the native **Search sources** page and **Analytics → Events**. In the administrator profile, open [**Agent Portal Home in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998&sc_lang=en), choose **Layers**, select **Agency priorities**, and choose **Edit personalization rules** in the right-hand component panel. Confirm **Liberty Mutual - Agency product priorities** and leave this Builder ready. Keep Avery’s and Daniel’s current **Native profile ID** UUIDs, copied earlier in preparation, ready for the two read-only tests. Prepare the saved **agency-growth** and **producer-priorities** content previews for the later priority-change loop. Keep the public article/API tabs ready for their own delivery checks. Refresh a slow page, then open one fresh tab before changing the running demonstration.",
                   ]}
                 />
@@ -145,24 +148,24 @@ export default async function CustomerDemoPage() {
 
             <section id="opening" className={styles.opening}>
               <span className={styles.timing}>00:00–01:00 · Opening</span>
-              <h2>The story and the time budget</h2>
+              <h2>Trusted content, relevant experiences, and simpler change</h2>
               <p>
-                Two experiences use governed content. A prospective customer
-                finds a trustworthy answer, and an independent agent receives
-                relevant guidance. Follow all 13 steps, and use the reference
-                guides for extra depth after the demonstration.
+                Start with a customer finding approved guidance on the public
+                website. Then show how that same governed foundation helps
+                independent agents and gives business users control over the
+                content that serves them.
               </p>
               <div className={styles.talkTrack}>
                 <h3>
                   <Mic2 size={17} aria-hidden="true" /> Talk track
                 </h3>
                 <p>
-                  “We’ll start with your first rollout priority, bringing your
-                  existing LibertyMutual.com content onto a governed foundation.
-                  Then we’ll show how the same approach gives business users
-                  control of the content that your existing Independent Agent
-                  Portal can use. You’ll see an approved change reach both sites
-                  without a frontend release.”
+                  “We’ll start where you plan to start: your public website
+                  content. A customer finds trusted guidance, and a marketer
+                  manages the content through review and publication. We’ll then
+                  apply that same foundation to your existing agent portal, so
+                  business users can promote relevant products and keep approved
+                  wording consistent across channels.”
                 </p>
               </div>
               <table className={styles.runOfShow}>
@@ -211,10 +214,7 @@ export default async function CustomerDemoPage() {
                 <strong>Pacing:</strong> the {closeEnd}-minute plan leaves{" "}
                 {DEMO_BUFFER_MINUTES} minutes within the {DEMO_TOTAL_MINUTES}
                 -minute limit. Stop each loop when its stated outcome is
-                visible. Use the reserve for publication or navigation delays.
-                If indexing is still pending, return to that same loop to
-                complete its verification; keep Analytics and API focused on
-                their own outcomes.
+                visible, and use the reserve for publication or navigation.
               </p>
             </section>
 
@@ -261,7 +261,10 @@ export default async function CustomerDemoPage() {
                           </span>
                         )}
                       </div>
-                      <h3>{step.label}</h3>
+                      <h3>{step.title}</h3>
+                      <p>
+                        <strong>Customer request:</strong> {step.label}
+                      </p>
                       <p className={styles.objective}>
                         <strong>Outcome:</strong> {step.objective}
                       </p>
@@ -302,7 +305,7 @@ export default async function CustomerDemoPage() {
                           <GuideText text={step.stopWhen} />
                         </p>
                       </div>
-                      <h4>Show the data and controls</h4>
+                      <h4>How it works</h4>
                       <Lines lines={step.controls} />
                       {step.images?.map((image) => (
                         <GuideScreenshot image={image} key={image.file} />
@@ -321,24 +324,23 @@ export default async function CustomerDemoPage() {
               <span className={styles.timing}>
                 {elapsedTime(closeStart)}–{elapsedTime(closeEnd)} · Close
               </span>
-              <h2>Trusted content with clear ownership</h2>
+              <h2>More relevant experiences, with business control</h2>
               <div className={styles.talkTrack}>
                 <h3>
                   <Mic2 size={17} aria-hidden="true" /> Talk track
                 </h3>
                 <p>
-                  “You’ve seen a customer find sourced guidance, a marketer
-                  create and publish content, and an agent receive a relevant
-                  experience. The same governed content reaches separate sites
-                  and applications, while your team retains approval and version
-                  history.”
+                  “You’ve seen business users create and release changes, agents
+                  receive relevant priorities, and one approved update reach
+                  both sites. Those capabilities support the measures you
+                  identified: time to publish, the share of changes managed by
+                  business users, and content reuse.”
                 </p>
                 <p>
-                  “Three measures can tell you whether this operating model is
-                  working: time to publish, the share of changes your business
-                  teams make without engineering, and the rate of content reuse.
-                  We can now discuss your questions and the platform’s product
-                  direction.”
+                  “That gives your team a simpler way to keep trusted
+                  information current and help independent agents find what
+                  matters to their business. We can now discuss your questions
+                  and the platform’s product direction.”
                 </p>
               </div>
               <p>
