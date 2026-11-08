@@ -268,7 +268,7 @@ test("the public Search loop ends at the unsupported-question agent contact opti
   );
   assert.match(
     prose(entry.controls),
-    /application.*authored-evidence.*separate.*ML confidence/i,
+    /application.*authored-evidence.*approved source material.*question.*result/i,
   );
 });
 
@@ -286,9 +286,18 @@ test("discovery readiness identifies native structure while keeping external eng
     /canonical/i,
   ])
     assert.match(text, required);
+  const page = readFileSync(
+    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    "utf8",
+  );
+  const preparation = page.slice(
+    page.indexOf('<details id="preparation"'),
+    page.indexOf('<section id="opening"'),
+  );
+  assert.match(preparation, /excluded from external crawling/);
   assert.match(
-    text,
-    /excluded from external crawling|crawl policy.*rather than proof/i,
+    preparation,
+    /discovery readiness rather than a live external-engine citation/,
   );
 });
 
@@ -306,8 +315,8 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   ])
     assert.match(text, required);
   assert.match(
-    text,
-    /ordinary Landing page does not.*approved-answer Search document/i,
+    prose(entry.controls),
+    /This mapping indexes the Approved answers library.*wording and applicability metadata/i,
   );
   const publish = actionIndex(
     entry.id,
@@ -413,8 +422,19 @@ test("Profound is the customer-permitted governed integration explanation, not a
     text,
     /Profound output.*Draft.*human review and approval.*publication/i,
   );
-  assert.match(text, /live Profound connection is not configured/i);
-  assert.match(text, /does not represent a packaged Profound connector/i);
+  assert.match(text, /proposed integration design/i);
+  const page = readFileSync(
+    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    "utf8",
+  );
+  const preparation = page.slice(
+    page.indexOf('<details id="preparation"'),
+    page.indexOf('<section id="opening"'),
+  );
+  assert.match(
+    preparation,
+    /Profound.*proposed integration design.*rather than a configured live connection or packaged connector/i,
+  );
 });
 
 test("analytics is a report-only loop using genuine consented preparation", () => {
@@ -431,7 +451,14 @@ test("analytics is a report-only loop using genuine consented preparation", () =
     /Privacy choices/,
   ])
     assert.match(text, required);
-  assert.match(text, /do not establish a completed quote or policy sale/i);
+  assert.match(
+    text,
+    /visits, reading depth, and selected actions.*improve the content/i,
+  );
+  assert.doesNotMatch(
+    prose(entry.talkTrack),
+    /completed quote|policy sale|conversion lift/i,
+  );
   assert.match(text, /prepar.*consented|consented.*prepar/i);
   assert.doesNotMatch(
     prose(entry.actions),
@@ -570,7 +597,7 @@ test("the priority edit remains a draft until both audience previews and approva
   );
   assert.match(
     prose(step(id).controls),
-    /not full CDP identity impersonation/i,
+    /configured experience in Preview.*Load profile.*real profile.*signed-in agent browsers.*live result/i,
   );
   assert.match(
     prose(step(id).expected),
@@ -620,6 +647,34 @@ test("shared disclosure and its reversal stop after the two-site proof", () => {
   assert.match(
     step("portal-audit-rollback").stopWhen,
     /Both Home pages.*restored original wording.*history/,
+  );
+});
+
+test("the presenter narrative leads with outcomes and keeps operational cautions in preparation", () => {
+  const spoken = prose(
+    steps.flatMap((entry) => [...entry.talkTrack, entry.transition]),
+  );
+  assert.doesNotMatch(
+    spoken,
+    /outcome is complete|complete search outcome|rehearsal receipt|still pending|not configured|not verified/i,
+  );
+  const page = readFileSync(
+    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    "utf8",
+  );
+  assert.match(page, /<h3>\{step\.title\}<\/h3>/);
+  assert.match(page, /Customer request:<\/strong> \{step\.label\}/);
+  const preparation = page.slice(
+    page.indexOf('<details id="preparation"'),
+    page.indexOf('<section id="opening"'),
+  );
+  assert.match(
+    preparation,
+    /current publication before marking its loop complete/,
+  );
+  assert.match(
+    preparation,
+    /Allow publication, Search updates, and delivery to complete/,
   );
 });
 
