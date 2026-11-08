@@ -223,7 +223,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Profound intake uses a proposed integration design with scoped API permissions, template mapping, Draft creation, and human review.",
         ],
         transition:
-          "Content is now created, governed, and delivered. Next, show marketers how engagement signals inform their next improvement.",
+          "The native review and publication flow is established. Next, show marketers how engagement signals inform their next improvement.",
       },
       {
         id: "public-analytics",
