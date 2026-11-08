@@ -90,7 +90,7 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 10,
         durationMinutes: 2,
         objective:
-          "Give approved guidance the structure, classifications, and metadata that help search and AI consumers interpret it.",
+          "Make approved guidance easier to find and reuse, with its source, applicability, and review information kept explicit.",
         stopWhen:
           "The answer template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
         actions: [
@@ -125,7 +125,7 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 10,
         durationMinutes: 4,
         objective:
-          "Publish one approved answer revision and see the updated wording reach Search automatically, with its classifications intact.",
+          "Keep approved wording and classifications aligned across publishing and Search, reducing duplicate maintenance through one controlled update.",
         stopWhen:
           "The native Search document contains the newly published sentence, with its state, product, and audience values preserved.",
         actions: [
@@ -164,7 +164,7 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 10,
         durationMinutes: 8,
         objective:
-          "A marketer creates and previews a page from approved building blocks, with clear Author, Approver, and publisher responsibilities.",
+          "Create, preview, and publish pages without an engineering ticket, using approved components and a clear review process.",
         stopWhen:
           "The new coverage-guide-live page shows the authored headings and the shared Promotion on the public website.",
         actions: [
@@ -206,7 +206,7 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 1,
         mode: "explain",
         objective:
-          "Explain the proposed integration path from Profound output to a SitecoreAI Draft, followed by human review and publication.",
+          "Bring proposed Profound content into the same governed publishing process, with human review before release.",
         stopWhen:
           "The scoped intake, native Draft, human approval, and downstream publication path have been explained.",
         actions: [
@@ -233,7 +233,7 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 10,
         durationMinutes: 2,
         objective:
-          "Help a marketer identify how visitors reach, read, and act on public-site guidance using the native Events report.",
+          "Help marketers choose which guidance to improve using visits, clicks, and reading-depth signals.",
         stopWhen:
           "The site-filtered report shows the prepared page, CTA, and scroll events with their actual timestamps and reporting period.",
         actions: [
@@ -280,7 +280,7 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 10,
         durationMinutes: 1,
         objective:
-          "Present the same published answer in a separate application through a stable content API, keeping wording and governance together.",
+          "Reuse one approved answer through a stable API, reducing duplicate content maintenance across applications.",
         stopWhen:
           "The second experience shows the newly published sentence, its source, stable item ID, and native content version.",
         actions: [
@@ -351,7 +351,7 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 11,
         durationMinutes: 3,
         objective:
-          "Give each known agent relevant priorities based on their role, licensed states, and agency production.",
+          "Help agents focus on relevant product conversations based on their role, licensed states, and agency production.",
         stopWhen:
           "Avery and Daniel’s different Home priorities match their native profile tests, and the saved marketing-eligibility condition has been shown.",
         actions: [
