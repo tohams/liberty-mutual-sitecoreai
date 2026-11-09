@@ -79,20 +79,21 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Help a visitor find relevant approved guidance from a conversational question, with an agent-assisted next step when the subject needs further help.",
         stopWhen:
-          "The supported question returns the relevant result and answer excerpt, and the unsupported question ends with No results found and Contact an agent.",
+          "The supported question shows the range of relevant published results and the approved answer excerpt, and the unsupported question ends with No results found and Contact an agent.",
         actions: [
           `Open the [**public Home page**](${PUBLIC}/). Choose **Privacy choices → Essential only**, then select **Search** in the header. Search remains available when optional collection is declined.`,
-          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish, then show the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page.",
+          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Briefly point out the bundling overview and two practical articles, then highlight the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page. Keep every result unopened.",
           "In **keyword(s)**, replace the query with **Does car insurance cover cyberextortion?**, and select **Search**. Show **No results found** and **Contact an agent**. End this loop with that contact option; leave the link unopened.",
         ],
         expected: [
-          "The conversational question retrieves a relevant result and answer excerpt from approved Liberty Mutual guidance. The unsupported subject offers an agent-assisted next step.",
+          "The conversational question returns five published results, including **Bundle home and auto insurance**, **How to bundle your insurance policies**, **3 tips for bundling your insurance policies**, and **Can I bundle my car and home insurance?**. The approved answer excerpt is visible in the results. The unsupported subject offers an agent-assisted next step.",
         ],
         talkTrack: [
-          "A visitor asks, “Can I combine home and car coverage?” Search returns the relevant “Can I bundle my car and home insurance?” result and its answer excerpt. When published guidance does not address the question, the experience offers Contact an agent. The visitor has a useful next step, and Liberty Mutual stays in control of the guidance.",
+          "One question brings back several kinds of published guidance: a bundling overview, practical articles, and the approved answer. The visitor can compare useful guidance in the results without having to phrase the question exactly as Liberty Mutual does. When published guidance does not address the subject, Contact an agent provides the next step.",
         ],
         controls: [
           "**SitecoreAI Search** retrieves and ranks published guidance. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
+          "Published website pages join Search when their native **Include in site search** checkbox is selected. The articles and approved answers are managed and published in **SitecoreAI**.",
           "**Essential only** keeps website and Search functions available while respecting the visitor’s choice about optional collection.",
         ],
         links: [
@@ -162,7 +163,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "When that car-and-home guidance changes, the publisher releases the approved revision once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages one answer across these delivery channels.",
         ],
         controls: [
-          "The **OnEnd** publication event calls the configured publication service, which reconciles approved Live content through the **Search Push API**. This mapping indexes the **Approved answers** library, including the answer’s wording and applicability metadata.",
+          "The **OnEnd** publication event calls the configured publication service, which reconciles approved Live content through the **Search Push API**. This mapping indexes the **Approved answers** library and published website pages selected with **Include in site search**. This loop follows one approved answer’s wording and applicability metadata.",
         ],
         links: [
           {
