@@ -167,7 +167,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its state, product, and audience values preserved.",
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          `In the prepared **administrator acting as publisher** session, open [**the car-and-home resource page**](${resourcePageContent}). In the version selector, choose the prepared revision by the **Prepared page version** number recorded in [**Before presenting**](#preparation)—the new English page version created for this run. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish** for the selected page with **Current language (English)** selected and **Subpages** unchecked, then select **Start publish**.`,
+          `In the prepared **administrator acting as publisher** session, open [**the car-and-home resource page**](${resourcePageContent}). In the version selector, choose the prepared revision by the **Prepared page version** number recorded in [**Before presenting**](#preparation)—the new English page version created for this run. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected, clear **All references** and **Include related items**, leave **Subpages** unchecked, and select **Start publish**.`,
           `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
@@ -357,16 +357,16 @@ export const customerDemoChapters: DemoChapter[] = [
             annotations: [
               {
                 x: 46,
-                y: 80,
+                y: 28,
                 width: 39,
-                height: 9,
+                height: 4,
                 label: "Choose the published insurance question.",
               },
               {
                 x: 85,
-                y: 80,
+                y: 29,
                 width: 12,
-                height: 9,
+                height: 3,
                 label: "Select **Load content**.",
               },
             ],

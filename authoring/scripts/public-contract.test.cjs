@@ -89,7 +89,7 @@ test('structured resources are page-owned and preserve native identities without
  assert.equal(model.templateIds.ResourceFields,'deb9d373-cca7-4f18-a2fd-a56602b59497');
  assert(!model.templateIds.PublicApprovedAnswer);
  assert(model.records.every(r=>!r.path.startsWith(SITE+'/Data/Approved answers')&&!r.path.includes('/PublicApprovedAnswer')));
- const pages=model.records.filter(r=>r.template===resourceId&&!r.path.endsWith('/__Standard Values'));
+ const pages=model.records.filter(r=>r.template===resourceId&&r.path.startsWith(SITE+'/Home/insurance-resources/'));
  assert.equal(pages.length,10);
  for(const page of pages){
   assert(page.path.startsWith(SITE+'/Home/insurance-resources/'));
@@ -106,6 +106,8 @@ test('structured resources are page-owned and preserve native identities without
  assert.equal(model.variantIds['PublicResourceContent.Default'],'3e82160b-336f-5744-a667-7a1b94bc7307');
  const rendering=record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicResourceContent');
  assert.equal(rendering.fields['Datasource Template'],'');assert.equal(rendering.fields['Datasource Location'],'');
+ assert.equal(rendering.fields.__Icon,'Office/32x32/document_text.png');
+ assert.equal(norm(rendering.fields['Rendering Contents Resolver']),'6cccbcde5e9544e4ae66cfe7d3a0589e');
  assert.equal(rendering.fields['Can select Page as datasource'],'1');assert.equal(norm(rendering.fields.AllowedOnTemplates),norm(resourceId));
 });
 
@@ -121,4 +123,38 @@ test('ResourcePage inherits shared classification fields once and enables search
  assert.notEqual(record(root+'/PublicPage/__Standard Values').fields.includeInSearch,'1');
  assert.equal(model.fieldIds['ResourceFields.question'],'de4a7a26-6fe3-571d-9b4c-6e117690f9b5');
  assert.equal(model.fieldIds['ResourceFields.explanation'],'db533ede-0a22-5a9b-ae03-f3298cfc2e70');
+});
+
+
+test('Resource page starter has only native page content and independent local Hero, scoped to the resource collection',()=>{
+ const branch=SITE+'/Presentation/Page Branches/Resource page',proto=branch+'/$name';
+ const records=model.records.filter(r=>r.path===branch||r.path.startsWith(branch+'/'));
+ assert.equal(records.length,4);
+ assert.equal(record(branch).id,'3216026f-858d-46ed-aa05-edbd025c9250');
+ assert.equal(record(proto).id,'83c4ff3b-22c8-42c3-accd-7ded4f6c4e66');
+ assert.equal(record(proto+'/Data').id,'9b675e40-b0ca-4529-9a80-afea5d811de9');
+ assert.equal(record(proto+'/Data/Hero').id,'e38057ab-517d-4902-a56d-738cc28dc09c');
+ assert.equal(record(proto).template,model.templateIds.PublicResourcePage);
+ assert.equal(record(proto).fields.includeInSearch,'0');
+ assert.equal(norm(record(proto).fields['__Workflow state']),norm(model.workflow.draft));
+ for(const key of ['question','answer','formalWording','explanation','state','product','audience'])assert(!record(proto).fields[key],key+' remains naturally blank');
+ assert(!record(proto+'/Data/Introduction'));
+ const layout=record(proto).fields.__Renderings;
+ assert.equal((layout.match(/<r uid=/g)||[]).length,2);
+ assert(layout.includes('ds="page:/Data/Hero"'));
+ assert(layout.includes('uid="{3DE5BEFB-5A55-477E-B479-5A493678C3CB}"'));
+ const content=layout.match(/<r uid="\{C2B69079-9986-4816-9E5F-88048DDBDC4B\}"[^>]*>/)?.[0];
+ assert(content&&content.includes('ds=""'),'Built-in Context Item Resolver reads the new page; prototype GUIDs are not clone references.');
+ assert(!layout.includes(record(proto).id.toUpperCase()));
+ assert(!layout.includes(model.renderingIds.PublicArticle.toUpperCase()));
+ assert(!layout.includes(model.renderingIds.SharedDisclosure.toUpperCase()));
+ const rule=record(SITE+'/Presentation/Page Branches').fields.Rule;
+ assert(rule.includes('uid="{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}"'));
+ assert(rule.includes('PageBranchId="{D5784517-B225-55AA-BC9C-8910FA0DB4F2}"'));
+ const scoped=rule.match(/<rule uid="\{899B9FEF-EF0F-4E5B-99CC-8925EE563DB5\}"[\s\S]*?<\/rule>/)?.[0];
+ assert(scoped&&scoped.includes('value="{AFAD2C4C-2DC6-5428-B357-28FCA18B611D}"'));
+ assert(scoped.includes('PageBranchId="{3216026F-858D-46ED-AA05-EDBD025C9250}"'));
+ const parent=record(SITE+'/Home/insurance-resources');
+ assert.equal(parent.fields.__Masters,'{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}|{3216026F-858D-46ED-AA05-EDBD025C9250}');
+ for(const r of model.records.filter(r=>r.path.startsWith(SITE+'/Home')&&r.fields.__Masters?.includes('3216026F')))assert.equal(r.path,parent.path);
 });

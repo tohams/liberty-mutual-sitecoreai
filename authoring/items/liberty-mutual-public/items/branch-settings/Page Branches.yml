@@ -9,26 +9,7 @@ SharedFields:
   Value: "{FBC802E5-4B9E-480F-93DA-3F2A80CAE5CB}"
 - ID: bb3391dd-f8be-4b2e-ae9f-47bb63c166ce
   Hint: Rule
-  Value: |
-    <ruleset>
-      <rule
-        uid="{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}"
-        name="Landing pages beneath Home">
-        <conditions>
-          <condition
-            id="{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}"
-            uid="{55387862-AA7F-5189-B501-91D82B13B423}"
-            operatorid="{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}"
-            value="{6D600332-3E21-4C5F-83EC-AAE04F83450F}" />
-        </conditions>
-        <actions>
-          <action
-            id="{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}"
-            uid="{CF4A380D-6AD5-5C4A-9EAC-9568B315F24C}"
-            PageBranchId="{D5784517-B225-55AA-BC9C-8910FA0DB4F2}" />
-        </actions>
-      </rule>
-    </ruleset>
+  Value: "<ruleset>\r\n  <rule uid=\"{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}\" name=\"Landing pages beneath Home\">\r\n    <conditions>\r\n      <condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{55387862-AA7F-5189-B501-91D82B13B423}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{6D600332-3E21-4C5F-83EC-AAE04F83450F}\" />\r\n    </conditions>\r\n    <actions>\r\n      <action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{CF4A380D-6AD5-5C4A-9EAC-9568B315F24C}\" PageBranchId=\"{D5784517-B225-55AA-BC9C-8910FA0DB4F2}\" />\r\n    </actions>\r\n  </rule>\r\n<rule uid=\"{899B9FEF-EF0F-4E5B-99CC-8925EE563DB5}\" name=\"Resource pages beneath insurance-resources\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{0E8FAB43-D18F-4AA9-87E5-33ADB88D4392}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{AFAD2C4C-2DC6-5428-B357-28FCA18B611D}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{3F1A9D8D-659B-4417-B195-BF0089545E6C}\" PageBranchId=\"{3216026F-858D-46ED-AA05-EDBD025C9250}\" /></actions></rule></ruleset>"
 Languages:
 - Language: en
   Versions:

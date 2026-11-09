@@ -61,7 +61,7 @@ export const Default = ({
           <Link
             className="public-text-link"
             field={fields.sourceLink}
-            target={fields.sourceLink.value?.target || "_blank"}
+            target={fields.sourceLink?.value?.target || "_blank"}
             rel="noopener noreferrer"
           />
           {fields.disclosure?.fields && (
