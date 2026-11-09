@@ -791,6 +791,47 @@ test("the priority edit remains a draft until both audience previews and approva
   );
 });
 
+test("workflow review and publication use the version number shown after saving", () => {
+  const priority = prose(step("portal-priority-edit").actions);
+  assert.match(
+    priority,
+    /wait for Saved.*Record the version number currently shown as Saved priority version.*same saved version number.*With Saved priority version selected.*Texas workers compensation → Small business growth → Home and auto conversations.*remains Draft/i,
+  );
+  for (const id of [
+    "portal-preview",
+    "portal-shared-content",
+    "portal-audit-rollback",
+  ]) {
+    const text = prose(step(id).actions);
+    const label =
+      id === "portal-preview"
+        ? "Saved priority version"
+        : id === "portal-shared-content"
+          ? "Saved disclosure version"
+          : "Restored disclosure version";
+    assert.match(text, new RegExp(`${label}.*Draft.*Actions → Submit`, "i"));
+    assert.match(
+      text,
+      new RegExp(`Approver.*same ${label}.*Actions → Approve`, "i"),
+    );
+    assert.match(
+      text,
+      new RegExp(
+        `administrator acting as publisher.*same ${label}.*Approved.*Start publish|administrator acting as publisher.*same ${label}.*Approved.*publish`,
+        "i",
+      ),
+    );
+  }
+  assert.match(
+    prose(step("portal-shared-content").actions),
+    /wait for Saved.*Record the version number currently shown as Saved disclosure version/i,
+  );
+  assert.match(
+    prose(step("portal-audit-rollback").actions),
+    /original wording is saved.*record the version number currently shown as Restored disclosure version/i,
+  );
+});
+
 test("each named content Draft is explicitly selected before its fields change", () => {
   for (const [id, name, field] of [
     [
