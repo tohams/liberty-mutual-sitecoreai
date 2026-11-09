@@ -33,6 +33,8 @@ For a temporary demonstration change, restore the original values through a new 
 
 The **Public Website** uses native **State applicability**, **Products**, and **Audience** checklists. Select the resource page beneath **Home → insurance-resources**, and edit its native fields through **Page content** or its **Content** view. Expand **Resource content** for the question, guidance, owner, and review dates. The inherited **Content** section contains **Canonical URL**, **Reference source**, **Include in site search**, and the classification checklists. The same page owns the fields published to the website, Search, and the content API.
 
+To create a public resource, select **Home → insurance-resources** in **Page Builder** and choose **Create a page → Resource page**. The branch creates a **Draft** with an independent **Data → Hero** item. The page’s resource fields and classification checklists start blank. Fill the page content and managed selections, and leave **Include in site search** cleared until the page is ready for review and publication.
+
 Select products individually, such as **Auto**, **Homeowners**, and **Condo**. The managed options live under the public site’s **Data/Taxonomy/States**, **Products**, and **Audiences** folders. Use an **All** choice on its own. Normal permissions, versions, approval, and publication apply.
 
 ## Maintain the taxonomy
