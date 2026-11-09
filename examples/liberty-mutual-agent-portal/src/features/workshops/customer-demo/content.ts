@@ -137,17 +137,9 @@ export const customerDemoChapters: DemoChapter[] = [
           {
             file: "native-public-taxonomy-checklist.png",
             title: "Open a native checklist to inspect its selections",
-            alt: "Native Page Builder Content fields with the Products checklist open and Auto and Homeowners selected independently",
+            alt: "Native Products checklist with Auto and Homeowners selected independently",
             caption:
               "Open **Products** using its **2 items selected** control to see the separate **Auto**, **Homeowners**, and **Condo** checkboxes. These are the resource page’s native classification fields. Leave the selected choices unchanged during this inspection.",
-            crop: {
-              x: 310,
-              y: 1020,
-              width: 700,
-              height: 490,
-              sourceWidth: 3008,
-              sourceHeight: 1519,
-            },
           },
         ],
         transition:

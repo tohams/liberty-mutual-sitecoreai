@@ -338,6 +338,13 @@ test("discovery readiness identifies native structure while keeping external eng
     step("public-discovery").images?.[0]?.file,
     "native-public-taxonomy-checklist.png",
   );
+  const checklistImage = step("public-discovery").images?.[0];
+  assert.equal(checklistImage?.crop, undefined);
+  const checklistBytes = readFileSync(
+    join(appRoot, "workshop-assets", checklistImage!.file),
+  );
+  assert.equal(checklistBytes.readUInt32BE(16), 310);
+  assert.equal(checklistBytes.readUInt32BE(20), 315);
   assert.match(text, /Home → insurance-resources → bundle-car-and-home/);
   assert.match(text, /Reference source/);
   assert.match(
