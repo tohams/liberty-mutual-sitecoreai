@@ -7,6 +7,16 @@ export interface ResourceSearchProps extends ComponentProps {
 
 export interface ResourceSearchConfiguration {
   searchIndex: string;
+  facetMapping?: Partial<
+    Record<
+      | "Risk state"
+      | "Business family"
+      | "Product"
+      | "Distribution channel"
+      | "Resource type",
+      string
+    >
+  >;
   fieldsMapping: {
     title?: string;
     description?: string;

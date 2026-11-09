@@ -100,10 +100,16 @@
       "sourceId": "f687abc0-0028-5475-801f-30a0533bd44f",
       "options": [
         {
-          "name": "auto-home",
-          "displayName": "Auto & home",
-          "description": "Personal auto and homeowners preparation guidance.",
-          "id": "ed8fa42a-1b68-5afd-b152-08167f7a9118"
+          "name": "auto",
+          "displayName": "Auto",
+          "description": "Personal auto preparation guidance.",
+          "id": "28acd0f4-de95-5359-a172-6233e08389dc"
+        },
+        {
+          "name": "home",
+          "displayName": "Homeowners",
+          "description": "Homeowners preparation guidance.",
+          "id": "526470f9-d360-5345-9f8c-5c835bfad2d7"
         },
         {
           "name": "businessowners-policy",
@@ -254,7 +260,8 @@
     "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/surety.yml",
     "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Business families/wholesale-specialty.yml",
     "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products.yml",
-    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/auto-home.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/auto.yml",
+    "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/home.yml",
     "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/businessowners-policy.yml",
     "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/commercial-auto.yml",
     "authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Products/commercial-package.yml",

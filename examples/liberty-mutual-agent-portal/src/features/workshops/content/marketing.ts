@@ -521,22 +521,22 @@ export const marketingGuides: WorkshopGuide[] = [
     category: "Content authoring",
     title: "Edit and publish a resource",
     summary:
-      "**Presenter demonstration:** Follow a Texas resource article from authoring to the live portal and its search results. Change a summary, inspect the article’s classification choices, and restore the starting content after checking delivery.",
+      "**Presenter demonstration:** Edit a Texas resource using native Page Builder fields, inspect its managed checklists, and follow publication into the live portal and Search. Restore the starting content before finishing.",
     outcome:
-      "You understand why saving, publishing, and refreshing Search are separate actions: saving updates authoring content, publishing delivers reviewed content to agents, and indexing updates the searchable copy.",
+      "See how native authoring, review, publication, and automatic Search updates keep a resource aligned across the agent experience.",
     personas: ["daniel.01", "Authorized Sitecore author"],
     prerequisites: [
-      "The presenter uses **daniel.01** with password **Sitecore1** for the live-portal checks. Attendees follow that screen while the shared article is edited and restored.",
+      "The presenter uses **daniel.01** with password **Sitecore1** for the live-portal checks. Attendees follow the presenter while this shared article is edited and restored.",
       platformPrerequisite,
       authorPrerequisite,
-      "Follow the presenter as they edit the shared Texas article. Editing and publishing require access to this resource; **Resource metadata** currently requires organization administrator/owner access.",
-      "A **version** retains a revision of this article in a selected language. A **Draft** can be edited; approval makes it eligible for publication in this configured workflow. **Metadata** describes the article’s state, product, and other classifications used by Search. Complete publication, Search refresh, and restoration so the temporary summary is not left live.",
-      "For the supporting authoring instructions, open [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai) and browse to **docs/resource-metadata-authoring.md** from the repository root (its top-level folder).",
+      "Use a Sitecore account with permission to edit and publish the selected resource. The native fields use that account’s normal page, language, and workflow permissions.",
+      "A **version** retains a revision of the article in one language. A **Draft** holds changes before publication. **Metadata** classifies the article by state, business family, product, channel, and resource type. Those choices help Search retrieve relevant guidance while the portal separately enforces licensed-state access.",
+      "Keep the original text and selected checkboxes in your notes. A workshop-number reset restores agent data, not CMS content; complete the restoration in this guide.",
     ],
     links: [pageBuilder, liveLogin],
     repositoryFiles: [
       {
-        label: "Resource metadata authoring guide",
+        label: "Native metadata authoring guide",
         path: "docs/resource-metadata-authoring.md",
       },
     ],
@@ -546,131 +546,113 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Record the live article’s starting content",
         action: [
           "Open **Learning & resources**, search **Workers compensation**, and open **Workers compensation: a Texas starting point**.",
-          "Copy the current summary, source, and body into your notes before editing. You will use this exact text to restore the article at the end.",
-          "Keep this live portal tab for publication checks.",
+          "Copy the current **Summary**, **Source**, and **Body** into your notes. Keep this live portal tab open for the publication and restoration checks.",
         ],
         expected: [
-          "Your notes capture the article as agents see it now and provide the values needed for cleanup.",
+          "Your notes retain the exact wording agents currently see, so the shared article can be restored after the demonstration.",
         ],
       },
       {
         title: "Create one named English Draft",
         action: [
-          `Open [**Page Builder**](${PAGES}). In the left page tree, expand **Home** > **Learning & resources**, then select **Workers compensation: a Texas starting point**. Click the stacked-layers **Layers** icon above the tree and select **Article**.`,
-          "Above the page canvas, the version dropdown is immediately left of **Default editing host**. Open it, record the selected **English** version number, then choose **Create version**. Name the version resource-review-[your initials]-[date-time] and click **Create** so you can recognize it later.",
-          "Reopen that version dropdown and select the newest **English** **Draft** with your version name. Wait for its fields to load. In the top toolbar, click the puzzle-piece **Apps** icon, then **Resource metadata**. Check the selected page, language, and version shown in the panel.",
+          `Open [**Page Builder**](${PAGES}), select **Agent Portal**, and retain **Default editing host**. Under **Home → Learning & resources**, select **Workers compensation: a Texas starting point**.`,
+          "Open the version selector above the canvas, record the selected **English** version number, and choose **Create version**. Name it resource-review-[your initials]-[date-time], then select **Create**.",
+          "Reopen the selector, select the new **English Draft** with that name, and click **Content** in the top navigation to display the article’s native fields.",
         ],
         expected: [
-          "**Resource metadata** is a custom Marketplace app inside Page Builder. It provides managed dropdown choices for the resource’s classification. Check its page name, language, and version before changing a value so you are editing the intended revision.",
-          "A new **Draft** preserves earlier versions of this same shared article; it does not create a separate attendee page. Only the presenter edits this version. The panel identifies the page, **English** language, and version. **Approved** versions are read-only.",
+          "The page, language, version, and **Draft** state identify the revision being edited. Earlier approved versions remain on the same article.",
+          "The **Content** view contains the article’s fields, including its native classification checklists. Only the presenter edits this shared revision.",
         ],
         links: [pageBuilder],
       },
       {
-        title: "Understand the managed choices",
+        title: "Read the selected classification checkboxes",
         action: [
-          "Record all five loaded values. The baseline is **Risk state**: Texas; **Business family**: **Small commercial**; **Product**: **Workers’ compensation**; **Distribution channel**: **Independent agent**; **Resource type**: **State guidance**.",
-          "Scroll within the **Resource metadata** panel to read all five dropdowns and their help text. Copy each current value into your notes so you can restore it after testing.",
+          "Find **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Click each field’s selection control to open its checkboxes; a collapsed control reports how many items are selected.",
+          "Record every selected choice. For the starting Texas article, expect **Texas**, **Small commercial**, **Workers’ compensation**, **Independent agent**, and **State guidance**. Close each list before opening the next.",
         ],
         expected: [
-          "Each field permits one selection, giving authors consistent choices for describing the resource.",
-          "A **Marketplace app** extends SitecoreAI’s authoring interface. This custom panel supplies centrally managed choices instead of requiring authors to type classifications consistently. Those saved values help Search filter the resource for an agent’s state and interests.",
+          "The choices come from managed **Data → Taxonomy** items. A checklist can select several applicable values without creating a separate combination option.",
+          "**Cross-state guidance** applies across supported states and is selected on its own. Choosing content classifications does not grant an agent a license or change the portal’s access rules.",
         ],
       },
       {
-        title: "Try an unsaved change and discard it",
+        title: "Save a native checklist change, then restore it",
         action: [
-          "Select **Resource type** > **Preparation guide**.",
-          "At the bottom of the panel, check for **1 unsaved change** and an enabled **Save metadata** button. Click **Discard changes** beside that button.",
+          "Open **Resource types**. Clear **State guidance**, select **Preparation guide**, close the list, and click outside the field. Wait for the native **Saved** checkmark.",
+          "Reload the Page Builder tab, return to the same named **English Draft**, and open **Resource types**. Verify that **Preparation guide** remains selected.",
+          "Restore the complete original **Resource types** selection recorded earlier. Wait for **Saved**, reload once more, and verify all five original classifications before continuing.",
         ],
         expected: [
-          "**1 unsaved change** appears and **Save metadata** becomes available; the canvas retains the saved classification.",
-          "Discard returns the dropdown to the loaded value and shows **No unsaved changes**. No save occurred.",
-        ],
-      },
-      {
-        title: "Save metadata, read it back, then restore it",
-        action: [
-          "Set **Resource type** to **Preparation guide** again and click **Save metadata** at the bottom of the panel. After **Metadata saved** appears, click **Refresh** beside the selected-resource details near the top of the panel.",
-          "Restore the original **Resource type** recorded earlier. Click **Save metadata**, then **Refresh**.",
-          "Select **Learning & resources**, then return to the Texas article and the same **English** **Draft**. Verify all five original values.",
-        ],
-        expected: [
-          "**Metadata saved** and **No unsaved changes** appear. The **Draft** canvas shows **PREPARATION GUIDE TX**, and **Refresh** retains the saved choice.",
-          "Returning to the Texas article reloads the saved classification. The metadata controls are available on resource articles.",
-          "Continue working in this same **Draft**. Restore its original classification before the publication steps so the temporary value stays out of the live library.",
+          "Native fields save automatically. Reloading the same draft proves that the checklist selection persisted; there is no separate metadata Save button.",
+          "The original classification is restored while the article remains a **Draft**, so the temporary choice never reaches the live portal.",
         ],
       },
       {
         title: "Edit and preview the temporary summary",
         action: [
-          "Close **Resource metadata** with the × at the panel’s upper right. Click the **Content** tab in Page Builder’s top navigation, then locate the **Summary** field for the selected Texas article.",
-          "Enter: Prepare your next Texas employer conversation using this source-linked overview.",
-          "Click outside **Summary** and wait for the **Saved** checkmark. Click **Editor** in the top navigation. Keep the same **Draft** and **Default editing host**, then read the summary immediately below the article title in the page preview.",
+          "In **Content**, find **Summary** and enter: Prepare your next Texas employer conversation using this source-linked overview.",
+          "Click outside the field, wait for **Saved**, and select **Editor**. Keep the same **Draft** and **Default editing host**, then read the summary below the article title.",
         ],
         expected: [
-          "The **Content** tab saves when you click outside the field. The **Saved** checkmark confirms the change, and the page preview shows the temporary summary with the original source and body.",
+          "The visual preview shows the saved draft summary, with the original source, body, image, and classifications retained.",
         ],
       },
       {
         title: "Approve and publish only this page",
         action: [
-          "Choose **Actions** > **Approve**, enter the comment Workshop resource summary review, and click **Submit**. Confirm **Approved** before publishing.",
-          "Open **Publish**. Uncheck **Include related items** first, then **All references**. Keep **Page** and **Current language (English)** checked; leave **Subpages** off.",
-          "Click **Start publish** and wait for completion.",
+          "Choose **Actions → Approve**, enter Workshop resource summary review in the comment, and select **Submit**. Confirm **Approved** before publishing.",
+          "Open **Publish**. Clear **Include related items** first, then **All references**. Keep **Page** and **Current language (English)** selected, with **Subpages** off.",
+          "Select **Start publish**, and wait for completion.",
         ],
         expected: [
-          "This resource uses **Basic Workflow**, which moves directly from **Draft** to **Approved**.",
-          "Publication sends the approved **English** article to the live portal. Because this exercise changes only the article summary, publish the page with its existing image left unchanged.",
+          "This resource’s **Basic Workflow** makes an approved draft eligible for publication. The scoped operation publishes its changed summary without republishing unrelated pages or image content.",
         ],
       },
       {
-        title: "Verify live delivery and refresh the exact Search source",
+        title: "Verify the published article and automatic Search update",
         action: [
-          "Reload the article in Daniel’s live portal tab and compare the temporary summary.",
-          `Open [**SitecoreAI**](${SITECORE}), then select **Content** > **Search Sources** > **Liberty Mutual Agent Resources** > **Settings**. Verify source ID b5e24aff-8b5b-4653-bf66-deef52c1241a.`,
-          "Return to the source list and click **Reindex Content** once for that source. Wait until the job reaches **Succeeded**.",
-          "As Daniel, search **Workers compensation** again; compare the Texas result card and article.",
+          "Reload Daniel’s live article, and confirm the temporary **Summary** appears.",
+          "Return to **Learning & resources**, search **Workers compensation**, and select **Texas** in **Risk state**. Wait for the publishing-driven Search update, then repeat the query if the earlier result is still displayed.",
+          "Read the Texas result’s summary, open the article, and compare the same wording in both places.",
         ],
         expected: [
-          "The updated live article confirms publication. A **Search source** identifies the content to index; **Reindex Content** rebuilds its searchable copy. That refresh brings the library’s result card into line with the published article.",
-          "Once indexing reaches **Succeeded**, both the result card and article show the exact temporary summary.",
+          "The normal publication flow updates the live article and automatically synchronizes its Search document. No code deployment or manual **Reindex Content** action is needed.",
+          "The Texas result card and article show the exact temporary summary, while licensed-state access remains in force.",
         ],
-        links: [sitecoreWorkspace],
       },
       {
         title: "Restore through a new version and publication",
         action: [
-          "On the same Texas page, open the version selector > **Create version**, enter resource-restore-[your initials]-[date-time], and click **Create**. Reopen the selector, select this newest **English** **Draft**, and wait for its fields to load. Restore the summary recorded at the start.",
-          "Click outside the field, wait for **Saved**, and inspect the restored **Draft**.",
-          "**Actions** > **Approve** > **Submit**. Confirm **Approved**. **Publish** with **Include related items** off first, then **All references** off; **Page** and **Current language (English)** on, **Subpages** off.",
-          "Confirm publication, then run **Reindex Content** once on the same **Liberty Mutual Agent Resources** source and wait for success.",
+          "On the same Texas page, choose **Create version**, name it resource-restore-[your initials]-[date-time], and select the new **English Draft**.",
+          "In **Content**, restore the complete **Summary** recorded at the start. Wait for **Saved**, then check the original five checklist selections.",
+          "Complete **Actions → Approve → Submit**, confirm **Approved**, and publish the page using the same scoped settings. Wait for publication and its automatic Search synchronization.",
         ],
         expected: [
-          "The restored version is published and indexed, with earlier versions retained for review.",
+          "The restored wording is released through the normal workflow, with earlier revisions retained for review.",
         ],
       },
       {
         title: "Check the complete restoration",
         action: [
-          "Reload Daniel’s live article and repeat the **Search**. Compare the starting **Summary** in both the article and result card, then check the article’s **Source** and **Body** against your notes.",
-          "Record the restoration version and publish/index outcomes.",
+          "Reload Daniel’s live article and repeat the **Workers compensation** search. Compare the article and result card with your original **Summary**.",
+          "Check the original **Source**, **Body**, and classifications, then record the restoration version and publication result.",
         ],
         expected: [
-          "The original wording and all five metadata values are restored. A workshop-number reset cannot undo or replace these CMS restoration steps.",
+          "The original article and Search result are restored. The native CMS revision history retains the temporary and restored versions.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Complete the final restoration and verify both live article delivery and **Search** before leaving. **Sign out** of the portal.",
-        "If a temporary metadata value was accidentally published, restore it in a new **Draft**, approve and publish the exact page, then reindex the same **Search** source. A workshop-number reset has no effect on CMS content.",
+        "Verify the original wording in both the live article and Search before leaving, then **Sign out** of the portal and close temporary authoring tabs.",
+        "A workshop-number reset does not restore CMS pages. If a temporary content or classification change was published, restore it in a new draft, approve it, publish it, and verify both delivery surfaces.",
       ],
     },
     related: [
-      "author-approver-workflow",
-      "create-resource-and-media",
       "state-aware-search",
+      "create-resource-and-media",
+      "resource-taxonomy",
     ],
     sourceSlides: [17, 18, 19, 20, 21, 22, 23],
   },
@@ -687,7 +669,7 @@ export const marketingGuides: WorkshopGuide[] = [
     prerequisites: [
       platformPrerequisite,
       authorPrerequisite,
-      "Follow the presenter for this guide. The presenter needs permission to create and delete pages under **Learning & resources**, edit local image content, and use **Modern Media Library**. **Resource metadata** additionally requires organization administrator/owner access.",
+      "Follow the presenter for this guide. The presenter needs normal permissions to create and delete pages under **Learning & resources**, edit local image content, and use **Modern Media Library**.",
       "A **page branch** is a prepared starting structure that creates a page and its supporting content together. Here it creates a local **Data** folder containing **Resource image**, the item that stores this page’s image choice. The presenter creates one uniquely named, unpublished page and deletes it at the end. Attendees follow the demonstration without creating copies.",
       "For the supporting authoring instructions, open [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai) and browse to **docs/resource-page-authoring.md** from the repository root (its top-level folder).",
     ],
@@ -731,14 +713,15 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Inspect metadata without changing classification",
+        title: "Classify the new page with native checklists",
         action: [
-          "Keep the new resource page selected. Click the puzzle-piece **Apps** icon in the top toolbar, then **Resource metadata**.",
-          "Inspect the five dropdowns. Set **Resource type** to **Preparation guide**, observe the unsaved-change indicator, then click **Discard changes** to return to the blank starting classification.",
+          "Keep the new resource page selected, and click **Content** in the top navigation. Find **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Their checklists start with no selected values.",
+          "Open each selection control and select **Texas**, **Small commercial**, **Workers’ compensation**, **Independent agent**, and **Preparation guide**, respectively. Close each list before opening the next, click outside the fields, and wait for **Saved**.",
+          "Reload Page Builder, return to the same new **English Draft**, and reopen the five checklists to verify the saved choices. Leave the page unpublished.",
         ],
         expected: [
-          "Each dropdown describes one aspect of the article for filtering, such as its state or resource type. **Discard changes** returns these new-page fields to their blank values; the page remains unpublished.",
-          "The resource’s classification is managed through **Resource metadata**, while its photograph is selected through the image field.",
+          "The article uses native fields and managed taxonomy choices. Multiple applicable values can be selected in a checklist.",
+          "Classification is stored on this new page. Its photograph remains separate local content in **Data → Resource image**.",
         ],
       },
       {
@@ -750,7 +733,7 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
         expected: [
           "The reviewed alt text describes two colleagues reviewing a tablet beside warehouse boxes. **Tags** help organize the asset, while **Alt text** describes the image’s meaning. Public-link expiration is **None**, so this delivery link has no configured expiry.",
-          "You are inspecting reviewed metadata on an existing image. New image uploads can receive AI tag and alt-text suggestions for an author to review. Resource classification is managed separately in **Resource metadata**.",
+          "You are inspecting reviewed metadata on an existing image. New image uploads can receive AI tag and alt-text suggestions for an author to review. The article’s state, product, and other classifications are its native content fields from the preceding step.",
         ],
         links: [sitecoreWorkspace],
       },

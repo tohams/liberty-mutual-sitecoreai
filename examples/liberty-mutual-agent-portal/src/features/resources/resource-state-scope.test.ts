@@ -28,6 +28,7 @@ const resourceIdsFor = (agent: Agent) =>
         resource.states,
         agent.licensedStates,
         DEFAULT_RESOURCE_STATE_SCOPE,
+        resource.nationwide === true,
       ),
     )
     .map((resource) => resource.id);
@@ -71,9 +72,11 @@ test("old All states and forged selections cannot expose out-of-license guidance
 });
 
 test("native All means nationwide-only, and absent licenses never broaden the default to state-specific content", () => {
-  assert.ok(matchesResourceStateScope(["IL", "FL", "TX"], [], "All"));
+  assert.ok(matchesResourceStateScope(["IL", "FL", "TX"], [], "All", true));
   assert.ok(!matchesResourceStateScope(["FL"], ["FL"], "All"));
-  assert.ok(matchesResourceStateScope(["IL", "FL", "TX"], [], "licensed"));
+  assert.ok(
+    matchesResourceStateScope(["IL", "FL", "TX"], [], "licensed", true),
+  );
   assert.ok(!matchesResourceStateScope(["IL"], [], "licensed"));
   assert.ok(!matchesResourceStateScope([], [], "licensed"));
   assert.ok(!matchesResourceStateScope(["TX", "TX", "TX"], [], "licensed"));

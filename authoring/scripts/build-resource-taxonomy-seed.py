@@ -141,8 +141,8 @@ def load_configuration():
         expected = set()
         for resource in resources:
             value = resource[keys[entry['field']]]
-            expected.add(value[0] if isinstance(value, list) and len(value) == 1 else
-                         'All' if isinstance(value, list) else value)
+            original = ('All' if resource.get('nationwide') else ','.join(value)) if isinstance(value, list) else value
+            expected.update(['auto', 'home'] if entry['field'] == 'product' and original == 'auto-home' else original.split(','))
         available = {option['name'] for option in entry['options']}
         if not expected <= available:
             raise ValueError('Missing original resource codes for ' + entry['field'] + ': ' + ', '.join(sorted(expected - available)))
@@ -228,6 +228,7 @@ def module_configuration():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true', help='Verify without creating or changing files.')
+    parser.add_argument('--refresh-source', action='store_true', help='Explicit offline update of owned source files; never changes native content.')
     args = parser.parse_args()
     config = load_configuration()
     records = build_items(config)
@@ -245,7 +246,8 @@ def main():
             continue
         actual = json.loads(target.read_text()) if target.suffix == '.json' else yaml.safe_load(target.read_text(encoding='utf-8-sig'))
         if actual != expected:
-            raise SystemExit('Refusing to overwrite an existing file that differs: ' + str(target.relative_to(ROOT)))
+            if args.refresh_source and not args.check: missing.append((target, serialized))
+            else: raise SystemExit('Refusing to overwrite an existing file that differs: ' + str(target.relative_to(ROOT)))
     if args.check and missing:
         raise SystemExit('Missing taxonomy files: ' + ', '.join(str(target.relative_to(ROOT)) for target, _ in missing))
     if not args.check:

@@ -126,47 +126,4 @@ export const developmentScreenshots: Record<
       ],
     },
   },
-  "resource-taxonomy": {
-    2: {
-      file: "resource-metadata.png",
-      title: "Inspect the Texas article’s managed choices",
-      alt: "Resource metadata panel showing the selected Texas article, its read-only version, and the Risk state choice Texas",
-      caption:
-        "This reference shows **Workers compensation: a Texas starting point** on an approved, read-only version. Your current version number may differ. **Risk state** is visible here; scroll inside the panel to inspect **Business family**, **Product**, **Distribution channel**, and **Resource type**.",
-      crop: {
-        x: 305,
-        y: 125,
-        width: 965,
-        height: 580,
-        sourceWidth: 1280,
-        sourceHeight: 720,
-      },
-      annotations: [
-        {
-          x: 2.49,
-          y: 31.55,
-          width: 70.98,
-          height: 5.86,
-          label:
-            "Confirm the selected article before comparing its metadata with the **TX** taxonomy definition.",
-        },
-        {
-          x: 2.49,
-          y: 37.76,
-          width: 19.07,
-          height: 5.17,
-          label:
-            "Record the language and version. **Read only** lets you inspect the approved article without changing its classification.",
-        },
-        {
-          x: 2.49,
-          y: 58.1,
-          width: 95.34,
-          height: 16.72,
-          label:
-            "**Risk state** displays the managed label **Texas**, followed by the choice’s help text.",
-        },
-      ],
-    },
-  },
 };

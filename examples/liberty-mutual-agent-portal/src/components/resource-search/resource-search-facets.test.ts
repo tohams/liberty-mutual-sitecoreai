@@ -18,11 +18,11 @@ test("native Search combines licenses and nationwide in one OR filter, independe
         },
         {
           name: "Resource type",
-          filters: [{ operator: "eq", value: "State guidance" }],
+          filters: [{ operator: "eq", value: ["State guidance"] }],
         },
         {
           name: "Product",
-          filters: [{ operator: "eq", value: "workers-compensation" }],
+          filters: [{ operator: "eq", value: ["workers-compensation"] }],
         },
       ],
     },
@@ -50,4 +50,30 @@ test("legacy and forged state scopes stay licensed, explicit licenses keep natio
       },
     ]);
   }
+});
+
+test("Push source technical facet keys preserve human labels and licensed OR filters", () => {
+  assert.deepEqual(
+    buildResourceSearchFacet(
+      "licensed",
+      ["IL", "TX"],
+      { "Resource type": "Checklist", Product: "home" },
+      {
+        "Risk state": "state",
+        "Resource type": "resourcetype",
+        Product: "product",
+      },
+    ).fields,
+    [
+      {
+        name: "state",
+        filters: [{ operator: "eq", value: ["IL", "TX", "All"] }],
+      },
+      {
+        name: "resourcetype",
+        filters: [{ operator: "eq", value: ["Checklist"] }],
+      },
+      { name: "product", filters: [{ operator: "eq", value: ["home"] }] },
+    ],
+  );
 });

@@ -109,7 +109,7 @@ function resolveResource(reference: string, resources: Resource[]) {
 
 function makeBootstrap(session: PortalSession, agent: Agent, metadata: PackMetadata, record: StoredValue<AgencyState>, editor = false, resources = fixtures.resources): PortalBootstrap {
   const licensedStates = activeLicensedStates(agent, fixtures.eligibility);
-  resources = editor ? resources : resources.filter((resource) => canAccessResourceStates(resource.states, licensedStates));
+  resources = editor ? resources : resources.filter((resource) => canAccessResourceStates(resource.states, licensedStates, resource.nationwide === true));
   const agency = fixtures.agencies.find((entry) => entry.id === agent.agencyId)!;
   const allowedLine = (line: BusinessLine) => canAccessLine(agent, line);
   const policies = fixtures.policies.filter((policy) => policy.agencyId === agency.id && allowedLine(policy.line));
@@ -302,7 +302,7 @@ export async function applyPortalAction(session: PortalSession, input: unknown, 
       addActivity(value.principal, `Bond request received · ${value.reference}`, `/surety/${value.id}`); break;
     }
     case 'toggle-favorite': {
-      if (!context.resources.some((resource) => resource.id === action.resourceId && canAccessResourceStates(resource.states, activeLicensedStates(agent, fixtures.eligibility)))) failNotFound();
+      if (!context.resources.some((resource) => resource.id === action.resourceId && canAccessResourceStates(resource.states, activeLicensedStates(agent, fixtures.eligibility), resource.nationwide === true))) failNotFound();
       const favorites = (next.favorites[agent.id] ?? []).map((reference) => resolveResource(reference, context.resources)?.id).filter((resourceId): resourceId is string => !!resourceId);
       next.favorites[agent.id] = favorites.includes(action.resourceId) ? favorites.filter((resourceId) => resourceId !== action.resourceId) : [...favorites, action.resourceId];
       break;

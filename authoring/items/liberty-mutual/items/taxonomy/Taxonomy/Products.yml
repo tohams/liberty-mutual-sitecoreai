@@ -15,7 +15,7 @@ Languages:
     Value: Products
   - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
     Hint: __Short description
-    Value: Select the product covered by the resource.
+    Value: Select the products covered by this resource.
   Versions:
   - Version: 1
     Fields:

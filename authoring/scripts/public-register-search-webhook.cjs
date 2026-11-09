@@ -28,24 +28,37 @@ const BINDING = Object.freeze({
     "https://xmc-scaipocusem400b-sitecoreai950c-demo4418.sitecorecloud.io",
 });
 const LABEL = "Liberty Mutual public knowledge Search sync";
+const PUBLIC_HOOK_CONFIG = Object.freeze({
+  label: LABEL,
+  clientName: "Liberty Mutual public webhook setup",
+  clientDescription:
+    "Temporary environment-scoped setup client for the public Search completion webhook.",
+  originKey: "PUBLIC_SITE_URL",
+  alternateOriginKey: "NEXT_PUBLIC_SITE_URL",
+  secretKey: "PUBLICATION_WEBHOOK_SECRET",
+  site: "liberty-mutual-public-site",
+  route: "/api/sitecore/publication",
+});
 const EDGE_ADMIN = "https://edge.sitecorecloud.io/api/admin/v1/webhooks";
 const DEPLOY = "https://xmclouddeploy-api.sitecorecloud.io";
 const CLIENT_MANAGEMENT_SCOPE = "xmclouddeploy.clients:manage";
 const digest = (value) =>
   crypto.createHash("sha256").update(JSON.stringify(value)).digest("hex");
 
-function edgeClientRequest() {
+function edgeClientRequest(hookConfig = PUBLIC_HOOK_CONFIG) {
   return {
     projectId: BINDING.projectId,
     environmentId: BINDING.environmentId,
-    name: "Liberty Mutual public webhook setup",
-    description:
-      "Temporary environment-scoped setup client for the public Search completion webhook.",
+    name: hookConfig.clientName,
+    description: hookConfig.clientDescription,
   };
 }
-function desiredHook(settings) {
+function desiredHook(settings, hookConfig = PUBLIC_HOOK_CONFIG) {
   const url = new URL(
-    settings.PUBLIC_SITE_URL || settings.NEXT_PUBLIC_SITE_URL || "",
+    settings[hookConfig.originKey] ||
+      (hookConfig.alternateOriginKey &&
+        settings[hookConfig.alternateOriginKey]) ||
+      "",
   );
   assert(
     url.protocol === "https:" &&
@@ -54,24 +67,24 @@ function desiredHook(settings) {
       !url.password &&
       !url.search &&
       !url.hash,
-    "Provide the deployed public HTTPS origin.",
+    "Provide the deployed HTTPS origin for this site.",
   );
   assert(
-    typeof settings.PUBLICATION_WEBHOOK_SECRET === "string" &&
-      settings.PUBLICATION_WEBHOOK_SECRET.length >= 24,
+    typeof settings[hookConfig.secretKey] === "string" &&
+      settings[hookConfig.secretKey].length >= 24,
     "Provide the dedicated publication webhook secret.",
   );
   return {
-    label: LABEL,
-    uri: `${url.origin}/api/sitecore/publication`,
+    label: hookConfig.label,
+    uri: `${url.origin}${hookConfig.route}`,
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${settings.PUBLICATION_WEBHOOK_SECRET}`,
+      Authorization: `Bearer ${settings[hookConfig.secretKey]}`,
     },
     body: JSON.stringify({
       schemaVersion: 1,
-      site: "liberty-mutual-public-site",
+      site: hookConfig.site,
       event: "edge-publish-complete",
     }),
     createdBy: "Sitecore solutions team",
@@ -207,6 +220,7 @@ async function register({
   apply = false,
   recordBefore = () => {},
   transport = fetch,
+  hookConfig = PUBLIC_HOOK_CONFIG,
 }) {
   const cm = connection(environment, false);
   assert(cm.origin === BINDING.cmOrigin, "Unexpected authoring environment.");
@@ -221,11 +235,11 @@ async function register({
     "Deploy environment/project binding changed.",
   );
   const token = await edgeToken(client, transport);
-  const desired = desiredHook(settings);
+  const desired = desiredHook(settings, hookConfig);
   const list = await jsonRequest(EDGE_ADMIN, { token, transport });
   assert(Array.isArray(list), "Edge webhook inventory was not an array.");
   const matches = list.filter(
-    (hook) => hook.label === LABEL || hook.uri === desired.uri,
+    (hook) => hook.label === desired.label || hook.uri === desired.uri,
   );
   assert(
     matches.length <= 1,
@@ -236,7 +250,7 @@ async function register({
     assert.deepEqual(
       hookSignature(current),
       { ...hookSignature(desired), disabled: false },
-      "An existing hook differs from the prepared public configuration. Preserve it; inspect before making an explicit change.",
+      "An existing hook differs from the prepared configuration. Preserve it; inspect before making an explicit change.",
     );
   const report = {
     schemaVersion: 1,
@@ -289,11 +303,14 @@ async function register({
   report.after = summarize(verified);
   return report;
 }
-async function main() {
+async function main(
+  hookConfig = PUBLIC_HOOK_CONFIG,
+  scriptName = "public-register-search-webhook.cjs",
+) {
   const args = process.argv.slice(2);
   if (args.includes("--help")) {
     console.log(
-      "public-register-search-webhook.cjs ENV --edge-client /abs/private-client.json --runtime-env /abs/public.env.local --report /abs/private-report.json [--apply --before /abs/private-before.json]",
+      `${scriptName} ENV --edge-client /abs/private-client.json --runtime-env /abs/runtime.env.local --report /abs/private-report.json [--apply --before /abs/private-before.json]`,
     );
     return;
   }
@@ -355,6 +372,7 @@ async function main() {
     settings,
     apply: options["--apply"] === true,
     recordBefore: (data) => writePrivate(options["--before"], data),
+    hookConfig,
   });
   writePrivate(options["--report"], report);
   console.log(
@@ -371,12 +389,14 @@ module.exports = {
   LABEL,
   EDGE_ADMIN,
   CLIENT_MANAGEMENT_SCOPE,
+  PUBLIC_HOOK_CONFIG,
   edgeClientRequest,
   desiredHook,
   hookSignature,
   summarize,
   edgeToken,
   register,
+  main,
 };
 if (require.main === module)
   main().catch((error) => {

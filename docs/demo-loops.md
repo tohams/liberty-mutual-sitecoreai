@@ -6,16 +6,16 @@ The separate [developer setup and component-edit workshop](developer-quickstart.
 
 ## Choose the session
 
-| Loop | Story | Audience |
-| --- | --- | --- |
-| [1](#loop-1-one-agency-different-people) | One agency, different people | Marketing, marketing operations |
-| [2](#loop-2-find-the-right-answer) | Find the right answer | Marketing, Search owners |
-| [3](#loop-3-from-opportunity-to-submission) | From opportunity to submission | Marketing and IT |
-| [4](#loop-4-different-specialties-one-portal) | Different specialties, one portal | Business stakeholders, IT |
-| [5](#loop-5-marketing-owns-the-content) | Marketing owns the content | Authors, approvers, implementers |
-| [6](#loop-6-grow-an-agency-relationship) | Grow an agency relationship | Marketing, marketing operations |
-| [7](#loop-7-beneath-the-implementation) | Beneath the implementation | Developers, platform owners |
-| [8](#loop-8-a-clearer-next-step) | A clearer next step | Marketing, optimization and platform owners |
+| Loop                                                  | Story                                    | Audience                                       |
+| ----------------------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| [1](#loop-1-one-agency-different-people)              | One agency, different people             | Marketing, marketing operations                |
+| [2](#loop-2-find-the-right-answer)                    | Find the right answer                    | Marketing, Search owners                       |
+| [3](#loop-3-from-opportunity-to-submission)           | From opportunity to submission           | Marketing and IT                               |
+| [4](#loop-4-different-specialties-one-portal)         | Different specialties, one portal        | Business stakeholders, IT                      |
+| [5](#loop-5-marketing-owns-the-content)               | Marketing owns the content               | Authors, approvers, implementers               |
+| [6](#loop-6-grow-an-agency-relationship)              | Grow an agency relationship              | Marketing, marketing operations                |
+| [7](#loop-7-beneath-the-implementation)               | Beneath the implementation               | Developers, platform owners                    |
+| [8](#loop-8-a-clearer-next-step)                      | A clearer next step                      | Marketing, optimization and platform owners    |
 | [9](#loop-9-an-interest-becomes-a-relevant-next-step) | An interest becomes a relevant next step | Marketing, personalization and platform owners |
 
 Loop 8 introduces optimization through a live content comparison. Inspect the existing test and results; creating another test is not part of an ordinary presentation.
@@ -32,15 +32,15 @@ Loop 9 can accompany loop 1 to distinguish known agent attributes from browsing-
 6. Rehearse the chosen loops on the deployment you will present. The guide records baseline headings and counts; approved editorial changes can change copy and Search totals. Do not alter profiles or force audience matches simply to reproduce a screenshot.
 7. Before a fresh loop 9 replay, record the selected host, pack and current profile generation, then inspect Daniel’s, Maya’s and Elena’s native history. Original seed identities may share history across hosts. If a fresh set is needed, coordinate the whole pack, run an on-demand restart on the selected host, wait for verified completion, then sign in and inspect the new active identifiers before tagged browsing. Signing out or resetting saved work does not clear affinities. See [Reset and repeat](#reset-and-repeat).
 
-| Example login | Person / agency | Role | Licensed states |
-| --- | --- | --- | --- |
-| `avery.01` | Avery Brooks / Cedar Ridge | Agency principal | TX, FL, IL |
-| `jordan.01` | Jordan Ellis / Cedar Ridge | Small commercial producer | TX, IL |
-| `maya.01` | Maya Chen / Cedar Ridge | Personal lines account manager | TX, FL, IL |
-| `daniel.01` | Daniel Ortiz / Prairie Oak | Business insurance producer | IL, TX |
-| `priya.01` | Priya Shah / Harborline | Commercial account executive | FL, TX, IL |
-| `marcus.01` | Marcus Reed / Harborline | Surety specialist | FL, TX, IL |
-| `elena.01` | Elena Park / Summit Specialty | Wholesale broker | IL, TX, FL |
+| Example login | Person / agency               | Role                           | Licensed states |
+| ------------- | ----------------------------- | ------------------------------ | --------------- |
+| `avery.01`    | Avery Brooks / Cedar Ridge    | Agency principal               | TX, FL, IL      |
+| `jordan.01`   | Jordan Ellis / Cedar Ridge    | Small commercial producer      | TX, IL          |
+| `maya.01`     | Maya Chen / Cedar Ridge       | Personal lines account manager | TX, FL, IL      |
+| `daniel.01`   | Daniel Ortiz / Prairie Oak    | Business insurance producer    | IL, TX          |
+| `priya.01`    | Priya Shah / Harborline       | Commercial account executive   | FL, TX, IL      |
+| `marcus.01`   | Marcus Reed / Harborline      | Surety specialist              | FL, TX, IL      |
+| `elena.01`    | Elena Park / Summit Specialty | Wholesale broker               | IL, TX, FL      |
 
 The insurance records, premium figures, authority records and operational actions are synthetic integration examples. Native CMS, Search, UDL, personalization, Design and Agentic configuration are inspectable in Sitecore. No workflow rates or binds insurance, issues a bond, or sends an email to a customer or underwriter.
 
@@ -58,12 +58,12 @@ The insurance records, premium figures, authority records and operational action
 
 **Expected baseline:**
 
-| Person | Guidance heading |
-| --- | --- |
-| Avery | Build your next chapter in small business |
-| Jordan | Bring a stronger submission to the table |
-| Maya | Connect everyday conversations to new needs |
-| Elena | Resources for your next client conversations |
+| Person | Guidance heading                             |
+| ------ | -------------------------------------------- |
+| Avery  | Build your next chapter in small business    |
+| Jordan | Bring a stronger submission to the table     |
+| Maya   | Connect everyday conversations to new needs  |
+| Elena  | Resources for your next client conversations |
 
 **Explain:** “One agency opportunity can produce different next steps for its principal, producer and account manager.” Native UDL identity and decisioning select CMS content. The agency growth cohort is a seeded attribute; the display is not calculating a new live segment from a policy system. Marketing attributes never grant transaction permissions.
 
@@ -154,29 +154,21 @@ The insurance records, premium figures, authority records and operational action
 
 ## Loop 5: Marketing owns the content
 
-**Story:** a marketer updates an agent resource once and follows it through preview, publication and Search without deploying application code.
+**Story:** a marketer edits an agent resource in native Page Builder, then follows its normal publication into the live article and automatically updated Search result.
 
-**Optional creation exercise:** before or after this existing-article walkthrough, use the [new resource and Media exercise](resource-page-authoring.md#a-short-creation-exercise). Create an independent unpublished **Resource page**, observe its blank fields and local **Data/Resource image**, and select an existing asset through **Browse media library → Media BETA**. Recycle only that practice page afterward. Keep this exercise separate from the published Texas article restoration below; an agent workspace reset cannot reset CMS content.
+**Start:** use a Sitecore account with permission to edit and publish the Texas resource, plus Daniel’s portal login for the delivered-content checks. Record the original summary and all five checklist selections before the shared demonstration.
 
-**Start:** Page Builder and Search Sources access, permission to edit and publish the Texas resource, and the original summary saved for restoration. Refresh the Search source after publication and again after restoring the starting content. For the separate Author and Approver demonstration, follow [Review and publish content](https://liberty-mutual-agent-portal.vercel.app/workshops/guide/author-approver-workflow).
+1. In **Agent Portal**, open **Home → Learning & resources → Workers compensation: a Texas starting point**. The page is the article’s datasource; its **Content** view contains the visible article fields and native classification checklists.
+2. As Daniel, open the [Texas article](https://liberty-mutual-agent-portal.vercel.app/resources/texas-workers-compensation) and its [Learning & resources](https://liberty-mutual-agent-portal.vercel.app/resources) result. Keep this portal tab for published-content checks.
+3. Create a named **English Draft** in Page Builder. In **Content**, inspect **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Open each selection control to reveal the checkboxes. Record the original selections.
+4. Change **Resource types** from **State guidance** to **Preparation guide**, close the control, and wait for **Saved**. Reload the same draft to verify the selection. Restore the complete original checklist selection, wait for **Saved**, and verify it before continuing.
+5. Edit **Summary**, click outside the field, and wait for **Saved**. Preview the draft in **Editor** with **Default editing host**. Complete **Actions → Approve → Submit**, confirm **Approved**, and publish only the intended English page. Clear **Include related items** before **All references**, retain **Page** and **Current language (English)**, and leave **Subpages** off.
+6. Reload the live article and repeat the **Workers compensation** search with **Texas** selected. The configured publication event synchronizes Search after delivery through **Experience Edge**. Verify the same updated summary in the article and result card.
+7. Restore the original summary through another named **English Draft**, approval, and scoped publication. Confirm the original article text, checklist selections, and Search result before finishing.
 
-1. In the portal site, locate **Home → Learning & resources → Workers compensation: a Texas starting point** (item name `texas-workers-compensation`). Select **Article** and inspect its title, summary, body, source and reviewed date. The page itself is the datasource; the unused **Data/Resources** copies are not the active source.
-2. Sign in to the [production portal](https://liberty-mutual-agent-portal.vercel.app/login) as Daniel with your assigned pack suffix. Open the [Texas article](https://liberty-mutual-agent-portal.vercel.app/resources/texas-workers-compensation) and its result in [Learning & resources](https://liberty-mutual-agent-portal.vercel.app/resources). Record the original summary. Use this production tab for every published-content check below; keep draft inspection in Page builder.
-3. Open that same resource item in native **Content** and create a **new English draft version** with a descriptive name, such as **Presenter verification**. Edit **Summary** without altering regulatory meaning, then click outside the field. Content mode autosaves on blur; wait for the **Saved** checkmark rather than looking for a Save button. Preview this version in **Editor** using the configured **Default** editing host. Record the new version number; do not edit the published version in place or change the editing host for this exercise.
-4. From **Draft**, choose **Actions → Approve**, then **Submit** in the workflow dialog. Confirm the item reaches **Approved**.
-5. Choose **Publish Page**. Keep **Page** and **Current language (English)** selected and leave **Subpages** off. Uncheck **Include related items first**, then uncheck **All references**; switching off All references hides the related-items checkbox, so set the related-items option first. Select **Start publish**, confirm completion, then refresh the production [Texas article](https://liberty-mutual-agent-portal.vercel.app/resources/texas-workers-compensation) and verify the new summary. Verify the Search result after the separate reindex in step 6.
-6. Open **Content → Search Sources**. Locate **Liberty Mutual Agent Resources**, confirm source ID `b5e24aff-8b5b-4653-bf66-deef52c1241a`, and choose **Reindex Content** for that source. Wait for the indexing job to finish, then search for the Texas article in production [Learning & resources](https://liberty-mutual-agent-portal.vercel.app/resources) and verify that its native Search result card contains the changed summary before recording the editorial loop as successful. No Git deployment is required.
-7. In Page Builder, open **Home → Layers → Guidance** and inspect the reusable **Data/Guidance** datasources and the **Default** and **Highlight** variants. Show the eyebrow, headline, body and action-link fields that marketing owns.
+**Expected result:** native fields and managed taxonomy give authors consistent choices. Review controls publication, and the configured integration keeps the searchable copy aligned automatically. Application code is unchanged.
 
-**Managed metadata exercise:** use the installed app’s existing organization administrator/owner access. After creating the English Draft in step 3 and before approval in step 4, open **Apps → Resource metadata**. Record **Risk state**, **Business family**, **Product**, **Distribution channel** and **Resource type**. These are five single-select lists. Change **Resource type** to **Preparation guide**, observe the unsaved count, then **Discard changes**. Repeat the selection and click **Save metadata**; **Refresh** must retain it. Restore the recorded original type with another **Save metadata**, then **Refresh** before continuing publication. Discard does not undo a completed save. Approved versions are read-only. Follow the [Resource metadata panel guide](resource-metadata-authoring.md#use-the-resource-metadata-panel) for the full validation and access boundaries.
-
-**Expected result:** one authored source drives article and Search metadata; editable component fields remain native; operational actions are disabled in the authoring context.
-
-**Explain:** “Content changes and application releases have separate ownership and release paths.” This native content source requires an explicit reindex to ingest published changes; refresh the source after publishing so Search can retrieve the updated content. See [Sitecore's content-source workflow](https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/search-experiences/manage-content-sources.html). The editing host isolates operational preview data, but publishing in this shared Sitecore tenant can update the live site. A reviewer-pack reset does not undo a CMS publication.
-
-**If Search still shows the previous wording:** open **Liberty Mutual Agent Resources**, inspect the indexing status, and wait for the current job to finish before searching again.
-
-**Leave it ready:** create another **new English draft version**, named for the restoration, and restore the agreed original wording, or explicitly retain the approved change. After editing **Summary**, click outside the field and wait for the **Saved** checkmark. For restoration, use **Actions → Approve**, then **Submit** in its dialog, confirm the Draft reaches **Approved**, and repeat the scoped **Publish Page** settings: Include related items off first, then All references off; Subpages off, Page and current English on. Run **Reindex Content** on **Liberty Mutual Agent Resources** again and verify the restored summary in the article, listing and native Search result. See [content model and publishing](content-model.md) for the publishing and indexing paths.
+For complete clicks, expected results, and restoration, follow [Edit and publish a resource](https://liberty-mutual-agent-portal.vercel.app/workshops/guide/resource-content-workflow). For a separate creation exercise, use [Create a page](https://liberty-mutual-agent-portal.vercel.app/workshops/guide/create-resource-and-media), and recycle only the new unpublished page. A workshop-number reset does not restore CMS content.
 
 ## Loop 6: Grow an agency relationship
 
@@ -265,7 +257,6 @@ It retains the new records, does not edit preexisting records, and does not rese
 **Explain:** “Known attributes tell us who the agent is; browsing adds a signal about what interests them now.” This extends the personalization story beyond loop 1's role/cohort inputs. It is independent of loop 8's A/B allocation, and it does not claim reading completion, intent to transact or measured business lift.
 
 **Leave it ready:** record the ending profile generation, topic scores, content and comparison outcome, then sign out. Logout and `saved-work` reset retain native history. A `restart` affects all seven personas in the selected host’s pack. It provisions a fresh native set and activates it only after every profile is verified; old history remains. Wait for completion and inspect the new identifiers before beginning another affinity journey. Follow [Reset and repeat](#reset-and-repeat).
-
 
 ## Reset and repeat
 

@@ -1,0 +1,172 @@
+{
+  "state": [
+    {
+      "id": "c5675444-00bc-541f-b740-1b936556f036",
+      "value": "All",
+      "label": "Cross-state guidance"
+    },
+    {
+      "id": "e3cb8be3-8ca2-581b-9de6-37047c82e605",
+      "value": "FL",
+      "label": "Florida"
+    },
+    {
+      "id": "10ca6f71-703e-5917-81f4-2d2e0d289d3e",
+      "value": "IL",
+      "label": "Illinois"
+    },
+    {
+      "id": "190e6130-817d-57bf-9730-65607d22c45f",
+      "value": "TX",
+      "label": "Texas"
+    }
+  ],
+  "businessFamily": [
+    {
+      "id": "5e3c2a4f-b6ec-56b2-8380-9a1308298990",
+      "value": "personal",
+      "label": "Personal insurance"
+    },
+    {
+      "id": "6746782f-ec25-50c5-baf9-c86b30e48e5a",
+      "value": "small-commercial",
+      "label": "Small commercial"
+    },
+    {
+      "id": "d6c0eaf9-751a-52e3-994d-424085e3fa75",
+      "value": "farm-ranch",
+      "label": "Farm & ranch"
+    },
+    {
+      "id": "1ca33d4a-0052-5951-8514-276cc3b8a7b1",
+      "value": "midsize-large",
+      "label": "Midsize & large commercial"
+    },
+    {
+      "id": "0343e9e9-f4c1-5d6e-995f-71eea9619249",
+      "value": "retail-specialty",
+      "label": "Retail specialty"
+    },
+    {
+      "id": "435b1eec-9d53-5b17-9e38-b2c766af1090",
+      "value": "surety",
+      "label": "Surety"
+    },
+    {
+      "id": "611b212c-97b0-5ff1-8376-3b160dc71bc1",
+      "value": "wholesale-specialty",
+      "label": "Wholesale specialty"
+    }
+  ],
+  "product": [
+    {
+      "id": "28acd0f4-de95-5359-a172-6233e08389dc",
+      "value": "auto",
+      "label": "Auto"
+    },
+    {
+      "id": "526470f9-d360-5345-9f8c-5c835bfad2d7",
+      "value": "home",
+      "label": "Homeowners"
+    },
+    {
+      "id": "0b1ed9c1-1abf-5d25-bbc2-74a4bab99f11",
+      "value": "businessowners-policy",
+      "label": "Businessowners policy (BOP)"
+    },
+    {
+      "id": "a62bb0b6-47ef-5e8f-b2b3-f3065658dba3",
+      "value": "commercial-auto",
+      "label": "Commercial auto"
+    },
+    {
+      "id": "9ecbff05-8abc-522b-a638-0922852f8761",
+      "value": "commercial-package",
+      "label": "Commercial package"
+    },
+    {
+      "id": "2f7cd92d-aa0d-5a79-8a0e-5a7486373a03",
+      "value": "contract-commercial-bonds",
+      "label": "Contract & commercial bonds"
+    },
+    {
+      "id": "9b53d874-c96b-52d3-9750-ec431b4e96f4",
+      "value": "farm",
+      "label": "Farm"
+    },
+    {
+      "id": "c07a4368-c5cb-58d4-b2e9-cf891a414130",
+      "value": "specialty",
+      "label": "Specialty"
+    },
+    {
+      "id": "1a81cbb8-3c4c-58b6-8726-b1a108c3f179",
+      "value": "workers-compensation",
+      "label": "Workers’ compensation"
+    },
+    {
+      "id": "ed8fa42a-1b68-5afd-b152-08167f7a9118",
+      "value": "auto-home",
+      "label": "Auto & home"
+    }
+  ],
+  "channel": [
+    {
+      "id": "4b70f776-d528-5cfe-be25-8617c69787f0",
+      "value": "independent-agent",
+      "label": "Independent agent"
+    },
+    {
+      "id": "528f536c-b8da-5e56-aea6-910a2520a667",
+      "value": "wholesale",
+      "label": "Wholesale"
+    }
+  ],
+  "resourceType": [
+    {
+      "id": "602e34c5-ad55-5d7e-a23c-2e4120d2de99",
+      "value": "Bond guide",
+      "label": "Bond guide"
+    },
+    {
+      "id": "714631b8-79c6-5f0b-99d2-583b0c540656",
+      "value": "Checklist",
+      "label": "Checklist"
+    },
+    {
+      "id": "7cd2c664-3e24-55ba-a21d-44fedd1daa70",
+      "value": "Conversation guide",
+      "label": "Conversation guide"
+    },
+    {
+      "id": "2f83ae0a-75fd-512d-8b11-050828b1703c",
+      "value": "Learning path",
+      "label": "Learning path"
+    },
+    {
+      "id": "22f18bce-059a-5814-a80c-c3fa36ba84a9",
+      "value": "Placement guide",
+      "label": "Placement guide"
+    },
+    {
+      "id": "beb968e6-9cd8-5ce9-aada-1828e5a32f63",
+      "value": "Preparation guide",
+      "label": "Preparation guide"
+    },
+    {
+      "id": "5b69a3f1-e120-5fbc-9235-a6636db9298f",
+      "value": "Referral guide",
+      "label": "Referral guide"
+    },
+    {
+      "id": "3e59dc6d-ebf5-5717-a9a2-1cfcf39ec696",
+      "value": "State guidance",
+      "label": "State guidance"
+    },
+    {
+      "id": "d354ca21-ccfe-57e1-b1d0-473948b63055",
+      "value": "Submission guide",
+      "label": "Submission guide"
+    }
+  ]
+}

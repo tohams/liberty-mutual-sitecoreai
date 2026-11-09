@@ -15,7 +15,7 @@ Languages:
     Value: Resource types
   - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
     Hint: __Short description
-    Value: Select the kind of guidance the resource provides.
+    Value: Select the kinds of guidance this resource provides.
   Versions:
   - Version: 1
     Fields:

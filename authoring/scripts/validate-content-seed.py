@@ -247,6 +247,9 @@ require(id_list(field_value(folder_defaults.get('SharedFields', []), '__Masters'
         'Metadata folders must offer only managed metadata options.')
 expected_taxonomy_paths = {taxonomy_root}
 taxonomy_values = {}
+taxonomy_ids = {}
+taxonomy_sources = {}
+taxonomy_all = {}
 for managed_list in taxonomy_manifest['taxonomies']:
     source = managed_list['source']
     require(source == taxonomy_root + '/' + managed_list['folder'], 'Metadata list must be a direct taxonomy child.')
@@ -273,6 +276,9 @@ for managed_list in taxonomy_manifest['taxonomies']:
         expected_taxonomy_paths.add(option_path)
     require(managed_list['field'] not in taxonomy_values, 'Duplicate metadata field mapping.')
     taxonomy_values[managed_list['field']] = values
+    taxonomy_ids[managed_list['field']] = {normalized_id(option['id']) for option in managed_list['options']}
+    taxonomy_sources[managed_list['field']] = source
+    taxonomy_all[managed_list['field']] = next((normalized_id(option['id']) for option in managed_list['options'] if option['name'] == 'All'), None)
 require(set(taxonomy_values) == {'state', 'businessFamily', 'product', 'channel', 'resourceType'},
         'Expected exactly five resource metadata lists.')
 require({path for path in paths if path == taxonomy_root or path.startswith(taxonomy_root + '/')} ==
@@ -281,15 +287,20 @@ for relative in taxonomy_manifest['generatedFiles']:
     require((ROOT / relative).is_file(), 'Missing generated taxonomy item: ' + relative)
 for metadata_field in taxonomy_values:
     definition = paths[TEMPLATE_ROOT + '/ResourcePage/Content/' + metadata_field]
-    require(field_value(definition['SharedFields'], 'Type') == 'Single-Line Text',
-            'ResourcePage metadata must retain its tenant-verified Search-supported text type: ' + metadata_field)
+    require(field_value(definition['SharedFields'], 'Type') == 'Checklist'
+            and field_value(definition['SharedFields'], 'Source') == taxonomy_sources[metadata_field],
+            'ResourcePage metadata must use its managed native Checklist source: ' + metadata_field)
 for resource in resources:
     entry = items[normalized_id(resource['pageId'])]
     for language in entry['Languages']:
         for version in language['Versions']:
             for metadata_field, values in taxonomy_values.items():
                 value = field_value(version['Fields'], metadata_field)
-                require(value in values, f'Authored metadata has no managed option: {entry["Path"]} {metadata_field}={value}')
+                selected = id_list(value)
+                require(selected and len(selected) == len(set(selected)) and set(selected) <= taxonomy_ids[metadata_field],
+                        f'Authored metadata has no managed references: {entry["Path"]} {metadata_field}')
+                require(taxonomy_all[metadata_field] not in selected or len(selected) == 1,
+                        'Cross-state guidance cannot be combined with specific states.')
 
 
 placeholder_ids = {}

@@ -15,7 +15,7 @@ Languages:
     Value: Distribution channels
   - ID: 9541e67d-ce8c-4225-803d-33f7f29f09ef
     Hint: __Short description
-    Value: Select the distribution channel the resource is written for.
+    Value: Select the channels for which this resource is written.
   Versions:
   - Version: 1
     Fields:
