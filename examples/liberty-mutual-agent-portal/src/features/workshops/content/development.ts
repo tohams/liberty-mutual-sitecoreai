@@ -706,7 +706,7 @@ export const developmentGuides: WorkshopGuide[] = [
           "Compare the selected choices with **Texas**, **Small commercial**, **Workers’ compensation**, **Independent agent**, and **State guidance**. Close each list without changing any checkbox.",
         ],
         expected: [
-          "The selected **Draft** exposes the native, multiple-selection checklists. An **Approved** or **Live** version is read-only; create or select a draft before opening its checklist choices. Each selection describes applicability of the article, while page and workflow permissions govern editing.",
+          "The selected **Draft** exposes the native, multiple-selection checklists while preserving the earlier approved version. Each selection describes applicability of the article, while page and workflow permissions govern editing. Leave this inspection draft unchanged and unpublished.",
           "**Cross-state guidance** is selected by itself when content applies across supported states. It does not grant an agent a license or broaden the portal’s licensed-state access.",
         ],
         links: [{ label: "Open Page Builder", href: pageBuilder }],

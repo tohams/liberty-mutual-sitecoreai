@@ -653,7 +653,7 @@ test("resource guides use native checklists and the publishing-driven Search pat
   );
   assert.match(
     readableContent(nativeFieldsStep.expected),
-    /Approved.*Live.*read-only/i,
+    /Draft.*preserving.*approved version.*unchanged and unpublished/i,
   );
   const workflow = workshopGuides.find(
     (guide) => guide.slug === "resource-content-workflow",

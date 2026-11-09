@@ -32,7 +32,7 @@ const nativeResourceMetadata: GuideImage = {
   title: "Find the native classification fields in Page content",
   alt: "Native Page content pane for the Texas resource with Resource types, Risk states, Business families, Products, and Distribution channels checklist controls",
   caption:
-    "This approved Texas article is a location reference: its fields are read-only. Create or select a **Draft** before opening the checklists. On the draft, open each control using its selected-item count, such as **1 item selected**.",
+    "Use this approved Texas article to locate the native fields. For the exercise, create or select a **Draft** so the approved version stays unchanged. Open each checklist using its selected-item count, such as **1 item selected**.",
   crop: {
     x: 0,
     y: 540,
@@ -56,7 +56,7 @@ const nativeResourceMetadata: GuideImage = {
       width: 92.6,
       height: 9.8,
       label:
-        "Find **Products** farther down the same pane. Its individual checkboxes become available on a selected **Draft**.",
+        "Find **Products** farther down the same pane. On your selected **Draft**, open this control to inspect the individual product checkboxes.",
     },
   ],
 };
