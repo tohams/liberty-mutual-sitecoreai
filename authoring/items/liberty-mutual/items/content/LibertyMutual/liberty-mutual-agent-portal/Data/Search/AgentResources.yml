@@ -25,13 +25,20 @@ Languages:
       Hint: search
       Value: |
         {
-          "searchIndex": "b5e24aff-8b5b-4653-bf66-deef52c1241a",
+          "searchIndex": "26cf5bd0-b285-4a7d-93f9-9e3dac91b202",
           "fieldsMapping": {
-            "title": "Title",
+            "title": "title",
             "description": "summary",
             "state": "state",
-            "type": "resourceType",
-            "family": "businessFamily"
+            "type": "resourcetype",
+            "family": "businessfamily"
+          },
+          "facetMapping": {
+            "Risk state": "state",
+            "Resource type": "resourcetype",
+            "Business family": "businessfamily",
+            "Distribution channel": "channel",
+            "Product": "product"
           }
         }
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"

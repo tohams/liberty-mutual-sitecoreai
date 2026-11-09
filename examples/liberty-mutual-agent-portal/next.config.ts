@@ -32,16 +32,6 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        source: "/resource-metadata",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value:
-              "frame-ancestors https://pages.sitecorecloud.io https://app.sitecorecloud.io https://portal.sitecorecloud.io",
-          },
-        ],
-      },
     ];
   },
   async rewrites() {

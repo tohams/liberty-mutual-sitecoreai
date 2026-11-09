@@ -4,7 +4,7 @@ Metadata describes where content applies and how readers find it. Both sites use
 
 ## Agent Portal resources
 
-Open **Agent Portal → Home → Learning & resources**, select a resource article, and choose **Content** in the top navigation. The same page owns the visible article and its classification.
+In **Page Builder**, select **Agent Portal** and **Editor**. Under **Pages → Home → Learning & resources**, select an article, open its **Content tree options (…)** menu, and choose **Page content**. The native pane opens beside the website canvas. The same page owns the visible article and its classification.
 
 | Native field          | Technical name   | Managed Source under `Data/Taxonomy` |
 | --------------------- | ---------------- | ------------------------------------ |
@@ -21,7 +21,7 @@ Use **Cross-state guidance** on its own when the article applies across supporte
 ### Edit, verify, and release
 
 1. Record the original text and selected checkboxes before a shared demonstration.
-2. Create a named **English Draft**, then select that version and open **Content**.
+2. Create a named **English Draft**, then select that version and open **Page content**.
 3. Open a native checklist, change the applicable selections, close it, and click outside the field. Wait for the native **Saved** checkmark.
 4. Reload the page, return to the same draft, and reopen the checklist to verify persistence. Native fields save automatically.
 5. Preview visible article content in **Editor** with **Default editing host**. Complete the configured review workflow, then publish the approved page. Include changed local image content when appropriate.
