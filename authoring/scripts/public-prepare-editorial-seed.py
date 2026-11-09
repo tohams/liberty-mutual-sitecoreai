@@ -121,7 +121,9 @@ def prepare(source,bindings):
             fields={field['ID'].lower():field for field in values}
             fields.update({fieldid('PublicPage',k).lower():F(fieldid('PublicPage',k),k,h.checklist_value(k,v) if k in h.CHECKLIST_HELP else v) for k,v in common.items()})
             values=list(fields.values())
-        item(p,UID(p.rsplit('/',1)[0]),template('PublicResourcePage' if page.get('approvedAnswerSlug') else 'PublicPage'),values,[F(h.F['layout'],'__Renderings',h.layout(components)),F(h.F['workflow'],'__Workflow',BRACE(M['workflow']['id']))])
+        shared=[F(h.F['layout'],'__Renderings',h.layout(components)),F(h.F['workflow'],'__Workflow',BRACE(M['workflow']['id']))]
+        if page['slug']=='/insurance-resources':shared.append(F(h.F['masters'],'__Masters',BRACE(h.T['data'])+'|'+BRACE(UID(root+'/Presentation/Page Branches/Resource page'))))
+        item(p,UID(p.rsplit('/',1)[0]),template('PublicResourcePage' if page.get('approvedAnswerSlug') else 'PublicPage'),values,shared)
         item(d,UID(p),h.T['data'])
         hero_values={**page['hero'],'summary':hero_summary,'image':image(page['hero'].get('image'),d+'/Hero',bindings),'primaryLink':link(page['hero'].get('primaryLink')),'secondaryLink':link(page['hero'].get('secondaryLink'))}
         data(d+'/Hero','PublicHero',hero_values);data(d+'/Introduction','PublicArticle',page['introduction'])

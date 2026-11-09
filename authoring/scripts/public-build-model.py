@@ -44,6 +44,12 @@ RESOURCE_IDS = {
     RP + "/PublicResourceContent": "4585a48f-e841-50ca-b2a3-0d3fc9893875",
     SITE + "/Presentation/Headless Variants/PublicResourceContent": "370f9cc8-4585-560d-9228-881f53a62859",
     SITE + "/Presentation/Headless Variants/PublicResourceContent/Default": "3e82160b-336f-5744-a667-7a1b94bc7307",
+    SITE + "/Presentation/Page Branches/Resource page": "3216026f-858d-46ed-aa05-edbd025c9250",
+    SITE + "/Presentation/Page Branches/Resource page/$name": "83c4ff3b-22c8-42c3-accd-7ded4f6c4e66",
+    SITE + "/Presentation/Page Branches/Resource page/$name/Data": "9b675e40-b0ca-4529-9a80-afea5d811de9",
+    SITE + "/Presentation/Page Branches/Resource page/$name/Data/Hero": "e38057ab-517d-4902-a56d-738cc28dc09c",
+    SITE + "/Presentation/Page Branches/Resource page/$name/rendering/PublicHero/2": "3de5befb-5a55-477e-b479-5a493678c3cb",
+    SITE + "/Presentation/Page Branches/Resource page/$name/rendering/PublicResourceContent/6": "c2b69079-9986-4816-9e5f-88048ddbdc4b",
 }
 RESOURCE_FIELD_IDS = {
     "question": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
@@ -182,7 +188,7 @@ def build(include_editorial=True):
         # Register those peers and their linked recommendation cards with Edge.
         if name=="AgencyPriorities": sf += [field("b4bbc0be-7619-4678-b2f7-947d84aa77a9","Content Dependencies","{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{15F0229E-41E0-442B-94C5-243CBA793465}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}")]
         if name=="PublicPageBody": sf += [field("e829c217-5e94-4306-9c48-2634b094fdc2","OtherProperties","IsRenderingsWithDynamicPlaceholders=true"),field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-hero"))+"|"+brace(uid(PP+"/headless-public-content")))]
-        if name=="PublicResourceContent": sf += [field("a3411ff6-c978-40aa-b059-a49b9ca2209b","Can select Page as datasource","1")]
+        if name=="PublicResourceContent": sf += [field("a3411ff6-c978-40aa-b059-a49b9ca2209b","Can select Page as datasource","1"),field("b0b15510-b138-470e-8f33-8da2e228aafe","Rendering Contents Resolver","{6CCCBCDE-5E95-44E4-AE66-CFE7D3A0589E}")]
         allowed=[resource_page] if name=="PublicResourceContent" else [page]
         if name in ["PublicHeader","PublicFooter","PublicPageBody"]: allowed.append(T["partial"])
         if name in ["AgencyPriorities","SharedDisclosure"]: allowed += [I["portalPage"],I["collectionPage"]]
@@ -261,6 +267,16 @@ def build(include_editorial=True):
             hero.update({"eyebrow":"HOME AND AUTO" if bundle else "LIBERTY MUTUAL INSURANCE","heading":"Better together. Home and auto insurance." if bundle else "Protection for the life you live.","summary":"<p>Bring your home and auto insurance together, and explore coverage that fits your needs.</p>" if bundle else "<p>Explore insurance for your home, car, and the things that matter to you.</p>","primaryLink":link("Start your quote","/get-a-quote"),"secondaryLink":link("Explore bundling","/bundling") if not bundle else link("Find answers","/insurance-resources")})
             article={"heading":"Make room for what matters.","body":"<p>Understand your options, find useful guidance, and take your next step with confidence.</p>"}
         for name,component,vals in [("Hero","PublicHero",hero),("Introduction","PublicArticle",article)]:item(p+"/Data/"+name,uid(p+"/Data"),TEMPLATES[component],bucket,values=[field(FIELDS[component+"."+k],k,v) for k,v in vals.items()])
+    # Native Page Builder verified this starter creates independent local Hero
+    # content and uses the built-in Context Item Resolver for page-owned fields.
+    # An empty datasource is intentional: a branch prototype GUID is not remapped.
+    resource_branch=SITE+"/Presentation/Page Branches/Resource page"
+    resource_proto=resource_branch+"/$name"
+    item(resource_branch,uid(SITE+"/Presentation/Page Branches"),T["branch"],"branch")
+    resource_components=[placement(resource_proto,"PublicHero","/headless-main/sxa-public-page-body/headless-public-hero-1","page:/Data/Hero",n=2),placement(resource_proto,"PublicResourceContent","/headless-main/sxa-public-page-body/headless-public-content-1",n=6)]
+    item(resource_proto,uid(resource_branch),resource_page,"branch",shared=fs({"layout":layout(resource_components),"masters":brace(T["data"])}),values=[field("d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b","Title","$name"),field("4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8","NavigationTitle","$name"),field(FIELDS["PublicPage.includeInSearch"],"includeInSearch","0")])
+    item(resource_proto+"/Data",uid(resource_proto),T["data"],"branch")
+    item(resource_proto+"/Data/Hero",uid(resource_proto+"/Data"),TEMPLATES["PublicHero"],"branch")
     data(SITE+"/Data/Promotions/Bundle and save","PublicPromotion",{"eyebrow":"BETTER TOGETHER","headline":"Bundle your home and auto insurance","body":"<p>Keep your home and auto coverage together. Explore your options and see what works for you.</p>","image":"","actionLink":link("Explore bundling","/bundling"),"disclosure":brace(uid(SITE+"/Data/Disclosures/Product availability notice"))})
     # No invented corporate approval: source/owner are visible editorial fields,
     # while native workflow and publication determine delivery eligibility.

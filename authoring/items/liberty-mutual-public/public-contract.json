@@ -2059,6 +2059,7 @@
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
         "__Icon": "Office/32x32/document_text.png",
         "Can select Page as datasource": "1",
+        "Rendering Contents Resolver": "{6CCCBCDE-5E95-44E4-AE66-CFE7D3A0589E}",
         "__Display name": "Resource content",
         "AllowedOnTemplates": "{B99218EA-E1FD-41AF-A4AE-7EC9E5C30B17}"
       }
@@ -2453,7 +2454,7 @@
       "bucket": "presentation",
       "fields": {
         "__Masters": "{FBC802E5-4B9E-480F-93DA-3F2A80CAE5CB}",
-        "Rule": "<ruleset><rule uid=\"{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}\" name=\"Landing pages beneath Home\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{55387862-AA7F-5189-B501-91D82B13B423}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{6D600332-3E21-4C5F-83EC-AAE04F83450F}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{CF4A380D-6AD5-5C4A-9EAC-9568B315F24C}\" PageBranchId=\"{D5784517-B225-55AA-BC9C-8910FA0DB4F2}\" /></actions></rule></ruleset>",
+        "Rule": "<ruleset>\r\n  <rule uid=\"{AC72F345-4D0E-55DC-9EA4-CAAB14A5CD91}\" name=\"Landing pages beneath Home\">\r\n    <conditions>\r\n      <condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{55387862-AA7F-5189-B501-91D82B13B423}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{6D600332-3E21-4C5F-83EC-AAE04F83450F}\" />\r\n    </conditions>\r\n    <actions>\r\n      <action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{CF4A380D-6AD5-5C4A-9EAC-9568B315F24C}\" PageBranchId=\"{D5784517-B225-55AA-BC9C-8910FA0DB4F2}\" />\r\n    </actions>\r\n  </rule>\r\n<rule uid=\"{899B9FEF-EF0F-4E5B-99CC-8925EE563DB5}\" name=\"Resource pages beneath insurance-resources\"><conditions><condition id=\"{4F5389E9-79B7-4FE1-A43A-EEA4ECD19C94}\" uid=\"{0E8FAB43-D18F-4AA9-87E5-33ADB88D4392}\" operatorid=\"{066602E2-ED1D-44C2-A698-7ED27FD3A2CC}\" value=\"{AFAD2C4C-2DC6-5428-B357-28FCA18B611D}\" /></conditions><actions><action id=\"{D46EC8E5-7B46-47DE-B44A-4C5C30EF48D1}\" uid=\"{3F1A9D8D-659B-4417-B195-BF0089545E6C}\" PageBranchId=\"{3216026F-858D-46ED-AA05-EDBD025C9250}\" /></actions></rule></ruleset>",
         "__Created": "20261031T160000Z"
       }
     },
@@ -2946,6 +2947,53 @@
         "__Workflow": "{1BB54766-6A38-5C47-B0EE-C57570679D14}",
         "heading": "Choose a combination that fits your needs",
         "body": "<p>Consider what you want to protect, and review the coverages in each policy. Then explore whether combining eligible policies with Liberty Mutual is a good fit.</p>",
+        "__Workflow state": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+      }
+    },
+    {
+      "id": "3216026f-858d-46ed-aa05-edbd025c9250",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Resource page",
+      "parent": "97a7dbe5-4a9e-499d-9ef4-9e96ae833c98",
+      "template": "35e75c72-4985-4e09-88c3-0eac6cd1e64f",
+      "bucket": "branch",
+      "fields": {
+        "__Created": "20261031T160000Z"
+      }
+    },
+    {
+      "id": "83c4ff3b-22c8-42c3-accd-7ded4f6c4e66",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Resource page/$name",
+      "parent": "3216026f-858d-46ed-aa05-edbd025c9250",
+      "template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
+      "bucket": "branch",
+      "fields": {
+        "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{3DE5BEFB-5A55-477E-B479-5A493678C3CB}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{C2B69079-9986-4816-9E5F-88048DDBDC4B}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /></d></r>",
+        "__Masters": "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}",
+        "__Workflow": "{1BB54766-6A38-5C47-B0EE-C57570679D14}",
+        "Title": "$name",
+        "NavigationTitle": "$name",
+        "includeInSearch": "0",
+        "__Workflow state": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+      }
+    },
+    {
+      "id": "9b675e40-b0ca-4529-9a80-afea5d811de9",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Resource page/$name/Data",
+      "parent": "83c4ff3b-22c8-42c3-accd-7ded4f6c4e66",
+      "template": "1c82e550-ebcd-4e5d-8abd-d50d0809541e",
+      "bucket": "branch",
+      "fields": {
+        "__Created": "20261031T160000Z"
+      }
+    },
+    {
+      "id": "e38057ab-517d-4902-a56d-738cc28dc09c",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Page Branches/Resource page/$name/Data/Hero",
+      "parent": "9b675e40-b0ca-4529-9a80-afea5d811de9",
+      "template": "0d29dd73-62cc-5421-b14c-b8f8d8921540",
+      "bucket": "branch",
+      "fields": {
+        "__Workflow": "{1BB54766-6A38-5C47-B0EE-C57570679D14}",
         "__Workflow state": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
       }
     },
@@ -4770,6 +4818,7 @@
       "fields": {
         "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{4AD2273F-9047-53DE-9457-7F38BC074070}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{B510319F-DBA3-507E-839D-A08BE75A93BB}\" id=\"{F63F0F36-EA5B-5693-85C6-B4DF475C8840}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Introduction\" par=\"FieldNames={C64AAA90-DC86-5D1E-9286-1BA1DC0ECE10}&amp;DynamicPlaceholderId=3\" /><r uid=\"{BBCBA7B4-3FD6-5372-95BB-E527A47E2455}\" id=\"{2967923C-52C6-5E80-946F-533CE8C2148E}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{9C50F771-2F1D-54ED-B01A-B641C860DA03}\" par=\"FieldNames={53E17A98-82BA-5EAD-996B-536397733442}&amp;DynamicPlaceholderId=7\" /><r uid=\"{58FDAA6B-EB58-50D9-9465-5848B91ACE32}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>",
         "__Workflow": "{1BB54766-6A38-5C47-B0EE-C57570679D14}",
+        "__Masters": "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}|{3216026F-858D-46ED-AA05-EDBD025C9250}",
         "Title": "Insurance resources",
         "NavigationTitle": "Insurance resources",
         "__Workflow state": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}",

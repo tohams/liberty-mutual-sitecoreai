@@ -4,8 +4,12 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { LayoutServicePageState } from "@sitecore-content-sdk/nextjs";
 import { Default as ResourceContent } from "../../components/public-resource-content/PublicResourceContent";
+import type { PublicResourceContentProps } from "../../components/public-resource-content/public-resource-content.props";
 
-function renderAnswer(target?: string) {
+function renderAnswer(
+  target?: string,
+  linkState: "authored" | "omitted" | "empty" = "authored",
+) {
   return renderToStaticMarkup(
     createElement(ResourceContent, {
       params: {},
@@ -25,17 +29,29 @@ function renderAnswer(target?: string) {
       fields: {
         question: { value: "Can I bundle my car and home insurance?" },
         answer: { value: "Authored answer" },
-        sourceLink: {
-          value: {
-            href: "https://www.libertymutual.com/bundling",
-            text: "Liberty Mutual: bundling auto and home",
-            ...(target === undefined ? {} : { target }),
-          },
-        },
-        nextStep: {
-          value: { href: "/get-a-quote", text: "Explore a bundled quote" },
-        },
-      },
+        ...(linkState === "omitted"
+          ? {}
+          : {
+              sourceLink: {
+                value:
+                  linkState === "empty"
+                    ? {}
+                    : {
+                        href: "https://www.libertymutual.com/bundling",
+                        text: "Liberty Mutual: bundling auto and home",
+                        ...(target === undefined ? {} : { target }),
+                      },
+              },
+              nextStep: {
+                value:
+                  linkState === "empty"
+                    ? {}
+                    : { href: "/get-a-quote", text: "Explore a bundled quote" },
+              },
+            }),
+        // A new native branch page can omit empty link properties from its
+        // delivered fields even though the SDK Link's static type requires one.
+      } as NonNullable<PublicResourceContentProps["fields"]>,
     }),
   );
 }
@@ -51,6 +67,15 @@ test("the native authored source opens separately and remains eligible for the e
   assert.match(source, /target="_blank"/);
   assert.match(source, /rel="noopener noreferrer"/);
   assert.match(markup, /<a class="public-button" href="\/get-a-quote">/);
+});
+
+test("a newly created native resource page renders its question when optional links are absent or blank", () => {
+  for (const state of ["omitted", "empty"] as const) {
+    const markup = renderAnswer(undefined, state);
+    assert.match(markup, /<h2>Can I bundle my car and home insurance\?<\/h2>/);
+    assert.match(markup, /Authored answer/);
+    assert.doesNotMatch(markup, /<a\b/);
+  }
 });
 
 test("an explicitly authored source target is preserved", () => {

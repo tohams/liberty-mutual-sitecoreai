@@ -340,6 +340,10 @@ test("discovery readiness identifies native structure while keeping external eng
   );
   assert.match(text, /Home → insurance-resources → bundle-car-and-home/);
   assert.match(text, /Reference source/);
+  assert.match(
+    prose(step("public-discovery").actions),
+    /Expand Resource content.*Detailed explanation.*Under Content.*Canonical URL.*Reference source/,
+  );
   assert.doesNotMatch(
     text,
     /Apps → Resource metadata|Content to classify|PublicApprovedAnswer|Data → Approved answers/,
@@ -388,6 +392,10 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   assert.match(
     prose(entry.actions[publish]),
     /Wait for the version to finish loading.*read the selected version number again.*matches Prepared page version.*Immediately before choosing Publish.*Approved.*Detailed explanation.*Start publish/i,
+  );
+  assert.match(
+    prose(entry.actions[publish]),
+    /Page is already selected.*Current language \(English\).*clear All references and Include related items.*Subpages unchecked.*Start publish/,
   );
   assert.match(entry.stopWhen, /Search document.*newly published sentence/);
   assert.doesNotMatch(

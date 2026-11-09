@@ -24,6 +24,9 @@ SharedFields:
 - ID: a3411ff6-c978-40aa-b059-a49b9ca2209b
   Hint: Can select Page as datasource
   Value: "1"
+- ID: b0b15510-b138-470e-8f33-8da2e228aafe
+  Hint: Rendering Contents Resolver
+  Value: "{6CCCBCDE-5E95-44E4-AE66-CFE7D3A0589E}"
 Languages:
 - Language: en
   Fields:

@@ -23,7 +23,6 @@ import * as PublicFaq from 'src/components/public-faq/PublicFaq';
 import * as PublicCta from 'src/components/public-cta/PublicCta';
 import * as PublicBreadcrumbs from 'src/components/public-breadcrumbs/PublicBreadcrumbs';
 import * as PublicArticle from 'src/components/public-article/PublicArticle';
-import * as PublicApprovedAnswer from 'src/components/public-approved-answer/PublicApprovedAnswer';
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
 
 export const componentMap = new Map<string, NextjsContentSdkComponent>([
@@ -47,7 +46,6 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['PublicCta', { ...PublicCta }],
   ['PublicBreadcrumbs', { ...PublicBreadcrumbs }],
   ['PublicArticle', { ...PublicArticle }],
-  ['PublicApprovedAnswer', { ...PublicApprovedAnswer }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
 ]);
 
