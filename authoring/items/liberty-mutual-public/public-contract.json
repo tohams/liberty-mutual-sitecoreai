@@ -57,6 +57,8 @@
     "PublicPage.audience": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
     "PublicPage.state": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
     "PublicPage.product": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
+    "PublicPage.includeInSearch": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+    "PublicPage.sourceLink": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
     "PublicHero.eyebrow": "f6b19f8a-18e0-5550-85ab-7602cecec48c",
     "PublicHero.heading": "3a61c47e-c996-5a80-ba68-f988ee36554f",
     "PublicHero.summary": "608c6aac-cdd7-5be1-b727-a1647363b89c",
@@ -462,6 +464,34 @@
         "__Sortorder": "800",
         "Title": "Product",
         "__Display name": "Product",
+        "__Created": "20261031T160000Z"
+      }
+    },
+    {
+      "id": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+      "path": "/sitecore/templates/Project/LibertyMutualPublic/PublicPage/Content/includeInSearch",
+      "parent": "5fe6bf8c-4635-5bc5-8993-f3e687ab030c",
+      "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "bucket": "templates",
+      "fields": {
+        "Type": "Checkbox",
+        "__Sortorder": "900",
+        "Title": "Include in site search",
+        "__Display name": "Include in site search",
+        "__Created": "20261031T160000Z"
+      }
+    },
+    {
+      "id": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+      "path": "/sitecore/templates/Project/LibertyMutualPublic/PublicPage/Content/sourceLink",
+      "parent": "5fe6bf8c-4635-5bc5-8993-f3e687ab030c",
+      "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
+      "bucket": "templates",
+      "fields": {
+        "Type": "General Link",
+        "__Sortorder": "1000",
+        "Title": "Reference source",
+        "__Display name": "Reference source",
         "__Created": "20261031T160000Z"
       }
     },

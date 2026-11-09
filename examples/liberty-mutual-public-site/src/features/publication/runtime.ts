@@ -1,5 +1,6 @@
 import { PublicationError } from "./content";
 import { LiveContent } from "./live-content";
+import { LivePages, LiveSearchContent } from "./live-pages";
 import { RedisReceiptStore } from "./receipt-store";
 import { SearchPush } from "./search-push";
 import { PublicationService } from "./publication-service";
@@ -58,6 +59,16 @@ export function publicationRuntime(
   );
   return {
     store,
-    service: new PublicationService(liveContent(environment), writer, store),
+    service: new PublicationService(
+      new LiveSearchContent(
+        liveContent(environment),
+        new LivePages(
+          environment.SITECORE_LIVE_EDGE_CONTEXT_ID || "",
+          publicOrigin(environment),
+        ),
+      ),
+      writer,
+      store,
+    ),
   };
 }

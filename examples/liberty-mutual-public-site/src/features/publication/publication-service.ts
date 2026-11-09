@@ -5,7 +5,7 @@ import {
   searchDocument,
   type SearchOperation,
 } from "./content";
-import type { LiveContentReader } from "./live-content";
+import { pageSearchDocument, type SearchContentReader } from "./live-pages";
 import type { SearchWriter } from "./search-push";
 import type {
   PublicationReceipt,
@@ -29,7 +29,7 @@ export class PublicationFailure extends PublicationError {
 
 export class PublicationService {
   constructor(
-    private readonly reader: LiveContentReader,
+    private readonly reader: SearchContentReader,
     private readonly writer: SearchWriter,
     private readonly store: PublicationStore,
     private readonly pause: (ms: number) => Promise<void> = (ms) =>
@@ -83,7 +83,10 @@ export class PublicationService {
       const documents: PublicationState["documents"] = {};
       const operations: SearchOperation[] = [];
       for (const answer of answers) {
-        const document = searchDocument(answer);
+        const document =
+          "kind" in answer
+            ? pageSearchDocument(answer)
+            : searchDocument(answer);
         const documentHash = digest(document);
         documents[answer.id] = { hash: documentHash, url: answer.canonicalUrl };
         if (!previous || previous.documents[answer.id]?.hash !== documentHash)
