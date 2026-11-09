@@ -1,24 +1,27 @@
 ---
-ID: 3305647a-51b7-5a4e-ba7a-530eef8312c5
-Parent: 901d5bbe-10dc-56e2-9fe5-bcd4ccc1b39c
+ID: 6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d
+Parent: 77fb7241-8927-409f-8950-61f26865aec0
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer/Content/sourceLink
+Path: /sitecore/templates/Project/LibertyMutualPublic/Base/Resource fields/Resource content/disclosure
 SharedFields:
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
-  Value: General Link
+  Value: Droptree
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: "600"
+  Value: "900"
+- ID: 1eb8ae32-e190-44a6-968d-ed904c794ebf
+  Hint: Source
+  Value: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures
 Languages:
 - Language: en
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: Authoritative source
+    Value: Disclosure
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: Authoritative source
+    Value: Disclosure
   Versions:
   - Version: 1
     Fields:

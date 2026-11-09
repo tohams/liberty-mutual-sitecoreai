@@ -10,7 +10,7 @@ const SEARCH_SOURCE = `https://app.sitecorecloud.io/search/f527245d-98c7-4978-88
 const ANALYTICS = `https://app.sitecorecloud.io/optimization/dashboards/events?${CONTEXT}`;
 const MARKETING_ELIGIBILITY = `https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&operationalTimeWindow=15m&${CONTEXT}`;
 const ARTICLE = `${PUBLIC}/insurance-resources/bundle-car-and-home`;
-const ANSWER_ID = "70144ef3-4be0-597a-9b22-81e8ee1cc9f6";
+const RESOURCE_PAGE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
 const PUBLIC_HOME_ID = "6d600332-3e21-4c5f-83ec-aae04f83450f";
 const PORTAL_HOME_ID = "ae9e45ca-f127-4abe-9ca7-2ff109981998";
 const PRIORITIES_ID = "3127968e-4b21-50c3-ad79-b6bbbe5303b8";
@@ -28,7 +28,7 @@ function pageBuilder(
   return `https://pages.sitecorecloud.io/${mode}?tenantName=${TENANT_NAME}&sc_site=${siteName}&organization=${ORG}&sc_itemid=${itemId}&sc_lang=en`;
 }
 
-const answerContent = pageBuilder("public", ANSWER_ID, "content");
+const resourcePageContent = pageBuilder("public", RESOURCE_PAGE_ID, "content");
 const publicEditor = pageBuilder("public", PUBLIC_HOME_ID);
 const portalEditor = pageBuilder("portal", PORTAL_HOME_ID);
 const priorityContent = pageBuilder("portal", PRIORITIES_ID, "content");
@@ -112,25 +112,25 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Make approved guidance easier to find and reuse, with its source, applicability, and review information kept explicit.",
         stopWhen:
-          "The answer template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
+          "The native page template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
         actions: [
-          `Open [**Bundle car and home in Page Builder Content**](${answerContent}). Confirm **Public Website**, **English**, and **Data → Approved answers → Bundle car and home**. Inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Authoritative source**, **Content owner**, and the dates. Under **Quick Info**, identify the **PublicApprovedAnswer** template.`,
-          `In the same [**approved answer in Page Builder Content**](${answerContent}), locate **State applicability**, **Products**, and **Audience**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
+          `Open [**the car-and-home resource page in Page Builder Content**](${resourcePageContent}). Confirm **Public Website**, **English**, and **Home → insurance-resources → bundle-car-and-home**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.`,
+          `In the same [**resource page in Page Builder Content**](${resourcePageContent}), locate **State applicability**, **Products**, and **Audience** under **Content**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
           `On the [**public article**](${ARTICLE}), use **View page source → Find** to locate **application/ld+json**. Identify **FAQPage**, **Question**, and **acceptedAnswer**, then find the **canonical** link. Return to the rendered article.`,
         ],
         expected: [
-          "The same governed answer supplies its native fields, managed taxonomy, canonical metadata, and structured answer data.",
+          "The resource page owns its guidance, managed classifications, canonical metadata, and structured answer data.",
         ],
         talkTrack: [
-          "The visitor asked, “Can I combine home and car coverage?” Here is the approved “Can I bundle my car and home insurance?” content: its question, answer, source, owner, applicability, and review dates.",
+          "The visitor found the car-and-home resource page. Here is that same page in Page Builder: its question, guidance, source, owner, applicability, and review dates.",
           customerDemoAiContext.public.talkTrack,
         ],
         controls: [
-          "**Page Builder → Content → Quick Info** identifies the native template. Native **Checklist** fields classify the **Approved answer** using choices maintained beneath **Data → Taxonomy**. These selections belong to the reusable answer and follow it into Search and the content API.",
+          "**Page Builder → Content → Quick Info** identifies the native page template. Native **Checklist** fields classify the resource page using choices maintained beneath **Data → Taxonomy**. The page’s content and classifications follow the same publication into Search and the content API.",
           "The public rendering supplies **FAQPage** metadata and a canonical URL: a structured foundation for discovery by permitted search and AI consumers.",
         ],
         links: [
-          { label: "Approved answer fields", href: `${answerContent}` },
+          { label: "Resource page fields", href: `${resourcePageContent}` },
           { label: "Public article", href: `${ARTICLE}` },
         ],
         images: [
@@ -139,7 +139,7 @@ export const customerDemoChapters: DemoChapter[] = [
             title: "Open a native checklist to inspect its selections",
             alt: "Native Page Builder Content fields with the Products checklist open and Auto and Homeowners selected independently",
             caption:
-              "Open **Products** using its **2 items selected** control to see the separate **Auto**, **Homeowners**, and **Condo** checkboxes. These are the answer’s native content fields; no separate metadata app is needed. Leave the selected choices unchanged during this inspection.",
+              "Open **Products** using its **2 items selected** control to see the separate **Auto**, **Homeowners**, and **Condo** checkboxes. These are the resource page’s native classification fields. Leave the selected choices unchanged during this inspection.",
             crop: {
               x: 310,
               y: 1020,
@@ -151,7 +151,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "One structured answer now carries its meaning and governance. Next, publish a reviewed change and see Search stay aligned.",
+          "The page carries its content, meaning, and governance together. Next, publish a reviewed page change and see Search stay aligned.",
       },
       {
         id: "public-indexing",
@@ -166,23 +166,23 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "The native Search document contains the newly published sentence, with its state, product, and audience values preserved.",
         actions: [
-          `Open [**Liberty Mutual Approved Answers → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          `In the prepared **administrator acting as publisher** session, open [**Bundle car and home**](${answerContent}). In the version selector, choose the prepared revision by the **Prepared answer version** number recorded in [**Before presenting**](#preparation)—the new English version created for this run. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared answer version**. Immediately before choosing **Publish**, confirm **Shared answer review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish** with **Item** and **Current language (English)** selected and **Subitems** unchecked, then select **Start publish**.`,
-          `Wait for the publishing job to complete. Return to [**Liberty Mutual Approved Answers → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
+          `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
+          `In the prepared **administrator acting as publisher** session, open [**the car-and-home resource page**](${resourcePageContent}). In the version selector, choose the prepared revision by the **Prepared page version** number recorded in [**Before presenting**](#preparation)—the new English page version created for this run. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish** for the selected page with **Current language (English)** selected and **Subpages** unchecked, then select **Start publish**.`,
+          `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
-          "A single approved source publication updates the native Search record automatically, including the changed body and unchanged applicability metadata.",
+          "A single approved page publication updates the native Search record automatically, including the changed body and unchanged applicability metadata.",
         ],
         talkTrack: [
-          "When that car-and-home guidance changes, the publisher releases the approved revision once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages one answer across these delivery channels.",
+          "When that car-and-home guidance changes, the publisher releases the approved page revision once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages the page content once across these delivery channels.",
         ],
         controls: [
-          "The **OnEnd** publication event calls the configured publication service, which reconciles approved Live content through the **Search Push API**. This mapping indexes the **Approved answers** library and published website pages selected with **Include in site search**. This loop follows one approved answer’s wording and applicability metadata.",
+          "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. This loop follows the resource page’s own guidance and applicability metadata.",
         ],
         links: [
           {
-            label: "Publish the prepared approved answer",
-            href: `${answerContent}`,
+            label: "Publish the prepared resource page",
+            href: `${resourcePageContent}`,
           },
           {
             label: "Verify the native Search document",
@@ -321,20 +321,20 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "The second experience shows the newly published sentence, its source, stable item ID, and native content version.",
         actions: [
-          "Open [**One approved answer, two experiences**](/workshops/content-api). Under **Published insurance question**, select **Can I bundle my car and home insurance?**, and select **Load answer**.",
+          "Open [**One published page, two experiences**](/workshops/content-api). Under **Published insurance question**, select **Can I bundle my car and home insurance?**, and select **Load content**.",
           `Find **Review your options with your agent before choosing coverage.** Compare it with the [**public article**](${ARTICLE}). Under **The governance travels with the answer**, identify the source and applicability metadata.`,
-          "Under **A stable contract for other applications**, identify **API contract version**, **Native content version**, and **Stable item ID**. The stable ID identifies the same governed answer; the content version identifies its published revision.",
+          "Under **A stable contract for other applications**, identify **API contract version**, **Native content version**, and **Stable item ID**. The stable ID identifies the same resource page; the content version identifies that page’s published English revision.",
         ],
         expected: [
-          "The separate rendered API consumer and public article present the same approved source change without re-entering content.",
+          "The separate API consumer and public article present the same approved page content without re-entering it.",
         ],
         talkTrack: [
-          "The same approved car-and-home guidance can also serve another application. Here, a separate application retrieves it through a stable API and presents it in its own layout. The wording and governance information travel together. This is the kind of approved content feed LibertyAir could consume.",
-          "The car-and-home answer we just reused is managed in SitecoreAI and published to Experience Edge. Edge sits between authoring and the applications that deliver the experience. Frontends retrieve published content and layout through GraphQL, while Liberty Mutual controls its hosting and development process. A public website, an authenticated Agent Portal, or another application can consume that content. Approved content publication stays separate from the frontend build and deployment cycle.",
+          "The same car-and-home page serves another application through a stable API. Its approved guidance, source, and applicability travel together. This is the kind of governed content feed LibertyAir could consume.",
+          "The car-and-home resource page we just reused is managed in SitecoreAI and published to Experience Edge. Edge sits between authoring and the applications that deliver the experience. Frontends retrieve published content and layout through GraphQL, while Liberty Mutual controls its hosting and development process. A public website, an authenticated Agent Portal, or another application can consume that content. Approved content publication stays separate from the frontend build and deployment cycle.",
         ],
         controls: [
           "The versioned **/api/content/v1/answers/** endpoint reads approved published content from **Live Experience Edge**. The API envelope and second application are implementation components around the native governed source.",
-          "The API contract version describes the response format, while **Native content version** identifies the editorial revision. Draft and Preview content remain in authoring.",
+          "The API contract version describes the response format, while **Native content version** identifies the resource page’s published English revision. Draft and Preview content remain in authoring.",
         ],
         links: [
           {
@@ -351,9 +351,9 @@ export const customerDemoChapters: DemoChapter[] = [
           {
             file: "customer-demo-content-api.png",
             title: "Select the same published answer",
-            alt: "One approved answer, two experiences page with the published insurance question selector and Load answer button",
+            alt: "One published page, two experiences page with the published insurance question selector and Load content button",
             caption:
-              "Choose **Can I bundle my car and home insurance?** under **Published insurance question**, then select **Load answer**. This page retrieves the actual published API response.",
+              "Choose **Can I bundle my car and home insurance?** under **Published insurance question**, then select **Load content**. This page retrieves the actual published API response.",
             annotations: [
               {
                 x: 46,
@@ -367,7 +367,7 @@ export const customerDemoChapters: DemoChapter[] = [
                 y: 80,
                 width: 12,
                 height: 9,
-                label: "Select **Load answer**.",
+                label: "Select **Load content**.",
               },
             ],
           },

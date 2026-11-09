@@ -22,7 +22,7 @@ import {
 import styles from "@/features/workshops/content-api/ContentApi.module.css";
 
 export const metadata: Metadata = {
-  title: "One approved answer, two experiences | Liberty Mutual workshop guide",
+  title: "One published page, two experiences | Liberty Mutual workshop guide",
 };
 
 const PATH = "/workshops/content-api";
@@ -72,7 +72,7 @@ export default async function ContentApiPage({
         </Link>
         <header className={styles.heading}>
           <span className="workshop-eyebrow">STRUCTURED CONTENT REUSE</span>
-          <h1>One approved answer, two experiences</h1>
+          <h1>One published page, two experiences</h1>
           <p>
             <strong>SitecoreAI</strong> manages the approved insurance guidance.
             The <strong>public website</strong> presents it as an article. This
@@ -124,7 +124,7 @@ export default async function ContentApiPage({
             </h2>
             <p>
               {selectedUnavailable
-                ? "The selected item is not in the published answer library. Choose another approved answer to continue."
+                ? "The selected resource page is not currently published. Choose another question to continue."
                 : "This page could not retrieve a complete, valid response from the public website’s content API. Refresh to try the request again."}
             </p>
             <Link className={styles.primaryLink} href={PATH}>
@@ -165,7 +165,7 @@ export default async function ContentApiPage({
                     ))}
                   </select>
                   <button type="submit">
-                    Load answer <ArrowRight size={16} />
+                    Load content <ArrowRight size={16} />
                   </button>
                 </div>
               </form>

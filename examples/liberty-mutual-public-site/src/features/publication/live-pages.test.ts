@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  ANSWER_ROOT,
-  ANSWER_TEMPLATE,
+  RESOURCE_ROOT,
+  RESOURCE_PAGE_TEMPLATE,
   mapPublishedAnswer,
   type SearchOperation,
 } from "./content";
@@ -176,9 +176,9 @@ const answerReader = {
     mapPublishedAnswer(
       {
         id: answerId,
-        path: ANSWER_ROOT + "/Original answer",
+        path: RESOURCE_ROOT + "/bundle-car-and-home",
         version: 1,
-        template: { id: ANSWER_TEMPLATE },
+        template: { id: RESOURCE_PAGE_TEMPLATE },
         question: field("Can I bundle my car and home insurance?"),
         answer: field("Review eligible policies."),
         canonicalUrl: field("/insurance-resources/bundle-car-and-home"),
@@ -234,6 +234,44 @@ test("new pages remain out of Search until the native checkbox is explicitly sel
     assert.deepEqual(await f.reader.readAll(), []);
     assert.equal(f.layoutReads(), 0);
   }
+});
+
+test("a structured ResourcePage returned through its PublicPage base is indexed only through its own page projection", async () => {
+  const f = fixture();
+  f.setPages([
+    {
+      ...page(),
+      id: answerId,
+      path: `${RESOURCE_ROOT}/bundle-car-and-home`,
+      template: { id: RESOURCE_PAGE_TEMPLATE },
+      canonicalUrl: field("/insurance-resources/bundle-car-and-home"),
+    },
+  ]);
+  assert.deepEqual(await f.reader.readAll(), []);
+  assert.equal(f.layoutReads(), 0);
+  const content = await new LiveSearchContent(answerReader, f.reader).readAll();
+  assert.equal(content.length, 1);
+  assert.equal(content[0].id, answerId);
+  assert.equal(
+    content[0].canonicalUrl,
+    origin + "/insurance-resources/bundle-car-and-home",
+  );
+});
+
+test("different projection identities cannot produce duplicate results for the same canonical page", async () => {
+  const f = fixture();
+  const [ordinary] = await f.reader.readAll();
+  await assert.rejects(
+    new LiveSearchContent(answerReader, {
+      readAll: async () => [
+        {
+          ...ordinary,
+          canonicalUrl: origin + "/insurance-resources/bundle-car-and-home/",
+        },
+      ],
+    }).readAll(),
+    /DUPLICATE_PUBLISHED_URL/,
+  );
 });
 
 test("page Search classifies native Checklist values on the page itself", async () => {

@@ -79,11 +79,11 @@ test("workflow migration preserves approved content and refuses foreign or unkno
 });
 
 test("content grants stay under Home and named managed libraries; definitions and administrator rights stay protected", () => {
-  assert.equal(W.ACL_ROOTS.length, 4);
+  assert.equal(W.ACL_ROOTS.length, 3);
   for (const root of W.ACL_ROOTS)
     assert.match(
       root,
-      /^\/sitecore\/content\/LibertyMutual\/liberty-mutual-public-site\/(?:Home|Data\/(?:Promotions|Disclosures|Approved answers))$/,
+      /^\/sitecore\/content\/LibertyMutual\/liberty-mutual-public-site\/(?:Home|Data\/(?:Promotions|Disclosures))$/,
     );
   assert.equal(W.AUTHOR_CONTENT["item:create"], true);
   assert.equal(W.APPROVER_CONTENT["item:create"], false);

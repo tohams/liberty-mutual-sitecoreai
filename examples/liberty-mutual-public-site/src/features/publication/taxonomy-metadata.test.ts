@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  ANSWER_ROOT,
-  ANSWER_TEMPLATE,
+  RESOURCE_ROOT,
+  RESOURCE_PAGE_TEMPLATE,
   mapPublishedAnswer,
   publishedTaxonomy,
   searchDocument,
@@ -34,9 +34,9 @@ function options(folder: string, names: string[]): NativeTaxonomyField {
 function answer() {
   return {
     id,
-    path: `${ANSWER_ROOT}/Bundle car and home`,
+    path: `${RESOURCE_ROOT}/bundle-car-and-home`,
     version: 6,
-    template: { id: ANSWER_TEMPLATE },
+    template: { id: RESOURCE_PAGE_TEMPLATE },
     question: text("Can I bundle my car and home insurance?"),
     answer: text("Review eligible products and coverage."),
     canonicalUrl: text("/insurance-resources/bundle-car-and-home"),
@@ -57,7 +57,7 @@ test("native Checklist references reach Search and schema 1.0 API as stable inde
     return Response.json({
       data: {
         item: {
-          path: ANSWER_ROOT,
+          path: RESOURCE_ROOT,
           children: { results: [answer()], pageInfo: { hasNext: false } },
         },
       },

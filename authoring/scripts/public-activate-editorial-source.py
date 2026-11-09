@@ -62,9 +62,9 @@ def main():
     records=sorted(by.values(),key=lambda r:(len(r['Path'].split('/')),r['Path']))
     assert len({r['ID'] for r in records})==len(records)
     # These are authored-value snapshots, not a second runtime content store.
-    result={'schemaVersion':1,'ownership':'One-time CreateOnly factory editorial seed; excluded from normal Deploy.','routeCount':len(seed['pages']),'answerCount':len(seed['answerIds']),'records':records}
+    result={'schemaVersion':1,'ownership':'One-time CreateOnly page-owned editorial seed; excluded from normal Deploy.','routeCount':len(seed['pages']),'resourcePageCount':len(seed['resourcePageIds']),'records':records}
     (BASE/'public-editorial-records.json').write_text(json.dumps(result,indent=2)+'\n')
     (BASE/'public-fidelity-draft-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
     (BASE/'public-media-bindings.json').write_text(json.dumps({'schemaVersion':1,'bindings':bindings},indent=2)+'\n')
-    print(json.dumps({'sourceOnly':True,'factoryRecords':len(records),'routes':len(seed['pages']),'answerDrafts':len(seed['answerIds']),'fidelityCreateOnlyRecords':len(preparation.records),'reviewedContentNewDrafts':len(plan['newDraftChanges']),'allImageBindingsNative':True}))
+    print(json.dumps({'sourceOnly':True,'factoryRecords':len(records),'routes':len(seed['pages']),'resourcePageDrafts':len(seed['resourcePageIds']),'fidelityCreateOnlyRecords':len(preparation.records),'reviewedContentNewDrafts':len(plan['newDraftChanges']),'allImageBindingsNative':True}))
 if __name__=='__main__':main()

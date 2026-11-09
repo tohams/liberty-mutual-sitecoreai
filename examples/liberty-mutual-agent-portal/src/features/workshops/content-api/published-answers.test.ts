@@ -9,7 +9,9 @@ import {
   PublishedContentUnavailable,
 } from "./published-answers";
 
-const ID = "70144ef3-4be0-597a-9b22-81e8ee1cc9f6";
+// Identity is the native resource PAGE; the former standalone answer is retired.
+const ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
+const RETIRED_ANSWER_ID = "70144ef3-4be0-597a-9b22-81e8ee1cc9f6";
 const OTHER_ID = "13fea402-dd76-589a-95e6-beacdbf658f7";
 const answer = {
   id: ID,
@@ -25,7 +27,7 @@ const answer = {
   effectiveDate: "20261031T000000Z",
   reviewDate: "20270131T000000Z",
   state: "national",
-  product: "auto-home",
+  product: "auto,home",
   audience: "consumer",
   sourceLink: {
     href: "https://www.libertymutual.com/bundling",
@@ -69,6 +71,38 @@ test("the second rendering host retrieves the chosen answer through the collecti
   assert(calls.every(({ options }) => options?.cache === "no-store"));
   assert(calls.every(({ options }) => options?.redirect === "error"));
   assert(calls.every(({ options }) => options?.signal instanceof AbortSignal));
+});
+
+test("the default example selects the canonical resource page rather than a compound-product label or collection order", async () => {
+  const earlier = {
+    ...answer,
+    id: OTHER_ID,
+    question: "Another published insurance question",
+    canonicalUrl:
+      "https://liberty-mutual-public-site.vercel.app/insurance-resources/other-guidance",
+  };
+  const urls: string[] = [];
+  const fetcher = (async (url) => {
+    urls.push(String(url));
+    return urls.length === 1 ? response([earlier, answer]) : response(answer);
+  }) as typeof fetch;
+  const result = await loadPublishedAnswer(undefined, false, fetcher);
+  assert.equal(result.selected.data.id, ID);
+  assert.equal(result.selected.data.product, "auto,home");
+  assert.equal(urls[1], `${ANSWER_COLLECTION_URL}/${ID}`);
+});
+
+test("a retired standalone answer ID cannot replace the native page identity", async () => {
+  const urls: string[] = [];
+  const fetcher = (async (url) => {
+    urls.push(String(url));
+    return response([answer]);
+  }) as typeof fetch;
+  await assert.rejects(
+    loadPublishedAnswer(RETIRED_ANSWER_ID, false, fetcher),
+    PublishedAnswerNotAvailable,
+  );
+  assert.deepEqual(urls, [ANSWER_COLLECTION_URL]);
 });
 
 test("an unrecognized answer parameter never becomes an arbitrary request URL", async () => {
@@ -182,6 +216,15 @@ test("unavailable, incomplete, unsafe, or cross-site responses fail without fabr
     () =>
       new Response("not JSON", { headers: { "Content-Type": "text/html" } }),
     () => response([answer, answer]),
+    () => response([answer, { ...answer, id: OTHER_ID }]),
+    () =>
+      response([
+        {
+          ...answer,
+          canonicalUrl:
+            "https://liberty-mutual-public-site.vercel.app/insurance-resources/nested/page",
+        },
+      ]),
   ];
   for (const candidate of candidates) {
     await assert.rejects(

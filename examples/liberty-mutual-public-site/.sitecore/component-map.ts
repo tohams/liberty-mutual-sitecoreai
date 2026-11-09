@@ -10,6 +10,7 @@ import * as SharedDisclosure from 'src/components/shared-disclosure/SharedDisclo
 import * as PublicSplitContent from 'src/components/public-split-content/PublicSplitContent';
 import * as PublicSection from 'src/components/public-section/PublicSection';
 import * as PublicSearch from 'src/components/public-search/PublicSearch';
+import * as PublicResourceContent from 'src/components/public-resource-content/PublicResourceContent';
 import * as PublicQuoteHandoff from 'src/components/public-quote-handoff/PublicQuoteHandoff';
 import * as PublicPromotion from 'src/components/public-promotion/PublicPromotion';
 import * as PublicProductSelector from 'src/components/public-product-selector/PublicProductSelector';
@@ -33,6 +34,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['PublicSplitContent', { ...PublicSplitContent }],
   ['PublicSection', { ...PublicSection }],
   ['PublicSearch', { ...PublicSearch, componentType: 'client' }],
+  ['PublicResourceContent', { ...PublicResourceContent }],
   ['PublicQuoteHandoff', { ...PublicQuoteHandoff, componentType: 'client' }],
   ['PublicPromotion', { ...PublicPromotion }],
   ['PublicProductSelector', { ...PublicProductSelector, componentType: 'client' }],

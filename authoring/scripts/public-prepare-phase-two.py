@@ -21,7 +21,7 @@ ICONS={
  'PublicCta':('Call to action','<rect x="3" y="9" width="34" height="22" rx="5"/><path d="M10 20h19m-6-6 6 6-6 6"/>'),
  'PublicPromotion':('Promotion','<path d="M4 6h16l17 17-14 14L6 20z"/><circle cx="13" cy="13" r="3"/><path d="m22 20 7 7"/>'),
  'SharedDisclosure':('Disclosure','<path d="M20 3 35 9v12c0 8-8 14-15 17C13 35 5 29 5 21V9zM20 17v11"/><circle cx="20" cy="11" r="1"/>'),
- 'PublicApprovedAnswer':('Approved answer','<path d="M5 5h30v23H20l-9 8v-8H5zM12 16l6 6 11-12"/>'),
+ 'PublicResourceContent':('Resource content','<path d="M5 5h30v23H20l-9 8v-8H5zM12 16l6 6 11-12"/>'),
  'PublicSearch':('Knowledge search','<circle cx="17" cy="16" r="11"/><path d="m25 25 11 11M12 12h10M12 17h7"/>'),
  'PublicProductSelector':('Product choices','<rect x="3" y="3" width="14" height="14" rx="3"/><rect x="23" y="3" width="14" height="14" rx="3"/><rect x="3" y="23" width="14" height="14" rx="3"/><path d="m27 29 4 4 7-9M7 10h6M27 10h6M7 30h6"/>'),
  'PublicQuoteHandoff':('Next step','<path d="M22 5h15v15M37 5 18 24M16 8H5v29h28V26"/>'),
@@ -123,5 +123,5 @@ def main():
     (a.output/'component-icons-manifest.json').write_text(json.dumps(icon_manifest,indent=2)+'\n')
     gallery='<!doctype html><meta charset="utf-8"><title>Component icons</title><style>body{font:16px system-ui;padding:30px;color:#20174b}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{border:1px solid #ddd;border-radius:12px;padding:20px;display:flex;align-items:center;gap:15px}img{width:64px;height:64px}</style><h1>Component icons</h1><div class="grid">'+''.join('<div class="card"><img src="component-icons/'+x['componentName']+'.svg"><span>'+x['label']+'</span></div>' for x in icon_manifest)+'</div>'
     (a.output/'component-icons-preview.html').write_text(gallery)
-    print(json.dumps({'state':'offline only','newNativeDefinitions':len(new),'existingDefinitionUpdates':len(updates),'contentRecords':len(seed['records']),'publicPages':len(seed['pages']),'answerDrafts':len(seed['answerIds']),'unboundImages':sum(not m['bound'] for m in seed['mediaBindings']),'homeMmlPreserved':True,'semanticIcons':len(icon_manifest)},indent=2))
+    print(json.dumps({'state':'offline only','newNativeDefinitions':len(new),'existingDefinitionUpdates':len(updates),'contentRecords':len(seed['records']),'publicPages':len(seed['pages']),'resourcePageDrafts':len(seed['resourcePageIds']),'unboundImages':sum(not m['bound'] for m in seed['mediaBindings']),'homeMmlPreserved':True,'semanticIcons':len(icon_manifest)},indent=2))
 if __name__=='__main__':main()

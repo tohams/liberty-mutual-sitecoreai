@@ -1,0 +1,61 @@
+---
+ID: 88de4de6-f6bf-4371-899f-22041e132d12
+Parent: b99218ea-e1fd-41af-a4ae-7ec9e5c30b17
+Template: b99218ea-e1fd-41af-a4ae-7ec9e5c30b17
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicResourcePage/__Standard Values
+SharedFields:
+- ID: ca9b9f52-4fb0-4f87-a79f-24dea62cda65
+  Hint: __Default workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+- ID: 24171bf1-c0e1-480e-be76-4c0a1876f916
+  Hint: Page Design
+  Value: "{34B431BC-C49D-5F34-B000-075CC6B1D7BD}"
+- ID: 1172f251-dad4-4efb-a329-0c63500e4f1e
+  Hint: __Masters
+  Value: "{1C82E550-EBCD-4E5D-8ABD-D50D0809541E}"
+- ID: 1fce966b-b8dc-46f1-8ceb-6ff6816a88f0
+  Hint: baseOgType
+  Value: website
+- ID: 4a749557-242b-4372-8a20-b2db9d406301
+  Hint: __AutoThumbnails
+  Value: "1"
+- ID: 508c54c0-cd02-4266-8b68-d71f88de1aa9
+  Hint: ChangeFrequency
+  Value: "{D23B4654-53A5-4589-8B1B-5665A763D144}"
+- ID: 76fb6ffd-4487-4028-a1cf-705fbe360cba
+  Hint: Priority
+  Value: "{19F3E919-4991-495F-9207-E1DADFD06F54}"
+- ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
+  Hint: __Renderings
+  Value: |
+    <r>
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"></d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 25bed78c-4957-4165-998a-ca1b52f67497
+      Hint: __Created
+      Value: 20261031T160000Z
+    - ID: d74e777c-dbb0-5d67-accf-4cfd8c391cc4
+      Hint: includeInSearch
+      Value: "1"
+    - ID: 4c346442-e859-4efd-89b2-44aedf467d21
+      Hint: __Valid to
+      Value: |
+
+    - ID: 52807595-0f8f-4b20-8d2a-cb71d28c6103
+      Hint: __Owner
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: 5dd74568-4d4b-44c1-b513-0af5f4cda34f
+      Hint: __Created by
+      Value: |
+        sitecore\thomas.lin@sitecore.com
+    - ID: c8f93afe-bfd4-4e8f-9c61-152559854661
+      Hint: __Valid from
+      Value: |

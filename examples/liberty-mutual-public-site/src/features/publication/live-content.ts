@@ -1,21 +1,23 @@
 import {
-  ANSWER_ROOT,
-  ANSWER_TEMPLATE,
+  RESOURCE_ROOT,
+  RESOURCE_PAGE_TEMPLATE,
   PublicationError,
   TAXONOMY_FIELD_QUERY,
   identifier,
   mapPublishedAnswer,
-  type NativeAnswer,
+  pageIncludedInSearch,
+  type NativeResourcePage,
   type PublishedAnswer,
 } from "./content";
 
-const QUERY = `query PublishedAnswers($root: String!, $after: String) {
+const QUERY = `query PublishedResourcePages($root: String!, $after: String) {
   item(path: $root, language: "en") {
     id path
     children(first: 10, after: $after) {
       pageInfo { hasNext endCursor }
       results {
         id path version template { id }
+        includeInSearch: field(name: "includeInSearch") { jsonValue }
         question: field(name: "question") { jsonValue }
         answer: field(name: "answer") { jsonValue }
         formalWording: field(name: "formalWording") { jsonValue }
@@ -50,7 +52,7 @@ interface PageResult {
     item?: {
       path: string;
       children: {
-        results: NativeAnswer[];
+        results: NativeResourcePage[];
         pageInfo: { hasNext: boolean; endCursor?: string };
       };
     } | null;
@@ -72,10 +74,22 @@ export class LiveContent implements LiveContentReader {
       throw new PublicationError("LIVE_CONTEXT_NOT_CONFIGURED");
   }
 
-  async readAll(signal?: AbortSignal): Promise<PublishedAnswer[]> {
+  readAll(signal?: AbortSignal): Promise<PublishedAnswer[]> {
+    return this.readPages(false, signal);
+  }
+
+  readSearchable(signal?: AbortSignal): Promise<PublishedAnswer[]> {
+    return this.readPages(true, signal);
+  }
+
+  private async readPages(
+    searchableOnly: boolean,
+    signal?: AbortSignal,
+  ): Promise<PublishedAnswer[]> {
     const answers: PublishedAnswer[] = [];
     const cursors = new Set<string>();
     const ids = new Set<string>();
+    const urls = new Set<string>();
     let after: string | undefined;
     const deadline = AbortSignal.timeout(10000);
     for (let page = 0; page < 10; page++) {
@@ -98,7 +112,7 @@ export class LiveContent implements LiveContentReader {
             },
             body: JSON.stringify({
               query: QUERY,
-              variables: { root: ANSWER_ROOT, after },
+              variables: { root: RESOURCE_ROOT, after },
             }),
           },
         );
@@ -111,18 +125,23 @@ export class LiveContent implements LiveContentReader {
       const root = result.data?.item;
       if (
         result.errors?.length ||
-        root?.path?.toLowerCase() !== ANSWER_ROOT.toLowerCase() ||
+        root?.path?.toLowerCase() !== RESOURCE_ROOT.toLowerCase() ||
         !Array.isArray(root?.children?.results) ||
         typeof root.children.pageInfo?.hasNext !== "boolean"
       )
         throw new PublicationError("LIVE_LIBRARY_UNAVAILABLE");
       for (const item of root.children.results) {
-        if (identifier(item.template.id) !== ANSWER_TEMPLATE) continue;
+        if (identifier(item.template.id) !== RESOURCE_PAGE_TEMPLATE) continue;
         const answer = mapPublishedAnswer(item, this.publicOrigin);
         if (ids.has(answer.id))
           throw new PublicationError("DUPLICATE_PUBLISHED_ID");
-        answers.push(answer);
+        const url = answer.canonicalUrl.replace(/\/$/, "").toLowerCase();
+        if (urls.has(url))
+          throw new PublicationError("DUPLICATE_PUBLISHED_URL");
         ids.add(answer.id);
+        urls.add(url);
+        if (!searchableOnly || pageIncludedInSearch(item.includeInSearch))
+          answers.push(answer);
       }
       if (!root.children.pageInfo.hasNext)
         return answers.sort((a, b) => a.id.localeCompare(b.id));

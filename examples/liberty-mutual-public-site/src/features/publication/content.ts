@@ -1,8 +1,8 @@
 import { createHash } from "node:crypto";
 
-export const ANSWER_ROOT =
-  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers";
-export const ANSWER_TEMPLATE = "1a9400ee-e47b-5992-9431-56ae5586f90d";
+export const RESOURCE_ROOT =
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources";
+export const RESOURCE_PAGE_TEMPLATE = "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17";
 export const DISCLOSURE_TEMPLATE = "ba156366-00c4-5c7e-a79a-1c9f8cbce184";
 export const PUBLIC_SITE = "liberty-mutual-public-site";
 
@@ -177,11 +177,12 @@ export function publishedTaxonomy(
   if (typeof value !== "string" || !isLegacy(value.trim())) return invalid();
   return value.trim();
 }
-export interface NativeAnswer {
+export interface NativeResourcePage {
   id: string;
   path: string;
   version: number;
   template: { id: string };
+  includeInSearch?: NativeField;
   question?: NativeField;
   answer?: NativeField;
   formalWording?: NativeField;
@@ -334,15 +335,24 @@ function disclosure(
 }
 
 export function mapPublishedAnswer(
-  item: NativeAnswer,
+  item: NativeResourcePage,
   publicOrigin: string,
 ): PublishedAnswer {
   if (
-    identifier(item.template.id) !== ANSWER_TEMPLATE ||
-    !item.path.toLowerCase().startsWith(`${ANSWER_ROOT.toLowerCase()}/`) ||
-    item.path.slice(ANSWER_ROOT.length + 1).includes("/")
+    identifier(item.template.id) !== RESOURCE_PAGE_TEMPLATE ||
+    !item.path.toLowerCase().startsWith(`${RESOURCE_ROOT.toLowerCase()}/`) ||
+    item.path.slice(RESOURCE_ROOT.length + 1).includes("/")
   )
     throw new PublicationError("OUT_OF_SCOPE_CONTENT");
+  const pageName = item.path.slice(RESOURCE_ROOT.length + 1);
+  if (!/^[a-z0-9][a-z0-9-]{0,199}$/i.test(pageName))
+    throw new PublicationError("OUT_OF_SCOPE_CONTENT");
+  const canonicalUrl = canonical(item.canonicalUrl, publicOrigin);
+  if (
+    new URL(canonicalUrl).pathname.replace(/\/$/, "") !==
+    `/insurance-resources/${pageName}`
+  )
+    throw new PublicationError("PAGE_CANONICAL_MISMATCH");
   const question = text(item.question);
   const answer = text(item.answer);
   const disclosureId = item.disclosure?.targetId;
@@ -376,7 +386,7 @@ export function mapPublishedAnswer(
     audience: publishedTaxonomy(item.audience, "audience"),
     sourceLink: link(item.sourceLink),
     nextStep: link(item.nextStep),
-    canonicalUrl: canonical(item.canonicalUrl, publicOrigin),
+    canonicalUrl,
     disclosure: disclosure(item.disclosure?.targetItem),
   };
   // Edge deliberately excludes CMS Standard Fields such as __Revision. Fingerprint the
@@ -386,6 +396,21 @@ export function mapPublishedAnswer(
     revision: digest(published),
     revisionKind: "published-content-sha256",
   };
+}
+
+/** The native page checkbox controls Search, independently of public API delivery. */
+export function pageIncludedInSearch(field?: NativeField): boolean {
+  const value = field?.jsonValue?.value;
+  if (
+    value == null ||
+    value === false ||
+    value === "" ||
+    value === "0" ||
+    value === "false"
+  )
+    return false;
+  if (value === true || value === "1" || value === "true") return true;
+  throw new PublicationError("INVALID_SEARCH_INCLUSION");
 }
 
 export function digest(value: unknown): string {

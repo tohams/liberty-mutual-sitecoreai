@@ -1,8 +1,8 @@
 ---
-ID: 901d5bbe-10dc-56e2-9fe5-bcd4ccc1b39c
-Parent: 1a9400ee-e47b-5992-9431-56ae5586f90d
+ID: 77fb7241-8927-409f-8950-61f26865aec0
+Parent: deb9d373-cca7-4f18-a2fd-a56602b59497
 Template: e269fbb5-3750-427a-9149-7aa950b49301
-Path: /sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer/Content
+Path: /sitecore/templates/Project/LibertyMutualPublic/Base/Resource fields/Resource content
 Languages:
 - Language: en
   Versions:

@@ -1,15 +1,15 @@
 ---
 ID: b6cfeb53-9864-5c4a-b920-d5d283af71fd
-Parent: 901d5bbe-10dc-56e2-9fe5-bcd4ccc1b39c
+Parent: 77fb7241-8927-409f-8950-61f26865aec0
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer/Content/owner
+Path: /sitecore/templates/Project/LibertyMutualPublic/Base/Resource fields/Resource content/owner
 SharedFields:
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
   Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: "700"
+  Value: "500"
 Languages:
 - Language: en
   Fields:

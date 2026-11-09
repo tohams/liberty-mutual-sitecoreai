@@ -3,13 +3,13 @@ import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { LayoutServicePageState } from "@sitecore-content-sdk/nextjs";
-import { Default as ApprovedAnswer } from "../../components/public-approved-answer/PublicApprovedAnswer";
+import { Default as ResourceContent } from "../../components/public-resource-content/PublicResourceContent";
 
 function renderAnswer(target?: string) {
   return renderToStaticMarkup(
-    createElement(ApprovedAnswer, {
+    createElement(ResourceContent, {
       params: {},
-      rendering: { componentName: "PublicApprovedAnswer" },
+      rendering: { componentName: "PublicResourceContent" },
       page: {
         locale: "en",
         layout: { sitecore: { context: {}, route: null } },

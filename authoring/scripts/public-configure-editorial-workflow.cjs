@@ -77,7 +77,6 @@ const ACL_ROOTS = [
   SITE + "/Home",
   SITE + "/Data/Promotions",
   SITE + "/Data/Disclosures",
-  SITE + "/Data/Approved answers",
 ];
 const PROTECTED_ROOTS = [
   "/sitecore/system/Workflows/Basic Workflow",

@@ -6,8 +6,10 @@ const actor='sitecore\\setup';
 const start={cursor:'MA==',node:{date:'2026-11-01T04:00:00Z',user:actor,newState:{stateId:W.IDS.draft,displayName:'Draft'}}};
 const event={date:'2026-11-01T04:01:00Z',user:actor,oldState:{stateId:W.IDS.draft,displayName:'Draft'},newState:{stateId:W.IDS.awaiting,displayName:'Awaiting approval'}};
 test('finite source approval includes delivered records only, with exactly six revised versions and seven portal editorial records',()=>{
- const m=H.manifest();assert.equal(m.targets.length,196);assert.equal(m.targets.filter(t=>t.version>1).length,6);
+ const m=H.manifest();assert.equal(m.targets.length,186);assert.equal(m.targets.filter(t=>t.version>1).length,6);
  assert.equal(m.targets.filter(t=>t.path.includes('/liberty-mutual-agent-portal/')).length,7);
+ assert.equal(m.targets.filter(t=>t.template==='b99218ea-e1fd-41af-a4ae-7ec9e5c30b17').length,10);
+ assert(m.targets.every(t=>!t.path.includes('/Data/Approved answers')));
  assert(m.targets.every(t=>!t.path.includes('/Page Branches/')&&!t.path.includes('$name')&&!t.path.includes('/Authoring check')));
  assert(m.targets.every(t=>!['Data','Cards','Questions','Navigation','Columns','Links','Social','Legal'].includes(t.path.split('/').at(-1))));
 });

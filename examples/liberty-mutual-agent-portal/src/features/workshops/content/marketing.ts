@@ -1490,9 +1490,9 @@ export const marketingGuides: WorkshopGuide[] = [
     accountScope: "presenter",
     title: "Publish content to two experiences",
     summary:
-      "Read one approved insurance answer on the **public website** and in a separate **Agent Portal** application. Then follow the presenter as an approved source change reaches both experiences through publication and a versioned content API.",
+      "Read one approved insurance answer on the **public website** and in a separate **Agent Portal** application. Then follow the presenter as a reviewed change to that resource page reaches both experiences through publication and a versioned content API.",
     outcome:
-      "You can distinguish the governed source content, its published API response, and each application’s presentation. The same approved answer, citation, and ownership information can serve more than one experience.",
+      "You can follow the resource page’s governed content into its published API response and each application’s presentation. Its guidance, citation, ownership, and applicability can serve more than one experience.",
     personas: [
       "Authorized Sitecore author",
       "Approver",
@@ -1500,10 +1500,10 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     prerequisites: [
       "Sign in to this workshop website with a portal username and password **Sitecore1** if requested. The [**Content API experience**](/workshops/content-api) is a protected page on the **Agent Portal** host; it does not require an agent persona or change an agent’s browsing profile.",
-      "Steps 1–2 are read-only and suitable for everyone. Steps 3–6 are a **Presenter demonstration** because **Bundle car and home** is shared source content. One presenter makes and restores the change while participants observe.",
+      "Steps 1–2 are read-only and suitable for everyone. Steps 3–6 are a **Presenter demonstration** because the **car-and-home resource page** is used by both experiences. One presenter makes and restores the change while participants observe.",
       `For authoring, open [**SitecoreAI**](${SITECORE}) with your authorized **Sitecore Cloud** account. In **Page Builder**, select **Public Website**, whose site name is **liberty-mutual-public-site**, and **English**. Keep **Default editing host** selected. This guide uses the public site rather than the Agent Portal site.`,
       "The publishing demonstration uses an **Author** to edit and submit, a separate **Approver** to review, and an **administrator acting as publisher** to publish. Use separate browser profiles for the Sitecore identities so each role’s available actions remain clear. The workshop website’s persona logins do not grant Sitecore authoring access.",
-      "An **API** is a structured response another application can request. The public website’s versioned read API returns approved answers published to **Experience Edge Live**. This protected page consumes that actual response and displays it using the Agent Portal application’s own presentation.",
+      "An **API** is a structured response another application can request. The public website’s versioned read API returns the approved fields of resource pages published to **Experience Edge Live**. This protected page consumes that actual response and displays it using the Agent Portal application’s own presentation.",
     ],
     links: [
       {
@@ -1515,8 +1515,8 @@ export const marketingGuides: WorkshopGuide[] = [
         href: "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home",
       },
       {
-        label: "Open the approved answer in Page Builder Content",
-        href: `https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en`,
+        label: "Open the resource page in Page Builder Content",
+        href: `https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en`,
       },
     ],
     repositoryFiles: [
@@ -1531,10 +1531,10 @@ export const marketingGuides: WorkshopGuide[] = [
     ],
     steps: [
       {
-        title: "Compare the same approved answer in two experiences",
+        title: "Compare the page’s content in two experiences",
         action: [
           "Open the [**public car and home article**](https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home). Read **Can I bundle my car and home insurance?**, its answer, and the **More information** source link.",
-          "Open the [**Content API experience**](/workshops/content-api). Under **Choose an approved answer**, select **Can I bundle my car and home insurance?**, then click **Load answer**. Compare the answer and citation with the public article.",
+          "Open the [**Content API experience**](/workshops/content-api). Under **Published insurance question**, select **Can I bundle my car and home insurance?**, then click **Load content**. Compare the answer and citation with the public article.",
           "On the API experience, find **The governance travels with the answer**. Read **Content owner**, **State**, **Product**, **Audience**, **Effective**, and **Review date**. Click **View the public article** to return to the first experience when you want to compare them.",
         ],
         expected: [
@@ -1560,34 +1560,34 @@ export const marketingGuides: WorkshopGuide[] = [
           "Click **Check whether the response is unchanged**. Read the confirmation beneath the request links.",
         ],
         expected: [
-          "The request uses the stable item ID **70144ef3-4be0-597a-9b22-81e8ee1cc9f6** under **/api/content/v1/answers/**. The **API contract version** identifies the response structure; **Native content version** identifies the authored revision of this answer.",
+          "The request uses the resource page’s stable item ID **ae109fc0-b508-5840-97eb-0b2c02ae1a9b** under **/api/content/v1/answers/**. The **API contract version** identifies the response structure; **Native content version** identifies the page’s published English revision.",
           "The normal unchanged result is **304 Not Modified**. The page made a second real request using the API’s **ETag**, the response identifier, in an **If-None-Match** header. An unchanged response avoids sending a duplicate response body. A newly changed response can instead return **200 OK**.",
           "The fingerprint is a 64-character **SHA-256** value computed from the delivered content. Comparing it helps a developer determine whether the published payload changed.",
         ],
       },
       {
-        title: "Create a reversible source edit as the Author",
+        title: "Edit the resource page as the Author",
         action: [
-          `As the **Author**, open [**Bundle car and home in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). Confirm the item name, **English**, and the **Public Website** site. Its location is **Data** > **Approved answers** > **Bundle car and home**.`,
-          "Record the original English version number. Open its version selector, choose **Create version**, name it **Shared answer review**, and click **Create**. Select the new **Draft**.",
-          "Find **Detailed explanation**. Preserve the existing text, and append a new paragraph: Review your coverage options with an agent before choosing. Click outside the field and wait for **Saved**. Keep the original version number for restoration.",
+          `As the **Author**, open [**the car-and-home resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Confirm **Public Website**, **English**, and **Home → insurance-resources → bundle-car-and-home**. The page owns the guidance and classifications used by both experiences.`,
+          "Record the English version marked **Live**, select that original version, and wait for its fields to finish loading. Choose **Create version**, name it **Resource page review**, and click **Create**. Reopen the version selector, select the new **Draft** by its new version number, and wait for its fields to finish loading. Confirm the selected number and original wording before editing.",
+          "Expand **Resource content**, and find **Detailed explanation**. Preserve the existing text, and append a new paragraph: Review your coverage options with an agent before choosing. Click outside the field and wait for **Saved**. Keep the original version number for restoration.",
           "Open **Actions** > **Submit**, enter a comment explaining the source change, and click **Submit**. Confirm **Awaiting approval**.",
         ],
         expected: [
-          "The new **Draft** retains the original version in history. Only this source answer is edited; its question, citation, ownership, and applicability remain unchanged.",
+          "The new **Draft** retains the original version in history. Only this page’s explanation is edited; its question, citation, ownership, and applicability remain unchanged.",
           "Saving and submission update the authoring environment. The two live experiences continue to use the previously published answer until the reviewed change is published.",
         ],
       },
       {
-        title: "Review the source and publish its article",
+        title: "Review and publish the resource page",
         action: [
-          `In the separate **Approver** browser profile, open [**Bundle car and home**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=70144ef3-4be0-597a-9b22-81e8ee1cc9f6&sc_lang=en). Select the submitted English version, read **Detailed explanation**, and use **Actions** > **Approve**. Enter the review comment, click **Submit**, and confirm **Approved**.`,
-          `In the **administrator acting as publisher** browser profile, open the [**car and home article in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Keep its current approved English page version.`,
-          "Click **Publish**. Keep **Page**, **Current language (English)**, **All references**, and **Include related items** checked; leave **Subpages** unchecked. Click **Start publish** and wait for completion. Including references publishes the approved answer that supplies this article.",
+          `In the separate **Approver** browser profile, open [**the car-and-home resource page**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Select the submitted English version, expand **Resource content**, read **Detailed explanation**, and use **Actions** > **Approve**. Enter the review comment, click **Submit**, and confirm **Approved**.`,
+          `In the **administrator acting as publisher** browser profile, open the same [**resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Select the exact English version just approved, wait for its fields to finish loading, and confirm the added paragraph before publishing.`,
+          "Click **Publish**. Keep **Page**, **Current language (English)**, **All references**, and **Include related items** checked; leave **Subpages** unchecked. Click **Start publish** and wait for completion. This publishes the page that owns the edited guidance and its metadata.",
         ],
         expected: [
           "The **Author** submits, the **Approver** reviews, and the administrator performs publication. These separate responsibilities make the path from edited text to delivered guidance visible.",
-          "Publication delivers the approved page and referenced answer to **Experience Edge Live**. The public application’s publication service updates its delivery cache and Search projection; a frontend code deployment is not part of this content change.",
+          "Publication delivers the resource page’s approved content to **Experience Edge Live**. The public application’s publication service updates its delivery cache and Search projection; a frontend code deployment is not part of this content change.",
         ],
       },
       {
@@ -1603,10 +1603,10 @@ export const marketingGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Restore the original source through a new reviewed version",
+        title: "Restore the page through a new reviewed version",
         action: [
-          "As the **Author**, return to **Bundle car and home** in **Page Builder Content**. Open the version selector, select the original English version recorded in step 3, then choose **Create version**. Name it **Shared answer restored** and click **Create**. Check that the newest **Draft** contains the original **Detailed explanation**, without the added paragraph.",
-          "Repeat **Submit**, the separate **Approver**’s **Approve**, and the administrator’s article publication with **All references** and **Include related items**. Keep the same article and English language; leave **Subpages** unchecked.",
+          "As the **Author**, return to the **car-and-home resource page** in **Page Builder Content**. Select the original English version recorded in step 3, and wait for its fields to load. Choose **Create version**, name it **Resource page restored**, and click **Create**. Explicitly select that new **Draft** by its new version number, wait for the fields to load, and confirm the original **Detailed explanation** without the added paragraph.",
+          "Repeat **Submit**, the separate **Approver**’s **Approve**, and the administrator’s page publication with **All references** and **Include related items**. Keep the same article and English language; leave **Subpages** unchecked.",
           "Reload the public article and the API experience. Compare the original wording and citation with the starting values. Verify the temporary sentence is absent from both.",
         ],
         expected: [
@@ -1618,7 +1618,7 @@ export const marketingGuides: WorkshopGuide[] = [
     cleanup: {
       body: [
         "If you completed only the read-only steps, close the extra article and API tabs; no reset is needed.",
-        "If the presenter edited the source, complete step 6 and confirm the original words and citation in both experiences before finishing. Keep the shared answer and article; do not delete them. A portal workshop-number reset does not restore Sitecore content.",
+        "If the presenter edited the page, complete step 6 and confirm the original words and citation in both experiences before finishing. Keep the resource page and its version history. A portal workshop-number reset does not restore Sitecore content.",
       ],
       links: [
         {

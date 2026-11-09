@@ -34,6 +34,47 @@ class NativeReferences(unittest.TestCase):
         self.assertEqual(editorial.SEARCH_INDEX_NAME,'Liberty Mutual Approved Answers')
         self.assertEqual(editorial.native_search_configuration(actual),actual)
 
+    def test_resource_preparation_has_one_page_identity_and_no_reusable_answer_library(self):
+        pages=[];answers=[]
+        for n in range(10):
+            slug='resource-'+str(n)
+            answers.append({'slug':slug,'question':'Question '+str(n),'canonicalUrl':'https://liberty-mutual-public-site.vercel.app/insurance-resources/'+slug,'answer':'Approved page content','formalWording':'<p>Policy details</p>','explanation':'<p>Explanation</p>','owner':'Content team','state':'All','product':'auto-home','audience':'consumer','sourceLink':{'text':'Reference source','href':'https://www.libertymutual.com/bundling'},'nextStep':{'text':'Find an agent','href':'/contact-an-agent'}})
+            pages.append({'slug':'/insurance-resources/'+slug,'approvedAnswerSlug':slug})
+        pages.extend({'slug':slug} for slug in ['/','/search','/insurance-resources','/bundling','/get-a-quote','/contact-an-agent','/vehicle/auto-insurance'])
+        for page in pages:
+            page.update(title='Page title',canonicalUrl='https://liberty-mutual-public-site.vercel.app'+page['slug'],hero={'heading':'Page title','summary':'<p>Page summary</p>'},introduction={'heading':'Introduction','body':'<p>Body</p>'})
+            if page['slug']=='/search':page['searchConfiguration']={'searchIndex':editorial.SEARCH_INDEX_ID,'fieldsMapping':{'title':'title','link':'canonicalurl'}}
+        source={'pages':pages,'answers':answers,'productOptions':[],'sharedPromotionDraft':{}}
+        original=copy.deepcopy(source);editorial.RECORDS.clear();editorial.MEDIA.clear()
+        result=editorial.prepare(source,{})
+        self.assertEqual(source,original)
+        self.assertEqual(len(result['resourcePageIds']),10)
+        self.assertTrue(all('/Data/Approved answers' not in row['Path'] for row in result['records']))
+        resources=[r for r in result['records'] if r['Template']=='b99218ea-e1fd-41af-a4ae-7ec9e5c30b17']
+        self.assertEqual(len(resources),10)
+        for row in resources:
+            fields={f['Hint']:f for f in row['Languages'][0]['Versions'][0]['Fields']}
+            self.assertEqual(fields['question']['ID'],'de4a7a26-6fe3-571d-9b4c-6e117690f9b5')
+            self.assertEqual(fields['sourceLink']['ID'],editorial.M['fieldIds']['PublicPage.sourceLink'])
+            self.assertEqual(fields['includeInSearch']['Value'],'1')
+            self.assertEqual(len(fields['product']['Value'].split('|')),2)
+            self.assertEqual(fields['product']['Value'],editorial.h.checklist_value('product','auto,home'))
+            layout=next(f['Value'] for f in row['SharedFields'] if f['Hint']=='__Renderings')
+            self.assertIn('ds="'+editorial.BRACE(row['ID'])+'"',layout)
+            # Native placement IDs are preserved even though the rendering's
+            # technical name changes. Personalization attaches to that identity.
+            expected=editorial.UID(row['Path']+'/rendering/PublicApprovedAnswer/6')
+            self.assertIn('uid="'+editorial.BRACE(expected)+'"',layout)
+        editorial.RECORDS.clear();editorial.MEDIA.clear()
+
+    def test_factory_checklists_require_known_native_choices_and_preserve_atomic_selection(self):
+        h=editorial.h
+        self.assertEqual(h.checklist_value('product','auto-home'),h.checklist_value('product','auto,home'))
+        self.assertEqual(h.checklist_value('product',h.checklist_value('product','auto,home')),h.checklist_value('product','auto,home'))
+        for name,value in [('state','All,TX'),('product','missing'),('audience','consumer,customer')]:
+            with self.subTest(name=name,value=value),self.assertRaises(AssertionError):h.checklist_value(name,value)
+        self.assertEqual(h.checklist_value('product',''),'')
+
     def test_selector_copy_describes_the_actual_zip_input(self):
         before='<p>Choose auto insurance, one property option, or both. Your state helps keep your next step relevant.</p>'
         after='<p>Choose auto insurance, one property option, or both. Your ZIP Code helps keep your next step relevant.</p>'

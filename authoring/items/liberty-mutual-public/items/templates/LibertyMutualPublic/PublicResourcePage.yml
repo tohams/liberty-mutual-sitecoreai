@@ -1,18 +1,20 @@
 ---
-ID: 1a9400ee-e47b-5992-9431-56ae5586f90d
+ID: b99218ea-e1fd-41af-a4ae-7ec9e5c30b17
 Parent: 96246a36-0e25-54a1-b2b4-802a78a8aead
 Template: ab86861a-6030-46c5-b394-e8f99e8b87db
-Path: /sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer
+Path: /sitecore/templates/Project/LibertyMutualPublic/PublicResourcePage
 SharedFields:
 - ID: 12c33f3f-86c5-43a5-aeb4-5598cec45116
   Hint: __Base template
-  Value: "{1930BBEB-7805-471A-A3BE-4858AC7CF696}"
+  Value: |
+    {A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}
+    {DEB9D373-CCA7-4F18-A2FD-A56602B59497}
 - ID: f7d48a55-2158-4f02-9356-756654404f73
   Hint: __Standard values
-  Value: "{8E276ADD-BC9C-5AB8-9372-7055E15DFB8E}"
+  Value: "{88DE4DE6-F6BF-4371-899F-22041E132D12}"
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
-  Value: Office/32x32/check.png
+  Value: Office/32x32/document_text.png
 Languages:
 - Language: en
   Versions:

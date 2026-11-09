@@ -64,8 +64,8 @@ function checklistValue(field, raw, choices) {
 
 /** Plan only the three owned fields. Root caller owns item/version/concurrency checks. */
 function planMetadataChanges(kind, fields, lists) {
-  const definitions = MODEL.fields[kind];
-  assert(definitions && Array.isArray(fields) && Array.isArray(lists), "Provide a page or answer native field snapshot and its current managed choices.");
+  const definitions = MODEL.fields[kind === "resource" ? "page" : kind];
+  assert(definitions && Array.isArray(fields) && Array.isArray(lists), "Provide a page or resource native field snapshot and its current managed choices.");
   return definitions.map((definition) => {
     const field = fields.find((entry) => normalizedId(entry.fieldId) === normalizedId(definition.fieldId));
     const list = lists.find((entry) => entry.field === definition.name);

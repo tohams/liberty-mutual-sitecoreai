@@ -2,7 +2,7 @@ import type { Field, Item, LinkField } from "@sitecore-content-sdk/nextjs";
 import type { ComponentProps } from "lib/component-props";
 import type { SharedDisclosureFields } from "../shared-disclosure/shared-disclosure.props";
 
-export type PublicApprovedAnswerProps = ComponentProps & {
+export type PublicResourceContentProps = ComponentProps & {
   fields?: {
     question?: Field<string>;
     canonicalUrl?: Field<string>;

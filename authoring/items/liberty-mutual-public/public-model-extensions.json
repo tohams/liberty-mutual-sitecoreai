@@ -5361,7 +5361,6 @@
     "PublicCta": "449b1df9-4734-5f5f-b456-bde2842ed640",
     "PublicHeader": "19e06326-2afd-54e0-99fa-df8b005512a4",
     "PublicFooter": "2f8f9387-9e11-53d6-b99c-0b33c2a372c7",
-    "PublicApprovedAnswer": "1a9400ee-e47b-5992-9431-56ae5586f90d",
     "AgencyPriority": "b2ead4d5-0b3a-5fa9-918b-e224162ec526",
     "AgencyPriorities": "2ec5a6fa-cefe-5477-9e13-9ad07609f26c",
     "PublicSearch": "b7125e2a-f98f-5a33-a53f-089c287de495",
@@ -5376,7 +5375,9 @@
     "PublicLink": "9e6168b4-3c3e-5764-bfa0-6f4e5210d426",
     "PublicBreadcrumbs": "d93e627b-69a3-5fa9-849d-caa19b1d2146",
     "PublicNavigationGroup": "8369c5b1-af02-591d-8b12-d0ac6414d41f",
-    "PublicFooterColumn": "4197034d-2f0e-551b-b3d9-9c18fa9be84f"
+    "PublicFooterColumn": "4197034d-2f0e-551b-b3d9-9c18fa9be84f",
+    "ResourceFields": "deb9d373-cca7-4f18-a2fd-a56602b59497",
+    "PublicResourcePage": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17"
   },
   "fieldIds": {
     "PublicPage.metadataTitle": "748e2709-fb2f-5f73-9ca6-d8e801b6eafc",
@@ -5425,20 +5426,6 @@
     "PublicFooter.contactLink": "179ab06f-b987-5f3a-a681-6b7fa7cb4e1b",
     "PublicFooter.privacyLink": "ec94038d-c2ca-51cc-ba92-e7e87cdb0b7b",
     "PublicFooter.termsLink": "5ccc39a6-592e-544a-a4c1-7cb8e31eac3f",
-    "PublicApprovedAnswer.question": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-    "PublicApprovedAnswer.canonicalUrl": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-    "PublicApprovedAnswer.answer": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-    "PublicApprovedAnswer.formalWording": "47041dc1-a183-5516-85ea-afdea936289c",
-    "PublicApprovedAnswer.explanation": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-    "PublicApprovedAnswer.sourceLink": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-    "PublicApprovedAnswer.owner": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-    "PublicApprovedAnswer.effectiveDate": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-    "PublicApprovedAnswer.reviewDate": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-    "PublicApprovedAnswer.state": "69a206de-38f4-5302-8142-5e2cff09168f",
-    "PublicApprovedAnswer.product": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-    "PublicApprovedAnswer.audience": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-    "PublicApprovedAnswer.nextStep": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-    "PublicApprovedAnswer.disclosure": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
     "AgencyPriority.Heading": "8a29fd20-38ec-5038-b7da-d60ab4598c31",
     "AgencyPriority.Body": "43610941-be36-52fb-b82e-421cd5f1899b",
     "AgencyPriority.Image": "ea39ce7b-ad09-5270-975f-d64d59728d3b",
@@ -5500,7 +5487,16 @@
     "PublicFooter.socialLinks": "2d3223c2-2922-5844-a5c5-8cf60d492698",
     "PublicFooter.legalLinks": "5a6d7e0f-dac4-5bf2-84d3-81b4931ce1f3",
     "PublicFooter.disclaimer": "e67078b8-6882-5aad-a733-2ce916ebe84c",
-    "PublicFooter.mobileLogo": "fa8f1baa-ee13-5b43-bdf0-d434376aa9a4"
+    "PublicFooter.mobileLogo": "fa8f1baa-ee13-5b43-bdf0-d434376aa9a4",
+    "ResourceFields.effectiveDate": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+    "ResourceFields.nextStep": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+    "ResourceFields.answer": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+    "ResourceFields.formalWording": "47041dc1-a183-5516-85ea-afdea936289c",
+    "ResourceFields.owner": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+    "ResourceFields.disclosure": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+    "ResourceFields.question": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+    "ResourceFields.explanation": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+    "ResourceFields.reviewDate": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5"
   },
   "renderingIds": {
     "PublicHero": "38a74fc9-3ff2-5e89-8545-daa4b3a164c4",
@@ -5512,7 +5508,6 @@
     "PublicHeader": "f08a1f43-1c90-5422-a93f-c8e6439d9f04",
     "PublicFooter": "5a7d5d76-d30d-5e47-8969-31835b870856",
     "PublicPageBody": "5d5c48c3-2103-5cdd-935d-bfa622018add",
-    "PublicApprovedAnswer": "4585a48f-e841-50ca-b2a3-0d3fc9893875",
     "AgencyPriorities": "a2e85f2d-7dbc-5640-8040-0b688d7912a6",
     "PublicSearch": "2967923c-52c6-5e80-946f-533ce8c2148e",
     "PublicProductSelector": "ff280574-45ae-5a99-b5e0-5e290b91d9b0",
@@ -5520,7 +5515,8 @@
     "PublicSection": "7efb74e9-a17b-5a27-9118-6b78ae1b2d8c",
     "PublicSplitContent": "0839d907-b33b-5aad-8030-635f1451794f",
     "PublicFaq": "f4ef94bb-096b-5404-9b3e-e0f2b0b041c5",
-    "PublicBreadcrumbs": "2472c249-4d6a-5bb7-b388-bd4f3cc4eaa1"
+    "PublicBreadcrumbs": "2472c249-4d6a-5bb7-b388-bd4f3cc4eaa1",
+    "PublicResourceContent": "4585a48f-e841-50ca-b2a3-0d3fc9893875"
   },
   "queries": {
     "referenceContract": "Native Layout Service resolves these reference fields directly; these are inspectable Edge integration queries, not fabricated SDK field objects or unverified custom resolvers.",
