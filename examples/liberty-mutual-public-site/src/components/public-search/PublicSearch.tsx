@@ -147,8 +147,7 @@ function SearchExperience({
   } = useSearch<SearchDocument>({
     searchIndexId: configuration.searchIndex,
     query: nativeQuery,
-    // The approved-answer source is bounded to 100 published items. Retrieve
-    // its ranked candidates once, then page the evidence-supported results.
+    // Retrieve native ranked candidates once, then page the evidence-supported results.
     page: 1,
     pageSize: 100,
     locale: "en",
