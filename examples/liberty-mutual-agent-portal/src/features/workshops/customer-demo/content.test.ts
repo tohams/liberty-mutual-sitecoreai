@@ -395,6 +395,10 @@ test("the indexing loop owns both publication and fresh Search-record verificati
     entry.id,
     /job to complete.*body.*added sentence.*No manual reindex/i,
   );
+  assert.match(
+    prose(entry.actions[verify]),
+    /job to complete.*prior wording.*content distribution.*automatic Search update.*refresh again until the added sentence appears.*No manual reindex/i,
+  );
   assert(publish < verify);
   assert.match(
     prose(entry.actions[publish]),
@@ -402,8 +406,21 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   );
   assert.match(
     prose(entry.actions[publish]),
-    /Page is already selected.*Current language \(English\).*clear All references and Include related items.*Subpages unchecked.*Start publish/,
+    /Page is already selected.*Current language \(English\).*Clear Include related items first, then clear All references.*control disappears.*Subpages unchecked.*Start publish/,
   );
+  const reuseGuide = workshopGuides.find(
+    (guide) => guide.slug === "publish-to-two-experiences",
+  );
+  const existingPagePublications = reuseGuide!.steps
+    .flatMap((guideStep) => guideStep.action)
+    .filter((action) => action.includes("**All references**"));
+  assert(existingPagePublications.length > 0);
+  for (const publication of existingPagePublications) {
+    assert.match(
+      prose(publication),
+      /Clear Include related items first, then clear All references/,
+    );
+  }
   assert.match(entry.stopWhen, /Search document.*newly published sentence/);
   assert.doesNotMatch(
     prose(step("public-api").actions),
@@ -611,6 +628,10 @@ test("the relevance loop proves profile relevance and same-profile native market
     text,
     /Testing as: Daniel Ortiz - 01.*producer-priorities.*green|Testing as: Daniel Ortiz - 01.*green.*producer-priorities/i,
   );
+  assert.match(
+    prose(entry.actions),
+    /ensure Profile ID is selected.*Client ID.*Profile ID.*Avery.*press Enter.*Testing as: Avery Brooks - 01.*Select Test.*green agency-growth.*Daniel.*press Enter.*Testing as: Daniel Ortiz - 01.*Select Test again.*green producer-priorities/i,
+  );
   assert.match(text, /Refresh status.*current IDs after a reset/i);
   assert.match(text, /Cancel.*read-only tests/i);
   assert(
@@ -689,6 +710,14 @@ test("the relevance loop proves profile relevance and same-profile native market
   assert.match(
     text,
     /application separately enforces licensed-state eligibility/i,
+  );
+});
+
+test("the design loop opens the placeholder-specific component picker without changing content", () => {
+  const entry = step("portal-design");
+  assert.match(
+    prose(entry.actions),
+    /Layers.*headless-agency-priorities.*Insert into.*before or after Agency priorities.*filtered Components picker.*Business priorities → Agency priorities.*Close the picker without selecting a component or inserting content/i,
   );
 });
 

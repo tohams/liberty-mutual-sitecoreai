@@ -1583,7 +1583,7 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           `In the separate **Approver** browser profile, open [**the car-and-home resource page**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Select the submitted English version, expand **Resource content**, read **Detailed explanation**, and use **Actions** > **Approve**. Enter the review comment, click **Submit**, and confirm **Approved**.`,
           `In the **administrator acting as publisher** browser profile, open the same [**resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=${ORG}&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Select the exact English version just approved, wait for its fields to finish loading, and confirm the added paragraph before publishing.`,
-          "Click **Publish**. **Page** is already selected. Keep **Current language (English)** selected, clear **All references** and **Include related items**, and leave **Subpages** unchecked. Click **Start publish** and wait for completion. This publishes the page that owns the edited guidance and its metadata.",
+          "Click **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked. Click **Start publish** and wait for completion. This publishes the page that owns the edited guidance and its metadata.",
         ],
         expected: [
           "The **Author** submits, the **Approver** reviews, and the administrator performs publication. These separate responsibilities make the path from edited text to delivered guidance visible.",
@@ -1606,7 +1606,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Restore the page through a new reviewed version",
         action: [
           "As the **Author**, return to the **car-and-home resource page** in **Page Builder Content**. Select the original English version recorded in step 3, and wait for its fields to load. Choose **Create version**, name it **Resource page restored**, and click **Create**. Explicitly select that new **Draft** by its new version number, wait for the fields to load, and confirm the original **Detailed explanation** without the added paragraph.",
-          "Repeat **Submit**, the separate **Approver**’s **Approve**, and the administrator’s page publication. Keep the same resource page and **Current language (English)**, clear **All references** and **Include related items**, and leave **Subpages** unchecked.",
+          "Repeat **Submit**, the separate **Approver**’s **Approve**, and the administrator’s page publication. Keep the same resource page and **Current language (English)**. Clear **Include related items** first, then clear **All references**, and leave **Subpages** unchecked.",
           "Reload the public article and the API experience. Compare the original wording and citation with the starting values. Verify the temporary sentence is absent from both.",
         ],
         expected: [
