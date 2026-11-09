@@ -616,6 +616,39 @@ test("API reuse stops after the second experience loads the same published answe
     /ETag|304 Not Modified|Actual single-answer request|Search by term|Toggle document details/,
   );
   assert(linksIn(entry).some((link) => link.href === "/workshops/content-api"));
+  assert.match(
+    prose(entry.actions[0]),
+    /Show Experience Edge content delivery.*SitecoreAI authoring → Publish → Experience Edge → API consumers/,
+  );
+  assert.match(
+    prose(entry.actions[1]),
+    /Open One published page, two experiences/,
+  );
+  assert.match(
+    entry.talkTrack[0],
+    /Authors manage and approve content.*Publishing sends.*Experience Edge.*globally distributed.*APIs.*publishing content independently of application deployments/,
+  );
+  assert.match(
+    entry.talkTrack[1],
+    /^The same car-and-home page serves another application/,
+  );
+  assert.match(entry.transition, /Next.*independent agents/);
+  assert.doesNotMatch(
+    entry.transition,
+    /Experience Edge content delivery|slide \d+/i,
+  );
+  const page = readFileSync(
+    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    "utf8",
+  );
+  assert.match(
+    page,
+    /Experience Edge content delivery.*before the API example/,
+  );
+  assert.doesNotMatch(
+    page,
+    /slide 19|architecture bridge after the API example/,
+  );
 });
 
 test("the relevance loop proves profile relevance and same-profile native marketing suppression", () => {
