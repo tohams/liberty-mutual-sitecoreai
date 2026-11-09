@@ -273,7 +273,9 @@ test("the public Search loop proves both outcomes on the results page", () => {
     /enter Can I combine home and car coverage\?.*Can I bundle my car and home insurance\?/i,
   );
   for (const required of [
+    /Briefly point out the bundling overview and two practical articles/i,
     /result and its answer excerpt on the results page/i,
+    /Keep every result unopened/i,
     /keyword\(s\).*replace the query/i,
     /Contact an agent/i,
     /Essential only/i,
@@ -286,8 +288,17 @@ test("the public Search loop proves both outcomes on the results page", () => {
   );
   assert.match(
     entry.stopWhen,
-    /relevant result and answer excerpt.*unsupported question.*No results found.*Contact an agent/i,
+    /range of relevant published results.*approved answer excerpt.*unsupported question.*No results found.*Contact an agent/i,
   );
+  assert.match(prose(entry.expected), /five published results/i);
+  for (const title of [
+    "Bundle home and auto insurance",
+    "How to bundle your insurance policies",
+    "3 tips for bundling your insurance policies",
+    "Can I bundle my car and home insurance?",
+  ])
+    assert(prose(entry.expected).includes(title));
+  assert.equal(entry.durationMinutes, 2);
   assert.doesNotMatch(
     live,
     /then open|Read the answer|Coverage and policy details|More information|source link|return to the article|Explore bundling|Explore a bundled quote|Allow personalization|scroll|Effective|Review date/i,
@@ -300,6 +311,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
     prose(entry.controls),
     /application.*authored-evidence.*approved source material.*question.*result/i,
   );
+  assert.match(prose(entry.controls), /Include in site search.*checkbox/i);
 });
 
 test("discovery readiness identifies native structure while keeping external engine citation claims bounded", () => {
