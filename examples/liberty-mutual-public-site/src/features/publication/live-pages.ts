@@ -3,6 +3,8 @@ import {
   identifier,
   PublicationError,
   PUBLIC_SITE,
+  RESOURCE_PAGE_TEMPLATE,
+  pageIncludedInSearch,
   publishedTaxonomy,
   TAXONOMY_FIELD_QUERY,
   type NativeField,
@@ -53,6 +55,9 @@ export type PublishedSearchContent = PublishedAnswer | PublishedSearchPage;
 export interface SearchContentReader {
   readAll(signal?: AbortSignal): Promise<PublishedSearchContent[]>;
 }
+export interface SearchPageReader {
+  readAll(signal?: AbortSignal): Promise<PublishedSearchPage[]>;
+}
 
 // Search selects published native pages, not a code-maintained list of result URLs.
 const PAGES_QUERY = `query PublishedSearchPages($after: String) {
@@ -98,20 +103,6 @@ function fieldText(field?: NativeField, limit = 50000): string {
   if (value == null) return "";
   if (typeof value !== "string" || value.length > limit) invalid();
   return value.trim();
-}
-
-function optedIn(field?: NativeField): boolean {
-  const value = field?.jsonValue?.value;
-  if (
-    value == null ||
-    value === false ||
-    value === "" ||
-    value === "0" ||
-    value === "false"
-  )
-    return false;
-  if (value === true || value === "1" || value === "true") return true;
-  return invalid();
 }
 
 function plain(value: string): string {
@@ -349,16 +340,18 @@ export class LivePages {
         const id = identifier(page.id);
         if (seen.has(id)) throw new PublicationError("DUPLICATE_PUBLISHED_ID");
         seen.add(id);
-        if (
-          identifier(page.template.id) !== PUBLIC_PAGE_TEMPLATE ||
-          !(
-            page.path.toLowerCase() === PUBLIC_HOME.toLowerCase() ||
-            page.path.toLowerCase().startsWith(`${PUBLIC_HOME.toLowerCase()}/`)
-          )
-        ) {
+        if (!(
+          page.path.toLowerCase() === PUBLIC_HOME.toLowerCase() ||
+          page.path.toLowerCase().startsWith(`${PUBLIC_HOME.toLowerCase()}/`)
+        ))
           throw new PublicationError("OUT_OF_SCOPE_PUBLISHED_PAGE");
-        }
-        if (optedIn(page.includeInSearch)) pages.push(page);
+        const template = identifier(page.template.id);
+        // ResourcePage derives from PublicPage, so Edge's base-template query also
+        // returns it. Its structured page projection owns this document exactly once.
+        if (template === RESOURCE_PAGE_TEMPLATE) continue;
+        if (template !== PUBLIC_PAGE_TEMPLATE)
+          throw new PublicationError("OUT_OF_SCOPE_PUBLISHED_PAGE");
+        if (pageIncludedInSearch(page.includeInSearch)) pages.push(page);
       }
       if (!batch.pageInfo.hasNext) break;
       const cursor = batch.pageInfo.endCursor;
@@ -403,11 +396,11 @@ export class LivePages {
   }
 }
 
-/** Search has a broader opt-in projection; the versioned answer API stays unchanged. */
+/** Merge structured resource pages and ordinary opted-in pages without duplicate records. */
 export class LiveSearchContent implements SearchContentReader {
   constructor(
     private readonly answers: LiveContentReader,
-    private readonly pages: LivePages,
+    private readonly pages: SearchPageReader,
   ) {}
   async readAll(signal?: AbortSignal): Promise<PublishedSearchContent[]> {
     const [answers, pages] = await Promise.all([
@@ -419,6 +412,11 @@ export class LiveSearchContent implements SearchContentReader {
     );
     if (new Set(contents.map((item) => item.id)).size !== contents.length)
       throw new PublicationError("DUPLICATE_PUBLISHED_ID");
+    const urls = contents.map((item) =>
+      item.canonicalUrl.replace(/\/$/, "").toLowerCase(),
+    );
+    if (new Set(urls).size !== urls.length)
+      throw new PublicationError("DUPLICATE_PUBLISHED_URL");
     return contents;
   }
 }

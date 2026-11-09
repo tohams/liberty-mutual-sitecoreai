@@ -2,7 +2,7 @@ import { digest, identifier, PUBLIC_SITE, PublicationError } from "./content";
 import type { LiveContentReader } from "./live-content";
 import { liveContent } from "./runtime";
 
-/** Stable, public read model backed exclusively by the approved answers published to Live Edge. */
+/** Stable, public read model backed exclusively by the structured resource pages published to Live Edge. */
 export async function contentGet(
   request: Request,
   id?: string,

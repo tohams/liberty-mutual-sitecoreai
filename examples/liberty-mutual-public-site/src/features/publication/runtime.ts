@@ -57,11 +57,12 @@ export function publicationRuntime(
     environment.SITECORE_SEARCH_SOURCE_ID || "",
     environment.SITECORE_SEARCH_PUSH_API_KEY || "",
   );
+  const resources = liveContent(environment);
   return {
     store,
     service: new PublicationService(
       new LiveSearchContent(
-        liveContent(environment),
+        { readAll: (signal) => resources.readSearchable(signal) },
         new LivePages(
           environment.SITECORE_LIVE_EDGE_CONTEXT_ID || "",
           publicOrigin(environment),

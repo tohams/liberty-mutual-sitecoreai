@@ -55,7 +55,7 @@ const PUBLIC_HOST = "liberty-mutual-public-site.vercel.app";
 const PORTAL_HOST = "liberty-mutual-agent-portal.vercel.app";
 const ORG = "org_XqL3u1MSNVuubOTb";
 const TENANT_NAME = "scaipocusem400b-sitecoreai950c-demo4418";
-const ANSWER_ID = "70144ef3-4be0-597a-9b22-81e8ee1cc9f6";
+const RESOURCE_PAGE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
 const DISCLOSURE_ID = "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca";
 const appRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const steps = customerDemoChapters.flatMap((chapter) => chapter.steps);
@@ -317,7 +317,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
 test("discovery readiness identifies native structure while keeping external engine citation claims bounded", () => {
   const text = prose(step("public-discovery"));
   for (const required of [
-    /PublicApprovedAnswer/,
+    /PublicResourcePage/,
     /Quick Info/,
     /Checklist/,
     /State applicability/,
@@ -338,7 +338,12 @@ test("discovery readiness identifies native structure while keeping external eng
     step("public-discovery").images?.[0]?.file,
     "native-public-taxonomy-checklist.png",
   );
-  assert.doesNotMatch(text, /Apps → Resource metadata|Content to classify/);
+  assert.match(text, /Home → insurance-resources → bundle-car-and-home/);
+  assert.match(text, /Reference source/);
+  assert.doesNotMatch(
+    text,
+    /Apps → Resource metadata|Content to classify|PublicApprovedAnswer|Data → Approved answers/,
+  );
   const page = readFileSync(
     join(appRoot, "src/app/workshops/demo/page.tsx"),
     "utf8",
@@ -364,12 +369,12 @@ test("the indexing loop owns both publication and fresh Search-record verificati
     /state/,
     /product/,
     /audience/,
-    /Approved answers.*library/i,
+    /published website content/i,
   ])
     assert.match(text, required);
   assert.match(
     prose(entry.controls),
-    /This mapping indexes the Approved answers library.*wording and applicability metadata/i,
+    /reads published website content.*Search Push API.*Include in site search.*resource page’s own guidance and applicability metadata/i,
   );
   const publish = actionIndex(
     entry.id,
@@ -382,7 +387,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   assert(publish < verify);
   assert.match(
     prose(entry.actions[publish]),
-    /Wait for the version to finish loading.*read the selected version number again.*matches Prepared answer version.*Immediately before choosing Publish.*Approved.*Detailed explanation.*Start publish/i,
+    /Wait for the version to finish loading.*read the selected version number again.*matches Prepared page version.*Immediately before choosing Publish.*Approved.*Detailed explanation.*Start publish/i,
   );
   assert.match(entry.stopWhen, /Search document.*newly published sentence/);
   assert.doesNotMatch(
@@ -414,15 +419,15 @@ test("indexing preparation requires a clean published baseline and one unpublish
   );
   assert.match(
     preparationText,
-    /select Create.*Reopen the version selector.*explicitly select the new.*Shared answer review.*Draft.*new version number.*wait for its fields to finish loading.*selected version number is newer.*original wording remains intact before editing.*Add.*exactly once/,
+    /select Create.*Reopen the version selector.*explicitly select the new.*Resource page review.*Draft.*new version number.*wait for its fields to finish loading.*selected version number is newer.*original wording remains intact before editing.*Add.*exactly once/,
+  );
+  assert.match(
+    preparationText,
+    /must be absent from the public article.*Search record.*published-page API experience/,
   );
   assert.match(
     preparation,
-    /must be absent from the public article.*Search record.*published-answer API experience/,
-  );
-  assert.match(
-    preparation,
-    /sentence is already present.*Bundle car and home.*After the demonstration.*restoration checklist.*Continue only after all three/,
+    /sentence is already present.*car-and-home resource page.*After the demonstration.*restoration checklist.*Continue only after all three/,
   );
   assert.match(
     preparation,
@@ -528,7 +533,7 @@ test("analytics is a report-only loop using genuine consented preparation", () =
   assert.match(text, /prepar.*consented|consented.*prepar/i);
   assert.doesNotMatch(
     prose(entry.actions),
-    /Start publish|Create a page|Explore bundling|Load answer/,
+    /Start publish|Create a page|Explore bundling|Load content/,
   );
   const page = readFileSync(
     join(appRoot, "src/app/workshops/demo/page.tsx"),
@@ -545,8 +550,8 @@ test("API reuse stops after the second experience loads the same published answe
   const entry = step("public-api");
   const text = prose(entry);
   for (const required of [
-    /One approved answer, two experiences/i,
-    /Load answer/,
+    /One published page, two experiences/i,
+    /Load content/,
     /Native content version/,
     /Stable item ID/,
     /API contract version/,
@@ -842,8 +847,7 @@ test("the presenter narrative leads with outcomes and keeps operational cautions
 test("every launch or inline link has a safe destination and the correct site and native item context", () => {
   const nativeSites: Record<string, string> = {
     "6d600332-3e21-4c5f-83ec-aae04f83450f": "liberty-mutual-public-site",
-    [ANSWER_ID]: "liberty-mutual-public-site",
-    "ae109fc0-b508-5840-97eb-0b2c02ae1a9b": "liberty-mutual-public-site",
+    [RESOURCE_PAGE_ID]: "liberty-mutual-public-site",
     [DISCLOSURE_ID]: "liberty-mutual-public-site",
     "ae9e45ca-f127-4abe-9ca7-2ff109981998": "liberty-mutual-agent-portal",
     "3127968e-4b21-50c3-ad79-b6bbbe5303b8": "liberty-mutual-agent-portal",
@@ -908,7 +912,7 @@ test("every launch or inline link has a safe destination and the correct site an
       url.hostname === PUBLIC_HOST &&
       url.pathname.startsWith("/api/content/v1/answers/")
     )
-      assert.equal(url.pathname, `/api/content/v1/answers/${ANSWER_ID}`);
+      assert.equal(url.pathname, `/api/content/v1/answers/${RESOURCE_PAGE_ID}`);
   }
 });
 

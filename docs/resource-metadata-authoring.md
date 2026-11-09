@@ -31,7 +31,7 @@ For a temporary demonstration change, restore the original values through a new 
 
 ## Public website content
 
-The **Public Website** uses native **State applicability**, **Products**, and **Audience** checklists. Edit page classification through **Page content** or its **Content** view. A reusable approved answer owns its own classification: select its visible **Approved answer** component and use its native **Content** fields, or open the answer in **Page Builder Content**.
+The **Public Website** uses native **State applicability**, **Products**, and **Audience** checklists. Select the resource page beneath **Home → insurance-resources**, and edit its native fields through **Page content** or its **Content** view. Expand **Resource content** for the question, guidance, owner, and review dates. The inherited **Content** section contains **Canonical URL**, **Reference source**, **Include in site search**, and the classification checklists. The same page owns the fields published to the website, Search, and the content API.
 
 Select products individually, such as **Auto**, **Homeowners**, and **Condo**. The managed options live under the public site’s **Data/Taxonomy/States**, **Products**, and **Audiences** folders. Use an **All** choice on its own. Normal permissions, versions, approval, and publication apply.
 

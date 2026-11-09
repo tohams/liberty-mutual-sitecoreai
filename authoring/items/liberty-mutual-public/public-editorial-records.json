@@ -1,8 +1,7 @@
 {
   "schemaVersion": 1,
-  "ownership": "One-time CreateOnly factory editorial seed; excluded from normal Deploy.",
+  "ownership": "One-time CreateOnly page-owned editorial seed; excluded from normal Deploy.",
   "routeCount": 17,
-  "answerCount": 10,
   "records": [
     {
       "ID": "6d600332-3e21-4c5f-83ec-aae04f83450f",
@@ -81,12 +80,12 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
@@ -97,29 +96,6 @@
             }
           ],
           "Fields": []
-        }
-      ]
-    },
-    {
-      "ID": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Parent": "212031c4-4cb5-4205-b174-27c54daf2475",
-      "Template": "a87a00b1-e6db-45ab-8b54-636fec3b5523",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers",
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
-                  "Hint": "__Created",
-                  "Value": "20261031T160000Z"
-                }
-              ]
-            }
-          ]
         }
       ]
     },
@@ -333,12 +309,12 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
@@ -409,12 +385,12 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
@@ -484,12 +460,12 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
@@ -559,12 +535,12 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
@@ -634,12 +610,12 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
@@ -668,1006 +644,6 @@
                   "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
                   "Hint": "__Created",
                   "Value": "20261031T160000Z"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "a7796585-5538-55be-8f08-a10d64fe505c",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Bundle auto and condo",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "Can I bundle auto and condo insurance?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-auto-and-condo"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Eligible customers can explore bundling auto and condo insurance with Liberty Mutual. Keeping the two with one insurer may offer savings and convenience. Your quote shows the coverage choices and discounts available for your circumstances."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Auto and condo bundling is subject to eligibility and product availability. Savings are not the same for every policyholder.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Consider your car and your condo separately when reviewing coverage. Then explore whether a bundle is a good fit. An independent agent can help you understand the choices without treating the lowest price as the only consideration.</p>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "All"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto-condo"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: bundling auto and condo\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/condo\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore auto and condo options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-condo&amp;source=bundle-auto-and-condo\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "4c54e28e-f876-5a48-a413-881641ee548b",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Bundle auto and renters",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "Can I bundle auto and renters insurance?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-auto-and-renters"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Liberty Mutual offers auto and renters bundling options for eligible customers. You can explore protecting your car and the belongings in your rental while keeping your policies with one insurer. The savings available to you depend on your circumstances."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Auto and renters bundling discounts are subject to eligibility, state availability, and the terms of the policies selected.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Renters insurance and auto insurance address different needs. Review what each policy covers, and compare limits and deductibles before choosing a combination. Start a quote to explore your available options.</p>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "All"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto-renters"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: bundling auto and renters\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/renters\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore auto and renters options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-renters&amp;source=bundle-auto-and-renters\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "70144ef3-4be0-597a-9b22-81e8ee1cc9f6",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Bundle car and home",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "Can I bundle my car and home insurance?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "You can explore combining eligible auto and home policies with Liberty Mutual. Bundling may qualify you for savings and can make your insurance easier to manage. Available options and discounts depend on your state, eligibility, and how you purchase."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Bundling and multi-policy savings are subject to product availability and eligibility. A quote determines the options and discounts available to you.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Start with the products you need, and compare their coverages, limits, and deductibles. If your circumstances need a closer look, an independent agent can help you discuss the options.</p>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "All"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto-home"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: bundling auto and home\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore a bundled quote\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-home&amp;source=bundle-car-and-home\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "a7850688-c72d-5d65-b28c-fa23e252a670",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Check your policy for a specific loss",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "Can this information confirm whether my particular loss is covered?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/check-your-policy-for-a-specific-loss"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "General insurance information cannot determine whether your specific loss is covered. The cause of the damage, your selected coverages, policy limits, exclusions, and conditions all matter. Review your policy contract, and contact your insurer or agent for help with your situation."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Coverage for a specific loss is determined from the applicable policy and the facts of the loss. This general overview is not a coverage decision or a promise of payment.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>For example, water damage does not have a single answer that applies to every situation. A sudden plumbing problem, maintenance-related damage, and flooding can be treated differently. Ask for a review of your policy rather than relying on a general search result.</p><ul><li><a href=\"https://www.libertymutual.com/home-coverage-education\" target=\"_blank\" rel=\"noopener noreferrer\">Liberty Mutual: home coverage education</a></li></ul>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "All"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "home"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: what is not covered by homeowners insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/insurance-resources/property/what-is-not-covered-by-homeowners-insurance\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Ask an agent about your situation\" linktype=\"external\" url=\"/contact-an-agent\" querystring=\"product=home&amp;source=check-your-policy-for-a-specific-loss\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "787170aa-1871-5741-bdd1-704814c5f6df",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Collision coverage and deductibles",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "How do collision coverage and deductibles work together?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/collision-coverage-and-deductibles"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Collision coverage can help repair or replace your vehicle after a covered collision with another vehicle or object. The deductible is the part you pay. A higher deductible generally means taking on more of that cost yourself in exchange for a lower premium."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Collision coverage is governed by the policy terms and the selected deductible. Coverage and payment for an individual loss require review of the actual policy and circumstances.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Consider both the value of your vehicle and the amount you could comfortably pay after a covered accident. Compare the same deductible when comparing quotes, and discuss lender requirements if the vehicle is financed or leased.</p>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "All"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: collision insurance coverage\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/collision-insurance\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Compare auto coverage choices\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;source=collision-coverage-and-deductibles\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "b6e34bd3-3bd0-5d36-ae08-764eb99506a0",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Compare auto insurance quotes",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "What should I compare when shopping for car insurance?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/compare-auto-insurance-quotes"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Compare similar coverage limits, deductibles, and optional protections when reviewing car insurance quotes. Price matters, but so does the protection you choose. Your location, driving history, vehicle, and selected coverages can affect the quote."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Quoted premiums depend on individual rating information and selected coverage. Comparing unlike limits or deductibles does not provide an equivalent coverage comparison.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Start with your coverage needs. Review liability limits, collision and comprehensive deductibles, and any optional coverage you want. Then compare quotes on the same basis, and ask an agent about differences you do not understand.</p>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "All"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: car insurance options\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Prepare for an auto quote\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;source=compare-auto-insurance-quotes\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "cfcc8cf4-9a88-5a61-b296-c6b8da1df070",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Comprehensive auto coverage",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "What does comprehensive car insurance help cover?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/comprehensive-auto-coverage"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Comprehensive coverage can help with damage to your vehicle from events other than a collision, such as theft, vandalism, hail, or a falling tree. The coverage you select, your deductible, and your policy terms determine how a covered loss is handled."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Comprehensive coverage is subject to the applicable deductible, coverage limits, exclusions, and policy conditions. A lender may require it for a financed or leased vehicle.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Think about the risks to your car beyond a crash. Review the coverage and deductible in your quote or policy, and ask about anything unclear. This overview cannot confirm whether a particular incident is covered.</p>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "All"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: comprehensive insurance coverage\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/comprehensive-insurance\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore auto coverage options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;source=comprehensive-auto-coverage\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "13fea402-dd76-589a-95e6-beacdbf658f7",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Florida auto insurance guide",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "What should I review when choosing auto insurance in Florida?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/florida-auto-insurance-guide"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Florida has its own auto insurance requirements and coverage considerations. Review Personal Injury Protection and Property Damage Liability, along with optional protection for your vehicle and other risks. An agent can help you consider coverage beyond the state minimum."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>This is general Florida information, not a determination of the coverage required for an individual driver or the protection provided by a particular policy.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Start with the Florida-specific overview instead of assuming guidance from another state applies. Review your quote and policy carefully, and ask about limits, deductibles, exclusions, and coverage that fits how you use your vehicle.</p>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "FL"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: Florida car insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/state/florida\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore Florida auto options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;state=FL&amp;source=florida-auto-insurance-guide\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "6a3295f8-a2d7-5109-bb7a-86704729b888",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Illinois auto insurance guide",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "What should I review when choosing auto insurance in Illinois?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/illinois-auto-insurance-guide"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Use Illinois-specific guidance when comparing car insurance. Review liability and uninsured motorist bodily injury coverage, and consider the protection you want for your own vehicle. The state minimum is a starting point for a conversation about your needs."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Illinois coverage requirements and the policy terms apply. General information does not replace a review of your limits, deductibles, selected coverages, and individual circumstances.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Compare quotes with equivalent limits and deductibles. The Illinois Department of Insurance shopping guide explains required and optional coverages, and an independent agent can help you discuss the choices that fit your vehicle and budget.</p><ul><li><a href=\"https://idoi.illinois.gov/consumers/consumerinsurance/auto-insurance-shopping-guide.html\" target=\"_blank\" rel=\"noopener noreferrer\">Illinois Department of Insurance: Auto Insurance Shopping Guide</a></li></ul>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "IL"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: Illinois car insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/state/illinois\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore Illinois auto options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;state=IL&amp;source=illinois-auto-insurance-guide\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "9891fd76-f232-5f2e-8643-224f7bdf2027",
-      "Parent": "0a7f4afc-ba36-5b17-9fa5-b82287d5e883",
-      "Template": "1a9400ee-e47b-5992-9431-56ae5586f90d",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Texas auto insurance guide",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "What should I review when choosing auto insurance in Texas?"
-                },
-                {
-                  "ID": "43f7eef1-6cba-5b10-94cb-17e86f19726d",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/texas-auto-insurance-guide"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "Use Texas-specific information when reviewing car insurance. Consider the required liability protection, your needs beyond the minimum, and coverage for your own vehicle. Eligible customers may also explore combining auto with home, condo, or renters insurance."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>This is general Texas information. Required coverage, optional protections, eligibility, and policy terms should be confirmed for your circumstances before you buy.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<p>Review the Liberty Mutual Texas overview, and compare equivalent limits and deductibles. The Texas Department of Insurance also provides a shopping checklist covering coverage, costs, discounts, and exclusions. An agent can help you work through the choices.</p><ul><li><a href=\"https://www.tdi.texas.gov/consumer/auto-insurance-shopping-guide.html\" target=\"_blank\" rel=\"noopener noreferrer\">Texas Department of Insurance: auto insurance shopping checklist</a></li></ul>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "69a206de-38f4-5302-8142-5e2cff09168f",
-                  "Hint": "state",
-                  "Value": "TX"
-                },
-                {
-                  "ID": "4acbbd9e-68fd-58d5-8f05-374d157b26d9",
-                  "Hint": "product",
-                  "Value": "auto"
-                },
-                {
-                  "ID": "c883a7fd-9117-5a5a-a4f8-ca7b6017bdc2",
-                  "Hint": "audience",
-                  "Value": "consumer"
-                },
-                {
-                  "ID": "3305647a-51b7-5a4e-ba7a-530eef8312c5",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: Texas car insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/state/texas\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore Texas auto options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;state=TX&amp;source=texas-auto-insurance-guide\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
                 }
               ]
             }
@@ -3189,13 +2165,13 @@
     {
       "ID": "4478ef85-2a21-54ed-b40c-1d87f7b5134f",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-auto-and-condo",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{35A3E13B-A5BA-5BC1-99F4-C39FA1B6F9B1}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{D97B8B66-B089-53C8-8747-2D747212DD03}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{A7796585-5538-55BE-8F08-A10D64FE505C}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{32EFC4E4-AF85-586C-960F-68D7D0025B7F}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{35A3E13B-A5BA-5BC1-99F4-C39FA1B6F9B1}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{D97B8B66-B089-53C8-8747-2D747212DD03}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{4478EF85-2A21-54ED-B40C-1D87F7B5134F}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{32EFC4E4-AF85-586C-960F-68D7D0025B7F}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3243,17 +2219,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto-condo"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{005D71B8-6FD7-4E0A-842A-338DF40E1F47}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "Can I bundle auto and condo insurance?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Eligible customers can explore bundling auto and condo insurance with Liberty Mutual. Keeping the two with one insurer may offer savings and convenience. Your quote shows the coverage choices and discounts available for your circumstances."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Auto and condo bundling is subject to eligibility and product availability. Savings are not the same for every policyholder.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Consider your car and your condo separately when reviewing coverage. Then explore whether a bundle is a good fit. An independent agent can help you understand the choices without treating the lowest price as the only consideration.</p>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: bundling auto and condo\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/condo\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Explore auto and condo options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-condo&amp;source=bundle-auto-and-condo\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3264,13 +2295,13 @@
     {
       "ID": "777de2e0-bae0-508b-926f-8e17cc1f95d2",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-auto-and-renters",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{CEDD6E6D-6D05-547B-85FA-5FD470BF51BC}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{CC77A0C4-0F59-5569-8731-9D4E6954B88E}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{4C54E28E-F876-5A48-A413-881641EE548B}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{AE827A4B-AC5E-53B7-B18D-42F65F99D759}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{CEDD6E6D-6D05-547B-85FA-5FD470BF51BC}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{CC77A0C4-0F59-5569-8731-9D4E6954B88E}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{777DE2E0-BAE0-508B-926F-8E17CC1F95D2}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{AE827A4B-AC5E-53B7-B18D-42F65F99D759}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3318,17 +2349,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto-renters"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{D81D3AE8-243B-4F32-B70D-33796448DCA0}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "Can I bundle auto and renters insurance?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Liberty Mutual offers auto and renters bundling options for eligible customers. You can explore protecting your car and the belongings in your rental while keeping your policies with one insurer. The savings available to you depend on your circumstances."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Auto and renters bundling discounts are subject to eligibility, state availability, and the terms of the policies selected.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Renters insurance and auto insurance address different needs. Review what each policy covers, and compare limits and deductibles before choosing a combination. Start a quote to explore your available options.</p>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: bundling auto and renters\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling/renters\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Explore auto and renters options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-renters&amp;source=bundle-auto-and-renters\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3339,13 +2425,13 @@
     {
       "ID": "ae109fc0-b508-5840-97eb-0b2c02ae1a9b",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-car-and-home",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{AE05A1A0-5729-5A88-A5EF-5B123E9F4285}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{1FA93D3A-1935-52B8-B512-5CC2F274B489}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{70144EF3-4BE0-597A-9B22-81E8EE1CC9F6}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{25A364F1-1249-5E0C-AA6B-024B8DCE62D4}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{AE05A1A0-5729-5A88-A5EF-5B123E9F4285}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{1FA93D3A-1935-52B8-B512-5CC2F274B489}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{AE109FC0-B508-5840-97EB-0B2C02AE1A9B}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{25A364F1-1249-5E0C-AA6B-024B8DCE62D4}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3393,17 +2479,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto-home"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "Can I bundle my car and home insurance?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "You can explore combining eligible auto and home policies with Liberty Mutual. Bundling may qualify you for savings and can make your insurance easier to manage. Available options and discounts depend on your state, eligibility, and how you purchase."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Bundling and multi-policy savings are subject to product availability and eligibility. A quote determines the options and discounts available to you.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Start with the products you need, and compare their coverages, limits, and deductibles. If your circumstances need a closer look, an independent agent can help you discuss the options.</p>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: bundling auto and home\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Explore a bundled quote\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-home&amp;source=bundle-car-and-home\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3414,13 +2555,13 @@
     {
       "ID": "94605a38-49c8-5454-bcba-8a6ba1c9a7dc",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/check-your-policy-for-a-specific-loss",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{2C6235B7-5238-5AB9-AD67-0F425A445EF2}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{392DB91F-5520-5411-B98A-AFF1D9D16E66}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{A7850688-C72D-5D65-B28C-FA23E252A670}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{515C0221-C691-51C5-9A1A-91590E8C9151}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{2C6235B7-5238-5AB9-AD67-0F425A445EF2}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{392DB91F-5520-5411-B98A-AFF1D9D16E66}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{94605A38-49C8-5454-BCBA-8A6BA1C9A7DC}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{515C0221-C691-51C5-9A1A-91590E8C9151}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3468,17 +2609,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "home"
+                  "Value": "{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "Can this information confirm whether my particular loss is covered?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "General insurance information cannot determine whether your specific loss is covered. The cause of the damage, your selected coverages, policy limits, exclusions, and conditions all matter. Review your policy contract, and contact your insurer or agent for help with your situation."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Coverage for a specific loss is determined from the applicable policy and the facts of the loss. This general overview is not a coverage decision or a promise of payment.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>For example, water damage does not have a single answer that applies to every situation. A sudden plumbing problem, maintenance-related damage, and flooding can be treated differently. Ask for a review of your policy rather than relying on a general search result.</p><ul><li><a href=\"https://www.libertymutual.com/home-coverage-education\" target=\"_blank\" rel=\"noopener noreferrer\">Liberty Mutual: home coverage education</a></li></ul>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: what is not covered by homeowners insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/insurance-resources/property/what-is-not-covered-by-homeowners-insurance\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Ask an agent about your situation\" linktype=\"external\" url=\"/contact-an-agent\" querystring=\"product=home&amp;source=check-your-policy-for-a-specific-loss\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3489,13 +2685,13 @@
     {
       "ID": "daac6096-da7d-55db-8454-a9fc87412db5",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/collision-coverage-and-deductibles",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{30635AFE-EFE2-5A76-AFEC-798480E491CF}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{583A78DC-9B9D-5806-AAE5-B4628215BF85}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{787170AA-1871-5741-BDD1-704814C5F6DF}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{2F336B13-EE2B-503E-9FE3-BD662496AC35}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{30635AFE-EFE2-5A76-AFEC-798480E491CF}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{583A78DC-9B9D-5806-AAE5-B4628215BF85}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{DAAC6096-DA7D-55DB-8454-A9FC87412DB5}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{2F336B13-EE2B-503E-9FE3-BD662496AC35}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3543,17 +2739,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "How do collision coverage and deductibles work together?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Collision coverage can help repair or replace your vehicle after a covered collision with another vehicle or object. The deductible is the part you pay. A higher deductible generally means taking on more of that cost yourself in exchange for a lower premium."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Collision coverage is governed by the policy terms and the selected deductible. Coverage and payment for an individual loss require review of the actual policy and circumstances.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Consider both the value of your vehicle and the amount you could comfortably pay after a covered accident. Compare the same deductible when comparing quotes, and discuss lender requirements if the vehicle is financed or leased.</p>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: collision insurance coverage\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/collision-insurance\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Compare auto coverage choices\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;source=collision-coverage-and-deductibles\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3564,13 +2815,13 @@
     {
       "ID": "3d1ba18a-fbf8-5884-bc1b-c70ffe5b56f1",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/compare-auto-insurance-quotes",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{31F3B54A-930D-56A5-A5F1-657815BC0B40}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{59AFA19A-4368-56A9-BBD0-DE3B470142CB}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{B6E34BD3-3BD0-5D36-AE08-764EB99506A0}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{41A5C671-3065-5AAB-81E1-7E401405CF3C}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{31F3B54A-930D-56A5-A5F1-657815BC0B40}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{59AFA19A-4368-56A9-BBD0-DE3B470142CB}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{3D1BA18A-FBF8-5884-BC1B-C70FFE5B56F1}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{41A5C671-3065-5AAB-81E1-7E401405CF3C}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3618,17 +2869,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "What should I compare when shopping for car insurance?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Compare similar coverage limits, deductibles, and optional protections when reviewing car insurance quotes. Price matters, but so does the protection you choose. Your location, driving history, vehicle, and selected coverages can affect the quote."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Quoted premiums depend on individual rating information and selected coverage. Comparing unlike limits or deductibles does not provide an equivalent coverage comparison.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Start with your coverage needs. Review liability limits, collision and comprehensive deductibles, and any optional coverage you want. Then compare quotes on the same basis, and ask an agent about differences you do not understand.</p>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: car insurance options\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Prepare for an auto quote\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;source=compare-auto-insurance-quotes\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3639,13 +2945,13 @@
     {
       "ID": "c3984aa4-a22d-539b-a70b-9f0ff93267ad",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/comprehensive-auto-coverage",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{1E00ECAE-1537-59F6-AB54-57AEEF229A7B}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{EA27EC1B-2DB0-5849-B69E-0C330D663F76}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{CFCC8CF4-9A88-5A61-B296-C6B8DA1DF070}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{D0AEE315-732C-51A3-B632-82771E71D7F0}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{1E00ECAE-1537-59F6-AB54-57AEEF229A7B}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{EA27EC1B-2DB0-5849-B69E-0C330D663F76}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C3984AA4-A22D-539B-A70B-9F0FF93267AD}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{D0AEE315-732C-51A3-B632-82771E71D7F0}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3693,17 +2999,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "What does comprehensive car insurance help cover?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Comprehensive coverage can help with damage to your vehicle from events other than a collision, such as theft, vandalism, hail, or a falling tree. The coverage you select, your deductible, and your policy terms determine how a covered loss is handled."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Comprehensive coverage is subject to the applicable deductible, coverage limits, exclusions, and policy conditions. A lender may require it for a financed or leased vehicle.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Think about the risks to your car beyond a crash. Review the coverage and deductible in your quote or policy, and ask about anything unclear. This overview cannot confirm whether a particular incident is covered.</p>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: comprehensive insurance coverage\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/comprehensive-insurance\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Explore auto coverage options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;source=comprehensive-auto-coverage\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3714,13 +3075,13 @@
     {
       "ID": "7adca005-f6ce-56a8-a5d1-4a5d7f7d54d3",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/florida-auto-insurance-guide",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{AAA31242-4AB4-5DD1-ABA6-B9ED044F001A}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{AE11E679-5B82-5667-9D58-41BEFE210E8A}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{13FEA402-DD76-589A-95E6-BEACDBF658F7}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{7D024B31-E1EE-54CC-9C09-AB118850BC81}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{AAA31242-4AB4-5DD1-ABA6-B9ED044F001A}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{AE11E679-5B82-5667-9D58-41BEFE210E8A}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{7ADCA005-F6CE-56A8-A5D1-4A5D7F7D54D3}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{7D024B31-E1EE-54CC-9C09-AB118850BC81}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3768,17 +3129,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "FL"
+                  "Value": "{88219F25-81EA-4182-AEE4-8AB9DF30ABA2}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "What should I review when choosing auto insurance in Florida?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Florida has its own auto insurance requirements and coverage considerations. Review Personal Injury Protection and Property Damage Liability, along with optional protection for your vehicle and other risks. An agent can help you consider coverage beyond the state minimum."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>This is general Florida information, not a determination of the coverage required for an individual driver or the protection provided by a particular policy.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Start with the Florida-specific overview instead of assuming guidance from another state applies. Review your quote and policy carefully, and ask about limits, deductibles, exclusions, and coverage that fits how you use your vehicle.</p>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: Florida car insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/state/florida\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Explore Florida auto options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;state=FL&amp;source=florida-auto-insurance-guide\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3789,13 +3205,13 @@
     {
       "ID": "e02592b3-d405-51f9-9f8b-bba65bd60399",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/illinois-auto-insurance-guide",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{B10FB49F-F421-5B36-87A4-6C8EBDEFE7B5}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{8319F34D-EAD8-5E77-A022-E3185D8F28D9}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{6A3295F8-A2D7-5109-BB7A-86704729B888}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{47CED10C-987A-54BD-AB8D-060914034D00}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{B10FB49F-F421-5B36-87A4-6C8EBDEFE7B5}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{8319F34D-EAD8-5E77-A022-E3185D8F28D9}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{E02592B3-D405-51F9-9F8B-BBA65BD60399}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{47CED10C-987A-54BD-AB8D-060914034D00}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3843,17 +3259,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "IL"
+                  "Value": "{C14C8DC7-8B44-45A0-A093-99404B72D665}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "What should I review when choosing auto insurance in Illinois?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Use Illinois-specific guidance when comparing car insurance. Review liability and uninsured motorist bodily injury coverage, and consider the protection you want for your own vehicle. The state minimum is a starting point for a conversation about your needs."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>Illinois coverage requirements and the policy terms apply. General information does not replace a review of your limits, deductibles, selected coverages, and individual circumstances.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Compare quotes with equivalent limits and deductibles. The Illinois Department of Insurance shopping guide explains required and optional coverages, and an independent agent can help you discuss the choices that fit your vehicle and budget.</p><ul><li><a href=\"https://idoi.illinois.gov/consumers/consumerinsurance/auto-insurance-shopping-guide.html\" target=\"_blank\" rel=\"noopener noreferrer\">Illinois Department of Insurance: Auto Insurance Shopping Guide</a></li></ul>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: Illinois car insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/state/illinois\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Explore Illinois auto options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;state=IL&amp;source=illinois-auto-insurance-guide\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -3864,13 +3335,13 @@
     {
       "ID": "dddb4276-198d-5b3b-bef1-940b8e8f7f26",
       "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "a4de2222-c8a5-54d4-adee-bbad976a457c",
+      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/texas-auto-insurance-guide",
       "SharedFields": [
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{F49DBA32-9B2C-56F0-9C3A-83E69535199D}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{31B73286-D0AE-5D35-B98B-E261674E7486}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{9891FD76-F232-5F2E-8643-224F7BDF2027}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{6E675BC3-512F-5955-8C55-2AEA4BFF9DF7}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{F49DBA32-9B2C-56F0-9C3A-83E69535199D}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{31B73286-D0AE-5D35-B98B-E261674E7486}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{DDDB4276-198D-5B3B-BEF1-940B8E8F7F26}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{6E675BC3-512F-5955-8C55-2AEA4BFF9DF7}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
         },
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -3918,17 +3389,72 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "TX"
+                  "Value": "{1DF62CBF-DFAF-46E6-8CFA-BEDAC09C984B}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": "auto"
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}"
+                },
+                {
+                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+                  "Hint": "question",
+                  "Value": "What should I review when choosing auto insurance in Texas?"
+                },
+                {
+                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+                  "Hint": "answer",
+                  "Value": "Use Texas-specific information when reviewing car insurance. Consider the required liability protection, your needs beyond the minimum, and coverage for your own vehicle. Eligible customers may also explore combining auto with home, condo, or renters insurance."
+                },
+                {
+                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
+                  "Hint": "formalWording",
+                  "Value": "<p>This is general Texas information. Required coverage, optional protections, eligibility, and policy terms should be confirmed for your circumstances before you buy.</p>"
+                },
+                {
+                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+                  "Hint": "explanation",
+                  "Value": "<p>Review the Liberty Mutual Texas overview, and compare equivalent limits and deductibles. The Texas Department of Insurance also provides a shopping checklist covering coverage, costs, discounts, and exclusions. An agent can help you work through the choices.</p><ul><li><a href=\"https://www.tdi.texas.gov/consumer/auto-insurance-shopping-guide.html\" target=\"_blank\" rel=\"noopener noreferrer\">Texas Department of Insurance: auto insurance shopping checklist</a></li></ul>"
+                },
+                {
+                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+                  "Hint": "owner",
+                  "Value": "Liberty Mutual"
+                },
+                {
+                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+                  "Hint": "effectiveDate",
+                  "Value": "20261031T000000Z"
+                },
+                {
+                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+                  "Hint": "reviewDate",
+                  "Value": "20270131T000000Z"
+                },
+                {
+                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
+                  "Hint": "sourceLink",
+                  "Value": "<link text=\"Liberty Mutual: Texas car insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/state/texas\" />"
+                },
+                {
+                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+                  "Hint": "nextStep",
+                  "Value": "<link text=\"Explore Texas auto options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto&amp;state=TX&amp;source=texas-auto-insurance-guide\" />"
+                },
+                {
+                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+                  "Hint": "disclosure",
+                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+                },
+                {
+                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
+                  "Hint": "includeInSearch",
+                  "Value": "1"
                 }
               ]
             }
@@ -4016,12 +3542,12 @@
                 {
                   "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
                   "Hint": "audience",
-                  "Value": "consumer"
+                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
                 },
                 {
                   "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
                   "Hint": "state",
-                  "Value": "All"
+                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
                 },
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
@@ -11068,5 +10594,6 @@
         }
       ]
     }
-  ]
+  ],
+  "resourcePageCount": 10
 }

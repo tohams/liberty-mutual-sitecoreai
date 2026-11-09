@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  ANSWER_ROOT,
-  ANSWER_TEMPLATE,
+  RESOURCE_ROOT,
+  RESOURCE_PAGE_TEMPLATE,
   DISCLOSURE_TEMPLATE,
   mapPublishedAnswer,
   searchDocument,
-  type NativeAnswer,
+  type NativeResourcePage,
   type SearchOperation,
 } from "./content";
 import { LiveContent } from "./live-content";
@@ -20,6 +20,7 @@ import {
 } from "./publication-http";
 import { contentGet } from "./content-http";
 import { liveContent } from "./runtime";
+import type { PublicationState, PublicationStore } from "./receipt-store";
 import {
   revalidatePublicDelivery,
   PUBLIC_DELIVERY_PATH,
@@ -30,12 +31,13 @@ const id = "11111111-2222-3333-4444-555555555555";
 const secondId = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee";
 const origin = "https://public.example.com";
 const field = (value: unknown) => ({ jsonValue: { value } });
-function answer(): NativeAnswer {
+function answer(): NativeResourcePage {
   return {
     id,
-    path: `${ANSWER_ROOT}/bundle`,
-    template: { id: ANSWER_TEMPLATE },
+    path: `${RESOURCE_ROOT}/bundle`,
+    template: { id: RESOURCE_PAGE_TEMPLATE },
     version: 1,
+    includeInSearch: field(true),
     question: field("How do bundles work?"),
     answer: field("You can combine eligible coverages."),
     formalWording: field("<p>Terms depend on your policy.</p>"),
@@ -71,7 +73,7 @@ function request(body: unknown = edge, credential = secret) {
 
 /** HTTP contract harness exercises real Live reader, Search response parsing, durable-store commands, and handlers. */
 function harness() {
-  let content: NativeAnswer[] = [answer()];
+  let content: NativeResourcePage[] = [answer()];
   const redis = new Map<string, string>();
   const pushes: SearchOperation[][] = [];
   let liveReads = 0;
@@ -86,11 +88,11 @@ function harness() {
         "dedicated-live-context",
       );
       assert.equal(init?.cache, "no-store");
-      assert.equal(body.variables.root, ANSWER_ROOT);
+      assert.equal(body.variables.root, RESOURCE_ROOT);
       return Response.json({
         data: {
           item: {
-            path: ANSWER_ROOT,
+            path: RESOURCE_ROOT,
             children: {
               results: structuredClone(content),
               pageInfo: { hasNext: false },
@@ -170,7 +172,7 @@ function harness() {
     async () => undefined,
   );
   const service = new PublicationService(
-    reader,
+    { readAll: (signal) => reader.readSearchable(signal) },
     writer,
     store,
     async () => undefined,
@@ -180,7 +182,7 @@ function harness() {
     reader,
     redis,
     pushes,
-    setContent: (next: NativeAnswer[]) => {
+    setContent: (next: NativeResourcePage[]) => {
       content = next;
     },
     setSearchStatus: (status: number) => {
@@ -277,6 +279,30 @@ test("published native content preserves governance, source, canonical URL, and 
     mapped.sourceLink?.href,
     "https://www.libertymutual.com/bundling",
   );
+  assert.equal(mapped.id, id);
+  assert.equal(mapped.version, answer().version);
+  assert.throws(
+    () =>
+      mapPublishedAnswer(
+        {
+          ...answer(),
+          path: "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Approved answers/Bundle",
+        },
+        origin,
+      ),
+    /OUT_OF_SCOPE/,
+  );
+  assert.throws(
+    () =>
+      mapPublishedAnswer(
+        {
+          ...answer(),
+          canonicalUrl: field("/insurance-resources/another-page"),
+        },
+        origin,
+      ),
+    /PAGE_CANONICAL_MISMATCH/,
+  );
   assert.throws(
     () =>
       mapPublishedAnswer(
@@ -316,6 +342,88 @@ test("published native content preserves governance, source, canonical URL, and 
         origin,
       ),
     /MISSING_PUBLISHED_DISCLOSURE/,
+  );
+});
+
+test("the page Search checkbox removes its document while the same published page remains available through the API", async () => {
+  const h = harness();
+  await publicationPost(request(), environment, h.runtime);
+  h.setContent([{ ...answer(), version: 2, includeInSearch: field(false) }]);
+  const publication = await publicationPost(request(), environment, h.runtime);
+  assert.equal(publication.status, 200);
+  assert.equal((await publication.json()).receipt.deletes, 1);
+  assert.deepEqual(await h.reader.readSearchable(), []);
+  const response = await contentGet(
+    new Request(`${origin}/api/content/v1/answers/${id}`),
+    id,
+    h.reader,
+  );
+  const result = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(result.schemaVersion, "1.0");
+  assert.equal(result.data.id, id);
+  assert.equal(result.data.version, 2);
+  assert.equal(result.data.answer, "You can combine eligible coverages.");
+  assert(!Object.hasOwn(result.data, "includeInSearch"));
+});
+
+test("a complete migration replaces retired library identities with native page identities at the same URL", async () => {
+  const h = harness();
+  let state: PublicationState | null = {
+    schemaVersion: 1,
+    snapshotHash: "previous-complete-library-snapshot",
+    lastTriggerId: "previous-publication",
+    observedAt: "2026-11-09T00:00:00Z",
+    documents: {
+      [secondId]: {
+        hash: "a".repeat(64),
+        url: `${origin}/insurance-resources/bundle`,
+      },
+    },
+  };
+  const store: PublicationStore = {
+    acquire: async () => "migration-lease",
+    state: async () => state,
+    latest: async () => null,
+    finish: async (_lease, _receipt, next) => {
+      if (next) state = next;
+    },
+  };
+  const operations: SearchOperation[][] = [];
+  const service = new PublicationService(
+    { readAll: (signal) => h.reader.readSearchable(signal) },
+    {
+      push: async (batch) => {
+        operations.push(batch);
+        return batch.length;
+      },
+    },
+    store,
+  );
+  const receipt = await service.reconcile({
+    kind: "edge-publish-complete",
+    id: "page-migration",
+  });
+  assert.equal(receipt.upserts, 1);
+  assert.equal(receipt.deletes, 1);
+  assert.equal(operations[0][0].action, "upsert");
+  assert.equal(operations[0][0].id, id);
+  assert.deepEqual(operations[0][1], {
+    action: "delete",
+    id: secondId,
+    locale: "en",
+    sc_url: `${origin}/insurance-resources/bundle`,
+  });
+  assert.deepEqual(Object.keys(state!.documents), [id]);
+  assert.equal(
+    (
+      await contentGet(
+        new Request(`${origin}/api/content/v1/answers/${secondId}`),
+        secondId,
+        h.reader,
+      )
+    ).status,
+    404,
   );
 });
 

@@ -1,24 +1,24 @@
 ---
-ID: 54e5a9a7-a8e8-54f9-b163-f6cf04fe0119
-Parent: 901d5bbe-10dc-56e2-9fe5-bcd4ccc1b39c
+ID: de4a7a26-6fe3-571d-9b4c-6e117690f9b5
+Parent: 77fb7241-8927-409f-8950-61f26865aec0
 Template: 455a3e98-a627-4b40-8035-e683a0331ac7
-Path: /sitecore/templates/Project/LibertyMutualPublic/PublicApprovedAnswer/Content/answer
+Path: /sitecore/templates/Project/LibertyMutualPublic/Base/Resource fields/Resource content/question
 SharedFields:
 - ID: ab162cc0-dc80-4abf-8871-998ee5d7ba32
   Hint: Type
-  Value: Multi-Line Text
+  Value: Single-Line Text
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: "300"
+  Value: "100"
 Languages:
 - Language: en
   Fields:
   - ID: 19a69332-a23e-4e70-8d16-b2640cb24cc8
     Hint: Title
-    Value: Plain-language answer
+    Value: Question
   - ID: b5e02ad9-d56f-4c41-a065-a133db87bdeb
     Hint: __Display name
-    Value: Plain-language answer
+    Value: Question
   Versions:
   - Version: 1
     Fields:

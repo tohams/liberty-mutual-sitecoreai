@@ -1,12 +1,12 @@
 ---
 ID: daac6096-da7d-55db-8454-a9fc87412db5
 Parent: afad2c4c-2dc6-5428-b357-28fca18b611d
-Template: a4de2222-c8a5-54d4-adee-bbad976a457c
+Template: b99218ea-e1fd-41af-a4ae-7ec9e5c30b17
 Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/collision-coverage-and-deductibles
 SharedFields:
 - ID: f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e
   Hint: __Renderings
-  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"><r uid="{30635AFE-EFE2-5A76-AFEC-798480E491CF}" id="{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Hero" par="FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2" /><r uid="{583A78DC-9B9D-5806-AAE5-B4628215BF85}" id="{4585A48F-E841-50CA-B2A3-0D3FC9893875}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{787170AA-1871-5741-BDD1-704814C5F6DF}" par="FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6" /><r uid="{2F336B13-EE2B-503E-9FE3-BD662496AC35}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5" /></d></r>
+  Value: <r><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"><r uid="{30635AFE-EFE2-5A76-AFEC-798480E491CF}" id="{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}" ph="/headless-main/sxa-public-page-body/headless-public-hero-1" ds="page:/Data/Hero" par="FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2" /><r uid="{583A78DC-9B9D-5806-AAE5-B4628215BF85}" id="{4585A48F-E841-50CA-B2A3-0D3FC9893875}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{DAAC6096-DA7D-55DB-8454-A9FC87412DB5}" par="FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6" /><r uid="{2F336B13-EE2B-503E-9FE3-BD662496AC35}" id="{4BC5C522-23DE-54E1-8420-169BDCF996E9}" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}" par="FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5" /></d></r>
 - ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
   Hint: __Workflow
   Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
@@ -35,10 +35,43 @@ Languages:
       Value: https://liberty-mutual-public-site.vercel.app/insurance-resources/collision-coverage-and-deductibles
     - ID: 001ac65e-7daa-5a02-af03-2a5ebdabd129
       Hint: audience
-      Value: consumer
+      Value: "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
     - ID: 44cc401f-47ef-5b97-9a35-2bd9a860c066
       Hint: state
-      Value: All
+      Value: "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
     - ID: 9c5ab0fe-bb46-51cc-98f0-412ca7d8e543
       Hint: product
-      Value: auto
+      Value: "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}"
+    - ID: de4a7a26-6fe3-571d-9b4c-6e117690f9b5
+      Hint: question
+      Value: How do collision coverage and deductibles work together?
+    - ID: 54e5a9a7-a8e8-54f9-b163-f6cf04fe0119
+      Hint: answer
+      Value: Collision coverage can help repair or replace your vehicle after a covered collision with another vehicle or object. The deductible is the part you pay. A higher deductible generally means taking on more of that cost yourself in exchange for a lower premium.
+    - ID: 47041dc1-a183-5516-85ea-afdea936289c
+      Hint: formalWording
+      Value: <p>Collision coverage is governed by the policy terms and the selected deductible. Coverage and payment for an individual loss require review of the actual policy and circumstances.</p>
+    - ID: db533ede-0a22-5a9b-ae03-f3298cfc2e70
+      Hint: explanation
+      Value: <p>Consider both the value of your vehicle and the amount you could comfortably pay after a covered accident. Compare the same deductible when comparing quotes, and discuss lender requirements if the vehicle is financed or leased.</p>
+    - ID: b6cfeb53-9864-5c4a-b920-d5d283af71fd
+      Hint: owner
+      Value: Liberty Mutual
+    - ID: c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe
+      Hint: effectiveDate
+      Value: 20261031T000000Z
+    - ID: 17ea77c7-9126-5fcc-a6a1-82da22fc8df5
+      Hint: reviewDate
+      Value: 20270131T000000Z
+    - ID: e270fde6-7f22-5dfa-af6b-101de974f0f8
+      Hint: sourceLink
+      Value: "<link text=\"Liberty Mutual: collision insurance coverage\" linktype=\"external\" url=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/collision-insurance\" />"
+    - ID: 07a77a0f-36c5-5e6e-867e-cc75a35820d8
+      Hint: nextStep
+      Value: <link text="Compare auto coverage choices" linktype="external" url="/get-a-quote" querystring="product=auto&amp;source=collision-coverage-and-deductibles" />
+    - ID: 6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d
+      Hint: disclosure
+      Value: "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
+    - ID: d74e777c-dbb0-5d67-accf-4cfd8c391cc4
+      Hint: includeInSearch
+      Value: "1"

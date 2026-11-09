@@ -114,7 +114,9 @@ function publishedAnswer(value: unknown): PublishedAnswer {
   const canonical = new URL(canonicalUrl);
   if (
     canonical.origin !== PUBLIC_CONTENT_ORIGIN ||
-    !canonical.pathname.startsWith("/insurance-resources/") ||
+    !/^\/insurance-resources\/[a-z0-9][a-z0-9-]{0,199}\/?$/i.test(
+      canonical.pathname,
+    ) ||
     canonical.search ||
     canonical.hash
   )
@@ -223,6 +225,14 @@ export async function loadPublishedAnswer(
         const answers = value.map(publishedAnswer);
         if (new Set(answers.map((answer) => answer.id)).size !== answers.length)
           throw new PublishedContentUnavailable();
+        if (
+          new Set(
+            answers.map((answer) =>
+              answer.canonicalUrl.replace(/\/$/, "").toLowerCase(),
+            ),
+          ).size !== answers.length
+        )
+          throw new PublishedContentUnavailable();
         return answers;
       },
     );
@@ -232,7 +242,11 @@ export async function loadPublishedAnswer(
       throw new PublishedAnswerNotAvailable();
     const chosen =
       requested ??
-      answers.find((answer) => answer.product === "auto-home") ??
+      answers.find(
+        (answer) =>
+          new URL(answer.canonicalUrl).pathname.replace(/\/$/, "") ===
+          "/insurance-resources/bundle-car-and-home",
+      ) ??
       answers[0];
     const endpoint = `${ANSWER_COLLECTION_URL}/${chosen.id}`;
     const response = await fetcher(endpoint, options);

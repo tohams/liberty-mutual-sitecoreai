@@ -18,12 +18,13 @@ const {xmlShape}=require('./configure-product-spotlight.cjs');
 const BASE=path.join(ROOT,'authoring/items/liberty-mutual-public');
 const PUBLIC='/sitecore/content/LibertyMutual/liberty-mutual-public-site';
 const PUBLIC_PAGE='a4de2222-c8a5-54d4-adee-bbad976a457c';
+const PUBLIC_PAGE_TEMPLATES=new Set([PUBLIC_PAGE,'b99218ea-e1fd-41af-a4ae-7ec9e5c30b17'].map(norm));
 function generatedThumbnailId(xml){
  const shape=xmlShape(xml,'image'),attrs=Object.fromEntries(shape[1]);
  assert(shape[3].length===0&&shape[2]===''&&Object.keys(attrs).length===1&&/^\{[a-f\d-]{36}\}$/i.test(attrs.mediaid||''),'Only the native mediaid-only thumbnail field is accepted.');return norm(attrs.mediaid);
 }
 function verifyThumbnailMedia(row,xml,media,now=new Date()){
- assert(norm(row.target.template)===norm(PUBLIC_PAGE)&&row.target.path.startsWith(PUBLIC+'/Home')&&!value(row.item,'__Thumbnail').trim(),'Only previously blank public-page thumbnails may be acknowledged.');
+ assert(PUBLIC_PAGE_TEMPLATES.has(norm(row.target.template))&&row.target.path.startsWith(PUBLIC+'/Home')&&!value(row.item,'__Thumbnail').trim(),'Only previously blank public-page thumbnails may be acknowledged.');
  const id=norm(row.target.id),imageId=generatedThumbnailId(xml);
  const expected='/sitecore/media library/Project/LibertyMutual/liberty-mutual-public-site/System/'+id.slice(0,4).toUpperCase().split('').join('/')+'/thumbnail_'+id.toUpperCase();
  assert(norm(media?.itemId)===imageId&&media.path===expected&&norm(media.template.templateId)==='f1828a2c7e5d4bbd98ca320474871548','Thumbnail is not the exact native per-page generated media item.');
@@ -39,7 +40,7 @@ function acknowledgeThumbnail(before,after,evidence){
  const copy=structuredClone(after),field=copy.fields.find(f=>f.name==='__Thumbnail');assert(field,'Thumbnail metadata missing.');field.value=old;return copy;
 }
 async function thumbnailPreflight(query,before,journal,save){
- journal.generatedThumbnails??={};const candidates=before.rows.filter(r=>norm(r.target.template)===norm(PUBLIC_PAGE)&&!value(r.item,'__Thumbnail').trim());
+ journal.generatedThumbnails??={};const candidates=before.rows.filter(r=>PUBLIC_PAGE_TEMPLATES.has(norm(r.target.template))&&!value(r.item,'__Thumbnail').trim());
  let cursor=0;async function worker(){while(cursor<candidates.length){const row=candidates[cursor++];const {item}=await query('query($where:ItemQueryInput!){item(where:$where){field(name:"__Thumbnail"){value}}}',{where:{database:'master',itemId:row.target.id,language:'en',version:row.target.version}});const xml=item?.field?.value||'';if(!xml)continue;const key=norm(row.target.id),old=journal.generatedThumbnails[key];if(old){assert(old.field===xml,'A generated thumbnail was replaced after verification.');continue;}const media=await read(query,{itemId:generatedThumbnailId(xml)});journal.generatedThumbnails[key]=verifyThumbnailMedia(row,xml,media);}}
  await Promise.all([worker(),worker(),worker(),worker()]);save({phase:'native-generated-thumbnail-preflight',verified:Object.keys(journal.generatedThumbnails).length});
 }

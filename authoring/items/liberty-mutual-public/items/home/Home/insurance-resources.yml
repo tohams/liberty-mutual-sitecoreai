@@ -35,10 +35,10 @@ Languages:
       Value: https://liberty-mutual-public-site.vercel.app/insurance-resources
     - ID: 001ac65e-7daa-5a02-af03-2a5ebdabd129
       Hint: audience
-      Value: consumer
+      Value: "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
     - ID: 44cc401f-47ef-5b97-9a35-2bd9a860c066
       Hint: state
-      Value: All
+      Value: "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
     - ID: 9c5ab0fe-bb46-51cc-98f0-412ca7d8e543
       Hint: product
       Value: |

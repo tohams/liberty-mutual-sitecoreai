@@ -50,3 +50,15 @@ test("planning preserves unrelated page data and verifies the configured field I
   assert.deepEqual(fields, original);
   assert.throws(() => planMetadataChanges("page", fields, lists.map((list) => ({ ...list, path: "/other-site" }))), /scope differs/);
 });
+
+
+test("resource pages inherit the same native metadata definitions without a duplicate answer template", () => {
+  assert.equal(MODEL.resourceRoot, MODEL.pageRoot + "/insurance-resources");
+  assert.equal(MODEL.resourcePageTemplateId, "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17");
+  assert(!MODEL.answerRoot && !MODEL.answerTemplateId && !MODEL.fields.answer);
+  const lists = MODEL.fields.page.map((field) => ({ field: field.name, path: field.sourcePath,
+    choices: choices({ state: ["All", "TX"], product: ["auto", "home"], audience: ["consumer"] }[field.name]) }));
+  const fields = MODEL.fields.page.map((field) => ({ fieldId: field.fieldId, name: field.name,
+    value: { state: "TX", product: "auto-home", audience: "consumer" }[field.name] }));
+  assert.deepEqual(planMetadataChanges("resource", fields, lists), planMetadataChanges("page", fields, lists));
+});

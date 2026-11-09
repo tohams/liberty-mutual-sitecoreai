@@ -2,6 +2,7 @@
 const test = require("node:test"), assert = require("node:assert/strict");
 const { specifications, MODEL, SEED } = require("./provision-public-taxonomy.cjs");
 const contract = require("../items/liberty-mutual-public/public-contract.json");
+const identities = require("../items/liberty-mutual-public/public-site-identities.json");
 const { atomicValues } = require("./public-checklist-values.cjs");
 
 test("managed public choices are scoped to three author-owned lists and preserve indexed values", () => {
@@ -10,18 +11,18 @@ test("managed public choices are scoped to three author-owned lists and preserve
   assert(specs.every((item) => item.path.startsWith(MODEL.taxonomyRoot + "/")));
   assert(specs.every((item) => [MODEL.folderTemplateId, MODEL.optionTemplateId].includes(item.template)));
   assert(specs.every((item) => item.fields.every((field) => !["Type", "Source", "__Workflow", "__Workflow state", "__Renderings", "__Final Renderings"].includes(field.name))));
-  for (const name of ["PublicPage", "PublicApprovedAnswer"]) {
+  for (const name of ["PublicPage", "PublicResourcePage"]) {
     const items = contract.records.filter((item) => item.template === contract.templateIds[name]);
     for (const list of SEED.lists) {
-      // Historical CreateOnly snapshots are converted using actual current
-      // native choices during explicit restoration, never ordinary deploys.
-      const choices = list.options.map((option, index) => ({ ...option, id: `00000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}` }));
+      // CreateOnly snapshots use the same captured native identities as the
+      // managed choices; ordinary deployments never apply editorial snapshots.
+      const choices = list.options.map((option) => ({ ...option, id: identities[`${SEED.root}/${list.folder}/${option.value}`] }));
       for (const item of items) if (item.fields[list.field]) assert(atomicValues(list.field, item.fields[list.field], choices).length, `Missing existing ${list.field}: ${item.fields[list.field]}`);
     }
   }
 });
 test("public checklists use the existing field IDs and native managed source folders", () => {
-  for (const kind of ["page", "answer"]) for (const definition of MODEL.fields[kind]) {
+  for (const kind of ["page"]) for (const definition of MODEL.fields[kind]) {
     const field = contract.records.find((item) => item.id === definition.fieldId);
     assert(field && field.path === definition.definitionPath);
     assert.equal(field.fields.Type, "Checklist");

@@ -33,7 +33,30 @@ CHECKLIST_HELP = {
     "product": "Select every product covered by this content, or All products on its own.",
     "audience": "Select the audiences for this content. All consumers includes prospective and existing customers.",
 }
-def uid(key): return IDENTITIES.get(key, str(uuid.uuid5(NS, key)))
+# These identities were reserved/retained by the native page-owned resource
+# migration. Moving fields and renaming renderings must not create new IDs.
+RESOURCE_IDS = {
+    TP + "/Base": "bf66ce2d-c77f-4b34-8afd-eaa3b6fa3f2b",
+    TP + "/Base/Resource fields": "deb9d373-cca7-4f18-a2fd-a56602b59497",
+    TP + "/Base/Resource fields/Resource content": "77fb7241-8927-409f-8950-61f26865aec0",
+    TP + "/PublicResourcePage": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
+    TP + "/PublicResourcePage/__Standard Values": "88de4de6-f6bf-4371-899f-22041e132d12",
+    RP + "/PublicResourceContent": "4585a48f-e841-50ca-b2a3-0d3fc9893875",
+    SITE + "/Presentation/Headless Variants/PublicResourceContent": "370f9cc8-4585-560d-9228-881f53a62859",
+    SITE + "/Presentation/Headless Variants/PublicResourceContent/Default": "3e82160b-336f-5744-a667-7a1b94bc7307",
+}
+RESOURCE_FIELD_IDS = {
+    "question": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
+    "answer": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
+    "formalWording": "47041dc1-a183-5516-85ea-afdea936289c",
+    "explanation": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
+    "owner": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
+    "effectiveDate": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
+    "reviewDate": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
+    "nextStep": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
+    "disclosure": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
+}
+def uid(key): return RESOURCE_IDS.get(key, IDENTITIES.get(key, str(uuid.uuid5(NS, key))))
 def brace(value): return "{" + value.upper() + "}"
 def field(identifier, name, value): return {"ID": identifier, "Hint": name, "Value": str(value)}
 def merge_fields(before,after):
@@ -68,25 +91,49 @@ def item(path, parent, template, bucket, shared=None, values=None, identifier=No
     RECORDS.append((bucket,result)); return result["ID"]
 def fs(values): return [field(F[name],"__"+{"standard":"Standard values","base":"Base template","sort":"Sortorder","icon":"Icon","layout":"Renderings","masters":"Masters","defaultWorkflow":"Default workflow","workflow":"Workflow","workflowState":"Workflow state"}.get(name,name),value) for name,value in values.items()]
 FIELDS={}; TEMPLATES={}; RENDERINGS={}; VARIANTS={}
-def template(name, defs=(), bases=None, icon="Office/32x32/document_text.png", workflow=None):
-    p=TP+"/"+name; tid=uid(p); TEMPLATES[name]=tid
-    shared=fs({"base":"|".join(brace(b) for b in (bases or [T["standard"]])),"standard":brace(uid(p+"/__Standard Values")),"icon":icon})
-    item(p,uid(TP),T["template"],"templates",shared=shared)
+def template(name, defs=(), bases=None, icon="Office/32x32/document_text.png", workflow=None, relative_path=None, section="Content", with_standard=True):
+    p=TP+"/"+(relative_path or name); tid=uid(p); TEMPLATES[name]=tid
+    shared=fs({"base":"|".join(brace(b) for b in (bases or [T["standard"]])),"standard":brace(uid(p+"/__Standard Values")) if with_standard else "","icon":icon})
+    item(p,uid(p.rsplit("/",1)[0]),T["template"],"templates",shared=shared)
     if workflow is None and name!="PublicRenderingParameters": workflow=I["pageWorkflow"]
     default=fs({"defaultWorkflow":brace(workflow)}) if workflow else []
-    item(p+"/__Standard Values",tid,tid,"templates",shared=default)
+    if with_standard: item(p+"/__Standard Values",tid,tid,"templates",shared=default)
     if defs:
-        sec=p+"/Content"; item(sec,tid,T["section"],"templates")
+        sec=p+"/"+section; item(sec,tid,T["section"],"templates")
         for n,definition in enumerate(defs,1):
-            key,label,kind,*source=definition; fid=uid("field/"+name+"/"+key); FIELDS[name+"."+key]=fid
+            key,label,kind,*source=definition; fid=RESOURCE_FIELD_IDS[key] if name=="ResourceFields" else uid("field/"+name+"/"+key); FIELDS[name+"."+key]=fid
             sf=[field("ab162cc0-dc80-4abf-8871-998ee5d7ba32","Type",kind),field(F["sort"],"__Sortorder",n*100)]
             if source: sf.append(field("1eb8ae32-e190-44a6-968d-ed904c794ebf","Source",source[0]))
             elif kind=="Rich Text": sf.append(field("1eb8ae32-e190-44a6-968d-ed904c794ebf","Source","query:$xaRichTextProfile"))
             help_fields=[field("19a69332-a23e-4e70-8d16-b2640cb24cc8","Title",label)]
-            if name in ["PublicPage","PublicApprovedAnswer"] and key in CHECKLIST_HELP:
+            if name=="PublicPage" and key in CHECKLIST_HELP:
                 help_fields.append(field("9541e67d-ce8c-4225-803d-33f7f29f09ef","__Short description",CHECKLIST_HELP[key]))
             item(sec+"/"+key,uid(sec),T["field"],"templates",shared=sf,identifier=fid,label=label,language_fields=help_fields)
     return tid
+def checklist_value(name, raw):
+    """Encode factory metadata using captured native managed-choice IDs only."""
+    assert name in CHECKLIST_HELP and isinstance(raw,str), "Invalid checklist seed value."
+    if not raw.strip(): return ""
+    folder={"state":"States","product":"Products","audience":"Audiences"}[name]
+    prefix=SITE+"/Data/Taxonomy/"+folder+"/"
+    choices={p[len(prefix):]:v for p,v in IDENTITIES.items() if p.startswith(prefix) and "/" not in p[len(prefix):]}
+    assert choices, "Capture native managed taxonomy identities before preparing content."
+    by_id={v.replace("-","").lower():key for key,v in choices.items()}
+    combinations={"auto-home":["auto","home"],"auto-condo":["auto","condo"],"auto-renters":["auto","renters"]}
+    selected=set()
+    for token in re.split(r"[|,\r\n]+",raw):
+        token=token.strip()
+        if not token: continue
+        if re.fullmatch(r"\{?[a-fA-F0-9-]{32,38}\}?",token):
+            token=by_id.get(token.replace("-","").strip("{}").lower())
+        for value in combinations.get(token,[token]) if name=="product" else [token]:
+            assert value in choices, "Unknown native "+name+" choice; preserve the source."
+            selected.add(value)
+    assert not (name=="state" and "All" in selected and len(selected)>1), "Select All states on its own."
+    assert not (name=="product" and "all" in selected and len(selected)>1), "Select All products on its own."
+    assert not (name=="audience" and "consumer" in selected and selected & {"customer","prospective-customer"}), "All consumers already includes both customer groups."
+    return "|".join(brace(identifier) for value,identifier in choices.items() if value in selected)
+
 def data(p, name, values):
     # New editorial content starts in Draft. Approval/publication is an explicit
     # native action, not a side effect of a frontend build or this generator.
@@ -122,10 +169,12 @@ def build(include_editorial=True):
     template("PublicCta",[("heading","Heading","Single-Line Text"),("body","Body","Rich Text"),("actionLink","Action","General Link")],icon="Office/32x32/mouse_pointer.png")
     template("PublicHeader",[("logo","Logo","Image"),*[(k,l,"General Link") for k,l in [("homeLink","Home"),("autoLink","Auto"),("homeInsuranceLink","Home insurance"),("bundlingLink","Bundling"),("resourcesLink","Resources"),("contactLink","Contact"),("quoteLink","Quote")]]],icon="Office/32x32/navigate_up.png")
     template("PublicFooter",[("logo","Logo","Image"),("body","Body","Rich Text"),("contactLink","Contact","General Link"),("privacyLink","Privacy","General Link"),("termsLink","Terms","General Link")],icon="Office/32x32/navigate_down.png")
-    template("PublicApprovedAnswer",[("question","Question","Single-Line Text"),("canonicalUrl","Canonical published URL","Single-Line Text"),("answer","Plain-language answer","Multi-Line Text"),("formalWording","Formal source wording","Rich Text"),("explanation","Detailed explanation","Rich Text"),("sourceLink","Authoritative source","General Link"),("owner","Content owner","Single-Line Text"),("effectiveDate","Effective date","Date"),("reviewDate","Review date","Date"),("state","State applicability","Checklist",SITE+"/Data/Taxonomy/States"),("product","Products","Checklist",SITE+"/Data/Taxonomy/Products"),("audience","Audience","Checklist",SITE+"/Data/Taxonomy/Audiences"),("nextStep","Next step","General Link"),("disclosure","Disclosure","Droptree",SITE+"/Data/Disclosures")],icon="Office/32x32/check.png",workflow=I["dataWorkflow"])
+    item(TP+"/Base",uid(TP),T["templateFolder"],"templates")
+    resource_fields=template("ResourceFields",[("question","Question","Single-Line Text"),("answer","Plain-language answer","Multi-Line Text"),("formalWording","Formal source wording","Rich Text"),("explanation","Detailed explanation","Rich Text"),("owner","Content owner","Single-Line Text"),("effectiveDate","Effective date","Date"),("reviewDate","Review date","Date"),("nextStep","Next step","General Link"),("disclosure","Disclosure","Droptree",SITE+"/Data/Disclosures")],relative_path="Base/Resource fields",section="Resource content",workflow=False,with_standard=False)
+    resource_page=template("PublicResourcePage",bases=[page,resource_fields],workflow=I["pageWorkflow"])
     template("AgencyPriority",[("Heading","Heading","Single-Line Text"),("Body","Body","Rich Text"),("Image","Image","Image"),("Link","Action","General Link"),("Eyebrow","Eyebrow","Single-Line Text")],icon="Office/32x32/document_heart.png",workflow=I["dataWorkflow"])
     template("AgencyPriorities",[("Heading","Heading","Single-Line Text"),("Intro","Introduction","Rich Text"),("Recommendations","Ordered recommendations","Treelist","DataSource="+PORTAL+"/Data/Agency priorities/Recommendations&IncludeTemplatesForSelection="+uid(TP+"/AgencyPriority"))],icon="Office/32x32/signpost.png",workflow=I["dataWorkflow"])
-    contracts=[("PublicHero","Hero","PublicHero","query:./Data","Office/32x32/document_header.png"), ("PublicPromotion","Promotion","PublicPromotion",SITE+"/Data/Promotions","Office/32x32/megaphone.png"), ("SharedDisclosure","Disclosure","SharedDisclosure",SITE+"/Data/Disclosures","Office/32x32/shield.png"), ("PublicArticle","Article text","PublicArticle","query:./Data","Office/32x32/document_text.png"), ("PublicImage","Image","PublicImage","query:./Data","Office/32x32/photo_landscape.png"), ("PublicCta","Call to action","PublicCta","query:./Data","Office/32x32/mouse_pointer.png"), ("PublicHeader","Header","PublicHeader","query:./Data","Office/32x32/navigate_up.png"), ("PublicFooter","Footer","PublicFooter","query:./Data","Office/32x32/navigate_down.png"), ("PublicPageBody","Page body",None,"","Office/32x32/layout.png"), ("PublicApprovedAnswer","Approved answer","PublicApprovedAnswer",SITE+"/Data/Approved answers","Office/32x32/check.png"), ("AgencyPriorities","Agency priorities","AgencyPriorities",PORTAL+"/Data/Agency priorities","Office/32x32/signpost.png")]
+    contracts=[("PublicHero","Hero","PublicHero","query:./Data","Office/32x32/document_header.png"), ("PublicPromotion","Promotion","PublicPromotion",SITE+"/Data/Promotions","Office/32x32/megaphone.png"), ("SharedDisclosure","Disclosure","SharedDisclosure",SITE+"/Data/Disclosures","Office/32x32/shield.png"), ("PublicArticle","Article text","PublicArticle","query:./Data","Office/32x32/document_text.png"), ("PublicImage","Image","PublicImage","query:./Data","Office/32x32/photo_landscape.png"), ("PublicCta","Call to action","PublicCta","query:./Data","Office/32x32/mouse_pointer.png"), ("PublicHeader","Header","PublicHeader","query:./Data","Office/32x32/navigate_up.png"), ("PublicFooter","Footer","PublicFooter","query:./Data","Office/32x32/navigate_down.png"), ("PublicPageBody","Page body",None,"","Office/32x32/layout.png"), ("PublicResourceContent","Resource content",None,"","Office/32x32/document_text.png"), ("AgencyPriorities","Agency priorities","AgencyPriorities",PORTAL+"/Data/Agency priorities","Office/32x32/signpost.png")]
     for name,label,ds,location,icon in contracts:
         RENDERINGS[name]=uid(RP+"/"+name)
         sf=[field("037fe404-dd19-4bf7-8e30-4dadf68b27b0","componentName",name),field("1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f","Datasource Template",TP+"/"+ds if ds else ""),field("b5b27af1-25ef-405c-87ce-369b3a004016","Datasource Location",location),field("a77e8568-1ab3-44f1-a664-b7c37ec7810d","Parameters Template",brace(TEMPLATES["PublicRenderingParameters"])),field(F["icon"],"__Icon",icon)]
@@ -133,7 +182,8 @@ def build(include_editorial=True):
         # Register those peers and their linked recommendation cards with Edge.
         if name=="AgencyPriorities": sf += [field("b4bbc0be-7619-4678-b2f7-947d84aa77a9","Content Dependencies","{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{15F0229E-41E0-442B-94C5-243CBA793465}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}")]
         if name=="PublicPageBody": sf += [field("e829c217-5e94-4306-9c48-2634b094fdc2","OtherProperties","IsRenderingsWithDynamicPlaceholders=true"),field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-hero"))+"|"+brace(uid(PP+"/headless-public-content")))]
-        allowed=[page]
+        if name=="PublicResourceContent": sf += [field("a3411ff6-c978-40aa-b059-a49b9ca2209b","Can select Page as datasource","1")]
+        allowed=[resource_page] if name=="PublicResourceContent" else [page]
         if name in ["PublicHeader","PublicFooter","PublicPageBody"]: allowed.append(T["partial"])
         if name in ["AgencyPriorities","SharedDisclosure"]: allowed += [I["portalPage"],I["collectionPage"]]
         vf=[field("1b58d065-fe74-43e3-ba20-54c9588b3011","AllowedOnTemplates","|".join(brace(x) for x in allowed))]
@@ -148,7 +198,7 @@ def build(include_editorial=True):
             VARIANTS[name+"."+v]=uid(vp+"/"+v);item(vp+"/"+v,uid(vp),T["variant"],"presentation",shared=fs({"sort":n*100}))
     # Site-specific restrictions shadow the platform root placeholders only for
     # this site. Every nested slot has an explicit nonempty allowlist.
-    allowed={"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero":["PublicHero"],"headless-public-content":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicApprovedAnswer"]}
+    allowed={"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero":["PublicHero"],"headless-public-content":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicResourceContent"]}
     for key,components in allowed.items():
         fields=[field("7256bdab-1fd2-49dd-b205-cb4873d2917c","Placeholder Key",key+("-{*}" if key.startswith("headless-public-") else "")),field("e391b526-d0c5-439d-803e-17512eae6222","Allowed Controls","|".join(brace(RENDERINGS[c]) for c in components))]
         item(PP+"/"+key,uid(PP),T["placeholder"],"placeholders",shared=fields)
@@ -158,7 +208,7 @@ def build(include_editorial=True):
     # Native site seed is deliberately separate from model/presentation deploys.
     item(SITE,I["collection"],T["site"],"site",shared=[field("85a7501a-86d9-4243-9075-0b727c3a6db4","Name","Public Website"),field("89cecf4f-e545-44f2-813d-272c08661d14","Description","Insurance guidance and useful next steps for individuals and families.")])
     for child,tid in [("Data",T["data"]),("Settings",T["settings"]),("Presentation",T["presentation"])]: item(SITE+"/"+child,uid(SITE),tid,"site" if child!="Presentation" else "presentation")
-    for folder in ["Promotions","Disclosures","Approved answers","Taxonomy"]:item(SITE+"/Data/"+folder,uid(SITE+"/Data"),T["folder"],"content")
+    for folder in ["Promotions","Disclosures","Taxonomy"]:item(SITE+"/Data/"+folder,uid(SITE+"/Data"),T["folder"],"content")
     for child,tid in [("Page Designs",T["designFolder"]),("Partial Designs",T["partialFolder"]),("Headless Variants","da26c636-96e1-45e4-88d6-3fcec70d5699"),("Placeholder Settings","52288e39-7830-4694-b62d-32a54c6ef7ba"),("Available Renderings",T["availableFolder"]),("Page Branches",T["branchFolder"])]:
         p=SITE+"/Presentation/"+child
         sf=[field("878c9a33-e760-4cb8-aad3-b2309383bf10","Group renderings in sections","1")] if child=="Available Renderings" else []
@@ -171,7 +221,7 @@ def build(include_editorial=True):
     item(grouping+"/liberty-mutual-public-site",uid(grouping),T["siteGrouping"],"site",shared=[field("cb4e9e2e-2b66-43dc-ad3f-9caf363d28d3","SiteName","liberty-mutual-public-site"),field("1ee576af-ba8e-4312-9fbd-2ccf8395baa1","StartItem",brace(uid(SITE+"/Home"))),field("8e0dd914-9afb-4d45-bf8b-7ff5d6e5337e","HostName","liberty-mutual-public-site.vercel.app"),field("9eaf6dc9-b811-4cda-9edd-9697faba628a","POS","en=liberty-mutual-public-site"),field("f57099a3-526a-49f2-aebd-635453e48875","RenderingHost","liberty-mutual-public-site"),field("da06d09e-02b6-464a-80fc-9d8d7fc875e3","Environment","*")])
     settings=next(r for _,r in RECORDS if r["Path"]==SITE+"/Settings")
     settings["SharedFields"]=merge_fields(settings.get("SharedFields",[]),[field("3e4f559f-8e59-4405-b50d-619811371f6c","Name","liberty-mutual-public-site"),field("32ce6bbe-4217-46e5-9335-42793884cbe3","AppTemplate",brace(T["site"])),field("5764d2d4-724d-4313-a81b-9246c911faff","AppDatasourcesPath",brace(uid(SITE+"/Data"))),field("5ca117eb-8782-4a4f-9f2f-30de31fc2e34","PlaceholdersPath",brace(uid(PP))),field("c8d002f9-9518-4c5e-9baa-6617e13f0797","LayoutPath",brace(I["layout"])),field("e8881464-38af-4655-be4a-ee10586578a2","Templates",brace(uid(TP))),field("f29428d5-1285-48b8-a884-44057965829a","RenderingsPath",brace(uid(RP))),field("9016141c-ff51-40f2-9135-40f5161b9784","ServerSideRenderingEngine","http"),field("72e83c8d-3578-4e50-b4c0-93a78a1729f2","FilesystemPath","/dist/liberty-mutual-public-site")])
-    for group,names in {"Structure":["PublicPageBody"],"Content":["PublicHero","PublicArticle","PublicImage","PublicCta"],"Promotions":["PublicPromotion"],"Guidance":["PublicApprovedAnswer","SharedDisclosure"]}.items():
+    for group,names in {"Structure":["PublicPageBody"],"Content":["PublicHero","PublicArticle","PublicImage","PublicCta"],"Promotions":["PublicPromotion"],"Guidance":["PublicResourceContent","SharedDisclosure"]}.items():
         item(SITE+"/Presentation/Available Renderings/"+group,uid(SITE+"/Presentation/Available Renderings"),T["available"],"presentation",shared=[field("715ae6c0-71c8-4744-ab4f-65362d20ad65","Renderings","|".join(brace(RENDERINGS[n]) for n in names))])
     for path,native in SCAFFOLD.items():
         if path.startswith(SITE+"/Presentation/Available Renderings/") and not any(r["Path"]==path for _,r in RECORDS):
@@ -220,6 +270,9 @@ def build(include_editorial=True):
     std=next(r for _,r in RECORDS if r["Path"]==TP+"/PublicPage/__Standard Values")
     std["SharedFields"] += [*fs({"layout":layout([]),"masters":brace(T["data"])}),field('24171bf1-c0e1-480e-be76-4c0a1876f916','Page Design',brace(uid(design)))]
     std['Languages'][0]['Versions'][0]['Fields']=[field('25bed78c-4957-4165-998a-ca1b52f67497','__Created','20261031T160000Z'),field('d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b','Title','$name')]
+    resource_std=next(r for _,r in RECORDS if r["Path"]==TP+"/PublicResourcePage/__Standard Values")
+    resource_std["SharedFields"] += [field('24171bf1-c0e1-480e-be76-4c0a1876f916','Page Design',brace(uid(design)))]
+    resource_std['Languages'][0]['Versions'][0]['Fields'] += [field(FIELDS['PublicPage.includeInSearch'],'includeInSearch','1')]
     preserved=BASE/'public-preserved-presentation-metadata.json'
     if preserved.exists():
         for path,groups in json.loads(preserved.read_text()).items():
@@ -296,7 +349,7 @@ def outputs():
         module={"$schema":"../../../.sitecore/schemas/ModuleFile.schema.json","namespace":namespace,"description":"Public website "+("editable seed; explicit CreateOnly push only" if "Seed" in namespace else "developer-owned definitions; preserves editorial content"),"items":{"includes":includes}}
         out[BASE/(namespace+".module.json")]=json.dumps(module,indent=2)+"\n"
     assert sum(p.suffix==".yml" for p in out)==len(RECORDS),"Unowned or multiply owned native items"
-    manifest={"schemaVersion":1,"siteName":"liberty-mutual-public-site","sitePath":SITE,"workflow":{"id":I["pageWorkflow"],"draft":I["pageDraft"],"awaitingApproval":"2598d5b1-953b-57ec-9086-14afb798ab06","approved":"44581197-9864-590b-92eb-6d620f36fbe1"},"namespace":str(NS),"ownership":{"model":"developer","presentation":"developer excluding local Data and page branches","seed":"editorial CreateOnly, never ordinary deploy","sharedDisclosure":"public-owned, consumed read-only by portal"},"siteId":uid(SITE),"homeId":uid(SITE+"/Home"),"bundlingId":uid(SITE+"/Home/bundling"),"promotionId":uid(SITE+"/Data/Promotions/Bundle and save"),"disclosureId":uid(SITE+"/Data/Disclosures/Product availability notice"),"templateIds":TEMPLATES,"fieldIds":FIELDS,"renderingIds":RENDERINGS,"variantIds":VARIANTS,"placeholders":{"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero-{*}":["PublicHero"],"headless-public-content-{*}":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicApprovedAnswer"]},"records":[{"id":r["ID"],"path":r["Path"],"parent":r["Parent"],"template":r["Template"],"bucket":b,"fields":{f["Hint"]:f["Value"] for f in [*r.get("SharedFields",[]),*r["Languages"][0].get("Fields",[]),*r["Languages"][0]["Versions"][0]["Fields"]]}} for b,r in RECORDS]}
+    manifest={"schemaVersion":1,"siteName":"liberty-mutual-public-site","sitePath":SITE,"workflow":{"id":I["pageWorkflow"],"draft":I["pageDraft"],"awaitingApproval":"2598d5b1-953b-57ec-9086-14afb798ab06","approved":"44581197-9864-590b-92eb-6d620f36fbe1"},"namespace":str(NS),"ownership":{"model":"developer","presentation":"developer excluding local Data and page branches","seed":"editorial CreateOnly, never ordinary deploy","sharedDisclosure":"public-owned, consumed read-only by portal"},"siteId":uid(SITE),"homeId":uid(SITE+"/Home"),"bundlingId":uid(SITE+"/Home/bundling"),"promotionId":uid(SITE+"/Data/Promotions/Bundle and save"),"disclosureId":uid(SITE+"/Data/Disclosures/Product availability notice"),"templateIds":TEMPLATES,"fieldIds":FIELDS,"renderingIds":RENDERINGS,"variantIds":VARIANTS,"placeholders":{"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero-{*}":["PublicHero"],"headless-public-content-{*}":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicResourceContent"]},"records":[{"id":r["ID"],"path":r["Path"],"parent":r["Parent"],"template":r["Template"],"bucket":b,"fields":{f["Hint"]:f["Value"] for f in [*r.get("SharedFields",[]),*r["Languages"][0].get("Fields",[]),*r["Languages"][0]["Versions"][0]["Fields"]]}} for b,r in RECORDS]}
     if (BASE/'public-model-extensions.json').exists():
         manifest['placeholders']['headless-public-hero-{*}']=['PublicHero','PublicBreadcrumbs']
         manifest['placeholders']['headless-public-content-{*}'] += ['PublicSearch','PublicProductSelector','PublicQuoteHandoff','PublicSection','PublicSplitContent','PublicFaq']

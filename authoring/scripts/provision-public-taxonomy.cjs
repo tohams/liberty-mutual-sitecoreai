@@ -51,7 +51,7 @@ async function preflight(query, specs) {
   for (const id of [MODEL.folderTemplateId, MODEL.optionTemplateId]) assert(await read(query, { itemId: id }), "The shared managed-choice templates must be deployed first.");
   const description = await read(query, { itemId: MODEL.descriptionFieldId });
   assert(description && description.name === "description" && value(description, "Type") === "Multi-Line Text", "The managed option description field differs.");
-  for (const definition of [...MODEL.fields.page, ...MODEL.fields.answer]) {
+  for (const definition of MODEL.fields.page) {
     const field = await read(query, { itemId: definition.fieldId });
     assert(field && field.path === definition.definitionPath && field.name === definition.name && value(field, "Type") === "Checklist" && value(field, "Source") === definition.sourcePath &&
       ["", "0"].includes(value(field, "Shared")) && ["", "0"].includes(value(field, "Unversioned")),
