@@ -402,7 +402,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native guidance rules use imported UDL attributes, including role, specialization, and agency production. The application separately enforces licensed-state eligibility alongside the content personalization.",
           "**Load profile → Profile ID** evaluates actual native profiles. **Current profile identities → Refresh status** provides current IDs after a reset.",
           "**Communication preferences** supplies sample preference-center input and imports the choice into the native **Unified Data Layer**. The **Marketing outreach preview** calls **Liberty Mutual marketing eligibility**, a native runtime personalization that requires an explicit false value for the Boolean **marketingSuppressed**. True and missing values do not qualify.",
-          "**Run eligibility check** evaluates the actual native profiles again. The application uses the returned native eligibility response to include or withhold the email preview before downstream campaign delivery. Scheduled Audience membership and approximate counts are not used as the proof.",
+          "**Run eligibility check** evaluates the actual native profiles again. The application uses the returned native eligibility response to include or withhold the email preview before downstream campaign delivery.",
         ],
         links: [
           { label: "Live Agent Portal Home", href: `${PORTAL}/` },
