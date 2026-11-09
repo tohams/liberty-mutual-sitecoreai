@@ -330,6 +330,14 @@ test("discovery readiness identifies native structure while keeping external eng
     assert.match(text, required);
   assert.equal(step("public-discovery").durationMinutes, 1);
   assert.equal(step("public-discovery").actions.length, 3);
+  assert.match(
+    prose(step("public-discovery").actions),
+    /Open each field’s selection control.*1 item selected.*2 items selected/,
+  );
+  assert.equal(
+    step("public-discovery").images?.[0]?.file,
+    "native-public-taxonomy-checklist.png",
+  );
   assert.doesNotMatch(text, /Apps → Resource metadata|Content to classify/);
   const page = readFileSync(
     join(appRoot, "src/app/workshops/demo/page.tsx"),

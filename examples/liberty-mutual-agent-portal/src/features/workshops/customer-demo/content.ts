@@ -115,7 +115,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The answer template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
         actions: [
           `Open [**Bundle car and home in Page Builder Content**](${answerContent}). Confirm **Public Website**, **English**, and **Data → Approved answers → Bundle car and home**. Inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Authoritative source**, **Content owner**, and the dates. Under **Quick Info**, identify the **PublicApprovedAnswer** template.`,
-          `In the same [**approved answer in Page Builder Content**](${answerContent}), locate **State applicability**, **Products**, and **Audience**. Show the selected checkboxes: **All states**, **Auto**, **Homeowners**, and **All consumers**. The choices come from **Data → Taxonomy**. Leave this approved version unchanged.`,
+          `In the same [**approved answer in Page Builder Content**](${answerContent}), locate **State applicability**, **Products**, and **Audience**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
           `On the [**public article**](${ARTICLE}), use **View page source → Find** to locate **application/ld+json**. Identify **FAQPage**, **Question**, and **acceptedAnswer**, then find the **canonical** link. Return to the rendered article.`,
         ],
         expected: [
@@ -132,6 +132,23 @@ export const customerDemoChapters: DemoChapter[] = [
         links: [
           { label: "Approved answer fields", href: `${answerContent}` },
           { label: "Public article", href: `${ARTICLE}` },
+        ],
+        images: [
+          {
+            file: "native-public-taxonomy-checklist.png",
+            title: "Open a native checklist to inspect its selections",
+            alt: "Native Page Builder Content fields with the Products checklist open and Auto and Homeowners selected independently",
+            caption:
+              "Open **Products** using its **2 items selected** control to see the separate **Auto**, **Homeowners**, and **Condo** checkboxes. These are the answer’s native content fields; no separate metadata app is needed. Leave the selected choices unchanged during this inspection.",
+            crop: {
+              x: 310,
+              y: 1020,
+              width: 700,
+              height: 490,
+              sourceWidth: 3008,
+              sourceHeight: 1519,
+            },
+          },
         ],
         transition:
           "One structured answer now carries its meaning and governance. Next, publish a reviewed change and see Search stay aligned.",
