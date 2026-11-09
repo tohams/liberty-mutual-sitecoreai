@@ -671,8 +671,8 @@ export const developmentGuides: WorkshopGuide[] = [
     personas: [],
     prerequisites: [
       "A **resource** is an article in **Learning & resources**. Its **metadata** classifies it by state, business family, product, distribution channel, and resource type. A **taxonomy** is the managed list of choices for those fields.",
-      "Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**, with permission to view the resource. Native page, language, and workflow permissions determine which fields an author can edit.",
-      `Open [**Page Builder**](${pageBuilder}), select **Agent Portal**, and retain **Default editing host**. This guide inspects the current article without creating a version or changing content.`,
+      "Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**, with permission to open or create a draft of the resource. Native page, language, and workflow permissions determine which fields an author can edit.",
+      `Open [**Page Builder**](${pageBuilder}), select **Agent Portal**, and retain **Default editing host**. Use an existing **English Draft**, or create one named draft for this inspection. Leave its fields unchanged and the draft unpublished.`,
       "For the repository steps, open the **Agent Portal source repository** provided for the workshop and browse from its top-level file list using the paths shown here. No clone, source edit, deployment, or Search update is required for this inspection.",
     ],
     links: [
@@ -700,12 +700,13 @@ export const developmentGuides: WorkshopGuide[] = [
       {
         title: "Inspect the native classification checklists",
         action: [
-          `In [**Page Builder**](${pageBuilder}), open **Home → Learning & resources → Workers compensation: a Texas starting point**. Confirm **English**, note the displayed version, and click **Content** in the top navigation.`,
-          "Locate **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Open each selection control to reveal its checkboxes; the collapsed label reports the number of selected items.",
+          `In [**Page Builder**](${pageBuilder}), retain **Editor**, open **Pages → Home → Learning & resources → Workers compensation: a Texas starting point**, and confirm **English**. Note the displayed version and workflow state.`,
+          "Open the version selector, and select an existing **English Draft**. If none is available, choose **Create version**, name it resource-inspection-[your initials]-[date-time], and select **Create**. Reopen the selector, and select that new **Draft** before continuing.",
+          "Open the article’s **Content tree options (…) → Page content**. In the native pane beside the canvas, locate **Resource types**, **Risk states**, **Business families**, **Products**, and **Distribution channels**. On the selected **Draft**, open each control, such as **1 item selected**, to reveal its checkboxes.",
           "Compare the selected choices with **Texas**, **Small commercial**, **Workers’ compensation**, **Independent agent**, and **State guidance**. Close each list without changing any checkbox.",
         ],
         expected: [
-          "The native content fields expose managed, multiple-selection checklists. Each choice represents applicability of the article, while page and workflow permissions govern editing.",
+          "The selected **Draft** exposes the native, multiple-selection checklists while preserving the earlier approved version. Each selection describes applicability of the article, while page and workflow permissions govern editing. Leave this inspection draft unchanged and unpublished.",
           "**Cross-state guidance** is selected by itself when content applies across supported states. It does not grant an agent a license or broaden the portal’s licensed-state access.",
         ],
         links: [{ label: "Open Page Builder", href: pageBuilder }],
@@ -781,7 +782,7 @@ export const developmentGuides: WorkshopGuide[] = [
     ],
     cleanup: {
       body: [
-        "Close temporary authoring and repository tabs. This inspection changes no checkbox, content field, taxonomy item, publication, Search document, or portal data.",
+        "Leave the inspection **Draft** unpublished, with its original fields unchanged. Close temporary authoring and repository tabs. This inspection performs no approval, publication, Search update, or portal reset.",
         "If a field was accidentally changed, restore the original selection through the native fields before leaving. A portal workshop-number reset cannot restore CMS content.",
       ],
     },

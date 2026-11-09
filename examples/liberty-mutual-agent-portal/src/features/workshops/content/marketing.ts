@@ -557,18 +557,18 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           `Open [**Page Builder**](${PAGES}), select **Agent Portal**, and retain **Default editing host**. Under **Home → Learning & resources**, select **Workers compensation: a Texas starting point**.`,
           "Open the version selector above the canvas, record the selected **English** version number, and choose **Create version**. Name it resource-review-[your initials]-[date-time], then select **Create**.",
-          "Reopen the selector, select the new **English Draft** with that name, and click **Content** in the top navigation to display the article’s native fields.",
+          "Reopen the selector, and select the new **English Draft** with that name. In the left **Pages** tree, open the article’s **Content tree options (…)** menu and select **Page content**.",
         ],
         expected: [
           "The page, language, version, and **Draft** state identify the revision being edited. Earlier approved versions remain on the same article.",
-          "The **Content** view contains the article’s fields, including its native classification checklists. Only the presenter edits this shared revision.",
+          "The **Page content** pane opens beside the website canvas. It contains the article’s native fields and classification checklists. Only the presenter edits this shared revision.",
         ],
         links: [pageBuilder],
       },
       {
         title: "Read the selected classification checkboxes",
         action: [
-          "Find **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Click each field’s selection control to open its checkboxes; a collapsed control reports how many items are selected.",
+          "Scroll within **Page content** to find **Resource types**, **Risk states**, **Business families**, **Products**, and **Distribution channels**. Click each selection control, such as **1 item selected**, to open its checkboxes.",
           "Record every selected choice. For the starting Texas article, expect **Texas**, **Small commercial**, **Workers’ compensation**, **Independent agent**, and **State guidance**. Close each list before opening the next.",
         ],
         expected: [
@@ -580,19 +580,19 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Save a native checklist change, then restore it",
         action: [
           "Open **Resource types**. Clear **State guidance**, select **Preparation guide**, close the list, and click outside the field. Wait for the native **Saved** checkmark.",
-          "Reload the Page Builder tab, return to the same named **English Draft**, and open **Resource types**. Verify that **Preparation guide** remains selected.",
+          "Reload the Page Builder tab, return to the same named **English Draft**, and reopen **Content tree options (…) → Page content**. Open **Resource types**, and verify that **Preparation guide** remains selected.",
           "Restore the complete original **Resource types** selection recorded earlier. Wait for **Saved**, reload once more, and verify all five original classifications before continuing.",
         ],
         expected: [
-          "Native fields save automatically. Reloading the same draft proves that the checklist selection persisted; there is no separate metadata Save button.",
+          "Native fields save automatically. Reloading the same draft proves that the checklist selection persisted.",
           "The original classification is restored while the article remains a **Draft**, so the temporary choice never reaches the live portal.",
         ],
       },
       {
         title: "Edit and preview the temporary summary",
         action: [
-          "In **Content**, find **Summary** and enter: Prepare your next Texas employer conversation using this source-linked overview.",
-          "Click outside the field, wait for **Saved**, and select **Editor**. Keep the same **Draft** and **Default editing host**, then read the summary below the article title.",
+          "Scroll within **Page content** to find **Summary**, and enter: Prepare your next Texas employer conversation using this source-linked overview.",
+          "Click outside the field, wait for **Saved**, and close **Page content** with its **×** button. Keep the same **Draft** and **Default editing host**, and read the updated summary below the article title in the canvas.",
         ],
         expected: [
           "The visual preview shows the saved draft summary, with the original source, body, image, and classifications retained.",
@@ -625,7 +625,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Restore through a new version and publication",
         action: [
           "On the same Texas page, choose **Create version**, name it resource-restore-[your initials]-[date-time], and select the new **English Draft**.",
-          "In **Content**, restore the complete **Summary** recorded at the start. Wait for **Saved**, then check the original five checklist selections.",
+          "Open the article’s **Content tree options (…) → Page content**, and restore the complete **Summary** recorded at the start. Wait for **Saved**, then check the original five checklist selections.",
           "Complete **Actions → Approve → Submit**, confirm **Approved**, and publish the page using the same scoped settings. Wait for publication and its automatic Search synchronization.",
         ],
         expected: [
@@ -702,8 +702,8 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Add practice content and a Media image",
         action: [
-          "With your new page selected, click **Content** in the top navigation. Set **Title** to Resource practice [your initials] and **Summary** to Practice guidance for an agent conversation. Click outside each field and wait for **Saved**.",
-          "Click **Editor** in the top navigation. In the page preview, click the blank image area between the summary and body, then **Browse media library** > **Media BETA**.",
+          "With your new page selected in **Editor → Pages**, open its **Content tree options (…) → Page content**. Set **Title** to Resource practice [your initials] and **Summary** to Practice guidance for an agent conversation. Click outside each field, and wait for **Saved**.",
+          "Close **Page content** with its **×** button. In the page canvas, click the blank image area between the summary and body, then **Browse media library → Media BETA**.",
           "Select **liberty-mutual-businessowner-preparing-submission.jpg**. Inspect **Details** > **Alt text** and **Delivery** > **Public link**.",
           "Under **Image transformation**, set **Width** to 640 with aspect ratio locked, then click **Insert**.",
         ],
@@ -715,9 +715,9 @@ export const marketingGuides: WorkshopGuide[] = [
       {
         title: "Classify the new page with native checklists",
         action: [
-          "Keep the new resource page selected, and click **Content** in the top navigation. Find **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Their checklists start with no selected values.",
+          "Keep the new resource page selected in **Editor → Pages**, and reopen **Content tree options (…) → Page content**. Find **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Their checklists start with no selected values.",
           "Open each selection control and select **Texas**, **Small commercial**, **Workers’ compensation**, **Independent agent**, and **Preparation guide**, respectively. Close each list before opening the next, click outside the fields, and wait for **Saved**.",
-          "Reload Page Builder, return to the same new **English Draft**, and reopen the five checklists to verify the saved choices. Leave the page unpublished.",
+          "Reload Page Builder, return to the same new **English Draft**, and reopen **Page content** and the five checklists to verify the saved choices. Leave the page unpublished.",
         ],
         expected: [
           "The article uses native fields and managed taxonomy choices. Multiple applicable values can be selected in a checklist.",

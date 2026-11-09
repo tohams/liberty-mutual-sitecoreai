@@ -27,12 +27,52 @@ function focus(
   };
 }
 
+const nativeResourceMetadata: GuideImage = {
+  file: "portal-native-page-content.png",
+  title: "Find the native classification fields in Page content",
+  alt: "Native Page content pane for the Texas resource with Resource types, Risk states, Business families, Products, and Distribution channels checklist controls",
+  caption:
+    "Use this approved Texas article to locate the native fields. For the exercise, create or select a **Draft** so the approved version stays unchanged. Open each checklist using its selected-item count, such as **1 item selected**.",
+  crop: {
+    x: 0,
+    y: 540,
+    width: 490,
+    height: 820,
+    sourceWidth: 1955,
+    sourceHeight: 1380,
+  },
+  annotations: [
+    {
+      x: 2.9,
+      y: 17.2,
+      width: 92.6,
+      height: 9.3,
+      label:
+        "Find **Risk states**. After selecting a **Draft**, open this selected-item control to see the state checkboxes.",
+    },
+    {
+      x: 2.9,
+      y: 74.6,
+      width: 92.6,
+      height: 9.8,
+      label:
+        "Find **Products** farther down the same pane. On your selected **Draft**, open this control to inspect the individual product checkboxes.",
+    },
+  ],
+};
+
 // One-based positions include each guide's sign-in steps. Empty lists remove a
 // legacy screenshot when its visible screen belongs to another step.
 export const resourceScreenshots: Record<
   string,
   Record<number, GuideImage | GuideImage[]>
 > = {
+  "resource-content-workflow": {
+    4: nativeResourceMetadata,
+  },
+  "resource-taxonomy": {
+    2: nativeResourceMetadata,
+  },
   "state-aware-search": {
     2: focus(
       {
@@ -117,6 +157,11 @@ export const resourceScreenshots: Record<
   },
   "create-resource-and-media": {
     2: [],
+    3: {
+      ...nativeResourceMetadata,
+      caption:
+        "Existing Texas article for reference: the **Page content** pane contains the native checklists. Your new page begins with no selected values. Choose the classifications specified in the step on your own new **Draft**, then wait for **Saved**.",
+    },
     4: focus(
       {
         file: "modern-media-library.png",

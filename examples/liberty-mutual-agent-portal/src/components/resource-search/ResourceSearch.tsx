@@ -43,6 +43,7 @@ const FACET_LABELS: Record<string, string> = {
   "independent-agent": "Independent agent",
   wholesale: "Wholesale",
   "auto-home": "Auto & home",
+  home: "Homeowners",
   "contract-commercial-bonds": "Contract & commercial bonds",
 };
 function facetLabel(value: string) {

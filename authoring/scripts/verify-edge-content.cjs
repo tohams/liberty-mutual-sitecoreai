@@ -29,7 +29,10 @@ function verifyComposition(route, data, manifest) {
       if (expected === 'ResourceSearch') {
         const value = component.fields?.search?.value;
         const configuration = typeof value === 'string' ? JSON.parse(value) : value;
-        if (configuration?.searchIndex !== manifest.resourceSearch.sourceId || configuration.fieldsMapping?.title !== 'Title') throw new Error('Missing native search configuration');
+        const expected = manifest.resourceSearch.configuration;
+        const matchesMapping = (name) => expected?.[name] && Object.entries(expected[name])
+          .every(([key, field]) => configuration?.[name]?.[key] === field);
+        if (configuration?.searchIndex !== manifest.resourceSearch.sourceId || !matchesMapping('fieldsMapping') || !matchesMapping('facetMapping')) throw new Error('Missing native search configuration');
       } else if (expected === 'Form') {
         if (!/^[a-f\d]{32}-[a-z]{2,8}$/.test(component.params?.FormId || '')) throw new Error('Missing native Form selection');
       } else if (!component.fields?.body?.value || !component.fields?.[expected === 'ResourceArticle' ? 'Title' : 'headline']?.value) {

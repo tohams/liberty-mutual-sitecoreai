@@ -286,7 +286,7 @@ The output contains page IDs, versions, placeholder keys and allowed rendering I
 
 ## Native resource metadata
 
-Native **Checklist** fields on **ResourcePage** provide **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Their **Source** folders are the editable lists under the site’s **Data/Taxonomy**. Authors use normal **Page Builder → Content** fields, native autosave, versions, permissions, and workflow; [Native metadata authoring](resource-metadata-authoring.md) describes the exact flow.
+Native **Checklist** fields on **ResourcePage** provide **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Their **Source** folders are the editable lists under the site’s **Data/Taxonomy**. Authors use native **Page Builder → Page content** fields, native autosave, versions, permissions, and workflow; [Native metadata authoring](resource-metadata-authoring.md) describes the exact flow.
 
 Selections are native taxonomy item references. The application resolves published labels for the visible article and stable codes for the configured **SitecoreAI Search** Push projection. The native publication event keeps Search synchronized with **Live Experience Edge** content after approval and publication. The taxonomy and page-branch seeds remain **CreateOnly**, preserving author edits during ordinary releases.
 

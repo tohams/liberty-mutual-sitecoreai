@@ -77,15 +77,22 @@
   },
   "resourceSearch": {
     "datasourceId": "c0bca8fb-a509-549f-b94a-24cb585a62a7",
-    "sourceId": "b5e24aff-8b5b-4653-bf66-deef52c1241a",
+    "sourceId": "26cf5bd0-b285-4a7d-93f9-9e3dac91b202",
     "configuration": {
-      "searchIndex": "b5e24aff-8b5b-4653-bf66-deef52c1241a",
+      "searchIndex": "26cf5bd0-b285-4a7d-93f9-9e3dac91b202",
       "fieldsMapping": {
-        "title": "Title",
+        "title": "title",
         "description": "summary",
         "state": "state",
-        "type": "resourceType",
-        "family": "businessFamily"
+        "type": "resourcetype",
+        "family": "businessfamily"
+      },
+      "facetMapping": {
+        "Risk state": "state",
+        "Resource type": "resourcetype",
+        "Business family": "businessfamily",
+        "Distribution channel": "channel",
+        "Product": "product"
       }
     }
   },

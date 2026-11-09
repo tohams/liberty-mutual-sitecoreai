@@ -133,7 +133,7 @@ Autosave protects changes that reached the server. Named content versions provid
 
 Continue with [loop 5](demo-loops.md#loop-5-marketing-owns-the-content) and the [ResourcePage creation exercise](resource-page-authoring.md#a-short-creation-exercise). A new ResourcePage starts with blank fields and its own **Data → Resource image** item.
 
-For an existing resource, open its native **Content** fields. **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types** are **Checklist** fields sourced from the site’s **Data/Taxonomy** lists. Native fields autosave; verify a temporary draft selection by waiting for **Saved**, reloading the same version, and restoring the original choices before publication. See [Native metadata authoring](resource-metadata-authoring.md).
+For an existing resource, use **Editor → Pages → Content tree options (…) → Page content** to open its native fields beside the canvas. **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types** are **Checklist** fields sourced from the site’s **Data/Taxonomy** lists. Native fields autosave; verify a temporary draft selection by waiting for **Saved**, reloading the same version, and restoring the original choices before publication. See [Native metadata authoring](resource-metadata-authoring.md).
 
 Modern Media stores the reusable assets. The local Image field stores the selected image and its delivery/rendition details. Image selection, an asset's public delivery link and page publication are separate operations.
 

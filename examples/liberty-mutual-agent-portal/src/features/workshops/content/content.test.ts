@@ -643,6 +643,18 @@ test("resource guides use native checklists and the publishing-driven Search pat
       `${slug}: retired app screenshot`,
     );
   }
+  const inspection = workshopGuides.find(
+    (guide) => guide.slug === "resource-taxonomy",
+  )!;
+  const nativeFieldsStep = inspection.steps[1];
+  assert.match(
+    readableContent(nativeFieldsStep.action),
+    /English Draft.*Create version.*select.*Draft.*Page content/i,
+  );
+  assert.match(
+    readableContent(nativeFieldsStep.expected),
+    /Draft.*preserving.*approved version.*unchanged and unpublished/i,
+  );
   const workflow = workshopGuides.find(
     (guide) => guide.slug === "resource-content-workflow",
   )!;

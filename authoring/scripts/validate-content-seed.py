@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Read-only checks for the owned content seed and synthetic UDL import contract."""
 from pathlib import Path
+import ast
 import copy
 import hashlib
 import json
@@ -201,6 +202,26 @@ def field_value(fields, hint):
 
 def id_list(value):
     return [normalized_id(value) for value in re.findall(r'\{([0-9a-fA-F-]{36})\}', value)]
+
+
+# The editable Search datasource, source manifest, and initializer must retain
+# one compatible native Push binding after a deliberate source replacement.
+search_binding = manifest['resourceSearch']
+search_config = search_binding['configuration']
+search_item = items[normalized_id(search_binding['datasourceId'])]
+search_fields = [field for language in search_item['Languages'] for version in language['Versions'] for field in version['Fields']]
+require(json.loads(field_value(search_fields, 'search')) == search_config,
+        'The Search seed and declared binding differ.')
+require(search_binding['sourceId'] == search_config['searchIndex'], 'The declared Search source and index differ.')
+source_tree = ast.parse((ROOT / 'authoring/scripts/build-content-seed.py').read_text())
+source_binding = next(ast.literal_eval(statement.value) for statement in source_tree.body
+                      if isinstance(statement, ast.Assign) and any(isinstance(target, ast.Name) and target.id == 'searchconfiguration' for target in statement.targets))
+require(source_binding == search_config, 'The content initializer must preserve the current Search binding.')
+require(search_config['facetMapping'] == {'Risk state': 'state', 'Resource type': 'resourcetype',
+        'Business family': 'businessfamily', 'Distribution channel': 'channel', 'Product': 'product'},
+        'Native Push facet keys must map to the portal labels.')
+require(search_config['fieldsMapping'] == {'title': 'title', 'description': 'summary', 'state': 'state',
+        'type': 'resourcetype', 'family': 'businessfamily'}, 'Native Search result field mappings differ.')
 
 
 product_contract = read_json(BASE / 'product-catalog-authoring-manifest.json')
