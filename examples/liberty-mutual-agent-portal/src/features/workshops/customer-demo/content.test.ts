@@ -727,6 +727,45 @@ test("the priority edit remains a draft until both audience previews and approva
   );
 });
 
+test("each named content Draft is explicitly selected before its fields change", () => {
+  for (const [id, name, field] of [
+    [
+      "portal-priority-edit",
+      "Texas guidance priority",
+      "Ordered recommendations",
+    ],
+    ["portal-shared-content", "Shared disclosure review", "Disclosure"],
+    ["portal-audit-rollback", "Original disclosure restored", "Disclosure"],
+  ]) {
+    const text = actions(id).find(
+      (action) =>
+        action.includes(`name it ${name}`) ||
+        action.includes(`Name it ${name}`),
+    );
+    assert(text, `${id}: missing named Draft creation`);
+    const selected = text.indexOf(
+      `explicitly select the new ${name} Draft row by its new version number`,
+    );
+    const loaded = text.indexOf(
+      "wait for its fields to finish loading",
+      selected,
+    );
+    const confirmed = text.indexOf(
+      "Confirm the selected version number",
+      loaded,
+    );
+    assert(
+      selected >= 0 && loaded > selected && confirmed > loaded,
+      `${id}: select and load the new numbered Draft before confirming its fields`,
+    );
+    assert(text.slice(confirmed).includes(field));
+  }
+  assert.match(
+    prose(step("portal-audit-rollback").actions),
+    /Select the original approved English version.*wait for its fields to finish loading.*Confirm the selected version number and original Disclosure wording before choosing Create version/,
+  );
+});
+
 test("shared disclosure and its reversal stop after the two-site proof", () => {
   const shared = step("portal-shared-content");
   assert(
