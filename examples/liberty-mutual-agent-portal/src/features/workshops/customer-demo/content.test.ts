@@ -596,7 +596,7 @@ test("the relevance loop proves profile relevance and same-profile native market
   );
   assert.match(
     prose(entry.actions),
-    /API response.*marketingSuppressed === false/i,
+    /API response.*Open variant editor.*marketingSuppressed === false.*Close editor/i,
   );
   assert.match(
     prose(entry.actions),
