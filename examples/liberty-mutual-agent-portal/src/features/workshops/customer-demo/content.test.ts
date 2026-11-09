@@ -567,22 +567,34 @@ test("the relevance loop proves profile relevance and same-profile native market
     );
   const baseline = actionIndex(
     entry.id,
-    /Marketing outreach preview.*Run eligibility check.*only Cameron Ellis - Allowed/i,
+    /Run eligibility check.*1 eligible recipient.*Cameron Ellis - Allowed/i,
   );
   const optout = actionIndex(
     entry.id,
-    /Opt out Cameron.*Check import status.*Native profile ID.*unchanged.*Run eligibility check.*No eligible recipients/i,
+    /Native profile ID.*Opt out Cameron.*while SitecoreAI processes/i,
   );
-  const restore = actionIndex(
+  const result = actionIndex(
     entry.id,
-    /Restore preferences.*Run eligibility check.*included again.*same Native profile ID/i,
+    /Check import status.*Native profile ID.*unchanged.*Run eligibility check.*No eligible recipients.*no email preview/i,
   );
-  assert(baseline < optout && optout < restore);
+  assert.equal(
+    baseline,
+    0,
+    "Start from the prepared native recipient baseline",
+  );
+  assert.equal(optout, 0, "Start the import before the profile comparisons");
+  const avery = actionIndex(entry.id, /avery\.01.*Avery Brooks/i);
+  const daniel = actionIndex(entry.id, /daniel\.01.*Daniel Ortiz/i);
+  const profiles = actionIndex(entry.id, /Testing as: Avery Brooks - 01/i);
+  const policy = actionIndex(entry.id, /API response.*Open variant editor/i);
+  assert(optout < avery && avery < daniel && daniel < profiles);
+  assert(profiles < policy && policy < result);
   assert.match(
     prose(entry.controls),
     /Liberty Mutual marketing eligibility.*native runtime personalization/i,
   );
-  assert.match(entry.stopWhen, /included to excluded and back to included/i);
+  assert.match(entry.stopWhen, /included to excluded/i);
+  assert.doesNotMatch(entry.stopWhen, /back to included/i);
   assert.match(entry.stopWhen, /same Native profile ID/i);
   assert(linksIn(entry).some((link) => link.href === "/workshops/preferences"));
   assert(
@@ -604,7 +616,15 @@ test("the relevance loop proves profile relevance and same-profile native market
   );
   assert.doesNotMatch(
     prose(entry.actions),
-    /Products & appetite|Load preference examples|Audience size|Recalculate|Pause.*Audience|6 hours/,
+    /Products & appetite|Load preference examples|Restore preferences|Audience size|Recalculate|Pause.*Audience|6 hours/,
+  );
+  const page = readFileSync(
+    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    "utf8",
+  );
+  assert.match(
+    prose(page),
+    /Restore the Cameron comparison outside the 45-minute demonstration.*Restore preferences.*Check import status.*Run eligibility check.*1 eligible recipient.*Native profile IDs.*unchanged/i,
   );
   assert.match(
     text,
