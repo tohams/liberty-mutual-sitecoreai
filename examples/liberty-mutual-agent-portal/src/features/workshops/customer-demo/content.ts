@@ -382,20 +382,20 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Match guidance to each agent’s business, and honor a recorded marketing opt-out through a native eligibility decision.",
         stopWhen:
-          "The native profile tests explain Avery and Daniel’s priorities, and Cameron’s outreach eligibility has changed from included to excluded and back to included, using the same Native profile ID.",
+          "The native profile tests explain Avery and Daniel’s priorities, and Cameron’s outreach eligibility has changed from included to excluded, using the same Native profile ID. No outreach email preview remains.",
         actions: [
+          "Open the prepared [**Communication preferences**](/workshops/preferences) tab. Show the **Run eligibility check** result prepared before presenting: **1 eligible recipient**, **Cameron Ellis - Allowed**. Both Cameron records share the same agency, producer role, and Texas context; their marketing choice differs. Record **Cameron Ellis - Allowed**’s **Native profile ID**, then select **Opt out Cameron**. Leave this tab open while SitecoreAI processes the updated choice, and continue with the following profile comparisons.",
           `In the prepared **avery.01** session, open the [**live Agent Portal Home**](${PORTAL}/). Confirm **Avery Brooks** and **Cedar Ridge Insurance**. Find **Priorities for your agency**: **Build a stronger small-business practice**, **Support workers’ compensation conversations in Texas**, and **Connect home and auto conversations**. Open **Your profile** to identify her principal role and **Licensed states: Texas, Illinois, and Florida**.`,
           `In the separate prepared **daniel.01** session, open [**Home**](${PORTAL}/). Confirm **Daniel Ortiz** and **Prairie Oak Insurance**, then compare his household-first priorities. Open **Your profile** to identify his producer role and **Licensed states: Illinois and Texas**.`,
           `In the administrator profile, open [**Agent Portal Home in Page Builder**](${portalEditor}), keep **Default editing host**, choose **Layers**, and select **Agency priorities**. In the right-hand component panel, choose **Edit personalization rules**, then confirm the **Liberty Mutual - Agency product priorities** Builder. If it is already open from preparation, continue there. Use **Select profile → Load profile**, change **Client ID** to **Profile ID**, and load Avery’s current **Native profile ID** UUID copied during preparation from [**Current profile identities for 01**](/workshops/reset#current-profiles). Confirm **Testing as: Avery Brooks - 01** and a green **agency-growth** match. Load Daniel’s current ID the same way; confirm **Testing as: Daniel Ortiz - 01** and a green **producer-priorities** match. Choose **Cancel** after these read-only tests.`,
-          `Open the prepared [**Liberty Mutual marketing eligibility → Configuration**](${MARKETING_ELIGIBILITY}). Under **API response**, select **Open variant editor**. Point to **marketingEligible**: the native rule requires an identified profile and **marketingSuppressed === false**. Select **Close editor** without changing the Live rule. Open the prepared [**Communication preferences**](/workshops/preferences) page. In **Start with two matched agent profiles**, confirm **SitecoreAI confirmed the imported records**. Both Cameron records have the same agency, producer role, and Texas context; their marketing choice differs. Record **Cameron Ellis - Allowed**’s **Native profile ID**. In **Marketing outreach preview**, select **Run eligibility check**. Confirm **1 eligible recipient**: only **Cameron Ellis - Allowed** is included by the native decision.`,
-          "Select **Opt out Cameron**, then use **Check import status** until **SitecoreAI confirmed the imported records** appears. The first card keeps the name **Cameron Ellis - Allowed**, but now shows **marketingSuppressed = true**. Confirm its **Native profile ID** is unchanged. Select **Run eligibility check** again, and show **No eligible recipients**. Under **Native decision receipts**, confirm **marketingEligible = false** and **Same profile as this session’s first check** for Cameron. Both comparison profiles are now excluded by the runtime decision.",
-          "Select **Restore preferences**, wait for **SitecoreAI confirmed the imported records**, and select **Run eligibility check** again. Confirm **1 eligible recipient** again: the original **Cameron Ellis - Allowed** record is included again, with the same **Native profile ID**; **Cameron Ellis - Suppressed** remains excluded. End with this restored result visible.",
+          `Open the prepared [**Liberty Mutual marketing eligibility → Configuration**](${MARKETING_ELIGIBILITY}). Under **API response**, select **Open variant editor**. Point to **marketingEligible**: the native rule requires an identified profile and **marketingSuppressed === false**. Select **Close editor** without changing the Live rule.`,
+          "Return to **Communication preferences**, and use **Check import status** until **SitecoreAI confirmed the imported records** appears. The first card keeps the name **Cameron Ellis - Allowed**, but now shows **marketingSuppressed = true**. Confirm its **Native profile ID** is unchanged. In **Marketing outreach preview**, select **Run eligibility check** again, and show **No eligible recipients** with no email preview. Under **Native decision receipts**, confirm **marketingEligible = false** and **Same profile as this session’s first check** for Cameron. Both comparison profiles are now excluded by the runtime decision. End this loop here; restore the starting choices through [**After the demonstration**](#reset).",
         ],
         expected: [
-          "Native profile matches explain Avery and Daniel’s different guidance. A fresh native outreach decision includes Cameron, excludes the same profile after opt-out, and includes it again after restoration.",
+          "Native profile matches explain Avery and Daniel’s different guidance. A fresh native outreach decision excludes the same Cameron profile after opt-out, and the email preview is withheld.",
         ],
         talkTrack: [
-          "Avery’s principal role and Daniel’s producer role lead to different priorities. For marketing outreach, the two Cameron records share the same agency, role, and Texas context. Their recorded choice determines eligibility. When we record Cameron’s opt-out, SitecoreAI updates the same native profile and the runtime decision excludes him. Restoring the preference restores eligibility. Liberty Mutual can keep Ping for sign-in and supply profile context from its existing systems.",
+          "The two Cameron records share the same agency, role, and Texas context. Their recorded choice determines outreach eligibility. We’ll record Cameron’s opt-out while we compare Avery’s principal priorities with Daniel’s producer priorities. SitecoreAI then evaluates the updated choice on the same native profile and excludes Cameron from the outreach. Liberty Mutual can keep Ping for sign-in and supply profile context from its existing systems.",
           customerDemoAiContext.portal.talkTrack,
         ],
         controls: [
@@ -440,6 +440,13 @@ export const customerDemoChapters: DemoChapter[] = [
                   "Compare the ordered cards in **Priorities for your agency**.",
               },
             ],
+          },
+          {
+            file: "customer-demo-outreach-suppressed.png",
+            title: "Confirm the recorded opt-out stops outreach",
+            alt: "Marketing outreach preview shows No eligible recipients and a native decision receipt with marketingEligible false for Cameron Ellis - Allowed using the same native profile ID",
+            caption:
+              "After the opt-out is confirmed, select **Run eligibility check**. **No eligible recipients** replaces the email preview. Under **Native decision receipts**, **Cameron Ellis - Allowed** has **marketingEligible = false** and **Same profile as this session’s first check**.",
           },
         ],
         transition:
