@@ -346,6 +346,103 @@
 .spinning {
   animation: spin 1s linear infinite;
 }
+.outreach {
+  margin-top: 30px;
+  padding-top: 28px;
+  border-top: 1px solid var(--w-line);
+}
+.email {
+  max-width: 680px;
+  margin: 24px auto;
+  border: 1px solid var(--w-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 28px #211b4b09;
+}
+.emailMeta {
+  padding: 17px 24px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--w-muted);
+  background: #f8f9fb;
+  border-bottom: 1px solid var(--w-line);
+}
+.emailBrand {
+  background: #ffd000;
+  color: #191342;
+  padding: 24px 32px;
+  font:
+    700 24px Georgia,
+    serif;
+}
+.emailBrand span {
+  display: block;
+  margin-top: 4px;
+  font:
+    9px Arial,
+    sans-serif;
+  letter-spacing: 3px;
+}
+.emailBody {
+  padding: 26px 32px;
+  color: var(--w-navy);
+}
+.emailBody h3 {
+  font-size: 26px;
+  line-height: 1.3;
+  margin: 0 0 25px;
+}
+.emailBody p {
+  font-size: 14px;
+  line-height: 1.85;
+  margin: 0 0 20px;
+}
+.emailCta {
+  display: inline-block;
+  background: #087d91;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 14px 20px;
+  margin: 4px 0 24px;
+}
+.receipts {
+  margin-top: 24px;
+}
+.receipts h3 {
+  font-size: 17px;
+  margin: 0 0 8px;
+}
+.receipts p {
+  color: var(--w-muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.receipts code {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.receipt {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--w-line);
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 17px 20px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+.receipt > strong {
+  color: var(--w-navy);
+}
+.idConfirmed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #315e47;
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);
