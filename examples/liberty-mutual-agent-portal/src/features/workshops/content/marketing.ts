@@ -1710,7 +1710,7 @@ export const marketingGuides: WorkshopGuide[] = [
         title: "Inspect the native control",
         action: [
           "On each comparison card, click **Open native profile in SitecoreAI**. Inspect the stored **marketingSuppressed** extension. Compare the matching **agencyName**, **role**, and **state** attributes.",
-          `Open [**Liberty Mutual marketing eligibility**](https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&organization=${ORG}&tenantId=${TENANT}). Inspect its live configuration and **API response**. It reads the stored profile choice and returns **marketingEligible = true** only for an explicitly false suppression value.`,
+          `Open [**Liberty Mutual marketing eligibility**](https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&organization=${ORG}&tenantId=${TENANT}). In **Configuration**, find **API response**, and click **Open variant editor**. Inspect **marketingEligible**: it reads the stored profile choice and returns true only for an explicitly false suppression value. Click **Close editor** without changing the Live rule.`,
         ],
         expected: [
           "The native stored values match the imported choices. The personalization returns its eligibility decision and the native profile ID. The application consumes this response to decide whether an outreach preview is included.",
