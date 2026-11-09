@@ -265,7 +265,7 @@ test("each stable card has an objective, actions, observations, controls, a spok
   );
 });
 
-test("the public Search loop ends at the unsupported-question agent contact option", () => {
+test("the public Search loop proves both outcomes on the results page", () => {
   const entry = step("public-question");
   const live = prose(entry.actions);
   assert.match(
@@ -273,8 +273,8 @@ test("the public Search loop ends at the unsupported-question agent contact opti
     /enter Can I combine home and car coverage\?.*Can I bundle my car and home insurance\?/i,
   );
   for (const required of [
-    /More information/i,
-    /source link/i,
+    /result and its answer excerpt on the results page/i,
+    /keyword\(s\).*replace the query/i,
     /Contact an agent/i,
     /Essential only/i,
     /Searching…/,
@@ -286,11 +286,15 @@ test("the public Search loop ends at the unsupported-question agent contact opti
   );
   assert.match(
     entry.stopWhen,
-    /unsupported question.*No results found.*Contact an agent/i,
+    /relevant result and answer excerpt.*unsupported question.*No results found.*Contact an agent/i,
   );
   assert.doesNotMatch(
     live,
-    /Explore bundling|Explore a bundled quote|Allow personalization|scroll|Effective|Review date/i,
+    /then open|Read the answer|Coverage and policy details|More information|source link|return to the article|Explore bundling|Explore a bundled quote|Allow personalization|scroll|Effective|Review date/i,
+  );
+  assert.equal(entry.actions.length, 3);
+  assert(
+    entry.links?.every((link) => !link.href.includes("/insurance-resources/")),
   );
   assert.match(
     prose(entry.controls),

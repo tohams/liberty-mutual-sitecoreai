@@ -77,20 +77,19 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 10,
         durationMinutes: 2,
         objective:
-          "Help a visitor find an approved answer and its source, with an agent-assisted next step when the subject needs further help.",
+          "Help a visitor find relevant approved guidance from a conversational question, with an agent-assisted next step when the subject needs further help.",
         stopWhen:
-          "The supported answer and its source have been shown, and the unsupported question ends with No results found and Contact an agent.",
+          "The supported question returns the relevant result and answer excerpt, and the unsupported question ends with No results found and Contact an agent.",
         actions: [
           `Open the [**public Home page**](${PUBLIC}/). Choose **Privacy choices → Essential only**, then select **Search** in the header. Search remains available when optional collection is declined.`,
-          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish, then open **Can I bundle my car and home insurance?**.",
-          "Read the answer, expand **Coverage and policy details**, and select the Liberty Mutual source link under **More information**. Confirm the linked source, then return to the article and close the source tab.",
-          `Open [**public Search**](${PUBLIC}/search), enter **Does car insurance cover cyberextortion?**, and select **Search**. Show **No results found** and **Contact an agent**. End this loop with that contact option; leave the link unopened.`,
+          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish, then show the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page.",
+          "In **keyword(s)**, replace the query with **Does car insurance cover cyberextortion?**, and select **Search**. Show **No results found** and **Contact an agent**. End this loop with that contact option; leave the link unopened.",
         ],
         expected: [
-          "The conversational question retrieves relevant Liberty Mutual guidance with a source. The unsupported subject offers an agent-assisted next step instead of unrelated answers.",
+          "The conversational question retrieves a relevant result and answer excerpt from approved Liberty Mutual guidance. The unsupported subject offers an agent-assisted next step.",
         ],
         talkTrack: [
-          "A visitor asks, “Can I combine home and car coverage?” Search takes them to Liberty Mutual’s approved guidance and its source. If the published content does not address their question, the experience offers help from an agent. The customer has a useful next step, and Liberty Mutual stays in control of the guidance.",
+          "A visitor asks, “Can I combine home and car coverage?” Search returns the relevant “Can I bundle my car and home insurance?” result and its answer excerpt. When published guidance does not address the question, the experience offers Contact an agent. The visitor has a useful next step, and Liberty Mutual stays in control of the guidance.",
         ],
         controls: [
           "**SitecoreAI Search** retrieves and ranks published guidance. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
@@ -99,10 +98,9 @@ export const customerDemoChapters: DemoChapter[] = [
         links: [
           { label: "Public Home", href: `${PUBLIC}/` },
           { label: "Public Search", href: `${PUBLIC}/search` },
-          { label: "Car and home article", href: ARTICLE },
         ],
         transition:
-          "The customer has a sourced answer and a clear next step. Now show how the content team makes that answer consistent and discoverable.",
+          "The customer has found relevant guidance and a clear next step. Now inspect the content behind that result and how the content team keeps it consistent and discoverable.",
       },
       {
         id: "public-discovery",
