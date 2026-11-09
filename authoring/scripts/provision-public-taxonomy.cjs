@@ -53,9 +53,9 @@ async function preflight(query, specs) {
   assert(description && description.name === "description" && value(description, "Type") === "Multi-Line Text", "The managed option description field differs.");
   for (const definition of [...MODEL.fields.page, ...MODEL.fields.answer]) {
     const field = await read(query, { itemId: definition.fieldId });
-    assert(field && field.path === definition.definitionPath && field.name === definition.name && value(field, "Type") === "Single-Line Text" &&
+    assert(field && field.path === definition.definitionPath && field.name === definition.name && value(field, "Type") === "Checklist" && value(field, "Source") === definition.sourcePath &&
       ["", "0"].includes(value(field, "Shared")) && ["", "0"].includes(value(field, "Unversioned")),
-    "Public metadata must retain its native versioned Single-Line Text contract. No changes were made.");
+    "Public metadata must use native versioned Checklist fields sourced from its managed taxonomy. No changes were made.");
   }
   const items = [];
   for (const spec of specs) {

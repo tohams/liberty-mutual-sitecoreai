@@ -8,10 +8,6 @@ import {
   type MetadataSnapshot,
   type MetadataValues,
 } from "./metadata-contract";
-import {
-  createPublicMetadataService,
-  isPublicMetadataContext,
-} from "./public-metadata-service";
 
 export interface MetadataTransport {
   getContext(): Promise<unknown>;
@@ -623,39 +619,7 @@ function createPortalMetadataService(transport: MetadataTransport) {
   return { load, save };
 }
 
-/** Route to separate, explicitly scoped contracts; a public page never inherits Portal permissions or fields. */
+/** The Marketplace selector serves only the Portal's existing text-field Search contract. */
 export function createMetadataService(transport: MetadataTransport) {
-  const portal = createPortalMetadataService(transport);
-  const publicWebsite = createPublicMetadataService(transport);
-  const owners = new WeakMap<
-    MetadataSnapshot,
-    typeof portal | typeof publicWebsite
-  >();
-  return {
-    async load(targetId?: string): Promise<MetadataSnapshot> {
-      const raw = await transport.getContext();
-      const service = isPublicMetadataContext(raw) ? publicWebsite : portal;
-      const snapshot =
-        service === publicWebsite
-          ? await publicWebsite.load(targetId)
-          : await portal.load();
-      owners.set(snapshot, service);
-      return snapshot;
-    },
-    async save(
-      snapshot: MetadataSnapshot,
-      values: MetadataValues,
-      options?: { isCurrent?: () => boolean },
-    ) {
-      const service = owners.get(snapshot);
-      if (!service)
-        throw new MetadataError(
-          "STALE",
-          "Refresh this panel before attempting another save.",
-        );
-      const result = await service.save(snapshot, values, options);
-      owners.set(result.snapshot, service);
-      return result;
-    },
-  };
+  return createPortalMetadataService(transport);
 }

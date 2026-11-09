@@ -2,6 +2,7 @@ import {
   ANSWER_ROOT,
   ANSWER_TEMPLATE,
   PublicationError,
+  TAXONOMY_FIELD_QUERY,
   identifier,
   mapPublishedAnswer,
   type NativeAnswer,
@@ -22,9 +23,9 @@ const QUERY = `query PublishedAnswers($root: String!, $after: String) {
         owner: field(name: "owner") { jsonValue }
         effectiveDate: field(name: "effectiveDate") { jsonValue }
         reviewDate: field(name: "reviewDate") { jsonValue }
-        state: field(name: "state") { jsonValue }
-        product: field(name: "product") { jsonValue }
-        audience: field(name: "audience") { jsonValue }
+        state: field(name: "state") { ${TAXONOMY_FIELD_QUERY} }
+        product: field(name: "product") { ${TAXONOMY_FIELD_QUERY} }
+        audience: field(name: "audience") { ${TAXONOMY_FIELD_QUERY} }
         sourceLink: field(name: "sourceLink") { jsonValue }
         nextStep: field(name: "nextStep") { jsonValue }
         canonicalUrl: field(name: "canonicalUrl") { jsonValue }

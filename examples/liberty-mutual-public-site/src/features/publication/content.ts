@@ -52,6 +52,131 @@ export interface PublishedAnswer {
 export interface NativeField {
   jsonValue?: { value?: unknown } | null;
 }
+export interface NativeTaxonomyOption {
+  id: string;
+  name: string;
+  path: string;
+  template: { id: string };
+}
+export interface NativeTaxonomyField {
+  value?: unknown;
+  jsonValue?: unknown;
+  targetIds?: string[] | null;
+  targetItems?: Array<NativeTaxonomyOption | null> | null;
+}
+
+// Checklist fields use the same native Edge reference projection as Multilist.
+// Keep jsonValue while old published Single-Line Text versions are still Live.
+export const TAXONOMY_FIELD_QUERY = `value jsonValue
+  ... on MultilistField { targetIds targetItems { id name path template { id } } }`;
+const TAXONOMY_ROOT =
+  "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy";
+const TAXONOMY_OPTION_TEMPLATE = "9dc18d3c-9944-507a-aeab-9787c8fc4d9c";
+type TaxonomyKind = "state" | "product" | "audience";
+const TAXONOMY_FOLDERS: Record<TaxonomyKind, string> = {
+  state: "States",
+  product: "Products",
+  audience: "Audiences",
+};
+const LEGACY_PRODUCT_COMBINATIONS: Record<string, readonly string[]> = {
+  "auto-home": ["auto", "home"],
+  "auto-condo": ["auto", "condo"],
+  "auto-renters": ["auto", "renters"],
+};
+
+/** Resolve published managed references, never raw GUIDs or display-name guesses. */
+export function publishedTaxonomy(
+  field: NativeTaxonomyField | undefined,
+  kind: TaxonomyKind,
+): string {
+  const invalid = (): never => {
+    throw new PublicationError("INVALID_PUBLISHED_TAXONOMY");
+  };
+  const missing = (): never => {
+    throw new PublicationError("MISSING_PUBLISHED_TAXONOMY");
+  };
+  const isGuid = (value: string) =>
+    /^(?:\{?[a-f\d]{32}\}?|\{?[a-f\d]{8}(?:-[a-f\d]{4}){3}-[a-f\d]{12}\}?)$/i.test(
+      value,
+    );
+  const isLegacy = (value: string) =>
+    value.length <= 500 &&
+    /^[A-Za-z][A-Za-z0-9 -]*(?:,[A-Za-z][A-Za-z0-9 -]*)*$/.test(value) &&
+    !value.split(",").some((token) => isGuid(token.trim()));
+  // A changed field definition can reach Edge before an old published item is
+  // republished. Its raw value still carries the valid legacy taxonomy tokens,
+  // although the current Checklist projection has no resolvable target items.
+  if (typeof field?.value === "string" && isLegacy(field.value.trim()))
+    return field.value.trim();
+  if (field?.value != null && typeof field.value !== "string") return invalid();
+  if (field && ("targetIds" in field || "targetItems" in field)) {
+    const ids = field.targetIds;
+    const items = field.targetItems;
+    if (!Array.isArray(ids) || !Array.isArray(items) || ids.length > 100)
+      return invalid();
+    if (ids.length !== items.length) return missing();
+    const normalizedIds = ids.map((id) => identifier(id));
+    if (new Set(normalizedIds).size !== ids.length) return invalid();
+    if (typeof field.value === "string") {
+      const raw = field.value.trim();
+      const rawIds = raw ? raw.split("|").map((id) => identifier(id)) : [];
+      if (
+        rawIds.length !== normalizedIds.length ||
+        new Set(rawIds).size !== rawIds.length ||
+        rawIds.some((id) => !normalizedIds.includes(id))
+      )
+        return invalid();
+    }
+    const remaining = new Set(normalizedIds);
+    const folder = `${TAXONOMY_ROOT}/${TAXONOMY_FOLDERS[kind]}`;
+    const tokens: string[] = [];
+    for (const item of items) {
+      if (!item) return missing();
+      const id = identifier(item.id);
+      if (!remaining.delete(id)) return invalid();
+      if (
+        identifier(item.template?.id) !== TAXONOMY_OPTION_TEMPLATE ||
+        typeof item.name !== "string" ||
+        !/^[A-Za-z][A-Za-z0-9-]{0,99}$/.test(item.name) ||
+        item.path?.toLowerCase() !== `${folder}/${item.name}`.toLowerCase()
+      )
+        return invalid();
+      tokens.push(
+        ...(kind === "product" && LEGACY_PRODUCT_COMBINATIONS[item.name]
+          ? LEGACY_PRODUCT_COMBINATIONS[item.name]
+          : [item.name]),
+      );
+    }
+    if (remaining.size) return missing();
+    const distinct = [...new Set(tokens)].sort();
+    if (
+      (kind === "state" || kind === "product") &&
+      distinct.length > 1 &&
+      distinct.some((token) => token.toLowerCase() === "all")
+    )
+      return invalid();
+    if (
+      kind === "audience" &&
+      distinct.includes("consumer") &&
+      distinct.some((token) =>
+        ["customer", "prospective-customer"].includes(token),
+      )
+    )
+      return invalid();
+    return distinct.join(",");
+  }
+  const json = field?.jsonValue;
+  if (typeof field?.value === "string" && field.value.trim()) return invalid();
+  if (json == null) return "";
+  if (typeof json !== "object" || Array.isArray(json) || !("value" in json))
+    return invalid();
+  const value = json.value;
+  if (value == null || value === "") return "";
+  // Legacy published text stays byte-for-byte compatible apart from the existing
+  // outer trim. Reject unresolved IDs or mixed reference/text values explicitly.
+  if (typeof value !== "string" || !isLegacy(value.trim())) return invalid();
+  return value.trim();
+}
 export interface NativeAnswer {
   id: string;
   path: string;
@@ -64,9 +189,9 @@ export interface NativeAnswer {
   owner?: NativeField;
   effectiveDate?: NativeField;
   reviewDate?: NativeField;
-  state?: NativeField;
-  product?: NativeField;
-  audience?: NativeField;
+  state?: NativeTaxonomyField;
+  product?: NativeTaxonomyField;
+  audience?: NativeTaxonomyField;
   sourceLink?: NativeField;
   nextStep?: NativeField;
   canonicalUrl?: NativeField;
@@ -246,9 +371,9 @@ export function mapPublishedAnswer(
     owner: text(item.owner),
     effectiveDate: date(item.effectiveDate),
     reviewDate: date(item.reviewDate),
-    state: text(item.state),
-    product: text(item.product),
-    audience: text(item.audience),
+    state: publishedTaxonomy(item.state, "state"),
+    product: publishedTaxonomy(item.product, "product"),
+    audience: publishedTaxonomy(item.audience, "audience"),
     sourceLink: link(item.sourceLink),
     nextStep: link(item.nextStep),
     canonicalUrl: canonical(item.canonicalUrl, publicOrigin),

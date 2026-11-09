@@ -432,9 +432,11 @@
       "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
       "bucket": "templates",
       "fields": {
-        "Type": "Single-Line Text",
+        "Type": "Checklist",
         "__Sortorder": "600",
+        "Source": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Audiences",
         "Title": "Audience",
+        "__Short description": "Select the audiences for this content. All consumers includes prospective and existing customers.",
         "__Display name": "Audience",
         "__Created": "20261031T160000Z"
       }
@@ -446,9 +448,11 @@
       "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
       "bucket": "templates",
       "fields": {
-        "Type": "Single-Line Text",
+        "Type": "Checklist",
         "__Sortorder": "700",
+        "Source": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/States",
         "Title": "State applicability",
+        "__Short description": "Select every state covered by this content, or All states on its own.",
         "__Display name": "State applicability",
         "__Created": "20261031T160000Z"
       }
@@ -460,10 +464,12 @@
       "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
       "bucket": "templates",
       "fields": {
-        "Type": "Single-Line Text",
+        "Type": "Checklist",
         "__Sortorder": "800",
-        "Title": "Product",
-        "__Display name": "Product",
+        "Source": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Products",
+        "Title": "Products",
+        "__Short description": "Select every product covered by this content, or All products on its own.",
+        "__Display name": "Products",
         "__Created": "20261031T160000Z"
       }
     },
@@ -1475,9 +1481,11 @@
       "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
       "bucket": "templates",
       "fields": {
-        "Type": "Single-Line Text",
+        "Type": "Checklist",
         "__Sortorder": "1000",
+        "Source": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/States",
         "Title": "State applicability",
+        "__Short description": "Select every state covered by this content, or All states on its own.",
         "__Display name": "State applicability",
         "__Created": "20261031T160000Z"
       }
@@ -1489,10 +1497,12 @@
       "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
       "bucket": "templates",
       "fields": {
-        "Type": "Single-Line Text",
+        "Type": "Checklist",
         "__Sortorder": "1100",
-        "Title": "Product",
-        "__Display name": "Product",
+        "Source": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Products",
+        "Title": "Products",
+        "__Short description": "Select every product covered by this content, or All products on its own.",
+        "__Display name": "Products",
         "__Created": "20261031T160000Z"
       }
     },
@@ -1503,9 +1513,11 @@
       "template": "455a3e98-a627-4b40-8035-e683a0331ac7",
       "bucket": "templates",
       "fields": {
-        "Type": "Single-Line Text",
+        "Type": "Checklist",
         "__Sortorder": "1200",
+        "Source": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/Audiences",
         "Title": "Audience",
+        "__Short description": "Select the audiences for this content. All consumers includes prospective and existing customers.",
         "__Display name": "Audience",
         "__Created": "20261031T160000Z"
       }

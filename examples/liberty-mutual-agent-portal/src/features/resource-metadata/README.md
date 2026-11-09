@@ -1,24 +1,17 @@
-# Managed metadata in Page Builder
+# Metadata authoring
 
-The existing **Resource metadata** Marketplace app supports two native contracts:
+## Public website: native content fields
 
-- **Agent Portal resource articles:** the original risk state, business family, product, distribution channel, and resource type selectors.
-- **Public website pages:** state applicability, product, and audience selectors. **Content to classify** starts on the page itself. The author can explicitly select a shared **Approved answer** that the page actually references. The panel identifies its native path and version before any edit.
+Public website pages and approved answers use native **Checklist** fields for **State applicability**, **Products**, and **Audience**. Authors edit a page through **Page content**. To edit a reused answer, select its visible **Approved answer** component and use its **Content** fields, or open the answer in **Page Builder Content**. No custom selector or editing-only component is required.
 
-Page metadata and approved-answer metadata have different consumers. Page metadata classifies the page. The public Search publisher and versioned content API consume the approved-answer item's metadata. Choosing an approved answer deliberately affects that shared item wherever it is reused.
+The content owns its classification: a page's fields classify that page, while the approved-answer datasource's fields classify the reused answer in Search and the content API. Managed options live under the public website's **Data/Taxonomy/States**, **Products**, and **Audiences** folders. Products are individual choices such as **Auto**, **Homeowners**, and **Condo**. Authors can choose several applicable products. An **All** choice is used on its own rather than alongside specific choices.
 
-Managed choices live under the public website's **Data/Taxonomy/States**, **Products**, and **Audiences** folders. Each option has a stable text value (its item name), a readable display name, and a description. Administrators maintain these native items; the app reads current choices rather than embedding them in a browser fixture. `public-taxonomy.json` is the additive initial seed, not an overwrite policy.
+Checklist fields store native item references. The public publication service resolves the selected taxonomy items into stable values for Search and the content API. It also accepts the previous text values during the rollout. Normal permissions, versions, review, and publication remain native Sitecore behavior. Ordinary taxonomy seeding is additive and preserves author edits.
 
-## Provision the public choices
+## Agent Portal: Resource metadata app
 
-Run `node authoring/scripts/provision-public-taxonomy.cjs demo --report /absolute/private/public-taxonomy-review.json` from the repository root to inspect the plan. Use a new report path and add `--apply` to create only missing folders and options. The operation preserves existing items and author edits. It does not publish, change field definitions, alter workflows, or create credentials. Existing `ResourceMetadataFolder` and `ResourceMetadataOption` templates must be deployed first.
+The **Resource metadata** Marketplace app serves the Agent Portal's existing resource articles and native Search source. It provides controlled choices for risk state, business family, product, distribution channel, and resource type while preserving that source's text-field contract.
 
-Metadata fields remain versioned **Single-Line Text** because the native Search source expects that supported type. The Marketplace app supplies managed selectors without changing that indexing contract.
+The app reads current choices from native **Data/Taxonomy** content, validates the exact page, language, version, draft state, and allowed fields, and verifies a minimal save. It does not autosave, create versions, approve, publish, reindex, or change presentation. The standalone URL is inert. The Marketplace host supplies the authorized environment context, and the app checks the configured organization and tenant.
 
-## Native permissions and review
-
-The Marketplace connection uses the current Sitecore user. Native page/language permissions, locking, and workflow state are checked. Approved items remain read only. To edit an approved answer, open its displayed path in Page Builder **Content**, create its draft version, return to the page, reopen the panel, and choose that answer. Save, submit, review, and publish the content through its normal workflow. Public answer publication synchronizes Search and the content API.
-
-The app verifies the selected page's references and the target item's path, template, version, revision, workflow, allowed fields, and current managed choices again before a save. It rejects stale context and never retries an uncertain mutation. The page's shared/final presentation is read only for datasource discovery; the app never writes presentation XML. Native fields outside the three public metadata fields are preserved.
-
-The standalone app URL is inert. It initializes its authenticated transport only inside the Sitecore Marketplace host for this organization and tenant. No credentials or selections are persisted in the browser.
+If the app is opened on the public website, it displays native-authoring guidance and a link to the current page in **Page Builder Content**. It makes no public metadata query or write and shows no page-versus-answer dropdown.

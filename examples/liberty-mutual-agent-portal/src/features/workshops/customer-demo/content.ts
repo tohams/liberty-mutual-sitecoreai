@@ -12,7 +12,6 @@ const MARKETING_ELIGIBILITY = `https://app.sitecorecloud.io/optimization/persona
 const ARTICLE = `${PUBLIC}/insurance-resources/bundle-car-and-home`;
 const ANSWER_ID = "70144ef3-4be0-597a-9b22-81e8ee1cc9f6";
 const PUBLIC_HOME_ID = "6d600332-3e21-4c5f-83ec-aae04f83450f";
-const ARTICLE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
 const PORTAL_HOME_ID = "ae9e45ca-f127-4abe-9ca7-2ff109981998";
 const PRIORITIES_ID = "3127968e-4b21-50c3-ad79-b6bbbe5303b8";
 const DISCLOSURE_ID = "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca";
@@ -31,7 +30,6 @@ function pageBuilder(
 
 const answerContent = pageBuilder("public", ANSWER_ID, "content");
 const publicEditor = pageBuilder("public", PUBLIC_HOME_ID);
-const articleEditor = pageBuilder("public", ARTICLE_ID);
 const portalEditor = pageBuilder("portal", PORTAL_HOME_ID);
 const priorityContent = pageBuilder("portal", PRIORITIES_ID, "content");
 const disclosureContent = pageBuilder("public", DISCLOSURE_ID, "content");
@@ -117,7 +115,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The answer template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
         actions: [
           `Open [**Bundle car and home in Page Builder Content**](${answerContent}). Confirm **Public Website**, **English**, and **Data → Approved answers → Bundle car and home**. Inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Authoritative source**, **Content owner**, and the dates. Under **Quick Info**, identify the **PublicApprovedAnswer** template.`,
-          `Open [**the article in Page Builder Editor**](${articleEditor}), retain **Default editing host**, and choose **Apps → Resource metadata**. Under **Content to classify**, select **Approved answer: Can I bundle my car and home insurance?**. Show **State applicability: All states**, **Product: Auto and home**, and **Audience: All consumers**. Leave the approved item unchanged.`,
+          `In the same [**approved answer in Page Builder Content**](${answerContent}), locate **State applicability**, **Products**, and **Audience**. Show the selected checkboxes: **All states**, **Auto**, **Homeowners**, and **All consumers**. The choices come from **Data → Taxonomy**. Leave this approved version unchanged.`,
           `On the [**public article**](${ARTICLE}), use **View page source → Find** to locate **application/ld+json**. Identify **FAQPage**, **Question**, and **acceptedAnswer**, then find the **canonical** link. Return to the rendered article.`,
         ],
         expected: [
@@ -128,12 +126,11 @@ export const customerDemoChapters: DemoChapter[] = [
           customerDemoAiContext.public.talkTrack,
         ],
         controls: [
-          "**Page Builder → Content → Quick Info** identifies the native template. **Resource metadata** classifies the referenced **Approved answer** using lists maintained beneath **Data → Taxonomy**.",
+          "**Page Builder → Content → Quick Info** identifies the native template. Native **Checklist** fields classify the **Approved answer** using choices maintained beneath **Data → Taxonomy**. These selections belong to the reusable answer and follow it into Search and the content API.",
           "The public rendering supplies **FAQPage** metadata and a canonical URL: a structured foundation for discovery by permitted search and AI consumers.",
         ],
         links: [
           { label: "Approved answer fields", href: `${answerContent}` },
-          { label: "Article and Resource metadata", href: `${articleEditor}` },
           { label: "Public article", href: `${ARTICLE}` },
         ],
         transition:

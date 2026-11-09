@@ -143,6 +143,7 @@ function fixture() {
     if (payload.query.includes("query PublishedSearchPages")) {
       assert.match(payload.query, /_latestversion.*true/);
       assert.match(payload.query, /_language.*en/);
+      assert.match(payload.query, /\.\.\. on MultilistField/);
       return Response.json({
         data: { search: { results: pages, pageInfo: { hasNext: incomplete } } },
       });
@@ -233,6 +234,40 @@ test("new pages remain out of Search until the native checkbox is explicitly sel
     assert.deepEqual(await f.reader.readAll(), []);
     assert.equal(f.layoutReads(), 0);
   }
+});
+
+test("page Search classifies native Checklist values on the page itself", async () => {
+  const f = fixture();
+  const option = (number: string, folder: string, name: string) => ({
+    id: `${number}-2222-5333-8444-555555555555`,
+    name,
+    path: `/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/${folder}/${name}`,
+    template: { id: "9dc18d3c-9944-507a-aeab-9787c8fc4d9c" },
+  });
+  const products = [
+    option("11111111", "Products", "home"),
+    option("22222222", "Products", "auto"),
+  ];
+  const states = [
+    option("33333333", "States", "TX"),
+    option("44444444", "States", "IL"),
+  ];
+  f.setPages([
+    {
+      ...page(),
+      product: {
+        targetIds: products.map((item) => item.id),
+        targetItems: products,
+      },
+      state: { targetIds: states.map((item) => item.id), targetItems: states },
+    },
+  ]);
+  const [published] = await f.reader.readAll();
+  assert.equal(published.product, "auto,home");
+  assert.equal(published.state, "IL,TX");
+  assert.equal(pageSearchDocument(published).fields?.product, "auto,home");
+  products.pop();
+  await assert.rejects(f.reader.readAll(), /MISSING_PUBLISHED_TAXONOMY/);
 });
 
 test("published local information sections and linked FAQ copy also contribute to the page document", async () => {

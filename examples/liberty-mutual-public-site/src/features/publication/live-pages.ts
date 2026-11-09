@@ -3,7 +3,10 @@ import {
   identifier,
   PublicationError,
   PUBLIC_SITE,
+  publishedTaxonomy,
+  TAXONOMY_FIELD_QUERY,
   type NativeField,
+  type NativeTaxonomyField,
   type PublishedAnswer,
   type PublishedLink,
   type SearchOperation,
@@ -25,9 +28,9 @@ export interface NativeSearchPage {
   metadataDescription?: NativeField;
   canonicalUrl?: NativeField;
   sourceLink?: NativeField;
-  state?: NativeField;
-  product?: NativeField;
-  audience?: NativeField;
+  state?: NativeTaxonomyField;
+  product?: NativeTaxonomyField;
+  audience?: NativeTaxonomyField;
 }
 
 export interface PublishedSearchPage {
@@ -67,9 +70,9 @@ const PAGES_QUERY = `query PublishedSearchPages($after: String) {
       metadataDescription: field(name: "metadataDescription") { jsonValue }
       canonicalUrl: field(name: "canonicalUrl") { jsonValue }
       sourceLink: field(name: "sourceLink") { jsonValue }
-      state: field(name: "state") { jsonValue }
-      product: field(name: "product") { jsonValue }
-      audience: field(name: "audience") { jsonValue }
+      state: field(name: "state") { ${TAXONOMY_FIELD_QUERY} }
+      product: field(name: "product") { ${TAXONOMY_FIELD_QUERY} }
+      audience: field(name: "audience") { ${TAXONOMY_FIELD_QUERY} }
     }
   }
 }`;
@@ -386,9 +389,9 @@ export class LivePages {
               body: renderedBody(page, data),
               canonicalUrl: url.href,
               sourceLink: source(page),
-              state: fieldText(page.state, 500),
-              product: fieldText(page.product, 500),
-              audience: fieldText(page.audience, 500),
+              state: publishedTaxonomy(page.state, "state"),
+              product: publishedTaxonomy(page.product, "product"),
+              audience: publishedTaxonomy(page.audience, "audience"),
             };
             if (!value.title || !value.summary) invalid();
             return { ...value, revision: digest(value) };
