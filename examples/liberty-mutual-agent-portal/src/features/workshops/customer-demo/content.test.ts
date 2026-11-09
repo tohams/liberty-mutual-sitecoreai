@@ -380,6 +380,10 @@ test("the indexing loop owns both publication and fresh Search-record verificati
     /job to complete.*body.*added sentence.*No manual reindex/i,
   );
   assert(publish < verify);
+  assert.match(
+    prose(entry.actions[publish]),
+    /Wait for the version to finish loading.*read the selected version number again.*matches Prepared answer version.*Immediately before choosing Publish.*Approved.*Detailed explanation.*Start publish/i,
+  );
   assert.match(entry.stopWhen, /Search document.*newly published sentence/);
   assert.doesNotMatch(
     prose(step("public-api").actions),
@@ -403,6 +407,15 @@ test("indexing preparation requires a clean published baseline and one unpublish
   const baseline = preparation.indexOf("Verify the published baseline");
   const revision = preparation.indexOf("from that verified original named");
   assert(baseline >= 0 && revision > baseline);
+  const preparationText = plainGuideText(preparation);
+  assert.match(
+    preparationText,
+    /select the preserved original version.*Live baseline version.*wait for its fields to finish loading.*Read the selected version number again.*original wording without the temporary sentence.*Create version/,
+  );
+  assert.match(
+    preparationText,
+    /select Create.*Reopen the version selector.*explicitly select the new.*Shared answer review.*Draft.*new version number.*wait for its fields to finish loading.*selected version number is newer.*original wording remains intact before editing.*Add.*exactly once/,
+  );
   assert.match(
     preparation,
     /must be absent from the public article.*Search record.*published-answer API experience/,
