@@ -313,6 +313,7 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "The second experience shows the newly published sentence, its source, stable item ID, and native content version.",
         actions: [
+          "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A). Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**, then continue with the content-reuse example.",
           "Open [**One published page, two experiences**](/workshops/content-api). Under **Published insurance question**, select **Can I bundle my car and home insurance?**, and select **Load content**.",
           `Find **Review your options with your agent before choosing coverage.** Compare it with the [**public article**](${ARTICLE}). Under **The governance travels with the answer**, identify the source and applicability metadata.`,
           "Under **A stable contract for other applications**, identify **API contract version**, **Native content version**, and **Stable item ID**. The stable ID identifies the same resource page; the content version identifies that page’s published English revision.",
@@ -321,8 +322,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The separate API consumer and public article present the same approved page content without re-entering it.",
         ],
         talkTrack: [
+          "Authors manage and approve content in SitecoreAI. Publishing sends that content to Experience Edge, Sitecore’s globally distributed content delivery service. Websites and other applications retrieve it through APIs. That lets Liberty Mutual reuse one approved source across experiences, while publishing content independently of application deployments.",
           "The same car-and-home page serves another application through a stable API. Its approved guidance, source, and applicability travel together. This is the kind of governed content feed LibertyAir could consume.",
-          "The car-and-home resource page we just reused is managed in SitecoreAI and published to Experience Edge. Edge sits between authoring and the applications that deliver the experience. Frontends retrieve published content and layout through GraphQL, while Liberty Mutual controls its hosting and development process. A public website, an authenticated Agent Portal, or another application can consume that content. Approved content publication stays separate from the frontend build and deployment cycle.",
         ],
         controls: [
           "The versioned **/api/content/v1/answers/** endpoint reads approved published content from **Live Experience Edge**. The API envelope and second application are implementation components around the native governed source.",
@@ -330,14 +331,14 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         links: [
           {
+            label: "Open the Experience Edge diagram in the shared deck",
+            href: "https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A",
+          },
+          {
             label: "Open the second content experience",
             href: "/workshops/content-api",
           },
           { label: "Compare the public article", href: `${ARTICLE}` },
-          {
-            label: "Open the Experience Edge diagram in the shared deck",
-            href: "https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A",
-          },
         ],
         images: [
           {
@@ -365,7 +366,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "Show **slide 19: Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A) to connect authoring, publication, and GraphQL delivery to applications. Then continue to the Agent Portal.",
+          "The same approved page now serves both experiences. Next, show how relevant guidance helps independent agents place business with Liberty Mutual.",
       },
     ],
   },
