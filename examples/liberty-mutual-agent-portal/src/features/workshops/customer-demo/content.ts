@@ -8,7 +8,7 @@ const TENANT_NAME = "scaipocusem400b-sitecoreai950c-demo4418";
 const CONTEXT = `organization=${ORG}&tenantId=${TENANT}`;
 const SEARCH_SOURCE = `https://app.sitecorecloud.io/search/f527245d-98c7-4978-8802-237d7717ca43/preview?${CONTEXT}`;
 const ANALYTICS = `https://app.sitecorecloud.io/optimization/dashboards/events?${CONTEXT}`;
-const AUDIENCE = `https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?${CONTEXT}`;
+const MARKETING_ELIGIBILITY = `https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&operationalTimeWindow=15m&${CONTEXT}`;
 const ARTICLE = `${PUBLIC}/insurance-resources/bundle-car-and-home`;
 const ANSWER_ID = "70144ef3-4be0-597a-9b22-81e8ee1cc9f6";
 const PUBLIC_HOME_ID = "6d600332-3e21-4c5f-83ec-aae04f83450f";
@@ -35,6 +35,29 @@ const articleEditor = pageBuilder("public", ARTICLE_ID);
 const portalEditor = pageBuilder("portal", PORTAL_HOME_ID);
 const priorityContent = pageBuilder("portal", PRIORITIES_ID, "content");
 const disclosureContent = pageBuilder("public", DISCLOSURE_ID, "content");
+
+/** Explain AI's role in each customer journey without implying autonomous publication. */
+export const customerDemoAiContext: Record<
+  DemoChapter["id"],
+  { demonstrated: string; nextStep: string; talkTrack: string }
+> = {
+  public: {
+    demonstrated:
+      "Search retrieves approved guidance, while structured answers provide the source and applicability information that supports discovery by search and AI consumers.",
+    nextStep:
+      "SitecoreAI assistants can help marketers draft and refine brand-aligned website copy for human review. The proposed Profound integration would bring external content proposals into the same Draft, approval, and publishing process.",
+    talkTrack:
+      "For this public-site journey, Search retrieves published guidance and structured answers support AI discovery. SitecoreAI assistants can help marketers draft and refine brand-aligned copy; Profound intake would be a proposed integration, with human review.",
+  },
+  portal: {
+    demonstrated:
+      "Known profile attributes and explicit native rules select relevant agent guidance and evaluate the recorded marketing choice.",
+    nextStep:
+      "SitecoreAI assistants and Agentic Studio can help prepare audience-specific campaign drafts. Liberty Mutual could adopt those drafts within the same human review, publication, and marketing-eligibility controls.",
+    talkTrack:
+      "Known attributes and explicit rules select the agent experience today. SitecoreAI’s available AI assistants and Agentic Studio can prepare audience-specific campaign drafts; Liberty Mutual could adopt those within the same review and eligibility controls.",
+  },
+};
 
 /** Thirteen customer cards, retaining the original row and left-to-right order. */
 export const customerDemoChapters: DemoChapter[] = [
@@ -67,7 +90,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The conversational question retrieves relevant Liberty Mutual guidance with a source. The unsupported subject offers an agent-assisted next step instead of unrelated answers.",
         ],
         talkTrack: [
-          "A customer can ask a question in their own words and reach Liberty Mutual’s approved guidance and source. When the content does not address the subject, the experience offers help from an agent.",
+          "A visitor asks, “Can I combine home and car coverage?” Search takes them to Liberty Mutual’s approved guidance and its source. If the published content does not address their question, the experience offers help from an agent. The customer has a useful next step, and Liberty Mutual stays in control of the guidance.",
         ],
         controls: [
           "**SitecoreAI Search** retrieves and ranks published guidance. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
@@ -88,7 +111,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Search engines and AI answer engines can find and cite the right LM content",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 2,
+        durationMinutes: 1,
         objective:
           "Make approved guidance easier to find and reuse, with its source, applicability, and review information kept explicit.",
         stopWhen:
@@ -102,7 +125,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The same governed answer supplies its native fields, managed taxonomy, canonical metadata, and structured answer data.",
         ],
         talkTrack: [
-          "The answer is structured content with a source, owner, applicability, and review dates. Managed choices keep classifications consistent, while canonical metadata and structured answer data give search and AI consumers clear meaning.",
+          "The visitor asked, “Can I combine home and car coverage?” Here is the approved “Can I bundle my car and home insurance?” content: its question, answer, source, owner, applicability, and review dates.",
+          customerDemoAiContext.public.talkTrack,
         ],
         controls: [
           "**Page Builder → Content → Quick Info** identifies the native template. **Resource metadata** classifies the referenced **Approved answer** using lists maintained beneath **Data → Taxonomy**.",
@@ -137,7 +161,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "A single approved source publication updates the native Search record automatically, including the changed body and unchanged applicability metadata.",
         ],
         talkTrack: [
-          "The publisher releases the approved answer once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages one answer across these delivery channels.",
+          "When that car-and-home guidance changes, the publisher releases the approved revision once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages one answer across these delivery channels.",
         ],
         controls: [
           "The **OnEnd** publication event calls the configured publication service, which reconciles approved Live content through the **Search Push API**. This mapping indexes the **Approved answers** library, including the answer’s wording and applicability metadata.",
@@ -180,7 +204,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The new page is previewed and published without code changes, using approved components, independent local content, a reused Promotion, and separate workflow roles.",
         ],
         talkTrack: [
-          "The marketer starts with an approved structure and permitted components. Local copy remains independently editable, while the shared Promotion is reused. The Author submits, the Approver reviews, and the publisher releases the approved page without a frontend deployment.",
+          "The same publishing controls also support a complete page. The marketer starts with an approved structure and permitted components. Local copy remains independently editable, while the shared Promotion is reused. The Author submits, the Approver reviews, and the publisher releases the approved page without a frontend deployment.",
         ],
         controls: [
           "**Landing page** creates local **Hero** and **Introduction** items. Placeholder settings restrict the available components. **Assign** reuses the existing Promotion; **Compact** changes only its presentation.",
@@ -217,7 +241,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The audience understands where proposed upstream content enters and how native governance controls its publication.",
         ],
         talkTrack: [
-          "Profound publishing is an option Liberty Mutual is exploring. A scoped integration could map proposed content into the appropriate template as a draft. The normal human review, approval, and publication controls would then apply.",
+          "That review process can also support content proposed by an upstream tool such as Profound. Liberty Mutual is exploring this option. A scoped integration could map proposed content into the appropriate template as a draft. The normal human review, approval, and publication controls would then apply.",
         ],
         controls: [
           "Profound intake uses a proposed integration design with scoped API permissions, template mapping, Draft creation, and human review.",
@@ -231,7 +255,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Quick-answer analytics for marketers",
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
-        durationMinutes: 2,
+        durationMinutes: 1,
         objective:
           "Help marketers choose which guidance to improve using visits, clicks, and reading-depth signals.",
         stopWhen:
@@ -245,7 +269,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "A marketer can inspect genuine, consented engagement for the public site without a separate analytics request.",
         ],
         talkTrack: [
-          "The marketer can see page visits, content clicks, and reading depth in one platform view. Use these timely engagement signals to identify useful content and opportunities to improve the customer journey.",
+          "Once guidance is published, the marketer can see page visits, content clicks, and reading depth in one platform view. Those timely engagement signals help the marketing team identify useful content and opportunities to improve the customer journey.",
         ],
         controls: [
           "The **Site** filter separates this application’s events from the Agent Portal, and **Time → 1 hour** defines the reporting period. Use the events and timestamps actually present.",
@@ -278,7 +302,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Decoupled delivery with a stable content API",
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
-        durationMinutes: 1,
+        durationMinutes: 2,
         objective:
           "Reuse one approved answer through a stable API, reducing duplicate content maintenance across applications.",
         stopWhen:
@@ -292,7 +316,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The separate rendered API consumer and public article present the same approved source change without re-entering content.",
         ],
         talkTrack: [
-          "This application retrieves the same published answer through a stable API and presents it in its own layout. The wording and governance information travel together. This is the kind of approved content feed LibertyAir could consume.",
+          "The same approved car-and-home guidance can also serve another application. Here, a separate application retrieves it through a stable API and presents it in its own layout. The wording and governance information travel together. This is the kind of approved content feed LibertyAir could consume.",
+          "The car-and-home answer we just reused is managed in SitecoreAI and published to Experience Edge. Edge sits between authoring and the applications that deliver the experience. Frontends retrieve published content and layout through GraphQL, while Liberty Mutual controls its hosting and development process. A public website, an authenticated Agent Portal, or another application can consume that content. Approved content publication stays separate from the frontend build and deployment cycle.",
         ],
         controls: [
           "The versioned **/api/content/v1/answers/** endpoint reads approved published content from **Live Experience Edge**. The API envelope and second application are implementation components around the native governed source.",
@@ -304,6 +329,10 @@ export const customerDemoChapters: DemoChapter[] = [
             href: "/workshops/content-api",
           },
           { label: "Compare the public article", href: `${ARTICLE}` },
+          {
+            label: "Open the Experience Edge diagram in the shared deck",
+            href: "https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A",
+          },
         ],
         images: [
           {
@@ -331,7 +360,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The content can serve more than one application. Now apply the same governed foundation to an independent agent’s daily priorities.",
+          "Show **slide 19: Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A) to connect authoring, publication, and GraphQL delivery to applications. Then continue to the Agent Portal.",
       },
     ],
   },
@@ -349,26 +378,31 @@ export const customerDemoChapters: DemoChapter[] = [
           "Agent sees product content, and bundles based on their business, relationship and priorities",
         phase: "Agent Experience",
         sourceSlide: 11,
-        durationMinutes: 3,
+        durationMinutes: 5,
         objective:
-          "Help agents focus on relevant product conversations based on their role, licensed states, and agency production.",
+          "Match guidance to each agent’s business, and honor a recorded marketing opt-out through a native eligibility decision.",
         stopWhen:
-          "Avery and Daniel’s different Home priorities match their native profile tests, and the saved marketing-eligibility condition has been shown.",
+          "The native profile tests explain Avery and Daniel’s priorities, and Cameron’s outreach eligibility has changed from included to excluded and back to included, using the same Native profile ID.",
         actions: [
           `In the prepared **avery.01** session, open the [**live Agent Portal Home**](${PORTAL}/). Confirm **Avery Brooks** and **Cedar Ridge Insurance**. Find **Priorities for your agency**: **Build a stronger small-business practice**, **Support workers’ compensation conversations in Texas**, and **Connect home and auto conversations**. Open **Your profile** to identify her principal role and **Licensed states: Texas, Illinois, and Florida**.`,
           `In the separate prepared **daniel.01** session, open [**Home**](${PORTAL}/). Confirm **Daniel Ortiz** and **Prairie Oak Insurance**, then compare his household-first priorities. Open **Your profile** to identify his producer role and **Licensed states: Illinois and Texas**.`,
           `In the administrator profile, open [**Agent Portal Home in Page Builder**](${portalEditor}), keep **Default editing host**, choose **Layers**, and select **Agency priorities**. In the right-hand component panel, choose **Edit personalization rules**, then confirm the **Liberty Mutual - Agency product priorities** Builder. If it is already open from preparation, continue there. Use **Select profile → Load profile**, change **Client ID** to **Profile ID**, and load Avery’s current **Native profile ID** UUID copied during preparation from [**Current profile identities for 01**](/workshops/reset#current-profiles). Confirm **Testing as: Avery Brooks - 01** and a green **agency-growth** match. Load Daniel’s current ID the same way; confirm **Testing as: Daniel Ortiz - 01** and a green **producer-priorities** match. Choose **Cancel** after these read-only tests.`,
-          `Open the prepared [**Agents eligible for marketing**](${AUDIENCE}) Audience. Show its **Live** rule, **Marketing Suppressed → is false**. This requires an explicit false value; true and missing values do not qualify. Leave the rule unchanged, without pausing it or starting another import.`,
+          `Open the prepared [**Liberty Mutual marketing eligibility → Configuration**](${MARKETING_ELIGIBILITY}). Point to **API response**: the native rule requires an identified profile and **marketingSuppressed === false**. Open the prepared [**Communication preferences**](/workshops/preferences) page. In **Start with two matched agent profiles**, confirm **SitecoreAI confirmed the imported records**. Both Cameron records have the same agency, producer role, and Texas context; their marketing choice differs. Record **Cameron Ellis - Allowed**’s **Native profile ID**. In **Marketing outreach preview**, select **Run eligibility check**. Confirm **1 eligible recipient**: only **Cameron Ellis - Allowed** is included by the native decision.`,
+          "Select **Opt out Cameron**, then use **Check import status** until **SitecoreAI confirmed the imported records** appears. The first card keeps the name **Cameron Ellis - Allowed**, but now shows **marketingSuppressed = true**. Confirm its **Native profile ID** is unchanged. Select **Run eligibility check** again, and show **No eligible recipients**. Under **Native decision receipts**, confirm **marketingEligible = false** and **Same profile as this session’s first check** for Cameron. Both comparison profiles are now excluded by the runtime decision.",
+          "Select **Restore preferences**, wait for **SitecoreAI confirmed the imported records**, and select **Run eligibility check** again. Confirm **1 eligible recipient** again: the original **Cameron Ellis - Allowed** record is included again, with the same **Native profile ID**; **Cameron Ellis - Suppressed** remains excluded. End with this restored result visible.",
         ],
         expected: [
-          "The two native profile matches explain the different signed-in priority experiences, while the saved Audience rule respects a known communication choice.",
+          "Native profile matches explain Avery and Daniel’s different guidance. A fresh native outreach decision includes Cameron, excludes the same profile after opt-out, and includes it again after restoration.",
         ],
         talkTrack: [
-          "The known agent’s role, licenses, specialization, and agency production inform relevant priorities. Avery and Daniel match different native experiences. A stored communication choice can also govern marketing eligibility. Liberty Mutual can keep Ping for sign-in and supply this context from its existing systems.",
+          "Avery’s principal role and Daniel’s producer role lead to different priorities. For marketing outreach, the two Cameron records share the same agency, role, and Texas context. Their recorded choice determines eligibility. When we record Cameron’s opt-out, SitecoreAI updates the same native profile and the runtime decision excludes him. Restoring the preference restores eligibility. Liberty Mutual can keep Ping for sign-in and supply profile context from its existing systems.",
+          customerDemoAiContext.portal.talkTrack,
         ],
         controls: [
-          "The native rule uses imported UDL attributes. The application separately enforces licensed-state eligibility alongside the content personalization.",
-          "**Load profile → Profile ID** evaluates actual native profiles. **Current profile identities → Refresh status** provides current IDs after a reset. The optional Boolean **marketingSuppressed** must be explicitly false for the separate saved marketing Audience.",
+          "The native guidance rules use imported UDL attributes, including role, specialization, and agency production. The application separately enforces licensed-state eligibility alongside the content personalization.",
+          "**Load profile → Profile ID** evaluates actual native profiles. **Current profile identities → Refresh status** provides current IDs after a reset.",
+          "**Communication preferences** supplies sample preference-center input and imports the choice into the native **Unified Data Layer**. The **Marketing outreach preview** calls **Liberty Mutual marketing eligibility**, a native runtime personalization that requires an explicit false value for the Boolean **marketingSuppressed**. True and missing values do not qualify.",
+          "**Run eligibility check** evaluates the actual native profiles again. The application uses the returned native eligibility response to include or withhold the email preview before downstream campaign delivery. Scheduled Audience membership and approximate counts are not used as the proof.",
         ],
         links: [
           { label: "Live Agent Portal Home", href: `${PORTAL}/` },
@@ -380,7 +414,14 @@ export const customerDemoChapters: DemoChapter[] = [
             label: "Current profile IDs for presenter accounts",
             href: "/workshops/reset#current-profiles",
           },
-          { label: "Marketing eligibility Audience", href: `${AUDIENCE}` },
+          {
+            label: "Open Communication preferences and outreach preview",
+            href: "/workshops/preferences",
+          },
+          {
+            label: "Open native marketing eligibility Configuration",
+            href: MARKETING_ELIGIBILITY,
+          },
         ],
         images: [
           {
@@ -397,30 +438,6 @@ export const customerDemoChapters: DemoChapter[] = [
                 height: 39,
                 label:
                   "Compare the ordered cards in **Priorities for your agency**.",
-              },
-            ],
-          },
-          {
-            file: "customer-demo-suppression.png",
-            title: "Inspect the native exclusion rule",
-            alt: "Agents eligible for marketing Audience with Marketing Suppressed is false and an Audience size of one",
-            caption:
-              "**Marketing Suppressed → is false** requires a known eligible choice. The prepared matched profiles differ in this preference, and the native Audience includes the eligible record.",
-            annotations: [
-              {
-                x: 7,
-                y: 52,
-                width: 57,
-                height: 10,
-                label:
-                  "Read the native **Marketing Suppressed → is false** rule.",
-              },
-              {
-                x: 71,
-                y: 27,
-                width: 25,
-                height: 8,
-                label: "Inspect the calculated **Audience size**.",
               },
             ],
           },
@@ -448,7 +465,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The visitor experience is visually consistent, and the authoring library exposes governed component choices.",
         ],
         talkTrack: [
-          "The portal keeps a consistent design while business users manage its content. Shared structure and placeholder settings give authors approved building blocks and appropriate places for them.",
+          "Shared design keeps these personalized experiences consistently on brand. The portal’s shared structure and placeholder settings give business users approved components and appropriate places for them.",
         ],
         controls: [
           "**Page designs**, **partial designs**, native renderings, and **placeholder settings** govern reusable structure and permitted composition. Content edits remain separate from component code.",
@@ -484,7 +501,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The new Draft references the same approved cards in the new order. Avery’s live page retains the published order until the following preview and publication loop completes.",
         ],
         talkTrack: [
-          "The business user changes the ordered selection of approved conversations without an engineering ticket or frontend release. The live experience stays consistent while the team prepares and reviews its next priority.",
+          "Within that governed design, the business user can change the order of approved conversations without an engineering ticket or frontend release. Here, the team prepares a Texas-first priority for Avery in Draft while agents continue to see the current approved experience.",
         ],
         controls: [
           "**Ordered recommendations** is an ordered native item selection. This collection supplies the **agency-growth** experience, while **Producer priorities** supplies a separate experience.",
@@ -519,7 +536,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Native Preview shows the changed principal and unchanged producer collections. Publishing the reviewed collection updates Avery without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
         ],
         talkTrack: [
-          "The marketer previews both configured experiences before release. The principal receives the new emphasis, while the producer keeps the appropriate producer guidance. Separate approval and publication then make the intended change visible to the actual agent.",
+          "Before publishing that Texas-first priority, the marketer previews both configured experiences. The principal preview shows Avery’s new emphasis, while the producer preview keeps Daniel’s guidance unchanged. Separate approval and publication then make the reviewed change visible to Avery.",
         ],
         controls: [
           "**agency-growth** and **producer-priorities** are the native experience names. Their datasource selections display each configured experience in Preview; **Load profile** tests the real profile, and signed-in agent browsers verify the live result.",
@@ -560,7 +577,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Both independent sites display the changed sentence from the same governed disclosure, without separate copy edits or frontend releases.",
         ],
         talkTrack: [
-          "Both sites reference one governed disclosure. The content team changes it once, follows the review process, and publishes the source. Each site keeps its own layout while displaying the same approved message.",
+          "A single approved disclosure must stay consistent across the public website and Agent Portal. Both sites reference its shared source. The content team changes it once, follows the review process, and publishes the source. Each site keeps its own layout while displaying the same approved message.",
         ],
         controls: [
           "**Product availability notice** belongs to the public site’s **Data → Disclosures** library. Both sites reference that same native item, keeping the approved wording in one place.",
@@ -597,7 +614,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native history records the real workflow users, timestamps, and comments. A newer reviewed version restores both sites while preserving the original and changed versions.",
         ],
         talkTrack: [
-          "The workflow records who submitted and approved the change and when those decisions occurred. Restoring the original wording is another reviewed change, preserving the audit trail while returning both sites to the approved message.",
+          "That shared disclosure also gives us a clear audit trail. The workflow records who submitted and approved the change and when those decisions occurred. Restoring the original wording is another reviewed change, preserving the audit trail while returning both sites to the approved message.",
         ],
         controls: [
           "**Editor → Sitemap → Home → Content tree options → Page items → Product availability notice → Workflow history** shows actual transitions and comments.",

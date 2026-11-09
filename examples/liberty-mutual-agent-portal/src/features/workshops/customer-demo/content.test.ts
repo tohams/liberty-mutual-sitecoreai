@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { customerDemoChapters } from "./content";
+import { customerDemoAiContext, customerDemoChapters } from "./content";
 import {
   customerDemoSchedule,
   DEMO_CLOSING_MINUTES,
@@ -130,36 +130,62 @@ test("all thirteen customer cards retain the prescribed chapters, rows, and read
   );
 });
 
-test("the focused live plan leaves four minutes within the forty-five-minute limit", () => {
+test("both customer journeys explain demonstrated behavior and a bounded AI-assisted next step", () => {
+  assert.deepEqual(Object.keys(customerDemoAiContext), ["public", "portal"]);
+  for (const chapter of customerDemoChapters) {
+    const explanation = customerDemoAiContext[chapter.id];
+    assert(explanation.demonstrated.trim());
+    assert(explanation.nextStep.trim());
+    assert(explanation.talkTrack.trim());
+    assert(
+      explanation.talkTrack.split(/\s+/).length <= 45,
+      `${chapter.id}: keep the AI explanation brief enough for the existing journey`,
+    );
+  }
+  assert.match(customerDemoAiContext.public.nextStep, /proposed Profound/i);
+  assert.match(customerDemoAiContext.public.nextStep, /human review/i);
+  assert.match(
+    customerDemoAiContext.portal.demonstrated,
+    /explicit native rules/i,
+  );
+  assert.match(customerDemoAiContext.portal.nextStep, /could adopt/i);
+  assert.match(customerDemoAiContext.portal.nextStep, /human review/i);
+  assert.doesNotMatch(
+    prose(customerDemoAiContext),
+    /automatically publishes|guaranteed citation|unannounced roadmap/i,
+  );
+});
+
+test("the focused live plan leaves three minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [2, 2, 4, 8, 1, 2, 1],
+    [2, 1, 4, 8, 1, 1, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [3, 2, 2, 4, 4, 4],
+    [5, 2, 2, 4, 4, 4],
   );
   const schedule = customerDemoSchedule(customerDemoChapters);
   assert.equal(DEMO_OPENING_MINUTES, 1);
   assert.equal(DEMO_CLOSING_MINUTES, 1);
-  assert.equal(DEMO_BUFFER_MINUTES, 4);
+  assert.equal(DEMO_BUFFER_MINUTES, 3);
   assert.equal(DEMO_TOTAL_MINUTES, 45);
   assert.deepEqual(
     schedule.map(({ start, end }) => [start, end]),
     [
       [1, 3],
-      [3, 5],
-      [5, 9],
-      [9, 17],
+      [3, 4],
+      [4, 8],
+      [8, 16],
+      [16, 17],
       [17, 18],
       [18, 20],
-      [20, 21],
-      [21, 24],
-      [24, 26],
-      [26, 28],
-      [28, 32],
-      [32, 36],
-      [36, 40],
+      [20, 25],
+      [25, 27],
+      [27, 29],
+      [29, 33],
+      [33, 37],
+      [37, 41],
     ],
   );
   assert.deepEqual(
@@ -167,7 +193,7 @@ test("the focused live plan leaves four minutes within the forty-five-minute lim
     STABLE_ANCHORS,
   );
   const planned = schedule.at(-1)!.end + DEMO_CLOSING_MINUTES;
-  assert.equal(planned, 41);
+  assert.equal(planned, 42);
   assert.equal(planned + DEMO_BUFFER_MINUTES, DEMO_TOTAL_MINUTES);
   assert.deepEqual([0, 1, 21, 40, 45].map(elapsedTime), [
     "00:00",
@@ -500,7 +526,7 @@ test("API reuse stops after the second experience loads the same published answe
   assert(linksIn(entry).some((link) => link.href === "/workshops/content-api"));
 });
 
-test("the relevance loop compares two real profiles and one saved suppression rule", () => {
+test("the relevance loop proves profile relevance and same-profile native marketing suppression", () => {
   const entry = step("portal-relevance");
   const text = prose(entry);
   for (const required of [
@@ -539,10 +565,46 @@ test("the relevance loop compares two real profiles and one saved suppression ru
       action,
       /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i,
     );
-  assert.match(text, /without pausing.*starting another import/i);
+  const baseline = actionIndex(
+    entry.id,
+    /Marketing outreach preview.*Run eligibility check.*only Cameron Ellis - Allowed/i,
+  );
+  const optout = actionIndex(
+    entry.id,
+    /Opt out Cameron.*Check import status.*Native profile ID.*unchanged.*Run eligibility check.*No eligible recipients/i,
+  );
+  const restore = actionIndex(
+    entry.id,
+    /Restore preferences.*Run eligibility check.*included again.*same Native profile ID/i,
+  );
+  assert(baseline < optout && optout < restore);
+  assert.match(
+    prose(entry.controls),
+    /Liberty Mutual marketing eligibility.*native runtime personalization/i,
+  );
+  assert.match(entry.stopWhen, /included to excluded and back to included/i);
+  assert.match(entry.stopWhen, /same Native profile ID/i);
+  assert(linksIn(entry).some((link) => link.href === "/workshops/preferences"));
+  assert(
+    linksIn(entry).some(
+      (link) =>
+        link.href.includes(
+          "/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b",
+        ) && link.href.includes("section=configuration"),
+    ),
+    "Show the native enabling rule alongside the recorded choice and recipient outcome",
+  );
+  assert.match(
+    prose(entry.actions),
+    /API response.*marketingSuppressed === false/i,
+  );
+  assert.match(
+    prose(entry.actions),
+    /Native decision receipts.*marketingEligible = false.*Same profile as this session’s first check/i,
+  );
   assert.doesNotMatch(
     prose(entry.actions),
-    /Cameron|Products & appetite|Profile schema|Load preference examples|Opt out|Recalculate/,
+    /Products & appetite|Load preference examples|Audience size|Recalculate|Pause.*Audience|6 hours/,
   );
   assert.match(
     text,

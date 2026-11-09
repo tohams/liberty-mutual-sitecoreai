@@ -20,6 +20,7 @@ const CONTEXT =
   "organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df";
 const SCHEMA = `https://app.sitecorecloud.io/optimization/settings/profile-schema?${CONTEXT}`;
 const AUDIENCES = `https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?${CONTEXT}`;
+const PERSONALIZATION = `https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&${CONTEXT}`;
 const IMPORTS = `https://app.sitecorecloud.io/optimization/settings/profile-import?${CONTEXT}`;
 
 export default async function MarketingPreferencesPage() {
@@ -39,8 +40,10 @@ export default async function MarketingPreferencesPage() {
             An agent’s communication choice can come from a preference center or
             another business system. Send a known preference to
             <strong> SitecoreAI’s Unified Data Layer</strong>, inspect the
-            native profiles, and see how an <strong>Audience</strong> can
-            exclude people who have opted out of marketing.
+            native profiles, and let a live native personalization decide who
+            receives a <strong>Marketing outreach preview</strong>. Observe the
+            same agent become eligible, opt out, and become eligible again after
+            restoration.
           </p>
           <Link
             className="workshop-inline-link"
@@ -52,7 +55,7 @@ export default async function MarketingPreferencesPage() {
 
         <ol
           className={styles.flow}
-          aria-label="How a known preference reaches an audience"
+          aria-label="How a known preference controls marketing outreach"
         >
           <li>
             <UserCheck size={23} />
@@ -76,10 +79,10 @@ export default async function MarketingPreferencesPage() {
           <li>
             <ListFilter size={23} />
             <div>
-              <strong>Apply an audience exclusion</strong>
+              <strong>Withhold the marketing outreach</strong>
               <span>
-                The native Audience rule reads the stored suppression
-                preference.
+                A live native decision reads the stored choice. An opted-out
+                profile receives no outreach preview.
               </span>
             </div>
           </li>
@@ -93,22 +96,25 @@ export default async function MarketingPreferencesPage() {
         >
           <span className="workshop-eyebrow">INSPECT THE NATIVE CONTROLS</span>
           <h2 id="inspect-native-preferences">
-            Connect the choice to audience eligibility
+            Inspect the stored choice and the live decision
           </h2>
           <p>
             In <strong>Profile schema</strong>, find the published extension
             fields that describe the imported preference. Open each comparison
-            profile from its card to inspect its stored attributes, then open
-            <strong> Audiences</strong> to inspect the rule that excludes a
-            suppressed profile. The{" "}
-            <strong>Agents eligible for marketing</strong>{" "}
-            Audience requires <strong>Marketing Suppressed</strong> to be{" "}
-            <strong>false</strong>.
-            Profiles with a true or unspecified value are excluded. The sample
-            input and this page are application code; profile storage, the
-            schema, and audience rules are native SitecoreAI capabilities.
+            profile from its card to inspect its stored attributes. Open
+            <strong> Liberty Mutual marketing eligibility</strong> to inspect
+            the native personalization: it reads the profile’s stored{" "}
+            <strong>marketingSuppressed</strong>
+            value and returns <strong>marketingEligible = true</strong> only for
+            an explicit false suppression choice. A true or unspecified choice
+            is ineligible. The page displays a recipient only after receiving a
+            valid native response for the same profile ID as the completed
+            import.
           </p>
           <div className={styles.links}>
+            <a href={PERSONALIZATION} target="_blank" rel="noopener noreferrer">
+              Open Liberty Mutual marketing eligibility <ArrowRight size={15} />
+            </a>
             <a href={SCHEMA} target="_blank" rel="noopener noreferrer">
               Open Profile schema <ArrowRight size={15} />
             </a>
@@ -123,22 +129,20 @@ export default async function MarketingPreferencesPage() {
             </Link>
           </div>
           <p>
-            After an import is confirmed, use this comparison Audience to
-            estimate the matching profiles. If it is <strong>Live</strong>,
-            select <strong>Pause</strong> and wait for <strong>Paused</strong>.
-            Open <strong>Overview</strong>, select <strong>Recalculate</strong>,
-            and wait for the <strong>Audience size</strong> estimate. This sample
-            Audience is not connected to a campaign. Recalculation previews the
-            rule’s result; saved live membership updates on the Audience’s
-            schedule.
+            The preference input and email preview are part of this
+            implementation. Profile storage, the schema, profile import, and the
+            live personalization are native <strong>SitecoreAI</strong>{" "}
+            capabilities. No email is sent. Operational services and licensing
+            guidance are not marketing messages; this choice does not remove an
+            agent’s access to those services.
           </p>
           <p>
-            After reading the estimate, select <strong>Resume</strong>. In{" "}
-            <strong>Change schedule</strong>, set <strong>Every</strong> to{" "}
-            <strong>6 hours</strong>, select <strong>Apply</strong>, and confirm{" "}
-            <strong>Live</strong>. Repeat this pause, estimate, and resume
-            sequence after the opt-out and restoration imports. The live
-            schedule calculates saved membership separately from the estimate.
+            The saved <strong>Agents eligible for marketing</strong> Audience is
+            an additional example of a marketer-managed rule using
+            <strong> Marketing Suppressed is false</strong>. Its membership
+            follows its own schedule. The outreach preview uses a fresh native
+            decision for every check, so this walkthrough does not wait for an
+            Audience calculation.
           </p>
         </section>
 

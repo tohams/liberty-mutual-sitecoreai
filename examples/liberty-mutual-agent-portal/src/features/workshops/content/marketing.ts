@@ -1654,16 +1654,16 @@ export const marketingGuides: WorkshopGuide[] = [
     accountScope: "presenter",
     title: "Honor communication preferences",
     summary:
-      "Follow a known communication choice from sample preference-center input into real **SitecoreAI Unified Data Layer** profiles and a native **Audience** exclusion. Compare two matched agents, record an opt-out, and restore the starting preferences.",
+      "Follow a known communication choice into real **SitecoreAI Unified Data Layer** profiles, then use a live native personalization to include or withhold a **Marketing outreach preview**. Opt out the same agent, observe the outreach disappear, and restore the starting choice.",
     outcome:
-      "You can distinguish an external preference source, native profile storage, a marketer-managed audience rule, and the public website’s optional collection controls. You know how a known opt-out can exclude a profile from marketing eligibility.",
+      "You can follow the complete control: preference input, native profile update, live native eligibility response, and marketing outreach withheld. The same profile remains identifiable throughout, and operational access remains available.",
     personas: ["Authorized Sitecore user"],
     prerequisites: [
-      "Sign in to this workshop website if requested, then open [**Communication preferences**](/workshops/preferences). Its buttons send fixed sample preference records into SitecoreAI’s real **Profile import** service. The preference-center input is part of this implementation; native profiles, the profile schema, and the Audience are part of SitecoreAI.",
-      `Open [**SitecoreAI**](${SITECORE}) using your authorized **Sitecore Cloud** account. Confirm **Safeco Insurance Company of America POC** and **SitecoreAI / Demo**. The portal’s persona logins do not grant access to this administrative and marketing interface.`,
-      "This is a **Presenter demonstration** because the two comparison profiles and the Audience calculation are shared. One presenter runs the imports and restores the baseline while participants inspect the same native records.",
-      "The comparison uses **Cameron Ellis - Allowed** and **Cameron Ellis - Suppressed** at **Lakeside Independent Insurance**. Both have **Texas** and **producer** attributes. The suffixes identify their starting records; the current **marketingSuppressed** value determines eligibility. The records are separate from the numbered portal logins.",
-      "Imports and Audience calculations are asynchronous. Wait for each recorded import to finish before starting the next action. Use **Check import status** to inspect an existing import; refreshing the page reads its saved receipt and does not resend it.",
+      "Sign in to the workshop website if requested, then open [**Communication preferences**](/workshops/preferences). Its buttons send fixed sample preference records into SitecoreAI’s real **Profile import** service. The email is a preview; no email is sent.",
+      `Open [**SitecoreAI**](${SITECORE}) using your authorized **Sitecore Cloud** account. Confirm **Safeco Insurance Company of America POC** and **SitecoreAI / Demo**. The portal’s persona logins provide access to the agent portal, while your Sitecore account opens the authoring and marketing platform.`,
+      "This is a **Presenter demonstration** because the two comparison profiles are shared. One presenter runs the imports and restores the baseline while participants inspect the same native records.",
+      "The comparison uses **Cameron Ellis - Allowed** and **Cameron Ellis - Suppressed** at **Lakeside Independent Insurance**. Both have **Texas** and **producer** attributes. The suffixes identify their starting records. Their stored **marketingSuppressed** choice is evaluated by the native **Liberty Mutual marketing eligibility** personalization. These records are separate from numbered portal logins.",
+      "Profile imports run asynchronously. Wait for **SitecoreAI confirmed the imported records** before each eligibility check. Use **Check import status** to inspect an existing import. Refreshing the page reads its saved receipt and does not resend it.",
     ],
     links: [
       {
@@ -1675,8 +1675,8 @@ export const marketingGuides: WorkshopGuide[] = [
         href: `https://app.sitecorecloud.io/optimization/settings/profile-schema?organization=${ORG}&tenantId=${TENANT}`,
       },
       {
-        label: "Open Agents eligible for marketing",
-        href: `https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}`,
+        label: "Open Liberty Mutual marketing eligibility",
+        href: `https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&organization=${ORG}&tenantId=${TENANT}`,
       },
     ],
     repositoryFiles: [
@@ -1688,93 +1688,84 @@ export const marketingGuides: WorkshopGuide[] = [
         label: "Native import coordination and receipt handling",
         path: "examples/liberty-mutual-agent-portal/src/server/udl/marketing-preferences.ts",
       },
+      {
+        label: "Native runtime eligibility transport",
+        path: "examples/liberty-mutual-agent-portal/src/server/udl/marketing-eligibility.ts",
+      },
     ],
     steps: [
       {
-        title: "Load the two preference examples",
+        title: "Load the two starting choices",
         action: [
-          "Open [**Communication preferences**](/workshops/preferences). Read **Start with two matched agent profiles**, then click **Load preference examples** once.",
-          "Watch the import status. The page checks an accepted import a limited number of times. If processing continues, click **Check import status** until **SitecoreAI confirmed the imported records** appears. Keep the **Native import batch** identifier for comparison with native import history.",
-          "Read the two **Submitted preference** badges: **Cameron Ellis - Allowed** has **marketingSuppressed = false**, and **Cameron Ellis - Suppressed** has **marketingSuppressed = true**.",
+          "Open [**Communication preferences**](/workshops/preferences). Under **Start with two matched agent profiles**, click **Load preference examples** once.",
+          "Wait for **SitecoreAI confirmed the imported records**. If processing continues, click **Check import status**. The cards show **marketingSuppressed = false** for **Cameron Ellis - Allowed**, and **marketingSuppressed = true** for **Cameron Ellis - Suppressed**.",
+          "Record **Cameron Ellis - Allowed**’s **Native profile ID**. Later imports must update this same profile.",
         ],
         expected: [
-          "The real Profile import creates or updates two dedicated comparison records, depending on whether these examples have been loaded before. A successful import has no failed records.",
-          "The badges describe the submitted input. The completed import receipt confirms native processing; the following step opens SitecoreAI to inspect the actual stored profiles.",
-          "A queued or pending result is an in-progress operation. A request whose acknowledgement is uncertain stays blocked from another upload; use **Check import status** and native **Profile import** history to inspect that same operation.",
+          "A completed native import confirms that both comparison records were created or updated successfully. The badges describe the submitted choices; the next steps inspect the stored values and obtain native decisions.",
         ],
-        note: `If **Check the recorded import before continuing** appears, open [**Profile import history**](https://app.sitecorecloud.io/optimization/settings/profile-import?organization=${ORG}&tenantId=${TENANT}). Select the current preference import and wait until its status is **Completed**. Copy its **batch ID**, paste it into **Native import batch ID**, and click **Recover completed import**. Recovery verifies the import time and source data, and rejects older or unrelated batches. It does not upload the source again.`,
-        links: [
-          {
-            label: "Open native Profile import history",
-            href: `https://app.sitecorecloud.io/optimization/settings/profile-import?organization=${ORG}&tenantId=${TENANT}`,
-          },
+        note: `If **Check the recorded import before continuing** appears, open [**Profile import history**](https://app.sitecorecloud.io/optimization/settings/profile-import?organization=${ORG}&tenantId=${TENANT}). Select the current preference import and wait for **Completed**. Copy its **batch ID** into **Native import batch ID**, and click **Recover completed import**. This verifies the recorded operation without uploading the source again.`,
+      },
+      {
+        title: "Inspect the native control",
+        action: [
+          "On each comparison card, click **Open native profile in SitecoreAI**. Inspect the stored **marketingSuppressed** extension. Compare the matching **agencyName**, **role**, and **state** attributes.",
+          `Open [**Liberty Mutual marketing eligibility**](https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&organization=${ORG}&tenantId=${TENANT}). Inspect its live configuration and **API response**. It reads the stored profile choice and returns **marketingEligible = true** only for an explicitly false suppression value.`,
+        ],
+        expected: [
+          "The native stored values match the imported choices. The personalization returns its eligibility decision and the native profile ID. The application consumes this response to decide whether an outreach preview is included.",
+          "A true or unspecified suppression choice is ineligible. The saved **Agents eligible for marketing** Audience is an additional rule example; this runtime check does not wait for scheduled Audience membership.",
         ],
       },
       {
-        title: "Inspect the native schema and both stored profiles",
+        title: "Show the eligible outreach",
         action: [
-          `Open [**Profile schema**](https://app.sitecorecloud.io/optimization/settings/profile-schema?organization=${ORG}&tenantId=${TENANT}). In **Extensions**, find **marketingSuppressed** and inspect its **Boolean** type and published schema. This field stores a true-or-false marketing preference on the native profile.`,
-          "Return to **Communication preferences**. On each card, click **Open native profile in SitecoreAI**. Inspect the stored extension attributes and compare **marketingSuppressed**: false for the Allowed record and true for the Suppressed record.",
-          "Compare **agencyName**, **role**, and **state** in both profiles. Record each **Native profile ID** from the card so you can verify that later imports update the same records.",
+          "Return to [**Communication preferences**](/workshops/preferences). Find **Marketing outreach preview**, and click **Run eligibility check**.",
+          "Inspect **1 eligible recipient**, the email addressed to **Cameron Ellis - Allowed**, and the two **Native decision receipts**. Read each **marketingEligible** response and **Native profile ID**.",
         ],
         expected: [
-          "The stored native values match the imported choices. Both profiles describe the same agency, role, and Texas context; the suppression preference provides the meaningful eligibility difference.",
-          "The published schema makes the field available to native rules. An optional Boolean can also be unspecified; the Audience in the next step requires an explicit false value instead of treating a missing choice as permission.",
+          "Only **Cameron Ellis - Allowed** receives an email preview. Its native response is **marketingEligible = true**. The Suppressed record returns false and receives no preview. No email is sent.",
+          "Both response IDs match the completed native import. If the native response is unavailable or its stored preference is not yet current, no recipient preview is selected; run the check again after confirming the import.",
         ],
       },
       {
-        title: "Inspect the rule and calculate a comparison estimate",
+        title: "Opt out the same agent and withhold the outreach",
         action: [
-          `Open [**Agents eligible for marketing**](https://app.sitecorecloud.io/optimization/audience/fc7ce3e0-c300-4f2f-9b21-a22058065db8?organization=${ORG}&tenantId=${TENANT}). Inspect the Audience rule: **Marketing Suppressed** is selected, with **is false** as its condition.`,
-          "This Audience is reserved for the preference comparison and is not connected to a campaign. If its status is **Live**, click **Pause** and wait for **Paused**. Open **Overview**, click **Recalculate**, and wait for the **Audience size** estimate. Keep this Audience tab for the opt-out and restoration checks.",
-          "Click **Resume**. In **Change schedule**, set **Every** to **6 hours**, click **Apply**, and confirm **Live**. This restores the scheduled membership calculation after the estimate.",
+          "Click **Opt out Cameron** once. Wait for **SitecoreAI confirmed the imported records**, using **Check import status** if necessary.",
+          "On **Cameron Ellis - Allowed**, verify **marketingSuppressed = true** and the unchanged **Native profile ID**. Open the native profile and refresh it to inspect the stored choice.",
+          "Return to **Marketing outreach preview**, and click **Run eligibility check**. Inspect **No eligible recipients** and both native false responses.",
         ],
         expected: [
-          "The native rule includes a profile only when the stored suppression value is explicitly false. The false-valued Cameron is eligible, while the true-valued Cameron is excluded.",
-          "For the starting comparison, the expected **Audience size** estimate is **1**. Recalculation previews how many profiles match the rule; it does not immediately refresh the saved membership of a live Audience. Live membership updates on its schedule.",
+          "The same known agent is now excluded. The email preview disappears because SitecoreAI returned **marketingEligible = false**, rather than because the page independently checked a local preference. Both comparison records are suppressed.",
+          "The name **Cameron Ellis - Allowed** identifies the starting record. The updated stored choice controls current eligibility. Marketing suppression does not remove operational services or licensing guidance.",
         ],
       },
       {
-        title: "Record Cameron’s opt-out and observe exclusion",
+        title: "Restore the starting choice and verify the full round trip",
         action: [
-          "Return to **Communication preferences**, click **Opt out Cameron** once, and wait for **SitecoreAI confirmed the imported records**. Use **Check import status** if necessary.",
-          "The action updates the initially Allowed record. Its display name remains **Cameron Ellis - Allowed**, but its submitted **marketingSuppressed** choice is now **true**. Open that native profile, refresh it, and verify the stored true value and unchanged **Native profile ID**.",
-          "Return to **Agents eligible for marketing**. If it is **Live**, click **Pause** and wait for **Paused**. Open **Overview**, click **Recalculate**, wait for completion, and inspect the **Audience size** estimate again.",
-          "Click **Resume**. In **Change schedule**, set **Every** to **6 hours**, click **Apply**, and confirm **Live**. This restores the scheduled membership calculation after the estimate.",
+          "Click **Restore preferences**. Wait for **SitecoreAI confirmed the imported records**, using **Check import status** if necessary.",
+          "Verify the same native IDs, with **marketingSuppressed = false** for the Allowed record and **true** for the Suppressed record.",
+          "Click **Run eligibility check**. Confirm **1 eligible recipient** and the original Cameron email preview. Inspect the **Same profile as this session’s first check** indication in the native receipts.",
         ],
         expected: [
-          "The existing Cameron profile has been updated, rather than replaced by another identity. Both comparison records now have a true suppression value.",
-          "The rule now excludes both comparison records. The expected **Audience size** estimate is **0** after recalculation. The rule stayed the same; the imported known choice changed eligibility. Saved live membership follows the Audience’s schedule.",
+          "The starting comparison is restored: one recipient, one excluded profile, and the same native IDs. The full path is visible: choice, profile update, native decision, outreach withheld, and restoration.",
         ],
       },
       {
-        title: "Restore the starting preferences and audience",
-        action: [
-          "Click **Restore preferences** on **Communication preferences**. Wait for **SitecoreAI confirmed the imported records**, using **Check import status** if needed.",
-          "Open the two native profiles again. Verify the original false value for **Cameron Ellis - Allowed**, the original true value for **Cameron Ellis - Suppressed**, and the same **Native profile IDs**.",
-          "On **Agents eligible for marketing**, click **Pause** if it is **Live**, and wait for **Paused**. Open **Overview**, click **Recalculate**, wait for completion, and verify the starting **Audience size** estimate of **1**.",
-          "Click **Resume**. In **Change schedule**, set **Every** to **6 hours**, click **Apply**, and confirm **Live**. This restores the scheduled membership calculation after the estimate.",
-        ],
-        expected: [
-          "The original comparison is restored: one eligible record and one suppressed record, with an estimate of **1** and the six-hour live schedule restored. The two profiles and their native import history remain available for inspection.",
-        ],
-      },
-      {
-        title: "Compare a communication choice with website collection",
+        title: "Distinguish communication preferences from browser privacy",
         action: [
           "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/). Click **Privacy choices** at the lower left, then choose **Essential only**.",
-          "Use the public website’s **Search** to ask **Can I bundle my car and home insurance?** and open the matching approved article. Return to this guide afterward.",
+          "Use **Search** to ask **Can I bundle my car and home insurance?**, and open the matching article. The core information remains available.",
         ],
         expected: [
-          "The website records this browser’s choice to decline optional analytics and personalization collection. Core information retrieval and the approved article remain available.",
-          "That browser collection choice and the imported communication preference have different purposes. The native Cameron profile’s marketing suppression value remains the source for the Audience rule; the website’s consent controls govern its optional browser events.",
+          "The public website honors this browser’s choice about optional analytics and personalization events. The known Cameron marketing preference controls outreach eligibility. These are separate choices with distinct purposes.",
         ],
       },
     ],
     cleanup: {
       body: [
-        "Complete **Restore preferences**, verify both native profile values, and recalculate the Audience estimate back to **1**. Then click **Resume**, set **Every** to **6 hours** in **Change schedule**, click **Apply**, and confirm **Live**. Leave the two dedicated profiles and their import history available; no profile deletion or numbered-portal reset is needed.",
-        "Close extra native profile, Audience, and public website tabs. Your public website browser retains the **Essential only** privacy choice selected in step 6.",
+        "Complete **Restore preferences**, confirm the import, and click **Run eligibility check**. Leave **1 eligible recipient**, the original false/true preference pair, and unchanged native profile IDs. No profile deletion or numbered-portal reset is needed.",
+        "Close temporary native profile and personalization tabs. For another public-site journey, open **Privacy choices**, and choose **Allow personalization** when that journey requires optional collection.",
       ],
       links: [
         {

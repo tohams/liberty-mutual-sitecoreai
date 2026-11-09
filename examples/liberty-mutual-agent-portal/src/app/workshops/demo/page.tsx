@@ -5,7 +5,10 @@ import { requireWorkshopSession } from "@/server/workshops/auth";
 import { WorkshopShell } from "@/features/workshops/WorkshopShell";
 import { GuideText } from "@/features/workshops/GuideText";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
-import { customerDemoChapters } from "@/features/workshops/customer-demo/content";
+import {
+  customerDemoAiContext,
+  customerDemoChapters,
+} from "@/features/workshops/customer-demo/content";
 import {
   customerDemoSchedule,
   DEMO_BUFFER_MINUTES,
@@ -125,7 +128,9 @@ export default async function CustomerDemoPage() {
                     "Open [**Current profile identities**](/workshops/reset#current-profiles), select **Workshop number 01**, and choose **Refresh status**. Copy the **Native profile ID** for **avery.01** and **daniel.01** for the native rule tests in step 08. Refresh this table after a reset so the tests use the current profiles. If an ID is unavailable, open [**SitecoreAI Profiles**](https://app.sitecorecloud.io/optimization/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df), choose **Search filter → Liberty Mutual agent identity**, and paste that row’s **Agent identity**. Open the matching profile, and copy the UUID from its URL. Reading status does not start a reset.",
                     "Prepare three separate **Sitecore Cloud** browser profiles: **Author** can edit and submit, **Approver** can approve, and an **administrator acting as publisher** performs publication. Open **Safeco Insurance Company of America POC** → **SitecoreAI / Demo**. Keeping these profiles ready demonstrates the actual permission boundaries without spending the live slot signing in.",
                     "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, approved answers, and shared disclosure. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
-                    "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/), [**published-answer API experience**](/workshops/content-api), and **SitecoreAI** in the prepared browser profiles. Confirm that the comparison profiles and the **Agents eligible for marketing** Audience have their restored starting values.",
+                    "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/), [**published-answer API experience**](/workshops/content-api), and **SitecoreAI** in the prepared browser profiles. Keep the presentation’s **slide 19: Experience Edge content delivery** ready for the short architecture bridge after the API example.",
+                    "Prepare [**Communication preferences**](/workshops/preferences) before the audience joins. Select **Load preference examples** once, and use **Check import status** until **SitecoreAI confirmed the imported records** appears. Confirm **Cameron Ellis - Allowed** has **marketingSuppressed = false** and **Cameron Ellis - Suppressed** has **marketingSuppressed = true**. Record both **Native profile IDs**. These two records share the same agency, producer role, and Texas context, so the communication choice isolates the reason for their different marketing eligibility. They are separate from the numbered portal logins.",
+                    "In **Marketing outreach preview**, select **Run eligibility check**, and confirm **1 eligible recipient**: only **Cameron Ellis - Allowed** is included. Keep the restored result ready for step 08. The preview must display an actual native eligibility decision; a submitted preference badge or an Audience size estimate is not the completion check. Leave both profile identities and the native rule unchanged for the live opt-out and restoration.",
                     "Prepare genuine public-site analytics before presenting. In a visitor browser, choose **Privacy choices → Allow personalization**, use **Search** to find the car-and-home answer, read it while scrolling, and open its Liberty Mutual source link. Confirm the resulting **pageView**, **LM_PUBLIC_CTA_CLICK**, and recorded scroll events in **Analytics → Events** for **liberty-mutual-public-site** within **1 hour**. Record their timestamps. Close the source tab; the live search loop will demonstrate **Essential only** separately.",
                     "Record the version marked **Live** for **Bundle car and home** as **Live baseline version**, along with the current published versions of **Agency growth priorities** and **Product availability notice**. Keep those versions intact. Confirm that the temporary page name **coverage-guide-live** is available.",
                     "Verify the published baseline before preparing the indexing example: **Review your options with your agent before choosing coverage.** must be absent from the public article, the native **Liberty Mutual Approved Answers** Search record, and the [**published-answer API experience**](/workshops/content-api). If the sentence is already present, follow **Bundle car and home** in [**After the demonstration → restoration checklist**](#reset) to restore the preserved original answer through review and publication. Continue only after all three show the original wording.",
@@ -232,6 +237,17 @@ export default async function CustomerDemoPage() {
                   </span>
                   <h2>{chapter.title}</h2>
                   <p>{chapter.summary}</p>
+                  <div className={styles.talkTrack}>
+                    <h3>AI in this journey</h3>
+                    <p>
+                      <strong>Demonstrated:</strong>{" "}
+                      {customerDemoAiContext[chapter.id].demonstrated}
+                    </p>
+                    <p>
+                      <strong>AI-assisted next step:</strong>{" "}
+                      {customerDemoAiContext[chapter.id].nextStep}
+                    </p>
+                  </div>
                 </header>
                 {chapter.steps.map((step, index) => {
                   const number = String(
@@ -363,7 +379,7 @@ export default async function CustomerDemoPage() {
                     "For **Agency growth priorities**, restore **Small business growth**, **Texas workers compensation**, then **Home and auto conversations**. Use a new version and the same review/publication process. Sign in as **avery.01** and confirm the original order on **Home**. The **Producer priorities** collection stays in its original order.",
                     "The final shared-disclosure step already restores **Product availability notice** through a new reviewed version. Recheck the original wording on both public placements and Portal **Home** and **Learning & resources**.",
                     "Select the temporary **coverage-guide-live** page in the public site. Use the top **Publish** button’s **More options** → **Unpublish**, complete the confirmation, and wait for the publishing job. Confirm its live URL returns **404**. Use the page’s **Content tree options** → **Delete** to remove that temporary page and its local content through the normal recoverable deletion flow.",
-                    "Leave **Agents eligible for marketing** **Live**, with its six-hour schedule and original comparison preferences. Return the public visitor’s **Privacy choices** to **Allow personalization** for the next measured journey. Close temporary tabs, and keep the guide and the next presentation’s starting page available.",
+                    "The suppression loop already restores the Cameron comparison. Reopen [**Communication preferences**](/workshops/preferences), select **Run eligibility check**, and confirm that only **Cameron Ellis - Allowed** is included. If restoration is needed, select **Restore preferences**, wait for **SitecoreAI confirmed the imported records**, and run the eligibility check again. Keep the same **Native profile IDs** and the native eligibility rule. Return the public visitor’s **Privacy choices** to **Allow personalization** for the next measured journey. Close temporary tabs, and keep the guide and the next presentation’s starting page available.",
                   ]}
                 />
                 <p>

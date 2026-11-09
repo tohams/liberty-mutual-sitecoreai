@@ -30,6 +30,7 @@ import {
   recoverPreferenceImport,
 } from "./preference-request";
 import styles from "./Preferences.module.css";
+import { MarketingOutreachPreview } from "./MarketingOutreachPreview";
 
 const STATUS_LABELS = {
   idle: "Ready to load the preference examples",
@@ -411,10 +412,15 @@ export function MarketingPreferences() {
       <p className={styles.note}>
         These actions update two dedicated comparison records shared by this
         exercise. Their import receipt confirms native processing; open the
-        native profiles and Audience to inspect the stored values and exclusion
-        rule. The comparison records are separate from the numbered portal
-        logins.
+        native profiles to inspect the stored values. The eligibility check
+        below uses a live native personalization to decide whether each profile
+        receives the outreach preview. The comparison records are separate from
+        the numbered portal logins.
       </p>
+      <MarketingOutreachPreview
+        status={status}
+        preferenceBusy={busy || unknownSubmission || Boolean(error)}
+      />
     </section>
   );
 }
