@@ -28,33 +28,33 @@ All initial content comes from the source-reviewed brand pack in `docs/brand`. N
 
 Page Builder groups components by authoring purpose. Use the short display name in **Components** and **Layers**; the registered names below identify their React implementations and serialized contracts. Each component has a purpose-specific icon. Existing component IDs, datasource bindings, personalization rules, and placeholder restrictions are preserved.
 
-| Library section | Display name | Registered component |
-|---|---|---|
-| Campaign | Layout | `CampaignPage` |
-| Campaign | Heading | `CampaignHero` |
-| Campaign | Alert | `CampaignAlert` |
-| Campaign | Callout | `CampaignCallout` |
-| Campaign | Accordion | `CampaignAccordion` |
-| Campaign | Links | `CampaignLinkList` |
-| Campaign | Contact | `CampaignContact` |
-| Resources | Article | `ResourceArticle` |
-| Resources | Image | `ResourceImage` |
-| Resources | Search | `ResourceSearch` |
-| Agent tools | Guidance | `AgentGuidance` |
-| Agent tools | Spotlight | `ProductSpotlight` |
-| Agent tools | Product details | `ProductDetails` |
+| Library section | Display name    | Registered component |
+| --------------- | --------------- | -------------------- |
+| Campaign        | Layout          | `CampaignPage`       |
+| Campaign        | Heading         | `CampaignHero`       |
+| Campaign        | Alert           | `CampaignAlert`      |
+| Campaign        | Callout         | `CampaignCallout`    |
+| Campaign        | Accordion       | `CampaignAccordion`  |
+| Campaign        | Links           | `CampaignLinkList`   |
+| Campaign        | Contact         | `CampaignContact`    |
+| Resources       | Article         | `ResourceArticle`    |
+| Resources       | Image           | `ResourceImage`      |
+| Resources       | Search          | `ResourceSearch`     |
+| Agent tools     | Guidance        | `AgentGuidance`      |
+| Agent tools     | Spotlight       | `ProductSpotlight`   |
+| Agent tools     | Product details | `ProductDetails`     |
 
 Native experiments can retain the component name captured when they were created. The existing Resources test still identifies its control as **AgentGuidance (control)**; select **Guidance** in **Layers** to open it.
 
 ## Component contracts
 
-| Rendering | Editable datasource fields | Variants |
-|---|---|---|
-| `AgentGuidance` | `eyebrow`: Single-Line Text; `headline`: Single-Line Text; `body`: Rich Text; `actionLink`: General Link | `Default`, `Highlight` |
-| `ProductSpotlight` | `eyebrow`: Single-Line Text; `headline`: Single-Line Text; `body`: Rich Text; `actionLink`: General Link | `Default` |
-| `ProductDetails` | `Title`: inherited Single-Line Text; `catalogSummary`: Multi-Line Text; `catalogImage`: Image; `catalogBody`: Rich Text; `catalogProducts`: Multilist; `catalogChannel`: Droplist | `Default` |
-| `ResourceSearch` | `search`: Multi-Line Text containing the native source ID and field-mapping JSON | `Default` |
-| `ResourceArticle` | `Title`: inherited Single-Line Text; `summary`: Multi-Line Text; `body`: Rich Text; `resourceType`: Single-Line Text; `state`: Single-Line Text; `reviewedAt`: Date; `sourceLink`: General Link | `Default` |
+| Rendering          | Editable datasource fields                                                                                                                                                        | Variants               |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `AgentGuidance`    | `eyebrow`: Single-Line Text; `headline`: Single-Line Text; `body`: Rich Text; `actionLink`: General Link                                                                          | `Default`, `Highlight` |
+| `ProductSpotlight` | `eyebrow`: Single-Line Text; `headline`: Single-Line Text; `body`: Rich Text; `actionLink`: General Link                                                                          | `Default`              |
+| `ProductDetails`   | `Title`: inherited Single-Line Text; `catalogSummary`: Multi-Line Text; `catalogImage`: Image; `catalogBody`: Rich Text; `catalogProducts`: Multilist; `catalogChannel`: Droplist | `Default`              |
+| `ResourceSearch`   | `search`: Multi-Line Text containing the native source ID and field-mapping JSON                                                                                                  | `Default`              |
+| `ResourceArticle`  | `Title`: inherited Single-Line Text; `summary`: Multi-Line Text; `body`: Rich Text; `resourceType`: Checklist; `state`: Checklist; `reviewedAt`: Date; `sourceLink`: General Link | `Default`              |
 
 Field titles and short help text make the authoring form understandable while retaining predictable developer field names. Rich text fields use the site's rich text profile. General Links provide both label and destination. The renderings use Sitecore's standard flat datasource-field serialization; no custom component GraphQL query is needed. Front-end components use the Content SDK field controls so Page builder can edit them.
 
@@ -66,15 +66,15 @@ The authored campaign adds `CampaignPage`, `CampaignHero`, `CampaignAlert`, `Cam
 
 ### Component placement
 
-| Page | Owned layout | Placeholder → allowed rendering |
-|---|---|---|
-| Home (My workspace), quote, clients, agency growth, and existing product guidance pages | `PortalLayout` | `headless-agent-guidance` → `AgentGuidance` |
-| Support (`/support`) | `SupportLayout` | `headless-agent-guidance` → `AgentGuidance`; `headless-support-form` → native `Form` |
-| Learning & resources landing (`/resources`) | `ResourcesLayout` | `headless-resource-search` → `ResourceSearch`; `headless-agent-guidance` → `AgentGuidance` |
-| Products landing (`/products`) | `ProductsLayout` | `headless-agent-guidance` → `AgentGuidance`; `headless-products-spotlight` → `ProductSpotlight` |
-| New product pages (`/products/<slug>`) | `ProductPageLayout` | `headless-product-details` → `ProductDetails` |
-| Resource articles (`/resources/<slug>`) | `ResourceArticleLayout` | `headless-resource-article` → `ResourceArticle`; nested `headless-resource-image-{*}` → `ResourceImage` |
-| Campaign pages (`/growth/<slug>`) | `CampaignLayout` | `headless-campaign-page` → `CampaignPage`; nested `headless-campaign-hero-{*}` → `CampaignHero`; `headless-campaign-main-{*}` → `CampaignAlert`, `CampaignCallout`, `CampaignAccordion`; `headless-campaign-sidebar-{*}` → `CampaignLinkList`, `CampaignContact` |
+| Page                                                                                    | Owned layout            | Placeholder → allowed rendering                                                                                                                                                                                                                                  |
+| --------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Home (My workspace), quote, clients, agency growth, and existing product guidance pages | `PortalLayout`          | `headless-agent-guidance` → `AgentGuidance`                                                                                                                                                                                                                      |
+| Support (`/support`)                                                                    | `SupportLayout`         | `headless-agent-guidance` → `AgentGuidance`; `headless-support-form` → native `Form`                                                                                                                                                                             |
+| Learning & resources landing (`/resources`)                                             | `ResourcesLayout`       | `headless-resource-search` → `ResourceSearch`; `headless-agent-guidance` → `AgentGuidance`                                                                                                                                                                       |
+| Products landing (`/products`)                                                          | `ProductsLayout`        | `headless-agent-guidance` → `AgentGuidance`; `headless-products-spotlight` → `ProductSpotlight`                                                                                                                                                                  |
+| New product pages (`/products/<slug>`)                                                  | `ProductPageLayout`     | `headless-product-details` → `ProductDetails`                                                                                                                                                                                                                    |
+| Resource articles (`/resources/<slug>`)                                                 | `ResourceArticleLayout` | `headless-resource-article` → `ResourceArticle`; nested `headless-resource-image-{*}` → `ResourceImage`                                                                                                                                                          |
+| Campaign pages (`/growth/<slug>`)                                                       | `CampaignLayout`        | `headless-campaign-page` → `CampaignPage`; nested `headless-campaign-hero-{*}` → `CampaignHero`; `headless-campaign-main-{*}` → `CampaignAlert`, `CampaignCallout`, `CampaignAccordion`; `headless-campaign-sidebar-{*}` → `CampaignLinkList`, `CampaignContact` |
 
 Each owned layout explicitly lists only its applicable global root placeholder items in **Layout Service Placeholders**. That field determines which placeholder data is delivered. The matching site-level SXA restriction's **Allowed Controls** list configures which renderings authors may insert in Page builder; global layout metadata alone is not sufficient evidence that the authoring picker is restricted. The application renders those same named placeholders in the appropriate page sections. A component being available in the site library does not make it eligible for every page or position. An empty Allowed Controls list would remove restrictions, so these lists must remain explicit. Verify the actual insertion picker after deploying changes. See [Sitecore's placeholder restrictions](https://doc.sitecore.com/sai/en/developers/sitecoreai/content-modeling-and-presentation/sitecoreai-for-developers/content-editor-items/layout/set-placeholder-restrictions.html) and [rendering availability requirements](https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/forms/enable-forms-in-the-page-builder.html).
 
@@ -172,16 +172,15 @@ Allow 30–90 seconds after the final publishing job for Edge cache invalidation
 
 ## Native resource search composition
 
-`ResourceSearch` occupies `headless-resource-search` on `/resources`; AgentGuidance follows in `headless-agent-guidance`. Only `ResourcesLayout` exposes the Search placeholder. Its datasource is `Data/Search/AgentResources`; the `search` field stores source `b5e24aff-8b5b-4653-bf66-deef52c1241a` with title=Title, description=summary, state=state, type=resourceType and family=businessFamily mappings. This is editable native CMS configuration for the native Search source. The data adapter and React rendering do not maintain a second configuration constant.
+`ResourceSearch` occupies `headless-resource-search` on `/resources`; AgentGuidance follows in `headless-agent-guidance`. Only `ResourcesLayout` exposes the Search placeholder. Its datasource is `Data/Search/AgentResources`; the `search` field identifies the active native Push source and its result-field mappings. This is editable CMS configuration. The data adapter and React rendering do not maintain a second source-ID constant.
 
-The native content source is **Liberty Mutual Agent Resources**. Its indexed fields are a snapshot of published ResourcePage content, not a live read of each article. After publishing resource changes, open **Content → Search Sources**, confirm the source ID above, and choose **Reindex Content**. Verify job completion and the changed result fields before recording Search acceptance. Repeat that refresh after publishing restored rehearsal wording. The repository does not configure an automatic publish trigger or ingestion schedule for this source. [Sitecore's content-source documentation](https://doc.sitecore.com/sai/en/users/sitecoreai/design-components/search-experiences/manage-content-sources.html) specifies an initial ingestion when a source is created and an explicit reindex for subsequent content changes. This source refresh is separate from Edge cache invalidation and from the internal CMS core/master indexes.
+The active **SitecoreAI Search** Push source receives its resource projection from the configured publication service. After a normal reviewed publication, the service reads **Live Experience Edge** content, resolves native taxonomy references to stable classification codes, and synchronizes added, changed, or removed resource documents. Authors verify the article and its live Search result; they do not perform a separate manual reindex. Search synchronization remains distinct from website cache invalidation and internal CMS indexes.
 
-The authored `state` values are `TX`, `FL`, `IL` or `All` (nationwide guidance). The signed-in Search default combines the agent's active licensed states with `All` in one native OR facet filter. **Risk state** offers **My licensed states**, each active licensed state, and **Nationwide guidance only**; there is no broader **All states** override. The server applies the same licensed-state scope to direct article URLs, resource bootstrap and saved-resource views. Verified native Sitecore authoring remains separate and can edit all articles. See the [developer handoff](developer-handoff.md#licensed-state-content-relevance).
+The native **Risk states** checklist stores references to managed taxonomy items. Their stable published codes include `TX`, `FL`, `IL`, and `All` for nationwide guidance. The signed-in Search default combines the agent's active licensed states with `All` in one native OR facet filter. **Risk state** offers **My licensed states**, each active licensed state, and **Nationwide guidance only**; there is no broader **All states** override. The server applies the same licensed-state scope to direct article URLs, resource bootstrap and saved-resource views. Verified native Sitecore authoring remains separate and can edit all articles. See the [developer handoff](developer-handoff.md#licensed-state-content-relevance).
 
 The initial field type is Multi-Line Text so the JSON remains editable while Search Configuration Manager is not yet enabled. The official starter's Search Experience uses a **Plugin** field with Source `pub-958f3b66-0fb0-4675-8808-a5dc40949051`. After enabling and verifying that app in the target environment, change only the ResourceSearch/search model field to that Type/Source; keep its stable field ID and JSON value. Verify the editor and delivery payload before publishing the model. The SDK component must support the equivalent string or object configuration payload. See [Sitecore's JSON template contract](https://doc.sitecore.com/sai/en/developers/sitecoreai/bring-your-own-components/copy-the-search-component-from-the-starter-kit/add-a-json-template-to-a-content-item.html) and the preserved upstream `Search Experience/Data/search.yml` template.
 
 The initial installation updated only the `/resources` page presentation and the site's Available Renderings group through the normal Authoring API. Every other existing content item remained protected by CreateOnly. The source's indexing status and rendered Search response are tracked separately from CMS configuration delivery.
-
 
 ## Managed resource taxonomy
 
@@ -189,4 +188,4 @@ The site contains editable lists at `/sitecore/content/LibertyMutual/liberty-mut
 
 `ResourceMetadataFolder` permits inserting `ResourceMetadataOption` items. An option's item name is its canonical metadata value; its display name is its readable label, and `description` explains its use. The additive `build-resource-taxonomy-seed.py` generator preserves existing local seed files and reports drift instead of replacing them. Native author edits are protected by the separate CreateOnly module. These items are not resource-backed content.
 
-The five ResourcePage fields currently remain **Single-Line Text**. A separate native validation on September 14, 2026 confirmed that the current Search content-source configuration rejects **Droplist**. Merely preserving a Droplist's string rendering payload does not establish Search indexing compatibility. The custom Resource metadata Marketplace app supplies the author dropdowns while preserving these text fields. It validates option IDs/templates, exact field definitions and the selected draft version before saving. Marketplace registration and installation are tracked separately from the taxonomy seed; see the [authoring and installation guide](resource-metadata-authoring.md). Do not convert the indexed field types without passing native Search compatibility checks.
+The five ResourcePage classification fields are versioned **Checklist** fields. Their native **Source** folders limit selections to the managed taxonomy. **Page Builder → Content** provides the checklist controls, while native permissions, language versions, and workflow govern editing. The application resolves published taxonomy references into article labels and Search classification values. See [Native metadata authoring](resource-metadata-authoring.md) for maintenance and verification.

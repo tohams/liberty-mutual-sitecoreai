@@ -18,7 +18,8 @@
       "contractor",
       "requirements",
       "businessowners"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "bop-conversation",
@@ -39,7 +40,8 @@
       "property",
       "liability",
       "retail"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "home-renewal",
@@ -59,11 +61,12 @@
       "home",
       "renewal",
       "household"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "auto-review",
-    "title": "Stay current on the household\u2019s vehicles",
+    "title": "Stay current on the household’s vehicles",
     "description": "A straightforward vehicle and driver review.",
     "body": "Review drivers, garaging addresses, vehicle use, and recently added or removed vehicles. Ask about changes in commute and household drivers. Compare the current policy record with the information provided and request any needed updates through the account team.",
     "line": "personal",
@@ -79,7 +82,8 @@
       "auto",
       "renewal",
       "drivers"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "contractor-readiness",
@@ -100,13 +104,14 @@
       "requirements",
       "workers compensation",
       "trades"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "fleet-safety",
     "title": "Bring fleet safety into the renewal conversation",
     "description": "A structured discussion for commercial vehicle accounts.",
-    "body": "Review driver selection, vehicle inspection, maintenance, incident reporting, and training practices. Capture the customer\u2019s existing program and any recent changes. Share unresolved exposure questions with the commercial account team.",
+    "body": "Review driver selection, vehicle inspection, maintenance, incident reporting, and training practices. Capture the customer’s existing program and any recent changes. Share unresolved exposure questions with the commercial account team.",
     "line": "commercial",
     "states": [
       "TX",
@@ -120,7 +125,8 @@
       "fleet",
       "commercial auto",
       "risk control"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "property-schedule",
@@ -140,13 +146,14 @@
       "property",
       "statement of values",
       "manufacturing"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "bond-documents",
     "title": "Prepare your next contract bond request",
     "description": "Principal, project, and obligee information in one place.",
-    "body": "Confirm the principal\u2019s legal name, obligee, requested bond form, amount, and project timeline. Gather current financial information and a work-in-progress schedule. Submit complete information to your surety relationship team. A request is subject to review and is not an issued bond.",
+    "body": "Confirm the principal’s legal name, obligee, requested bond form, amount, and project timeline. Gather current financial information and a work-in-progress schedule. Submit complete information to your surety relationship team. A request is subject to review and is not an issued bond.",
     "line": "surety",
     "states": [
       "TX",
@@ -162,7 +169,8 @@
       "principal",
       "obligee",
       "documents"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "specialty-placement",
@@ -182,13 +190,14 @@
       "specialty",
       "wholesale",
       "placement"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "agency-growth",
     "title": "Build your small-business practice",
     "description": "Turn established relationships into a thoughtful commercial development plan.",
-    "body": "Start with your team\u2019s current knowledge and agency focus. Select a business segment, complete a learning path, and review the information needed for a well-prepared submission. Keep the plan specific, measure progress, and involve your relationship team.",
+    "body": "Start with your team’s current knowledge and agency focus. Select a business segment, complete a learning path, and review the information needed for a well-prepared submission. Keep the plan specific, measure progress, and involve your relationship team.",
     "line": "all",
     "states": [
       "TX",
@@ -203,13 +212,14 @@
       "campaign",
       "agency",
       "commercial"
-    ]
+    ],
+    "nationwide": true
   },
   {
     "id": "state-wc-tx",
     "title": "Texas workers compensation: start with the source",
     "description": "Official state guidance to support a more informed conversation.",
-    "body": "Texas generally permits many private employers to choose whether to carry workers compensation insurance, with exceptions. Review the Texas Department of Insurance guidance and the employer\u2019s circumstances before discussing requirements.",
+    "body": "Texas generally permits many private employers to choose whether to carry workers compensation insurance, with exceptions. Review the Texas Department of Insurance guidance and the employer’s circumstances before discussing requirements.",
     "line": "small-commercial",
     "states": [
       "TX"
@@ -222,13 +232,14 @@
       "workers compensation",
       "TX"
     ],
-    "sourceUrl": "https://www.tdi.texas.gov/pubs/consumer/cb030.html"
+    "sourceUrl": "https://www.tdi.texas.gov/pubs/consumer/cb030.html",
+    "nationwide": false
   },
   {
     "id": "state-wc-fl",
     "title": "Florida workers compensation: check the business context",
     "description": "Official state guidance to support a more informed conversation.",
-    "body": "Florida coverage requirements depend on the industry, number of employees, and applicable exceptions. Review the Division of Workers\u2019 Compensation guidance for the business and ownership structure.",
+    "body": "Florida coverage requirements depend on the industry, number of employees, and applicable exceptions. Review the Division of Workers’ Compensation guidance for the business and ownership structure.",
     "line": "small-commercial",
     "states": [
       "FL"
@@ -241,13 +252,14 @@
       "workers compensation",
       "FL"
     ],
-    "sourceUrl": "https://www.myfloridacfo.com/division/wc/employer/coverage-requirements"
+    "sourceUrl": "https://www.myfloridacfo.com/division/wc/employer/coverage-requirements",
+    "nationwide": false
   },
   {
     "id": "state-wc-il",
     "title": "Illinois workers compensation: review current requirements",
     "description": "Official state guidance to support a more informed conversation.",
-    "body": "Illinois generally requires workers compensation coverage when an employer has employees, subject to applicable exceptions. Refer to the Illinois Workers\u2019 Compensation Commission for current guidance.",
+    "body": "Illinois generally requires workers compensation coverage when an employer has employees, subject to applicable exceptions. Refer to the Illinois Workers’ Compensation Commission for current guidance.",
     "line": "small-commercial",
     "states": [
       "IL"
@@ -260,6 +272,7 @@
       "workers compensation",
       "IL"
     ],
-    "sourceUrl": "https://iwcc.illinois.gov/about/insurance.html"
+    "sourceUrl": "https://iwcc.illinois.gov/about/insurance.html",
+    "nationwide": false
   }
 ]

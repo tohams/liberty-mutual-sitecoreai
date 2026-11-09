@@ -10,12 +10,12 @@ Salesforce remains Liberty Mutual's existing business backend. SitecoreAI manage
 
 Reserve pack `01` for workshop presenters. Assign attendee and spare packs from `02`–`20` (19 non-presenter packs). Never reset a pack while an attendee is using it. Use that same suffix across all seven personas. Their roles and licenses are unchanged across packs; only their saved work and native profile identities are separate. The examples below use presenter pack `.01`; attendees substitute their assigned suffix consistently. All 140 fictional portal accounts use the password `Sitecore1`. SitecoreAI itself uses your own invited account in **Safeco Insurance Company of America POC** and the **Liberty Mutual Agent Portal** site.
 
-| Workspace | URL | Use |
-|---|---|---|
-| Live portal | [https://liberty-mutual-agent-portal.vercel.app/login](https://liberty-mutual-agent-portal.vercel.app/login) | Read-only campaign exploration, Search and personalization comparisons |
-| Designated preview | [https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/login](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/login) | A new saved conversation request and coordinated cleanup |
-| Page Builder | [Liberty Mutual Agent Portal in Page Builder](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb) | Content editing, component composition, AI assistance, preview and workflow |
-| SitecoreAI | [Safeco Insurance Company of America POC](https://app.sitecorecloud.io/?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df) | Profiles, personalization, performance, Media and Brand Kit work |
+| Workspace          | URL                                                                                                                                                                                                           | Use                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Live portal        | [https://liberty-mutual-agent-portal.vercel.app/login](https://liberty-mutual-agent-portal.vercel.app/login)                                                                                                  | Read-only campaign exploration, Search and personalization comparisons      |
+| Designated preview | [https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/login](https://liberty-mutual-sitecor-git-c8199e-thomas-lins-projects-67630b98.vercel.app/login)                          | A new saved conversation request and coordinated cleanup                    |
+| Page Builder       | [Liberty Mutual Agent Portal in Page Builder](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb) | Content editing, component composition, AI assistance, preview and workflow |
+| SitecoreAI         | [Safeco Insurance Company of America POC](https://app.sitecorecloud.io/?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df)                                                      | Profiles, personalization, performance, Media and Brand Kit work            |
 
 Read the cleanup at the end of each exercise before changing anything. Portal saved work, native CMS content and UDL profile history have different reset procedures. A shared preview pack must not be reset while another reviewer is using it. Leave the configured **Default** editing host selected during marketing exercises.
 
@@ -27,12 +27,12 @@ If you want to observe affinity starting from an unused profile, complete the pr
 
 The live campaign is [https://liberty-mutual-agent-portal.vercel.app/growth/small-business](https://liberty-mutual-agent-portal.vercel.app/growth/small-business). Its navigation label is **Small business growth**. The CMS page's display name is **Small-business growth**.
 
-| Step | Click or enter | Observe |
-|---|---|---|
-| C1 | Sign in as `daniel.01`. Beside **Agency growth**, select **Show Agency growth pages**, then **Small business growth**. | The child page opens. **Overview** still leads to the agency production view. |
-| C2 | Under **ON THIS PAGE**, select **Opportunity**, **Your questions** and **Your next step** in turn. | Each anchor moves to the corresponding part of the page. The page title includes the growth icon. |
-| C3 | Expand **Where should my team begin?** and **What should we prepare before asking for a review?** | Each accordion displays its own authored answer. Use Tab and Enter or Space to inspect keyboard operation. |
-| C4 | Under **Keep useful guidance close**, select **Develop your small-business practice**. Return to the campaign. | The link opens the current resource. The callout's preparation action and the other resource links remain clear, separate destinations. |
+| Step | Click or enter                                                                                                         | Observe                                                                                                                                 |
+| ---- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| C1   | Sign in as `daniel.01`. Beside **Agency growth**, select **Show Agency growth pages**, then **Small business growth**. | The child page opens. **Overview** still leads to the agency production view.                                                           |
+| C2   | Under **ON THIS PAGE**, select **Opportunity**, **Your questions** and **Your next step** in turn.                     | Each anchor moves to the corresponding part of the page. The page title includes the growth icon.                                       |
+| C3   | Expand **Where should my team begin?** and **What should we prepare before asking for a review?**                      | Each accordion displays its own authored answer. Use Tab and Enter or Space to inspect keyboard operation.                              |
+| C4   | Under **Keep useful guidance close**, select **Develop your small-business practice**. Return to the campaign.         | The link opens the current resource. The callout's preparation action and the other resource links remain clear, separate destinations. |
 
 The campaign's hero, alert, callout, questions, resource list and contact introduction are native authored content. The page layout and each component's behavior come from the application. The role and premium-share example below personalizes the callout separately from the existing Home, Products and Resources experiences.
 
@@ -42,12 +42,12 @@ The campaign's hero, alert, callout, questions, resource list and contact introd
 
 Use the **designated preview**, `daniel.01`, and an agreed reviewer pack for this exercise. A saved request becomes shared agency work.
 
-| Step | Click or enter | Observe |
-|---|---|---|
-| C5 | Open **Small business growth → Your next step → Plan a conversation**, then press Escape. | **Plan your next growth conversation** opens with **Close dialog** focused. Escape closes it and returns focus to **Plan a conversation**. |
-| C6 | Reopen the dialog. In **What would you like to discuss?**, enter a unique topic such as `Growth review Thomas 2026-09-16`. Select **Save conversation request**. | Required-field validation prevents an empty request. After a valid save, the dialog closes and **Request saved.** appears. |
-| C7 | Select **View your requests**, then reload **Support**. | The saved topic remains associated with the agency's request. |
-| C8 | Record the topic and sign out. | The coordinator can include this new record in the preview pack's agreed saved-work reset after all reviewers finish. |
+| Step | Click or enter                                                                                                                                                   | Observe                                                                                                                                    |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| C5   | Open **Small business growth → Your next step → Plan a conversation**, then press Escape.                                                                        | **Plan your next growth conversation** opens with **Close dialog** focused. Escape closes it and returns focus to **Plan a conversation**. |
+| C6   | Reopen the dialog. In **What would you like to discuss?**, enter a unique topic such as `Growth review Thomas 2026-09-16`. Select **Save conversation request**. | Required-field validation prevents an empty request. After a valid save, the dialog closes and **Request saved.** appears.                 |
+| C7   | Select **View your requests**, then reload **Support**.                                                                                                          | The saved topic remains associated with the agency's request.                                                                              |
+| C8   | Record the topic and sign out.                                                                                                                                   | The coordinator can include this new record in the preview pack's agreed saved-work reset after all reviewers finish.                      |
 
 This is a custom React form using the portal's authenticated action service and durable data store. It saves an administrative request. It does not send email, create a Salesforce activity, or change insurance coverage. In Page Builder, authors can inspect the dialog but cannot submit operational work.
 
@@ -59,16 +59,16 @@ The separate native **Contact your team** form below demonstrates SitecoreAI For
 
 This exercise connects a marketer-managed SitecoreAI form to **Demo Webhook**, its configured receiving URL. Submit fictional details, then inspect the received request in the inbox. Reloading clears the form and success message. The free receiving inbox can expire; [receiver configuration](native-forms-operator-guide.md#receiver-availability) explains how to replace it in SitecoreAI if needed.
 
-| Step | Click or inspect | Observe |
-|---|---|---|
-| F1 | In SitecoreAI, open **Forms → Active → Contact your team**. From the preview, select **Edit form**, then **Edit**. | The active form designer opens. The form is available for `liberty-mutual-agent-portal`. |
-| F2 | Inspect **Your name**, **Work email**, **Agency name**, **How can we help?** and **What would you like to discuss?** | All five fields are required. Topic choices are **Agency growth**, **Product guidance** and **Portal support**. |
-| F3 | Open **Settings** using the gear. Inspect **Demo Webhook**, site availability and the success message. | **Demo Webhook** is selected. Site availability shows **1 out of 1**. The success message is configured. |
-| F4 | Inspect **Push changes**, then return to the form preview without changing the form. | The action updates an active form. This inspection leaves the form and its live behavior unchanged. |
-| F5 | Sign in as `daniel.01`, password `Sitecore1`, at the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Enter `Daniel Ortiz`, `daniel.01@example.com` and `Prairie Oak Insurance`. | **Your name**, **Work email** and **Agency name** contain those fictional values. |
-| F6 | In **How can we help?**, select **Agency growth**. In **What would you like to discuss?**, enter a unique marker such as `LM-NATIVE-yourname-date-time`. Select **Send request**. | **Thank you. Your request has been received.** appears. The fields clear and the form remains visible. |
-| F7 | Open the receiver's inspection inbox, select the **POST** with your marker, then inspect **Request Content** or **Raw Content**. | JSON matches the five submitted values; request metadata identifies **Contact your team**. Match the unique message marker. |
-| F8 | Reload to clear the confirmation. Repeat with a new message marker and leave earlier receipts unchanged. | No saved-work reset is needed. Portal reset does not erase webhook receipts. |
+| Step | Click or inspect                                                                                                                                                                                                                                                                                                    | Observe                                                                                                                     |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| F1   | In SitecoreAI, open **Forms → Active → Contact your team**. From the preview, select **Edit form**, then **Edit**.                                                                                                                                                                                                  | The active form designer opens. The form is available for `liberty-mutual-agent-portal`.                                    |
+| F2   | Inspect **Your name**, **Work email**, **Agency name**, **How can we help?** and **What would you like to discuss?**                                                                                                                                                                                                | All five fields are required. Topic choices are **Agency growth**, **Product guidance** and **Portal support**.             |
+| F3   | Open **Settings** using the gear. Inspect **Demo Webhook**, site availability and the success message.                                                                                                                                                                                                              | **Demo Webhook** is selected. Site availability shows **1 out of 1**. The success message is configured.                    |
+| F4   | Inspect **Push changes**, then return to the form preview without changing the form.                                                                                                                                                                                                                                | The action updates an active form. This inspection leaves the form and its live behavior unchanged.                         |
+| F5   | Sign in as `daniel.01`, password `Sitecore1`, at the [portal login](https://liberty-mutual-agent-portal.vercel.app/login). Open [Support → Contact your team](https://liberty-mutual-agent-portal.vercel.app/support#contact-your-team). Enter `Daniel Ortiz`, `daniel.01@example.com` and `Prairie Oak Insurance`. | **Your name**, **Work email** and **Agency name** contain those fictional values.                                           |
+| F6   | In **How can we help?**, select **Agency growth**. In **What would you like to discuss?**, enter a unique marker such as `LM-NATIVE-yourname-date-time`. Select **Send request**.                                                                                                                                   | **Thank you. Your request has been received.** appears. The fields clear and the form remains visible.                      |
+| F7   | Open the receiver's inspection inbox, select the **POST** with your marker, then inspect **Request Content** or **Raw Content**.                                                                                                                                                                                    | JSON matches the five submitted values; request metadata identifies **Contact your team**. Match the unique message marker. |
+| F8   | Reload to clear the confirmation. Repeat with a new message marker and leave earlier receipts unchanged.                                                                                                                                                                                                            | No saved-work reset is needed. Portal reset does not erase webhook receipts.                                                |
 
 Before entering the fictional values at F5, optionally select **Send request** with empty fields, then try an invalid **Work email**. Five required-field errors appear; an invalid email shows **Email address must follow the format user@example.com**. Neither invalid attempt sends a receipt.
 
@@ -86,23 +86,23 @@ The separate **Campaign practice** page is beneath `Home/growth/campaign-practic
 
 This component-copy exercise needs a coordinator. Before starting, the coordinator records the original component layout and local Data items. They restore that exact layout and recycle only the newly created datasource at the end. It is separate from a portal saved-work reset.
 
-| Step | Click or inspect | Observe |
-|---|---|---|
-| C9 | Open **Page Builder → Liberty Mutual Agent Portal → Home → Agency growth → Campaign practice**. In **Layers**, select the first **Accordion**. | The floating component toolbar is available. Keep **Default** as the editing host. |
-| C10 | Select **Duplicate component**. Inspect the copy and its datasource. | The duplicate has its own local content item, for example **Start the conversation_var2**. Later copies can use another suffix. |
-| C11 | Select **Move up**. Open **Swap with another component** and inspect the choices; cancel without swapping. | Main offers **Accordion**, **Alert** and **Callout**. |
-| C12 | Select **Links → Swap with another component**, inspect, then cancel. Have the coordinator restore the recorded practice layout. | Sidebar offers **Contact** and **Links**. The coordinator recycles only the duplicate's new datasource and verifies the original layout; the page remains unpublished. |
+| Step | Click or inspect                                                                                                                               | Observe                                                                                                                                                                |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| C9   | Open **Page Builder → Liberty Mutual Agent Portal → Home → Agency growth → Campaign practice**. In **Layers**, select the first **Accordion**. | The floating component toolbar is available. Keep **Default** as the editing host.                                                                                     |
+| C10  | Select **Duplicate component**. Inspect the copy and its datasource.                                                                           | The duplicate has its own local content item, for example **Start the conversation_var2**. Later copies can use another suffix.                                        |
+| C11  | Select **Move up**. Open **Swap with another component** and inspect the choices; cancel without swapping.                                     | Main offers **Accordion**, **Alert** and **Callout**.                                                                                                                  |
+| C12  | Select **Links → Swap with another component**, inspect, then cancel. Have the coordinator restore the recorded practice layout.               | Sidebar offers **Contact** and **Links**. The coordinator recycles only the duplicate's new datasource and verifies the original layout; the page remains unpublished. |
 
 The **Campaign** section of the component library groups **Layout**, **Heading**, **Alert**, **Callout**, **Accordion**, **Links**, and **Contact**. Each uses a short name and a purpose-specific icon. The **Content** panel exposes the fields appropriate to the selected component. Page Builder supports drag-and-drop composition; this walkthrough uses the verified native toolbar controls. Inspect the campaign at a narrow browser width as part of the responsive rendering review. Content/layout changes do not require an application Git deployment.
 
-| Component | Author-managed fields | Intended location |
-|---|---|---|
-| **Heading** (`CampaignHero`) | Eyebrow, Title, Summary, Icon | Hero |
-| **Alert** (`CampaignAlert`) | Title, rich-text Body, Visible from (UTC), Visible until (UTC) | Main |
-| **Callout** (`CampaignCallout`) | Eyebrow, Title, rich-text Body, Action link | Main |
-| **Accordion** (`CampaignAccordion`) | Question, rich-text Answer | Main |
-| **Links** (`CampaignLinkList`) | Title, Icon, First link, Second link, Third link | Sidebar |
-| **Contact** (`CampaignContact`) | Title, Summary, Button label | Sidebar |
+| Component                           | Author-managed fields                                          | Intended location |
+| ----------------------------------- | -------------------------------------------------------------- | ----------------- |
+| **Heading** (`CampaignHero`)        | Eyebrow, Title, Summary, Icon                                  | Hero              |
+| **Alert** (`CampaignAlert`)         | Title, rich-text Body, Visible from (UTC), Visible until (UTC) | Main              |
+| **Callout** (`CampaignCallout`)     | Eyebrow, Title, rich-text Body, Action link                    | Main              |
+| **Accordion** (`CampaignAccordion`) | Question, rich-text Answer                                     | Main              |
+| **Links** (`CampaignLinkList`)      | Title, Icon, First link, Second link, Third link               | Sidebar           |
+| **Contact** (`CampaignContact`)     | Title, Summary, Button label                                   | Sidebar           |
 
 The local Data items have descriptive names: **Campaign introduction**, **Preparation update**, **Growth opportunity**, **Start the conversation**, **Prepare for review**, **Useful resources** and **Your next step**. Authors can find content by its purpose instead of tracing anonymous items.
 
@@ -114,12 +114,12 @@ When copying a page or component, check its datasource before editing. A duplica
 
 Use the [Page Builder Content tab](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=5e8f7d72-96e3-4c9f-a865-0231ee3a1512&sc_lang=en). The path is **Home → Agency growth → Campaign practice → Data → Growth opportunity**. This exercise edits that item's **Body** field, not the campaign hero Summary.
 
-| Step | Click or enter | Observe |
-|---|---|---|
-| C13 | Open **Body**. Record its exact original content, then enter a temporary sentence containing a spelling or grammar error. | The change affects only this practice datasource. |
-| C14 | Select **Optimize with AI → Fix spelling and grammar**. Compare both versions and select **Keep optimized**. Wait for the save checkmark and reload. | The accepted correction persists in the saved Body. |
-| C15 | Reopen **Optimize with AI**. Prompt: `Write two concise sentences for an agency preparing a small-business submission.` Review the generated draft and select **Revert to original**. | The proposed wording remains subject to author review. The assigned Liberty Mutual Brand Kit option is available. Revert cancels this current rewrite. |
-| C16 | Restore the exact Body recorded before C13. Click outside the field, wait for the save checkmark and reload. | The original content remains. The live campaign has not changed. |
+| Step | Click or enter                                                                                                                                                                        | Observe                                                                                                                                                |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| C13  | Open **Body**. Record its exact original content, then enter a temporary sentence containing a spelling or grammar error.                                                             | The change affects only this practice datasource.                                                                                                      |
+| C14  | Select **Optimize with AI → Fix spelling and grammar**. Compare both versions and select **Keep optimized**. Wait for the save checkmark and reload.                                  | The accepted correction persists in the saved Body.                                                                                                    |
+| C15  | Reopen **Optimize with AI**. Prompt: `Write two concise sentences for an agency preparing a small-business submission.` Review the generated draft and select **Revert to original**. | The proposed wording remains subject to author review. The assigned Liberty Mutual Brand Kit option is available. Revert cancels this current rewrite. |
+| C16  | Restore the exact Body recorded before C13. Click outside the field, wait for the save checkmark and reload.                                                                          | The original content remains. The live campaign has not changed.                                                                                       |
 
 This is prompted drafting or rewriting within an existing rich-text field. Review generated wording for accuracy and intended meaning before accepting it. **Revert to original** affects the current AI operation; it does not automatically restore the field's value from before the complete exercise. Keep the original record for final restoration.
 
@@ -133,16 +133,16 @@ Autosave protects changes that reached the server. Named content versions provid
 
 Continue with [loop 5](demo-loops.md#loop-5-marketing-owns-the-content) and the [ResourcePage creation exercise](resource-page-authoring.md#a-short-creation-exercise). A new ResourcePage starts with blank fields and its own **Data → Resource image** item.
 
-For an existing page, the installed **Resource metadata** Marketplace app exposes five single-select choices managed in the site's **Data/Taxonomy** lists. The workflow is **select → observe unsaved changes → Discard**, then **select → Save metadata → Refresh → restore the original → Save metadata → Refresh**. Approved versions remain read-only in this app. [Metadata instructions](resource-metadata-authoring.md).
+For an existing resource, open its native **Content** fields. **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types** are **Checklist** fields sourced from the site’s **Data/Taxonomy** lists. Native fields autosave; verify a temporary draft selection by waiting for **Saved**, reloading the same version, and restoring the original choices before publication. See [Native metadata authoring](resource-metadata-authoring.md).
 
 Modern Media stores the reusable assets. The local Image field stores the selected image and its delivery/rendition details. Image selection, an asset's public delivery link and page publication are separate operations.
 
-| Step | Click or inspect | Observe |
-|---|---|---|
-| I1 | Open **Content → Media BETA** and select `liberty-mutual-small-business-team-planning.png`. | The existing image's native asset dialog opens. |
-| I2 | Open **Details → Tags → Edit tags**. Inspect without changing values. | Stored tags describe the subject matter; they are separate from ResourcePage taxonomy. |
-| I3 | Click **Alt text** to open its editable field. Inspect **Description** and the public-link expiration. | The reviewed alt text is `Two colleagues reviewing a tablet beside boxes on warehouse shelves.` Expiration is **None**. |
-| I4 | Leave the existing values unchanged and close the dialog. | The shared asset remains available; this inspection requires no page publication. |
+| Step | Click or inspect                                                                                       | Observe                                                                                                                 |
+| ---- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| I1   | Open **Content → Media BETA** and select `liberty-mutual-small-business-team-planning.png`.            | The existing image's native asset dialog opens.                                                                         |
+| I2   | Open **Details → Tags → Edit tags**. Inspect without changing values.                                  | Stored tags describe the subject matter; they are separate from ResourcePage taxonomy.                                  |
+| I3   | Click **Alt text** to open its editable field. Inspect **Description** and the public-link expiration. | The reviewed alt text is `Two colleagues reviewing a tablet beside boxes on warehouse shelves.` Expiration is **None**. |
+| I4   | Leave the existing values unchanged and close the dialog.                                              | The shared asset remains available; this inspection requires no page publication.                                       |
 
 SitecoreAI's Modern Media image-upload workflow can generate editable alt text and tags. These are suggestions for an author to review. This image-enrichment capability does not automatically populate every ResourcePage taxonomy field, and its documented automatic enrichment excludes PDFs, audio and video. Reusing an existing asset demonstrates the stored metadata; an actual upload and review is required to observe new AI suggestions.
 
@@ -150,7 +150,7 @@ SitecoreAI's Modern Media image-upload workflow can generate editable alt text a
 
 ## 6. Govern publication and timed visibility
 
-The Texas resource loop supplies the deliberate release path: create a named English Draft, edit Summary, wait for Saved, preview using Default, approve, publish only the intended English page and explicitly reindex **Liberty Mutual Agent Resources**. Verify the live article and Search result. Restore the original through a new version and the same publication/indexing sequence.
+The Texas resource loop supplies the deliberate release path: create a named **English Draft**, edit **Summary**, wait for **Saved**, preview with **Default editing host**, approve, and publish only the intended English page. The configured publication event automatically synchronizes Search. Verify the article and result card, then restore the original through a new draft and the same review-and-publish sequence.
 
 For separate author and approver responsibilities, follow [Review and publish content](https://liberty-mutual-agent-portal.vercel.app/workshops/guide/author-approver-workflow). The presenters use two SitecoreAI accounts to move a practice page through **Draft → Awaiting approval → Approved**, followed by publication.
 
@@ -174,12 +174,12 @@ This is external scheduling automation. Native **Schedule publishing availabilit
 
 This is a read-only **Page Builder** exercise. Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**, select **Liberty Mutual Agent Portal**, and use **English** with the **Default** editing host. If your role only permits the paired **Workshop practice** exercise, follow the presenter for this inspection. Leave **Campaign practice** unpublished and do not change its fields.
 
-| Step | Click or inspect | Observe |
-|---|---|---|
-| C17 | Open **Page Builder → Content → Home → Agency growth → Campaign practice → Data**. Find **Growth opportunity**, **Preparation update**, **Prepare for review**, and **Your next step**. | These are separate local content items beneath the unpublished practice page. The live campaign has its own content. |
-| C18 | Read **Growth opportunity → Body**, then **Preparation update → Body**. Look for the phrase relationship team without changing either field. | The same wording occurs in independently editable content. Changing one item would not automatically change the other. |
-| C19 | Read **Prepare for review → Answer**, then **Your next step → Title**. Look for relationship team again. If a colleague has changed the wording, note the difference without restoring it. | The seeded phrase appears in four independent fields. This demonstrates the maintenance need, not a bulk replacement operation. |
-| C20 | Discuss a shared content item for wording that should always stay identical. For a one-time bulk change, record the exact items, fields, languages, and versions to include, then consider a scoped API workflow or the **Marketplace Content Export/Import Tool** for evaluation. | Content reuse and bulk updates solve different needs. This workshop does not demonstrate a multi-item replacement command in **Page Builder**; the suggested extension is not installed or validated in this sandbox. |
+| Step | Click or inspect                                                                                                                                                                                                                                                                   | Observe                                                                                                                                                                                                               |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| C17  | Open **Page Builder → Content → Home → Agency growth → Campaign practice → Data**. Find **Growth opportunity**, **Preparation update**, **Prepare for review**, and **Your next step**.                                                                                            | These are separate local content items beneath the unpublished practice page. The live campaign has its own content.                                                                                                  |
+| C18  | Read **Growth opportunity → Body**, then **Preparation update → Body**. Look for the phrase relationship team without changing either field.                                                                                                                                       | The same wording occurs in independently editable content. Changing one item would not automatically change the other.                                                                                                |
+| C19  | Read **Prepare for review → Answer**, then **Your next step → Title**. Look for relationship team again. If a colleague has changed the wording, note the difference without restoring it.                                                                                         | The seeded phrase appears in four independent fields. This demonstrates the maintenance need, not a bulk replacement operation.                                                                                       |
+| C20  | Discuss a shared content item for wording that should always stay identical. For a one-time bulk change, record the exact items, fields, languages, and versions to include, then consider a scoped API workflow or the **Marketplace Content Export/Import Tool** for evaluation. | Content reuse and bulk updates solve different needs. This workshop does not demonstrate a multi-item replacement command in **Page Builder**; the suggested extension is not installed or validated in this sandbox. |
 
 A bulk-update implementation would need review, workflow, publication, and a tested restoration process. The [campaign authoring guide](../authoring/CAMPAIGN-AUTHORING.md#workflow-versions-and-safe-exercises) describes this read-only exercise and its boundaries.
 
@@ -189,12 +189,12 @@ A bulk-update implementation would need review, workflow, publication, and a tes
 
 Keep the four examples separate so each capability is easy to understand.
 
-| Example | Native targeting input | Authored output |
-|---|---|---|
-| Home Agency Growth | Identified agent, growth cohort and role | Principal, producer, account-manager or neutral card |
-| Small-business campaign callout | Identified principal/producer plus calculated small-commercial premium share | Growth opportunity or neutral campaign guidance |
-| Products spotlight | Affinity scores accumulated from tagged resource visits | Workers compensation, household or neutral spotlight |
-| Resources A/B test | Experiment eligibility and allocation | One of two CTA labels, measured against a guide visit |
+| Example                         | Native targeting input                                                       | Authored output                                       |
+| ------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Home Agency Growth              | Identified agent, growth cohort and role                                     | Principal, producer, account-manager or neutral card  |
+| Small-business campaign callout | Identified principal/producer plus calculated small-commercial premium share | Growth opportunity or neutral campaign guidance       |
+| Products spotlight              | Affinity scores accumulated from tagged resource visits                      | Workers compensation, household or neutral spotlight  |
+| Resources A/B test              | Experiment eligibility and allocation                                        | One of two CTA labels, measured against a guide visit |
 
 For the calculated campaign example, the premium-share value is:
 
@@ -202,12 +202,12 @@ For the calculated campaign example, the premium-share value is:
 
 The growth criterion is below 20%. Cedar Ridge's seeded share is about 14.46%, while Prairie Oak's is about 36.86%. The value also requires an identified principal or producer. Missing, invalid or zero-total data follows the neutral path.
 
-| Step | Click or inspect | Observe |
-|---|---|---|
-| P1 | In Page Builder, open **Home → Agency growth → Small-business growth**. Select **Callout** in **Layers** and click **Edit personalization rules**. | The right panel shows **Personalized**. Its variant selector offers **Original** and **1 Liberty Mutual - Small business growth opportunity is true**. Leave the active rules running. |
-| P2 | Open the [custom JavaScript value](https://app.sitecorecloud.io/personalize/custom-values/9faad837-0e23-4b5b-af10-c6883dba86ac?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df) and inspect its input attributes. | The threshold, identity/role requirements and neutral fallback are explicit. |
-| P3 | Load Avery's actual Sitecore profile, then Daniel's from the same pack. Use [profile lookup](demo-loops.md) to obtain the native profile ID. | Avery meets the growth criterion; Daniel follows neutral guidance. The portal's imported identifier is not necessarily the native profile ID. |
-| P4 | [Sign in](https://liberty-mutual-agent-portal.vercel.app/login) as `avery.01` and open the campaign. Sign out, then repeat as `daniel.01`. | Avery sees **Build on your personal-lines relationships**. Daniel sees **Turn local knowledge into a stronger submission**. Compare those headings with the native test. |
+| Step | Click or inspect                                                                                                                                                                                                                                  | Observe                                                                                                                                                                                |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| P1   | In Page Builder, open **Home → Agency growth → Small-business growth**. Select **Callout** in **Layers** and click **Edit personalization rules**.                                                                                                | The right panel shows **Personalized**. Its variant selector offers **Original** and **1 Liberty Mutual - Small business growth opportunity is true**. Leave the active rules running. |
+| P2   | Open the [custom JavaScript value](https://app.sitecorecloud.io/personalize/custom-values/9faad837-0e23-4b5b-af10-c6883dba86ac?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df) and inspect its input attributes. | The threshold, identity/role requirements and neutral fallback are explicit.                                                                                                           |
+| P3   | Load Avery's actual Sitecore profile, then Daniel's from the same pack. Use [profile lookup](demo-loops.md) to obtain the native profile ID.                                                                                                      | Avery meets the growth criterion; Daniel follows neutral guidance. The portal's imported identifier is not necessarily the native profile ID.                                          |
+| P4   | [Sign in](https://liberty-mutual-agent-portal.vercel.app/login) as `avery.01` and open the campaign. Sign out, then repeat as `daniel.01`.                                                                                                        | Avery sees **Build on your personal-lines relationships**. Daniel sees **Turn local knowledge into a stronger submission**. Compare those headings with the native test.               |
 
 The current source metrics are fictional JSON data imported into profile extensions. Connecting the existing Salesforce backend needs approved identifiers, field mappings, permissions and freshness. Confirm any Snowflake data requirement separately. The CMS does not automatically discover or query those internal systems.
 
@@ -227,41 +227,41 @@ The [Watkins Agentic Studio example](agentic-studio/README.md) then expands the 
 
 ## Coverage of the 33 requested functions
 
-| # | Function | Where to see it and the implementation boundary |
-|---|---|---|
-| 1 | Publish content | Section 6 and the Texas article loop: authoring, approval, scoped publication and Search refresh. |
-| 2 | Personalize by state | Daniel/Maya journeys show licensed-state filtering in the portal and Search. Native state-based page/component variants are a separate configuration option; the current native examples use role, calculated share and affinity. |
-| 3 | Accordions | C3: two authored questions on the campaign. |
-| 4 | Content Organization & Media | Sections 3 and 5: local Data folders, branches, taxonomy and Modern Media. |
-| 5 | Workflow & Collaboration | Section 6: versions, approval, and publication. The linked Page Builder exercise shows the separate Author and Approver responsibilities. |
-| 6 | Versioning & Publishing | The Texas loop retains original, temporary and restoring versions. |
-| 7 | Governance, Security & Access | Restricted placeholders, staff roles and portal server authorization have distinct responsibilities. |
-| 8 | Accessibility & Compliance | Campaign semantic controls, keyboard operation, dialog focus, labels and descriptive images. Validation supports accessibility; it is not a compliance certification. |
-| 9 | Clone / copy pages and components | Section 3: copy with an intentional local/shared datasource; branches provide an independent starting structure. |
-| 10 | Scheduled publish | Section 6: configured scoped publishing automation with a verified delivery transition. |
-| 11 | Caching controls | Published delivery plus application retrieval/revalidation settings. Architecture owns the CMS, Edge, frontend and CDN boundaries. |
-| 12 | Responsive rendering | Review the actual campaign at desktop and narrow browser widths, including navigation, accordions and the dialog. |
-| 13 | L2 Navigation | C1/C2: Agency growth child navigation and campaign section anchors. |
-| 14 | Call out | The authored **Callout** with a heading, rich text, and action link. |
-| 15 | Link box component | **Keep useful guidance close**: titled, icon-led list of three authored links. |
-| 16 | Main navigation | Portal navigation and the Agency growth child. State/MI/reward navigation targeting needs an agreed data model and component rules; no live MI feed is implied. |
-| 17 | Modal | C5: triggered contact dialog with keyboard behavior. Event/MI triggers need the relevant integration and display logic. |
-| 18 | CTA Buttons | Campaign preparation and conversation actions, plus the existing Resources A/B CTA. |
-| 19 | Page title | The **Heading** component’s authored title and icon. |
-| 20 | Salesforce/Snowflake data connectors | Salesforce is the existing backend; its live connection remains integration work. The POC uses replaceable JSON-backed adapters and imported profile extensions. Confirm Snowflake requirements separately. |
-| 21 | Alerts | Section 6: rich-text alert body and explicit UTC visibility dates. |
-| 22 | Dynamic data-driven personalization rules | P1–P4: native JavaScript calculation, decision table and browser comparison. |
-| 23 | AI-Driven Personalization | AI-assisted content, native affinity and experiments. Autonomous ML segmentation/recommendations need separately confirmed capabilities and data design. |
-| 24 | Drag and drop components | Page Builder supports drag-and-drop composition. C9–C12 use verified Duplicate component, Move up and restricted Swap controls. |
-| 25 | Spell / grammar check in editor | C14: **Fix spelling and grammar** within Optimize content. This is an author-invoked AI action. |
-| 26 | AI-assisted content drafting | C15: prompt-based drafting with author review and assigned brand guidance. |
-| 27 | AI metadata and alt text suggestions | Modern Media image-upload enrichment and review. It does not auto-populate arbitrary ResourcePage taxonomy fields. |
-| 28 | Auto-save and draft recovery | C16 and named versions. Persisted changes can be reopened; unsaved keystrokes are outside that promise. |
-| 29 | Forms | F1–F8 cover native **Contact your team**. Native authoring, preview validation and production submission/receipt are verified. C5–C8 separately demonstrate custom durable portal requests. The inspection receiver is not a production database or CRM. |
-| 30 | A/B testing | Section 8 and the native Resources experiment. Keep it on a page without configured personalization. Custom application feature tests may need broader instrumentation. |
-| 31 | Bulk edit of fields and content | C17–C20: read-only Page Builder inspection of repeated wording. A multi-item replacement tool is not demonstrated; evaluate a scoped API workflow or Marketplace extension. Shared datasource reuse remains a distinct technique. |
-| 32 | Scheduled unpublish / content expiration | Section 6: scoped restriction and republish automation, distinct from hiding an alert. |
-| 33 | Personalization variant preview | Page Builder's selected variants and decision-table profile tests, followed by ordinary signed-in delivery. |
+| #   | Function                                  | Where to see it and the implementation boundary                                                                                                                                                                                                          |
+| --- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Publish content                           | Section 6 and the Texas article loop: authoring, approval, scoped publication and Search refresh.                                                                                                                                                        |
+| 2   | Personalize by state                      | Daniel/Maya journeys show licensed-state filtering in the portal and Search. Native state-based page/component variants are a separate configuration option; the current native examples use role, calculated share and affinity.                        |
+| 3   | Accordions                                | C3: two authored questions on the campaign.                                                                                                                                                                                                              |
+| 4   | Content Organization & Media              | Sections 3 and 5: local Data folders, branches, taxonomy and Modern Media.                                                                                                                                                                               |
+| 5   | Workflow & Collaboration                  | Section 6: versions, approval, and publication. The linked Page Builder exercise shows the separate Author and Approver responsibilities.                                                                                                                |
+| 6   | Versioning & Publishing                   | The Texas loop retains original, temporary and restoring versions.                                                                                                                                                                                       |
+| 7   | Governance, Security & Access             | Restricted placeholders, staff roles and portal server authorization have distinct responsibilities.                                                                                                                                                     |
+| 8   | Accessibility & Compliance                | Campaign semantic controls, keyboard operation, dialog focus, labels and descriptive images. Validation supports accessibility; it is not a compliance certification.                                                                                    |
+| 9   | Clone / copy pages and components         | Section 3: copy with an intentional local/shared datasource; branches provide an independent starting structure.                                                                                                                                         |
+| 10  | Scheduled publish                         | Section 6: configured scoped publishing automation with a verified delivery transition.                                                                                                                                                                  |
+| 11  | Caching controls                          | Published delivery plus application retrieval/revalidation settings. Architecture owns the CMS, Edge, frontend and CDN boundaries.                                                                                                                       |
+| 12  | Responsive rendering                      | Review the actual campaign at desktop and narrow browser widths, including navigation, accordions and the dialog.                                                                                                                                        |
+| 13  | L2 Navigation                             | C1/C2: Agency growth child navigation and campaign section anchors.                                                                                                                                                                                      |
+| 14  | Call out                                  | The authored **Callout** with a heading, rich text, and action link.                                                                                                                                                                                     |
+| 15  | Link box component                        | **Keep useful guidance close**: titled, icon-led list of three authored links.                                                                                                                                                                           |
+| 16  | Main navigation                           | Portal navigation and the Agency growth child. State/MI/reward navigation targeting needs an agreed data model and component rules; no live MI feed is implied.                                                                                          |
+| 17  | Modal                                     | C5: triggered contact dialog with keyboard behavior. Event/MI triggers need the relevant integration and display logic.                                                                                                                                  |
+| 18  | CTA Buttons                               | Campaign preparation and conversation actions, plus the existing Resources A/B CTA.                                                                                                                                                                      |
+| 19  | Page title                                | The **Heading** component’s authored title and icon.                                                                                                                                                                                                     |
+| 20  | Salesforce/Snowflake data connectors      | Salesforce is the existing backend; its live connection remains integration work. The POC uses replaceable JSON-backed adapters and imported profile extensions. Confirm Snowflake requirements separately.                                              |
+| 21  | Alerts                                    | Section 6: rich-text alert body and explicit UTC visibility dates.                                                                                                                                                                                       |
+| 22  | Dynamic data-driven personalization rules | P1–P4: native JavaScript calculation, decision table and browser comparison.                                                                                                                                                                             |
+| 23  | AI-Driven Personalization                 | AI-assisted content, native affinity and experiments. Autonomous ML segmentation/recommendations need separately confirmed capabilities and data design.                                                                                                 |
+| 24  | Drag and drop components                  | Page Builder supports drag-and-drop composition. C9–C12 use verified Duplicate component, Move up and restricted Swap controls.                                                                                                                          |
+| 25  | Spell / grammar check in editor           | C14: **Fix spelling and grammar** within Optimize content. This is an author-invoked AI action.                                                                                                                                                          |
+| 26  | AI-assisted content drafting              | C15: prompt-based drafting with author review and assigned brand guidance.                                                                                                                                                                               |
+| 27  | AI metadata and alt text suggestions      | Modern Media image-upload enrichment and review. It does not auto-populate arbitrary ResourcePage taxonomy fields.                                                                                                                                       |
+| 28  | Auto-save and draft recovery              | C16 and named versions. Persisted changes can be reopened; unsaved keystrokes are outside that promise.                                                                                                                                                  |
+| 29  | Forms                                     | F1–F8 cover native **Contact your team**. Native authoring, preview validation and production submission/receipt are verified. C5–C8 separately demonstrate custom durable portal requests. The inspection receiver is not a production database or CRM. |
+| 30  | A/B testing                               | Section 8 and the native Resources experiment. Keep it on a page without configured personalization. Custom application feature tests may need broader instrumentation.                                                                                  |
+| 31  | Bulk edit of fields and content           | C17–C20: read-only Page Builder inspection of repeated wording. A multi-item replacement tool is not demonstrated; evaluate a scoped API workflow or Marketplace extension. Shared datasource reuse remains a distinct technique.                        |
+| 32  | Scheduled unpublish / content expiration  | Section 6: scoped restriction and republish automation, distinct from hiding an alert.                                                                                                                                                                   |
+| 33  | Personalization variant preview           | Page Builder's selected variants and decision-table profile tests, followed by ordinary signed-in delivery.                                                                                                                                              |
 
 ## Final cleanup
 

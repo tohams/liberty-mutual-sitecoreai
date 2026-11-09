@@ -73,8 +73,22 @@ function parseConfiguration(
       typeof parsed.fieldsMapping === "object"
         ? parsed.fieldsMapping
         : {};
+    const facetMapping =
+      "facetMapping" in parsed &&
+      parsed.facetMapping &&
+      typeof parsed.facetMapping === "object"
+        ? parsed.facetMapping
+        : {};
     return {
       searchIndex: parsed.searchIndex,
+      facetMapping: Object.fromEntries(
+        Object.entries(facetMapping).filter(
+          ([name, field]) =>
+            ["Risk state", ...RESOURCE_FACET_NAMES].includes(name) &&
+            typeof field === "string" &&
+            /^[A-Za-z][A-Za-z0-9_ -]{0,99}$/.test(field),
+        ),
+      ),
       fieldsMapping: Object.fromEntries(
         Object.entries(mapping).filter(
           ([, field]) => typeof field === "string",
@@ -164,6 +178,8 @@ function ResourceSearchExperience({
     buildResourceSearchFacet(
       DEFAULT_RESOURCE_STATE_SCOPE,
       data.agent.licensedStates,
+      {},
+      configuration.facetMapping,
     ),
   );
   const {
@@ -265,7 +281,12 @@ function ResourceSearchExperience({
     setSelection(next);
     setPageNumber(1);
     setFacet(
-      buildResourceSearchFacet(stateScope, data.agent.licensedStates, next),
+      buildResourceSearchFacet(
+        stateScope,
+        data.agent.licensedStates,
+        next,
+        configuration.facetMapping,
+      ),
     );
   }
   function selectStateScope(scope: ResourceStateScope) {
@@ -273,7 +294,12 @@ function ResourceSearchExperience({
     setStateScope(scope);
     setPageNumber(1);
     setFacet(
-      buildResourceSearchFacet(scope, data.agent.licensedStates, selection),
+      buildResourceSearchFacet(
+        scope,
+        data.agent.licensedStates,
+        selection,
+        configuration.facetMapping,
+      ),
     );
   }
   function changePage(nextPage: number) {
@@ -289,6 +315,8 @@ function ResourceSearchExperience({
       buildResourceSearchFacet(
         DEFAULT_RESOURCE_STATE_SCOPE,
         data.agent.licensedStates,
+        {},
+        configuration.facetMapping,
       ),
     );
   }
@@ -353,7 +381,10 @@ function ResourceSearchExperience({
         </label>
         {RESOURCE_FACET_NAMES.map((name) => {
           const values =
-            facets?.find((item) => item.name === name)?.value || [];
+            facets?.find(
+              (item) =>
+                item.name === (configuration.facetMapping?.[name] || name),
+            )?.value || [];
           return (
             <label key={name}>
               <span>{name}</span>
@@ -441,7 +472,9 @@ function ResourceSearchExperience({
                 </div>
               ))
             : results.map((result, index) => {
-                const itemId = documentText(result, "sc_item_id");
+                const itemId =
+                  documentText(result, "sc_item_id") ||
+                  documentText(result, "id");
                 const resource = data.resources.find(
                   (item) => normalizeId(item.id) === normalizeId(itemId),
                 );
@@ -457,20 +490,26 @@ function ResourceSearchExperience({
                   resource?.description ||
                   "";
                 const type =
+                  resource?.type ||
                   documentText(
                     result,
                     mapping.type || mapping.resourceType || "resourceType",
                   ) ||
-                  resource?.type ||
                   "Guide";
-                const stateValue =
-                  documentText(result, mapping.state || "state") ||
-                  (resource?.states.length === 3
+                const stateValue = documentText(
+                  result,
+                  mapping.state || "state",
+                );
+                const state = resource
+                  ? resource.nationwide
                     ? "All states"
-                    : resource?.states.join(" · ")) ||
-                  "All states";
-                const state =
-                  stateValue === "All" ? "All states" : facetLabel(stateValue);
+                    : resource.states
+                        .map((state) => stateNames[state])
+                        .join(" · ")
+                  : stateValue === "All"
+                    ? "All states"
+                    : facetLabel(stateValue);
+                const types = resource?.types ?? [type];
                 const href = resource ? resourceHref(resource) : undefined;
                 const saved = resource
                   ? data.favorites.includes(resource.id)
@@ -483,9 +522,9 @@ function ResourceSearchExperience({
                     <div className={`library-art library-art-${index % 4}`}>
                       <PortalIcon
                         name={
-                          type === "State guidance"
+                          types.includes("State guidance")
                             ? "pin"
-                            : type === "Checklist"
+                            : types.includes("Checklist")
                               ? "file"
                               : "book"
                         }
@@ -493,7 +532,7 @@ function ResourceSearchExperience({
                         height="42"
                       />
                       <span>
-                        {type === "State guidance"
+                        {types.includes("State guidance")
                           ? "A local perspective."
                           : index % 2
                             ? "Knowledge that works."

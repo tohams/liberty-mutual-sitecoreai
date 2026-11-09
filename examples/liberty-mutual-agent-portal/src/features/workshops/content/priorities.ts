@@ -193,7 +193,7 @@ export const guidePriorities: Record<string, GuideFocusDefinition> = {
     priority: "dependable",
     section: "architecture",
     relevance:
-      "A taxonomy is a managed list of classification choices, such as state or product. Trace a selection in the custom **Resource metadata** app to the stored resource field and the filter used by **Search**. This shows how author-friendly choices are translated into the values that search expects.",
+      "A taxonomy is a managed list of classification choices, such as state or product. Trace native **Checklist** selections from **Page Builder** to their taxonomy references, published content, and **Search** filters. This connects governed authoring with relevant guidance and the portal’s separate licensed-state access rules.",
   },
   "saved-work-reset": {
     priority: "relevance",

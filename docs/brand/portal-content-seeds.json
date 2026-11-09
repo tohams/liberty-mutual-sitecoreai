@@ -28,7 +28,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-build-a-bop-submission",
@@ -56,7 +57,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-business-vehicles-conversation",
@@ -82,7 +84,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-texas-workers-compensation",
@@ -108,7 +111,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": false
     },
     {
       "id": "resource-florida-workers-compensation",
@@ -134,7 +138,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": false
     },
     {
       "id": "resource-illinois-workers-compensation",
@@ -160,7 +165,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": false
     },
     {
       "id": "resource-farm-account-information",
@@ -186,7 +192,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-multi-location-renewal",
@@ -212,7 +219,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-specialty-referral",
@@ -238,7 +246,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-bond-request-checklist",
@@ -264,7 +273,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-wholesale-placement-handoff",
@@ -290,7 +300,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     },
     {
       "id": "resource-expand-small-business-practice",
@@ -316,7 +327,8 @@
         "editorialStatus": "Ready for sandbox editorial review",
         "corporateApproved": false,
         "integrationNotice": "Operational actions use fictional records. Do not publish this internal provenance object as agent-facing page copy."
-      }
+      },
+      "nationwide": true
     }
   ],
   "promotions": [

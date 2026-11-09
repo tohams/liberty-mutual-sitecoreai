@@ -665,17 +665,15 @@ export const developmentGuides: WorkshopGuide[] = [
     category: "Understand the architecture",
     title: "Inspect resource metadata",
     summary:
-      "Inspect the Resource metadata panel in Page Builder and trace its author-friendly classification choices to the values used by Search.",
+      "Trace native classification checkboxes from Page Builder to the managed taxonomy, published resource, and Search filters.",
     outcome:
-      "Explain how a custom Sitecore Marketplace app gives authors managed dropdown choices while preserving Search-compatible fields and licensing filters.",
+      "Explain how native content fields, published taxonomy references, and automatic Search synchronization give authors consistent choices while preserving licensed-state access.",
     personas: [],
     prerequisites: [
-      "A **resource** is an article listed in **Learning & resources**. Its **metadata** classifies the article by state, product, and other attributes used by Search. **Taxonomy** means the managed list of choices for those classifications. This walkthrough inspects how authors choose those values without typing inconsistent text.",
-      "The **Resource metadata** panel is a custom **Marketplace app**, an extension installed inside SitecoreAI and opened from Page Builder. It provides controlled dropdowns while saving text values that this environment’s native Search can index. It is part of this implementation, rather than a built-in dropdown editor.",
-      "Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**. This optional inspection requires organization administrator/owner access to the installed **Resource metadata** Marketplace app. Ask Angela, Allen, or Thomas to confirm that access; a presenter **Author** or **Approver** account does not imply access to this app.",
-      `Open the [**Sitecore organization**](${sitecore}) and [**Page Builder**](${pageBuilder}) before starting. Confirm **Agent Portal** and **Default editing host** in Page Builder. If the app is unavailable to your account, observe a presenter with that access instead of changing your workshop role.`,
-      "The first step reads a taxonomy definition in [**Agent Portal source repository**](https://github.com/tohams/liberty-mutual-sitecoreai), Use your authorized GitHub account if prompted, and browse from its top-level file list using the paths shown here. No clone or source edit is required.",
-      "This guide inspects shared configuration without editing it. Do not create taxonomy options, change article metadata, publish content, or reindex Search during the inspection. Separate authoring guides cover deliberate resource changes and their cleanup.",
+      "A **resource** is an article in **Learning & resources**. Its **metadata** classifies it by state, business family, product, distribution channel, and resource type. A **taxonomy** is the managed list of choices for those fields.",
+      "Use your invited **Sitecore Cloud** account in **Safeco Insurance Company of America POC**, with permission to view the resource. Native page, language, and workflow permissions determine which fields an author can edit.",
+      `Open [**Page Builder**](${pageBuilder}), select **Agent Portal**, and retain **Default editing host**. This guide inspects the current article without creating a version or changing content.`,
+      "For the repository steps, open the **Agent Portal source repository** provided for the workshop and browse from its top-level file list using the paths shown here. No clone, source edit, deployment, or Search update is required for this inspection.",
     ],
     links: [
       { label: "Open the Sitecore organization", href: sitecore },
@@ -683,15 +681,14 @@ export const developmentGuides: WorkshopGuide[] = [
     ],
     steps: [
       {
-        title: "Trace the Texas choice to its managed taxonomy definition",
+        title: "Trace the Texas choice to its managed taxonomy item",
         action: [
-          `Open the **Texas taxonomy definition** (**authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk states/TX.yml**). In this read-only GitHub file, find **Path**: **/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy/Risk states/TX**. This locates the managed choice in the site-level **Data** folder, outside **Home**.`,
-          "Find **Hint: __Display name** with **Value: Texas**, then **Hint: description** with **Value: Resource guidance specific to a Texas risk.** The final item name in the path is **TX**. Comparing these values explains how authors see a readable label while Search keeps a stable state value.",
+          "Open the **Texas taxonomy definition** at **authoring/items/liberty-mutual/items/taxonomy/Taxonomy/Risk states/TX.yml**. Its **Path** ends in **Data/Taxonomy/Risk states/TX**, identifying a shared choice outside the website’s **Home** pages.",
+          "Compare the item’s **ID**, its stable name **TX**, its **Display name** **Texas**, and its **Description**. The native checklist stores the selected item reference; the published Search mapping resolves that item’s stable **TX** code.",
         ],
         expected: [
-          "**TX** is the stable value stored on articles and used by Search; **Texas** is the label shown to authors. **Description** supplies help text. Separating the label from the stored value lets the interface remain readable without changing the underlying filter value.",
-          "The YAML file is a **serialized** representation of a Sitecore content item. These choices are seeded as editable CMS content and excluded from **Items as Resources**, the package used to deploy CMS definitions. Normal application and model releases preserve subsequent author edits to the choices.",
-          "The file records the initial taxonomy definition, not a live read of the tenant. The next step inspects the installed panel’s current values. Opening the file does not change Sitecore content.",
+          "Authors see a readable **Texas** label. The reference identifies the managed content item, while **TX** supplies the application’s state code. These separate concerns let native authoring remain readable and Search filters remain consistent.",
+          "The YAML file is a **serialized** representation of native Sitecore content. Taxonomy choices remain editable CMS items; their separate **CreateOnly** seed preserves later author edits during ordinary releases.",
         ],
         repositoryFiles: [
           {
@@ -701,53 +698,52 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "See the choices in the installed Page Builder panel",
+        title: "Inspect the native classification checklists",
         action: [
-          `Open [**Page Builder**](${pageBuilder}), select **Agent Portal**, and keep **Default editing host** selected. Under **Pages** → **Home** → **Learning & resources**, open **Workers compensation: a Texas starting point**. Its item path ends in **/Home/resources/texas-workers-compensation**. Use this article so its state metadata can be compared with the **TX** definition from the first step.`,
-          "Select **English** and note the displayed version and workflow status. Use that same Texas article and version throughout this inspection; do not create a new version.",
-          "Open **Apps** → **Resource metadata**. Inspect **Risk state**, **Business family**, **Product**, **Distribution channel**, and **Resource type**. This panel edits classification fields on the selected article; it does not replace the article’s visible text or image.",
-          "Select the **Learning & resources** landing page and read the panel’s explanation. This checks what happens when an author opens the app on a page that is not a resource article. Return to **Workers compensation: a Texas starting point** and the version you recorded.",
+          `In [**Page Builder**](${pageBuilder}), open **Home → Learning & resources → Workers compensation: a Texas starting point**. Confirm **English**, note the displayed version, and click **Content** in the top navigation.`,
+          "Locate **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Open each selection control to reveal its checkboxes; the collapsed label reports the number of selected items.",
+          "Compare the selected choices with **Texas**, **Small commercial**, **Workers’ compensation**, **Independent agent**, and **State guidance**. Close each list without changing any checkbox.",
         ],
         expected: [
-          "The five dropdowns each permit one choice. They are supplied by the managed taxonomy; **Cross-state guidance** stores **All** and does not bypass licensed-state filtering.",
-          "The panel appears for **ResourcePage** articles. On an **Approved** version, its fields are read-only so you can inspect the selected version’s classification. The landing page displays an explanation that resource metadata applies to article pages.",
-          "To revise an approved article, an author creates a **Draft**, then edits and saves that draft’s fields throughout the review process.",
+          "The native content fields expose managed, multiple-selection checklists. Each choice represents applicability of the article, while page and workflow permissions govern editing.",
+          "**Cross-state guidance** is selected by itself when content applies across supported states. It does not grant an agent a license or broaden the portal’s licensed-state access.",
         ],
         links: [{ label: "Open Page Builder", href: pageBuilder }],
       },
       {
-        title: "Understand the save and concurrency boundaries",
+        title: "Read the field definition and its Source",
         action: [
-          `Open **Metadata validation and save service** (**examples/liberty-mutual-agent-portal/src/features/resource-metadata/metadata-service.ts**) and **Resource metadata authoring and access scope** (**docs/resource-metadata-authoring.md**). Both paths start at the **repository root**. Read the save validation and native readback behavior; do not call the save operation.`,
-          "Return to the Texas article’s panel and select **Refresh** to reload the selected version and managed choices. If you accidentally changed a dropdown, choose **Discard changes** before refreshing. Compare **Risk state: Texas** and its help text with the **TX** definition from the first step. If another workshop edit has changed the current value, record the difference without saving over it.",
+          "Open **ResourcePage Risk states field** and **ResourcePage Products field** using the repository paths below. Find **Type: Checklist** and each native **Source** folder under **Data/Taxonomy**.",
+          "Read **Native metadata authoring guide** to follow the same fields through draft editing, automatic saving, approval, and publication. Keep the native article unchanged while reviewing the design.",
         ],
         expected: [
-          "The panel rereads labels and help text from the managed lists. No change is expected during this read-only check. An author can maintain a label without a code deployment while preserving the stable item name and stored Search value.",
-          "**Save metadata** validates selected **Draft** fields and reads changes back. The panel does not autosave, create versions, approve, publish, or reindex.",
-          "**Discard changes** restores unsaved selections only. After an uncertain save, **Refresh** and inspect the actual native values before deciding what to do next.",
-          "This custom app uses an API with administrator privileges, so app access is restricted. Its underlying GraphQL save cannot reject a competing update atomically. Have one person edit a given article version at a time to avoid overwriting another person’s change.",
+          "The template defines the native authoring control and limits its choices to the managed Source folder. Selections are references to native taxonomy items, rather than free-form labels typed by each author.",
+          "A page version owns its selected references. Changing one article does not change another article’s selection; deliberately shared taxonomy labels remain managed in one place.",
         ],
         repositoryFiles: [
           {
-            label: "Resource metadata authoring and access scope",
-            path: "docs/resource-metadata-authoring.md",
+            label: "ResourcePage Risk states field",
+            path: "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourcePage/Content/state.yml",
           },
           {
-            label: "Metadata validation and save service",
-            path: "examples/liberty-mutual-agent-portal/src/features/resource-metadata/metadata-service.ts",
+            label: "ResourcePage Products field",
+            path: "authoring/items/liberty-mutual/items/templates/LibertyMutual/ResourcePage/Content/product.yml",
+          },
+          {
+            label: "Native metadata authoring guide",
+            path: "docs/resource-metadata-authoring.md",
           },
         ],
       },
       {
-        title: "Review dependencies before adding or renaming a value",
+        title: "Distinguish taxonomy maintenance from agent eligibility",
         action: [
-          `Open the **managed taxonomy folders** (**authoring/items/liberty-mutual/items/taxonomy/Taxonomy**) to see **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Then open the **taxonomy preservation rule** (**authoring/items/liberty-mutual/LibertyMutual.Taxonomy.module.json**) and find **allowedPushOperations: CreateOnly**. These source references explain where the choices originate and why the seed does not overwrite later author changes; do not edit or deploy these files.`,
-          "Consider adding a new state as a design example: compare its stable item name, readable label, application mappings, agent eligibility, existing resource values, and Search validation. This explains why editing a label and adding a new supported state have different consequences.",
+          "Open **Managed taxonomy folders** to inspect **Risk states**, **Business families**, **Products**, **Distribution channels**, and **Resource types**. Then open **Taxonomy preservation rule** and find **allowedPushOperations: CreateOnly**.",
+          "Consider adding a supported state as a design example. Its managed choice, application state code, agent licensing data, and Search behavior must agree. Keep the existing taxonomy and article selections unchanged during this inspection.",
         ],
         expected: [
-          "Adding a state does not add a license or carrier appointment. Renaming an option’s item name does not update existing string values on articles.",
-          "The managed labels serve the author panel. Visitor-facing facet labels currently come from the application and do not automatically adopt these display names.",
-          "The **Resource metadata** app presents managed dropdown choices and stores Search-compatible text values on the article. This gives authors controlled choices while keeping the indexed fields compatible with native Search.",
+          "A label change updates the managed taxonomy item. Adding an insurance state or product can also require application and integration support; a classification choice alone does not establish eligibility.",
+          "The authoring vocabulary and the portal’s access rules have distinct responsibilities. The latter continue to prevent unlicensed state guidance from appearing through Search, saved resources, or direct article access.",
         ],
         repositoryFiles: [
           {
@@ -761,21 +757,32 @@ export const developmentGuides: WorkshopGuide[] = [
         ],
       },
       {
-        title: "Follow an approved resource change through delivery",
+        title: "Follow a reviewed resource through publication and Search",
         action: [
-          "Read the release sequence without executing it: an authorized author saves metadata on a **Draft**, completes the review workflow, and publishes the article and any changed local **Resource image** datasource. **Save metadata** alone does not make the change visible on the live portal.",
-          "For indexed text or metadata, the separate refresh is **Content** → **Search Sources** → **Liberty Mutual Agent Resources** → **Reindex Content**. **Reindexing** refreshes the copy Search retrieves; the author then checks the published article and Search result with a licensed agent. Do not click **Reindex Content** for this unchanged inspection.",
+          "Read the release sequence without executing it: an author edits native fields on a **Draft**, waits for **Saved**, completes the review workflow, and publishes the article with any changed local **Resource image** content.",
+          "The configured publication event reads published content from **Experience Edge** and synchronizes the resource’s Search document automatically. The author verifies the actual article and its **Learning & resources** result using a licensed agent account.",
+          "For the implementation, inspect **Published resource mapping** and **Publication reconciliation** using the repository paths below. The first resolves native content and taxonomy references; the second maintains the Search projection after publication.",
         ],
         expected: [
-          "Saving, publication, and reindexing are three different operations. An existing bookmark continues to use the resource’s stable item ID.",
-          "An image-only change requires publication of the page and its changed image datasource, plus delivery of the selected media asset, but no Search reindex. New page branches affect new pages; they do not overwrite existing articles.",
+          "Saving changes authoring content; publication releases reviewed content; automatic Search synchronization aligns its searchable copy. An ordinary content update needs no frontend deployment.",
+          "The article’s native item ID stays stable across versions. Its local image, shared media asset, taxonomy choices, and licensed-state controls retain their separate responsibilities.",
+        ],
+        repositoryFiles: [
+          {
+            label: "Published resource mapping",
+            path: "examples/liberty-mutual-agent-portal/src/features/resource-publication/content.ts",
+          },
+          {
+            label: "Publication reconciliation",
+            path: "examples/liberty-mutual-agent-portal/src/features/resource-publication/publication-service.ts",
+          },
         ],
       },
     ],
     cleanup: {
       body: [
-        "Use **Discard changes** if you made any unsaved panel selections, and close temporary authoring tabs. This inspection saves no changes, so it needs no publication, Search refresh, or portal reset.",
-        "If you accidentally saved a CMS change, stop and tell the workshop team which item and version changed. A portal workshop reset cannot restore taxonomy or article content; recovery must use the recorded native content and its workflow.",
+        "Close temporary authoring and repository tabs. This inspection changes no checkbox, content field, taxonomy item, publication, Search document, or portal data.",
+        "If a field was accidentally changed, restore the original selection through the native fields before leaving. A portal workshop-number reset cannot restore CMS content.",
       ],
     },
     related: ["architecture-and-ownership", "release-and-recovery"],

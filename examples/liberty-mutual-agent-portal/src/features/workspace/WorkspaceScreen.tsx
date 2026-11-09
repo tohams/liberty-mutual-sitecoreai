@@ -335,13 +335,21 @@ export function WorkspaceScreen({
               >
                 <div className={`resource-art resource-art-${index}`}>
                   <PortalIcon
-                    name={resource.type === "State guidance" ? "pin" : "book"}
+                    name={
+                      (resource.types ?? [resource.type]).includes(
+                        "State guidance",
+                      )
+                        ? "pin"
+                        : "book"
+                    }
                     width="36"
                     height="36"
                   />
                   <span>
-                    {resource.type === "State guidance"
-                      ? resource.states.length === 3
+                    {(resource.types ?? [resource.type]).includes(
+                      "State guidance",
+                    )
+                      ? resource.nationwide === true
                         ? "Nationwide"
                         : resource.states
                             .map((state) => stateNames[state])

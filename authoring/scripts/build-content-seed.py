@@ -5,6 +5,7 @@ The normal deployment script pushes models; seeds are explicitly opt-in and Crea
 """
 from pathlib import Path
 import json,uuid,html,yaml,re
+from portal_checklist_model import CHECKLISTS, checklist_value
 from component_library_model import apply_rendering_metadata, MANIFEST as COMPONENT_LIBRARY
 ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'authoring/items/liberty-mutual'; ITEMS=BASE/'items'
@@ -66,10 +67,12 @@ def template(name,fielddefs=[],bases=[STD],workflow=None,sharedstd=None):
  item(path,IDS['projectTemplates'],TEMPLATE,'templates',shared=sf,id=tid)
  if fielddefs:
   sec=item(path+'/Content',tid,SECTION,'templates')
-  for n,(key,label,typ,description) in enumerate(fielddefs):
+  for n,definition in enumerate(fielddefs):
+   key,label,typ,description,*source=definition
    fid=uid('field/'+name+'/'+key);fieldids[name+'.'+key]=fid
    sf=[f('ab162cc0-dc80-4abf-8871-998ee5d7ba32','Type',typ),f(FIELDS['sort'],'__Sortorder',(n+1)*100)]
-   if typ=='Rich Text':sf.append(f('1eb8ae32-e190-44a6-968d-ed904c794ebf','Source','query:$xaRichTextProfile'))
+   if source:sf.append(f('1eb8ae32-e190-44a6-968d-ed904c794ebf','Source',source[0]))
+   elif typ=='Rich Text':sf.append(f('1eb8ae32-e190-44a6-968d-ed904c794ebf','Source','query:$xaRichTextProfile'))
    it={'ID':fid,'Parent':sec,'Template':FIELD,'Path':path+'/Content/'+key,'SharedFields':sf,'Languages':[{'Language':'en','Fields':[f('19a69332-a23e-4e70-8d16-b2640cb24cc8','Title',label),f(FIELDS['display'],'__Display name',label),f(FIELDS['help'],'__Short description',description)],'Versions':[{'Version':1,'Fields':[]}]}]}
    save(it,'templates')
  standard(path,tid,workflow=workflow,shared=sharedstd)
@@ -77,7 +80,7 @@ def template(name,fielddefs=[],bases=[STD],workflow=None,sharedstd=None):
 fieldids={};templates={}
 guidance=[('eyebrow','Eyebrow','Single-Line Text','Short context label, for example Agency growth.'),('headline','Headline','Single-Line Text','Use a concise, useful next step.'),('body','Body','Rich Text','Reusable guidance; never include private agency or client data.'),('actionLink','Action link','General Link','Choose a working destination and a meaningful link label.')]
 resources=[('title','Title','Single-Line Text','Specific resource title in sentence case.'),('summary','Summary','Multi-Line Text','A concise summary for browsing and search.'),('body','Body','Rich Text','Original approved resource copy with clear headings.'),('resourceType','Resource type','Single-Line Text','Guide, Checklist, State guidance, Learning path or other controlled label.'),('state','Risk state','Single-Line Text','TX, FL or IL; use All for reusable cross-state guidance.'),('reviewedAt','Source reviewed','Date','Date on which sources were checked, not a claim of corporate approval.'),('sourceLink','Source link','General Link','Official primary source when a factual or regulatory claim needs support.')]
-meta=[x for x in resources if x[0]!='title']+ [('businessFamily','Business family','Single-Line Text','Stable taxonomy key such as small-commercial.'),('product','Product','Single-Line Text','Stable product key such as workers-compensation.'),('channel','Distribution channel','Single-Line Text','Independent-agent or wholesale context.')]
+meta=[(key,*CHECKLISTS[key]) if key in CHECKLISTS else row for row in resources if row[0]!='title' for key in [row[0]]]+[(key,*CHECKLISTS[key]) for key in ['businessFamily','product','channel']]
 ag=template('AgentGuidance',guidance,workflow=IDS['datasourceWorkflow']);ra=template('ResourceArticle',resources,workflow=IDS['datasourceWorkflow'])
 rs=template('ResourceSearch',[('search','Search configuration','Multi-Line Text','JSON configuration for the native resource search source. Change source and field mappings together; preserve valid JSON.')],workflow=IDS['datasourceWorkflow'])
 params=template('PortalRenderingParameters',bases=['4247aad4-ebde-4994-998f-e067a51b1fe4','5c74e985-e055-43ff-b28c-db6c6a6450a2','44a022db-56d3-419a-b43b-e27e4d8e9c41','3db3eb10-f8d0-4cc9-be26-18ce7b139ec8'])
@@ -157,8 +160,8 @@ save(it,'content')
 resourceids=[]
 for r in DATA['resources']:
  source=SOURCES[r['sourceRefs'][0]] if r['sourceRefs'] else None
- vals={'title':r['title'],'summary':r['summary'],'body':r['bodyHtml'],'resourceType':r['resourceType'],'state':r['states'][0] if len(r['states'])==1 else 'All','reviewedAt':r['reviewedAt'].replace('-','')+'T000000Z','sourceLink':link(source['title'],source['url']) if source else ''}
- ds=uid(SITE+'/Home/resources/'+r['slug']);metadata={k:v for k,v in vals.items() if k!='title'};metadata.update({'businessFamily':r['family'],'product':r['product'],'channel':r['channel']})
+ vals={'title':r['title'],'summary':r['summary'],'body':r['bodyHtml'],'resourceType':r['resourceType'],'state':'All' if r.get('nationwide') else ','.join(r['states']),'reviewedAt':r['reviewedAt'].replace('-','')+'T000000Z','sourceLink':link(source['title'],source['url']) if source else ''}
+ ds=uid(SITE+'/Home/resources/'+r['slug']);metadata={k:v for k,v in vals.items() if k!='title'};metadata.update({'businessFamily':r['family'],'product':r['product'],'channel':r['channel']});metadata={key:checklist_value(key,value) if key in CHECKLISTS else value for key,value in metadata.items()}
  pid=page(r['slug'],r['title'],[('ResourceArticle',ds,'Default')],values=metadata,parentid=pageids['resources'],parentpath=SITE+'/Home/resources',tid=resourcepage)
  resourceids.append({'slug':r['slug'],'pageId':pid,'datasourceId':ds,'route':'/resources/'+r['slug']})
 for hub in DATA['productHubs']:

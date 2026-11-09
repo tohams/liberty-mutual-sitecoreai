@@ -7,6 +7,7 @@ import type {
 import nativeArticle from "@/components/resource-image/resource-article-native.fixture.json";
 import { canAccessResourcePage } from "./resource-page-access";
 import nativeStates from "./resource-page-native-state.fixture.json";
+import metadataChoices from "@/data/resource-taxonomy-options.json";
 
 function resourcePage(state: unknown, articleState = state): RouteData {
   const article = structuredClone(
@@ -210,6 +211,61 @@ test("legacy delivery is checked without admitting a legacy datasource beside a 
   legacy.placeholders["headless-resource-article"] = [];
   assert.equal(
     canAccessResourcePage("/resources/guide", legacy, daniel, false),
+    false,
+  );
+});
+
+test("native checklist states preserve explicit All and enforce every page and datasource boundary", () => {
+  const native = (states: string[]) =>
+    states.map((state) => {
+      const choice = metadataChoices.state.find(
+        (option) => option.value === state,
+      )!;
+      return {
+        id: choice.id,
+        name: state,
+        fields: { description: { value: "Native choice" } },
+      };
+    });
+  const route = resourcePage("TX");
+  route.fields!.state = native(["TX", "IL"]);
+  route.placeholders["headless-resource-article"][0].fields!.state = native([
+    "TX",
+    "IL",
+  ]);
+  assert.equal(
+    canAccessResourcePage("/resources/multi-state", route, ["IL"], false),
+    true,
+  );
+  assert.equal(
+    canAccessResourcePage("/resources/multi-state", route, ["FL"], false),
+    false,
+  );
+  assert.equal(
+    canAccessResourcePage("/resources/multi-state", route, [], false),
+    false,
+  );
+  route.fields!.state = native(["TX", "IL", "FL"]);
+  route.placeholders["headless-resource-article"][0].fields!.state = native([
+    "TX",
+    "IL",
+    "FL",
+  ]);
+  assert.equal(
+    canAccessResourcePage("/resources/all-specific", route, [], false),
+    false,
+  );
+  route.fields!.state = native(["All"]);
+  route.placeholders["headless-resource-article"][0].fields!.state = native([
+    "All",
+  ]);
+  assert.equal(
+    canAccessResourcePage("/resources/general", route, [], false),
+    true,
+  );
+  route.fields!.state = native(["All", "TX"]);
+  assert.equal(
+    canAccessResourcePage("/resources/contradictory", route, ["TX"], false),
     false,
   );
 });

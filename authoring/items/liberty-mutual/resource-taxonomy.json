@@ -7,7 +7,7 @@
     {
       "field": "state",
       "folder": "Risk states",
-      "description": "Select the risk location the resource applies to. All means reusable guidance that is not specific to one state.",
+      "description": "Select the states covered by this resource, or Cross-state guidance on its own.",
       "options": [
         {
           "name": "All",
@@ -34,7 +34,7 @@
     {
       "field": "businessFamily",
       "folder": "Business families",
-      "description": "Select the business family covered by the resource.",
+      "description": "Select the business families covered by this resource.",
       "options": [
         {
           "name": "personal",
@@ -76,12 +76,17 @@
     {
       "field": "product",
       "folder": "Products",
-      "description": "Select the product covered by the resource.",
+      "description": "Select the products covered by this resource.",
       "options": [
         {
-          "name": "auto-home",
-          "displayName": "Auto & home",
-          "description": "Personal auto and homeowners preparation guidance."
+          "name": "auto",
+          "displayName": "Auto",
+          "description": "Personal auto preparation guidance."
+        },
+        {
+          "name": "home",
+          "displayName": "Homeowners",
+          "description": "Homeowners preparation guidance."
         },
         {
           "name": "businessowners-policy",
@@ -123,7 +128,7 @@
     {
       "field": "channel",
       "folder": "Distribution channels",
-      "description": "Select the distribution channel the resource is written for.",
+      "description": "Select the channels for which this resource is written.",
       "options": [
         {
           "name": "independent-agent",
@@ -140,7 +145,7 @@
     {
       "field": "resourceType",
       "folder": "Resource types",
-      "description": "Select the kind of guidance the resource provides.",
+      "description": "Select the kinds of guidance this resource provides.",
       "options": [
         {
           "name": "Bond guide",

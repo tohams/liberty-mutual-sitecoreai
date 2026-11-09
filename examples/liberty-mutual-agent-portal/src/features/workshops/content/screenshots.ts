@@ -31,20 +31,6 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
         "On **Support**, scroll below the relationship-team cards to find **Contact your team**, the form created in SitecoreAI Forms.",
     },
   },
-  "resource-content-workflow": {
-    "3": {
-      file: "pagebuilder-resource.png",
-      alt: "Page Builder showing the Texas resource and its Article and Image layers",
-      caption:
-        "Reference layout for the Texas resource. **Layers** identifies the article and its nested image. The version shown is **Live**; follow this guide’s **Draft** creation step before editing so published content remains unchanged during preparation.",
-    },
-    "4": {
-      file: "resource-metadata.png",
-      alt: "Resource metadata app with managed risk state, business family, product, and distribution choices",
-      caption:
-        "**Apps** → **Resource metadata**. This screenshot shows the existing **Live** version, so fields are read-only. The guide creates a **Draft** before making changes.",
-    },
-  },
   "create-resource-and-media": {
     "2": {
       file: "modern-media-library.png",
@@ -119,14 +105,6 @@ const screenshots: Record<string, Record<number, GuideImage>> = {
       alt: "Article and Image layers in Page Builder",
       caption:
         "Authored page fields and local image data are rendered by the corresponding React components.",
-    },
-  },
-  "resource-taxonomy": {
-    "2": {
-      file: "resource-metadata.png",
-      alt: "Installed Resource metadata panel in Page Builder",
-      caption:
-        "The panel reads managed taxonomy choices while preserving the raw Search-compatible field values. **Live** versions are read-only.",
     },
   },
 };

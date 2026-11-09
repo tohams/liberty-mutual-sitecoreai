@@ -43,13 +43,16 @@ export function ResourcesScreen({
         resource.states,
         data.agent.licensedStates,
         stateScope,
+        resource.nationwide === true,
       ) &&
       (filter === "All resources" ||
         (filter === "Saved"
           ? data.favorites.includes(resource.id)
           : filter === "Guide"
-            ? resource.type.toLowerCase().endsWith("guide")
-            : resource.type === filter)),
+            ? (resource.types ?? [resource.type]).some((type) =>
+                type.toLowerCase().endsWith("guide"),
+              )
+            : (resource.types ?? [resource.type]).includes(filter))),
   );
   return (
     <>
@@ -208,9 +211,13 @@ export function ResourcesScreen({
                 <div className={`library-art library-art-${index % 4}`}>
                   <PortalIcon
                     name={
-                      resource.type === "State guidance"
+                      (resource.types ?? [resource.type]).includes(
+                        "State guidance",
+                      )
                         ? "pin"
-                        : resource.type === "Checklist"
+                        : (resource.types ?? [resource.type]).includes(
+                              "Checklist",
+                            )
                           ? "file"
                           : "book"
                     }
@@ -218,7 +225,9 @@ export function ResourcesScreen({
                     height="45"
                   />
                   <span>
-                    {resource.type === "State guidance"
+                    {(resource.types ?? [resource.type]).includes(
+                      "State guidance",
+                    )
                       ? "A local perspective."
                       : index % 2
                         ? "Knowledge that works."
@@ -251,7 +260,7 @@ export function ResourcesScreen({
                   <p>{resource.description}</p>
                   <footer>
                     <span>
-                      {resource.states.length === 3
+                      {resource.nationwide === true
                         ? "All states"
                         : resource.states.join(" · ")}
                     </span>

@@ -12,14 +12,21 @@ export function parseResourceStates(value: unknown): StateCode[] {
     : [];
 }
 
-export function isNationwideResource(states: readonly StateCode[]): boolean {
-  return RESOURCE_STATES.every((state) => states.includes(state));
+export function isNationwideResource(
+  states: readonly StateCode[],
+  explicitlyNationwide = false,
+): boolean {
+  return (
+    explicitlyNationwide &&
+    RESOURCE_STATES.every((state) => states.includes(state))
+  );
 }
 
 /** Nationwide guidance is shared; state-specific guidance requires a current license. */
 export function canAccessResourceStates(
   resourceStates: readonly StateCode[],
   licensedStates: readonly StateCode[],
+  explicitlyNationwide = false,
 ): boolean {
   if (
     !resourceStates.length ||
@@ -27,7 +34,7 @@ export function canAccessResourceStates(
   )
     return false;
   return (
-    isNationwideResource(resourceStates) ||
+    isNationwideResource(resourceStates, explicitlyNationwide) ||
     resourceStates.some((state) => licensedStates.includes(state))
   );
 }

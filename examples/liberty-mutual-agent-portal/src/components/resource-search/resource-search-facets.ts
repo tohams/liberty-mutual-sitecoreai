@@ -11,6 +11,9 @@ export const RESOURCE_FACET_NAMES = [
   "Distribution channel",
   "Product",
 ] as const;
+export type ResourceFacetMapping = Partial<
+  Record<"Risk state" | (typeof RESOURCE_FACET_NAMES)[number], string>
+>;
 export type ResourceFacetSelection = Partial<
   Record<(typeof RESOURCE_FACET_NAMES)[number], string>
 >;
@@ -20,6 +23,7 @@ export function buildResourceSearchFacet(
   scope: ResourceStateScope,
   licensedStates: readonly StateCode[],
   selection: ResourceFacetSelection = {},
+  mapping: ResourceFacetMapping = {},
 ): FacetRequest {
   scope = normalizeResourceStateScope(scope, licensedStates);
   const states =
@@ -34,7 +38,7 @@ export function buildResourceSearchFacet(
       ...(states.length
         ? [
             {
-              name: "Risk state",
+              name: mapping["Risk state"] || "Risk state",
               filters: [{ operator: "eq" as const, value: states }],
             },
           ]
@@ -43,8 +47,10 @@ export function buildResourceSearchFacet(
         selection[name]
           ? [
               {
-                name,
-                filters: [{ operator: "eq" as const, value: selection[name]! }],
+                name: mapping[name] || name,
+                filters: [
+                  { operator: "eq" as const, value: [selection[name]!] },
+                ],
               },
             ]
           : [],

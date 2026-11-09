@@ -19,7 +19,7 @@ export const governanceGuides: WorkshopGuide[] = [
       "Presenters use the existing non-administrator accounts: **tohams+author@gmail.com** for **Author** and **tohams+approver@gmail.com** for **Approver**. Both belong to **Safeco Insurance Company of America POC**, the SitecoreAI organization containing this portal. Use separate computers or separate browser profiles so signing in as one role does not replace the other role’s session.",
       "Both presenters open [**Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb), select **Agent Portal**, use **English**, and keep **Default editing host** selected. The editing host supplies the website preview; **Default editing host** uses the shared, hosted portal rather than a developer’s computer.",
       "Use only **Home** > **Workshop practice** > **Demo** in the page tree, the left-hand list of pages. **Demo** is a prepared practice page for this presentation, so it does not need to be copied. A **version** is a saved revision of that same page; creating a draft version lets the published wording remain visible while a new revision is prepared.",
-      "Change **Summary** only, and copy its complete starting text into a local note. Leave images, component placement, and **Resource metadata** unchanged. Complete the restoration at the end so the live page returns to its original wording.",
+      "Change **Summary** only, and copy its complete starting text into a local note. Leave images, component placement, and the native classification fields unchanged. Complete the restoration at the end so the live page returns to its original wording.",
     ],
     links: [
       {

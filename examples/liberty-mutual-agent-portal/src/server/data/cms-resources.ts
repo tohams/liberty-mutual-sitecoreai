@@ -1,18 +1,37 @@
-import 'server-only';
-import type { BusinessLine, Resource } from '../../contracts/portal';
-import { fixtures } from './fixtures';
-import { PortalError } from '../errors';
-import { parseResourceStates } from '../../domain/resource-access';
+import "server-only";
+import type { BusinessLine, Resource } from "../../contracts/portal";
+import { fixtures } from "./fixtures";
+import { PortalError } from "../errors";
+import { parseResourceStates } from "../../domain/resource-access";
+import {
+  RESOURCE_METADATA_FIELD_QUERY,
+  resolveResourceMetadataField,
+} from "../../domain/resource-metadata";
 
-interface CmsField { jsonValue?: { value?: unknown } | null; }
+interface CmsField {
+  jsonValue?: { value?: unknown } | null;
+}
 interface CmsResourceItem {
-  id: string; name: string; title?: CmsField | null; summary?: CmsField | null;
-  body?: CmsField | null; resourceType?: CmsField | null; state?: CmsField | null;
-  reviewedAt?: CmsField | null; sourceLink?: CmsField | null; businessFamily?: CmsField | null;
-  product?: CmsField | null; channel?: CmsField | null;
+  id: string;
+  name: string;
+  title?: CmsField | null;
+  summary?: CmsField | null;
+  body?: CmsField | null;
+  resourceType?: unknown;
+  state?: unknown;
+  reviewedAt?: CmsField | null;
+  sourceLink?: CmsField | null;
+  businessFamily?: unknown;
+  product?: unknown;
+  channel?: unknown;
 }
 interface ResourceQueryResult {
-  item?: { children: { results: CmsResourceItem[]; pageInfo: { hasNext: boolean; endCursor?: string } } } | null;
+  item?: {
+    children: {
+      results: CmsResourceItem[];
+      pageInfo: { hasNext: boolean; endCursor?: string };
+    };
+  } | null;
 }
 
 const RESOURCE_QUERY = `query PortalResourceCatalog($root: String!, $language: String!, $after: String) {
@@ -24,47 +43,128 @@ const RESOURCE_QUERY = `query PortalResourceCatalog($root: String!, $language: S
         title: field(name: "Title") { jsonValue }
         summary: field(name: "summary") { jsonValue }
         body: field(name: "body") { jsonValue }
-        resourceType: field(name: "resourceType") { jsonValue }
-        state: field(name: "state") { jsonValue }
+        resourceType: field(name: "resourceType") { ${RESOURCE_METADATA_FIELD_QUERY} }
+        state: field(name: "state") { ${RESOURCE_METADATA_FIELD_QUERY} }
         reviewedAt: field(name: "reviewedAt") { jsonValue }
         sourceLink: field(name: "sourceLink") { jsonValue }
-        businessFamily: field(name: "businessFamily") { jsonValue }
-        product: field(name: "product") { jsonValue }
-        channel: field(name: "channel") { jsonValue }
+        businessFamily: field(name: "businessFamily") { ${RESOURCE_METADATA_FIELD_QUERY} }
+        product: field(name: "product") { ${RESOURCE_METADATA_FIELD_QUERY} }
+        channel: field(name: "channel") { ${RESOURCE_METADATA_FIELD_QUERY} }
       }
     }
   }
 }`;
 
-const FAMILY_LINES: Record<string, BusinessLine | 'all'> = {
-  personal: 'personal', 'small-commercial': 'small-commercial', commercial: 'commercial',
-  'midsize-large': 'commercial', 'farm-ranch': 'commercial', specialty: 'specialty',
-  'retail-specialty': 'specialty', 'wholesale-specialty': 'specialty', surety: 'surety', all: 'all',
+const FAMILY_LINES: Record<string, BusinessLine | "all"> = {
+  personal: "personal",
+  "small-commercial": "small-commercial",
+  commercial: "commercial",
+  "midsize-large": "commercial",
+  "farm-ranch": "commercial",
+  specialty: "specialty",
+  "retail-specialty": "specialty",
+  "wholesale-specialty": "specialty",
+  surety: "surety",
+  all: "all",
 };
-function fieldText(field?: CmsField | null): string { return typeof field?.jsonValue?.value === 'string' ? field.jsonValue.value.trim() : ''; }
+function fieldText(field?: CmsField | null): string {
+  return typeof field?.jsonValue?.value === "string"
+    ? field.jsonValue.value.trim()
+    : "";
+}
 
 /** Map CMS metadata directly; a resource's item ID remains stable when its name/URL changes. */
 export function mapCmsResource(item: CmsResourceItem): Resource {
-  const id = item.id.replace(/-/g, '').toLowerCase();
+  const id = item.id.replace(/-/g, "").toLowerCase();
   const title = fieldText(item.title);
   const description = fieldText(item.summary);
-  const type = fieldText(item.resourceType);
-  const family = fieldText(item.businessFamily);
-  const body = fieldText(item.body).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-  const stateValue = fieldText(item.state);
-  const states = parseResourceStates(stateValue);
+  let metadata;
+  try {
+    metadata = {
+      types: resolveResourceMetadataField("resourceType", item.resourceType),
+      families: resolveResourceMetadataField(
+        "businessFamily",
+        item.businessFamily,
+      ),
+      states: resolveResourceMetadataField("state", item.state),
+      products: resolveResourceMetadataField("product", item.product),
+      channels: resolveResourceMetadataField("channel", item.channel),
+    };
+  } catch {
+    throw new PortalError(
+      "CONTENT_UNAVAILABLE",
+      "The resource library is being updated. Please try again shortly.",
+      503,
+    );
+  }
+  const type = metadata.types.join(" · ");
+  const lines = [
+    ...new Set(metadata.families.map((family) => FAMILY_LINES[family])),
+  ];
+  const nationwide =
+    metadata.states.length === 1 && metadata.states[0] === "All";
+  const body = fieldText(item.body)
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const states = parseResourceStates(
+    nationwide ? "All" : metadata.states.join(","),
+  );
   const dateValue = fieldText(item.reviewedAt);
-  const updatedAt = /^\d{8}T/.test(dateValue) ? `${dateValue.slice(0, 4)}-${dateValue.slice(4, 6)}-${dateValue.slice(6, 8)}` : dateValue.slice(0, 10);
-  if (!/^[a-f0-9]{32}$/.test(id) || !/^[a-z0-9-]+$/i.test(item.name) || !title || !description || !type || !states.length || !FAMILY_LINES[family] || !/^\d{4}-\d{2}-\d{2}$/.test(updatedAt)) {
-    throw new PortalError('CONTENT_UNAVAILABLE', 'The resource library is being updated. Please try again shortly.', 503);
+  const updatedAt = /^\d{8}T/.test(dateValue)
+    ? `${dateValue.slice(0, 4)}-${dateValue.slice(4, 6)}-${dateValue.slice(6, 8)}`
+    : dateValue.slice(0, 10);
+  if (
+    !/^[a-f0-9]{32}$/.test(id) ||
+    !/^[a-z0-9-]+$/i.test(item.name) ||
+    !title ||
+    !description ||
+    !type ||
+    !states.length ||
+    !lines.length ||
+    lines.some((line) => !line) ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(updatedAt)
+  ) {
+    throw new PortalError(
+      "CONTENT_UNAVAILABLE",
+      "The resource library is being updated. Please try again shortly.",
+      503,
+    );
   }
   const linkValue = item.sourceLink?.jsonValue?.value;
-  const href = linkValue && typeof linkValue === 'object' && 'href' in linkValue && typeof linkValue.href === 'string' ? linkValue.href : undefined;
+  const href =
+    linkValue &&
+    typeof linkValue === "object" &&
+    "href" in linkValue &&
+    typeof linkValue.href === "string"
+      ? linkValue.href
+      : undefined;
   return {
-    id, href: `/resources/${item.name}`, title, description, body,
-    line: FAMILY_LINES[family], states: [...states], type, updatedAt,
+    id,
+    href: `/resources/${item.name}`,
+    title,
+    description,
+    body,
+    line: lines[0],
+    lines,
+    states: [...states],
+    nationwide,
+    type,
+    types: metadata.types,
+    updatedAt,
+    businessFamilies: metadata.families,
+    products: metadata.products,
+    channels: metadata.channels,
     readMinutes: Math.max(1, Math.ceil(body.split(/\s+/).length / 200)),
-    tags: [family, fieldText(item.product), fieldText(item.channel), type, ...states].filter(Boolean),
+    tags: [
+      ...new Set([
+        ...metadata.families,
+        ...metadata.products,
+        ...metadata.channels,
+        ...metadata.types,
+        ...states,
+      ]),
+    ],
     ...(href && /^https:\/\//.test(href) ? { sourceUrl: href } : {}),
   };
 }
@@ -72,23 +172,38 @@ export function mapCmsResource(item: CmsResourceItem): Resource {
 /** A malformed published item cannot prevent agents from opening unrelated work. */
 export async function readCmsResourceCatalog(
   fetchPage: (after?: string) => Promise<ResourceQueryResult>,
-  reportInvalid: (itemId: string) => void = (itemId) => console.warn('Portal resource omitted: invalid published metadata', itemId),
+  reportInvalid: (itemId: string) => void = (itemId) =>
+    console.warn("Portal resource omitted: invalid published metadata", itemId),
 ): Promise<Resource[]> {
   const resources: Resource[] = [];
   let after: string | undefined;
   // Small pages avoid Experience Edge's query-complexity limit; a bounded cursor guards bad pagination.
   for (let page = 0; page < 25; page++) {
     const result = await fetchPage(after);
-    if (!result.item || !Array.isArray(result.item.children?.results) || typeof result.item.children.pageInfo?.hasNext !== 'boolean') {
-      throw new PortalError('CONTENT_UNAVAILABLE', 'The resource library is temporarily unavailable. Please try again shortly.', 503);
+    if (
+      !result.item ||
+      !Array.isArray(result.item.children?.results) ||
+      typeof result.item.children.pageInfo?.hasNext !== "boolean"
+    ) {
+      throw new PortalError(
+        "CONTENT_UNAVAILABLE",
+        "The resource library is temporarily unavailable. Please try again shortly.",
+        503,
+      );
     }
     for (const item of result.item.children.results) {
       try {
         resources.push(mapCmsResource(item));
       } catch (error) {
         // Only known per-item metadata validation may degrade. Provider/schema errors still fail explicitly.
-        if (!(error instanceof PortalError) || error.code !== 'CONTENT_UNAVAILABLE') throw error;
-        const identifier = /^[a-f0-9-]{32,36}$/i.test(item.id) ? item.id.replace(/-/g, '').toLowerCase() : 'invalid-item-id';
+        if (
+          !(error instanceof PortalError) ||
+          error.code !== "CONTENT_UNAVAILABLE"
+        )
+          throw error;
+        const identifier = /^[a-f0-9-]{32,36}$/i.test(item.id)
+          ? item.id.replace(/-/g, "").toLowerCase()
+          : "invalid-item-id";
         reportInvalid(identifier);
       }
     }
@@ -97,14 +212,31 @@ export async function readCmsResourceCatalog(
     if (!nextCursor || nextCursor === after) break;
     after = nextCursor;
   }
-  throw new PortalError('CONTENT_UNAVAILABLE', 'The resource library is temporarily unavailable. Please try again shortly.', 503);
+  throw new PortalError(
+    "CONTENT_UNAVAILABLE",
+    "The resource library is temporarily unavailable. Please try again shortly.",
+    503,
+  );
 }
 
 export async function getResourceCatalog(): Promise<Resource[]> {
-  if (process.env.PORTAL_CONTENT_ADAPTER === 'fixtures' && !process.env.VERCEL && process.env.NODE_ENV !== 'production') return fixtures.resources;
-  const { default: client } = await import('../../lib/sitecore-client');
-  const { default: config } = await import('../../../sitecore.config');
-  return readCmsResourceCatalog((after) => client.getData<ResourceQueryResult>(RESOURCE_QUERY, {
-    root: `/sitecore/content/LibertyMutual/${config.defaultSite}/Home/resources`, language: config.defaultLanguage, after,
-  }, { fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }) }));
+  if (
+    process.env.PORTAL_CONTENT_ADAPTER === "fixtures" &&
+    !process.env.VERCEL &&
+    process.env.NODE_ENV !== "production"
+  )
+    return fixtures.resources;
+  const { default: client } = await import("../../lib/sitecore-client");
+  const { default: config } = await import("../../../sitecore.config");
+  return readCmsResourceCatalog((after) =>
+    client.getData<ResourceQueryResult>(
+      RESOURCE_QUERY,
+      {
+        root: `/sitecore/content/LibertyMutual/${config.defaultSite}/Home/resources`,
+        language: config.defaultLanguage,
+        after,
+      },
+      { fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }) },
+    ),
+  );
 }

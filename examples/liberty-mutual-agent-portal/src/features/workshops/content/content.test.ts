@@ -611,3 +611,52 @@ test("native profile lookup uses the selected host's current Agent identity with
     "marketing and development instructions must not retain the retired reset procedure",
   );
 });
+
+test("resource guides use native checklists and the publishing-driven Search path", () => {
+  for (const slug of [
+    "resource-content-workflow",
+    "create-resource-and-media",
+    "resource-taxonomy",
+  ]) {
+    const guide = workshopGuides.find((entry) => entry.slug === slug)!;
+    const text = readableContent(guide);
+    for (const label of [
+      "Risk states",
+      "Business families",
+      "Products",
+      "Distribution channels",
+      "Resource types",
+    ])
+      assert(text.includes(label), `${slug}: missing native field ${label}`);
+    assert.match(text, /native.*checklist|checklist.*native/i);
+    assert.doesNotMatch(
+      text,
+      /Apps\s*→\s*Resource metadata|Save metadata|Discard changes|organization administrator\/owner|single-select/i,
+      `${slug}: retired custom authoring path`,
+    );
+    assert(
+      guide.steps.every((step) =>
+        guideStepImages(step).every(
+          (image) => image.file !== "resource-metadata.png",
+        ),
+      ),
+      `${slug}: retired app screenshot`,
+    );
+  }
+  const workflow = workshopGuides.find(
+    (guide) => guide.slug === "resource-content-workflow",
+  )!;
+  const actions = readableContent(
+    workflow.steps.flatMap((step) => step.action),
+  );
+  assert.match(actions, /Saved.*Reload.*restore/i);
+  assert.doesNotMatch(actions, /Reindex Content|Search Sources|Save metadata/);
+  assert.match(
+    readableContent(workflow),
+    /automatically synchronizes.*Search|automatic Search synchronization/i,
+  );
+  assert.match(
+    readableContent(workflow.cleanup),
+    /original wording.*article and Search/i,
+  );
+});

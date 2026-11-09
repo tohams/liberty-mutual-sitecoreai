@@ -23,10 +23,18 @@ export function matchesResourceStateScope(
   resourceStates: readonly StateCode[],
   licensedStates: readonly StateCode[],
   scope: ResourceStateScope,
+  explicitlyNationwide = false,
 ): boolean {
-  if (!canAccessResourceStates(resourceStates, licensedStates)) return false;
+  if (
+    !canAccessResourceStates(
+      resourceStates,
+      licensedStates,
+      explicitlyNationwide,
+    )
+  )
+    return false;
   scope = normalizeResourceStateScope(scope, licensedStates);
-  const nationwide = isNationwide(resourceStates);
+  const nationwide = isNationwide(resourceStates, explicitlyNationwide);
   if (scope === "All") return nationwide;
   if (nationwide) return true;
   return scope === DEFAULT_RESOURCE_STATE_SCOPE
@@ -49,9 +57,11 @@ export function selectRecommendedResources(
           resource.states,
           agent.licensedStates,
           DEFAULT_RESOURCE_STATE_SCOPE,
+          resource.nationwide === true,
         ) &&
-        (resource.line === "all" ||
-          agent.specializations.includes(resource.line)),
+        (resource.lines ?? [resource.line]).some(
+          (line) => line === "all" || agent.specializations.includes(line),
+        ),
     )
     .sort((left, right) => relevance(right) - relevance(left));
   const selected: Resource[] = [];
@@ -62,7 +72,7 @@ export function selectRecommendedResources(
     const newStateIndex = remaining.findIndex(
       (resource) =>
         relevance(resource) === bestScore &&
-        !isNationwide(resource.states) &&
+        !isNationwide(resource.states, resource.nationwide === true) &&
         resource.states.some(
           (state) =>
             agent.licensedStates.includes(state) &&
@@ -71,7 +81,7 @@ export function selectRecommendedResources(
     );
     const [resource] = remaining.splice(Math.max(newStateIndex, 0), 1);
     selected.push(resource);
-    if (!isNationwide(resource.states)) {
+    if (!isNationwide(resource.states, resource.nationwide === true)) {
       resource.states.forEach((state) => representedStates.add(state));
     }
   }
