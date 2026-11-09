@@ -1,24 +1,8 @@
 import metadataModel from "../../data/resource-metadata-model.json";
 
 export type MetadataField =
-  | "state"
-  | "businessFamily"
-  | "product"
-  | "channel"
-  | "resourceType"
-  | "audience";
+  "state" | "businessFamily" | "product" | "channel" | "resourceType";
 export type MetadataValues = Record<string, string>;
-export interface MetadataFieldDefinition {
-  name: MetadataField;
-  label: string;
-}
-export interface MetadataTarget {
-  itemId: string;
-  path: string;
-  version: number;
-  title: string;
-  kind: "page" | "answer";
-}
 export interface MetadataOption {
   id: string;
   value: string;
@@ -42,10 +26,6 @@ export interface MetadataSnapshot {
   options: Record<string, MetadataOption[]>;
   editable: boolean;
   blockedReason?: string;
-  fieldDefinitions?: MetadataFieldDefinition[];
-  targets?: MetadataTarget[];
-  target?: MetadataTarget;
-  publicationHelp?: string;
 }
 
 const labels: Record<MetadataField, string> = {
@@ -54,7 +34,6 @@ const labels: Record<MetadataField, string> = {
   product: "Product",
   channel: "Distribution channel",
   resourceType: "Resource type",
-  audience: "Audience",
 };
 export const METADATA_FIELDS = metadataModel.fields.map((field) => ({
   ...field,
@@ -67,12 +46,6 @@ export const METADATA_MODEL = {
   workflowId: "b4f49b23-4bba-4c79-ba22-f89f5f0d4e4f",
   draftStateId: "57cc7dce-e6b1-4564-9581-0e5850b8bdf2",
 } as const;
-
-export function fieldsForMetadata(
-  snapshot: MetadataSnapshot | null,
-): readonly MetadataFieldDefinition[] {
-  return snapshot?.fieldDefinitions ?? METADATA_FIELDS;
-}
 
 export class MetadataError extends Error {
   constructor(

@@ -13,9 +13,9 @@ export type PublicApprovedAnswerProps = ComponentProps & {
     owner?: Field<string>;
     effectiveDate?: Field<string>;
     reviewDate?: Field<string>;
-    state?: Field<string>;
-    product?: Field<string>;
-    audience?: Field<string>;
+    state?: Item[];
+    product?: Item[];
+    audience?: Item[];
     nextStep: LinkField;
     disclosure?: Item & { fields?: SharedDisclosureFields };
   };

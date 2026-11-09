@@ -299,21 +299,6 @@
           "description": "Use only when the approved guidance applies to renters."
         },
         {
-          "value": "auto-home",
-          "label": "Auto and home",
-          "description": "Use only when the approved guidance applies to auto and home."
-        },
-        {
-          "value": "auto-condo",
-          "label": "Auto and condo",
-          "description": "Use only when the approved guidance applies to auto and condo."
-        },
-        {
-          "value": "auto-renters",
-          "label": "Auto and renters",
-          "description": "Use only when the approved guidance applies to auto and renters."
-        },
-        {
           "value": "pet",
           "label": "Pet",
           "description": "Use only when the approved guidance applies to pet."

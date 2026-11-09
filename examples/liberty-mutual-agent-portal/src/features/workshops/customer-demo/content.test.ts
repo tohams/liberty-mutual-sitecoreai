@@ -319,15 +319,18 @@ test("discovery readiness identifies native structure while keeping external eng
   for (const required of [
     /PublicApprovedAnswer/,
     /Quick Info/,
-    /Resource metadata/,
+    /Checklist/,
     /State applicability/,
-    /Product/,
+    /Products/,
     /Audience/,
     /FAQPage/,
     /acceptedAnswer/,
     /canonical/i,
   ])
     assert.match(text, required);
+  assert.equal(step("public-discovery").durationMinutes, 1);
+  assert.equal(step("public-discovery").actions.length, 3);
+  assert.doesNotMatch(text, /Apps → Resource metadata|Content to classify/);
   const page = readFileSync(
     join(appRoot, "src/app/workshops/demo/page.tsx"),
     "utf8",

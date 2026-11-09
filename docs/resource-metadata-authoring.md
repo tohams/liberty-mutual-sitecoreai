@@ -1,16 +1,26 @@
 # Resource metadata authoring
 
-Resource metadata uses a shared vocabulary so state, product and other filters retain consistent values. The managed lists live at:
+## Public website: native checklists
+
+The **Public Website** uses native **Checklist** fields for **State applicability**, **Products**, and **Audience**. Open a page’s **Page content** to edit its classification. For a reusable approved answer, select its visible **Approved answer** component and use its **Content** fields, or open the answer directly in **Page Builder Content**. Native permissions, versions, workflow, and publication apply.
+
+Choose each applicable product separately, for example **Auto**, **Homeowners**, and **Condo**. The managed options live under `/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Taxonomy/States`, **Products**, and **Audiences**. Use an **All** choice on its own. The publication service resolves native taxonomy references to stable Search and API values. Classification belongs to the actual page or reused answer being edited, with no custom page-versus-answer selector.
+
+The public website does not use the **Resource metadata** Marketplace panel. The remaining sections describe the Agent Portal’s existing source and authoring panel.
+
+## Agent Portal: managed resource metadata
+
+Resource metadata uses a shared vocabulary so state, product, and other filters retain consistent values. The managed lists live at:
 
 `/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Taxonomy`
 
-| Managed folder | ResourcePage field | Initial choices |
-| --- | --- | --- |
-| Risk states | `state` | All, FL, IL, TX |
-| Business families | `businessFamily` | farm-ranch, midsize-large, personal, retail-specialty, small-commercial, surety, wholesale-specialty |
-| Products | `product` | auto-home, businessowners-policy, commercial-auto, commercial-package, contract-commercial-bonds, farm, specialty, workers-compensation |
-| Distribution channels | `channel` | independent-agent, wholesale |
-| Resource types | `resourceType` | Bond guide, Checklist, Conversation guide, Learning path, Placement guide, Preparation guide, Referral guide, State guidance, Submission guide |
+| Managed folder        | ResourcePage field | Initial choices                                                                                                                                |
+| --------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Risk states           | `state`            | All, FL, IL, TX                                                                                                                                |
+| Business families     | `businessFamily`   | farm-ranch, midsize-large, personal, retail-specialty, small-commercial, surety, wholesale-specialty                                           |
+| Products              | `product`          | auto-home, businessowners-policy, commercial-auto, commercial-package, contract-commercial-bonds, farm, specialty, workers-compensation        |
+| Distribution channels | `channel`          | independent-agent, wholesale                                                                                                                   |
+| Resource types        | `resourceType`     | Bond guide, Checklist, Conversation guide, Learning path, Placement guide, Preparation guide, Referral guide, State guidance, Submission guide |
 
 ## Why the panel preserves text fields
 
@@ -32,7 +42,7 @@ The lists are seeded in English. Add corresponding language versions before enab
 
 The folder template limits its normal Insert options to ResourceMetadataOption. Taxonomy content remains editable and is excluded from Items as Resources. Renaming a display label does not rewrite indexed resource values.
 
-Adding a state or business family to a list does not extend an agent's licensing, appointment or authorization. The current portal supports TX, FL and IL and applies separate server-side eligibility rules. New vocabulary values may also require application mapping and Search validation. Visitor-facing facet labels currently come from the application; they do not yet read these display names.
+Adding a state or business family to a list does not extend an agent's licensing, appointment, or authorization. The current portal supports TX, FL, and IL and applies separate server-side eligibility rules. New vocabulary values may also require application mapping and Search validation. Visitor-facing facet labels currently come from the application; they do not yet read these display names.
 
 ## Use the Resource metadata panel
 
@@ -42,7 +52,7 @@ The app is activated and installed in the **SitecoreAI / Demo** environment. Its
 2. Open **Learning & resources** in the page tree, then select a resource article beneath it. The landing page itself is not a ResourcePage and cannot be edited with this panel.
 3. Select the intended language and version. An approved resource is read-only; create a new draft version using the page's normal version/workflow controls first.
 4. Open **Apps**, then **Resource metadata**. The panel shows the selected article, language, version and five saved metadata values.
-5. Select **Risk state**, **Business family**, **Product**, **Distribution channel** and **Resource type** as needed. Read the help text under each choice. **Cross-state guidance** stores the canonical value `All`; it does not override licensing rules.
+5. Select **Risk state**, **Business family**, **Product**, **Distribution channel**, and **Resource type** as needed. Read the help text under each choice. **Cross-state guidance** stores the canonical value `All`; it does not override licensing rules.
 6. Review the unsaved-change count, then select **Save metadata**. The app validates the current page, permissions, draft workflow, field definitions and choices again before changing only the fields you edited.
 7. Observe the saved confirmation. The app reads the values back and refreshes the page canvas. **Discard changes** restores the last values loaded into the panel; it does not undo an already completed save.
 8. Complete the normal content review, approval and publication process. Then open **Content → Search Sources → Liberty Mutual Agent Resources** and run **Reindex Content**. Saving metadata alone performs neither operation.
@@ -58,24 +68,24 @@ Installed-panel acceptance verified all five lists and help text, Discard change
 
 This is a private **custom Marketplace app** using the [Page Builder context-panel extension](https://doc.sitecore.com/mp/en/developers/marketplace/extension-points.html). It is not a public Marketplace listing or a replacement for native Search.
 
-| Setting | Value |
-| --- | --- |
-| Name | Resource metadata |
-| Type | Custom |
-| Deployment URL | `https://liberty-mutual-agent-portal.vercel.app` |
-| Route | `/resource-metadata` |
-| App registration ID | `86157b8a-7411-415d-9931-1e7508b7bd81` |
-| App Studio status | Activated |
-| Installation status | Installed |
-| Installed target | SitecoreAI / Demo |
-| Installed app tenant ID (`marketplaceAppTenantId`) | `bb0e3dd3-909e-4c0b-5f0e-08df0e9c530e` |
-| Extension point | SitecoreAI Page builder context panel |
-| API access | SitecoreAI APIs: Authoring and Management GraphQL, Sites REST, Pages REST, Agent API and Search Configuration REST |
-| Browser permissions | None |
-| Organization | Safeco Insurance Company of America POC (`org_XqL3u1MSNVuubOTb`) |
-| SitecoreAI environment | `scaipocusem400b-sitecoreai950c-demo4418` |
-| Tenant ID | `97eea84c-ac47-4d91-7e4f-08defdaaa7df` |
-| Initial access | Organization administrators and owners |
+| Setting                                            | Value                                                                                                              |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Name                                               | Resource metadata                                                                                                  |
+| Type                                               | Custom                                                                                                             |
+| Deployment URL                                     | `https://liberty-mutual-agent-portal.vercel.app`                                                                   |
+| Route                                              | `/resource-metadata`                                                                                               |
+| App registration ID                                | `86157b8a-7411-415d-9931-1e7508b7bd81`                                                                             |
+| App Studio status                                  | Activated                                                                                                          |
+| Installation status                                | Installed                                                                                                          |
+| Installed target                                   | SitecoreAI / Demo                                                                                                  |
+| Installed app tenant ID (`marketplaceAppTenantId`) | `bb0e3dd3-909e-4c0b-5f0e-08df0e9c530e`                                                                             |
+| Extension point                                    | SitecoreAI Page builder context panel                                                                              |
+| API access                                         | SitecoreAI APIs: Authoring and Management GraphQL, Sites REST, Pages REST, Agent API and Search Configuration REST |
+| Browser permissions                                | None                                                                                                               |
+| Organization                                       | Safeco Insurance Company of America POC (`org_XqL3u1MSNVuubOTb`)                                                   |
+| SitecoreAI environment                             | `scaipocusem400b-sitecoreai950c-demo4418`                                                                          |
+| Tenant ID                                          | `97eea84c-ac47-4d91-7e4f-08defdaaa7df`                                                                             |
+| Initial access                                     | Organization administrators and owners                                                                             |
 
 The app is activated in **Cloud Portal → App studio → Studio** and installed for the target above through **My apps**. The installed iframe reported `marketplaceAppTenantId=bb0e3dd3-909e-4c0b-5f0e-08df0e9c530e`. The manifest records it as `marketplaceAppTenantId`, distinct from the app registration ID and the SDK’s `installationId` property.
 
