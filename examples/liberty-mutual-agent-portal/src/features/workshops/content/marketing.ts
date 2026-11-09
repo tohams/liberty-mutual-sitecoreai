@@ -690,7 +690,7 @@ export const marketingGuides: WorkshopGuide[] = [
         action: [
           `Open [**Page Builder**](${PAGES}) and confirm **Agent Portal** in the site selector at the upper left. In the left page tree, expand **Home**, select **Learning & resources**, and open its … menu > **Create a subpage**.`,
           "Choose **Resource page** > **Select**. Enter a unique lowercase, hyphen-separated name such as resource-practice-jd-20260918-1430, replacing the initials and date/time with your own. Press Enter.",
-          "Click **Reload tree** and select your new page.",
+          "Click **Reload tree**, and wait for the refreshed sitemap to finish loading. Select your new page, and wait until its name appears as the page heading before continuing to edit its content.",
         ],
         expected: [
           "**Page created from branch template** appears. The title starts with the page name you entered; summary, body, reviewed date, source, and metadata start empty.",

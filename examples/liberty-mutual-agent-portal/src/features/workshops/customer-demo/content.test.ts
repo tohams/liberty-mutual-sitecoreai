@@ -509,6 +509,21 @@ test("public authoring ends with the new page published through separate roles",
     prose(step(id).actions),
     /All references.*Include related items/i,
   );
+  assert.match(
+    prose(step(id).actions),
+    /Reload tree.*Wait for the refreshed sitemap to finish loading.*Select coverage-guide-live.*wait until coverage-guide-live appears as the page heading before opening Content/i,
+  );
+  assert.match(
+    prose(step(id).actions),
+    /Return to Editor.*confirm coverage-guide-live appears as the page heading.*If necessary.*Sitemap.*wait for its heading.*Then open Layers.*headless-public-content-1/i,
+  );
+  const resourceCreation = workshopGuides.find(
+    (guide) => guide.slug === "create-resource-and-media",
+  );
+  assert.match(
+    prose(resourceCreation!.steps[0].action),
+    /Reload tree.*wait for the refreshed sitemap to finish loading.*Select your new page.*wait until its name appears as the page heading/i,
+  );
   assert.match(actions(id)[submit], /local item.*Draft/i);
   assert.match(
     step(id).stopWhen,
