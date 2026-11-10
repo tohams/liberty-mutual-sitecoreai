@@ -128,7 +128,16 @@ export async function prepareAudiencePreview(
     page,
     preparation.profile,
     deps.decisions,
-  );
+  ).catch((error: unknown) => {
+    if (
+      error instanceof AudiencePreviewError &&
+      error.code === "PREVIEW_BINDING_CHANGED" &&
+      error.retryable
+    )
+      return null;
+    throw error;
+  });
+  if (!decisions) return { status: "pending", retryAfterSeconds: 3 };
   const layout = await (deps.loadLayout || getAudiencePreviewLayout)(
     page,
     decisions,

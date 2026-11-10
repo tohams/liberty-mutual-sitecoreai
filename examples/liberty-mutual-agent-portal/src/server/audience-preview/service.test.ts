@@ -4,7 +4,12 @@ import type { Page } from "@sitecore-content-sdk/nextjs";
 import type { AudiencePreviewInput } from "../../features/audience-preview/types";
 import type { StateStore, StoredValue } from "../state/store";
 import type { AudiencePreviewPage } from "../marketplace/audience-preview-pages";
-import { PREVIEW_IDENTITY_PREFIX, PREVIEW_SCHEMA_VERSION } from "./contracts";
+import {
+  AudiencePreviewError,
+  PREVIEW_IDENTITY_PREFIX,
+  PREVIEW_SCHEMA_VERSION,
+} from "./contracts";
+import type { PreviewServiceDependencies } from "./service";
 import { audienceSelectorHash } from "./profiles";
 
 // This synthetic context satisfies SDK module validation; every test injects its transports.
@@ -67,94 +72,125 @@ test("request parsing permits only selected-page coordinates and validated gener
     assert.throws(() => parseAudiencePreviewRequest(invalid));
 });
 
-test("native evaluation and verified native composition must succeed before a ready preview URL is returned", async () => {
+test("a transient binding mismatch remains pending until a strict native match and composition succeed", async () => {
   const { prepareAudiencePreview } = await import("./service");
   const namespace = "test-preview";
   const selectorHash = audienceSelectorHash(input, namespace, page.siteName);
   let composed = false;
   let created = false;
+  let bindingMatches = false;
+  let reads = 0;
+  let discoveries = 0;
+  let nativeDecisions = 0;
+  let discoveryError: unknown;
+  const dependencies: PreviewServiceDependencies = {
+    profiles: {
+      namespace,
+      store: store({
+        schemaVersion: PREVIEW_SCHEMA_VERSION,
+        phase: "ready",
+        plan: {
+          selectorHash,
+          identity: PREVIEW_IDENTITY_PREFIX + selectorHash,
+        },
+        profileId,
+        browserId,
+      }),
+      siteName: page.siteName,
+      edgeUrl: "https://edge-platform.sitecorecloud.io",
+      contextId: "configured-context",
+    },
+    decisions: {
+      siteName: page.siteName,
+      edgeUrl: "https://edge-platform.sitecorecloud.io",
+      contextId: "configured-context",
+      readProfileRef: async () => {
+        reads++;
+        return bindingMatches
+          ? profileId
+          : "44444444-4444-4444-8444-444444444444";
+      },
+      discovery: {
+        getPersonalizeInfo: async () => {
+          discoveries++;
+          if (discoveryError) throw discoveryError;
+          return {
+            pageId: page.id,
+            variantIds: [`${componentId}_variant`],
+          };
+        },
+      },
+      transport: async (_url, init) => {
+        nativeDecisions++;
+        const body = JSON.parse(String(init?.body));
+        assert.equal(body.browserId, browserId);
+        assert.equal(body.guestRef, profileId);
+        return Response.json({ variantId: `${componentId}_variant` });
+      },
+    },
+    loadLayout: async (selected, decisions) => {
+      assert.equal(selected.id, page.id);
+      assert.deepEqual(decisions.componentVariantIds, [
+        `${componentId}_variant`,
+      ]);
+      composed = true;
+      return {
+        locale: "en",
+        siteName: page.siteName,
+        mode: {
+          name: "preview",
+          isNormal: false,
+          isPreview: true,
+          isEditing: false,
+          isDesignLibrary: false,
+          designLibrary: { isVariantGeneration: false },
+        },
+        layout: {
+          sitecore: {
+            context: { language: "en", pageEditing: false },
+            route: {
+              name: "Home",
+              placeholders: {
+                main: [{ uid: componentId, componentName: "AgencyPriorities" }],
+              },
+            },
+          },
+        },
+      } as Page;
+    },
+    createView: async (actor, selected, audience) => {
+      assert.equal(composed, true);
+      assert.equal(actor, "authenticated-author");
+      assert.equal(selected.version, page.version);
+      assert.deepEqual(audience, input);
+      created = true;
+      return "a".repeat(43);
+    },
+    origin: "https://portal.example",
+  };
+  const pending = await prepareAudiencePreview(
+    "authenticated-author",
+    page,
+    input,
+    dependencies,
+  );
+  assert.deepEqual(pending, { status: "pending", retryAfterSeconds: 3 });
+  assert.equal("previewUrl" in pending, false);
+  assert.equal(reads, 1);
+  assert.equal(discoveries, 0);
+  assert.equal(nativeDecisions, 0);
+  assert.equal(composed, false);
+  assert.equal(created, false);
+  bindingMatches = true;
   const result = await prepareAudiencePreview(
     "authenticated-author",
     page,
     input,
-    {
-      profiles: {
-        namespace,
-        store: store({
-          schemaVersion: PREVIEW_SCHEMA_VERSION,
-          phase: "ready",
-          plan: {
-            selectorHash,
-            identity: PREVIEW_IDENTITY_PREFIX + selectorHash,
-          },
-          profileId,
-          browserId,
-        }),
-        siteName: page.siteName,
-        edgeUrl: "https://edge-platform.sitecorecloud.io",
-        contextId: "configured-context",
-      },
-      decisions: {
-        siteName: page.siteName,
-        edgeUrl: "https://edge-platform.sitecorecloud.io",
-        contextId: "configured-context",
-        readProfileRef: async () => profileId,
-        discovery: {
-          getPersonalizeInfo: async () => ({
-            pageId: page.id,
-            variantIds: [`${componentId}_variant`],
-          }),
-        },
-        transport: async (_url, init) => {
-          const body = JSON.parse(String(init?.body));
-          assert.equal(body.browserId, browserId);
-          assert.equal(body.guestRef, profileId);
-          return Response.json({ variantId: `${componentId}_variant` });
-        },
-      },
-      loadLayout: async (selected, decisions) => {
-        assert.equal(selected.id, page.id);
-        assert.deepEqual(decisions.componentVariantIds, [
-          `${componentId}_variant`,
-        ]);
-        composed = true;
-        return {
-          locale: "en",
-          siteName: page.siteName,
-          mode: {
-            name: "preview",
-            isNormal: false,
-            isPreview: true,
-            isEditing: false,
-            isDesignLibrary: false,
-            designLibrary: { isVariantGeneration: false },
-          },
-          layout: {
-            sitecore: {
-              context: { language: "en", pageEditing: false },
-              route: {
-                name: "Home",
-                placeholders: {
-                  main: [
-                    { uid: componentId, componentName: "AgencyPriorities" },
-                  ],
-                },
-              },
-            },
-          },
-        } as Page;
-      },
-      createView: async (actor, selected, audience) => {
-        assert.equal(composed, true);
-        assert.equal(actor, "authenticated-author");
-        assert.equal(selected.version, page.version);
-        assert.deepEqual(audience, input);
-        created = true;
-        return "a".repeat(43);
-      },
-      origin: "https://portal.example",
-    },
+    dependencies,
   );
+  assert.equal(reads, 2);
+  assert.equal(discoveries, 1);
+  assert.equal(nativeDecisions, 1);
   assert.equal(created, true);
   assert.equal(result.status, "ready");
   if (result.status !== "ready") throw new Error("Expected a ready preview.");
@@ -170,6 +206,24 @@ test("native evaluation and verified native composition must succeed before a re
   );
   assert.equal(JSON.stringify(result).includes(profileId), false);
   assert.equal(JSON.stringify(result).includes(browserId), false);
+  for (const error of [
+    new AudiencePreviewError(
+      "PREVIEW_BINDING_CHANGED",
+      "Nonretryable binding failure",
+    ),
+    new AudiencePreviewError(
+      "NATIVE_DECISION_UNAVAILABLE",
+      "Another retryable failure",
+      true,
+    ),
+    { code: "PREVIEW_BINDING_CHANGED", retryable: true },
+  ]) {
+    discoveryError = error;
+    await assert.rejects(
+      prepareAudiencePreview("authenticated-author", page, input, dependencies),
+      (caught) => caught === error,
+    );
+  }
 });
 
 test("pending retained preparation returns no URL and does not evaluate or create a view", async () => {
