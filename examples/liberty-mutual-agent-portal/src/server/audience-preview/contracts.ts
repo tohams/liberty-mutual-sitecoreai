@@ -1,5 +1,9 @@
 import "server-only";
 import type { AudiencePreviewInput } from "@/features/audience-preview/types";
+import {
+  ROLE_OPTIONS,
+  STATE_OPTIONS,
+} from "@/features/audience-preview/scenarios";
 
 export const PREVIEW_SCHEMA_VERSION = 1;
 export const PREVIEW_IDENTITY_PREFIX = "audience-preview:v1:";
@@ -29,15 +33,8 @@ const fields = [
   "agencyTotalWrittenPremiumUsd",
   "agentSmallCommercialWrittenPremiumUsd",
 ] as const;
-const roles = [
-  "principal",
-  "producer",
-  "account-manager",
-  "account-executive",
-  "surety-specialist",
-  "wholesale-broker",
-];
-const states = ["TX", "FL", "IL"] as const;
+const roles: readonly string[] = ROLE_OPTIONS.map((option) => option.value);
+const states = STATE_OPTIONS.map((option) => option.value);
 
 /** Exact selector-only input: callers cannot inject an identity, profile ID, or arbitrary extensions. */
 export function validateAudiencePreviewInput(
@@ -46,7 +43,7 @@ export function validateAudiencePreviewInput(
   const invalid = () => {
     throw new AudiencePreviewError(
       "INVALID_AUDIENCE",
-      "Choose a role, licensed states, and valid production values.",
+      "Choose a valid audience.",
     );
   };
   if (

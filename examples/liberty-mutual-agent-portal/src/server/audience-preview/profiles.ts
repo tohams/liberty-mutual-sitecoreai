@@ -46,7 +46,7 @@ export type AudienceProfilePreparation =
     }
   | { status: "ready"; profile: VerifiedPreviewProfile };
 
-interface ProfileJob {
+export interface AudienceProfileJob {
   schemaVersion: typeof PREVIEW_SCHEMA_VERSION;
   phase:
     | "uploading"
@@ -55,6 +55,7 @@ interface ProfileJob {
     | "verifying"
     | "binding"
     | "ready"
+    | "catalog"
     | "failed";
   plan: PreviewImportPlan;
   createdAt: number;
@@ -70,6 +71,22 @@ interface ProfileJob {
   uncertainRetryUsed?: boolean;
   lastUploadAttemptAt?: number;
   firstUncertainUploadAt?: number;
+  /** A fixed catalog reservation is advanced only by its durable catalog worker. */
+  catalogId?: string;
+  catalogProof?: {
+    batchId: string;
+    checksumMd5: string;
+    fileSizeBytes: number;
+    recordIndex: number;
+  };
+}
+type ProfileJob = AudienceProfileJob;
+
+export function audiencePreviewProfileKey(
+  selectorHash: string,
+  namespace: string,
+): string {
+  return `${namespace}:audience-preview:v${PREVIEW_SCHEMA_VERSION}:${selectorHash}`;
 }
 
 export interface AudienceProfileDependencies extends NativePreviewConfiguration {
@@ -234,7 +251,7 @@ export async function prepareAudiencePreviewProfile(
   validateNativePreviewConfiguration(dependencies);
   const { store, namespace, siteName } = dependencies;
   const selectorHash = audienceSelectorHash(audience, namespace, siteName);
-  const key = `${namespace}:audience-preview:v${PREVIEW_SCHEMA_VERSION}:${selectorHash}`;
+  const key = audiencePreviewProfileKey(selectorHash, namespace);
   const now = dependencies.now || Date.now;
   const uuid = dependencies.uuid || randomUUID;
   const transport = dependencies.transport || fetch;
@@ -439,6 +456,7 @@ export async function prepareAudiencePreviewProfile(
     job.plan.identity !== PREVIEW_IDENTITY_PREFIX + selectorHash
   )
     return jobFailure("INVALID_PREVIEW_STATE");
+  if (job.phase === "catalog") return pending(job, now());
   if (job.phase === "failed" && job.code === "IMPORT_UPLOAD_UNCONFIRMED") {
     const importer =
       dependencies.importer ||

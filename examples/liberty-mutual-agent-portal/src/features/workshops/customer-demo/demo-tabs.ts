@@ -16,6 +16,7 @@ export const demoTabNames = {
   averyPortal: "Avery portal",
   danielPortal: "Daniel portal",
   pageBuilder: "Page Builder",
+  audiencePreparation: "Prepare audiences",
   searchPreview: "Search Preview",
   events: "Events",
   graphqlExplorer: "GraphQL Explorer",
@@ -92,6 +93,11 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
         id: "pageBuilder",
         href: publicEditor,
         cue: "Reuse this tab for the Page Builder destinations named in each flow.",
+      },
+      {
+        id: "audiencePreparation",
+        href: `${PORTAL}/apps/audience-preview/prepare`,
+        cue: "Before presenting, select Prepare audiences, wait for 42 of 42 ready, and close this preparation tab.",
       },
       {
         id: "searchPreview",

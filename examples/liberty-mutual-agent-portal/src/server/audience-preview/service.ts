@@ -5,6 +5,10 @@ import type {
   AudiencePreviewResult,
 } from "@/features/audience-preview/types";
 import { PortalError } from "@/server/errors";
+import {
+  AUDIENCE_PREVIEW_BUSINESS_DEFAULTS,
+  createAudiencePreviewInput,
+} from "@/features/audience-preview/scenarios";
 import { jsonResponse } from "@/server/http";
 import {
   AudiencePreviewError as AccessError,
@@ -62,11 +66,31 @@ export function parseAudiencePreviewRequest(
       400,
     );
   }
+  if (!isObject(value.input)) {
+    throw new AccessError(
+      "INVALID_INPUT",
+      "Choose a role and at least one licensed state.",
+      400,
+    );
+  }
+  // The public app accepts role/state selection only. Production attributes are
+  // fixed server-side so callers cannot create an unprepared hidden scenario.
+  const selected = validateAudiencePreviewInput({
+    ...value.input,
+    ...AUDIENCE_PREVIEW_BUSINESS_DEFAULTS,
+  });
+  if (selected.licensedStates.length === 0) {
+    throw new AccessError(
+      "INVALID_INPUT",
+      "Choose at least one licensed state.",
+      400,
+    );
+  }
   return {
     pageId: value.pageId,
     language: value.language,
     ...(value.version === undefined ? {} : { version: Number(value.version) }),
-    input: validateAudiencePreviewInput(value.input),
+    input: createAudiencePreviewInput(selected.role, selected.licensedStates),
   };
 }
 
