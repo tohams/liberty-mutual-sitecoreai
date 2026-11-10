@@ -66,6 +66,8 @@ export interface AudienceProfileJob {
   profileId?: string;
   browserId?: string;
   identitySent?: boolean;
+  /** One clock resume for a proven existing browser whose first IDENTITY was never attempted. */
+  identityResumeUsed?: boolean;
   bindingStartedAt?: number;
   code?: string;
   /** At most one exact UPSERT after an unknown receipt; the original plan is immutable. */
@@ -473,8 +475,8 @@ export async function prepareAudiencePreviewProfile(
     return reconcileRetainedPlan(claimed);
   }
   if (job.phase === "failed") {
-    // A timed-out observation is not an uncertain write. Recheck only the exact
-    // existing binding; never import, create a browser, or replay IDENTITY here.
+    // Recheck the same binding; an interrupted first IDENTITY can resume only
+    // after current native receipt proof. Never import, create a browser, or replay an event.
     if (job.code !== "PROFILE_LINK_TIMEOUT") return jobFailure(job.code);
     const profile = {
       selectorHash,
@@ -490,6 +492,47 @@ export async function prepareAudiencePreviewProfile(
     };
     const claimed = await save(current, claimedJob);
     if (!claimed) return resultAfterConflict();
+    const stayFailed = async (): Promise<AudienceProfilePreparation> => {
+      const unchanged = { ...claimedJob };
+      delete unchanged.lease;
+      if (!(await save(claimed, unchanged))) return resultAfterConflict();
+      return jobFailure(job.code);
+    };
+    const mayResumeIdentity =
+      (job.identitySent === false || job.identitySent === undefined) &&
+      !job.identityResumeUsed &&
+      !!job.submission &&
+      !job.catalogProof;
+    if (mayResumeIdentity) {
+      try {
+        const expected = prepareAudienceProfileImport(
+          audience,
+          namespace,
+          siteName,
+          job.plan.correlationId,
+        );
+        if (
+          expected.payload !== job.plan.payload ||
+          expected.checksumMd5 !== job.plan.checksumMd5 ||
+          expected.fileSizeBytes !== job.plan.fileSizeBytes ||
+          expected.selectorHash !== job.plan.selectorHash ||
+          expected.identity !== job.plan.identity ||
+          expected.correlationId !== job.plan.correlationId
+        )
+          return stayFailed();
+        const receipt = await (
+          dependencies.importer ||
+          createPreviewProfileImporter(undefined, transport)
+        ).inspect(job.plan, job.submission!);
+        if (
+          receipt.status !== "verified" ||
+          receipt.profileId.toLowerCase() !== profile.profileId.toLowerCase()
+        )
+          return stayFailed();
+      } catch {
+        return stayFailed();
+      }
+    }
     recordAudiencePreviewStage("profile-binding", "started");
     const binding = await inspectAudiencePreviewBinding(
       {
@@ -503,11 +546,28 @@ export async function prepareAudiencePreviewProfile(
       readRef,
     );
     console.info("Audience Preview retained binding recovery", binding);
+    if (
+      mayResumeIdentity &&
+      binding.category === "mismatched" &&
+      binding.status === 200
+    ) {
+      const resumed: ProfileJob = {
+        ...claimedJob,
+        phase: "binding",
+        identityResumeUsed: true,
+        bindingStartedAt: now(),
+      };
+      delete resumed.lease;
+      delete resumed.code;
+      delete resumed.nextAttemptAt;
+      if (!(await save(claimed, resumed))) return resultAfterConflict();
+      console.info("Audience Preview retained identity resume", {
+        outcome: "resumed",
+      });
+      return pending(resumed, now());
+    }
     if (binding.category !== "matched") {
-      const unchanged = { ...claimedJob };
-      delete unchanged.lease;
-      if (!(await save(claimed, unchanged))) return resultAfterConflict();
-      return jobFailure(job.code);
+      return stayFailed();
     }
     const ready: ProfileJob = { ...claimedJob, phase: "ready" };
     delete ready.lease;

@@ -17,6 +17,7 @@ import {
   prepareAudiencePreviewProfile,
   prepareAudienceProfileImport,
   type AudienceProfileDependencies,
+  type AudienceProfileJob,
 } from "./profiles";
 
 const input: AudiencePreviewInput = {
@@ -577,6 +578,310 @@ test("retained timeout diagnostics classify the same single browser read without
       "test-context",
     ])
       assert.equal(serialized.includes(sensitive), false);
+  }
+});
+
+async function retainedUnsentIdentity(omitIdentityFlag = false) {
+  const run = await retainedBinding("failed", "PROFILE_LINK_TIMEOUT");
+  const existing = await run.store.read<AudienceProfileJob>(run.key);
+  assert(existing);
+  const submission = {
+    batchId,
+    checksumMd5: existing.value.plan.checksumMd5,
+    fileSizeBytes: existing.value.plan.fileSizeBytes,
+  };
+  const retained: AudienceProfileJob = {
+    ...existing.value,
+    identitySent: false,
+    submission,
+  };
+  if (omitIdentityFlag) delete retained.identitySent;
+  await run.store.compareAndSet(run.key, existing.version, retained);
+  let time = 200_000,
+    inspections = 0,
+    reads = 0,
+    events = 0;
+  let linked = false,
+    loseEventReceipt = false;
+  run.dependencies.now = () => time;
+  run.dependencies.importer = {
+    submit: async () => {
+      throw new Error("A first identity resume must never import.");
+    },
+    inspect: async (plan, receipt) => {
+      inspections++;
+      assert.deepEqual(plan, existing.value.plan);
+      assert.deepEqual(receipt, submission);
+      return { status: "verified", profileId };
+    },
+  };
+  run.dependencies.readProfileRef = undefined;
+  run.dependencies.transport = async (url, init) => {
+    const path = new URL(String(url)).pathname;
+    if (path === `/v1/events/v1.2/browser/${browserId}/show.json`) {
+      assert.equal(init?.method, "GET");
+      reads++;
+      return Response.json({
+        ref: browserId,
+        customer: { ref: linked ? profileId : batchId },
+      });
+    }
+    assert.equal(path, "/v1/events/v1.2/events");
+    assert.equal(init?.method, "POST");
+    const saved = await run.store.read<AudienceProfileJob>(run.key);
+    assert.equal(
+      saved?.value.identitySent,
+      true,
+      "The first event intent must already be durable.",
+    );
+    assert.equal(saved?.value.identityResumeUsed, true);
+    const body = JSON.parse(String(init?.body));
+    assert.equal(body.browser_id, browserId);
+    assert.deepEqual(body.identifiers, [
+      { provider: "liberty-mutual-agent", id: existing.value.plan.identity },
+    ]);
+    events++;
+    if (loseEventReceipt) throw new Error("private-lost-event-receipt");
+    return new Response(null, { status: 201 });
+  };
+  return {
+    ...run,
+    original: existing.value,
+    advance: (milliseconds = 4_000) => {
+      time += milliseconds;
+    },
+    match: () => {
+      linked = true;
+    },
+    loseReceipt: () => {
+      loseEventReceipt = true;
+    },
+    counts: () => ({ inspections, reads, events }),
+  };
+}
+
+test("an expired pre-IDENTITY interruption resumes the same proven browser once and sends its first event only after durable intent", async () => {
+  for (const loseReceipt of [false, true]) {
+    const run = await retainedUnsentIdentity(loseReceipt);
+    if (loseReceipt) run.loseReceipt();
+    assert.equal(
+      (await prepareAudiencePreviewProfile(input, run.dependencies)).status,
+      "pending",
+    );
+    const resumed = await run.store.read<AudienceProfileJob>(run.key);
+    assert(resumed);
+    assert.equal(resumed.value.phase, "binding");
+    assert.equal(resumed.value.identityResumeUsed, true);
+    assert.equal(resumed.value.identitySent, loseReceipt ? undefined : false);
+    assert.equal(resumed.value.bindingStartedAt, 200_000);
+    assert.equal(resumed.value.browserId, browserId);
+    assert.equal(resumed.value.profileId, profileId);
+    assert.deepEqual(resumed.value.plan, run.original.plan);
+    assert.deepEqual(run.counts(), { inspections: 1, reads: 1, events: 0 });
+    run.advance();
+    assert.equal(
+      (await prepareAudiencePreviewProfile(input, run.dependencies)).status,
+      "pending",
+    );
+    run.advance();
+    assert.equal(
+      (await prepareAudiencePreviewProfile(input, run.dependencies)).status,
+      "pending",
+    );
+    assert.equal(run.counts().events, 1);
+    run.match();
+    run.advance();
+    assert.equal(
+      (await prepareAudiencePreviewProfile(input, run.dependencies)).status,
+      "ready",
+    );
+    const ready = await run.store.read<AudienceProfileJob>(run.key);
+    assert.equal(ready?.value.identityResumeUsed, true);
+    assert.equal(ready?.value.identitySent, true);
+    assert.equal(run.counts().events, 1);
+    assert.equal(run.counts().inspections, 1);
+  }
+});
+
+test("a resumed clock cannot be reset again even if the process stops before the first identity event", async () => {
+  const run = await retainedUnsentIdentity();
+  await prepareAudiencePreviewProfile(input, run.dependencies);
+  run.advance(121_000);
+  for (let attempt = 0; attempt < 2; attempt++) {
+    await assert.rejects(
+      prepareAudiencePreviewProfile(input, run.dependencies),
+      (error: unknown) =>
+        error instanceof AudiencePreviewError &&
+        error.code === "PROFILE_LINK_TIMEOUT",
+    );
+  }
+  const saved = await run.store.read<AudienceProfileJob>(run.key);
+  assert.equal(saved?.value.phase, "failed");
+  assert.equal(saved?.value.bindingStartedAt, 200_000);
+  assert.equal(saved?.value.identityResumeUsed, true);
+  assert.equal(saved?.value.identitySent, false);
+  assert.equal(run.counts().events, 0);
+  assert.equal(run.counts().inspections, 1);
+});
+
+test("first-identity resume stays closed on missing, unreadable, wrong-target or nonindividual proof and altered canonical plans", async () => {
+  for (const failure of [
+    "missing",
+    "unreadable",
+    "wrong-target",
+    "pending",
+    "failed",
+    "bulk",
+    "altered-plan",
+    "already-sent",
+    "malformed-sent",
+  ] as const) {
+    const run = await retainedUnsentIdentity();
+    const current = await run.store.read<AudienceProfileJob>(run.key);
+    assert(current);
+    const changed = { ...current.value };
+    if (failure === "missing") delete changed.submission;
+    if (failure === "bulk")
+      changed.catalogProof = { ...changed.submission!, recordIndex: 0 };
+    if (failure === "already-sent") changed.identitySent = true;
+    if (failure === "malformed-sent")
+      changed.identitySent = "false" as unknown as boolean;
+    if (failure === "altered-plan")
+      changed.plan = {
+        ...changed.plan,
+        payload: changed.plan.payload.replace('"Audience"', '"Altered"'),
+      };
+    await run.store.compareAndSet(run.key, current.version, changed);
+    if (failure === "unreadable")
+      run.dependencies.importer!.inspect = async () => {
+        throw new AudiencePreviewError(
+          "IMPORT_READ_UNAVAILABLE",
+          "private-native-error",
+          true,
+        );
+      };
+    if (failure === "wrong-target")
+      run.dependencies.importer!.inspect = async () => ({
+        status: "verified",
+        profileId: batchId,
+      });
+    if (failure === "pending" || failure === "failed")
+      run.dependencies.importer!.inspect = async () => ({ status: failure });
+    await assert.rejects(
+      prepareAudiencePreviewProfile(input, run.dependencies),
+      (error: unknown) =>
+        error instanceof AudiencePreviewError &&
+        error.code === "PROFILE_LINK_TIMEOUT",
+    );
+    const saved = await run.store.read<AudienceProfileJob>(run.key);
+    assert.equal(saved?.value.phase, "failed");
+    assert.equal(saved?.value.identityResumeUsed, undefined);
+    assert.equal(saved?.value.bindingStartedAt, 15_000);
+    assert.equal(saved?.value.browserId, browserId);
+    assert.equal(saved?.value.profileId, profileId);
+    assert.equal(run.counts().events, 0);
+    if (
+      [
+        "missing",
+        "bulk",
+        "altered-plan",
+        "already-sent",
+        "malformed-sent",
+      ].includes(failure)
+    )
+      assert.equal(run.counts().inspections, 0);
+  }
+});
+
+test("only a strict readable mismatch can resume; a late exact match recovers without sending", async () => {
+  for (const state of [
+    "matched",
+    "not-found",
+    "http-failure",
+    "invalid-response",
+    "transport-failure",
+  ] as const) {
+    const run = await retainedUnsentIdentity();
+    run.dependencies.transport = async (url, init) => {
+      assert.equal(
+        new URL(String(url)).pathname,
+        `/v1/events/v1.2/browser/${browserId}/show.json`,
+      );
+      assert.equal(init?.method, "GET");
+      if (state === "transport-failure")
+        throw new Error("private-transport-error");
+      if (state === "matched")
+        return Response.json({ ref: browserId, customer: { ref: profileId } });
+      return new Response("private-response", {
+        status:
+          state === "not-found" ? 404 : state === "http-failure" ? 503 : 200,
+      });
+    };
+    if (state === "matched")
+      assert.equal(
+        (await prepareAudiencePreviewProfile(input, run.dependencies)).status,
+        "ready",
+      );
+    else
+      await assert.rejects(
+        prepareAudiencePreviewProfile(input, run.dependencies),
+        (error: unknown) =>
+          error instanceof AudiencePreviewError &&
+          error.code === "PROFILE_LINK_TIMEOUT",
+      );
+    const saved = await run.store.read<AudienceProfileJob>(run.key);
+    assert.equal(saved?.value.identityResumeUsed, undefined);
+    assert.equal(saved?.value.bindingStartedAt, 15_000);
+    assert.equal(saved?.value.identitySent, false);
+    assert.equal(run.counts().events, 0);
+  }
+});
+
+test("concurrent pre-identity resume has one proof/read winner and cannot overwrite a concurrent ready result", async () => {
+  for (const concurrentReady of [false, true]) {
+    const run = await retainedUnsentIdentity();
+    let release!: () => void, inspecting!: () => void;
+    const waiting = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const started = new Promise<void>((resolve) => {
+      inspecting = resolve;
+    });
+    const inspect = run.dependencies.importer!.inspect;
+    run.dependencies.importer!.inspect = async (...args) => {
+      inspecting();
+      await waiting;
+      return inspect(...args);
+    };
+    const first = prepareAudiencePreviewProfile(input, run.dependencies);
+    await started;
+    const second = await prepareAudiencePreviewProfile(input, run.dependencies);
+    assert.equal(second.status, "pending");
+    if (concurrentReady) {
+      run.advance(46_000);
+      const current = await run.store.read<AudienceProfileJob>(run.key);
+      assert(current);
+      await run.store.compareAndSet(run.key, current.version, {
+        ...current.value,
+        phase: "ready",
+        identitySent: true,
+      });
+    }
+    release();
+    assert.equal((await first).status, concurrentReady ? "ready" : "pending");
+    const saved = await run.store.read<AudienceProfileJob>(run.key);
+    assert.equal(saved?.value.phase, concurrentReady ? "ready" : "binding");
+    assert.equal(
+      saved?.value.identityResumeUsed,
+      concurrentReady ? undefined : true,
+    );
+    assert.equal(
+      saved?.value.bindingStartedAt,
+      concurrentReady ? 15_000 : 200_000,
+    );
+    assert.equal(run.counts().inspections, 1);
+    assert.equal(run.counts().reads, 1);
+    assert.equal(run.counts().events, 0);
   }
 });
 
