@@ -1319,6 +1319,7 @@ export const customerDemoChapters: DemoChapter[] = [
             label: "Agent Portal Home in Page Builder",
             href: `${portalEditor}`,
           },
+          { label: "Avery portal Home", href: `${PORTAL}/` },
           { label: "Learning & resources", href: `${PORTAL}/resources` },
           { label: "Open the sample Brand Kit library", href: BRAND_KITS },
         ],
@@ -1721,20 +1722,20 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Agent Portal footer", href: `${PORTAL}/` },
         ],
         transition:
-          "One reviewed update now reaches both footers. Finish by showing the approval history and restoring the original year without losing that history.",
+          "One reviewed update now reaches both footers. Finish by comparing the versions and restoring the original year without losing that history.",
       },
       {
         id: "portal-audit-rollback",
-        title: "Review the approval history and restore the year",
+        title: "Compare versions and restore the year",
         label: "Every change is approved, auditable, and reversible",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
         durationMinutes: 4,
         persona: "Content administrator",
         scenario:
-          "The team needs to see who approved the shared copyright change and restore its original year while preserving history.",
+          "The team needs to compare the shared copyright change and restore its original year while preserving version history.",
         objective:
-          "Show approval accountability, then restore copyright year 2025 through a new reviewed version.",
+          "Compare the original and changed copyright versions, then restore year 2025 through a new reviewed version.",
         stopWhen:
           "Both site footers show the full copyright notice with restored year 2025, and the original, changed, and restored versions remain in history.",
         inputs: [
@@ -1756,13 +1757,13 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Page Builder**. Select **Home** in the **Content** tree, then choose **Editor → Pages**.",
-            "Choose **Sitemap → Home → Content tree options → Page items → Copyright notice**.",
+            "Switch to **Page Builder → Site switcher → Public Website → Content**.",
+            "Select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**.",
           ],
           [
-            "Select **Workflow history**.",
-            "Under **History**, show **Draft → Awaiting approval** and **Awaiting approval → Approved**.",
-            "Read the user, timestamp, and **Comment**; match the preceding submission and approval.",
+            "Open the version selector. Find the original approved English version recorded in **P0** and **Saved copyright version** from A5.",
+            "Open the saved version’s **••• → Compare versions**. In the modal, set **Compare** to the recorded original version and **With** to **Saved copyright version**.",
+            "Under **Content → Disclosure**, show **2025** beside **2026**, with the full wording and link intact. The comparison updates automatically; choose **close** to return.",
           ],
           [
             "Switch to **Page Builder → Content → Data → Disclosures → Copyright notice**; select the recorded original approved English version.",
@@ -1781,8 +1782,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Stay on the same **Restored copyright version** in **Page Builder**; confirm **Approved** and copyright year **2025**.",
             "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
             "While publication completes, show the original, changed, and restored versions in the **Content version selector**.",
-            "Close the version selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Copyright notice → Workflow history**.",
-            "Show the restored version’s submission, approval, and comments.",
+            "Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**.",
           ],
           [
             "Wait for publication to complete. Reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer.",
@@ -1790,32 +1790,33 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
         ],
         presenterResult:
-          "Both site footers show the full copyright notice with 2025 again; history retains the original, changed, and restored revisions and their approvals.",
+          "Both site footers show the full copyright notice with 2025 again; history retains the original, changed, and restored revisions.",
         actions: [
-          "In **Page Builder**, select **Home** in the **Content** tree, then choose **Editor → Pages**. In **Sitemap**, open the **Home** row’s **Content tree options**, choose **Page items**, and expand **Copyright notice**.",
-          "Select **Workflow history**. Under **History**, read the **Draft → Awaiting approval** and **Awaiting approval → Approved** transitions, their user and timestamp, and the review **Comment**. Match these to the submission and approval just performed.",
+          "In **Page Builder**, choose **Site switcher → Public Website → Content**. Select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**.",
+          "Open the version selector, and find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Open the saved version’s **••• → Compare versions**. In the modal, set **Compare** to the recorded original version and **With** to **Saved copyright version**. Under **Content → Disclosure**, show the year changing from **2025** to **2026**, with the full wording and link retained. The comparison updates automatically; choose **close** to return to the item.",
           "In **Page Builder → Content → Data → Disclosures → Copyright notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**. Name it **Copyright year restored**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved full copyright notice with **2025**, without changing any other wording or punctuation, its line break, or the **Equal Opportunity Employer** link. After the original wording is saved, record the version number currently shown as **Restored copyright version**. Use that same saved version number for submission, approval, and publication.",
           "With **Restored copyright version** selected, recheck **Draft** and the original **Disclosure** wording with year **2025**. Choose **Actions → Submit**, enter **Restore copyright year to 2025**, and select **Submit**. Stay on the same **Restored copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved restoration of copyright year to 2025**, and select **Submit**.",
-          "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Close the selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Copyright notice → Workflow history** to inspect the restored version’s submission, approval, and review comments.",
+          "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**.",
           "After completion, reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer. Confirm that both footers show the full copyright notice with **2025** again, and retain all versions in history.",
         ],
         expected: [
-          "The native history records the acting account, timestamps, and comments. A newer reviewed version restores copyright year 2025 in both footers while preserving the original and changed versions.",
+          "Native version comparison shows the year-only change. A newer reviewed version restores copyright year 2025 in both footers while preserving the original and changed versions.",
         ],
         talkTrack: [
-          "The workflow records who submitted and approved this copyright change and when. Restoring 2025 is another reviewed version. Both footers return to the original year, and the complete change history remains available.",
+          "We have already seen the review and approval process. Version comparison now shows exactly what changed: only the copyright year. We restore the earlier wording through a new reviewed version, returning both footers to 2025 while retaining the original and changed versions.",
         ],
         controls: [
-          "**Editor → Sitemap → Home → Content tree options → Page items → Copyright notice → Workflow history** shows actual transitions and comments.",
+          "In **Content**, the item’s version selector exposes **••• → Compare versions**. Compare the recorded original, changed, and restored versions without changing their wording.",
           "Creating a new Draft from the original approved version preserves the original and changed versions. The same governed process reviews and publishes the restoration.",
-          "Submission, approval, and publication remain distinct recorded actions in the configured workflow.",
+          "Submission, approval, and publication remain distinct actions in the configured workflow demonstrated earlier.",
         ],
         links: [
           {
-            label: "Page Builder Page items and workflow history",
-            href: publicEditor,
+            label: "Compare and restore the copyright notice",
+            href: copyrightContent,
           },
-          { label: "Restore the shared copyright notice", href: copyrightContent },
+          { label: "Public website footer", href: `${PUBLIC}/` },
+          { label: "Agent Portal footer", href: `${PORTAL}/` },
         ],
         transition:
           "Close on what this enables for Liberty Mutual: trusted guidance, more relevant agent experiences, and business-managed changes with clear accountability.",

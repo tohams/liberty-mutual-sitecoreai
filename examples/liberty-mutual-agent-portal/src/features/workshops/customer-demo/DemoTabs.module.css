@@ -66,28 +66,6 @@
   margin: 0;
 }
 
-.tab a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding-block: 4px;
-  color: var(--w-navy);
-  font-size: 14px;
-  font-weight: 650;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.tab a:hover {
-  color: #6f2bc4;
-}
-
-.tab a:focus-visible {
-  outline: 2px solid #6f2bc4;
-  outline-offset: 4px;
-  border-radius: 2px;
-}
-
 .tab > span {
   display: block;
   color: var(--w-muted);
