@@ -5,8 +5,14 @@ const W=require('./public-configure-editorial-workflow.cjs');
 const actor='sitecore\\setup';
 const start={cursor:'MA==',node:{date:'2026-11-01T04:00:00Z',user:actor,newState:{stateId:W.IDS.draft,displayName:'Draft'}}};
 const event={date:'2026-11-01T04:01:00Z',user:actor,oldState:{stateId:W.IDS.draft,displayName:'Draft'},newState:{stateId:W.IDS.awaiting,displayName:'Awaiting approval'}};
-test('finite source approval includes delivered records only, with exactly six revised versions and seven portal editorial records',()=>{
- const m=H.manifest();assert.equal(m.targets.length,186);assert.equal(m.targets.filter(t=>t.version>1).length,6);
+test('finite source approval includes the shared copyright, with exactly six revised versions and seven portal editorial records',()=>{
+ const m=H.manifest();assert.equal(m.targets.length,187);assert.equal(m.targets.filter(t=>t.version>1).length,6);
+ const copyright=m.targets.find(t=>t.id==='9dc572ee-3d67-5909-922f-6482def1cdb0');
+ assert.equal(copyright.path,'/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures/Copyright notice');
+ assert.equal(copyright.version,1);assert.equal(copyright.expected.title,'Copyright notice');
+ assert(copyright.expected.body.includes('© 2025 Liberty Mutual Insurance'));
+ assert.equal(copyright.expected.owner,'');assert.equal(copyright.expected.sourceLink,'');
+ assert.equal(m.targets.find(t=>t.id==='82d42b7c-60f7-5230-9c17-03592feb8d05').expected.body,undefined);
  assert.equal(m.targets.filter(t=>t.path.includes('/liberty-mutual-agent-portal/')).length,7);
  assert.equal(m.targets.filter(t=>t.template==='b99218ea-e1fd-41af-a4ae-7ec9e5c30b17').length,10);
  assert(m.targets.every(t=>!t.path.includes('/Data/Approved answers')));

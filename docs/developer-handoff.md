@@ -177,6 +177,18 @@ The helper does not approve or publish the page, alter the shared layout, or con
 
 ### Dedicated editing host
 
+The Agent Portal's shared **Default editing host** uses the stable application origin **https://liberty-mutual-agent-portal.vercel.app**. Its site grouping selects the dedicated **liberty-mutual-agent-portal** rendering-host item. Keep that host separate from the platform's shared **Default** rendering-host item, and use the stable alias rather than a branch-specific Vercel deployment URL.
+
+The dedicated item at `/sitecore/system/Settings/Services/Rendering Hosts/liberty-mutual-agent-portal` has these URL settings:
+
+| Native field                              | Value                                                               |
+| ----------------------------------------- | ------------------------------------------------------------------- |
+| `ServerSideRenderingEngineApplicationUrl` | `https://liberty-mutual-agent-portal.vercel.app/`                   |
+| `ServerSideRenderingEngineEndpointUrl`    | `https://liberty-mutual-agent-portal.vercel.app/api/editing/render` |
+| `ServerSideRenderingEngineConfigUrl`      | `https://liberty-mutual-agent-portal.vercel.app/api/editing/config` |
+
+These URLs select the React application. The editing secret and Sitecore context IDs remain separate server settings. Ordinary definition deployments do not provision or overwrite rendering-host credentials. After changing the hosted URL, refresh Page Builder, keep **Default editing host** selected, and verify an unpublished page version in its canvas.
+
 For the local developer workshop, run `npm run setup:local` and `npm run dev`, then open Page Builder in **Chrome**, select **Local host**, enter **http://localhost:3000** and click **Save**. Setup automatically supplies this POC’s Preview server context, separate public browser context and matching editing secret, while keeping operational state local. This browser-level local selection does not replace the shared Default editing host or require the maintenance script below. Return to **Default editing host** after the exercise. See the [developer quickstart](developer-quickstart.md) for the complete verified sequence.
 
 The rest of this section covers maintaining the **shared** hosted editing environment.

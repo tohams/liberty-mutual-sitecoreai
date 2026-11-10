@@ -19,6 +19,9 @@ SharedFields:
 - ID: 06d5295c-ed2f-4a54-9bf2-26228d113318
   Hint: __Icon
   Value: Office/32x32/navigate_down.png
+- ID: e829c217-5e94-4306-9c48-2634b094fdc2
+  Hint: OtherProperties
+  Value: IsRenderingsWithDynamicPlaceholders=true
 - ID: 069a8361-b1cd-437c-8c32-a3be78941446
   Hint: Placeholders
   Value: "{2DF85430-B7BF-53D0-95EC-DB009C712D36}"

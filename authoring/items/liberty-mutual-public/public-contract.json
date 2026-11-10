@@ -259,7 +259,7 @@
       "PublicSplitContent",
       "PublicFaq"
     ],
-    "headless-public-copyright": [
+    "headless-public-copyright-{*}": [
       "SharedDisclosure"
     ]
   },
@@ -1984,6 +1984,7 @@
         "Datasource Location": "query:./Data",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
         "__Icon": "Office/32x32/navigate_down.png",
+        "OtherProperties": "IsRenderingsWithDynamicPlaceholders=true",
         "Placeholders": "{2DF85430-B7BF-53D0-95EC-DB009C712D36}",
         "__Display name": "Footer",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}|{FD2059FD-6043-4DFE-8C04-E2437CE87634}"
@@ -2255,7 +2256,7 @@
       "template": "5c547d4e-7111-4995-95b0-6b561751bf2e",
       "bucket": "placeholders",
       "fields": {
-        "Placeholder Key": "headless-public-copyright",
+        "Placeholder Key": "headless-public-copyright-{*}",
         "Allowed Controls": "{4BC5C522-23DE-54E1-8420-169BDCF996E9}",
         "__Created": "20261031T160000Z"
       }
@@ -2267,7 +2268,7 @@
       "template": "d2a6884c-04d5-4089-a64e-d27ca9d68d4c",
       "bucket": "presentation",
       "fields": {
-        "Placeholder Key": "headless-public-copyright",
+        "Placeholder Key": "headless-public-copyright-{*}",
         "Allowed Controls": "{4BC5C522-23DE-54E1-8420-169BDCF996E9}",
         "__Created": "20261031T160000Z"
       }
@@ -2720,9 +2721,9 @@
       "bucket": "presentation",
       "fields": {
         "Signature": "public-footer",
-        "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" ph=\"headless-footer\" ds=\"local:/Data/Footer\" par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /><r uid=\"{D86337AA-4CE4-55F9-9B6F-F4A18C90009A}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-footer/headless-public-copyright\" ds=\"{9DC572EE-3D67-5909-922F-6482DEF1CDB0}\" par=\"FieldNames={6FD9EEAF-A76A-52EE-A1FB-8FBDEB534FBB}&amp;DynamicPlaceholderId=2\" /></d></r>",
+        "__Renderings": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" ph=\"headless-footer\" ds=\"local:/Data/Footer\" par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /><r uid=\"{D86337AA-4CE4-55F9-9B6F-F4A18C90009A}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-footer/headless-public-copyright-1\" ds=\"{9DC572EE-3D67-5909-922F-6482DEF1CDB0}\" par=\"FieldNames={6FD9EEAF-A76A-52EE-A1FB-8FBDEB534FBB}&amp;DynamicPlaceholderId=2\" /></d></r>",
         "__Thumbnail": "<image mediaid=\"{76EEF150-1D2B-491E-9A68-6A4369F66C8C}\" />",
-        "__Final Renderings": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" s:id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" s:ph=\"headless-footer\" s:ds=\"local:/Data/Footer\" s:par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /><r uid=\"{D86337AA-4CE4-55F9-9B6F-F4A18C90009A}\" s:id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" s:ph=\"/headless-footer/headless-public-copyright\" s:ds=\"{9DC572EE-3D67-5909-922F-6482DEF1CDB0}\" s:par=\"FieldNames={6FD9EEAF-A76A-52EE-A1FB-8FBDEB534FBB}&amp;DynamicPlaceholderId=2\" /></d></r>",
+        "__Final Renderings": "<r xmlns:p=\"p\" xmlns:s=\"s\" p:p=\"1\"><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\"><r uid=\"{B10F3BCE-B09C-5EC6-9EFB-912B395E3856}\" s:id=\"{5A7D5D76-D30D-5E47-8969-31835B870856}\" s:ph=\"headless-footer\" s:ds=\"local:/Data/Footer\" s:par=\"FieldNames={4BA8A91F-DEE3-5EF0-8E43-B3D9AA04C70C}&amp;DynamicPlaceholderId=1\" /><r uid=\"{D86337AA-4CE4-55F9-9B6F-F4A18C90009A}\" s:id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" s:ph=\"/headless-footer/headless-public-copyright-1\" s:ds=\"{9DC572EE-3D67-5909-922F-6482DEF1CDB0}\" s:par=\"FieldNames={6FD9EEAF-A76A-52EE-A1FB-8FBDEB534FBB}&amp;DynamicPlaceholderId=2\" /></d></r>",
         "__Created": "20261031T160000Z"
       }
     },

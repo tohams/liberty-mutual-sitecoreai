@@ -15,7 +15,8 @@ const oldApp = process.env.AUDIENCE_PREVIEW_MARKETPLACE_APP_ID;
 
 beforeEach(() => {
   process.env.AUDIENCE_PREVIEW_SITECORE_CONTEXT_ID = CONTEXT_ID;
-  process.env.AUDIENCE_PREVIEW_MARKETPLACE_APP_ID = "synthetic-marketplace-app";
+  process.env.AUDIENCE_PREVIEW_MARKETPLACE_APP_ID =
+    "11111111-1111-4111-8111-111111111111";
 });
 
 afterEach(() => {
@@ -30,18 +31,11 @@ afterEach(() => {
 
 function responses(
   overrides: {
-    agent?: Record<string, unknown>;
     page?: Record<string, unknown>;
     status?: number;
   } = {},
 ) {
   const bodies = [
-    {
-      itemId: PAGE_ID,
-      name: "Home",
-      locationPath: `${ROOT}/Home`,
-      ...overrides.agent,
-    },
     {
       id: PAGE_ID.replaceAll("-", ""),
       name: "Home",
@@ -74,7 +68,7 @@ function isError(status: number, code?: string) {
     (!code || error.code === code);
 }
 
-test("authorizes the exact page version with delegated Marketplace calls", async () => {
+test("authorizes the exact page version with one delegated Pages API request", async () => {
   const fetch = responses();
   const result = await resolveAuthorizedPreviewPage(
     { pageId: `{${PAGE_ID.toUpperCase()}}`, language: "en", version: 7 },
@@ -90,7 +84,7 @@ test("authorizes the exact page version with delegated Marketplace calls", async
     version: 7,
   });
   const calls = fetch.mock.calls;
-  assert.equal(calls.length, 2);
+  assert.equal(calls.length, 1);
   for (const call of calls) {
     const [input, init] = call.arguments as [URL, RequestInit];
     assert.equal(input.origin, "https://edge-platform.sitecorecloud.io");
@@ -105,7 +99,7 @@ test("authorizes the exact page version with delegated Marketplace calls", async
     assert.equal(headers.get("sc-resource"), "marketplace");
     assert.equal(headers.get("sc-marketplace-auth"), "interactive/v1");
   }
-  const versioned = calls[1].arguments[0] as URL;
+  const versioned = calls[0].arguments[0] as URL;
   assert.equal(versioned.pathname, `/authoring/api/v1/pages/${PAGE_ID}`);
   assert.equal(versioned.searchParams.get("version"), "7");
   assert.equal(
@@ -151,6 +145,7 @@ test("cannot substitute a client-selected context or host", async () => {
       contextId: "untrusted-context",
       host: "https://untrusted.example",
       appId: "untrusted-app",
+      siteName: "liberty-mutual-public-site",
     } as Parameters<typeof resolveAuthorizedPreviewPage>[0],
     "synthetic-token",
   );
@@ -158,12 +153,13 @@ test("cannot substitute a client-selected context or host", async () => {
     const url = call.arguments[0] as URL;
     assert.equal(url.origin, "https://edge-platform.sitecorecloud.io");
     assert.equal(url.searchParams.get("sitecoreContextId"), CONTEXT_ID);
+    assert.equal(url.searchParams.get("site"), "liberty-mutual-agent-portal");
   }
 });
 
 test("does not accept a page belonging to another site", async () => {
   const fetch = responses({
-    agent: { locationPath: "/sitecore/content/Other/Home" },
+    page: { path: "/sitecore/content/Other/Home" },
   });
   await assert.rejects(
     resolveAuthorizedPreviewPage(
@@ -229,7 +225,6 @@ test("preserves Sitecore's authentication, authorization, and missing-page failu
 
 test("returns a subpage's route from the authoritative content path", async () => {
   responses({
-    agent: { locationPath: `${ROOT}/Home/resources/guide` },
     page: { path: `${ROOT}/Home/resources/guide` },
   });
   const page = await resolveAuthorizedPreviewPage(
@@ -241,11 +236,10 @@ test("returns a subpage's route from the authoritative content path", async () =
   assert.equal("previewUrl" in page, false);
 });
 
-test("reports Public Website as unsupported before reading draft content", async () => {
+test("rejects Public Website from authoritative Pages API metadata", async () => {
   const fetch = responses({
-    agent: {
-      locationPath:
-        "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home",
+    page: {
+      path: "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home",
     },
   });
   await assert.rejects(
@@ -278,6 +272,7 @@ test("Auth0 setup is optional until this app's own complete HTTPS configuration 
     AUDIENCE_PREVIEW_AUTH0_CLIENT_SECRET: "synthetic-client-secret",
     AUDIENCE_PREVIEW_AUTH0_SECRET: "a".repeat(64),
     AUDIENCE_PREVIEW_APP_BASE_URL: PORTAL,
+    AUDIENCE_PREVIEW_MARKETPLACE_APP_ID: "11111111-1111-4111-8111-111111111111",
   };
   assert.equal(audiencePreviewAuthConfiguration(config)?.appBaseUrl, PORTAL);
   for (const invalid of [

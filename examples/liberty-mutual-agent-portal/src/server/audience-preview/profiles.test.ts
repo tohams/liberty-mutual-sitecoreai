@@ -236,11 +236,15 @@ test("an uncertain upload cannot be replayed by repeated preview requests", asyn
   };
   await assert.rejects(
     prepareAudiencePreviewProfile(input, dependencies),
-    /not been submitted again/,
+    (error: unknown) =>
+      error instanceof AudiencePreviewError &&
+      error.code === "IMPORT_UPLOAD_UNCONFIRMED",
   );
   await assert.rejects(
     prepareAudiencePreviewProfile(input, dependencies),
-    /not been submitted again/,
+    (error: unknown) =>
+      error instanceof AudiencePreviewError &&
+      error.code === "IMPORT_UPLOAD_UNCONFIRMED",
   );
   assert.equal(uploads, 1);
 });
@@ -271,11 +275,15 @@ test("a worker disappearing during upload leaves an unreplayed retained job afte
   time += 46_000;
   await assert.rejects(
     prepareAudiencePreviewProfile(input, dependencies),
-    /not been submitted again/,
+    (error: unknown) =>
+      error instanceof AudiencePreviewError &&
+      error.code === "IMPORT_UPLOAD_UNCONFIRMED",
   );
   await assert.rejects(
     prepareAudiencePreviewProfile(input, dependencies),
-    /not been submitted again/,
+    (error: unknown) =>
+      error instanceof AudiencePreviewError &&
+      error.code === "IMPORT_UPLOAD_UNCONFIRMED",
   );
   assert.equal(uploads, 1);
 });

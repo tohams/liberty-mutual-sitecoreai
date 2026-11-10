@@ -147,20 +147,11 @@ export async function resolveAuthorizedPreviewPage(
     );
   }
   const { contextId } = audiencePreviewApiConfiguration();
-  const agentPage = await readSitecore(
-    `/stream/ai-agent-api/api/v1/pages/${pageId}`,
-    { language: input.language },
-    accessToken,
-    contextId,
-  );
-  const site = siteForPath(agentPage.locationPath);
-  if (!site || itemId(agentPage.itemId) !== pageId) {
-    throw new AudiencePreviewError(
-      "PAGE_OUTSIDE_SITE",
-      "Audience preview is currently available for Agent Portal pages.",
-      403,
-    );
-  }
+  // The delegated Pages API returns the full content path and current-user
+  // permissions. A separate Agent API lookup is unnecessary for ownership.
+  // The site is server-defined; neither SDK host context nor request input can
+  // select another site for the authorization request.
+  const site = SITES[0];
   const page = await readSitecore(
     `/authoring/api/v1/pages/${pageId}`,
     {
@@ -173,10 +164,16 @@ export async function resolveAuthorizedPreviewPage(
     accessToken,
     contextId,
   );
+  if (siteForPath(page.path, true)?.name !== site.name) {
+    throw new AudiencePreviewError(
+      "PAGE_OUTSIDE_SITE",
+      "Audience preview is currently available for Agent Portal pages.",
+      403,
+    );
+  }
   const permissions = page.permissions ? record(page.permissions) : undefined;
   if (
     itemId(page.id) !== pageId ||
-    siteForPath(page.path, true)?.name !== site.name ||
     page.hasPresentation === false ||
     permissions?.canRead === false ||
     page.language !== input.language ||

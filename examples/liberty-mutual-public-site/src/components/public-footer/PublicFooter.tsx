@@ -22,8 +22,12 @@ export const Default = ({
   const columns = Array.isArray(fields.columns) ? fields.columns : [];
   const social = Array.isArray(fields.socialLinks) ? fields.socialLinks : [];
   const legal = Array.isArray(fields.legalLinks) ? fields.legalLinks : [];
+  const copyrightSlot = `headless-public-copyright-${params.DynamicPlaceholderId}`;
   const hasCopyright = Boolean(
-    rendering.placeholders?.["headless-public-copyright"]?.length,
+    (
+      rendering.placeholders?.[copyrightSlot] ||
+      rendering.placeholders?.["headless-public-copyright-{*}"]
+    )?.length,
   );
   return (
     <div
@@ -99,7 +103,7 @@ export const Default = ({
           <div className="public-footer__body">
             {hasCopyright ? (
               <AppPlaceholder
-                name="headless-public-copyright"
+                name={copyrightSlot}
                 rendering={rendering}
                 page={page}
                 componentMap={componentMap}

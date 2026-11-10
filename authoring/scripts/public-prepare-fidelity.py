@@ -101,7 +101,10 @@ class Preparation:
         for name,key in [('PublicHeader','header'),('PublicFooter','footer')]:
             label=name[6:];path=h.SITE+'/Presentation/Partial Designs/'+label+'/Data/'+label
             values={**source[key],'logo':{'assetKey':'logo-header' if name=='PublicHeader' else 'logo-footer-vertical'}}
-            if name=='PublicFooter':values['mobileLogo']={'assetKey':'logo-footer-medallion'}
+            if name=='PublicFooter':
+                values['mobileLogo']={'assetKey':'logo-footer-medallion'}
+                # Copyright is a separate shared datasource in the Footer partial.
+                values.pop('body',None)
             fields=self.fields(name,values,path)
             self.changes.append({'id':h.uid(path),'path':path,'fields':fields,'mode':'new Draft from latest approved version','preserveHistory':'All preceding approved versions, including their initial logo, remain unchanged.'})
         assert len({r['ID'] for r in self.records})==len(self.records),'Duplicate native item identity.'
