@@ -182,7 +182,7 @@ function pending(job: ProfileJob, now: number): AudienceProfilePreparation {
 function jobFailure(code = "PREVIEW_PROFILE_FAILED"): never {
   throw new AudiencePreviewError(
     code,
-    "The audience preview profile could not be prepared. Its retained import has not been submitted again.",
+    "This audience could not be prepared. Contact your Sitecore administrator to resolve the preview request.",
   );
 }
 

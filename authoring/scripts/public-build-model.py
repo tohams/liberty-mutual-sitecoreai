@@ -200,7 +200,7 @@ def build(include_editorial=True):
         # Register those peers and their linked recommendation cards with Edge.
         if name=="AgencyPriorities": sf += [field("b4bbc0be-7619-4678-b2f7-947d84aa77a9","Content Dependencies","{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{15F0229E-41E0-442B-94C5-243CBA793465}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}")]
         if name=="PublicPageBody": sf += [field("e829c217-5e94-4306-9c48-2634b094fdc2","OtherProperties","IsRenderingsWithDynamicPlaceholders=true"),field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-hero"))+"|"+brace(uid(PP+"/headless-public-content")))]
-        if name=="PublicFooter": sf += [field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-copyright")))]
+        if name=="PublicFooter": sf += [field("e829c217-5e94-4306-9c48-2634b094fdc2","OtherProperties","IsRenderingsWithDynamicPlaceholders=true"),field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-copyright")))]
         if name=="PublicResourceContent": sf += [field("a3411ff6-c978-40aa-b059-a49b9ca2209b","Can select Page as datasource","1"),field("b0b15510-b138-470e-8f33-8da2e228aafe","Rendering Contents Resolver","{6CCCBCDE-5E95-44E4-AE66-CFE7D3A0589E}")]
         allowed=[resource_page] if name=="PublicResourceContent" else [page]
         if name in ["PublicHeader","PublicFooter","PublicPageBody","SharedDisclosure"]: allowed.append(T["partial"])
@@ -220,7 +220,7 @@ def build(include_editorial=True):
     # this site. Every nested slot has an explicit nonempty allowlist.
     allowed={"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero":["PublicHero"],"headless-public-content":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicResourceContent"],"headless-public-copyright":["SharedDisclosure"]}
     for key,components in allowed.items():
-        fields=[field("7256bdab-1fd2-49dd-b205-cb4873d2917c","Placeholder Key",key+("-{*}" if key in ["headless-public-hero","headless-public-content"] else "")),field("e391b526-d0c5-439d-803e-17512eae6222","Allowed Controls","|".join(brace(RENDERINGS[c]) for c in components))]
+        fields=[field("7256bdab-1fd2-49dd-b205-cb4873d2917c","Placeholder Key",key+("-{*}" if key in ["headless-public-hero","headless-public-content","headless-public-copyright"] else "")),field("e391b526-d0c5-439d-803e-17512eae6222","Allowed Controls","|".join(brace(RENDERINGS[c]) for c in components))]
         item(PP+"/"+key,uid(PP),T["placeholder"],"placeholders",shared=fields)
         item(SITE+"/Presentation/Placeholder Settings/"+key,uid(SITE+"/Presentation/Placeholder Settings"),T["sitePlaceholder"],"presentation",shared=fields)
     for key,component in [('headless-agency-priorities','AgencyPriorities'),('headless-shared-disclosure','SharedDisclosure')]:
@@ -251,7 +251,7 @@ def build(include_editorial=True):
         placed=placement(p,component,ph,"local:/Data/"+label if component!="PublicPageBody" else "")
         # Children authored inside this partial use its internal parent path.
         # SXA applies the public-footer signature when inserting the partial.
-        if component=="PublicFooter": placed += placement(p,"SharedDisclosure","/headless-footer/headless-public-copyright",brace(uid(COPYRIGHT_PATH)),variant="Copyright",n=2)
+        if component=="PublicFooter": placed += placement(p,"SharedDisclosure","/headless-footer/headless-public-copyright-1",brace(uid(COPYRIGHT_PATH)),variant="Copyright",n=2)
         final='<r xmlns:p="p" xmlns:s="s" p:p="1"><d id="'+brace(I['device'])+'">'+re.sub(r'\b(id|ds|ph|par)=',r's:\1=',placed)+'</d></r>'
         item(p,uid(SITE+"/Presentation/Partial Designs"),T["partial"],"presentation",shared=[field("55faae90-3bba-4f7f-96fe-13c3f40055ff","Signature","public-"+label.lower().replace(" ","-")),field(F["layout"],"__Renderings",layout([placed]))],values=[field('04bf00db-f5fb-41f7-8ab7-22408372a981','__Final Renderings',final)])
         # Native Page Builder creates this companion when creating a partial.
@@ -409,7 +409,7 @@ def outputs():
     manifest['copyrightId']=uid(COPYRIGHT_PATH)
     manifest['ownership']['sharedDisclosure']='public-owned coverage terms for promotions and resource pages'
     manifest['ownership']['sharedCopyright']='public-owned copyright, reused by Public Website and Agent Portal footers'
-    manifest['placeholders']['headless-public-copyright']=['SharedDisclosure']
+    manifest['placeholders']['headless-public-copyright-{*}']=['SharedDisclosure']
     if (BASE/'public-model-extensions.json').exists():
         manifest['placeholders']['headless-public-hero-{*}']=['PublicHero','PublicBreadcrumbs']
         manifest['placeholders']['headless-public-content-{*}'] += ['PublicSearch','PublicProductSelector','PublicQuoteHandoff','PublicSection','PublicSplitContent','PublicFaq']

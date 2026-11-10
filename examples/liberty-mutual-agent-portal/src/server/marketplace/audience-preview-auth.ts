@@ -9,6 +9,7 @@ import {
   AUDIENCE_PREVIEW_TENANT_ID,
   AudiencePreviewError,
   audiencePreviewAuthConfiguration,
+  audiencePreviewAuthorizationParameters,
 } from "./audience-preview-config";
 
 let configuredClient: Auth0Client | undefined;
@@ -21,14 +22,13 @@ export function getAudiencePreviewAuth(): Auth0Client | null {
   const key = JSON.stringify(configuration);
   if (configuredClient && configuredKey === key) return configuredClient;
   configuredClient = new Auth0Client({
-    ...configuration,
+    clientId: configuration.clientId,
+    clientSecret: configuration.clientSecret,
+    secret: configuration.secret,
+    appBaseUrl: configuration.appBaseUrl,
     domain: AUDIENCE_PREVIEW_AUTH0_DOMAIN,
-    authorizationParameters: {
-      scope: "openid profile email offline_access",
-      audience: AUDIENCE_PREVIEW_AUTH0_AUDIENCE,
-      organization_id: AUDIENCE_PREVIEW_ORGANIZATION_ID,
-      tenant_id: AUDIENCE_PREVIEW_TENANT_ID,
-    },
+    authorizationParameters:
+      audiencePreviewAuthorizationParameters(configuration),
     signInReturnToPath: `${AUDIENCE_PREVIEW_APP_PATH}/auth/complete`,
     session: {
       cookie: {
@@ -57,6 +57,7 @@ export function getAudiencePreviewAuth(): Auth0Client | null {
       audiencePreviewClientId: configuration.clientId,
       audiencePreviewOrganizationId: AUDIENCE_PREVIEW_ORGANIZATION_ID,
       audiencePreviewTenantId: AUDIENCE_PREVIEW_TENANT_ID,
+      audiencePreviewMarketplaceAppId: configuration.marketplaceAppId,
     }),
   });
   configuredKey = key;
@@ -85,7 +86,8 @@ export async function requireAudiencePreviewSession(): Promise<AudiencePreviewSe
     session.audiencePreviewClientId !== configuration.clientId ||
     session.audiencePreviewOrganizationId !==
       AUDIENCE_PREVIEW_ORGANIZATION_ID ||
-    session.audiencePreviewTenantId !== AUDIENCE_PREVIEW_TENANT_ID
+    session.audiencePreviewTenantId !== AUDIENCE_PREVIEW_TENANT_ID ||
+    session.audiencePreviewMarketplaceAppId !== configuration.marketplaceAppId
   ) {
     throw new AudiencePreviewError(
       "AUTHENTICATION_REQUIRED",

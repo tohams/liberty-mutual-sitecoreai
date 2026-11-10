@@ -31,9 +31,12 @@ test('one full copyright notice is governed in the shared footer without replaci
  assert.equal(copyright.fields.title,'Copyright notice');
  assert.equal(copyright.fields.sourceLink,'');assert.equal(copyright.fields.owner,'');
  const snapshot=JSON.parse(fs.readFileSync(path.join(__dirname,'../items/liberty-mutual-public/public-editorial-records.json')));
- const originalFooter=snapshot.records.find(r=>r.Path===SITE+'/Presentation/Partial Designs/Footer/Data/Footer');
- const originalBody=originalFooter.Languages[0].Versions[0].Fields.find(f=>f.Hint==='body').Value;
- assert.equal(copyright.fields.body,originalBody.replace('© 2026','© 2025'));
+ const fullCopyright='<p>© 2025 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116<br>Liberty Mutual is an <a href="https://www.libertymutualgroup.com/about-lm/our-company/equal-employment-opportunity-and-anti-discrimination-policy">Equal Opportunity Employer</a> and an Equal Housing Insurer.</p>';
+ assert.equal(copyright.fields.body,fullCopyright);
+ const copyrightSeed=snapshot.records.find(r=>r.ID===copyright.id);
+ assert.equal(copyrightSeed.Languages[0].Versions[0].Fields.find(f=>f.Hint==='body').Value,fullCopyright);
+ const footerSeed=snapshot.records.find(r=>r.Path===SITE+'/Presentation/Partial Designs/Footer/Data/Footer');
+ assert(footerSeed.Languages.every(l=>l.Versions.every(v=>v.Fields.every(f=>f.Hint!=='body'))));
  assert.equal(record(SITE+'/Presentation/Partial Designs/Footer/Data/Footer').fields.body,undefined);
  assert.equal(model.fieldIds['PublicFooter.body'],undefined);
  assert.equal(record('/sitecore/templates/Project/LibertyMutualPublic/PublicFooter/Content/body'),undefined);
@@ -50,18 +53,19 @@ test('one full copyright notice is governed in the shared footer without replaci
  for(const key of ['__Renderings','__Final Renderings']){
   const layout=footer.fields[key];
   assert(layout.includes('D86337AA-4CE4-55F9-9B6F-F4A18C90009A'));
-  assert(layout.includes('/headless-footer/headless-public-copyright'));
+  assert(layout.includes('/headless-footer/headless-public-copyright-1'));
   assert(layout.includes(model.copyrightId.toUpperCase()));
   assert(layout.includes(copyrightVariant.toUpperCase()));
  }
  const global='/sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic/headless-public-copyright';
  const site=SITE+'/Presentation/Placeholder Settings/headless-public-copyright';
  for(const p of [global,site]){
-  assert.equal(record(p).fields['Placeholder Key'],'headless-public-copyright');
+  assert.equal(record(p).fields['Placeholder Key'],'headless-public-copyright-{*}');
   assert.equal(norm(record(p).fields['Allowed Controls']),norm(model.renderingIds.SharedDisclosure));
  }
  assert.equal(norm(record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicFooter').fields.Placeholders),norm(record(global).id));
- assert.deepEqual(model.placeholders['headless-public-copyright'],['SharedDisclosure']);
+ assert.equal(record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicFooter').fields.OtherProperties,'IsRenderingsWithDynamicPlaceholders=true');
+ assert.deepEqual(model.placeholders['headless-public-copyright-{*}'],['SharedDisclosure']);
  for(const page of model.records.filter(r=>r.path.startsWith(SITE+'/Home')&&r.fields.__Renderings)){
   const nodes=page.fields.__Renderings.match(/<r\s[^>]*\/\s*>/g)||[];
   assert(nodes.every(node=>!(node.includes(model.renderingIds.SharedDisclosure.toUpperCase())&&node.includes(model.disclosureId.toUpperCase()))),page.path);

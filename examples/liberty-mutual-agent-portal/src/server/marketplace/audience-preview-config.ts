@@ -1,10 +1,11 @@
 export const AUDIENCE_PREVIEW_ORGANIZATION_ID = "org_XqL3u1MSNVuubOTb";
 export const AUDIENCE_PREVIEW_TENANT_ID =
-  "97eea84c-ac47-4d91-7e4f-08defdaaa7df";
+  "b0688afd-d747-4582-efe5-08defda484ba";
 export const AUDIENCE_PREVIEW_AUTH0_DOMAIN = "https://auth.sitecorecloud.io";
 export const AUDIENCE_PREVIEW_AUTH0_AUDIENCE =
   "https://api-webapp.sitecorecloud.io";
 export const AUDIENCE_PREVIEW_APP_PATH = "/apps/audience-preview";
+const APP_ID = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
 
 export class AudiencePreviewError extends Error {
   constructor(
@@ -22,6 +23,20 @@ export interface AudiencePreviewAuthConfiguration {
   clientSecret: string;
   secret: string;
   appBaseUrl: string;
+  marketplaceAppId: string;
+}
+
+/** The tenant is the installed Marketplace tenant, not the CDP/Optimization tenant. */
+export function audiencePreviewAuthorizationParameters(
+  configuration: AudiencePreviewAuthConfiguration,
+) {
+  return {
+    scope: "openid profile email offline_access",
+    audience: AUDIENCE_PREVIEW_AUTH0_AUDIENCE,
+    organization_id: AUDIENCE_PREVIEW_ORGANIZATION_ID,
+    tenant_id: AUDIENCE_PREVIEW_TENANT_ID,
+    product_codes: `mkp_${configuration.marketplaceAppId}`,
+  };
 }
 
 /** Read only this app's configuration; never fall back to portal/workshop keys. */
@@ -34,12 +49,16 @@ export function audiencePreviewAuthConfiguration(
   const appBaseUrl = environment.AUDIENCE_PREVIEW_APP_BASE_URL?.trim();
   const domain = environment.AUDIENCE_PREVIEW_AUTH0_DOMAIN?.trim();
   const audience = environment.AUDIENCE_PREVIEW_AUTH0_AUDIENCE?.trim();
+  const marketplaceAppId =
+    environment.AUDIENCE_PREVIEW_MARKETPLACE_APP_ID?.trim();
   if (
     !clientId ||
     !clientSecret ||
     !secret ||
     !/^[a-f0-9]{64}$/i.test(secret) ||
     !appBaseUrl ||
+    !marketplaceAppId ||
+    !APP_ID.test(marketplaceAppId) ||
     (domain && domain.replace(/\/$/, "") !== AUDIENCE_PREVIEW_AUTH0_DOMAIN) ||
     (audience && audience !== AUDIENCE_PREVIEW_AUTH0_AUDIENCE)
   ) {
@@ -57,7 +76,13 @@ export function audiencePreviewAuthConfiguration(
     ) {
       return null;
     }
-    return { clientId, clientSecret, secret, appBaseUrl: base.origin };
+    return {
+      clientId,
+      clientSecret,
+      secret,
+      appBaseUrl: base.origin,
+      marketplaceAppId: marketplaceAppId.toLowerCase(),
+    };
   } catch {
     return null;
   }
@@ -68,7 +93,12 @@ export function audiencePreviewApiConfiguration(
 ): { contextId: string; appId: string } {
   const contextId = environment.AUDIENCE_PREVIEW_SITECORE_CONTEXT_ID?.trim();
   const appId = environment.AUDIENCE_PREVIEW_MARKETPLACE_APP_ID?.trim();
-  if (!contextId || !/^[A-Za-z0-9_-]{8,128}$/.test(contextId) || !appId) {
+  if (
+    !contextId ||
+    !/^[A-Za-z0-9_-]{8,128}$/.test(contextId) ||
+    !appId ||
+    !APP_ID.test(appId)
+  ) {
     throw new AudiencePreviewError(
       "CONFIGURATION_REQUIRED",
       "Audience preview is not configured for this SitecoreAI environment.",
