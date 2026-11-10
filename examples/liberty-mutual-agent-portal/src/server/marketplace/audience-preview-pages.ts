@@ -66,6 +66,82 @@ function siteForPath(value: unknown, pageOnly = false) {
   });
 }
 
+function diagnosticText(value: unknown): string | undefined {
+  if (typeof value !== "string") return undefined;
+  return (
+    value
+      .replace(
+        /\beyJ[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g,
+        "[credential]",
+      )
+      .replace(/\b(?:Bearer|ApiKey)\s+[^\s,;]+/gi, "[credential]")
+      .replace(/https?:\/\/[^\s<>"']+/gi, "[URL]")
+      .replace(
+        /\b(?:sitecoreContextId|contextId|token|client_secret|authorization|secret|password)\s*[:=]\s*["']?[^\s,"';&]+/gi,
+        "[credential]",
+      )
+      .replace(
+        /\b[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\b/gi,
+        "[identifier]",
+      )
+      .replace(/\b[A-Za-z0-9_-]{20,}\b/g, "[identifier]")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/[\u0000-\u001f\u007f]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 300) || undefined
+  );
+}
+
+/** Inspect only bounded ProblemDetails diagnostics; never log the raw body. */
+async function problemDiagnostics(
+  response: Response,
+): Promise<Record<string, unknown>> {
+  if (
+    !response.body ||
+    !/\bjson\b/i.test(response.headers.get("content-type") || "")
+  )
+    return {};
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let length = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > 8_192) {
+        await reader.cancel();
+        return {};
+      }
+      chunks.push(value);
+    }
+    const payload: unknown = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+    if (!payload || typeof payload !== "object" || Array.isArray(payload))
+      return {};
+    const problem = payload as Record<string, unknown>;
+    const title = diagnosticText(problem.title);
+    const detail = diagnosticText(problem.detail);
+    const fields =
+      problem.errors &&
+      typeof problem.errors === "object" &&
+      !Array.isArray(problem.errors)
+        ? Object.keys(problem.errors)
+            .filter((key) => /^[A-Za-z0-9_.$\[\]-]{1,80}$/.test(key))
+            .slice(0, 12)
+        : [];
+    return {
+      ...(title ? { problemTitle: title } : {}),
+      ...(detail ? { problemDetail: detail } : {}),
+      ...(fields.length ? { validationFields: fields } : {}),
+    };
+  } catch {
+    return {};
+  } finally {
+    reader.releaseLock();
+  }
+}
+
 async function readSitecore(
   pathname: string,
   parameters: Record<string, string>,
@@ -111,6 +187,7 @@ async function readSitecore(
       status: response.status,
       path: pathname,
       ...(correlation ? { correlationId: correlation } : {}),
+      ...(await problemDiagnostics(response)),
     });
     void response.body?.cancel().catch(() => undefined);
     const status = [401, 403, 404].includes(response.status)

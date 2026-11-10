@@ -252,6 +252,45 @@ test("rejection diagnostics contain only status, fixed path, and a bounded corre
   assert.equal(recorded.includes("permissions"), false);
 });
 
+test("ProblemDetails diagnostics redact credentials and identifiers and expose field names without values", async () => {
+  const warn = mock.method(console, "warn", () => undefined);
+  responses({
+    status: 422,
+    page: {
+      title: "Validation failed",
+      detail:
+        "Wrong resource Bearer secret-value https://provider.example?token=private contextId=private-context-123456789 11111111-1111-4111-8111-111111111111",
+      errors: {
+        site: ["private-validation-value"],
+        sitecoreContextId: ["private-context-value"],
+        "not a field": ["private"],
+      },
+    },
+  });
+  await assert.rejects(
+    resolveAuthorizedPreviewPage(
+      { pageId: PAGE_ID, language: "en" },
+      "synthetic-delegated-secret",
+    ),
+    isError(502),
+  );
+  const diagnostic = warn.mock.calls[0].arguments[1] as Record<string, unknown>;
+  assert.equal(diagnostic.problemTitle, "Validation failed");
+  assert.deepEqual(diagnostic.validationFields, ["site", "sitecoreContextId"]);
+  const recorded = JSON.stringify(diagnostic);
+  for (const secret of [
+    "secret-value",
+    "provider.example",
+    "private-context",
+    "11111111-1111-4111-8111-111111111111",
+    "private-validation-value",
+    "private-context-value",
+    "synthetic-delegated-secret",
+  ])
+    assert.equal(recorded.includes(secret), false);
+  assert.ok(String(diagnostic.problemDetail).length <= 300);
+});
+
 test("returns a subpage's route from the authoritative content path", async () => {
   responses({
     page: { path: `${ROOT}/Home/resources/guide` },
