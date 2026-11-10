@@ -57,6 +57,13 @@ test('successful portal login establishes the agent session and lands on canonic
     assert.equal(session?.username, 'daniel.01');
     assert.equal(session?.reviewerPack, '01');
     assert.equal(response.headers.get('Location'), null, 'The API returns the canonical destination to the login client');
+    const cookies = response.headers.getSetCookie();
+    const browserExpirations = cookies.filter((cookie) => cookie.startsWith('sc_cid='));
+    assert.equal(browserExpirations.length, 2, 'Login must expire both SDK browser-cookie scopes');
+    assert.ok(browserExpirations.some((cookie) => cookie.includes('Domain=portal.example')));
+    assert.ok(browserExpirations.some((cookie) => !cookie.includes('Domain=')));
+    assert.ok(browserExpirations.every((cookie) => cookie.includes('Max-Age=0')));
+    assert.ok(cookies.some((cookie) => cookie.startsWith('__prerender_bypass=') && cookie.includes('Max-Age=0')));
   } finally {
     for (const [key, value] of Object.entries(previous)) {
       if (value === undefined) delete process.env[key];

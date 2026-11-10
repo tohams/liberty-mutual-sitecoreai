@@ -39,6 +39,32 @@ test("waits for profile-link change after an accepted identity without replaying
   assert.ok(now <= 2000);
 });
 
+test("a slower native profile merge can finish before the bounded login deadline", async () => {
+  let now = 0;
+  let identities = 0;
+  const ready = await waitForPortalProfileLink(
+    {
+      readProfileRef: async () => {
+        now += 100;
+        return now >= 6500 ? "imported-profile" : "fresh-anonymous-profile";
+      },
+      identify: async () => {
+        identities++;
+        now += 100;
+        return { accepted: true };
+      },
+    },
+    {
+      now: () => now,
+      sleep: async (milliseconds) => { now += milliseconds; },
+    },
+  );
+  assert.equal(ready, true);
+  assert.equal(identities, 1);
+  assert.ok(now > 6000, "The observed merge would exceed the former six-second limit");
+  assert.ok(now < PROFILE_LINK_TIMEOUT_MS);
+});
+
 test("a receipt with an unchanged profile exhausts one deadline and stays unready", async () => {
   let now = 0;
   let identities = 0;

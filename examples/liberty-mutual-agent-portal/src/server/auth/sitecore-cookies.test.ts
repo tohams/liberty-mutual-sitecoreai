@@ -1,7 +1,34 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { NextResponse } from 'next/server';
-import { clearPortalDraftCookies, clearSitecoreIdentityCookies } from './sitecore-cookies';
+import { clearPortalDraftCookies, clearPortalLoginCookies, clearSitecoreIdentityCookies } from './sitecore-cookies';
+
+test('complete login cleanup retains domain identity expirations after clearing draft mode', () => {
+  const previous = process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID;
+  process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID = 'public-context-123';
+  try {
+    const response = NextResponse.json({ success: true });
+    response.cookies.set('lm_portal_session', 'new-signed-session', { httpOnly: true, path: '/' });
+    clearPortalLoginCookies(response, new Request('https://portal.example/api/auth/login'));
+    const cookies = response.headers.getSetCookie();
+    for (const name of ['sc_cid', 'sc_cid_personalize', 'lm_portal_personalize_binding', 'sc_public-context-123', 'sc_public-context-123_personalize']) {
+      const expirations = cookies.filter((cookie) => cookie.startsWith(`${name}=`));
+      assert.equal(expirations.length, 2, `${name} must expire at both cookie scopes`);
+      assert.ok(expirations.some((cookie) => cookie.includes('Domain=portal.example')));
+      assert.ok(expirations.some((cookie) => !cookie.includes('Domain=')));
+      assert.ok(expirations.every((cookie) => cookie.includes('Max-Age=0')));
+    }
+    for (const name of ['__prerender_bypass', '__next_preview_data']) {
+      const expiration = cookies.find((cookie) => cookie.startsWith(`${name}=`));
+      assert.ok(expiration?.includes('Max-Age=0'));
+      assert.ok(!expiration?.includes('Domain='));
+    }
+    assert.ok(cookies.some((cookie) => cookie.startsWith('lm_portal_session=new-signed-session') && cookie.includes('HttpOnly')));
+  } finally {
+    if (previous === undefined) delete process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID;
+    else process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID = previous;
+  }
+});
 
 test('identity reset expires only intended SDK cookies and preserves the signed portal session', () => {
   const previous = process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID;

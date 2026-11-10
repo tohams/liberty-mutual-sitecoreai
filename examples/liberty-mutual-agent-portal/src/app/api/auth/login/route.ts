@@ -1,7 +1,7 @@
 import { authenticate } from '@/server/auth/credentials';
 import { createSession, SESSION_COOKIE, sessionCookieOptions } from '@/server/auth/session';
 import { limitLoginAttempts } from '@/server/auth/rate-limit';
-import { clearPortalDraftCookies, clearSitecoreIdentityCookies } from '@/server/auth/sitecore-cookies';
+import { clearPortalLoginCookies } from '@/server/auth/sitecore-cookies';
 import { PortalError } from '@/server/errors';
 import { errorResponse, jsonResponse, readJson, requireSameOrigin } from '@/server/http';
 
@@ -19,8 +19,7 @@ export async function POST(request: Request) {
     const { token } = await createSession(identity);
     const response = jsonResponse({ success: true, redirectTo: '/' });
     response.cookies.set(SESSION_COOKIE, token, sessionCookieOptions);
-    clearSitecoreIdentityCookies(response, request);
-    clearPortalDraftCookies(response);
+    clearPortalLoginCookies(response, request);
     return response;
   } catch (error) { return errorResponse(error); }
 }

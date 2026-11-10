@@ -47,7 +47,7 @@ Reproduces login's public browser/IDENTITY/profile-link sequence. Two workspace
 requests are strict separate assertions, never decision retries.
 --measure-link is a separate diagnostic: observes native profile linking for up
 to 10 seconds, makes no workspace/decision requests, and does not change or pass
-the strict six-second acceptance gate. Prints only statuses, timings, and safe
+the strict ten-second acceptance gate. Prints only statuses, timings, and safe
 cache-control/age/x-cache metadata; preserves all previous acceptance results.`;
 
 function selectPersonas(value) {
