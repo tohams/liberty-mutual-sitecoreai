@@ -200,7 +200,7 @@ test("catalog reservations stop ordinary preparation from creating individual im
   assert.equal(submitted, false);
 });
 
-test("later reserved rows start their binding deadline only when first serviced", async () => {
+test("later reserved rows have no binding deadline before a first identity intent", async () => {
   const run = harness();
   for (let index = 0; index < 16; index++) {
     run.advance();
@@ -223,7 +223,7 @@ test("later reserved rows start their binding deadline only when first serviced"
       audiencePreviewProfileKey(hash, "catalog:test"),
     );
     assert(current);
-    assert.equal(current.value.bindingStartedAt, run.deps.now!());
+    assert.equal(current.value.bindingStartedAt, undefined);
     return original(...args);
   };
   for (let index = 0; index < 14; index++) {
@@ -503,4 +503,88 @@ test("typed profile and native verification failures persist bounded row stage/c
       status: 503,
     });
   }
+});
+
+test("a retained bulk timeout revalidates the complete receipt through the catalog worker without changing the22 verified rows or importing again", async () => {
+  const run = harness();
+  let progress = await advanceCatalogPreparation(page, run.deps);
+  for (let count = 0; count < 70 && progress.status !== "ready"; count++) {
+    run.advance();
+    progress = await advanceCatalogPreparation(page, run.deps);
+  }
+  assert.equal(progress.status, "ready");
+  const catalogKey = [...run.store.values.keys()].find((key) =>
+    key.includes(":catalog:"),
+  );
+  assert(catalogKey);
+  const manifest = await run.store.read<{
+    rows: {
+      index: number;
+      selectorHash: string;
+      verifiedFor?: string;
+      failureFor?: string;
+    }[];
+  }>(catalogKey);
+  assert(manifest);
+  const verifiedRows = structuredClone(manifest.value.rows.slice(0, 22));
+  for (const row of manifest.value.rows.slice(22)) delete row.verifiedFor;
+  const target = manifest.value.rows[23];
+  target.failureFor = `${page.id}:${page.language}:${page.version}`;
+  await run.store.compareAndSet(catalogKey, manifest.version, manifest.value);
+  const key = audiencePreviewProfileKey(target.selectorHash, "catalog:test");
+  const current = await run.store.read<AudienceProfileJob>(key);
+  assert(current?.value.catalogProof);
+  await run.store.compareAndSet(key, current.version, {
+    ...current.value,
+    phase: "failed",
+    code: "PROFILE_LINK_TIMEOUT",
+    identitySent: false,
+    bindingStartedAt: 1,
+  });
+  let receiptReads = 0,
+    browserReads = 0;
+  const inspect = run.importer.inspect;
+  run.importer.inspect = async (...args) => {
+    receiptReads++;
+    return inspect(...args);
+  };
+  run.deps.profiles.transport = async (url, init) => {
+    assert.equal(init?.method, "GET");
+    assert.equal(
+      new URL(String(url)).pathname,
+      `/v1/events/v1.2/browser/${current.value.browserId}/show.json`,
+    );
+    browserReads++;
+    return Response.json({
+      ref: current.value.browserId,
+      customer: { ref: uuid(999) },
+    });
+  };
+  run.deps.prepareProfile = async (input, dependencies) => {
+    if (
+      audienceSelectorHash(input, "catalog:test", page.siteName) !==
+      target.selectorHash
+    )
+      return { status: "pending", retryAfterSeconds: 3 };
+    return prepareAudiencePreviewProfile(input, dependencies);
+  };
+  run.advance(600_000);
+  progress = await advanceCatalogPreparation(page, run.deps);
+  assert.equal(progress.status, "pending");
+  assert.equal(progress.readyCount, 22);
+  assert.equal(progress.failedCount, 0);
+  assert.equal(run.uploads(), 1);
+  assert.equal(run.verifications(), 42);
+  assert.equal(receiptReads, 1);
+  assert.equal(browserReads, 1);
+  const resumed = await run.store.read<AudienceProfileJob>(key);
+  assert.equal(resumed?.value.phase, "binding");
+  assert.equal(resumed?.value.bindingStartedAt, undefined);
+  assert.equal(resumed?.value.identitySent, false);
+  assert.equal(resumed?.value.browserId, current.value.browserId);
+  assert.equal(resumed?.value.profileId, current.value.profileId);
+  assert.deepEqual(resumed?.value.plan, current.value.plan);
+  assert.deepEqual(resumed?.value.catalogProof, current.value.catalogProof);
+  const after = await run.store.read<typeof manifest.value>(catalogKey);
+  assert.deepEqual(after?.value.rows.slice(0, 22), verifiedRows);
 });

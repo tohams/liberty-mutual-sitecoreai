@@ -66,7 +66,7 @@ export interface AudienceProfileJob {
   profileId?: string;
   browserId?: string;
   identitySent?: boolean;
-  /** One clock resume for a proven existing browser whose first IDENTITY was never attempted. */
+  /** Retained legacy marker; unsent stages no longer have a deadline or resume budget. */
   identityResumeUsed?: boolean;
   bindingStartedAt?: number;
   code?: string;
@@ -101,6 +101,8 @@ export interface AudienceProfileDependencies extends NativePreviewConfiguration 
   now?: () => number;
   uuid?: () => string;
   readProfileRef?: typeof readPortalBrowserProfileRef;
+  /** Fixed catalog worker only: reverify the full retained aggregate receipt. */
+  verifyCatalogProfile?: (job: AudienceProfileJob) => Promise<boolean>;
 }
 
 export function audienceSelectorHash(
@@ -384,7 +386,6 @@ export async function prepareAudiencePreviewProfile(
           phase: "binding",
           submission: receipt.submission,
           profileId: receipt.profileId,
-          bindingStartedAt: now(),
           nextAttemptAt: now() + RETRY_SECONDS * 1000,
         };
         delete next.lease;
@@ -499,10 +500,7 @@ export async function prepareAudiencePreviewProfile(
       return jobFailure(job.code);
     };
     const mayResumeIdentity =
-      (job.identitySent === false || job.identitySent === undefined) &&
-      !job.identityResumeUsed &&
-      !!job.submission &&
-      !job.catalogProof;
+      job.identitySent === false || job.identitySent === undefined;
     if (mayResumeIdentity) {
       try {
         const expected = prepareAudienceProfileImport(
@@ -520,15 +518,24 @@ export async function prepareAudiencePreviewProfile(
           expected.correlationId !== job.plan.correlationId
         )
           return stayFailed();
-        const receipt = await (
-          dependencies.importer ||
-          createPreviewProfileImporter(undefined, transport)
-        ).inspect(job.plan, job.submission!);
-        if (
-          receipt.status !== "verified" ||
-          receipt.profileId.toLowerCase() !== profile.profileId.toLowerCase()
-        )
-          return stayFailed();
+        if (job.catalogProof) {
+          if (
+            !dependencies.verifyCatalogProfile ||
+            !(await dependencies.verifyCatalogProfile(claimedJob))
+          )
+            return stayFailed();
+        } else {
+          if (!job.submission) return stayFailed();
+          const receipt = await (
+            dependencies.importer ||
+            createPreviewProfileImporter(undefined, transport)
+          ).inspect(job.plan, job.submission);
+          if (
+            receipt.status !== "verified" ||
+            receipt.profileId.toLowerCase() !== profile.profileId.toLowerCase()
+          )
+            return stayFailed();
+        }
       } catch {
         return stayFailed();
       }
@@ -554,9 +561,8 @@ export async function prepareAudiencePreviewProfile(
       const resumed: ProfileJob = {
         ...claimedJob,
         phase: "binding",
-        identityResumeUsed: true,
-        bindingStartedAt: now(),
       };
+      delete resumed.bindingStartedAt;
       delete resumed.lease;
       delete resumed.code;
       delete resumed.nextAttemptAt;
@@ -614,7 +620,6 @@ export async function prepareAudiencePreviewProfile(
         ...claimedJob,
         phase: "binding",
         profileId: inspection.profileId,
-        bindingStartedAt: now(),
       });
     } catch (error) {
       recordAudiencePreviewStage("profile-verification", "unconfirmed", {
@@ -628,7 +633,8 @@ export async function prepareAudiencePreviewProfile(
   if (job.phase !== "binding" || !job.profileId || !UUID.test(job.profileId))
     return fail(claimed, "INVALID_PREVIEW_STATE");
   const bindingDeadlineExceeded = () =>
-    now() - (job.bindingStartedAt || job.createdAt) > BINDING_DEADLINE_MS;
+    job.identitySent === true &&
+    now() - (job.bindingStartedAt ?? job.createdAt) > BINDING_DEADLINE_MS;
   // An existing browser must get one final read before a timeout is persisted.
   if (!job.browserId && bindingDeadlineExceeded())
     return fail(claimed, "PROFILE_LINK_TIMEOUT");
@@ -691,7 +697,11 @@ export async function prepareAudiencePreviewProfile(
     if (bindingDeadlineExceeded()) return fail(claimed, "PROFILE_LINK_TIMEOUT");
     if (job.identitySent) return release({ ...claimedJob });
     // Persist before the event. Even if its response is lost, polling only checks the same binding.
-    const sent: ProfileJob = { ...claimedJob, identitySent: true };
+    const sent: ProfileJob = {
+      ...claimedJob,
+      identitySent: true,
+      bindingStartedAt: now(),
+    };
     const recorded = await save(claimed, sent);
     if (!recorded) return resultAfterConflict();
     const endpoint = new URL("/v1/events/v1.2/events", dependencies.edgeUrl);
