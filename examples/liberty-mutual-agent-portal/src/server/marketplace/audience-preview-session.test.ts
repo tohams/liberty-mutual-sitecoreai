@@ -189,8 +189,6 @@ test("nested SDK OAuth diagnostics retain only allowlisted codes and an actually
     hasRefreshToken: true,
     expiresAtDelta: -5,
     oauthCode: "invalid_grant",
-    oauthReasonCategory: "unclassified",
-    oauthReason: "Denied for [identity]; refresh_token=[redacted]",
     oauthStatus: 401,
   });
   assert.equal(JSON.stringify(diagnostic).includes("private"), false);

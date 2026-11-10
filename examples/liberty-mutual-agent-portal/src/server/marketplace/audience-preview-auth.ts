@@ -33,7 +33,7 @@ export function getAudiencePreviewAuth(): Auth0Client | null {
     appBaseUrl: configuration.appBaseUrl,
     domain: AUDIENCE_PREVIEW_AUTH0_DOMAIN,
     customFetch: createAudiencePreviewAuthFetch(configuration.marketplaceAppId),
-    tokenRefreshBuffer: 840, // Temporary native refresh diagnostic; restore 60 after verification.
+    tokenRefreshBuffer: 60,
     authorizationParameters:
       audiencePreviewAuthorizationParameters(configuration),
     signInReturnToPath: `${AUDIENCE_PREVIEW_APP_PATH}/auth/complete`,
