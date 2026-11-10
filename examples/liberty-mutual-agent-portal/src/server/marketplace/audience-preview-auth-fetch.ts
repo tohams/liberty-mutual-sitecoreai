@@ -1,13 +1,16 @@
 import "server-only";
 import {
   AUDIENCE_PREVIEW_AUTH0_DOMAIN,
-  AUDIENCE_PREVIEW_ORGANIZATION_ID,
+  audiencePreviewAuthorizationParameters,
 } from "./audience-preview-config";
 
-/** Sitecore requires the fixed organization on its OAuth refresh-token grant. */
+/** Bind native refresh to the same fixed organization and installed app context as login. */
 export function createAudiencePreviewAuthFetch(
+  marketplaceAppId: string,
   transport: typeof fetch = fetch,
 ): typeof fetch {
+  const { organization_id, tenant_id, product_codes } =
+    audiencePreviewAuthorizationParameters({ marketplaceAppId });
   return async (input, init) => {
     let url: URL;
     try {
@@ -33,7 +36,9 @@ export function createAudiencePreviewAuthFetch(
     )
       return transport(input, init);
     const parameters = new URLSearchParams(body);
-    parameters.set("organization_id", AUDIENCE_PREVIEW_ORGANIZATION_ID);
+    parameters.set("organization_id", organization_id);
+    parameters.set("tenant_id", tenant_id);
+    parameters.set("product_codes", product_codes);
     const response = await transport(input, { ...init, body: parameters });
     console.info(
       JSON.stringify({

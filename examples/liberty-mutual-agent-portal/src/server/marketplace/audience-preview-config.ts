@@ -36,7 +36,7 @@ export interface AudiencePreviewAuthConfiguration {
 
 /** The tenant belongs to this installed app, not the Marketplace shell or CDP. */
 export function audiencePreviewAuthorizationParameters(
-  configuration: AudiencePreviewAuthConfiguration,
+  configuration: Pick<AudiencePreviewAuthConfiguration, "marketplaceAppId">,
 ) {
   return {
     scope: "openid profile email offline_access",
