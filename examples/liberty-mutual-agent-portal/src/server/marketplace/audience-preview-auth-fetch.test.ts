@@ -2,11 +2,13 @@ import "server-only";
 import assert from "node:assert/strict";
 import test, { mock } from "node:test";
 import { createAudiencePreviewAuthFetch } from "./audience-preview-auth-fetch";
-import { AUDIENCE_PREVIEW_ORGANIZATION_ID } from "./audience-preview-config";
+import { audiencePreviewAuthorizationParameters } from "./audience-preview-config";
 
 const endpoint = "https://auth.sitecorecloud.io/oauth/token";
+const marketplaceAppId = "11111111-1111-4111-8111-111111111111";
+const fixed = audiencePreviewAuthorizationParameters({ marketplaceAppId });
 
-test("the native refresh grant receives only the fixed organization while preserving request and response contracts", async () => {
+test("the native refresh grant receives only its fixed login context while preserving request and response contracts", async () => {
   const log = mock.method(console, "info", () => undefined);
   try {
     const body = new URLSearchParams([
@@ -16,6 +18,9 @@ test("the native refresh grant receives only the fixed organization while preser
       ["client_secret", "private-secret"],
       ["organization_id", "untrusted-organization"],
       ["organization_id", "another-untrusted-organization"],
+      ["tenant_id", "untrusted-tenant"],
+      ["product_codes", "untrusted-product"],
+      ["audience", "existing-audience"],
       ["scope", "openid profile"],
       ["resource", "first"],
       ["resource", "second"],
@@ -38,24 +43,33 @@ test("the native refresh grant receives only the fixed organization while preser
       access_token: "private-access",
       refresh_token: "private-rotated",
     });
-    const wrapped = createAudiencePreviewAuthFetch(async (input, forwarded) => {
-      assert.equal(input, endpoint);
-      assert.notEqual(forwarded, init);
-      assert.equal(forwarded?.headers, headers);
-      assert.equal(forwarded?.signal, signal);
-      assert.equal(forwarded?.redirect, init.redirect);
-      assert.equal(forwarded?.cache, init.cache);
-      const parameters = forwarded?.body;
-      assert.ok(parameters instanceof URLSearchParams);
-      assert.notEqual(parameters, body);
-      assert.deepEqual(parameters.getAll("organization_id"), [
-        AUDIENCE_PREVIEW_ORGANIZATION_ID,
-      ]);
-      const expected = new URLSearchParams(original);
-      expected.set("organization_id", AUDIENCE_PREVIEW_ORGANIZATION_ID);
-      assert.deepEqual([...parameters], [...expected]);
-      return response;
-    });
+    const wrapped = createAudiencePreviewAuthFetch(
+      marketplaceAppId,
+      async (input, forwarded) => {
+        assert.equal(input, endpoint);
+        assert.notEqual(forwarded, init);
+        assert.equal(forwarded?.headers, headers);
+        assert.equal(forwarded?.signal, signal);
+        assert.equal(forwarded?.redirect, init.redirect);
+        assert.equal(forwarded?.cache, init.cache);
+        const parameters = forwarded?.body;
+        assert.ok(parameters instanceof URLSearchParams);
+        assert.notEqual(parameters, body);
+        assert.deepEqual(parameters.getAll("organization_id"), [
+          fixed.organization_id,
+        ]);
+        assert.deepEqual(parameters.getAll("tenant_id"), [fixed.tenant_id]);
+        assert.deepEqual(parameters.getAll("product_codes"), [
+          fixed.product_codes,
+        ]);
+        const expected = new URLSearchParams(original);
+        expected.set("organization_id", fixed.organization_id);
+        expected.set("tenant_id", fixed.tenant_id);
+        expected.set("product_codes", fixed.product_codes);
+        assert.deepEqual([...parameters], [...expected]);
+        return response;
+      },
+    );
     assert.equal(await wrapped(endpoint, init), response);
     assert.equal(body.toString(), original);
     assert.equal(response.bodyUsed, false);
@@ -129,6 +143,7 @@ test("the exact origin, endpoint, POST method, unique refresh grant, and native 
     for (const [input, init] of cases) {
       let calls = 0;
       const wrapped = createAudiencePreviewAuthFetch(
+        marketplaceAppId,
         async (forwardedInput, forwardedInit) => {
           calls++;
           assert.equal(forwardedInput, input);
@@ -162,11 +177,14 @@ test("URL inputs and provider failures are returned unchanged without credential
       { status: 403 },
     );
     let calls = 0;
-    const wrapped = createAudiencePreviewAuthFetch(async (supplied) => {
-      calls++;
-      assert.equal(supplied, input);
-      return response;
-    });
+    const wrapped = createAudiencePreviewAuthFetch(
+      marketplaceAppId,
+      async (supplied) => {
+        calls++;
+        assert.equal(supplied, input);
+        return response;
+      },
+    );
     assert.equal(await wrapped(input, init), response);
     assert.equal(calls, 1);
     assert.equal(response.bodyUsed, false);
@@ -176,7 +194,7 @@ test("URL inputs and provider failures are returned unchanged without credential
     });
     const failure = new Error("private-transport-message");
     await assert.rejects(
-      createAudiencePreviewAuthFetch(async () => {
+      createAudiencePreviewAuthFetch(marketplaceAppId, async () => {
         throw failure;
       })(input, init),
       (error) => error === failure,
