@@ -166,7 +166,9 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "portal",
-                      text: "Use presenter agent logins **avery.01** and **daniel.01** at the [**Agent Portal login**](https://liberty-mutual-agent-portal.vercel.app/login). Their shared synthetic portal password is **Sitecore1**. Use separate browser profiles for the two agents so their sessions remain independent.",
+                      text: session
+                        ? "Use presenter agent logins **avery.01** and **daniel.01** at the [**Agent Portal login**](https://liberty-mutual-agent-portal.vercel.app/login). Their shared synthetic portal password is **Sitecore1**. Use separate browser profiles for the two agents so their sessions remain independent."
+                        : "Use presenter agent logins **avery.01** and **daniel.01** at the [**Agent Portal login**](https://liberty-mutual-agent-portal.vercel.app/login), with the agent password supplied by the presenter. Use separate browser profiles for the two agents so their sessions remain independent.",
                     },
                     {
                       chapter: "portal",
