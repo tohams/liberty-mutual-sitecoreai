@@ -101,6 +101,19 @@ export interface NativePreviewConfiguration {
   scope?: string;
 }
 
+/** The Content SDK represents its default, unscoped configuration as an empty string. */
+export function normalizeNativePreviewConfiguration(
+  config: NativePreviewConfiguration,
+): NativePreviewConfiguration {
+  const { scope, ...configuration } = config;
+  const normalized = {
+    ...configuration,
+    ...(scope?.trim() ? { scope: scope.trim() } : {}),
+  };
+  validateNativePreviewConfiguration(normalized);
+  return normalized;
+}
+
 export function validateNativePreviewConfiguration(
   config: NativePreviewConfiguration,
 ): void {

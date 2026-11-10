@@ -20,6 +20,7 @@ import scConfig from "sitecore.config";
 import {
   AudiencePreviewError,
   isObject,
+  normalizeNativePreviewConfiguration,
   validateAudiencePreviewInput,
 } from "./contracts";
 import {
@@ -78,8 +79,12 @@ export function audiencePreviewDependencies(): {
   const decisionContextId =
     process.env.NEXT_PUBLIC_SITECORE_EDGE_CONTEXT_ID || "";
   const siteName = scConfig.defaultSite;
-  const scope = scConfig.personalize.scope;
-  const decision = { edgeUrl, contextId: decisionContextId, siteName, scope };
+  const decision = normalizeNativePreviewConfiguration({
+    edgeUrl,
+    contextId: decisionContextId,
+    siteName,
+    scope: scConfig.personalize.scope,
+  });
   return {
     profiles: {
       ...decision,
@@ -93,7 +98,7 @@ export function audiencePreviewDependencies(): {
           api: { edge: { edgeUrl, contextId: contentContextId } },
         }),
         timeout: 8_000,
-        scope,
+        scope: decision.scope,
         fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }),
       }),
     },

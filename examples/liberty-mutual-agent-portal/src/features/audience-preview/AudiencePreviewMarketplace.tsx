@@ -217,7 +217,7 @@ export function AudiencePreviewMarketplace() {
             ),
           );
         }
-        setPage(payload);
+        setPage({ ...payload, siteName: selected.siteName });
         setSignInRequired(false);
         setContextReady(true);
       } catch (error) {
