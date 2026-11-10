@@ -21,6 +21,9 @@ type Outcome =
 const CODES = new Set([
   "INVALID_IMPORT_PLAN",
   "IMPORT_NOT_CONFIGURED",
+  "IMPORT_QUEUE_BUSY",
+  "IMPORT_TRANSPORT_UNCONFIRMED",
+  "IMPORT_ACKNOWLEDGEMENT_INVALID",
   "IMPORT_UPLOAD_UNCONFIRMED",
   "IMPORT_VERIFICATION_FAILED",
   "IMPORT_READ_UNAVAILABLE",
@@ -51,11 +54,19 @@ const CODES = new Set([
   "PAGE_OUTSIDE_SITE",
 ]);
 
+const REASONS = new Set([
+  "invalid-body",
+  "invalid-batch-id",
+  "checksum-mismatch",
+  "file-size-mismatch",
+  "unexpected-status",
+]);
+
 /** Fixed stage/outcome enums only. Never log selectors, identities, tokens, native bodies, or exception messages. */
 export function recordAudiencePreviewStage(
   stage: AudiencePreviewStage,
   outcome: Outcome,
-  details: { code?: unknown; status?: unknown } = {},
+  details: { code?: unknown; status?: unknown; reason?: unknown } = {},
 ): void {
   const code =
     typeof details.code === "string" && CODES.has(details.code)
@@ -70,6 +81,10 @@ export function recordAudiencePreviewStage(
     details.status <= 599
       ? details.status
       : undefined;
+  const reason =
+    typeof details.reason === "string" && REASONS.has(details.reason)
+      ? details.reason
+      : undefined;
   console.info(
     "Audience Preview preparation",
     JSON.stringify({
@@ -77,6 +92,7 @@ export function recordAudiencePreviewStage(
       outcome,
       ...(code ? { code } : {}),
       ...(status ? { status } : {}),
+      ...(reason ? { reason } : {}),
     }),
   );
 }

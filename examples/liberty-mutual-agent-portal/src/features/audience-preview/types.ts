@@ -38,5 +38,6 @@ export interface AudiencePreviewPanelProps {
     page: AudiencePreviewPage,
   ) => Promise<AudiencePreviewResult>;
   initialAudience?: AudiencePreviewInput;
+  preparationMessage?: string;
   disabled?: boolean;
 }

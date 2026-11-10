@@ -17,8 +17,8 @@ import {
   type AudiencePreviewAuthFlow,
 } from "./sso";
 
-// A cold audience includes import verification and a native binding window of up to two minutes.
-const PREVIEW_TIMEOUT_MS = 180_000;
+// Allow two serialized cold audiences plus the native binding window; every request remains bounded.
+const PREVIEW_TIMEOUT_MS = 300_000;
 let marketplaceClient: Promise<ClientSDK> | null = null;
 
 function getMarketplaceClient() {
@@ -159,6 +159,7 @@ export function AudiencePreviewMarketplace() {
   const [contextLoading, setContextLoading] = useState(false);
   const [signInRequired, setSignInRequired] = useState(false);
   const [message, setMessage] = useState("");
+  const [preparationMessage, setPreparationMessage] = useState("");
   const [connectionAttempt, setConnectionAttempt] = useState(0);
   const [sso] = useState(() => new AudiencePreviewSsoBridge());
   const [authFlow, setAuthFlow] = useState<AudiencePreviewAuthFlow | null>(
@@ -389,6 +390,7 @@ export function AudiencePreviewMarketplace() {
   const preparePreview = useCallback(
     async (input: AudiencePreviewInput, selected: AudiencePreviewPage) => {
       previewRequest.current?.abort();
+      setPreparationMessage("");
       const controller = new AbortController();
       previewRequest.current = controller;
       const timeout = setTimeout(() => controller.abort(), PREVIEW_TIMEOUT_MS);
@@ -421,6 +423,11 @@ export function AudiencePreviewMarketplace() {
             isRecord(payload) &&
             payload.status === "pending"
           ) {
+            setPreparationMessage(
+              payload.waitingForAnotherAudience === true
+                ? "Another audience is being prepared. Your preview will continue automatically."
+                : "",
+            );
             const retryAfter =
               typeof payload.retryAfterSeconds === "number" &&
               Number.isFinite(payload.retryAfterSeconds)
@@ -550,6 +557,7 @@ export function AudiencePreviewMarketplace() {
           key={pageKey(page)}
           page={page}
           onPreview={preparePreview}
+          preparationMessage={preparationMessage}
           disabled={
             phase !== "ready" ||
             !contextReady ||

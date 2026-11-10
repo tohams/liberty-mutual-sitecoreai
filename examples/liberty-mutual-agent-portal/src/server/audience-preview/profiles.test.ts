@@ -9,6 +9,7 @@ import {
 } from "./contracts";
 import {
   createPreviewProfileImporter,
+  PreviewImportQueueBusyError,
   type PreviewProfileImporter,
 } from "./importer";
 import {
@@ -615,4 +616,184 @@ test("concurrent timeout recovery returns pending to the CAS loser and promotes 
   );
   const saved = await originalRead<{ phase: string }>(key);
   assert.equal(saved?.value.phase, "ready");
+});
+
+test("native queue rejection defers the identical plan until Retry-After and CAS permits only one resumed upload", async () => {
+  let time = 10_000;
+  const uploads: unknown[] = [];
+  const dependencies: AudienceProfileDependencies = {
+    store: new MemoryStore(),
+    namespace: "preview:test",
+    siteName: "liberty-mutual-agent-portal",
+    edgeUrl: "https://edge-platform.sitecorecloud.io",
+    contextId: "test-context",
+    now: () => time,
+    importer: {
+      submit: async (plan) => {
+        uploads.push(structuredClone(plan));
+        if (uploads.length === 1) throw new PreviewImportQueueBusyError(35);
+        return {
+          batchId,
+          checksumMd5: plan.checksumMd5,
+          fileSizeBytes: plan.fileSizeBytes,
+        };
+      },
+      inspect: async () => ({ status: "pending" }),
+    },
+  };
+  const first = await prepareAudiencePreviewProfile(input, dependencies);
+  assert.equal(first.status, "pending");
+  if (first.status !== "pending")
+    throw new Error("Expected queued preparation.");
+  assert.equal(first.waitingForAnotherAudience, true);
+  assert.equal(first.retryAfterSeconds, 35);
+  time += 34_000;
+  assert.equal(
+    (await prepareAudiencePreviewProfile(input, dependencies)).status,
+    "pending",
+  );
+  assert.equal(uploads.length, 1);
+  time += 1_000;
+  const resumed = await Promise.all([
+    prepareAudiencePreviewProfile(input, dependencies),
+    prepareAudiencePreviewProfile(input, dependencies),
+  ]);
+  assert(resumed.every((result) => result.status === "pending"));
+  assert.equal(uploads.length, 2);
+  assert.deepEqual(uploads[0], uploads[1]);
+});
+
+test("a legacy uncertain upload reuses an exact recovered receipt without another upload", async () => {
+  const { dependencies, store, key } = await retainedBinding(
+    "failed",
+    "IMPORT_UPLOAD_UNCONFIRMED",
+  );
+  let submitted = false;
+  dependencies.importer = {
+    submit: async () => {
+      submitted = true;
+      throw new Error("Reconciliation must be read-only.");
+    },
+    inspect: async () => {
+      throw new Error("Exact completed receipts already passed validation.");
+    },
+    reconcile: async (plan) => ({
+      status: "verified",
+      profileId,
+      submission: {
+        batchId,
+        checksumMd5: plan.checksumMd5,
+        fileSizeBytes: plan.fileSizeBytes,
+      },
+    }),
+  };
+  assert.equal(
+    (await prepareAudiencePreviewProfile(input, dependencies)).status,
+    "pending",
+  );
+  assert.equal(submitted, false);
+  const saved = await store.read<{
+    phase: string;
+    profileId: string;
+    code?: string;
+  }>(key);
+  assert.equal(saved?.value.phase, "binding");
+  assert.equal(saved?.value.profileId, profileId);
+  assert.equal(saved?.value.code, undefined);
+});
+
+test("a bounded unconfirmed lookup allows one identical UPSERT with a fresh persisted lease and attempt time", async () => {
+  const { dependencies, store, key } = await retainedBinding(
+    "failed",
+    "IMPORT_UPLOAD_UNCONFIRMED",
+  );
+  const original = await store.read<{ plan: unknown }>(key);
+  let time = 200_000;
+  let uploads = 0;
+  dependencies.now = () => time;
+  dependencies.importer = {
+    reconcile: async () => {
+      time += 50_000;
+      return { status: "unconfirmed" };
+    },
+    submit: async (plan) => {
+      uploads++;
+      assert.deepEqual(plan, original?.value.plan);
+      const recorded = await store.read<{
+        uncertainRetryUsed: boolean;
+        lease: { expiresAt: number };
+        lastUploadAttemptAt: number;
+      }>(key);
+      assert.equal(recorded?.value.uncertainRetryUsed, true);
+      assert.equal(recorded?.value.lastUploadAttemptAt, time);
+      assert(recorded && recorded.value.lease.expiresAt > time);
+      return {
+        batchId,
+        checksumMd5: plan.checksumMd5,
+        fileSizeBytes: plan.fileSizeBytes,
+      };
+    },
+    inspect: async () => ({ status: "pending" }),
+  };
+  assert.equal(
+    (await prepareAudiencePreviewProfile(input, dependencies)).status,
+    "pending",
+  );
+  assert.equal(uploads, 1);
+  const saved = await store.read<{ phase: string; plan: unknown }>(key);
+  assert.equal(saved?.value.phase, "verifying");
+  assert.deepEqual(saved?.value.plan, original?.value.plan);
+});
+
+test("a second unknown receipt can reconcile again but cannot spend another upload retry", async () => {
+  const { dependencies } = await retainedBinding(
+    "failed",
+    "IMPORT_UPLOAD_UNCONFIRMED",
+  );
+  let uploads = 0,
+    reads = 0;
+  dependencies.importer = {
+    reconcile: async () => {
+      reads++;
+      return { status: "unconfirmed" };
+    },
+    submit: async () => {
+      uploads++;
+      throw new Error("unknown second receipt");
+    },
+    inspect: async () => ({ status: "pending" }),
+  };
+  for (let attempt = 0; attempt < 2; attempt++)
+    await assert.rejects(
+      prepareAudiencePreviewProfile(input, dependencies),
+      (error: unknown) =>
+        error instanceof AudiencePreviewError &&
+        error.code === "IMPORT_UPLOAD_UNCONFIRMED",
+    );
+  assert.equal(uploads, 1);
+  assert.equal(reads, 2);
+});
+
+test("an unavailable reconciliation stays pending without risking another native upload", async () => {
+  const { dependencies } = await retainedBinding(
+    "failed",
+    "IMPORT_UPLOAD_UNCONFIRMED",
+  );
+  dependencies.importer = {
+    reconcile: async () => {
+      throw new AudiencePreviewError(
+        "IMPORT_READ_UNAVAILABLE",
+        "private response",
+        true,
+      );
+    },
+    submit: async () => {
+      throw new Error("An unreadable native list must not trigger upload.");
+    },
+    inspect: async () => ({ status: "pending" }),
+  };
+  assert.equal(
+    (await prepareAudiencePreviewProfile(input, dependencies)).status,
+    "pending",
+  );
 });
