@@ -1,4 +1,5 @@
 import "server-only";
+import { campaignPlaceholder } from "@/features/growth/campaign-contract";
 import type { Page } from "@sitecore-content-sdk/nextjs";
 
 export type EditorPreviewAgent = "avery" | "daniel";
@@ -11,6 +12,14 @@ const PRIORITIES_UID = "c293373f7f755cfea495f62ed2a70920";
 const DATASOURCE_AGENT: Readonly<Record<string, EditorPreviewAgent>> = {
   "3127968e4b2150c3ad79b6bbbe5303b8": "avery",
   "077bbcf9ce805f76ae6a8a8b5580f1c0": "daniel",
+};
+// Owned page-level preview references are recorded in portal-audience-preview-contract.json.
+const AUDIENCE_PREVIEW = "cfe0e86fdd934b8e84cda2a46e8c1947";
+const CAMPAIGN_UID = "13fdd83017634bd1ba20b3b5684f5275";
+const HERO_UID = "110f2164796548bf9ea9e2a56cc4f54f";
+const HERO_DATASOURCE_AGENT: Readonly<Record<string, EditorPreviewAgent>> = {
+  "56dcdf609ae2445c9051f039fb9aa214": "avery",
+  "059a1e6c11124e609294d2bf1d9fbad6": "daniel",
 };
 const normalize = (value: unknown) =>
   typeof value === "string" ? value.replace(/[{}-]/g, "").toLowerCase() : "";
@@ -27,6 +36,26 @@ export function editorPreviewAgent(
   )
     return undefined;
   const route = page.layout.sitecore.route;
+  if (normalize(route?.itemId) === AUDIENCE_PREVIEW) {
+    const campaigns = (
+      route?.placeholders?.["headless-campaign-page"] ?? []
+    ).filter(
+      (component) =>
+        component.componentName === "CampaignPage" &&
+        normalize(component.uid) === CAMPAIGN_UID,
+    );
+    if (campaigns.length !== 1) return undefined;
+    const hero = campaignPlaceholder(campaigns[0], "hero", page.mode.isEditing);
+    const selected = Object.values(hero?.rendering.placeholders ?? {})
+      .flat()
+      .filter(
+        (component) =>
+          component.componentName === "CampaignHero" &&
+          normalize(component.uid) === HERO_UID,
+      );
+    if (selected.length !== 1) return undefined;
+    return HERO_DATASOURCE_AGENT[normalize(selected[0].dataSource)];
+  }
   if (normalize(route?.itemId) !== HOME) return undefined;
   // The route contains the native SDK-selected component instance. Do not inspect
   // `experiences`, force a variant, or reinterpret the visitor's profile here.

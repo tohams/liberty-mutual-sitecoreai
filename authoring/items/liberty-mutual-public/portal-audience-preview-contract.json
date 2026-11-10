@@ -1,0 +1,23 @@
+{
+  "purpose": "Native page-level audience preview and its identity-free, read-only operational context. This contract records native references; it does not seed or publish content.",
+  "page": {
+    "id": "cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947",
+    "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/agent-audience-preview"
+  },
+  "instances": {
+    "campaignPage": "13fdd830-1763-4bd1-ba20-b3b5684f5275",
+    "hero": "110f2164-7965-48bf-9ea9-e2a56cc4f54f"
+  },
+  "datasources": {
+    "principal": {
+      "id": "56dcdf60-9ae2-445c-9051-f039fb9aa214",
+      "name": "Agency principal introduction",
+      "previewAgent": "avery"
+    },
+    "producer": {
+      "id": "059a1e6c-1112-4e60-9294-d2bf1d9fbad6",
+      "name": "Producer introduction",
+      "previewAgent": "daniel"
+    }
+  }
+}
