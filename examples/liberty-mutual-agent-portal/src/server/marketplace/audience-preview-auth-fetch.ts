@@ -39,13 +39,6 @@ export function createAudiencePreviewAuthFetch(
     parameters.set("organization_id", organization_id);
     parameters.set("tenant_id", tenant_id);
     parameters.set("product_codes", product_codes);
-    const response = await transport(input, { ...init, body: parameters });
-    console.info(
-      JSON.stringify({
-        operation: "audience_preview_refresh",
-        status: response.status,
-      }),
-    );
-    return response;
+    return transport(input, { ...init, body: parameters });
   };
 }

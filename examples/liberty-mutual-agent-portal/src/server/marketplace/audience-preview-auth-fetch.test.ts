@@ -73,11 +73,7 @@ test("the native refresh grant receives only its fixed login context while prese
     assert.equal(await wrapped(endpoint, init), response);
     assert.equal(body.toString(), original);
     assert.equal(response.bodyUsed, false);
-    assert.deepEqual(JSON.parse(String(log.mock.calls[0].arguments[0])), {
-      operation: "audience_preview_refresh",
-      status: 200,
-    });
-    assert.equal(JSON.stringify(log.mock.calls).includes("private"), false);
+    assert.equal(log.mock.callCount(), 0);
   } finally {
     mock.restoreAll();
   }
@@ -188,10 +184,7 @@ test("URL inputs and provider failures are returned unchanged without credential
     assert.equal(await wrapped(input, init), response);
     assert.equal(calls, 1);
     assert.equal(response.bodyUsed, false);
-    assert.deepEqual(JSON.parse(String(log.mock.calls[0].arguments[0])), {
-      operation: "audience_preview_refresh",
-      status: 403,
-    });
+    assert.equal(log.mock.callCount(), 0);
     const failure = new Error("private-transport-message");
     await assert.rejects(
       createAudiencePreviewAuthFetch(marketplaceAppId, async () => {
@@ -199,7 +192,7 @@ test("URL inputs and provider failures are returned unchanged without credential
       })(input, init),
       (error) => error === failure,
     );
-    assert.equal(log.mock.callCount(), 1);
+    assert.equal(log.mock.callCount(), 0);
   } finally {
     mock.restoreAll();
   }
