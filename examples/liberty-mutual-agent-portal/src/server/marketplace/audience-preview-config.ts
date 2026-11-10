@@ -1,6 +1,6 @@
 export const AUDIENCE_PREVIEW_ORGANIZATION_ID = "org_XqL3u1MSNVuubOTb";
 export const AUDIENCE_PREVIEW_TENANT_ID =
-  "b0688afd-d747-4582-efe5-08defda484ba";
+  "ba40a477-d452-493b-fb23-08df2a1b4cda";
 export const AUDIENCE_PREVIEW_AUTH0_DOMAIN = "https://auth.sitecorecloud.io";
 export const AUDIENCE_PREVIEW_AUTH0_AUDIENCE =
   "https://api-webapp.sitecorecloud.io";
@@ -26,7 +26,7 @@ export interface AudiencePreviewAuthConfiguration {
   marketplaceAppId: string;
 }
 
-/** The tenant is the installed Marketplace tenant, not the CDP/Optimization tenant. */
+/** The tenant belongs to this installed app, not the Marketplace shell or CDP. */
 export function audiencePreviewAuthorizationParameters(
   configuration: AudiencePreviewAuthConfiguration,
 ) {
