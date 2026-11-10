@@ -125,7 +125,7 @@ test("the owned native page variant aligns its read-only shell only from the sel
                   uid: contract.instances.campaignPage,
                   params: { DynamicPlaceholderId: "1" },
                   placeholders: {
-                    "headless-campaign-hero-1": [
+                    "headless-campaign-hero-{*}": [
                       {
                         componentName: "CampaignHero",
                         uid: contract.instances.hero,
@@ -140,12 +140,16 @@ test("the owned native page variant aligns its read-only shell only from the sel
         },
       },
     }) as unknown as Page;
-  const principal = variant(contract.datasources.principal.id);
-  const producer = variant(contract.datasources.producer.id);
+  const principal = variant(contract.datasources.principal.path);
+  const producer = variant(contract.datasources.producer.path);
   const before = structuredClone(producer);
   assert.equal(editorPreviewAgent(principal, true), "avery");
   assert.equal(editorPreviewAgent(producer, true), "daniel");
   assert.deepEqual(producer, before);
+  assert.equal(
+    editorPreviewAgent(variant(contract.datasources.producer.id), true),
+    "daniel",
+  );
   assert.equal(editorPreviewAgent(producer, false), undefined);
   producer.mode.isPreview = false;
   assert.equal(editorPreviewAgent(producer, true), undefined);
@@ -153,11 +157,11 @@ test("the owned native page variant aligns its read-only shell only from the sel
     editorPreviewAgent(variant("unknown-datasource"), true),
     undefined,
   );
-  const ambiguous = variant(contract.datasources.producer.id);
+  const ambiguous = variant(contract.datasources.producer.path);
   const shell =
     ambiguous.layout.sitecore.route!.placeholders["headless-campaign-page"][0];
-  shell.placeholders!["headless-campaign-hero-1"].push(
-    structuredClone(shell.placeholders!["headless-campaign-hero-1"][0]),
+  shell.placeholders!["headless-campaign-hero-{*}"].push(
+    structuredClone(shell.placeholders!["headless-campaign-hero-{*}"][0]),
   );
   assert.equal(editorPreviewAgent(ambiguous, true), undefined);
 });

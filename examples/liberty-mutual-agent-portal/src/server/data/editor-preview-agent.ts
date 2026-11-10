@@ -21,6 +21,13 @@ const HERO_DATASOURCE_AGENT: Readonly<Record<string, EditorPreviewAgent>> = {
   "56dcdf609ae2445c9051f039fb9aa214": "avery",
   "059a1e6c11124e609294d2bf1d9fbad6": "daniel",
 };
+const AUDIENCE_DATA_PATH =
+  "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/agent-audience-preview/Data";
+const HERO_PATH_AGENT: Readonly<Record<string, EditorPreviewAgent>> = {
+  [`${AUDIENCE_DATA_PATH}/Agency principal introduction`.toLowerCase()]:
+    "avery",
+  [`${AUDIENCE_DATA_PATH}/Producer introduction`.toLowerCase()]: "daniel",
+};
 const normalize = (value: unknown) =>
   typeof value === "string" ? value.replace(/[{}-]/g, "").toLowerCase() : "";
 
@@ -54,7 +61,14 @@ export function editorPreviewAgent(
           normalize(component.uid) === HERO_UID,
       );
     if (selected.length !== 1) return undefined;
-    return HERO_DATASOURCE_AGENT[normalize(selected[0].dataSource)];
+    const datasource = selected[0].dataSource;
+    // Preview Layout Service can serialize this native selection as its full item path.
+    return (
+      HERO_DATASOURCE_AGENT[normalize(datasource)] ??
+      (typeof datasource === "string"
+        ? HERO_PATH_AGENT[datasource.toLowerCase()]
+        : undefined)
+    );
   }
   if (normalize(route?.itemId) !== HOME) return undefined;
   // The route contains the native SDK-selected component instance. Do not inspect

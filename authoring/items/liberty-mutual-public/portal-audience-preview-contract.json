@@ -12,12 +12,14 @@
     "principal": {
       "id": "56dcdf60-9ae2-445c-9051-f039fb9aa214",
       "name": "Agency principal introduction",
-      "previewAgent": "avery"
+      "previewAgent": "avery",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/agent-audience-preview/Data/Agency principal introduction"
     },
     "producer": {
       "id": "059a1e6c-1112-4e60-9294-d2bf1d9fbad6",
       "name": "Producer introduction",
-      "previewAgent": "daniel"
+      "previewAgent": "daniel",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home/growth/agent-audience-preview/Data/Producer introduction"
     }
   }
 }
