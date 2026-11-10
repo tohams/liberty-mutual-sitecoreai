@@ -31,7 +31,7 @@ export function getAudiencePreviewAuth(): Auth0Client | null {
     secret: configuration.secret,
     appBaseUrl: configuration.appBaseUrl,
     domain: AUDIENCE_PREVIEW_AUTH0_DOMAIN,
-    tokenRefreshBuffer: 60,
+    tokenRefreshBuffer: 840, // Temporary native refresh diagnostic; restore 60 after verification.
     authorizationParameters:
       audiencePreviewAuthorizationParameters(configuration),
     signInReturnToPath: `${AUDIENCE_PREVIEW_APP_PATH}/auth/complete`,
