@@ -12,9 +12,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: 517e0df2-5e2d-5e04-aca0-09742ad1b486
-      Hint: body
-      Value: <p>© 2026 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116<br>Liberty Mutual is an <a href="https://www.libertymutualgroup.com/about-lm/our-company/equal-employment-opportunity-and-anti-discrimination-policy">Equal Opportunity Employer</a> and an Equal Housing Insurer.</p>
     - ID: 179ab06f-b987-5f3a-a681-6b7fa7cb4e1b
       Hint: contactLink
       Value: <link text="Contact us" linktype="external" url="/contact-an-agent" />

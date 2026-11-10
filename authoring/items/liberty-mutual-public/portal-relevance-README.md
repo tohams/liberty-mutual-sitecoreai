@@ -22,14 +22,14 @@ The authoring environment must also enable `ExperienceEdge.ComputeContentDepende
 
 See [Sitecore's publishing dependencies documentation](https://doc.sitecore.com/sai/en/developers/sitecoreai/experience-edge/publishing-to-experience-edge/dependencies-and-publishing.html), the [supported JSON rendering dependency configuration](https://support.sitecore.com/kb?id=kb_article_view&sysparm_article=KB1003056), and the [native dependency options](https://doc.sitecore.com/xp/en/developers/103/sitecore-experience-manager/configure-content-dependencies-for-an-mvc-rendering.html).
 
-**SharedDisclosure** is a separate component on Home and Learning & resources. Both placements reference the single public-owned **Product availability notice** by its native ID. Its copy is not duplicated into the portal.
+**SharedDisclosure** renders the copyright notice in the footer on Home and Learning & resources. Both existing placements keep their native rendering UIDs and reference the single public-owned **Copyright notice** by its native ID. Its **Copyright** rendering variant presents the full notice without a separate heading or owner label. The public footer uses that same native item and variant; its copy is not duplicated into the portal. **Product availability notice** remains the separate source for public promotion and resource coverage terms.
 
 `portal-relevance-contract.json` records all native IDs, including the three audience datasources, component instances, variants, and placeholder contracts.
 
 ## Separate definitions, content, and placements
 
 - `LibertyMutual.PublicModel` owns the shared component templates/renderings and two global placeholder definitions.
-- `LibertyMutual.PortalRelevancePresentation` owns exactly two portal placeholder settings, two Component Library sections, and two variant folders with Defaults. Include this developer model in ordinary definition deployments.
+- `LibertyMutual.PortalRelevancePresentation` owns exactly two portal placeholder settings, two Component Library sections, and two variant folders with Defaults. The copyright placements deliberately reference the shared **Copyright** variant owned by the public presentation model. Include this developer model in ordinary definition deployments.
 - `LibertyMutual.PortalRelevanceSeed` creates initial editorial items only. It uses **CreateOnly** and belongs outside ordinary Deploy releases. Items start in **Liberty Mutual Public Review → Draft**.
 - `public-configure-portal-relevance.cjs` adds three native component instances and references their slots from the two existing layout definitions. It captures fresh before-images, guards all languages/versions, preserves native final layouts and their personalization/test UIDs, and verifies readback. It does not publish or configure native audiences.
 
@@ -44,4 +44,4 @@ dotnet sitecore ser push -n demo -i LibertyMutual.PortalRelevancePresentation --
 dotnet sitecore ser push -n demo -i LibertyMutual.PortalRelevanceSeed --what-if
 ```
 
-After definitions and the explicit seed are installed, use the placement helper's read-only snapshot and baseline modes before an explicit apply. Keep before-images and journals outside source control. Observe the resulting native components in Preview and Page Builder, configure the intended native audiences, and then approve/publish the dependencies. Confirm the two agents' live results and the single disclosure's propagation to both portal pages and the public site.
+After definitions and the explicit seed are installed, use the placement helper's read-only snapshot and baseline modes before an explicit apply. Keep before-images and journals outside source control. Observe the resulting native components in Preview and Page Builder, configure the intended native audiences, and then approve/publish the dependencies. Confirm the two agents' live results and the single copyright notice's propagation to both portal footers and the public site footer.

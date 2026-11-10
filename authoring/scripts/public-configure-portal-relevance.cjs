@@ -50,7 +50,7 @@ async function prerequisites(api,m){
  for(const name of ['neutral','principal','producer']){
   const ds=await read(api.query,{itemId:m.datasources[name].id});assert(ds?.path===m.datasources[name].path&&ds.template.name==='AgencyPriorities','A priority datasource is missing or changed.');
  }
- const disclosure=await read(api.query,{itemId:m.sharedDisclosureId});assert(disclosure?.path==='/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures/Product availability notice','Canonical public disclosure is missing or moved.');
+ const disclosure=await read(api.query,{itemId:m.sharedDisclosureId});assert(disclosure?.path===m.sharedDisclosurePath,'Canonical public copyright notice is missing or moved.');
  for(const[key,ids]of Object.entries(m.placeholderIds))for(const type of ['global','site']){
   const ph=await read(api.query,{itemId:ids[type]});const component=key==='headless-agency-priorities'?'AgencyPriorities':'SharedDisclosure';
   assert(ph&&ph.fields.find(f=>f.name==='Placeholder Key')?.value===key&&norm(ph.fields.find(f=>f.name==='Allowed Controls')?.value)===norm(m.renderings[component].id),'Portal placeholder restrictions do not match their exact component.');

@@ -14,6 +14,17 @@ test('an owned UID with changed authored selection cannot be overwritten',()=>{
  const changed=inserted.replace(m.datasources.neutral.id.toUpperCase(),m.datasources.principal.id.toUpperCase());
  assert.throws(()=>appendPlacements(after,[changed]),/changed/);
 });
+test('owned footer placements reuse the canonical full copyright and its body-only variant',()=>{
+ assert.equal(m.sharedDisclosureId,'9dc572ee-3d67-5909-922f-6482def1cdb0');
+ assert.equal(m.sharedDisclosurePath,'/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures/Copyright notice');
+ assert.equal(m.renderings.SharedDisclosure.variantId,'6fd9eeaf-a76a-52ee-a1fb-8fbdeb534fbb');
+ for(const uid of [m.instances.homeDisclosure,m.instances.resourcesDisclosure]){
+  const xml=placement(m,'SharedDisclosure','headless-shared-disclosure',uid,m.sharedDisclosureId,81);
+  assert(xml.includes(uid.toUpperCase()));
+  assert(xml.includes(m.sharedDisclosureId.toUpperCase()));
+  assert(xml.includes(m.renderings.SharedDisclosure.variantId.toUpperCase()));
+ }
+});
 test('layout placeholder references are additive and cannot duplicate existing IDs',()=>{
  const first='{11111111-1111-4111-8111-111111111111}';
  const ids=[m.placeholderIds['headless-agency-priorities'].global,m.placeholderIds['headless-shared-disclosure'].global];

@@ -28,6 +28,8 @@ TP = "/sitecore/templates/Project/LibertyMutualPublic"
 RP = "/sitecore/layout/Renderings/Project/LibertyMutualPublic"
 PP = "/sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic"
 PORTAL = "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal"
+COPYRIGHT_PATH = SITE + "/Data/Disclosures/Copyright notice"
+COPYRIGHT_BODY = '<p>© 2025 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116<br>Liberty Mutual is an <a href="https://www.libertymutualgroup.com/about-lm/our-company/equal-employment-opportunity-and-anti-discrimination-policy">Equal Opportunity Employer</a> and an Equal Housing Insurer.</p>'
 CHECKLIST_HELP = {
     "state": "Select every state covered by this content, or All states on its own.",
     "product": "Select every product covered by this content, or All products on its own.",
@@ -184,7 +186,7 @@ def build(include_editorial=True):
     template("PublicImage",[("image","Image","Image"),("caption","Caption","Single-Line Text")],icon="Office/32x32/photo_landscape.png")
     template("PublicCta",[("heading","Heading","Single-Line Text"),("body","Body","Rich Text"),("actionLink","Action","General Link")],icon="Office/32x32/mouse_pointer.png")
     template("PublicHeader",[("logo","Logo","Image"),*[(k,l,"General Link") for k,l in [("homeLink","Home"),("autoLink","Auto"),("homeInsuranceLink","Home insurance"),("bundlingLink","Bundling"),("resourcesLink","Resources"),("contactLink","Contact"),("quoteLink","Quote")]]],icon="Office/32x32/navigate_up.png")
-    template("PublicFooter",[("logo","Logo","Image"),("body","Body","Rich Text"),("contactLink","Contact","General Link"),("privacyLink","Privacy","General Link"),("termsLink","Terms","General Link")],icon="Office/32x32/navigate_down.png")
+    template("PublicFooter",[("logo","Logo","Image"),("contactLink","Contact","General Link"),("privacyLink","Privacy","General Link"),("termsLink","Terms","General Link")],icon="Office/32x32/navigate_down.png")
     item(TP+"/Base",uid(TP),T["templateFolder"],"templates")
     resource_fields=template("ResourceFields",[("question","Question","Single-Line Text"),("answer","Plain-language answer","Multi-Line Text"),("formalWording","Formal source wording","Rich Text"),("explanation","Detailed explanation","Rich Text"),("owner","Content owner","Single-Line Text"),("effectiveDate","Effective date","Date"),("reviewDate","Review date","Date"),("nextStep","Next step","General Link"),("disclosure","Disclosure","Droptree",SITE+"/Data/Disclosures")],relative_path="Base/Resource fields",section="Resource content",workflow=False,with_standard=False)
     resource_page=template("PublicResourcePage",bases=[page,resource_fields],workflow=I["pageWorkflow"])
@@ -198,9 +200,10 @@ def build(include_editorial=True):
         # Register those peers and their linked recommendation cards with Edge.
         if name=="AgencyPriorities": sf += [field("b4bbc0be-7619-4678-b2f7-947d84aa77a9","Content Dependencies","{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{15F0229E-41E0-442B-94C5-243CBA793465}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}")]
         if name=="PublicPageBody": sf += [field("e829c217-5e94-4306-9c48-2634b094fdc2","OtherProperties","IsRenderingsWithDynamicPlaceholders=true"),field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-hero"))+"|"+brace(uid(PP+"/headless-public-content")))]
+        if name=="PublicFooter": sf += [field("069a8361-b1cd-437c-8c32-a3be78941446","Placeholders",brace(uid(PP+"/headless-public-copyright")))]
         if name=="PublicResourceContent": sf += [field("a3411ff6-c978-40aa-b059-a49b9ca2209b","Can select Page as datasource","1"),field("b0b15510-b138-470e-8f33-8da2e228aafe","Rendering Contents Resolver","{6CCCBCDE-5E95-44E4-AE66-CFE7D3A0589E}")]
         allowed=[resource_page] if name=="PublicResourceContent" else [page]
-        if name in ["PublicHeader","PublicFooter","PublicPageBody"]: allowed.append(T["partial"])
+        if name in ["PublicHeader","PublicFooter","PublicPageBody","SharedDisclosure"]: allowed.append(T["partial"])
         if name in ["AgencyPriorities","SharedDisclosure"]: allowed += [I["portalPage"],I["collectionPage"]]
         vf=[field("1b58d065-fe74-43e3-ba20-54c9588b3011","AllowedOnTemplates","|".join(brace(x) for x in allowed))]
         if name=="AgencyPriorities":
@@ -210,14 +213,14 @@ def build(include_editorial=True):
         item(RP+"/"+name,uid(RP),T["rendering"],"renderings",shared=sf,label=label,values=vf)
         vp=SITE+"/Presentation/Headless Variants/"+name
         item(vp,uid(SITE+"/Presentation/Headless Variants"),T["variantFolder"],"presentation")
-        for n,v in enumerate(["ImageLeft","ImageRight"] if name=="PublicPromotion" else ["Default","Centered"] if name=="PublicHero" else ["Default"],1):
+        for n,v in enumerate(["ImageLeft","ImageRight"] if name=="PublicPromotion" else ["Default","Copyright"] if name=="SharedDisclosure" else ["Default","Centered"] if name=="PublicHero" else ["Default"],1):
             label={"ImageLeft":"Image left","ImageRight":"Image right"}.get(v) if name=="PublicPromotion" else None
             VARIANTS[name+"."+v]=uid(vp+"/"+v);item(vp+"/"+v,uid(vp),T["variant"],"presentation",shared=fs({"sort":n*100}),label=label)
     # Site-specific restrictions shadow the platform root placeholders only for
     # this site. Every nested slot has an explicit nonempty allowlist.
-    allowed={"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero":["PublicHero"],"headless-public-content":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicResourceContent"]}
+    allowed={"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero":["PublicHero"],"headless-public-content":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicResourceContent"],"headless-public-copyright":["SharedDisclosure"]}
     for key,components in allowed.items():
-        fields=[field("7256bdab-1fd2-49dd-b205-cb4873d2917c","Placeholder Key",key+("-{*}" if key.startswith("headless-public-") else "")),field("e391b526-d0c5-439d-803e-17512eae6222","Allowed Controls","|".join(brace(RENDERINGS[c]) for c in components))]
+        fields=[field("7256bdab-1fd2-49dd-b205-cb4873d2917c","Placeholder Key",key+("-{*}" if key in ["headless-public-hero","headless-public-content"] else "")),field("e391b526-d0c5-439d-803e-17512eae6222","Allowed Controls","|".join(brace(RENDERINGS[c]) for c in components))]
         item(PP+"/"+key,uid(PP),T["placeholder"],"placeholders",shared=fields)
         item(SITE+"/Presentation/Placeholder Settings/"+key,uid(SITE+"/Presentation/Placeholder Settings"),T["sitePlaceholder"],"presentation",shared=fields)
     for key,component in [('headless-agency-priorities','AgencyPriorities'),('headless-shared-disclosure','SharedDisclosure')]:
@@ -246,6 +249,9 @@ def build(include_editorial=True):
     for label,component,ph in [("Header","PublicHeader","headless-header"),("Page body","PublicPageBody","headless-main"),("Footer","PublicFooter","headless-footer")]:
         p=SITE+"/Presentation/Partial Designs/"+label
         placed=placement(p,component,ph,"local:/Data/"+label if component!="PublicPageBody" else "")
+        # Children authored inside this partial use its internal parent path.
+        # SXA applies the public-footer signature when inserting the partial.
+        if component=="PublicFooter": placed += placement(p,"SharedDisclosure","/headless-footer/headless-public-copyright",brace(uid(COPYRIGHT_PATH)),variant="Copyright",n=2)
         final='<r xmlns:p="p" xmlns:s="s" p:p="1"><d id="'+brace(I['device'])+'">'+re.sub(r'\b(id|ds|ph|par)=',r's:\1=',placed)+'</d></r>'
         item(p,uid(SITE+"/Presentation/Partial Designs"),T["partial"],"presentation",shared=[field("55faae90-3bba-4f7f-96fe-13c3f40055ff","Signature","public-"+label.lower().replace(" ","-")),field(F["layout"],"__Renderings",layout([placed]))],values=[field('04bf00db-f5fb-41f7-8ab7-22408372a981','__Final Renderings',final)])
         # Native Page Builder creates this companion when creating a partial.
@@ -256,7 +262,7 @@ def build(include_editorial=True):
         item(partial_ph,uid(SITE+'/Presentation/Placeholder Settings/Partial Design'),T['sitePlaceholder'],'presentation',shared=[field('7256bdab-1fd2-49dd-b205-cb4873d2917c','Placeholder Key',signature),field('e391b526-d0c5-439d-803e-17512eae6222','Allowed Controls',brace(RENDERINGS[component]))])
         if component!="PublicPageBody":
             item(p+"/Data",uid(p),T["data"],"partial-content")
-            vals={"homeLink":link("Home","/"),"autoLink":link("Auto","/vehicle/auto-insurance"),"homeInsuranceLink":link("Home","/property/homeowners-insurance"),"bundlingLink":link("Bundle","/bundling"),"resourcesLink":link("Resources","/insurance-resources"),"contactLink":link("Contact","/contact-an-agent"),"quoteLink":link("Get a quote","/get-a-quote")} if component=="PublicHeader" else {"body":"<p>Liberty Mutual Insurance</p>","contactLink":link("Contact us","/contact-an-agent"),"privacyLink":link("Privacy","https://www.libertymutual.com/privacy-policy"),"termsLink":link("Terms","https://www.libertymutual.com/terms-conditions")}
+            vals={"homeLink":link("Home","/"),"autoLink":link("Auto","/vehicle/auto-insurance"),"homeInsuranceLink":link("Home","/property/homeowners-insurance"),"bundlingLink":link("Bundle","/bundling"),"resourcesLink":link("Resources","/insurance-resources"),"contactLink":link("Contact","/contact-an-agent"),"quoteLink":link("Get a quote","/get-a-quote")} if component=="PublicHeader" else {"contactLink":link("Contact us","/contact-an-agent"),"privacyLink":link("Privacy","https://www.libertymutual.com/privacy-policy"),"termsLink":link("Terms","https://www.libertymutual.com/terms-conditions")}
             item(p+"/Data/"+label,uid(p+"/Data"),TEMPLATES[component],"partial-content",values=[field(FIELDS[component+"."+k],k,v) for k,v in vals.items()])
     design=SITE+"/Presentation/Page Designs/Public website"
     item(design,uid(SITE+"/Presentation/Page Designs"),T["design"],"presentation",shared=[field("0966b999-0d0e-4278-acc9-9da69d461fe6","PartialDesigns","|".join(brace(uid(SITE+"/Presentation/Partial Designs/"+n)) for n in ["Header","Page body","Footer"]))])
@@ -268,7 +274,7 @@ def build(include_editorial=True):
     for p,title in [(proto,"$name"),(SITE+"/Home","Liberty Mutual"),(SITE+"/Home/bundling","Bundle home and auto insurance")]:
         bucket="branch" if p==proto else "content"
         components=[placement(p,"PublicHero","/headless-main/sxa-public-page-body/headless-public-hero-1","page:/Data/Hero",n=2),placement(p,"PublicArticle","/headless-main/sxa-public-page-body/headless-public-content-1","page:/Data/Introduction",n=3)]
-        if p!=proto:components += [placement(p,"PublicPromotion","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Promotions/Bundle and save")),"ImageRight" if p.endswith("bundling") else "ImageLeft",4),placement(p,"SharedDisclosure","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Disclosures/Product availability notice")),n=5)]
+        if p!=proto:components += [placement(p,"PublicPromotion","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Promotions/Bundle and save")),"ImageRight" if p.endswith("bundling") else "ImageLeft",4)]
         item(p,uid(branch) if p==proto else uid(SITE) if p==SITE+"/Home" else uid(SITE+"/Home"),page,bucket,shared=fs({"layout":layout(components),"masters":brace(T["data"])+"|"+brace(uid(branch))}),values=[field("d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b","Title",title),field("4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8","NavigationTitle",title)])
         item(p+"/Data",uid(p),T["data"],bucket,shared=fs({"masters":"|".join(brace(TEMPLATES[n]) for n in ["PublicHero","PublicArticle","PublicImage","PublicCta"])}))
         hero={k:"" for k in ["eyebrow","heading","summary","image","primaryLink","secondaryLink"]}
@@ -292,6 +298,7 @@ def build(include_editorial=True):
     # No invented corporate approval: source/owner are visible editorial fields,
     # while native workflow and publication determine delivery eligibility.
     data(SITE+"/Data/Disclosures/Product availability notice","SharedDisclosure",{"title":"Coverage and availability","body":"<p>Coverage, discounts, and availability vary by state and individual circumstances. Review your policy for its terms, conditions, and exclusions.</p>","sourceLink":link("Liberty Mutual","https://www.libertymutual.com/"),"owner":"Public website content team","effectiveDate":"","reviewDate":""})
+    data(COPYRIGHT_PATH,"SharedDisclosure",{"title":"Copyright notice","body":COPYRIGHT_BODY,"sourceLink":"","owner":"","effectiveDate":"","reviewDate":""})
     # Standard values select the site design through native template mapping;
     # local Data insertion is allowed without adding numbered page body fields.
     std=next(r for _,r in RECORDS if r["Path"]==TP+"/PublicPage/__Standard Values")
@@ -333,6 +340,28 @@ def build(include_editorial=True):
                 n,b,old=bypath[r['Path']];assert old['ID']==r['ID'],'Editorial identity must be preserved.'
                 RECORDS[n]=(b,r)
             else:RECORDS.append(('partial-content' if '/Presentation/Partial Designs/' in r['Path'] else 'content',r))
+    # The copyright has one public-owned datasource shared by both sites. Keep
+    # coverage terms in their existing legal item and promotion/resource fields.
+    # Normalize the retained editorial snapshot narrowly after applying it.
+    FIELDS.pop('PublicFooter.body',None)
+    legal_id=brace(uid(SITE+"/Data/Disclosures/Product availability notice")).lower()
+    disclosure_rendering=brace(RENDERINGS["SharedDisclosure"]).lower()
+    def remove_duplicate_legal_placement(match):
+        attrs=dict(re.findall(r'(?:s:)?(id|ds)="([^"]*)"',match[0]))
+        return "" if attrs.get('id','').lower()==disclosure_rendering and attrs.get('ds','').lower()==legal_id else match[0]
+    footer_data=SITE+"/Presentation/Partial Designs/Footer/Data/Footer"
+    for _,record in RECORDS:
+        if record['Path']==footer_data:
+            for language in record.get('Languages',[]):
+                for version in language.get('Versions',[]):
+                    # The full notice now belongs to the shared copyright item;
+                    # do not retain a second, invisible authoring field.
+                    version['Fields']=[f for f in version.get('Fields',[]) if f['Hint']!='body']
+        if record['Path'].startswith(SITE+'/Home'):
+            groups=[record.get('SharedFields',[]),*[v.get('Fields',[]) for l in record.get('Languages',[]) for v in l.get('Versions',[])]]
+            for group in groups:
+                for f in group:
+                    if f['Hint'] in ['__Renderings','__Final Renderings']:f['Value']=re.sub(r'<r\s[^>]*?/\s*>',remove_duplicate_legal_placement,f['Value'])
 
 def outputs():
     build(); result={}; seen=set()
@@ -377,6 +406,10 @@ def outputs():
         out[BASE/(namespace+".module.json")]=json.dumps(module,indent=2)+"\n"
     assert sum(p.suffix==".yml" for p in out)==len(RECORDS),"Unowned or multiply owned native items"
     manifest={"schemaVersion":1,"siteName":"liberty-mutual-public-site","sitePath":SITE,"workflow":{"id":I["pageWorkflow"],"draft":I["pageDraft"],"awaitingApproval":"2598d5b1-953b-57ec-9086-14afb798ab06","approved":"44581197-9864-590b-92eb-6d620f36fbe1"},"namespace":str(NS),"ownership":{"model":"developer","presentation":"developer excluding local Data and page branches","seed":"editorial CreateOnly, never ordinary deploy","sharedDisclosure":"public-owned, consumed read-only by portal"},"siteId":uid(SITE),"homeId":uid(SITE+"/Home"),"bundlingId":uid(SITE+"/Home/bundling"),"promotionId":uid(SITE+"/Data/Promotions/Bundle and save"),"disclosureId":uid(SITE+"/Data/Disclosures/Product availability notice"),"templateIds":TEMPLATES,"fieldIds":FIELDS,"renderingIds":RENDERINGS,"variantIds":VARIANTS,"placeholders":{"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero-{*}":["PublicHero"],"headless-public-content-{*}":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicResourceContent"]},"records":[{"id":r["ID"],"path":r["Path"],"parent":r["Parent"],"template":r["Template"],"bucket":b,"fields":{f["Hint"]:f["Value"] for f in [*r.get("SharedFields",[]),*r["Languages"][0].get("Fields",[]),*r["Languages"][0]["Versions"][0]["Fields"]]}} for b,r in RECORDS]}
+    manifest['copyrightId']=uid(COPYRIGHT_PATH)
+    manifest['ownership']['sharedDisclosure']='public-owned coverage terms for promotions and resource pages'
+    manifest['ownership']['sharedCopyright']='public-owned copyright, reused by Public Website and Agent Portal footers'
+    manifest['placeholders']['headless-public-copyright']=['SharedDisclosure']
     if (BASE/'public-model-extensions.json').exists():
         manifest['placeholders']['headless-public-hero-{*}']=['PublicHero','PublicBreadcrumbs']
         manifest['placeholders']['headless-public-content-{*}'] += ['PublicSearch','PublicProductSelector','PublicQuoteHandoff','PublicSection','PublicSplitContent','PublicFaq']

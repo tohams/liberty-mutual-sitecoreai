@@ -35,10 +35,11 @@
     },
     "SharedDisclosure": {
       "id": "4bc5c522-23de-54e1-8420-169bdcf996e9",
-      "variantId": "468dcf82-4789-5cc6-9e4b-6896d549bcae"
+      "variantId": "6fd9eeaf-a76a-52ee-a1fb-8fbdeb534fbb"
     }
   },
-  "sharedDisclosureId": "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca",
+  "sharedDisclosureId": "9dc572ee-3d67-5909-922f-6482def1cdb0",
+  "sharedDisclosurePath": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures/Copyright notice",
   "placeholderIds": {
     "headless-agency-priorities": {
       "global": "70ecc2ae-dca2-5402-9b89-feef26aec8ed",
