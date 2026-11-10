@@ -155,6 +155,7 @@ export const customerDemoChapters: DemoChapter[] = [
         images: [
           {
             file: "native-public-taxonomy-checklist.png",
+            afterAction: 2,
             title: "Open a native checklist to inspect its selections",
             alt: "Native Products checklist with Auto and Homeowners selected independently",
             caption:
@@ -316,6 +317,7 @@ export const customerDemoChapters: DemoChapter[] = [
         images: [
           {
             file: "customer-demo-public-events.png",
+            afterAction: 2,
             title: "Read actual visitor events",
             alt: "Native SitecoreAI Events table showing public-site CTA clicks, scroll-depth events, and page views",
             caption:
@@ -378,6 +380,7 @@ export const customerDemoChapters: DemoChapter[] = [
         images: [
           {
             file: "customer-demo-content-api.png",
+            afterAction: 2,
             title: "Select the same published answer",
             alt: "One published page, two experiences page with the published insurance question selector and Load content button",
             caption:
@@ -471,6 +474,7 @@ export const customerDemoChapters: DemoChapter[] = [
         images: [
           {
             file: "customer-demo-priorities.png",
+            afterAction: 2,
             title: "Find Priorities for your agency",
             alt: "Avery's portal dashboard with Priorities for your agency below the agency overview and the small-business and Texas guidance cards",
             caption:
@@ -488,6 +492,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
           {
             file: "customer-demo-outreach-suppressed.png",
+            afterAction: 6,
             title: "Confirm the recorded opt-out stops outreach",
             alt: "Marketing outreach preview shows No eligible recipients and a native decision receipt with marketingEligible false for Cameron Ellis - Allowed using the same native profile ID",
             caption:
@@ -699,6 +704,7 @@ export const customerDemoChapters: DemoChapter[] = [
         images: [
           {
             file: "customer-demo-workflow-history.png",
+            afterAction: 2,
             title: "Read the actual Workflow history",
             alt: "Page Builder Page items panel with Product availability notice expanded and Workflow history showing approval transitions and comments",
             caption:

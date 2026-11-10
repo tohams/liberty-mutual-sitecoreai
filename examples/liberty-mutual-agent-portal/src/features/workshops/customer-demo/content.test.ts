@@ -360,7 +360,7 @@ test("discovery readiness identifies native structure while keeping external eng
     /Apps → Resource metadata|Content to classify|PublicApprovedAnswer|Data → Approved answers/,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   const preparation = page.slice(
@@ -438,7 +438,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
 
 test("indexing preparation requires a clean published baseline and one unpublished revision", () => {
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   const preparation = page.slice(
@@ -546,7 +546,7 @@ test("Profound is the customer-permitted governed integration explanation, not a
   );
   assert.match(text, /proposed integration design/i);
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   const preparation = page.slice(
@@ -587,7 +587,7 @@ test("analytics is a report-only loop using genuine consented preparation", () =
     /Start publish|Create a page|Explore bundling|Load content/,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(
@@ -642,7 +642,7 @@ test("API reuse stops after the second experience loads the same published answe
     /Experience Edge content delivery|slide \d+/i,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(
@@ -752,7 +752,7 @@ test("the relevance loop proves profile relevance and same-profile native market
     /Products & appetite|Load preference examples|Restore preferences|Audience size|Recalculate|Pause.*Audience|6 hours/,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(
@@ -962,7 +962,7 @@ test("the presenter narrative leads with outcomes and keeps operational cautions
     /outcome is complete|complete search outcome|rehearsal receipt|still pending|not configured|not verified/i,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(page, /<h3>\{step\.title\}<\/h3>/);
@@ -1087,6 +1087,12 @@ test("screenshot guidance has real protected assets and crops or callouts stay i
   for (const entry of steps) {
     for (const image of entry.images ?? []) {
       assert.match(image.file, /^[a-z0-9][a-z0-9-]{0,79}\.(png|webp)$/);
+      if (image.afterAction !== undefined) {
+        assert(Number.isInteger(image.afterAction));
+        assert(
+          image.afterAction >= 1 && image.afterAction <= entry.actions.length,
+        );
+      }
       assert(image.alt.trim() && image.caption.trim());
       const file = join(appRoot, "workshop-assets", image.file);
       assert(existsSync(file), `${entry.id}: missing screenshot ${image.file}`);
