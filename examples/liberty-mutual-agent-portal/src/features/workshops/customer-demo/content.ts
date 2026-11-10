@@ -10,9 +10,16 @@ const SEARCH_SOURCE = `https://app.sitecorecloud.io/search/f527245d-98c7-4978-88
 const ANALYTICS = `https://app.sitecorecloud.io/optimization/dashboards/events?${CONTEXT}`;
 const MARKETING_ELIGIBILITY = `https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&operationalTimeWindow=15m&${CONTEXT}`;
 const ARTICLE = `${PUBLIC}/insurance-resources/bundle-car-and-home`;
+const SCRUNCH_CONTEXT =
+  "organization=org_vDtrEzJHxeuuB9cD&tenantName=sitecoresaa7acd-agverticals97fd-agvertsc3b5";
+const SCRUNCH_REVIEW = `https://app.sitecorecloud.io/channels/collection/45177ac3175042dc9bc748d76ba0858a/sites/d4c417d9-0acf-44f9-aec8-c94730b872bb/aeo-opportunities/readability/review?url=https%3A%2F%2Fprospera-bank.vercel.app%2F&${SCRUNCH_CONTEXT}`;
+const SCRUNCH_EDITOR = `https://pages.sitecorecloud.io/editor?${SCRUNCH_CONTEXT}&sc_site=prospera&sc_lang=en&sc_itemid=69fc0a48-3e75-426e-9b2b-296d7a3bf8a4&sc_aeo=1&sc_aeo_item=ca10c042-247a-4836-9d07-92a9e2224a7f&sc_aeo_field=Cards+%C2%B7+Description`;
+
 const RESOURCE_PAGE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
 const PUBLIC_HOME_ID = "6d600332-3e21-4c5f-83ec-aae04f83450f";
 const PORTAL_HOME_ID = "ae9e45ca-f127-4abe-9ca7-2ff109981998";
+const AUDIENCE_PREVIEW_ID = "cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947";
+const BRAND_KITS = `https://app.sitecorecloud.io/design/brandkits?organization=${ORG}&tenantName=${TENANT_NAME}`;
 const PRIORITIES_ID = "3127968e-4b21-50c3-ad79-b6bbbe5303b8";
 const DISCLOSURE_ID = "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca";
 
@@ -31,6 +38,7 @@ function pageBuilder(
 const resourcePageContent = pageBuilder("public", RESOURCE_PAGE_ID, "content");
 const publicEditor = pageBuilder("public", PUBLIC_HOME_ID);
 const portalEditor = pageBuilder("portal", PORTAL_HOME_ID);
+const audiencePreviewEditor = pageBuilder("portal", AUDIENCE_PREVIEW_ID);
 const priorityContent = pageBuilder("portal", PRIORITIES_ID, "content");
 const disclosureContent = pageBuilder("public", DISCLOSURE_ID, "content");
 
@@ -96,14 +104,14 @@ export const customerDemoChapters: DemoChapter[] = [
           "The supported question shows the range of relevant published results and the approved answer excerpt, and the unsupported question ends with No results found and Contact an agent.",
         actions: [
           `Open the [**public Home page**](${PUBLIC}/). Choose **Privacy choices → Essential only**, then select **Search** in the header. Search remains available when optional collection is declined.`,
-          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Briefly point out the bundling overview and two practical articles, then highlight the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page. Keep every result unopened.",
+          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**, then highlight the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page. Keep every result unopened.",
           "In **keyword(s)**, replace the query with **Does car insurance cover cyberextortion?**, and select **Search**. Show **No results found** and **Contact an agent**. End this loop with that contact option; leave the link unopened.",
         ],
         expected: [
-          "The conversational question returns five published results, including **Bundle home and auto insurance**, **How to bundle your insurance policies**, **3 tips for bundling your insurance policies**, and **Can I bundle my car and home insurance?**. The approved answer excerpt is visible in the results. The unsupported subject offers an agent-assisted next step.",
+          "The conversational question returns relevant published guidance, including **How to bundle your insurance policies**, **3 tips for bundling your insurance policies**, and **Can I bundle my car and home insurance?**. The approved answer excerpt is visible in the results. The unsupported subject offers an agent-assisted next step.",
         ],
         talkTrack: [
-          "One question brings back several kinds of published guidance: a bundling overview, practical articles, and the approved answer. The visitor can compare useful guidance in the results without having to phrase the question exactly as Liberty Mutual does. When published guidance does not address the subject, Contact an agent provides the next step.",
+          "One question brings back relevant published guidance, practical articles, and the approved answer. The visitor can compare useful guidance in the results without having to phrase the question exactly as Liberty Mutual does. When published guidance does not address the subject, Contact an agent provides the next step.",
         ],
         controls: [
           "**SitecoreAI Search** retrieves and ranks published guidance. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
@@ -113,6 +121,112 @@ export const customerDemoChapters: DemoChapter[] = [
         links: [
           { label: "Public Home", href: `${PUBLIC}/` },
           { label: "Public Search", href: `${PUBLIC}/search` },
+        ],
+        images: [
+          {
+            file: "demo-public-search-panel.png",
+            title: "Search opens below the header",
+            alt: "Select Search in the header, enter the customer’s question in the panel, and select the teal Search button.",
+            caption:
+              "**Select** **Search** in the header, enter the customer’s question in the panel, and select the teal **Search** button.",
+            afterAction: 1,
+            crop: {
+              x: 360,
+              y: 12,
+              width: 1200,
+              height: 270,
+              sourceWidth: 1920,
+              sourceHeight: 900,
+            },
+            annotations: [
+              {
+                x: 80.0,
+                y: 13.7,
+                width: 7.5,
+                height: 14.81,
+                label: "Open the **Search** panel",
+              },
+              {
+                x: 4.58,
+                y: 66.3,
+                width: 78.67,
+                height: 19.26,
+                label: "Enter the customer’s question",
+              },
+              {
+                x: 84.17,
+                y: 66.3,
+                width: 11.25,
+                height: 19.26,
+                label: "Run the search",
+              },
+            ],
+          },
+          {
+            file: "demo-public-search-results.png",
+            title: "Relevant results and the answer excerpt",
+            alt: "Find **Can I bundle my car and home insurance?** and read its approved answer excerpt directly in the results. Keep the results unopened.",
+            caption:
+              "Find **Can I bundle my car and home insurance?** and read its approved answer excerpt directly in the results. Keep the results unopened.",
+            afterAction: 2,
+            crop: {
+              x: 44,
+              y: 151,
+              width: 1190,
+              height: 535,
+              sourceWidth: 1280,
+              sourceHeight: 720,
+            },
+            annotations: [
+              {
+                x: 1.68,
+                y: 37.2,
+                width: 50.4,
+                height: 4.5,
+                label: "Published guidance for the question",
+              },
+              {
+                x: 1.68,
+                y: 59.6,
+                width: 96.64,
+                height: 14.39,
+                label:
+                  "Read the **Can I bundle my car and home insurance?** answer excerpt here.",
+              },
+            ],
+          },
+          {
+            file: "demo-public-search-no-results.png",
+            title: "A clear next step when guidance is unavailable",
+            alt: "The unsupported question ends with No results found and Contact an agent. Leave the contact link unopened.",
+            caption:
+              "The unsupported question ends with **No results found** and **Contact an agent**. Leave the contact link unopened.",
+            afterAction: 3,
+            crop: {
+              x: 44,
+              y: 151,
+              width: 1190,
+              height: 440,
+              sourceWidth: 1280,
+              sourceHeight: 720,
+            },
+            annotations: [
+              {
+                x: 1.68,
+                y: 55,
+                width: 23,
+                height: 8,
+                label: "Show **No results found**.",
+              },
+              {
+                x: 1.68,
+                y: 80.7,
+                width: 14.37,
+                height: 11.36,
+                label: "End with **Contact an agent**.",
+              },
+            ],
+          },
         ],
         transition:
           "The customer has found relevant guidance and a clear next step. Now inspect the content behind that result and how the content team keeps it consistent and discoverable.",
@@ -205,6 +319,72 @@ export const customerDemoChapters: DemoChapter[] = [
             href: `${SEARCH_SOURCE}`,
           },
         ],
+        images: [
+          {
+            file: "demo-public-publish-approved.png",
+            title: "Publish the approved page revision",
+            alt: "The page is Approved. Its Detailed explanation contains the new review sentence, and the publishing status provides a link to the job.",
+            caption:
+              "The page is **Approved**. Its **Detailed explanation** contains the new review sentence, and the publishing status provides a link to the job. Use the version number recorded for the current demonstration.",
+            afterAction: 2,
+            crop: {
+              x: 0,
+              y: 0,
+              width: 1440,
+              height: 900,
+              sourceWidth: 1440,
+              sourceHeight: 900,
+            },
+            annotations: [
+              {
+                x: 79.51,
+                y: 1.56,
+                width: 6.67,
+                height: 3.33,
+                label: "Confirm **Approved**",
+              },
+              {
+                x: 22.22,
+                y: 69.89,
+                width: 45.14,
+                height: 3.67,
+                label: "Confirm the added review sentence",
+              },
+              {
+                x: 79.17,
+                y: 5.56,
+                width: 20.69,
+                height: 11.22,
+                label: "Follow publishing progress",
+              },
+            ],
+          },
+          {
+            file: "demo-public-search-published-body.png",
+            title: "The published sentence appears in Search",
+            alt: "In the expanded native Search document, body now contains the sentence published from the page. This is the automatic update to verify.",
+            caption:
+              "In the expanded native **Search** document, body now contains the sentence published from the page. This is the automatic update to verify.",
+            afterAction: 3,
+            crop: {
+              x: 80,
+              y: 90,
+              width: 1280,
+              height: 720,
+              sourceWidth: 1440,
+              sourceHeight: 900,
+            },
+            annotations: [
+              {
+                x: 10.23,
+                y: 25.69,
+                width: 87.34,
+                height: 29.58,
+                label: "The updated published body is in **Search**",
+              },
+            ],
+          },
+        ],
         transition:
           "The published answer and Search now agree. Next, give a marketer the same control over a complete page.",
       },
@@ -249,6 +429,200 @@ export const customerDemoChapters: DemoChapter[] = [
             href: `${PUBLIC}/coverage-guide-live`,
           },
         ],
+        images: [
+          {
+            file: "demo-public-create-page.png",
+            title: "Create a page from the approved template",
+            alt: "Select the Landing page tile, then select Select to create the new page with its approved starting structure.",
+            caption:
+              "**Select** the **Landing page** tile, then select **Select** to create the new page with its approved starting structure.",
+            afterAction: 1,
+            crop: {
+              x: 225,
+              y: 55,
+              width: 1470,
+              height: 800,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 5.78,
+                y: 12.75,
+                width: 13.61,
+                height: 23.62,
+                label: "Choose **Landing page**",
+              },
+              {
+                x: 91.7,
+                y: 90.88,
+                width: 5.44,
+                height: 5.38,
+                label: "Then select **Select**",
+              },
+            ],
+          },
+          {
+            file: "demo-public-components-promotion.png",
+            title: "Choose an allowed component",
+            alt: "The selected page-body placeholder offers approved component choices. In Promotions, choose Promotion.",
+            caption:
+              "The selected page-body placeholder offers approved component choices. In **Promotions**, choose **Promotion**.",
+            afterAction: 3,
+            crop: {
+              x: 0,
+              y: 0,
+              width: 710,
+              height: 900,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 47.89,
+                y: 9.0,
+                width: 45.07,
+                height: 77.67,
+                label: "These choices belong to this placeholder",
+              },
+              {
+                x: 50.7,
+                y: 57.89,
+                width: 10.7,
+                height: 8.67,
+                label: "Choose **Promotion**",
+              },
+            ],
+          },
+          {
+            file: "demo-public-assign-promotion.png",
+            title: "Reuse the existing Promotion",
+            alt: "Choose Bundle and save from Promotions, then use Assign to reference the existing content item.",
+            caption:
+              "Choose **Bundle and save** from **Promotions**, then use **Assign** to reference the existing content item.",
+            afterAction: 3,
+            crop: {
+              x: 435,
+              y: 60,
+              width: 1050,
+              height: 762,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 8.0,
+                y: 31.1,
+                width: 23.33,
+                height: 5.12,
+                label: "**Select** **Bundle and save**",
+              },
+              {
+                x: 88.29,
+                y: 90.94,
+                width: 7.81,
+                height: 5.51,
+                label: "Use **Assign** to reuse it",
+              },
+            ],
+          },
+          {
+            file: "demo-public-promotion-variant.png",
+            title: "Apply the Compact presentation variant",
+            alt: "With the Promotion selected, open Design, open Variant, and choose Compact. This changes its presentation.",
+            caption:
+              "With the **Promotion** selected, open **Design**, open **Variant**, and choose **Compact**. This changes its presentation.",
+            afterAction: 3,
+            crop: {
+              x: 1615,
+              y: 115,
+              width: 305,
+              height: 345,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 32.79,
+                y: 6.67,
+                width: 24.92,
+                height: 10.43,
+                label: "Open **Design**",
+              },
+              {
+                x: 4.92,
+                y: 56.23,
+                width: 91.48,
+                height: 11.3,
+                label: "Choose **Compact**",
+              },
+            ],
+          },
+          {
+            file: "demo-public-page-preview-menu.png",
+            title: "Open the unpublished page preview",
+            alt: "Use the eye-shaped Preview control, then choose Preview in its menu to inspect the page before publication.",
+            caption:
+              "Use the eye-shaped **Preview** control, then choose **Preview** in its menu to inspect the page before publication.",
+            afterAction: 4,
+            crop: {
+              x: 1190,
+              y: 65,
+              width: 720,
+              height: 420,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 52.36,
+                y: 2.62,
+                width: 4.58,
+                height: 7.62,
+                label: "Open **Preview**",
+              },
+              {
+                x: 63.61,
+                y: 15.0,
+                width: 13.47,
+                height: 8.81,
+                label: "Choose **Preview** in the menu",
+              },
+            ],
+          },
+          {
+            file: "demo-public-workflow-comment.png",
+            title: "Submit the draft for review",
+            alt: "The workflow action opens Comment. Enter the review comment, then select Submit.",
+            caption:
+              "The workflow action opens **Comment**. Enter the review comment, then select **Submit**.",
+            afterAction: 5,
+            crop: {
+              x: 690,
+              y: 55,
+              width: 540,
+              height: 320,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 7.59,
+                y: 30.94,
+                width: 85.74,
+                height: 30.94,
+                label: "Enter the review comment",
+              },
+              {
+                x: 76.67,
+                y: 77.81,
+                width: 15.93,
+                height: 13.44,
+                label: "**Submit** for review",
+              },
+            ],
+          },
+        ],
         transition:
           "The page is live through a familiar review process. That same governed process can also receive content from an upstream tool such as Profound.",
       },
@@ -263,26 +637,163 @@ export const customerDemoChapters: DemoChapter[] = [
         mode: "explain",
         persona: "Public-site marketer",
         scenario:
-          "The marketer wants to act on an external content opportunity while keeping the resulting page change within SitecoreAI’s review process.",
+          "The marketer wants to turn a content recommendation into a reviewed page change without leaving the authoring process.",
         objective:
-          "Bring proposed Profound content into the same governed publishing process, with human review before release.",
+          "Show a real in-platform content recommendation, then explain how proposed Profound content would enter Liberty Mutual’s governed publishing process.",
         stopWhen:
-          "The scoped intake, native Draft, human approval, and downstream publication path have been explained.",
+          "The existing and proposed wording and its target field have been shown, and the proposed Profound-to-Draft, review, and publication path has been explained.",
         actions: [
-          "Trace **Profound output → scoped integration → SitecoreAI Draft → human review and approval → publication → website, Search, and API consumers**.",
-          "Use the structured answer template and review workflow already shown to explain the mapping of proposed wording, source, owner, applicability, and dates. Present this as the proposed integration design, using the native review process already demonstrated.",
+          `Open the prepared [**Prospera AEO recommendation review**](${SCRUNCH_REVIEW}) tab. Confirm the **agverticals** environment and **Prospera** site. Under **Readability & Clarity**, review the **Home** page recommendations. This is the existing integrated recommendation example. Keep it read-only.`,
+          "Locate **Cards · Description**. Compare the existing wording in the upper block with the proposed wording in the lower block. Point out **trackable rewards** and **card options side by side** as examples of clearer phrasing. Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
+          `Use **Open in Page builder** on that recommendation, or open the prepared [**same recommendation in Page Builder**](${SCRUNCH_EDITOR}). Show the **AEO opportunities** panel and **Powered by Scrunch** label beside the page. On **Cards · Description**, choose **Show live content** if the existing copy is collapsed. Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**. The corresponding field is outlined on the page. Inspect it without applying the recommendation or changing the page.`,
+          "Return to Liberty Mutual’s prepared Page Builder tab. Trace the proposed integration design: **Profound output → scoped Sitecore authoring API → SitecoreAI Draft → human review and approval → publication → website, Search, and API consumers**. Use the Liberty Mutual review process already demonstrated to show where governance applies. The read-only Prospera example demonstrates recommendation review and field context; Liberty Mutual’s preceding page demonstration supplies the workflow proof.",
         ],
         expected: [
-          "The audience understands where proposed upstream content enters and how native governance controls its publication.",
+          "The marketer can inspect a real contextual recommendation in SitecoreAI and understand how proposed Profound content would enter Liberty Mutual’s existing Draft, review, and publishing process.",
         ],
         talkTrack: [
-          "That review process can also support content proposed by an upstream tool such as Profound. Liberty Mutual is exploring this option. A scoped integration could map proposed content into the appropriate template as a draft. The normal human review, approval, and publication controls would then apply.",
+          "SitecoreAI brings content opportunities into the authoring experience. Here the marketer can compare the suggested wording with the original and see the exact page field it would change. This existing experience uses Scrunch. For Profound, an integration could use Sitecore’s authoring APIs to create or update the appropriate content as a draft. The Liberty Mutual review, approval, and publishing controls we just demonstrated would then apply.",
         ],
         controls: [
-          "Profound intake uses a proposed integration design with scoped API permissions, template mapping, Draft creation, and human review.",
+          "The existing **AEO opportunities** experience associates a recommendation with its native page, component, and field. This example is read-only in **Sales Engineers1 → agverticals → Prospera**.",
+          "Profound intake remains a proposed integration design with scoped API permissions, template mapping, Draft creation, and human review. The workflow evidence comes from Liberty Mutual’s preceding demonstration.",
+        ],
+        links: [
+          {
+            label: "Review the native AEO recommendation",
+            href: SCRUNCH_REVIEW,
+          },
+          {
+            label: "Open the same recommendation in Page Builder",
+            href: SCRUNCH_EDITOR,
+          },
+          {
+            label: "Return to Liberty Mutual Page Builder",
+            href: publicEditor,
+          },
+        ],
+        images: [
+          {
+            file: "demo-aeo-recommendation-review.png",
+            title: "Compare the existing and proposed wording",
+            alt: "Native AEO recommendation for Cards Description with existing wording above and proposed clearer phrasing below.",
+            caption:
+              "**Cards · Description** identifies the target component and field. Compare the existing wording in the upper block with the proposed wording below it. The page-opening icon launches the same recommendation in **Page Builder**.",
+            afterAction: 2,
+            crop: {
+              x: 438,
+              y: 590,
+              width: 326,
+              height: 247,
+              sourceWidth: 813,
+              sourceHeight: 988,
+            },
+            annotations: [
+              {
+                x: 3.07,
+                y: 38.05,
+                width: 92.94,
+                height: 23.08,
+                label: "Read the existing wording.",
+              },
+              {
+                x: 3.07,
+                y: 66.4,
+                width: 92.94,
+                height: 27.1,
+                label: "Compare the proposed wording.",
+              },
+              {
+                x: 90.18,
+                y: 15.8,
+                width: 7.98,
+                height: 10,
+                label: "Open the recommendation in **Page Builder**.",
+              },
+            ],
+          },
+          {
+            file: "demo-aeo-page-builder-context.png",
+            title: "Review the recommendation beside the page",
+            alt: "Page Builder AEO opportunities panel powered by Scrunch, with Cards Description recommended wording, Live content, and Scroll to content.",
+            caption:
+              "The **AEO opportunities** panel identifies **Cards · Description** and displays its recommendation beside **Live content**. Use **Scroll to content** to locate the field on the page. Keep this example read-only.",
+            afterAction: 3,
+            crop: {
+              x: 315,
+              y: 132,
+              width: 470,
+              height: 650,
+              sourceWidth: 1600,
+              sourceHeight: 1000,
+            },
+            annotations: [
+              {
+                x: 3.2,
+                y: 0.9,
+                width: 63.8,
+                height: 6.6,
+                label:
+                  "Identify **AEO opportunities** and **Powered by Scrunch**.",
+              },
+              {
+                x: 3.2,
+                y: 57.3,
+                width: 40,
+                height: 4.3,
+                label: "Find **Cards · Description**.",
+              },
+              {
+                x: 67,
+                y: 57.3,
+                width: 29.5,
+                height: 4.3,
+                label: "Select **Scroll to content**.",
+              },
+              {
+                x: 3.2,
+                y: 68.5,
+                width: 92.5,
+                height: 10.5,
+                label: "Read the recommended wording.",
+              },
+              {
+                x: 3.2,
+                y: 83,
+                width: 92.5,
+                height: 9,
+                label: "Compare **Live content**.",
+              },
+            ],
+          },
+          {
+            file: "demo-aeo-page-builder-context.png",
+            title: "The corresponding page field is outlined",
+            alt: "The actual Cards Description rich-text field is outlined in the Page Builder canvas after Scroll to content.",
+            caption:
+              "**Scroll to content** locates the existing **Cards · Description** field in the page canvas. The recommendation and the native field refer to the same content. Leave the field unchanged.",
+            afterAction: 3,
+            crop: {
+              x: 850,
+              y: 795,
+              width: 680,
+              height: 160,
+              sourceWidth: 1600,
+              sourceHeight: 1000,
+            },
+            annotations: [
+              {
+                x: 15.3,
+                y: 53.1,
+                width: 67.1,
+                height: 35,
+                label: "The native page field contains the existing wording.",
+              },
+            ],
+          },
         ],
         transition:
-          "The native review and publication flow is established. Next, show marketers how engagement signals inform their next improvement.",
+          "Recommendations help the team choose a change. Next, show the engagement signals that help marketers assess their content.",
       },
       {
         id: "public-analytics",
@@ -515,20 +1026,22 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Let business users manage content within a consistent portal design and approved component choices.",
         stopWhen:
-          "Two representative portal pages share the same design, and the permitted component choices have been shown without changing a page.",
+          "Two representative portal pages share the same design, the permitted component choices are visible, and the sample Brand Kit’s voice guidance has been shown.",
         actions: [
           `In Avery’s session, compare **My workspace** with [**Learning & resources**](${PORTAL}/resources). Identify their common navigation, typography, buttons, cards, and **Coverage and availability** disclosure.`,
           `Open [**Agent Portal Home in Page Builder**](${portalEditor}). Confirm **Agent Portal**, **English**, and **Default editing host**. Open **Layers**, and locate **Agency priorities** and the shared **Disclosure** component.`,
           "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that the page design supplies shared structure and placeholder settings limit which components fit each area.",
+          `Switch to the prepared [**Design → Brand kits**](${BRAND_KITS}) tab. Select the **Published** **Liberty Mutual — Independent Agents** card, then open **Sections → Tone of Voice**. Briefly identify its reusable voice guidance, and leave the kit unchanged.`,
         ],
         expected: [
-          "The visitor experience is visually consistent, and the authoring library exposes governed component choices.",
+          "The portal uses consistent design and governed component choices, while the sample Brand Kit provides reusable guidance for content creation.",
         ],
         talkTrack: [
-          "Shared design keeps these personalized experiences consistently on brand. The portal’s shared structure and placeholder settings give business users approved components and appropriate places for them.",
+          "Shared design keeps these personalized experiences consistently on brand. The portal’s shared structure and placeholder settings give business users approved components and appropriate places for them. We also assembled a sample Liberty Mutual Brand Kit for the workshop, with reusable visual and voice guidance for content creation.",
         ],
         controls: [
           "**Page designs**, **partial designs**, native renderings, and **placeholder settings** govern reusable structure and permitted composition. Content edits remain separate from component code.",
+          "The sample **Brand Kit** collects reusable visual and voice instructions for content creation. Shared application styles and native composition controls govern the rendered portal.",
         ],
         links: [
           {
@@ -536,6 +1049,80 @@ export const customerDemoChapters: DemoChapter[] = [
             href: `${portalEditor}`,
           },
           { label: "Learning & resources", href: `${PORTAL}/resources` },
+          { label: "Open the sample Brand Kit library", href: BRAND_KITS },
+        ],
+        images: [
+          {
+            file: "demo-portal-allowed-component.png",
+            title: "The placeholder governs available components",
+            alt: "In this portal placeholder, the Components picker exposes the Agency priorities component under Business priorities.",
+            caption:
+              "In this portal placeholder, the **Components** picker exposes the **Agency priorities** component under **Business priorities**.",
+            afterAction: 3,
+            crop: {
+              x: 0,
+              y: 0,
+              width: 720,
+              height: 900,
+              sourceWidth: 1440,
+              sourceHeight: 900,
+            },
+            annotations: [
+              {
+                x: 47.22,
+                y: 9.0,
+                width: 44.44,
+                height: 77.67,
+                label: "The selected placeholder’s component choices",
+              },
+              {
+                x: 49.86,
+                y: 25.78,
+                width: 38.47,
+                height: 14.22,
+                label: "**Agency priorities** is the permitted choice",
+              },
+            ],
+          },
+          {
+            file: "demo-brand-kit-voice.png",
+            title: "The sample Brand Kit supplies reusable voice guidance",
+            alt: "Native Brand Kit Sections tab with the Tone of Voice section and reusable guidance for the Liberty Mutual independent-agent portal.",
+            caption:
+              "In **Liberty Mutual — Independent Agents**, open **Sections → Tone of Voice**. The sample kit supplies reusable voice guidance for content creation.",
+            afterAction: 4,
+            crop: {
+              x: 18,
+              y: 340,
+              width: 780,
+              height: 560,
+              sourceWidth: 813,
+              sourceHeight: 988,
+            },
+            annotations: [
+              {
+                x: 14.1,
+                y: 0.35,
+                width: 11.7,
+                height: 5.5,
+                label: "Open **Sections**.",
+              },
+              {
+                x: 0.8,
+                y: 19.8,
+                width: 21.8,
+                height: 5.2,
+                label: "Find **Tone of Voice**.",
+              },
+              {
+                x: 1.67,
+                y: 39.64,
+                width: 96.15,
+                height: 46.6,
+                label: "Read the reusable voice guidance.",
+              },
+            ],
+          },
         ],
         transition:
           "The design stays consistent while the business changes its emphasis. Next, prepare one priority update in the governed content collection.",
@@ -551,14 +1138,14 @@ export const customerDemoChapters: DemoChapter[] = [
         scenario:
           "The business wants Texas guidance to lead the principal audience’s priorities without requesting a code change.",
         objective:
-          "Part 1 of the priority-change loop: save the new order as a Draft, ready for audience preview, approval, and publication in Part 2.",
+          "Part 1 of the priority-change loop: save the new order as a Draft, ready for review, approval, and publication in the next step.",
         stopWhen:
-          "Checkpoint: the Texas-first Draft is saved, the original approved version remains intact, and the live experience is unchanged. Continue with audience preview to complete this priority-change loop.",
+          "Checkpoint: the Texas-first Draft is saved, the original approved version remains intact, and the live experience is unchanged. Continue with the audience-preview demonstration and the review/publication actions to complete this priority-change loop.",
         actions: [
           `As the **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}). Confirm **Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.`,
           "Record the current approved version and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Open the version selector, choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
           "Find **Ordered recommendations**. Click **Remove all items** to clear only this draft’s selection, open the picker, and select **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, the Approver’s review, and publication.",
-          "With **Saved priority version** selected, confirm the order **Texas workers compensation → Small business growth → Home and auto conversations** and that the version remains **Draft**. Leave it unpublished. The next step previews both audience experiences before completing this same change’s approval and publication.",
+          "With **Saved priority version** selected, confirm the order **Texas workers compensation → Small business growth → Home and auto conversations** and that the version remains **Draft**. Leave it unpublished. The next step demonstrates native page-level audience preview on the prepared growth page, then returns to this saved priority version for approval and publication.",
         ],
         expected: [
           "The new Draft references the same approved cards in the new order. Avery’s live page retains the published order until the following preview and publication loop completes.",
@@ -573,8 +1160,42 @@ export const customerDemoChapters: DemoChapter[] = [
         links: [
           { label: "Edit Agency growth priorities", href: priorityContent },
         ],
+        images: [
+          {
+            file: "demo-portal-priority-order.png",
+            title: "The draft’s ordered recommendations",
+            alt: "Ordered recommendations contains Texas workers compensation first, followed by Small business growth and Home and auto conversations. The version remains Draft.",
+            caption:
+              "**Ordered recommendations** contains **Texas workers compensation** first, followed by **Small business growth** and **Home and auto conversations**. The version remains **Draft**. Use the version number recorded for the current demonstration.",
+            afterAction: 3,
+            crop: {
+              x: 300,
+              y: 0,
+              width: 1620,
+              height: 908,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 87.53,
+                y: 1.1,
+                width: 4.26,
+                height: 3.96,
+                label: "Confirm this version is **Draft**",
+              },
+              {
+                x: 1.23,
+                y: 87.0,
+                width: 97.53,
+                height: 6.94,
+                label: "Read the selected cards from left to right",
+              },
+            ],
+          },
+        ],
         transition:
-          "Continue the same priority change by previewing both audiences. Confirm the intended effect before approving and publishing it.",
+          "Next, inspect the two native page-level audience previews, then return to this saved priority version for approval and publication.",
       },
       {
         id: "portal-preview",
@@ -587,35 +1208,150 @@ export const customerDemoChapters: DemoChapter[] = [
         scenario:
           "The team needs to inspect each intended audience experience before releasing the reviewed priority change.",
         objective:
-          "Part 2 of the same priority-change loop: preview both experiences, approve and publish the priority change, and verify that it reaches the intended agent without code changes.",
+          "Part 2 of the priority-change loop: inspect native page-level audience previews, then approve and publish the saved Home priority change and verify its intended live result.",
         stopWhen:
-          "Both configured experiences have been previewed; Avery’s live order changes after publication, while Daniel’s producer order remains unchanged.",
+          "Both named page variants have been previewed while the growth page remains unpublished; publishing the saved priority collection changes Avery’s live Home order, while Daniel’s order remains unchanged.",
         actions: [
-          `Switch to the prepared **administrator acting as publisher** browser profile, and open [**Agent Portal Home in Page Builder Editor**](${portalEditor}). Use this profile to preview Home’s existing personalized component. Retain **Default editing host**, select **Layers**, and select **Agency priorities**. Open that component’s personalization experience selector.`,
-          "Choose **agency-growth**. Click the header **Preview** button, then **Preview** in its menu. In the full preview, confirm Texas guidance appears first for the changed principal collection. Close the preview tab, return to **Editor**, and select **Agency priorities** in **Layers** again.",
-          "Choose **producer-priorities** for the same component, and open **Preview** again. Confirm its separate order: household conversations, Illinois workers compensation, and small-business growth. Close that preview tab without changing the producer content.",
+          `In the prepared **administrator acting as publisher** browser profile, open [**Agent audience preview in Page Builder**](${audiencePreviewEditor}). Confirm **Agent Portal**, **English**, **Default editing host**, and the unpublished **Agent audience preview** page beneath **Home → growth**. Open **Personalize** in the top navigation.`,
+          "Select **Avery agency principal**. Choose the header **Preview** button, then **Preview** in its menu. In the complete page preview, identify **Set your agency’s next growth priority** and **Give your team a clear direction**. Confirm the Avery/Cedar Ridge principal context. Close the preview tab, and return to the same **Personalize** screen.",
+          "Select **Daniel producer**, and choose **Preview → Preview** again. Identify **Prepare your next business insurance opportunity** and **Build a stronger first submission**, with the Daniel/Prairie Oak producer context. Close that preview tab. The native page variants select authored Hero and Callout content on this unpublished growth page. Home retains its existing component-level personalization.",
           `Switch back to the **Author** browser profile, and open [**Agency growth priorities**](${priorityContent}). Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.`,
           "In the separate **Approver** session, select the same **Saved priority version**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
           "In the **administrator acting as publisher** session, open that collection in **Content**, select the same **Saved priority version**, confirm **Approved** and its Texas-first order, and choose **Publish**, keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, reload Avery’s actual live portal and confirm Texas guidance first. Reload Daniel’s separate producer session and confirm his household-first order remains unchanged.",
         ],
         expected: [
-          "Native Preview shows the changed principal and unchanged producer collections. Publishing the reviewed collection updates Avery without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
+          "Native page-level Preview shows the two authored audience experiences on the unpublished growth page. Publishing the separately reviewed priority collection updates Avery’s Home without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
         ],
         talkTrack: [
-          "Before publishing that Texas-first priority, the marketer previews both configured experiences. The principal preview shows Avery’s new emphasis, while the producer preview keeps Daniel’s guidance unchanged. Separate approval and publication then make the reviewed change visible to Avery.",
+          "The marketer can inspect a complete page for each configured audience before publication. The principal view focuses on setting direction for the agency; the producer view focuses on preparing a stronger submission. These are native page variants on an unpublished growth page. We will now complete the Texas-first Home priority change prepared earlier, using separate approval and publication, and verify the live result for both agents.",
         ],
         controls: [
-          "**agency-growth** and **producer-priorities** are the native experience names. Their datasource selections display each configured experience in Preview; **Load profile** tests the real profile, and signed-in agent browsers verify the live result.",
-          "Native profile evaluation selects the live experience. The renderer’s **Related Items**, **Siblings**, and **Recursive Related Items** dependencies keep the peer collections and selected cards associated with the published page.",
-          "The prepared administrator profile previews Home; the **Author** edits and submits the priority collection, the **Approver** reviews it, and the administrator publishes it. The **Draft → Awaiting approval → Approved** workflow remains unchanged. The experience selector appears when **Agency priorities** is selected.",
+          "**Personalize → Avery agency principal** and **Personalize → Daniel producer** select native page variants. **Preview → Preview** opens the corresponding complete page. Each variant uses its own authored **Hero** and **Callout** datasources. The preview page remains unpublished.",
+          "The operational header uses a synthetic, read-only context that matches the native selected Hero datasource during verified CMS editing and preview. No real agent sign-in or CDP identity is created by this page preview.",
+          "The **Saved priority version** from A3 is a separate Home content collection. The **Author** submits it, the **Approver** reviews it, and the administrator publishes it. Home’s existing native component rules still select Avery’s and Daniel’s live content.",
         ],
         links: [
-          { label: "Preview Home experiences", href: portalEditor },
+          {
+            label: "Open native page audience preview",
+            href: audiencePreviewEditor,
+          },
           {
             label: "Review and publish the priority collection",
             href: priorityContent,
           },
           { label: "Verify Avery’s live portal", href: `${PORTAL}/` },
+        ],
+        images: [
+          {
+            file: "demo-portal-page-audience-selector.png",
+            title: "Choose the audience, then open its complete page preview",
+            alt: "Page Builder Personalize view lists Avery agency principal and Daniel producer on the unpublished Agent audience preview page. The Preview eye button is in the page toolbar.",
+            caption:
+              "Open **Personalize**, select **Avery agency principal** or **Daniel producer** in the left panel, and use the toolbar’s **Preview** button. Choose **Preview** in its menu to open the complete page.",
+            afterAction: 1,
+            crop: {
+              x: 0,
+              y: 0,
+              width: 1280,
+              height: 720,
+              sourceWidth: 1280,
+              sourceHeight: 720,
+            },
+            annotations: [
+              {
+                x: 63.5,
+                y: 0.3,
+                width: 5.6,
+                height: 7.3,
+                label: "Open **Personalize**.",
+              },
+              {
+                x: 0.6,
+                y: 36.3,
+                width: 22.2,
+                height: 19.4,
+                label: "Select one of the named page variants.",
+              },
+              {
+                x: 72.0,
+                y: 10.2,
+                width: 2.7,
+                height: 4.8,
+                label: "Open **Preview**, then select **Preview**.",
+              },
+              {
+                x: 77.5,
+                y: 9.9,
+                width: 18.2,
+                height: 4.8,
+                label: "Confirm **Agent audience preview**.",
+              },
+            ],
+          },
+          {
+            file: "demo-portal-avery-page-preview.png",
+            title: "Avery’s agency-principal page preview",
+            alt: "Avery’s page preview shows the Cedar Ridge Insurance Texas principal context, Set your agency’s next growth priority, and Give your team a clear direction.",
+            caption:
+              "The **Avery agency principal** variant shows **Set your agency’s next growth priority** and **Give your team a clear direction**. The agency and Texas context match that audience. Close this preview tab before choosing the other variant.",
+            afterAction: 2,
+            crop: {
+              x: 220,
+              y: 165,
+              width: 580,
+              height: 790,
+              sourceWidth: 813,
+              sourceHeight: 988,
+            },
+            annotations: [
+              {
+                x: 6.9,
+                y: 6.3,
+                width: 88,
+                height: 13.8,
+                label: "Principal context and audience-specific **Hero**.",
+              },
+              {
+                x: 6.9,
+                y: 51.4,
+                width: 88,
+                height: 6,
+                label: "Audience-specific **Callout**.",
+              },
+            ],
+          },
+          {
+            file: "demo-portal-daniel-page-preview.png",
+            title: "Daniel’s producer page preview",
+            alt: "Daniel’s page preview shows the Prairie Oak Insurance Illinois producer context, Prepare your next business insurance opportunity, and Build a stronger first submission.",
+            caption:
+              "The **Daniel producer** variant shows **Prepare your next business insurance opportunity** and **Build a stronger first submission**. The agency and Illinois context change with the selected native variant. The page remains unpublished.",
+            afterAction: 3,
+            crop: {
+              x: 220,
+              y: 165,
+              width: 580,
+              height: 770,
+              sourceWidth: 813,
+              sourceHeight: 988,
+            },
+            annotations: [
+              {
+                x: 6.9,
+                y: 6.5,
+                width: 88,
+                height: 14.2,
+                label: "Producer context and audience-specific **Hero**.",
+              },
+              {
+                x: 6.9,
+                y: 52.7,
+                width: 88,
+                height: 6.2,
+                label: "Audience-specific **Callout**.",
+              },
+            ],
+          },
         ],
         transition:
           "The right agent now receives the reviewed priority change. Next, keep approved wording consistent across both independent websites.",
@@ -657,6 +1393,97 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Edit the shared disclosure", href: `${disclosureContent}` },
           { label: "Public Home", href: `${PUBLIC}/` },
           { label: "Agent Portal Home", href: `${PORTAL}/` },
+        ],
+        images: [
+          {
+            file: "demo-shared-disclosure-editor.png",
+            title: "Edit the shared source once",
+            alt: "Product availability notice holds the shared Disclosure field. The new draft contains the sentence that will appear on both sites after approval and publication.",
+            caption:
+              "**Product availability notice** holds the shared **Disclosure** field. The new draft contains the sentence that will appear on both sites after approval and publication. Use the version number recorded for the current demonstration.",
+            afterAction: 2,
+            crop: {
+              x: 300,
+              y: 0,
+              width: 1620,
+              height: 770,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 87.53,
+                y: 1.3,
+                width: 4.26,
+                height: 4.68,
+                label: "The new version is **Draft**",
+              },
+              {
+                x: 1.23,
+                y: 18.18,
+                width: 32.1,
+                height: 4.55,
+                label: "This is the shared source item",
+              },
+              {
+                x: 1.23,
+                y: 51.95,
+                width: 97.53,
+                height: 14.29,
+                label: "Edit and review the **Disclosure** wording",
+              },
+            ],
+          },
+          {
+            file: "demo-shared-disclosure-public.png",
+            title: "Public Website: the published disclosure",
+            alt: "On Public Website Home, Coverage and availability displays the published sentence from the shared source.",
+            caption:
+              "On Public Website Home, **Coverage and availability** displays the published sentence from the shared source.",
+            afterAction: 5,
+            crop: {
+              x: 372,
+              y: 435,
+              width: 1180,
+              height: 100,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 0.93,
+                y: 9.0,
+                width: 97.46,
+                height: 61.0,
+                label: "The shared wording on Public Website",
+              },
+            ],
+          },
+          {
+            file: "demo-shared-disclosure-portal.png",
+            title: "Agent Portal: the same published disclosure",
+            alt: "On Agent Portal Home, Coverage and availability displays the same published sentence in the portal’s own design.",
+            caption:
+              "On Agent Portal Home, **Coverage and availability** displays the same published sentence in the portal’s own design.",
+            afterAction: 5,
+            crop: {
+              x: 587,
+              y: 515,
+              width: 980,
+              height: 210,
+              sourceWidth: 1920,
+              sourceHeight: 908,
+            },
+            annotations: [
+              {
+                x: 3.57,
+                y: 13.33,
+                width: 93.37,
+                height: 42.86,
+                label: "The same shared wording on Agent Portal",
+              },
+            ],
+          },
         ],
         transition:
           "One reviewed update now reaches both sites. Finish by showing who approved it and how the team can restore the original wording with a complete history.",

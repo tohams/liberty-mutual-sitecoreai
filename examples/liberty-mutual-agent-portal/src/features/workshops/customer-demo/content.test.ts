@@ -277,7 +277,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
     /enter Can I combine home and car coverage\?.*Can I bundle my car and home insurance\?/i,
   );
   for (const required of [
-    /Briefly point out the bundling overview and two practical articles/i,
+    /Briefly point out How to bundle your insurance policies and 3 tips for bundling your insurance policies/i,
     /result and its answer excerpt on the results page/i,
     /Keep every result unopened/i,
     /keyword\(s\).*replace the query/i,
@@ -294,9 +294,12 @@ test("the public Search loop proves both outcomes on the results page", () => {
     entry.stopWhen,
     /range of relevant published results.*approved answer excerpt.*unsupported question.*No results found.*Contact an agent/i,
   );
-  assert.match(prose(entry.expected), /five published results/i);
+  assert.match(prose(entry.expected), /relevant published guidance/i);
+  assert.doesNotMatch(
+    prose(entry.expected),
+    /(?:four|five|4|5) published results/i,
+  );
   for (const title of [
-    "Bundle home and auto insurance",
     "How to bundle your insurance policies",
     "3 tips for bundling your insurance policies",
     "Can I bundle my car and home insurance?",
@@ -545,6 +548,11 @@ test("Profound is the customer-permitted governed integration explanation, not a
     /Profound output.*Draft.*human review and approval.*publication/i,
   );
   assert.match(text, /proposed integration design/i);
+  assert.match(text, /existing wording.*proposed wording/);
+  assert.match(text, /Show live content.*Scroll to content/);
+  assert.match(text, /AEO opportunities.*Powered by Scrunch/);
+  assert.match(text, /read-only/);
+  assert.match(text, /workflow evidence comes from Liberty Mutual/);
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
@@ -555,7 +563,7 @@ test("Profound is the customer-permitted governed integration explanation, not a
   );
   assert.match(
     preparation,
-    /Profound.*proposed integration design.*rather than a configured live connection or packaged connector/i,
+    /Profound.*read-only example.*Do not apply or dismiss.*Profound intake remains a proposed integration design/i,
   );
 });
 
@@ -771,6 +779,13 @@ test("the design loop opens the placeholder-specific component picker without ch
     prose(entry.actions),
     /Layers.*headless-agency-priorities.*Insert into.*before or after Agency priorities.*filtered Components picker.*Business priorities → Agency priorities.*Close the picker without selecting a component or inserting content/i,
   );
+  assert.match(
+    prose(entry.actions),
+    /Published.*Liberty Mutual — Independent Agents.*Sections → Tone of Voice/,
+  );
+  assert(entry.links?.some((link) => link.href.includes("/design/brandkits?")));
+  assert.match(prose(entry.talkTrack), /sample Liberty Mutual Brand Kit/);
+  assert.equal(entry.durationMinutes, 1);
 });
 
 test("the priority edit remains a draft until both audience previews and approval are complete", () => {
@@ -781,7 +796,7 @@ test("the priority edit remains a draft until both audience previews and approva
   );
   assert.match(
     step("portal-preview").objective,
-    /Part 2 of the same priority-change loop/,
+    /Part 2 of the priority-change loop/,
   );
   assert.match(
     step("portal-priority-edit").stopWhen,
@@ -797,10 +812,10 @@ test("the priority edit remains a draft until both audience previews and approva
   const id = "portal-preview";
   const previewRole = actionIndex(
     id,
-    /Switch to.*administrator acting as publisher.*browser profile.*Page Builder Editor/i,
+    /administrator acting as publisher.*browser profile.*Agent audience preview.*Page Builder.*Personalize/i,
   );
-  const principal = actionIndex(id, /Choose agency-growth.*Preview/);
-  const producer = actionIndex(id, /Choose producer-priorities.*Preview/);
+  const principal = actionIndex(id, /Select Avery agency principal.*Preview/);
+  const producer = actionIndex(id, /Select Daniel producer.*Preview/);
   const submit = actionIndex(id, /Switch back.*Author.*Actions → Submit/);
   const approve = actionIndex(id, /separate Approver.*Actions → Approve/i);
   const publish = actionIndex(
@@ -816,11 +831,11 @@ test("the priority edit remains a draft until both audience previews and approva
   );
   assert.match(
     prose(step(id).actions[principal]),
-    /Close the preview tab.*Editor.*select Agency priorities in Layers again/i,
+    /Close the preview tab.*same Personalize screen/i,
   );
   assert.match(
     prose(step(id).controls),
-    /configured experience in Preview.*Load profile.*real profile.*signed-in agent browsers.*live result/i,
+    /native page variants.*own authored Hero and Callout.*preview page remains unpublished/i,
   );
   assert.match(
     prose(step(id).expected),
@@ -996,6 +1011,8 @@ test("every launch or inline link has a safe destination and the correct site an
     [DISCLOSURE_ID]: "liberty-mutual-public-site",
     "ae9e45ca-f127-4abe-9ca7-2ff109981998": "liberty-mutual-agent-portal",
     "3127968e-4b21-50c3-ad79-b6bbbe5303b8": "liberty-mutual-agent-portal",
+    "69fc0a48-3e75-426e-9b2b-296d7a3bf8a4": "prospera",
+    "cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947": "liberty-mutual-agent-portal",
   };
   const knownAnchors = new Set([
     ...STABLE_ANCHORS,
@@ -1024,16 +1041,38 @@ test("every launch or inline link has a safe destination and the correct site an
     );
     if (url.hostname === "pages.sitecorecloud.io") {
       assert(["/content", "/editor"].includes(url.pathname));
-      assert.equal(url.searchParams.get("organization"), ORG);
-      assert.equal(url.searchParams.get("tenantName"), TENANT_NAME);
+      const recommendationExample =
+        url.searchParams.get("sc_site") === "prospera";
+      assert.equal(
+        url.searchParams.get("organization"),
+        recommendationExample ? "org_vDtrEzJHxeuuB9cD" : ORG,
+      );
+      assert.equal(
+        url.searchParams.get("tenantName"),
+        recommendationExample
+          ? "sitecoresaa7acd-agverticals97fd-agvertsc3b5"
+          : TENANT_NAME,
+      );
       assert.equal(url.searchParams.get("sc_lang"), "en");
       assert.equal(
         url.searchParams.get("sc_site"),
         nativeSites[url.searchParams.get("sc_itemid")?.toLowerCase() || ""],
       );
     }
-    if (url.hostname === "app.sitecorecloud.io")
-      assert.equal(url.searchParams.get("organization"), ORG);
+    if (url.hostname === "app.sitecorecloud.io") {
+      const recommendationExample = url.pathname.startsWith(
+        "/channels/collection/45177ac3175042dc9bc748d76ba0858a/sites/d4c417d9-0acf-44f9-aec8-c94730b872bb/aeo-opportunities/",
+      );
+      assert.equal(
+        url.searchParams.get("organization"),
+        recommendationExample ? "org_vDtrEzJHxeuuB9cD" : ORG,
+      );
+      if (recommendationExample)
+        assert.equal(
+          url.searchParams.get("tenantName"),
+          "sitecoresaa7acd-agverticals97fd-agvertsc3b5",
+        );
+    }
     if (
       url.hostname === PORTAL_HOST &&
       url.pathname.startsWith("/workshops/")

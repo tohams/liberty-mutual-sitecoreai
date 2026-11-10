@@ -86,7 +86,10 @@ export async function CustomerDemoGuide({
               <Clock3 size={18} aria-hidden="true" />
               {DEMO_TOTAL_MINUTES}-minute limit
             </span>
-            <a href="#opening" className={styles.startLink}>
+            <a
+              href={chapterId === "portal" ? "#portal-relevance" : "#opening"}
+              className={styles.startLink}
+            >
               Begin the demonstration{" "}
               <ArrowRight size={17} aria-hidden="true" />
             </a>
@@ -210,7 +213,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "public",
-                      text: "The Profound section explains a proposed integration design, rather than a configured live connection or packaged connector. Trace the proposed API, Draft, and review path using the native content model and workflow already shown.",
+                      text: "The Profound section uses the prepared **Sales Engineers1 → agverticals → Prospera** recommendation tabs as a read-only example. Open the **Home → Readability & Clarity** recommendation and its **Page Builder → AEO opportunities** panel before presenting. Do not apply or dismiss a recommendation, edit content, change workflow, or publish in that environment. Profound intake remains a proposed integration design. Return to the already-demonstrated Liberty Mutual Draft, review, and publication process when explaining governance.",
                     },
                     {
                       chapter: "public",
@@ -222,7 +225,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "portal",
-                      text: "Prepare the native **Search sources** page and **Analytics → Events**. In the administrator profile, open [**Agent Portal Home in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998&sc_lang=en), choose **Layers**, select **Agency priorities**, and choose **Edit personalization rules** in the right-hand component panel. Confirm **Liberty Mutual - Agency product priorities** and leave this Builder ready. Keep Avery’s and Daniel’s current **Native profile ID** UUIDs, copied earlier in preparation, ready for the two read-only tests. Prepare the saved **agency-growth** and **producer-priorities** content previews for the later priority-change loop. Keep the public article/API tabs ready for their own delivery checks. Refresh a slow page, then open one fresh tab before changing the running demonstration.",
+                      text: "Prepare the native **Search sources** page and **Analytics → Events**. In the administrator profile, open [**Agent Portal Home in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998&sc_lang=en), choose **Layers**, select **Agency priorities**, and choose **Edit personalization rules** in the right-hand component panel. Confirm **Liberty Mutual - Agency product priorities** and leave this Builder ready. Keep Avery’s and Daniel’s current **Native profile ID** UUIDs, copied earlier in preparation, ready for the two read-only tests. Open [**Agent audience preview in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947&sc_lang=en), choose **Personalize**, and confirm the native **Avery agency principal** and **Daniel producer** page variants. Check **Preview → Preview** for each variant, then close its preview tab. Leave this growth page unpublished. It demonstrates whole-page audience preview separately from the later Home priority-collection change. Keep the public article/API tabs ready for their own delivery checks. Refresh a slow page, then open one fresh tab before changing the running demonstration.",
                     },
                   ]
                     .filter(
@@ -288,7 +291,11 @@ export async function CustomerDemoGuide({
                     </tr>
                     <tr>
                       <th scope="row">
-                        <a href="#portal">One Relevant Liberty Experience</a>
+                        <Link
+                          href={chapterId === "public" ? "/demo" : "#portal"}
+                        >
+                          One Relevant Liberty Experience
+                        </Link>
                       </th>
                       <td>
                         {elapsedTime(publicEnd)}–{elapsedTime(closeStart)}
@@ -423,7 +430,7 @@ export async function CustomerDemoGuide({
                               .map((image) => (
                                 <GuideScreenshot
                                   image={image}
-                                  key={image.file}
+                                  key={`${image.file}-${image.title ?? ""}`}
                                 />
                               ))}
                           </li>
@@ -444,7 +451,10 @@ export async function CustomerDemoGuide({
                       {step.images
                         ?.filter((image) => !image.afterAction)
                         .map((image) => (
-                          <GuideScreenshot image={image} key={image.file} />
+                          <GuideScreenshot
+                            image={image}
+                            key={`${image.file}-${image.title ?? ""}`}
+                          />
                         ))}
                       <p className={styles.transition}>
                         <strong>Transition:</strong>{" "}
