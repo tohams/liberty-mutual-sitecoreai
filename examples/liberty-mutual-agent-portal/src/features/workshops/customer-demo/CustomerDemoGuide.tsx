@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Clock3 } from "lucide-react";
-import { requireWorkshopSession } from "@/server/workshops/auth";
+import {
+  getWorkshopSession,
+  requireWorkshopSession,
+} from "@/server/workshops/auth";
 import { DemoShell } from "./DemoShell";
 import { CopyValue } from "./CopyValue";
 import { LaunchUrls } from "./LaunchUrls";
@@ -52,8 +55,10 @@ export async function CustomerDemoGuide({
       : chapterId === "portal"
         ? "/demo"
         : "/workshops/demo";
-  const session = await requireWorkshopSession(returnTo);
-  const presenterProfiles = await getPresenterProfiles();
+  const session = chapterId
+    ? await getWorkshopSession()
+    : await requireWorkshopSession(returnTo);
+  const presenterProfiles = session ? await getPresenterProfiles() : [];
   const chapters = chapterId
     ? customerDemoChapters.filter((chapter) => chapter.id === chapterId)
     : customerDemoChapters;
@@ -161,7 +166,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "portal",
-                      text: "Keep this guide signed in. Use presenter agent logins **avery.01** and **daniel.01** at the [**Agent Portal login**](https://liberty-mutual-agent-portal.vercel.app/login). Their shared synthetic portal password is **Sitecore1**. Use separate browser profiles for the two agents so their sessions remain independent.",
+                      text: "Use presenter agent logins **avery.01** and **daniel.01** at the [**Agent Portal login**](https://liberty-mutual-agent-portal.vercel.app/login). Their shared synthetic portal password is **Sitecore1**. Use separate browser profiles for the two agents so their sessions remain independent.",
                     },
                     {
                       chapter: "portal",
@@ -181,7 +186,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "public",
-                      text: `Open the **Public website**, [**GraphQL Explorer**](${GRAPHQL_EXPLORER}), and native **SitecoreAI** tabs listed in **P0**. Configure the Explorer’s **HTTP HEADERS** with the copied **sc_apikey** JSON supplied in **P7**, and run its **GraphQL query** once to verify access to Live Experience Edge. Keep the presentation’s **Experience Edge content delivery** slide ready for P7.`,
+                      text: `Open the **Public website**, [**GraphQL Explorer**](${GRAPHQL_EXPLORER}), and native **SitecoreAI** tabs listed in **P0**. Configure the Explorer’s **HTTP HEADERS** using the **sc_apikey** JSON template in **P7** and your **Live Delivery API token**, and run its **GraphQL query** once to verify access to Live Experience Edge. Keep the presentation’s **Experience Edge content delivery** slide ready for P7.`,
                     },
                     {
                       chapter: "all",
@@ -262,7 +267,9 @@ export async function CustomerDemoGuide({
                   const timing = schedule.find(
                     (entry) => entry.id === step.id,
                   )!;
-                  const inputs = presenterInputs(step);
+                  const inputs = presenterInputs(step, {
+                    includeDeliveryToken: Boolean(session),
+                  });
                   return (
                     <section id={step.id} key={step.id} className={styles.step}>
                       <div className={styles.stepTop}>
@@ -279,6 +286,13 @@ export async function CustomerDemoGuide({
                         )}
                       </div>
                       <h3>{step.title}</h3>
+                      {step.id === "public-api" && !session && (
+                        <p>
+                          Replace <code>&lt;Delivery API token&gt;</code> in the
+                          HTTP headers template with your Live Delivery API
+                          token.
+                        </p>
+                      )}
                       <LaunchUrls links={demoLaunchUrls(step)} />
                       <ol className={styles.clicks}>
                         {step.presenterActions.map((lines, actionIndex) => (
@@ -319,7 +333,10 @@ export async function CustomerDemoGuide({
                                     Screenshot ·{" "}
                                     {image.title ?? "View this step"}
                                   </summary>
-                                  <GuideScreenshot image={image} />
+                                  <GuideScreenshot
+                                    image={image}
+                                    assetBasePath="/api/demo/assets"
+                                  />
                                 </details>
                               ))}
                           </li>
@@ -339,7 +356,10 @@ export async function CustomerDemoGuide({
                             <summary>
                               Screenshot · {image.title ?? "View this step"}
                             </summary>
-                            <GuideScreenshot image={image} />
+                            <GuideScreenshot
+                              image={image}
+                              assetBasePath="/api/demo/assets"
+                            />
                           </details>
                         ))}
                     </section>

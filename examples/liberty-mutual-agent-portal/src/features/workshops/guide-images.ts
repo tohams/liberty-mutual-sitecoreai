@@ -58,9 +58,21 @@ export function guideCropGeometry(crop: GuideImageCrop) {
   };
 }
 
-export function guideImageAssetUrl(file: string): string {
+export type GuideImageAssetBasePath =
+  "/api/workshops/assets" | "/api/demo/assets";
+
+export function guideImageAssetUrl(
+  file: string,
+  assetBasePath: GuideImageAssetBasePath = "/api/workshops/assets",
+): string {
   if (!/^[a-z0-9][a-z0-9-]{0,79}\.(png|webp)$/.test(file)) {
     throw new Error("Workshop screenshots require a protected asset filename.");
   }
-  return `/api/workshops/assets/${file}`;
+  if (
+    assetBasePath !== "/api/workshops/assets" &&
+    assetBasePath !== "/api/demo/assets"
+  ) {
+    throw new Error("Workshop screenshots require a supported asset route.");
+  }
+  return `${assetBasePath}/${file}`;
 }

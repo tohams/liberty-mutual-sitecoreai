@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-/** Both entry URLs use the existing protected documentation service. */
+/** Both entry URLs use the unlinked presenter guide service. */
 export function GET() {
   return NextResponse.redirect(
     "https://liberty-mutual-agent-portal.vercel.app/demo/public",

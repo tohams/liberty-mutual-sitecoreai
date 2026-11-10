@@ -10,6 +10,7 @@ import {
   guideStepImages,
   validImageAnnotation,
   validImageCrop,
+  type GuideImageAssetBasePath,
 } from "./guide-images";
 import type { GuideImage, GuideImageAnnotation, GuideImageCrop } from "./types";
 
@@ -143,6 +144,32 @@ test("screenshots always use the authenticated asset route", () => {
   ]) {
     assert.throws(() => guideImageAssetUrl(file), /protected asset filename/);
   }
+});
+
+test("demo screenshots opt in to the bounded demo route without changing the workshop default", () => {
+  assert.equal(
+    guideImageAssetUrl("sample.png", "/api/demo/assets"),
+    "/api/demo/assets/sample.png",
+  );
+  assert.equal(
+    guideImageAssetUrl("sample.png"),
+    "/api/workshops/assets/sample.png",
+  );
+  for (const base of [
+    "https://example.com/images",
+    "//example.com/images",
+    "/api/workshops/reset",
+    "/api/demo/assets/../private",
+  ]) {
+    assert.throws(
+      () => guideImageAssetUrl("sample.png", base as GuideImageAssetBasePath),
+      /supported asset route/,
+    );
+  }
+  assert.throws(
+    () => guideImageAssetUrl("../private.png", "/api/demo/assets"),
+    /protected asset filename/,
+  );
 });
 
 test("every displayed screenshot and overlay resolves to a protected source with valid geometry", () => {
