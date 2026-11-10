@@ -1533,21 +1533,6 @@ export const customerDemoChapters: DemoChapter[] = [
           "Before publication, Home preview shows Texas guidance first for the principal and the unchanged household-first order for the producer. After publication, Avery and Daniel show those same respective orders live.",
         inputs: [
           {
-            action: 2,
-            label: "Agency small-commercial share",
-            value: "15",
-          },
-          {
-            action: 2,
-            label: "Agency written premium",
-            value: "1000000",
-          },
-          {
-            action: 3,
-            label: "Agent small-commercial written premium",
-            value: "100000",
-          },
-          {
             action: 4,
             label: "Priority submission comment",
             value: "Prioritize Texas workers compensation guidance",
@@ -1565,14 +1550,12 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "Set **Role → Principal**. Under **Licensed states**, select only **Texas**; clear **Florida** and **Illinois**.",
-            "Expand **Business context**. Set **Agency small-commercial share → 15** and **Agency written premium → 1000000**.",
             "Select **Preview audience**, wait for the result, then select **Open preview**.",
             "On **Home**, find **Priorities for your agency**. Confirm **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**.",
             "Close the preview tab, and return to the same **Audience Preview** panel in **Page Builder**.",
           ],
           [
             "Set **Role → Producer**. Under **Licensed states**, select only **Illinois**; clear **Texas** and **Florida**.",
-            "In **Business context**, check **Specializes in small commercial**, and set **Agent small-commercial written premium → 100000**.",
             "Select **Preview audience**, then **Open preview** when ready.",
             "On **Home**, confirm the producer’s unchanged order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
             "Close the preview tab, and return to **Page Builder**. Both previews used audience attributes, without an agent login.",
@@ -1599,8 +1582,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The same Home page previews the draft for both audience contexts. One reviewed publication then updates Avery’s live priorities while Daniel’s order remains unchanged.",
         actions: [
           "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Open **Apps → Audience Preview**, and confirm **Current page → Home**. Leave **Saved priority version** unpublished.",
-          "Set **Role → Principal**. Under **Licensed states**, select only **Texas**, clearing **Florida** and **Illinois**. Expand **Business context**, set **Agency small-commercial share → 15** and **Agency written premium → 1000000**, and select **Preview audience**. When ready, select **Open preview**. On **Home**, find **Priorities for your agency**, and confirm the draft order **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**. Close the preview tab, and return to the same **Audience Preview** panel in **Page Builder**.",
-          "Set **Role → Producer**. Under **Licensed states**, select only **Illinois**, clearing **Texas** and **Florida**. In **Business context**, check **Specializes in small commercial**, and set **Agent small-commercial written premium → 100000**. Select **Preview audience**, then **Open preview** when ready. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab, and return to **Page Builder**. Neither preview requires an agent login or a human profile identifier.",
+          "Set **Role → Principal**. Under **Licensed states**, select only **Texas**, clearing **Florida** and **Illinois**. Select **Preview audience**. When ready, select **Open preview**. On **Home**, find **Priorities for your agency**, and confirm the draft order **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**. Close the preview tab, and return to the same **Audience Preview** panel in **Page Builder**.",
+          "Set **Role → Producer**. Under **Licensed states**, select only **Illinois**, clearing **Texas** and **Florida**. Select **Preview audience**, then **Open preview** when ready. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab, and return to **Page Builder**. Neither preview requires an agent login or a human profile identifier.",
           "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
           "Stay on the same **Saved priority version** in **Page Builder**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
           "On the same **Saved priority version** in **Page Builder**, confirm **Approved** and its Texas-first order, and choose **Publish**. Keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, in the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",

@@ -8,38 +8,17 @@ import {
   CircleAlert,
   FileText,
   LoaderCircle,
-  SlidersHorizontal,
   UsersRound,
 } from "lucide-react";
 import type { AgentRole, StateCode } from "@/contracts/portal";
-import type {
-  AudiencePreviewInput,
-  AudiencePreviewPanelProps,
-  AudiencePreviewResult,
-} from "./types";
+import type { AudiencePreviewPanelProps, AudiencePreviewResult } from "./types";
 import styles from "./AudiencePreviewPanel.module.css";
-
-const ROLES: ReadonlyArray<{ value: AgentRole; label: string }> = [
-  { value: "principal", label: "Principal" },
-  { value: "producer", label: "Producer" },
-  { value: "account-manager", label: "Account manager" },
-  { value: "account-executive", label: "Account executive" },
-  { value: "surety-specialist", label: "Surety specialist" },
-  { value: "wholesale-broker", label: "Wholesale broker" },
-];
-const STATES: ReadonlyArray<{ value: StateCode; label: string }> = [
-  { value: "TX", label: "Texas" },
-  { value: "FL", label: "Florida" },
-  { value: "IL", label: "Illinois" },
-];
-const DEFAULT_AUDIENCE: AudiencePreviewInput = {
-  role: "principal",
-  licensedStates: ["TX", "IL"],
-  specializesInSmallCommercial: true,
-  agencySmallCommercialSharePercent: 15,
-  agencyTotalWrittenPremiumUsd: 1_000_000,
-  agentSmallCommercialWrittenPremiumUsd: 60_000,
-};
+import {
+  ROLE_OPTIONS,
+  STATE_OPTIONS,
+  createAudiencePreviewInput,
+  DEFAULT_AUDIENCE_PREVIEW_INPUT,
+} from "./scenarios";
 
 function contextKey(page: AudiencePreviewPanelProps["page"]) {
   return page
@@ -47,20 +26,18 @@ function contextKey(page: AudiencePreviewPanelProps["page"]) {
     : "";
 }
 
-function numberValue(value: number) {
-  return Number.isFinite(value) ? value : "";
-}
-
 export function AudiencePreviewPanel({
   page,
   onPreview,
-  initialAudience = DEFAULT_AUDIENCE,
+  initialAudience = DEFAULT_AUDIENCE_PREVIEW_INPUT,
   preparationMessage,
   disabled = false,
 }: AudiencePreviewPanelProps) {
   const id = useId();
-  const [audience, setAudience] =
-    useState<AudiencePreviewInput>(initialAudience);
+  const [audience, setAudience] = useState(() => ({
+    role: initialAudience.role,
+    licensedStates: [...initialAudience.licensedStates],
+  }));
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [completed, setCompleted] = useState<{
@@ -75,18 +52,16 @@ export function AudiencePreviewPanel({
       ? completed.result
       : null;
 
-  const change = <K extends keyof AudiencePreviewInput>(
-    field: K,
-    value: AudiencePreviewInput[K],
-  ) => {
-    setAudience((current) => ({ ...current, [field]: value }));
+  const changeRole = (role: AgentRole) => {
+    setAudience((current) => ({ ...current, role }));
     setError("");
   };
   const toggleState = (state: StateCode, selected: boolean) => {
     setAudience((current) => ({
       ...current,
-      licensedStates: STATES.map((option) => option.value).filter((code) =>
-        code === state ? selected : current.licensedStates.includes(code),
+      licensedStates: STATE_OPTIONS.map((option) => option.value).filter(
+        (code) =>
+          code === state ? selected : current.licensedStates.includes(code),
       ),
     }));
     setError("");
@@ -94,12 +69,16 @@ export function AudiencePreviewPanel({
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!page || busy || disabled) return;
+    if (!page || busy || disabled || audience.licensedStates.length === 0)
+      return;
     setBusy(true);
     setError("");
     setCompleted(null);
     try {
-      const generated = await onPreview(audience, page);
+      const generated = await onPreview(
+        createAudiencePreviewInput(audience.role, audience.licensedStates),
+        page,
+      );
       setCompleted({
         pageKey,
         audienceKey,
@@ -154,10 +133,10 @@ export function AudiencePreviewPanel({
                 id={`${id}-role`}
                 value={audience.role}
                 onChange={(event) =>
-                  change("role", event.target.value as AgentRole)
+                  changeRole(event.target.value as AgentRole)
                 }
               >
-                {ROLES.map((role) => (
+                {ROLE_OPTIONS.map((role) => (
                   <option key={role.value} value={role.value}>
                     {role.label}
                   </option>
@@ -169,12 +148,14 @@ export function AudiencePreviewPanel({
 
           <fieldset className={styles.states}>
             <legend>Licensed states</legend>
-            <p id={`${id}-states-hint`}>Select all applicable states.</p>
+            <p id={`${id}-states-hint`} aria-live="polite">
+              Select at least one licensed state.
+            </p>
             <div
               className={styles.stateOptions}
               aria-describedby={`${id}-states-hint`}
             >
-              {STATES.map((state) => (
+              {STATE_OPTIONS.map((state) => (
                 <label key={state.value} className={styles.stateOption}>
                   <input
                     type="checkbox"
@@ -189,114 +170,6 @@ export function AudiencePreviewPanel({
               ))}
             </div>
           </fieldset>
-
-          <details className={styles.businessContext}>
-            <summary>
-              <span>
-                <SlidersHorizontal size={16} aria-hidden="true" />
-                Business context
-              </span>
-              <ChevronDown size={17} aria-hidden="true" />
-            </summary>
-            <div className={styles.businessFields}>
-              <label className={styles.specialization}>
-                <input
-                  type="checkbox"
-                  checked={audience.specializesInSmallCommercial}
-                  onChange={(event) =>
-                    change("specializesInSmallCommercial", event.target.checked)
-                  }
-                />
-                <span>Specializes in small commercial</span>
-              </label>
-              <div className={styles.field}>
-                <label htmlFor={`${id}-agency-share`}>
-                  Agency small-commercial share
-                </label>
-                <div className={styles.numberWrap}>
-                  <input
-                    id={`${id}-agency-share`}
-                    type="number"
-                    inputMode="decimal"
-                    min="0"
-                    max="100"
-                    step="0.1"
-                    required
-                    value={numberValue(
-                      audience.agencySmallCommercialSharePercent,
-                    )}
-                    onChange={(event) =>
-                      change(
-                        "agencySmallCommercialSharePercent",
-                        event.target.valueAsNumber,
-                      )
-                    }
-                    aria-describedby={`${id}-share-hint`}
-                  />
-                  <span aria-hidden="true">%</span>
-                </div>
-                <p id={`${id}-share-hint`} className={styles.fieldHint}>
-                  Share of personal and small-commercial written premium.
-                </p>
-              </div>
-              <div className={styles.field}>
-                <label htmlFor={`${id}-agency-premium`}>
-                  Agency written premium
-                </label>
-                <div className={`${styles.numberWrap} ${styles.currency}`}>
-                  <span aria-hidden="true">$</span>
-                  <input
-                    id={`${id}-agency-premium`}
-                    type="number"
-                    inputMode="decimal"
-                    min="0"
-                    max="10000000000"
-                    step="0.01"
-                    required
-                    value={numberValue(audience.agencyTotalWrittenPremiumUsd)}
-                    onChange={(event) =>
-                      change(
-                        "agencyTotalWrittenPremiumUsd",
-                        event.target.valueAsNumber,
-                      )
-                    }
-                    aria-describedby={`${id}-agency-hint`}
-                  />
-                  <span aria-hidden="true">USD</span>
-                </div>
-                <p id={`${id}-agency-hint`} className={styles.fieldHint}>
-                  Combined personal and small-commercial production.
-                </p>
-              </div>
-              <div className={styles.field}>
-                <label htmlFor={`${id}-agent-premium`}>
-                  Agent small-commercial written premium
-                </label>
-                <div className={`${styles.numberWrap} ${styles.currency}`}>
-                  <span aria-hidden="true">$</span>
-                  <input
-                    id={`${id}-agent-premium`}
-                    type="number"
-                    inputMode="decimal"
-                    min="0"
-                    max="10000000000"
-                    step="0.01"
-                    required
-                    value={numberValue(
-                      audience.agentSmallCommercialWrittenPremiumUsd,
-                    )}
-                    onChange={(event) =>
-                      change(
-                        "agentSmallCommercialWrittenPremiumUsd",
-                        event.target.valueAsNumber,
-                      )
-                    }
-                  />
-                  <span aria-hidden="true">USD</span>
-                </div>
-              </div>
-            </div>
-          </details>
         </fieldset>
 
         {error ? (
@@ -309,7 +182,9 @@ export function AudiencePreviewPanel({
         <button
           type="submit"
           className={styles.previewButton}
-          disabled={!page || busy || disabled}
+          disabled={
+            !page || busy || disabled || audience.licensedStates.length === 0
+          }
           aria-describedby={`${id}-preview-note`}
         >
           {busy ? (

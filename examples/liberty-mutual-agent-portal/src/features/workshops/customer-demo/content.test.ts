@@ -837,15 +837,24 @@ test("the same Home draft is previewed with audience attributes before approval 
   const editEntry = step("portal-priority-edit");
   const edit = prose(editEntry.actions);
   assert.match(editEntry.objective, /Part 1 of the priority-change loop/);
-  assert.match(step("portal-preview").objective, /Part 2 of the priority-change loop/);
-  assert.match(editEntry.stopWhen, /Checkpoint.*live experience is unchanged.*Continue/);
+  assert.match(
+    step("portal-preview").objective,
+    /Part 2 of the priority-change loop/,
+  );
+  assert.match(
+    editEntry.stopWhen,
+    /Checkpoint.*live experience is unchanged.*Continue/,
+  );
   assert.match(
     edit,
     /explicitly select Priority baseline version recorded in P0.*wait for its fields to finish loading.*original version number.*Small business growth → Texas workers compensation → Home and auto conversations.*Choose Create version/,
   );
   assert.match(edit, /Ordered recommendations/);
   assert.match(edit, /remains Draft.*Leave it unpublished/i);
-  assert.doesNotMatch(edit, /(?:choose|select)\s+Actions → (?:Submit|Approve)|click Start publish/i);
+  assert.doesNotMatch(
+    edit,
+    /(?:choose|select)\s+Actions → (?:Submit|Approve)|click Start publish/i,
+  );
   const id = "portal-preview";
   const entry = step(id);
   const open = actionIndex(
@@ -854,16 +863,32 @@ test("the same Home draft is previewed with audience attributes before approval 
   );
   const principal = actionIndex(
     id,
-    /Role → Principal.*Licensed states.*only Texas.*Business context.*Agency small-commercial share → 15.*Agency written premium → 1000000.*Preview audience.*Open preview.*Home.*Texas → Build a stronger small-business practice → Connect home and auto conversations/,
+    /Role → Principal.*Licensed states.*only Texas.*Preview audience.*Open preview.*Home.*Texas → Build a stronger small-business practice → Connect home and auto conversations/,
   );
   const producer = actionIndex(
     id,
-    /Role → Producer.*Licensed states.*only Illinois.*Specializes in small commercial.*Agent small-commercial written premium → 100000.*Preview audience.*Open preview.*Home.*Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice/,
+    /Role → Producer.*Licensed states.*only Illinois.*Preview audience.*Open preview.*Home.*Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice/,
+  );
+  assert.doesNotMatch(
+    prose(entry.actions),
+    /Business context|Agency small-commercial share|Agency written premium|Agent small-commercial written premium|Specializes in small commercial/,
   );
   const submit = actionIndex(id, /Saved priority version.*Actions → Submit/);
-  const approve = actionIndex(id, /same Saved priority version.*Actions → Approve/i);
-  const publish = actionIndex(id, /same Saved priority version.*Approved.*Start publish/i);
-  assert(open < principal && principal < producer && producer < submit && submit < approve && approve < publish);
+  const approve = actionIndex(
+    id,
+    /same Saved priority version.*Actions → Approve/i,
+  );
+  const publish = actionIndex(
+    id,
+    /same Saved priority version.*Approved.*Start publish/i,
+  );
+  assert(
+    open < principal &&
+      principal < producer &&
+      producer < submit &&
+      submit < approve &&
+      approve < publish,
+  );
   assert.match(
     prose(entry.actions[principal]),
     /Close the preview tab.*same Audience Preview panel in Page Builder/i,
@@ -876,7 +901,10 @@ test("the same Home draft is previewed with audience attributes before approval 
     prose(entry.controls),
     /private Marketplace extension.*existing published SitecoreAI personalization rules.*current authoring content for Home/,
   );
-  assert.match(prose(entry.controls), /isolated synthetic audience records.*without changing human agent accounts/);
+  assert.match(
+    prose(entry.controls),
+    /isolated synthetic audience records.*without changing human agent accounts/,
+  );
   assert.match(
     prose(entry.expected),
     /same Home page.*without publishing Home manually or deploying frontend code/i,
@@ -885,18 +913,37 @@ test("the same Home draft is previewed with audience attributes before approval 
     prose([editEntry, entry]),
     /Agent audience preview|Home → growth|prepared growth page|Avery agency principal|Daniel producer|authored Hero and Callout|native page-level audience previews/,
   );
-  assert(linksIn(entry).some((link) => link.href.includes("sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998")));
+  assert(
+    linksIn(entry).some((link) =>
+      link.href.includes("sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998"),
+    ),
+  );
   assert.equal(editEntry.durationMinutes, 2);
   assert.equal(entry.durationMinutes, 4);
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
-  assert.match(page, /Editor → Pages → Home.*Apps → Audience Preview.*Current page → Home/);
-  assert.match(page, /same presenter account.*Role → Principal.*Texas.*Agency small-commercial share → 15.*Agency written premium → 1000000.*Role → Producer.*Illinois.*Agent small-commercial written premium → 100000/);
-  assert.match(page, /attempts to connect the existing SitecoreAI session automatically.*Connect to SitecoreAI.*same presenter account.*connection window closes after authentication.*verifies the session automatically/);
-  assert.doesNotMatch(page, /complete \*\*Sign in\*\* with the same presenter account|return to the app, and select \*\*Continue\*\*/);
-  assert.doesNotMatch(page, /Agent audience preview|Avery agency principal|Daniel producer|growth page|cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947/);
+  assert.match(
+    page,
+    /Editor → Pages → Home.*Apps → Audience Preview.*Current page → Home/,
+  );
+  assert.match(
+    page,
+    /same presenter account.*Role → Principal.*Texas.*Role → Producer.*Illinois/,
+  );
+  assert.match(
+    page,
+    /attempts to connect the existing SitecoreAI session automatically.*Connect to SitecoreAI.*same presenter account.*connection window closes after authentication.*verifies the session automatically/,
+  );
+  assert.doesNotMatch(
+    page,
+    /complete \*\*Sign in\*\* with the same presenter account|return to the app, and select \*\*Continue\*\*/,
+  );
+  assert.doesNotMatch(
+    page,
+    /Agent audience preview|Avery agency principal|Daniel producer|growth page|cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947/,
+  );
   for (const source of [page, prose(step("portal-relevance")), prose(entry)]) {
     assert.match(
       source,
@@ -1033,9 +1080,11 @@ test("one full copyright notice updates both footers and restores only its year"
       prose(entry),
       /Coverage and availability|added sentence|temporary sentence|append|Content owner|Public website content team|Content Editor/i,
     );
-    assert((entry.images ?? []).every((image) =>
-      !/shared-disclosure|workflow-history/.test(image.file),
-    ));
+    assert(
+      (entry.images ?? []).every(
+        (image) => !/shared-disclosure|workflow-history/.test(image.file),
+      ),
+    );
   }
   assert.doesNotMatch(
     prose(shared),
@@ -1081,9 +1130,18 @@ test("one full copyright notice updates both footers and restores only its year"
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
-  assert.match(page, /both site footers display the same full copyright notice with \*\*2025\*\*/);
-  assert.match(page, /scroll to both footers.*full copyright notice with \*\*2025\*\*/);
-  assert.doesNotMatch(page, /shared-disclosure|Product availability notice|both public placements/);
+  assert.match(
+    page,
+    /both site footers display the same full copyright notice with \*\*2025\*\*/,
+  );
+  assert.match(
+    page,
+    /scroll to both footers.*full copyright notice with \*\*2025\*\*/,
+  );
+  assert.doesNotMatch(
+    page,
+    /shared-disclosure|Product availability notice|both public placements/,
+  );
 });
 
 test("the presenter guide displays concise clicks and result checks, with preparation kept separate", () => {

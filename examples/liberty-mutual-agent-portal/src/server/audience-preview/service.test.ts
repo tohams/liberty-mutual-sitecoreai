@@ -72,6 +72,32 @@ test("request parsing permits only selected-page coordinates and validated gener
     assert.throws(() => parseAudiencePreviewRequest(invalid));
 });
 
+test("public preview selection cannot override fixed business attributes or request an empty state set", async () => {
+  const { parseAudiencePreviewRequest } = await import("./service");
+  const selected = parseAudiencePreviewRequest({
+    pageId: page.id,
+    language: "en",
+    input: {
+      ...input,
+      agencySmallCommercialSharePercent: 95,
+      agencyTotalWrittenPremiumUsd: 999,
+      agentSmallCommercialWrittenPremiumUsd: 100_000,
+      specializesInSmallCommercial: false,
+    },
+  });
+  assert.equal(selected.input.specializesInSmallCommercial, true);
+  assert.equal(selected.input.agencySmallCommercialSharePercent, 15);
+  assert.equal(selected.input.agencyTotalWrittenPremiumUsd, 1_000_000);
+  assert.equal(selected.input.agentSmallCommercialWrittenPremiumUsd, 60_000);
+  assert.throws(() =>
+    parseAudiencePreviewRequest({
+      pageId: page.id,
+      language: "en",
+      input: { ...input, licensedStates: [] },
+    }),
+  );
+});
+
 test("a transient binding mismatch remains pending until a strict native match and composition succeed", async () => {
   const { prepareAudiencePreview } = await import("./service");
   const namespace = "test-preview";

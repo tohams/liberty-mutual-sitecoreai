@@ -190,9 +190,15 @@ test("all thirteen loops expose the required public, portal, and native destinat
   }
 });
 
-test("P0 keeps all twelve real tab URLs, with agent sessions separated by browser context", () => {
+test("P0 keeps all thirteen real tab URLs, with agent sessions separated by browser context", () => {
   const tabs = customerDemoTabGroups.flatMap((group) => group.tabs);
-  assert.equal(tabs.length, 12);
+  assert.equal(tabs.length, 13);
+  const preparation = tabs.find((tab) => tab.id === "audiencePreparation");
+  assert.equal(preparation?.href, `${PORTAL}/apps/audience-preview/prepare`);
+  assert.match(
+    preparation?.cue || "",
+    /42 of 42 ready.*close this preparation tab/,
+  );
   for (const tab of tabs) {
     const url = new URL(tab.href);
     assert.equal(url.protocol, "https:");

@@ -1,0 +1,164 @@
+.page {
+  min-height: 100vh;
+  padding: 48px 20px;
+  background: #f8f7fb;
+  color: #252234;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid #dfdce7;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 32px #29203e08;
+}
+.card h1 {
+  margin: 18px 0 12px;
+  font-size: 25px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.card p {
+  margin: 8px 0;
+  color: #706b7d;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.icon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border-radius: 13px;
+  background: #f4f0ff;
+  color: #6135e8;
+}
+.progress {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid #e8e0ff;
+  border-radius: 10px;
+  background: #fcfaff;
+}
+.counts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+.counts span {
+  color: #706b7d;
+  font-size: 12px;
+}
+.progress progress {
+  display: block;
+  width: 100%;
+  height: 10px;
+  appearance: none;
+  border: none;
+  border-radius: 8px;
+  background: #e9e4f1;
+  accent-color: #6135e8;
+}
+.progress progress::-webkit-progress-bar {
+  border-radius: 8px;
+  background: #e9e4f1;
+}
+.progress progress::-webkit-progress-value {
+  border-radius: 8px;
+  background: #6135e8;
+}
+.progress progress::-moz-progress-bar {
+  border-radius: 8px;
+  background: #6135e8;
+}
+.card button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 24px;
+  padding: 12px 16px;
+  border: 1px solid #6135e8;
+  border-radius: 8px;
+  background: #6135e8;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.card button:hover:not(:disabled) {
+  background: #4b22c2;
+}
+.card button:focus-visible {
+  outline: 3px solid #c7b7fb;
+  outline-offset: 3px;
+}
+.card button:disabled {
+  border-color: #e4e0ed;
+  background: #efedf4;
+  color: #9a93a8;
+  cursor: not-allowed;
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px solid #eccfd5;
+  border-radius: 8px;
+  background: #fff7f8;
+  color: #972d43;
+}
+.error svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.error p {
+  margin: 0;
+  color: inherit;
+}
+.spinner {
+  display: inline-block;
+  vertical-align: middle;
+  animation: preparation-spin 850ms linear infinite;
+}
+@keyframes preparation-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 480px) {
+  .page {
+    padding: 24px 12px;
+  }
+  .card {
+    padding: 24px;
+  }
+  .counts {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}
