@@ -63,6 +63,40 @@ test("the SDK's beforeSessionSaved binding preserves the author and refreshed to
   assert.equal(isBoundAudiencePreviewSession(null, configuration), false);
 });
 
+test("default SDK claim filtering removes oversized custom data while preserving identity and authorization metadata", () => {
+  const original: SessionData = {
+    ...session,
+    user: {
+      ...session.user,
+      org_id: "synthetic-organization",
+      act: { sub: "synthetic-actor", iss: "https://issuer.example" },
+      groups: Array.from(
+        { length: 200 },
+        (_, index) => `unused-custom-group-${index}`,
+      ),
+      "https://custom.example/unused": "x".repeat(20_000),
+    },
+    internal: { ...session.internal, sessionExpiresAt: 2_000 },
+  };
+  const bound = bindAudiencePreviewSession(original, configuration);
+  assert.equal(Object.hasOwn(bound.user, "groups"), false);
+  assert.equal(
+    Object.hasOwn(bound.user, "https://custom.example/unused"),
+    false,
+  );
+  assert.equal(bound.user.sub, original.user.sub);
+  assert.equal(bound.user.org_id, original.user.org_id);
+  assert.deepEqual(bound.user.act, original.user.act);
+  assert.equal(bound.tokenSet, original.tokenSet);
+  assert.equal(bound.internal, original.internal);
+  assert.equal(isBoundAudiencePreviewSession(bound, configuration), true);
+  assert.ok(JSON.stringify(bound.user).length < 1_000);
+  assert.ok(
+    Object.hasOwn(original.user, "groups"),
+    "Filtering must not mutate the input session",
+  );
+});
+
 test("authorized token retrieval uses the configured single audience without an MRRT override", async () => {
   const environment = {
     AUDIENCE_PREVIEW_AUTH0_CLIENT_ID: configuration.clientId,

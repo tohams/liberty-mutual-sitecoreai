@@ -1,5 +1,6 @@
 import "server-only";
 import type { SessionData } from "@auth0/nextjs-auth0/types";
+import { filterDefaultIdTokenClaims } from "@auth0/nextjs-auth0/server";
 import {
   AUDIENCE_PREVIEW_ORGANIZATION_ID,
   AUDIENCE_PREVIEW_TENANT_ID,
@@ -13,6 +14,7 @@ export function bindAudiencePreviewSession(
 ): SessionData {
   return {
     ...session,
+    user: filterDefaultIdTokenClaims(session.user),
     audiencePreviewClientId: configuration.clientId,
     audiencePreviewOrganizationId: AUDIENCE_PREVIEW_ORGANIZATION_ID,
     audiencePreviewTenantId: AUDIENCE_PREVIEW_TENANT_ID,
