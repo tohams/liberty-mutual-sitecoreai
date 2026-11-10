@@ -102,6 +102,18 @@ export const customerDemoChapters: DemoChapter[] = [
           "Help a visitor find relevant approved guidance from a conversational question, with an agent-assisted next step when the subject needs further help.",
         stopWhen:
           "The supported question shows the range of relevant published results and the approved answer excerpt, and the unsupported question ends with No results found and Contact an agent.",
+        inputs: [
+          {
+            action: 2,
+            label: "Supported search question",
+            value: "Can I combine home and car coverage?",
+          },
+          {
+            action: 3,
+            label: "Unsupported search question",
+            value: "Does car insurance cover cyberextortion?",
+          },
+        ],
         actions: [
           `Open the [**public Home page**](${PUBLIC}/). Choose **Privacy choices → Essential only**, then select **Search** in the header. Search remains available when optional collection is declined.`,
           "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**, then highlight the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page. Keep every result unopened.",
@@ -246,6 +258,18 @@ export const customerDemoChapters: DemoChapter[] = [
           "Make approved guidance easier to find and reuse, with its source, applicability, and review information kept explicit.",
         stopWhen:
           "The native page template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
+        inputs: [
+          {
+            action: 3,
+            label: "Find structured data in page source",
+            value: "application/ld+json",
+          },
+          {
+            action: 3,
+            label: "Find the canonical link in page source",
+            value: "canonical",
+          },
+        ],
         actions: [
           `Open [**the car-and-home resource page in Page Builder Content**](${resourcePageContent}). Confirm **Public Website**, **English**, and **Home → insurance-resources → bundle-car-and-home**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.`,
           `In the same [**resource page in Page Builder Content**](${resourcePageContent}), locate **State applicability**, **Products**, and **Audience** under **Content**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
@@ -295,6 +319,18 @@ export const customerDemoChapters: DemoChapter[] = [
           "Keep approved wording and classifications aligned across publishing and Search, reducing duplicate maintenance through one controlled update.",
         stopWhen:
           "The native Search document contains the newly published sentence, with its state, product, and audience values preserved.",
+        inputs: [
+          {
+            action: 1,
+            label: "Search by term",
+            value: "Can I bundle my car and home insurance?",
+          },
+          {
+            action: 3,
+            label: "Repeat Search by term",
+            value: "Can I bundle my car and home insurance?",
+          },
+        ],
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
           `In the prepared **administrator acting as publisher** session, open [**the car-and-home resource page**](${resourcePageContent}). In the version selector, choose the prepared revision by the **Prepared page version** number recorded in [**Before presenting**](#preparation)—the new English page version created for this run. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.`,
@@ -403,6 +439,44 @@ export const customerDemoChapters: DemoChapter[] = [
           "Create, preview, and publish pages without an engineering ticket, using approved components and a clear review process.",
         stopWhen:
           "The new coverage-guide-live page shows the authored headings and the shared Promotion on the public website.",
+        inputs: [
+          {
+            action: 1,
+            label: "New page name",
+            value: "coverage-guide-live",
+          },
+          {
+            action: 2,
+            label: "Hero heading",
+            value: "Explore coverage with confidence",
+          },
+          {
+            action: 2,
+            label: "Introduction heading",
+            value: "Guidance for your next decision",
+          },
+          {
+            action: 2,
+            label: "Introduction body",
+            value:
+              "Review approved information, compare your options, and speak with an agent about your needs.",
+          },
+          {
+            action: 5,
+            label: "Page submission comment",
+            value: "Review coverage guidance page",
+          },
+          {
+            action: 5,
+            label: "Local content submission comment",
+            value: "Review coverage guidance content",
+          },
+          {
+            action: 6,
+            label: "Approval comment",
+            value: "Approved coverage guidance",
+          },
+        ],
         actions: [
           `In the prepared **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. In the sitemap’s editable **New page** name, type **coverage-guide-live**, press **Enter**, and wait for **Page created from branch template**.`,
           "Choose **Reload tree** if it appears. Wait for the refreshed sitemap to finish loading. Select **coverage-guide-live**, and wait until **coverage-guide-live** appears as the page heading before opening **Content**. Open **Content → coverage-guide-live → Data → Hero**, and set **Heading** to **Explore coverage with confidence**. Press **Tab**, and wait for **Saved** before opening **Data → Introduction**. Set its **Heading** to **Guidance for your next decision**, press **Tab**, and wait for **Saved**. Enter **Review approved information, compare your options, and speak with an agent about your needs.** in **Body**, click outside **Body**, and wait for **Saved**.",
@@ -1141,6 +1215,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "Part 1 of the priority-change loop: save the new order as a Draft, ready for review, approval, and publication in the next step.",
         stopWhen:
           "Checkpoint: the Texas-first Draft is saved, the original approved version remains intact, and the live experience is unchanged. Continue with the audience-preview demonstration and the review/publication actions to complete this priority-change loop.",
+        inputs: [
+          {
+            action: 2,
+            label: "New priority version name",
+            value: "Texas guidance priority",
+          },
+        ],
         actions: [
           `As the **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}). Confirm **Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.`,
           "Record the current approved version and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Open the version selector, choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
@@ -1211,6 +1292,18 @@ export const customerDemoChapters: DemoChapter[] = [
           "Part 2 of the priority-change loop: inspect native page-level audience previews, then approve and publish the saved Home priority change and verify its intended live result.",
         stopWhen:
           "Both named page variants have been previewed while the growth page remains unpublished; publishing the saved priority collection changes Avery’s live Home order, while Daniel’s order remains unchanged.",
+        inputs: [
+          {
+            action: 4,
+            label: "Priority submission comment",
+            value: "Prioritize Texas workers compensation guidance",
+          },
+          {
+            action: 5,
+            label: "Priority approval comment",
+            value: "Approved agency priority update",
+          },
+        ],
         actions: [
           `In the prepared **administrator acting as publisher** browser profile, open [**Agent audience preview in Page Builder**](${audiencePreviewEditor}). Confirm **Agent Portal**, **English**, **Default editing host**, and the unpublished **Agent audience preview** page beneath **Home → growth**. Open **Personalize** in the top navigation.`,
           "Select **Avery agency principal**. Choose the header **Preview** button, then **Preview** in its menu. In the complete page preview, identify **Set your agency’s next growth priority** and **Give your team a clear direction**. Confirm the Avery/Cedar Ridge principal context. Close the preview tab, and return to the same **Personalize** screen.",
@@ -1372,6 +1465,29 @@ export const customerDemoChapters: DemoChapter[] = [
           "Keep the public website and Agent Portal aligned by publishing one approved disclosure from a shared source.",
         stopWhen:
           "The added disclosure sentence is visible on both Home pages after one source publication.",
+        inputs: [
+          {
+            action: 2,
+            label: "New disclosure version name",
+            value: "Shared disclosure review",
+          },
+          {
+            action: 2,
+            label: "Sentence to append to Disclosure",
+            value:
+              "Review available options with your agent before making a coverage decision.",
+          },
+          {
+            action: 3,
+            label: "Disclosure submission comment",
+            value: "Review shared disclosure wording",
+          },
+          {
+            action: 3,
+            label: "Disclosure approval comment",
+            value: "Approved shared disclosure wording",
+          },
+        ],
         actions: [
           `As the **Author**, open [**Product availability notice in Page Builder Content**](${disclosureContent}). Confirm **Public Website**, **English**, and **Data → Disclosures → Product availability notice**. Record the original approved English version and **Disclosure** text for the rollback in the next loop.`,
           "Choose **Create version**, name it **Shared disclosure review**, and select **Create**. Reopen the version selector, explicitly select the new **Shared disclosure review** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before editing **Disclosure**. Append **Review available options with your agent before making a coverage decision.** to **Disclosure**, click outside the field, and wait for **Saved**. Record the version number currently shown as **Saved disclosure version**. Use that same saved version number for submission, the Approver’s review, and publication.",
@@ -1502,6 +1618,23 @@ export const customerDemoChapters: DemoChapter[] = [
           "Show clear approval accountability, then restore the original disclosure through a new reviewed version while preserving history.",
         stopWhen:
           "Both Home pages show the restored original wording, and the original, changed, and restored versions remain in history.",
+        inputs: [
+          {
+            action: 3,
+            label: "Restored disclosure version name",
+            value: "Original disclosure restored",
+          },
+          {
+            action: 4,
+            label: "Restoration submission comment",
+            value: "Restore original disclosure wording",
+          },
+          {
+            action: 4,
+            label: "Restoration approval comment",
+            value: "Approved restoration of shared disclosure wording",
+          },
+        ],
         actions: [
           `Open [**public Home in Page Builder Editor**](${publicEditor}). In **Sitemap**, open the **Home** row’s **Content tree options**, choose **Page items**, and expand **Product availability notice**.`,
           "Select **Workflow history**. Under **History**, read the **Draft → Awaiting approval** and **Awaiting approval → Approved** transitions, their user and timestamp, and the review **Comment**. Match these to the separate Author and Approver actions just performed.",

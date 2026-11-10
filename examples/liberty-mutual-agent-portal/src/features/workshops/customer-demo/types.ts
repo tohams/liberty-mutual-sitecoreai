@@ -5,6 +5,13 @@ export interface DemoImage extends GuideImage {
   afterAction?: number;
 }
 
+/** Exact static text to paste into a field during the numbered action. */
+export interface DemoInput {
+  action: number;
+  label: string;
+  value: string;
+}
+
 /** One card in the customer's prescribed use-case order. */
 export interface DemoStep {
   id: string;
@@ -22,6 +29,7 @@ export interface DemoStep {
   /** The observable completion condition for this customer-requested outcome. */
   stopWhen: string;
   actions: string[];
+  inputs?: DemoInput[];
   expected: string[];
   talkTrack: string[];
   controls: string[];

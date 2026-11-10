@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock3, Mic2 } from "lucide-react";
 import { requireWorkshopSession } from "@/server/workshops/auth";
 import { DemoShell } from "./DemoShell";
+import { CopyValue } from "./CopyValue";
 import type { DemoChapter } from "./types";
 import { GuideText } from "@/features/workshops/GuideText";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
@@ -94,6 +95,10 @@ export async function CustomerDemoGuide({
               <ArrowRight size={17} aria-hidden="true" />
             </a>
           </div>
+          <p className={styles.copyHint}>
+            Select <strong>Copy</strong> beside any supplied text, then paste it
+            into the named field.
+          </p>
         </header>
 
         <div className={styles.layout}>
@@ -422,6 +427,23 @@ export async function CustomerDemoGuide({
                         {step.actions.map((action, actionIndex) => (
                           <li key={actionIndex}>
                             <GuideText text={action} openLinksInNewTab />
+                            {step.inputs?.some(
+                              (input) => input.action === actionIndex + 1,
+                            ) ? (
+                              <div className={styles.copyValues}>
+                                {step.inputs
+                                  .filter(
+                                    (input) => input.action === actionIndex + 1,
+                                  )
+                                  .map((input) => (
+                                    <CopyValue
+                                      key={`${input.label}-${input.value}`}
+                                      label={input.label}
+                                      value={input.value}
+                                    />
+                                  ))}
+                              </div>
+                            ) : null}
                             {step.images
                               ?.filter(
                                 (image) =>
