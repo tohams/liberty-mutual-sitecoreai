@@ -16,6 +16,7 @@ import {
   assertVerifiedPreviewProfile,
   type VerifiedPreviewProfile,
 } from "./profiles";
+import { inspectAudiencePreviewBinding } from "./binding";
 
 export interface NativePreviewDiscovery {
   getPersonalizeInfo(
@@ -157,16 +158,22 @@ export async function evaluateAudiencePreview(
   assertVerifiedPreviewProfile(profile);
   const transport = dependencies.transport || fetch;
   const readRef = dependencies.readProfileRef || readPortalBrowserProfileRef;
-  const currentRef = await readRef(
+  const binding = await inspectAudiencePreviewBinding(
     {
       edgeUrl: dependencies.edgeUrl,
       contextId: dependencies.contextId,
       browserId: profile.browserId,
     },
+    profile.profileId,
     AbortSignal.timeout(8_000),
     transport,
+    readRef,
   );
-  if (currentRef?.toLowerCase() !== profile.profileId.toLowerCase()) {
+  console.info(
+    "Audience Preview native binding check",
+    JSON.stringify(binding),
+  );
+  if (binding.category !== "matched") {
     throw new AudiencePreviewError(
       "PREVIEW_BINDING_CHANGED",
       "The preview profile’s browser binding could not be confirmed.",
