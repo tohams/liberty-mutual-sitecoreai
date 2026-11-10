@@ -82,18 +82,19 @@
   cursor: pointer;
 }
 
-.actions a {
+.actions a,
+.actions button {
   border-color: #7040d7;
   background: #7040d7;
   color: #fff;
 }
 
-.actions a:hover {
+.actions a:hover,
+.actions button:hover {
   border-color: #5d2dbb;
   background: #5d2dbb;
 }
 
-.actions button:hover,
 .error button:hover {
   background: #f6f2fe;
 }

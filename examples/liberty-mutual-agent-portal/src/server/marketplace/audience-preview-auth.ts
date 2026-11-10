@@ -1,6 +1,8 @@
 import "server-only";
 import { Auth0Client } from "@auth0/nextjs-auth0/server";
 import type { User } from "@auth0/nextjs-auth0/types";
+import { NextResponse } from "next/server";
+import { audiencePreviewCallbackDestination } from "./audience-preview-sso";
 import {
   AUDIENCE_PREVIEW_APP_PATH,
   AUDIENCE_PREVIEW_AUTH0_AUDIENCE,
@@ -52,6 +54,14 @@ export function getAudiencePreviewAuth(): Auth0Client | null {
       accessToken: `${AUDIENCE_PREVIEW_APP_PATH}/auth/access-token`,
     },
     enableAccessTokenEndpoint: false,
+    onCallback: async (error, context) =>
+      NextResponse.redirect(
+        audiencePreviewCallbackDestination(
+          error,
+          context.returnTo,
+          configuration.appBaseUrl,
+        ),
+      ),
     beforeSessionSaved: async (session) => ({
       ...session,
       audiencePreviewClientId: configuration.clientId,
