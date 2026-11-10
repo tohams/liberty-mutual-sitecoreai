@@ -89,7 +89,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `In the **Public website** tab, use the starting address once to open **Home**.`,
+            `Start in the **Public website** tab on **Home**.`,
             "Select **Search** in the header.",
           ],
           [
@@ -1248,7 +1248,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation. Leave the kit unchanged.",
           ],
           [
-            `Return to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.`,
+            `Return to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.`,
             "Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**. Confirm **Introduction** in the right panel.",
             "Select **Optimize with AI**; point to **Adhere to brand kit**, then paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**.",
             "When **Ready!** appears, review the generated paragraph. Choose **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.",
