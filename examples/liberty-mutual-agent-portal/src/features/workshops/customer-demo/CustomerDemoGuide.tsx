@@ -1,19 +1,14 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Clock3, Mic2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Clock3 } from "lucide-react";
 import { requireWorkshopSession } from "@/server/workshops/auth";
 import { DemoShell } from "./DemoShell";
 import { CopyValue } from "./CopyValue";
 import type { DemoChapter } from "./types";
 import { GuideText } from "@/features/workshops/GuideText";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
-import {
-  customerDemoAiContext,
-  customerDemoChapters,
-  customerDemoOpening,
-} from "@/features/workshops/customer-demo/content";
+import { customerDemoChapters } from "@/features/workshops/customer-demo/content";
 import {
   customerDemoSchedule,
-  DEMO_BUFFER_MINUTES,
   DEMO_CLOSING_MINUTES,
   DEMO_OPENING_MINUTES,
   DEMO_TOTAL_MINUTES,
@@ -65,9 +60,6 @@ export async function CustomerDemoGuide({
     <DemoShell session={session} chapterId={chapterId}>
       <main id="workshop-main" className={styles.page}>
         <header className={styles.heading}>
-          <span className="workshop-eyebrow">
-            FROM CUSTOMER NEED TO BUSINESS VALUE
-          </span>
           <h1>
             {chapterId === "public"
               ? "Public Website demonstration"
@@ -75,13 +67,6 @@ export async function CustomerDemoGuide({
                 ? "Agent Portal demonstration"
                 : "Liberty Mutual demonstration walkthrough"}
           </h1>
-          <p>
-            {chapterId === "public"
-              ? "Follow the public-site visitor’s question through governed authoring, publication, measurement, and reuse. Each of the seven demonstrations identifies the customer request, the business task, the exact clicks, and the result to show."
-              : chapterId === "portal"
-                ? "Follow the independent agent’s experience, then show how marketers change priorities, preview audiences, and govern one shared message. Each of the six demonstrations includes the exact clicks, talk track, and expected result."
-                : "Follow Liberty Mutual’s two requested journeys in order. Each demonstration identifies the person, the business task, the exact clicks, and the result to show."}
-          </p>
           <div className={styles.introLinks}>
             <span className={styles.timeBudget}>
               <Clock3 size={18} aria-hidden="true" />
@@ -96,8 +81,8 @@ export async function CustomerDemoGuide({
             </a>
           </div>
           <p className={styles.copyHint}>
-            Select <strong>Copy</strong> beside any supplied text, then paste it
-            into the named field.
+            <strong>Copy</strong> the supplied text. Expand screenshots when
+            needed.
           </p>
         </header>
 
@@ -256,77 +241,8 @@ export async function CustomerDemoGuide({
                 <span className={styles.timing}>
                   00:00–{elapsedTime(DEMO_OPENING_MINUTES)} · AI introduction
                 </span>
-                <h2>{customerDemoOpening.title}</h2>
-                <p>
-                  <strong>Presenter:</strong> {customerDemoOpening.presenter}.
-                  Introduce the role of AI assistance, then hand over to the
-                  live customer scenarios. The introduction is part of the
-                  45-minute limit.
-                </p>
-                <div className={styles.talkTrack}>
-                  <h3>
-                    <Mic2 size={17} aria-hidden="true" /> Talk track
-                  </h3>
-                  {customerDemoOpening.talkTrack.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                  <p>{customerDemoOpening.handoff}</p>
-                </div>
-                <table className={styles.runOfShow}>
-                  <caption>
-                    Elapsed time from the start of the demonstration
-                  </caption>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Angela’s AI introduction</th>
-                      <td>00:00–{elapsedTime(DEMO_OPENING_MINUTES)}</td>
-                      <td>{DEMO_OPENING_MINUTES} minutes</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <a href="#public">
-                          Trusted Answers, Wherever the Journey Begins
-                        </a>
-                      </th>
-                      <td>
-                        {elapsedTime(DEMO_OPENING_MINUTES)}–
-                        {elapsedTime(publicEnd)}
-                      </td>
-                      <td>{publicEnd - DEMO_OPENING_MINUTES} minutes</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <Link
-                          href={chapterId === "public" ? "/demo" : "#portal"}
-                        >
-                          One Relevant Liberty Experience
-                        </Link>
-                      </th>
-                      <td>
-                        {elapsedTime(publicEnd)}–{elapsedTime(closeStart)}
-                      </td>
-                      <td>{closeStart - publicEnd} minutes</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Close</th>
-                      <td>
-                        {elapsedTime(closeStart)}–{elapsedTime(closeEnd)}
-                      </td>
-                      <td>1 minute</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Publication and navigation reserve</th>
-                      <td>Use only when needed</td>
-                      <td>{DEMO_BUFFER_MINUTES} minutes</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p className={styles.pacing}>
-                  <strong>Pacing:</strong> the {closeEnd}-minute plan leaves{" "}
-                  {DEMO_BUFFER_MINUTES} minutes within the {DEMO_TOTAL_MINUTES}
-                  -minute limit. Stop each loop when its stated outcome is
-                  visible, and use the reserve for publication or navigation.
-                </p>
+                <h2>Opening</h2>
+                <p>Angela: AI introduction. Then begin P1.</p>
               </section>
             )}
 
@@ -337,38 +253,19 @@ export async function CustomerDemoGuide({
                 className={styles.chapter}
               >
                 <header className={styles.chapterHeading}>
-                  <span className="workshop-eyebrow">
+                  <h2>
                     {chapter.id === "public"
-                      ? "PUBLIC WEBSITE · CUSTOMER GUIDE SLIDE 10"
-                      : "INDEPENDENT AGENT PORTAL · CUSTOMER GUIDE SLIDE 11"}
-                  </span>
-                  <h2>{chapter.title}</h2>
-                  <p>{chapter.summary}</p>
-                  <div className={styles.talkTrack}>
-                    <h3>AI in this journey</h3>
-                    <p>
-                      <strong>Demonstrated:</strong>{" "}
-                      {customerDemoAiContext[chapter.id].demonstrated}
-                    </p>
-                    <p>
-                      <strong>AI-assisted next step:</strong>{" "}
-                      {customerDemoAiContext[chapter.id].nextStep}
-                    </p>
-                  </div>
+                      ? "Public Website"
+                      : "Agent Portal"}
+                  </h2>
                 </header>
                 {chapter.steps.map((step, index) => {
                   const number = `${chapter.id === "public" ? "P" : "A"}${index + 1}`;
                   const timing = schedule.find(
                     (entry) => entry.id === step.id,
                   )!;
-                  const showPhase =
-                    index === 0 ||
-                    chapter.steps[index - 1].phase !== step.phase;
                   return (
                     <section id={step.id} key={step.id} className={styles.step}>
-                      {showPhase && (
-                        <p className={styles.phase}>{step.phase}</p>
-                      )}
                       <div className={styles.stepTop}>
                         <span className={styles.number}>{number}</span>
                         <span className={styles.timing}>
@@ -383,30 +280,6 @@ export async function CustomerDemoGuide({
                         )}
                       </div>
                       <h3>{step.title}</h3>
-                      <p>
-                        <strong>Customer request:</strong> {step.label}
-                      </p>
-                      <div className={styles.observations}>
-                        <p>
-                          <strong>Who is acting:</strong> {step.persona}
-                        </p>
-                        <p>
-                          <strong>Business task:</strong> {step.scenario}
-                        </p>
-                      </div>
-                      <p className={styles.objective}>
-                        <strong>Outcome:</strong> {step.objective}
-                      </p>
-                      <div className={styles.talkTrack}>
-                        <h4>
-                          <Mic2 size={17} aria-hidden="true" /> Talk track
-                        </h4>
-                        {step.talkTrack.map((paragraph, i) => (
-                          <p key={i}>
-                            <GuideText text={paragraph} />
-                          </p>
-                        ))}
-                      </div>
                       {step.links?.length ? (
                         <div className={styles.launchLinks}>
                           {step.links.map((link) => (
@@ -422,11 +295,14 @@ export async function CustomerDemoGuide({
                           ))}
                         </div>
                       ) : null}
-                      <h4>On screen</h4>
-                      <ol>
-                        {step.actions.map((action, actionIndex) => (
+                      <ol className={styles.clicks}>
+                        {step.presenterActions.map((lines, actionIndex) => (
                           <li key={actionIndex}>
-                            <GuideText text={action} openLinksInNewTab />
+                            {lines.map((line, lineIndex) => (
+                              <div className={styles.clickLine} key={lineIndex}>
+                                <GuideText text={line} openLinksInNewTab />
+                              </div>
+                            ))}
                             {step.inputs?.some(
                               (input) => input.action === actionIndex + 1,
                             ) ? (
@@ -450,38 +326,37 @@ export async function CustomerDemoGuide({
                                   image.afterAction === actionIndex + 1,
                               )
                               .map((image) => (
-                                <GuideScreenshot
-                                  image={image}
+                                <details
+                                  className={styles.screenshot}
                                   key={`${image.file}-${image.title ?? ""}`}
-                                />
+                                >
+                                  <summary>
+                                    Screenshot ·{" "}
+                                    {image.title ?? "View this step"}
+                                  </summary>
+                                  <GuideScreenshot image={image} />
+                                </details>
                               ))}
                           </li>
                         ))}
                       </ol>
-                      <div className={styles.observations}>
-                        <h4>What to observe</h4>
-                        <Lines lines={step.expected} />
-                      </div>
-                      <div className={styles.observations}>
-                        <h4>Stop when</h4>
-                        <p>
-                          <GuideText text={step.stopWhen} />
-                        </p>
-                      </div>
-                      <h4>How it works</h4>
-                      <Lines lines={step.controls} />
+                      <p className={styles.resultCheck}>
+                        <strong>Result check:</strong>{" "}
+                        <GuideText text={step.presenterResult} />
+                      </p>
                       {step.images
                         ?.filter((image) => !image.afterAction)
                         .map((image) => (
-                          <GuideScreenshot
-                            image={image}
+                          <details
+                            className={styles.screenshot}
                             key={`${image.file}-${image.title ?? ""}`}
-                          />
+                          >
+                            <summary>
+                              Screenshot · {image.title ?? "View this step"}
+                            </summary>
+                            <GuideScreenshot image={image} />
+                          </details>
                         ))}
-                      <p className={styles.transition}>
-                        <strong>Transition:</strong>{" "}
-                        <GuideText text={step.transition} />
-                      </p>
                     </section>
                   );
                 })}
@@ -493,13 +368,7 @@ export async function CustomerDemoGuide({
                 <span className={styles.timing}>
                   {elapsedTime(publicEnd)} · Agent Portal handoff
                 </span>
-                <h2>
-                  The same governed foundation supports independent agents
-                </h2>
-                <p>
-                  The public-site sequence is complete. Continue with the Agent
-                  Portal in the customer’s requested order.
-                </p>
+                <h2>Next: Agent Portal</h2>
                 <Link href="/demo" className={styles.startLink}>
                   Continue to the Agent Portal guide{" "}
                   <ArrowRight size={17} aria-hidden="true" />
@@ -510,31 +379,8 @@ export async function CustomerDemoGuide({
                 <span className={styles.timing}>
                   {elapsedTime(closeStart)}–{elapsedTime(closeEnd)} · Close
                 </span>
-                <h2>More relevant experiences, with business control</h2>
-                <div className={styles.talkTrack}>
-                  <h3>
-                    <Mic2 size={17} aria-hidden="true" /> Talk track
-                  </h3>
-                  <p>
-                    “You’ve seen business users create and release changes,
-                    agents receive relevant priorities, and one approved update
-                    reach both sites. Those capabilities support the measures
-                    you identified: time to publish, the share of changes
-                    managed by business users, and content reuse.”
-                  </p>
-                  <p>
-                    “That gives your team a simpler way to keep trusted
-                    information current and help independent agents find what
-                    matters to their business. We can now discuss your questions
-                    and the platform’s product direction.”
-                  </p>
-                </div>
-                <p>
-                  The customer agenda reserves five minutes for Q&amp;A after
-                  this 45-minute demonstration block. The product roadmap
-                  follows in its separate agenda slot, using the horizon
-                  requested by Liberty Mutual.
-                </p>
+                <h2>Close</h2>
+                <p>Return to the deck for the closing and Q&amp;A.</p>
               </section>
             )}
 
