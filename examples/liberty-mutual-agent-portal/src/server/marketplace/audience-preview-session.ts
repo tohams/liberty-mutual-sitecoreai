@@ -1,6 +1,7 @@
 import "server-only";
 import type { SessionData } from "@auth0/nextjs-auth0/types";
 import { filterDefaultIdTokenClaims } from "@auth0/nextjs-auth0/server";
+import { audiencePreviewOAuthReason } from "./audience-preview-oauth-reason";
 import {
   AUDIENCE_PREVIEW_ORGANIZATION_ID,
   AUDIENCE_PREVIEW_TENANT_ID,
@@ -110,6 +111,7 @@ export function audiencePreviewTokenDiagnostic(
           )
         : null,
     ...(oauthCode ? { oauthCode } : {}),
+    ...(oauthCode ? audiencePreviewOAuthReason(cause?.message, session) : {}),
     ...(oauthStatus !== undefined ? { oauthStatus } : {}),
   };
 }

@@ -171,7 +171,8 @@ test("refresh diagnostics expose only allowlisted codes, token presence, and a b
 test("nested SDK OAuth diagnostics retain only allowlisted codes and an actually present HTTP error status", () => {
   const cause = new OAuth2Error({
     code: "invalid_grant",
-    message: "private-provider-description",
+    message:
+      "Denied for private@example.test; refresh_token=private-refresh-token",
   });
   const error = new AccessTokenError(
     AccessTokenErrorCode.FAILED_TO_REFRESH_TOKEN,
@@ -188,6 +189,8 @@ test("nested SDK OAuth diagnostics retain only allowlisted codes and an actually
     hasRefreshToken: true,
     expiresAtDelta: -5,
     oauthCode: "invalid_grant",
+    oauthReasonCategory: "unclassified",
+    oauthReason: "Denied for [identity]; refresh_token=[redacted]",
     oauthStatus: 401,
   });
   assert.equal(JSON.stringify(diagnostic).includes("private"), false);
