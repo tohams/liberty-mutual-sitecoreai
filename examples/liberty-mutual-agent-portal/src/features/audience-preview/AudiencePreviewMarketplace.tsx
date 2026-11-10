@@ -331,22 +331,6 @@ export function AudiencePreviewMarketplace() {
           "Open Audience Preview from its installed app in Page Builder.",
         );
       }
-      // Temporary setup diagnostic; remove after verifying the installed app's routing context.
-      console.info(
-        "Audience Preview temporary setup resource context",
-        JSON.stringify(
-          (application.data.resourceAccess || []).map((resource) => ({
-            resourceId: resource.resourceId,
-            name: resource.tenantDisplayName || resource.tenantName,
-            type: typeof resource.type === "string" ? resource.type : undefined,
-            context: {
-              preview: resource.context?.preview,
-              live: resource.context?.live,
-            },
-          })),
-        ),
-      );
-
       const receivePage = (context: PagesContext) => {
         if (cancelled) return;
         const selected = currentPage(context);

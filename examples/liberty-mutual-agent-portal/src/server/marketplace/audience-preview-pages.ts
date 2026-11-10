@@ -7,7 +7,6 @@ import {
 const GATEWAY = "https://edge-platform.sitecorecloud.io";
 const SITES = [
   {
-    id: "e1624003-27d5-49c4-9aa6-32563bdf2277",
     name: "liberty-mutual-agent-portal",
     root: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal",
   },
@@ -147,7 +146,7 @@ async function readSitecore(
   parameters: Record<string, string>,
   accessToken: string,
   contextId: string,
-): Promise<Record<string, unknown>> {
+): Promise<unknown> {
   const url = new URL(pathname, GATEWAY);
   url.search = new URLSearchParams({
     ...parameters,
@@ -200,7 +199,7 @@ async function readSitecore(
     );
   }
   try {
-    return record(await response.json());
+    return await response.json();
   } catch (error) {
     if (error instanceof AudiencePreviewError) throw error;
     throw new AudiencePreviewError(
@@ -239,22 +238,53 @@ export async function resolveAuthorizedPreviewPage(
     );
   }
   const { contextId } = audiencePreviewApiConfiguration();
-  // The delegated Pages API returns the full content path and current-user
-  // permissions. A separate Agent API lookup is unnecessary for ownership.
-  // The site is server-defined; neither SDK host context nor request input can
-  // select another site for the authorization request.
+  // Sites API IDs are its own contract; a SiteGrouping item ID is not a
+  // substitute. Resolve the fixed site through the same delegated identity.
+  // The host and request cannot choose another site or identifier.
   const site = SITES[0];
-  const page = await readSitecore(
-    `/authoring/api/v1/pages/${pageId}`,
-    {
-      site: site.id,
-      language: input.language,
-      ...(input.version === undefined
-        ? {}
-        : { version: String(input.version) }),
-    },
+  const sites = await readSitecore(
+    "/authoring/api/v1/sites",
+    {},
     accessToken,
     contextId,
+  );
+  if (!Array.isArray(sites) || sites.length > 1_000) {
+    throw new AudiencePreviewError(
+      "INVALID_SITECORE_RESPONSE",
+      "SitecoreAI returned an invalid site response.",
+      502,
+    );
+  }
+  const candidates = sites.filter((candidate: unknown) => {
+    return (
+      candidate &&
+      typeof candidate === "object" &&
+      !Array.isArray(candidate) &&
+      (candidate as Record<string, unknown>).name === site.name
+    );
+  });
+  const siteId =
+    candidates.length === 1 ? itemId(record(candidates[0]).id) : null;
+  if (!siteId) {
+    throw new AudiencePreviewError(
+      "SITE_ACCESS_DENIED",
+      "This SitecoreAI account cannot access Agent Portal for audience preview.",
+      403,
+    );
+  }
+  const page = record(
+    await readSitecore(
+      `/authoring/api/v1/pages/${pageId}`,
+      {
+        site: siteId,
+        language: input.language,
+        ...(input.version === undefined
+          ? {}
+          : { version: String(input.version) }),
+      },
+      accessToken,
+      contextId,
+    ),
   );
   if (siteForPath(page.path, true)?.name !== site.name) {
     throw new AudiencePreviewError(
