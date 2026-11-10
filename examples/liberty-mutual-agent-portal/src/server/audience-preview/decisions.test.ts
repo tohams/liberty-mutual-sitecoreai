@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { CdpHelper } from "@sitecore-content-sdk/content/personalize";
+import { defineConfig } from "@sitecore-content-sdk/nextjs/config";
 import type { AudiencePreviewPage } from "../../features/audience-preview/types";
 import { evaluateAudiencePreview, nativePreviewExecutions } from "./decisions";
+import { normalizeNativePreviewConfiguration } from "./contracts";
 
 const page: AudiencePreviewPage = {
   id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
@@ -24,6 +26,73 @@ const configuration = {
   contextId: "synthetic-context",
   siteName: page.siteName,
 };
+
+test("the actual SDK default scope becomes an omitted scope and sends an unscoped native friendly ID", async () => {
+  const sdk = defineConfig({
+    api: { edge: { contextId: "configuration-test" } },
+    defaultSite: page.siteName,
+    personalize: { enabled: true },
+  });
+  assert.equal(sdk.personalize.scope, "");
+  const normalized = normalizeNativePreviewConfiguration({
+    edgeUrl: sdk.api.edge.edgeUrl,
+    contextId: sdk.api.edge.contextId,
+    siteName: sdk.defaultSite,
+    scope: sdk.personalize.scope,
+  });
+  assert.equal(Object.hasOwn(normalized, "scope"), false);
+  let requests = 0;
+  const result = await evaluateAudiencePreview(page, profile, {
+    ...normalized,
+    discovery: {
+      getPersonalizeInfo: async () => ({
+        pageId: page.id,
+        variantIds: [variants[0]],
+      }),
+    },
+    readProfileRef: async () => profile.profileId,
+    transport: (async (url, init) => {
+      requests++;
+      const endpoint = new URL(String(url));
+      const body = JSON.parse(String(init?.body));
+      assert.equal(endpoint.searchParams.has("scope"), false);
+      assert.equal(Object.hasOwn(body, "scope"), false);
+      assert.equal(
+        body.friendlyId,
+        CdpHelper.getComponentFriendlyId(page.id, "componentA", "en"),
+      );
+      return Response.json({ variantId: "componentA_default" });
+    }) as typeof fetch,
+  });
+  assert.equal(requests, 1);
+  assert.equal(result.selections[0].control, true);
+});
+
+test("scope normalization retains explicit scopes and rejects invalid native configuration", () => {
+  assert.equal(
+    normalizeNativePreviewConfiguration({ ...configuration, scope: " " }).scope,
+    undefined,
+  );
+  assert.equal(
+    normalizeNativePreviewConfiguration({
+      ...configuration,
+      scope: "portal-preview",
+    }).scope,
+    "portal-preview",
+  );
+  for (const invalid of [
+    { edgeUrl: "http://edge-platform.sitecorecloud.io" },
+    { edgeUrl: "https://untrusted.example" },
+    { contextId: "" },
+    { siteName: "invalid/site" },
+    { scope: "invalid/scope" },
+  ])
+    assert.throws(
+      () =>
+        normalizeNativePreviewConfiguration({ ...configuration, ...invalid }),
+      /not configured/,
+    );
+});
 
 test("native grouping uses SDK friendly IDs and per-component control variants", () => {
   assert.deepEqual(
