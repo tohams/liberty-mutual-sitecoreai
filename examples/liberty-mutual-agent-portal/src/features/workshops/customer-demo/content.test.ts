@@ -761,17 +761,13 @@ test("the relevance loop uses native profile and priority tests without presente
   assert.equal(entry.inputs, undefined);
   for (const link of linksIn(entry))
     assert.doesNotMatch(link.href, /\/(?:workshops?|demo)(?:[/?#]|$)/);
-  assert(
-    linksIn(entry).some((link) =>
-      link.href.includes("/optimization/profiles?"),
-    ),
+  assert.match(
+    prose(entry.presenterActions),
+    /SitecoreAI.*Optimization → Profiles.*Avery Brooks - 01/,
   );
-  assert(
-    linksIn(entry).some((link) =>
-      link.href.includes(
-        "/optimization/custom-values/ad7b493b-f768-404c-adc6-9841c2fe1a6e?",
-      ),
-    ),
+  assert.match(
+    prose(entry.presenterActions),
+    /Optimization → Custom values → Liberty Mutual - Agency product priorities/,
   );
   assert.doesNotMatch(
     text,
@@ -805,7 +801,10 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
     /Layers.*headless-agency-priorities.*Insert into.*before or after Agency priorities.*filtered Components picker.*Business priorities → Agency priorities.*Close the picker without selecting a component or inserting content/i,
   );
   assert.match(actions[3], /Avery portal.*My workspace.*Learning & resources/);
-  assert(entry.links?.some((link) => link.href.includes("/design/brandkits?")));
+  assert.match(
+    prose(entry.presenterActions[0]),
+    /SitecoreAI.*Design → Brand kits/,
+  );
   assert.match(prose(entry.talkTrack), /sample Liberty Mutual Brand Kit/);
   assert.match(
     prose(entry.talkTrack),
@@ -913,10 +912,9 @@ test("the same Home draft is previewed with audience attributes before approval 
     prose([editEntry, entry]),
     /Agent audience preview|Home → growth|prepared growth page|Avery agency principal|Daniel producer|authored Hero and Callout|native page-level audience previews/,
   );
-  assert(
-    linksIn(entry).some((link) =>
-      link.href.includes("sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998"),
-    ),
+  assert.match(
+    prose(entry.presenterActions[0]),
+    /SitecoreAI → Channels → Agent Portal → Page builder.*Site switcher → Agent Portal → Editor → Pages → Home/,
   );
   assert.equal(editEntry.durationMinutes, 2);
   assert.equal(entry.durationMinutes, 4);
@@ -1039,19 +1037,14 @@ test("each named content Draft is explicitly selected before its fields change",
 
 test("one full copyright notice updates both footers and restores only its year", () => {
   const shared = step("portal-shared-content");
-  assert(
-    linksIn(shared).some((link) =>
-      link.href.includes(`sc_itemid=${COPYRIGHT_ID}`),
-    ),
+  assert.match(
+    prose(shared.presenterActions[0]),
+    /Site switcher → Public Website → Content.*Data → Disclosures → Copyright notice/,
   );
-  const destinations = new Set(
-    linksIn(shared).map((link) => {
-      const url = new URL(link.href, `https://${PORTAL_HOST}`);
-      return `${url.hostname}${url.pathname}`;
-    }),
+  assert.match(
+    prose(shared.presenterActions.at(-1)),
+    /Public website.*reload.*footer.*Avery portal.*reload.*footer/,
   );
-  for (const expected of [`${PUBLIC_HOST}/`, `${PORTAL_HOST}/`])
-    assert(destinations.has(expected));
   assert.match(
     prose(shared.actions),
     /Record.*original.*full Disclosure.*rollback.*copyright year is 2025/i,

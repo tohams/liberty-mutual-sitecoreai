@@ -2,6 +2,7 @@ import type { DemoChapter } from "./types";
 
 import {
   PUBLIC,
+  SITECORE_AI,
   PORTAL,
   SEARCH_SOURCE,
   ANALYTICS,
@@ -11,10 +12,7 @@ import {
   SCRUNCH_EDITOR,
   BRAND_KITS,
   resourcePageContent,
-  publicEditor,
   portalEditor,
-  priorityContent,
-  copyrightContent,
 } from "./demo-destinations";
 
 /** Explain AI's role in each customer journey without implying autonomous publication. */
@@ -91,7 +89,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `In the **Public website** tab, open [**public Home**](${PUBLIC}/).`,
+            `In the **Public website** tab, use the starting address once to open **Home**.`,
             "Select **Search** in the header.",
           ],
           [
@@ -123,10 +121,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Published website pages join Search when their native **Include in site search** checkbox is selected. The articles and approved answers are managed and published in **SitecoreAI**.",
           "Optional measurement respects the visitor’s stored privacy preferences.",
         ],
-        links: [
-          { label: "Public Home", href: `${PUBLIC}/` },
-          { label: "Public Search", href: `${PUBLIC}/search` },
-        ],
+        links: [{ label: "Public website", href: `${PUBLIC}/` }],
         images: [
           {
             file: "demo-public-search-panel.png",
@@ -265,7 +260,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Page Builder**, and choose **Site switcher → Public Website → Editor → Pages**.",
+            "In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Public Website** card. Reuse that **Page Builder** tab; choose **Site switcher → Public Website → Editor → Pages**.",
             "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**; then choose **Content**.",
             "Confirm **English** and the selected **bundle-car-and-home** page.",
             "Expand **Resource content**: show **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and dates.",
@@ -278,7 +273,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
           ],
           [
-            `Switch to the **Public website** tab, open [**the public article**](${ARTICLE}), then choose **View page source → Find**.`,
+            `Switch to the **Public article** starting tab, then choose **View page source → Find**.`,
             "Paste **Find structured data in page source** below into **Find**.",
             "Show **FAQPage**, **Question**, and **acceptedAnswer**.",
             "Find **canonical** using the Copy field below; close the source tab, and return to the **Public website** tab.",
@@ -303,8 +298,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The public rendering supplies **FAQPage** metadata and a canonical URL: a structured foundation for discovery by permitted search and AI consumers.",
         ],
         links: [
-          { label: "Resource page fields", href: `${resourcePageContent}` },
-          { label: "Public article", href: `${ARTICLE}` },
+          { label: "SitecoreAI", href: SITECORE_AI },
+          { label: "Public article", href: ARTICLE },
         ],
         images: [
           {
@@ -355,13 +350,13 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to the prepared **Search Preview** tab.",
+            "In the **SitecoreAI** tab, choose **Content → Search Sources → Liberty Mutual Approved Answers → Preview**. Keep this tab as **Search Preview**.",
             "Paste **Search by term** below into **Search by term**, then expand the matching row using **Toggle document details**.",
             "Confirm **body** does not contain **Review your options with your agent before choosing coverage.**",
             "If the sentence is present, restore the baseline through [**Before presenting**](#preparation) before continuing.",
           ],
           [
-            "Return to **Page Builder → Content** for **bundle-car-and-home**, the page selected in P2.",
+            "Return to the existing **Page Builder** tab. Choose **Site switcher → Public Website → Editor → Pages**; expand **Home → insurance-resources**, select **bundle-car-and-home**, then choose **Content**.",
             "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
             "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field below in **Detailed explanation**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
@@ -390,16 +385,7 @@ export const customerDemoChapters: DemoChapter[] = [
         controls: [
           "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. This loop follows the resource page’s own guidance and applicability metadata.",
         ],
-        links: [
-          {
-            label: "Publish the prepared resource page",
-            href: `${resourcePageContent}`,
-          },
-          {
-            label: "Verify the native Search document",
-            href: `${SEARCH_SOURCE}`,
-          },
-        ],
+        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
         images: [
           {
             file: "demo-public-publish-approved.png",
@@ -519,7 +505,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**, then select **Home** in **Sitemap**.",
+            "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Editor → Pages**, then select **Home** in **Sitemap**.",
             "Confirm **Public Website**, **English**, and **Default editing host**.",
             "Choose **Home → Create a page → Landing page → Select**.",
             "Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**.",
@@ -562,7 +548,7 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "On the same **coverage-page** in **Page Builder**, choose **Publish**.",
             "Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**.",
-            `After completion, switch to the **Public website** tab, open [**the published coverage page**](${PUBLIC}/coverage-page), and confirm both headings, the Hero image, and the shared Promotion.`,
+            `After completion, use this loop’s **Published page** starting address in the **Public website** tab. Confirm both headings, the Hero image, and the shared Promotion.`,
           ],
         ],
         presenterResult:
@@ -588,9 +574,9 @@ export const customerDemoChapters: DemoChapter[] = [
           "The configured workflow is **Draft → Awaiting approval → Approved**. The page’s local content moves with it through review, and a separate publishing action releases the approved page. Shared Promotions retain their own review.",
         ],
         links: [
-          { label: "Create a page under public Home", href: publicEditor },
+          { label: "SitecoreAI", href: SITECORE_AI },
           {
-            label: "New page after publication",
+            label: "Published page — open after publishing",
             href: `${PUBLIC}/coverage-page`,
           },
         ],
@@ -786,7 +772,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
           ],
           [
-            "Switch to the prepared **Prospera Page Builder** tab in the same **Incognito / Private** window.",
+            "Beside **Cards · Description**, select the **page-opening icon** to the right of **Select**. Switch to the **Prospera Page Builder** tab that opens in the same **Incognito / Private** window.",
             "Show **AEO opportunities** and **Powered by Scrunch**.",
             "On **Cards · Description**, choose **Show live content** if needed.",
             "Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**.",
@@ -818,12 +804,8 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         links: [
           {
-            label: "Review the native AEO recommendation",
+            label: "Prospera recommendations — Private window",
             href: SCRUNCH_REVIEW,
-          },
-          {
-            label: "Open the same recommendation in Page Builder",
-            href: SCRUNCH_EDITOR,
           },
         ],
         images: [
@@ -965,7 +947,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The public-site report shows pageView and LM_PUBLIC_CTA_CLICK over the past month, and the presenter explains the visitor action represented by the custom event.",
         presenterActions: [
           [
-            "Switch to the prepared **Events** tab.",
+            "In the **SitecoreAI** tab, choose **Optimization → Analytics → Events**. If the left navigation is collapsed, choose **Expand navigation** first. Keep this tab as **Events**.",
             "Set **Site → liberty-mutual-public-site** and **Time → 1 month**.",
             "Under **Event Type**, keep **pageView** and **LM_PUBLIC_CTA_CLICK** checked; clear the other event checkboxes.",
           ],
@@ -996,7 +978,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The **Site** filter separates the Public Website from the Agent Portal. **Time → 1 month** defines the reporting period, and **Event Type** checkboxes focus the report on **pageView** and **LM_PUBLIC_CTA_CLICK**. The native report supplies the recorded rows and totals.",
           "The application defines **LM_PUBLIC_CTA_CLICK** and sends it through the **Sitecore Content SDK** after the visitor allows optional measurement. **SitecoreAI** displays the received custom events alongside page views. Liberty Mutual’s Tealium architecture remains part of the integration discussion.",
         ],
-        links: [{ label: "Native public-site Events", href: `${ANALYTICS}` }],
+        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
         images: [
           {
             file: "demo-public-events-month.png",
@@ -1058,16 +1040,16 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A).",
+            "Return to the already-open presentation, and show **Experience Edge content delivery**.",
             "Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**.",
           ],
           [
-            `Switch to the prepared [**GraphQL Explorer**](${GRAPHQL_EXPLORER}) tab; its **HTTP HEADERS** already contain the **Live Delivery API token** configured in **P0**.`,
+            `Switch to the **GraphQL Explorer** starting tab; its **HTTP HEADERS** already contain the **Live Delivery API token** configured in **P0**.`,
             "Keep **HTTP HEADERS** configured with your **Live Delivery API token**, using the **HTTP headers** copy field below if needed. Copy **GraphQL query**, replace the existing text in the left **Query** editor, and select the triangular **Run** button.",
           ],
           [
             "In the response on the right, show **id**, **version**, **question**, **answer**, **explanation**, and **source**.",
-            `Find **Review your options with your agent before choosing coverage.** in **explanation**, then briefly compare it with [**the public article**](${ARTICLE}) in the **Public website** tab. Return to **GraphQL Explorer**.`,
+            `Find **Review your options with your agent before choosing coverage.** in **explanation**, then compare it with the **Public article** starting tab. Return to **GraphQL Explorer**.`,
           ],
           [
             "Explain that the front end, LibertyAir, or any other application can retrieve these same published fields through the native API.",
@@ -1094,12 +1076,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The query selects the resource page by its stable item ID and English language. **version** identifies its published content version. Draft and Preview content remain in authoring.",
         ],
         links: [
-          {
-            label: "Open the Experience Edge diagram in the shared deck",
-            href: "https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A",
-          },
-          { label: "Open GraphQL Explorer", href: GRAPHQL_EXPLORER },
-          { label: "Compare the public article", href: ARTICLE },
+          { label: "GraphQL Explorer", href: GRAPHQL_EXPLORER },
+          { label: "Public article", href: ARTICLE },
         ],
         transition:
           "The same approved content can serve another application. Next, move to the second journey in your guide: a relevant Liberty Mutual experience for independent agents.",
@@ -1131,30 +1109,30 @@ export const customerDemoChapters: DemoChapter[] = [
           "Avery and Daniel’s different priorities are visible, each agent matches the expected native priority rule using that agent’s own Client ID, and the published Texas and Illinois conditions are shown.",
         presenterActions: [
           [
-            `Switch to the **Avery portal** tab, and open [**Home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.`,
+            `Switch to the **Avery portal** tab, and select **My workspace** in the left navigation. Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.`,
             "Find **Priorities for your agency**; show **Build a stronger small-business practice** first.",
             "Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**.",
             "Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.",
           ],
           [
-            `Switch to the separate **Daniel portal** tab, and open [**Home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.`,
+            `Switch to the separate **Daniel portal** tab, and select **My workspace** in the left navigation. Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.`,
             "Compare his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
             "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.",
           ],
           [
-            `Switch to the **Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**.`,
+            `In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Agent Portal** card. In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**. Keep **Default editing host**, then choose **Layers → Agency priorities**.`,
             "Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**.",
             "Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.",
           ],
           [
-            "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**.",
+            "Return to the **SitecoreAI** tab, choose **Optimization → Profiles**, and open **Avery Brooks - 01**. Keep this tab as **Profiles**; leave the separate **Page Builder** tab open.",
             "Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test.",
             "Return to **Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**.",
             "Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**.",
             "Select **Testing as: Avery Brooks - 01 → Load profile → Client ID**, replace the existing ID with Daniel’s **Client ID** from **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**, and press **Enter**; wait for **Testing as: Daniel Ortiz - 01**, select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
           ],
           [
-            "Switch to the **State business rule** tab. Its normal navigation is **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it.",
+            "In the **SitecoreAI** tab, choose **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it.",
             "Point to the **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**.",
             "Point to **producer-priorities**: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production.",
             "Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
@@ -1183,19 +1161,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "These read-only tests inspect the existing configuration and do not publish or change a rule.",
         ],
         links: [
-          { label: "Live Agent Portal Home", href: `${PORTAL}/` },
-          {
-            label: "Open Home’s native personalization rules",
-            href: `${portalEditor}`,
-          },
-          {
-            label: "Open native Profiles",
-            href: "https://app.sitecorecloud.io/optimization/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df",
-          },
-          {
-            label: "Open published role, state, and agency rule",
-            href: "https://app.sitecorecloud.io/optimization/custom-values/ad7b493b-f768-404c-adc6-9841c2fe1a6e?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df",
-          },
+          { label: "Agent Portal", href: `${PORTAL}/` },
+          { label: "SitecoreAI", href: SITECORE_AI },
         ],
         images: [
           {
@@ -1276,12 +1243,12 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to the **Brand Kit** tab, or navigate **Design → Brand kits**.",
+            "In the **SitecoreAI** tab, choose **Design → Brand kits**.",
             "Select **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**.",
             "Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation. Leave the kit unchanged.",
           ],
           [
-            `Switch to **Page Builder → Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**.`,
+            `Return to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.`,
             "Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**. Confirm **Introduction** in the right panel.",
             "Select **Optimize with AI**; point to **Adhere to brand kit**, then paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**.",
             "When **Ready!** appears, review the generated paragraph. Choose **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.",
@@ -1292,7 +1259,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Explain: authors change content; reusable components control its presentation, page designs supply shared structure, and placeholder settings govern composition.",
           ],
           [
-            `Switch to **Avery portal**, and briefly compare **My workspace** with [**Learning & resources**](${PORTAL}/resources).`,
+            `Switch to **Avery portal**, select **Learning & resources** in the left navigation, then select **My workspace** to compare the two pages.`,
             "Point to their shared navigation, typography, buttons, and cards. The content changes while the design stays consistent.",
           ],
         ],
@@ -1314,15 +1281,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "**Page designs**, **partial designs**, native renderings, and **placeholder settings** govern reusable structure and permitted composition. Content edits remain separate from component code.",
           "The sample **Brand Kit** collects reusable visual and voice guidance for AI-assisted writing. **Optimize with AI** offers **Adhere to brand kit** alongside writing improvements. The author reviews the suggestion; **Revert to original** restores the field without keeping the generated wording or publishing it.",
         ],
-        links: [
-          {
-            label: "Agent Portal Home in Page Builder",
-            href: `${portalEditor}`,
-          },
-          { label: "Avery portal Home", href: `${PORTAL}/` },
-          { label: "Learning & resources", href: `${PORTAL}/resources` },
-          { label: "Open the sample Brand Kit library", href: BRAND_KITS },
-        ],
+        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
         images: [
           {
             file: "demo-ai-field-copilot.png",
@@ -1438,7 +1397,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Page Builder**, and choose **Site switcher → Agent Portal → Content**.",
+            "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Content**.",
             "In the content tree, select **Data → Agency priorities → Agency growth priorities**. Confirm **English**.",
           ],
           [
@@ -1477,9 +1436,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "**Ordered recommendations** is an ordered native item selection. This collection supplies the **agency-growth** experience, while **Producer priorities** supplies a separate experience.",
           "The original approved version is retained. Saving the new **Draft** changes authoring content, with publication still governed by the configured workflow.",
         ],
-        links: [
-          { label: "Edit Agency growth priorities", href: priorityContent },
-        ],
+        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
         images: [
           {
             file: "demo-portal-priority-order.png",
@@ -1545,7 +1502,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
+            "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
             "Open **Apps → Audience Preview**. Confirm **Current page → Home**. Leave the saved priority Draft unpublished.",
           ],
           [
@@ -1599,17 +1556,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Preview uses isolated synthetic audience records, without changing human agent accounts. It does not publish content or grant additional content permissions.",
           "The **Saved priority version** from A3 remains Draft during both Home previews. The same presenter account then performs **Submit**, **Approve**, and **Publish** on that exact version in **Page Builder**.",
         ],
-        links: [
-          {
-            label: "Open Agent Portal Home in Page Builder",
-            href: portalEditor,
-          },
-          {
-            label: "Review and publish the priority collection",
-            href: priorityContent,
-          },
-          { label: "Verify Avery’s live portal", href: `${PORTAL}/` },
-        ],
+        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
         transition:
           "The intended agent now receives the reviewed priority change. Next, keep approved wording consistent across both independent websites.",
       },
@@ -1652,7 +1599,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Page Builder**, and choose **Site switcher → Public Website → Content**.",
+            "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Content**.",
             "In the content tree, select the top-level **Data → Disclosures → Copyright notice**. Confirm **English**.",
             "Record the original approved English version and full **Disclosure** wording for restoration. Confirm its copyright year is **2025**.",
           ],
@@ -1700,9 +1647,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The complete copyright notice is shared content delivered through **Experience Edge**. Only its year changes from **2025** to **2026**; its address, equal-opportunity wording, line break, and **Equal Opportunity Employer** link stay intact.",
         ],
         links: [
-          { label: "Edit the shared copyright notice", href: copyrightContent },
-          { label: "Public website footer", href: `${PUBLIC}/` },
-          { label: "Agent Portal footer", href: `${PORTAL}/` },
+          { label: "SitecoreAI", href: SITECORE_AI },
+          { label: "Public website", href: `${PUBLIC}/` },
         ],
         transition:
           "One reviewed update now reaches both footers. Finish by comparing the versions and restoring the original year without losing that history.",
@@ -1740,7 +1686,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Page Builder → Site switcher → Public Website → Content**.",
+            "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Content**.",
             "Select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**.",
           ],
           [
@@ -1793,14 +1739,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Creating a new Draft from the original approved version preserves the original and changed versions. The same governed process reviews and publishes the restoration.",
           "Submission, approval, and publication remain distinct actions in the configured workflow demonstrated earlier.",
         ],
-        links: [
-          {
-            label: "Compare and restore the copyright notice",
-            href: copyrightContent,
-          },
-          { label: "Public website footer", href: `${PUBLIC}/` },
-          { label: "Agent Portal footer", href: `${PORTAL}/` },
-        ],
+        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
         transition:
           "Close on what this enables for Liberty Mutual: trusted guidance, more relevant agent experiences, and business-managed changes with clear accountability.",
       },

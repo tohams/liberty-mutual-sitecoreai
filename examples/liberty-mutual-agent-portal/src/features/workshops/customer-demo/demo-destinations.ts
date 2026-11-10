@@ -4,6 +4,7 @@ export const PORTAL = "https://liberty-mutual-agent-portal.vercel.app";
 export const ORG = "org_XqL3u1MSNVuubOTb";
 export const TENANT = "97eea84c-ac47-4d91-7e4f-08defdaaa7df";
 export const TENANT_NAME = "scaipocusem400b-sitecoreai950c-demo4418";
+export const SITECORE_AI = `https://app.sitecorecloud.io/channels?organization=${ORG}&tenantName=${TENANT_NAME}`;
 export const CONTEXT = `organization=${ORG}&tenantId=${TENANT}`;
 export const SEARCH_SOURCE = `https://app.sitecorecloud.io/search/f527245d-98c7-4978-8802-237d7717ca43/preview?${CONTEXT}`;
 export const ANALYTICS = `https://app.sitecorecloud.io/optimization/dashboards/events?${CONTEXT}`;
@@ -42,8 +43,4 @@ export const resourcePageContent = pageBuilder(
 export const publicEditor = pageBuilder("public", PUBLIC_HOME_ID);
 export const portalEditor = pageBuilder("portal", PORTAL_HOME_ID);
 export const priorityContent = pageBuilder("portal", PRIORITIES_ID, "content");
-export const copyrightContent = pageBuilder(
-  "public",
-  COPYRIGHT_ID,
-  "content",
-);
+export const copyrightContent = pageBuilder("public", COPYRIGHT_ID, "content");

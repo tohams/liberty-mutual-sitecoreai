@@ -1,10 +1,10 @@
-import { guideTextParts, isGuideHref, plainGuideText } from "../guide-text";
+import { isGuideHref, plainGuideText } from "../guide-text";
 import type { GuideLink } from "../types";
 import type { DemoStep } from "./types";
 
-type LaunchSource = Pick<DemoStep, "links" | "actions" | "presenterActions">;
+type LaunchSource = Pick<DemoStep, "links">;
 
-/** Keep each destination once, including URLs embedded beside individual clicks. */
+/** Only the loop's explicit starting destinations become copyable launch URLs. */
 export function demoLaunchUrls(step: LaunchSource): GuideLink[] {
   const destinations = new Map<string, GuideLink>();
   const add = ({ label, href }: GuideLink) => {
@@ -28,14 +28,5 @@ export function demoLaunchUrls(step: LaunchSource): GuideLink[] {
       destinations.set(url.href, { label: name, href });
   };
   step.links?.forEach(add);
-  for (const line of [...step.presenterActions.flat(), ...step.actions]) {
-    for (const part of guideTextParts(line)) {
-      if (part.kind === "link")
-        add({
-          label: part.children.map((child) => child.text).join(""),
-          href: part.href,
-        });
-    }
-  }
   return [...destinations.values()];
 }
