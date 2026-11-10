@@ -22,6 +22,11 @@ import {
   type PreviewProfileImporter,
 } from "./importer";
 
+import {
+  recordAudiencePreviewStage,
+  type AudiencePreviewStage,
+} from "./telemetry";
+
 const LEASE_MS = 45_000;
 const RETRY_SECONDS = 3;
 const BINDING_DEADLINE_MS = 120_000;
@@ -166,7 +171,16 @@ export function assertVerifiedPreviewProfile(
     );
 }
 
+function jobStage(job: ProfileJob): AudiencePreviewStage {
+  if (job.phase === "uploading") return "profile-import";
+  if (job.phase === "verifying") return "profile-verification";
+  if (job.phase === "binding" || job.code === "PROFILE_LINK_TIMEOUT")
+    return "profile-binding";
+  return "profile-preparation";
+}
+
 function pending(job: ProfileJob, now: number): AudienceProfilePreparation {
+  recordAudiencePreviewStage(jobStage(job), "pending");
   return {
     status: "pending",
     retryAfterSeconds: Math.max(
@@ -180,6 +194,7 @@ function pending(job: ProfileJob, now: number): AudienceProfilePreparation {
 }
 
 function jobFailure(code = "PREVIEW_PROFILE_FAILED"): never {
+  recordAudiencePreviewStage("profile-preparation", "failed", { code });
   throw new AudiencePreviewError(
     code,
     "This audience could not be prepared. Contact your Sitecore administrator to resolve the preview request.",
@@ -211,7 +226,15 @@ export async function prepareAudiencePreviewProfile(
         "The preview is temporarily unavailable.",
         true,
       );
-    if (latest.value.phase === "failed") jobFailure(latest.value.code);
+    if (latest.value.phase === "failed") {
+      if (
+        latest.value.code === "PROFILE_LINK_TIMEOUT" &&
+        latest.value.lease &&
+        latest.value.lease.expiresAt > now()
+      )
+        return pending(latest.value, now());
+      jobFailure(latest.value.code);
+    }
     if (latest.value.phase === "ready") {
       const profile = {
         selectorHash,
@@ -228,6 +251,7 @@ export async function prepareAudiencePreviewProfile(
     previous: StoredValue<ProfileJob>,
     code: string,
   ): Promise<never> => {
+    recordAudiencePreviewStage(jobStage(previous.value), "failed", { code });
     const job = { ...previous.value, phase: "failed" as const, code };
     delete job.lease;
     await save(previous, job);
@@ -248,7 +272,9 @@ export async function prepareAudiencePreviewProfile(
       const importer =
         dependencies.importer ||
         createPreviewProfileImporter(undefined, transport);
+      recordAudiencePreviewStage("profile-import", "started");
       const submission = await importer.submit(job.plan);
+      recordAudiencePreviewStage("profile-import", "accepted");
       if (
         !UUID.test(submission.batchId) ||
         submission.checksumMd5 !== job.plan.checksumMd5 ||
@@ -270,7 +296,53 @@ export async function prepareAudiencePreviewProfile(
     job.plan.identity !== PREVIEW_IDENTITY_PREFIX + selectorHash
   )
     return jobFailure("INVALID_PREVIEW_STATE");
-  if (job.phase === "failed") return jobFailure(job.code);
+  if (job.phase === "failed") {
+    // A timed-out observation is not an uncertain write. Recheck only the exact
+    // existing binding; never import, create a browser, or replay IDENTITY here.
+    if (job.code !== "PROFILE_LINK_TIMEOUT") return jobFailure(job.code);
+    const profile = {
+      selectorHash,
+      identity: job.plan.identity,
+      profileId: job.profileId!,
+      browserId: job.browserId!,
+    };
+    assertVerifiedPreviewProfile(profile);
+    if (job.lease && job.lease.expiresAt > now()) return pending(job, now());
+    const claimedJob: ProfileJob = {
+      ...job,
+      lease: { id: uuid(), expiresAt: now() + LEASE_MS },
+    };
+    const claimed = await save(current, claimedJob);
+    if (!claimed) return resultAfterConflict();
+    recordAudiencePreviewStage("profile-binding", "started");
+    let linked: string | null = null;
+    try {
+      linked = await readRef(
+        {
+          edgeUrl: dependencies.edgeUrl,
+          contextId: dependencies.contextId,
+          browserId: profile.browserId,
+        },
+        AbortSignal.timeout(8_000),
+        transport,
+      );
+    } catch {
+      /* An unreadable binding remains unconfirmed. */
+    }
+    if (linked?.toLowerCase() !== profile.profileId.toLowerCase()) {
+      const unchanged = { ...claimedJob };
+      delete unchanged.lease;
+      if (!(await save(claimed, unchanged))) return resultAfterConflict();
+      return jobFailure(job.code);
+    }
+    const ready: ProfileJob = { ...claimedJob, phase: "ready" };
+    delete ready.lease;
+    delete ready.code;
+    delete ready.nextAttemptAt;
+    if (!(await save(claimed, ready))) return resultAfterConflict();
+    recordAudiencePreviewStage("profile-binding", "recovered");
+    return { status: "ready", profile };
+  }
   if (job.phase === "ready") return resultAfterConflict();
   if (job.lease && job.lease.expiresAt > now()) return pending(job, now());
   if (job.phase === "uploading")
@@ -293,6 +365,7 @@ export async function prepareAudiencePreviewProfile(
   if (job.phase === "verifying") {
     if (!job.submission) return fail(claimed, "INVALID_PREVIEW_STATE");
     try {
+      recordAudiencePreviewStage("profile-verification", "started");
       const inspection = await (
         dependencies.importer ||
         createPreviewProfileImporter(undefined, transport)
@@ -300,6 +373,7 @@ export async function prepareAudiencePreviewProfile(
       if (inspection.status === "pending") return release({ ...claimedJob });
       if (inspection.status !== "verified" || !UUID.test(inspection.profileId))
         return fail(claimed, "IMPORT_VERIFICATION_FAILED");
+      recordAudiencePreviewStage("profile-verification", "ready");
       return release({
         ...claimedJob,
         phase: "binding",
@@ -307,6 +381,9 @@ export async function prepareAudiencePreviewProfile(
         bindingStartedAt: now(),
       });
     } catch (error) {
+      recordAudiencePreviewStage("profile-verification", "unconfirmed", {
+        code: error instanceof AudiencePreviewError ? error.code : undefined,
+      });
       if (error instanceof AudiencePreviewError && !error.retryable)
         return fail(claimed, error.code);
       return release({ ...claimedJob });
@@ -314,8 +391,12 @@ export async function prepareAudiencePreviewProfile(
   }
   if (job.phase !== "binding" || !job.profileId || !UUID.test(job.profileId))
     return fail(claimed, "INVALID_PREVIEW_STATE");
-  if (now() - (job.bindingStartedAt || job.createdAt) > BINDING_DEADLINE_MS)
+  const bindingDeadlineExceeded = () =>
+    now() - (job.bindingStartedAt || job.createdAt) > BINDING_DEADLINE_MS;
+  // An existing browser must get one final read before a timeout is persisted.
+  if (!job.browserId && bindingDeadlineExceeded())
     return fail(claimed, "PROFILE_LINK_TIMEOUT");
+  recordAudiencePreviewStage("profile-binding", "started");
   const headers = {
     "x-sitecore-contextid": dependencies.contextId,
     Accept: "application/json",
@@ -333,7 +414,12 @@ export async function prepareAudiencePreviewProfile(
         credentials: "omit",
         signal: AbortSignal.timeout(8_000),
       });
-      if (!response.ok) return release({ ...claimedJob });
+      if (!response.ok) {
+        recordAudiencePreviewStage("profile-binding", "unconfirmed", {
+          status: response.status,
+        });
+        return release({ ...claimedJob });
+      }
       const body = await responseObject(response);
       if (typeof body.ref !== "string" || !UUID.test(body.ref))
         return fail(claimed, "INVALID_BROWSER_RESPONSE");
@@ -355,6 +441,7 @@ export async function prepareAudiencePreviewProfile(
       delete ready.lease;
       delete ready.nextAttemptAt;
       if (!(await save(claimed, ready))) return resultAfterConflict();
+      recordAudiencePreviewStage("profile-binding", "ready");
       return {
         status: "ready",
         profile: {
@@ -365,6 +452,7 @@ export async function prepareAudiencePreviewProfile(
         },
       };
     }
+    if (bindingDeadlineExceeded()) return fail(claimed, "PROFILE_LINK_TIMEOUT");
     if (job.identitySent) return release({ ...claimedJob });
     // Persist before the event. Even if its response is lost, polling only checks the same binding.
     const sent: ProfileJob = { ...claimedJob, identitySent: true };
@@ -394,8 +482,14 @@ export async function prepareAudiencePreviewProfile(
           ext: { previewOnly: true },
         }),
       });
+      recordAudiencePreviewStage(
+        "identity-event",
+        response.ok ? "accepted" : "unconfirmed",
+        { status: response.status },
+      );
       void response.body?.cancel().catch(() => undefined);
     } catch {
+      recordAudiencePreviewStage("identity-event", "unconfirmed");
       /* A lost event receipt is resolved by read-only browser/show polling, never by replay. */
     }
     delete sent.lease;
