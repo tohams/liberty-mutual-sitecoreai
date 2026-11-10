@@ -12,6 +12,12 @@ export function clearPortalDraftCookies(response: NextResponse): void {
   }
 }
 
+/** Append domain-scoped expirations last: later cookie-map writes replace those headers. */
+export function clearPortalLoginCookies(response: NextResponse, request: Request): void {
+  clearPortalDraftCookies(response);
+  clearSitecoreIdentityCookies(response, request);
+}
+
 /** Pinned analytics-core 2.1.2 and personalize 2.1.0 cookie contracts. */
 export function sitecoreIdentityCookieNames(): string[] {
   const names = new Set(['sc_cid', 'sc_cid_personalize', 'lm_portal_personalize_binding']);
