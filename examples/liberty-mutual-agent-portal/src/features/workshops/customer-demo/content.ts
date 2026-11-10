@@ -366,6 +366,12 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Can I bundle my car and home insurance?",
           },
           {
+            action: 2,
+            label: "Detailed explanation — review sentence",
+            value:
+              "Review your options with your agent before choosing coverage.",
+          },
+          {
             action: 3,
             label: "Repeat Search by term",
             value: "Can I bundle my car and home insurance?",
@@ -381,7 +387,7 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             `In the **administrator acting as publisher** session, open [**the resource page**](${resourcePageContent}).`,
             "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
-            "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the temporary review sentence in **Detailed explanation**.",
+            "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field below in **Detailed explanation**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
             "Leave **Subpages** unchecked, select **Start publish**, and wait for completion.",
           ],
