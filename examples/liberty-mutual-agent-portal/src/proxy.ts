@@ -17,6 +17,8 @@ import { getPortalPersonalizationIdentity } from './server/data/portal';
 import { reportPersonalizationDiagnostic } from './server/personalization/diagnostics';
 import { privateHeaders } from './server/http';
 import { getAudiencePreviewAuth } from './server/marketplace/audience-preview-auth';
+import { isAudiencePreviewAuthPath } from './server/marketplace/audience-preview-config';
+import { isAudiencePreviewViewPath, preflightAudiencePreviewView } from './server/marketplace/audience-preview-view-auth';
 import { verifyWorkshopSession, WORKSHOP_SESSION_COOKIE, workshopReturnTo } from './server/workshops/auth';
 
 const preview = new PreviewProxy({
@@ -87,7 +89,7 @@ export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   // Marketplace preview uses its own delegated Sitecore identity and never
   // enters the synthetic agent login, analytics, or personalization proxy.
-  if (path === '/apps/audience-preview' || path.startsWith('/apps/audience-preview/')) {
+  if (isAudiencePreviewAuthPath(path)) {
     const auth = getAudiencePreviewAuth();
     if (!auth) return NextResponse.next({ headers: privateHeaders });
     // Login parameters are server-defined. Preserve callback parameters so
@@ -97,6 +99,7 @@ export default async function proxy(req: NextRequest) {
       : req;
     const response = await auth.middleware(authRequest);
     for (const [name, value] of Object.entries(privateHeaders)) response.headers.set(name, value);
+    if (isAudiencePreviewViewPath(path)) return preflightAudiencePreviewView(req, response, auth);
     return response;
   }
   // Workshop access is separate from the agent session. Server pages check it
@@ -133,7 +136,7 @@ export default async function proxy(req: NextRequest) {
 export const config = {
   /*
    * Match all paths except for:
-   * 1. API route handlers
+   * 1. API route handlers, except Audience Preview's authenticated API
    * 2. /_next (Next.js internals)
    * 3. /sitecore/api (Sitecore API routes)
    * 4. /- (Sitecore media)
@@ -142,6 +145,7 @@ export const config = {
    */
   matcher: [
     '/',
+    '/api/audience-preview/:path*',
     '/((?!api/|\\.well-known/|sitemap|robots|llms|_next/|healthz|sitecore/api/|-/|favicon.ico|brand/|sc_logo.svg|ai/).*)',
   ],
 };

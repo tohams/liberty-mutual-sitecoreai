@@ -5,6 +5,14 @@ export const AUDIENCE_PREVIEW_AUTH0_DOMAIN = "https://auth.sitecorecloud.io";
 export const AUDIENCE_PREVIEW_AUTH0_AUDIENCE =
   "https://api-webapp.sitecorecloud.io";
 export const AUDIENCE_PREVIEW_APP_PATH = "/apps/audience-preview";
+export function isAudiencePreviewAuthPath(path: string): boolean {
+  return (
+    path === AUDIENCE_PREVIEW_APP_PATH ||
+    path.startsWith(`${AUDIENCE_PREVIEW_APP_PATH}/`) ||
+    path === "/api/audience-preview" ||
+    path.startsWith("/api/audience-preview/")
+  );
+}
 const APP_ID = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
 
 export class AudiencePreviewError extends Error {

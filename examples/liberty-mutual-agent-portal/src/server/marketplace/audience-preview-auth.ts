@@ -5,14 +5,16 @@ import { NextResponse } from "next/server";
 import { audiencePreviewCallbackDestination } from "./audience-preview-sso";
 import {
   AUDIENCE_PREVIEW_APP_PATH,
-  AUDIENCE_PREVIEW_AUTH0_AUDIENCE,
   AUDIENCE_PREVIEW_AUTH0_DOMAIN,
-  AUDIENCE_PREVIEW_ORGANIZATION_ID,
-  AUDIENCE_PREVIEW_TENANT_ID,
   AudiencePreviewError,
   audiencePreviewAuthConfiguration,
   audiencePreviewAuthorizationParameters,
 } from "./audience-preview-config";
+import {
+  audiencePreviewTokenDiagnostic,
+  bindAudiencePreviewSession,
+  isBoundAudiencePreviewSession,
+} from "./audience-preview-session";
 
 let configuredClient: Auth0Client | undefined;
 let configuredKey: string | undefined;
@@ -62,13 +64,8 @@ export function getAudiencePreviewAuth(): Auth0Client | null {
           configuration.appBaseUrl,
         ),
       ),
-    beforeSessionSaved: async (session) => ({
-      ...session,
-      audiencePreviewClientId: configuration.clientId,
-      audiencePreviewOrganizationId: AUDIENCE_PREVIEW_ORGANIZATION_ID,
-      audiencePreviewTenantId: AUDIENCE_PREVIEW_TENANT_ID,
-      audiencePreviewMarketplaceAppId: configuration.marketplaceAppId,
-    }),
+    beforeSessionSaved: async (session) =>
+      bindAudiencePreviewSession(session, configuration),
   });
   configuredKey = key;
   return configuredClient;
@@ -91,14 +88,14 @@ export async function requireAudiencePreviewSession(): Promise<AudiencePreviewSe
     );
   }
   const session = await auth.getSession();
-  if (
-    !session?.user?.sub ||
-    session.audiencePreviewClientId !== configuration.clientId ||
-    session.audiencePreviewOrganizationId !==
-      AUDIENCE_PREVIEW_ORGANIZATION_ID ||
-    session.audiencePreviewTenantId !== AUDIENCE_PREVIEW_TENANT_ID ||
-    session.audiencePreviewMarketplaceAppId !== configuration.marketplaceAppId
-  ) {
+  if (!isBoundAudiencePreviewSession(session, configuration)) {
+    console.warn(
+      "Audience Preview authentication rejected",
+      audiencePreviewTokenDiagnostic(
+        { code: session ? "session_binding_mismatch" : "missing_session" },
+        session,
+      ),
+    );
     throw new AudiencePreviewError(
       "AUTHENTICATION_REQUIRED",
       "Sign in to SitecoreAI to preview this page.",
@@ -106,12 +103,16 @@ export async function requireAudiencePreviewSession(): Promise<AudiencePreviewSe
     );
   }
   try {
-    const { token } = await auth.getAccessToken({
-      audience: AUDIENCE_PREVIEW_AUTH0_AUDIENCE,
-    });
+    // The client already fixes this single audience. A per-call audience would
+    // unnecessarily request an MRRT audience override during token refresh.
+    const { token } = await auth.getAccessToken();
     if (!token) throw new Error("No delegated access token.");
     return { user: session.user, accessToken: token };
-  } catch {
+  } catch (error) {
+    console.warn(
+      "Audience Preview token refresh rejected",
+      audiencePreviewTokenDiagnostic(error, session),
+    );
     throw new AudiencePreviewError(
       "AUTHENTICATION_REQUIRED",
       "Sign in to SitecoreAI again to continue previewing.",
