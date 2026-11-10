@@ -1,46 +1,22 @@
 import type { DemoChapter } from "./types";
 
-const PUBLIC = "https://liberty-mutual-public-site.vercel.app";
-const PORTAL = "https://liberty-mutual-agent-portal.vercel.app";
-const ORG = "org_XqL3u1MSNVuubOTb";
-const TENANT = "97eea84c-ac47-4d91-7e4f-08defdaaa7df";
-const TENANT_NAME = "scaipocusem400b-sitecoreai950c-demo4418";
-const CONTEXT = `organization=${ORG}&tenantId=${TENANT}`;
-const SEARCH_SOURCE = `https://app.sitecorecloud.io/search/f527245d-98c7-4978-8802-237d7717ca43/preview?${CONTEXT}`;
-const ANALYTICS = `https://app.sitecorecloud.io/optimization/dashboards/events?${CONTEXT}`;
-const MARKETING_ELIGIBILITY = `https://app.sitecorecloud.io/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b?experienceType=INTERACTIVE_API_FLOW&section=configuration&operationalTimeWindow=15m&${CONTEXT}`;
-const ARTICLE = `${PUBLIC}/insurance-resources/bundle-car-and-home`;
-const SCRUNCH_CONTEXT =
-  "organization=org_vDtrEzJHxeuuB9cD&tenantName=sitecoresaa7acd-agverticals97fd-agvertsc3b5";
-const SCRUNCH_REVIEW = `https://app.sitecorecloud.io/channels/collection/45177ac3175042dc9bc748d76ba0858a/sites/d4c417d9-0acf-44f9-aec8-c94730b872bb/aeo-opportunities/readability/review?url=https%3A%2F%2Fprospera-bank.vercel.app%2F&${SCRUNCH_CONTEXT}`;
-const SCRUNCH_EDITOR = `https://pages.sitecorecloud.io/editor?${SCRUNCH_CONTEXT}&sc_site=prospera&sc_lang=en&sc_itemid=69fc0a48-3e75-426e-9b2b-296d7a3bf8a4&sc_aeo=1&sc_aeo_item=ca10c042-247a-4836-9d07-92a9e2224a7f&sc_aeo_field=Cards+%C2%B7+Description`;
-
-const RESOURCE_PAGE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
-const PUBLIC_HOME_ID = "6d600332-3e21-4c5f-83ec-aae04f83450f";
-const PORTAL_HOME_ID = "ae9e45ca-f127-4abe-9ca7-2ff109981998";
-const AUDIENCE_PREVIEW_ID = "cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947";
-const BRAND_KITS = `https://app.sitecorecloud.io/design/brandkits?organization=${ORG}&tenantName=${TENANT_NAME}`;
-const PRIORITIES_ID = "3127968e-4b21-50c3-ad79-b6bbbe5303b8";
-const DISCLOSURE_ID = "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca";
-
-function pageBuilder(
-  site: "public" | "portal",
-  itemId: string,
-  mode: "editor" | "content" = "editor",
-) {
-  const siteName =
-    site === "public"
-      ? "liberty-mutual-public-site"
-      : "liberty-mutual-agent-portal";
-  return `https://pages.sitecorecloud.io/${mode}?tenantName=${TENANT_NAME}&sc_site=${siteName}&organization=${ORG}&sc_itemid=${itemId}&sc_lang=en`;
-}
-
-const resourcePageContent = pageBuilder("public", RESOURCE_PAGE_ID, "content");
-const publicEditor = pageBuilder("public", PUBLIC_HOME_ID);
-const portalEditor = pageBuilder("portal", PORTAL_HOME_ID);
-const audiencePreviewEditor = pageBuilder("portal", AUDIENCE_PREVIEW_ID);
-const priorityContent = pageBuilder("portal", PRIORITIES_ID, "content");
-const disclosureContent = pageBuilder("public", DISCLOSURE_ID, "content");
+import {
+  PUBLIC,
+  PORTAL,
+  SEARCH_SOURCE,
+  ANALYTICS,
+  ARTICLE,
+  GRAPHQL_EXPLORER,
+  SCRUNCH_REVIEW,
+  SCRUNCH_EDITOR,
+  BRAND_KITS,
+  resourcePageContent,
+  publicEditor,
+  portalEditor,
+  audiencePreviewEditor,
+  priorityContent,
+  disclosureContent,
+} from "./demo-destinations";
 
 /** Explain AI's role in each customer journey without implying autonomous publication. */
 export const customerDemoAiContext: Record<
@@ -57,9 +33,9 @@ export const customerDemoAiContext: Record<
   },
   portal: {
     demonstrated:
-      "Known profile attributes and explicit native rules select relevant agent guidance and evaluate the recorded marketing choice.",
+      "Known profile attributes and explicit native rules use role, state licensing, and agency production to select relevant agent guidance.",
     nextStep:
-      "SitecoreAI assistants and Agentic Studio can help prepare audience-specific campaign drafts. Liberty Mutual could adopt those drafts within the same human review, publication, and marketing-eligibility controls.",
+      "SitecoreAI assistants and Agentic Studio can help prepare audience-specific campaign drafts. Liberty Mutual could adopt those drafts within the same human review and publication controls.",
     talkTrack:
       "Known attributes and explicit rules select the agent experience today. SitecoreAI’s available AI assistants and Agentic Studio can prepare audience-specific campaign drafts; Liberty Mutual could adopt those within the same review and eligibility controls.",
   },
@@ -116,8 +92,8 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `Open [**public Home**](${PUBLIC}/).`,
-            "Choose **Privacy choices → Essential only**, then **Search** in the header.",
+            `In the **Public website** tab, open [**public Home**](${PUBLIC}/).`,
+            "Select **Search** in the header.",
           ],
           [
             "Paste **Supported search question** below into **Search**, then select **Search**.",
@@ -133,7 +109,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The supported question returns relevant guidance; the unsupported question shows **No results found** and **Contact an agent**.",
         actions: [
-          `Open the [**public Home page**](${PUBLIC}/). Choose **Privacy choices → Essential only**, then select **Search** in the header. Search remains available when optional collection is declined.`,
+          `In the **Public website** tab, open the [**public Home page**](${PUBLIC}/), and select **Search** in the header.`,
           "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**, then highlight the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page. Keep every result unopened.",
           "In **keyword(s)**, replace the query with **Does car insurance cover cyberextortion?**, and select **Search**. Show **No results found** and **Contact an agent**. End this loop with that contact option; leave the link unopened.",
         ],
@@ -146,7 +122,7 @@ export const customerDemoChapters: DemoChapter[] = [
         controls: [
           "**SitecoreAI Search** retrieves and ranks published guidance. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
           "Published website pages join Search when their native **Include in site search** checkbox is selected. The articles and approved answers are managed and published in **SitecoreAI**.",
-          "**Essential only** keeps website and Search functions available while respecting the visitor’s choice about optional collection.",
+          "Optional measurement respects the visitor’s stored privacy preferences.",
         ],
         links: [
           { label: "Public Home", href: `${PUBLIC}/` },
@@ -290,8 +266,9 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `Open [**the resource page in Page Builder Content**](${resourcePageContent}).`,
-            "Confirm **Public Website**, **English**, and **Home → insurance-resources → bundle-car-and-home**.",
+            "Switch to **Publisher Page Builder**, and choose **Site switcher → Public Website → Editor → Pages**.",
+            "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**; then choose **Content**.",
+            "Confirm **English** and the selected **bundle-car-and-home** page.",
             "Expand **Resource content**: show **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and dates.",
             "Under **Content**, show **Canonical URL** and **Reference source**.",
             "Open **Quick Info**, and show the **PublicResourcePage** template.",
@@ -302,16 +279,16 @@ export const customerDemoChapters: DemoChapter[] = [
             "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
           ],
           [
-            `Open [**the public article**](${ARTICLE}), then **View page source → Find**.`,
+            `Switch to the **Public website** tab, open [**the public article**](${ARTICLE}), then choose **View page source → Find**.`,
             "Paste **Find structured data in page source** below into **Find**.",
             "Show **FAQPage**, **Question**, and **acceptedAnswer**.",
-            "Find **canonical** using the Copy field below, then return to the rendered article.",
+            "Find **canonical** using the Copy field below; close the source tab, and return to the **Public website** tab.",
           ],
         ],
         presenterResult:
           "Show the native template, managed classifications, **FAQPage** data, and canonical URL without editing content.",
         actions: [
-          `Open [**the car-and-home resource page in Page Builder Content**](${resourcePageContent}). Confirm **Public Website**, **English**, and **Home → insurance-resources → bundle-car-and-home**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.`,
+          "In **Publisher Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, select **bundle-car-and-home**, and choose **Content**. Confirm **English**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.",
           `In the same [**resource page in Page Builder Content**](${resourcePageContent}), locate **State applicability**, **Products**, and **Audience** under **Content**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
           `On the [**public article**](${ARTICLE}), use **View page source → Find** to locate **application/ld+json**. Identify **FAQPage**, **Question**, and **acceptedAnswer**, then find the **canonical** link. Return to the rendered article.`,
         ],
@@ -379,20 +356,20 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}).`,
+            "Switch to the prepared **Search Preview** tab.",
             "Paste **Search by term** below into **Search by term**, then expand the matching row using **Toggle document details**.",
             "Confirm **body** does not contain **Review your options with your agent before choosing coverage.**",
             "If the sentence is present, restore the baseline through [**Before presenting**](#preparation) before continuing.",
           ],
           [
-            `In the **administrator acting as publisher** session, open [**the resource page**](${resourcePageContent}).`,
+            "Return to **Publisher Page Builder → Content** for **bundle-car-and-home**, the page selected in P2.",
             "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
             "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field below in **Detailed explanation**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
             "Leave **Subpages** unchecked, select **Start publish**, and wait for completion.",
           ],
           [
-            `Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), and refresh.`,
+            "Return to the **Search Preview** tab, and refresh.",
             "Repeat **Search by term** using the Copy field below; expand the matching row.",
             "If needed, wait and refresh until **body** contains **Review your options with your agent before choosing coverage.**",
             "Confirm **state**, **product**, and **audience** are preserved.",
@@ -402,7 +379,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          `In the prepared **administrator acting as publisher** session, open [**the car-and-home resource page**](${resourcePageContent}). In the version selector, choose the prepared revision by the **Prepared page version** number recorded in [**Before presenting**](#preparation)—the new English page version created for this run. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.`,
+          "Return to **Publisher Page Builder → Content** for **bundle-car-and-home**, the page selected in P2. In the version selector, choose the prepared revision by the **Prepared page version** number recorded in **Before presenting**. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
           `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
@@ -507,12 +484,12 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Create, preview, and publish pages without an engineering ticket, using approved components and a clear review process.",
         stopWhen:
-          "The new coverage-guide-live page shows the authored headings and the shared Promotion on the public website.",
+          "The new coverage-page page shows the authored headings and the shared Promotion on the public website.",
         inputs: [
           {
             action: 1,
             label: "New page name",
-            value: "coverage-guide-live",
+            value: "coverage-page",
           },
           {
             action: 2,
@@ -521,85 +498,85 @@ export const customerDemoChapters: DemoChapter[] = [
           },
           {
             action: 2,
-            label: "Introduction heading",
+            label: "Article heading",
             value: "Guidance for your next decision",
           },
           {
             action: 2,
-            label: "Introduction body",
+            label: "Article body",
             value:
               "Review approved information, compare your options, and speak with an agent about your needs.",
           },
           {
-            action: 5,
+            action: 6,
             label: "Page submission comment",
             value: "Review coverage guidance page",
           },
           {
-            action: 5,
-            label: "Local content submission comment",
-            value: "Review coverage guidance content",
-          },
-          {
-            action: 6,
+            action: 7,
             label: "Approval comment",
             value: "Approved coverage guidance",
           },
         ],
         presenterActions: [
           [
-            `In the **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}).`,
+            `In the **Author Page Builder** tab, open [**public Home in Page Builder**](${publicEditor}).`,
             "Confirm **Public Website**, **English**, and **Default editing host**.",
             "Choose **Home → Create a page → Landing page → Select**.",
             "Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**.",
             "Wait for **Page created from branch template**.",
           ],
           [
-            "Choose **Reload tree** if shown. Select **coverage-guide-live**, and wait for the matching page heading.",
-            "Open **Content → coverage-guide-live → Data → Hero**. Paste **Hero heading** below into **Heading**.",
-            "Press **Tab**, wait for **Saved**, then open **Data → Introduction**.",
-            "Paste **Introduction heading** below into **Heading**; press **Tab**, and wait for **Saved**.",
-            "Paste **Introduction body** below into **Body**; click outside the field, and wait for **Saved**.",
+            "Choose **Reload tree** if shown. In **Sitemap**, select **coverage-page**, and wait for its matching page heading.",
+            "Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading** below.",
+            "Click outside the text, and wait for **Saved**.",
+            "Below the Hero, click **Article text → Heading**, and paste **Article heading** below.",
+            "Click the blank **Body** immediately below that heading, and paste **Article body** below. Click outside, and wait for **Saved**.",
           ],
           [
-            "Return to **Editor**; select **coverage-guide-live** in **Sitemap**, and confirm its heading.",
-            "Open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**.",
+            "In the **Author Page Builder** tab, click the **Hero image** placeholder on the canvas.",
+            "In the right-hand **Image** panel, choose **Browse media library → Media BETA** to open the **Modern Media Library**.",
+            "Select **liberty-mutual-public-family-basketball.jpg**, then choose **Insert** in its image details.",
+            "Confirm the family photograph appears beside the Hero heading, and wait for **Saved**.",
+          ],
+          [
+            "In the **Author Page Builder** tab, open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**.",
             "Show the permitted choices; choose **Promotions → Promotion → Bundle and save**.",
             "Select **Assign**, rather than **Duplicate and assign**.",
-            "Choose **Design → Variant → Compact** instead of **Default**.",
+            "With **Promotion** selected, choose **Design → Variant → Image left**, then **Image right**.",
+            "On desktop, confirm the photograph switches sides while the copy stays the same. On mobile, both variants keep the image above the text.",
           ],
           [
-            "Select **Preview → Preview**.",
-            "Confirm both headings and the shared Promotion; return to **Editor**. Keep the page unpublished.",
+            "In the **Author Page Builder** tab, select **Preview → Preview**.",
+            "Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Author Page Builder**. Keep the page unpublished.",
           ],
           [
-            "On **coverage-guide-live**, choose **Actions → Submit**; paste **Page submission comment** below, then select **Submit**.",
-            "Open **Page items**; check **coverage-guide-live**, **Hero**, and **Introduction**.",
-            "For each local item still in **Draft**, open **Content → Actions → Submit**; paste **Local content submission comment**, then **Submit**.",
-            "Confirm the page, **Hero**, and **Introduction** are all **Awaiting approval**.",
+            "In the **Author Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**.",
+            "Paste **Page submission comment** below, then select **Submit**.",
+            "Confirm the page is **Awaiting approval**. Its local Hero and Article text follow the page through review.",
           ],
           [
-            "In the separate **Approver** profile, review **coverage-guide-live**, **Hero**, and **Introduction**.",
-            "On the page, choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**.",
-            "In **Page items**, open any local item still **Awaiting approval**; review it, then **Actions → Approve → Submit**.",
-            "Confirm all three are **Approved**. Switch to the publisher profile for publication.",
+            "Switch to the **Approver Page Builder** tab, reload it to refresh **Sitemap**, select **coverage-page**, and review the page on its canvas.",
+            "Choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**.",
+            "Confirm **Approved**, then switch to the **Publisher Page Builder** tab.",
           ],
           [
-            "In the **administrator acting as publisher** profile, open **coverage-guide-live**, then choose **Publish**.",
+            "Switch to the **Publisher Page Builder** tab, reload it to refresh **Sitemap**, open **coverage-page**, then choose **Publish**.",
             "Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**.",
-            `After completion, open [**the published coverage page**](${PUBLIC}/coverage-guide-live); confirm both headings and the shared Promotion.`,
+            `After completion, switch to the **Public website** tab, open [**the published coverage page**](${PUBLIC}/coverage-page), and confirm both headings, the Hero image, and the shared Promotion.`,
           ],
         ],
         presenterResult:
-          "The published **coverage-guide-live** page shows both authored headings and the reused Promotion.",
+          "The published **coverage-page** page shows both authored headings, the selected Hero image, and the reused Promotion.",
         actions: [
-          `In the prepared **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. In the sitemap’s editable **New page** name, type **coverage-guide-live**, press **Enter**, and wait for **Page created from branch template**.`,
-          "Choose **Reload tree** if it appears. Wait for the refreshed sitemap to finish loading. Select **coverage-guide-live**, and wait until **coverage-guide-live** appears as the page heading before opening **Content**. Open **Content → coverage-guide-live → Data → Hero**, and set **Heading** to **Explore coverage with confidence**. Press **Tab**, and wait for **Saved** before opening **Data → Introduction**. Set its **Heading** to **Guidance for your next decision**, press **Tab**, and wait for **Saved**. Enter **Review approved information, compare your options, and speak with an agent about your needs.** in **Body**, click outside **Body**, and wait for **Saved**.",
-          "Return to **Editor**, and confirm **coverage-guide-live** appears as the page heading. If necessary, select **coverage-guide-live** in **Sitemap**, and wait for its heading. Then open **Layers**. Expand **headless-public-content-1**, and choose its **Insert into** button immediately after **Article text**. Choose **Promotions → Promotion**, select the existing **Bundle and save** item, and choose **Assign** to reuse it, rather than **Duplicate and assign**. In the right-hand panel, choose **Design → Variant**, and change **Default** to **Compact**. Identify the allowed components offered for this placeholder.",
-          "Click **Preview**, then **Preview** in its menu. Confirm the headings and reused Promotion while the page remains unpublished. Return to the editor. The **Hero** and **Introduction** are independent local content; the Promotion references its shared source.",
-          "On **coverage-guide-live**, choose **Actions → Submit**, enter **Review coverage guidance page**, and select **Submit**. In **Page items**, check the page, **Hero**, and **Introduction**. For any local item still in **Draft**, open it in **Content**, choose **Actions → Submit**, enter **Review coverage guidance content**, and select **Submit**. Confirm all three are **Awaiting approval**.",
-          "In the separate **Approver** browser profile, review **coverage-guide-live** and its **Hero** and **Introduction** content. On **coverage-guide-live**, choose **Actions → Approve**, enter **Approved coverage guidance**, and select **Submit**. Open **Page items**, and confirm the page, **Hero**, and **Introduction** are all **Approved**. If a local item is still **Awaiting approval**, open it, review it, and approve it. This restricted Approver cannot publish.",
-          `In the **administrator acting as publisher** profile, open **coverage-guide-live**. Choose **Publish** with **Page**, **Current language (English)**, **All references**, and **Include related items** selected. Leave **Subpages** unchecked, and select **Start publish**. After completion, open the [**published coverage page**](${PUBLIC}/coverage-guide-live), and confirm both headings and the shared Promotion.`,
+          `In the **Author Page Builder** tab, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**. Wait for **Page created from branch template**.`,
+          "Choose **Reload tree** if shown. In **Sitemap**, select **coverage-page**, and wait for its matching page heading. Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading** below. Click outside the text, and wait for **Saved**. Below the Hero, click **Article text → Heading**, and paste **Article heading** below. Click the blank **Body** immediately below that heading, and paste **Article body** below. Click outside, and wait for **Saved**.",
+          "In the **Author Page Builder** tab, click the **Hero image** placeholder on the canvas. In the right-hand **Image** panel, choose **Browse media library → Media BETA** to open the **Modern Media Library**. Select **liberty-mutual-public-family-basketball.jpg**, then choose **Insert** in its image details. Confirm the family photograph appears beside the Hero heading, and wait for **Saved**.",
+          "In the **Author Page Builder** tab, open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**. Show the permitted choices; choose **Promotions → Promotion → Bundle and save**. Select **Assign**, rather than **Duplicate and assign**. With **Promotion** selected, choose **Design → Variant → Image left**, then **Image right**. On desktop, confirm the photograph switches sides while the copy stays the same. On mobile, both variants keep the image above the text.",
+          "In the **Author Page Builder** tab, select **Preview → Preview**. Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Author Page Builder**. Keep the page unpublished.",
+          "In the **Author Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**. Paste **Page submission comment** below, then select **Submit**. Confirm the page is **Awaiting approval**. Its local Hero and Article text follow the page through review.",
+          "Switch to the **Approver Page Builder** tab, reload it to refresh **Sitemap**, select **coverage-page**, and review the page on its canvas. Choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**. Confirm **Approved**, then switch to the **Publisher Page Builder** tab.",
+          `Switch to the **Publisher Page Builder** tab, reload it to refresh **Sitemap**, open **coverage-page**, then choose **Publish**. Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**. After completion, switch to the **Public website** tab, open [**the published coverage page**](${PUBLIC}/coverage-page), and confirm both headings, the Hero image, and the shared Promotion.`,
         ],
         expected: [
           "The new page is previewed and published without code changes, using approved components, independent local content, a reused Promotion, and separate workflow roles.",
@@ -608,14 +585,14 @@ export const customerDemoChapters: DemoChapter[] = [
           "The same publishing controls also support a complete page. The marketer starts with an approved structure and permitted components. Local copy remains independently editable, while the shared Promotion is reused. The Author submits, the Approver reviews, and the publisher releases the approved page without a frontend deployment.",
         ],
         controls: [
-          "**Landing page** creates local **Hero** and **Introduction** items. Placeholder settings restrict the available components. **Assign** reuses the existing Promotion; **Compact** changes only its presentation.",
-          "The configured workflow is **Draft → Awaiting approval → Approved**. Each local content item completes its review, and a separate publishing action releases the approved page.",
+          "**Landing page** creates local **Hero** and **Introduction** items. Placeholder settings restrict the available components. **Assign** reuses the existing Promotion; **Image left** and **Image right** change only its presentation. Both place the image above the text on mobile.",
+          "The configured workflow is **Draft → Awaiting approval → Approved**. The page’s local content moves with it through review, and a separate publishing action releases the approved page. Shared Promotions retain their own review.",
         ],
         links: [
           { label: "Create a page under public Home", href: publicEditor },
           {
             label: "New page after publication",
-            href: `${PUBLIC}/coverage-guide-live`,
+            href: `${PUBLIC}/coverage-page`,
           },
         ],
         images: [
@@ -657,7 +634,7 @@ export const customerDemoChapters: DemoChapter[] = [
             alt: "The selected page-body placeholder offers approved component choices. In Promotions, choose Promotion.",
             caption:
               "The selected page-body placeholder offers approved component choices. In **Promotions**, choose **Promotion**.",
-            afterAction: 3,
+            afterAction: 4,
             crop: {
               x: 0,
               y: 0,
@@ -689,7 +666,7 @@ export const customerDemoChapters: DemoChapter[] = [
             alt: "Choose Bundle and save from Promotions, then use Assign to reference the existing content item.",
             caption:
               "Choose **Bundle and save** from **Promotions**, then use **Assign** to reference the existing content item.",
-            afterAction: 3,
+            afterAction: 4,
             crop: {
               x: 435,
               y: 60,
@@ -716,44 +693,12 @@ export const customerDemoChapters: DemoChapter[] = [
             ],
           },
           {
-            file: "demo-public-promotion-variant.png",
-            title: "Apply the Compact presentation variant",
-            alt: "With the Promotion selected, open Design, open Variant, and choose Compact. This changes its presentation.",
-            caption:
-              "With the **Promotion** selected, open **Design**, open **Variant**, and choose **Compact**. This changes its presentation.",
-            afterAction: 3,
-            crop: {
-              x: 1615,
-              y: 115,
-              width: 305,
-              height: 345,
-              sourceWidth: 1920,
-              sourceHeight: 908,
-            },
-            annotations: [
-              {
-                x: 32.79,
-                y: 6.67,
-                width: 24.92,
-                height: 10.43,
-                label: "Open **Design**",
-              },
-              {
-                x: 4.92,
-                y: 56.23,
-                width: 91.48,
-                height: 11.3,
-                label: "Choose **Compact**",
-              },
-            ],
-          },
-          {
             file: "demo-public-page-preview-menu.png",
             title: "Open the unpublished page preview",
             alt: "Use the eye-shaped Preview control, then choose Preview in its menu to inspect the page before publication.",
             caption:
               "Use the eye-shaped **Preview** control, then choose **Preview** in its menu to inspect the page before publication.",
-            afterAction: 4,
+            afterAction: 5,
             crop: {
               x: 1190,
               y: 65,
@@ -785,7 +730,7 @@ export const customerDemoChapters: DemoChapter[] = [
             alt: "The workflow action opens Comment. Enter the review comment, then select Submit.",
             caption:
               "The workflow action opens **Comment**. Enter the review comment, then select **Submit**.",
-            afterAction: 5,
+            afterAction: 6,
             crop: {
               x: 690,
               y: 55,
@@ -833,7 +778,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The existing and proposed wording and its target field have been shown, and the proposed Profound-to-Draft, review, and publication path has been explained.",
         presenterActions: [
           [
-            `Open the prepared [**Prospera AEO recommendation review**](${SCRUNCH_REVIEW}). Confirm **agverticals → Prospera**.`,
+            "Switch to the **Prospera recommendations** tab in the **Incognito / Private** window. Confirm **agverticals → Prospera**.",
             "Under **Readability & Clarity**, open the **Home** recommendations. Keep this example read-only.",
           ],
           [
@@ -842,17 +787,16 @@ export const customerDemoChapters: DemoChapter[] = [
             "Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
           ],
           [
-            `Select **Open in Page builder**, or open [**the prepared recommendation in Page Builder**](${SCRUNCH_EDITOR}).`,
+            "Switch to the prepared **Prospera Page Builder** tab in the same **Incognito / Private** window.",
             "Show **AEO opportunities** and **Powered by Scrunch**.",
             "On **Cards · Description**, choose **Show live content** if needed.",
             "Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**.",
             "Show the outlined field. Do not apply, dismiss, edit, or publish.",
           ],
           [
-            "Return to Liberty Mutual’s prepared **Page Builder** tab.",
-            "Show the proposed path: **Profound output → scoped Sitecore authoring API → SitecoreAI Draft**.",
-            "Continue: **human review and approval → publication → website, Search, and API consumers**.",
-            "Identify **Profound** as a proposed integration; the live recommendation example uses **Scrunch**.",
+            "Stay in the **Prospera Page Builder** tab in the **Incognito / Private** window.",
+            "Explain: a marketer can accept a recommendation, refine the editable copy, and follow the content’s configured review and approval before publication.",
+            "For **Profound**, explain the proposed authoring-API intake into **Draft**, followed by human review, approval, and publication. Keep this example read-only; leave **Apply**, **Apply all**, **Dismiss**, and **Publish** untouched.",
           ],
         ],
         presenterResult:
@@ -861,7 +805,7 @@ export const customerDemoChapters: DemoChapter[] = [
           `Open the prepared [**Prospera AEO recommendation review**](${SCRUNCH_REVIEW}) tab. Confirm the **agverticals** environment and **Prospera** site. Under **Readability & Clarity**, review the **Home** page recommendations. This is the existing integrated recommendation example. Keep it read-only.`,
           "Locate **Cards · Description**. Compare the existing wording in the upper block with the proposed wording in the lower block. Point out **trackable rewards** and **card options side by side** as examples of clearer phrasing. Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
           `Use **Open in Page builder** on that recommendation, or open the prepared [**same recommendation in Page Builder**](${SCRUNCH_EDITOR}). Show the **AEO opportunities** panel and **Powered by Scrunch** label beside the page. On **Cards · Description**, choose **Show live content** if the existing copy is collapsed. Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**. The corresponding field is outlined on the page. Inspect it without applying the recommendation or changing the page.`,
-          "Return to Liberty Mutual’s prepared Page Builder tab. Trace the proposed integration design: **Profound output → scoped Sitecore authoring API → SitecoreAI Draft → human review and approval → publication → website, Search, and API consumers**. Use the Liberty Mutual review process already demonstrated to show where governance applies. The read-only Prospera example demonstrates recommendation review and field context; Liberty Mutual’s preceding page demonstration supplies the workflow proof.",
+          "Stay in the **Prospera Page Builder** tab in the **Incognito** window. Explain that a marketer can accept a recommendation into editable content, refine the wording, and follow the configured human review and approval workflow before publication. Show the recommendation beside its page field; do not apply it, edit the page, or publish. For Liberty Mutual’s requested Profound integration, this is the intended review pattern.",
         ],
         expected: [
           "The marketer can inspect a real contextual recommendation in SitecoreAI and understand how proposed Profound content would enter Liberty Mutual’s existing Draft, review, and publishing process.",
@@ -881,10 +825,6 @@ export const customerDemoChapters: DemoChapter[] = [
           {
             label: "Open the same recommendation in Page Builder",
             href: SCRUNCH_EDITOR,
-          },
-          {
-            label: "Return to Liberty Mutual Page Builder",
-            href: publicEditor,
           },
         ],
         images: [
@@ -1019,57 +959,58 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 1,
         persona: "Public-site marketer",
         scenario:
-          "The marketer needs timely evidence of visits, clicks, and reading depth to decide which guidance to improve.",
+          "The marketer needs to understand website visits and the next-step actions visitors select.",
         objective:
-          "Help marketers choose which guidance to improve using visits, clicks, and reading-depth signals.",
+          "Show how marketers can measure defined visitor actions alongside page views using actual public-site events.",
         stopWhen:
-          "The site-filtered report shows the prepared page, CTA, and scroll events with their actual timestamps and reporting period.",
+          "The public-site report shows pageView and LM_PUBLIC_CTA_CLICK over the past month, and the presenter explains the visitor action represented by the custom event.",
         presenterActions: [
           [
-            `Open [**Optimization → Analytics → Events**](${ANALYTICS}).`,
-            "Set **Site → liberty-mutual-public-site** and **Time → 1 hour**.",
+            "Switch to the prepared **Events** tab.",
+            "Set **Site → liberty-mutual-public-site** and **Time → 1 month**.",
+            "Under **Event Type**, keep **pageView** and **LM_PUBLIC_CTA_CLICK** checked; clear the other event checkboxes.",
           ],
           [
             "Show **Events over Time** and **Events Table**.",
-            "Find actual **pageView**, **LM_PUBLIC_CTA_CLICK**, and **LM_PUBLIC_SCROLL_25** or other recorded scroll milestones.",
-            "Match their timestamps to the visitor journey completed during preparation.",
+            "Find the actual **pageView** and **LM_PUBLIC_CTA_CLICK** rows.",
+            "Read the values shown for the selected site and reporting period.",
           ],
           [
-            "Point to visits, reading depth, and selected next actions in the actual report.",
-            "Show which signal helps identify a content improvement.",
+            "Explain: **LM_PUBLIC_CTA_CLICK** records a visitor’s selection of a defined next-step button or link.",
+            "Show that the custom business action can be measured alongside **pageView** visits.",
           ],
         ],
         presenterResult:
-          "The site-filtered report shows genuine page, CTA, and scroll events with the prepared journey’s timestamps.",
+          "The public-site report shows actual page views and defined CTA selections over the past month.",
         actions: [
-          `Open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site** to **liberty-mutual-public-site** and **Time** to **1 hour**, matching the consented visitor interactions completed during preparation.`,
-          "Inspect **Events over Time** and **Events Table**. Identify the actual **pageView**, **LM_PUBLIC_CTA_CLICK**, and **LM_PUBLIC_SCROLL_25** or other recorded scroll milestones. Match their timestamps to the prepared visitor journey.",
-          "Explain one use of these signals: identify whether visitors reach and read the answer and select its next action. Use visits, reading depth, and selected actions to choose where to improve the content.",
+          `Switch to the prepared **Events** tab, or open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Under **Event Type**, keep **pageView** and **LM_PUBLIC_CTA_CLICK** checked, and clear the other event checkboxes.`,
+          "Inspect **Events over Time** and **Events Table**. Identify the actual **pageView** and **LM_PUBLIC_CTA_CLICK** rows, and read the values shown for the selected site and reporting period.",
+          "Explain that **LM_PUBLIC_CTA_CLICK** is a custom event for a visitor’s selection of a defined next-step button or link. Show that this business action can be measured alongside **pageView** visits.",
         ],
         expected: [
-          "A marketer can inspect genuine, consented engagement for the public site without a separate analytics request.",
+          "A marketer can inspect the public site’s recorded page views and custom business actions in SitecoreAI over the selected monthly reporting period.",
         ],
         talkTrack: [
-          "Once guidance is published, the marketer can see page visits, content clicks, and reading depth in one platform view. Those timely engagement signals help the marketing team identify useful content and opportunities to improve the customer journey.",
+          "Marketers can measure website visits and the actions that matter to Liberty Mutual. Here, pageView records visits, and the defined LM_PUBLIC_CTA_CLICK event records selections of next-step buttons and links. Custom events let the team name and measure meaningful business actions. This report shows the public site’s actual recorded activity over the past month.",
         ],
         controls: [
-          "The **Site** filter separates this application’s events from the Agent Portal, and **Time → 1 hour** defines the reporting period. Use the events and timestamps actually present.",
-          "The prepared journey used **Privacy choices → Allow personalization** for optional measurement. The earlier **Essential only** search is a separate consent example. Liberty Mutual’s Tealium architecture remains part of the integration discussion.",
+          "The **Site** filter separates the Public Website from the Agent Portal. **Time → 1 month** defines the reporting period, and **Event Type** checkboxes focus the report on **pageView** and **LM_PUBLIC_CTA_CLICK**. The native report supplies the recorded rows and totals.",
+          "The application defines **LM_PUBLIC_CTA_CLICK** and sends it through the **Sitecore Content SDK** after the visitor allows optional measurement. **SitecoreAI** displays the received custom events alongside page views. Liberty Mutual’s Tealium architecture remains part of the integration discussion.",
         ],
         links: [{ label: "Native public-site Events", href: `${ANALYTICS}` }],
         images: [
           {
-            file: "customer-demo-public-events.png",
-            afterAction: 2,
-            title: "Read actual visitor events",
-            alt: "Native SitecoreAI Events table showing public-site CTA clicks, scroll-depth events, and page views",
+            file: "demo-public-events-month.png",
+            afterAction: 1,
+            title: "Filter the public site’s monthly events",
+            alt: "Native SitecoreAI Events view with liberty-mutual-public-site selected, Time set to 1 month, and Event Type limited to LM_PUBLIC_CTA_CLICK and pageView",
             caption:
-              "In **Events Table**, compare the actual **LM_PUBLIC_CTA_CLICK**, **LM_PUBLIC_SCROLL** milestones, and **pageView** rows. Counts vary with the selected reporting window and the interactions performed; these are engagement signals.",
+              "Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Keep **LM_PUBLIC_CTA_CLICK** and **pageView** selected under **Event Type**; the report reflects those selections.",
             crop: {
-              x: 72,
-              y: 370,
-              width: 1180,
-              height: 350,
+              x: 64,
+              y: 110,
+              width: 1190,
+              height: 308,
               sourceWidth: 1280,
               sourceHeight: 720,
             },
@@ -1080,7 +1021,7 @@ export const customerDemoChapters: DemoChapter[] = [
       },
       {
         id: "public-api",
-        title: "Reuse one approved answer in another experience",
+        title: "Retrieve approved content through native GraphQL",
         label: "Decoupled delivery with a stable content API",
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
@@ -1089,82 +1030,77 @@ export const customerDemoChapters: DemoChapter[] = [
         scenario:
           "Another application needs the same approved guidance without maintaining another copy.",
         objective:
-          "Reuse one approved answer through a stable API, reducing duplicate content maintenance across applications.",
+          "Show how any application can retrieve the same published page fields through Experience Edge’s native GraphQL API.",
         stopWhen:
-          "The second experience shows the newly published sentence, its source, stable item ID, and native content version.",
+          "The native GraphQL response shows the same page ID, published version, question, answer, and Detailed explanation, including the sentence published in P3.",
+        inputs: [
+          {
+            action: 2,
+            label: "HTTP headers",
+            value: `{
+  "sc_apikey": "<Delivery API token>"
+}`,
+          },
+          {
+            action: 2,
+            label: "GraphQL query",
+            value: `query PublishedCoverageGuidance {
+  item(path: "{AE109FC0-B508-5840-97EB-0B2C02AE1A9B}", language: "en") {
+    id
+    name
+    version
+    question: field(name: "question") { value }
+    answer: field(name: "answer") { value }
+    explanation: field(name: "explanation") { value }
+    source: field(name: "sourceLink") { jsonValue }
+  }
+}`,
+          },
+        ],
         presenterActions: [
           [
             "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A).",
             "Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**.",
           ],
           [
-            "Open [**One published page, two experiences**](/workshops/content-api).",
-            "Under **Published insurance question**, select **Can I bundle my car and home insurance?**, then **Load content**.",
+            `Switch to the prepared [**GraphQL Explorer**](${GRAPHQL_EXPLORER}) tab; its **HTTP HEADERS** already contain the **Live Delivery API token** configured in **P0**.`,
+            "Keep **HTTP HEADERS** configured with your **Live Delivery API token**, using the **HTTP headers** copy field below if needed. Copy **GraphQL query**, replace the existing text in the left **Query** editor, and select the triangular **Run** button.",
           ],
           [
-            `Find **Review your options with your agent before choosing coverage.**; compare it with [**the public article**](${ARTICLE}).`,
-            "Under **The governance travels with the answer**, show the source and applicability metadata.",
+            "In the response on the right, show **id**, **version**, **question**, **answer**, **explanation**, and **source**.",
+            `Find **Review your options with your agent before choosing coverage.** in **explanation**, then briefly compare it with [**the public article**](${ARTICLE}) in the **Public website** tab. Return to **GraphQL Explorer**.`,
           ],
           [
-            "Under **A stable contract for other applications**, show **API contract version**, **Native content version**, and **Stable item ID**.",
-            "Match the stable ID to the resource page and the native version to its published English revision.",
+            "Explain that the front end, LibertyAir, or any other application can retrieve these same published fields through the native API.",
+            "Finish on the actual response: one approved page, available to multiple experiences without another content copy.",
           ],
         ],
         presenterResult:
-          "The second experience and public article show the same published sentence, source, applicability, stable ID, and content version.",
+          "The native GraphQL response and public article show the same published guidance and added sentence, with the resource page’s ID, published version, and source.",
         actions: [
-          "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A). Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**, then continue with the content-reuse example.",
-          "Open [**One published page, two experiences**](/workshops/content-api). Under **Published insurance question**, select **Can I bundle my car and home insurance?**, and select **Load content**.",
-          `Find **Review your options with your agent before choosing coverage.** Compare it with the [**public article**](${ARTICLE}). Under **The governance travels with the answer**, identify the source and applicability metadata.`,
-          "Under **A stable contract for other applications**, identify **API contract version**, **Native content version**, and **Stable item ID**. The stable ID identifies the same resource page; the content version identifies that page’s published English revision.",
+          "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A). Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**.",
+          `Open the prepared [**GraphQL Explorer**](${GRAPHQL_EXPLORER}). Its **HTTP HEADERS** must use the **Live Delivery API token** configured in **P0**, not Preview. Use the **HTTP headers** copy field below if needed. Copy **GraphQL query** below, replace the existing text in the left **Query** editor, and select the triangular **Run** button.`,
+          `In the response on the right, identify **id**, **version**, **question**, **answer**, **explanation**, and **source**. Find **Review your options with your agent before choosing coverage.** in **explanation**, and briefly compare it with [**the public article**](${ARTICLE}). Return to **GraphQL Explorer**.`,
+          "Explain that the front end, LibertyAir, or any other application can retrieve these same published fields through the native API. Finish on the actual response; no additional application demonstration is needed.",
         ],
         expected: [
-          "The separate API consumer and public article present the same approved page content without re-entering it.",
+          "Experience Edge’s native GraphQL API returns the same approved, published page fields used by the public website.",
         ],
         talkTrack: [
           "Authors manage and approve content in SitecoreAI. Publishing sends that content to Experience Edge, Sitecore’s globally distributed content delivery service. Websites and other applications retrieve it through APIs. That lets Liberty Mutual reuse one approved source across experiences, while publishing content independently of application deployments.",
-          "The same car-and-home page serves another application through a stable API. Its approved guidance, source, and applicability travel together. This is the kind of governed content feed LibertyAir could consume.",
+          "This is the native GraphQL response for the same car-and-home page. Its ID, published version, guidance, and source come directly from Live Experience Edge, including the sentence we just published. The website, LibertyAir, or another application can retrieve these fields without maintaining another copy of the content.",
         ],
         controls: [
-          "The versioned **/api/content/v1/answers/** endpoint reads approved published content from **Live Experience Edge**. The API envelope and second application are implementation components around the native governed source.",
-          "The API contract version describes the response format, while **Native content version** identifies the resource page’s published English revision. Draft and Preview content remain in authoring.",
+          "**GraphQL Explorer** queries **Live Experience Edge** using a generated **Delivery API token** in the **sc_apikey** HTTP header. The token is configured locally before the demonstration; it is not part of the query or link.",
+          "The query selects the resource page by its stable item ID and English language. **version** identifies its published content version. Draft and Preview content remain in authoring.",
         ],
         links: [
           {
             label: "Open the Experience Edge diagram in the shared deck",
             href: "https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A",
           },
-          {
-            label: "Open the second content experience",
-            href: "/workshops/content-api",
-          },
-          { label: "Compare the public article", href: `${ARTICLE}` },
-        ],
-        images: [
-          {
-            file: "customer-demo-content-api.png",
-            afterAction: 2,
-            title: "Select the same published answer",
-            alt: "One published page, two experiences page with the published insurance question selector and Load content button",
-            caption:
-              "Choose **Can I bundle my car and home insurance?** under **Published insurance question**, then select **Load content**. This page retrieves the actual published API response.",
-            annotations: [
-              {
-                x: 46,
-                y: 28,
-                width: 39,
-                height: 4,
-                label: "Choose the published insurance question.",
-              },
-              {
-                x: 85,
-                y: 29,
-                width: 12,
-                height: 3,
-                label: "Select **Load content**.",
-              },
-            ],
-          },
+          { label: "Open GraphQL Explorer", href: GRAPHQL_EXPLORER },
+          { label: "Compare the public article", href: ARTICLE },
         ],
         transition:
           "The same approved content can serve another application. Next, move to the second journey in your guide: a relevant Liberty Mutual experience for independent agents.",
@@ -1189,70 +1125,63 @@ export const customerDemoChapters: DemoChapter[] = [
         persona:
           "Independent agents Avery and Daniel, followed by a portal marketer",
         scenario:
-          "Agents with different roles and agency context need relevant priorities, while a recorded marketing opt-out must stop outreach.",
+          "Agents with different roles, licensed states, and agency context need priorities relevant to their business.",
         objective:
-          "Match guidance to each agent’s business, and honor a recorded marketing opt-out through a native eligibility decision.",
+          "Compare two agents’ priorities, then show how role, licensed state, and agency production determine the result in native personalization rules.",
         stopWhen:
-          "The native profile tests explain Avery and Daniel’s priorities, and Cameron’s outreach eligibility has changed from included to excluded, using the same Native profile ID. No outreach email preview remains.",
+          "Avery and Daniel’s different priorities are visible, each agent matches the expected native priority rule using that agent’s own Client ID, and the published Texas and Illinois conditions are shown.",
         presenterActions: [
           [
-            "Open prepared [**Communication preferences**](/workshops/preferences); show **1 eligible recipient → Cameron Ellis - Allowed**.",
-            "Record that profile’s **Native profile ID**, then select **Opt out Cameron**.",
-            "Leave the tab open while the update processes; continue with Avery and Daniel.",
-          ],
-          [
-            `In the **avery.01** session, open [**Agent Portal Home**](${PORTAL}/). Confirm **Avery Brooks → Cedar Ridge Insurance**.`,
+            `Switch to the **Avery portal** tab, and open [**Home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.`,
             "Find **Priorities for your agency**; show **Build a stronger small-business practice** first.",
             "Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**.",
             "Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.",
           ],
           [
-            `In the separate **daniel.01** session, open [**Home**](${PORTAL}/). Confirm **Daniel Ortiz → Prairie Oak Insurance**.`,
+            `Switch to the separate **Daniel portal** tab, and open [**Home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.`,
             "Compare his household-first priorities.",
             "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.",
           ],
           [
-            `As administrator, open [**Agent Portal Home in Page Builder**](${portalEditor}); keep **Default editing host**, then **Layers → Agency priorities**.`,
+            `Switch to the **Publisher Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**.`,
             "Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**.",
-            "Choose **Select profile → Load profile → Profile ID**, replacing **Client ID** if shown.",
-            "Paste Avery’s prepared [**Native profile ID**](/workshops/reset#current-profiles); press **Enter**. Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**.",
-            "Repeat with Daniel’s current UUID; wait for **Testing as: Daniel Ortiz - 01**; select **Test**, and confirm green **producer-priorities**. Choose **Cancel**.",
+            "Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.",
           ],
           [
-            `Open [**Liberty Mutual marketing eligibility → Configuration**](${MARKETING_ELIGIBILITY}), then **API response → Open variant editor**.`,
-            "Show **marketingEligible** requiring an identified profile and **marketingSuppressed === false**.",
-            "Select **Close editor**. Leave the Live rule unchanged.",
+            "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**.",
+            "Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test.",
+            "Return to **Publisher Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**.",
+            "Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**.",
+            "Repeat with Daniel’s **Client ID**, obtained from his current **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**. Wait for **Testing as: Daniel Ortiz - 01**; select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
           ],
           [
-            "Return to **Communication preferences**; select **Check import status** until **SitecoreAI confirmed the imported records**.",
-            "Confirm **Cameron Ellis - Allowed** now has **marketingSuppressed = true**, with the same **Native profile ID**.",
-            "Under **Marketing outreach preview**, select **Run eligibility check**.",
-            "Show **No eligible recipients**, with no email preview.",
-            "Under **Native decision receipts**, confirm **marketingEligible = false** and **Same profile as this session’s first check**.",
+            "Switch to the **State business rule** tab. Its normal navigation is **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it.",
+            "Point to the **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**.",
+            "Point to **producer-priorities**: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production.",
+            "Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
           ],
         ],
         presenterResult:
-          "Avery and Daniel match their native priority rules; Cameron’s same-profile opt-out yields **No eligible recipients** and no email preview.",
+          "Avery matches **agency-growth**, and Daniel matches **producer-priorities**. The published rule shows how role, Texas or Illinois licensing, and agency or agent production determine those results.",
         actions: [
-          "Open the prepared [**Communication preferences**](/workshops/preferences) tab. Show the **Run eligibility check** result prepared before presenting: **1 eligible recipient**, **Cameron Ellis - Allowed**. Both Cameron records share the same agency, producer role, and Texas context; their marketing choice differs. Record **Cameron Ellis - Allowed**’s **Native profile ID**, then select **Opt out Cameron**. Leave this tab open while SitecoreAI processes the updated choice, and continue with the following profile comparisons.",
-          `In the prepared **avery.01** session, open the [**live Agent Portal Home**](${PORTAL}/). Confirm **Avery Brooks** and **Cedar Ridge Insurance**. Find **Priorities for your agency**: **Build a stronger small-business practice**, **Support workers’ compensation conversations in Texas**, and **Connect home and auto conversations**. Open **Your profile** to identify her principal role and **Licensed states: Texas, Illinois, and Florida**.`,
-          `In the separate prepared **daniel.01** session, open [**Home**](${PORTAL}/). Confirm **Daniel Ortiz** and **Prairie Oak Insurance**, then compare his household-first priorities. Open **Your profile** to identify his producer role and **Licensed states: Illinois and Texas**.`,
-          `In the administrator profile, open [**Agent Portal Home in Page Builder**](${portalEditor}), keep **Default editing host**, choose **Layers**, and select **Agency priorities**. In the right-hand component panel, choose **Edit personalization rules**, then confirm the **Liberty Mutual - Agency product priorities** Builder. If it is already open from preparation, continue there. Use **Select profile → Load profile**, and ensure **Profile ID** is selected; if the field shows **Client ID**, change it to **Profile ID**. Enter Avery’s current **Native profile ID** UUID copied during preparation from [**Current profile identities for 01**](/workshops/reset#current-profiles), press **Enter**, and wait for **Testing as: Avery Brooks - 01**. Select **Test**, and confirm a green **agency-growth** match. Enter Daniel’s current ID in the same **Profile ID** field, press **Enter**, and wait for **Testing as: Daniel Ortiz - 01**. Select **Test** again, and confirm a green **producer-priorities** match. Choose **Cancel** after these read-only tests.`,
-          `Open the prepared [**Liberty Mutual marketing eligibility → Configuration**](${MARKETING_ELIGIBILITY}). Under **API response**, select **Open variant editor**. Point to **marketingEligible**: the native rule requires an identified profile and **marketingSuppressed === false**. Select **Close editor** without changing the Live rule.`,
-          "Return to **Communication preferences**, and use **Check import status** until **SitecoreAI confirmed the imported records** appears. The first card keeps the name **Cameron Ellis - Allowed**, but now shows **marketingSuppressed = true**. Confirm its **Native profile ID** is unchanged. In **Marketing outreach preview**, select **Run eligibility check** again, and show **No eligible recipients** with no email preview. Under **Native decision receipts**, confirm **marketingEligible = false** and **Same profile as this session’s first check** for Cameron. Both comparison profiles are now excluded by the runtime decision. End this loop here; restore the starting choices through [**After the demonstration**](#reset).",
+          `Switch to the **Avery portal** tab, and open [**Home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**. Find **Priorities for your agency**; show **Build a stronger small-business practice** first. Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**. Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.`,
+          `Switch to the separate **Daniel portal** tab, and open [**Home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Compare his household-first priorities. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.`,
+          `Switch to the **Publisher Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**. Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**. Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.`,
+          "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test. Return to **Publisher Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**. Repeat with Daniel’s **Client ID**, obtained from his current **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**. Wait for **Testing as: Daniel Ortiz - 01**; select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
+          "Switch to the **State business rule** tab. Its normal navigation is **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it. Point to the **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**. Point to **producer-priorities**: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production. Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
         ],
         expected: [
-          "Native profile matches explain Avery and Daniel’s different guidance. A fresh native outreach decision excludes the same Cameron profile after opt-out, and the email preview is withheld.",
+          "The portal shows different priorities for Avery and Daniel. Native profile tests and the published custom value reveal the role, licensed-state, and production conditions behind those experiences.",
         ],
         talkTrack: [
-          "The two Cameron records share the same agency, role, and Texas context. Their recorded choice determines outreach eligibility. We’ll record Cameron’s opt-out while we compare Avery’s principal priorities with Daniel’s producer priorities. SitecoreAI then evaluates the updated choice on the same native profile and excludes Cameron from the outreach. Liberty Mutual can keep Ping for sign-in and supply profile context from its existing systems.",
+          "Avery and Daniel receive priorities relevant to their roles and agencies. The published rule combines known licensing with production: Texas principals below a 20% small-commercial share receive the growth priority; qualifying Illinois producers receive producer priorities. We can inspect each profile and test the exact visitor. Liberty Mutual can keep Ping for sign-in and supply this context from its existing systems.",
           customerDemoAiContext.portal.talkTrack,
         ],
         controls: [
-          "The native guidance rules use imported UDL attributes, including role, specialization, and agency production. The application separately enforces licensed-state eligibility alongside the content personalization.",
-          "**Load profile → Profile ID** evaluates actual native profiles. **Current profile identities → Refresh status** provides current IDs after a reset.",
-          "**Communication preferences** supplies sample preference-center input and imports the choice into the native **Unified Data Layer**. The **Marketing outreach preview** calls **Liberty Mutual marketing eligibility**, a native runtime personalization that requires an explicit false value for the Boolean **marketingSuppressed**. True and missing values do not qualify.",
-          "**Run eligibility check** evaluates the actual native profiles again. The application uses the returned native eligibility response to include or withhold the email preview before downstream campaign delivery.",
+          "The published **Liberty Mutual - Agency product priorities** custom value uses known UDL attributes: **principal**, **licensedInTexas = true**, and agency small-commercial share below **20%** return **agency-growth**; **producer**, **licensedInIllinois = true**, small-commercial specialization, and positive agent small-commercial production return **producer-priorities**. Unmatched profiles receive **neutral**.",
+          "The rule requires an identified **liberty-mutual-agent** profile, **USD** production currency, and **agency** production scope. Agency small-commercial share is small-commercial production divided by personal plus small-commercial production. The application separately enforces licensed-state eligibility alongside the content personalization.",
+          "The priority Builder loads a visitor through **Load profile → Client ID**. Find that UUID in the native profile’s **Inspect → JSON view → clientIds**; the **Profile ID** in the browser URL is a different identifier. Prepare Daniel’s current **Client ID** in **P0** to keep the comparison concise.",
+          "These read-only tests inspect the existing configuration and do not publish or change a rule.",
         ],
         links: [
           { label: "Live Agent Portal Home", href: `${PORTAL}/` },
@@ -1261,22 +1190,18 @@ export const customerDemoChapters: DemoChapter[] = [
             href: `${portalEditor}`,
           },
           {
-            label: "Current profile IDs for presenter accounts",
-            href: "/workshops/reset#current-profiles",
+            label: "Open native Profiles",
+            href: "https://app.sitecorecloud.io/optimization/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df",
           },
           {
-            label: "Open Communication preferences and outreach preview",
-            href: "/workshops/preferences",
-          },
-          {
-            label: "Open native marketing eligibility Configuration",
-            href: MARKETING_ELIGIBILITY,
+            label: "Open published role, state, and agency rule",
+            href: "https://app.sitecorecloud.io/optimization/custom-values/ad7b493b-f768-404c-adc6-9841c2fe1a6e?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df",
           },
         ],
         images: [
           {
             file: "customer-demo-priorities.png",
-            afterAction: 2,
+            afterAction: 1,
             title: "Find Priorities for your agency",
             alt: "Avery's portal dashboard with Priorities for your agency below the agency overview and the small-business and Texas guidance cards",
             caption:
@@ -1293,12 +1218,36 @@ export const customerDemoChapters: DemoChapter[] = [
             ],
           },
           {
-            file: "customer-demo-outreach-suppressed.png",
-            afterAction: 6,
-            title: "Confirm the recorded opt-out stops outreach",
-            alt: "Marketing outreach preview shows No eligible recipients and a native decision receipt with marketingEligible false for Cameron Ellis - Allowed using the same native profile ID",
+            file: "demo-state-business-rule.png",
+            afterAction: 5,
+            title: "Show the known-state business conditions",
+            alt: "Published native custom value with Texas licensing required for principal growth guidance and Illinois licensing required for producer priorities.",
             caption:
-              "After the opt-out is confirmed, select **Run eligibility check**. **No eligible recipients** replaces the email preview. Under **Native decision receipts**, **Cameron Ellis - Allowed** has **marketingEligible = false** and **Same profile as this session’s first check**.",
+              "The **Published**, **View only** rule checks **licensedInTexas** for principal growth guidance and **licensedInIllinois** for producer priorities, alongside the stated business attributes. Leave the rule unchanged.",
+            crop: {
+              x: 24,
+              y: 110,
+              width: 1240,
+              height: 440,
+              sourceWidth: 1280,
+              sourceHeight: 720,
+            },
+            annotations: [
+              {
+                x: 4,
+                y: 45,
+                width: 62,
+                height: 8,
+                label: "Texas licensing and principal role",
+              },
+              {
+                x: 4,
+                y: 74,
+                width: 65,
+                height: 18,
+                label: "Illinois licensing and producer context",
+              },
+            ],
           },
         ],
         transition:
@@ -1306,55 +1255,65 @@ export const customerDemoChapters: DemoChapter[] = [
       },
       {
         id: "portal-design",
-        title: "Keep the brand consistent as content grows",
+        title: "Create on-brand content within a governed design",
         label: "Agent sees consistent brand and design across all portal pages",
         phase: "Agent Experience",
         sourceSlide: 11,
         durationMinutes: 1,
         persona: "Independent agent, followed by a portal marketer",
         scenario:
-          "Agents need a consistent experience, and authors need approved components and clear places in which to use them.",
+          "Marketers need to create clear, on-brand copy while the portal keeps a consistent design across pages.",
         objective:
-          "Let business users manage content within a consistent portal design and approved component choices.",
+          "Show the Brand Kit’s role in AI-assisted writing, then demonstrate how editable content remains separate from reusable design and governed component choices.",
         stopWhen:
-          "Two representative portal pages share the same design, the permitted component choices are visible, and the sample Brand Kit’s voice guidance has been shown.",
+          "The sample Brand Kit, field-level AI writing assistance, and permitted component choices are visible, with no content changes kept or published.",
+        inputs: [
+          {
+            action: 2,
+            label: "AI writing prompt",
+            value:
+              "Rewrite this introduction for an independent insurance agent. Keep it concise, clear, and helpful. Do not add coverage promises, discounts, or claims.",
+          },
+        ],
         presenterActions: [
           [
-            `In Avery’s session, compare **My workspace** with [**Learning & resources**](${PORTAL}/resources).`,
-            "Show common navigation, typography, buttons, cards, and **Coverage and availability**.",
-          ],
-          [
-            `Open [**Agent Portal Home in Page Builder**](${portalEditor}). Confirm **Agent Portal**, **English**, and **Default editing host**.`,
-            "Open **Layers**; locate **Agency priorities** and the shared **Disclosure** component.",
-          ],
-          [
-            "In **Layers → headless-agency-priorities**, select **Insert into** before or after **Agency priorities**.",
-            "Show **Components → Business priorities → Agency priorities** as the permitted choice.",
-            "Close the picker without inserting content.",
-          ],
-          [
-            `Open [**Design → Brand kits**](${BRAND_KITS}).`,
+            "Switch to the **Brand Kit** tab, or navigate **Design → Brand kits**.",
             "Select **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**.",
-            "Show the voice guidance. Leave the kit unchanged.",
+            "Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation. Leave the kit unchanged.",
+          ],
+          [
+            `Switch to **Publisher Page Builder → Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**.`,
+            "Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**. Confirm **Introduction** in the right panel.",
+            "Select **Optimize with AI**; point to **Adhere to brand kit**, then paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**.",
+            "When **Ready!** appears, review the generated paragraph. Choose **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.",
+          ],
+          [
+            "Open **Layers → headless-agency-priorities**, and select **Insert into** before or after **Agency priorities**.",
+            "Show **Components → Business priorities → Agency priorities** as the permitted choice, then close the picker without inserting content.",
+            "Explain: authors change content; reusable components control its presentation, page designs supply shared structure, and placeholder settings govern composition.",
+          ],
+          [
+            `Switch to **Avery portal**, and briefly compare **My workspace** with [**Learning & resources**](${PORTAL}/resources).`,
+            "Point to their shared navigation, typography, buttons, and cards. The content changes while the design stays consistent.",
           ],
         ],
         presenterResult:
-          "Both portal pages share the design; the placeholder limits component choices, and the sample Brand Kit’s voice guidance is visible.",
+          "The Brand Kit guides content creation, native AI assistance operates on an editable field, and governed components preserve a consistent design. No generated change is kept or published.",
         actions: [
-          `In Avery’s session, compare **My workspace** with [**Learning & resources**](${PORTAL}/resources). Identify their common navigation, typography, buttons, cards, and **Coverage and availability** disclosure.`,
-          `Open [**Agent Portal Home in Page Builder**](${portalEditor}). Confirm **Agent Portal**, **English**, and **Default editing host**. Open **Layers**, and locate **Agency priorities** and the shared **Disclosure** component.`,
-          "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that the page design supplies shared structure and placeholder settings limit which components fit each area.",
-          `Switch to the prepared [**Design → Brand kits**](${BRAND_KITS}) tab. Select the **Published** **Liberty Mutual — Independent Agents** card, then open **Sections → Tone of Voice**. Briefly identify its reusable voice guidance, and leave the kit unchanged.`,
+          `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
+          `In **Publisher Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, review the generated paragraph. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
+          "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that authors change content; reusable components control presentation, page designs supply shared structure, and placeholder settings limit which components fit each area.",
+          `In **Avery portal**, briefly compare **My workspace** with [**Learning & resources**](${PORTAL}/resources). Point to the shared navigation, typography, buttons, and cards. Authors manage the content independently of that consistent design.`,
         ],
         expected: [
-          "The portal uses consistent design and governed component choices, while the sample Brand Kit provides reusable guidance for content creation.",
+          "Marketers can use brand guidance and native AI assistance while editing content, with reusable design and restricted component choices preserving a consistent portal.",
         ],
         talkTrack: [
-          "Shared design keeps these personalized experiences consistently on brand. The portal’s shared structure and placeholder settings give business users approved components and appropriate places for them. We also assembled a sample Liberty Mutual Brand Kit for the workshop, with reusable visual and voice guidance for content creation.",
+          "We assembled a sample Liberty Mutual Brand Kit with reusable voice and messaging guidance for AI-assisted writing. Content Copilot helps an author refine copy directly in Page Builder, with human review before keeping the result. Content and design remain separate: authors manage words and images, content templates define the fields, reusable components control presentation, and page designs arrange those components. Placeholder settings limit the permitted choices. Marketers can work faster while agents receive a consistent Liberty Mutual experience.",
         ],
         controls: [
           "**Page designs**, **partial designs**, native renderings, and **placeholder settings** govern reusable structure and permitted composition. Content edits remain separate from component code.",
-          "The sample **Brand Kit** collects reusable visual and voice instructions for content creation. Shared application styles and native composition controls govern the rendered portal.",
+          "The sample **Brand Kit** collects reusable visual and voice guidance for AI-assisted writing. **Optimize with AI** offers **Adhere to brand kit** alongside writing improvements. The author reviews the suggestion; **Revert to original** restores the field without keeping the generated wording or publishing it.",
         ],
         links: [
           {
@@ -1365,6 +1324,22 @@ export const customerDemoChapters: DemoChapter[] = [
           { label: "Open the sample Brand Kit library", href: BRAND_KITS },
         ],
         images: [
+          {
+            file: "demo-ai-field-copilot.png",
+            title: "Open AI writing assistance for the Introduction field",
+            alt: "Page Builder’s Introduction field with the Optimize with AI menu, Ask AI for content improvements prompt, Generate content button, and writing-improvement actions.",
+            caption:
+              "Select **Layers → Agency priorities → Introduction**. In the right panel, choose **Optimize with AI**, enter the prompt in **Ask AI for content improvements**, and select **Generate content**. After reviewing the result, choose **Revert to original**.",
+            afterAction: 2,
+            crop: {
+              x: 800,
+              y: 80,
+              width: 470,
+              height: 480,
+              sourceWidth: 1280,
+              sourceHeight: 720,
+            },
+          },
           {
             file: "demo-portal-allowed-component.png",
             title: "The placeholder governs available components",
@@ -1403,7 +1378,7 @@ export const customerDemoChapters: DemoChapter[] = [
             alt: "Native Brand Kit Sections tab with the Tone of Voice section and reusable guidance for the Liberty Mutual independent-agent portal.",
             caption:
               "In **Liberty Mutual — Independent Agents**, open **Sections → Tone of Voice**. The sample kit supplies reusable voice guidance for content creation.",
-            afterAction: 4,
+            afterAction: 1,
             crop: {
               x: 18,
               y: 340,
@@ -1463,8 +1438,8 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `As **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}).`,
-            "Confirm **Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.",
+            "Switch to **Author Page Builder**, and choose **Site switcher → Agent Portal → Content**.",
+            "In the content tree, select **Data → Agency priorities → Agency growth priorities**. Confirm **English**.",
           ],
           [
             "Record the approved version and original order: **Small business growth → Texas workers compensation → Home and auto conversations**.",
@@ -1486,7 +1461,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The recorded **Saved priority version** is a saved Texas-first **Draft**; the original approved version and live order remain unchanged.",
         actions: [
-          `As the **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}). Confirm **Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.`,
+          "In **Author Page Builder**, choose **Site switcher → Agent Portal → Content**. In the content tree, select **Data → Agency priorities → Agency growth priorities**, and confirm **English**.",
           "Record the current approved version and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Open the version selector, choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
           "Find **Ordered recommendations**. Click **Remove all items** to clear only this draft’s selection, open the picker, and select **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, the Approver’s review, and publication.",
           "With **Saved priority version** selected, confirm the order **Texas workers compensation → Small business growth → Home and auto conversations** and that the version remains **Draft**. Leave it unpublished. The next step demonstrates native page-level audience preview on the prepared growth page, then returns to this saved priority version for approval and publication.",
@@ -1569,47 +1544,48 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `In the **administrator acting as publisher** profile, open [**Agent audience preview in Page Builder**](${audiencePreviewEditor}).`,
-            "Confirm **Agent Portal**, **English**, **Default editing host**, and unpublished **Home → growth → Agent audience preview**.",
+            "Switch to **Publisher Page Builder**, and choose **Site switcher → Agent Portal → Editor → Pages**.",
+            "In **Sitemap**, expand **Home → growth**, and select **Agent audience preview**. Confirm **English**, **Default editing host**, and that this page remains unpublished.",
             "Select **Personalize**.",
           ],
           [
             "Select **Avery agency principal → Preview → Preview**.",
             "Show **Set your agency’s next growth priority** and **Give your team a clear direction**.",
-            "Confirm Avery/Cedar Ridge principal context; close the preview tab, and return to **Personalize**.",
+            "Confirm Avery/Cedar Ridge principal context; close the preview tab, and return to **Personalize** in **Publisher Page Builder**.",
           ],
           [
             "Select **Daniel producer → Preview → Preview**.",
             "Show **Prepare your next business insurance opportunity** and **Build a stronger first submission**.",
-            "Confirm Daniel/Prairie Oak producer context; close the preview tab. Keep this growth page unpublished.",
+            "Confirm Daniel/Prairie Oak producer context; close the preview tab, and return to **Publisher Page Builder**. Keep this growth page unpublished.",
           ],
           [
-            `In the **Author** profile, open [**Agency growth priorities**](${priorityContent}); select **Saved priority version**.`,
+            "Switch to **Author Page Builder → Content**; select **Data → Agency priorities → Agency growth priorities**, then **Saved priority version**.",
             "Wait for loading; confirm **Draft** and Texas-first **Ordered recommendations**.",
             "Choose **Actions → Submit**; paste **Priority submission comment** below, then select **Submit**.",
             "Confirm **Awaiting approval**.",
           ],
           [
-            "In the separate **Approver** session, select the same **Saved priority version**, and review its Texas-first order.",
+            "Switch to **Approver Page Builder**, and choose **Site switcher → Agent Portal → Content → Data → Agency priorities → Agency growth priorities**.",
+            "Select the same **Saved priority version**, and review its Texas-first order.",
             "Choose **Actions → Approve**; paste **Priority approval comment** below, then select **Submit**.",
             "Confirm **Approved**.",
           ],
           [
-            "In the **administrator acting as publisher** session, open the collection in **Content**; select the same **Saved priority version**.",
+            "Switch to **Publisher Page Builder → Content**; select **Data → Agency priorities → Agency growth priorities**, then the same **Saved priority version**.",
             "Confirm **Approved** and Texas-first order. Choose **Publish** with **Item** and **Current language (English)** selected.",
             "Leave **Subitems** unchecked, select **Start publish**, and wait for completion.",
-            "Reload Avery’s live Home: confirm Texas guidance first. Reload Daniel’s separate session: confirm his household-first order remains unchanged.",
+            "In the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
           ],
         ],
         presenterResult:
           "Both audience previews work; publishing the saved priority version changes Avery’s live order while Daniel’s remains unchanged.",
         actions: [
-          `In the prepared **administrator acting as publisher** browser profile, open [**Agent audience preview in Page Builder**](${audiencePreviewEditor}). Confirm **Agent Portal**, **English**, **Default editing host**, and the unpublished **Agent audience preview** page beneath **Home → growth**. Open **Personalize** in the top navigation.`,
+          "In **Publisher Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages**. In **Sitemap**, expand **Home → growth**, select **Agent audience preview**, and confirm **English**, **Default editing host**, and that the page remains unpublished. Open **Personalize** in the top navigation.",
           "Select **Avery agency principal**. Choose the header **Preview** button, then **Preview** in its menu. In the complete page preview, identify **Set your agency’s next growth priority** and **Give your team a clear direction**. Confirm the Avery/Cedar Ridge principal context. Close the preview tab, and return to the same **Personalize** screen.",
           "Select **Daniel producer**, and choose **Preview → Preview** again. Identify **Prepare your next business insurance opportunity** and **Build a stronger first submission**, with the Daniel/Prairie Oak producer context. Close that preview tab. The native page variants select authored Hero and Callout content on this unpublished growth page. Home retains its existing component-level personalization.",
-          `Switch back to the **Author** browser profile, and open [**Agency growth priorities**](${priorityContent}). Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.`,
-          "In the separate **Approver** session, select the same **Saved priority version**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
-          "In the **administrator acting as publisher** session, open that collection in **Content**, select the same **Saved priority version**, confirm **Approved** and its Texas-first order, and choose **Publish**, keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, reload Avery’s actual live portal and confirm Texas guidance first. Reload Daniel’s separate producer session and confirm his household-first order remains unchanged.",
+          "Switch to **Author Page Builder → Content → Data → Agency priorities → Agency growth priorities**. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
+          "In **Approver Page Builder**, choose **Site switcher → Agent Portal → Content → Data → Agency priorities → Agency growth priorities**. Select the same **Saved priority version**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
+          "Switch to **Publisher Page Builder → Content → Data → Agency priorities → Agency growth priorities**. Select the same **Saved priority version**, confirm **Approved** and its Texas-first order, and choose **Publish**. Keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, in the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
         ],
         expected: [
           "Native page-level Preview shows the two authored audience experiences on the unpublished growth page. Publishing the separately reviewed priority collection updates Avery’s Home without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
@@ -1789,8 +1765,8 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `As **Author**, open [**Product availability notice in Page Builder Content**](${disclosureContent}).`,
-            "Confirm **Public Website**, **English**, and **Data → Disclosures → Product availability notice**.",
+            "Switch to **Author Page Builder**, and choose **Site switcher → Public Website → Content**.",
+            "In the content tree, select **Data → Disclosures → Product availability notice**. Confirm **English**.",
             "Record the original approved English version and **Disclosure** wording for the next loop’s restoration.",
           ],
           [
@@ -1803,28 +1779,29 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "Select **Saved disclosure version**; confirm **Draft** and the added sentence.",
             "Choose **Actions → Submit**; paste **Disclosure submission comment** below, then **Submit**. Confirm **Awaiting approval**.",
-            "In the separate **Approver** session, select the same **Saved disclosure version**, and review its wording.",
+            "Switch to **Approver Page Builder**, and choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**.",
+            "Select the same **Saved disclosure version**, and review its wording.",
             "Choose **Actions → Approve**; paste **Disclosure approval comment** below, then select **Submit**.",
           ],
           [
-            "In the **administrator acting as publisher** session, open the disclosure in **Content**, and select **Saved disclosure version**.",
+            "Switch to **Publisher Page Builder**, and choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**; select **Saved disclosure version**.",
             "Confirm **Approved** and the added sentence.",
             "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
           ],
           [
             "Wait for publication to complete.",
-            `Reload [**public Home**](${PUBLIC}/) and Avery’s [**Agent Portal Home**](${PORTAL}/).`,
+            "In the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In the **Avery portal** tab, select **My workspace** in the left navigation, and reload.",
             "Show the added sentence in **Coverage and availability** on both pages.",
           ],
         ],
         presenterResult:
           "Both Home pages show the added disclosure sentence after one shared-source publication.",
         actions: [
-          `As the **Author**, open [**Product availability notice in Page Builder Content**](${disclosureContent}). Confirm **Public Website**, **English**, and **Data → Disclosures → Product availability notice**. Record the original approved English version and **Disclosure** text for the rollback in the next loop.`,
+          "In **Author Page Builder**, choose **Site switcher → Public Website → Content**. In the content tree, select **Data → Disclosures → Product availability notice**, and confirm **English**. Record the original approved English version and **Disclosure** text for the rollback in the next loop.",
           "Choose **Create version**, name it **Shared disclosure review**, and select **Create**. Reopen the version selector, explicitly select the new **Shared disclosure review** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before editing **Disclosure**. Append **Review available options with your agent before making a coverage decision.** to **Disclosure**, click outside the field, and wait for **Saved**. Record the version number currently shown as **Saved disclosure version**. Use that same saved version number for submission, the Approver’s review, and publication.",
-          "With **Saved disclosure version** selected, recheck **Draft** and the added sentence in **Disclosure**. Choose **Actions → Submit**, enter **Review shared disclosure wording**, and select **Submit**. Confirm **Awaiting approval**. In the separate **Approver** session, select the same **Saved disclosure version**, review its wording, and choose **Actions → Approve**, enter **Approved shared disclosure wording**, and select **Submit**.",
-          "In the **administrator acting as publisher** session, open the disclosure in **Content**, select the same **Saved disclosure version**, and confirm **Approved** and the added sentence. Publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. Select **Start publish**.",
-          `After the job completes, reload [**public Home**](${PUBLIC}/) and, in Avery’s session, [**Agent Portal Home**](${PORTAL}/). Find the added sentence in **Coverage and availability** on both pages.`,
+          "With **Saved disclosure version** selected, recheck **Draft** and the added sentence in **Disclosure**. Choose **Actions → Submit**, enter **Review shared disclosure wording**, and select **Submit**. Confirm **Awaiting approval**. In **Approver Page Builder**, choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**. Select the same **Saved disclosure version**, review its wording, and choose **Actions → Approve**, enter **Approved shared disclosure wording**, and select **Submit**.",
+          "In **Publisher Page Builder**, choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**. Select the same **Saved disclosure version**, and confirm **Approved** and the added sentence. Publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. Select **Start publish**.",
+          "After the job completes, in the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In **Avery portal**, select **My workspace** in the left navigation, and reload. Find the added sentence in **Coverage and availability** on both pages.",
         ],
         expected: [
           "Both independent sites display the changed sentence from the same governed disclosure, without separate copy edits or frontend releases.",
@@ -1968,7 +1945,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `Open [**public Home in Page Builder Editor**](${publicEditor}).`,
+            "Switch to **Publisher Page Builder**. Select **Home** in the **Content** tree, then choose **Editor → Pages**.",
             "Choose **Sitemap → Home → Content tree options → Page items → Product availability notice**.",
           ],
           [
@@ -1977,7 +1954,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Read the user, timestamp, and **Comment**; match the preceding Author and Approver actions.",
           ],
           [
-            `As **Author**, open [**Product availability notice in Content**](${disclosureContent}); select the recorded original approved English version.`,
+            "Switch to **Author Page Builder → Content → Data → Disclosures → Product availability notice**; select the recorded original approved English version.",
             "Wait for loading; recheck the selected number and original **Disclosure** wording before choosing **Create version**.",
             "Paste **Restored disclosure version name** below, then **Create**. Reopen the selector; select the new **Original disclosure restored → Draft** row.",
             "Wait; recheck its new version number and original wording without the added sentence.",
@@ -1986,29 +1963,30 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "Select **Restored disclosure version**; confirm **Draft** and original **Disclosure** wording without the temporary sentence.",
             "Choose **Actions → Submit**; paste **Restoration submission comment** below, then select **Submit**.",
-            "In the separate **Approver** session, select the same **Restored disclosure version**, and review the original wording.",
+            "Switch to **Approver Page Builder**, and reload to refresh the version list. In **Content → Data → Disclosures → Product availability notice**, select the same **Restored disclosure version**, and review the original wording.",
             "Choose **Actions → Approve**; paste **Restoration approval comment** below, then select **Submit**.",
           ],
           [
-            "In the **administrator acting as publisher** session, select **Restored disclosure version** in **Content**; confirm **Approved** and original wording.",
+            "Switch to **Publisher Page Builder → Content → Data → Disclosures → Product availability notice**; select **Restored disclosure version**, and confirm **Approved** and original wording.",
             "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
             "While publication completes, show the original, changed, and restored versions in the **Content version selector**.",
-            "Open **Page items → Product availability notice → Workflow history**; show the restored version’s submission, approval, and comments.",
+            "Close the version selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Product availability notice → Workflow history**.",
+            "Show the restored version’s submission, approval, and comments.",
           ],
           [
-            `Wait for publication to complete, then reload [**public Home**](${PUBLIC}/) and Avery’s [**Agent Portal Home**](${PORTAL}/).`,
+            "Wait for publication to complete. In the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In the **Avery portal** tab, select **My workspace** in the left navigation, and reload.",
             "Confirm the temporary sentence is absent from both pages. Retain all content versions.",
           ],
         ],
         presenterResult:
           "Both Home pages show the original wording; version history retains the original, changed, and restored revisions and their approvals.",
         actions: [
-          `Open [**public Home in Page Builder Editor**](${publicEditor}). In **Sitemap**, open the **Home** row’s **Content tree options**, choose **Page items**, and expand **Product availability notice**.`,
+          "In **Publisher Page Builder**, select **Home** in the **Content** tree, then choose **Editor → Pages**. In **Sitemap**, open the **Home** row’s **Content tree options**, choose **Page items**, and expand **Product availability notice**.",
           "Select **Workflow history**. Under **History**, read the **Draft → Awaiting approval** and **Awaiting approval → Approved** transitions, their user and timestamp, and the review **Comment**. Match these to the separate Author and Approver actions just performed.",
-          `As the **Author**, return to [**Product availability notice in Content**](${disclosureContent}). Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording before choosing **Create version**. Name it **Original disclosure restored**, and select **Create**. Reopen the version selector, explicitly select the new **Original disclosure restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved original wording without the added sentence. After the original wording is saved, record the version number currently shown as **Restored disclosure version**. Use that same saved version number for submission, the Approver’s review, and publication.`,
-          "With **Restored disclosure version** selected, recheck **Draft** and the original **Disclosure** wording without the temporary sentence. Choose **Actions → Submit**, enter **Restore original disclosure wording**, and select **Submit**. In the separate **Approver** session, select the same **Restored disclosure version**, review the original wording, and choose **Actions → Approve**, enter **Approved restoration of shared disclosure wording**, and select **Submit**.",
-          "In the **administrator acting as publisher** session, select the same **Restored disclosure version** in **Content**, confirm **Approved** and the original wording, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Then open **Page items → Product availability notice → Workflow history** to inspect the selected restored version’s submission, approval, and review comments.",
-          `After completion, reload [**public Home**](${PUBLIC}/) and Avery’s [**Agent Portal Home**](${PORTAL}/). Confirm that the temporary sentence is absent from both pages and retain all versions in history.`,
+          "In **Author Page Builder → Content → Data → Disclosures → Product availability notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording before choosing **Create version**. Name it **Original disclosure restored**, and select **Create**. Reopen the version selector, explicitly select the new **Original disclosure restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved original wording without the added sentence. After the original wording is saved, record the version number currently shown as **Restored disclosure version**. Use that same saved version number for submission, the Approver’s review, and publication.",
+          "With **Restored disclosure version** selected, recheck **Draft** and the original **Disclosure** wording without the temporary sentence. Choose **Actions → Submit**, enter **Restore original disclosure wording**, and select **Submit**. Switch to **Approver Page Builder**, and reload to refresh the version list. In **Content → Data → Disclosures → Product availability notice**, select the same **Restored disclosure version**, review the original wording, and choose **Actions → Approve**, enter **Approved restoration of shared disclosure wording**, and select **Submit**.",
+          "In **Publisher Page Builder → Content → Data → Disclosures → Product availability notice**, select the same **Restored disclosure version**, confirm **Approved** and the original wording, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Close the selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Product availability notice → Workflow history** to inspect the restored version’s submission, approval, and review comments.",
+          "After completion, in the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In **Avery portal**, select **My workspace** in the left navigation, and reload. Confirm that the temporary sentence is absent from both pages, and retain all versions in history.",
         ],
         expected: [
           "The native history records the real workflow users, timestamps, and comments. A newer reviewed version restores both sites while preserving the original and changed versions.",

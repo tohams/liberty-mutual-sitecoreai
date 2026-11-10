@@ -27,7 +27,7 @@ npm run start
 All page composition comes from Sitecore layout data. The SDK's generated maps register the rendering components, and `PublicPageBody` exposes the governed hero and content placeholders. Native SDK fields preserve Page Builder's editing metadata.
 
 - Hero, Article, Image, CTA, selector, section, split-content, and FAQ datasources belong in each page's local `Data` folder. Ordered Cards, Questions, and Links are native items selected with local Multilist fields.
-- Home and Bundling deliberately share the Promotion in `Data/Promotions/Bundle and save`. Its `Default` and `Compact` rendering variants present the same content differently.
+- Home and Bundling deliberately share the Promotion in `Data/Promotions/Bundle and save`. Its **Image left** and **Image right** rendering variants position the same image and copy on opposite sides at desktop widths. Both put the image above the copy on mobile. `Default` preserves the image-left layout; the legacy `Compact` export remains an alias for `ImageRight` during native variant updates.
 - The public-owned Disclosure is intentionally shared with the Agent Portal by native datasource reference.
 - Header and Footer belong to the shared partial design. Their native fields supply the navigation and branding.
 

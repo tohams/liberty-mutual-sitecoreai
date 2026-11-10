@@ -193,8 +193,8 @@
   "variantIds": {
     "PublicHero.Default": "ae66b881-d8e6-59c6-89db-59fa1538b810",
     "PublicHero.Centered": "109a5a8b-b00a-5275-a3df-cd6c8a4c1671",
-    "PublicPromotion.Default": "5d5b9527-e2e8-5c4f-b1ff-d38f7588caf1",
-    "PublicPromotion.Compact": "9740e635-3b9f-57fa-a134-72a97c4addfa",
+    "PublicPromotion.ImageLeft": "5d5b9527-e2e8-5c4f-b1ff-d38f7588caf1",
+    "PublicPromotion.ImageRight": "9740e635-3b9f-57fa-a134-72a97c4addfa",
     "SharedDisclosure.Default": "8244a4f5-62c2-5025-b1a3-12751e300d0e",
     "PublicArticle.Default": "c64aaa90-dc86-5d1e-9286-1ba1dc0ece10",
     "PublicImage.Default": "772c8d8f-b0c8-5155-bba8-ab8c8c8c32fd",
@@ -1765,23 +1765,25 @@
     },
     {
       "id": "5d5b9527-e2e8-5c4f-b1ff-d38f7588caf1",
-      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicPromotion/Default",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicPromotion/ImageLeft",
       "parent": "db447254-dbb4-55d7-b799-82318bcadfdb",
       "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
       "bucket": "presentation",
       "fields": {
         "__Sortorder": "100",
+        "__Display name": "Image left",
         "__Created": "20261031T160000Z"
       }
     },
     {
       "id": "9740e635-3b9f-57fa-a134-72a97c4addfa",
-      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicPromotion/Compact",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicPromotion/ImageRight",
       "parent": "db447254-dbb4-55d7-b799-82318bcadfdb",
       "template": "4d50cdae-c2d9-4de8-b080-8f992bfb1b55",
       "bucket": "presentation",
       "fields": {
         "__Sortorder": "200",
+        "__Display name": "Image right",
         "__Created": "20261031T160000Z"
       }
     },

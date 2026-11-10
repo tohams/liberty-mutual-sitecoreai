@@ -1,0 +1,29 @@
+---
+ID: 8e283a24-9ed8-4d85-ab3b-b94310d6a8b9
+Parent: 189f8ec0-9217-5447-b2a9-f2ed7a4a70a2
+Template: def0aa0d-3446-41ae-b307-ec7ba429ce50
+Path: /sitecore/system/Workflows/Liberty Mutual Public Review/Draft/Submit/Datasource Workflow Action
+SharedFields:
+- ID: 8273a3db-fac0-44d6-aed0-29e2e039e8f9
+  Hint: Command Item
+  Value: "{189F8EC0-9217-5447-B2A9-F2ED7A4A70A2}"
+- ID: b5757325-3263-4daf-b6cd-811629cf4794
+  Hint: Scope
+  Value: "{FDA1A53F-8A35-4BF5-8BA0-1E47B7DA35D3}"
+- ID: 73c28ab2-3072-4bb8-b85c-181a128650d6
+  Hint: Item Validation
+  Value: "<ruleset><rule uid=\"{F06E23C1-48A6-5A5A-A605-4CACEADDC6D1}\" name=\"Public landing page\"><conditions><condition id=\"{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}\" uid=\"{FDFD0FF2-E2B7-5C36-A947-B8EA1CD7A02E}\" templateid=\"{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}\" /></conditions></rule></ruleset>"
+- ID: 4ae36874-58d6-44c4-96f7-23287a22848d
+  Hint: Datasource Validation
+  Value: "<ruleset><rule uid=\"{47F4E802-CE98-500D-9A95-DD7AF4250144}\" name=\"Local Hero or Introduction\"><conditions><or uid=\"{33685A51-F187-501F-9FE7-CA2DC2EF65DC}\"><condition id=\"{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}\" uid=\"{DD8980E7-D042-571B-AAF3-81466C844D79}\" templateid=\"{0D29DD73-62CC-5421-B14C-B8F8D8921540}\" /><condition id=\"{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}\" uid=\"{AF323160-1F41-5453-A92F-67DF46CD5099}\" templateid=\"{8FB0A60A-31D7-5009-ABCA-636A6A3F40B5}\" /></or></conditions></rule></ruleset>"
+- ID: a291a22b-99e2-46bb-a27b-8ec744275396
+  Hint: Type
+  Value: "Sitecore.XA.Foundation.Editing.Workflow.ApplyForDataSourceItemsAction,Sitecore.XA.Foundation.Editing"
+- ID: 1507131d-cee3-49e9-af32-de5403a37b49
+  Hint: Parameters
+  Value: |
+
+Languages:
+- Language: en
+  Versions:
+  - Version: 1

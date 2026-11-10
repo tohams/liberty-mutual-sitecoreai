@@ -62,7 +62,14 @@ RESOURCE_FIELD_IDS = {
     "nextStep": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
     "disclosure": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
 }
-def uid(key): return RESOURCE_IDS.get(key, IDENTITIES.get(key, str(uuid.uuid5(NS, key))))
+# Variant labels can change without changing references in existing page layouts.
+# Keep the original item identities when replacing Default/Compact with clear
+# author-facing image positions.
+PROMOTION_VARIANT_IDS = {
+    SITE + "/Presentation/Headless Variants/PublicPromotion/ImageLeft": "5d5b9527-e2e8-5c4f-b1ff-d38f7588caf1",
+    SITE + "/Presentation/Headless Variants/PublicPromotion/ImageRight": "9740e635-3b9f-57fa-a134-72a97c4addfa",
+}
+def uid(key): return PROMOTION_VARIANT_IDS.get(key, RESOURCE_IDS.get(key, IDENTITIES.get(key, str(uuid.uuid5(NS, key)))))
 def brace(value): return "{" + value.upper() + "}"
 def field(identifier, name, value): return {"ID": identifier, "Hint": name, "Value": str(value)}
 def merge_fields(before,after):
@@ -154,6 +161,9 @@ def link(label,url):
     if parsed.fragment:attrs['anchor']=parsed.fragment
     return '<link '+' '.join(k+'="'+html.escape(v,quote=True)+'"' for k,v in attrs.items())+' />'
 def placement(page,name,ph,ds="",variant="Default",n=1):
+    # Older factory declarations retain compatible aliases; native items and
+    # current declarations use the explicit ImageLeft/ImageRight names.
+    if name=="PublicPromotion": variant={"Default":"ImageLeft","Compact":"ImageRight"}.get(variant,variant)
     par="FieldNames="+brace(VARIANTS[name+"."+variant])+"&amp;DynamicPlaceholderId="+str(n)
     return '<r uid="'+brace(uid(page+"/rendering/"+name+"/"+str(n)))+'" id="'+brace(RENDERINGS[name])+'" ph="'+ph+'" ds="'+html.escape(ds,quote=True)+'" par="'+par+'" />'
 def layout(renderings, with_layout=True):
@@ -200,8 +210,9 @@ def build(include_editorial=True):
         item(RP+"/"+name,uid(RP),T["rendering"],"renderings",shared=sf,label=label,values=vf)
         vp=SITE+"/Presentation/Headless Variants/"+name
         item(vp,uid(SITE+"/Presentation/Headless Variants"),T["variantFolder"],"presentation")
-        for n,v in enumerate(["Default","Compact"] if name=="PublicPromotion" else ["Default","Centered"] if name=="PublicHero" else ["Default"],1):
-            VARIANTS[name+"."+v]=uid(vp+"/"+v);item(vp+"/"+v,uid(vp),T["variant"],"presentation",shared=fs({"sort":n*100}))
+        for n,v in enumerate(["ImageLeft","ImageRight"] if name=="PublicPromotion" else ["Default","Centered"] if name=="PublicHero" else ["Default"],1):
+            label={"ImageLeft":"Image left","ImageRight":"Image right"}.get(v) if name=="PublicPromotion" else None
+            VARIANTS[name+"."+v]=uid(vp+"/"+v);item(vp+"/"+v,uid(vp),T["variant"],"presentation",shared=fs({"sort":n*100}),label=label)
     # Site-specific restrictions shadow the platform root placeholders only for
     # this site. Every nested slot has an explicit nonempty allowlist.
     allowed={"headless-header":["PublicHeader"],"headless-main":["PublicPageBody"],"headless-footer":["PublicFooter"],"headless-public-hero":["PublicHero"],"headless-public-content":["PublicArticle","PublicImage","PublicCta","PublicPromotion","SharedDisclosure","PublicResourceContent"]}
@@ -257,7 +268,7 @@ def build(include_editorial=True):
     for p,title in [(proto,"$name"),(SITE+"/Home","Liberty Mutual"),(SITE+"/Home/bundling","Bundle home and auto insurance")]:
         bucket="branch" if p==proto else "content"
         components=[placement(p,"PublicHero","/headless-main/sxa-public-page-body/headless-public-hero-1","page:/Data/Hero",n=2),placement(p,"PublicArticle","/headless-main/sxa-public-page-body/headless-public-content-1","page:/Data/Introduction",n=3)]
-        if p!=proto:components += [placement(p,"PublicPromotion","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Promotions/Bundle and save")),"Compact" if p.endswith("bundling") else "Default",4),placement(p,"SharedDisclosure","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Disclosures/Product availability notice")),n=5)]
+        if p!=proto:components += [placement(p,"PublicPromotion","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Promotions/Bundle and save")),"ImageRight" if p.endswith("bundling") else "ImageLeft",4),placement(p,"SharedDisclosure","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Disclosures/Product availability notice")),n=5)]
         item(p,uid(branch) if p==proto else uid(SITE) if p==SITE+"/Home" else uid(SITE+"/Home"),page,bucket,shared=fs({"layout":layout(components),"masters":brace(T["data"])+"|"+brace(uid(branch))}),values=[field("d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b","Title",title),field("4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8","NavigationTitle",title)])
         item(p+"/Data",uid(p),T["data"],bucket,shared=fs({"masters":"|".join(brace(TEMPLATES[n]) for n in ["PublicHero","PublicArticle","PublicImage","PublicCta"])}))
         hero={k:"" for k in ["eyebrow","heading","summary","image","primaryLink","secondaryLink"]}

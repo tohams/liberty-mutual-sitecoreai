@@ -21,8 +21,19 @@ test('one shared Promotion is assigned to Home and Bundling, with different vari
   assert(layout.includes(model.promotionId.toUpperCase()));
   assert(layout.includes(model.disclosureId.toUpperCase()));
  }
- assert(home.includes(model.variantIds['PublicPromotion.Default'].toUpperCase()));
- assert(bundling.includes(model.variantIds['PublicPromotion.Compact'].toUpperCase()));
+ assert(home.includes(model.variantIds['PublicPromotion.ImageLeft'].toUpperCase()));
+ assert(bundling.includes(model.variantIds['PublicPromotion.ImageRight'].toUpperCase()));
+});
+test('promotion image-position variants preserve existing native identities with clear labels',()=>{
+ const root=SITE+'/Presentation/Headless Variants/PublicPromotion/';
+ const positions=[['ImageLeft','Image left','5d5b9527-e2e8-5c4f-b1ff-d38f7588caf1'],['ImageRight','Image right','9740e635-3b9f-57fa-a134-72a97c4addfa']];
+ for(const [name,label,id]of positions){
+  assert.equal(model.variantIds['PublicPromotion.'+name],id);
+  assert.equal(record(root+name).id,id);
+  assert.equal(record(root+name).fields['__Display name'],label);
+ }
+ assert.equal(record(root+'Default'),undefined);
+ assert.equal(record(root+'Compact'),undefined);
 });
 test('new page branch has independent, blank local content and governed placeholders',()=>{
  const p=SITE+'/Presentation/Page Branches/Landing page/$name';
@@ -32,6 +43,12 @@ test('new page branch has independent, blank local content and governed placehol
   for(const [field,value]of Object.entries(content.fields))if(!field.startsWith('__'))assert.equal(value,'',`${name}.${field} must be blank`);
  }
  assert(record(p).fields.__Renderings.includes('page:/Data/Hero'));
+ assert(record(p).fields.__Renderings.includes('page:/Data/Introduction'));
+ for(const name of ['PublicHero','PublicArticle']){
+  const rendering=record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/'+name);
+  assert.equal(rendering.fields['Datasource Location'],'query:./Data');
+  assert.equal(rendering.fields['Datasource Template'],'/sitecore/templates/Project/LibertyMutualPublic/'+name);
+ }
  for(const [key,names]of Object.entries(model.placeholders)){
   assert(names.length,`${key} must have an allowlist`);
   assert(names.every(name=>model.renderingIds[name]));
