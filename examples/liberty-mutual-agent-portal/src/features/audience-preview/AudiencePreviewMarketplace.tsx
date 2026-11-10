@@ -17,7 +17,8 @@ import {
   type AudiencePreviewAuthFlow,
 } from "./sso";
 
-const PREVIEW_TIMEOUT_MS = 90_000;
+// A cold audience includes import verification and a native binding window of up to two minutes.
+const PREVIEW_TIMEOUT_MS = 180_000;
 let marketplaceClient: Promise<ClientSDK> | null = null;
 
 function getMarketplaceClient() {

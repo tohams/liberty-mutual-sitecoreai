@@ -34,6 +34,10 @@ import {
 import { createAudiencePreviewViewSession } from "./preview-sessions";
 import { getAudiencePreviewLayout } from "./preview-client";
 import { nativePreviewComponentNames } from "./native-layout";
+import {
+  observeAudiencePreviewStage,
+  recordAudiencePreviewStage,
+} from "./telemetry";
 
 export interface AudiencePreviewRequest extends AudiencePreviewPageRequest {
   input: AudiencePreviewInput;
@@ -124,6 +128,7 @@ export async function prepareAudiencePreview(
 > {
   const preparation = await prepareAudiencePreviewProfile(input, deps.profiles);
   if (preparation.status === "pending") return preparation;
+  recordAudiencePreviewStage("native-decision", "started");
   const decisions = await evaluateAudiencePreview(
     page,
     preparation.profile,
@@ -133,21 +138,30 @@ export async function prepareAudiencePreview(
       error instanceof AudiencePreviewError &&
       error.code === "PREVIEW_BINDING_CHANGED" &&
       error.retryable
-    )
+    ) {
+      recordAudiencePreviewStage("native-decision", "pending", {
+        code: error.code,
+      });
       return null;
+    }
+    recordAudiencePreviewStage("native-decision", "failed", {
+      code: error instanceof AudiencePreviewError ? error.code : undefined,
+    });
     throw error;
   });
   if (!decisions) return { status: "pending", retryAfterSeconds: 3 };
-  const layout = await (deps.loadLayout || getAudiencePreviewLayout)(
-    page,
-    decisions,
+  recordAudiencePreviewStage("native-decision", "ready");
+  const layout = await observeAudiencePreviewStage("page-layout", () =>
+    (deps.loadLayout || getAudiencePreviewLayout)(page, decisions),
   );
   const names = nativePreviewComponentNames(layout);
-  const token = await (deps.createView || createAudiencePreviewViewSession)(
-    actor,
-    page,
-    input,
-    decisions,
+  const token = await observeAudiencePreviewStage("preview-session", () =>
+    (deps.createView || createAudiencePreviewViewSession)(
+      actor,
+      page,
+      input,
+      decisions,
+    ),
   );
   const origin = deps.origin || audiencePreviewAuthConfiguration()?.appBaseUrl;
   if (!origin)
@@ -180,6 +194,14 @@ export async function prepareAudiencePreview(
 
 /** Only messages from the app's own typed errors are safe to return to the iframe. */
 export function audiencePreviewErrorResponse(error: unknown) {
+  recordAudiencePreviewStage("request", "failed", {
+    code:
+      error instanceof AccessError ||
+      error instanceof PortalError ||
+      error instanceof AudiencePreviewError
+        ? error.code
+        : undefined,
+  });
   if (error instanceof AccessError || error instanceof PortalError) {
     const response = jsonResponse(
       { error: { code: error.code, message: error.message } },

@@ -323,7 +323,9 @@ export function AudiencePreviewPanel({
           {busy ? "Preparing preview…" : "Preview audience"}
         </button>
         <p id={`${id}-preview-note`} className={styles.previewNote}>
-          Previewing does not publish content or change an agent’s account.
+          {busy
+            ? "Preparing an audience for the first time can take a little longer. Keep this panel open."
+            : "Previewing does not publish content or change an agent’s account."}
         </p>
       </form>
 

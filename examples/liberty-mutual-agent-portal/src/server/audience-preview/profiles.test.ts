@@ -15,6 +15,7 @@ import {
   audienceSelectorHash,
   prepareAudiencePreviewProfile,
   prepareAudienceProfileImport,
+  type AudienceProfileDependencies,
 } from "./profiles";
 
 const input: AudiencePreviewInput = {
@@ -407,4 +408,211 @@ test("one-record import verifies checksum, correlation, counts, and CREATED or U
     );
     assert.deepEqual(await bad.inspect(plan, submission), { status: "failed" });
   }
+});
+
+async function retainedBinding(phase: "binding" | "failed", code?: string) {
+  const store = new MemoryStore();
+  const namespace = "preview:test";
+  const siteName = "liberty-mutual-agent-portal";
+  const plan = prepareAudienceProfileImport(
+    input,
+    namespace,
+    siteName,
+    correlationId,
+  );
+  const key = `${namespace}:audience-preview:v1:${plan.selectorHash}`;
+  await store.compareAndSet(key, null, {
+    schemaVersion: 1,
+    phase,
+    plan,
+    createdAt: 10_000,
+    bindingStartedAt: 15_000,
+    profileId,
+    browserId,
+    identitySent: true,
+    ...(code ? { code } : {}),
+  });
+  const dependencies: AudienceProfileDependencies = {
+    store,
+    namespace,
+    siteName,
+    edgeUrl: "https://edge-platform.sitecorecloud.io",
+    contextId: "test-context",
+    now: () => 200_000,
+    importer: {
+      submit: async () => {
+        throw new Error("A retained binding must never import again.");
+      },
+      inspect: async () => {
+        throw new Error("A verified import must not be repeated.");
+      },
+    },
+    transport: async () => {
+      throw new Error("Recovery must never create a browser or send an event.");
+    },
+    readProfileRef: async (browser) => {
+      assert.equal(browser.browserId, browserId);
+      return profileId;
+    },
+  };
+  return { dependencies, store, key };
+}
+
+test("an elapsed binding window checks the exact existing binding before recording a timeout", async () => {
+  const { dependencies, store, key } = await retainedBinding("binding");
+  const result = await prepareAudiencePreviewProfile(input, dependencies);
+  assert.equal(result.status, "ready");
+  const saved = await store.read<{ phase: string }>(key);
+  assert.equal(saved?.value.phase, "ready");
+});
+
+test("a retained link timeout can recover only by reading the original exact profile binding", async () => {
+  const { dependencies, store, key } = await retainedBinding(
+    "failed",
+    "PROFILE_LINK_TIMEOUT",
+  );
+  let reads = 0;
+  dependencies.readProfileRef = async (browser) => {
+    reads++;
+    assert.equal(browser.browserId, browserId);
+    return profileId;
+  };
+  const result = await prepareAudiencePreviewProfile(input, dependencies);
+  assert.equal(result.status, "ready");
+  if (result.status !== "ready") throw new Error("Expected verified recovery.");
+  assert.equal(result.profile.profileId, profileId);
+  assert.equal(result.profile.browserId, browserId);
+  assert.equal(reads, 1);
+  const saved = await store.read<{
+    phase: string;
+    code?: string;
+    lease?: unknown;
+  }>(key);
+  assert.equal(saved?.value.phase, "ready");
+  assert.equal(saved?.value.code, undefined);
+  assert.equal(saved?.value.lease, undefined);
+});
+
+test("a retained timeout stays closed on mismatch, missing data, or failed native read", async () => {
+  for (const read of [
+    async () => "55555555-5555-4555-8555-555555555555",
+    async () => null,
+    async (): Promise<string | null> => {
+      throw new Error("native read unavailable");
+    },
+  ]) {
+    const { dependencies, store, key } = await retainedBinding(
+      "failed",
+      "PROFILE_LINK_TIMEOUT",
+    );
+    dependencies.readProfileRef = read;
+    await assert.rejects(
+      prepareAudiencePreviewProfile(input, dependencies),
+      (error: unknown) =>
+        error instanceof AudiencePreviewError &&
+        error.code === "PROFILE_LINK_TIMEOUT",
+    );
+    const saved = await store.read<{
+      phase: string;
+      code: string;
+      lease?: unknown;
+    }>(key);
+    assert.equal(saved?.value.phase, "failed");
+    assert.equal(saved?.value.code, "PROFILE_LINK_TIMEOUT");
+    assert.equal(saved?.value.lease, undefined);
+  }
+});
+
+test("uncertain uploads and rejected import receipts remain terminal and never enter binding recovery", async () => {
+  for (const code of [
+    "IMPORT_UPLOAD_UNCONFIRMED",
+    "IMPORT_VERIFICATION_FAILED",
+  ]) {
+    const { dependencies } = await retainedBinding("failed", code);
+    dependencies.readProfileRef = async () => {
+      throw new Error("Unverified imports must not read a binding.");
+    };
+    await assert.rejects(
+      prepareAudiencePreviewProfile(input, dependencies),
+      (error: unknown) =>
+        error instanceof AudiencePreviewError && error.code === code,
+    );
+  }
+});
+
+test("an explicitly rejected IDENTITY receipt is recorded without replaying the event", async () => {
+  const { dependencies, store, key } = await retainedBinding("binding");
+  const existing = await store.read<Record<string, unknown>>(key);
+  assert(existing);
+  await store.compareAndSet(key, existing.version, {
+    ...existing.value,
+    identitySent: false,
+    bindingStartedAt: 195_000,
+  });
+  let events = 0;
+  dependencies.readProfileRef = async () => null;
+  dependencies.transport = async (_url, init) => {
+    assert.equal(init?.method, "POST");
+    events++;
+    return new Response(null, { status: 503 });
+  };
+  assert.equal(
+    (await prepareAudiencePreviewProfile(input, dependencies)).status,
+    "pending",
+  );
+  dependencies.now = () => 205_000;
+  assert.equal(
+    (await prepareAudiencePreviewProfile(input, dependencies)).status,
+    "pending",
+  );
+  assert.equal(events, 1);
+  const saved = await store.read<{ identitySent: boolean }>(key);
+  assert.equal(saved?.value.identitySent, true);
+});
+
+test("concurrent timeout recovery returns pending to the CAS loser and promotes only an exact native match", async () => {
+  const { dependencies, store, key } = await retainedBinding(
+    "failed",
+    "PROFILE_LINK_TIMEOUT",
+  );
+  const originalRead = store.read.bind(store);
+  let initialReads = 0;
+  let releaseBothReads!: () => void;
+  const bothReads = new Promise<void>((resolve) => {
+    releaseBothReads = resolve;
+  });
+  store.read = async <T>(
+    requestedKey: string,
+  ): Promise<StoredValue<T> | null> => {
+    const value = await originalRead<T>(requestedKey);
+    if (++initialReads <= 2) {
+      if (initialReads === 2) releaseBothReads();
+      await bothReads;
+    }
+    return value;
+  };
+  let releaseNativeRead!: () => void;
+  const nativeRead = new Promise<void>((resolve) => {
+    releaseNativeRead = resolve;
+  });
+  let nativeReads = 0;
+  dependencies.readProfileRef = async () => {
+    nativeReads++;
+    await nativeRead;
+    return profileId;
+  };
+  const first = prepareAudiencePreviewProfile(input, dependencies);
+  const second = prepareAudiencePreviewProfile(input, dependencies);
+  const early = await Promise.race([first, second]);
+  assert.equal(early.status, "pending");
+  assert.equal(nativeReads, 1);
+  releaseNativeRead();
+  const results = await Promise.all([first, second]);
+  assert.equal(results.filter((result) => result.status === "ready").length, 1);
+  assert.equal(
+    results.filter((result) => result.status === "pending").length,
+    1,
+  );
+  const saved = await originalRead<{ phase: string }>(key);
+  assert.equal(saved?.value.phase, "ready");
 });
