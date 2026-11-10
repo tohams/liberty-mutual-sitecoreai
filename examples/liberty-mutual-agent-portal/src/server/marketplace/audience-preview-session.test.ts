@@ -3,6 +3,11 @@ import assert from "node:assert/strict";
 import test, { mock } from "node:test";
 import type { SessionData } from "@auth0/nextjs-auth0/types";
 import {
+  AccessTokenError,
+  AccessTokenErrorCode,
+  OAuth2Error,
+} from "@auth0/nextjs-auth0/errors";
+import {
   audiencePreviewAuthConfiguration,
   isAudiencePreviewAuthPath,
 } from "./audience-preview-config";
@@ -161,6 +166,53 @@ test("refresh diagnostics expose only allowlisted codes, token presence, and a b
     audiencePreviewTokenDiagnostic({ code: "missing_session" }, null),
     { code: "missing_session", hasRefreshToken: false, expiresAtDelta: null },
   );
+});
+
+test("nested SDK OAuth diagnostics retain only allowlisted codes and an actually present HTTP error status", () => {
+  const cause = new OAuth2Error({
+    code: "invalid_grant",
+    message: "private-provider-description",
+  });
+  const error = new AccessTokenError(
+    AccessTokenErrorCode.FAILED_TO_REFRESH_TOKEN,
+    "private-top-level-description",
+    cause,
+  );
+  const withoutStatus = audiencePreviewTokenDiagnostic(error, session, 1_005);
+  assert.equal(withoutStatus.oauthCode, "invalid_grant");
+  assert.equal(Object.hasOwn(withoutStatus, "oauthStatus"), false);
+  Object.assign(cause, { status: 401 });
+  const diagnostic = audiencePreviewTokenDiagnostic(error, session, 1_005);
+  assert.deepEqual(diagnostic, {
+    code: "failed_to_refresh_token",
+    hasRefreshToken: true,
+    expiresAtDelta: -5,
+    oauthCode: "invalid_grant",
+    oauthStatus: 401,
+  });
+  assert.equal(JSON.stringify(diagnostic).includes("private"), false);
+});
+
+test("unrecognized OAuth codes, raw provider data, and invalid status values never enter diagnostics", () => {
+  for (const status of [399, 600, 401.5, Infinity, "401", undefined]) {
+    const diagnostic = audiencePreviewTokenDiagnostic(
+      {
+        code: "failed_to_refresh_token",
+        cause: {
+          code: "https://private.example/token",
+          status,
+          message: "private-message",
+          error_description: "private-description",
+          body: { token: "private-token" },
+        },
+      },
+      session,
+      1_005,
+    );
+    assert.equal(Object.hasOwn(diagnostic, "oauthCode"), false);
+    assert.equal(Object.hasOwn(diagnostic, "oauthStatus"), false);
+    assert.equal(JSON.stringify(diagnostic).includes("private"), false);
+  }
 });
 
 test("the auth boundary includes this app's API and excludes other application paths", () => {
