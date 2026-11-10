@@ -7,6 +7,7 @@ import {
 const GATEWAY = "https://edge-platform.sitecorecloud.io";
 const SITES = [
   {
+    id: "e1624003-27d5-49c4-9aa6-32563bdf2277",
     name: "liberty-mutual-agent-portal",
     root: "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal",
   },
@@ -98,6 +99,20 @@ async function readSitecore(
     );
   }
   if (!response.ok) {
+    const correlation = [
+      "x-request-id",
+      "x-correlation-id",
+      "x-sitecore-request-id",
+      "traceparent",
+    ]
+      .map((name) => response.headers.get(name))
+      .find((value) => value && /^[A-Za-z0-9._-]{1,128}$/.test(value));
+    console.warn("Audience Preview Sitecore request rejected", {
+      status: response.status,
+      path: pathname,
+      ...(correlation ? { correlationId: correlation } : {}),
+    });
+    void response.body?.cancel().catch(() => undefined);
     const status = [401, 403, 404].includes(response.status)
       ? response.status
       : 502;
@@ -155,7 +170,7 @@ export async function resolveAuthorizedPreviewPage(
   const page = await readSitecore(
     `/authoring/api/v1/pages/${pageId}`,
     {
-      site: site.name,
+      site: site.id,
       language: input.language,
       ...(input.version === undefined
         ? {}
