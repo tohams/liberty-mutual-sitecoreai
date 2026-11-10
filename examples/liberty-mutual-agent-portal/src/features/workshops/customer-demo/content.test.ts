@@ -602,7 +602,7 @@ test("analytics is a report-only loop using genuine consented preparation", () =
     page,
     /Prepare genuine public-site analytics before presenting.*Allow personalization/,
   );
-  assert.match(page, /step\.stopWhen/);
+  assert.match(page, /step\.presenterResult/);
 });
 
 test("API reuse stops after the second experience loads the same published answer", () => {
@@ -968,7 +968,7 @@ test("shared disclosure and its reversal stop after the two-site proof", () => {
   );
 });
 
-test("the presenter narrative leads with outcomes and keeps operational cautions in preparation", () => {
+test("the presenter guide displays concise clicks and result checks, with preparation kept separate", () => {
   const spoken = prose(
     steps.flatMap((entry) => [...entry.talkTrack, entry.transition]),
   );
@@ -981,15 +981,26 @@ test("the presenter narrative leads with outcomes and keeps operational cautions
     "utf8",
   );
   assert.match(page, /<h3>\{step\.title\}<\/h3>/);
-  assert.match(page, /Who is acting:<\/strong> \{step\.persona\}/);
-  assert.match(page, /Business task:<\/strong> \{step\.scenario\}/);
+  assert.match(page, /step\.presenterActions\.map/);
+  assert.match(page, /Result check:/);
+  assert.match(page, /className=\{styles\.screenshot\}/);
+  assert.doesNotMatch(
+    page,
+    /How it works|Talk track|Who is acting:|Business task:|Customer request:|step\.talkTrack|step\.controls/,
+  );
+  for (const entry of steps) {
+    assert.equal(entry.presenterActions.length, entry.actions.length);
+    assert(entry.presenterActions.every((lines) => lines.length > 0));
+    assert(entry.presenterResult.trim());
+    for (const input of entry.inputs ?? [])
+      assert(entry.presenterActions[input.action - 1]?.length);
+  }
   assert.equal(customerDemoOpening.presenter, "Angela Gustafson");
   assert.match(prose(customerDemoOpening.talkTrack), /Microsoft Copilot/);
   assert.match(
     prose(customerDemoOpening.talkTrack),
     /two requested journeys in order/,
   );
-  assert.match(page, /Customer request:<\/strong> \{step\.label\}/);
   const preparation = page.slice(
     page.indexOf('<details id="preparation"'),
     page.indexOf('<section id="opening"'),

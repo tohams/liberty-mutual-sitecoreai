@@ -29,6 +29,9 @@ export interface DemoStep {
   /** The observable completion condition for this customer-requested outcome. */
   stopWhen: string;
   actions: string[];
+  /** Short, line-by-line presenter cues in the same action order. */
+  presenterActions: string[][];
+  presenterResult: string;
   inputs?: DemoInput[];
   expected: string[];
   talkTrack: string[];

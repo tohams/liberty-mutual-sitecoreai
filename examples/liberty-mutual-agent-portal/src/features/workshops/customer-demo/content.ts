@@ -114,6 +114,24 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Does car insurance cover cyberextortion?",
           },
         ],
+        presenterActions: [
+          [
+            `Open [**public Home**](${PUBLIC}/).`,
+            "Choose **Privacy choices → Essential only**, then **Search** in the header.",
+          ],
+          [
+            "Paste **Supported search question** below into **Search**, then select **Search**.",
+            "Wait until **Searching…** finishes.",
+            "Show **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**.",
+            "Highlight **Can I bundle my car and home insurance?** and its answer excerpt. Keep all results unopened.",
+          ],
+          [
+            "Replace **keyword(s)** with **Unsupported search question** below, then select **Search**.",
+            "Show **No results found** and **Contact an agent**. Leave the contact link unopened.",
+          ],
+        ],
+        presenterResult:
+          "The supported question returns relevant guidance; the unsupported question shows **No results found** and **Contact an agent**.",
         actions: [
           `Open the [**public Home page**](${PUBLIC}/). Choose **Privacy choices → Essential only**, then select **Search** in the header. Search remains available when optional collection is declined.`,
           "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**, then highlight the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page. Keep every result unopened.",
@@ -270,6 +288,28 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "canonical",
           },
         ],
+        presenterActions: [
+          [
+            `Open [**the resource page in Page Builder Content**](${resourcePageContent}).`,
+            "Confirm **Public Website**, **English**, and **Home → insurance-resources → bundle-car-and-home**.",
+            "Expand **Resource content**: show **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and dates.",
+            "Under **Content**, show **Canonical URL** and **Reference source**.",
+            "Open **Quick Info**, and show the **PublicResourcePage** template.",
+          ],
+          [
+            "Under **Content**, open **State applicability** using its **1 item selected** control; show **All states**, then close.",
+            "Open **Products** using **2 items selected**; show **Auto** and **Homeowners**, then close.",
+            "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
+          ],
+          [
+            `Open [**the public article**](${ARTICLE}), then **View page source → Find**.`,
+            "Paste **Find structured data in page source** below into **Find**.",
+            "Show **FAQPage**, **Question**, and **acceptedAnswer**.",
+            "Find **canonical** using the Copy field below, then return to the rendered article.",
+          ],
+        ],
+        presenterResult:
+          "Show the native template, managed classifications, **FAQPage** data, and canonical URL without editing content.",
         actions: [
           `Open [**the car-and-home resource page in Page Builder Content**](${resourcePageContent}). Confirm **Public Website**, **English**, and **Home → insurance-resources → bundle-car-and-home**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.`,
           `In the same [**resource page in Page Builder Content**](${resourcePageContent}), locate **State applicability**, **Products**, and **Audience** under **Content**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
@@ -331,6 +371,29 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Can I bundle my car and home insurance?",
           },
         ],
+        presenterActions: [
+          [
+            `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}).`,
+            "Paste **Search by term** below into **Search by term**, then expand the matching row using **Toggle document details**.",
+            "Confirm **body** does not contain **Review your options with your agent before choosing coverage.**",
+            "If the sentence is present, restore the baseline through [**Before presenting**](#preparation) before continuing.",
+          ],
+          [
+            `In the **administrator acting as publisher** session, open [**the resource page**](${resourcePageContent}).`,
+            "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
+            "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the temporary review sentence in **Detailed explanation**.",
+            "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
+            "Leave **Subpages** unchecked, select **Start publish**, and wait for completion.",
+          ],
+          [
+            `Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), and refresh.`,
+            "Repeat **Search by term** using the Copy field below; expand the matching row.",
+            "If needed, wait and refresh until **body** contains **Review your options with your agent before choosing coverage.**",
+            "Confirm **state**, **product**, and **audience** are preserved.",
+          ],
+        ],
+        presenterResult:
+          "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
           `In the prepared **administrator acting as publisher** session, open [**the car-and-home resource page**](${resourcePageContent}). In the version selector, choose the prepared revision by the **Prepared page version** number recorded in [**Before presenting**](#preparation)—the new English page version created for this run. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Use the recorded version number because older rehearsal versions can have the same name. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.`,
@@ -477,6 +540,52 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Approved coverage guidance",
           },
         ],
+        presenterActions: [
+          [
+            `In the **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}).`,
+            "Confirm **Public Website**, **English**, and **Default editing host**.",
+            "Choose **Home → Create a page → Landing page → Select**.",
+            "Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**.",
+            "Wait for **Page created from branch template**.",
+          ],
+          [
+            "Choose **Reload tree** if shown. Select **coverage-guide-live**, and wait for the matching page heading.",
+            "Open **Content → coverage-guide-live → Data → Hero**. Paste **Hero heading** below into **Heading**.",
+            "Press **Tab**, wait for **Saved**, then open **Data → Introduction**.",
+            "Paste **Introduction heading** below into **Heading**; press **Tab**, and wait for **Saved**.",
+            "Paste **Introduction body** below into **Body**; click outside the field, and wait for **Saved**.",
+          ],
+          [
+            "Return to **Editor**; select **coverage-guide-live** in **Sitemap**, and confirm its heading.",
+            "Open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**.",
+            "Show the permitted choices; choose **Promotions → Promotion → Bundle and save**.",
+            "Select **Assign**, rather than **Duplicate and assign**.",
+            "Choose **Design → Variant → Compact** instead of **Default**.",
+          ],
+          [
+            "Select **Preview → Preview**.",
+            "Confirm both headings and the shared Promotion; return to **Editor**. Keep the page unpublished.",
+          ],
+          [
+            "On **coverage-guide-live**, choose **Actions → Submit**; paste **Page submission comment** below, then select **Submit**.",
+            "Open **Page items**; check **coverage-guide-live**, **Hero**, and **Introduction**.",
+            "For each local item still in **Draft**, open **Content → Actions → Submit**; paste **Local content submission comment**, then **Submit**.",
+            "Confirm the page, **Hero**, and **Introduction** are all **Awaiting approval**.",
+          ],
+          [
+            "In the separate **Approver** profile, review **coverage-guide-live**, **Hero**, and **Introduction**.",
+            "On the page, choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**.",
+            "In **Page items**, open any local item still **Awaiting approval**; review it, then **Actions → Approve → Submit**.",
+            "Confirm all three are **Approved**. Switch to the publisher profile for publication.",
+          ],
+          [
+            "In the **administrator acting as publisher** profile, open **coverage-guide-live**, then choose **Publish**.",
+            "Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**.",
+            `After completion, open [**the published coverage page**](${PUBLIC}/coverage-guide-live); confirm both headings and the shared Promotion.`,
+          ],
+        ],
+        presenterResult:
+          "The published **coverage-guide-live** page shows both authored headings and the reused Promotion.",
         actions: [
           `In the prepared **Author** browser profile, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. In the sitemap’s editable **New page** name, type **coverage-guide-live**, press **Enter**, and wait for **Page created from branch template**.`,
           "Choose **Reload tree** if it appears. Wait for the refreshed sitemap to finish loading. Select **coverage-guide-live**, and wait until **coverage-guide-live** appears as the page heading before opening **Content**. Open **Content → coverage-guide-live → Data → Hero**, and set **Heading** to **Explore coverage with confidence**. Press **Tab**, and wait for **Saved** before opening **Data → Introduction**. Set its **Heading** to **Guidance for your next decision**, press **Tab**, and wait for **Saved**. Enter **Review approved information, compare your options, and speak with an agent about your needs.** in **Body**, click outside **Body**, and wait for **Saved**.",
@@ -716,6 +825,32 @@ export const customerDemoChapters: DemoChapter[] = [
           "Show a real in-platform content recommendation, then explain how proposed Profound content would enter Liberty Mutual’s governed publishing process.",
         stopWhen:
           "The existing and proposed wording and its target field have been shown, and the proposed Profound-to-Draft, review, and publication path has been explained.",
+        presenterActions: [
+          [
+            `Open the prepared [**Prospera AEO recommendation review**](${SCRUNCH_REVIEW}). Confirm **agverticals → Prospera**.`,
+            "Under **Readability & Clarity**, open the **Home** recommendations. Keep this example read-only.",
+          ],
+          [
+            "Find **Cards · Description**; compare the upper existing wording with the lower proposed wording.",
+            "Point to **trackable rewards** and **card options side by side**.",
+            "Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
+          ],
+          [
+            `Select **Open in Page builder**, or open [**the prepared recommendation in Page Builder**](${SCRUNCH_EDITOR}).`,
+            "Show **AEO opportunities** and **Powered by Scrunch**.",
+            "On **Cards · Description**, choose **Show live content** if needed.",
+            "Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**.",
+            "Show the outlined field. Do not apply, dismiss, edit, or publish.",
+          ],
+          [
+            "Return to Liberty Mutual’s prepared **Page Builder** tab.",
+            "Show the proposed path: **Profound output → scoped Sitecore authoring API → SitecoreAI Draft**.",
+            "Continue: **human review and approval → publication → website, Search, and API consumers**.",
+            "Identify **Profound** as a proposed integration; the live recommendation example uses **Scrunch**.",
+          ],
+        ],
+        presenterResult:
+          "Show the recommendation, its target field, and the proposed Profound-to-review path; leave Prospera unchanged.",
         actions: [
           `Open the prepared [**Prospera AEO recommendation review**](${SCRUNCH_REVIEW}) tab. Confirm the **agverticals** environment and **Prospera** site. Under **Readability & Clarity**, review the **Home** page recommendations. This is the existing integrated recommendation example. Keep it read-only.`,
           "Locate **Cards · Description**. Compare the existing wording in the upper block with the proposed wording in the lower block. Point out **trackable rewards** and **card options side by side** as examples of clearer phrasing. Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
@@ -883,6 +1018,23 @@ export const customerDemoChapters: DemoChapter[] = [
           "Help marketers choose which guidance to improve using visits, clicks, and reading-depth signals.",
         stopWhen:
           "The site-filtered report shows the prepared page, CTA, and scroll events with their actual timestamps and reporting period.",
+        presenterActions: [
+          [
+            `Open [**Optimization → Analytics → Events**](${ANALYTICS}).`,
+            "Set **Site → liberty-mutual-public-site** and **Time → 1 hour**.",
+          ],
+          [
+            "Show **Events over Time** and **Events Table**.",
+            "Find actual **pageView**, **LM_PUBLIC_CTA_CLICK**, and **LM_PUBLIC_SCROLL_25** or other recorded scroll milestones.",
+            "Match their timestamps to the visitor journey completed during preparation.",
+          ],
+          [
+            "Point to visits, reading depth, and selected next actions in the actual report.",
+            "Show which signal helps identify a content improvement.",
+          ],
+        ],
+        presenterResult:
+          "The site-filtered report shows genuine page, CTA, and scroll events with the prepared journey’s timestamps.",
         actions: [
           `Open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site** to **liberty-mutual-public-site** and **Time** to **1 hour**, matching the consented visitor interactions completed during preparation.`,
           "Inspect **Events over Time** and **Events Table**. Identify the actual **pageView**, **LM_PUBLIC_CTA_CLICK**, and **LM_PUBLIC_SCROLL_25** or other recorded scroll milestones. Match their timestamps to the prepared visitor journey.",
@@ -934,6 +1086,26 @@ export const customerDemoChapters: DemoChapter[] = [
           "Reuse one approved answer through a stable API, reducing duplicate content maintenance across applications.",
         stopWhen:
           "The second experience shows the newly published sentence, its source, stable item ID, and native content version.",
+        presenterActions: [
+          [
+            "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A).",
+            "Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**.",
+          ],
+          [
+            "Open [**One published page, two experiences**](/workshops/content-api).",
+            "Under **Published insurance question**, select **Can I bundle my car and home insurance?**, then **Load content**.",
+          ],
+          [
+            `Find **Review your options with your agent before choosing coverage.**; compare it with [**the public article**](${ARTICLE}).`,
+            "Under **The governance travels with the answer**, show the source and applicability metadata.",
+          ],
+          [
+            "Under **A stable contract for other applications**, show **API contract version**, **Native content version**, and **Stable item ID**.",
+            "Match the stable ID to the resource page and the native version to its published English revision.",
+          ],
+        ],
+        presenterResult:
+          "The second experience and public article show the same published sentence, source, applicability, stable ID, and content version.",
         actions: [
           "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A). Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**, then continue with the content-reuse example.",
           "Open [**One published page, two experiences**](/workshops/content-api). Under **Published insurance question**, select **Can I bundle my car and home insurance?**, and select **Load content**.",
@@ -1016,6 +1188,45 @@ export const customerDemoChapters: DemoChapter[] = [
           "Match guidance to each agent’s business, and honor a recorded marketing opt-out through a native eligibility decision.",
         stopWhen:
           "The native profile tests explain Avery and Daniel’s priorities, and Cameron’s outreach eligibility has changed from included to excluded, using the same Native profile ID. No outreach email preview remains.",
+        presenterActions: [
+          [
+            "Open prepared [**Communication preferences**](/workshops/preferences); show **1 eligible recipient → Cameron Ellis - Allowed**.",
+            "Record that profile’s **Native profile ID**, then select **Opt out Cameron**.",
+            "Leave the tab open while the update processes; continue with Avery and Daniel.",
+          ],
+          [
+            `In the **avery.01** session, open [**Agent Portal Home**](${PORTAL}/). Confirm **Avery Brooks → Cedar Ridge Insurance**.`,
+            "Find **Priorities for your agency**; show **Build a stronger small-business practice** first.",
+            "Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**.",
+            "Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.",
+          ],
+          [
+            `In the separate **daniel.01** session, open [**Home**](${PORTAL}/). Confirm **Daniel Ortiz → Prairie Oak Insurance**.`,
+            "Compare his household-first priorities.",
+            "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.",
+          ],
+          [
+            `As administrator, open [**Agent Portal Home in Page Builder**](${portalEditor}); keep **Default editing host**, then **Layers → Agency priorities**.`,
+            "Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**.",
+            "Choose **Select profile → Load profile → Profile ID**, replacing **Client ID** if shown.",
+            "Paste Avery’s prepared [**Native profile ID**](/workshops/reset#current-profiles); press **Enter**. Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**.",
+            "Repeat with Daniel’s current UUID; wait for **Testing as: Daniel Ortiz - 01**; select **Test**, and confirm green **producer-priorities**. Choose **Cancel**.",
+          ],
+          [
+            `Open [**Liberty Mutual marketing eligibility → Configuration**](${MARKETING_ELIGIBILITY}), then **API response → Open variant editor**.`,
+            "Show **marketingEligible** requiring an identified profile and **marketingSuppressed === false**.",
+            "Select **Close editor**. Leave the Live rule unchanged.",
+          ],
+          [
+            "Return to **Communication preferences**; select **Check import status** until **SitecoreAI confirmed the imported records**.",
+            "Confirm **Cameron Ellis - Allowed** now has **marketingSuppressed = true**, with the same **Native profile ID**.",
+            "Under **Marketing outreach preview**, select **Run eligibility check**.",
+            "Show **No eligible recipients**, with no email preview.",
+            "Under **Native decision receipts**, confirm **marketingEligible = false** and **Same profile as this session’s first check**.",
+          ],
+        ],
+        presenterResult:
+          "Avery and Daniel match their native priority rules; Cameron’s same-profile opt-out yields **No eligible recipients** and no email preview.",
         actions: [
           "Open the prepared [**Communication preferences**](/workshops/preferences) tab. Show the **Run eligibility check** result prepared before presenting: **1 eligible recipient**, **Cameron Ellis - Allowed**. Both Cameron records share the same agency, producer role, and Texas context; their marketing choice differs. Record **Cameron Ellis - Allowed**’s **Native profile ID**, then select **Opt out Cameron**. Leave this tab open while SitecoreAI processes the updated choice, and continue with the following profile comparisons.",
           `In the prepared **avery.01** session, open the [**live Agent Portal Home**](${PORTAL}/). Confirm **Avery Brooks** and **Cedar Ridge Insurance**. Find **Priorities for your agency**: **Build a stronger small-business practice**, **Support workers’ compensation conversations in Texas**, and **Connect home and auto conversations**. Open **Your profile** to identify her principal role and **Licensed states: Texas, Illinois, and Florida**.`,
@@ -1101,6 +1312,28 @@ export const customerDemoChapters: DemoChapter[] = [
           "Let business users manage content within a consistent portal design and approved component choices.",
         stopWhen:
           "Two representative portal pages share the same design, the permitted component choices are visible, and the sample Brand Kit’s voice guidance has been shown.",
+        presenterActions: [
+          [
+            `In Avery’s session, compare **My workspace** with [**Learning & resources**](${PORTAL}/resources).`,
+            "Show common navigation, typography, buttons, cards, and **Coverage and availability**.",
+          ],
+          [
+            `Open [**Agent Portal Home in Page Builder**](${portalEditor}). Confirm **Agent Portal**, **English**, and **Default editing host**.`,
+            "Open **Layers**; locate **Agency priorities** and the shared **Disclosure** component.",
+          ],
+          [
+            "In **Layers → headless-agency-priorities**, select **Insert into** before or after **Agency priorities**.",
+            "Show **Components → Business priorities → Agency priorities** as the permitted choice.",
+            "Close the picker without inserting content.",
+          ],
+          [
+            `Open [**Design → Brand kits**](${BRAND_KITS}).`,
+            "Select **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**.",
+            "Show the voice guidance. Leave the kit unchanged.",
+          ],
+        ],
+        presenterResult:
+          "Both portal pages share the design; the placeholder limits component choices, and the sample Brand Kit’s voice guidance is visible.",
         actions: [
           `In Avery’s session, compare **My workspace** with [**Learning & resources**](${PORTAL}/resources). Identify their common navigation, typography, buttons, cards, and **Coverage and availability** disclosure.`,
           `Open [**Agent Portal Home in Page Builder**](${portalEditor}). Confirm **Agent Portal**, **English**, and **Default editing host**. Open **Layers**, and locate **Agency priorities** and the shared **Disclosure** component.`,
@@ -1222,6 +1455,30 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Texas guidance priority",
           },
         ],
+        presenterActions: [
+          [
+            `As **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}).`,
+            "Confirm **Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.",
+          ],
+          [
+            "Record the approved version and original order: **Small business growth → Texas workers compensation → Home and auto conversations**.",
+            "Choose **Create version**; paste **New priority version name** below, then select **Create**.",
+            "Reopen the version selector; select the new **Texas guidance priority → Draft** row by its new number.",
+            "Wait for fields to load, then recheck the selected version number.",
+          ],
+          [
+            "In **Ordered recommendations**, select **Remove all items** to clear only this draft’s selection.",
+            "Open the picker; select **Texas workers compensation**, **Small business growth**, then **Home and auto conversations**.",
+            "Click the item heading to close; wait for **Saved**.",
+            "Record the selected number as **Saved priority version**; retain it for the following approval and publication.",
+          ],
+          [
+            "Recheck **Saved priority version**, **Draft**, and the Texas-first order.",
+            "Leave it unpublished; continue to audience preview and the same version’s review/publication.",
+          ],
+        ],
+        presenterResult:
+          "The recorded **Saved priority version** is a saved Texas-first **Draft**; the original approved version and live order remain unchanged.",
         actions: [
           `As the **Author**, open [**Agency growth priorities in Page Builder Content**](${priorityContent}). Confirm **Agent Portal**, **English**, and **Data → Agency priorities → Agency growth priorities**.`,
           "Record the current approved version and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Open the version selector, choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
@@ -1304,6 +1561,42 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Approved agency priority update",
           },
         ],
+        presenterActions: [
+          [
+            `In the **administrator acting as publisher** profile, open [**Agent audience preview in Page Builder**](${audiencePreviewEditor}).`,
+            "Confirm **Agent Portal**, **English**, **Default editing host**, and unpublished **Home → growth → Agent audience preview**.",
+            "Select **Personalize**.",
+          ],
+          [
+            "Select **Avery agency principal → Preview → Preview**.",
+            "Show **Set your agency’s next growth priority** and **Give your team a clear direction**.",
+            "Confirm Avery/Cedar Ridge principal context; close the preview tab, and return to **Personalize**.",
+          ],
+          [
+            "Select **Daniel producer → Preview → Preview**.",
+            "Show **Prepare your next business insurance opportunity** and **Build a stronger first submission**.",
+            "Confirm Daniel/Prairie Oak producer context; close the preview tab. Keep this growth page unpublished.",
+          ],
+          [
+            `In the **Author** profile, open [**Agency growth priorities**](${priorityContent}); select **Saved priority version**.`,
+            "Wait for loading; confirm **Draft** and Texas-first **Ordered recommendations**.",
+            "Choose **Actions → Submit**; paste **Priority submission comment** below, then select **Submit**.",
+            "Confirm **Awaiting approval**.",
+          ],
+          [
+            "In the separate **Approver** session, select the same **Saved priority version**, and review its Texas-first order.",
+            "Choose **Actions → Approve**; paste **Priority approval comment** below, then select **Submit**.",
+            "Confirm **Approved**.",
+          ],
+          [
+            "In the **administrator acting as publisher** session, open the collection in **Content**; select the same **Saved priority version**.",
+            "Confirm **Approved** and Texas-first order. Choose **Publish** with **Item** and **Current language (English)** selected.",
+            "Leave **Subitems** unchecked, select **Start publish**, and wait for completion.",
+            "Reload Avery’s live Home: confirm Texas guidance first. Reload Daniel’s separate session: confirm his household-first order remains unchanged.",
+          ],
+        ],
+        presenterResult:
+          "Both audience previews work; publishing the saved priority version changes Avery’s live order while Daniel’s remains unchanged.",
         actions: [
           `In the prepared **administrator acting as publisher** browser profile, open [**Agent audience preview in Page Builder**](${audiencePreviewEditor}). Confirm **Agent Portal**, **English**, **Default editing host**, and the unpublished **Agent audience preview** page beneath **Home → growth**. Open **Personalize** in the top navigation.`,
           "Select **Avery agency principal**. Choose the header **Preview** button, then **Preview** in its menu. In the complete page preview, identify **Set your agency’s next growth priority** and **Give your team a clear direction**. Confirm the Avery/Cedar Ridge principal context. Close the preview tab, and return to the same **Personalize** screen.",
@@ -1488,6 +1781,38 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Approved shared disclosure wording",
           },
         ],
+        presenterActions: [
+          [
+            `As **Author**, open [**Product availability notice in Page Builder Content**](${disclosureContent}).`,
+            "Confirm **Public Website**, **English**, and **Data → Disclosures → Product availability notice**.",
+            "Record the original approved English version and **Disclosure** wording for the next loop’s restoration.",
+          ],
+          [
+            "Choose **Create version**; paste **New disclosure version name** below, then select **Create**.",
+            "Reopen the version selector; select the new **Shared disclosure review → Draft** row by its new number.",
+            "Wait for fields to load, then recheck the selected number.",
+            "Append **Sentence to append to Disclosure** below to **Disclosure**; click outside, and wait for **Saved**.",
+            "Record the number as **Saved disclosure version**; use it for submission, approval, and publication.",
+          ],
+          [
+            "Select **Saved disclosure version**; confirm **Draft** and the added sentence.",
+            "Choose **Actions → Submit**; paste **Disclosure submission comment** below, then **Submit**. Confirm **Awaiting approval**.",
+            "In the separate **Approver** session, select the same **Saved disclosure version**, and review its wording.",
+            "Choose **Actions → Approve**; paste **Disclosure approval comment** below, then select **Submit**.",
+          ],
+          [
+            "In the **administrator acting as publisher** session, open the disclosure in **Content**, and select **Saved disclosure version**.",
+            "Confirm **Approved** and the added sentence.",
+            "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
+          ],
+          [
+            "Wait for publication to complete.",
+            `Reload [**public Home**](${PUBLIC}/) and Avery’s [**Agent Portal Home**](${PORTAL}/).`,
+            "Show the added sentence in **Coverage and availability** on both pages.",
+          ],
+        ],
+        presenterResult:
+          "Both Home pages show the added disclosure sentence after one shared-source publication.",
         actions: [
           `As the **Author**, open [**Product availability notice in Page Builder Content**](${disclosureContent}). Confirm **Public Website**, **English**, and **Data → Disclosures → Product availability notice**. Record the original approved English version and **Disclosure** text for the rollback in the next loop.`,
           "Choose **Create version**, name it **Shared disclosure review**, and select **Create**. Reopen the version selector, explicitly select the new **Shared disclosure review** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before editing **Disclosure**. Append **Review available options with your agent before making a coverage decision.** to **Disclosure**, click outside the field, and wait for **Saved**. Record the version number currently shown as **Saved disclosure version**. Use that same saved version number for submission, the Approver’s review, and publication.",
@@ -1635,6 +1960,42 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Approved restoration of shared disclosure wording",
           },
         ],
+        presenterActions: [
+          [
+            `Open [**public Home in Page Builder Editor**](${publicEditor}).`,
+            "Choose **Sitemap → Home → Content tree options → Page items → Product availability notice**.",
+          ],
+          [
+            "Select **Workflow history**.",
+            "Under **History**, show **Draft → Awaiting approval** and **Awaiting approval → Approved**.",
+            "Read the user, timestamp, and **Comment**; match the preceding Author and Approver actions.",
+          ],
+          [
+            `As **Author**, open [**Product availability notice in Content**](${disclosureContent}); select the recorded original approved English version.`,
+            "Wait for loading; recheck the selected number and original **Disclosure** wording before choosing **Create version**.",
+            "Paste **Restored disclosure version name** below, then **Create**. Reopen the selector; select the new **Original disclosure restored → Draft** row.",
+            "Wait; recheck its new version number and original wording without the added sentence.",
+            "After **Saved**, record the number as **Restored disclosure version**; use it for submission, approval, and publication.",
+          ],
+          [
+            "Select **Restored disclosure version**; confirm **Draft** and original **Disclosure** wording without the temporary sentence.",
+            "Choose **Actions → Submit**; paste **Restoration submission comment** below, then select **Submit**.",
+            "In the separate **Approver** session, select the same **Restored disclosure version**, and review the original wording.",
+            "Choose **Actions → Approve**; paste **Restoration approval comment** below, then select **Submit**.",
+          ],
+          [
+            "In the **administrator acting as publisher** session, select **Restored disclosure version** in **Content**; confirm **Approved** and original wording.",
+            "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
+            "While publication completes, show the original, changed, and restored versions in the **Content version selector**.",
+            "Open **Page items → Product availability notice → Workflow history**; show the restored version’s submission, approval, and comments.",
+          ],
+          [
+            `Wait for publication to complete, then reload [**public Home**](${PUBLIC}/) and Avery’s [**Agent Portal Home**](${PORTAL}/).`,
+            "Confirm the temporary sentence is absent from both pages. Retain all content versions.",
+          ],
+        ],
+        presenterResult:
+          "Both Home pages show the original wording; version history retains the original, changed, and restored revisions and their approvals.",
         actions: [
           `Open [**public Home in Page Builder Editor**](${publicEditor}). In **Sitemap**, open the **Home** row’s **Content tree options**, choose **Page items**, and expand **Product availability notice**.`,
           "Select **Workflow history**. Under **History**, read the **Draft → Awaiting approval** and **Awaiting approval → Approved** transitions, their user and timestamp, and the review **Comment**. Match these to the separate Author and Approver actions just performed.",
