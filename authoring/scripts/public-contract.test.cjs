@@ -19,10 +19,64 @@ test('one shared Promotion is assigned to Home and Bundling, with different vari
  const bundling=record(SITE+'/Home/bundling').fields.__Renderings;
  for(const layout of [home,bundling]){
   assert(layout.includes(model.promotionId.toUpperCase()));
-  assert(layout.includes(model.disclosureId.toUpperCase()));
  }
- assert(home.includes(model.variantIds['PublicPromotion.Default'].toUpperCase()));
- assert(bundling.includes(model.variantIds['PublicPromotion.Compact'].toUpperCase()));
+ assert(home.includes(model.variantIds['PublicPromotion.ImageLeft'].toUpperCase()));
+ assert(bundling.includes(model.variantIds['PublicPromotion.ImageRight'].toUpperCase()));
+});
+test('one full copyright notice is governed in the shared footer without replacing coverage terms',()=>{
+ const copyright=record(SITE+'/Data/Disclosures/Copyright notice');
+ assert.equal(copyright.id,'9dc572ee-3d67-5909-922f-6482def1cdb0');
+ assert.equal(model.copyrightId,copyright.id);
+ assert.notEqual(model.copyrightId,model.disclosureId);
+ assert.equal(copyright.fields.title,'Copyright notice');
+ assert.equal(copyright.fields.sourceLink,'');assert.equal(copyright.fields.owner,'');
+ const snapshot=JSON.parse(fs.readFileSync(path.join(__dirname,'../items/liberty-mutual-public/public-editorial-records.json')));
+ const originalFooter=snapshot.records.find(r=>r.Path===SITE+'/Presentation/Partial Designs/Footer/Data/Footer');
+ const originalBody=originalFooter.Languages[0].Versions[0].Fields.find(f=>f.Hint==='body').Value;
+ assert.equal(copyright.fields.body,originalBody.replace('© 2026','© 2025'));
+ assert.equal(record(SITE+'/Presentation/Partial Designs/Footer/Data/Footer').fields.body,undefined);
+ assert.equal(model.fieldIds['PublicFooter.body'],undefined);
+ assert.equal(record('/sitecore/templates/Project/LibertyMutualPublic/PublicFooter/Content/body'),undefined);
+ assert.equal(record(SITE+'/Data/Disclosures/Product availability notice').id,model.disclosureId);
+ assert(record(SITE+'/Data/Disclosures/Product availability notice').fields.body.includes('Coverage, discounts, and availability vary by state'));
+ assert.equal(norm(record(SITE+'/Data/Promotions/Bundle and save').fields.disclosure),norm(model.disclosureId));
+ const resources=model.records.filter(r=>r.template===model.templateIds.PublicResourcePage&&r.path.startsWith(SITE+'/Home/insurance-resources/'));
+ assert(resources.length);assert(resources.every(r=>norm(r.fields.disclosure)===norm(model.disclosureId)));
+ const copyrightVariant='6fd9eeaf-a76a-52ee-a1fb-8fbdeb534fbb';
+ assert.equal(model.variantIds['SharedDisclosure.Copyright'],copyrightVariant);
+ assert.equal(record(SITE+'/Presentation/Headless Variants/SharedDisclosure/Copyright').id,copyrightVariant);
+ const footer=record(SITE+'/Presentation/Partial Designs/Footer');
+ assert.equal(footer.fields.Signature,'public-footer');
+ for(const key of ['__Renderings','__Final Renderings']){
+  const layout=footer.fields[key];
+  assert(layout.includes('D86337AA-4CE4-55F9-9B6F-F4A18C90009A'));
+  assert(layout.includes('/headless-footer/headless-public-copyright'));
+  assert(layout.includes(model.copyrightId.toUpperCase()));
+  assert(layout.includes(copyrightVariant.toUpperCase()));
+ }
+ const global='/sitecore/layout/Placeholder Settings/Project/LibertyMutualPublic/headless-public-copyright';
+ const site=SITE+'/Presentation/Placeholder Settings/headless-public-copyright';
+ for(const p of [global,site]){
+  assert.equal(record(p).fields['Placeholder Key'],'headless-public-copyright');
+  assert.equal(norm(record(p).fields['Allowed Controls']),norm(model.renderingIds.SharedDisclosure));
+ }
+ assert.equal(norm(record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicFooter').fields.Placeholders),norm(record(global).id));
+ assert.deepEqual(model.placeholders['headless-public-copyright'],['SharedDisclosure']);
+ for(const page of model.records.filter(r=>r.path.startsWith(SITE+'/Home')&&r.fields.__Renderings)){
+  const nodes=page.fields.__Renderings.match(/<r\s[^>]*\/\s*>/g)||[];
+  assert(nodes.every(node=>!(node.includes(model.renderingIds.SharedDisclosure.toUpperCase())&&node.includes(model.disclosureId.toUpperCase()))),page.path);
+ }
+});
+test('promotion image-position variants preserve existing native identities with clear labels',()=>{
+ const root=SITE+'/Presentation/Headless Variants/PublicPromotion/';
+ const positions=[['ImageLeft','Image left','5d5b9527-e2e8-5c4f-b1ff-d38f7588caf1'],['ImageRight','Image right','9740e635-3b9f-57fa-a134-72a97c4addfa']];
+ for(const [name,label,id]of positions){
+  assert.equal(model.variantIds['PublicPromotion.'+name],id);
+  assert.equal(record(root+name).id,id);
+  assert.equal(record(root+name).fields['__Display name'],label);
+ }
+ assert.equal(record(root+'Default'),undefined);
+ assert.equal(record(root+'Compact'),undefined);
 });
 test('new page branch has independent, blank local content and governed placeholders',()=>{
  const p=SITE+'/Presentation/Page Branches/Landing page/$name';
@@ -32,6 +86,12 @@ test('new page branch has independent, blank local content and governed placehol
   for(const [field,value]of Object.entries(content.fields))if(!field.startsWith('__'))assert.equal(value,'',`${name}.${field} must be blank`);
  }
  assert(record(p).fields.__Renderings.includes('page:/Data/Hero'));
+ assert(record(p).fields.__Renderings.includes('page:/Data/Introduction'));
+ for(const name of ['PublicHero','PublicArticle']){
+  const rendering=record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/'+name);
+  assert.equal(rendering.fields['Datasource Location'],'query:./Data');
+  assert.equal(rendering.fields['Datasource Template'],'/sitecore/templates/Project/LibertyMutualPublic/'+name);
+ }
  for(const [key,names]of Object.entries(model.placeholders)){
   assert(names.length,`${key} must have an allowlist`);
   assert(names.every(name=>model.renderingIds[name]));

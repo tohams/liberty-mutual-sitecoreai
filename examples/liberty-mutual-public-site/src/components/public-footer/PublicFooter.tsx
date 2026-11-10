@@ -1,15 +1,30 @@
 import NextLink from "next/link";
 import NextImage from "next/image";
-import { Image, Link, RichText, Text } from "@sitecore-content-sdk/nextjs";
+import {
+  AppPlaceholder,
+  Image,
+  Link,
+  RichText,
+  Text,
+} from "@sitecore-content-sdk/nextjs";
+import componentMap from ".sitecore/component-map";
 import type { PublicFooterProps } from "./public-footer.props";
 
 const SOCIAL_ICONS = new Set(["facebook", "instagram", "youtube", "linkedin"]);
 
-export const Default = ({ fields, params }: PublicFooterProps) => {
+export const Default = ({
+  fields,
+  params,
+  rendering,
+  page,
+}: PublicFooterProps) => {
   if (!fields) return null;
   const columns = Array.isArray(fields.columns) ? fields.columns : [];
   const social = Array.isArray(fields.socialLinks) ? fields.socialLinks : [];
   const legal = Array.isArray(fields.legalLinks) ? fields.legalLinks : [];
+  const hasCopyright = Boolean(
+    rendering.placeholders?.["headless-public-copyright"]?.length,
+  );
   return (
     <div
       className={`component public-footer ${params.styles || ""}`}
@@ -81,7 +96,18 @@ export const Default = ({ fields, params }: PublicFooterProps) => {
       </div>
       <div className="public-footer__bottom">
         <div className="public-container">
-          <RichText className="public-footer__body" field={fields.body} />
+          <div className="public-footer__body">
+            {hasCopyright ? (
+              <AppPlaceholder
+                name="headless-public-copyright"
+                rendering={rendering}
+                page={page}
+                componentMap={componentMap}
+              />
+            ) : (
+              <RichText field={fields.body} />
+            )}
+          </div>
           <RichText
             className="public-footer__disclaimer"
             field={fields.disclaimer}

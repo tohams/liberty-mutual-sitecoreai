@@ -1,12 +1,12 @@
 ---
-ID: 5d5b9527-e2e8-5c4f-b1ff-d38f7588caf1
-Parent: db447254-dbb4-55d7-b799-82318bcadfdb
+ID: 6fd9eeaf-a76a-52ee-a1fb-8fbdeb534fbb
+Parent: 8173259f-d847-52c9-a3fd-bb9bd0c181ee
 Template: 4d50cdae-c2d9-4de8-b080-8f992bfb1b55
-Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/PublicPromotion/Default
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Headless Variants/SharedDisclosure/Copyright
 SharedFields:
 - ID: ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e
   Hint: __Sortorder
-  Value: "100"
+  Value: "200"
 Languages:
 - Language: en
   Versions:

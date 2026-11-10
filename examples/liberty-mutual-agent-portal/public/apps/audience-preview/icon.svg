@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Audience Preview</title>
+  <desc id="desc">An audience with a preview eye on a purple background.</desc>
+  <rect width="512" height="512" rx="108" fill="#7040D7"/>
+  <circle cx="201" cy="182" r="48" stroke="#FFFFFF" stroke-width="24"/>
+  <path d="M111 332V311C111 271 143 248 183 248H219C249 248 276 261 289 285" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round"/>
+  <path d="M295 138C322 140 342 160 342 186C342 212 322 232 296 234" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round"/>
+  <path d="M329 253C361 260 382 280 382 309V320" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round"/>
+  <rect x="245" y="295" width="197" height="126" rx="63" fill="#FFFFFF" stroke="#7040D7" stroke-width="16"/>
+  <path d="M276 358C293 335 315 323 343 323C371 323 393 335 410 358C393 381 371 393 343 393C315 393 293 381 276 358Z" stroke="#7040D7" stroke-width="12" stroke-linejoin="round"/>
+  <circle cx="343" cy="358" r="16" fill="#7040D7"/>
+</svg>

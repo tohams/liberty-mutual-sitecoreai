@@ -35,14 +35,6 @@ export function Default({ fields, params, rendering }: SharedDisclosureProps) {
       <Text field={fields.title} tag="h2" id={headingId} />
       <RichText field={fields.body} className="cms-rich-text" />
       <dl className={styles.details}>
-        {(fields.owner?.value || page.mode.isEditing) && (
-          <div>
-            <dt>Content owner</dt>
-            <dd>
-              <Text field={fields.owner} />
-            </dd>
-          </div>
-        )}
         {fields.effectiveDate &&
           (!isFieldValueEmpty(fields.effectiveDate) || page.mode.isEditing) && (
             <div>
@@ -76,5 +68,23 @@ export function Default({ fields, params, rendering }: SharedDisclosureProps) {
           />
         )}
     </aside>
+  );
+}
+
+/** One native content item supplies the complete notice on both websites. */
+export function Copyright({
+  fields,
+  params,
+  rendering,
+}: SharedDisclosureProps) {
+  if (!fields) return null;
+  return (
+    <div
+      id={params?.RenderingIdentifier || undefined}
+      className={[styles.copyright, params?.styles].filter(Boolean).join(" ")}
+      data-content-item={rendering.dataSource || undefined}
+    >
+      <RichText field={fields.body} />
+    </div>
   );
 }

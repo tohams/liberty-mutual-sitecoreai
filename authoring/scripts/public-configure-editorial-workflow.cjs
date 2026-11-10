@@ -38,6 +38,9 @@ const IDS = Object.freeze({
   submit: "189f8ec0-9217-5447-b2a9-f2ed7a4a70a2",
   approve: "54ff573a-a778-587b-823f-e7593fae4d38",
   reject: "7fc46cee-d4d5-5667-802a-7ccc71416009",
+  submitSources: "8e283a24-9ed8-4d85-ab3b-b94310d6a8b9",
+  approveSources: "f2a9e88e-c657-49af-bebf-001ad82996d5",
+  returnSources: "51f521c9-97b9-46ed-827e-d1ec4dee0232",
 });
 const BASIC = Object.freeze({
   workflow: "b4f49b23-4bba-4c79-ba22-f89f5f0d4e4f",
@@ -52,11 +55,34 @@ const F = Object.freeze({
   suppress: "82a7c02f-9a55-4bfe-b494-d1713d4be9ff",
   marker: "9541e67d-ce8c-4225-803d-33f7f29f09ef",
   sort: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e",
+  commandItem: "8273a3db-fac0-44d6-aed0-29e2e039e8f9",
+  scope: "b5757325-3263-4daf-b6cd-811629cf4794",
+  itemValidation: "73c28ab2-3072-4bb8-b85c-181a128650d6",
+  datasourceValidation: "4ae36874-58d6-44c4-96f7-23287a22848d",
+  type: "a291a22b-99e2-46bb-a27b-8ec744275396",
+  parameters: "1507131d-cee3-49e9-af32-de5403a37b49",
 });
 const T = Object.freeze({
   workflow: "1c0acc50-37be-4742-b43c-96a07a7410a5",
   state: "4b7e2da9-de43-4c83-88c3-02f042031d04",
   command: "cb01f9fc-c187-46b3-ab0b-97a8468d8303",
+  datasourceAction: "def0aa0d-3446-41ae-b307-ec7ba429ce50",
+});
+// Native SXA action configuration verified in the Rule Builder. Scope Self
+// affects directly referenced items only. The governed page branch/pickers keep
+// Hero and Introduction local; shared Promotion has a different template.
+const DATASOURCE_CASCADE = Object.freeze({
+  scope: "fda1a53f-8a35-4bf5-8ba0-1e47b7da35d3",
+  pageTemplate: "a4de2222-c8a5-54d4-adee-bbad976a457c",
+  templates: Object.freeze([
+    "0d29dd73-62cc-5421-b14c-b8f8d8921540",
+    "8fb0a60a-31d7-5009-abca-636a6a3f40b5",
+  ]),
+  type: "Sitecore.XA.Foundation.Editing.Workflow.ApplyForDataSourceItemsAction,Sitecore.XA.Foundation.Editing",
+  itemValidation:
+    '<ruleset><rule uid="{F06E23C1-48A6-5A5A-A605-4CACEADDC6D1}" name="Public landing page"><conditions><condition id="{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}" uid="{FDFD0FF2-E2B7-5C36-A947-B8EA1CD7A02E}" templateid="{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}" /></conditions></rule></ruleset>',
+  datasourceValidation:
+    '<ruleset><rule uid="{47F4E802-CE98-500D-9A95-DD7AF4250144}" name="Local Hero or Introduction"><conditions><or uid="{33685A51-F187-501F-9FE7-CA2DC2EF65DC}"><condition id="{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}" uid="{DD8980E7-D042-571B-AAF3-81466C844D79}" templateid="{0D29DD73-62CC-5421-B14C-B8F8D8921540}" /><condition id="{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}" uid="{AF323160-1F41-5453-A92F-67DF46CD5099}" templateid="{8FB0A60A-31D7-5009-ABCA-636A6A3F40B5}" /></or></conditions></rule></ruleset>',
 });
 const READ = Object.freeze({
   "item:read": true,
@@ -186,7 +212,39 @@ function specifications() {
         __Security: ownedAcl(commandAcl(false)),
       },
     },
-  ].map((spec) => ({ ...spec, id: IDS[spec.key] }));
+  ]
+    .concat([
+      datasourceAction("submitSources", "Draft/Submit", "submit"),
+      datasourceAction(
+        "approveSources",
+        "Awaiting approval/Approve",
+        "approve",
+      ),
+      datasourceAction(
+        "returnSources",
+        "Awaiting approval/Return to author",
+        "reject",
+      ),
+    ])
+    .map((spec) => ({ ...spec, id: IDS[spec.key] }));
+}
+
+function datasourceAction(key, commandPath, commandKey) {
+  return {
+    key,
+    path: WF + "/" + commandPath + "/Datasource Workflow Action",
+    parent: IDS[commandKey],
+    template: T.datasourceAction,
+    // Inherit the existing command ACL; do not widen author/approver rights.
+    fields: {
+      "Command Item": brace(IDS[commandKey]),
+      Scope: brace(DATASOURCE_CASCADE.scope),
+      "Item Validation": DATASOURCE_CASCADE.itemValidation,
+      "Datasource Validation": DATASOURCE_CASCADE.datasourceValidation,
+      Type: DATASOURCE_CASCADE.type,
+      Parameters: "",
+    },
+  };
 }
 
 function serialization() {
@@ -197,6 +255,12 @@ function serialization() {
     "Suppress Comment": F.suppress,
     __Sortorder: F.sort,
     __Security: F.security,
+    "Command Item": F.commandItem,
+    Scope: F.scope,
+    "Item Validation": F.itemValidation,
+    "Datasource Validation": F.datasourceValidation,
+    Type: F.type,
+    Parameters: F.parameters,
   };
   return specifications().map((spec) => ({
     ID: spec.id,
@@ -223,13 +287,16 @@ function serialization() {
         Versions: [
           {
             Version: 1,
-            Fields: [
-              field(
-                "25bed78c-4957-4165-998a-ca1b52f67497",
-                "__Created",
-                "20261031T160000Z",
-              ),
-            ],
+            Fields:
+              spec.template === T.datasourceAction
+                ? []
+                : [
+                    field(
+                      "25bed78c-4957-4165-998a-ca1b52f67497",
+                      "__Created",
+                      "20261031T160000Z",
+                    ),
+                  ],
           },
         ],
       },
@@ -330,7 +397,7 @@ function writeModel() {
     $schema: "../../../.sitecore/schemas/ModuleFile.schema.json",
     namespace: MODULE,
     description:
-      "Public-only three-state review; reuses scoped Author and Approver roles; administrator publishes separately.",
+      "Public-only three-state review with native local Hero/Introduction cascade; shared Promotion remains separately reviewed; administrator publishes separately.",
     items: {
       includes: [
         {
@@ -369,8 +436,9 @@ function writeModel() {
     lines.push(
       "  Versions:",
       "  - Version: 1",
-      "    Fields:",
-      ...emitFields(language.Versions[0].Fields, "    "),
+      ...(language.Versions[0].Fields.length
+        ? ["    Fields:", ...emitFields(language.Versions[0].Fields, "    ")]
+        : []),
     );
     const file = path.join(
       base,
@@ -381,7 +449,7 @@ function writeModel() {
     fs.writeFileSync(file, lines.join("\n") + "\n");
   }
   console.log(
-    "Prepared seven public workflow definitions and their focused module. No Sitecore operations.",
+    "Prepared ten public workflow definitions and their focused module. No Sitecore operations.",
   );
 }
 
@@ -601,8 +669,14 @@ function plan(before) {
     changesRoleMembership: false,
     changesSettingsOrPresentationPermissions: false,
     protectedRoots: [...PROTECTED_ROOTS, PORTAL_HOME],
+    datasourceCascade: {
+      scope: "Self",
+      pageTemplate: DATASOURCE_CASCADE.pageTemplate,
+      allowedDatasourceTemplates: DATASOURCE_CASCADE.templates,
+      sharedPromotionIncluded: false,
+    },
     acceptance:
-      "Test actual non-admin Page Builder sessions: Author edits and submits; Author cannot approve; Approver approves or returns; approval alone does not publish; administrator publishes. Edit an approved item and verify a new Draft version. Verify local/shared datasource workflow as well as the page.",
+      "Test actual non-admin Page Builder sessions: page Submit, Approve, and Return to author also transition its local Hero and Introduction; Author cannot approve; shared Promotion and another page's local content remain unchanged. Approval alone does not publish; administrator publishes. Edit an approved item and verify a new Draft version.",
   };
 }
 async function run({
@@ -947,6 +1021,7 @@ module.exports = {
   BASIC,
   F,
   T,
+  DATASOURCE_CASCADE,
   ACL_ROOTS,
   PROTECTED_ROOTS,
   READ,

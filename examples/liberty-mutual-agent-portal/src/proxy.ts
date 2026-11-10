@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { verifySession, SESSION_COOKIE } from '@/server/auth/session';
 import {
   defineProxy,
@@ -16,6 +16,7 @@ import { extractPortalVisitorGeo } from './server/personalization/visitor-geoloc
 import { getPortalPersonalizationIdentity } from './server/data/portal';
 import { reportPersonalizationDiagnostic } from './server/personalization/diagnostics';
 import { privateHeaders } from './server/http';
+import { getAudiencePreviewAuth } from './server/marketplace/audience-preview-auth';
 import { verifyWorkshopSession, WORKSHOP_SESSION_COOKIE, workshopReturnTo } from './server/workshops/auth';
 
 const preview = new PreviewProxy({
@@ -84,6 +85,20 @@ const personalize = new PortalPersonalizeProxy({
 
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
+  // Marketplace preview uses its own delegated Sitecore identity and never
+  // enters the synthetic agent login, analytics, or personalization proxy.
+  if (path === '/apps/audience-preview' || path.startsWith('/apps/audience-preview/')) {
+    const auth = getAudiencePreviewAuth();
+    if (!auth) return NextResponse.next({ headers: privateHeaders });
+    // Login parameters are server-defined. Preserve callback parameters so
+    // Auth0 can validate its transaction, state, and authorization code.
+    const authRequest = path === '/apps/audience-preview/auth/login'
+      ? new NextRequest(new URL(path, req.url), { method: req.method, headers: req.headers })
+      : req;
+    const response = await auth.middleware(authRequest);
+    for (const [name, value] of Object.entries(privateHeaders)) response.headers.set(name, value);
+    return response;
+  }
   // Workshop access is separate from the agent session. Server pages check it
   // again before reading guide content; none of these routes initialize CDP.
   if (path === '/workshops' || path.startsWith('/workshops/') || path === '/demo' || path.startsWith('/demo/')) {

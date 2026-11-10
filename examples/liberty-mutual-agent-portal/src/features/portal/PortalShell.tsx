@@ -24,9 +24,11 @@ const navigation: { href: string; label: string; icon: IconName }[] = [
 export function PortalShell({
   route,
   children,
+  copyright,
 }: {
   route: string;
   children: ReactNode;
+  copyright?: ReactNode;
 }) {
   const { data, notify } = usePortal();
   const searchParams = useSearchParams();
@@ -270,10 +272,6 @@ export function PortalShell({
               {data.agency.city}, {stateNames[data.agency.state]}
             </span>
           </div>
-          <p className="sidebar-copyright">
-            © {new Date(data.asOfDate).getUTCFullYear()} Liberty Mutual
-            Insurance
-          </p>
         </div>
       </aside>
       {mobileOpen && (
@@ -305,6 +303,7 @@ export function PortalShell({
               <PortalIcon name="lock" width="13" /> Secure workspace
             </span>
           </div>
+          {copyright && <div className="portal-copyright">{copyright}</div>}
         </footer>
       </main>
       <PortalDialog

@@ -12,8 +12,8 @@ function rights(acl, role) {
 
 test("public review has exactly three states, separated commands, and no publishing action", () => {
   const specs = W.specifications();
-  assert.equal(specs.length, 7);
-  assert.equal(new Set(specs.map((row) => row.id)).size, 7);
+  assert.equal(specs.length, 10);
+  assert.equal(new Set(specs.map((row) => row.id)).size, 10);
   assert.deepEqual(
     specs
       .filter((row) => row.template === W.T.state)
@@ -91,7 +91,7 @@ test("content grants stay under Home and named managed libraries; definitions an
     assert.equal(content["item:admin"], false);
     assert.equal(content["item:delete"], false);
   }
-  for (const spec of W.specifications())
+  for (const spec of W.specifications().filter((row) => row.fields.__Security))
     for (const role of [ROLES.author, ROLES.approver]) {
       const permissions = rights(spec.fields.__Security, role);
       assert.ok(permissions.includes("-item:admin"));
@@ -101,7 +101,7 @@ test("content grants stay under Home and named managed libraries; definitions an
 
 test("serialized workflow stores native shared settings and real empty values, not editorial copies or credentials", () => {
   const rows = W.serialization();
-  assert.equal(rows.length, 7);
+  assert.equal(rows.length, 10);
   for (const row of rows) {
     assert.equal(
       row.ID,
@@ -125,7 +125,9 @@ test("serialized workflow stores native shared settings and real empty values, n
 });
 
 test("ACL scalars retain one literal native domain slash and the recovery exception accepts no other drift", () => {
-  for (const spec of W.specifications()) {
+  for (const spec of W.specifications().filter(
+    (row) => row.fields.__Security,
+  )) {
     const acl = spec.fields.__Security;
     assert.equal(W.serializedValue({ Hint: "__Security", Value: acl }), acl);
     assert.deepEqual(
@@ -254,4 +256,89 @@ test("inherited metadata changes require the exact template, verified Standard V
     }).length,
     0,
   );
+});
+
+test("native page workflow cascades only to allowed direct datasource templates without granting rights or publishing", () => {
+  const actions = W.specifications().filter(
+    (row) => row.template === W.T.datasourceAction,
+  );
+  assert.equal(actions.length, 3);
+  const expected = [
+    ["submitSources", "submit"],
+    ["approveSources", "approve"],
+    ["returnSources", "reject"],
+  ];
+  for (const [key, command] of expected) {
+    const action = actions.find((row) => row.key === key);
+    assert.equal(action.parent, W.IDS[command]);
+    assert.equal(
+      action.fields["Command Item"].toLowerCase(),
+      `{${W.IDS[command]}}`,
+    );
+    assert.equal(
+      action.fields.Scope.toLowerCase(),
+      `{${W.DATASOURCE_CASCADE.scope}}`,
+    );
+    assert.equal(
+      action.fields.Type,
+      "Sitecore.XA.Foundation.Editing.Workflow.ApplyForDataSourceItemsAction,Sitecore.XA.Foundation.Editing",
+    );
+    assert.equal(action.fields.Parameters, "");
+    assert.equal(
+      Object.hasOwn(action.fields, "__Security"),
+      false,
+      "The action inherits its command's existing permissions.",
+    );
+    assert.equal(
+      action.fields["Item Validation"],
+      W.DATASOURCE_CASCADE.itemValidation,
+    );
+    assert.equal(
+      action.fields["Datasource Validation"],
+      W.DATASOURCE_CASCADE.datasourceValidation,
+    );
+  }
+  const ids = (xml) =>
+    [...xml.matchAll(/templateid="\{([^}]+)\}"/g)].map((m) =>
+      m[1].toLowerCase(),
+    );
+  assert.deepEqual(ids(W.DATASOURCE_CASCADE.itemValidation), [
+    W.DATASOURCE_CASCADE.pageTemplate,
+  ]);
+  assert.deepEqual(ids(W.DATASOURCE_CASCADE.datasourceValidation), [
+    ...W.DATASOURCE_CASCADE.templates,
+  ]);
+  assert.match(W.DATASOURCE_CASCADE.datasourceValidation, /<or\s[^>]*>/);
+  for (const xml of [
+    W.DATASOURCE_CASCADE.itemValidation,
+    W.DATASOURCE_CASCADE.datasourceValidation,
+  ]) {
+    assert.match(xml, /^<ruleset><rule /);
+    assert.equal(
+      (xml.match(/id="\{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B\}"/g) || [])
+        .length,
+      ids(xml).length,
+    );
+    assert.equal(xml.includes("<actions>"), false);
+  }
+  assert.equal(
+    W.DATASOURCE_CASCADE.templates.includes(W.DATASOURCE_CASCADE.pageTemplate),
+    false,
+    "Datasource commands cannot recursively pass the page guard.",
+  );
+  for (const action of actions) {
+    const serialized = W.serialization().find((row) => row.ID === action.id);
+    assert.equal(serialized.SharedFields.length, 6);
+    assert.equal(
+      serialized.SharedFields.every((field) =>
+        /^[a-f0-9-]{36}$/.test(field.ID),
+      ),
+      true,
+    );
+    assert.equal(
+      serialized.Languages[0].Versions[0].Fields.length,
+      0,
+      "Do not replace native creation metadata with the older seed date.",
+    );
+  }
 });

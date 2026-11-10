@@ -1,7 +1,7 @@
 {
   "$schema": "../../../.sitecore/schemas/ModuleFile.schema.json",
   "namespace": "LibertyMutual.PublicWorkflow",
-  "description": "Public-only three-state review; reuses scoped Author and Approver roles; administrator publishes separately.",
+  "description": "Public-only three-state review with native local Hero/Introduction cascade; shared Promotion remains separately reviewed; administrator publishes separately.",
   "items": {
     "includes": [
       {

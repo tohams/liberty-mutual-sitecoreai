@@ -3,12 +3,12 @@ import type { PublicPromotionProps } from "./public-promotion.props";
 
 function Promotion(
   { fields, params, rendering }: PublicPromotionProps,
-  compact = false,
+  imagePosition: "left" | "right" = "left",
 ) {
   if (!fields) return null;
   return (
     <section
-      className={`component public-section public-promotion ${compact ? "public-promotion--compact" : ""} ${params.styles || ""}`}
+      className={`component public-section public-promotion public-promotion--image-${imagePosition} ${params.styles || ""}`}
       id={params.RenderingIdentifier}
       data-content-id={rendering.dataSource}
     >
@@ -36,4 +36,10 @@ function Promotion(
 }
 
 export const Default = (props: PublicPromotionProps) => Promotion(props);
-export const Compact = (props: PublicPromotionProps) => Promotion(props, true);
+export const ImageLeft = (props: PublicPromotionProps) =>
+  Promotion(props, "left");
+export const ImageRight = (props: PublicPromotionProps) =>
+  Promotion(props, "right");
+
+// Preserve layouts using the previous variant while native definitions update.
+export const Compact = ImageRight;

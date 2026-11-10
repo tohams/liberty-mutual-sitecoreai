@@ -60,7 +60,7 @@ const PORTAL_HOST = "liberty-mutual-agent-portal.vercel.app";
 const ORG = "org_XqL3u1MSNVuubOTb";
 const TENANT_NAME = "scaipocusem400b-sitecoreai950c-demo4418";
 const RESOURCE_PAGE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
-const DISCLOSURE_ID = "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca";
+const COPYRIGHT_ID = "9dc572ee-3d67-5909-922f-6482def1cdb0";
 const appRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const steps = customerDemoChapters.flatMap((chapter) => chapter.steps);
 const step = (id: string): DemoStep => {
@@ -282,7 +282,6 @@ test("the public Search loop proves both outcomes on the results page", () => {
     /Keep every result unopened/i,
     /keyword\(s\).*replace the query/i,
     /Contact an agent/i,
-    /Essential only/i,
     /Searching…/,
   ])
     assert.match(live, required);
@@ -308,7 +307,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
   assert.equal(entry.durationMinutes, 2);
   assert.doesNotMatch(
     live,
-    /then open|Read the answer|Coverage and policy details|More information|source link|return to the article|Explore bundling|Explore a bundled quote|Allow personalization|scroll|Effective|Review date/i,
+    /then open|Read the answer|Coverage and policy details|More information|source link|return to the article|Explore bundling|Explore a bundled quote|Privacy choices|Essential only|Allow personalization|scroll|Effective|Review date/i,
   );
   assert.equal(entry.actions.length, 3);
   assert(
@@ -352,7 +351,7 @@ test("discovery readiness identifies native structure while keeping external eng
   );
   assert.equal(checklistBytes.readUInt32BE(16), 310);
   assert.equal(checklistBytes.readUInt32BE(20), 315);
-  assert.match(text, /Home → insurance-resources → bundle-car-and-home/);
+  assert.match(text, /Home → insurance-resources.*select bundle-car-and-home/i);
   assert.match(text, /Reference source/);
   assert.match(
     prose(step("public-discovery").actions),
@@ -435,7 +434,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   );
   assert.doesNotMatch(
     prose(step("public-analytics").actions),
-    /coverage-guide-live|publishing job|new sentence|new coverage page/i,
+    /coverage-page|publishing job|new sentence|new coverage page/i,
   );
 });
 
@@ -462,11 +461,11 @@ test("indexing preparation requires a clean published baseline and one unpublish
   );
   assert.match(
     preparationText,
-    /must be absent from the public article.*Search record.*published-page API experience/,
+    /must be absent from the public article.*Search record.*explanation.*P7 GraphQL query/,
   );
   assert.match(
     preparation,
-    /sentence is already present.*car-and-home resource page.*After the demonstration.*restoration checklist.*Continue only after all three/,
+    /sentence is present.*After the demonstration.*restoration checklist.*Continue only after all three/,
   );
   assert.match(
     preparation,
@@ -483,24 +482,30 @@ test("indexing preparation requires a clean published baseline and one unpublish
   );
 });
 
-test("public authoring ends with the new page published through separate roles", () => {
+test("public authoring uses one presenter account through review and publication", () => {
   const id = "public-authoring";
-  const create = actionIndex(
-    id,
-    /Create a page.*Landing page.*coverage-guide-live/i,
+  const entry = step(id);
+  const create = actionIndex(id, /Create a page.*Landing page.*New page name/i);
+  assert.deepEqual(
+    entry.inputs?.find((input) => input.label === "New page name"),
+    {
+      action: 1,
+      label: "New page name",
+      value: "coverage-page",
+    },
   );
-  const preview = actionIndex(id, /Click Preview.*remains unpublished/i);
+  const preview = actionIndex(id, /select Preview.*Keep the page unpublished/i);
   const submit = actionIndex(
     id,
-    /Actions → Submit.*Hero.*Introduction.*Awaiting approval/i,
+    /Actions → Submit.*Awaiting approval.*local Hero and Article text follow the page/i,
   );
   const approve = actionIndex(
     id,
-    /separate Approver.*coverage-guide-live.*Hero.*Introduction.*Actions → Approve/i,
+    /coverage-page.*Page Builder.*Actions → Approve/i,
   );
   const publish = actionIndex(
     id,
-    /administrator acting as publisher.*Start publish.*published coverage page/i,
+    /Page Builder.*Start publish.*published coverage page/i,
   );
   assert(
     create < preview &&
@@ -510,7 +515,7 @@ test("public authoring ends with the new page published through separate roles",
   );
   assert.match(
     prose(step(id).actions),
-    /Assign.*rather than Duplicate and assign.*Compact/i,
+    /Assign.*rather than Duplicate and assign.*Image left.*Image right/i,
   );
   assert.match(
     prose(step(id).actions),
@@ -518,11 +523,11 @@ test("public authoring ends with the new page published through separate roles",
   );
   assert.match(
     prose(step(id).actions),
-    /Reload tree.*Wait for the refreshed sitemap to finish loading.*Select coverage-guide-live.*wait until coverage-guide-live appears as the page heading before opening Content/i,
+    /Reload tree.*Sitemap.*select coverage-page.*matching page heading.*Keep Editor open.*canvas.*Hero.*Heading/i,
   );
   assert.match(
     prose(step(id).actions),
-    /Return to Editor.*confirm coverage-guide-live appears as the page heading.*If necessary.*Sitemap.*wait for its heading.*Then open Layers.*headless-public-content-1/i,
+    /Page Builder.*Layers.*headless-public-content-1.*Insert into.*Article text/i,
   );
   const resourceCreation = workshopGuides.find(
     (guide) => guide.slug === "create-resource-and-media",
@@ -531,12 +536,27 @@ test("public authoring ends with the new page published through separate roles",
     prose(resourceCreation!.steps[0].action),
     /Reload tree.*wait for the refreshed sitemap to finish loading.*Select your new page.*wait until its name appears as the page heading/i,
   );
-  assert.match(actions(id)[submit], /local item.*Draft/i);
+  assert.match(
+    actions(id)[submit],
+    /local Hero and Article text follow the page through review/i,
+  );
+  assert.doesNotMatch(
+    actions(id)[submit],
+    /each local item|local item.*Draft/i,
+  );
   assert.match(
     step(id).stopWhen,
-    /coverage-guide-live.*authored headings.*shared Promotion/,
+    /coverage-page.*authored headings.*shared Promotion/,
   );
   assert.doesNotMatch(prose(step(id).actions), /Page not found|step 06/);
+  assert.doesNotMatch(
+    prose(entry.actions),
+    /Author Page Builder|Approver Page Builder|Publisher Page Builder|separate.*profile|switch.*account/i,
+  );
+  assert.match(
+    prose(entry.talkTrack),
+    /one SitecoreAI administrator account.*production teams normally.*separate roles/i,
+  );
 });
 
 test("Profound is the customer-permitted governed integration explanation, not a claimed running connector", () => {
@@ -545,7 +565,7 @@ test("Profound is the customer-permitted governed integration explanation, not a
   const text = prose(entry);
   assert.match(
     text,
-    /Profound output.*Draft.*human review and approval.*publication/i,
+    /Profound.*authoring.API.*Draft.*human review.*approval.*publication/i,
   );
   assert.match(text, /proposed integration design/i);
   assert.match(text, /existing wording.*proposed wording/);
@@ -567,29 +587,27 @@ test("Profound is the customer-permitted governed integration explanation, not a
   );
 });
 
-test("analytics is a report-only loop using genuine consented preparation", () => {
+test("analytics uses the monthly report without generating new events", () => {
   const entry = step("public-analytics");
   const text = prose(entry);
   for (const required of [
     /Events Table/i,
     /Site.*liberty-mutual-public-site/,
-    /Time.*1 hour/,
+    /Time.*1 month/,
+    /Event Type.*pageView.*LM_PUBLIC_CTA_CLICK.*checked/i,
     /pageView/,
     /LM_PUBLIC_CTA_CLICK/,
-    /LM_PUBLIC_SCROLL_25/,
-    /timestamps/i,
-    /Privacy choices/,
+    /custom event.*next-step button or link/i,
   ])
     assert.match(text, required);
-  assert.match(
+  assert.doesNotMatch(
     text,
-    /visits, reading depth, and selected actions.*improve the content/i,
+    /LM_PUBLIC_SCROLL|reading depth|1 hour|prepared journey|generate events/i,
   );
   assert.doesNotMatch(
     prose(entry.talkTrack),
     /completed quote|policy sale|conversion lift/i,
   );
-  assert.match(text, /prepar.*consented|consented.*prepar/i);
   assert.doesNotMatch(
     prose(entry.actions),
     /Start publish|Create a page|Explore bundling|Load content/,
@@ -598,249 +616,285 @@ test("analytics is a report-only loop using genuine consented preparation", () =
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
-  assert.match(
+  assert.doesNotMatch(
     page,
-    /Prepare genuine public-site analytics before presenting.*Allow personalization/,
+    /Prepare genuine public-site analytics before presenting/,
   );
   assert.match(page, /step\.presenterResult/);
 });
 
-test("API reuse stops after the second experience loads the same published answer", () => {
+test("API reuse uses native Live GraphQL with a copyable query for the same published page", () => {
   const entry = step("public-api");
   const text = prose(entry);
+  assert.equal(entry.durationMinutes, 2);
+  assert.equal(entry.presenterActions.length, 4);
+  assert.equal(entry.actions.length, 4);
   for (const required of [
-    /One published page, two experiences/i,
-    /Load content/,
-    /Native content version/,
-    /Stable item ID/,
-    /API contract version/,
-    /implementation components/i,
+    /GraphQL Explorer/,
     /Live Experience Edge/,
+    /HTTP HEADERS/,
+    /Delivery API token/,
+    /sc_apikey/,
+    /Draft and Preview content remain in authoring/i,
+    /same published fields/i,
   ])
     assert.match(text, required);
-  assert.match(text, /Draft and Preview content remain in authoring/i);
+  const query = entry.inputs?.find((input) => input.label === "GraphQL query");
+  assert(query);
+  assert.equal(query.action, 2);
+  assert.equal(
+    query.value,
+    `query PublishedCoverageGuidance {
+  item(path: "{AE109FC0-B508-5840-97EB-0B2C02AE1A9B}", language: "en") {
+    id
+    name
+    version
+    question: field(name: "question") { value }
+    answer: field(name: "answer") { value }
+    explanation: field(name: "explanation") { value }
+    source: field(name: "sourceLink") { jsonValue }
+  }
+}`,
+  );
+  assert.doesNotMatch(query.value, /sc_apikey|token|secret/i);
+  const headers = entry.inputs?.find((input) => input.label === "HTTP headers");
+  assert(headers);
+  assert.equal(headers.action, 2);
+  assert.deepEqual(JSON.parse(headers.value), {
+    sc_apikey: "<Delivery API token>",
+  });
+  assert.doesNotMatch(headers.value, /x-gql-token/i);
   assert.match(
     entry.stopWhen,
-    /second experience.*newly published sentence.*stable item ID/i,
+    /native GraphQL response.*page ID.*published version.*sentence published in P3/i,
+  );
+  assert.match(
+    prose(entry.actions[1]),
+    /HTTP HEADERS.*Live Delivery API token.*not Preview.*Copy GraphQL query.*left Query editor.*Run/,
+  );
+  assert.match(
+    prose(entry.actions[2]),
+    /id.*version.*question.*answer.*explanation.*source.*Review your options with your agent before choosing coverage.*public article/i,
+  );
+  assert(
+    linksIn(entry).some(
+      (link) => link.href === "https://edge.sitecorecloud.io/api/graphql/ide",
+    ),
+  );
+  assert(
+    linksIn(entry).every(
+      (link) => !/sc_apikey|token|secret|[?&]api/i.test(link.href),
+    ),
   );
   assert.doesNotMatch(
-    prose(entry.actions),
-    /ETag|304 Not Modified|Actual single-answer request|Search by term|Toggle document details/,
+    text,
+    /workshops\/content-api|One published page, two experiences|API contract version|Load content|customer-demo-content-api\.png|implementation components/,
   );
-  assert(linksIn(entry).some((link) => link.href === "/workshops/content-api"));
   assert.match(
     prose(entry.actions[0]),
     /Show Experience Edge content delivery.*SitecoreAI authoring → Publish → Experience Edge → API consumers/,
   );
   assert.match(
-    prose(entry.actions[1]),
-    /Open One published page, two experiences/,
-  );
-  assert.match(
     entry.talkTrack[0],
-    /Authors manage and approve content.*Publishing sends.*Experience Edge.*globally distributed.*APIs.*publishing content independently of application deployments/,
-  );
-  assert.match(
-    entry.talkTrack[1],
-    /^The same car-and-home page serves another application/,
+    /Content teams manage and approve content.*Publishing sends.*Experience Edge.*globally distributed.*APIs.*publishing content independently of application deployments/,
   );
   assert.match(entry.transition, /Next.*independent agents/);
-  assert.doesNotMatch(
-    entry.transition,
-    /Experience Edge content delivery|slide \d+/i,
-  );
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
-  assert.match(
-    page,
-    /Experience Edge content delivery.*before the API example/,
-  );
-  assert.doesNotMatch(
-    page,
-    /slide 19|architecture bridge after the API example/,
-  );
+  assert.match(page, /Experience Edge content delivery.*ready for P7/);
 });
 
-test("the relevance loop proves profile relevance and same-profile native marketing suppression", () => {
+test("the relevance loop uses native profile and priority tests without presenter helper pages", () => {
   const entry = step("portal-relevance");
   const text = prose(entry);
+  assert.equal(entry.durationMinutes, 5);
+  assert.equal(entry.actions.length, 5);
+  assert.equal(entry.presenterActions.length, entry.actions.length);
   for (const required of [
     /avery\.01/,
     /Cedar Ridge Insurance/,
     /daniel\.01/,
     /Prairie Oak Insurance/,
     /Licensed states/i,
-    /role/i,
     /specialization/i,
     /production/i,
-    /marketingSuppressed/,
-    /explicit false/i,
   ])
     assert.match(text, required);
-  assert.match(text, /Select profile → Load profile.*Client ID.*Profile ID/i);
   assert.match(
-    text,
-    /Testing as: Avery Brooks - 01.*agency-growth.*green|Testing as: Avery Brooks - 01.*green.*agency-growth/i,
+    prose(entry.actions[2]),
+    /Page Builder.*Layers → Agency priorities.*Edit personalization rules → Liberty Mutual - Agency product priorities.*Leave the rule Builder open/i,
+  );
+  const profileRules = prose(entry.actions[3]);
+  assert.match(
+    profileRules,
+    /Optimization → Profiles.*Avery Brooks - 01.*Toggle menu → Inspect → JSON view.*first UUID in clientIds.*without quotation marks.*close Inspect profile/i,
   );
   assert.match(
-    text,
-    /Testing as: Daniel Ortiz - 01.*producer-priorities.*green|Testing as: Daniel Ortiz - 01.*green.*producer-priorities/i,
+    profileRules,
+    /Return to Page Builder.*Select profile → Load profile → Client ID.*Avery.*Client ID.*Enter.*Testing as: Avery Brooks - 01.*Test.*green agency-growth/i,
   );
   assert.match(
-    prose(entry.actions),
-    /ensure Profile ID is selected.*Client ID.*Profile ID.*Avery.*press Enter.*Testing as: Avery Brooks - 01.*Select Test.*green agency-growth.*Daniel.*press Enter.*Testing as: Daniel Ortiz - 01.*Select Test again.*green producer-priorities/i,
+    profileRules,
+    /Daniel.*Testing as: Daniel Ortiz - 01.*Test.*green producer-priorities.*Cancel.*read-only tests/i,
   );
-  assert.match(text, /Refresh status.*current IDs after a reset/i);
-  assert.match(text, /Cancel.*read-only tests/i);
+  const stateRule = prose(entry.actions[4]);
+  assert.match(
+    stateRule,
+    /Optimization → Custom values.*Liberty Mutual - Agency product priorities.*published rule without editing/i,
+  );
+  assert.match(
+    stateRule,
+    /agency-growth.*principal.*licensedInTexas === true.*small-commercial share below 20%/,
+  );
+  assert.match(
+    stateRule,
+    /producer-priorities.*producer.*licensedInIllinois === true.*small-commercial specialization.*positive agent small-commercial production/,
+  );
+  assert.match(stateRule, /Leave the published rule unchanged/);
+  assert.match(
+    entry.stopWhen,
+    /Avery and Daniel.*native priority rule.*own Client ID/,
+  );
+  assert.match(entry.stopWhen, /published Texas and Illinois conditions/);
+  assert.equal(entry.inputs, undefined);
+  for (const link of linksIn(entry))
+    assert.doesNotMatch(link.href, /\/(?:workshops?|demo)(?:[/?#]|$)/);
   assert(
-    linksIn(entry).some(
-      (link) => link.href === "/workshops/reset#current-profiles",
+    linksIn(entry).some((link) =>
+      link.href.includes("/optimization/profiles?"),
     ),
   );
-  for (const action of actions(entry.id).filter((line) =>
-    /Native profile ID/.test(line),
-  ))
-    assert.doesNotMatch(
-      action,
-      /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i,
-    );
-  const baseline = actionIndex(
-    entry.id,
-    /Run eligibility check.*1 eligible recipient.*Cameron Ellis - Allowed/i,
-  );
-  const optout = actionIndex(
-    entry.id,
-    /Native profile ID.*Opt out Cameron.*while SitecoreAI processes/i,
-  );
-  const result = actionIndex(
-    entry.id,
-    /Check import status.*Native profile ID.*unchanged.*Run eligibility check.*No eligible recipients.*no email preview/i,
-  );
-  assert.equal(
-    baseline,
-    0,
-    "Start from the prepared native recipient baseline",
-  );
-  assert.equal(optout, 0, "Start the import before the profile comparisons");
-  const avery = actionIndex(entry.id, /avery\.01.*Avery Brooks/i);
-  const daniel = actionIndex(entry.id, /daniel\.01.*Daniel Ortiz/i);
-  const profiles = actionIndex(entry.id, /Testing as: Avery Brooks - 01/i);
-  const policy = actionIndex(entry.id, /API response.*Open variant editor/i);
-  assert(optout < avery && avery < daniel && daniel < profiles);
-  assert(profiles < policy && policy < result);
-  assert.match(
-    prose(entry.controls),
-    /Liberty Mutual marketing eligibility.*native runtime personalization/i,
-  );
-  assert.match(entry.stopWhen, /included to excluded/i);
-  assert.doesNotMatch(entry.stopWhen, /back to included/i);
-  assert.match(entry.stopWhen, /same Native profile ID/i);
-  assert(linksIn(entry).some((link) => link.href === "/workshops/preferences"));
   assert(
-    linksIn(entry).some(
-      (link) =>
-        link.href.includes(
-          "/optimization/personalization/af90f4c1-20ab-4ae3-871d-97e91f22431b",
-        ) && link.href.includes("section=configuration"),
+    linksIn(entry).some((link) =>
+      link.href.includes(
+        "/optimization/custom-values/ad7b493b-f768-404c-adc6-9841c2fe1a6e?",
+      ),
     ),
-    "Show the native enabling rule alongside the recorded choice and recipient outcome",
-  );
-  assert.match(
-    prose(entry.actions),
-    /API response.*Open variant editor.*marketingSuppressed === false.*Close editor/i,
-  );
-  assert.match(
-    prose(entry.actions),
-    /Native decision receipts.*marketingEligible = false.*Same profile as this session’s first check/i,
   );
   assert.doesNotMatch(
-    prose(entry.actions),
-    /Products & appetite|Load preference examples|Restore preferences|Audience size|Recalculate|Pause.*Audience|6 hours/,
-  );
-  const page = readFileSync(
-    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
-    "utf8",
+    text,
+    /Communication preferences|Cameron|marketingSuppressed|marketingEligible|marketing eligibility|Preview API|Opt out Cameron|Run eligibility check|Check import status|Native decision receipts|No eligible recipients|customer-demo-outreach-suppressed/i,
   );
   assert.match(
-    prose(page),
-    /Restore the Cameron comparison outside the 45-minute demonstration.*Restore preferences.*Check import status.*Run eligibility check.*1 eligible recipient.*Native profile IDs.*unchanged/i,
+    prose(entry.controls),
+    /read-only tests.*do not publish or change a rule/i,
   );
   assert.match(
     text,
     /application separately enforces licensed-state eligibility/i,
   );
+  assert.match(prose(entry.controls), /Unmatched profiles receive neutral/);
 });
 
-test("the design loop opens the placeholder-specific component picker without changing content", () => {
+test("the design loop connects the Brand Kit to field-level AI and governed composition", () => {
   const entry = step("portal-design");
+  const actions = entry.actions.map((action) => prose([action]));
   assert.match(
-    prose(entry.actions),
+    actions[0],
+    /Design → Brand kits.*Published.*Liberty Mutual — Independent Agents.*Sections → Tone of Voice/,
+  );
+  assert.match(
+    actions[1],
+    /Page Builder.*Site switcher → Agent Portal → Editor → Pages → Home.*Layers → Agency priorities → Introduction.*Priorities for your agency.*Introduction in the right panel.*Optimize with AI.*Adhere to brand kit.*AI writing prompt.*Ask AI for content improvements.*Generate content.*Ready!.*Revert to original.*original wording returns/,
+  );
+  assert.match(actions[1], /Keep optimized.*A\/B\/n test.*Publish.*untouched/);
+  assert.match(
+    actions[2],
     /Layers.*headless-agency-priorities.*Insert into.*before or after Agency priorities.*filtered Components picker.*Business priorities → Agency priorities.*Close the picker without selecting a component or inserting content/i,
   );
-  assert.match(
-    prose(entry.actions),
-    /Published.*Liberty Mutual — Independent Agents.*Sections → Tone of Voice/,
-  );
+  assert.match(actions[3], /Avery portal.*My workspace.*Learning & resources/);
   assert(entry.links?.some((link) => link.href.includes("/design/brandkits?")));
   assert.match(prose(entry.talkTrack), /sample Liberty Mutual Brand Kit/);
+  assert.match(
+    prose(entry.talkTrack),
+    /Content and design remain separate.*authors manage words and images.*content templates define the fields.*reusable components.*page designs.*Placeholder settings/i,
+  );
+  assert(
+    entry.inputs?.some(
+      (input) => input.action === 2 && input.label === "AI writing prompt",
+    ),
+  );
+  assert.equal(
+    entry.images?.find((image) => image.file === "demo-brand-kit-voice.png")
+      ?.afterAction,
+    1,
+  );
+  assert.equal(
+    entry.images?.find((image) => image.file === "demo-ai-field-copilot.png")
+      ?.afterAction,
+    2,
+  );
+  assert.doesNotMatch(
+    prose(entry.actions),
+    /Content → Optimize content|Original and Optimized|X → Cancel|Create A\/B test/,
+  );
   assert.equal(entry.durationMinutes, 1);
 });
 
-test("the priority edit remains a draft until both audience previews and approval are complete", () => {
-  const edit = prose(step("portal-priority-edit").actions);
+test("the same Home draft is previewed with audience attributes before approval and publication", () => {
+  const editEntry = step("portal-priority-edit");
+  const edit = prose(editEntry.actions);
+  assert.match(editEntry.objective, /Part 1 of the priority-change loop/);
+  assert.match(step("portal-preview").objective, /Part 2 of the priority-change loop/);
+  assert.match(editEntry.stopWhen, /Checkpoint.*live experience is unchanged.*Continue/);
   assert.match(
-    step("portal-priority-edit").objective,
-    /Part 1 of the priority-change loop/,
+    edit,
+    /explicitly select Priority baseline version recorded in P0.*wait for its fields to finish loading.*original version number.*Small business growth → Texas workers compensation → Home and auto conversations.*Choose Create version/,
   );
-  assert.match(
-    step("portal-preview").objective,
-    /Part 2 of the priority-change loop/,
-  );
-  assert.match(
-    step("portal-priority-edit").stopWhen,
-    /Checkpoint.*live experience is unchanged.*Continue/,
-  );
-  assert.match(edit, /Create version/);
   assert.match(edit, /Ordered recommendations/);
   assert.match(edit, /remains Draft.*Leave it unpublished/i);
-  assert.doesNotMatch(
-    edit,
-    /(?:choose|select)\s+Actions → (?:Submit|Approve)|click Start publish/i,
-  );
+  assert.doesNotMatch(edit, /(?:choose|select)\s+Actions → (?:Submit|Approve)|click Start publish/i);
   const id = "portal-preview";
-  const previewRole = actionIndex(
+  const entry = step(id);
+  const open = actionIndex(
     id,
-    /administrator acting as publisher.*browser profile.*Agent audience preview.*Page Builder.*Personalize/i,
+    /Page Builder.*Site switcher → Agent Portal → Editor → Pages → Home.*Apps → Audience Preview.*Current page → Home/i,
   );
-  const principal = actionIndex(id, /Select Avery agency principal.*Preview/);
-  const producer = actionIndex(id, /Select Daniel producer.*Preview/);
-  const submit = actionIndex(id, /Switch back.*Author.*Actions → Submit/);
-  const approve = actionIndex(id, /separate Approver.*Actions → Approve/i);
-  const publish = actionIndex(
+  const principal = actionIndex(
     id,
-    /administrator acting as publisher.*Start publish/i,
+    /Role → Principal.*Licensed states.*only Texas.*Business context.*Agency small-commercial share → 15.*Agency written premium → 1000000.*Preview audience.*Open preview.*Home.*Texas → Build a stronger small-business practice → Connect home and auto conversations/,
   );
-  assert(
-    previewRole < principal &&
-      principal < producer &&
-      producer < submit &&
-      submit < approve &&
-      approve < publish,
+  const producer = actionIndex(
+    id,
+    /Role → Producer.*Licensed states.*only Illinois.*Specializes in small commercial.*Agent small-commercial written premium → 100000.*Preview audience.*Open preview.*Home.*Connect home and auto conversations → Build a stronger small-business practice/,
+  );
+  const submit = actionIndex(id, /Saved priority version.*Actions → Submit/);
+  const approve = actionIndex(id, /same Saved priority version.*Actions → Approve/i);
+  const publish = actionIndex(id, /same Saved priority version.*Approved.*Start publish/i);
+  assert(open < principal && principal < producer && producer < submit && submit < approve && approve < publish);
+  assert.match(
+    prose(entry.actions[principal]),
+    /Close the preview tab.*same Audience Preview panel in Page Builder/i,
   );
   assert.match(
-    prose(step(id).actions[principal]),
-    /Close the preview tab.*same Personalize screen/i,
+    prose(entry.actions[producer]),
+    /Neither preview requires an agent login or a human profile identifier/,
   );
   assert.match(
-    prose(step(id).controls),
-    /native page variants.*own authored Hero and Callout.*preview page remains unpublished/i,
+    prose(entry.controls),
+    /private Marketplace extension.*existing published SitecoreAI personalization rules.*current authoring content for Home/,
   );
+  assert.match(prose(entry.controls), /isolated synthetic audience records.*without changing human agent accounts/);
   assert.match(
-    prose(step(id).expected),
-    /without publishing Home manually or deploying frontend code/i,
+    prose(entry.expected),
+    /same Home page.*without publishing Home manually or deploying frontend code/i,
   );
+  assert.doesNotMatch(
+    prose([editEntry, entry]),
+    /Agent audience preview|Home → growth|prepared growth page|Avery agency principal|Daniel producer|authored Hero and Callout|native page-level audience previews/,
+  );
+  assert(linksIn(entry).some((link) => link.href.includes("sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998")));
+  assert.equal(editEntry.durationMinutes, 2);
+  assert.equal(entry.durationMinutes, 4);
+  const page = readFileSync(
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
+    "utf8",
+  );
+  assert.match(page, /Editor → Pages → Home.*Apps → Audience Preview.*Current page → Home/);
+  assert.match(page, /same presenter account.*Role → Principal.*Texas.*Agency small-commercial share → 15.*Agency written premium → 1000000.*Role → Producer.*Illinois.*Agent small-commercial written premium → 100000/);
+  assert.doesNotMatch(page, /Agent audience preview|Avery agency principal|Daniel producer|growth page|cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947/);
 });
 
 test("workflow review and publication use the version number shown after saving", () => {
@@ -859,28 +913,28 @@ test("workflow review and publication use the version number shown after saving"
       id === "portal-preview"
         ? "Saved priority version"
         : id === "portal-shared-content"
-          ? "Saved disclosure version"
-          : "Restored disclosure version";
+          ? "Saved copyright version"
+          : "Restored copyright version";
     assert.match(text, new RegExp(`${label}.*Draft.*Actions → Submit`, "i"));
     assert.match(
       text,
-      new RegExp(`Approver.*same ${label}.*Actions → Approve`, "i"),
+      new RegExp(`same ${label}.*Page Builder.*Actions → Approve`, "i"),
     );
     assert.match(
       text,
       new RegExp(
-        `administrator acting as publisher.*same ${label}.*Approved.*Start publish|administrator acting as publisher.*same ${label}.*Approved.*publish`,
+        `same ${label}.*Page Builder.*Approved.*Start publish|same ${label}.*Page Builder.*Approved.*publish`,
         "i",
       ),
     );
   }
   assert.match(
     prose(step("portal-shared-content").actions),
-    /wait for Saved.*Record the version number currently shown as Saved disclosure version/i,
+    /wait for Saved.*Record the version number currently shown as Saved copyright version/i,
   );
   assert.match(
     prose(step("portal-audit-rollback").actions),
-    /original wording is saved.*record the version number currently shown as Restored disclosure version/i,
+    /original wording is saved.*record the version number currently shown as Restored copyright version/i,
   );
 });
 
@@ -891,8 +945,8 @@ test("each named content Draft is explicitly selected before its fields change",
       "Texas guidance priority",
       "Ordered recommendations",
     ],
-    ["portal-shared-content", "Shared disclosure review", "Disclosure"],
-    ["portal-audit-rollback", "Original disclosure restored", "Disclosure"],
+    ["portal-shared-content", "Copyright year update", "Disclosure"],
+    ["portal-audit-rollback", "Copyright year restored", "Disclosure"],
   ]) {
     const text = actions(id).find(
       (action) =>
@@ -919,15 +973,15 @@ test("each named content Draft is explicitly selected before its fields change",
   }
   assert.match(
     prose(step("portal-audit-rollback").actions),
-    /Select the original approved English version.*wait for its fields to finish loading.*Confirm the selected version number and original Disclosure wording before choosing Create version/,
+    /Select the original approved English version.*wait for its fields to finish loading.*Confirm the selected version number and original Disclosure wording with copyright year 2025 before choosing Create version/,
   );
 });
 
-test("shared disclosure and its reversal stop after the two-site proof", () => {
+test("one full copyright notice updates both footers and restores only its year", () => {
   const shared = step("portal-shared-content");
   assert(
     linksIn(shared).some((link) =>
-      link.href.includes(`sc_itemid=${DISCLOSURE_ID}`),
+      link.href.includes(`sc_itemid=${COPYRIGHT_ID}`),
     ),
   );
   const destinations = new Set(
@@ -940,8 +994,36 @@ test("shared disclosure and its reversal stop after the two-site proof", () => {
     assert(destinations.has(expected));
   assert.match(
     prose(shared.actions),
-    /Record.*original.*Disclosure.*rollback/i,
+    /Record.*original.*full Disclosure.*rollback.*copyright year is 2025/i,
   );
+  assert.match(
+    prose(shared.actions),
+    /Replace only 2025 with 2026.*preserving every other word and punctuation mark in the full copyright notice.*line break.*Equal Opportunity Employer.*link/i,
+  );
+  assert.match(
+    prose(shared.actions),
+    /Publish the shared item once.*both footers show the same full copyright notice with 2026/i,
+  );
+  assert.match(
+    prose(shared.expected),
+    /© 2026 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116.*Liberty Mutual is an Equal Opportunity Employer and an Equal Housing Insurer\./,
+  );
+  assert(
+    !linksIn(shared).some((link) =>
+      link.href.includes("sc_itemid=c4fd68f7-7c79-5bb6-9919-fb6f82b84bca"),
+    ),
+    "The copyright exercise must not repurpose the product-availability legal notice",
+  );
+  for (const entry of [shared, step("portal-audit-rollback")]) {
+    assert.equal(entry.durationMinutes, 4);
+    assert.doesNotMatch(
+      prose(entry),
+      /Coverage and availability|added sentence|temporary sentence|append|Content owner|Public website content team|Content Editor/i,
+    );
+    assert((entry.images ?? []).every((image) =>
+      !/shared-disclosure|workflow-history/.test(image.file),
+    ));
+  }
   assert.doesNotMatch(
     prose(shared),
     /public Bundling|Learning & resources|four configured|additional links|other two placements|Q&A/,
@@ -960,12 +1042,27 @@ test("shared disclosure and its reversal stop after the two-site proof", () => {
     assert.match(rollback, required);
   assert.doesNotMatch(
     prose(step("portal-audit-rollback").actions),
-    /Agency growth priorities|Bundle car and home|coverage-guide-live|public Bundling|Learning & resources/,
+    /Agency growth priorities|Bundle car and home|coverage-page|public Bundling|Learning & resources/,
   );
   assert.match(
     step("portal-audit-rollback").stopWhen,
-    /Both Home pages.*restored original wording.*history/,
+    /Both site footers.*full copyright notice.*restored year 2025.*history/,
   );
+  assert.match(
+    prose(step("portal-audit-rollback").actions),
+    /preserved full copyright notice with 2025, without changing any other wording or punctuation/i,
+  );
+  assert.match(
+    prose(step("portal-audit-rollback").actions),
+    /both footers show the full copyright notice with 2025 again/i,
+  );
+  const page = readFileSync(
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
+    "utf8",
+  );
+  assert.match(page, /both site footers display the same full copyright notice with \*\*2025\*\*/);
+  assert.match(page, /scroll to both footers.*full copyright notice with \*\*2025\*\*/);
+  assert.doesNotMatch(page, /shared-disclosure|Product availability notice|both public placements/);
 });
 
 test("the presenter guide displays concise clicks and result checks, with preparation kept separate", () => {
@@ -1019,7 +1116,7 @@ test("every launch or inline link has a safe destination and the correct site an
   const nativeSites: Record<string, string> = {
     "6d600332-3e21-4c5f-83ec-aae04f83450f": "liberty-mutual-public-site",
     [RESOURCE_PAGE_ID]: "liberty-mutual-public-site",
-    [DISCLOSURE_ID]: "liberty-mutual-public-site",
+    [COPYRIGHT_ID]: "liberty-mutual-public-site",
     "ae9e45ca-f127-4abe-9ca7-2ff109981998": "liberty-mutual-agent-portal",
     "3127968e-4b21-50c3-ad79-b6bbbe5303b8": "liberty-mutual-agent-portal",
     "69fc0a48-3e75-426e-9b2b-296d7a3bf8a4": "prospera",

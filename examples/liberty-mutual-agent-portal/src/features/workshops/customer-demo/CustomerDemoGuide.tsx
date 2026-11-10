@@ -3,6 +3,10 @@ import { ArrowRight, ArrowUpRight, Clock3 } from "lucide-react";
 import { requireWorkshopSession } from "@/server/workshops/auth";
 import { DemoShell } from "./DemoShell";
 import { CopyValue } from "./CopyValue";
+import { DemoTabs } from "./DemoTabs";
+import { presenterInputs } from "./demo-inputs.server";
+import { getPresenterProfiles } from "./demo-profiles.server";
+import { GRAPHQL_EXPLORER } from "./demo-destinations";
 import type { DemoChapter } from "./types";
 import { GuideText } from "@/features/workshops/GuideText";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
@@ -47,6 +51,7 @@ export async function CustomerDemoGuide({
         ? "/demo"
         : "/workshops/demo";
   const session = await requireWorkshopSession(returnTo);
+  const presenterProfiles = await getPresenterProfiles();
   const chapters = chapterId
     ? customerDemoChapters.filter((chapter) => chapter.id === chapterId)
     : customerDemoChapters;
@@ -89,6 +94,7 @@ export async function CustomerDemoGuide({
         <div className={styles.layout}>
           <aside className={styles.navigation}>
             <nav aria-label="Customer demonstration sequence">
+              <a href="#demo-tabs">P0 · Open your demo tabs</a>
               <a href="#preparation">Before presenting</a>
               {chapterId !== "portal" && (
                 <a href="#opening">00:00 · AI introduction</a>
@@ -130,6 +136,7 @@ export async function CustomerDemoGuide({
           </aside>
 
           <article className={styles.article}>
+            <DemoTabs profiles={presenterProfiles} />
             <details id="preparation" className={styles.preparation}>
               <summary>
                 Before presenting · preparation outside the 45 minutes
@@ -139,13 +146,10 @@ export async function CustomerDemoGuide({
                   Prepare the accounts and tools for the complete demonstration
                 </h2>
                 <p>
-                  Complete this guide’s preparation before presenting. Both
-                  guides use the same 45-minute run of show and the existing
-                  documentation login. The{" "}
-                  <Link href="/workshops/demo#preparation">
-                    full-sequence checklist
-                  </Link>{" "}
-                  combines preparation for both sites.
+                  Complete preparation before the audience joins. Keep this
+                  guide on the presenter display; show only the websites and
+                  native SitecoreAI screens. Both site guides follow the same
+                  45-minute sequence.
                 </p>
                 <Lines
                   lines={[
@@ -159,15 +163,15 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "portal",
-                      text: "Open [**Current profile identities**](/workshops/reset#current-profiles), select **Workshop number 01**, and choose **Refresh status**. Copy the **Native profile ID** for **avery.01** and **daniel.01** for the native rule tests in **A1**. Refresh this table after a reset so the tests use the current profiles. If an ID is unavailable, open [**SitecoreAI Profiles**](https://app.sitecorecloud.io/optimization/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df), choose **Search filter → Liberty Mutual agent identity**, and paste that row’s **Agent identity**. Open the matching profile, and copy the UUID from its URL. Reading status does not start a reset.",
+                      text: "In **P0 → Profiles**, open the current native records for **avery.01** and **daniel.01**. In **SitecoreAI → Optimization → Profiles**, open **Avery Brooks - 01**, then choose **Toggle menu → Inspect → JSON view**. Copy the UUID under **clientIds**, without quotation marks, for the **A1** personalization preview. Close **Inspect**. Repeat for **Daniel Ortiz - 01** if testing both. The UUID in a profile’s URL is its **Profile ID**; it is different from the **Client ID**. Refresh this guide after a reset so P0 uses the current profile records.",
                     },
                     {
                       chapter: "all",
-                      text: "Prepare three separate **Sitecore Cloud** browser profiles: **Author** can edit and submit, **Approver** can approve, and an **administrator acting as publisher** performs publication. Open **Safeco Insurance Company of America POC** → **SitecoreAI / Demo**. Keeping these profiles ready demonstrates the actual permission boundaries without spending the live slot signing in.",
+                      text: "Use one **SitecoreAI** presenter account with permission to edit, submit, approve, and publish. Open **Safeco Insurance Company of America POC → SitecoreAI / Demo**, and keep one **Page Builder** tab ready. For an efficient presentation, the same account performs the real **Draft → Awaiting approval → Approved** workflow. Explain that a normal team assigns separate Author, Approver, and Publisher permissions; this demonstration does not switch accounts.",
                     },
                     {
                       chapter: "all",
-                      text: "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, their resource guidance, and the shared disclosure. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
+                      text: "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, their resource guidance, and the shared copyright notice. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
                     },
                     {
                       chapter: "all",
@@ -175,35 +179,27 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "public",
-                      text: "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/), [**published-page API experience**](/workshops/content-api), and **SitecoreAI** in the prepared browser profiles. Keep the presentation’s **Experience Edge content delivery** slide ready for the architecture introduction before the API example.",
-                    },
-                    {
-                      chapter: "portal",
-                      text: "Prepare [**Communication preferences**](/workshops/preferences) before the audience joins. Select **Load preference examples** once, and use **Check import status** until **SitecoreAI confirmed the imported records** appears. Confirm **Cameron Ellis - Allowed** has **marketingSuppressed = false** and **Cameron Ellis - Suppressed** has **marketingSuppressed = true**. Record both **Native profile IDs**. These two records share the same agency, producer role, and Texas context, so the communication choice isolates the reason for their different marketing eligibility. They are separate from the numbered portal logins.",
-                    },
-                    {
-                      chapter: "portal",
-                      text: "In **Marketing outreach preview**, select **Run eligibility check**, and confirm **1 eligible recipient**: only **Cameron Ellis - Allowed** is included. Keep this tab open with the baseline result ready for **A1**. The preview must display an actual native eligibility decision; a submitted preference badge or an Audience size estimate is not the completion check. **A1** starts the opt-out before comparing Avery and Daniel, so the native import can process while those profiles are shown. Restore the starting choices after the demonstration, outside the 45 minutes. Keep both **Native profile IDs** and the native rule unchanged.",
-                    },
-                    {
-                      chapter: "public",
-                      text: "Prepare genuine public-site analytics before presenting. In a visitor browser, choose **Privacy choices → Allow personalization**, use **Search** to find the car-and-home answer, read it while scrolling, and open its Liberty Mutual source link. Confirm the resulting **pageView**, **LM_PUBLIC_CTA_CLICK**, and recorded scroll events in **Analytics → Events** for **liberty-mutual-public-site** within **1 hour**. Record their timestamps. Close the source tab; the live search loop will demonstrate **Essential only** separately.",
+                      text: `Open the **Public website**, [**GraphQL Explorer**](${GRAPHQL_EXPLORER}), and native **SitecoreAI** tabs listed in **P0**. Configure the Explorer’s **HTTP HEADERS** with the copied **sc_apikey** JSON supplied in **P7**, and run its **GraphQL query** once to verify access to Live Experience Edge. Keep the presentation’s **Experience Edge content delivery** slide ready for P7.`,
                     },
                     {
                       chapter: "all",
-                      text: "Record the version marked **Live** for **the car-and-home resource page** as **Live baseline version**, along with the current published versions of **Agency growth priorities** and **Product availability notice**. Keep those versions intact. Confirm that the temporary page name **coverage-guide-live** is available.",
+                      text: "Record the version marked **Live** for **the car-and-home resource page** as **Live baseline version**, along with the current published versions of **Agency growth priorities** and **Copyright notice**. Keep those versions intact. Confirm that both site footers display the same full copyright notice with **2025**; that is the shared-content baseline. Confirm that the temporary page name **coverage-page** is available.",
+                    },
+                    {
+                      chapter: "all",
+                      text: "Before **A3–A4**, verify the actual published starting order in **Avery portal → My workspace → Priorities for your agency**: **Build a stronger small-business practice → Support workers’ compensation conversations in Texas → Connect home and auto conversations**. In **Daniel portal → My workspace**, confirm **Connect home and auto conversations → Build a stronger small-business practice**. If Avery already shows Texas guidance first, or either order differs, restore the baseline through [**After the demonstration → restoration checklist**](#reset), then reload both portal sessions and verify these orders before presenting. In **Page Builder → Content → Data → Agency priorities → Agency growth priorities**, the matching order is **Small business growth → Texas workers compensation → Home and auto conversations**. Once the live portal matches, record the collection’s **Live** version number as **Priority baseline version**; keep it intact for restoration.",
                     },
                     {
                       chapter: "public",
-                      text: "Verify the published baseline before preparing the indexing example: **Review your options with your agent before choosing coverage.** must be absent from the public article, the native **SitecoreAI Search** record, and the [**published-page API experience**](/workshops/content-api). If the sentence is already present, follow **the car-and-home resource page** in [**After the demonstration → restoration checklist**](#reset) to restore the preserved original page content through review and publication. Continue only after all three show the original wording.",
+                      text: "Verify the published baseline before preparing the indexing example: **Review your options with your agent before choosing coverage.** must be absent from the public article, the native **SitecoreAI Search** record, and the **explanation** returned by the **P7 GraphQL query**. If the sentence is present, use [**After the demonstration → restoration checklist**](#reset) to restore the preserved original page content through review and publication. Continue only after all three show the original wording.",
                     },
                     {
                       chapter: "public",
-                      text: "Open [**the car-and-home resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). As **Author**, select the preserved original version recorded as **Live baseline version**, and wait for its fields to finish loading. Read the selected version number again, expand **Resource content**, and confirm that **Detailed explanation** contains the original wording without the temporary sentence. Choose **Create version** to create an English page version from that verified original named **Resource page review**, and select **Create**. Reopen the version selector, explicitly select the new **Resource page review** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm that the selected version number is newer than **Live baseline version** and the original wording remains intact before editing. Add **Review your options with your agent before choosing coverage.** exactly once to **Detailed explanation**. Save, choose **Actions → Submit**, and have the **Approver** review and approve the new version. After approval, record this new English version number as **Prepared page version**. It must be newer than the recorded **Live baseline version**. Leave it unpublished; the sentence must still be absent from the live article, Search, and API. In the publisher profile, open that exact recorded version number and confirm **Resource page review** and **Approved**. Earlier rehearsals can reuse the same version name, so the version number identifies the revision prepared for this run.",
+                      text: "Open [**the car-and-home resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). In the same **Page Builder** tab, select the preserved original version recorded as **Live baseline version**, and wait for its fields to finish loading. Read the selected version number again, expand **Resource content**, and confirm that **Detailed explanation** contains the original wording without the temporary sentence. Choose **Create version** to create an English page version from that verified original named **Resource page review**, and select **Create**. Reopen the version selector, explicitly select the new **Resource page review** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm that the selected version number is newer than **Live baseline version** and the original wording remains intact before editing. Add **Review your options with your agent before choosing coverage.** exactly once to **Detailed explanation**. Save, choose **Actions → Submit**, and confirm **Awaiting approval**. Review the same version, choose **Actions → Approve**, and confirm **Approved**. After approval, record this new English version number as **Prepared page version**. It must be newer than the recorded **Live baseline version**. Leave it unpublished; the sentence must still be absent from the live article, Search, and API. In the same **Page Builder** tab, open that exact recorded version number and confirm **Resource page review** and **Approved**. Earlier rehearsals can reuse the same version name, so the version number identifies the revision prepared for this run.",
                     },
                     {
                       chapter: "public",
-                      text: "The Profound section uses the prepared **Sales Engineers1 → agverticals → Prospera** recommendation tabs as a read-only example. Open the **Home → Readability & Clarity** recommendation and its **Page Builder → AEO opportunities** panel before presenting. Do not apply or dismiss a recommendation, edit content, change workflow, or publish in that environment. Profound intake remains a proposed integration design. Return to the already-demonstrated Liberty Mutual Draft, review, and publication process when explaining governance.",
+                      text: "The Profound section uses the prepared **Prospera recommendations** and **Prospera Page Builder** tabs in a separate **Incognito** window for **Sales Engineers1 → agverticals → Prospera** as a read-only example. Open the **Home → Readability & Clarity** recommendation and its **Page Builder → AEO opportunities** panel before presenting. Do not apply or dismiss a recommendation, edit content, change workflow, or publish in that environment. Profound intake remains a proposed integration design. Keep this example in **Prospera Page Builder**, and explain editable copy and the configured human review process without applying or publishing anything.",
                     },
                     {
                       chapter: "public",
@@ -215,7 +211,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "portal",
-                      text: "Prepare the native **Search sources** page and **Analytics → Events**. In the administrator profile, open [**Agent Portal Home in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998&sc_lang=en), choose **Layers**, select **Agency priorities**, and choose **Edit personalization rules** in the right-hand component panel. Confirm **Liberty Mutual - Agency product priorities** and leave this Builder ready. Keep Avery’s and Daniel’s current **Native profile ID** UUIDs, copied earlier in preparation, ready for the two read-only tests. Open [**Agent audience preview in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947&sc_lang=en), choose **Personalize**, and confirm the native **Avery agency principal** and **Daniel producer** page variants. Check **Preview → Preview** for each variant, then close its preview tab. Leave this growth page unpublished. It demonstrates whole-page audience preview separately from the later Home priority-collection change. Keep the public article/API tabs ready for their own delivery checks. Refresh a slow page, then open one fresh tab before changing the running demonstration.",
+                      text: "Prepare the native **Search sources** page and **Analytics → Events**. In the same **SitecoreAI** window’s **Page Builder** tab, open [**Agent Portal Home in Page Builder**](https://pages.sitecorecloud.io/editor?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-agent-portal&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae9e45ca-f127-4abe-9ca7-2ff109981998&sc_lang=en), choose **Layers**, select **Agency priorities**, and choose **Edit personalization rules** in the right-hand component panel. Confirm **Liberty Mutual - Agency product priorities** and leave this Builder ready. Keep Avery’s and Daniel’s current **Client ID** UUIDs, copied from native **Inspect → JSON view → clientIds**, ready for the read-only tests. In the same **Page Builder** tab, return to **Editor → Pages → Home**, open **Apps → Audience Preview**, and confirm **Current page → Home**. If the app requests authentication, complete **Sign in** with the same presenter account, return to the app, and select **Continue** before the audience joins. Test **Role → Principal** with only **Texas** selected; in **Business context**, set **Agency small-commercial share → 15** and **Agency written premium → 1000000**. Select **Preview audience → Open preview**, verify **Build a stronger small-business practice → Support workers’ compensation conversations in Texas → Connect home and auto conversations**, then close the preview tab. Repeat with **Role → Producer**, only **Illinois**, **Specializes in small commercial** checked, and **Agent small-commercial written premium → 100000**; verify **Connect home and auto conversations → Build a stronger small-business practice**, then close that preview tab. Leave all content, rules, and workflow states unchanged during this preparation. These read-only checks use the same **Home** page and require no agent login or human profile identifier. Keep the **Public website** and **GraphQL Explorer** tabs ready for their delivery checks. Refresh a slow page, then open one fresh tab before changing the running demonstration.",
                     },
                   ]
                     .filter(
@@ -264,6 +260,7 @@ export async function CustomerDemoGuide({
                   const timing = schedule.find(
                     (entry) => entry.id === step.id,
                   )!;
+                  const inputs = presenterInputs(step);
                   return (
                     <section id={step.id} key={step.id} className={styles.step}>
                       <div className={styles.stepTop}>
@@ -303,11 +300,11 @@ export async function CustomerDemoGuide({
                                 <GuideText text={line} openLinksInNewTab />
                               </div>
                             ))}
-                            {step.inputs?.some(
+                            {inputs.some(
                               (input) => input.action === actionIndex + 1,
                             ) ? (
                               <div className={styles.copyValues}>
-                                {step.inputs
+                                {inputs
                                   .filter(
                                     (input) => input.action === actionIndex + 1,
                                   )
@@ -395,7 +392,7 @@ export async function CustomerDemoGuide({
                   lines={[
                     {
                       chapter: "public",
-                      text: "For [**the car-and-home resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en), open its preserved original English version, create a new page version from it, select that new **Draft**, and wait for its fields to finish loading. Confirm the original wording, submit the page, approve it, and publish it. Confirm the page’s original wording in the **public article**, **Search**, and [**published-page API experience**](/workshops/content-api). Keep the intermediate versions as the review history.",
+                      text: "For [**the car-and-home resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en), open its preserved original English version, create a new page version from it, select that new **Draft**, and wait for its fields to finish loading. Using the same presenter account, confirm the original wording, choose **Actions → Submit** to reach **Awaiting approval**, choose **Actions → Approve** to reach **Approved**, and publish the page. Confirm the original wording in the **public article**, **Search**, and the **P7 GraphQL response**. Keep the intermediate versions as the review history.",
                     },
                     {
                       chapter: "portal",
@@ -403,15 +400,15 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "portal",
-                      text: "The final shared-disclosure step already restores **Product availability notice** through a new reviewed version. Recheck the original wording on both public placements and Portal **Home** and **Learning & resources**.",
+                      text: "The final shared-content step already restores **Copyright notice** through a new reviewed version. Reload the **Public website** and **Agent Portal**, scroll to both footers, and confirm that each displays the same full copyright notice with **2025**. Preserve all other wording, punctuation, the line break, and the **Equal Opportunity Employer** link.",
                     },
                     {
                       chapter: "public",
-                      text: "Select the temporary **coverage-guide-live** page in the public site. Use the top **Publish** button’s **More options** → **Unpublish**, complete the confirmation, and wait for the publishing job. Confirm its live URL returns **404**. Use the page’s **Content tree options** → **Delete** to remove that temporary page and its local content through the normal recoverable deletion flow.",
+                      text: "Select the temporary **coverage-page** page in the public site. Use the top **Publish** button’s **More options** → **Unpublish**, complete the confirmation, and wait for the publishing job. Confirm its live URL returns **404**. Use the page’s **Content tree options** → **Delete** to remove that temporary page and its local content through the normal recoverable deletion flow.",
                     },
                     {
-                      chapter: "portal",
-                      text: "Restore the Cameron comparison outside the 45-minute demonstration. Return to the same [**Communication preferences**](/workshops/preferences) tab, select **Restore preferences**, and use **Check import status** until **SitecoreAI confirmed the imported records** appears. Select **Run eligibility check**, and confirm **1 eligible recipient**: **Cameron Ellis - Allowed** is included again, while **Cameron Ellis - Suppressed** remains excluded. Confirm that both **Native profile IDs** are unchanged and the receipt shows **Same profile as this session’s first check**. Keep the native eligibility rule unchanged. Return the public visitor’s **Privacy choices** to **Allow personalization** for the next measured journey. Close temporary tabs, and keep the guide and the next presentation’s starting page available.",
+                      chapter: "all",
+                      text: "Close native personalization previews without saving rule changes. Close temporary tabs, and keep the guide and the next presentation’s starting page available.",
                     },
                   ]
                     .filter(
@@ -422,15 +419,6 @@ export async function CustomerDemoGuide({
                     )
                     .map((entry) => entry.text)}
                 />
-                <p>
-                  <Link href="/workshops/marketing">
-                    Marketing reference walkthroughs
-                  </Link>
-                  {" · "}
-                  <Link href="/workshops/development">
-                    Development and architecture references
-                  </Link>
-                </p>
               </div>
             </details>
           </article>
