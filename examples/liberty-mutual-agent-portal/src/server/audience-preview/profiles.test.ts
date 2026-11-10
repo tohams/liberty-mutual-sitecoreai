@@ -524,6 +524,62 @@ test("a retained timeout stays closed on mismatch, missing data, or failed nativ
   }
 });
 
+test("retained timeout diagnostics classify the same single browser read without exposing native references", async (t) => {
+  const log = t.mock.method(console, "info", () => undefined);
+  for (const [status, category] of [
+    [404, "not-found"],
+    [403, "http-failure"],
+    [200, "mismatched"],
+  ] as const) {
+    const { dependencies, store, key } = await retainedBinding(
+      "failed",
+      "PROFILE_LINK_TIMEOUT",
+    );
+    let reads = 0;
+    dependencies.readProfileRef = undefined;
+    dependencies.transport = async (url, init) => {
+      reads++;
+      assert.equal(init?.method, "GET");
+      assert.equal(
+        new URL(String(url)).pathname,
+        `/v1/events/v1.2/browser/${browserId}/show.json`,
+      );
+      return status === 200
+        ? Response.json({ ref: browserId, customer: { ref: batchId } })
+        : new Response("private-native-error", { status });
+    };
+    await assert.rejects(
+      prepareAudiencePreviewProfile(input, dependencies),
+      (error: unknown) =>
+        error instanceof AudiencePreviewError &&
+        error.code === "PROFILE_LINK_TIMEOUT",
+    );
+    assert.equal(reads, 1);
+    const saved = await store.read<{
+      phase: string;
+      profileId: string;
+      browserId: string;
+    }>(key);
+    assert.equal(saved?.value.phase, "failed");
+    assert.equal(saved?.value.profileId, profileId);
+    assert.equal(saved?.value.browserId, browserId);
+    const diagnostic = log.mock.calls.findLast(
+      (call) =>
+        call.arguments[0] === "Audience Preview retained binding recovery",
+    );
+    assert.deepEqual(diagnostic?.arguments[1], { category, status });
+    const serialized = JSON.stringify(diagnostic?.arguments);
+    for (const sensitive of [
+      profileId,
+      browserId,
+      batchId,
+      "private-native-error",
+      "test-context",
+    ])
+      assert.equal(serialized.includes(sensitive), false);
+  }
+});
+
 test("uncertain uploads and rejected import receipts remain terminal and never enter binding recovery", async () => {
   for (const code of [
     "IMPORT_UPLOAD_UNCONFIRMED",

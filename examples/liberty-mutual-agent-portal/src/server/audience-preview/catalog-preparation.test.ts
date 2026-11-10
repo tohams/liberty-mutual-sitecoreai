@@ -10,6 +10,7 @@ import {
   type AudienceProfileJob,
 } from "./profiles";
 import { PreviewImportQueueBusyError } from "./importer";
+import { AudiencePreviewError } from "./contracts";
 import type { CatalogImportPlan, CatalogImporter } from "./catalog-importer";
 
 process.env.SITECORE_EDGE_CONTEXT_ID = "catalog-synthetic-context";
@@ -366,4 +367,140 @@ test("native decision or layout verification failure cannot be counted ready", a
   assert.equal(result.status, "failed");
   assert.equal(result.readyCount, 0);
   assert(result.failedCount > 0);
+});
+
+test("GET diagnoses a legacy retained link failure from state alone and preserves verified progress", async () => {
+  const run = harness();
+  // Create all reservations, stopping before the aggregate upload.
+  for (let index = 0; index < 14; index++) {
+    run.advance();
+    await advanceCatalogPreparation(page, run.deps);
+  }
+  const catalogKey = [...run.store.values.keys()].find((key) =>
+    key.includes(":catalog:"),
+  );
+  assert(catalogKey);
+  const manifest = await run.store.read<{
+    phase: string;
+    rows: {
+      index: number;
+      selectorHash: string;
+      source: string;
+      verifiedFor?: string;
+      failureFor?: string;
+      profileId?: string;
+    }[];
+  }>(catalogKey);
+  assert(manifest);
+  const targetPage = `${page.id}:${page.language}:${page.version}`;
+  manifest.value.phase = "preparing";
+  for (const row of manifest.value.rows.slice(0, 21)) {
+    row.verifiedFor = targetPage;
+    row.profileId = uuid(100 + row.index);
+  }
+  const failed = manifest.value.rows[22];
+  assert.equal(AUDIENCE_PREVIEW_SCENARIOS[22].role, "account-executive");
+  assert.deepEqual(AUDIENCE_PREVIEW_SCENARIOS[22].licensedStates, ["FL"]);
+  failed.source = "existing";
+  failed.failureFor = targetPage;
+  await run.store.compareAndSet(catalogKey, manifest.version, manifest.value);
+  const key = audiencePreviewProfileKey(failed.selectorHash, "catalog:test");
+  const profile = await run.store.read<AudienceProfileJob>(key);
+  assert(profile);
+  await run.store.compareAndSet(key, profile.version, {
+    ...profile.value,
+    phase: "failed",
+    code: "PROFILE_LINK_TIMEOUT",
+    profileId: uuid(122),
+    browserId: uuid(522),
+    identitySent: true,
+    submission: {
+      batchId: uuid(900),
+      checksumMd5: profile.value.plan.checksumMd5,
+      fileSizeBytes: profile.value.plan.fileSizeBytes,
+    },
+  });
+  run.deps.prepareProfile = async () => {
+    throw new Error("GET must not prepare profiles");
+  };
+  run.deps.verifyProfile = async () => {
+    throw new Error("GET must not read native decisions/layout");
+  };
+  const retainedState = structuredClone(run.store.values);
+  const result = await readCatalogPreparation(page, run.deps);
+  assert.equal(result.status, "failed");
+  assert.equal(result.readyCount, 21);
+  assert.equal(result.failedCount, 1);
+  assert.equal(result.pendingCount, 20);
+  assert.deepEqual(result.failedRows, [
+    {
+      index: 22,
+      stage: "profile-preparation",
+      code: "PROFILE_LINK_TIMEOUT",
+      source: "existing",
+      profilePhase: "failed",
+      profileCode: "PROFILE_LINK_TIMEOUT",
+      identitySent: true,
+      hasCatalogProof: false,
+      hasSubmissionProof: true,
+    },
+  ]);
+  assert.deepEqual(run.store.values, retainedState);
+  assert.equal(run.uploads(), 0);
+  const serialized = JSON.stringify(result);
+  for (const sensitive of [
+    uuid(122),
+    uuid(522),
+    uuid(900),
+    profile.value.plan.identity,
+    profile.value.plan.payload,
+  ]) {
+    assert.equal(serialized.includes(sensitive), false);
+  }
+});
+
+test("typed profile and native verification failures persist bounded row stage/code/status", async () => {
+  for (const stage of ["profile-preparation", "native-decision"] as const) {
+    const run = harness();
+    const fail = async () => {
+      throw Object.assign(
+        new AudiencePreviewError(
+          "PROFILE_LINK_TIMEOUT",
+          "private-provider-details",
+        ),
+        { status: 503, profileId: "private-profile" },
+      );
+    };
+    if (stage === "profile-preparation") run.deps.prepareProfile = fail;
+    else run.deps.verifyProfile = fail;
+    let result = await advanceCatalogPreparation(page, run.deps);
+    for (let index = 0; index < 25 && result.status !== "failed"; index++) {
+      run.advance();
+      result = await advanceCatalogPreparation(page, run.deps);
+    }
+    assert.equal(result.status, "failed");
+    assert.deepEqual(result.failedRows?.[0], {
+      index: 0,
+      stage,
+      code: "PROFILE_LINK_TIMEOUT",
+      status: 503,
+      source: "bulk",
+    });
+    assert.equal(
+      JSON.stringify(result).includes("private-provider-details"),
+      false,
+    );
+    const stored = [...run.store.values.entries()].find(([key]) =>
+      key.includes(":catalog:"),
+    );
+    assert(stored);
+    const diagnostic = (stored[1].value as { rows: { failure?: unknown }[] })
+      .rows[0].failure;
+    assert.deepEqual(diagnostic, {
+      index: 0,
+      stage,
+      code: "PROFILE_LINK_TIMEOUT",
+      status: 503,
+    });
+  }
 });

@@ -3,6 +3,7 @@ import { createHash, randomUUID } from "node:crypto";
 import type { AudiencePreviewInput } from "@/features/audience-preview/types";
 import { readPortalBrowserProfileRef } from "@/lib/portal-identity-link";
 import type { StateStore, StoredValue } from "../state/store";
+import { inspectAudiencePreviewBinding } from "./binding";
 import {
   AudiencePreviewError,
   HASH,
@@ -490,21 +491,19 @@ export async function prepareAudiencePreviewProfile(
     const claimed = await save(current, claimedJob);
     if (!claimed) return resultAfterConflict();
     recordAudiencePreviewStage("profile-binding", "started");
-    let linked: string | null = null;
-    try {
-      linked = await readRef(
-        {
-          edgeUrl: dependencies.edgeUrl,
-          contextId: dependencies.contextId,
-          browserId: profile.browserId,
-        },
-        AbortSignal.timeout(8_000),
-        transport,
-      );
-    } catch {
-      /* An unreadable binding remains unconfirmed. */
-    }
-    if (linked?.toLowerCase() !== profile.profileId.toLowerCase()) {
+    const binding = await inspectAudiencePreviewBinding(
+      {
+        edgeUrl: dependencies.edgeUrl,
+        contextId: dependencies.contextId,
+        browserId: profile.browserId,
+      },
+      profile.profileId,
+      AbortSignal.timeout(8_000),
+      transport,
+      readRef,
+    );
+    console.info("Audience Preview retained binding recovery", binding);
+    if (binding.category !== "matched") {
       const unchanged = { ...claimedJob };
       delete unchanged.lease;
       if (!(await save(claimed, unchanged))) return resultAfterConflict();
