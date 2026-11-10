@@ -858,7 +858,7 @@ test("the same Home draft is previewed with audience attributes before approval 
   );
   const producer = actionIndex(
     id,
-    /Role → Producer.*Licensed states.*only Illinois.*Specializes in small commercial.*Agent small-commercial written premium → 100000.*Preview audience.*Open preview.*Home.*Connect home and auto conversations → Build a stronger small-business practice/,
+    /Role → Producer.*Licensed states.*only Illinois.*Specializes in small commercial.*Agent small-commercial written premium → 100000.*Preview audience.*Open preview.*Home.*Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice/,
   );
   const submit = actionIndex(id, /Saved priority version.*Actions → Submit/);
   const approve = actionIndex(id, /same Saved priority version.*Actions → Approve/i);
@@ -894,7 +894,20 @@ test("the same Home draft is previewed with audience attributes before approval 
   );
   assert.match(page, /Editor → Pages → Home.*Apps → Audience Preview.*Current page → Home/);
   assert.match(page, /same presenter account.*Role → Principal.*Texas.*Agency small-commercial share → 15.*Agency written premium → 1000000.*Role → Producer.*Illinois.*Agent small-commercial written premium → 100000/);
+  assert.match(page, /attempts to connect the existing SitecoreAI session automatically.*Connect to SitecoreAI.*same presenter account.*connection window closes after authentication.*verifies the session automatically/);
+  assert.doesNotMatch(page, /complete \*\*Sign in\*\* with the same presenter account|return to the app, and select \*\*Continue\*\*/);
   assert.doesNotMatch(page, /Agent audience preview|Avery agency principal|Daniel producer|growth page|cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947/);
+  for (const source of [page, prose(step("portal-relevance")), prose(entry)]) {
+    assert.match(
+      source,
+      /Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice/,
+    );
+    assert.doesNotMatch(
+      source,
+      /Connect home and auto conversations → Build a stronger small-business practice/,
+      "The real producer experience has three cards; the neutral fallback has two",
+    );
+  }
 });
 
 test("workflow review and publication use the version number shown after saving", () => {
