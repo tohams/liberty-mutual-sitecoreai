@@ -174,7 +174,7 @@ export function PortalApp({
           notify: (message) => setToast({ message }),
         }}
       >
-        <PortalShell route={route}>
+        <PortalShell route={route} copyright={sharedDisclosure}>
           {pageContent ? (
             <>
               <div className="content-utility">
@@ -234,9 +234,6 @@ export function PortalApp({
                   </section>
                 )}
             </>
-          )}
-          {sharedDisclosure && (
-            <section className="cms-editorial-slot">{sharedDisclosure}</section>
           )}
         </PortalShell>
         {toast && (

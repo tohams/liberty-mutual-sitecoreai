@@ -15,9 +15,7 @@ export const demoTabNames = {
   publicWebsite: "Public website",
   averyPortal: "Avery portal",
   danielPortal: "Daniel portal",
-  authorPageBuilder: "Author Page Builder",
-  approverPageBuilder: "Approver Page Builder",
-  publisherPageBuilder: "Publisher Page Builder",
+  pageBuilder: "Page Builder",
   searchPreview: "Search Preview",
   events: "Events",
   graphqlExplorer: "GraphQL Explorer",
@@ -85,37 +83,13 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
     ],
   },
   {
-    id: "author",
-    title: "Author window",
-    note: "Sitecore account: tohams+author@gmail.com.",
-    tabs: [
-      {
-        id: "authorPageBuilder",
-        href: publicEditor,
-        cue: "Confirm Public Website, English, and Default editing host.",
-      },
-    ],
-  },
-  {
-    id: "approver",
-    title: "Approver window",
-    note: "Use a separate Sitecore profile: tohams+approver@gmail.com.",
-    tabs: [
-      {
-        id: "approverPageBuilder",
-        href: publicEditor,
-        cue: "Keep Page Builder ready for the submitted page and content reviews.",
-      },
-    ],
-  },
-  {
-    id: "publisher",
-    title: "Publisher window",
-    note: "Use your Sitecore administrator profile for publication and native platform views.",
+    id: "sitecore",
+    title: "SitecoreAI window",
+    note: "Use your presenter account throughout. It can edit, submit, approve, and publish; explain that separate roles normally control those actions.",
     wide: true,
     tabs: [
       {
-        id: "publisherPageBuilder",
+        id: "pageBuilder",
         href: publicEditor,
         cue: "Reuse this tab for the Page Builder destinations named in each flow.",
       },

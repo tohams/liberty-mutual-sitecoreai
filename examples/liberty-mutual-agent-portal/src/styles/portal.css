@@ -5073,3 +5073,14 @@ p {
   outline: 3px solid #ffd000;
   outline-offset: 4px;
 }
+
+/* The shared legal notice is the final, full-width row in the portal footer. */
+.portal-footer {
+  flex-wrap: wrap;
+}
+.portal-footer > .portal-copyright {
+  display: block;
+  flex: 0 0 100%;
+  min-width: 0;
+  padding-top: 2px;
+}

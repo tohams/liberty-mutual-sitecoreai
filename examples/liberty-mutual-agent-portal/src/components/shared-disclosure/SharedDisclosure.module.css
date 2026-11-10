@@ -50,3 +50,19 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+.copyright {
+  color: #6b6872;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.copyright p {
+  margin: 0;
+}
+
+.copyright a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

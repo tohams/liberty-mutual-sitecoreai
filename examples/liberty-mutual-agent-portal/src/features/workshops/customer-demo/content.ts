@@ -13,9 +13,8 @@ import {
   resourcePageContent,
   publicEditor,
   portalEditor,
-  audiencePreviewEditor,
   priorityContent,
-  disclosureContent,
+  copyrightContent,
 } from "./demo-destinations";
 
 /** Explain AI's role in each customer journey without implying autonomous publication. */
@@ -266,7 +265,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Publisher Page Builder**, and choose **Site switcher → Public Website → Editor → Pages**.",
+            "Switch to **Page Builder**, and choose **Site switcher → Public Website → Editor → Pages**.",
             "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**; then choose **Content**.",
             "Confirm **English** and the selected **bundle-car-and-home** page.",
             "Expand **Resource content**: show **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and dates.",
@@ -288,7 +287,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "Show the native template, managed classifications, **FAQPage** data, and canonical URL without editing content.",
         actions: [
-          "In **Publisher Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, select **bundle-car-and-home**, and choose **Content**. Confirm **English**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.",
+          "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, select **bundle-car-and-home**, and choose **Content**. Confirm **English**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.",
           `In the same [**resource page in Page Builder Content**](${resourcePageContent}), locate **State applicability**, **Products**, and **Audience** under **Content**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
           `On the [**public article**](${ARTICLE}), use **View page source → Find** to locate **application/ld+json**. Identify **FAQPage**, **Question**, and **acceptedAnswer**, then find the **canonical** link. Return to the rendered article.`,
         ],
@@ -362,7 +361,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "If the sentence is present, restore the baseline through [**Before presenting**](#preparation) before continuing.",
           ],
           [
-            "Return to **Publisher Page Builder → Content** for **bundle-car-and-home**, the page selected in P2.",
+            "Return to **Page Builder → Content** for **bundle-car-and-home**, the page selected in P2.",
             "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
             "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field below in **Detailed explanation**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
@@ -379,7 +378,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          "Return to **Publisher Page Builder → Content** for **bundle-car-and-home**, the page selected in P2. In the version selector, choose the prepared revision by the **Prepared page version** number recorded in **Before presenting**. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
+          "Return to **Page Builder → Content** for **bundle-car-and-home**, the page selected in P2. In the version selector, choose the prepared revision by the **Prepared page version** number recorded in **Before presenting**. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
           `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
@@ -478,7 +477,7 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
         durationMinutes: 7,
-        persona: "Public-site marketer, approver, and publisher",
+        persona: "Public-site content administrator",
         scenario:
           "A marketer needs a new coverage page using approved components, with review before customers can see it.",
         objective:
@@ -520,7 +519,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            `In the **Author Page Builder** tab, open [**public Home in Page Builder**](${publicEditor}).`,
+            "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**, then select **Home** in **Sitemap**.",
             "Confirm **Public Website**, **English**, and **Default editing host**.",
             "Choose **Home → Create a page → Landing page → Select**.",
             "Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**.",
@@ -534,34 +533,34 @@ export const customerDemoChapters: DemoChapter[] = [
             "Click the blank **Body** immediately below that heading, and paste **Article body** below. Click outside, and wait for **Saved**.",
           ],
           [
-            "In the **Author Page Builder** tab, click the **Hero image** placeholder on the canvas.",
+            "In the **Page Builder** tab, click the **Hero image** placeholder on the canvas.",
             "In the right-hand **Image** panel, choose **Browse media library → Media BETA** to open the **Modern Media Library**.",
             "Select **liberty-mutual-public-family-basketball.jpg**, then choose **Insert** in its image details.",
             "Confirm the family photograph appears beside the Hero heading, and wait for **Saved**.",
           ],
           [
-            "In the **Author Page Builder** tab, open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**.",
+            "In the **Page Builder** tab, open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**.",
             "Show the permitted choices; choose **Promotions → Promotion → Bundle and save**.",
             "Select **Assign**, rather than **Duplicate and assign**.",
             "With **Promotion** selected, choose **Design → Variant → Image left**, then **Image right**.",
             "On desktop, confirm the photograph switches sides while the copy stays the same. On mobile, both variants keep the image above the text.",
           ],
           [
-            "In the **Author Page Builder** tab, select **Preview → Preview**.",
-            "Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Author Page Builder**. Keep the page unpublished.",
+            "In the **Page Builder** tab, select **Preview → Preview**.",
+            "Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Page Builder**. Keep the page unpublished.",
           ],
           [
-            "In the **Author Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**.",
+            "In the **Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**.",
             "Paste **Page submission comment** below, then select **Submit**.",
             "Confirm the page is **Awaiting approval**. Its local Hero and Article text follow the page through review.",
           ],
           [
-            "Switch to the **Approver Page Builder** tab, reload it to refresh **Sitemap**, select **coverage-page**, and review the page on its canvas.",
+            "Stay on **coverage-page** in **Page Builder**, and review the page on its canvas.",
             "Choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**.",
-            "Confirm **Approved**, then switch to the **Publisher Page Builder** tab.",
+            "Confirm **Approved**.",
           ],
           [
-            "Switch to the **Publisher Page Builder** tab, reload it to refresh **Sitemap**, open **coverage-page**, then choose **Publish**.",
+            "On the same **coverage-page** in **Page Builder**, choose **Publish**.",
             "Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**.",
             `After completion, switch to the **Public website** tab, open [**the published coverage page**](${PUBLIC}/coverage-page), and confirm both headings, the Hero image, and the shared Promotion.`,
           ],
@@ -569,20 +568,20 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The published **coverage-page** page shows both authored headings, the selected Hero image, and the reused Promotion.",
         actions: [
-          `In the **Author Page Builder** tab, open [**public Home in Page Builder**](${publicEditor}). Confirm **Public Website**, **English**, and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**. Wait for **Page created from branch template**.`,
+          "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**, then select **Home** in **Sitemap**. Confirm **English** and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**. Wait for **Page created from branch template**.",
           "Choose **Reload tree** if shown. In **Sitemap**, select **coverage-page**, and wait for its matching page heading. Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading** below. Click outside the text, and wait for **Saved**. Below the Hero, click **Article text → Heading**, and paste **Article heading** below. Click the blank **Body** immediately below that heading, and paste **Article body** below. Click outside, and wait for **Saved**.",
-          "In the **Author Page Builder** tab, click the **Hero image** placeholder on the canvas. In the right-hand **Image** panel, choose **Browse media library → Media BETA** to open the **Modern Media Library**. Select **liberty-mutual-public-family-basketball.jpg**, then choose **Insert** in its image details. Confirm the family photograph appears beside the Hero heading, and wait for **Saved**.",
-          "In the **Author Page Builder** tab, open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**. Show the permitted choices; choose **Promotions → Promotion → Bundle and save**. Select **Assign**, rather than **Duplicate and assign**. With **Promotion** selected, choose **Design → Variant → Image left**, then **Image right**. On desktop, confirm the photograph switches sides while the copy stays the same. On mobile, both variants keep the image above the text.",
-          "In the **Author Page Builder** tab, select **Preview → Preview**. Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Author Page Builder**. Keep the page unpublished.",
-          "In the **Author Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**. Paste **Page submission comment** below, then select **Submit**. Confirm the page is **Awaiting approval**. Its local Hero and Article text follow the page through review.",
-          "Switch to the **Approver Page Builder** tab, reload it to refresh **Sitemap**, select **coverage-page**, and review the page on its canvas. Choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**. Confirm **Approved**, then switch to the **Publisher Page Builder** tab.",
-          `Switch to the **Publisher Page Builder** tab, reload it to refresh **Sitemap**, open **coverage-page**, then choose **Publish**. Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**. After completion, switch to the **Public website** tab, open [**the published coverage page**](${PUBLIC}/coverage-page), and confirm both headings, the Hero image, and the shared Promotion.`,
+          "In the **Page Builder** tab, click the **Hero image** placeholder on the canvas. In the right-hand **Image** panel, choose **Browse media library → Media BETA** to open the **Modern Media Library**. Select **liberty-mutual-public-family-basketball.jpg**, then choose **Insert** in its image details. Confirm the family photograph appears beside the Hero heading, and wait for **Saved**.",
+          "In the **Page Builder** tab, open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**. Show the permitted choices; choose **Promotions → Promotion → Bundle and save**. Select **Assign**, rather than **Duplicate and assign**. With **Promotion** selected, choose **Design → Variant → Image left**, then **Image right**. On desktop, confirm the photograph switches sides while the copy stays the same. On mobile, both variants keep the image above the text.",
+          "In the **Page Builder** tab, select **Preview → Preview**. Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Page Builder**. Keep the page unpublished.",
+          "In the **Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**. Paste **Page submission comment** below, then select **Submit**. Confirm the page is **Awaiting approval**. Its local Hero and Article text follow the page through review.",
+          "Stay on **coverage-page** in **Page Builder**, and review the page on its canvas. Choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**. Confirm **Approved**.",
+          `On the same **coverage-page** in **Page Builder**, choose **Publish**. Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**. After completion, switch to the **Public website** tab, open [**the published coverage page**](${PUBLIC}/coverage-page), and confirm both headings, the Hero image, and the shared Promotion.`,
         ],
         expected: [
-          "The new page is previewed and published without code changes, using approved components, independent local content, a reused Promotion, and separate workflow roles.",
+          "The new page is previewed and published without code changes, using approved components, independent local content, a reused Promotion, and the configured review workflow.",
         ],
         talkTrack: [
-          "The same publishing controls also support a complete page. The marketer starts with an approved structure and permitted components. Local copy remains independently editable, while the shared Promotion is reused. The Author submits, the Approver reviews, and the publisher releases the approved page without a frontend deployment.",
+          "The same publishing controls also support a complete page. The marketer starts with an approved structure and permitted components. Local copy remains independently editable, while the shared Promotion is reused. We submit, approve, and publish the page without a frontend deployment. I’m using one SitecoreAI administrator account to move through these steps quickly; production teams normally assign authoring, approval, and publishing permissions to separate roles.",
         ],
         controls: [
           "**Landing page** creates local **Hero** and **Introduction** items. Placeholder settings restrict the available components. **Assign** reuses the existing Promotion; **Image left** and **Image right** change only its presentation. Both place the image above the text on mobile.",
@@ -1087,7 +1086,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Experience Edge’s native GraphQL API returns the same approved, published page fields used by the public website.",
         ],
         talkTrack: [
-          "Authors manage and approve content in SitecoreAI. Publishing sends that content to Experience Edge, Sitecore’s globally distributed content delivery service. Websites and other applications retrieve it through APIs. That lets Liberty Mutual reuse one approved source across experiences, while publishing content independently of application deployments.",
+          "Content teams manage and approve content in SitecoreAI. Publishing sends that content to Experience Edge, Sitecore’s globally distributed content delivery service. Websites and other applications retrieve it through APIs. That lets Liberty Mutual reuse one approved source across experiences, while publishing content independently of application deployments.",
           "This is the native GraphQL response for the same car-and-home page. Its ID, published version, guidance, and source come directly from Live Experience Edge, including the sentence we just published. The website, LibertyAir, or another application can retrieve these fields without maintaining another copy of the content.",
         ],
         controls: [
@@ -1143,16 +1142,16 @@ export const customerDemoChapters: DemoChapter[] = [
             "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.",
           ],
           [
-            `Switch to the **Publisher Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**.`,
+            `Switch to the **Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**.`,
             "Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**.",
             "Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.",
           ],
           [
             "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**.",
             "Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test.",
-            "Return to **Publisher Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**.",
+            "Return to **Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**.",
             "Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**.",
-            "Repeat with Daniel’s **Client ID**, obtained from his current **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**. Wait for **Testing as: Daniel Ortiz - 01**; select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
+            "Select **Testing as: Avery Brooks - 01 → Load profile → Client ID**, replace the existing ID with Daniel’s **Client ID** from **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**, and press **Enter**; wait for **Testing as: Daniel Ortiz - 01**, select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
           ],
           [
             "Switch to the **State business rule** tab. Its normal navigation is **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it.",
@@ -1166,8 +1165,8 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `Switch to the **Avery portal** tab, and open [**Home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**. Find **Priorities for your agency**; show **Build a stronger small-business practice** first. Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**. Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.`,
           `Switch to the separate **Daniel portal** tab, and open [**Home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Compare his household-first priorities. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.`,
-          `Switch to the **Publisher Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**. Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**. Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.`,
-          "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test. Return to **Publisher Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**. Repeat with Daniel’s **Client ID**, obtained from his current **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**. Wait for **Testing as: Daniel Ortiz - 01**; select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
+          `Switch to the **Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**. Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**. Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.`,
+          "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test. Return to **Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**. Select **Testing as: Avery Brooks - 01 → Load profile → Client ID**, replace the existing ID with Daniel’s **Client ID** from **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**, and press **Enter**; wait for **Testing as: Daniel Ortiz - 01**, select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
           "Switch to the **State business rule** tab. Its normal navigation is **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it. Point to the **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**. Point to **producer-priorities**: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production. Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
         ],
         expected: [
@@ -1282,7 +1281,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation. Leave the kit unchanged.",
           ],
           [
-            `Switch to **Publisher Page Builder → Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**.`,
+            `Switch to **Page Builder → Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**.`,
             "Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**. Confirm **Introduction** in the right panel.",
             "Select **Optimize with AI**; point to **Adhere to brand kit**, then paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**.",
             "When **Ready!** appears, review the generated paragraph. Choose **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.",
@@ -1301,7 +1300,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The Brand Kit guides content creation, native AI assistance operates on an editable field, and governed components preserve a consistent design. No generated change is kept or published.",
         actions: [
           `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
-          `In **Publisher Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, review the generated paragraph. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
+          `In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, review the generated paragraph. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
           "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that authors change content; reusable components control presentation, page designs supply shared structure, and placeholder settings limit which components fit each area.",
           `In **Avery portal**, briefly compare **My workspace** with [**Learning & resources**](${PORTAL}/resources). Point to the shared navigation, typography, buttons, and cards. Authors manage the content independently of that consistent design.`,
         ],
@@ -1422,7 +1421,7 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Liberty Business Experience",
         sourceSlide: 11,
         durationMinutes: 2,
-        persona: "Portal marketer acting as Author",
+        persona: "Portal content administrator",
         scenario:
           "The business wants Texas guidance to lead the principal audience’s priorities without requesting a code change.",
         objective:
@@ -1438,11 +1437,12 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Author Page Builder**, and choose **Site switcher → Agent Portal → Content**.",
+            "Switch to **Page Builder**, and choose **Site switcher → Agent Portal → Content**.",
             "In the content tree, select **Data → Agency priorities → Agency growth priorities**. Confirm **English**.",
           ],
           [
-            "Record the approved version and original order: **Small business growth → Texas workers compensation → Home and auto conversations**.",
+            "Open the version selector; select **Priority baseline version** recorded in **P0**, and wait for its fields to load.",
+            "Recheck its version number and original order: **Small business growth → Texas workers compensation → Home and auto conversations**.",
             "Choose **Create version**; paste **New priority version name** below, then select **Create**.",
             "Reopen the version selector; select the new **Texas guidance priority → Draft** row by its new number.",
             "Wait for fields to load, then recheck the selected version number.",
@@ -1461,10 +1461,10 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The recorded **Saved priority version** is a saved Texas-first **Draft**; the original approved version and live order remain unchanged.",
         actions: [
-          "In **Author Page Builder**, choose **Site switcher → Agent Portal → Content**. In the content tree, select **Data → Agency priorities → Agency growth priorities**, and confirm **English**.",
-          "Record the current approved version and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Open the version selector, choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
-          "Find **Ordered recommendations**. Click **Remove all items** to clear only this draft’s selection, open the picker, and select **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, the Approver’s review, and publication.",
-          "With **Saved priority version** selected, confirm the order **Texas workers compensation → Small business growth → Home and auto conversations** and that the version remains **Draft**. Leave it unpublished. The next step demonstrates native page-level audience preview on the prepared growth page, then returns to this saved priority version for approval and publication.",
+          "In **Page Builder**, choose **Site switcher → Agent Portal → Content**. In the content tree, select **Data → Agency priorities → Agency growth priorities**, and confirm **English**.",
+          "Open the version selector, explicitly select **Priority baseline version** recorded in **P0**, and wait for its fields to finish loading. Confirm that selected original version number and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
+          "Find **Ordered recommendations**. Click **Remove all items** to clear only this draft’s selection, open the picker, and select **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, approval, and publication.",
+          "With **Saved priority version** selected, confirm the order **Texas workers compensation → Small business growth → Home and auto conversations** and that the version remains **Draft**. Leave it unpublished. The next step previews this draft on the same **Home** page for two audience contexts, then returns to this saved priority version for approval and publication.",
         ],
         expected: [
           "The new Draft references the same approved cards in the new order. Avery’s live page retains the published order until the following preview and publication loop completes.",
@@ -1514,23 +1514,38 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "Next, inspect the two native page-level audience previews, then return to this saved priority version for approval and publication.",
+          "Next, preview this Home priority change for a Texas principal and an Illinois producer, then approve and publish the saved version.",
       },
       {
         id: "portal-preview",
-        title: "Preview the impact, then release the change",
+        title: "Preview the priority change for each audience",
         label: "Marketing user previews the experience for each agent audience",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
         durationMinutes: 4,
-        persona: "Portal marketer, approver, and publisher",
+        persona: "Portal content administrator",
         scenario:
-          "The team needs to inspect each intended audience experience before releasing the reviewed priority change.",
+          "The team needs to check the draft Home priorities for the intended principal and producer audiences before publication.",
         objective:
-          "Part 2 of the priority-change loop: inspect native page-level audience previews, then approve and publish the saved Home priority change and verify its intended live result.",
+          "Part 2 of the priority-change loop: preview the same Home page for two audience contexts, approve and publish the saved priority change, and verify both live agents.",
         stopWhen:
-          "Both named page variants have been previewed while the growth page remains unpublished; publishing the saved priority collection changes Avery’s live Home order, while Daniel’s order remains unchanged.",
+          "Before publication, Home preview shows Texas guidance first for the principal and the unchanged household-first order for the producer. After publication, Avery and Daniel show those same respective orders live.",
         inputs: [
+          {
+            action: 2,
+            label: "Agency small-commercial share",
+            value: "15",
+          },
+          {
+            action: 2,
+            label: "Agency written premium",
+            value: "1000000",
+          },
+          {
+            action: 3,
+            label: "Agent small-commercial written premium",
+            value: "100000",
+          },
           {
             action: 4,
             label: "Priority submission comment",
@@ -1544,64 +1559,66 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterActions: [
           [
-            "Switch to **Publisher Page Builder**, and choose **Site switcher → Agent Portal → Editor → Pages**.",
-            "In **Sitemap**, expand **Home → growth**, and select **Agent audience preview**. Confirm **English**, **Default editing host**, and that this page remains unpublished.",
-            "Select **Personalize**.",
+            "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
+            "Open **Apps → Audience Preview**. Confirm **Current page → Home**. Leave the saved priority Draft unpublished.",
           ],
           [
-            "Select **Avery agency principal → Preview → Preview**.",
-            "Show **Set your agency’s next growth priority** and **Give your team a clear direction**.",
-            "Confirm Avery/Cedar Ridge principal context; close the preview tab, and return to **Personalize** in **Publisher Page Builder**.",
+            "Set **Role → Principal**. Under **Licensed states**, select only **Texas**; clear **Florida** and **Illinois**.",
+            "Expand **Business context**. Set **Agency small-commercial share → 15** and **Agency written premium → 1000000**.",
+            "Select **Preview audience**, wait for the result, then select **Open preview**.",
+            "On **Home**, find **Priorities for your agency**. Confirm **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**.",
+            "Close the preview tab, and return to the same **Audience Preview** panel in **Page Builder**.",
           ],
           [
-            "Select **Daniel producer → Preview → Preview**.",
-            "Show **Prepare your next business insurance opportunity** and **Build a stronger first submission**.",
-            "Confirm Daniel/Prairie Oak producer context; close the preview tab, and return to **Publisher Page Builder**. Keep this growth page unpublished.",
+            "Set **Role → Producer**. Under **Licensed states**, select only **Illinois**; clear **Texas** and **Florida**.",
+            "In **Business context**, check **Specializes in small commercial**, and set **Agent small-commercial written premium → 100000**.",
+            "Select **Preview audience**, then **Open preview** when ready.",
+            "On **Home**, confirm the producer’s unchanged order: **Connect home and auto conversations → Build a stronger small-business practice**.",
+            "Close the preview tab, and return to **Page Builder**. Both previews used audience attributes, without an agent login.",
           ],
           [
-            "Switch to **Author Page Builder → Content**; select **Data → Agency priorities → Agency growth priorities**, then **Saved priority version**.",
+            "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**, then select **Saved priority version**.",
             "Wait for loading; confirm **Draft** and Texas-first **Ordered recommendations**.",
             "Choose **Actions → Submit**; paste **Priority submission comment** below, then select **Submit**.",
             "Confirm **Awaiting approval**.",
           ],
           [
-            "Switch to **Approver Page Builder**, and choose **Site switcher → Agent Portal → Content → Data → Agency priorities → Agency growth priorities**.",
-            "Select the same **Saved priority version**, and review its Texas-first order.",
+            "Stay on the same **Saved priority version** in **Page Builder**, and review its Texas-first order.",
             "Choose **Actions → Approve**; paste **Priority approval comment** below, then select **Submit**.",
             "Confirm **Approved**.",
           ],
           [
-            "Switch to **Publisher Page Builder → Content**; select **Data → Agency priorities → Agency growth priorities**, then the same **Saved priority version**.",
+            "Stay on the same **Saved priority version** in **Page Builder**.",
             "Confirm **Approved** and Texas-first order. Choose **Publish** with **Item** and **Current language (English)** selected.",
             "Leave **Subitems** unchecked, select **Start publish**, and wait for completion.",
-            "In the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
+            "In the **Avery portal** tab, select **My workspace**, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
           ],
         ],
         presenterResult:
-          "Both audience previews work; publishing the saved priority version changes Avery’s live order while Daniel’s remains unchanged.",
+          "The same Home page previews the draft for both audience contexts. One reviewed publication then updates Avery’s live priorities while Daniel’s order remains unchanged.",
         actions: [
-          "In **Publisher Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages**. In **Sitemap**, expand **Home → growth**, select **Agent audience preview**, and confirm **English**, **Default editing host**, and that the page remains unpublished. Open **Personalize** in the top navigation.",
-          "Select **Avery agency principal**. Choose the header **Preview** button, then **Preview** in its menu. In the complete page preview, identify **Set your agency’s next growth priority** and **Give your team a clear direction**. Confirm the Avery/Cedar Ridge principal context. Close the preview tab, and return to the same **Personalize** screen.",
-          "Select **Daniel producer**, and choose **Preview → Preview** again. Identify **Prepare your next business insurance opportunity** and **Build a stronger first submission**, with the Daniel/Prairie Oak producer context. Close that preview tab. The native page variants select authored Hero and Callout content on this unpublished growth page. Home retains its existing component-level personalization.",
-          "Switch to **Author Page Builder → Content → Data → Agency priorities → Agency growth priorities**. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
-          "In **Approver Page Builder**, choose **Site switcher → Agent Portal → Content → Data → Agency priorities → Agency growth priorities**. Select the same **Saved priority version**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
-          "Switch to **Publisher Page Builder → Content → Data → Agency priorities → Agency growth priorities**. Select the same **Saved priority version**, confirm **Approved** and its Texas-first order, and choose **Publish**. Keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, in the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
+          "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Open **Apps → Audience Preview**, and confirm **Current page → Home**. Leave **Saved priority version** unpublished.",
+          "Set **Role → Principal**. Under **Licensed states**, select only **Texas**, clearing **Florida** and **Illinois**. Expand **Business context**, set **Agency small-commercial share → 15** and **Agency written premium → 1000000**, and select **Preview audience**. When ready, select **Open preview**. On **Home**, find **Priorities for your agency**, and confirm the draft order **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**. Close the preview tab, and return to the same **Audience Preview** panel in **Page Builder**.",
+          "Set **Role → Producer**. Under **Licensed states**, select only **Illinois**, clearing **Texas** and **Florida**. In **Business context**, check **Specializes in small commercial**, and set **Agent small-commercial written premium → 100000**. Select **Preview audience**, then **Open preview** when ready. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Build a stronger small-business practice**. Close the preview tab, and return to **Page Builder**. Neither preview requires an agent login or a human profile identifier.",
+          "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
+          "Stay on the same **Saved priority version** in **Page Builder**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
+          "On the same **Saved priority version** in **Page Builder**, confirm **Approved** and its Texas-first order, and choose **Publish**. Keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, in the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
         ],
         expected: [
-          "Native page-level Preview shows the two authored audience experiences on the unpublished growth page. Publishing the separately reviewed priority collection updates Avery’s Home without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
+          "Audience Preview shows the draft priority order on the same Home page for a Texas principal and the unchanged order for an Illinois producer. Publishing the reviewed priority collection updates Avery’s Home without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
         ],
         talkTrack: [
-          "The marketer can inspect a complete page for each configured audience before publication. The principal view focuses on setting direction for the agency; the producer view focuses on preparing a stronger submission. These are native page variants on an unpublished growth page. We will now complete the Texas-first Home priority change prepared earlier, using separate approval and publication, and verify the live result for both agents.",
+          "Before publishing, I can check this same Home page for a Texas principal and an Illinois producer. The principal’s draft puts Texas guidance first; the producer keeps the household-first order. We enter audience attributes without signing in as an agent. I can then review and publish the saved change and confirm that only the intended live experience changes.",
         ],
         controls: [
-          "**Personalize → Avery agency principal** and **Personalize → Daniel producer** select native page variants. **Preview → Preview** opens the corresponding complete page. Each variant uses its own authored **Hero** and **Callout** datasources. The preview page remains unpublished.",
-          "The operational header uses a synthetic, read-only context that matches the native selected Hero datasource during verified CMS editing and preview. No real agent sign-in or CDP identity is created by this page preview.",
-          "The **Saved priority version** from A3 is a separate Home content collection. The **Author** submits it, the **Approver** reviews it, and the administrator publishes it. Home’s existing native component rules still select Avery’s and Daniel’s live content.",
+          "**Audience Preview** is a private **Marketplace** extension inside **Page Builder**. It evaluates the existing published SitecoreAI personalization rules for the selected audience attributes, then renders the current authoring content for **Home**.",
+          "Preview uses isolated synthetic audience records, without changing human agent accounts. It does not publish content or grant additional content permissions.",
+          "The **Saved priority version** from A3 remains Draft during both Home previews. The same presenter account then performs **Submit**, **Approve**, and **Publish** on that exact version in **Page Builder**.",
         ],
         links: [
           {
-            label: "Open native page audience preview",
-            href: audiencePreviewEditor,
+            label: "Open Agent Portal Home in Page Builder",
+            href: portalEditor,
           },
           {
             label: "Review and publish the priority collection",
@@ -1609,420 +1626,196 @@ export const customerDemoChapters: DemoChapter[] = [
           },
           { label: "Verify Avery’s live portal", href: `${PORTAL}/` },
         ],
-        images: [
-          {
-            file: "demo-portal-page-audience-selector.png",
-            title: "Choose the audience, then open its complete page preview",
-            alt: "Page Builder Personalize view lists Avery agency principal and Daniel producer on the unpublished Agent audience preview page. The Preview eye button is in the page toolbar.",
-            caption:
-              "Open **Personalize**, select **Avery agency principal** or **Daniel producer** in the left panel, and use the toolbar’s **Preview** button. Choose **Preview** in its menu to open the complete page.",
-            afterAction: 1,
-            crop: {
-              x: 0,
-              y: 0,
-              width: 1280,
-              height: 720,
-              sourceWidth: 1280,
-              sourceHeight: 720,
-            },
-            annotations: [
-              {
-                x: 63.5,
-                y: 0.3,
-                width: 5.6,
-                height: 7.3,
-                label: "Open **Personalize**.",
-              },
-              {
-                x: 0.6,
-                y: 36.3,
-                width: 22.2,
-                height: 19.4,
-                label: "Select one of the named page variants.",
-              },
-              {
-                x: 72.0,
-                y: 10.2,
-                width: 2.7,
-                height: 4.8,
-                label: "Open **Preview**, then select **Preview**.",
-              },
-              {
-                x: 77.5,
-                y: 9.9,
-                width: 18.2,
-                height: 4.8,
-                label: "Confirm **Agent audience preview**.",
-              },
-            ],
-          },
-          {
-            file: "demo-portal-avery-page-preview.png",
-            title: "Avery’s agency-principal page preview",
-            alt: "Avery’s page preview shows the Cedar Ridge Insurance Texas principal context, Set your agency’s next growth priority, and Give your team a clear direction.",
-            caption:
-              "The **Avery agency principal** variant shows **Set your agency’s next growth priority** and **Give your team a clear direction**. The agency and Texas context match that audience. Close this preview tab before choosing the other variant.",
-            afterAction: 2,
-            crop: {
-              x: 220,
-              y: 165,
-              width: 580,
-              height: 790,
-              sourceWidth: 813,
-              sourceHeight: 988,
-            },
-            annotations: [
-              {
-                x: 6.9,
-                y: 6.3,
-                width: 88,
-                height: 13.8,
-                label: "Principal context and audience-specific **Hero**.",
-              },
-              {
-                x: 6.9,
-                y: 51.4,
-                width: 88,
-                height: 6,
-                label: "Audience-specific **Callout**.",
-              },
-            ],
-          },
-          {
-            file: "demo-portal-daniel-page-preview.png",
-            title: "Daniel’s producer page preview",
-            alt: "Daniel’s page preview shows the Prairie Oak Insurance Illinois producer context, Prepare your next business insurance opportunity, and Build a stronger first submission.",
-            caption:
-              "The **Daniel producer** variant shows **Prepare your next business insurance opportunity** and **Build a stronger first submission**. The agency and Illinois context change with the selected native variant. The page remains unpublished.",
-            afterAction: 3,
-            crop: {
-              x: 220,
-              y: 165,
-              width: 580,
-              height: 770,
-              sourceWidth: 813,
-              sourceHeight: 988,
-            },
-            annotations: [
-              {
-                x: 6.9,
-                y: 6.5,
-                width: 88,
-                height: 14.2,
-                label: "Producer context and audience-specific **Hero**.",
-              },
-              {
-                x: 6.9,
-                y: 52.7,
-                width: 88,
-                height: 6.2,
-                label: "Audience-specific **Callout**.",
-              },
-            ],
-          },
-        ],
         transition:
-          "The right agent now receives the reviewed priority change. Next, keep approved wording consistent across both independent websites.",
+          "The intended agent now receives the reviewed priority change. Next, keep approved wording consistent across both independent websites.",
       },
       {
         id: "portal-shared-content",
-        title: "Publish one approved message across both sites",
+        title: "Update one copyright notice in both footers",
         label:
           "Approved shared content is managed once and distributed to every website",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
         durationMinutes: 4,
-        persona:
-          "Content administrator working through Author, Approver, and publisher roles",
+        persona: "Content administrator",
         scenario:
-          "One disclosure update must remain consistent across the public website and Agent Portal.",
+          "The copyright year must stay consistent in the public website and Agent Portal footers.",
         objective:
-          "Keep the public website and Agent Portal aligned by publishing one approved disclosure from a shared source.",
+          "Change one shared copyright notice, publish its source once, and show the updated year on both sites.",
         stopWhen:
-          "The added disclosure sentence is visible on both Home pages after one source publication.",
+          "Both site footers show the full copyright notice with 2026 after one shared-source publication.",
         inputs: [
           {
             action: 2,
-            label: "New disclosure version name",
-            value: "Shared disclosure review",
+            label: "New copyright version name",
+            value: "Copyright year update",
           },
           {
             action: 2,
-            label: "Sentence to append to Disclosure",
-            value:
-              "Review available options with your agent before making a coverage decision.",
+            label: "New copyright year",
+            value: "2026",
           },
           {
             action: 3,
-            label: "Disclosure submission comment",
-            value: "Review shared disclosure wording",
+            label: "Copyright submission comment",
+            value: "Review copyright year update to 2026",
           },
           {
             action: 3,
-            label: "Disclosure approval comment",
-            value: "Approved shared disclosure wording",
+            label: "Copyright approval comment",
+            value: "Approved copyright year update to 2026",
           },
         ],
         presenterActions: [
           [
-            "Switch to **Author Page Builder**, and choose **Site switcher → Public Website → Content**.",
-            "In the content tree, select **Data → Disclosures → Product availability notice**. Confirm **English**.",
-            "Record the original approved English version and **Disclosure** wording for the next loop’s restoration.",
+            "Switch to **Page Builder**, and choose **Site switcher → Public Website → Content**.",
+            "In the content tree, select the top-level **Data → Disclosures → Copyright notice**. Confirm **English**.",
+            "Record the original approved English version and full **Disclosure** wording for restoration. Confirm its copyright year is **2025**.",
           ],
           [
-            "Choose **Create version**; paste **New disclosure version name** below, then select **Create**.",
-            "Reopen the version selector; select the new **Shared disclosure review → Draft** row by its new number.",
+            "Choose **Create version**; paste **New copyright version name** below, then select **Create**.",
+            "Reopen the version selector; select the new **Copyright year update → Draft** row by its new number.",
             "Wait for fields to load, then recheck the selected number.",
-            "Append **Sentence to append to Disclosure** below to **Disclosure**; click outside, and wait for **Saved**.",
-            "Record the number as **Saved disclosure version**; use it for submission, approval, and publication.",
+            "In **Disclosure**, replace only **2025** with **2026**. Preserve every other word, punctuation mark, line break, and the **Equal Opportunity Employer** link; click outside, and wait for **Saved**.",
+            "Record the number as **Saved copyright version**; use it for submission, approval, and publication.",
           ],
           [
-            "Select **Saved disclosure version**; confirm **Draft** and the added sentence.",
-            "Choose **Actions → Submit**; paste **Disclosure submission comment** below, then **Submit**. Confirm **Awaiting approval**.",
-            "Switch to **Approver Page Builder**, and choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**.",
-            "Select the same **Saved disclosure version**, and review its wording.",
-            "Choose **Actions → Approve**; paste **Disclosure approval comment** below, then select **Submit**.",
+            "Select **Saved copyright version**; confirm **Draft** and copyright year **2026**.",
+            "Choose **Actions → Submit**; paste **Copyright submission comment** below, then **Submit**. Confirm **Awaiting approval**.",
+            "Stay on the same **Saved copyright version** in **Page Builder**, and review the full notice.",
+            "Choose **Actions → Approve**; paste **Copyright approval comment** below, then select **Submit**.",
           ],
           [
-            "Switch to **Publisher Page Builder**, and choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**; select **Saved disclosure version**.",
-            "Confirm **Approved** and the added sentence.",
-            "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
+            "Stay on the same **Saved copyright version** in **Page Builder**.",
+            "Confirm **Approved**, copyright year **2026**, and unchanged surrounding wording.",
+            "Publish the shared item once with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
           ],
           [
             "Wait for publication to complete.",
-            "In the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In the **Avery portal** tab, select **My workspace** in the left navigation, and reload.",
-            "Show the added sentence in **Coverage and availability** on both pages.",
+            "In the **Public website** tab, reload, and scroll to the footer. In the **Avery portal** tab, reload, and scroll to the footer.",
+            "Show the same full copyright notice with **2026** in both footers.",
           ],
         ],
         presenterResult:
-          "Both Home pages show the added disclosure sentence after one shared-source publication.",
+          "The public website and Agent Portal footers show the same full copyright notice with 2026 after one shared-source publication.",
         actions: [
-          "In **Author Page Builder**, choose **Site switcher → Public Website → Content**. In the content tree, select **Data → Disclosures → Product availability notice**, and confirm **English**. Record the original approved English version and **Disclosure** text for the rollback in the next loop.",
-          "Choose **Create version**, name it **Shared disclosure review**, and select **Create**. Reopen the version selector, explicitly select the new **Shared disclosure review** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before editing **Disclosure**. Append **Review available options with your agent before making a coverage decision.** to **Disclosure**, click outside the field, and wait for **Saved**. Record the version number currently shown as **Saved disclosure version**. Use that same saved version number for submission, the Approver’s review, and publication.",
-          "With **Saved disclosure version** selected, recheck **Draft** and the added sentence in **Disclosure**. Choose **Actions → Submit**, enter **Review shared disclosure wording**, and select **Submit**. Confirm **Awaiting approval**. In **Approver Page Builder**, choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**. Select the same **Saved disclosure version**, review its wording, and choose **Actions → Approve**, enter **Approved shared disclosure wording**, and select **Submit**.",
-          "In **Publisher Page Builder**, choose **Site switcher → Public Website → Content → Data → Disclosures → Product availability notice**. Select the same **Saved disclosure version**, and confirm **Approved** and the added sentence. Publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. Select **Start publish**.",
-          "After the job completes, in the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In **Avery portal**, select **My workspace** in the left navigation, and reload. Find the added sentence in **Coverage and availability** on both pages.",
+          "In **Page Builder**, choose **Site switcher → Public Website → Content**. In the content tree, select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**. Record the original approved English version and full **Disclosure** text for the rollback in the next loop. Confirm its copyright year is **2025**.",
+          "Choose **Create version**, name it **Copyright year update**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year update** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before editing **Disclosure**. Replace only **2025** with **2026** in **Disclosure**, preserving every other word and punctuation mark in the full copyright notice, its line break, and the **Equal Opportunity Employer** link. Click outside the field, and wait for **Saved**. Record the version number currently shown as **Saved copyright version**. Use that same saved version number for submission, approval, and publication.",
+          "With **Saved copyright version** selected, recheck **Draft** and copyright year **2026** in **Disclosure**. Choose **Actions → Submit**, enter **Review copyright year update to 2026**, and select **Submit**. Confirm **Awaiting approval**. Stay on the same **Saved copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved copyright year update to 2026**, and select **Submit**.",
+          "On the same **Saved copyright version** in **Page Builder**, confirm **Approved**, copyright year **2026**, and unchanged surrounding wording. Publish the shared item once with **Item** and **Current language (English)** selected and **Subitems** unchecked. Select **Start publish**.",
+          "After the job completes, reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer. Confirm that both footers show the same full copyright notice with **2026**.",
         ],
         expected: [
-          "Both independent sites display the changed sentence from the same governed disclosure, without separate copy edits or frontend releases.",
+          "Both independent sites display the same full copyright notice with 2026 from one governed content item, without separate copy edits or frontend releases. The first line reads **© 2026 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116**. The second reads **Liberty Mutual is an Equal Opportunity Employer and an Equal Housing Insurer.** The **Equal Opportunity Employer** link remains intact.",
         ],
         talkTrack: [
-          "A single approved disclosure must stay consistent across the public website and Agent Portal. Both sites reference its shared source. The content team changes it once, follows the review process, and publishes the source. Each site keeps its own layout while displaying the same approved message.",
+          "Both footers use one copyright notice. I change only the year, review the change, and publish its shared source once. Experience Edge makes that approved content available to both sites, while each site retains its own design.",
         ],
         controls: [
-          "**Product availability notice** belongs to the public site’s **Data → Disclosures** library. Both sites reference that same native item, keeping the approved wording in one place.",
-          "The public and Agent Portal Home pages show the shared message delivered through **Experience Edge**.",
+          "**Copyright notice** belongs to the public site’s top-level **Data → Disclosures** library. Both footers reference that same native item.",
+          "The complete copyright notice is shared content delivered through **Experience Edge**. Only its year changes from **2025** to **2026**; its address, equal-opportunity wording, line break, and **Equal Opportunity Employer** link stay intact.",
         ],
         links: [
-          { label: "Edit the shared disclosure", href: `${disclosureContent}` },
-          { label: "Public Home", href: `${PUBLIC}/` },
-          { label: "Agent Portal Home", href: `${PORTAL}/` },
-        ],
-        images: [
-          {
-            file: "demo-shared-disclosure-editor.png",
-            title: "Edit the shared source once",
-            alt: "Product availability notice holds the shared Disclosure field. The new draft contains the sentence that will appear on both sites after approval and publication.",
-            caption:
-              "**Product availability notice** holds the shared **Disclosure** field. The new draft contains the sentence that will appear on both sites after approval and publication. Use the version number recorded for the current demonstration.",
-            afterAction: 2,
-            crop: {
-              x: 300,
-              y: 0,
-              width: 1620,
-              height: 770,
-              sourceWidth: 1920,
-              sourceHeight: 908,
-            },
-            annotations: [
-              {
-                x: 87.53,
-                y: 1.3,
-                width: 4.26,
-                height: 4.68,
-                label: "The new version is **Draft**",
-              },
-              {
-                x: 1.23,
-                y: 18.18,
-                width: 32.1,
-                height: 4.55,
-                label: "This is the shared source item",
-              },
-              {
-                x: 1.23,
-                y: 51.95,
-                width: 97.53,
-                height: 14.29,
-                label: "Edit and review the **Disclosure** wording",
-              },
-            ],
-          },
-          {
-            file: "demo-shared-disclosure-public.png",
-            title: "Public Website: the published disclosure",
-            alt: "On Public Website Home, Coverage and availability displays the published sentence from the shared source.",
-            caption:
-              "On Public Website Home, **Coverage and availability** displays the published sentence from the shared source.",
-            afterAction: 5,
-            crop: {
-              x: 372,
-              y: 435,
-              width: 1180,
-              height: 100,
-              sourceWidth: 1920,
-              sourceHeight: 908,
-            },
-            annotations: [
-              {
-                x: 0.93,
-                y: 9.0,
-                width: 97.46,
-                height: 61.0,
-                label: "The shared wording on Public Website",
-              },
-            ],
-          },
-          {
-            file: "demo-shared-disclosure-portal.png",
-            title: "Agent Portal: the same published disclosure",
-            alt: "On Agent Portal Home, Coverage and availability displays the same published sentence in the portal’s own design.",
-            caption:
-              "On Agent Portal Home, **Coverage and availability** displays the same published sentence in the portal’s own design.",
-            afterAction: 5,
-            crop: {
-              x: 587,
-              y: 515,
-              width: 980,
-              height: 210,
-              sourceWidth: 1920,
-              sourceHeight: 908,
-            },
-            annotations: [
-              {
-                x: 3.57,
-                y: 13.33,
-                width: 93.37,
-                height: 42.86,
-                label: "The same shared wording on Agent Portal",
-              },
-            ],
-          },
+          { label: "Edit the shared copyright notice", href: copyrightContent },
+          { label: "Public website footer", href: `${PUBLIC}/` },
+          { label: "Agent Portal footer", href: `${PORTAL}/` },
         ],
         transition:
-          "One reviewed update now reaches both sites. Finish by showing who approved it and how the team can restore the original wording with a complete history.",
+          "One reviewed update now reaches both footers. Finish by showing the approval history and restoring the original year without losing that history.",
       },
       {
         id: "portal-audit-rollback",
-        title: "Review changes and restore with confidence",
+        title: "Review the approval history and restore the year",
         label: "Every change is approved, auditable, and reversible",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
         durationMinutes: 4,
-        persona: "Content administrator and approver",
+        persona: "Content administrator",
         scenario:
-          "The team needs to identify who approved a shared change and restore the earlier wording while keeping its history.",
+          "The team needs to see who approved the shared copyright change and restore its original year while preserving history.",
         objective:
-          "Show clear approval accountability, then restore the original disclosure through a new reviewed version while preserving history.",
+          "Show approval accountability, then restore copyright year 2025 through a new reviewed version.",
         stopWhen:
-          "Both Home pages show the restored original wording, and the original, changed, and restored versions remain in history.",
+          "Both site footers show the full copyright notice with restored year 2025, and the original, changed, and restored versions remain in history.",
         inputs: [
           {
             action: 3,
-            label: "Restored disclosure version name",
-            value: "Original disclosure restored",
+            label: "Restored copyright version name",
+            value: "Copyright year restored",
           },
           {
             action: 4,
             label: "Restoration submission comment",
-            value: "Restore original disclosure wording",
+            value: "Restore copyright year to 2025",
           },
           {
             action: 4,
             label: "Restoration approval comment",
-            value: "Approved restoration of shared disclosure wording",
+            value: "Approved restoration of copyright year to 2025",
           },
         ],
         presenterActions: [
           [
-            "Switch to **Publisher Page Builder**. Select **Home** in the **Content** tree, then choose **Editor → Pages**.",
-            "Choose **Sitemap → Home → Content tree options → Page items → Product availability notice**.",
+            "Switch to **Page Builder**. Select **Home** in the **Content** tree, then choose **Editor → Pages**.",
+            "Choose **Sitemap → Home → Content tree options → Page items → Copyright notice**.",
           ],
           [
             "Select **Workflow history**.",
             "Under **History**, show **Draft → Awaiting approval** and **Awaiting approval → Approved**.",
-            "Read the user, timestamp, and **Comment**; match the preceding Author and Approver actions.",
+            "Read the user, timestamp, and **Comment**; match the preceding submission and approval.",
           ],
           [
-            "Switch to **Author Page Builder → Content → Data → Disclosures → Product availability notice**; select the recorded original approved English version.",
-            "Wait for loading; recheck the selected number and original **Disclosure** wording before choosing **Create version**.",
-            "Paste **Restored disclosure version name** below, then **Create**. Reopen the selector; select the new **Original disclosure restored → Draft** row.",
-            "Wait; recheck its new version number and original wording without the added sentence.",
-            "After **Saved**, record the number as **Restored disclosure version**; use it for submission, approval, and publication.",
+            "Switch to **Page Builder → Content → Data → Disclosures → Copyright notice**; select the recorded original approved English version.",
+            "Wait for loading; recheck the selected number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**.",
+            "Paste **Restored copyright version name** below, then **Create**. Reopen the selector; select the new **Copyright year restored → Draft** row.",
+            "Wait; recheck its new version number and the full copyright notice with **2025**. Preserve all other wording, punctuation, the line break, and the **Equal Opportunity Employer** link.",
+            "After **Saved**, record the number as **Restored copyright version**; use it for submission, approval, and publication.",
           ],
           [
-            "Select **Restored disclosure version**; confirm **Draft** and original **Disclosure** wording without the temporary sentence.",
+            "Select **Restored copyright version**; confirm **Draft** and original **Disclosure** wording with year **2025**.",
             "Choose **Actions → Submit**; paste **Restoration submission comment** below, then select **Submit**.",
-            "Switch to **Approver Page Builder**, and reload to refresh the version list. In **Content → Data → Disclosures → Product availability notice**, select the same **Restored disclosure version**, and review the original wording.",
+            "Stay on the same **Restored copyright version** in **Page Builder**, and review the full notice.",
             "Choose **Actions → Approve**; paste **Restoration approval comment** below, then select **Submit**.",
           ],
           [
-            "Switch to **Publisher Page Builder → Content → Data → Disclosures → Product availability notice**; select **Restored disclosure version**, and confirm **Approved** and original wording.",
+            "Stay on the same **Restored copyright version** in **Page Builder**; confirm **Approved** and copyright year **2025**.",
             "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
             "While publication completes, show the original, changed, and restored versions in the **Content version selector**.",
-            "Close the version selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Product availability notice → Workflow history**.",
+            "Close the version selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Copyright notice → Workflow history**.",
             "Show the restored version’s submission, approval, and comments.",
           ],
           [
-            "Wait for publication to complete. In the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In the **Avery portal** tab, select **My workspace** in the left navigation, and reload.",
-            "Confirm the temporary sentence is absent from both pages. Retain all content versions.",
+            "Wait for publication to complete. Reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer.",
+            "Confirm that both footers show the full copyright notice with **2025** again. Retain all content versions.",
           ],
         ],
         presenterResult:
-          "Both Home pages show the original wording; version history retains the original, changed, and restored revisions and their approvals.",
+          "Both site footers show the full copyright notice with 2025 again; history retains the original, changed, and restored revisions and their approvals.",
         actions: [
-          "In **Publisher Page Builder**, select **Home** in the **Content** tree, then choose **Editor → Pages**. In **Sitemap**, open the **Home** row’s **Content tree options**, choose **Page items**, and expand **Product availability notice**.",
-          "Select **Workflow history**. Under **History**, read the **Draft → Awaiting approval** and **Awaiting approval → Approved** transitions, their user and timestamp, and the review **Comment**. Match these to the separate Author and Approver actions just performed.",
-          "In **Author Page Builder → Content → Data → Disclosures → Product availability notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording before choosing **Create version**. Name it **Original disclosure restored**, and select **Create**. Reopen the version selector, explicitly select the new **Original disclosure restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved original wording without the added sentence. After the original wording is saved, record the version number currently shown as **Restored disclosure version**. Use that same saved version number for submission, the Approver’s review, and publication.",
-          "With **Restored disclosure version** selected, recheck **Draft** and the original **Disclosure** wording without the temporary sentence. Choose **Actions → Submit**, enter **Restore original disclosure wording**, and select **Submit**. Switch to **Approver Page Builder**, and reload to refresh the version list. In **Content → Data → Disclosures → Product availability notice**, select the same **Restored disclosure version**, review the original wording, and choose **Actions → Approve**, enter **Approved restoration of shared disclosure wording**, and select **Submit**.",
-          "In **Publisher Page Builder → Content → Data → Disclosures → Product availability notice**, select the same **Restored disclosure version**, confirm **Approved** and the original wording, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Close the selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Product availability notice → Workflow history** to inspect the restored version’s submission, approval, and review comments.",
-          "After completion, in the **Public website** tab, select the **Liberty Mutual** logo to open Home, and reload. In **Avery portal**, select **My workspace** in the left navigation, and reload. Confirm that the temporary sentence is absent from both pages, and retain all versions in history.",
+          "In **Page Builder**, select **Home** in the **Content** tree, then choose **Editor → Pages**. In **Sitemap**, open the **Home** row’s **Content tree options**, choose **Page items**, and expand **Copyright notice**.",
+          "Select **Workflow history**. Under **History**, read the **Draft → Awaiting approval** and **Awaiting approval → Approved** transitions, their user and timestamp, and the review **Comment**. Match these to the submission and approval just performed.",
+          "In **Page Builder → Content → Data → Disclosures → Copyright notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**. Name it **Copyright year restored**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved full copyright notice with **2025**, without changing any other wording or punctuation, its line break, or the **Equal Opportunity Employer** link. After the original wording is saved, record the version number currently shown as **Restored copyright version**. Use that same saved version number for submission, approval, and publication.",
+          "With **Restored copyright version** selected, recheck **Draft** and the original **Disclosure** wording with year **2025**. Choose **Actions → Submit**, enter **Restore copyright year to 2025**, and select **Submit**. Stay on the same **Restored copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved restoration of copyright year to 2025**, and select **Submit**.",
+          "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Close the selector, select **Home** in the **Content** tree, then choose **Editor → Pages → Sitemap → Home → Content tree options → Page items → Copyright notice → Workflow history** to inspect the restored version’s submission, approval, and review comments.",
+          "After completion, reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer. Confirm that both footers show the full copyright notice with **2025** again, and retain all versions in history.",
         ],
         expected: [
-          "The native history records the real workflow users, timestamps, and comments. A newer reviewed version restores both sites while preserving the original and changed versions.",
+          "The native history records the acting account, timestamps, and comments. A newer reviewed version restores copyright year 2025 in both footers while preserving the original and changed versions.",
         ],
         talkTrack: [
-          "That shared disclosure also gives us a clear audit trail. The workflow records who submitted and approved the change and when those decisions occurred. Restoring the original wording is another reviewed change, preserving the audit trail while returning both sites to the approved message.",
+          "The workflow records who submitted and approved this copyright change and when. Restoring 2025 is another reviewed version. Both footers return to the original year, and the complete change history remains available.",
         ],
         controls: [
-          "**Editor → Sitemap → Home → Content tree options → Page items → Product availability notice → Workflow history** shows actual transitions and comments.",
+          "**Editor → Sitemap → Home → Content tree options → Page items → Copyright notice → Workflow history** shows actual transitions and comments.",
           "Creating a new Draft from the original approved version preserves the original and changed versions. The same governed process reviews and publishes the restoration.",
-          "Separate restricted Author and Approver identities demonstrate role separation; the administrator acts only as publisher in this sequence.",
+          "Submission, approval, and publication remain distinct recorded actions in the configured workflow.",
         ],
         links: [
           {
             label: "Page Builder Page items and workflow history",
             href: publicEditor,
           },
-          { label: "Restore the shared disclosure", href: disclosureContent },
-        ],
-        images: [
-          {
-            file: "customer-demo-workflow-history.png",
-            afterAction: 2,
-            title: "Read the actual Workflow history",
-            alt: "Page Builder Page items panel with Product availability notice expanded and Workflow history showing approval transitions and comments",
-            caption:
-              "In **Page items**, expand **Product availability notice**, then select **Workflow history**. The entries show the state change, user, time, and review comment.",
-            crop: {
-              x: 315,
-              y: 444,
-              width: 475,
-              height: 276,
-              sourceWidth: 1280,
-              sourceHeight: 720,
-            },
-          },
+          { label: "Restore the shared copyright notice", href: copyrightContent },
         ],
         transition:
           "Close on what this enables for Liberty Mutual: trusted guidance, more relevant agent experiences, and business-managed changes with clear accountability.",

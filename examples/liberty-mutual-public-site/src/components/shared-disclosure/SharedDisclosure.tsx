@@ -21,3 +21,19 @@ export const Default = ({
     </aside>
   );
 };
+
+/** The native footer placeholder selects this presentation of the shared notice. */
+export const Copyright = ({
+  fields,
+  params,
+  rendering,
+}: SharedDisclosureProps) =>
+  fields ? (
+    <div
+      className={`component public-copyright ${params.styles || ""}`}
+      id={params.RenderingIdentifier}
+      data-content-id={rendering.dataSource}
+    >
+      <RichText field={fields.body} />
+    </div>
+  ) : null;

@@ -18,10 +18,9 @@ export const SCRUNCH_EDITOR = `https://pages.sitecorecloud.io/editor?${SCRUNCH_C
 export const RESOURCE_PAGE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
 export const PUBLIC_HOME_ID = "6d600332-3e21-4c5f-83ec-aae04f83450f";
 export const PORTAL_HOME_ID = "ae9e45ca-f127-4abe-9ca7-2ff109981998";
-export const AUDIENCE_PREVIEW_ID = "cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947";
 export const BRAND_KITS = `https://app.sitecorecloud.io/design/brandkits?organization=${ORG}&tenantName=${TENANT_NAME}`;
 export const PRIORITIES_ID = "3127968e-4b21-50c3-ad79-b6bbbe5303b8";
-export const DISCLOSURE_ID = "c4fd68f7-7c79-5bb6-9919-fb6f82b84bca";
+export const COPYRIGHT_ID = "9dc572ee-3d67-5909-922f-6482def1cdb0";
 
 export function pageBuilder(
   site: "public" | "portal",
@@ -42,10 +41,9 @@ export const resourcePageContent = pageBuilder(
 );
 export const publicEditor = pageBuilder("public", PUBLIC_HOME_ID);
 export const portalEditor = pageBuilder("portal", PORTAL_HOME_ID);
-export const audiencePreviewEditor = pageBuilder("portal", AUDIENCE_PREVIEW_ID);
 export const priorityContent = pageBuilder("portal", PRIORITIES_ID, "content");
-export const disclosureContent = pageBuilder(
+export const copyrightContent = pageBuilder(
   "public",
-  DISCLOSURE_ID,
+  COPYRIGHT_ID,
   "content",
 );
