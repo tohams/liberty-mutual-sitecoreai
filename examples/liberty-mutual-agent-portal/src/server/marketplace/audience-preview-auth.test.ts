@@ -20,12 +20,16 @@ test("Auth0 targets the verified installed Marketplace tenant and the server-con
   const authorization = audiencePreviewAuthorizationParameters(configuration);
   assert.equal(
     AUDIENCE_PREVIEW_TENANT_ID,
-    "b0688afd-d747-4582-efe5-08defda484ba",
+    "ba40a477-d452-493b-fb23-08df2a1b4cda",
   );
   assert.equal(authorization.tenant_id, AUDIENCE_PREVIEW_TENANT_ID);
   assert.notEqual(
     authorization.tenant_id,
     "97eea84c-ac47-4d91-7e4f-08defdaaa7df",
+  );
+  assert.notEqual(
+    authorization.tenant_id,
+    "b0688afd-d747-4582-efe5-08defda484ba",
   );
   assert.equal(authorization.organization_id, "org_XqL3u1MSNVuubOTb");
   assert.equal(

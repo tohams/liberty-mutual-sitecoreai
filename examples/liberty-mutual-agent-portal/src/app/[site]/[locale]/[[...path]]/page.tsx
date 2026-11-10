@@ -9,6 +9,7 @@ import { notFound, redirect } from "next/navigation";
 import { draftMode, headers } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import client from "@/lib/sitecore-client";
+import { getSitecorePreviewClient } from "@/lib/sitecore-preview-client";
 import { getSession } from "@/server/auth/session";
 import { getPortalBootstrap, getEditorBootstrap } from "@/server/data/portal";
 import { editorPreviewAgent } from "@/server/data/editor-preview-agent";
@@ -50,22 +51,25 @@ export default async function PortalPage({ params, searchParams }: PageProps) {
   if (site !== scConfig.defaultSite || locale !== scConfig.defaultLanguage)
     notFound();
   const draft = await draftMode();
+  const previewClient = draft.isEnabled ? getSitecorePreviewClient() : null;
   const session = await getSession();
   if (!draft.isEnabled && !session) redirect("/login");
 
   // Draft Mode is minted by the SDK editing handler after it verifies the editing secret.
   // A query-string switch alone cannot grant editor access to agency records.
-  const previewData = draft.isEnabled
-    ? client.getPreviewData(await headers())
+  const previewData = previewClient
+    ? previewClient.getPreviewData(await headers())
     : undefined;
   const route = "/" + client.parsePath(path).replace(/^\/+/, "");
   const contentPath = portalContentPath(route, path);
   // Operational aliases change the CMS path, but must retain the SDK's native variant selection.
   const personalize = getPersonalizedRewriteData(path.join("/"));
-  const page = draft.isEnabled
+  const page = previewClient
     ? isDesignLibraryPreviewData(previewData)
-      ? await client.getDesignLibraryData(previewData, { fetch: uncachedFetch })
-      : await client.getPreview(previewData, { fetch: uncachedFetch })
+      ? await previewClient.getDesignLibraryData(previewData, {
+          fetch: uncachedFetch,
+        })
+      : await previewClient.getPreview(previewData, { fetch: uncachedFetch })
     : await client.getPage(
         contentPath,
         { site, locale, personalize },
