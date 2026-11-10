@@ -12,6 +12,7 @@ import type { AudiencePreviewPage } from "@/server/marketplace/audience-preview-
 import { getAudiencePreviewBootstrap } from "./bootstrap";
 import type { AudiencePreviewViewSession } from "./preview-sessions";
 import { getAudiencePreviewLayout } from "./preview-client";
+import styles from "./view.module.css";
 
 export async function AudiencePreviewView({
   session,
@@ -55,42 +56,31 @@ export async function AudiencePreviewView({
   return (
     <NextIntlClientProvider locale={selected.language} messages={{}}>
       <Providers page={page}>
-        <header
-          style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 100,
-            padding: "12px 24px",
-            background: "#f3edff",
-            borderBottom: "1px solid #dbcef1",
-            color: "#34204e",
-            fontFamily: "Arial, sans-serif",
-            fontSize: 13,
-            lineHeight: 1.5,
-          }}
-        >
-          <strong>Audience Preview</strong>
-          <span style={{ marginLeft: 16 }}>
-            {selected.name} · {data.agent.roleLabel} ·{" "}
-            {session.input.licensedStates.length
-              ? session.input.licensedStates.join(", ")
-              : "No licensed states"}
-          </span>
-          <span style={{ float: "right" }}>Read-only</span>
-        </header>
-        <div inert>
-          <PortalApp
-            initialData={data}
-            isEditing
-            route={route}
-            workspaceEditorial={resourcesSearch ? undefined : guidance}
-            agencyPriorities={renderPlaceholder(placements.agencyPriorities)}
-            sharedDisclosure={renderPlaceholder(placements.sharedDisclosure)}
-            resourcesSearch={resourcesSearch}
-            productsSpotlight={renderPlaceholder(placements.productSpotlight)}
-            supportForm={renderPlaceholder(placements.supportForm)}
-            pageContent={pageContent}
-          />
+        <div className={styles.preview}>
+          <header className={styles.bar}>
+            <strong>Audience Preview</strong>
+            <span className={styles.summary}>
+              {selected.name} · {data.agent.roleLabel} ·{" "}
+              {session.input.licensedStates.length
+                ? session.input.licensedStates.join(", ")
+                : "No licensed states"}
+            </span>
+            <span className={styles.readOnly}>Read-only</span>
+          </header>
+          <div className={styles.portal} inert>
+            <PortalApp
+              initialData={data}
+              isEditing
+              route={route}
+              workspaceEditorial={resourcesSearch ? undefined : guidance}
+              agencyPriorities={renderPlaceholder(placements.agencyPriorities)}
+              sharedDisclosure={renderPlaceholder(placements.sharedDisclosure)}
+              resourcesSearch={resourcesSearch}
+              productsSpotlight={renderPlaceholder(placements.productSpotlight)}
+              supportForm={renderPlaceholder(placements.supportForm)}
+              pageContent={pageContent}
+            />
+          </div>
         </div>
       </Providers>
     </NextIntlClientProvider>

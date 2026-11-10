@@ -1,5 +1,6 @@
 import "server-only";
 import type { SessionData } from "@auth0/nextjs-auth0/types";
+import { filterDefaultIdTokenClaims } from "@auth0/nextjs-auth0/server";
 import {
   AUDIENCE_PREVIEW_ORGANIZATION_ID,
   AUDIENCE_PREVIEW_TENANT_ID,
@@ -13,6 +14,7 @@ export function bindAudiencePreviewSession(
 ): SessionData {
   return {
     ...session,
+    user: filterDefaultIdTokenClaims(session.user),
     audiencePreviewClientId: configuration.clientId,
     audiencePreviewOrganizationId: AUDIENCE_PREVIEW_ORGANIZATION_ID,
     audiencePreviewTenantId: AUDIENCE_PREVIEW_TENANT_ID,
@@ -43,6 +45,28 @@ const diagnosticCodes = new Set([
   "mfa_required",
   "session_binding_mismatch",
 ]);
+const oauthDiagnosticCodes = new Set([
+  "invalid_request",
+  "invalid_client",
+  "invalid_grant",
+  "unauthorized_client",
+  "unsupported_grant_type",
+  "invalid_scope",
+  "access_denied",
+  "server_error",
+  "temporarily_unavailable",
+  "login_required",
+  "consent_required",
+  "interaction_required",
+  "mfa_required",
+  "unknown_error",
+]);
+
+function diagnosticRecord(value: unknown): Record<string, unknown> | undefined {
+  return value !== null && typeof value === "object" && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : undefined;
+}
 
 /** Bounded operational facts only: no token, raw error, user, or cookie value. */
 export function audiencePreviewTokenDiagnostic(
@@ -50,10 +74,27 @@ export function audiencePreviewTokenDiagnostic(
   session: SessionData | null | undefined,
   nowSeconds = Date.now() / 1_000,
 ) {
-  const code =
-    error && typeof error === "object" && "code" in error
-      ? error.code
+  const outer = diagnosticRecord(error);
+  const code = outer?.code;
+  // Installed Auth0 SDK: AccessTokenError.cause is an OAuth2Error. The SDK
+  // normally drops the provider status; report one only if actually present.
+  const cause = diagnosticRecord(outer?.cause);
+  const oauthCode =
+    typeof cause?.code === "string" && oauthDiagnosticCodes.has(cause.code)
+      ? cause.code
       : undefined;
+  const oauthStatus = [
+    cause?.status,
+    cause?.statusCode,
+    outer?.status,
+    outer?.statusCode,
+  ].find(
+    (value): value is number =>
+      typeof value === "number" &&
+      Number.isInteger(value) &&
+      value >= 400 &&
+      value <= 599,
+  );
   const expiresAt = session?.tokenSet?.expiresAt;
   return {
     code:
@@ -68,5 +109,7 @@ export function audiencePreviewTokenDiagnostic(
             Math.min(86_400, Math.trunc(expiresAt - nowSeconds)),
           )
         : null,
+    ...(oauthCode ? { oauthCode } : {}),
+    ...(oauthStatus !== undefined ? { oauthStatus } : {}),
   };
 }

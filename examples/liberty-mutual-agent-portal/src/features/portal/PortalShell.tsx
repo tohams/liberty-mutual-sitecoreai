@@ -269,7 +269,9 @@ export function PortalShell({
           <div className="sidebar-state">
             <PortalIcon name="pin" width="16" />
             <span>
-              {data.agency.city}, {stateNames[data.agency.state]}
+              {[data.agency.city, stateNames[data.agency.state]]
+                .filter(Boolean)
+                .join(", ")}
             </span>
           </div>
         </div>
