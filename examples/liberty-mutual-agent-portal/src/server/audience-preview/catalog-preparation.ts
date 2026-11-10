@@ -28,6 +28,13 @@ import {
   type AudienceDecisionDependencies,
 } from "./decisions";
 import { getAudiencePreviewLayout } from "./preview-client";
+import {
+  catalogRowFailure,
+  recordCatalogRowFailure,
+  storedCatalogRowFailure,
+  type CatalogFailureStage,
+  type CatalogRowFailure,
+} from "./catalog-diagnostics";
 
 const TOTAL = 42;
 const WORKERS = 3;
@@ -49,6 +56,7 @@ interface CatalogRow {
   verifiedFor?: string;
   profileId?: string;
   failureFor?: string;
+  failure?: CatalogRowFailure;
 }
 interface CatalogJob {
   id: string;
@@ -76,6 +84,7 @@ export interface CatalogPreparationStatus {
     "planning" | "importing" | "verifying" | "preparing" | "ready" | "failed";
   retryAfterSeconds: 3;
   message: string;
+  failedRows?: CatalogRowFailure[];
 }
 export interface CatalogPreparationDependencies {
   profiles: AudienceProfileDependencies;
@@ -142,6 +151,24 @@ function status(
     failedCount,
     phase,
     retryAfterSeconds: 3,
+    ...(job && failedCount
+      ? {
+          failedRows: job.rows
+            .filter(
+              (row) =>
+                row.failureFor === pageKey(page) &&
+                Number.isInteger(row.index) &&
+                row.index >= 0 &&
+                row.index < TOTAL,
+            )
+            .map((row) =>
+              storedCatalogRowFailure(row.index, {
+                ...storedCatalogRowFailure(row.index, row.failure),
+                source: row.source,
+              }),
+            ),
+        }
+      : {}),
     message:
       state === "ready"
         ? "All 42 audiences are prepared and verified."
@@ -156,11 +183,52 @@ export async function readCatalogPreparation(
   page: AudiencePreviewPage,
   deps: CatalogPreparationDependencies,
 ): Promise<CatalogPreparationStatus> {
-  return status(
+  const job =
     (await deps.profiles.store.read<CatalogJob>(catalogKey(deps)))?.value ||
-      null,
-    page,
-  );
+    null;
+  // Diagnose retained legacy failures with state reads only. This GET neither advances
+  // preparation nor changes the saved manifest or any native profile.
+  if (job)
+    await Promise.all(
+      job.rows
+        .filter(
+          (row) =>
+            row.failureFor === pageKey(page) &&
+            Number.isInteger(row.index) &&
+            row.index >= 0 &&
+            row.index < TOTAL,
+        )
+        .map(async (row) => {
+          const profile = await deps.profiles.store.read<AudienceProfileJob>(
+            audiencePreviewProfileKey(
+              row.selectorHash,
+              deps.profiles.namespace,
+            ),
+          );
+          const failure =
+            !row.failure &&
+            profile?.value.phase === "failed" &&
+            profile.value.code
+              ? catalogRowFailure(row.index, "profile-preparation", {
+                  code: profile.value.code,
+                })
+              : storedCatalogRowFailure(row.index, row.failure);
+          row.failure = storedCatalogRowFailure(row.index, {
+            ...failure,
+            source: row.source,
+            ...(profile
+              ? {
+                  profilePhase: profile.value.phase,
+                  profileCode: profile.value.code,
+                  identitySent: profile.value.identitySent === true,
+                  hasCatalogProof: !!profile.value.catalogProof,
+                  hasSubmissionProof: !!profile.value.submission,
+                }
+              : {}),
+          });
+        }),
+    );
+  return status(job, page);
 }
 
 function exactRetainedPlan(
@@ -425,6 +493,7 @@ export async function advanceCatalogPreparation(
         .slice(0, WORKERS);
       await Promise.all(
         selected.map(async (row) => {
+          let stage: CatalogFailureStage = "profile-preparation";
           try {
             const input = AUDIENCE_PREVIEW_SCENARIOS[row.index];
             if (row.source === "bulk") {
@@ -478,6 +547,7 @@ export async function advanceCatalogPreparation(
                 "INVALID_PREVIEW_PROFILE",
                 "The audience profile could not be verified.",
               );
+            stage = "native-decision";
             if (deps.verifyProfile)
               await deps.verifyProfile(page, result.profile);
             else {
@@ -486,15 +556,22 @@ export async function advanceCatalogPreparation(
                 result.profile,
                 deps.decisions,
               );
+              stage = "page-layout";
               await getAudiencePreviewLayout(page, decisions);
             }
             row.profileId = result.profile.profileId;
             row.verifiedFor = pageKey(page);
             delete row.failureFor;
+            delete row.failure;
           } catch (error) {
-            if (error instanceof AudiencePreviewError && error.retryable)
+            const failure = catalogRowFailure(row.index, stage, error);
+            if (error instanceof AudiencePreviewError && error.retryable) {
+              recordCatalogRowFailure(failure, "pending");
               return;
+            }
             row.failureFor = pageKey(page);
+            row.failure = failure;
+            recordCatalogRowFailure(failure, "failed");
           }
         }),
       );
@@ -509,6 +586,9 @@ export async function advanceCatalogPreparation(
           ) {
             delete row.verifiedFor;
             row.failureFor = pageKey(page);
+            row.failure = catalogRowFailure(row.index, "profile-preparation", {
+              code: "INVALID_PREVIEW_PROFILE",
+            });
           }
         job.phase = "failed";
         job.failureCode = "INVALID_PREVIEW_PROFILE";

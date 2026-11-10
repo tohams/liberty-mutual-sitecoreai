@@ -2,17 +2,38 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Check, CircleAlert, LoaderCircle, UsersRound } from "lucide-react";
-import { AUDIENCE_PREVIEW_SCENARIOS } from "./scenarios";
+import {
+  AUDIENCE_PREVIEW_SCENARIOS,
+  ROLE_OPTIONS,
+  STATE_OPTIONS,
+} from "./scenarios";
 import { AUDIENCE_PREVIEW_LOGIN, AudiencePreviewSsoBridge } from "./sso";
 import {
   isAudiencePreparationProgress,
   type AudiencePreparationProgress,
+  type CatalogFailureStage,
 } from "./preparation-types";
 import styles from "./AudiencePreparation.module.css";
 
 const ENDPOINT = "/api/audience-preview/prepare";
 const TOTAL = AUDIENCE_PREVIEW_SCENARIOS.length;
 const TIMEOUT_MS = 15 * 60_000;
+const FAILURE_LABELS: Record<CatalogFailureStage, string> = {
+  "profile-preparation": "Prepare the profile",
+  "native-decision": "Evaluate personalization",
+  "page-layout": "Load the page",
+  unrecorded: "Earlier preparation attempt",
+};
+function scenarioLabel(index: number): string {
+  const scenario = AUDIENCE_PREVIEW_SCENARIOS[index];
+  const role = ROLE_OPTIONS.find(
+    (option) => option.value === scenario.role,
+  )!.label;
+  const states = scenario.licensedStates.map(
+    (state) => STATE_OPTIONS.find((option) => option.value === state)!.label,
+  );
+  return `${role} · ${new Intl.ListFormat("en-US", { type: "conjunction" }).format(states)}`;
+}
 
 async function payload(response: Response): Promise<unknown> {
   try {
@@ -246,11 +267,92 @@ export function AudiencePreparation() {
             <p role="status" aria-live="polite" aria-atomic="true">
               {progress.status === "ready"
                 ? "All audiences are ready for preview."
-                : busy
-                  ? "Preparing audiences. Keep this page open; progress is saved automatically."
-                  : "Select Prepare audiences to begin or continue."}
+                : progress.status === "failed"
+                  ? "Audience preparation needs attention. Review the details below before continuing."
+                  : busy
+                    ? "Preparing audiences. Keep this page open; progress is saved automatically."
+                    : "Select Prepare audiences to begin or continue."}
             </p>
           </div>
+        ) : null}
+        {progress?.failedRows?.length ? (
+          <section
+            className={styles.failures}
+            aria-labelledby="failed-audiences-title"
+          >
+            <h2 id="failed-audiences-title">Needs attention</h2>
+            <ul>
+              {progress.failedRows.map((row) => (
+                <li key={row.index}>
+                  <strong>{scenarioLabel(row.index)}</strong>
+                  <span>{FAILURE_LABELS[row.stage]}</span>
+                  <code>{row.code}</code>
+                  {row.status ? <span>HTTP {row.status}</span> : null}
+                  {row.source ||
+                  row.profilePhase ||
+                  row.profileCode ||
+                  row.identitySent !== undefined ||
+                  row.hasCatalogProof !== undefined ||
+                  row.hasSubmissionProof !== undefined ? (
+                    <dl>
+                      {row.source ? (
+                        <>
+                          <dt>Source</dt>
+                          <dd>
+                            {row.source === "bulk"
+                              ? "Batch preparation"
+                              : "Existing audience record"}
+                          </dd>
+                        </>
+                      ) : null}
+                      {row.profilePhase ? (
+                        <>
+                          <dt>Stored state</dt>
+                          <dd>
+                            <code>{row.profilePhase}</code>
+                          </dd>
+                        </>
+                      ) : null}
+                      {row.profileCode && row.profileCode !== row.code ? (
+                        <>
+                          <dt>Stored code</dt>
+                          <dd>
+                            <code>{row.profileCode}</code>
+                          </dd>
+                        </>
+                      ) : null}
+                      {row.identitySent !== undefined ? (
+                        <>
+                          <dt>Identity attempt</dt>
+                          <dd>
+                            {row.identitySent ? "Recorded" : "Not recorded"}
+                          </dd>
+                        </>
+                      ) : null}
+                      {row.hasCatalogProof !== undefined ? (
+                        <>
+                          <dt>Batch verification</dt>
+                          <dd>
+                            {row.hasCatalogProof ? "Recorded" : "Not recorded"}
+                          </dd>
+                        </>
+                      ) : null}
+                      {row.hasSubmissionProof !== undefined ? (
+                        <>
+                          <dt>Import receipt</dt>
+                          <dd>
+                            {row.hasSubmissionProof
+                              ? "Recorded"
+                              : "Not recorded"}
+                          </dd>
+                        </>
+                      ) : null}
+                    </dl>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </section>
         ) : null}
         {error ? (
           <div className={styles.error} role="alert">
