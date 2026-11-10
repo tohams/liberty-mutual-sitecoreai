@@ -3,7 +3,11 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { customerDemoAiContext, customerDemoChapters } from "./content";
+import {
+  customerDemoAiContext,
+  customerDemoChapters,
+  customerDemoOpening,
+} from "./content";
 import {
   customerDemoSchedule,
   DEMO_CLOSING_MINUTES,
@@ -159,29 +163,29 @@ test("both customer journeys explain demonstrated behavior and a bounded AI-assi
 test("the focused live plan leaves three minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [2, 1, 4, 8, 1, 1, 2],
+    [2, 1, 3, 7, 2, 1, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [5, 2, 2, 4, 4, 4],
+    [5, 1, 2, 4, 4, 4],
   );
   const schedule = customerDemoSchedule(customerDemoChapters);
-  assert.equal(DEMO_OPENING_MINUTES, 1);
+  assert.equal(DEMO_OPENING_MINUTES, 3);
   assert.equal(DEMO_CLOSING_MINUTES, 1);
   assert.equal(DEMO_BUFFER_MINUTES, 3);
   assert.equal(DEMO_TOTAL_MINUTES, 45);
   assert.deepEqual(
     schedule.map(({ start, end }) => [start, end]),
     [
-      [1, 3],
-      [3, 4],
-      [4, 8],
-      [8, 16],
-      [16, 17],
-      [17, 18],
-      [18, 20],
-      [20, 25],
-      [25, 27],
+      [3, 5],
+      [5, 6],
+      [6, 9],
+      [9, 16],
+      [16, 18],
+      [18, 19],
+      [19, 21],
+      [21, 26],
+      [26, 27],
       [27, 29],
       [29, 33],
       [33, 37],
@@ -962,6 +966,14 @@ test("the presenter narrative leads with outcomes and keeps operational cautions
     "utf8",
   );
   assert.match(page, /<h3>\{step\.title\}<\/h3>/);
+  assert.match(page, /Who is acting:<\/strong> \{step\.persona\}/);
+  assert.match(page, /Business task:<\/strong> \{step\.scenario\}/);
+  assert.equal(customerDemoOpening.presenter, "Angela Gustafson");
+  assert.match(prose(customerDemoOpening.talkTrack), /Microsoft Copilot/);
+  assert.match(
+    prose(customerDemoOpening.talkTrack),
+    /two requested journeys in order/,
+  );
   assert.match(page, /Customer request:<\/strong> \{step\.label\}/);
   const preparation = page.slice(
     page.indexOf('<details id="preparation"'),

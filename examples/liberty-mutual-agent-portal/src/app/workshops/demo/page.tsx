@@ -8,11 +8,13 @@ import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
 import {
   customerDemoAiContext,
   customerDemoChapters,
+  customerDemoOpening,
 } from "@/features/workshops/customer-demo/content";
 import {
   customerDemoSchedule,
   DEMO_BUFFER_MINUTES,
   DEMO_CLOSING_MINUTES,
+  DEMO_OPENING_MINUTES,
   DEMO_TOTAL_MINUTES,
   elapsedTime,
 } from "@/features/workshops/customer-demo/timing";
@@ -81,7 +83,7 @@ export default async function CustomerDemoPage() {
           <aside className={styles.navigation}>
             <nav aria-label="Customer demonstration sequence">
               <a href="#preparation">Before presenting</a>
-              <a href="#opening">00:00 · Opening</a>
+              <a href="#opening">00:00 · AI introduction</a>
               {customerDemoChapters.map((chapter) => (
                 <div key={chapter.id} className={styles.navChapter}>
                   <a href={`#${chapter.id}`} className={styles.navChapterTitle}>
@@ -124,10 +126,12 @@ export default async function CustomerDemoPage() {
                 <h2>Open the accounts and tools before the audience joins</h2>
                 <Lines
                   lines={[
+                    "Aaron leads the meeting introduction, product overview, and case studies in their separate agenda slots. Angela’s opening here is included in the 45-minute use-case block. Keep questions in chat for the separate five-minute Q&A after this block, and leave the full roadmap to its own agenda slot.",
                     "Keep this guide signed in. Use presenter agent logins **avery.01** and **daniel.01** at the [**Agent Portal login**](https://liberty-mutual-agent-portal.vercel.app/login). Their shared synthetic portal password is **Sitecore1**. Use separate browser profiles for the two agents so their sessions remain independent.",
                     "Open [**Current profile identities**](/workshops/reset#current-profiles), select **Workshop number 01**, and choose **Refresh status**. Copy the **Native profile ID** for **avery.01** and **daniel.01** for the native rule tests in step 08. Refresh this table after a reset so the tests use the current profiles. If an ID is unavailable, open [**SitecoreAI Profiles**](https://app.sitecorecloud.io/optimization/profiles?organization=org_XqL3u1MSNVuubOTb&tenantId=97eea84c-ac47-4d91-7e4f-08defdaaa7df), choose **Search filter → Liberty Mutual agent identity**, and paste that row’s **Agent identity**. Open the matching profile, and copy the UUID from its URL. Reading status does not start a reset.",
                     "Prepare three separate **Sitecore Cloud** browser profiles: **Author** can edit and submit, **Approver** can approve, and an **administrator acting as publisher** performs publication. Open **Safeco Insurance Company of America POC** → **SitecoreAI / Demo**. Keeping these profiles ready demonstrates the actual permission boundaries without spending the live slot signing in.",
                     "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, their resource guidance, and the shared disclosure. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
+                    "Before each demonstration, show the corresponding customer-journey visual in the shared presentation, with the current requirement highlighted. Introduce the person, the business task, and the expected outcome before switching to the live site. Follow the original public-website and Agent Portal order.",
                     "Open the [**public website**](https://liberty-mutual-public-site.vercel.app/), [**published-page API experience**](/workshops/content-api), and **SitecoreAI** in the prepared browser profiles. Keep the presentation’s **Experience Edge content delivery** slide ready for the architecture introduction before the API example.",
                     "Prepare [**Communication preferences**](/workshops/preferences) before the audience joins. Select **Load preference examples** once, and use **Check import status** until **SitecoreAI confirmed the imported records** appears. Confirm **Cameron Ellis - Allowed** has **marketingSuppressed = false** and **Cameron Ellis - Suppressed** has **marketingSuppressed = true**. Record both **Native profile IDs**. These two records share the same agency, producer role, and Texas context, so the communication choice isolates the reason for their different marketing eligibility. They are separate from the numbered portal logins.",
                     "In **Marketing outreach preview**, select **Run eligibility check**, and confirm **1 eligible recipient**: only **Cameron Ellis - Allowed** is included. Keep this tab open with the baseline result ready for step 08. The preview must display an actual native eligibility decision; a submitted preference badge or an Audience size estimate is not the completion check. Step 08 starts the opt-out before comparing Avery and Daniel, so the native import can process while those profiles are shown. Restore the starting choices after the demonstration, outside the 45 minutes. Keep both **Native profile IDs** and the native rule unchanged.",
@@ -152,26 +156,24 @@ export default async function CustomerDemoPage() {
             </details>
 
             <section id="opening" className={styles.opening}>
-              <span className={styles.timing}>00:00–01:00 · Opening</span>
-              <h2>Trusted content, relevant experiences, and simpler change</h2>
+              <span className={styles.timing}>
+                00:00–{elapsedTime(DEMO_OPENING_MINUTES)} · AI introduction
+              </span>
+              <h2>{customerDemoOpening.title}</h2>
               <p>
-                Start with a customer finding approved guidance on the public
-                website. Then show how that same governed foundation helps
-                independent agents and gives business users control over the
-                content that serves them.
+                <strong>Presenter:</strong> {customerDemoOpening.presenter}.
+                Introduce the role of AI assistance, then hand over to the live
+                customer scenarios. The introduction is part of the 45-minute
+                limit.
               </p>
               <div className={styles.talkTrack}>
                 <h3>
                   <Mic2 size={17} aria-hidden="true" /> Talk track
                 </h3>
-                <p>
-                  “We’ll start where you plan to start: your public website
-                  content. A customer finds trusted guidance, and a marketer
-                  manages the content through review and publication. We’ll then
-                  apply that same foundation to your existing agent portal, so
-                  business users can promote relevant products and keep approved
-                  wording consistent across channels.”
-                </p>
+                {customerDemoOpening.talkTrack.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+                <p>{customerDemoOpening.handoff}</p>
               </div>
               <table className={styles.runOfShow}>
                 <caption>
@@ -179,9 +181,9 @@ export default async function CustomerDemoPage() {
                 </caption>
                 <tbody>
                   <tr>
-                    <th scope="row">Opening</th>
-                    <td>00:00–01:00</td>
-                    <td>1 minute</td>
+                    <th scope="row">Angela’s AI introduction</th>
+                    <td>00:00–{elapsedTime(DEMO_OPENING_MINUTES)}</td>
+                    <td>{DEMO_OPENING_MINUTES} minutes</td>
                   </tr>
                   <tr>
                     <th scope="row">
@@ -189,8 +191,11 @@ export default async function CustomerDemoPage() {
                         Trusted Answers, Wherever the Journey Begins
                       </a>
                     </th>
-                    <td>01:00–{elapsedTime(publicEnd)}</td>
-                    <td>{publicEnd - 1} minutes</td>
+                    <td>
+                      {elapsedTime(DEMO_OPENING_MINUTES)}–
+                      {elapsedTime(publicEnd)}
+                    </td>
+                    <td>{publicEnd - DEMO_OPENING_MINUTES} minutes</td>
                   </tr>
                   <tr>
                     <th scope="row">
@@ -281,6 +286,14 @@ export default async function CustomerDemoPage() {
                       <p>
                         <strong>Customer request:</strong> {step.label}
                       </p>
+                      <div className={styles.observations}>
+                        <p>
+                          <strong>Who is acting:</strong> {step.persona}
+                        </p>
+                        <p>
+                          <strong>Business task:</strong> {step.scenario}
+                        </p>
+                      </div>
                       <p className={styles.objective}>
                         <strong>Outcome:</strong> {step.objective}
                       </p>
@@ -360,9 +373,10 @@ export default async function CustomerDemoPage() {
                 </p>
               </div>
               <p>
-                Return to the agreed meeting agenda for the separate roadmap and
-                Q&amp;A discussion. Use the two-year roadmap horizon requested
-                by Liberty Mutual.
+                The customer agenda reserves five minutes for Q&amp;A after this
+                45-minute demonstration block. The product roadmap follows in
+                its separate agenda slot, using the horizon requested by Liberty
+                Mutual.
               </p>
             </section>
 

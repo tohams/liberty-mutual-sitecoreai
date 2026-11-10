@@ -57,6 +57,19 @@ export const customerDemoAiContext: Record<
   },
 };
 
+/** Angela introduces the AI vision before the customer-prescribed live sequence. */
+export const customerDemoOpening = {
+  presenter: "Angela Gustafson",
+  title: "AI assistance with business control",
+  talkTrack: [
+    "Some of your colleagues have already explored the Agent Portal with us and worked directly in SitecoreAI. We have expanded that foundation to the public website, so you can see how the same governed platform supports both experiences.",
+    "We know your teams use Microsoft Copilot. Our vision is for AI assistance to become a natural part of the marketer’s working day: understanding signals, considering a business goal, and helping the team prepare its next action. Human judgment and publishing controls remain central to that process.",
+    "We will follow your two requested journeys in order. First, a customer finds trusted guidance, and the content team keeps it current. Then, an independent agent receives relevant priorities, and a marketer changes that experience without a code release. Watch for the controls behind each result as well as the visitor experience. The separate roadmap discussion will expand on the product direction.",
+  ],
+  handoff:
+    "Let’s begin with the public-site visitor and the first requirement in your guide: asking an insurance question in everyday language.",
+};
+
 /** Thirteen customer cards, retaining the original row and left-to-right order. */
 export const customerDemoChapters: DemoChapter[] = [
   {
@@ -74,6 +87,9 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
         durationMinutes: 2,
+        persona: "Prospective customer",
+        scenario:
+          "The visitor wants useful insurance guidance without already knowing Liberty Mutual’s terminology.",
         objective:
           "Help a visitor find relevant approved guidance from a conversational question, with an agent-assisted next step when the subject needs further help.",
         stopWhen:
@@ -109,6 +125,9 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
         durationMinutes: 1,
+        persona: "Public-site marketer",
+        scenario:
+          "The marketer needs the guidance to retain its meaning, source, and applicability when people discover it through search or an AI experience.",
         objective:
           "Make approved guidance easier to find and reuse, with its source, applicability, and review information kept explicit.",
         stopWhen:
@@ -152,7 +171,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "Published content is automatically indexed by enterprise search platform",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 4,
+        durationMinutes: 3,
+        persona:
+          "Public-site publisher, following marketer and approver review",
+        scenario:
+          "An approved guidance change must reach Search automatically, with its existing product, state, and audience classifications.",
         objective:
           "Keep approved wording and classifications aligned across publishing and Search, reducing duplicate maintenance through one controlled update.",
         stopWhen:
@@ -191,7 +214,10 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketing builds and publishes pages from a library of pre-approved components",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
-        durationMinutes: 8,
+        durationMinutes: 7,
+        persona: "Public-site marketer, approver, and publisher",
+        scenario:
+          "A marketer needs a new coverage page using approved components, with review before customers can see it.",
         objective:
           "Create, preview, and publish pages without an engineering ticket, using approved components and a clear review process.",
         stopWhen:
@@ -232,8 +258,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketing can publish content from Profound directly into the CMS / DXP",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
-        durationMinutes: 1,
+        durationMinutes: 2,
         mode: "explain",
+        persona: "Public-site marketer",
+        scenario:
+          "The marketer wants to act on an external content opportunity while keeping the resulting page change within SitecoreAI’s review process.",
         objective:
           "Bring proposed Profound content into the same governed publishing process, with human review before release.",
         stopWhen:
@@ -261,6 +290,9 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
         durationMinutes: 1,
+        persona: "Public-site marketer",
+        scenario:
+          "The marketer needs timely evidence of visits, clicks, and reading depth to decide which guidance to improve.",
         objective:
           "Help marketers choose which guidance to improve using visits, clicks, and reading-depth signals.",
         stopWhen:
@@ -308,6 +340,9 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
         durationMinutes: 2,
+        persona: "Content team supporting another digital experience",
+        scenario:
+          "Another application needs the same approved guidance without maintaining another copy.",
         objective:
           "Reuse one approved answer through a stable API, reducing duplicate content maintenance across applications.",
         stopWhen:
@@ -366,7 +401,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The same approved page now serves both experiences. Next, show how relevant guidance helps independent agents place business with Liberty Mutual.",
+          "The same approved content can serve another application. Next, move to the second journey in your guide: a relevant Liberty Mutual experience for independent agents.",
       },
     ],
   },
@@ -385,6 +420,10 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Agent Experience",
         sourceSlide: 11,
         durationMinutes: 5,
+        persona:
+          "Independent agents Avery and Daniel, followed by a portal marketer",
+        scenario:
+          "Agents with different roles and agency context need relevant priorities, while a recorded marketing opt-out must stop outreach.",
         objective:
           "Match guidance to each agent’s business, and honor a recorded marketing opt-out through a native eligibility decision.",
         stopWhen:
@@ -464,7 +503,10 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Agent sees consistent brand and design across all portal pages",
         phase: "Agent Experience",
         sourceSlide: 11,
-        durationMinutes: 2,
+        durationMinutes: 1,
+        persona: "Independent agent, followed by a portal marketer",
+        scenario:
+          "Agents need a consistent experience, and authors need approved components and clear places in which to use them.",
         objective:
           "Let business users manage content within a consistent portal design and approved component choices.",
         stopWhen:
@@ -500,6 +542,9 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Liberty Business Experience",
         sourceSlide: 11,
         durationMinutes: 2,
+        persona: "Portal marketer acting as Author",
+        scenario:
+          "The business wants Texas guidance to lead the principal audience’s priorities without requesting a code change.",
         objective:
           "Part 1 of the priority-change loop: save the new order as a Draft, ready for audience preview, approval, and publication in Part 2.",
         stopWhen:
@@ -533,6 +578,9 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Liberty Business Experience",
         sourceSlide: 11,
         durationMinutes: 4,
+        persona: "Portal marketer, approver, and publisher",
+        scenario:
+          "The team needs to inspect each intended audience experience before releasing the reviewed priority change.",
         objective:
           "Part 2 of the same priority-change loop: preview both experiences, approve and publish the priority change, and verify that it reaches the intended agent without code changes.",
         stopWhen:
@@ -575,6 +623,10 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
         durationMinutes: 4,
+        persona:
+          "Content administrator working through Author, Approver, and publisher roles",
+        scenario:
+          "One disclosure update must remain consistent across the public website and Agent Portal.",
         objective:
           "Keep the public website and Agent Portal aligned by publishing one approved disclosure from a shared source.",
         stopWhen:
@@ -611,6 +663,9 @@ export const customerDemoChapters: DemoChapter[] = [
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
         durationMinutes: 4,
+        persona: "Content administrator and approver",
+        scenario:
+          "The team needs to identify who approved a shared change and restore the earlier wording while keeping its history.",
         objective:
           "Show clear approval accountability, then restore the original disclosure through a new reviewed version while preserving history.",
         stopWhen:
