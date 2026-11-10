@@ -165,7 +165,7 @@ export const customerDemoChapters: DemoChapter[] = [
           {
             file: "demo-public-search-results.png",
             title: "Relevant results and the answer excerpt",
-            alt: "Find **Can I bundle my car and home insurance?** and read its approved answer excerpt directly in the results. Keep the results unopened.",
+            alt: "Find Can I bundle my car and home insurance? and read its approved answer excerpt directly in the results. Keep the results unopened.",
             caption:
               "Find **Can I bundle my car and home insurance?** and read its approved answer excerpt directly in the results. Keep the results unopened.",
             afterAction: 2,
@@ -180,10 +180,10 @@ export const customerDemoChapters: DemoChapter[] = [
             annotations: [
               {
                 x: 1.68,
-                y: 37.2,
-                width: 50.4,
-                height: 4.5,
-                label: "Published guidance for the question",
+                y: 44.3,
+                width: 96.64,
+                height: 10.6,
+                label: "Related bundling guidance",
               },
               {
                 x: 1.68,
