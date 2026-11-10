@@ -1,4 +1,4 @@
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import {
   defineProxy,
   PreviewProxy,
@@ -85,6 +85,10 @@ const personalize = new PersonalizeProxy({
 });
 
 export default function proxy(req: NextRequest) {
+  // Documentation is outside Sitecore page resolution and visitor tracking.
+  if (req.nextUrl.pathname === "/demo" || req.nextUrl.pathname === "/demo/") {
+    return NextResponse.next();
+  }
   return defineProxy(preview, locale, multisite, redirects, personalize).exec(
     req,
   );

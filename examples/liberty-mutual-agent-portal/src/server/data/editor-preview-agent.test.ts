@@ -100,3 +100,68 @@ test("both operational preview contexts stay identity-free and read-only while k
     assert.equal(data.udlIdentity, null);
   }
 });
+
+test("the owned native page variant aligns its read-only shell only from the selected Hero datasource", () => {
+  const contract = JSON.parse(
+    readFileSync(
+      new URL(
+        "../../../../../authoring/items/liberty-mutual-public/portal-audience-preview-contract.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+  const variant = (datasource: string) =>
+    ({
+      mode: { isEditing: false, isPreview: true, isDesignLibrary: false },
+      layout: {
+        sitecore: {
+          route: {
+            itemId: contract.page.id,
+            placeholders: {
+              "headless-campaign-page": [
+                {
+                  componentName: "CampaignPage",
+                  uid: contract.instances.campaignPage,
+                  params: { DynamicPlaceholderId: "1" },
+                  placeholders: {
+                    "headless-campaign-hero-{*}": [
+                      {
+                        componentName: "CampaignHero",
+                        uid: contract.instances.hero,
+                        dataSource: datasource,
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    }) as unknown as Page;
+  const principal = variant(contract.datasources.principal.path);
+  const producer = variant(contract.datasources.producer.path);
+  const before = structuredClone(producer);
+  assert.equal(editorPreviewAgent(principal, true), "avery");
+  assert.equal(editorPreviewAgent(producer, true), "daniel");
+  assert.deepEqual(producer, before);
+  assert.equal(
+    editorPreviewAgent(variant(contract.datasources.producer.id), true),
+    "daniel",
+  );
+  assert.equal(editorPreviewAgent(producer, false), undefined);
+  producer.mode.isPreview = false;
+  assert.equal(editorPreviewAgent(producer, true), undefined);
+  assert.equal(
+    editorPreviewAgent(variant("unknown-datasource"), true),
+    undefined,
+  );
+  const ambiguous = variant(contract.datasources.producer.path);
+  const shell =
+    ambiguous.layout.sitecore.route!.placeholders["headless-campaign-page"][0];
+  shell.placeholders!["headless-campaign-hero-{*}"].push(
+    structuredClone(shell.placeholders!["headless-campaign-hero-{*}"][0]),
+  );
+  assert.equal(editorPreviewAgent(ambiguous, true), undefined);
+});

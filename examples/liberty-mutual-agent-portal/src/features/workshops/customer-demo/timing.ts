@@ -1,4 +1,4 @@
-export const DEMO_OPENING_MINUTES = 1;
+export const DEMO_OPENING_MINUTES = 3;
 export const DEMO_CLOSING_MINUTES = 1;
 export const DEMO_TOTAL_MINUTES = 45;
 export const DEMO_BUFFER_MINUTES = 3;

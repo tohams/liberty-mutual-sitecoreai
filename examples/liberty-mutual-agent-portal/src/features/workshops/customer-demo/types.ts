@@ -1,5 +1,10 @@
 import type { GuideImage, GuideLink } from "../types";
 
+/** Screenshot placed next to the click it explains; unassigned images follow the controls. */
+export interface DemoImage extends GuideImage {
+  afterAction?: number;
+}
+
 /** One card in the customer's prescribed use-case order. */
 export interface DemoStep {
   id: string;
@@ -9,6 +14,10 @@ export interface DemoStep {
   phase: string;
   sourceSlide: 10 | 11;
   durationMinutes: number;
+  /** The person whose task is being demonstrated. */
+  persona: string;
+  /** The business situation that makes this task useful. */
+  scenario: string;
   objective: string;
   /** The observable completion condition for this customer-requested outcome. */
   stopWhen: string;
@@ -17,7 +26,7 @@ export interface DemoStep {
   talkTrack: string[];
   controls: string[];
   links?: GuideLink[];
-  images?: GuideImage[];
+  images?: DemoImage[];
   transition: string;
   mode?: "demonstrate" | "explain";
 }

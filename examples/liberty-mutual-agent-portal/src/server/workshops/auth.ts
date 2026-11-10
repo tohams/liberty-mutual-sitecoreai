@@ -96,9 +96,10 @@ export async function getWorkshopSession(): Promise<WorkshopSession | null> {
   );
 }
 
-/** Allow only canonical workshop paths, never external, encoded, or portal destinations. */
+/** Allow only canonical guide paths, never external, encoded, or agent destinations. */
 export function workshopReturnTo(value: unknown): string {
   if (typeof value !== "string" || value.length > 240) return "/workshops";
+  if (/^\/demo(?:\/public)?\/?$/.test(value)) return value.replace(/\/$/, "");
   if (!/^\/workshops(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*\/?$/.test(value))
     return "/workshops";
   const normalized = value.replace(/\/$/, "");

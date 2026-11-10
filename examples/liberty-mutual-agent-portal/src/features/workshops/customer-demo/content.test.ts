@@ -3,7 +3,11 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { customerDemoAiContext, customerDemoChapters } from "./content";
+import {
+  customerDemoAiContext,
+  customerDemoChapters,
+  customerDemoOpening,
+} from "./content";
 import {
   customerDemoSchedule,
   DEMO_CLOSING_MINUTES,
@@ -159,29 +163,29 @@ test("both customer journeys explain demonstrated behavior and a bounded AI-assi
 test("the focused live plan leaves three minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [2, 1, 4, 8, 1, 1, 2],
+    [2, 1, 3, 7, 2, 1, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [5, 2, 2, 4, 4, 4],
+    [5, 1, 2, 4, 4, 4],
   );
   const schedule = customerDemoSchedule(customerDemoChapters);
-  assert.equal(DEMO_OPENING_MINUTES, 1);
+  assert.equal(DEMO_OPENING_MINUTES, 3);
   assert.equal(DEMO_CLOSING_MINUTES, 1);
   assert.equal(DEMO_BUFFER_MINUTES, 3);
   assert.equal(DEMO_TOTAL_MINUTES, 45);
   assert.deepEqual(
     schedule.map(({ start, end }) => [start, end]),
     [
-      [1, 3],
-      [3, 4],
-      [4, 8],
-      [8, 16],
-      [16, 17],
-      [17, 18],
-      [18, 20],
-      [20, 25],
-      [25, 27],
+      [3, 5],
+      [5, 6],
+      [6, 9],
+      [9, 16],
+      [16, 18],
+      [18, 19],
+      [19, 21],
+      [21, 26],
+      [26, 27],
       [27, 29],
       [29, 33],
       [33, 37],
@@ -273,7 +277,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
     /enter Can I combine home and car coverage\?.*Can I bundle my car and home insurance\?/i,
   );
   for (const required of [
-    /Briefly point out the bundling overview and two practical articles/i,
+    /Briefly point out How to bundle your insurance policies and 3 tips for bundling your insurance policies/i,
     /result and its answer excerpt on the results page/i,
     /Keep every result unopened/i,
     /keyword\(s\).*replace the query/i,
@@ -290,9 +294,12 @@ test("the public Search loop proves both outcomes on the results page", () => {
     entry.stopWhen,
     /range of relevant published results.*approved answer excerpt.*unsupported question.*No results found.*Contact an agent/i,
   );
-  assert.match(prose(entry.expected), /five published results/i);
+  assert.match(prose(entry.expected), /relevant published guidance/i);
+  assert.doesNotMatch(
+    prose(entry.expected),
+    /(?:four|five|4|5) published results/i,
+  );
   for (const title of [
-    "Bundle home and auto insurance",
     "How to bundle your insurance policies",
     "3 tips for bundling your insurance policies",
     "Can I bundle my car and home insurance?",
@@ -356,7 +363,7 @@ test("discovery readiness identifies native structure while keeping external eng
     /Apps → Resource metadata|Content to classify|PublicApprovedAnswer|Data → Approved answers/,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   const preparation = page.slice(
@@ -434,7 +441,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
 
 test("indexing preparation requires a clean published baseline and one unpublished revision", () => {
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   const preparation = page.slice(
@@ -541,8 +548,13 @@ test("Profound is the customer-permitted governed integration explanation, not a
     /Profound output.*Draft.*human review and approval.*publication/i,
   );
   assert.match(text, /proposed integration design/i);
+  assert.match(text, /existing wording.*proposed wording/);
+  assert.match(text, /Show live content.*Scroll to content/);
+  assert.match(text, /AEO opportunities.*Powered by Scrunch/);
+  assert.match(text, /read-only/);
+  assert.match(text, /workflow evidence comes from Liberty Mutual/);
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   const preparation = page.slice(
@@ -551,7 +563,7 @@ test("Profound is the customer-permitted governed integration explanation, not a
   );
   assert.match(
     preparation,
-    /Profound.*proposed integration design.*rather than a configured live connection or packaged connector/i,
+    /Profound.*read-only example.*Do not apply or dismiss.*Profound intake remains a proposed integration design/i,
   );
 });
 
@@ -583,7 +595,7 @@ test("analytics is a report-only loop using genuine consented preparation", () =
     /Start publish|Create a page|Explore bundling|Load content/,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(
@@ -638,7 +650,7 @@ test("API reuse stops after the second experience loads the same published answe
     /Experience Edge content delivery|slide \d+/i,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(
@@ -748,7 +760,7 @@ test("the relevance loop proves profile relevance and same-profile native market
     /Products & appetite|Load preference examples|Restore preferences|Audience size|Recalculate|Pause.*Audience|6 hours/,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(
@@ -767,6 +779,13 @@ test("the design loop opens the placeholder-specific component picker without ch
     prose(entry.actions),
     /Layers.*headless-agency-priorities.*Insert into.*before or after Agency priorities.*filtered Components picker.*Business priorities → Agency priorities.*Close the picker without selecting a component or inserting content/i,
   );
+  assert.match(
+    prose(entry.actions),
+    /Published.*Liberty Mutual — Independent Agents.*Sections → Tone of Voice/,
+  );
+  assert(entry.links?.some((link) => link.href.includes("/design/brandkits?")));
+  assert.match(prose(entry.talkTrack), /sample Liberty Mutual Brand Kit/);
+  assert.equal(entry.durationMinutes, 1);
 });
 
 test("the priority edit remains a draft until both audience previews and approval are complete", () => {
@@ -777,7 +796,7 @@ test("the priority edit remains a draft until both audience previews and approva
   );
   assert.match(
     step("portal-preview").objective,
-    /Part 2 of the same priority-change loop/,
+    /Part 2 of the priority-change loop/,
   );
   assert.match(
     step("portal-priority-edit").stopWhen,
@@ -793,10 +812,10 @@ test("the priority edit remains a draft until both audience previews and approva
   const id = "portal-preview";
   const previewRole = actionIndex(
     id,
-    /Switch to.*administrator acting as publisher.*browser profile.*Page Builder Editor/i,
+    /administrator acting as publisher.*browser profile.*Agent audience preview.*Page Builder.*Personalize/i,
   );
-  const principal = actionIndex(id, /Choose agency-growth.*Preview/);
-  const producer = actionIndex(id, /Choose producer-priorities.*Preview/);
+  const principal = actionIndex(id, /Select Avery agency principal.*Preview/);
+  const producer = actionIndex(id, /Select Daniel producer.*Preview/);
   const submit = actionIndex(id, /Switch back.*Author.*Actions → Submit/);
   const approve = actionIndex(id, /separate Approver.*Actions → Approve/i);
   const publish = actionIndex(
@@ -812,11 +831,11 @@ test("the priority edit remains a draft until both audience previews and approva
   );
   assert.match(
     prose(step(id).actions[principal]),
-    /Close the preview tab.*Editor.*select Agency priorities in Layers again/i,
+    /Close the preview tab.*same Personalize screen/i,
   );
   assert.match(
     prose(step(id).controls),
-    /configured experience in Preview.*Load profile.*real profile.*signed-in agent browsers.*live result/i,
+    /native page variants.*own authored Hero and Callout.*preview page remains unpublished/i,
   );
   assert.match(
     prose(step(id).expected),
@@ -958,10 +977,18 @@ test("the presenter narrative leads with outcomes and keeps operational cautions
     /outcome is complete|complete search outcome|rehearsal receipt|still pending|not configured|not verified/i,
   );
   const page = readFileSync(
-    join(appRoot, "src/app/workshops/demo/page.tsx"),
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
   assert.match(page, /<h3>\{step\.title\}<\/h3>/);
+  assert.match(page, /Who is acting:<\/strong> \{step\.persona\}/);
+  assert.match(page, /Business task:<\/strong> \{step\.scenario\}/);
+  assert.equal(customerDemoOpening.presenter, "Angela Gustafson");
+  assert.match(prose(customerDemoOpening.talkTrack), /Microsoft Copilot/);
+  assert.match(
+    prose(customerDemoOpening.talkTrack),
+    /two requested journeys in order/,
+  );
   assert.match(page, /Customer request:<\/strong> \{step\.label\}/);
   const preparation = page.slice(
     page.indexOf('<details id="preparation"'),
@@ -984,6 +1011,8 @@ test("every launch or inline link has a safe destination and the correct site an
     [DISCLOSURE_ID]: "liberty-mutual-public-site",
     "ae9e45ca-f127-4abe-9ca7-2ff109981998": "liberty-mutual-agent-portal",
     "3127968e-4b21-50c3-ad79-b6bbbe5303b8": "liberty-mutual-agent-portal",
+    "69fc0a48-3e75-426e-9b2b-296d7a3bf8a4": "prospera",
+    "cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947": "liberty-mutual-agent-portal",
   };
   const knownAnchors = new Set([
     ...STABLE_ANCHORS,
@@ -1012,16 +1041,38 @@ test("every launch or inline link has a safe destination and the correct site an
     );
     if (url.hostname === "pages.sitecorecloud.io") {
       assert(["/content", "/editor"].includes(url.pathname));
-      assert.equal(url.searchParams.get("organization"), ORG);
-      assert.equal(url.searchParams.get("tenantName"), TENANT_NAME);
+      const recommendationExample =
+        url.searchParams.get("sc_site") === "prospera";
+      assert.equal(
+        url.searchParams.get("organization"),
+        recommendationExample ? "org_vDtrEzJHxeuuB9cD" : ORG,
+      );
+      assert.equal(
+        url.searchParams.get("tenantName"),
+        recommendationExample
+          ? "sitecoresaa7acd-agverticals97fd-agvertsc3b5"
+          : TENANT_NAME,
+      );
       assert.equal(url.searchParams.get("sc_lang"), "en");
       assert.equal(
         url.searchParams.get("sc_site"),
         nativeSites[url.searchParams.get("sc_itemid")?.toLowerCase() || ""],
       );
     }
-    if (url.hostname === "app.sitecorecloud.io")
-      assert.equal(url.searchParams.get("organization"), ORG);
+    if (url.hostname === "app.sitecorecloud.io") {
+      const recommendationExample = url.pathname.startsWith(
+        "/channels/collection/45177ac3175042dc9bc748d76ba0858a/sites/d4c417d9-0acf-44f9-aec8-c94730b872bb/aeo-opportunities/",
+      );
+      assert.equal(
+        url.searchParams.get("organization"),
+        recommendationExample ? "org_vDtrEzJHxeuuB9cD" : ORG,
+      );
+      if (recommendationExample)
+        assert.equal(
+          url.searchParams.get("tenantName"),
+          "sitecoresaa7acd-agverticals97fd-agvertsc3b5",
+        );
+    }
     if (
       url.hostname === PORTAL_HOST &&
       url.pathname.startsWith("/workshops/")
@@ -1075,6 +1126,12 @@ test("screenshot guidance has real protected assets and crops or callouts stay i
   for (const entry of steps) {
     for (const image of entry.images ?? []) {
       assert.match(image.file, /^[a-z0-9][a-z0-9-]{0,79}\.(png|webp)$/);
+      if (image.afterAction !== undefined) {
+        assert(Number.isInteger(image.afterAction));
+        assert(
+          image.afterAction >= 1 && image.afterAction <= entry.actions.length,
+        );
+      }
       assert(image.alt.trim() && image.caption.trim());
       const file = join(appRoot, "workshop-assets", image.file);
       assert(existsSync(file), `${entry.id}: missing screenshot ${image.file}`);

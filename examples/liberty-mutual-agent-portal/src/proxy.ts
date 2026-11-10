@@ -86,7 +86,7 @@ export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   // Workshop access is separate from the agent session. Server pages check it
   // again before reading guide content; none of these routes initialize CDP.
-  if (path === '/workshops' || path.startsWith('/workshops/')) {
+  if (path === '/workshops' || path.startsWith('/workshops/') || path === '/demo' || path.startsWith('/demo/')) {
     if (path !== '/workshops/login') {
       const workshop = await verifyWorkshopSession(req.cookies.get(WORKSHOP_SESSION_COOKIE)?.value);
       if (!workshop) {

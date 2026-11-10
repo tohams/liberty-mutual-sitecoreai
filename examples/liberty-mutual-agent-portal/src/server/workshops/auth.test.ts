@@ -89,7 +89,11 @@ test("workshop and portal tokens cannot authorize each other even with the share
   });
 });
 
-test("return destinations stay within canonical workshop paths", () => {
+test("return destinations stay within canonical guide paths", () => {
+  assert.equal(workshopReturnTo("/demo"), "/demo");
+  assert.equal(workshopReturnTo("/demo/public"), "/demo/public");
+  assert.equal(workshopReturnTo("/demo/"), "/demo");
+  assert.equal(workshopReturnTo("/demo/public/"), "/demo/public");
   assert.equal(
     workshopReturnTo("/workshops/marketing/personalization"),
     "/workshops/marketing/personalization",
@@ -110,6 +114,10 @@ test("return destinations stay within canonical workshop paths", () => {
     "/workshops-other",
     "/operator",
     "/login",
+    "/demo/unknown",
+    "/demo?next=https://other.example",
+    "/demo/public#part",
+    "/demo/../operator",
     null,
     {},
     "/workshops/" + "a".repeat(241),
