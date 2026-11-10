@@ -20,6 +20,7 @@ import { getAudiencePreviewAuth } from './server/marketplace/audience-preview-au
 import { isAudiencePreviewAuthPath } from './server/marketplace/audience-preview-config';
 import { isAudiencePreviewViewPath, preflightAudiencePreviewView } from './server/marketplace/audience-preview-view-auth';
 import { verifyWorkshopSession, WORKSHOP_SESSION_COOKIE, workshopReturnTo } from './server/workshops/auth';
+import { isDemoGuidePath } from './features/workshops/customer-demo/access';
 
 const preview = new PreviewProxy({
     client,
@@ -102,6 +103,8 @@ export default async function proxy(req: NextRequest) {
     if (isAudiencePreviewViewPath(path)) return preflightAudiencePreviewView(req, response, auth);
     return response;
   }
+  // The two unlinked presenter guides are anonymous and never initialize CDP.
+  if (isDemoGuidePath(path)) return NextResponse.next({ headers: privateHeaders });
   // Workshop access is separate from the agent session. Server pages check it
   // again before reading guide content; none of these routes initialize CDP.
   if (path === '/workshops' || path.startsWith('/workshops/') || path === '/demo' || path.startsWith('/demo/')) {

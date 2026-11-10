@@ -4,13 +4,13 @@ import { WorkshopSignOut } from "../WorkshopControls";
 import type { WorkshopSession } from "@/server/workshops/auth";
 import type { DemoChapter } from "./types";
 
-/** Presenter navigation is confined to the private guide, outside the two sites. */
+/** Presenter navigation stays in the unlinked guide, outside the two sites. */
 export function DemoShell({
   session,
   chapterId,
   children,
 }: {
-  session: WorkshopSession;
+  session: WorkshopSession | null;
   chapterId?: DemoChapter["id"];
   children: React.ReactNode;
 }) {
@@ -21,7 +21,7 @@ export function DemoShell({
       </a>
       <header className="workshop-header">
         <Link
-          href="/workshops/demo"
+          href={session ? "/workshops/demo" : "/demo/public"}
           className="workshop-brand"
           aria-label="Liberty Mutual demonstration guides"
         >
@@ -51,20 +51,24 @@ export function DemoShell({
           >
             <Users size={16} /> Agent Portal
           </Link>
-          <Link
-            href="/workshops/demo"
-            className={!chapterId ? "active" : ""}
-            aria-current={!chapterId ? "page" : undefined}
-          >
-            <ListOrdered size={16} /> Full sequence
-          </Link>
+          {session && (
+            <Link
+              href="/workshops/demo"
+              className={!chapterId ? "active" : ""}
+              aria-current={!chapterId ? "page" : undefined}
+            >
+              <ListOrdered size={16} /> Full sequence
+            </Link>
+          )}
         </nav>
-        <div className="workshop-account">
-          <span>
-            Signed in as <strong>{session.username}</strong>
-          </span>
-          <WorkshopSignOut />
-        </div>
+        {session && (
+          <div className="workshop-account">
+            <span>
+              Signed in as <strong>{session.username}</strong>
+            </span>
+            <WorkshopSignOut />
+          </div>
+        )}
       </header>
       {children}
       <footer className="workshop-footer">

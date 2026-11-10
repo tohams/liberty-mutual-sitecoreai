@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   outputFileTracingIncludes: {
+    "/api/demo/assets/*": ["./workshop-assets/**"],
     "/api/workshops/assets/*": ["./workshop-assets/**"],
     "/api/workshops/preferences": ["./fixtures/preference-governance/*.jsonl"],
   },

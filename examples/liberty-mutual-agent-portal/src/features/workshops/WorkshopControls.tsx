@@ -7,6 +7,7 @@ import type { GuideImage } from "./types";
 import {
   guideCropGeometry,
   guideImageAssetUrl,
+  type GuideImageAssetBasePath,
   validImageAnnotation,
 } from "./guide-images";
 
@@ -95,9 +96,11 @@ export function CopyCode({
 function ScreenshotCanvas({
   image,
   enlarged = false,
+  assetBasePath,
 }: {
   image: GuideImage;
   enlarged?: boolean;
+  assetBasePath?: GuideImageAssetBasePath;
 }) {
   const crop = image.crop ? guideCropGeometry(image.crop) : null;
   const annotations = image.annotations?.filter(validImageAnnotation) ?? [];
@@ -117,10 +120,10 @@ function ScreenshotCanvas({
         className={`workshop-screenshot-viewport${crop ? " is-cropped" : ""}`}
         style={crop ? { aspectRatio: crop.aspectRatio } : undefined}
       >
-        {/* Authenticated images bypass the shared image optimizer cache. Crops use CSS only. */}
+        {/* Asset routes bypass the shared image optimizer cache. Crops use CSS only. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={guideImageAssetUrl(image.file)}
+          src={guideImageAssetUrl(image.file, assetBasePath)}
           alt={image.alt}
           loading="lazy"
           style={crop?.image}
@@ -183,7 +186,13 @@ function ScreenshotDetails({ image }: { image: GuideImage }) {
   );
 }
 
-export function GuideScreenshot({ image }: { image: GuideImage }) {
+export function GuideScreenshot({
+  image,
+  assetBasePath,
+}: {
+  image: GuideImage;
+  assetBasePath?: GuideImageAssetBasePath;
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   const id = useId();
   return (
@@ -205,7 +214,7 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
         aria-label={`Enlarge screenshot: ${image.alt}`}
         aria-describedby={`${id}-caption`}
       >
-        <ScreenshotCanvas image={image} />
+        <ScreenshotCanvas image={image} assetBasePath={assetBasePath} />
         <span className="workshop-image-enlarge">
           <Maximize2 size={14} />
           Enlarge image and highlights
@@ -247,7 +256,11 @@ export function GuideScreenshot({ image }: { image: GuideImage }) {
               <X size={22} />
             </button>
           </div>
-          <ScreenshotCanvas image={image} enlarged />
+          <ScreenshotCanvas
+            image={image}
+            enlarged
+            assetBasePath={assetBasePath}
+          />
           <ScreenshotDetails image={image} />
         </div>
       </dialog>

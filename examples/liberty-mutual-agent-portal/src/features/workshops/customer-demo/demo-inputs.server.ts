@@ -1,9 +1,14 @@
 import "server-only";
 import type { DemoInput, DemoStep } from "./types";
 
-/** Called only after the presenter guide's workshop session has been verified. */
-export function presenterInputs(step: DemoStep): DemoInput[] {
-  const deliveryToken = process.env.DEMO_GRAPHQL_DELIVERY_API_KEY?.trim();
+/** Anonymous guides retain the header template; credentials require a verified session. */
+export function presenterInputs(
+  step: DemoStep,
+  { includeDeliveryToken = false }: { includeDeliveryToken?: boolean } = {},
+): DemoInput[] {
+  const deliveryToken = includeDeliveryToken
+    ? process.env.DEMO_GRAPHQL_DELIVERY_API_KEY?.trim()
+    : undefined;
   return (step.inputs ?? []).map((input) =>
     step.id === "public-api" && input.label === "HTTP headers" && deliveryToken
       ? {

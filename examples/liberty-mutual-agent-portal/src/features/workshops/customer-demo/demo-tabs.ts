@@ -67,7 +67,7 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       {
         id: "averyPortal",
         href: `${PORTAL}/login`,
-        cue: "Sign in as avery.01 with Sitecore1; leave Home open.",
+        cue: "Sign in as avery.01 with the agent portal password; leave Home open.",
       },
     ],
   },
@@ -79,7 +79,7 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       {
         id: "danielPortal",
         href: `${PORTAL}/login`,
-        cue: "Sign in as daniel.01 with Sitecore1; leave Home open.",
+        cue: "Sign in as daniel.01 with the agent portal password; leave Home open.",
       },
     ],
   },
