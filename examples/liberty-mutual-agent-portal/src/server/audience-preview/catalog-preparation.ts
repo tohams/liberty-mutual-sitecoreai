@@ -28,6 +28,7 @@ import {
   type AudienceDecisionDependencies,
 } from "./decisions";
 import { getAudiencePreviewLayout } from "./preview-client";
+import { createCatalogProfileProofVerifier } from "./catalog-profile-proof";
 import {
   catalogRowFailure,
   recordCatalogRowFailure,
@@ -481,6 +482,10 @@ export async function advanceCatalogPreparation(
       return persist(job);
     }
     if (job.phase === "preparing") {
+      const verifyCatalogProfile = createCatalogProfileProofVerifier(
+        job,
+        importer,
+      );
       // An explicit retry may re-run failed native reads; completed profile/import work is retained.
       for (const row of job.rows)
         if (row.failureFor === pageKey(page)) delete row.failureFor;
@@ -519,7 +524,6 @@ export async function advanceCatalogPreparation(
                   ...existing.value,
                   phase: "binding",
                   profileId,
-                  bindingStartedAt: now(),
                   catalogProof: { ...job.submission, recordIndex },
                 };
                 delete next.code;
@@ -539,7 +543,7 @@ export async function advanceCatalogPreparation(
             }
             const result = await (
               deps.prepareProfile || prepareAudiencePreviewProfile
-            )(input, deps.profiles);
+            )(input, { ...deps.profiles, verifyCatalogProfile });
             if (result.status !== "ready") return;
             assertVerifiedPreviewProfile(result.profile);
             if (result.profile.selectorHash !== row.selectorHash)
