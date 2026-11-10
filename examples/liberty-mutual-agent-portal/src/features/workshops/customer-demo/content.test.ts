@@ -1043,10 +1043,10 @@ test("one full copyright notice updates both footers and restores only its year"
   );
   const rollback = prose(step("portal-audit-rollback"));
   for (const required of [
-    /Workflow history/,
-    /Draft → Awaiting approval/,
-    /Awaiting approval → Approved/,
-    /Comment/,
+    /Compare versions/,
+    /version selector/,
+    /comparison updates automatically/,
+    /year changing from 2025 to 2026/,
     /original approved English version/,
     /Create version/,
     /same governed process|newer reviewed version/i,
@@ -1056,6 +1056,14 @@ test("one full copyright notice updates both footers and restores only its year"
   assert.doesNotMatch(
     prose(step("portal-audit-rollback").actions),
     /Agency growth priorities|Bundle car and home|coverage-page|public Bundling|Learning & resources/,
+  );
+  assert.doesNotMatch(
+    rollback,
+    /Workflow history|acting account|timestamps|read the user|who submitted|Page items/,
+  );
+  assert.match(
+    rollback,
+    /Compare.*recorded original version.*With.*Saved copyright version.*Content → Disclosure/,
   );
   assert.match(
     step("portal-audit-rollback").stopWhen,

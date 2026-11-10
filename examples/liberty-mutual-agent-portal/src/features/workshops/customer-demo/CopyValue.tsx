@@ -5,9 +5,18 @@ import { Check, Copy } from "lucide-react";
 import styles from "./CustomerDemo.module.css";
 
 /** Copies only the supplied field value, without its label or formatting. */
-export function CopyValue({ label, value }: { label: string; value: string }) {
+export function CopyValue({
+  label,
+  value,
+  format = "text",
+}: {
+  label: string;
+  value: string;
+  format?: "text" | "url";
+}) {
   const valueId = useId();
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
+  const actionLabel = format === "url" ? "Copy URL" : "Copy";
 
   async function copyValue() {
     try {
@@ -22,13 +31,16 @@ export function CopyValue({ label, value }: { label: string; value: string }) {
     <div className={styles.copyValue}>
       <span className={styles.copyLabel}>{label}</span>
       <div className={styles.copyRow}>
-        <span id={valueId} className={styles.copyText}>
+        <span
+          id={valueId}
+          className={`${styles.copyText} ${format === "url" ? styles.copyUrl : ""}`}
+        >
           {value}
         </span>
         <button
           type="button"
           className={styles.copyButton}
-          aria-label={`Copy ${label}`}
+          aria-label={`${status === "copied" ? "Copied" : actionLabel} ${label}`}
           aria-describedby={valueId}
           onClick={copyValue}
           onBlur={() =>
@@ -40,7 +52,7 @@ export function CopyValue({ label, value }: { label: string; value: string }) {
           ) : (
             <Copy size={15} aria-hidden="true" />
           )}
-          {status === "copied" ? "Copied" : "Copy"}
+          {status === "copied" ? "Copied" : actionLabel}
         </button>
       </div>
       <span

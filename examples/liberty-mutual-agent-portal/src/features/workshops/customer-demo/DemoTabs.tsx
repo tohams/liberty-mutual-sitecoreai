@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import { CopyValue } from "./CopyValue";
 import type { PresenterProfileRef } from "./demo-profiles.server";
 import { customerDemoTabGroups, demoTabNames } from "./demo-tabs";
@@ -21,9 +20,9 @@ export function DemoTabs({
       </h2>
       <p className={styles.instruction}>
         Use separate browser profiles for the named windows, and reserve one
-        Incognito / Private window for Prospera. Copy each link address into its
-        assigned window to preserve the sign-ins. Reuse these tabs throughout
-        the demonstration.
+        Incognito / Private window for Prospera. Select Copy URL, and paste it
+        into the assigned window’s address bar. Reuse these tabs throughout the
+        demonstration.
       </p>
       <div className={styles.groups}>
         {customerDemoTabGroups.map((group) => (
@@ -41,28 +40,27 @@ export function DemoTabs({
             >
               {group.tabs.map((tab) => (
                 <li key={tab.id} className={styles.tab}>
-                  <a href={tab.href} target="_blank" rel="noopener noreferrer">
-                    {demoTabNames[tab.id]}
-                    <ArrowUpRight size={15} aria-hidden="true" />
-                  </a>
+                  <CopyValue
+                    label={demoTabNames[tab.id]}
+                    value={tab.href}
+                    format="url"
+                  />
                   <span>{tab.cue}</span>
                   {tab.id === "profiles" && profiles.length > 0 && (
                     <div className={styles.profileRefs}>
                       <p className={styles.profileNote}>
                         Current profiles for number <strong>01</strong>. Copy
                         the agent identity to find the record in Profiles, or
-                        open its native link. Refresh this guide after a reset.
+                        copy its native profile URL. Refresh this guide after a
+                        reset.
                       </p>
                       {profiles.map((profile) => (
                         <div key={profile.username}>
-                          <a
-                            href={profile.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {profile.label}
-                            <ArrowUpRight size={15} aria-hidden="true" />
-                          </a>
+                          <CopyValue
+                            label={profile.label}
+                            value={profile.href}
+                            format="url"
+                          />
                           <CopyValue
                             label={`${profile.username} — Agent identity`}
                             value={profile.identifier}

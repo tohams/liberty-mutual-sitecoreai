@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Clock3 } from "lucide-react";
+import { ArrowRight, Clock3 } from "lucide-react";
 import { requireWorkshopSession } from "@/server/workshops/auth";
 import { DemoShell } from "./DemoShell";
 import { CopyValue } from "./CopyValue";
+import { LaunchUrls } from "./LaunchUrls";
+import { demoLaunchUrls } from "./launch-urls";
 import { DemoTabs } from "./DemoTabs";
 import { presenterInputs } from "./demo-inputs.server";
 import { getPresenterProfiles } from "./demo-profiles.server";
@@ -86,8 +88,8 @@ export async function CustomerDemoGuide({
             </a>
           </div>
           <p className={styles.copyHint}>
-            <strong>Copy</strong> the supplied text. Expand screenshots when
-            needed.
+            <strong>Copy URL</strong> for navigation; <strong>Copy</strong> for
+            fields and queries. Expand screenshots when needed.
           </p>
         </header>
 
@@ -277,21 +279,7 @@ export async function CustomerDemoGuide({
                         )}
                       </div>
                       <h3>{step.title}</h3>
-                      {step.links?.length ? (
-                        <div className={styles.launchLinks}>
-                          {step.links.map((link) => (
-                            <a
-                              href={link.href}
-                              key={link.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {link.label}
-                              <ArrowUpRight size={15} aria-hidden="true" />
-                            </a>
-                          ))}
-                        </div>
-                      ) : null}
+                      <LaunchUrls links={demoLaunchUrls(step)} />
                       <ol className={styles.clicks}>
                         {step.presenterActions.map((lines, actionIndex) => (
                           <li key={actionIndex}>

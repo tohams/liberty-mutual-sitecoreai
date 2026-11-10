@@ -273,25 +273,16 @@
   color: #716182;
   font-size: 11px;
 }
-.launchLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
+.launchUrls {
+  display: grid;
+  gap: 8px;
   margin: 14px 0 18px;
 }
-.launchLinks a {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 13px;
-  border: 1px solid #dcd7e5;
-  border-radius: 6px;
+.launchTitle {
+  margin: 0;
+  color: var(--w-muted);
   font-size: 12px;
-  font-weight: 600;
-  color: var(--w-navy);
-}
-.launchLinks a:hover {
-  background: #f4f0f9;
+  font-weight: 650;
 }
 .observations {
   border-left: 2px solid #b7b2c6;
@@ -329,6 +320,11 @@
   user-select: text;
   font-size: 14px;
   line-height: 1.6;
+}
+.copyUrl {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.5;
 }
 .copyButton {
   display: inline-flex;
