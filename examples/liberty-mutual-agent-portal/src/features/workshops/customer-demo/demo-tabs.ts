@@ -1,20 +1,16 @@
 import {
-  ANALYTICS,
-  BRAND_KITS,
-  CONTEXT,
   GRAPHQL_EXPLORER,
   PORTAL,
   PUBLIC,
-  SCRUNCH_EDITOR,
   SCRUNCH_REVIEW,
-  SEARCH_SOURCE,
-  publicEditor,
+  SITECORE_AI,
 } from "./demo-destinations";
 
 export const demoTabNames = {
   publicWebsite: "Public website",
   averyPortal: "Avery portal",
   danielPortal: "Daniel portal",
+  sitecoreAI: "SitecoreAI",
   pageBuilder: "Page Builder",
   audiencePreparation: "Prepare audiences",
   searchPreview: "Search Preview",
@@ -31,7 +27,8 @@ export type DemoTabId = keyof typeof demoTabNames;
 
 export interface DemoTab {
   id: DemoTabId;
-  href: string;
+  href?: string;
+  navigation?: string;
   cue: string;
 }
 
@@ -42,8 +39,6 @@ export interface DemoTabGroup {
   tabs: DemoTab[];
   wide?: boolean;
 }
-
-export const nativeProfilesUrl = `https://app.sitecorecloud.io/optimization/profiles?${CONTEXT}`;
 
 /** Reuse the named tabs throughout the thirteen flows instead of accumulating tabs. */
 export const customerDemoTabGroups: DemoTabGroup[] = [
@@ -78,7 +73,8 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
     tabs: [
       {
         id: "danielPortal",
-        href: `${PORTAL}/login`,
+        navigation:
+          "Reuse the **Agent Portal login** address from the **Avery window** in another browser profile.",
         cue: "Sign in as daniel.01 with the agent portal password; leave Home open.",
       },
     ],
@@ -90,9 +86,14 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
     wide: true,
     tabs: [
       {
+        id: "sitecoreAI",
+        href: SITECORE_AI,
+        cue: "Start at Channels. Reuse this SitecoreAI tab for each native tool when its loop begins.",
+      },
+      {
         id: "pageBuilder",
-        href: publicEditor,
-        cue: "Reuse this tab for the Page Builder destinations named in each flow.",
+        navigation: "**Channels → Public Website → Page builder**.",
+        cue: "Keep the Page Builder tab opened from Channels, and reuse it for both sites.",
       },
       {
         id: "audiencePreparation",
@@ -101,12 +102,14 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       },
       {
         id: "searchPreview",
-        href: SEARCH_SOURCE,
-        cue: "Keep the public Search source’s Preview view ready for P3.",
+        navigation:
+          "**Content → Search Sources → Liberty Mutual Approved Answers → Preview**.",
+        cue: "Use this view in P3, then return after publication to verify the added sentence.",
       },
       {
         id: "events",
-        href: ANALYTICS,
+        navigation:
+          "Expand the navigation if collapsed, then choose **Optimization → Analytics → Events**.",
         cue: "Select Site → liberty-mutual-public-site and Time → 1 month. Under Event Type, select pageView and LM_PUBLIC_CTA_CLICK for P6.",
       },
       {
@@ -116,17 +119,18 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       },
       {
         id: "profiles",
-        href: nativeProfilesUrl,
-        cue: "Use the native profile filters to find Avery and Daniel with number 01 appended to their names. Keep their SitecoreAI profile records ready for A1.",
+        navigation: "**Optimization → Profiles**.",
+        cue: "During A1, use the native profile filters to find Avery and Daniel with number 01 appended to their names.",
       },
       {
         id: "stateBusinessRule",
-        href: `https://app.sitecorecloud.io/optimization/custom-values/ad7b493b-f768-404c-adc6-9841c2fe1a6e?${CONTEXT}`,
-        cue: "For A1, keep the published Liberty Mutual - Agency product priorities custom value ready. Its Texas and Illinois licensing conditions use known agent attributes. Leave the rule unchanged.",
+        navigation:
+          "**Optimization → Custom values → Liberty Mutual - Agency product priorities**.",
+        cue: "For A1, show the published Liberty Mutual - Agency product priorities custom value. Its Texas and Illinois licensing conditions use known agent attributes. Leave the rule unchanged.",
       },
       {
         id: "brandKit",
-        href: BRAND_KITS,
+        navigation: "**Design → Brand kits**.",
         cue: "Open Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice.",
       },
     ],
@@ -134,7 +138,7 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
   {
     id: "prospera",
     title: "Prospera window · Incognito / Private",
-    note: "For P5 only: Sales Engineers 1 → agverticals → Prospera. Keep both tabs read-only.",
+    note: "For P5 only: Sales Engineers 1 → agverticals → Prospera. Keep the recommendation and its Page Builder view read-only.",
     wide: true,
     tabs: [
       {
@@ -144,8 +148,9 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       },
       {
         id: "prosperaPageBuilder",
-        href: SCRUNCH_EDITOR,
-        cue: "Keep AEO opportunities and the matching Cards · Description field ready.",
+        navigation:
+          "In **Prospera recommendations**, open **Home → Readability & Clarity → Cards · Description**, then choose the **page-opening icon** to the right of **Select**.",
+        cue: "Use the Page Builder tab opened by that icon to inspect AEO opportunities and the matching Cards · Description field.",
       },
     ],
   },

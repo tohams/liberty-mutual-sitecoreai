@@ -93,8 +93,9 @@ export async function CustomerDemoGuide({
             </a>
           </div>
           <p className={styles.copyHint}>
-            <strong>Copy URL</strong> for navigation; <strong>Copy</strong> for
-            fields and queries. Expand screenshots when needed.
+            Use <strong>Start here</strong> once per loop, or reuse the open
+            tab. Follow the numbered clicks; <strong>Copy</strong> supplies
+            field text and queries. Expand screenshots when needed.
           </p>
         </header>
 
@@ -172,7 +173,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "portal",
-                      text: "In **P0 → Profiles**, open the current native records for **avery.01** and **daniel.01**. In **SitecoreAI → Optimization → Profiles**, open **Avery Brooks - 01**, then choose **Toggle menu → Inspect → JSON view**. Copy the UUID under **clientIds**, without quotation marks, for the **A1** personalization preview. Close **Inspect**. Repeat for **Daniel Ortiz - 01** so both current Client IDs are ready for A1. The UUID in a profile’s URL is its **Profile ID**; it is different from the **Client ID**. Refresh this guide after a reset so P0 uses the current profile records.",
+                      text: "Using the **P0 → Profiles** click path in the **SitecoreAI** tab, open the current native records for **avery.01** and **daniel.01**. In **SitecoreAI → Optimization → Profiles**, open **Avery Brooks - 01**, then choose **Toggle menu → Inspect → JSON view**. Copy the UUID under **clientIds**, without quotation marks, for the **A1** personalization preview. Close **Inspect**. Repeat for **Daniel Ortiz - 01** so both current Client IDs are ready for A1. The UUID in a profile’s URL is its **Profile ID**; it is different from the **Client ID**. Refresh this guide after a reset so P0 uses the current profile records.",
                     },
                     {
                       chapter: "all",
@@ -188,7 +189,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "public",
-                      text: `Open the **Public website**, [**GraphQL Explorer**](${GRAPHQL_EXPLORER}), and native **SitecoreAI** tabs listed in **P0**. Configure the Explorer’s **HTTP HEADERS** using the **sc_apikey** JSON template in **P7** and your **Live Delivery API token**, and run its **GraphQL query** once to verify access to Live Experience Edge. Keep the presentation’s **Experience Edge content delivery** slide ready for P7.`,
+                      text: `Prepare the windows in **P0** once. Reuse the **SitecoreAI** tab for its tool menus, and keep the **Page Builder** tab that opens from **Channels**. Open [**GraphQL Explorer**](${GRAPHQL_EXPLORER}) in its own tab. Configure the Explorer’s **HTTP HEADERS** using the **sc_apikey** JSON template in **P7** and your **Live Delivery API token**, and run its **GraphQL query** once to verify access to Live Experience Edge. Keep the presentation’s **Experience Edge content delivery** slide ready for P7.`,
                     },
                     {
                       chapter: "all",
@@ -208,7 +209,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "public",
-                      text: "The Profound section uses the prepared **Prospera recommendations** and **Prospera Page Builder** tabs in a separate **Incognito** window for **Sales Engineers1 → agverticals → Prospera** as a read-only example. Open the **Home → Readability & Clarity** recommendation and its **Page Builder → AEO opportunities** panel before presenting. Do not apply or dismiss a recommendation, edit content, change workflow, or publish in that environment. Profound intake remains a proposed integration design. Keep this example in **Prospera Page Builder**, and explain editable copy and the configured human review process without applying or publishing anything.",
+                      text: "The Profound section starts with **Prospera recommendations** in a separate **Incognito** window for **Sales Engineers1 → agverticals → Prospera** as a read-only example. Open the **Home → Readability & Clarity** recommendation. Beside **Cards · Description**, select the **page-opening icon** to the right of **Select**; keep the **Prospera Page Builder → AEO opportunities** tab it opens. Do not apply or dismiss a recommendation, edit content, change workflow, or publish in that environment. Profound intake remains a proposed integration design. Keep this example in **Prospera Page Builder**, and explain editable copy and the configured human review process without applying or publishing anything.",
                     },
                     {
                       chapter: "public",
