@@ -3,6 +3,7 @@ import { Auth0Client } from "@auth0/nextjs-auth0/server";
 import type { User } from "@auth0/nextjs-auth0/types";
 import { NextResponse } from "next/server";
 import { audiencePreviewCallbackDestination } from "./audience-preview-sso";
+import { createAudiencePreviewAuthFetch } from "./audience-preview-auth-fetch";
 import {
   AUDIENCE_PREVIEW_APP_PATH,
   AUDIENCE_PREVIEW_AUTH0_DOMAIN,
@@ -31,6 +32,7 @@ export function getAudiencePreviewAuth(): Auth0Client | null {
     secret: configuration.secret,
     appBaseUrl: configuration.appBaseUrl,
     domain: AUDIENCE_PREVIEW_AUTH0_DOMAIN,
+    customFetch: createAudiencePreviewAuthFetch(),
     tokenRefreshBuffer: 840, // Temporary native refresh diagnostic; restore 60 after verification.
     authorizationParameters:
       audiencePreviewAuthorizationParameters(configuration),
