@@ -97,6 +97,20 @@ The provisioned free Redis integration is connected to Vercel Production and Pre
 
 Do not enable verbose Sitecore editing diagnostics on a shared deployment: the upstream SDK's editing debug path can log secret comparisons. Keep secrets in protected configuration and review logging changes before enabling them.
 
+### Audience Preview authorization and content contexts
+
+The private **Audience Preview** Marketplace extension uses two separate server contexts. Their similar names do not make them interchangeable:
+
+| Setting | Source and purpose |
+| --- | --- |
+| `AUDIENCE_PREVIEW_SITECORE_CONTEXT_ID` | The installed app's authorized SitecoreAI resource: `application.context.resourceAccess` → the `xmcloud` resource → `context.preview`. The server uses this context with the presenter's delegated Sitecore access token for Pages API permission checks. Configure the verified value on the server; do not accept a replacement from the browser. |
+| `SITECORE_PREVIEW_CONTEXT_ID` | The CMS Preview content context from the Deploy app. The Content SDK uses this context for versioned draft rendering. The normal `SITECORE_EDGE_CONTEXT_ID` continues to serve published content. |
+| `AUDIENCE_PREVIEW_EDGE_CONTEXT_ID` | Optional app-specific override for the Content SDK draft-rendering context. When absent, Audience Preview uses `SITECORE_PREVIEW_CONTEXT_ID`, with the legacy `SITECORE_EDGE_CONTEXT_ID` fallback. This override is not the Marketplace Pages API context. |
+
+The app's Auth0 configuration identifies its **installed Marketplace app tenant**, its organization, and its `mkp_` application product. That tenant is distinct from the Marketplace shell tenant and the Optimization/CDP tenant. Authentication attempts silent SSO once, then offers **Connect to SitecoreAI** if interaction is required. Completion always rechecks the real server session and the selected page's permissions; a browser completion message does not authorize access.
+
+Keep all configuration values in protected environment settings, outside repository content and client-visible variables. If Pages API token exchange fails, verify the installed app's granted resource and its `context.preview` binding rather than substituting the Deploy content context or changing author permissions.
+
 ## Build and continuous integration
 
 The application's `.nvmrc` pins Node.js 24.19.0; the validation workflow reads that same file. The local setup helper has separate preservation and state-isolation checks in `npm run test:setup`, also run by CI.
