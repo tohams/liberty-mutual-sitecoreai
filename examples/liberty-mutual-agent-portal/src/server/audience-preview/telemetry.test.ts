@@ -16,6 +16,7 @@ test("preparation telemetry includes only safe enums, known codes, and numeric H
   recordAudiencePreviewStage("request", "failed", {
     code: "person@example.test/token-value",
     status: Number.NaN,
+    reason: "private-native-body",
   });
   recordAudiencePreviewStage("request", "failed", {
     code: "SITECORE_UNAVAILABLE",
@@ -57,6 +58,7 @@ test("preparation telemetry includes only safe enums, known codes, and numeric H
     "person@",
     "token-value",
     "private-response-body",
+    "private-native-body",
     "secret exception",
     "never-log-me",
   ])

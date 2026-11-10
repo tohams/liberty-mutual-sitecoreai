@@ -17,6 +17,7 @@ import {
 } from "./contracts";
 import {
   createPreviewProfileImporter,
+  PreviewImportQueueBusyError,
   type PreviewImportPlan,
   type PreviewImportSubmission,
   type PreviewProfileImporter,
@@ -38,12 +39,23 @@ export interface VerifiedPreviewProfile {
   browserId: string;
 }
 export type AudienceProfilePreparation =
-  | { status: "pending"; retryAfterSeconds: number }
+  | {
+      status: "pending";
+      retryAfterSeconds: number;
+      waitingForAnotherAudience?: boolean;
+    }
   | { status: "ready"; profile: VerifiedPreviewProfile };
 
 interface ProfileJob {
   schemaVersion: typeof PREVIEW_SCHEMA_VERSION;
-  phase: "uploading" | "verifying" | "binding" | "ready" | "failed";
+  phase:
+    | "uploading"
+    | "waiting-upload"
+    | "reconciling"
+    | "verifying"
+    | "binding"
+    | "ready"
+    | "failed";
   plan: PreviewImportPlan;
   createdAt: number;
   nextAttemptAt?: number;
@@ -54,6 +66,10 @@ interface ProfileJob {
   identitySent?: boolean;
   bindingStartedAt?: number;
   code?: string;
+  /** At most one exact UPSERT after an unknown receipt; the original plan is immutable. */
+  uncertainRetryUsed?: boolean;
+  lastUploadAttemptAt?: number;
+  firstUncertainUploadAt?: number;
 }
 
 export interface AudienceProfileDependencies extends NativePreviewConfiguration {
@@ -172,7 +188,12 @@ export function assertVerifiedPreviewProfile(
 }
 
 function jobStage(job: ProfileJob): AudiencePreviewStage {
-  if (job.phase === "uploading") return "profile-import";
+  if (
+    job.phase === "uploading" ||
+    job.phase === "waiting-upload" ||
+    job.phase === "reconciling"
+  )
+    return "profile-import";
   if (job.phase === "verifying") return "profile-verification";
   if (job.phase === "binding" || job.code === "PROFILE_LINK_TIMEOUT")
     return "profile-binding";
@@ -183,6 +204,9 @@ function pending(job: ProfileJob, now: number): AudienceProfilePreparation {
   recordAudiencePreviewStage(jobStage(job), "pending");
   return {
     status: "pending",
+    ...(job.code === "IMPORT_QUEUE_BUSY"
+      ? { waitingForAnotherAudience: true }
+      : {}),
     retryAfterSeconds: Math.max(
       RETRY_SECONDS,
       Math.ceil(
@@ -252,13 +276,151 @@ export async function prepareAudiencePreviewProfile(
     code: string,
   ): Promise<never> => {
     recordAudiencePreviewStage(jobStage(previous.value), "failed", { code });
-    const job = { ...previous.value, phase: "failed" as const, code };
+    const job: ProfileJob = { ...previous.value, phase: "failed", code };
+    if (
+      code === "IMPORT_UPLOAD_UNCONFIRMED" &&
+      job.firstUncertainUploadAt === undefined &&
+      job.lastUploadAttemptAt
+    )
+      job.firstUncertainUploadAt = job.lastUploadAttemptAt;
     delete job.lease;
     await save(previous, job);
     return jobFailure(code);
   };
+  const submitRetainedPlan = async (
+    previous: StoredValue<ProfileJob>,
+  ): Promise<AudienceProfilePreparation> => {
+    const attempting: ProfileJob = {
+      ...previous.value,
+      phase: "uploading",
+      lastUploadAttemptAt: now(),
+      lease: { id: uuid(), expiresAt: now() + LEASE_MS },
+    };
+    const claimed = await save(previous, attempting);
+    if (!claimed) return resultAfterConflict();
+    const job = claimed.value;
+    try {
+      const importer =
+        dependencies.importer ||
+        createPreviewProfileImporter(undefined, transport);
+      recordAudiencePreviewStage("profile-import", "started");
+      const submission = await importer.submit(job.plan);
+      if (
+        !UUID.test(submission.batchId) ||
+        submission.checksumMd5 !== job.plan.checksumMd5 ||
+        submission.fileSizeBytes !== job.plan.fileSizeBytes
+      )
+        return fail(claimed, "IMPORT_UPLOAD_UNCONFIRMED");
+      const next: ProfileJob = { ...job, phase: "verifying", submission };
+      delete next.lease;
+      delete next.code;
+      delete next.nextAttemptAt;
+      if (!(await save(claimed, next))) return resultAfterConflict();
+      return pending(next, now());
+    } catch (error) {
+      if (error instanceof PreviewImportQueueBusyError) {
+        const next: ProfileJob = {
+          ...job,
+          phase: "waiting-upload",
+          code: "IMPORT_QUEUE_BUSY",
+          nextAttemptAt: now() + error.retryAfterSeconds * 1000,
+        };
+        delete next.lease;
+        if (!(await save(claimed, next))) return resultAfterConflict();
+        return pending(next, now());
+      }
+      return fail(claimed, "IMPORT_UPLOAD_UNCONFIRMED");
+    }
+  };
+  const reconcileRetainedPlan = async (
+    previous: StoredValue<ProfileJob>,
+  ): Promise<AudienceProfilePreparation> => {
+    const job = previous.value;
+    try {
+      const importer =
+        dependencies.importer ||
+        createPreviewProfileImporter(undefined, transport);
+      if (!importer.reconcile)
+        return fail(previous, "IMPORT_UPLOAD_UNCONFIRMED");
+      recordAudiencePreviewStage("profile-import", "started");
+      const receipt = await importer.reconcile(
+        job.plan,
+        job.createdAt,
+        job.lastUploadAttemptAt,
+        job.firstUncertainUploadAt,
+      );
+      if (receipt.status === "failed")
+        return fail(previous, "IMPORT_VERIFICATION_FAILED");
+      if (receipt.status === "verified") {
+        if (
+          !UUID.test(receipt.profileId) ||
+          !UUID.test(receipt.submission.batchId) ||
+          receipt.submission.checksumMd5 !== job.plan.checksumMd5 ||
+          receipt.submission.fileSizeBytes !== job.plan.fileSizeBytes
+        )
+          return fail(previous, "IMPORT_VERIFICATION_FAILED");
+        const next: ProfileJob = {
+          ...job,
+          phase: "binding",
+          submission: receipt.submission,
+          profileId: receipt.profileId,
+          bindingStartedAt: now(),
+          nextAttemptAt: now() + RETRY_SECONDS * 1000,
+        };
+        delete next.lease;
+        delete next.code;
+        if (!(await save(previous, next))) return resultAfterConflict();
+        recordAudiencePreviewStage("profile-import", "recovered");
+        return pending(next, now());
+      }
+      if (receipt.status === "pending") {
+        const next: ProfileJob = {
+          ...job,
+          phase: "reconciling",
+          code: "IMPORT_QUEUE_BUSY",
+          nextAttemptAt: now() + 10_000,
+        };
+        delete next.lease;
+        if (!(await save(previous, next))) return resultAfterConflict();
+        return pending(next, now());
+      }
+      if (job.uncertainRetryUsed)
+        return fail(previous, "IMPORT_UPLOAD_UNCONFIRMED");
+      // The bounded search did not recover a receipt. A single exact UPSERT is
+      // profile-idempotent under the native identity rule. Persist its budget first.
+      const retry: ProfileJob = {
+        ...job,
+        phase: "uploading",
+        uncertainRetryUsed: true,
+        lease: { id: uuid(), expiresAt: now() + LEASE_MS },
+      };
+      delete retry.code;
+      const saved = await save(previous, retry);
+      if (!saved) return resultAfterConflict();
+      return submitRetainedPlan(saved);
+    } catch (error) {
+      if (error instanceof AudiencePreviewError && error.retryable) {
+        const next: ProfileJob = {
+          ...job,
+          phase: "reconciling",
+          nextAttemptAt: now() + 5_000,
+        };
+        delete next.lease;
+        if (!(await save(previous, next))) return resultAfterConflict();
+        recordAudiencePreviewStage("profile-import", "unconfirmed", {
+          code: error.code,
+        });
+        return pending(next, now());
+      }
+      return fail(
+        previous,
+        error instanceof AudiencePreviewError
+          ? error.code
+          : "IMPORT_UPLOAD_UNCONFIRMED",
+      );
+    }
+  };
   if (!current) {
-    // Only the CAS winner may submit. An unknown upload outcome is never retried automatically.
     const job: ProfileJob = {
       schemaVersion: PREVIEW_SCHEMA_VERSION,
       phase: "uploading",
@@ -268,26 +430,7 @@ export async function prepareAudiencePreviewProfile(
     };
     current = await store.compareAndSet(key, null, job, null);
     if (!current) return resultAfterConflict();
-    try {
-      const importer =
-        dependencies.importer ||
-        createPreviewProfileImporter(undefined, transport);
-      recordAudiencePreviewStage("profile-import", "started");
-      const submission = await importer.submit(job.plan);
-      recordAudiencePreviewStage("profile-import", "accepted");
-      if (
-        !UUID.test(submission.batchId) ||
-        submission.checksumMd5 !== job.plan.checksumMd5 ||
-        submission.fileSizeBytes !== job.plan.fileSizeBytes
-      )
-        return fail(current, "IMPORT_UPLOAD_UNCONFIRMED");
-      const next = { ...job, phase: "verifying" as const, submission };
-      delete next.lease;
-      if (!(await save(current, next))) return resultAfterConflict();
-      return pending(next, now());
-    } catch {
-      return fail(current, "IMPORT_UPLOAD_UNCONFIRMED");
-    }
+    return submitRetainedPlan(current);
   }
   const job = current.value;
   if (
@@ -296,6 +439,20 @@ export async function prepareAudiencePreviewProfile(
     job.plan.identity !== PREVIEW_IDENTITY_PREFIX + selectorHash
   )
     return jobFailure("INVALID_PREVIEW_STATE");
+  if (job.phase === "failed" && job.code === "IMPORT_UPLOAD_UNCONFIRMED") {
+    const importer =
+      dependencies.importer ||
+      createPreviewProfileImporter(undefined, transport);
+    if (!importer.reconcile) return jobFailure(job.code);
+    const claimedJob: ProfileJob = {
+      ...job,
+      phase: "reconciling",
+      lease: { id: uuid(), expiresAt: now() + LEASE_MS },
+    };
+    const claimed = await save(current, claimedJob);
+    if (!claimed) return resultAfterConflict();
+    return reconcileRetainedPlan(claimed);
+  }
   if (job.phase === "failed") {
     // A timed-out observation is not an uncertain write. Recheck only the exact
     // existing binding; never import, create a browser, or replay IDENTITY here.
@@ -362,6 +519,8 @@ export async function prepareAudiencePreviewProfile(
     if (!(await save(claimed, next))) return resultAfterConflict();
     return pending(next, now());
   };
+  if (job.phase === "waiting-upload") return submitRetainedPlan(claimed);
+  if (job.phase === "reconciling") return reconcileRetainedPlan(claimed);
   if (job.phase === "verifying") {
     if (!job.submission) return fail(claimed, "INVALID_PREVIEW_STATE");
     try {

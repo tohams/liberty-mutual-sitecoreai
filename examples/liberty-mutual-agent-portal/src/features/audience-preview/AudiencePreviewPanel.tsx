@@ -55,6 +55,7 @@ export function AudiencePreviewPanel({
   page,
   onPreview,
   initialAudience = DEFAULT_AUDIENCE,
+  preparationMessage,
   disabled = false,
 }: AudiencePreviewPanelProps) {
   const id = useId();
@@ -322,9 +323,15 @@ export function AudiencePreviewPanel({
           )}
           {busy ? "Preparing preview…" : "Preview audience"}
         </button>
-        <p id={`${id}-preview-note`} className={styles.previewNote}>
+        <p
+          id={`${id}-preview-note`}
+          className={styles.previewNote}
+          aria-live="polite"
+          aria-atomic="true"
+        >
           {busy
-            ? "Preparing an audience for the first time can take a little longer. Keep this panel open."
+            ? preparationMessage ||
+              "Preparing an audience for the first time can take a little longer. Keep this panel open."
             : "Previewing does not publish content or change an agent’s account."}
         </p>
       </form>
