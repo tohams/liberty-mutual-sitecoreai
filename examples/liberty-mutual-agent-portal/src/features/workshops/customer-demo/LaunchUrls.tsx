@@ -11,9 +11,9 @@ export function LaunchUrls({ links }: { links: GuideLink[] }) {
       aria-label="Copy URL"
       data-demo-cue="url"
     >
-      <h4 className={styles.cueLabel}>
+      <h5 className={styles.cueLabel}>
         <Link2 size={15} aria-hidden="true" /> Copy URL
-      </h4>
+      </h5>
       <div className={styles.launchUrls}>
         {links.map((link) => (
           <CopyValue

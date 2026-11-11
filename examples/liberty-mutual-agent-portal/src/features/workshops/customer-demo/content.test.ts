@@ -1276,6 +1276,9 @@ test("the presenter guide displays concise clicks and result checks, with prepar
   );
   assert.match(page, /<h3>\{step\.title\}<\/h3>/);
   assert.match(page, /step\.presenterActions\.map/);
+  assert.match(page, /className=\{styles\.actionPurpose\}/);
+  assert.match(page, /\{number\}\.\{actionIndex \+ 1\}/);
+  assert.match(page, /step\.actionPurposes\[actionIndex\]/);
   assert.match(page, /Result check:/);
   assert.match(
     page,
@@ -1288,6 +1291,8 @@ test("the presenter guide displays concise clicks and result checks, with prepar
   );
   for (const entry of steps) {
     assert.equal(entry.presenterActions.length, entry.actions.length);
+    assert.equal(entry.actionPurposes.length, entry.presenterActions.length);
+    assert(entry.actionPurposes.every((purpose) => purpose.trim()));
     assert(entry.presenterActions.every((lines) => lines.length > 0));
     assert(entry.presenterResult.trim());
     for (const input of entry.inputs ?? [])
