@@ -395,11 +395,19 @@ test("discovery readiness separates public Article metadata from structured CMS 
     prose(step("public-discovery").presenterActions[1]),
     /Page content.*Go to field → State applicability/,
   );
-  assert.equal(
-    step("public-discovery").images?.find(
-      (image) => image.file === "demo-public-page-content.png",
-    )?.afterAction,
-    1,
+  const metadataImage = step("public-discovery").images?.find(
+    (image) => image.file === "demo-public-page-content-metadata.png",
+  );
+  assert.equal(metadataImage?.afterAction, 1);
+  assert.match(
+    metadataImage?.alt ?? "",
+    /Search title and Search description.*Bundling your car and home insurance/,
+  );
+  assert.deepEqual(
+    metadataImage?.annotations?.map((annotation) =>
+      plainGuideText(annotation.label ?? ""),
+    ),
+    ["Search title", "Search description"],
   );
   assert.match(
     prose(step("public-indexing").presenterActions[1]),
@@ -460,7 +468,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   assert(publish < verify);
   assert.match(
     prose(entry.actions[publish]),
-    /Create version.*Resource page review.*select the newest.*Draft.*wait for its fields to finish loading.*At the end of Detailed explanation.*append.*exactly once.*retaining all existing paragraphs.*Save.*Saved.*same new version.*Actions → Submit.*Awaiting approval.*same presenter account.*Actions → Approve.*Approved.*Publish.*Start publish/i,
+    /Create version.*Resource page review.*select the newest.*Draft.*wait for its fields to finish loading.*At the end of Detailed explanation.*append.*exactly once.*retaining all existing paragraphs.*Press Tab.*click outside Detailed explanation.*leave the edited field and save it.*Saved.*same new version.*Actions → Submit.*Awaiting approval.*same presenter account.*Actions → Approve.*Approved.*Publish.*Start publish/i,
   );
   assert.match(
     prose(entry.actions[publish]),
