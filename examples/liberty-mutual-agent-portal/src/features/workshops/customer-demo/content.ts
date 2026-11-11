@@ -1014,7 +1014,7 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "In the **SitecoreAI** tab, choose **Optimization → Analytics → Events**. If the left navigation is collapsed, choose **Expand navigation** first. Keep this tab as **Events**.",
             "Set **Site → liberty-mutual-public-site** and **Time → 1 month**.",
-            "Under **Event Type**, keep **pageView** and **LM_PUBLIC_CTA_CLICK** checked; clear the other event checkboxes.",
+            "Under **Event Type**, select only **pageView** and **LM_PUBLIC_CTA_CLICK**; clear all other event checkboxes.",
           ],
           [
             "Show **Events over Time** and **Events Table**.",
@@ -1029,7 +1029,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The public-site report shows actual page views and defined CTA selections over the past month.",
         actions: [
-          `Switch to the prepared **Events** tab, or open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Under **Event Type**, keep **pageView** and **LM_PUBLIC_CTA_CLICK** checked, and clear the other event checkboxes.`,
+          `Switch to the prepared **Events** tab, or open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Under **Event Type**, select only **pageView** and **LM_PUBLIC_CTA_CLICK**; clear all other event checkboxes.`,
           "Inspect **Events over Time** and **Events Table**. Identify the actual **pageView** and **LM_PUBLIC_CTA_CLICK** rows, and read the values shown for the selected site and reporting period.",
           "Explain that **LM_PUBLIC_CTA_CLICK** is a custom event for a visitor’s selection of a defined next-step button or link. Show that this business action can be measured alongside **pageView** page views.",
         ],
@@ -1051,7 +1051,7 @@ export const customerDemoChapters: DemoChapter[] = [
             title: "Filter the public site’s monthly events",
             alt: "Native SitecoreAI Events view with liberty-mutual-public-site selected, Time set to 1 month, and Event Type limited to LM_PUBLIC_CTA_CLICK and pageView",
             caption:
-              "Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Keep **LM_PUBLIC_CTA_CLICK** and **pageView** selected under **Event Type**; the report reflects those selections.",
+              "Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Under **Event Type**, select only **pageView** and **LM_PUBLIC_CTA_CLICK**; clear all other event checkboxes.",
             crop: {
               x: 64,
               y: 110,
