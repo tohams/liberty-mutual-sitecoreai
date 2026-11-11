@@ -19,6 +19,9 @@ import { privateHeaders } from './server/http';
 import { getAudiencePreviewAuth } from './server/marketplace/audience-preview-auth';
 import { isAudiencePreviewAuthPath } from './server/marketplace/audience-preview-config';
 import { isAudiencePreviewViewPath, preflightAudiencePreviewView } from './server/marketplace/audience-preview-view-auth';
+import { getPersonalizationPreviewAuth } from './server/marketplace/personalization-preview-auth';
+import { isPersonalizationPreviewAuthPath } from './server/marketplace/personalization-preview-config';
+import { isPersonalizationPreviewViewPath, preflightPersonalizationPreviewView } from './server/marketplace/personalization-preview-view-auth';
 import { verifyWorkshopSession, WORKSHOP_SESSION_COOKIE, workshopReturnTo } from './server/workshops/auth';
 import { isDemoGuidePath } from './features/workshops/customer-demo/access';
 
@@ -88,6 +91,18 @@ const personalize = new PortalPersonalizeProxy({
 
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
+  // Variant selection has its own app, cookies, and delegated Sitecore identity.
+  if (isPersonalizationPreviewAuthPath(path)) {
+    const auth = getPersonalizationPreviewAuth();
+    if (!auth) return NextResponse.next({ headers: privateHeaders });
+    const authRequest = path === '/apps/personalization-preview/auth/login'
+      ? new NextRequest(new URL(path, req.url), { method: req.method, headers: req.headers })
+      : req;
+    const response = await auth.middleware(authRequest);
+    for (const [name, value] of Object.entries(privateHeaders)) response.headers.set(name, value);
+    if (isPersonalizationPreviewViewPath(path)) return preflightPersonalizationPreviewView(req, response, auth);
+    return response;
+  }
   // Marketplace preview uses its own delegated Sitecore identity and never
   // enters the synthetic agent login, analytics, or personalization proxy.
   if (isAudiencePreviewAuthPath(path)) {
@@ -149,6 +164,7 @@ export const config = {
   matcher: [
     '/',
     '/api/audience-preview/:path*',
+    '/api/personalization-preview/:path*',
     '/((?!api/|\\.well-known/|sitemap|robots|llms|_next/|healthz|sitecore/api/|-/|favicon.ico|brand/|sc_logo.svg|ai/).*)',
   ],
 };
