@@ -72,7 +72,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "User can ask a question in conversational language in an AI-enabled search field",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 3,
+        durationMinutes: 2,
         persona: "Prospective customer",
         scenario:
           "The visitor wants useful insurance guidance without already knowing Liberty Mutual’s terminology.",
@@ -397,6 +397,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterPoints: [
           "Publish one approved page revision, without a frontend release.",
+          "A configured **OnEnd** publication event invokes a custom synchronization service, which reads **Live Experience Edge** and updates the index through the **Search Push API**.",
           "Show the sentence absent before publication and present in Search afterward; the state, product, and audience classifications stay intact.",
         ],
         presenterActions: [
@@ -808,7 +809,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketing can publish content from Profound directly into the CMS / DXP",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
-        durationMinutes: 3,
+        durationMinutes: 2,
         mode: "explain",
         persona: "Public-site marketer",
         scenario:
@@ -1167,7 +1168,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Agent sees product content, and bundles based on their business, relationship and priorities",
         phase: "Agent Experience",
         sourceSlide: 11,
-        durationMinutes: 2,
+        durationMinutes: 3,
         persona:
           "Independent agents Avery and Daniel, followed by a portal marketer",
         scenario:
@@ -1564,7 +1565,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Marketing user previews the experience for each agent audience",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
-        durationMinutes: 3,
+        durationMinutes: 4,
         persona: "Portal content administrator",
         scenario:
           "The team needs to check the draft Home priorities for the intended principal and producer audiences before publication.",
