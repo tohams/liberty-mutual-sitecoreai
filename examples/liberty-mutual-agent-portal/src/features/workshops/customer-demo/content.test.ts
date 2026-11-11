@@ -1200,7 +1200,7 @@ test("the presenter guide displays concise clicks and result checks, with prepar
   assert.match(page, /Result check:/);
   assert.match(
     page,
-    /step\.presenterResult[\s\S]*?Return to this slide, and click once to mark the area\s+complete\./,
+    /step\.presenterResult[\s\S]*?Return to the presentation and advance to the next\s+slide\./,
   );
   assert.match(page, /className=\{styles\.screenshot\}/);
   assert.doesNotMatch(

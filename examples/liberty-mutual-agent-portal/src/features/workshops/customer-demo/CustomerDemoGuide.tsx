@@ -380,8 +380,8 @@ export async function CustomerDemoGuide({
                         <strong>Result check:</strong>{" "}
                         <GuideText text={step.presenterResult} />
                         <span className={styles.slideReturn}>
-                          Return to this slide, and click once to mark the area
-                          complete.
+                          Return to the presentation and advance to the next
+                          slide.
                         </span>
                       </p>
                       {step.images
