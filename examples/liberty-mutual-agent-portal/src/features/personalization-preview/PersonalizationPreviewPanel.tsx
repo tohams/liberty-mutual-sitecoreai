@@ -123,21 +123,6 @@ export function PersonalizationPreviewPanel({
         </div>
       </header>
 
-      <div className={styles.pageContext}>
-        <FileText size={18} aria-hidden="true" />
-        <div className={styles.pageIdentity}>
-          <span className={styles.eyebrow}>Current page</span>
-          <strong>{page?.name || "Select a page in Page Builder"}</strong>
-          {page ? (
-            <span className={styles.pageMeta}>
-              {page.siteName} · {page.language.toUpperCase()}
-              {page.version ? ` · Version ${page.version}` : ""}
-            </span>
-          ) : null}
-        </div>
-        <span className={styles.readOnly}>Read-only</span>
-      </div>
-
       <div className={styles.sectionHeading}>
         <h2>Personalizations</h2>
         <button
