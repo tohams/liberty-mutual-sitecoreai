@@ -165,6 +165,13 @@ test('structured resources are page-owned and preserve native identities without
  }
  const bundle=record(SITE+'/Home/insurance-resources/bundle-car-and-home');
  assert.equal(bundle.id,'ae109fc0-b508-5840-97eb-0b2c02ae1a9b');
+ assert.equal(bundle.fields.Title,'Bundling your car and home insurance');
+ assert.equal(bundle.fields.metadataTitle,'Bundling your car and home insurance | Liberty Mutual');
+ assert.equal(record(bundle.path+'/Data/Hero').fields.heading,bundle.fields.Title);
+ assert.match(bundle.fields.explanation,/<h2>Review your coverage options<\/h2>/);
+ assert.doesNotMatch(bundle.fields.explanation,/Review your options with your agent before choosing coverage\./,'The factory article starts before the P3 editing exercise.');
+ assert.equal(bundle.fields.question,'Can I bundle my car and home insurance?');
+ assert.match(bundle.fields.answer,/combining eligible auto and home policies/,'Native Search and API answer fields remain intact.');
  assert(bundle.fields.__Renderings.includes('{1FA93D3A-1935-52B8-B512-5CC2F274B489}'),'Preserve the placed component identity.');
  assert.equal(model.renderingIds.PublicResourceContent,'4585a48f-e841-50ca-b2a3-0d3fc9893875');
  assert.equal(model.variantIds['PublicResourceContent.Default'],'3e82160b-336f-5744-a667-7a1b94bc7307');

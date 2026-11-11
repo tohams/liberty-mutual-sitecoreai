@@ -1,4 +1,6 @@
-import { Link, RichText, Text } from "@sitecore-content-sdk/nextjs";
+import { Link, RichText } from "@sitecore-content-sdk/nextjs";
+import { getBaseUrl } from "lib/utils";
+import { resourceArticleSchema } from "src/features/structured-data/resource-article-schema";
 import { serializeJsonLd } from "src/features/structured-data/serialize-json-ld";
 import type { PublicResourceContentProps } from "./public-resource-content.props";
 
@@ -8,23 +10,14 @@ export const Default = ({
   rendering,
 }: PublicResourceContentProps) => {
   if (!fields) return null;
-  const schema =
-    fields.question?.value && fields.answer?.value
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          ...(fields.canonicalUrl?.value
-            ? { "@id": fields.canonicalUrl.value }
-            : {}),
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: fields.question.value,
-              acceptedAnswer: { "@type": "Answer", text: fields.answer.value },
-            },
-          ],
-        }
-      : null;
+  const schema = resourceArticleSchema(
+    {
+      title: fields.Title?.value,
+      description: fields.metadataDescription?.value,
+      canonicalUrl: fields.canonicalUrl?.value,
+    },
+    getBaseUrl(),
+  );
   return (
     <article
       className={`component public-section public-answer ${params.styles || ""}`}
@@ -41,12 +34,6 @@ export const Default = ({
       )}
       <div className="public-container public-answer__grid">
         <div>
-          <Text tag="h2" field={fields.question} />
-          <Text
-            tag="p"
-            className="public-answer__summary public-prose"
-            field={fields.answer}
-          />
           <RichText className="public-prose" field={fields.explanation} />
           <details className="public-answer__wording">
             <summary>Coverage and policy details</summary>

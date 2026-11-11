@@ -2514,7 +2514,7 @@
                 {
                   "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
                   "Hint": "Title",
-                  "Value": "Can I bundle my car and home insurance?"
+                  "Value": "Bundling your car and home insurance"
                 },
                 {
                   "ID": "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8",
@@ -2529,7 +2529,7 @@
                 {
                   "ID": "748e2709-fb2f-5f73-9ca6-d8e801b6eafc",
                   "Hint": "metadataTitle",
-                  "Value": "Can I bundle my car and home insurance?"
+                  "Value": "Bundling your car and home insurance | Liberty Mutual"
                 },
                 {
                   "ID": "396bcd2c-e08b-56fa-8d7a-170b9a7a18e8",
@@ -2574,7 +2574,7 @@
                 {
                   "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
                   "Hint": "explanation",
-                  "Value": "<p>Start with the products you need, and compare their coverages, limits, and deductibles. If your circumstances need a closer look, an independent agent can help you discuss the options.</p>"
+                  "Value": "<div class=\"ck-content\"><p>Bundling means insuring your car and home with the same company. Keeping eligible policies together may make them easier to manage and may qualify you for a multi-policy discount.</p><h2>Review your coverage options</h2><p>Start with the products you need, and compare their coverages, limits, and deductibles. If your circumstances need a closer look, an independent agent can help you discuss the options.</p></div>"
                 },
                 {
                   "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
@@ -6101,7 +6101,7 @@
                 {
                   "ID": "3a61c47e-c996-5a80-ba68-f988ee36554f",
                   "Hint": "heading",
-                  "Value": "Can I bundle my car and home insurance?"
+                  "Value": "Bundling your car and home insurance"
                 },
                 {
                   "ID": "608c6aac-cdd7-5be1-b727-a1647363b89c",
