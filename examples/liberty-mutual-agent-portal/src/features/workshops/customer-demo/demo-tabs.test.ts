@@ -20,7 +20,7 @@ test("P0 names fourteen tools but copies only five starting addresses", () => {
     tabs.filter((tab) => tab.href).map((tab) => [tab.id, tab.href]),
     [
       ["publicWebsite", `${PUBLIC}/`],
-      ["averyPortal", `${PORTAL}/login`],
+      ["danielPortal", `${PORTAL}/login`],
       ["sitecoreAI", SITECORE_AI],
       ["graphqlExplorer", GRAPHQL_EXPLORER],
       ["prosperaRecommendations", SCRUNCH_REVIEW],
@@ -69,17 +69,36 @@ test("native tools use their verified menus instead of more deep-link copy targe
   assert.match(source, /GuideText text={tab\.navigation/);
 });
 
-test("agent windows stay separate while Daniel reuses the one login address", () => {
+test("P0 follows Daniel then Avery in separate windows with one login address", () => {
   const avery = customerDemoTabGroups.find((group) => group.id === "avery");
   const daniel = customerDemoTabGroups.find((group) => group.id === "daniel");
   assert(avery && daniel);
-  assert.match(avery.note, /separate browser profile/);
-  assert.match(daniel.note, /another browser profile/);
-  assert.equal(avery.tabs[0].href, `${PORTAL}/login`);
-  assert.equal(daniel.tabs[0].href, undefined);
   assert.match(
-    plainGuideText(daniel.tabs[0].navigation ?? ""),
-    /Agent Portal login.*Avery window.*another browser profile/,
+    daniel.note,
+    /separate browser profile.*producer baseline.*first in A1/,
+  );
+  assert.match(
+    avery.note,
+    /another browser profile.*principal contrast.*second in A1/,
+  );
+  assert(
+    customerDemoTabGroups.indexOf(daniel) <
+      customerDemoTabGroups.indexOf(avery),
+  );
+  assert.equal(daniel.tabs[0].href, `${PORTAL}/login`);
+  assert.equal(avery.tabs[0].href, undefined);
+  assert.match(
+    plainGuideText(avery.tabs[0].navigation ?? ""),
+    /Daniel portal.*Daniel window.*another browser profile/,
+  );
+  assert.match(
+    avery.tabs[0].cue,
+    /Stay with Avery for Profiles and the native personalization test/,
+  );
+  const profiles = tabs.find((tab) => tab.id === "profiles");
+  assert.match(
+    profiles?.cue ?? "",
+    /Daniel’s portal baseline and Avery’s contrast.*Avery Brooks - 01.*her Client ID/,
   );
   assert.doesNotMatch(
     JSON.stringify(customerDemoTabGroups),
