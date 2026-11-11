@@ -64,26 +64,44 @@ export async function recordPublicEvent(
   }
 }
 
-/** Native search analytics contract follows the official Content SDK product-listing starter. */
-export async function recordSearchInteraction(data: {
-  query: string;
-  componentId: string;
-  siteName: string;
-  interactionType: "viewed" | "clicked";
-  nullResults: boolean;
-}) {
-  if (!trackingAllowed()) return;
-  const ready = ensurePublicAnalytics(data.siteName);
-  if (!ready) return;
+interface SearchInteractionRuntime {
+  allowed: () => boolean;
+  ensure: (siteName: string) => Promise<void> | null;
+  send: (payload: Parameters<typeof event>[0]) => Promise<unknown>;
+  page: () => string;
+  language: () => string;
+}
+const searchRuntime: SearchInteractionRuntime = {
+  allowed: trackingAllowed,
+  ensure: ensurePublicAnalytics,
+  send: event,
+  page: () => window.location.pathname,
+  language: () => document.documentElement.lang,
+};
+
+/** True means the SDK returned a send receipt, not that a dashboard has processed it. */
+export async function recordSearchInteraction(
+  data: {
+    query: string;
+    componentId: string;
+    siteName: string;
+    interactionType: "viewed" | "clicked";
+    nullResults: boolean;
+  },
+  runtime: SearchInteractionRuntime = searchRuntime,
+): Promise<boolean> {
   try {
+    if (!runtime.allowed()) return false;
+    const ready = runtime.ensure(data.siteName);
+    if (!ready) return false;
     await ready;
-    if (!trackingAllowed()) return;
-    await event({
+    if (!runtime.allowed()) return false;
+    const receipt = await runtime.send({
       type: "search",
       siteId: data.siteName,
       channel: "web",
-      name: window.location.pathname,
-      language: document.documentElement.lang,
+      name: runtime.page(),
+      language: runtime.language(),
       core: {
         componentId: data.componentId,
         interactionType: data.interactionType,
@@ -91,7 +109,9 @@ export async function recordSearchInteraction(data: {
         nullResults: data.nullResults,
       },
     });
+    return Boolean(receipt);
   } catch {
     /* Search remains usable when optional analytics is unavailable. */
+    return false;
   }
 }
