@@ -973,7 +973,7 @@ test("the same Home draft uses native content variants before approval and publi
   );
   assert.match(
     plainGuideText(page),
-    /After the demonstration.*Apps → Personalization Preview.*return every variant selector to Default/is,
+    /After the demonstration[\s\S]*Apps → Personalization Preview[\s\S]*return every variant selector to Default/i,
   );
   assert.doesNotMatch(
     prose([editEntry, entry, page]),
