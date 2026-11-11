@@ -13,7 +13,7 @@ import {
 
 const tabs = customerDemoTabGroups.flatMap((group) => group.tabs);
 
-test("P0 names fourteen tools but copies only six starting addresses", () => {
+test("P0 names fourteen tools but copies only five starting addresses", () => {
   assert.equal(tabs.length, 14);
   assert.equal(new Set(tabs.map((tab) => tab.id)).size, 14);
   assert.deepEqual(
@@ -22,7 +22,6 @@ test("P0 names fourteen tools but copies only six starting addresses", () => {
       ["publicWebsite", `${PUBLIC}/`],
       ["averyPortal", `${PORTAL}/login`],
       ["sitecoreAI", SITECORE_AI],
-      ["audiencePreparation", `${PORTAL}/apps/audience-preview/prepare`],
       ["graphqlExplorer", GRAPHQL_EXPLORER],
       ["prosperaRecommendations", SCRUNCH_REVIEW],
     ],
@@ -44,6 +43,8 @@ test("P0 names fourteen tools but copies only six starting addresses", () => {
 test("native tools use their verified menus instead of more deep-link copy targets", () => {
   const paths: Record<string, RegExp> = {
     pageBuilder: /Channels → Public Website → Page builder/,
+    personalizationPreview:
+      /Page Builder → Site switcher → Agent Portal → Editor → Pages → Home → Apps → Personalization Preview/,
     searchPreview:
       /Content → Search Sources → Liberty Mutual Approved Answers → Preview/,
     events:
@@ -86,12 +87,17 @@ test("agent windows stay separate while Daniel reuses the one login address", ()
   );
 });
 
-test("preparation closes after all audiences are ready and dynamic profile URLs are never rendered", () => {
-  const preparation = tabs.find((tab) => tab.id === "audiencePreparation");
-  assert(preparation);
+test("Personalization Preview uses live page choices, restores defaults, and needs no preparation tab", () => {
+  const preview = tabs.find((tab) => tab.id === "personalizationPreview");
+  assert(preview);
+  assert.equal(preview.href, undefined);
   assert.match(
-    preparation.cue,
-    /Before presenting.*42 of 42 ready.*close this preparation tab/,
+    preview.cue,
+    /Agency growth priorities and Producer priorities.*Preview page opens each result directly.*Allow pop-ups.*return all selectors to Default/,
+  );
+  assert.doesNotMatch(
+    JSON.stringify(customerDemoTabGroups),
+    /audience-preview|Prepare audiences|42 of 42|Apps → Audience Preview/,
   );
   const source = readFileSync(
     new URL("./DemoTabs.tsx", import.meta.url),

@@ -872,7 +872,7 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
   assert.equal(entry.durationMinutes, 2);
 });
 
-test("the same Home draft is previewed with audience attributes before approval and publication", () => {
+test("the same Home draft uses native content variants before approval and publication", () => {
   const editEntry = step("portal-priority-edit");
   const edit = prose(editEntry.actions);
   assert.match(editEntry.objective, /Part 1 of the priority-change loop/);
@@ -898,19 +898,19 @@ test("the same Home draft is previewed with audience attributes before approval 
   const entry = step(id);
   const open = actionIndex(
     id,
-    /Page Builder.*Site switcher → Agent Portal → Editor → Pages → Home.*Apps → Audience Preview.*Current page → Home/i,
+    /Page Builder.*Site switcher → Agent Portal → Editor → Pages → Home.*Apps → Personalization Preview.*Home.*Page Builder/i,
   );
   const principal = actionIndex(
     id,
-    /Role → Principal.*Licensed states.*only Texas.*Preview audience.*Open preview.*Home.*Texas → Build a stronger small-business practice → Connect home and auto conversations/,
+    /Agency priorities.*Agency growth priorities.*Guidance → Default.*Preview page.*directly.*Home.*Texas → Build a stronger small-business practice → Connect home and auto conversations/,
   );
   const producer = actionIndex(
     id,
-    /Role → Producer.*Licensed states.*only Illinois.*Preview audience.*Open preview.*Home.*Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice/,
+    /Agency priorities.*Producer priorities.*Guidance → Default.*Preview page.*directly.*Home.*Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice/,
   );
   assert.doesNotMatch(
     prose(entry.actions),
-    /Business context|Agency small-commercial share|Agency written premium|Agent small-commercial written premium|Specializes in small commercial/,
+    /Business context|Agency small-commercial share|Agency written premium|Agent small-commercial written premium|Specializes in small commercial|Role →|Licensed states|Open preview|Preview audience|Apps → Audience Preview/,
   );
   const submit = actionIndex(id, /Saved priority version.*Actions → Submit/);
   const approve = actionIndex(
@@ -930,7 +930,7 @@ test("the same Home draft is previewed with audience attributes before approval 
   );
   assert.match(
     prose(entry.actions[principal]),
-    /Close the preview tab.*same Audience Preview panel in Page Builder/i,
+    /Close the preview tab.*same Personalization Preview panel in Page Builder/i,
   );
   assert.match(
     prose(entry.actions[producer]),
@@ -938,11 +938,11 @@ test("the same Home draft is previewed with audience attributes before approval 
   );
   assert.match(
     prose(entry.controls),
-    /private Marketplace extension.*existing published SitecoreAI personalization rules.*current authoring content for Home/,
+    /private Marketplace extension.*native content-variant names.*chosen variants.*current authoring content for Home/,
   );
   assert.match(
     prose(entry.controls),
-    /isolated synthetic audience records.*without changing human agent accounts/,
+    /Native profile tests in A1 verify the decision rules.*without changing human agent accounts/,
   );
   assert.match(
     prose(entry.expected),
@@ -962,21 +962,22 @@ test("the same Home draft is previewed with audience attributes before approval 
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
   );
+  assert.match(page, /Editor → Pages → Home.*Apps → Personalization Preview/);
   assert.match(
     page,
-    /Editor → Pages → Home.*Apps → Audience Preview.*Current page → Home/,
+    /same presenter account.*Agency priorities.*Agency growth priorities.*Guidance → Default.*Preview page.*directly.*Agency priorities → Producer priorities.*Illinois.*Return every variant selector to \*\*Default\*\*/,
   );
   assert.match(
-    page,
-    /same presenter account.*Role → Principal.*Texas.*Role → Producer.*Illinois/,
+    plainGuideText(page),
+    /The app reads the current page’s available variants/,
   );
   assert.match(
-    page,
-    /attempts to connect the existing SitecoreAI session automatically.*Connect to SitecoreAI.*same presenter account.*connection window closes after authentication.*verifies the session automatically/,
+    plainGuideText(page),
+    /After the demonstration[\s\S]*Apps → Personalization Preview[\s\S]*return every variant selector to Default/i,
   );
   assert.doesNotMatch(
-    page,
-    /complete \*\*Sign in\*\* with the same presenter account|return to the app, and select \*\*Continue\*\*/,
+    prose([editEntry, entry, page]),
+    /Apps → Audience Preview|apps\/audience-preview|Prepare audiences|42 of 42|Preview audience|Open preview/,
   );
   assert.doesNotMatch(
     page,
