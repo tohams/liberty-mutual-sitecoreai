@@ -12,6 +12,7 @@ import type {
   PersonalizationPreviewSelection,
   SelectedPersonalizationExperience,
 } from "./types";
+import { personalizationPreviewComponentOrder } from "./component-order";
 
 type RecordValue = Record<string, unknown>;
 type NativeChoice = {
@@ -178,6 +179,7 @@ export function buildPersonalizationCatalog(
   ]);
   const choices = new Map<string, Map<string, NativeChoice>>();
   const flows: PersonalizationPreviewContext["flows"] = [];
+  const flowOwners = new Map<string, string | undefined>();
   const owners = new Set<string>();
   const warnings: string[] = [];
   for (const raw of rawFlows) {
@@ -280,6 +282,7 @@ export function buildPersonalizationCatalog(
         control: option.control,
       });
     choices.set(flowId, flowChoices);
+    flowOwners.set(flowId, execution.componentId);
     flows.push({
       id: flowId,
       name: flowName,
@@ -293,9 +296,33 @@ export function buildPersonalizationCatalog(
       "This page has more personalizations than can be combined in one preview.",
       409,
     );
+  const componentOrder = personalizationPreviewComponentOrder(page);
+  const positions = new Map(
+    componentOrder.map((componentId, index) => [componentId, index]),
+  );
+  const discoveryPositions = new Map(
+    executions.map((execution, index) => [execution.componentId, index]),
+  );
+  const position = (flowId: string) => {
+    const owner = flowOwners.get(flowId);
+    // A whole-page choice establishes the baseline before component choices.
+    if (!owner) return -1;
+    return (
+      positions.get(normalizePreviewId(owner)) ??
+      componentOrder.length +
+        (discoveryPositions.get(owner) ?? executions.length)
+    );
+  };
+  flows.sort((left, right) => position(left.id) - position(right.id));
   const revision = createHash("sha256")
     .update(
-      JSON.stringify({ page, rawFlows, variants: info.variantIds, scope }),
+      JSON.stringify({
+        page,
+        rawFlows,
+        variants: info.variantIds,
+        scope,
+        componentOrder,
+      }),
     )
     .digest("hex");
   return {

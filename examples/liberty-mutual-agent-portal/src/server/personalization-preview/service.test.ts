@@ -183,6 +183,6 @@ test("prefers real flow labels and uses native content names only for a successf
   );
   assert.deepEqual(
     mixed.context.flows.map((flow) => flow.name),
-    ["Product priorities", "Principal page", "Growth guidance"],
+    ["Principal page", "Product priorities", "Growth guidance"],
   );
 });

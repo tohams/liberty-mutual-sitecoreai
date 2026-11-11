@@ -70,7 +70,7 @@ test("only the appropriate named slots are exposed for each page and operational
   }
   assert.deepEqual(
     Object.keys(getPortalPlaceholders("/products", allSlots, editing)),
-    ["guidance", "productSpotlight"],
+    ["productSpotlight", "guidance"],
   );
   assert.deepEqual(
     Object.keys(
@@ -122,12 +122,32 @@ test("Product page detail slots keep only the governed component and preserve it
     placeholders: { "headless-product-details": [details, guidance, search] },
   };
   for (const mode of [editing, delivery]) {
-    const slot = getPortalPlaceholders("/products/new-guidance", layout, mode).productDetails;
-    assert.deepEqual(slot?.rendering.placeholders["headless-product-details"], [details]);
-    assert.equal(slot?.rendering.placeholders["headless-product-details"][0], details);
-    assert.equal(getPortalPlaceholders("/resources/new-guidance", layout, mode).productDetails, undefined);
-    assert.equal(getPortalPlaceholders("/products", layout, mode).productDetails, undefined);
-    assert.equal(getPortalPlaceholders("/products/personal", allSlots, mode).productDetails, undefined);
+    const slot = getPortalPlaceholders(
+      "/products/new-guidance",
+      layout,
+      mode,
+    ).productDetails;
+    assert.deepEqual(slot?.rendering.placeholders["headless-product-details"], [
+      details,
+    ]);
+    assert.equal(
+      slot?.rendering.placeholders["headless-product-details"][0],
+      details,
+    );
+    assert.equal(
+      getPortalPlaceholders("/resources/new-guidance", layout, mode)
+        .productDetails,
+      undefined,
+    );
+    assert.equal(
+      getPortalPlaceholders("/products", layout, mode).productDetails,
+      undefined,
+    );
+    assert.equal(
+      getPortalPlaceholders("/products/personal", allSlots, mode)
+        .productDetails,
+      undefined,
+    );
   }
 });
 
@@ -350,7 +370,7 @@ test("native Forms are restricted to the Support slot and retain native paramete
   };
   for (const mode of [delivery, editing]) {
     const support = getPortalPlaceholders("/support", layout, mode);
-    assert.deepEqual(Object.keys(support), ["guidance", "supportForm"]);
+    assert.deepEqual(Object.keys(support), ["supportForm", "guidance"]);
     assert.deepEqual(support.supportForm?.rendering.placeholders, {
       "headless-support-form": [nativeForm],
     });
