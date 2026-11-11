@@ -27,6 +27,9 @@ export interface PersonalizationPreviewPage {
   siteName: string;
   language: string;
   version: number;
+  /** Server-only request metadata; deliberately non-enumerable in responses and stored tokens. */
+  readonly nativeFinalLayout?: unknown;
+  readonly nativeSharedLayout?: unknown;
 }
 
 function itemId(value: unknown): string | null {
@@ -214,7 +217,10 @@ async function readSitecore(
 export async function resolveAuthorizedPersonalizationPreviewPage(
   input: PersonalizationPreviewPageRequest,
   accessToken: string,
-  onLayouts?: (layouts: { finalLayout: unknown; sharedLayout: unknown }) => void,
+  onLayouts?: (layouts: {
+    finalLayout: unknown;
+    sharedLayout: unknown;
+  }) => void,
 ): Promise<PersonalizationPreviewPage> {
   const pageId = itemId(input.pageId);
   if (
@@ -315,8 +321,11 @@ export async function resolveAuthorizedPersonalizationPreviewPage(
   }
   const contentPath = `/${String(page.path).replace(/^\/+|\/+$/g, "")}`;
   const path = contentPath.slice(`${site.root}/Home`.length) || "/";
-  onLayouts?.({ finalLayout: page.finalLayout, sharedLayout: page.sharedLayout });
-  return {
+  onLayouts?.({
+    finalLayout: page.finalLayout,
+    sharedLayout: page.sharedLayout,
+  });
+  const selected: PersonalizationPreviewPage = {
     id: pageId,
     name: page.name,
     path,
@@ -325,4 +334,9 @@ export async function resolveAuthorizedPersonalizationPreviewPage(
     language: String(page.language),
     version: page.version,
   };
+  Object.defineProperties(selected, {
+    nativeFinalLayout: { value: page.finalLayout, enumerable: false },
+    nativeSharedLayout: { value: page.sharedLayout, enumerable: false },
+  });
+  return selected;
 }

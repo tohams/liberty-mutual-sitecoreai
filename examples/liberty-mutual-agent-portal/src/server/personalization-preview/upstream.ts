@@ -55,7 +55,7 @@ async function json(response: Response): Promise<unknown> {
 }
 
 /** Fixed-origin, read-only Agent API calls under the author's delegated Sitecore session. */
-function personalizationDefinitionReader(
+export function personalizationDefinitionReader(
   accessToken: string,
   transport: typeof fetch = fetch,
 ) {
@@ -115,6 +115,45 @@ function personalizationDefinitionReader(
     return json(response);
   };
   return read;
+}
+
+/** Temporary bounded component-shape inspection; remove with diagnostics. */
+export async function readNativeComponentDefinitionDiagnostics(
+  page: PersonalizationPreviewPage,
+  variantIds: string[],
+  accessToken: string,
+) {
+  const read = personalizationDefinitionReader(accessToken);
+  const variants = [
+    undefined,
+    variantIds.find((value) => /^[a-f0-9]{32}_[a-f0-9]{32}$/i.test(value)),
+  ];
+  return Promise.all(
+    variants.map(async (variantId) => {
+      try {
+        return {
+          variantId: variantId || "_default",
+          value: await read(
+            `/api/v1/pages/${encodeURIComponent(page.id)}/components`,
+            {
+              language: page.language,
+              version: String(page.version),
+              includeRenderingDetails: "true",
+              ...(variantId ? { variantId } : {}),
+            },
+          ),
+        };
+      } catch (error) {
+        return {
+          variantId: variantId || "_default",
+          error:
+            error instanceof PersonalizationPreviewError
+              ? error.message
+              : "Unavailable",
+        };
+      }
+    }),
+  );
 }
 
 export async function readPersonalizationFlowDefinitions(

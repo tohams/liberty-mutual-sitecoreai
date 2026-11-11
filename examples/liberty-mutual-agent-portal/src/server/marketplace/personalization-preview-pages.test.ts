@@ -133,6 +133,23 @@ test("rejects invalid page selection before any network request", async () => {
   assert.equal(fetch.mock.callCount(), 0);
 });
 
+test("retains authorized native layout metadata only on the server", async () => {
+  const finalLayout = '{"devices":[{"renderings":[]}]}';
+  const sharedLayout = '{"devices":[]}';
+  responses({ page: { finalLayout, sharedLayout } });
+  const selected = await resolveAuthorizedPersonalizationPreviewPage(
+    { pageId: PAGE_ID, language: "en", version: 7 },
+    "synthetic-delegated-user-token",
+  );
+  assert.equal(selected.nativeFinalLayout, finalLayout);
+  assert.equal(selected.nativeSharedLayout, sharedLayout);
+  assert.equal(
+    Object.hasOwn(JSON.parse(JSON.stringify(selected)), "nativeFinalLayout"),
+    false,
+  );
+  assert.equal(Object.hasOwn({ ...selected }, "nativeSharedLayout"), false);
+});
+
 test("rejects missing or invalid bearer tokens before any network request", async () => {
   const fetch = responses();
   for (const token of ["", "token\r\ninjected-header"]) {

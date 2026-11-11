@@ -6,11 +6,13 @@ Personalization Preview is a separate private Page Builder app for inspecting th
 
 1. Open an Agent Portal page in Page Builder, and choose **Apps → Personalization Preview**.
 2. Connect the same Sitecore account if the existing Sitecore session cannot connect automatically.
-3. Choose **Default** or an existing variant under each personalization name.
+3. Choose **Default** or an existing content variant under each component or personalization name.
 4. Select **Preview page**, and then **Open preview** to inspect the current draft.
 5. Select **Refresh choices** after changing the page's personalization configuration.
 
-The app reads native flow definitions and maps their outcomes to verified native preview variant IDs. It does not interpret custom JavaScript, create CDP profiles, change rules, or publish content. Selecting an outcome previews its presentation; use Sitecore's condition testing to verify visitor eligibility. A changed configuration invalidates an earlier selection, so the app asks the author to select from the latest choices.
+The app maps native configuration to verified native preview variant IDs. When decision-table metadata is available, it uses that metadata. Otherwise, it reads the selected page's authorized native variant configuration and labels the choices using the actual component and content-variant names. Content-variant names describe the selected content, rather than the conditions that make a visitor eligible for it.
+
+The app does not interpret custom JavaScript, create CDP profiles, change rules, or publish content. Selecting an outcome previews its presentation; use Sitecore's condition testing to verify visitor eligibility. A changed configuration invalidates an earlier selection, so the app asks the author to select from the latest choices.
 
 ## Installation and isolation
 

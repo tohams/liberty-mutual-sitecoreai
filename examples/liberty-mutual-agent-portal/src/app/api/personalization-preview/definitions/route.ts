@@ -10,7 +10,10 @@ import {
   personalizationPreviewErrorResponse,
   personalizationPreviewDependencies,
 } from "@/server/personalization-preview/service";
-import { readPersonalizationDefinitionDiagnostics } from "@/server/personalization-preview/upstream";
+import {
+  readPersonalizationDefinitionDiagnostics,
+  readNativeComponentDefinitionDiagnostics,
+} from "@/server/personalization-preview/upstream";
 import { nativePreviewExecutions } from "@/server/audience-preview/decisions";
 
 export const runtime = "nodejs";
@@ -110,6 +113,13 @@ export async function GET(request: NextRequest) {
     ]);
     return jsonResponse({
       page,
+      components: diagnosticValue(
+        await readNativeComponentDefinitionDiagnostics(
+          page,
+          nativeInfo?.variantIds || [],
+          actor.accessToken,
+        ),
+      ),
       layouts: diagnosticValue(layouts),
       probes: diagnosticValue(definitions),
       nativeInfo: nativeInfo || null,
