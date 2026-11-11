@@ -6,6 +6,7 @@ import test from "node:test";
 import {
   customerDemoAiContext,
   customerDemoChapters,
+  customerDemoClosing,
   customerDemoOpening,
 } from "./content";
 import {
@@ -163,11 +164,11 @@ test("both customer journeys explain demonstrated behavior and a bounded AI-assi
 test("the focused live plan leaves three minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [2, 1, 3, 7, 2, 1, 2],
+    [3, 2, 4, 9, 3, 2, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [5, 1, 2, 4, 4, 4],
+    [2, 2, 2, 3, 2, 2],
   );
   const schedule = customerDemoSchedule(customerDemoChapters);
   assert.equal(DEMO_OPENING_MINUTES, 3);
@@ -177,19 +178,19 @@ test("the focused live plan leaves three minutes within the forty-five-minute li
   assert.deepEqual(
     schedule.map(({ start, end }) => [start, end]),
     [
-      [3, 5],
-      [5, 6],
-      [6, 9],
-      [9, 16],
-      [16, 18],
-      [18, 19],
-      [19, 21],
-      [21, 26],
-      [26, 27],
-      [27, 29],
-      [29, 33],
-      [33, 37],
-      [37, 41],
+      [3, 6],
+      [6, 8],
+      [8, 12],
+      [12, 21],
+      [21, 24],
+      [24, 26],
+      [26, 28],
+      [28, 30],
+      [30, 32],
+      [32, 34],
+      [34, 37],
+      [37, 39],
+      [39, 41],
     ],
   );
   assert.deepEqual(
@@ -304,7 +305,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
     "Can I bundle my car and home insurance?",
   ])
     assert(prose(entry.expected).includes(title));
-  assert.equal(entry.durationMinutes, 2);
+  assert.equal(entry.durationMinutes, 3);
   assert.doesNotMatch(
     live,
     /then open|Read the answer|Coverage and policy details|More information|source link|return to the article|Explore bundling|Explore a bundled quote|Privacy choices|Essential only|Allow personalization|scroll|Effective|Review date/i,
@@ -334,7 +335,7 @@ test("discovery readiness identifies native structure while keeping external eng
     /canonical/i,
   ])
     assert.match(text, required);
-  assert.equal(step("public-discovery").durationMinutes, 1);
+  assert.equal(step("public-discovery").durationMinutes, 2);
   assert.equal(step("public-discovery").actions.length, 3);
   assert.match(
     prose(step("public-discovery").actions),
@@ -355,7 +356,29 @@ test("discovery readiness identifies native structure while keeping external eng
   assert.match(text, /Reference source/);
   assert.match(
     prose(step("public-discovery").actions),
-    /Expand Resource content.*Detailed explanation.*Under Content.*Canonical URL.*Reference source/,
+    /expand Resource content.*Detailed explanation.*Under Content.*Canonical URL.*Reference source/i,
+  );
+  assert.match(
+    prose(step("public-discovery").presenterActions[0]),
+    /selected row.*Content tree options \(•••\) → Page content.*panel beside the canvas/,
+  );
+  assert.doesNotMatch(
+    prose(step("public-discovery").presenterActions),
+    /Quick Info|then choose Content/,
+  );
+  assert.match(
+    prose(step("public-discovery").presenterActions[1]),
+    /Page content.*Go to field → State applicability/,
+  );
+  assert.equal(
+    step("public-discovery").images?.find(
+      (image) => image.file === "demo-public-page-content.png",
+    )?.afterAction,
+    1,
+  );
+  assert.match(
+    prose(step("public-indexing").presenterActions[1]),
+    /bundle-car-and-home.*kept selected from P2.*Page content.*panel is closed/,
   );
   assert.doesNotMatch(
     text,
@@ -709,7 +732,7 @@ test("API reuse uses native Live GraphQL with a copyable query for the same publ
 test("the relevance loop uses native profile and priority tests without presenter helper pages", () => {
   const entry = step("portal-relevance");
   const text = prose(entry);
-  assert.equal(entry.durationMinutes, 5);
+  assert.equal(entry.durationMinutes, 2);
   assert.equal(entry.actions.length, 5);
   assert.equal(entry.presenterActions.length, entry.actions.length);
   for (const required of [
@@ -800,7 +823,14 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
     actions[2],
     /Layers.*headless-agency-priorities.*Insert into.*before or after Agency priorities.*filtered Components picker.*Business priorities → Agency priorities.*Close the picker without selecting a component or inserting content/i,
   );
-  assert.match(actions[3], /Avery portal.*My workspace.*Learning & resources/);
+  assert.match(
+    actions[3],
+    /original Introduction wording is restored.*component picker is closed/,
+  );
+  assert.match(
+    prose(step("portal-relevance").presenterActions[1]),
+    /Avery portal.*Learning & resources.*My workspace.*before opening marketer screens/,
+  );
   assert.match(
     prose(entry.presenterActions[0]),
     /SitecoreAI.*Design → Brand kits/,
@@ -829,7 +859,7 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
     prose(entry.actions),
     /Content → Optimize content|Original and Optimized|X → Cancel|Create A\/B test/,
   );
-  assert.equal(entry.durationMinutes, 1);
+  assert.equal(entry.durationMinutes, 2);
 });
 
 test("the same Home draft is previewed with audience attributes before approval and publication", () => {
@@ -917,7 +947,7 @@ test("the same Home draft is previewed with audience attributes before approval 
     /SitecoreAI → Channels → Agent Portal → Page builder.*Site switcher → Agent Portal → Editor → Pages → Home/,
   );
   assert.equal(editEntry.durationMinutes, 2);
-  assert.equal(entry.durationMinutes, 4);
+  assert.equal(entry.durationMinutes, 3);
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
@@ -1068,7 +1098,7 @@ test("one full copyright notice updates both footers and restores only its year"
     "The copyright exercise must not repurpose the product-availability legal notice",
   );
   for (const entry of [shared, step("portal-audit-rollback")]) {
-    assert.equal(entry.durationMinutes, 4);
+    assert.equal(entry.durationMinutes, 2);
     assert.doesNotMatch(
       prose(entry),
       /Coverage and availability|added sentence|temporary sentence|append|Content owner|Public website content team|Content Editor/i,
@@ -1087,8 +1117,6 @@ test("one full copyright notice updates both footers and restores only its year"
   for (const required of [
     /Compare versions/,
     /version selector/,
-    /comparison updates automatically/,
-    /year changing from 2025 to 2026/,
     /original approved English version/,
     /Create version/,
     /same governed process|newer reviewed version/i,
@@ -1104,8 +1132,8 @@ test("one full copyright notice updates both footers and restores only its year"
     /Workflow history|acting account|timestamps|read the user|who submitted|Page items/,
   );
   assert.match(
-    rollback,
-    /Compare.*recorded original version.*With.*Saved copyright version.*Content → Disclosure/,
+    prose(shared.presenterActions[3]),
+    /While publication and delivery complete.*Compare.*recorded original version.*With.*Saved copyright version.*Content → Disclosure/,
   );
   assert.match(
     step("portal-audit-rollback").stopWhen,
@@ -1181,6 +1209,89 @@ test("the presenter guide displays concise clicks and result checks, with prepar
   assert.match(
     preparation,
     /Allow publication, Search updates, and delivery to complete/,
+  );
+});
+
+test("all thirteen loops provide brief business and screen-observation bullets", () => {
+  for (const entry of steps) {
+    assert(
+      entry.presenterPoints.length >= 2 && entry.presenterPoints.length <= 3,
+      entry.id,
+    );
+    for (const point of entry.presenterPoints) {
+      assert(plainGuideText(point).trim());
+      assert(
+        point.split(/\s+/).length <= 45,
+        `${entry.id}: keep the speaking cue concise`,
+      );
+      assert.doesNotMatch(
+        point,
+        /https?:|how it works|not verified|internal note/i,
+      );
+    }
+  }
+  const page = readFileSync(
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
+    "utf8",
+  );
+  assert.match(page, /Say \/ point out/);
+  assert.match(page, /Lines lines={step\.presenterPoints}/);
+  assert.match(page, /step\.persona/);
+  assert.match(page, /step\.scenario/);
+  assert.match(page, /P2–P3 · One resource, from content to Search/);
+  assert.match(page, /A1–A2 · Agent experience first/);
+  assert.match(page, /Lines lines={customerDemoOpening\.talkTrack}/);
+  assert.match(page, /Lines lines={customerDemoClosing}/);
+  assert.equal(customerDemoClosing.length, 3);
+  assert.match(
+    prose(customerDemoClosing),
+    /Trusted guidance.*Relevant agent experiences.*Business control/,
+  );
+});
+
+test("frontend comparisons precede marketer controls and shared publishing precedes restoration", () => {
+  const relevance = step("portal-relevance");
+  const frontend = prose(relevance.presenterActions.slice(0, 2));
+  assert.match(
+    frontend,
+    /Avery.*Daniel.*Learning & resources.*shared navigation/,
+  );
+  assert.doesNotMatch(
+    frontend,
+    /Edit personalization rules|Optimize with AI|Custom values/,
+  );
+  assert.match(
+    prose(relevance.presenterActions[2]),
+    /Edit personalization rules/,
+  );
+  const edit = step("portal-priority-edit");
+  assert.match(edit.scenario, /Texas workers’ compensation campaign/);
+  assert.match(
+    prose(edit.presenterActions),
+    /Ordered recommendations.*Texas workers compensation.*Small business growth/,
+  );
+  const shared = step("portal-shared-content");
+  assert.match(
+    prose(shared.presenterActions[3]),
+    /Start publish.*While publication.*Compare versions/,
+  );
+  assert.match(prose(shared.presenterActions[4]), /2026 in both footers/);
+  const restore = step("portal-audit-rollback");
+  assert.match(
+    prose(restore.presenterActions[1]),
+    /only after A5 confirms 2026 in both live footers/,
+  );
+  assert.match(prose(restore.presenterActions[2]), /Create version/);
+  assert.match(
+    prose(restore.presenterActions[4]),
+    /While publication completes.*Compare versions/,
+  );
+  assert.match(prose(restore.presenterActions[5]), /both footers.*2025 again/);
+  assert.deepEqual(
+    customerDemoChapters.map((chapter) =>
+      chapter.steps.reduce((sum, entry) => sum + entry.durationMinutes, 0),
+    ),
+    [25, 13],
   );
 });
 

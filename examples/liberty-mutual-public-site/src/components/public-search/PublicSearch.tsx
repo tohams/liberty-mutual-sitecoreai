@@ -21,6 +21,8 @@ import {
 } from "src/features/analytics/public-analytics";
 import { normalizeSearchQuestion } from "src/features/search/normalize-search-question";
 import { supportedQuestionResults } from "src/features/search/question-evidence";
+import { createSearchViewTracker } from "src/features/search/search-view-tracking";
+import { CONSENT_EVENT } from "src/features/consent/consent";
 import type {
   PublicSearchConfiguration,
   PublicSearchProps,
@@ -132,8 +134,13 @@ function SearchExperience({
   const searchParams = useSearchParams();
   const [input, setInput] = useState(searchParams.get("q") || "");
   const [query, setQuery] = useState(input);
+  const [searchRun, setSearchRun] = useState(0);
+  const [consentRevision, setConsentRevision] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const measured = useRef<SearchDocument[] | null>(null);
+  const [viewTracker] = useState(createSearchViewTracker);
+  const [resultsBeforeQuery, setResultsBeforeQuery] = useState<
+    SearchDocument[] | null
+  >(null);
   const summaryRef = useRef<HTMLParagraphElement>(null);
   const nativeQuery = normalizeSearchQuestion(query);
   const needsSubject = Boolean(query.trim() && !nativeQuery);
@@ -154,7 +161,13 @@ function SearchExperience({
     enabled: !editing && !needsSubject,
     keepPreviousData: true,
   });
-  const loading = !editing && !needsSubject && (isLoading || status === "idle");
+  // The SDK retains the old array until its effect starts the next request.
+  // Keep that array hidden and unmeasured for a different native query.
+  const awaitingCurrentResults = resultsBeforeQuery === results;
+  const loading =
+    !editing &&
+    !needsSubject &&
+    (isLoading || status === "idle" || awaitingCurrentResults);
   const mapping = configuration.fieldsMapping;
   const supported = supportedQuestionResults(query, results, (document) =>
     [
@@ -177,22 +190,22 @@ function SearchExperience({
   const totalPages = Math.ceil(total / 6);
   const resultCards = allCards.slice((currentPage - 1) * 6, currentPage * 6);
   useEffect(() => {
-    if (
-      editing ||
-      needsSubject ||
-      !isSuccess ||
-      loading ||
-      measured.current === results
-    )
-      return;
-    measured.current = results;
-    void recordSearchInteraction({
-      query,
-      componentId,
-      siteName,
-      interactionType: "viewed",
-      nullResults: total === 0,
-    });
+    const consentChanged = () => setConsentRevision((value) => value + 1);
+    window.addEventListener(CONSENT_EVENT, consentChanged);
+    return () => window.removeEventListener(CONSENT_EVENT, consentChanged);
+  }, []);
+  const viewKey = JSON.stringify([searchRun, query, siteName, componentId]);
+  useEffect(() => {
+    if (editing || needsSubject || !isSuccess || loading) return;
+    void viewTracker.record(viewKey, () =>
+      recordSearchInteraction({
+        query,
+        componentId,
+        siteName,
+        interactionType: "viewed",
+        nullResults: total === 0,
+      }),
+    );
   }, [
     editing,
     needsSubject,
@@ -203,10 +216,18 @@ function SearchExperience({
     total,
     componentId,
     siteName,
+    viewTracker,
+    viewKey,
+    consentRevision,
   ]);
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setQuery(input.trim());
+    const nextQuery = input.trim();
+    setResultsBeforeQuery(
+      normalizeSearchQuestion(nextQuery) === nativeQuery ? null : results,
+    );
+    setQuery(nextQuery);
+    setSearchRun((value) => value + 1);
     setCurrentPage(1);
     const url = new URL(window.location.href);
     if (input.trim()) url.searchParams.set("q", input.trim());
@@ -294,7 +315,8 @@ function SearchExperience({
             <div className="public-search__empty">
               <h2>No results found</h2>
               <p>
-                Try another search term, or browse our{" "}
+                We couldn’t find information matching your search. Try another
+                search term, or browse our{" "}
                 <NextLink href="/insurance-resources">
                   insurance resources
                 </NextLink>
@@ -312,11 +334,17 @@ function SearchExperience({
               {!loading &&
                 resultCards.map(({ document, href, title }, index) => {
                   const description = text(document, mapping.description);
+                  const isAnswer = Boolean(text(document, "question").trim());
                   return (
                     <article
-                      className="public-search-card"
+                      className={`public-search-card${isAnswer ? " public-search-card--answer" : ""}`}
                       key={`${href}-${index}`}
                     >
+                      {isAnswer && (
+                        <p className="public-eyebrow public-search-card__answer-label">
+                          Answer
+                        </p>
+                      )}
                       <h2>
                         <NextLink
                           href={href}

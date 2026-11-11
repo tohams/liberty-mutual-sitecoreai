@@ -15,7 +15,11 @@ import { GRAPHQL_EXPLORER } from "./demo-destinations";
 import type { DemoChapter } from "./types";
 import { GuideText } from "@/features/workshops/GuideText";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
-import { customerDemoChapters } from "@/features/workshops/customer-demo/content";
+import {
+  customerDemoChapters,
+  customerDemoClosing,
+  customerDemoOpening,
+} from "@/features/workshops/customer-demo/content";
 import {
   customerDemoSchedule,
   DEMO_CLOSING_MINUTES,
@@ -247,8 +251,9 @@ export async function CustomerDemoGuide({
                 <span className={styles.timing}>
                   00:00–{elapsedTime(DEMO_OPENING_MINUTES)} · AI introduction
                 </span>
-                <h2>Opening</h2>
-                <p>Angela: AI introduction. Then begin P1.</p>
+                <h2>Opening · three outcomes for Liberty Mutual</h2>
+                <p>{customerDemoOpening.presenter}</p>
+                <Lines lines={customerDemoOpening.talkTrack} />
               </section>
             )}
 
@@ -289,6 +294,25 @@ export async function CustomerDemoGuide({
                         )}
                       </div>
                       <h3>{step.title}</h3>
+                      {step.id === "public-discovery" && (
+                        <p className={styles.flowCue}>
+                          <strong>
+                            P2–P3 · One resource, from content to Search.
+                          </strong>{" "}
+                          Keep bundle-car-and-home selected across both steps.
+                        </p>
+                      )}
+                      {step.id === "portal-relevance" && (
+                        <p className={styles.flowCue}>
+                          <strong>A1–A2 · Agent experience first.</strong>{" "}
+                          Compare agent priorities and consistent pages before
+                          opening the marketer’s controls.
+                        </p>
+                      )}
+                      <p className={styles.roleTask}>
+                        <strong>{step.persona}.</strong>{" "}
+                        <GuideText text={step.scenario} />
+                      </p>
                       {step.id === "public-api" && !session && (
                         <p>
                           Replace <code>&lt;Delivery API token&gt;</code> in the
@@ -297,6 +321,13 @@ export async function CustomerDemoGuide({
                         </p>
                       )}
                       <LaunchUrls links={demoLaunchUrls(step)} />
+                      <aside
+                        className={styles.presenterPoints}
+                        aria-label="Say / point out"
+                      >
+                        <h4>Say / point out</h4>
+                        <Lines lines={step.presenterPoints} />
+                      </aside>
                       <ol className={styles.clicks}>
                         {step.presenterActions.map((lines, actionIndex) => (
                           <li key={actionIndex}>
@@ -388,7 +419,10 @@ export async function CustomerDemoGuide({
                   {elapsedTime(closeStart)}–{elapsedTime(closeEnd)} · Close
                 </span>
                 <h2>Close</h2>
-                <p>Return to the deck for the closing and Q&amp;A.</p>
+                <Lines lines={customerDemoClosing} />
+                <p>
+                  Return to the deck, then take questions in the Q&amp;A slot.
+                </p>
               </section>
             )}
 

@@ -11,7 +11,6 @@ import {
   SCRUNCH_REVIEW,
   SCRUNCH_EDITOR,
   BRAND_KITS,
-  resourcePageContent,
   portalEditor,
 } from "./demo-destinations";
 
@@ -43,13 +42,19 @@ export const customerDemoOpening = {
   presenter: "Angela Gustafson",
   title: "AI assistance with business control",
   talkTrack: [
-    "Some of your colleagues have already explored the Agent Portal with us and worked directly in SitecoreAI. We have expanded that foundation to the public website, so you can see how the same governed platform supports both experiences.",
-    "We know your teams use Microsoft Copilot. Our vision is for AI assistance to become a natural part of the marketer’s working day: understanding signals, considering a business goal, and helping the team prepare its next action. Human judgment and publishing controls remain central to that process.",
-    "We will follow your two requested journeys in order. First, a customer finds trusted guidance, and the content team keeps it current. Then, an independent agent receives relevant priorities, and a marketer changes that experience without a code release. Watch for the controls behind each result as well as the visitor experience. The separate roadmap discussion will expand on the product direction.",
+    "We will follow your two requested journeys in order and show three outcomes: trusted customer guidance, relevant agent priorities, and business-managed changes with clear control.",
+    "First, a customer finds published guidance, and the team keeps the same source current across Search, the website, and other applications. Then, two independent agents receive priorities that reflect their roles and licensed states.",
+    "Finally, marketers create, preview, review, publish, and reverse real content changes. Your teams already use Microsoft Copilot; SitecoreAI brings AI assistance into content work while people retain the decision to keep and publish a change.",
   ],
   handoff:
     "Let’s begin with the public-site visitor and the first requirement in your guide: asking an insurance question in everyday language.",
 };
+
+export const customerDemoClosing = [
+  "**Trusted guidance:** one approved source stays aligned across the website, Search, and APIs.",
+  "**Relevant agent experiences:** known role, licensing, and business attributes select useful priorities.",
+  "**Business control:** marketers create and preview content, then review, publish, and restore it without a frontend release.",
+];
 
 /** Thirteen customer cards, retaining the original row and left-to-right order. */
 export const customerDemoChapters: DemoChapter[] = [
@@ -67,7 +72,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "User can ask a question in conversational language in an AI-enabled search field",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 2,
+        durationMinutes: 3,
         persona: "Prospective customer",
         scenario:
           "The visitor wants useful insurance guidance without already knowing Liberty Mutual’s terminology.",
@@ -86,6 +91,11 @@ export const customerDemoChapters: DemoChapter[] = [
             label: "Unsupported search question",
             value: "Does car insurance cover cyberextortion?",
           },
+        ],
+        presenterPoints: [
+          "Help a customer find relevant guidance without knowing Liberty Mutual’s terminology.",
+          "Point to the related bundling results and the **Can I bundle my car and home insurance?** answer excerpt; leave results unopened.",
+          "For the unsupported question, show **No results found** and **Contact an agent** as the clear next step.",
         ],
         presenterActions: [
           [
@@ -233,19 +243,19 @@ export const customerDemoChapters: DemoChapter[] = [
       },
       {
         id: "public-discovery",
-        title: "Make approved answers easier to discover",
+        title: "Inspect the resource behind the answer",
         label:
           "Search engines and AI answer engines can find and cite the right LM content",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 1,
+        durationMinutes: 2,
         persona: "Public-site marketer",
         scenario:
           "The marketer needs the guidance to retain its meaning, source, and applicability when people discover it through search or an AI experience.",
         objective:
           "Make approved guidance easier to find and reuse, with its source, applicability, and review information kept explicit.",
         stopWhen:
-          "The native page template, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
+          "The native page fields, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
         inputs: [
           {
             action: 3,
@@ -258,17 +268,20 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "canonical",
           },
         ],
+        presenterPoints: [
+          "This is the same resource the customer found: one page owns its answer, source, applicability, and review details.",
+          "Point to native checklists, the canonical URL, and **FAQPage** data as the foundation for search and permitted AI discovery.",
+        ],
         presenterActions: [
           [
             "In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Public Website** card. Reuse that **Page Builder** tab; choose **Site switcher → Public Website → Editor → Pages**.",
-            "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**; then choose **Content**.",
+            "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On that selected row, choose **Content tree options (•••) → Page content**.",
             "Confirm **English** and the selected **bundle-car-and-home** page.",
-            "Expand **Resource content**: show **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and dates.",
+            "In the **Page content** panel beside the canvas, expand **Resource content**: show **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and dates.",
             "Under **Content**, show **Canonical URL** and **Reference source**.",
-            "Open **Quick Info**, and show the **PublicResourcePage** template.",
           ],
           [
-            "Under **Content**, open **State applicability** using its **1 item selected** control; show **All states**, then close.",
+            "In **Page content**, expand **Content**, or use **Go to field → State applicability**. Open **State applicability** using its **1 item selected** control; show **All states**, then close.",
             "Open **Products** using **2 items selected**; show **Auto** and **Homeowners**, then close.",
             "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
           ],
@@ -280,10 +293,10 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
         ],
         presenterResult:
-          "Show the native template, managed classifications, **FAQPage** data, and canonical URL without editing content.",
+          "Show native page fields, managed classifications, **FAQPage** data, and the canonical URL beside the public page, without editing content.",
         actions: [
-          "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, select **bundle-car-and-home**, and choose **Content**. Confirm **English**. Expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**. Under **Quick Info**, identify the **PublicResourcePage** template.",
-          `In the same [**resource page in Page Builder Content**](${resourcePageContent}), locate **State applicability**, **Products**, and **Audience** under **Content**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.`,
+          "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On the selected row, choose **Content tree options (•••) → Page content**. Confirm **English**. In the **Page content** panel beside the canvas, expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**.",
+          "In the same **Page content** panel, expand **Content**, or choose **Go to field → State applicability**. Locate **State applicability**, **Products**, and **Audience**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.",
           `On the [**public article**](${ARTICLE}), use **View page source → Find** to locate **application/ld+json**. Identify **FAQPage**, **Question**, and **acceptedAnswer**, then find the **canonical** link. Return to the rendered article.`,
         ],
         expected: [
@@ -294,7 +307,7 @@ export const customerDemoChapters: DemoChapter[] = [
           customerDemoAiContext.public.talkTrack,
         ],
         controls: [
-          "**Page Builder → Content → Quick Info** identifies the native page template. Native **Checklist** fields classify the resource page using choices maintained beneath **Data → Taxonomy**. The page’s content and classifications follow the same publication into Search and the content API.",
+          "The **Page content** panel keeps native resource fields and **Checklist** classifications beside the page canvas. Classification choices are maintained beneath **Data → Taxonomy**. If a template question arises, the full **Page Builder → Content → Quick Info** view identifies **PublicResourcePage**; that extra view is not needed for the live loop. Content and classifications follow the same publication into Search and the content API.",
           "The public rendering supplies **FAQPage** metadata and a canonical URL: a structured foundation for discovery by permitted search and AI consumers.",
         ],
         links: [
@@ -310,9 +323,43 @@ export const customerDemoChapters: DemoChapter[] = [
             caption:
               "Open **Products** using its **2 items selected** control to see the separate **Auto**, **Homeowners**, and **Condo** checkboxes. These are the resource page’s native classification fields. Leave the selected choices unchanged during this inspection.",
           },
+          {
+            file: "demo-public-page-content.png",
+            afterAction: 1,
+            title: "Keep native fields beside the page",
+            alt: "Page content beside the public resource canvas, with State applicability and Products checklists showing one and two selected items.",
+            caption:
+              "**Page content** keeps the native fields beside the canvas. Use **Go to field → State applicability** to reach the checklists without hunting through fields.",
+            crop: {
+              x: 300,
+              y: 115,
+              width: 980,
+              height: 605,
+              sourceWidth: 1280,
+              sourceHeight: 720,
+            },
+            annotations: [
+              {
+                x: 2.8,
+                y: 13.8,
+                width: 45.5,
+                height: 7,
+                label:
+                  "Open **State applicability** to inspect its native selection.",
+              },
+              {
+                x: 2.8,
+                y: 31.7,
+                width: 45.5,
+                height: 7,
+                label:
+                  "Open **Products** to inspect independent product choices.",
+              },
+            ],
+          },
         ],
         transition:
-          "The page carries its content, meaning, and governance together. Next, publish a reviewed page change and see Search stay aligned.",
+          "Keep this same resource selected. Next, publish its approved revision and verify that Search receives the updated wording automatically.",
       },
       {
         id: "public-indexing",
@@ -321,7 +368,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Published content is automatically indexed by enterprise search platform",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 3,
+        durationMinutes: 4,
         persona:
           "Public-site publisher, following marketer and approver review",
         scenario:
@@ -348,6 +395,10 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Can I bundle my car and home insurance?",
           },
         ],
+        presenterPoints: [
+          "Publish one approved page revision, without a frontend release.",
+          "Show the sentence absent before publication and present in Search afterward; the state, product, and audience classifications stay intact.",
+        ],
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Content → Search Sources → Liberty Mutual Approved Answers → Preview**. Keep this tab as **Search Preview**.",
@@ -356,7 +407,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "If the sentence is present, restore the baseline through [**Before presenting**](#preparation) before continuing.",
           ],
           [
-            "Return to the existing **Page Builder** tab. Choose **Site switcher → Public Website → Editor → Pages**; expand **Home → insurance-resources**, select **bundle-car-and-home**, then choose **Content**.",
+            "Return to the existing **Page Builder** tab and the **bundle-car-and-home** page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed.",
             "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
             "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field below in **Detailed explanation**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
@@ -373,7 +424,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          "Return to **Page Builder → Content** for **bundle-car-and-home**, the page selected in P2. In the version selector, choose the prepared revision by the **Prepared page version** number recorded in **Before presenting**. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
+          "Return to **Page Builder** for **bundle-car-and-home**, the page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed. In the version selector, choose the prepared revision by the **Prepared page version** number recorded in **Before presenting**. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
           `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
@@ -462,7 +513,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketing builds and publishes pages from a library of pre-approved components",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
-        durationMinutes: 7,
+        durationMinutes: 9,
         persona: "Public-site content administrator",
         scenario:
           "A marketer needs a new coverage page using approved components, with review before customers can see it.",
@@ -502,6 +553,11 @@ export const customerDemoChapters: DemoChapter[] = [
             label: "Approval comment",
             value: "Approved coverage guidance",
           },
+        ],
+        presenterPoints: [
+          "Create a real page from an approved structure, then edit its words and image directly on the canvas.",
+          "Point to the permitted components, the reused **Promotion**, and the obvious **Image left / Image right** presentation choices.",
+          "Submit, approve, and publish the page; show the same headings, image, and Promotion on the public website.",
         ],
         presenterActions: [
           [
@@ -752,7 +808,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketing can publish content from Profound directly into the CMS / DXP",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
-        durationMinutes: 2,
+        durationMinutes: 3,
         mode: "explain",
         persona: "Public-site marketer",
         scenario:
@@ -761,6 +817,10 @@ export const customerDemoChapters: DemoChapter[] = [
           "Show a real in-platform content recommendation, then explain how proposed Profound content would enter Liberty Mutual’s governed publishing process.",
         stopWhen:
           "The existing and proposed wording and its target field have been shown, and the proposed Profound-to-Draft, review, and publication path has been explained.",
+        presenterPoints: [
+          "Show the existing **Scrunch** recommendation beside the exact page field it addresses; keep Prospera unchanged.",
+          "For **Profound**, a scoped integration could bring proposed content into **Draft**, followed by human editing, review, approval, and publication.",
+        ],
         presenterActions: [
           [
             "Switch to the **Prospera recommendations** tab in the **Incognito / Private** window. Confirm **agverticals → Prospera**.",
@@ -937,14 +997,19 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Quick-answer analytics for marketers",
         phase: "Measurement & Delivery Foundation",
         sourceSlide: 10,
-        durationMinutes: 1,
+        durationMinutes: 2,
         persona: "Public-site marketer",
         scenario:
-          "The marketer needs to understand website visits and the next-step actions visitors select.",
+          "The marketer needs to understand website page views and the next-step actions visitors select.",
         objective:
           "Show how marketers can measure defined visitor actions alongside page views using actual public-site events.",
         stopWhen:
           "The public-site report shows pageView and LM_PUBLIC_CTA_CLICK over the past month, and the presenter explains the visitor action represented by the custom event.",
+        presenterPoints: [
+          "Show actual public-site activity for **1 month**, using the site and event filters.",
+          "**pageView** measures page views; **LM_PUBLIC_CTA_CLICK** records selections of defined next-step buttons and links.",
+          "Recorded visitor choices automatically govern optional measurement and personalization.",
+        ],
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Optimization → Analytics → Events**. If the left navigation is collapsed, choose **Expand navigation** first. Keep this tab as **Events**.",
@@ -958,7 +1023,7 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "Explain: **LM_PUBLIC_CTA_CLICK** records a visitor’s selection of a defined next-step button or link.",
-            "Show that the custom business action can be measured alongside **pageView** visits.",
+            "Show that the custom business action can be measured alongside **pageView** page views.",
           ],
         ],
         presenterResult:
@@ -966,13 +1031,13 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `Switch to the prepared **Events** tab, or open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Under **Event Type**, keep **pageView** and **LM_PUBLIC_CTA_CLICK** checked, and clear the other event checkboxes.`,
           "Inspect **Events over Time** and **Events Table**. Identify the actual **pageView** and **LM_PUBLIC_CTA_CLICK** rows, and read the values shown for the selected site and reporting period.",
-          "Explain that **LM_PUBLIC_CTA_CLICK** is a custom event for a visitor’s selection of a defined next-step button or link. Show that this business action can be measured alongside **pageView** visits.",
+          "Explain that **LM_PUBLIC_CTA_CLICK** is a custom event for a visitor’s selection of a defined next-step button or link. Show that this business action can be measured alongside **pageView** page views.",
         ],
         expected: [
           "A marketer can inspect the public site’s recorded page views and custom business actions in SitecoreAI over the selected monthly reporting period.",
         ],
         talkTrack: [
-          "Marketers can measure website visits and the actions that matter to Liberty Mutual. Here, pageView records visits, and the defined LM_PUBLIC_CTA_CLICK event records selections of next-step buttons and links. Custom events let the team name and measure meaningful business actions. This report shows the public site’s actual recorded activity over the past month.",
+          "Marketers can measure website page views and the actions that matter to Liberty Mutual. Here, pageView records page views, and the defined LM_PUBLIC_CTA_CLICK event records selections of next-step buttons and links. Custom events let the team name and measure meaningful business actions. This report shows the public site’s actual recorded activity over the past month.",
         ],
         controls: [
           "The **Site** filter separates the Public Website from the Agent Portal. **Time → 1 month** defines the reporting period, and **Event Type** checkboxes focus the report on **pageView** and **LM_PUBLIC_CTA_CLICK**. The native report supplies the recorded rows and totals.",
@@ -1038,6 +1103,10 @@ export const customerDemoChapters: DemoChapter[] = [
 }`,
           },
         ],
+        presenterPoints: [
+          "Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**: one approved source can serve several applications.",
+          "Point to the same page ID, published version, and newly published sentence in the live GraphQL response.",
+        ],
         presenterActions: [
           [
             "Return to the already-open presentation, and show **Experience Edge content delivery**.",
@@ -1098,7 +1167,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Agent sees product content, and bundles based on their business, relationship and priorities",
         phase: "Agent Experience",
         sourceSlide: 11,
-        durationMinutes: 5,
+        durationMinutes: 2,
         persona:
           "Independent agents Avery and Daniel, followed by a portal marketer",
         scenario:
@@ -1107,6 +1176,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "Compare two agents’ priorities, then show how role, licensed state, and agency production determine the result in native personalization rules.",
         stopWhen:
           "Avery and Daniel’s different priorities are visible, each agent matches the expected native priority rule using that agent’s own Client ID, and the published Texas and Illinois conditions are shown.",
+        presenterPoints: [
+          "Compare Avery, a principal at **Cedar Ridge Insurance**, with Daniel, a producer at **Prairie Oak Insurance**.",
+          "Show their different priorities and licensed states, then compare the consistent Home and resource-page design before opening marketer screens.",
+          "Point to the matching native profile tests and the Texas / Illinois business conditions behind those experiences.",
+        ],
         presenterActions: [
           [
             `Switch to the **Avery portal** tab, and select **My workspace** in the left navigation. Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.`,
@@ -1118,6 +1192,7 @@ export const customerDemoChapters: DemoChapter[] = [
             `Switch to the separate **Daniel portal** tab, and select **My workspace** in the left navigation. Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.`,
             "Compare his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
             "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.",
+            "Return to **Avery portal**, select **Learning & resources**, then **My workspace**. Point to their shared navigation, typography, buttons, and cards before opening marketer screens.",
           ],
           [
             `In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Agent Portal** card. In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**. Keep **Default editing host**, then choose **Layers → Agency priorities**.`,
@@ -1142,7 +1217,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Avery matches **agency-growth**, and Daniel matches **producer-priorities**. The published rule shows how role, Texas or Illinois licensing, and agency or agent production determine those results.",
         actions: [
           `Switch to the **Avery portal** tab, and open [**Home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**. Find **Priorities for your agency**; show **Build a stronger small-business practice** first. Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**. Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.`,
-          `Switch to the separate **Daniel portal** tab, and open [**Home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Compare his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.`,
+          `Switch to the separate **Daniel portal** tab, and open [**Home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Compare his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**. Return to **Avery portal**, select **Learning & resources**, then **My workspace**. Point to the shared navigation, typography, buttons, and cards before opening marketer screens.`,
           `Switch to the **Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**. Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**. Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.`,
           "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test. Return to **Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**. Select **Testing as: Avery Brooks - 01 → Load profile → Client ID**, replace the existing ID with Daniel’s **Client ID** from **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**, and press **Enter**; wait for **Testing as: Daniel Ortiz - 01**, select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
           "Switch to the **State business rule** tab. Its normal navigation is **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it. Point to the **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**. Point to **producer-priorities**: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production. Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
@@ -1225,7 +1300,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Agent sees consistent brand and design across all portal pages",
         phase: "Agent Experience",
         sourceSlide: 11,
-        durationMinutes: 1,
+        durationMinutes: 2,
         persona: "Independent agent, followed by a portal marketer",
         scenario:
           "Marketers need to create clear, on-brand copy while the portal keeps a consistent design across pages.",
@@ -1240,6 +1315,11 @@ export const customerDemoChapters: DemoChapter[] = [
             value:
               "Rewrite this introduction for an independent insurance agent. Keep it concise, clear, and helpful. Do not add coverage promises, discounts, or claims.",
           },
+        ],
+        presenterPoints: [
+          "The sample **Brand Kit** supplies reusable voice guidance; **Content Copilot** helps an author refine an editable field.",
+          "Review the suggestion, then **Revert to original**: the author decides what to retain.",
+          "Point to the allowed component choice: governed structure keeps the agent experience consistent while marketers edit content.",
         ],
         presenterActions: [
           [
@@ -1259,8 +1339,8 @@ export const customerDemoChapters: DemoChapter[] = [
             "Explain: authors change content; reusable components control its presentation, page designs supply shared structure, and placeholder settings govern composition.",
           ],
           [
-            `Switch to **Avery portal**, select **Learning & resources** in the left navigation, then select **My workspace** to compare the two pages.`,
-            "Point to their shared navigation, typography, buttons, and cards. The content changes while the design stays consistent.",
+            "Confirm the original **Introduction** wording is restored and the component picker is closed.",
+            "Keep all content and the Brand Kit unchanged. The consistent agent pages shown at the start are supported by these authoring controls.",
           ],
         ],
         presenterResult:
@@ -1269,7 +1349,7 @@ export const customerDemoChapters: DemoChapter[] = [
           `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
           `In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, review the generated paragraph. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
           "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that authors change content; reusable components control presentation, page designs supply shared structure, and placeholder settings limit which components fit each area.",
-          `In **Avery portal**, briefly compare **My workspace** with [**Learning & resources**](${PORTAL}/resources). Point to the shared navigation, typography, buttons, and cards. Authors manage the content independently of that consistent design.`,
+          "Confirm that the original **Introduction** wording is restored and the component picker is closed. Keep all content and the Brand Kit unchanged. The consistent agent pages shown at the start are supported by these authoring controls.",
         ],
         expected: [
           "Marketers can use brand guidance and native AI assistance while editing content, with reusable design and restricted component choices preserving a consistent portal.",
@@ -1383,7 +1463,7 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 2,
         persona: "Portal content administrator",
         scenario:
-          "The business wants Texas guidance to lead the principal audience’s priorities without requesting a code change.",
+          "For a Texas workers’ compensation campaign, the business wants approved Texas guidance to lead the principal audience’s priorities without requesting a code change.",
         objective:
           "Part 1 of the priority-change loop: save the new order as a Draft, ready for review, approval, and publication in the next step.",
         stopWhen:
@@ -1394,6 +1474,10 @@ export const customerDemoChapters: DemoChapter[] = [
             label: "New priority version name",
             value: "Texas guidance priority",
           },
+        ],
+        presenterPoints: [
+          "For a Texas workers’ compensation campaign, make the approved Texas guidance the principal audience’s first priority.",
+          "Change the actual **Ordered recommendations** in a new **Draft**; the original approved version and live order remain intact.",
         ],
         presenterActions: [
           [
@@ -1430,7 +1514,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The new Draft references the same approved cards in the new order. Avery’s live page retains the published order until the following preview and publication loop completes.",
         ],
         talkTrack: [
-          "Within that governed design, the business user can change the order of approved conversations without an engineering ticket or frontend release. Here, the team prepares a Texas-first priority for Avery in Draft while agents continue to see the current approved experience.",
+          "For a Texas workers’ compensation campaign, the marketer moves approved Texas guidance to the top of the principal audience’s recommendations. The new Draft leaves the current live experience intact until it is reviewed and published.",
         ],
         controls: [
           "**Ordered recommendations** is an ordered native item selection. This collection supplies the **agency-growth** experience, while **Producer priorities** supplies a separate experience.",
@@ -1480,7 +1564,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Marketing user previews the experience for each agent audience",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
-        durationMinutes: 4,
+        durationMinutes: 3,
         persona: "Portal content administrator",
         scenario:
           "The team needs to check the draft Home priorities for the intended principal and producer audiences before publication.",
@@ -1499,6 +1583,11 @@ export const customerDemoChapters: DemoChapter[] = [
             label: "Priority approval comment",
             value: "Approved agency priority update",
           },
+        ],
+        presenterPoints: [
+          "**Audience Preview** is a private Marketplace extension: it combines the current authoring page with the existing native personalization rules.",
+          "Preview a Texas principal and an Illinois producer using only **Role** and **Licensed states**; the producer keeps the household-first order.",
+          "Review and publish the saved priority change once, then show Avery’s updated live order and Daniel’s unchanged order.",
         ],
         presenterActions: [
           [
@@ -1567,7 +1656,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Approved shared content is managed once and distributed to every website",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
-        durationMinutes: 4,
+        durationMinutes: 2,
         persona: "Content administrator",
         scenario:
           "The copyright year must stay consistent in the public website and Agent Portal footers.",
@@ -1597,6 +1686,11 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Approved copyright year update to 2026",
           },
         ],
+        presenterPoints: [
+          "Both website footers reference one full copyright notice, rather than separate copies.",
+          "Change only **2025 → 2026**, publish the shared source once, and compare versions while delivery completes.",
+          "Confirm **2026** on both live sites before beginning restoration.",
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Content**.",
@@ -1620,6 +1714,8 @@ export const customerDemoChapters: DemoChapter[] = [
             "Stay on the same **Saved copyright version** in **Page Builder**.",
             "Confirm **Approved**, copyright year **2026**, and unchanged surrounding wording.",
             "Publish the shared item once with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
+            "While publication and delivery complete, return to the item’s version selector, open **Saved copyright version → ••• → Compare versions**, and set **Compare** to the recorded original version and **With** to **Saved copyright version**.",
+            "Under **Content → Disclosure**, show **2025** beside **2026**, with all surrounding wording and the link intact. Choose **close**.",
           ],
           [
             "Wait for publication to complete.",
@@ -1633,7 +1729,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "In **Page Builder**, choose **Site switcher → Public Website → Content**. In the content tree, select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**. Record the original approved English version and full **Disclosure** text for the rollback in the next loop. Confirm its copyright year is **2025**.",
           "Choose **Create version**, name it **Copyright year update**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year update** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before editing **Disclosure**. Replace only **2025** with **2026** in **Disclosure**, preserving every other word and punctuation mark in the full copyright notice, its line break, and the **Equal Opportunity Employer** link. Click outside the field, and wait for **Saved**. Record the version number currently shown as **Saved copyright version**. Use that same saved version number for submission, approval, and publication.",
           "With **Saved copyright version** selected, recheck **Draft** and copyright year **2026** in **Disclosure**. Choose **Actions → Submit**, enter **Review copyright year update to 2026**, and select **Submit**. Confirm **Awaiting approval**. Stay on the same **Saved copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved copyright year update to 2026**, and select **Submit**.",
-          "On the same **Saved copyright version** in **Page Builder**, confirm **Approved**, copyright year **2026**, and unchanged surrounding wording. Publish the shared item once with **Item** and **Current language (English)** selected and **Subitems** unchecked. Select **Start publish**.",
+          "On the same **Saved copyright version** in **Page Builder**, confirm **Approved**, copyright year **2026**, and unchanged surrounding wording. Publish the shared item once with **Item** and **Current language (English)** selected and **Subitems** unchecked. Select **Start publish**. While publication and delivery complete, return to the item’s version selector, open **Saved copyright version → ••• → Compare versions**, and set **Compare** to the recorded original version and **With** to **Saved copyright version**. Under **Content → Disclosure**, show **2025** beside **2026**, with the surrounding wording and link intact. Choose **close**.",
           "After the job completes, reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer. Confirm that both footers show the same full copyright notice with **2026**.",
         ],
         expected: [
@@ -1655,11 +1751,11 @@ export const customerDemoChapters: DemoChapter[] = [
       },
       {
         id: "portal-audit-rollback",
-        title: "Compare versions and restore the year",
+        title: "Restore prior wording without losing history",
         label: "Every change is approved, auditable, and reversible",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
-        durationMinutes: 4,
+        durationMinutes: 2,
         persona: "Content administrator",
         scenario:
           "The team needs to compare the shared copyright change and restore its original year while preserving version history.",
@@ -1684,15 +1780,19 @@ export const customerDemoChapters: DemoChapter[] = [
             value: "Approved restoration of copyright year to 2025",
           },
         ],
+        presenterPoints: [
+          "Restore earlier wording through a new reviewed version, preserving the original and changed revisions.",
+          "While the restoration publishes, show the retained versions and compare the restored notice with the original.",
+          "Finish with **2025** in both footers: a controlled change and a controlled reversal.",
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Content**.",
             "Select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**.",
           ],
           [
-            "Open the version selector. Find the original approved English version recorded in **P0** and **Saved copyright version** from A5.",
-            "Open the saved version’s **••• → Compare versions**. In the modal, set **Compare** to the recorded original version and **With** to **Saved copyright version**.",
-            "Under **Content → Disclosure**, show **2025** beside **2026**, with the full wording and link intact. The comparison updates automatically; choose **close** to return.",
+            "Begin restoration only after A5 confirms **2026** in both live footers.",
+            "Open the version selector. Find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
           ],
           [
             "Switch to **Page Builder → Content → Data → Disclosures → Copyright notice**; select the recorded original approved English version.",
@@ -1722,7 +1822,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Both site footers show the full copyright notice with 2025 again; history retains the original, changed, and restored revisions.",
         actions: [
           "In **Page Builder**, choose **Site switcher → Public Website → Content**. Select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**.",
-          "Open the version selector, and find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Open the saved version’s **••• → Compare versions**. In the modal, set **Compare** to the recorded original version and **With** to **Saved copyright version**. Under **Content → Disclosure**, show the year changing from **2025** to **2026**, with the full wording and link retained. The comparison updates automatically; choose **close** to return to the item.",
+          "Begin restoration only after A5 confirms **2026** in both live footers. Open the version selector, and find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
           "In **Page Builder → Content → Data → Disclosures → Copyright notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**. Name it **Copyright year restored**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved full copyright notice with **2025**, without changing any other wording or punctuation, its line break, or the **Equal Opportunity Employer** link. After the original wording is saved, record the version number currently shown as **Restored copyright version**. Use that same saved version number for submission, approval, and publication.",
           "With **Restored copyright version** selected, recheck **Draft** and the original **Disclosure** wording with year **2025**. Choose **Actions → Submit**, enter **Restore copyright year to 2025**, and select **Submit**. Stay on the same **Restored copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved restoration of copyright year to 2025**, and select **Submit**.",
           "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**.",

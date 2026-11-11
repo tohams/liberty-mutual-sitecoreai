@@ -691,6 +691,19 @@ code.scpm {
 .public-search-card {
   min-width: 0;
 }
+.public-search-card--answer {
+  border-left: 4px solid var(--public-teal);
+  background: var(--public-sky);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+}
+.public-search-card--answer .public-eyebrow.public-search-card__answer-label {
+  color: var(--public-navy);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
 .public-search-card h2 {
   font-size: 1rem;
   font-weight: 700;
