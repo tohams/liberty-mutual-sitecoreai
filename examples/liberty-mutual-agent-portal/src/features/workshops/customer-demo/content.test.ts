@@ -525,10 +525,6 @@ test("indexing begins with the latest clean published page and creates its Draft
     firstIndexingAction,
     /Review your options with your agent before choosing coverage\. is absent/,
   );
-  assert.match(
-    firstIndexingAction,
-    /already visible.*restore the baseline.*existing sentence does not prove a fresh publication/,
-  );
   const entry = step("public-indexing");
   assert.equal(entry.durationMinutes, 5);
   assert.deepEqual(
@@ -914,10 +910,6 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
     /Layers.*headless-agency-priorities.*Insert into.*before or after Agency priorities.*filtered Components picker.*Business priorities → Agency priorities.*Close the picker without selecting a component or inserting content/i,
   );
   assert.match(
-    actions[3],
-    /original Introduction wording is restored.*component picker is closed/,
-  );
-  assert.match(
     prose(entry.presenterActions[0]),
     /SitecoreAI.*Design → Brand kits/,
   );
@@ -1222,7 +1214,7 @@ test("one full copyright notice updates both footers and restores only its year"
   assert.equal(restoration.presenterActions.length, 6);
   assert.match(
     prose(restoration.presenterActions[4]),
-    /Compare versions.*Choose close.*Show all fields.*Statistics.*Updated.*Updated by.*latest update.*Collapse Statistics.*restore Show all fields to its original setting/,
+    /Compare versions.*Choose close.*Show all fields.*Statistics.*Updated.*Updated by.*latest update/,
   );
   assert.match(
     prose(restoration.presenterPoints),
@@ -1643,10 +1635,7 @@ test("evidence and copy cues appear while their corresponding screen is visible"
   const ai = step("portal-design");
   const aiBeats = presenterActionSequence(ai, 2, ai.inputs);
   const aiSpeech = aiBeats.findIndex((beat) => beat.kind === "say");
-  assert.match(
-    prose(aiBeats.slice(0, aiSpeech)),
-    /review the generated paragraph/,
-  );
+  assert.match(prose(aiBeats.slice(0, aiSpeech)), /Ready!.*paragraph/);
   assert.match(
     prose(aiBeats.slice(aiSpeech + 1)),
     /Choose.*Revert to original/,

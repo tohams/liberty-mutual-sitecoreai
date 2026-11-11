@@ -455,7 +455,6 @@ export const customerDemoChapters: DemoChapter[] = [
             "In the **SitecoreAI** tab, choose **Content → Search Sources → Liberty Mutual Approved Answers → Preview**. Keep this tab as **Search Preview**.",
             "Paste **Search by term** into **Search by term**, then expand the matching row using **Toggle document details**.",
             "Confirm **body** does not contain **Review your options with your agent before choosing coverage.**",
-            "If the sentence is present, restore the baseline through [**Before presenting**](#preparation) before continuing.",
           ],
           [
             "Return to the existing **Page Builder** tab and the **bundle-car-and-home** page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed.",
@@ -478,7 +477,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
-          `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
+          `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent.`,
           "Return to **Page Builder** for **bundle-car-and-home**, the page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed. Confirm the **latest version** is **Approved** and marked **Live**, with the review sentence absent. Choose **Create version**, name it **Resource page review**, and select **Create**. Reopen the version selector, explicitly select the newest **Resource page review → Draft** row, and wait for its fields to finish loading. Expand **Resource content**. At the end of **Detailed explanation**, append **Review your options with your agent before choosing coverage.** exactly once, retaining all existing paragraphs. Press **Tab**, or click outside **Detailed explanation**, to leave the edited field and save it. Wait for **Saved**. On this same new version, choose **Actions → Submit**, then **Submit**, and confirm **Awaiting approval**. Using the same presenter account, review the complete content, choose **Actions → Approve**, then **Submit**, and confirm **Approved**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
           `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
@@ -1412,12 +1411,12 @@ export const customerDemoChapters: DemoChapter[] = [
             action: 2,
             label: "AI writing prompt",
             value:
-              "Rewrite this introduction for an independent insurance agent. Keep it concise, clear, and helpful. Do not add coverage promises, discounts, or claims.",
+              "Expand this brief introduction into a welcoming 35–45-word paragraph for an independent insurance agent. Use three short sentences, starting with “Build your next opportunity.” Address the agent as “you,” and focus on exploring product conversations and useful resources to grow their agency. Do not repeat the original sentence or add products, coverage promises, discounts, or performance claims. Return only the rewritten introduction.",
           },
         ],
         presenterPoints: [
           "The sample **Brand Kit** supplies reusable voice guidance; **Content Copilot** helps an author refine an editable field.",
-          "Review the suggestion, then **Revert to original**: the author decides what to retain.",
+          "Compare the expanded introduction with the short original, check its meaning, then **Revert to original**: the author decides what to retain.",
           "Point to the allowed component choice: governed structure keeps the agent experience consistent while marketers edit content.",
         ],
         presenterCues: [
@@ -1427,9 +1426,8 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         actionPurposes: [
           "Show the Brand Kit that guides AI-assisted writing",
-          "Review an AI suggestion and retain author control",
+          "Review an expanded introduction and retain author control",
           "Show the component choices that govern page design",
-          "Confirm the author controls which copy is retained",
         ],
         presenterActions: [
           [
@@ -1441,7 +1439,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Return to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
             "Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**. Confirm **Introduction** in the right panel.",
             "Select **Optimize with AI**; point to **Adhere to brand kit**, then paste **AI writing prompt** into **Ask AI for content improvements**, and select **Generate content**.",
-            "When **Ready!** appears, review the generated paragraph.",
+            "When **Ready!** appears, look for **Build your next opportunity.** and a visibly longer paragraph. Compare the new wording with the original, and check that its meaning is preserved without new claims.",
             "Choose **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.",
           ],
           [
@@ -1450,18 +1448,13 @@ export const customerDemoChapters: DemoChapter[] = [
             "Close the picker without inserting content.",
             "Explain: authors change content; reusable components control its presentation, page designs supply shared structure, and placeholder settings govern composition.",
           ],
-          [
-            "Confirm the original **Introduction** wording is restored and the component picker is closed.",
-            "Keep all content and the Brand Kit unchanged. The consistent agent pages shown at the start are supported by these authoring controls.",
-          ],
         ],
         presenterResult:
           "The Brand Kit guides content creation, native AI assistance operates on an editable field, and governed components preserve a consistent design. No generated change is kept or published.",
         actions: [
           `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
-          `In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, review the generated paragraph. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
+          `In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, look for **Build your next opportunity.** and a visibly longer paragraph. Compare the new wording with the original, and check that its meaning is preserved without new claims. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
           "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that authors change content; reusable components control presentation, page designs supply shared structure, and placeholder settings limit which components fit each area.",
-          "Confirm that the original **Introduction** wording is restored and the component picker is closed. Keep all content and the Brand Kit unchanged. The consistent agent pages shown at the start are supported by these authoring controls.",
         ],
         expected: [
           "Marketers can use brand guidance and native AI assistance while editing content, with reusable design and restricted component choices preserving a consistent portal.",
@@ -1482,7 +1475,7 @@ export const customerDemoChapters: DemoChapter[] = [
             title: "Open AI writing assistance for the Introduction field",
             alt: "Page Builder’s Introduction field with the Optimize with AI menu, Ask AI for content improvements prompt, Generate content button, and writing-improvement actions.",
             caption:
-              "Select **Layers → Agency priorities → Introduction**. In the right panel, choose **Optimize with AI**, enter the prompt in **Ask AI for content improvements**, and select **Generate content**. After reviewing the result, choose **Revert to original**.",
+              "Select **Layers → Agency priorities → Introduction**. In the right panel, choose **Optimize with AI**, enter the prompt in **Ask AI for content improvements**, and select **Generate content**. Review the new opening and visibly longer paragraph, then choose **Revert to original**.",
             afterAction: 2,
             crop: {
               x: 800,
@@ -1602,38 +1595,34 @@ export const customerDemoChapters: DemoChapter[] = [
           "Locate the marketer-managed priority collection",
           "Create a Draft while preserving the published order",
           "Reorder approved recommendations for the Texas campaign",
-          "Hold the Draft for preview and approval",
         ],
         presenterActions: [
           [
-            "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Content**.",
-            "In the content tree, select **Data → Agency priorities → Agency growth priorities**. Confirm **English**.",
+            "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
+            "Choose **Layers → Agency priorities**, selecting the component, then open its right-hand **Content** tab.",
+            "Open the component’s personalization dropdown, initially **Original**, and choose **rule 1: Liberty Mutual - Agency product priorities is equal to agency-growth**.",
+            "Confirm **Content item → Agency growth priorities**. Its **Ordered recommendations** field is in this same panel.",
           ],
           [
-            "Open the version selector; select **Priority baseline version** recorded in **P0**, and wait for its fields to load.",
+            "In **Content item → Agency growth priorities**, open the content item’s version selector; select **Priority baseline version** recorded in **P0**, and wait for its fields to load.",
             "Recheck its version number and original order: **Small business growth → Texas workers compensation → Home and auto conversations**.",
             "Choose **Create version**; paste **New priority version name**, then select **Create**.",
-            "Reopen the version selector; select the new **Texas guidance priority → Draft** row by its new number.",
+            "Reopen the content item’s version selector; select the new **Texas guidance priority → Draft** row by its new number.",
             "Wait for fields to load, then recheck the selected version number.",
           ],
           [
-            "In **Ordered recommendations**, select **Remove all items** to clear only this draft’s selection.",
-            "Open the picker; select **Texas workers compensation**, **Small business growth**, then **Home and auto conversations**.",
-            "Click the item heading to close; wait for **Saved**.",
-            "Record the selected number as **Saved priority version**; retain it for the following approval and publication.",
-          ],
-          [
-            "Recheck **Saved priority version**, **Draft**, and the Texas-first order.",
-            "Leave it unpublished; continue to audience preview and the same version’s review/publication.",
+            "For this reorder, select **Remove all items** in **Ordered recommendations** to clear only this draft’s selection.",
+            "Click the far-right **down-chevron** in **Ordered recommendations**. The chips show selected cards; the dropdown lists available choices. Click the **card names** **Texas workers compensation**, **Small business growth**, then **Home and auto conversations** to append them in that order.",
+            "Click the item heading to close; wait for **Saved**. Confirm that the canvas now shows Texas guidance first.",
+            "Record the selected number as **Saved priority version**. Recheck **Draft** and the Texas-first order; leave it unpublished for the next preview and review steps.",
           ],
         ],
         presenterResult:
           "The recorded **Saved priority version** is a saved Texas-first **Draft**; the original approved version and live order remain unchanged.",
         actions: [
-          "In **Page Builder**, choose **Site switcher → Agent Portal → Content**. In the content tree, select **Data → Agency priorities → Agency growth priorities**, and confirm **English**.",
-          "Open the version selector, explicitly select **Priority baseline version** recorded in **P0**, and wait for its fields to finish loading. Confirm that selected original version number and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
-          "Find **Ordered recommendations**. Click **Remove all items** to clear only this draft’s selection, open the picker, and select **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, approval, and publication.",
-          "With **Saved priority version** selected, confirm the order **Texas workers compensation → Small business growth → Home and auto conversations** and that the version remains **Draft**. Leave it unpublished. The next step previews this draft on the same **Home** page for two audience contexts, then returns to this saved priority version for approval and publication.",
+          "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Choose **Layers → Agency priorities**, selecting the component, then open the right-hand **Content** tab. In its personalization dropdown, initially **Original**, choose **rule 1: Liberty Mutual - Agency product priorities is equal to agency-growth**. Confirm **Content item → Agency growth priorities**; its **Ordered recommendations** field appears in this panel.",
+          "In the **Agency growth priorities** content-item card, open its version selector, explicitly select **Priority baseline version** recorded in **P0**, and wait for its fields to finish loading. Confirm that selected original version number and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
+          "Find **Ordered recommendations**. For this reorder, click **Remove all items** to clear only this draft’s selection. Use the far-right **down-chevron** to open the available choices, then click the **card names** **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Selected chips determine the cards on the canvas. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, approval, and publication. With **Saved priority version** selected, confirm **Texas workers compensation → Small business growth → Home and auto conversations**, that the version remains **Draft**, and that the canvas shows Texas guidance first. Leave it unpublished for the following preview and review steps.",
         ],
         expected: [
           "The new Draft references the same approved cards in the new order. Avery’s live page retains the published order until the following preview and publication loop completes.",
@@ -1650,34 +1639,41 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         images: [
           {
-            file: "demo-portal-priority-order.png",
-            title: "The draft’s ordered recommendations",
-            alt: "Ordered recommendations contains Texas workers compensation first, followed by Small business growth and Home and auto conversations. The version remains Draft.",
-            caption:
-              "**Ordered recommendations** contains **Texas workers compensation** first, followed by **Small business growth** and **Home and auto conversations**. The version remains **Draft**. Use the version number recorded for the current demonstration.",
+            file: "demo-portal-priority-order-in-context.png",
             afterAction: 3,
+            title: "Edit the selected variant beside its page canvas",
+            alt: "Page Builder Layers has Agency priorities selected; the right-hand content item is Agency growth priorities, and the canvas starts with Texas workers compensation guidance.",
+            caption:
+              "Select the **agency-growth** variant and confirm **Agency growth priorities** in the content-item card. **Ordered recommendations** is edited in the same panel; the canvas shows Texas guidance first after saving.",
             crop: {
-              x: 300,
-              y: 0,
-              width: 1620,
-              height: 908,
-              sourceWidth: 1920,
-              sourceHeight: 908,
+              x: 20,
+              y: 80,
+              width: 1250,
+              height: 640,
+              sourceWidth: 1280,
+              sourceHeight: 720,
             },
             annotations: [
               {
-                x: 87.53,
-                y: 1.1,
-                width: 4.26,
-                height: 3.96,
-                label: "Confirm this version is **Draft**",
+                x: 0,
+                y: 54.22,
+                width: 21.6,
+                height: 6.09,
+                label: "Select **Agency priorities**",
               },
               {
-                x: 1.23,
-                y: 87.0,
-                width: 97.53,
-                height: 6.94,
-                label: "Read the selected cards from left to right",
+                x: 78.24,
+                y: 8.59,
+                width: 21.2,
+                height: 11.88,
+                label: "Confirm the variant’s content item",
+              },
+              {
+                x: 43.6,
+                y: 82.34,
+                width: 28.8,
+                height: 12.5,
+                label: "Texas guidance is first",
               },
             ],
           },
@@ -1746,11 +1742,11 @@ export const customerDemoChapters: DemoChapter[] = [
             "Under **Agency priorities**, choose **Producer priorities**. Keep **Guidance → Default**.",
             "Select **Preview page**; the producer preview opens directly in a new tab.",
             "On **Home**, confirm the producer’s unchanged order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
-            "Close the preview tab, return to **Personalization Preview**, and set **Agency priorities → Default**. Both previews used named content variants, without an agent login.",
+            "Close the preview tab, and return to **Page Builder**. Both previews used named content variants, without an agent login.",
           ],
           [
-            "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**, then select **Saved priority version**.",
-            "Wait for loading; confirm **Draft** and Texas-first **Ordered recommendations**.",
+            "Close **Personalization Preview**, then in **Page Builder**, choose **Layers → Agency priorities → Content**. In the component’s personalization dropdown, choose **rule 1: Liberty Mutual - Agency product priorities is equal to agency-growth**.",
+            "Confirm **Content item → Agency growth priorities**, then choose its **••• (Data source options) → Open in Content mode**. Select **Saved priority version**, wait for loading, and confirm the **Agency growth priorities** heading, **Draft**, and Texas-first **Ordered recommendations**.",
             "Choose **Actions → Submit**; paste **Priority submission comment**, then select **Submit**.",
             "Confirm **Awaiting approval**.",
           ],
@@ -1771,8 +1767,8 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Open **Apps → Personalization Preview**, and keep **Home** selected in **Page Builder**. Leave **Saved priority version** unpublished.",
           "Under **Agency priorities**, choose **Agency growth priorities**, and leave **Guidance → Default**. Select **Preview page**; the preview opens directly in a new tab. On **Home**, find **Priorities for your agency**, and confirm the draft order **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**. Close the preview tab, and return to the same **Personalization Preview** panel in **Page Builder**.",
-          "Under **Agency priorities**, choose **Producer priorities**, and keep **Guidance → Default**. Select **Preview page**; the preview opens directly in a new tab. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab, return to **Personalization Preview**, and set **Agency priorities → Default**. Neither preview requires an agent login or a human profile identifier.",
-          "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
+          "Under **Agency priorities**, choose **Producer priorities**, and keep **Guidance → Default**. Select **Preview page**; the preview opens directly in a new tab. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab, and return to **Page Builder**. Neither preview requires an agent login or a human profile identifier.",
+          "Close **Personalization Preview**, then in **Page Builder**, choose **Layers → Agency priorities → Content**, and select **rule 1: Liberty Mutual - Agency product priorities is equal to agency-growth** in the component’s personalization dropdown. Confirm **Content item → Agency growth priorities**, and choose its **••• (Data source options) → Open in Content mode**. Confirm the **Agency growth priorities** heading. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
           "Stay on the same **Saved priority version** in **Page Builder**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
           "On the same **Saved priority version** in **Page Builder**, confirm **Approved** and its Texas-first order, and choose **Publish**. Keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, in the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
         ],
@@ -1994,9 +1990,8 @@ export const customerDemoChapters: DemoChapter[] = [
             "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
             "While publication completes, show the original, changed, and restored versions in the **Content version selector**.",
             "Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**.",
-            "After closing **Compare versions**, note the current **Show all fields** setting. Enable it if needed, and expand **Statistics**.",
+            "After closing **Compare versions**, enable **Show all fields** if needed, and expand **Statistics**.",
             "Point to **Updated** and **Updated by** for the item’s latest update.",
-            "Collapse **Statistics**, and restore **Show all fields** to its original setting.",
           ],
           [
             "Wait for publication to complete. Reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer.",
@@ -2010,7 +2005,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Begin restoration only after A5 confirms **2026** in both live footers. Open the version selector, and find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
           "In **Page Builder → Content → Data → Disclosures → Copyright notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**. Name it **Copyright year restored**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved full copyright notice with **2025**, without changing any other wording or punctuation, its line break, or the **Equal Opportunity Employer** link. After the original wording is saved, record the version number currently shown as **Restored copyright version**. Use that same saved version number for submission, approval, and publication.",
           "With **Restored copyright version** selected, recheck **Draft** and the original **Disclosure** wording with year **2025**. Choose **Actions → Submit**, enter **Restore copyright year to 2025**, and select **Submit**. Stay on the same **Restored copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved restoration of copyright year to 2025**, and select **Submit**.",
-          "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**. Note the current **Show all fields** setting, enable it if needed, and expand **Statistics**. Point to **Updated** and **Updated by** for the item’s latest update. Collapse **Statistics**, and restore **Show all fields** to its original setting.",
+          "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**. Enable **Show all fields** if needed, and expand **Statistics**. Point to **Updated** and **Updated by** for the item’s latest update.",
           "After completion, reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer. Confirm that both footers show the full copyright notice with **2025** again, and retain all versions in history.",
         ],
         expected: [
