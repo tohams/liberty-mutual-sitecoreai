@@ -8,8 +8,10 @@ import { limitPersonalizationPreviewRequests } from "@/server/personalization-pr
 import {
   parsePersonalizationPageRequest,
   personalizationPreviewErrorResponse,
+  personalizationPreviewDependencies,
 } from "@/server/personalization-preview/service";
-import { readPersonalizationFlowDefinitions } from "@/server/personalization-preview/upstream";
+import { readPersonalizationDefinitionDiagnostics } from "@/server/personalization-preview/upstream";
+import { nativePreviewExecutions } from "@/server/audience-preview/decisions";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -97,11 +99,18 @@ export async function GET(request: NextRequest) {
       input,
       actor.accessToken,
     );
+    const dependencies = personalizationPreviewDependencies();
+    const [definitions, nativeInfo] = await Promise.all([
+      readPersonalizationDefinitionDiagnostics(page, actor.accessToken),
+      dependencies.getInfo(page),
+    ]);
     return jsonResponse({
       page,
-      flows: diagnosticValue(
-        await readPersonalizationFlowDefinitions(page, actor.accessToken),
-      ),
+      probes: diagnosticValue(definitions),
+      nativeInfo: nativeInfo || null,
+      executions: nativeInfo
+        ? nativePreviewExecutions(nativeInfo, page.language, dependencies.scope)
+        : [],
     });
   } catch (error) {
     return personalizationPreviewErrorResponse(error);

@@ -11,6 +11,10 @@ export function PersonalizationPreviewRenderReady() {
     const root = document.documentElement;
     root.setAttribute("data-personalization-preview-ready", "false");
     root.removeAttribute("data-personalization-preview-rendered-ms");
+    root.setAttribute(
+      "data-personalization-preview-start-visibility",
+      document.visibilityState,
+    );
 
     const markReady = () => {
       if (cancelled) return;
@@ -27,6 +31,19 @@ export function PersonalizationPreviewRenderReady() {
       root.setAttribute(
         "data-personalization-preview-rendered-ms",
         elapsed.toFixed(1),
+      );
+      const navigation = performance.getEntriesByType("navigation")[0] as
+        PerformanceNavigationTiming | undefined;
+      if (navigation && navigation.responseStart > 0)
+        root.setAttribute(
+          "data-personalization-preview-navigation-ttfb-ms",
+          Math.max(0, navigation.responseStart - navigation.startTime).toFixed(
+            1,
+          ),
+        );
+      root.setAttribute(
+        "data-personalization-preview-visibility",
+        document.visibilityState,
       );
       root.setAttribute("data-personalization-preview-ready", "true");
     };

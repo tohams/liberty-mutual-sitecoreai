@@ -23,9 +23,16 @@ Configure these server-only settings independently of Audience Preview:
 - `PERSONALIZATION_PREVIEW_AUTH0_SECRET` — a separate 32-byte hexadecimal session key.
 - `PERSONALIZATION_PREVIEW_APP_BASE_URL` — the HTTPS origin that hosts the new routes.
 - `PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID`
+- `PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID` — this app's installed Marketplace tenant, shown in its Page Builder iframe URL; this is separate from the CMS tenant and Audience Preview installation.
 - `PERSONALIZATION_PREVIEW_SITECORE_CONTEXT_ID` — the new installed app's `application.context.resourceAccess` → `xmcloud` → `context.preview` value.
 - `PERSONALIZATION_PREVIEW_EDGE_CONTEXT_ID` — optional CMS Preview content context override; otherwise the normal CMS Preview context is used.
 
 Use `NEXT_PUBLIC_PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID` only for the public app identifier. No credential belongs in a public environment variable.
 
 The app has its own authentication cookie, callback paths, API routes, rate-limit namespace, and short-lived actor-bound preview tokens. Each preview rechecks the author's page/version access and validates the selections against the current native configuration. Its read-only rendering reuses the existing native component-receipt composition without changing Audience Preview's behavior or stored scenarios.
+
+## Performance checks
+
+Browser User Timing measures record catalog loading (`personalization-preview-catalog`) and preparation (`personalization-preview-prepare`), including response parsing. API `Server-Timing` headers identify the authentication, page authorization, catalog, native rendering, and token stages. These measurements contain durations only.
+
+The preview document marks `personalization-preview-rendered` after hydration, font readiness, and two animation frames. Its `data-personalization-preview-rendered-ms` attribute measures navigation to that point. Check visible images separately; this marker does not imply that every image has loaded. Compare first-use and repeat runs using current page configuration, and verify the rendered content against the selected outcomes.

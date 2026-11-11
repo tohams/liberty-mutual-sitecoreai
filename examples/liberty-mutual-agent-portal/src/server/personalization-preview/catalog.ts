@@ -166,6 +166,12 @@ export function buildPersonalizationCatalog(
       502,
     );
   const executions = nativePreviewExecutions(info, page.language, scope);
+  if (rawFlows.length === 0 && info.variantIds.length > 0)
+    throw new PersonalizationPreviewError(
+      "PERSONALIZATION_DISCOVERY_INCOMPLETE",
+      "SitecoreAI could not load this page’s configured personalizations. Refresh the choices and try again.",
+      502,
+    );
   const available = new Set([
     "_default",
     ...executions.flatMap((execution) => execution.variantIds),

@@ -233,3 +233,9 @@ test("a page with no personalization can preview its original content", () => {
     [],
   );
 });
+
+test("an empty management list cannot masquerade as default-only when native variants exist", () => {
+  assert.throws(() => buildPersonalizationCatalog(page, [], info), {
+    code: "PERSONALIZATION_DISCOVERY_INCOMPLETE",
+  });
+});

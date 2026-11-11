@@ -55,11 +55,10 @@ async function json(response: Response): Promise<unknown> {
 }
 
 /** Fixed-origin, read-only Agent API calls under the author's delegated Sitecore session. */
-export async function readPersonalizationFlowDefinitions(
-  page: PersonalizationPreviewPage,
+function personalizationDefinitionReader(
   accessToken: string,
   transport: typeof fetch = fetch,
-): Promise<unknown[]> {
+) {
   const { contextId } = personalizationPreviewApiConfiguration();
   if (!accessToken || /[\s\u0000-\u001f]/.test(accessToken))
     throw new PersonalizationPreviewError(
@@ -103,14 +102,27 @@ export async function readPersonalizationFlowDefinitions(
       const status = [401, 403, 404].includes(response.status)
         ? response.status
         : 502;
-      throw new PersonalizationPreviewError(
+      const error = new PersonalizationPreviewError(
         "PERSONALIZATION_ACCESS_DENIED",
         "This SitecoreAI account cannot read this page’s personalization configuration.",
         status,
       );
+      Object.defineProperty(error, "upstreamStatus", {
+        value: response.status,
+      });
+      throw error;
     }
     return json(response);
   };
+  return read;
+}
+
+export async function readPersonalizationFlowDefinitions(
+  page: PersonalizationPreviewPage,
+  accessToken: string,
+  transport: typeof fetch = fetch,
+): Promise<unknown[]> {
+  const read = personalizationDefinitionReader(accessToken, transport);
   const listed = await read(
     `/api/v1/flows/by-page/${encodeURIComponent(page.id)}`,
     { language: page.language },
@@ -148,4 +160,49 @@ export async function readPersonalizationFlowDefinitions(
     }),
   );
   return definitions;
+}
+
+/** Temporary bounded integration probes; remove with the diagnostic route. */
+export async function readPersonalizationDefinitionDiagnostics(
+  page: PersonalizationPreviewPage,
+  accessToken: string,
+  transport: typeof fetch = fetch,
+): Promise<unknown> {
+  const read = personalizationDefinitionReader(accessToken, transport);
+  const probe = async (pathname: string) => {
+    try {
+      return {
+        status: "success",
+        value: await read(pathname, { language: page.language }),
+      };
+    } catch (error) {
+      return {
+        status: "error",
+        code:
+          error instanceof PersonalizationPreviewError
+            ? error.code
+            : "UNAVAILABLE",
+        ...(error instanceof PersonalizationPreviewError
+          ? {
+              statusCode: error.status,
+              upstreamStatus: (
+                error as PersonalizationPreviewError & {
+                  upstreamStatus?: number;
+                }
+              ).upstreamStatus,
+            }
+          : {}),
+      };
+    }
+  };
+  const uuid = encodeURIComponent(page.id);
+  const normalized = encodeURIComponent(
+    page.id.replace(/[{}-]/g, "").toLowerCase(),
+  );
+  const [byPageUuid, byPageNormalized, personalizationV2] = await Promise.all([
+    probe(`/api/v1/flows/by-page/${uuid}`),
+    probe(`/api/v1/flows/by-page/${normalized}`),
+    probe(`/api/v2/personalization/by-page/${uuid}`),
+  ]);
+  return { byPageUuid, byPageNormalized, personalizationV2 };
 }

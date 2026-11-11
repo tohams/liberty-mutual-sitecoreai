@@ -137,6 +137,7 @@ export function PersonalizationPreviewMarketplace() {
       });
       if (selected.version) query.set("version", String(selected.version));
       const finishRoundTrip = startPersonalizationPreviewMeasure("catalog");
+      let observedResponse: Response | undefined;
       try {
         const response = await fetch(
           `/api/personalization-preview/context?${query}`,
@@ -146,6 +147,7 @@ export function PersonalizationPreviewMarketplace() {
             signal: controller.signal,
           },
         );
+        observedResponse = response;
         const payload = await readCurrentPersonalizationResponse(response, {
           controller,
           activeController: () => contextRequest.current,
@@ -153,7 +155,10 @@ export function PersonalizationPreviewMarketplace() {
           currentPageKey: () =>
             personalizationPreviewPageKey(nativePage.current),
         });
-        finishRoundTrip();
+        finishRoundTrip({
+          response,
+          status: response.ok ? "success" : "error",
+        });
         if (needsConnection(response, payload)) {
           requireConnection();
           return false;
@@ -172,6 +177,15 @@ export function PersonalizationPreviewMarketplace() {
         setCatalog(payload);
         return true;
       } catch (error) {
+        finishRoundTrip({
+          response: observedResponse,
+          status:
+            observedResponse && !observedResponse.ok
+              ? "error"
+              : controller.signal.aborted
+                ? "aborted"
+                : "error",
+        });
         if (
           contextRequest.current !== controller ||
           (error instanceof PersonalizationRequestSuperseded && !timedOut)
@@ -289,17 +303,6 @@ export function PersonalizationPreviewMarketplace() {
         throw new Error(
           "Open Personalization Preview from its installed app in Page Builder.",
         );
-      if (
-        process.env.NEXT_PUBLIC_PERSONALIZATION_PREVIEW_SETUP_DIAGNOSTICS ===
-        "true"
-      )
-        console.info(
-          "Personalization Preview setup resource context",
-          JSON.stringify({
-            appId: application.data.id,
-            resourceAccess: application.data.resourceAccess,
-          }),
-        );
       const receivePage = (context: PagesContext) => {
         if (cancelled) return;
         const selected = currentPage(context);
@@ -369,6 +372,7 @@ export function PersonalizationPreviewMarketplace() {
       );
       const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
       const finishRoundTrip = startPersonalizationPreviewMeasure("prepare");
+      let observedResponse: Response | undefined;
       try {
         const response = await fetch("/api/personalization-preview", {
           method: "POST",
@@ -384,6 +388,7 @@ export function PersonalizationPreviewMarketplace() {
           }),
           signal: controller.signal,
         });
+        observedResponse = response;
         const payload = await readCurrentPersonalizationResponse(response, {
           controller,
           activeController: () => previewRequest.current,
@@ -391,7 +396,10 @@ export function PersonalizationPreviewMarketplace() {
           currentPageKey: () =>
             personalizationPreviewPageKey(nativePage.current),
         });
-        finishRoundTrip();
+        finishRoundTrip({
+          response,
+          status: response.ok ? "success" : "error",
+        });
         if (needsConnection(response, payload)) {
           requireConnection();
           setCatalog(null);
@@ -428,6 +436,15 @@ export function PersonalizationPreviewMarketplace() {
           );
         return payload;
       } catch (error) {
+        finishRoundTrip({
+          response: observedResponse,
+          status:
+            observedResponse && !observedResponse.ok
+              ? "error"
+              : controller.signal.aborted
+                ? "aborted"
+                : "error",
+        });
         if (controller.signal.aborted)
           throw new Error(
             "The preview was interrupted. Select Preview page to try again.",
