@@ -1559,7 +1559,7 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Part 1 of the priority-change loop: save the new order as a Draft, ready for review, approval, and publication in the next step.",
         stopWhen:
-          "Checkpoint: the Texas-first Draft is saved, the original approved version remains intact, and the live experience is unchanged. Continue with the audience-preview demonstration and the review/publication actions to complete this priority-change loop.",
+          "Checkpoint: the Texas-first Draft is saved, the original approved version remains intact, and the live experience is unchanged. Continue with the personalization-preview demonstration and the review/publication actions to complete this priority-change loop.",
         inputs: [
           {
             beforeLine: 3,
@@ -1659,16 +1659,16 @@ export const customerDemoChapters: DemoChapter[] = [
       },
       {
         id: "portal-preview",
-        title: "Preview the priority change for each audience",
+        title: "Preview each personalized priority experience",
         label: "Marketing user previews the experience for each agent audience",
         phase: "Liberty Business Experience",
         sourceSlide: 11,
         durationMinutes: 4,
         persona: "Portal content administrator",
         scenario:
-          "The team needs to check the draft Home priorities for the intended principal and producer audiences before publication.",
+          "The team needs to compare the draft Home content variants for the principal and producer experiences before publication.",
         objective:
-          "Part 2 of the priority-change loop: preview the same Home page for two audience contexts, approve and publish the saved priority change, and verify both live agents.",
+          "Part 2 of the priority-change loop: preview both personalized content variants on Home, approve and publish the saved priority change, and verify both live agents.",
         stopWhen:
           "Before publication, Home preview shows Texas guidance first for the principal and the unchanged household-first order for the producer. After publication, Avery and Daniel show those same respective orders live.",
         inputs: [
@@ -1686,8 +1686,8 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Audience Preview** is a private Marketplace extension: it combines the current authoring page with the existing native personalization rules.",
-          "Preview a Texas principal and an Illinois producer using only **Role** and **Licensed states**; the producer keeps the household-first order.",
+          "**Personalization Preview** is a private Marketplace extension: choose a native content variant and inspect the current draft on the same page.",
+          "Compare **Agency growth priorities** with **Producer priorities** before publication; the producer keeps the household-first order.",
           "Review and publish the saved priority change once, then show Avery’s updated live order and Daniel’s unchanged order.",
         ],
         presenterCues: [
@@ -1698,19 +1698,19 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
-            "Open **Apps → Audience Preview**. Confirm **Current page → Home**. Leave the saved priority Draft unpublished.",
+            "Open **Apps → Personalization Preview**. Keep **Home** selected in **Page Builder**, and leave the saved priority Draft unpublished.",
           ],
           [
-            "Set **Role → Principal**. Under **Licensed states**, select only **Texas**; clear **Florida** and **Illinois**.",
-            "Select **Preview audience**, wait for the result, then select **Open preview**.",
+            "Under **Agency priorities**, choose **Agency growth priorities**. Leave **Guidance → Default**.",
+            "Select **Preview page**; the preview opens directly in a new tab.",
             "On **Home**, find **Priorities for your agency**. Confirm **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**.",
-            "Close the preview tab, and return to the same **Audience Preview** panel in **Page Builder**.",
+            "Close the preview tab, and return to the same **Personalization Preview** panel in **Page Builder**.",
           ],
           [
-            "Set **Role → Producer**. Under **Licensed states**, select only **Illinois**; clear **Texas** and **Florida**.",
-            "Select **Preview audience**, then **Open preview** when ready.",
+            "Under **Agency priorities**, choose **Producer priorities**. Keep **Guidance → Default**.",
+            "Select **Preview page**; the producer preview opens directly in a new tab.",
             "On **Home**, confirm the producer’s unchanged order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
-            "Close the preview tab, and return to **Page Builder**. Both previews used audience attributes, without an agent login.",
+            "Close the preview tab, return to **Personalization Preview**, and set **Agency priorities → Default**. Both previews used named content variants, without an agent login.",
           ],
           [
             "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**, then select **Saved priority version**.",
@@ -1731,24 +1731,24 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
         ],
         presenterResult:
-          "The same Home page previews the draft for both audience contexts. One reviewed publication then updates Avery’s live priorities while Daniel’s order remains unchanged.",
+          "The same Home page previews both personalized content variants. One reviewed publication then updates Avery’s live priorities while Daniel’s order remains unchanged.",
         actions: [
-          "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Open **Apps → Audience Preview**, and confirm **Current page → Home**. Leave **Saved priority version** unpublished.",
-          "Set **Role → Principal**. Under **Licensed states**, select only **Texas**, clearing **Florida** and **Illinois**. Select **Preview audience**. When ready, select **Open preview**. On **Home**, find **Priorities for your agency**, and confirm the draft order **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**. Close the preview tab, and return to the same **Audience Preview** panel in **Page Builder**.",
-          "Set **Role → Producer**. Under **Licensed states**, select only **Illinois**, clearing **Texas** and **Florida**. Select **Preview audience**, then **Open preview** when ready. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab, and return to **Page Builder**. Neither preview requires an agent login or a human profile identifier.",
+          "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Open **Apps → Personalization Preview**, and keep **Home** selected in **Page Builder**. Leave **Saved priority version** unpublished.",
+          "Under **Agency priorities**, choose **Agency growth priorities**, and leave **Guidance → Default**. Select **Preview page**; the preview opens directly in a new tab. On **Home**, find **Priorities for your agency**, and confirm the draft order **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**. Close the preview tab, and return to the same **Personalization Preview** panel in **Page Builder**.",
+          "Under **Agency priorities**, choose **Producer priorities**, and keep **Guidance → Default**. Select **Preview page**; the preview opens directly in a new tab. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab, return to **Personalization Preview**, and set **Agency priorities → Default**. Neither preview requires an agent login or a human profile identifier.",
           "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
           "Stay on the same **Saved priority version** in **Page Builder**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
           "On the same **Saved priority version** in **Page Builder**, confirm **Approved** and its Texas-first order, and choose **Publish**. Keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, in the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
         ],
         expected: [
-          "Audience Preview shows the draft priority order on the same Home page for a Texas principal and the unchanged order for an Illinois producer. Publishing the reviewed priority collection updates Avery’s Home without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
+          "Personalization Preview shows the draft Agency growth priorities and unchanged Producer priorities on the same Home page. Publishing the reviewed priority collection updates Avery’s Home without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
         ],
         talkTrack: [
-          "Before publishing, I can check this same Home page for a Texas principal and an Illinois producer. The principal’s draft puts Texas guidance first; the producer keeps the household-first order. We enter audience attributes without signing in as an agent. I can then review and publish the saved change and confirm that only the intended live experience changes.",
+          "Before publishing, I can choose each personalized content variant on this same Home page. The agency-growth draft puts Texas guidance first; the producer keeps the household-first order. I can inspect these draft experiences without signing in as an agent, then review and publish the saved change and confirm that only the intended live experience changes.",
         ],
         controls: [
-          "**Audience Preview** is a private **Marketplace** extension inside **Page Builder**. It evaluates the existing published SitecoreAI personalization rules for the selected audience attributes, then renders the current authoring content for **Home**.",
-          "Preview uses isolated synthetic audience records, without changing human agent accounts. It does not publish content or grant additional content permissions.",
+          "**Personalization Preview** is a private **Marketplace** extension inside **Page Builder**. It reads the selected page’s native content-variant names and renders the chosen variants with current authoring content for **Home**.",
+          "Native profile tests in **A1** verify the decision rules. This preview checks the selected content variants before publication, without changing human agent accounts, publishing content, or granting additional content permissions.",
           "The **Saved priority version** from A3 remains Draft during both Home previews. The same presenter account then performs **Submit**, **Approve**, and **Publish** on that exact version in **Page Builder**.",
         ],
         links: [

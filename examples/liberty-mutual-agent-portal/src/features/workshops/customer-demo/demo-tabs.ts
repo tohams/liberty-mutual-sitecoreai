@@ -12,7 +12,7 @@ export const demoTabNames = {
   danielPortal: "Daniel portal",
   sitecoreAI: "SitecoreAI",
   pageBuilder: "Page Builder",
-  audiencePreparation: "Prepare audiences",
+  personalizationPreview: "Personalization Preview",
   searchPreview: "Search Preview",
   events: "Events",
   graphqlExplorer: "GraphQL Explorer",
@@ -96,9 +96,10 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
         cue: "Keep the Page Builder tab opened from Channels, and reuse it for both sites.",
       },
       {
-        id: "audiencePreparation",
-        href: `${PORTAL}/apps/audience-preview/prepare`,
-        cue: "Before presenting, select Prepare audiences, wait for 42 of 42 ready, and close this preparation tab.",
+        id: "personalizationPreview",
+        navigation:
+          "**Page Builder → Site switcher → Agent Portal → Editor → Pages → Home → Apps → Personalization Preview**.",
+        cue: "Check the Agency growth priorities and Producer priorities variants before presenting. Preview page opens each result directly. Allow pop-ups, then return all selectors to Default. Reuse Page Builder for A4.",
       },
       {
         id: "searchPreview",
