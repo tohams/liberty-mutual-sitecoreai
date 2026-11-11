@@ -62,7 +62,7 @@ test("starting URLs omit unsafe, private helper, and credential-bearing destinat
 test("all thirteen loops have one starting destination, or two for genuinely different sites", () => {
   const expected: Record<string, string[]> = {
     "public-question": [`${PUBLIC}/`],
-    "public-discovery": [SITECORE_AI, ARTICLE],
+    "public-discovery": [ARTICLE, SITECORE_AI],
     "public-indexing": [SITECORE_AI],
     "public-authoring": [SITECORE_AI, `${PUBLIC}/coverage-page`],
     "public-profound": [SCRUNCH_REVIEW],

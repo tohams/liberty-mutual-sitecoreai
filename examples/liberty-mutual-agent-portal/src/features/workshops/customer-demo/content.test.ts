@@ -322,7 +322,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
   assert.match(prose(entry.controls), /Include in site search.*checkbox/i);
 });
 
-test("discovery readiness identifies native structure while keeping external engine citation claims bounded", () => {
+test("discovery readiness separates public Article metadata from structured CMS reuse", () => {
   const text = prose(step("public-discovery"));
   for (const required of [
     /PublicResourcePage/,
@@ -331,13 +331,37 @@ test("discovery readiness identifies native structure while keeping external eng
     /State applicability/,
     /Products/,
     /Audience/,
-    /FAQPage/,
-    /acceptedAnswer/,
+    /Search title/,
+    /Search description/,
+    /Article/,
+    /headline/,
+    /mainEntityOfPage → @id/,
+    /Question.*Plain-language answer.*Search.*connected AI applications/,
     /canonical/i,
   ])
     assert.match(text, required);
   assert.equal(step("public-discovery").durationMinutes, 2);
   assert.equal(step("public-discovery").actions.length, 3);
+  assert.match(
+    prose(step("public-discovery").presenterActions[0][0]),
+    /Public website.*Public article.*Bundling your car and home insurance.*article copy/,
+  );
+  assert.match(
+    prose(step("public-discovery").controls),
+    /Article schema.*headline.*native page Title.*Search description.*mainEntityOfPage → @id.*Canonical URL.*published fields support permitted crawlers.*Question.*Plain-language answer.*CMS fields for Search and connected applications/,
+  );
+  assert.doesNotMatch(text, /FAQPage|acceptedAnswer/);
+  assert.deepEqual(
+    step("public-discovery").links?.map(({ label, action, afterLine }) => ({
+      label,
+      action,
+      afterLine,
+    })),
+    [
+      { label: "Public article", action: 1, afterLine: 0 },
+      { label: "SitecoreAI", action: 1, afterLine: 1 },
+    ],
+  );
   assert.match(
     prose(step("public-discovery").actions),
     /Open each field’s selection control.*1 item selected.*2 items selected/,
@@ -357,7 +381,7 @@ test("discovery readiness identifies native structure while keeping external eng
   assert.match(text, /Reference source/);
   assert.match(
     prose(step("public-discovery").actions),
-    /expand Resource content.*Detailed explanation.*Under Content.*Canonical URL.*Reference source/i,
+    /natural article copy.*Page Builder.*expand Content.*Search title.*Search description.*Canonical URL.*Reference source.*Expand Resource content.*Detailed explanation/i,
   );
   assert.match(
     prose(step("public-discovery").presenterActions[0]),
