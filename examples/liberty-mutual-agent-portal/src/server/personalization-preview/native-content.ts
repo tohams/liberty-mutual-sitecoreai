@@ -221,9 +221,6 @@ export async function readNativePersonalizationContentDefinitions(
   });
   return {
     definitions,
-    warnings: [
-      "Choices show the page’s native content variants, named for their content.",
-      ...warnings,
-    ],
+    warnings,
   };
 }

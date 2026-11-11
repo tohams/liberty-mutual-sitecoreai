@@ -126,7 +126,7 @@ test("native content labels come from resolved datasource names, while exact nat
       ["Producer priorities", producer],
     ],
   );
-  assert.match(result.warnings[0], /native content variants/);
+  assert.deepEqual(result.warnings, []);
 });
 
 test("never infers a preview ID from a rule label or an unrelated SDK component", () => {

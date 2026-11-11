@@ -1,7 +1,6 @@
 .panel {
   --pp-ink: #252234;
   --pp-muted: #706b7d;
-  --pp-border: #dfdce7;
   --pp-purple: #6135e8;
   --pp-purple-dark: #4b22c2;
   box-sizing: border-box;
@@ -64,64 +63,6 @@
   margin-top: 4px;
   color: var(--pp-muted);
   font-size: 13px;
-}
-
-.pageContext {
-  display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  padding: 16px;
-  margin-bottom: 28px;
-  border: 1px solid var(--pp-border);
-  border-radius: 10px;
-  background: #faf9fc;
-}
-
-.pageContext > svg {
-  flex-shrink: 0;
-  margin-top: 3px;
-  color: #7a728e;
-}
-
-.pageIdentity {
-  display: grid;
-  flex: 1;
-  min-width: 0;
-  gap: 3px;
-}
-
-.eyebrow {
-  font-size: 10px;
-  font-weight: 650;
-  line-height: 1.5;
-  letter-spacing: 0.085em;
-  color: var(--pp-muted);
-  text-transform: uppercase;
-}
-
-.pageIdentity strong {
-  overflow-wrap: anywhere;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.pageMeta {
-  color: var(--pp-muted);
-  font-size: 12px;
-  overflow-wrap: anywhere;
-}
-
-.readOnly {
-  flex-shrink: 0;
-  padding: 2px 7px;
-  margin-top: 1px;
-  border: 1px solid #e4e1ea;
-  border-radius: 5px;
-  background: #fff;
-  color: #675f78;
-  font-size: 10px;
-  font-weight: 550;
-  white-space: nowrap;
 }
 
 .field {
@@ -292,15 +233,6 @@
 
   .header p {
     font-size: 12px;
-  }
-
-  .pageContext {
-    padding: 13px;
-    gap: 9px;
-  }
-
-  .readOnly {
-    font-size: 9px;
   }
 }
 
