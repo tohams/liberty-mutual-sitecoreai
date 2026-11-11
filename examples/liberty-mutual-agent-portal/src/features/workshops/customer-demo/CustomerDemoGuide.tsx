@@ -193,7 +193,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "public",
-                      text: `Prepare the windows in **P0** once. Reuse the **SitecoreAI** tab for its tool menus, and keep the **Page Builder** tab that opens from **Channels**. Open [**GraphQL Explorer**](${GRAPHQL_EXPLORER}) in its own tab. Configure the Explorer’s **HTTP HEADERS** using the **sc_apikey** JSON template in **P7** and your **Live Delivery API token**, and run its **GraphQL query** once to verify access to Live Experience Edge. Keep the presentation’s **Experience Edge content delivery** slide ready for P7.`,
+                      text: `Prepare the windows in **P0** once. Reuse the **SitecoreAI** tab for its tool menus, and keep the **Page Builder** tab that opens from **Channels**. Open [**GraphQL Explorer**](${GRAPHQL_EXPLORER}) in its own tab. Before presenting, configure **HTTP HEADERS** using the **sc_apikey** JSON template in **P7** and a **Live Delivery API token**. If the copy field contains **<Delivery API token>**, obtain a token through **Quick links → Deploy → project SitecoreAI → environment Demo → Details → Live GraphQL IDE (Experience Edge) → Generate Delivery API token → Launch IDE**. Replace the placeholder with that token; use **Live**, not **Preview**, for P7. Run the **P7 GraphQL query** once to verify access to Live Experience Edge, and leave the headers configured. Keep the presentation’s **Experience Edge content delivery** slide ready for P7.`,
                     },
                     {
                       chapter: "all",

@@ -164,11 +164,11 @@ test("both customer journeys explain demonstrated behavior and a bounded AI-assi
 test("the focused live plan leaves three minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [3, 2, 4, 9, 3, 2, 2],
+    [2, 2, 4, 9, 2, 2, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [2, 2, 2, 3, 2, 2],
+    [3, 2, 2, 4, 2, 2],
   );
   const schedule = customerDemoSchedule(customerDemoChapters);
   assert.equal(DEMO_OPENING_MINUTES, 3);
@@ -178,17 +178,17 @@ test("the focused live plan leaves three minutes within the forty-five-minute li
   assert.deepEqual(
     schedule.map(({ start, end }) => [start, end]),
     [
-      [3, 6],
-      [6, 8],
-      [8, 12],
-      [12, 21],
-      [21, 24],
+      [3, 5],
+      [5, 7],
+      [7, 11],
+      [11, 20],
+      [20, 22],
+      [22, 24],
       [24, 26],
-      [26, 28],
-      [28, 30],
-      [30, 32],
-      [32, 34],
-      [34, 37],
+      [26, 29],
+      [29, 31],
+      [31, 33],
+      [33, 37],
       [37, 39],
       [39, 41],
     ],
@@ -305,7 +305,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
     "Can I bundle my car and home insurance?",
   ])
     assert(prose(entry.expected).includes(title));
-  assert.equal(entry.durationMinutes, 3);
+  assert.equal(entry.durationMinutes, 2);
   assert.doesNotMatch(
     live,
     /then open|Read the answer|Coverage and policy details|More information|source link|return to the article|Explore bundling|Explore a bundled quote|Privacy choices|Essential only|Allow personalization|scroll|Effective|Review date/i,
@@ -415,6 +415,10 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   assert.match(
     prose(entry.controls),
     /reads published website content.*Search Push API.*Include in site search.*resource page’s own guidance and applicability metadata/i,
+  );
+  assert.match(
+    prose(entry.presenterPoints),
+    /OnEnd.*publication event.*custom synchronization service.*Live Experience Edge.*Search Push API/i,
   );
   const publish = actionIndex(
     entry.id,
@@ -727,12 +731,16 @@ test("API reuse uses native Live GraphQL with a copyable query for the same publ
     "utf8",
   );
   assert.match(page, /Experience Edge content delivery.*ready for P7/);
+  assert.match(
+    plainGuideText(page),
+    /copy field contains <Delivery API token>.*Quick links → Deploy → project SitecoreAI → environment Demo → Details → Live GraphQL IDE \(Experience Edge\) → Generate Delivery API token → Launch IDE.*use Live, not Preview, for P7.*leave the headers configured/,
+  );
 });
 
 test("the relevance loop uses native profile and priority tests without presenter helper pages", () => {
   const entry = step("portal-relevance");
   const text = prose(entry);
-  assert.equal(entry.durationMinutes, 2);
+  assert.equal(entry.durationMinutes, 3);
   assert.equal(entry.actions.length, 5);
   assert.equal(entry.presenterActions.length, entry.actions.length);
   for (const required of [
@@ -947,7 +955,7 @@ test("the same Home draft is previewed with audience attributes before approval 
     /SitecoreAI → Channels → Agent Portal → Page builder.*Site switcher → Agent Portal → Editor → Pages → Home/,
   );
   assert.equal(editEntry.durationMinutes, 2);
-  assert.equal(entry.durationMinutes, 3);
+  assert.equal(entry.durationMinutes, 4);
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
@@ -1295,7 +1303,7 @@ test("frontend comparisons precede marketer controls and shared publishing prece
     customerDemoChapters.map((chapter) =>
       chapter.steps.reduce((sum, entry) => sum + entry.durationMinutes, 0),
     ),
-    [25, 13],
+    [23, 15],
   );
 });
 
