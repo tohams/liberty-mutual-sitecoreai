@@ -382,7 +382,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "Keep this same resource selected. Next, publish its approved revision and verify that Search receives the updated wording automatically.",
+          "Keep this same resource selected. Next, make a reviewed update and verify that Search receives the published wording automatically.",
       },
       {
         id: "public-indexing",
@@ -391,7 +391,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Published content is automatically indexed by enterprise search platform",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 4,
+        durationMinutes: 5,
         persona:
           "Public-site publisher, following marketer and approver review",
         scenario:
@@ -410,6 +410,12 @@ export const customerDemoChapters: DemoChapter[] = [
           {
             beforeLine: 3,
             action: 2,
+            label: "New resource version name",
+            value: "Resource page review",
+          },
+          {
+            beforeLine: 5,
+            action: 2,
             label: "Detailed explanation — review sentence",
             value:
               "Review your options with your agent before choosing coverage.",
@@ -422,13 +428,13 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Publish one approved page revision, without a frontend release.",
+          "Make, review, and publish one page revision, without a frontend release.",
           "A configured **OnEnd** publication event invokes a custom synchronization service, which reads **Live Experience Edge** and updates the index through the **Search Push API**.",
           "Show the sentence absent before publication and present in Search afterward; the state, product, and audience classifications stay intact.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
-          { point: 2, action: 2, afterLine: 5 },
+          { point: 2, action: 2, afterLine: 9 },
           { point: 3, action: 3, afterLine: 4 },
         ],
         presenterActions: [
@@ -440,8 +446,12 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "Return to the existing **Page Builder** tab and the **bundle-car-and-home** page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed.",
-            "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
-            "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field in **Detailed explanation**.",
+            "In the version selector, confirm the **latest version** is **Approved** and marked **Live**. Its **Detailed explanation** must not contain the review sentence.",
+            "Choose **Create version**, paste **New resource version name**, and select **Create**.",
+            "Reopen the version selector, explicitly select the newest **Resource page review → Draft** row, and wait for its fields to load. Confirm **Draft**.",
+            "Expand **Resource content**. Place the cursor at the end of **Detailed explanation**, and append **Detailed explanation — review sentence** exactly once. Retain all existing paragraphs; do not replace the field’s content.",
+            "Save, and wait for **Saved**. On this same new version, choose **Actions → Submit**, then **Submit**; confirm **Awaiting approval**.",
+            "Using the same presenter account, review this version’s complete content, choose **Actions → Approve**, then **Submit**; confirm **Approved**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
             "Leave **Subpages** unchecked, select **Start publish**, and wait for completion.",
           ],
@@ -456,14 +466,14 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          "Return to **Page Builder** for **bundle-car-and-home**, the page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed. In the version selector, choose the prepared revision by the **Prepared page version** number recorded in **Before presenting**. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
+          "Return to **Page Builder** for **bundle-car-and-home**, the page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed. Confirm the **latest version** is **Approved** and marked **Live**, with the review sentence absent. Choose **Create version**, name it **Resource page review**, and select **Create**. Reopen the version selector, explicitly select the newest **Resource page review → Draft** row, and wait for its fields to finish loading. Expand **Resource content**. At the end of **Detailed explanation**, append **Review your options with your agent before choosing coverage.** exactly once, retaining all existing paragraphs. Save, and wait for **Saved**. On this same new version, choose **Actions → Submit**, then **Submit**, and confirm **Awaiting approval**. Using the same presenter account, review the complete content, choose **Actions → Approve**, then **Submit**, and confirm **Approved**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
           `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
           "A single approved page publication updates the native Search record automatically, including the changed body and unchanged applicability metadata.",
         ],
         talkTrack: [
-          "When that car-and-home guidance changes, the publisher releases the approved page revision once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages the page content once across these delivery channels.",
+          "We create one fresh Draft, retain the article, and append one sentence. The same presenter account submits, reviews, and publishes that revision; separate roles normally govern those actions. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages the page content once across these delivery channels.",
         ],
         controls: [
           "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. This loop follows the resource page’s own guidance and applicability metadata.",
@@ -472,45 +482,6 @@ export const customerDemoChapters: DemoChapter[] = [
           { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
         ],
         images: [
-          {
-            file: "demo-public-publish-approved.png",
-            title: "Publish the approved page revision",
-            alt: "The page is Approved. Its Detailed explanation contains the new review sentence, and the publishing status provides a link to the job.",
-            caption:
-              "The page is **Approved**. Its **Detailed explanation** contains the new review sentence, and the publishing status provides a link to the job. Use the version number recorded for the current demonstration.",
-            afterAction: 2,
-            crop: {
-              x: 0,
-              y: 0,
-              width: 1440,
-              height: 900,
-              sourceWidth: 1440,
-              sourceHeight: 900,
-            },
-            annotations: [
-              {
-                x: 79.51,
-                y: 1.56,
-                width: 6.67,
-                height: 3.33,
-                label: "Confirm **Approved**",
-              },
-              {
-                x: 22.22,
-                y: 69.89,
-                width: 45.14,
-                height: 3.67,
-                label: "Confirm the added review sentence",
-              },
-              {
-                x: 79.17,
-                y: 5.56,
-                width: 20.69,
-                height: 11.22,
-                label: "Follow publishing progress",
-              },
-            ],
-          },
           {
             file: "demo-public-search-published-body.png",
             title: "The published sentence appears in Search",

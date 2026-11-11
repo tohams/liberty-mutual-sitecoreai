@@ -162,10 +162,10 @@ test("both customer journeys explain demonstrated behavior and a bounded AI-assi
   );
 });
 
-test("the focused live plan leaves three minutes within the forty-five-minute limit", () => {
+test("the focused live plan leaves two minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [2, 2, 4, 7, 2, 2, 2],
+    [2, 2, 5, 7, 2, 2, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
@@ -174,24 +174,24 @@ test("the focused live plan leaves three minutes within the forty-five-minute li
   const schedule = customerDemoSchedule(customerDemoChapters);
   assert.equal(DEMO_OPENING_MINUTES, 3);
   assert.equal(DEMO_CLOSING_MINUTES, 1);
-  assert.equal(DEMO_BUFFER_MINUTES, 3);
+  assert.equal(DEMO_BUFFER_MINUTES, 2);
   assert.equal(DEMO_TOTAL_MINUTES, 45);
   assert.deepEqual(
     schedule.map(({ start, end }) => [start, end]),
     [
       [3, 5],
       [5, 7],
-      [7, 11],
-      [11, 18],
-      [18, 20],
-      [20, 22],
-      [22, 24],
-      [24, 27],
-      [27, 29],
-      [29, 31],
-      [31, 35],
-      [35, 38],
-      [38, 41],
+      [7, 12],
+      [12, 19],
+      [19, 21],
+      [21, 23],
+      [23, 25],
+      [25, 28],
+      [28, 30],
+      [30, 32],
+      [32, 36],
+      [36, 39],
+      [39, 42],
     ],
   );
   assert.deepEqual(
@@ -199,7 +199,7 @@ test("the focused live plan leaves three minutes within the forty-five-minute li
     STABLE_ANCHORS,
   );
   const planned = schedule.at(-1)!.end + DEMO_CLOSING_MINUTES;
-  assert.equal(planned, 42);
+  assert.equal(planned, 43);
   assert.equal(planned + DEMO_BUFFER_MINUTES, DEMO_TOTAL_MINUTES);
   assert.deepEqual([0, 1, 21, 40, 45].map(elapsedTime), [
     "00:00",
@@ -447,7 +447,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   );
   const publish = actionIndex(
     entry.id,
-    /prepared revision.*Approved.*Start publish/i,
+    /latest version.*Approved.*Create version.*Draft.*Actions → Submit.*Actions → Approve.*Approved.*Start publish/i,
   );
   const verify = actionIndex(
     entry.id,
@@ -460,7 +460,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   assert(publish < verify);
   assert.match(
     prose(entry.actions[publish]),
-    /Wait for the version to finish loading.*read the selected version number again.*matches Prepared page version.*Immediately before choosing Publish.*Approved.*Detailed explanation.*Start publish/i,
+    /Create version.*Resource page review.*select the newest.*Draft.*wait for its fields to finish loading.*At the end of Detailed explanation.*append.*exactly once.*retaining all existing paragraphs.*Save.*Saved.*same new version.*Actions → Submit.*Awaiting approval.*same presenter account.*Actions → Approve.*Approved.*Publish.*Start publish/i,
   );
   assert.match(
     prose(entry.actions[publish]),
@@ -490,7 +490,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   );
 });
 
-test("indexing preparation requires a clean published baseline and one unpublished revision", () => {
+test("indexing begins with the latest clean published page and creates its Draft live", () => {
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
@@ -499,29 +499,18 @@ test("indexing preparation requires a clean published baseline and one unpublish
     page.indexOf('<details id="preparation"'),
     page.indexOf('<section id="opening"'),
   );
-  const baseline = preparation.indexOf("Verify the published baseline");
-  const revision = preparation.indexOf("from that verified original named");
-  assert(baseline >= 0 && revision > baseline);
   const preparationText = plainGuideText(preparation);
   assert.match(
     preparationText,
-    /select the preserved original version.*Live baseline version.*wait for its fields to finish loading.*Read the selected version number again.*original wording without the temporary sentence.*Create version/,
-  );
-  assert.match(
-    preparationText,
-    /select Create.*Reopen the version selector.*explicitly select the new.*Resource page review.*Draft.*new version number.*wait for its fields to finish loading.*selected version number is newer.*original wording remains intact before editing.*Add.*exactly once/,
+    /latest version.*Approved.*marked Live.*Detailed explanation.*full clean article without.*Keep this latest published version selected.*Do not create a version during preparation.*P3 creates a fresh Resource page review Draft live/,
   );
   assert.match(
     preparationText,
     /must be absent from the public article.*Search record.*explanation.*P7 GraphQL query/,
   );
   assert.match(
-    preparation,
-    /sentence is present.*After the demonstration.*restoration checklist.*Continue only after all three/,
-  );
-  assert.match(
-    preparation,
-    /exactly once.*Leave it unpublished.*sentence must still be absent/,
+    preparationText,
+    /sentence is present.*After the demonstration.*restoration checklist.*remove only that temporary sentence.*Continue only after all three/,
   );
   const firstIndexingAction = actions("public-indexing")[0];
   assert.match(
@@ -531,6 +520,34 @@ test("indexing preparation requires a clean published baseline and one unpublish
   assert.match(
     firstIndexingAction,
     /already visible.*restore the baseline.*existing sentence does not prove a fresh publication/,
+  );
+  const entry = step("public-indexing");
+  assert.equal(entry.durationMinutes, 5);
+  assert.deepEqual(
+    entry.inputs?.find((input) => input.label === "New resource version name"),
+    {
+      action: 2,
+      beforeLine: 3,
+      label: "New resource version name",
+      value: "Resource page review",
+    },
+  );
+  assert.equal(
+    entry.inputs?.find(
+      (input) => input.label === "Detailed explanation — review sentence",
+    )?.beforeLine,
+    5,
+  );
+  const restoration = plainGuideText(
+    page.slice(page.indexOf('<details id="reset"')),
+  );
+  assert.match(
+    restoration,
+    /begin with the latest published version.*Resource page restored.*newest Draft.*remove only.*Retain the complete article and all other fields.*Save, submit, approve, and publish this same version.*latest version is Approved and marked Live/,
+  );
+  assert.doesNotMatch(
+    prose([entry, page]),
+    /Prepared page version|Live baseline version|select the preserved original version|prepared revision|select.*version (?:31|32)/i,
   );
 });
 
@@ -1341,7 +1358,7 @@ test("frontend comparisons precede marketer controls and shared publishing prece
     customerDemoChapters.map((chapter) =>
       chapter.steps.reduce((sum, entry) => sum + entry.durationMinutes, 0),
     ),
-    [21, 17],
+    [22, 17],
   );
 });
 
