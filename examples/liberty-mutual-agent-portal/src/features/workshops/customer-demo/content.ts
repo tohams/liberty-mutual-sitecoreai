@@ -1000,14 +1000,14 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 2,
         persona: "Public-site marketer",
         scenario:
-          "The marketer needs to understand website visits and the next-step actions visitors select.",
+          "The marketer needs to understand website page views and the next-step actions visitors select.",
         objective:
           "Show how marketers can measure defined visitor actions alongside page views using actual public-site events.",
         stopWhen:
           "The public-site report shows pageView and LM_PUBLIC_CTA_CLICK over the past month, and the presenter explains the visitor action represented by the custom event.",
         presenterPoints: [
           "Show actual public-site activity for **1 month**, using the site and event filters.",
-          "**pageView** measures visits; **LM_PUBLIC_CTA_CLICK** records selections of defined next-step buttons and links.",
+          "**pageView** measures page views; **LM_PUBLIC_CTA_CLICK** records selections of defined next-step buttons and links.",
           "Recorded visitor choices automatically govern optional measurement and personalization.",
         ],
         presenterActions: [
@@ -1023,7 +1023,7 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "Explain: **LM_PUBLIC_CTA_CLICK** records a visitor’s selection of a defined next-step button or link.",
-            "Show that the custom business action can be measured alongside **pageView** visits.",
+            "Show that the custom business action can be measured alongside **pageView** page views.",
           ],
         ],
         presenterResult:
@@ -1031,13 +1031,13 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `Switch to the prepared **Events** tab, or open [**Optimization → Analytics → Events**](${ANALYTICS}). Set **Site → liberty-mutual-public-site** and **Time → 1 month**. Under **Event Type**, keep **pageView** and **LM_PUBLIC_CTA_CLICK** checked, and clear the other event checkboxes.`,
           "Inspect **Events over Time** and **Events Table**. Identify the actual **pageView** and **LM_PUBLIC_CTA_CLICK** rows, and read the values shown for the selected site and reporting period.",
-          "Explain that **LM_PUBLIC_CTA_CLICK** is a custom event for a visitor’s selection of a defined next-step button or link. Show that this business action can be measured alongside **pageView** visits.",
+          "Explain that **LM_PUBLIC_CTA_CLICK** is a custom event for a visitor’s selection of a defined next-step button or link. Show that this business action can be measured alongside **pageView** page views.",
         ],
         expected: [
           "A marketer can inspect the public site’s recorded page views and custom business actions in SitecoreAI over the selected monthly reporting period.",
         ],
         talkTrack: [
-          "Marketers can measure website visits and the actions that matter to Liberty Mutual. Here, pageView records visits, and the defined LM_PUBLIC_CTA_CLICK event records selections of next-step buttons and links. Custom events let the team name and measure meaningful business actions. This report shows the public site’s actual recorded activity over the past month.",
+          "Marketers can measure website page views and the actions that matter to Liberty Mutual. Here, pageView records page views, and the defined LM_PUBLIC_CTA_CLICK event records selections of next-step buttons and links. Custom events let the team name and measure meaningful business actions. This report shows the public site’s actual recorded activity over the past month.",
         ],
         controls: [
           "The **Site** filter separates the Public Website from the Agent Portal. **Time → 1 month** defines the reporting period, and **Event Type** checkboxes focus the report on **pageView** and **LM_PUBLIC_CTA_CLICK**. The native report supplies the recorded rows and totals.",
