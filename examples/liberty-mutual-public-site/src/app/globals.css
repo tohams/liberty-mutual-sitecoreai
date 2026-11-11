@@ -558,9 +558,6 @@ code.scpm {
   gap: 64px;
   align-items: start;
 }
-.public-answer__summary {
-  font-size: 1.2rem;
-}
 .public-answer__source {
   border: 1px solid var(--public-border);
   border-top: 4px solid var(--public-teal);

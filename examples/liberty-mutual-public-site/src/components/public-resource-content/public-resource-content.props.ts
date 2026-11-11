@@ -4,6 +4,8 @@ import type { SharedDisclosureFields } from "../shared-disclosure/shared-disclos
 
 export type PublicResourceContentProps = ComponentProps & {
   fields?: {
+    Title?: Field<string>;
+    metadataDescription?: Field<string>;
     question?: Field<string>;
     canonicalUrl?: Field<string>;
     answer?: Field<string>;

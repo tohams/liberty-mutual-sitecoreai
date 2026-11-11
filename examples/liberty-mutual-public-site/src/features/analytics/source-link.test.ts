@@ -6,7 +6,7 @@ import { LayoutServicePageState } from "@sitecore-content-sdk/nextjs";
 import { Default as ResourceContent } from "../../components/public-resource-content/PublicResourceContent";
 import type { PublicResourceContentProps } from "../../components/public-resource-content/public-resource-content.props";
 
-function renderAnswer(
+function renderArticle(
   target?: string,
   linkState: "authored" | "omitted" | "empty" = "authored",
 ) {
@@ -29,6 +29,9 @@ function renderAnswer(
       fields: {
         question: { value: "Can I bundle my car and home insurance?" },
         answer: { value: "Authored answer" },
+        explanation: {
+          value: "<p>Explore coverage that fits your household.</p>",
+        },
         ...(linkState === "omitted"
           ? {}
           : {
@@ -57,7 +60,7 @@ function renderAnswer(
 }
 
 test("the native authored source opens separately and remains eligible for the existing CTA tracker", () => {
-  const markup = renderAnswer();
+  const markup = renderArticle();
   const source = markup.match(
     /<a\b[^>]*>Liberty Mutual: bundling auto and home<\/a>/,
   )?.[0];
@@ -69,18 +72,21 @@ test("the native authored source opens separately and remains eligible for the e
   assert.match(markup, /<a class="public-button" href="\/get-a-quote">/);
 });
 
-test("a newly created native resource page renders its question when optional links are absent or blank", () => {
+test("a newly created native resource page renders its article when optional links are absent or blank", () => {
   for (const state of ["omitted", "empty"] as const) {
-    const markup = renderAnswer(undefined, state);
-    assert.match(markup, /<h2>Can I bundle my car and home insurance\?<\/h2>/);
-    assert.match(markup, /Authored answer/);
+    const markup = renderArticle(undefined, state);
+    assert.match(markup, /Explore coverage that fits your household\./);
+    assert.doesNotMatch(
+      markup,
+      /Can I bundle my car and home insurance|Authored answer/,
+    );
     assert.doesNotMatch(markup, /<a\b/);
   }
 });
 
 test("an explicitly authored source target is preserved", () => {
   for (const target of ["_self", "_blank", "reference-window"])
-    assert.match(renderAnswer(target), new RegExp(`target="${target}"`));
+    assert.match(renderArticle(target), new RegExp(`target="${target}"`));
 });
 
 test("CTA events remain disabled without optional consent and when GPC is enabled", async () => {
