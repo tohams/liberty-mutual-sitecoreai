@@ -18,6 +18,7 @@ import {
 } from "./catalog";
 import { readPersonalizationFlowDefinitions } from "./upstream";
 import { readNativePersonalizationContentDefinitions } from "./native-content";
+import { nativePreviewExecutions } from "@/server/audience-preview/decisions";
 import {
   createPersonalizationPreviewViewSession,
   type PersonalizationPreviewViewSession,
@@ -174,20 +175,37 @@ export async function loadPersonalizationPreviewCatalog(
       "SitecoreAI could not confirm this page’s preview variants. Please try again.",
       502,
     );
-  if (
-    !flows.length &&
-    info.variantIds.length &&
-    dependencies.readNativeContent
-  ) {
+  const preferred =
+    flows.length || !info.variantIds.length
+      ? buildPersonalizationCatalog(page, flows, info, dependencies.scope)
+      : undefined;
+  const coveredOwners = new Set(
+    [...(preferred?.choices.values() || [])].flatMap((choices) =>
+      [...choices.values()].flatMap((choice) =>
+        choice.componentId ? [choice.componentId] : [],
+      ),
+    ),
+  );
+  const missingComponents = nativePreviewExecutions(
+    info,
+    page.language,
+    dependencies.scope,
+  ).some(
+    (execution) =>
+      execution.componentId && !coveredOwners.has(execution.componentId),
+  );
+  if (missingComponents && dependencies.readNativeContent) {
     const native = await dependencies.readNativeContent(
       page,
       info,
       accessToken,
       dependencies.scope,
+      undefined,
+      coveredOwners,
     );
     const catalog = buildPersonalizationCatalog(
       page,
-      native.definitions,
+      [...flows, ...native.definitions],
       info,
       dependencies.scope,
     );
@@ -197,7 +215,10 @@ export async function loadPersonalizationPreviewCatalog(
     ];
     return catalog;
   }
-  return buildPersonalizationCatalog(page, flows, info, dependencies.scope);
+  return (
+    preferred ||
+    buildPersonalizationCatalog(page, flows, info, dependencies.scope)
+  );
 }
 
 export async function preparePersonalizationPreview(

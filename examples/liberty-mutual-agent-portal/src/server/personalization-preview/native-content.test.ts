@@ -200,3 +200,17 @@ test("datasource-less outcomes are named as native variants without inventing an
   );
   assert.equal(catalog.context.flows[0].options[2].id, producer);
 });
+
+test("already-covered components and real page-level variants do not produce false missing-row warnings", () => {
+  const result = nativeContentGroups(
+    selectedPage(),
+    {
+      ...info,
+      variantIds: [...info.variantIds, "ed1ff2801b9b4f71946885ff88584fdf"],
+    },
+    undefined,
+    new Set([component]),
+  );
+  assert.deepEqual(result.groups, []);
+  assert.deepEqual(result.warnings, []);
+});

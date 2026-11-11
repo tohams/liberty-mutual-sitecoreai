@@ -49,6 +49,7 @@ export function nativeContentGroups(
   page: PersonalizationPreviewPage,
   info: PersonalizeInfo,
   scope?: string,
+  excludedOwners: ReadonlySet<string> = new Set(),
 ): { groups: NativeContentGroup[]; warnings: string[] } {
   if (normalizePreviewId(info.pageId) !== normalizePreviewId(page.id))
     invalid();
@@ -84,6 +85,7 @@ export function nativeContentGroups(
       if (!object(rendering) || !object(rendering.personalization)) continue;
       const componentId = uuid(rendering.instanceId);
       const renderingId = uuid(rendering.id);
+      if (componentId && excludedOwners.has(componentId)) continue;
       const ruleSet = rendering.personalization.ruleSet;
       if (
         !componentId ||
@@ -137,14 +139,18 @@ export function nativeContentGroups(
     }
   }
   if (groups.length > 10 || mapped.size > 40) invalid();
-  const missing = info.variantIds.filter((value) => !mapped.has(value));
+  const relevant = info.variantIds.filter((value) => {
+    const owner = /^([a-f0-9]{32})_[a-f0-9]{32}$/i.exec(value)?.[1];
+    return owner && !excludedOwners.has(owner);
+  });
+  const missing = relevant.filter((value) => !mapped.has(value));
   const warnings =
     missing.length || unavailableRows
       ? [
           "Some native variants are not available in this selected page version.",
         ]
       : [];
-  if (!groups.length && info.variantIds.length) invalid();
+  if (!groups.length && relevant.length) invalid();
   return { groups, warnings };
 }
 
@@ -155,8 +161,14 @@ export async function readNativePersonalizationContentDefinitions(
   accessToken: string,
   scope?: string,
   reader: NativeMetadataReader = nativeMetadataReader(accessToken),
+  excludedOwners: ReadonlySet<string> = new Set(),
 ): Promise<{ definitions: unknown[]; warnings: string[] }> {
-  const { groups, warnings } = nativeContentGroups(page, info, scope);
+  const { groups, warnings } = nativeContentGroups(
+    page,
+    info,
+    scope,
+    excludedOwners,
+  );
   if (!groups.length) return { definitions: [], warnings };
   const itemIds = [
     ...new Set(

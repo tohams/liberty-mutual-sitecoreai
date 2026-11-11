@@ -119,4 +119,70 @@ test("prefers real flow labels and uses native content names only for a successf
     }),
   );
   assert.equal(fallbackCalls, 1);
+
+  const anotherComponent = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  const anotherNative = `${anotherComponent}_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`;
+  const pageNative = "ed1ff2801b9b4f71946885ff88584fdf";
+  const pageDefinition = {
+    ...definition,
+    ref: "page-flow",
+    name: "Principal page",
+    transpiledVariants: [
+      {
+        name: "Principal",
+        tasks: [
+          { input: { template: JSON.stringify({ variantId: pageNative }) } },
+        ],
+      },
+    ],
+  };
+  const mixed = await loadPersonalizationPreviewCatalog(
+    selected,
+    "author-token",
+    {
+      ...dependencies,
+      readFlows: async () => [definition, pageDefinition],
+      getInfo: async () =>
+        ({
+          pageId: selected.id,
+          variantIds: [native, pageNative, anotherNative],
+        }) as PersonalizeInfo,
+      readNativeContent: async (
+        _page,
+        _info,
+        _token,
+        _scope,
+        _reader,
+        excludedOwners,
+      ) => {
+        assert.deepEqual(excludedOwners, new Set([component]));
+        return {
+          definitions: [
+            {
+              ...definition,
+              ref: `native_${anotherComponent}`,
+              name: "Growth guidance",
+              transpiledVariants: [
+                {
+                  name: "Growth content",
+                  tasks: [
+                    {
+                      input: {
+                        template: JSON.stringify({ variantId: anotherNative }),
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          warnings: ["Native content variants"],
+        };
+      },
+    },
+  );
+  assert.deepEqual(
+    mixed.context.flows.map((flow) => flow.name),
+    ["Product priorities", "Principal page", "Growth guidance"],
+  );
 });
