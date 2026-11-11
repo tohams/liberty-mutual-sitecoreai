@@ -1212,76 +1212,72 @@ export const customerDemoChapters: DemoChapter[] = [
         sourceSlide: 11,
         durationMinutes: 3,
         persona:
-          "Independent agents Avery and Daniel, followed by a portal marketer",
+          "Independent agents Daniel and Avery, followed by a portal marketer",
         scenario:
           "Agents with different roles, licensed states, and agency context need priorities relevant to their business.",
         objective:
-          "Compare two agents’ priorities, then show how role, licensed state, and agency production determine the result in native personalization rules.",
+          "Start with Daniel’s producer priorities, contrast Avery’s principal priorities, then follow Avery’s profile into the native personalization test and state business rule.",
         stopWhen:
-          "Avery and Daniel’s different priorities are visible, each agent matches the expected native priority rule using that agent’s own Client ID, and the published Texas and Illinois conditions are shown.",
+          "Daniel and Avery’s different priorities are visible, Avery matches the native agency-growth rule using her own Client ID, and the published Texas and Illinois conditions are shown.",
         presenterPoints: [
-          "Compare Avery, a principal at **Cedar Ridge Insurance**, with Daniel, a producer at **Prairie Oak Insurance**.",
-          "Show their different priorities and licensed states, then compare the consistent Home and resource-page design before opening marketer screens.",
-          "Point to the matching native profile tests and the Texas / Illinois business conditions behind those experiences.",
+          "Start with Daniel, a producer at **Prairie Oak Insurance**, then contrast Avery, a principal at **Cedar Ridge Insurance**.",
+          "Compare the ordered recommendations and licensed states: Daniel sees household guidance first; Avery sees agency growth first.",
+          "Follow Avery’s **Client ID** into the native **agency-growth** test, then show the Texas / Illinois business conditions behind the experiences.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
-          { point: 2, action: 2, afterLine: 4 },
+          { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 5, afterLine: 4 },
         ],
         presenterActions: [
           [
-            "Switch to the **Avery portal** tab, and select **My workspace** in the left navigation. Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.",
-            "Find **Priorities for your agency**; show **Build a stronger small-business practice** first.",
-            "Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**.",
+            "Switch to the **Daniel portal** tab, and select **My workspace** in the left navigation. Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.",
+            "Read his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
+            "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**. Choose **Close dialog**.",
+          ],
+          [
+            "Switch to the separate **Avery portal** tab, and select **My workspace** in the left navigation. Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.",
+            "Contrast her principal priorities: **Build a stronger small-business practice → Support workers’ compensation conversations in Texas → Connect home and auto conversations**.",
             "Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**. Choose **Close dialog**.",
           ],
           [
-            "Switch to the separate **Daniel portal** tab, and select **My workspace** in the left navigation. Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.",
-            "Compare his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
-            "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**. Choose **Close dialog**.",
-            "Return to **Avery portal**, select **Learning & resources**, then **My workspace**. Point to their shared navigation, typography, buttons, and cards before opening marketer screens.",
+            "In the **SitecoreAI** tab, choose **Optimization → Profiles**, and open **Avery Brooks - 01**. Keep this tab as **Profiles**; leave the separate **Page Builder** tab open.",
+            "Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies Avery for the native rule test.",
           ],
           [
-            "In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Agent Portal** card. In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**. Keep **Default editing host**, then choose **Layers → Agency priorities**.",
+            "Switch to **Page Builder**. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**, keep **Default editing host**, then choose **Layers → Agency priorities**.",
             "Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**.",
-            "Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.",
-          ],
-          [
-            "Return to the **SitecoreAI** tab, choose **Optimization → Profiles**, and open **Avery Brooks - 01**. Keep this tab as **Profiles**; leave the separate **Page Builder** tab open.",
-            "Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test.",
-            "Return to **Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**.",
-            "Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**.",
-            "Select **Testing as: Avery Brooks - 01 → Load profile → Client ID**, replace the existing ID with Daniel’s **Client ID** from **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**, and press **Enter**; wait for **Testing as: Daniel Ortiz - 01**, select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
+            "In the Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**.",
+            "Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**. Choose **Cancel** after this read-only test.",
           ],
           [
             "In the **SitecoreAI** tab, choose **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it.",
-            "Point to the **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**.",
-            "Point to **producer-priorities**: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production.",
+            "Point to Avery’s matching **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**.",
+            "Show the **producer-priorities** branch behind Daniel’s earlier experience: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production.",
             "Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
           ],
         ],
         presenterResult:
-          "Avery matches **agency-growth**, and Daniel matches **producer-priorities**. The published rule shows how role, Texas or Illinois licensing, and agency or agent production determine those results.",
+          "Daniel’s producer-first baseline contrasts with Avery’s principal experience. Avery’s own native profile test matches **agency-growth**, and the published rule shows the role, licensing, and production conditions behind both experiences.",
         actions: [
-          `Switch to the **Avery portal** tab, and open [**Home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**. Find **Priorities for your agency**; show **Build a stronger small-business practice** first. Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**. Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.`,
-          `Switch to the separate **Daniel portal** tab, and open [**Home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Compare his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**. Return to **Avery portal**, select **Learning & resources**, then **My workspace**. Point to the shared navigation, typography, buttons, and cards before opening marketer screens.`,
-          `Switch to the **Page Builder** tab, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities**. Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**. Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.`,
-          "Switch to the prepared **Profiles** tab under **Optimization → Profiles**, and open the current **Avery Brooks - 01** profile prepared in **P0**. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies the visitor whose rules you will test. Return to **Page Builder**. In the open Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm green **agency-growth**. Select **Testing as: Avery Brooks - 01 → Load profile → Client ID**, replace the existing ID with Daniel’s **Client ID** from **Profiles → Toggle menu → Inspect → JSON view → clientIds** in **P0**, and press **Enter**; wait for **Testing as: Daniel Ortiz - 01**, select **Test**, and confirm green **producer-priorities**. Choose **Cancel** after these read-only tests.",
-          "Switch to the **State business rule** tab. Its normal navigation is **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it. Point to the **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**. Point to **producer-priorities**: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production. Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
+          `Switch to the **Daniel portal** tab, and open [**portal home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Read his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**, then choose **Close dialog**.`,
+          `Switch to the separate **Avery portal** tab, and open [**portal home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**. Contrast her principal priorities: **Build a stronger small-business practice → Support workers’ compensation conversations in Texas → Connect home and auto conversations**. Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**, then choose **Close dialog**.`,
+          "In the **SitecoreAI** tab, choose **Optimization → Profiles**, and open **Avery Brooks - 01**. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies Avery for the native rule test. Keep the separate **Page Builder** tab open.",
+          `Switch to **Page Builder**, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities**. Choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**, select **Test**, and confirm green **agency-growth**. Choose **Cancel** after this read-only test.`,
+          "In the **SitecoreAI** tab, choose **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it. Point to Avery’s matching **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**. Show the **producer-priorities** branch behind Daniel’s earlier experience: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production. Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
         ],
         expected: [
-          "The portal shows different priorities for Avery and Daniel. Native profile tests and the published custom value reveal the role, licensed-state, and production conditions behind those experiences.",
+          "Daniel’s producer priorities and Avery’s principal priorities differ. Avery’s native profile test and the published custom value reveal the role, licensed-state, and production conditions behind those experiences.",
         ],
         talkTrack: [
-          "Avery and Daniel receive priorities relevant to their roles and agencies. The published rule combines known licensing with production: Texas principals below a 20% small-commercial share receive the growth priority; qualifying Illinois producers receive producer priorities. We can inspect each profile and test the exact visitor. Liberty Mutual can keep Ping for sign-in and supply this context from its existing systems.",
+          "Daniel’s producer priorities lead with household conversations. Avery’s principal priorities lead with agency growth. We stay with Avery, inspect her profile, and test her exact visitor ID. The published rule combines Texas licensing and a principal role with agency production; its Illinois producer branch explains Daniel’s earlier experience. Liberty Mutual can keep Ping for sign-in and supply this context from its existing systems.",
           customerDemoAiContext.portal.talkTrack,
         ],
         controls: [
           "The published **Liberty Mutual - Agency product priorities** custom value uses known UDL attributes: **principal**, **licensedInTexas = true**, and agency small-commercial share below **20%** return **agency-growth**; **producer**, **licensedInIllinois = true**, small-commercial specialization, and positive agent small-commercial production return **producer-priorities**. Unmatched profiles receive **neutral**.",
           "The rule requires an identified **liberty-mutual-agent** profile, **USD** production currency, and **agency** production scope. Agency small-commercial share is small-commercial production divided by personal plus small-commercial production. The application separately enforces licensed-state eligibility alongside the content personalization.",
-          "The priority Builder loads a visitor through **Load profile → Client ID**. Find that UUID in the native profile’s **Inspect → JSON view → clientIds**; the **Profile ID** in the browser URL is a different identifier. Prepare Daniel’s current **Client ID** in **P0** to keep the comparison concise.",
-          "These read-only tests inspect the existing configuration and do not publish or change a rule.",
+          "The priority Builder loads a visitor through **Load profile → Client ID**. Find that UUID in the native profile’s **Inspect → JSON view → clientIds**; the **Profile ID** in the browser URL is a different identifier. Inspect Avery’s current profile in **A1**, and use her **Client ID** throughout the native test.",
+          "These read-only checks inspect the existing configuration and do not publish or change a rule.",
         ],
         links: [
           {
@@ -1295,11 +1291,11 @@ export const customerDemoChapters: DemoChapter[] = [
         images: [
           {
             file: "customer-demo-priorities.png",
-            afterAction: 1,
+            afterAction: 2,
             title: "Find Priorities for your agency",
             alt: "Avery's portal dashboard with Priorities for your agency below the agency overview and the small-business and Texas guidance cards",
             caption:
-              "On **My workspace**, find **Priorities for your agency** below the agency overview. The starting principal experience leads with **Build a stronger small-business practice**; Daniel’s producer experience leads with household guidance.",
+              "On **My workspace**, find **Priorities for your agency** below the agency overview. After Daniel’s household-first baseline, Avery’s principal experience leads with **Build a stronger small-business practice**.",
             annotations: [
               {
                 x: 22,

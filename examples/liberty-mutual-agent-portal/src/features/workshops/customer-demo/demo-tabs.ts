@@ -55,27 +55,27 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
     ],
   },
   {
-    id: "avery",
-    title: "Avery window",
-    note: "Use a separate browser profile to preserve Avery’s agent session.",
+    id: "daniel",
+    title: "Daniel window",
+    note: "Use a separate browser profile for Daniel’s producer baseline, shown first in A1.",
     tabs: [
       {
-        id: "averyPortal",
+        id: "danielPortal",
         href: `${PORTAL}/login`,
-        cue: "Sign in as avery.01 with the agent portal password; leave Home open.",
+        cue: "Sign in as daniel.01 with the agent portal password; leave the portal home open.",
       },
     ],
   },
   {
-    id: "daniel",
-    title: "Daniel window",
-    note: "Use another browser profile to preserve Daniel’s agent session.",
+    id: "avery",
+    title: "Avery window",
+    note: "Use another browser profile for Avery’s principal contrast, shown second in A1.",
     tabs: [
       {
-        id: "danielPortal",
+        id: "averyPortal",
         navigation:
-          "Reuse the **Agent Portal login** address from the **Avery window** in another browser profile.",
-        cue: "Sign in as daniel.01 with the agent portal password; leave Home open.",
+          "Reuse the **Daniel portal** login address from the **Daniel window** in another browser profile.",
+        cue: "Sign in as avery.01 with the agent portal password; leave the portal home open. Stay with Avery for Profiles and the native personalization test.",
       },
     ],
   },
@@ -121,7 +121,7 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       {
         id: "profiles",
         navigation: "**Optimization → Profiles**.",
-        cue: "During A1, use the native profile filters to find Avery and Daniel with number 01 appended to their names.",
+        cue: "After Daniel’s portal baseline and Avery’s contrast in A1, open Avery Brooks - 01. Use her Client ID for the native personalization test.",
       },
       {
         id: "stateBusinessRule",

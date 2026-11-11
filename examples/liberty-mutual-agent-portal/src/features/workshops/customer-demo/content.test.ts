@@ -788,7 +788,7 @@ test("API reuse uses native Live GraphQL with a copyable query for the same publ
   );
 });
 
-test("the relevance loop uses native profile and priority tests without presenter helper pages", () => {
+test("A1 follows Daniel to Avery and keeps Avery through the native profile and rule test", () => {
   const entry = step("portal-relevance");
   const text = prose(entry);
   assert.equal(entry.durationMinutes, 3);
@@ -805,21 +805,52 @@ test("the relevance loop uses native profile and priority tests without presente
   ])
     assert.match(text, required);
   assert.match(
-    prose(entry.actions[2]),
-    /Page Builder.*Layers → Agency priorities.*Edit personalization rules → Liberty Mutual - Agency product priorities.*Leave the rule Builder open/i,
+    prose(entry.actions[0]),
+    /Daniel portal.*daniel\.01.*Prairie Oak Insurance.*Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice.*producer role/,
   );
-  const profileRules = prose(entry.actions[3]);
+  assert.match(
+    prose(entry.actions[1]),
+    /Avery portal.*avery\.01.*Cedar Ridge Insurance.*Build a stronger small-business practice → Support workers’ compensation conversations in Texas → Connect home and auto conversations.*principal role.*Close dialog/,
+  );
+  const profileRules = prose(entry.actions[2]);
   assert.match(
     profileRules,
     /Optimization → Profiles.*Avery Brooks - 01.*Toggle menu → Inspect → JSON view.*first UUID in clientIds.*without quotation marks.*close Inspect profile/i,
   );
   assert.match(
-    profileRules,
-    /Return to Page Builder.*Select profile → Load profile → Client ID.*Avery.*Client ID.*Enter.*Testing as: Avery Brooks - 01.*Test.*green agency-growth/i,
+    prose(entry.actions[3]),
+    /Page Builder.*Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities.*Select profile → Load profile → Client ID.*Avery.*Client ID.*Enter.*Testing as: Avery Brooks - 01.*Test.*green agency-growth.*Cancel/i,
+  );
+  assert.doesNotMatch(
+    prose(entry.actions.slice(2)),
+    /Daniel portal|Testing as: Daniel Ortiz|Daniel’s Client ID/i,
+  );
+  assert.doesNotMatch(prose(entry.actions[3]), /Daniel/i);
+  assert.doesNotMatch(
+    prose([entry.presenterActions, entry.actions, entry.presenterPoints]),
+    /Learning & resources|resource-page design|shared navigation|Return to Avery portal|Stay in Avery portal/,
+  );
+  assert.equal(
+    entry.images?.find((image) => image.file === "customer-demo-priorities.png")
+      ?.afterAction,
+    2,
+  );
+  const preparation = plainGuideText(
+    readFileSync(
+      join(
+        appRoot,
+        "src/features/workshops/customer-demo/CustomerDemoGuide.tsx",
+      ),
+      "utf8",
+    ),
   );
   assert.match(
-    profileRules,
-    /Daniel.*Testing as: Daniel Ortiz - 01.*Test.*green producer-priorities.*Cancel.*read-only tests/i,
+    preparation,
+    /first show Daniel’s portal, then Avery’s portal; continue with Avery’s native profile/,
+  );
+  assert.doesNotMatch(
+    preparation,
+    /Repeat for Daniel Ortiz|both current Client IDs|Avery’s and Daniel’s current Client ID/,
   );
   const stateRule = prose(entry.actions[4]);
   assert.match(
@@ -837,7 +868,7 @@ test("the relevance loop uses native profile and priority tests without presente
   assert.match(stateRule, /Leave the published rule unchanged/);
   assert.match(
     entry.stopWhen,
-    /Avery and Daniel.*native priority rule.*own Client ID/,
+    /Daniel and Avery.*Avery matches.*native agency-growth rule.*own Client ID/,
   );
   assert.match(entry.stopWhen, /published Texas and Illinois conditions/);
   assert.equal(entry.inputs, undefined);
@@ -857,7 +888,7 @@ test("the relevance loop uses native profile and priority tests without presente
   );
   assert.match(
     prose(entry.controls),
-    /read-only tests.*do not publish or change a rule/i,
+    /read-only checks.*do not publish or change a rule/i,
   );
   assert.match(
     text,
@@ -885,10 +916,6 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
   assert.match(
     actions[3],
     /original Introduction wording is restored.*component picker is closed/,
-  );
-  assert.match(
-    prose(step("portal-relevance").presenterActions[1]),
-    /Avery portal.*Learning & resources.*My workspace.*before opening marketer screens/,
   );
   assert.match(
     prose(entry.presenterActions[0]),
@@ -1327,17 +1354,18 @@ test("all thirteen loops provide brief business and screen-observation bullets",
 test("frontend comparisons precede marketer controls and shared publishing precedes restoration", () => {
   const relevance = step("portal-relevance");
   const frontend = prose(relevance.presenterActions.slice(0, 2));
-  assert.match(
-    frontend,
-    /Avery.*Daniel.*Learning & resources.*shared navigation/,
-  );
+  assert.match(frontend, /Daniel.*producer role.*Avery.*principal role/);
   assert.doesNotMatch(
     frontend,
     /Edit personalization rules|Optimize with AI|Custom values/,
   );
   assert.match(
     prose(relevance.presenterActions[2]),
-    /Edit personalization rules/,
+    /Optimization → Profiles.*Avery Brooks - 01.*clientIds/,
+  );
+  assert.match(
+    prose(relevance.presenterActions[3]),
+    /Edit personalization rules.*Testing as: Avery Brooks - 01/,
   );
   const edit = step("portal-priority-edit");
   assert.match(edit.scenario, /Texas workers’ compensation campaign/);
