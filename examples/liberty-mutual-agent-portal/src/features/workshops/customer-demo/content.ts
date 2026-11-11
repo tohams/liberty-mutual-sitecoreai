@@ -21,11 +21,11 @@ export const customerDemoAiContext: Record<
 > = {
   public: {
     demonstrated:
-      "Search retrieves approved guidance, while structured answers provide the source and applicability information that supports discovery by search and AI consumers.",
+      "Search retrieves approved guidance. Published article metadata, schema, and canonical URLs help permitted search and AI engines understand the public page; structured CMS fields also support connected applications.",
     nextStep:
       "SitecoreAI assistants can help marketers draft and refine brand-aligned website copy for human review. The proposed Profound integration would bring external content proposals into the same Draft, approval, and publishing process.",
     talkTrack:
-      "For this public-site journey, Search retrieves published guidance and structured answers support AI discovery. SitecoreAI assistants can help marketers draft and refine brand-aligned copy; Profound intake would be a proposed integration, with human review.",
+      "Published article metadata supports search and AI discovery; structured CMS fields support connected applications. SitecoreAI assistants help marketers draft and refine brand-aligned copy. Proposed Profound intake would use the same human review and publication controls.",
   },
   portal: {
     demonstrated:
@@ -257,7 +257,7 @@ export const customerDemoChapters: DemoChapter[] = [
       },
       {
         id: "public-discovery",
-        title: "Inspect the resource behind the answer",
+        title: "Inspect article metadata and structured content",
         label:
           "Search engines and AI answer engines can find and cite the right LM content",
         phase: "Core Demonstration Flow",
@@ -265,11 +265,11 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 2,
         persona: "Public-site marketer",
         scenario:
-          "The marketer needs the guidance to retain its meaning, source, and applicability when people discover it through search or an AI experience.",
+          "The marketer needs a natural customer article with clear metadata, source attribution, and applicability for discovery and reuse.",
         objective:
-          "Make approved guidance easier to find and reuse, with its source, applicability, and review information kept explicit.",
+          "Show one natural article backed by governed SEO metadata, taxonomy, and published Article schema, with structured fields available to Search and connected applications.",
         stopWhen:
-          "The native page fields, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
+          "The natural article, Search title and description, managed applicability values, canonical URL, and Article schema have been shown without changing content.",
         inputs: [
           {
             beforeLine: 2,
@@ -285,20 +285,22 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "This is the same resource the customer found: one page owns its answer, source, applicability, and review details.",
-          "Point to native checklists, the canonical URL, and **FAQPage** data as the foundation for search and permitted AI discovery.",
+          "The customer reads a natural article. The same governed page supplies the metadata and structured content used for discovery and reuse.",
+          "**Search title**, **Search description**, and the native checklists keep the page’s purpose and applicability explicit. **Question** and **Plain-language answer** supply Search and connected applications.",
+          "The public page exposes **Article** schema and a canonical URL for permitted search and AI engines. Connected applications retrieve structured CMS fields through their integrations.",
         ],
         presenterCues: [
-          { point: 1, action: 1, afterLine: 0 },
-          { point: 2, action: 3, afterLine: 4 },
+          { point: 1, action: 1, afterLine: 1 },
+          { point: 2, action: 2, afterLine: 3 },
+          { point: 3, action: 3, afterLine: 4 },
         ],
         presenterActions: [
           [
+            "Switch to the **Public website** tab, and open the **Public article** URL. Briefly show **Bundling your car and home insurance** and its article copy.",
             "In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Public Website** card. Reuse that **Page Builder** tab; choose **Site switcher → Public Website → Editor → Pages**.",
-            "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On that selected row, choose **Content tree options (•••) → Page content**.",
-            "Confirm **English** and the selected **bundle-car-and-home** page.",
-            "In the **Page content** panel beside the canvas, expand **Resource content**: show **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and dates.",
-            "Under **Content**, show **Canonical URL** and **Reference source**.",
+            "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On that selected row, choose **Content tree options (•••) → Page content**. Confirm **English**.",
+            "In the **Page content** panel beside the canvas, expand **Content**: show **Search title**, **Search description**, **Canonical URL**, and **Reference source**.",
+            "Expand **Resource content**: point to **Question** and **Plain-language answer** as structured fields for **Search** and connected AI applications. Show **Detailed explanation**, and leave all fields unchanged.",
           ],
           [
             "In **Page content**, expand **Content**, or use **Go to field → State applicability**. Open **State applicability** using its **1 item selected** control; show **All states**, then close.",
@@ -306,34 +308,34 @@ export const customerDemoChapters: DemoChapter[] = [
             "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
           ],
           [
-            "Switch to the **Public website** tab, open the **Public article** URL, then choose **View page source → Find**.",
+            "Return to the **Public website** tab’s article, then choose **View page source → Find**.",
             "Paste **Find structured data in page source** into **Find**.",
-            "Show **FAQPage**, **Question**, and **acceptedAnswer**.",
-            "Find **canonical** using the copy field.",
+            "Show **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**, which identifies the article’s canonical URL.",
+            "Find **canonical** using the copy field, and show the matching **rel=canonical** link.",
             "Close the source tab, and return to the **Public website** tab.",
           ],
         ],
         presenterResult:
-          "Show native page fields, managed classifications, **FAQPage** data, and the canonical URL beside the public page, without editing content.",
+          "One natural article has governed search metadata, managed classifications, published **Article** schema, and a canonical URL; its structured CMS fields also support Search and connected applications.",
         actions: [
-          "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On the selected row, choose **Content tree options (•••) → Page content**. Confirm **English**. In the **Page content** panel beside the canvas, expand **Resource content** to inspect **Question**, **Plain-language answer**, **Formal source wording**, **Detailed explanation**, **Content owner**, and the dates. Under **Content**, find **Canonical URL** and **Reference source**.",
+          `Open the [**public article**](${ARTICLE}), and briefly show **Bundling your car and home insurance** and its natural article copy. In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On the selected row, choose **Content tree options (•••) → Page content**. Confirm **English**. In the **Page content** panel beside the canvas, expand **Content** to inspect **Search title**, **Search description**, **Canonical URL**, and **Reference source**. Expand **Resource content** to show **Question** and **Plain-language answer** as structured fields for **Search** and connected AI applications, plus **Detailed explanation**. Leave all fields unchanged.`,
           "In the same **Page content** panel, expand **Content**, or choose **Go to field → State applicability**. Locate **State applicability**, **Products**, and **Audience**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.",
-          `On the [**public article**](${ARTICLE}), use **View page source → Find** to locate **application/ld+json**. Identify **FAQPage**, **Question**, and **acceptedAnswer**, then find the **canonical** link. Return to the rendered article.`,
+          "Return to the **Public website** tab’s article. Use **View page source → Find** to locate **application/ld+json**. Identify **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**. Find the **canonical** link, and compare its URL with **@id**. Close the source tab, and return to the rendered article.",
         ],
         expected: [
-          "The resource page owns its guidance, managed classifications, canonical metadata, and structured answer data.",
+          "The resource page owns its natural article, governed search metadata, managed classifications, and canonical Article schema. Search and connected applications reuse its structured CMS fields.",
         ],
         talkTrack: [
-          "The visitor found the car-and-home resource page. Here is that same page in Page Builder: its question, guidance, source, owner, applicability, and review dates.",
+          "The customer reads a natural article about bundling car and home insurance. Behind it, the marketer manages the Search title and description, canonical URL, source, and applicability on one page. Its published Article schema supports external discovery; its structured fields also serve Search and connected applications.",
           customerDemoAiContext.public.talkTrack,
         ],
         controls: [
           "The **Page content** panel keeps native resource fields and **Checklist** classifications beside the page canvas. Classification choices are maintained beneath **Data → Taxonomy**. If a template question arises, the full **Page Builder → Content → Quick Info** view identifies **PublicResourcePage**; that extra view is not needed for the live loop. Content and classifications follow the same publication into Search and the content API.",
-          "The public rendering supplies **FAQPage** metadata and a canonical URL: a structured foundation for discovery by permitted search and AI consumers.",
+          "The public rendering supplies **Article** schema: **headline** uses the native page **Title**, **description** uses **Search description**, and **url** and **mainEntityOfPage → @id** use **Canonical URL**. These published fields support permitted crawlers. **Question** and **Plain-language answer** remain native CMS fields for Search and connected applications through their configured APIs.",
         ],
         links: [
-          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
-          { action: 3, afterLine: 0, label: "Public article", href: ARTICLE },
+          { action: 1, afterLine: 0, label: "Public article", href: ARTICLE },
+          { action: 1, afterLine: 1, label: "SitecoreAI", href: SITECORE_AI },
         ],
         images: [
           {
@@ -345,42 +347,40 @@ export const customerDemoChapters: DemoChapter[] = [
               "Open **Products** using its **2 items selected** control to see the separate **Auto**, **Homeowners**, and **Condo** checkboxes. These are the resource page’s native classification fields. Leave the selected choices unchanged during this inspection.",
           },
           {
-            file: "demo-public-page-content.png",
+            file: "demo-public-page-content-metadata.png",
             afterAction: 1,
-            title: "Keep native fields beside the page",
-            alt: "Page content beside the public resource canvas, with State applicability and Products checklists showing one and two selected items.",
+            title: "Keep SEO metadata beside the natural article",
+            alt: "Native Page content Search title and Search description fields beside the public heading Bundling your car and home insurance.",
             caption:
-              "**Page content** keeps the native fields beside the canvas. Use **Go to field → State applicability** to reach the checklists without hunting through fields.",
+              "**Search title** and **Search description** are native fields in **Page content**. The canvas beside them shows the natural article heading, **Bundling your car and home insurance**.",
             crop: {
               x: 300,
-              y: 115,
-              width: 980,
-              height: 605,
+              y: 390,
+              width: 950,
+              height: 245,
               sourceWidth: 1280,
               sourceHeight: 720,
             },
             annotations: [
               {
-                x: 2.8,
-                y: 13.8,
-                width: 45.5,
-                height: 7,
-                label:
-                  "Open **State applicability** to inspect its native selection.",
+                x: 2.63,
+                y: 20.41,
+                width: 47.26,
+                height: 24.49,
+                label: "**Search title**",
               },
               {
-                x: 2.8,
-                y: 31.7,
-                width: 45.5,
-                height: 7,
-                label:
-                  "Open **Products** to inspect independent product choices.",
+                x: 2.63,
+                y: 53.47,
+                width: 47.26,
+                height: 42.45,
+                label: "**Search description**",
               },
             ],
           },
         ],
         transition:
-          "Keep this same resource selected. Next, publish its approved revision and verify that Search receives the updated wording automatically.",
+          "Keep this same resource selected. Next, make a reviewed update and verify that Search receives the published wording automatically.",
       },
       {
         id: "public-indexing",
@@ -389,7 +389,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Published content is automatically indexed by enterprise search platform",
         phase: "Core Demonstration Flow",
         sourceSlide: 10,
-        durationMinutes: 4,
+        durationMinutes: 5,
         persona:
           "Public-site publisher, following marketer and approver review",
         scenario:
@@ -408,6 +408,12 @@ export const customerDemoChapters: DemoChapter[] = [
           {
             beforeLine: 3,
             action: 2,
+            label: "New resource version name",
+            value: "Resource page review",
+          },
+          {
+            beforeLine: 5,
+            action: 2,
             label: "Detailed explanation — review sentence",
             value:
               "Review your options with your agent before choosing coverage.",
@@ -420,13 +426,13 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Publish one approved page revision, without a frontend release.",
+          "Make, review, and publish one page revision, without a frontend release.",
           "A configured **OnEnd** publication event invokes a custom synchronization service, which reads **Live Experience Edge** and updates the index through the **Search Push API**.",
           "Show the sentence absent before publication and present in Search afterward; the state, product, and audience classifications stay intact.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
-          { point: 2, action: 2, afterLine: 5 },
+          { point: 2, action: 2, afterLine: 9 },
           { point: 3, action: 3, afterLine: 4 },
         ],
         presenterActions: [
@@ -438,8 +444,12 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "Return to the existing **Page Builder** tab and the **bundle-car-and-home** page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed.",
-            "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
-            "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field in **Detailed explanation**.",
+            "In the version selector, confirm the **latest version** is **Approved** and marked **Live**. Its **Detailed explanation** must not contain the review sentence.",
+            "Choose **Create version**, paste **New resource version name**, and select **Create**.",
+            "Reopen the version selector, explicitly select the newest **Resource page review → Draft** row, and wait for its fields to load. Confirm **Draft**.",
+            "Expand **Resource content**. Place the cursor at the end of **Detailed explanation**, and append **Detailed explanation — review sentence** exactly once. Retain all existing paragraphs; do not replace the field’s content.",
+            "Press **Tab**, or click outside **Detailed explanation**, to leave the edited field and save it. Wait for **Saved**. On this same new version, choose **Actions → Submit**, then **Submit**; confirm **Awaiting approval**.",
+            "Using the same presenter account, review this version’s complete content, choose **Actions → Approve**, then **Submit**; confirm **Approved**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
             "Leave **Subpages** unchecked, select **Start publish**, and wait for completion.",
           ],
@@ -454,14 +464,14 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
           `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent. If it is already visible, return to [**Before presenting**](#preparation) to restore the baseline before continuing; an existing sentence does not prove a fresh publication.`,
-          "Return to **Page Builder** for **bundle-car-and-home**, the page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed. In the version selector, choose the prepared revision by the **Prepared page version** number recorded in **Before presenting**. Wait for the version to finish loading, then read the selected version number again and confirm that it matches **Prepared page version**. Immediately before choosing **Publish**, expand **Resource content**, and confirm **Resource page review**, **Approved**, and **Review your options with your agent before choosing coverage.** in **Detailed explanation**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
+          "Return to **Page Builder** for **bundle-car-and-home**, the page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed. Confirm the **latest version** is **Approved** and marked **Live**, with the review sentence absent. Choose **Create version**, name it **Resource page review**, and select **Create**. Reopen the version selector, explicitly select the newest **Resource page review → Draft** row, and wait for its fields to finish loading. Expand **Resource content**. At the end of **Detailed explanation**, append **Review your options with your agent before choosing coverage.** exactly once, retaining all existing paragraphs. Press **Tab**, or click outside **Detailed explanation**, to leave the edited field and save it. Wait for **Saved**. On this same new version, choose **Actions → Submit**, then **Submit**, and confirm **Awaiting approval**. Using the same presenter account, review the complete content, choose **Actions → Approve**, then **Submit**, and confirm **Approved**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
           `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
           "A single approved page publication updates the native Search record automatically, including the changed body and unchanged applicability metadata.",
         ],
         talkTrack: [
-          "When that car-and-home guidance changes, the publisher releases the approved page revision once. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages the page content once across these delivery channels.",
+          "We create one fresh Draft, retain the article, and append one sentence. The same presenter account submits, reviews, and publishes that revision; separate roles normally govern those actions. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages the page content once across these delivery channels.",
         ],
         controls: [
           "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. This loop follows the resource page’s own guidance and applicability metadata.",
@@ -470,45 +480,6 @@ export const customerDemoChapters: DemoChapter[] = [
           { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
         ],
         images: [
-          {
-            file: "demo-public-publish-approved.png",
-            title: "Publish the approved page revision",
-            alt: "The page is Approved. Its Detailed explanation contains the new review sentence, and the publishing status provides a link to the job.",
-            caption:
-              "The page is **Approved**. Its **Detailed explanation** contains the new review sentence, and the publishing status provides a link to the job. Use the version number recorded for the current demonstration.",
-            afterAction: 2,
-            crop: {
-              x: 0,
-              y: 0,
-              width: 1440,
-              height: 900,
-              sourceWidth: 1440,
-              sourceHeight: 900,
-            },
-            annotations: [
-              {
-                x: 79.51,
-                y: 1.56,
-                width: 6.67,
-                height: 3.33,
-                label: "Confirm **Approved**",
-              },
-              {
-                x: 22.22,
-                y: 69.89,
-                width: 45.14,
-                height: 3.67,
-                label: "Confirm the added review sentence",
-              },
-              {
-                x: 79.17,
-                y: 5.56,
-                width: 20.69,
-                height: 11.22,
-                label: "Follow publishing progress",
-              },
-            ],
-          },
           {
             file: "demo-public-search-published-body.png",
             title: "The published sentence appears in Search",
