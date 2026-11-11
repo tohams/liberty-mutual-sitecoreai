@@ -63,6 +63,80 @@ const flows = [
   },
 ];
 
+test("selectors follow current native component occurrence across two pages, preserving their labels and IDs", () => {
+  const authored = (renderings: unknown[], path: string) =>
+    Object.defineProperty({ ...page, path }, "nativeFinalLayout", {
+      value: JSON.stringify({ devices: [{ renderings }] }),
+    });
+  const firstPage = authored(
+    [
+      { instanceId: componentB, placeholderKey: "headless-agent-guidance" },
+      { instanceId: componentA, placeholderKey: "headless-agency-priorities" },
+    ],
+    "/",
+  );
+  const secondPage = authored(
+    [
+      { instanceId: componentB, placeholderKey: "custom-root" },
+      { instanceId: componentA, placeholderKey: "custom-root" },
+    ],
+    "/another-page",
+  );
+  const reversedDefinitions = [...flows].reverse();
+  const home = buildPersonalizationCatalog(
+    firstPage,
+    reversedDefinitions,
+    info,
+  );
+  const other = buildPersonalizationCatalog(secondPage, flows, info);
+  assert.deepEqual(
+    home.context.flows.map((flow) => flow.id),
+    flows.map((flow) => flow.ref),
+  );
+  assert.deepEqual(
+    other.context.flows.map((flow) => flow.id),
+    reversedDefinitions.map((flow) => flow.ref),
+  );
+  assert.deepEqual(
+    home.context.flows[0].options.map((option) => option.label),
+    ["Default", "agency-growth", "producer-priorities"],
+  );
+  assert.equal(home.context.flows[0].options[1].id, agency);
+  const changedOrder = authored(
+    [
+      { instanceId: componentA, placeholderKey: "custom-root" },
+      { instanceId: componentB, placeholderKey: "custom-root" },
+    ],
+    "/another-page",
+  );
+  const refreshed = buildPersonalizationCatalog(changedOrder, flows, info);
+  assert.notEqual(refreshed.context.revision, other.context.revision);
+  assert.deepEqual(
+    refreshed.context.flows.map((flow) => flow.id),
+    flows.map((flow) => flow.ref),
+  );
+});
+
+test("a page-level personalization is first even when native discovery and definitions list components first", () => {
+  const pageVariant = "ed1ff2801b9b4f71946885ff88584fdf";
+  const pageFlow = {
+    ref: "page-flow",
+    name: "Whole page",
+    subtype: "EXPERIENCE",
+    transpiledVariants: [
+      variant("A named page variant", pageVariant, "page-row"),
+    ],
+  };
+  const result = buildPersonalizationCatalog(page, [...flows, pageFlow], {
+    ...info,
+    variantIds: [...info.variantIds, pageVariant],
+  });
+  assert.deepEqual(
+    result.context.flows.map((flow) => flow.id),
+    [pageFlow.ref, ...flows.map((flow) => flow.ref)],
+  );
+});
+
 test("discovers named table outputs using actual native IDs, without treating management refs or labels as preview IDs", () => {
   const result = buildPersonalizationCatalog(page, flows, info);
   assert.deepEqual(

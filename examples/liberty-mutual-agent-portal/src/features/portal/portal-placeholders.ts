@@ -43,34 +43,66 @@ export const PORTAL_PLACEHOLDERS = {
 } as const;
 
 type PortalPlaceholder = keyof typeof PORTAL_PLACEHOLDERS;
+/** Matches the order in which PortalApp and its screens render the native slots. */
+export const PORTAL_PLACEHOLDER_DISPLAY_ORDER = {
+  home: ["agencyPriorities", "guidance", "sharedDisclosure"],
+  campaign: ["campaignPage"],
+  article: ["resourceArticle"],
+  resources: ["resourceSearch", "guidance", "sharedDisclosure"],
+  learning: ["resourceSearch", "guidance"],
+  products: ["productSpotlight", "guidance"],
+  productDetails: ["productDetails", "guidance"],
+  support: ["supportForm", "guidance"],
+  editorial: ["guidance"],
+} as const satisfies Record<string, readonly PortalPlaceholder[]>;
+
 export type PortalPlaceholderPlacement = {
   name: string;
   rendering: RouteData;
 };
 
 /** Operational aliases use the same authored composition as their owning page. */
-function placeholdersForRoute(route: string): PortalPlaceholder[] {
+export function portalPlaceholderOrderForRoute(
+  route: string,
+): readonly PortalPlaceholder[] | undefined {
   const [section, child] = route.split("/").filter(Boolean);
-  if (!section) return ["agencyPriorities", "guidance", "sharedDisclosure"];
+  if (!section) return PORTAL_PLACEHOLDER_DISPLAY_ORDER.home;
   const practiceNumber = /^\/practice\/practice-(\d{2})\/?$/.exec(route)?.[1];
   if (
     (section === "growth" && child) ||
     (practiceNumber && manifest.reviewerPacks.includes(practiceNumber))
   )
-    return ["campaignPage"];
+    return PORTAL_PLACEHOLDER_DISPLAY_ORDER.campaign;
   if (
     (section === "resources" && child) ||
     /^\/workshop-practice(?:\/pair-0[1-9])?\/?$/.test(route)
   )
-    return ["resourceArticle"];
+    return PORTAL_PLACEHOLDER_DISPLAY_ORDER.article;
   if (section === "resources" || section === "learning")
     return section === "resources"
-      ? ["resourceSearch", "guidance", "sharedDisclosure"]
-      : ["resourceSearch", "guidance"];
-  if (section === "products" && !child) return ["guidance", "productSpotlight"];
-  if (section === "products" && child) return ["productDetails", "guidance"];
-  if (section === "support" && !child) return ["guidance", "supportForm"];
-  return ["guidance"];
+      ? PORTAL_PLACEHOLDER_DISPLAY_ORDER.resources
+      : PORTAL_PLACEHOLDER_DISPLAY_ORDER.learning;
+  if (section === "products" && !child)
+    return PORTAL_PLACEHOLDER_DISPLAY_ORDER.products;
+  if (section === "products" && child)
+    return PORTAL_PLACEHOLDER_DISPLAY_ORDER.productDetails;
+  if (section === "support" && !child)
+    return PORTAL_PLACEHOLDER_DISPLAY_ORDER.support;
+  if (
+    [
+      "quote",
+      "submissions",
+      "appetite",
+      "surety",
+      "clients",
+      "policies",
+      "renewals",
+      "growth",
+      "saved",
+    ].includes(section)
+  )
+    return PORTAL_PLACEHOLDER_DISPLAY_ORDER.editorial;
+  return undefined;
 }
 
 /**
@@ -86,7 +118,8 @@ export function getPortalPlaceholders(
   const placements: Partial<
     Record<PortalPlaceholder, PortalPlaceholderPlacement>
   > = {};
-  for (const slot of placeholdersForRoute(route)) {
+  for (const slot of portalPlaceholderOrderForRoute(route) ??
+    PORTAL_PLACEHOLDER_DISPLAY_ORDER.editorial) {
     const setting = PORTAL_PLACEHOLDERS[slot];
     const hasCanonicalKey = Object.hasOwn(rendering.placeholders, setting.name);
     if (slot === "productDetails" && !hasCanonicalKey) continue;
