@@ -199,10 +199,12 @@ export async function readPersonalizationDefinitionDiagnostics(
   const normalized = encodeURIComponent(
     page.id.replace(/[{}-]/g, "").toLowerCase(),
   );
-  const [byPageUuid, byPageNormalized, personalizationV2] = await Promise.all([
-    probe(`/api/v1/flows/by-page/${uuid}`),
-    probe(`/api/v1/flows/by-page/${normalized}`),
-    probe(`/api/v2/personalization/by-page/${uuid}`),
-  ]);
-  return { byPageUuid, byPageNormalized, personalizationV2 };
+  const [byPageUuid, byPageNormalized, personalizationV1, personalizationV2] =
+    await Promise.all([
+      probe(`/api/v1/flows/by-page/${uuid}`),
+      probe(`/api/v1/flows/by-page/${normalized}`),
+      probe(`/api/v1/personalization/by-page/${uuid}`),
+      probe(`/api/v2/personalization/by-page/${uuid}`),
+    ]);
+  return { byPageUuid, byPageNormalized, personalizationV1, personalizationV2 };
 }

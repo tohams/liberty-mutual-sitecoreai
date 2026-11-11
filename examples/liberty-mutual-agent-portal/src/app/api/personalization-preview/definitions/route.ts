@@ -95,9 +95,13 @@ export async function GET(request: NextRequest) {
         : {}),
       ...(params.has("siteName") ? { siteName: params.get("siteName") } : {}),
     });
+    let layouts: { finalLayout: unknown; sharedLayout: unknown } | undefined;
     const page = await resolveAuthorizedPersonalizationPreviewPage(
       input,
       actor.accessToken,
+      (value) => {
+        layouts = value;
+      },
     );
     const dependencies = personalizationPreviewDependencies();
     const [definitions, nativeInfo] = await Promise.all([
@@ -106,6 +110,7 @@ export async function GET(request: NextRequest) {
     ]);
     return jsonResponse({
       page,
+      layouts: diagnosticValue(layouts),
       probes: diagnosticValue(definitions),
       nativeInfo: nativeInfo || null,
       executions: nativeInfo
