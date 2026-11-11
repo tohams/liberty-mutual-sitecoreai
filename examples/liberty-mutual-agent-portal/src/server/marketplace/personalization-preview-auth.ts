@@ -32,9 +32,7 @@ export function getPersonalizationPreviewAuth(): Auth0Client | null {
     secret: configuration.secret,
     appBaseUrl: configuration.appBaseUrl,
     domain: PERSONALIZATION_PREVIEW_AUTH0_DOMAIN,
-    customFetch: createPersonalizationPreviewAuthFetch(
-      configuration.marketplaceAppId,
-    ),
+    customFetch: createPersonalizationPreviewAuthFetch(configuration),
     tokenRefreshBuffer: 60,
     authorizationParameters:
       personalizationPreviewAuthorizationParameters(configuration),

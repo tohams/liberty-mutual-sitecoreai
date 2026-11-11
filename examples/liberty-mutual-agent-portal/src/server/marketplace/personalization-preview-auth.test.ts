@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  PERSONALIZATION_PREVIEW_TENANT_ID,
   personalizationPreviewAuthConfiguration,
   personalizationPreviewAuthorizationParameters,
   isPersonalizationPreviewAuthPath,
@@ -14,6 +13,8 @@ const environment = {
   PERSONALIZATION_PREVIEW_APP_BASE_URL: "https://portal.example",
   PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID:
     "11111111-1111-4111-8111-111111111111",
+  PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID:
+    "01f409b3-854f-4c33-4345-08df2a1d7525",
 };
 
 test("Auth0 targets the verified installed Marketplace tenant and the server-configured app product", () => {
@@ -22,10 +23,13 @@ test("Auth0 targets the verified installed Marketplace tenant and the server-con
   const authorization =
     personalizationPreviewAuthorizationParameters(configuration);
   assert.equal(
-    PERSONALIZATION_PREVIEW_TENANT_ID,
+    authorization.tenant_id,
+    environment.PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID,
+  );
+  assert.notEqual(
+    authorization.tenant_id,
     "ba40a477-d452-493b-fb23-08df2a1b4cda",
   );
-  assert.equal(authorization.tenant_id, PERSONALIZATION_PREVIEW_TENANT_ID);
   assert.notEqual(
     authorization.tenant_id,
     "97eea84c-ac47-4d91-7e4f-08defdaaa7df",
@@ -41,6 +45,32 @@ test("Auth0 targets the verified installed Marketplace tenant and the server-con
   );
   assert.equal(authorization.audience, "https://api-webapp.sitecorecloud.io");
   assert.equal(authorization.scope, "openid profile email offline_access");
+});
+
+test("sign-in requires this app's own Marketplace installation tenant", () => {
+  for (const tenantId of [
+    undefined,
+    "",
+    "not-a-tenant",
+    "tenant&product_codes=other",
+  ]) {
+    assert.equal(
+      personalizationPreviewAuthConfiguration({
+        ...environment,
+        PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID: tenantId,
+      }),
+      null,
+    );
+  }
+  assert.equal(
+    personalizationPreviewAuthConfiguration({
+      ...environment,
+      PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID: undefined,
+      AUDIENCE_PREVIEW_MARKETPLACE_TENANT_ID:
+        "ba40a477-d452-493b-fb23-08df2a1b4cda",
+    }),
+    null,
+  );
 });
 
 test("sign-in cannot initialize without a valid server-configured Marketplace app ID", () => {

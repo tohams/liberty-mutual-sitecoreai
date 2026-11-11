@@ -1,6 +1,4 @@
 export const PERSONALIZATION_PREVIEW_ORGANIZATION_ID = "org_XqL3u1MSNVuubOTb";
-export const PERSONALIZATION_PREVIEW_TENANT_ID =
-  "ba40a477-d452-493b-fb23-08df2a1b4cda";
 export const PERSONALIZATION_PREVIEW_AUTH0_DOMAIN =
   "https://auth.sitecorecloud.io";
 export const PERSONALIZATION_PREVIEW_AUTH0_AUDIENCE =
@@ -33,20 +31,21 @@ export interface PersonalizationPreviewAuthConfiguration {
   secret: string;
   appBaseUrl: string;
   marketplaceAppId: string;
+  marketplaceTenantId: string;
 }
 
 /** The tenant belongs to this installed app, not the Marketplace shell or CDP. */
 export function personalizationPreviewAuthorizationParameters(
   configuration: Pick<
     PersonalizationPreviewAuthConfiguration,
-    "marketplaceAppId"
+    "marketplaceAppId" | "marketplaceTenantId"
   >,
 ) {
   return {
     scope: "openid profile email offline_access",
     audience: PERSONALIZATION_PREVIEW_AUTH0_AUDIENCE,
     organization_id: PERSONALIZATION_PREVIEW_ORGANIZATION_ID,
-    tenant_id: PERSONALIZATION_PREVIEW_TENANT_ID,
+    tenant_id: configuration.marketplaceTenantId,
     product_codes: `mkp_${configuration.marketplaceAppId}`,
   };
 }
@@ -64,6 +63,8 @@ export function personalizationPreviewAuthConfiguration(
   const audience = environment.PERSONALIZATION_PREVIEW_AUTH0_AUDIENCE?.trim();
   const marketplaceAppId =
     environment.PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID?.trim();
+  const marketplaceTenantId =
+    environment.PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID?.trim();
   if (
     !clientId ||
     !clientSecret ||
@@ -72,6 +73,8 @@ export function personalizationPreviewAuthConfiguration(
     !appBaseUrl ||
     !marketplaceAppId ||
     !APP_ID.test(marketplaceAppId) ||
+    !marketplaceTenantId ||
+    !APP_ID.test(marketplaceTenantId) ||
     (domain &&
       domain.replace(/\/$/, "") !== PERSONALIZATION_PREVIEW_AUTH0_DOMAIN) ||
     (audience && audience !== PERSONALIZATION_PREVIEW_AUTH0_AUDIENCE)
@@ -96,6 +99,7 @@ export function personalizationPreviewAuthConfiguration(
       secret,
       appBaseUrl: base.origin,
       marketplaceAppId: marketplaceAppId.toLowerCase(),
+      marketplaceTenantId: marketplaceTenantId.toLowerCase(),
     };
   } catch {
     return null;

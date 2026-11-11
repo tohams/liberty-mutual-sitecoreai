@@ -421,6 +421,8 @@ test("Auth0 setup is optional until this app's own complete HTTPS configuration 
     PERSONALIZATION_PREVIEW_APP_BASE_URL: PORTAL,
     PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID:
       "11111111-1111-4111-8111-111111111111",
+    PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID:
+      "01f409b3-854f-4c33-4345-08df2a1d7525",
   };
   assert.equal(
     personalizationPreviewAuthConfiguration(config)?.appBaseUrl,

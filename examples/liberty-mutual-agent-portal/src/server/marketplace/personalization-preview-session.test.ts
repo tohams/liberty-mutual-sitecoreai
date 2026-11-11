@@ -24,6 +24,8 @@ const configuration = personalizationPreviewAuthConfiguration({
   PERSONALIZATION_PREVIEW_APP_BASE_URL: "https://portal.example",
   PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID:
     "11111111-1111-4111-8111-111111111111",
+  PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID:
+    "01f409b3-854f-4c33-4345-08df2a1d7525",
 })!;
 const session: SessionData = {
   user: { sub: "synthetic-author", email: "private@example.test" },
@@ -112,6 +114,25 @@ test("default SDK claim filtering removes oversized custom data while preserving
   );
 });
 
+test("a session bound to the old app installation is rejected by the new configuration", () => {
+  const oldInstallation = {
+    ...configuration,
+    marketplaceTenantId: "ba40a477-d452-493b-fb23-08df2a1b4cda",
+  };
+  const bound = bindPersonalizationPreviewSession(session, oldInstallation);
+  assert.equal(
+    isBoundPersonalizationPreviewSession(bound, configuration),
+    false,
+  );
+  assert.equal(
+    isBoundPersonalizationPreviewSession(
+      bindPersonalizationPreviewSession(session, configuration),
+      configuration,
+    ),
+    true,
+  );
+});
+
 test("authorized token retrieval uses the configured single audience without an MRRT override", async () => {
   const environment = {
     PERSONALIZATION_PREVIEW_AUTH0_CLIENT_ID: configuration.clientId,
@@ -119,6 +140,8 @@ test("authorized token retrieval uses the configured single audience without an 
     PERSONALIZATION_PREVIEW_AUTH0_SECRET: configuration.secret,
     PERSONALIZATION_PREVIEW_APP_BASE_URL: configuration.appBaseUrl,
     PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID: configuration.marketplaceAppId,
+    PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID:
+      configuration.marketplaceTenantId,
   };
   const previous = Object.fromEntries(
     Object.keys(environment).map((key) => [key, process.env[key]]),

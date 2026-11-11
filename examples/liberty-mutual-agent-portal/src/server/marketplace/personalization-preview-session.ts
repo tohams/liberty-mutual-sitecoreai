@@ -3,7 +3,6 @@ import type { SessionData } from "@auth0/nextjs-auth0/types";
 import { filterDefaultIdTokenClaims } from "@auth0/nextjs-auth0/server";
 import {
   PERSONALIZATION_PREVIEW_ORGANIZATION_ID,
-  PERSONALIZATION_PREVIEW_TENANT_ID,
   type PersonalizationPreviewAuthConfiguration,
 } from "./personalization-preview-config";
 
@@ -18,7 +17,7 @@ export function bindPersonalizationPreviewSession(
     personalizationPreviewClientId: configuration.clientId,
     personalizationPreviewOrganizationId:
       PERSONALIZATION_PREVIEW_ORGANIZATION_ID,
-    personalizationPreviewTenantId: PERSONALIZATION_PREVIEW_TENANT_ID,
+    personalizationPreviewTenantId: configuration.marketplaceTenantId,
     personalizationPreviewMarketplaceAppId: configuration.marketplaceAppId,
   };
 }
@@ -33,7 +32,7 @@ export function isBoundPersonalizationPreviewSession(
     session.personalizationPreviewOrganizationId ===
       PERSONALIZATION_PREVIEW_ORGANIZATION_ID &&
     session.personalizationPreviewTenantId ===
-      PERSONALIZATION_PREVIEW_TENANT_ID &&
+      configuration.marketplaceTenantId &&
     session.personalizationPreviewMarketplaceAppId ===
       configuration.marketplaceAppId,
   );

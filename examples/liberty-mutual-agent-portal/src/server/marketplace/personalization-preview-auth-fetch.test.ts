@@ -6,9 +6,11 @@ import { personalizationPreviewAuthorizationParameters } from "./personalization
 
 const endpoint = "https://auth.sitecorecloud.io/oauth/token";
 const marketplaceAppId = "11111111-1111-4111-8111-111111111111";
-const fixed = personalizationPreviewAuthorizationParameters({
+const configuration = {
   marketplaceAppId,
-});
+  marketplaceTenantId: "01f409b3-854f-4c33-4345-08df2a1d7525",
+};
+const fixed = personalizationPreviewAuthorizationParameters(configuration);
 
 test("the native refresh grant receives only its fixed login context while preserving request and response contracts", async () => {
   const log = mock.method(console, "info", () => undefined);
@@ -46,7 +48,7 @@ test("the native refresh grant receives only its fixed login context while prese
       refresh_token: "private-rotated",
     });
     const wrapped = createPersonalizationPreviewAuthFetch(
-      marketplaceAppId,
+      configuration,
       async (input, forwarded) => {
         assert.equal(input, endpoint);
         assert.notEqual(forwarded, init);
@@ -141,7 +143,7 @@ test("the exact origin, endpoint, POST method, unique refresh grant, and native 
     for (const [input, init] of cases) {
       let calls = 0;
       const wrapped = createPersonalizationPreviewAuthFetch(
-        marketplaceAppId,
+        configuration,
         async (forwardedInput, forwardedInit) => {
           calls++;
           assert.equal(forwardedInput, input);
@@ -176,7 +178,7 @@ test("URL inputs and provider failures are returned unchanged without credential
     );
     let calls = 0;
     const wrapped = createPersonalizationPreviewAuthFetch(
-      marketplaceAppId,
+      configuration,
       async (supplied) => {
         calls++;
         assert.equal(supplied, input);
@@ -189,7 +191,7 @@ test("URL inputs and provider failures are returned unchanged without credential
     assert.equal(log.mock.callCount(), 0);
     const failure = new Error("private-transport-message");
     await assert.rejects(
-      createPersonalizationPreviewAuthFetch(marketplaceAppId, async () => {
+      createPersonalizationPreviewAuthFetch(configuration, async () => {
         throw failure;
       })(input, init),
       (error) => error === failure,

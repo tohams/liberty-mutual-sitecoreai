@@ -2,15 +2,19 @@ import "server-only";
 import {
   PERSONALIZATION_PREVIEW_AUTH0_DOMAIN,
   personalizationPreviewAuthorizationParameters,
+  type PersonalizationPreviewAuthConfiguration,
 } from "./personalization-preview-config";
 
 /** Bind native refresh to the same fixed organization and installed app context as login. */
 export function createPersonalizationPreviewAuthFetch(
-  marketplaceAppId: string,
+  configuration: Pick<
+    PersonalizationPreviewAuthConfiguration,
+    "marketplaceAppId" | "marketplaceTenantId"
+  >,
   transport: typeof fetch = fetch,
 ): typeof fetch {
   const { organization_id, tenant_id, product_codes } =
-    personalizationPreviewAuthorizationParameters({ marketplaceAppId });
+    personalizationPreviewAuthorizationParameters(configuration);
   return async (input, init) => {
     let url: URL;
     try {

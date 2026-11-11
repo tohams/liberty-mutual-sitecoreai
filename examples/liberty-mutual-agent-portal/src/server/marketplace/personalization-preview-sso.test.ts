@@ -19,6 +19,7 @@ const configuration: PersonalizationPreviewAuthConfiguration = {
   clientSecret: "synthetic-secret",
   secret: "a".repeat(64),
   marketplaceAppId: "11111111-1111-4111-8111-111111111111",
+  marketplaceTenantId: "01f409b3-854f-4c33-4345-08df2a1d7525",
   appBaseUrl: "https://portal.example",
 };
 
