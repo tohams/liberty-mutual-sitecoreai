@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { requirePersonalizationPreviewSession } from "@/server/marketplace/personalization-preview-auth";
 import { resolveAuthorizedPersonalizationPreviewPage } from "@/server/marketplace/personalization-preview-pages";
 import { PersonalizationPreviewError } from "@/server/marketplace/personalization-preview-config";
-import { AudiencePreviewError as NativePreviewError } from "@/server/marketplace/audience-preview-config";
 import { readPersonalizationPreviewViewSession } from "@/server/personalization-preview/preview-sessions";
 import { PersonalizationPreviewView } from "@/server/personalization-preview/view";
 
@@ -41,9 +40,7 @@ export default async function PersonalizationPreviewPage({
       accessToken: actor.accessToken,
     });
   } catch (error) {
-    const knownError =
-      error instanceof PersonalizationPreviewError ||
-      error instanceof NativePreviewError;
+    const knownError = error instanceof PersonalizationPreviewError;
     const authenticationRequired = knownError && error.status === 401;
     const message = knownError
       ? error.message

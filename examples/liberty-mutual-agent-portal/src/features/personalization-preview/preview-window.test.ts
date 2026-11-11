@@ -141,7 +141,7 @@ test("an unsafe result never navigates the reserved tab and closes it", () => {
   for (const previewUrl of [
     "https://other.example.com" + result.previewUrl,
     "javascript:alert(1)",
-    "/apps/audience-preview/view/" + "a".repeat(43),
+    "/apps/other-preview/view/" + "a".repeat(43),
     result.previewUrl + "?redirect=https://other.example.com",
   ]) {
     const { opened, navigations } = browserWindow();

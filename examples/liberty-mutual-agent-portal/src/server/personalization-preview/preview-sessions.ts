@@ -6,7 +6,7 @@ import {
   stateNamespace,
   type StateStore,
 } from "@/server/state/store";
-import type { AudiencePreviewDecisions } from "@/server/audience-preview/decisions";
+import type { NativePreviewDecisions } from "./native-variants";
 import type {
   PersonalizationPreviewPage,
   PersonalizationPreviewSelection,
@@ -22,7 +22,7 @@ export interface PersonalizationPreviewViewSession {
   page: PersonalizationPreviewPage;
   revision: string;
   selections: PersonalizationPreviewSelection[];
-  decisions: AudiencePreviewDecisions;
+  decisions: NativePreviewDecisions;
   selectedExperiences: SelectedPersonalizationExperience[];
 }
 export interface PersonalizationPreviewSessionDependencies {

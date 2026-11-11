@@ -5,8 +5,6 @@ import {
   PersonalizationPreviewError,
   personalizationPreviewAuthConfiguration,
 } from "@/server/marketplace/personalization-preview-config";
-import { AudiencePreviewError as NativeReceiptError } from "@/server/marketplace/audience-preview-config";
-import { AudiencePreviewError as NativeDiscoveryError } from "@/server/audience-preview/contracts";
 import { PortalPersonalizeService } from "@/server/personalization/PortalPersonalizeService";
 import { PortalError } from "@/server/errors";
 import { jsonResponse } from "@/server/http";
@@ -18,7 +16,7 @@ import {
 } from "./catalog";
 import { readPersonalizationFlowDefinitions } from "./upstream";
 import { readNativePersonalizationContentDefinitions } from "./native-content";
-import { nativePreviewExecutions } from "@/server/audience-preview/decisions";
+import { nativePreviewExecutions } from "./native-variants";
 import {
   createPersonalizationPreviewViewSession,
   type PersonalizationPreviewViewSession,
@@ -295,8 +293,7 @@ export async function revalidatePersonalizationPreviewSession(
 export function personalizationPreviewErrorResponse(error: unknown) {
   if (
     error instanceof PersonalizationPreviewError ||
-    error instanceof PortalError ||
-    error instanceof NativeReceiptError
+    error instanceof PortalError
   ) {
     const response = jsonResponse(
       { error: { code: error.code, message: error.message } },
@@ -305,16 +302,6 @@ export function personalizationPreviewErrorResponse(error: unknown) {
     if (error.status === 429) response.headers.set("Retry-After", "60");
     return response;
   }
-  if (error instanceof NativeDiscoveryError)
-    return jsonResponse(
-      {
-        error: {
-          code: error.code,
-          message: "SitecoreAI could not confirm this page’s preview variants.",
-        },
-      },
-      502,
-    );
   console.error(
     "Personalization Preview failed:",
     error instanceof Error ? error.name : "UnknownError",

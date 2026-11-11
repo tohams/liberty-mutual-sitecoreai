@@ -16,9 +16,6 @@ import { extractPortalVisitorGeo } from './server/personalization/visitor-geoloc
 import { getPortalPersonalizationIdentity } from './server/data/portal';
 import { reportPersonalizationDiagnostic } from './server/personalization/diagnostics';
 import { privateHeaders } from './server/http';
-import { getAudiencePreviewAuth } from './server/marketplace/audience-preview-auth';
-import { isAudiencePreviewAuthPath } from './server/marketplace/audience-preview-config';
-import { isAudiencePreviewViewPath, preflightAudiencePreviewView } from './server/marketplace/audience-preview-view-auth';
 import { getPersonalizationPreviewAuth } from './server/marketplace/personalization-preview-auth';
 import { isPersonalizationPreviewAuthPath } from './server/marketplace/personalization-preview-config';
 import { isPersonalizationPreviewViewPath, preflightPersonalizationPreviewView } from './server/marketplace/personalization-preview-view-auth';
@@ -105,19 +102,6 @@ export default async function proxy(req: NextRequest) {
   }
   // Marketplace preview uses its own delegated Sitecore identity and never
   // enters the synthetic agent login, analytics, or personalization proxy.
-  if (isAudiencePreviewAuthPath(path)) {
-    const auth = getAudiencePreviewAuth();
-    if (!auth) return NextResponse.next({ headers: privateHeaders });
-    // Login parameters are server-defined. Preserve callback parameters so
-    // Auth0 can validate its transaction, state, and authorization code.
-    const authRequest = path === '/apps/audience-preview/auth/login'
-      ? new NextRequest(new URL(path, req.url), { method: req.method, headers: req.headers })
-      : req;
-    const response = await auth.middleware(authRequest);
-    for (const [name, value] of Object.entries(privateHeaders)) response.headers.set(name, value);
-    if (isAudiencePreviewViewPath(path)) return preflightAudiencePreviewView(req, response, auth);
-    return response;
-  }
   // The two unlinked presenter guides are anonymous and never initialize CDP.
   if (isDemoGuidePath(path)) return NextResponse.next({ headers: privateHeaders });
   // Workshop access is separate from the agent session. Server pages check it
@@ -154,7 +138,7 @@ export default async function proxy(req: NextRequest) {
 export const config = {
   /*
    * Match all paths except for:
-   * 1. API route handlers, except Audience Preview's authenticated API
+   * 1. API route handlers, except Personalization Preview's authenticated API
    * 2. /_next (Next.js internals)
    * 3. /sitecore/api (Sitecore API routes)
    * 4. /- (Sitecore media)
@@ -163,7 +147,6 @@ export const config = {
    */
   matcher: [
     '/',
-    '/api/audience-preview/:path*',
     '/api/personalization-preview/:path*',
     '/((?!api/|\\.well-known/|sitemap|robots|llms|_next/|healthz|sitecore/api/|-/|favicon.ico|brand/|sc_logo.svg|ai/).*)',
   ],

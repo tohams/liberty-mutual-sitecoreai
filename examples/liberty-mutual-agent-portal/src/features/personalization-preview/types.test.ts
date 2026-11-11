@@ -95,7 +95,7 @@ test("preview navigation stays inside the new app’s actor-bound view route", (
   for (const previewUrl of [
     `https://other.example${preview.previewUrl}`,
     "javascript:alert(1)",
-    "/apps/audience-preview/view/other",
+    "/apps/other-preview/view/other",
     `${preview.previewUrl}?token=other`,
     `${preview.previewUrl}#other`,
     "/apps/personalization-preview/view/invalid",

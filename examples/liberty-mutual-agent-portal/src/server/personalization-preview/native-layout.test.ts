@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { ComponentRendering, Page } from "@sitecore-content-sdk/nextjs";
-import type { AudiencePreviewDecisions } from "@/server/audience-preview/decisions";
+import type { NativePreviewDecisions } from "./native-variants";
 import type { PersonalizationPreviewPage } from "./types";
 import { composeNativePersonalizationPreview } from "./native-layout";
 
@@ -54,7 +54,7 @@ function page(components: ComponentRendering[]): Page {
 function decisions(
   ids: string[],
   controls: string[] = [],
-): AudiencePreviewDecisions {
+): NativePreviewDecisions {
   return {
     pageId: selected.id,
     selectedVariantIds: ids.map(

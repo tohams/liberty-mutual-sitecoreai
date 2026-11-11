@@ -19,8 +19,8 @@ test("anonymous access is confined to the two read-only demo guides", () => {
     "/operator/reset",
     "/api/workshops/reset",
     "/api/workshops/assets/example.png",
-    "/apps/audience-preview/prepare",
-    "/api/audience-preview/prepare",
+    "/apps/personalization-preview",
+    "/api/personalization-preview/context",
   ])
     assert.equal(isDemoGuidePath(path), false, path);
 });
