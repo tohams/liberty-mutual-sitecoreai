@@ -238,65 +238,14 @@
   margin-top: 1px;
 }
 
-.result {
-  padding: 18px;
-  margin-top: 24px;
-  border: 1px solid #dcd4f2;
-  border-radius: 10px;
-  background: #fcfaff;
-}
-
-.resultHeading {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.resultHeading h2 {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-.successIcon {
-  display: grid;
-  flex: 0 0 24px;
-  width: 24px;
-  height: 24px;
-  place-items: center;
-  border-radius: 50%;
-  background: #ede7fb;
-  color: var(--pp-purple);
-}
-
-.result > p {
-  margin-top: 9px;
-  color: var(--pp-muted);
+.popupFallback {
+  padding: 14px;
+  margin-top: 20px;
+  border: 1px solid #eadcba;
+  border-radius: 8px;
+  background: #fffcf5;
+  color: #725b2a;
   font-size: 12px;
-}
-
-.matches {
-  display: grid;
-  gap: 12px;
-  margin: 17px 0 0;
-}
-
-.matches > div {
-  display: grid;
-  gap: 2px;
-}
-
-.matches dt {
-  color: var(--pp-muted);
-  font-size: 11px;
-}
-
-.matches dd {
-  margin: 0;
-  color: var(--pp-ink);
-  font-size: 13px;
-  font-weight: 550;
-  overflow-wrap: anywhere;
 }
 
 .openPreview {
@@ -306,7 +255,7 @@
   gap: 7px;
   min-height: 42px;
   padding: 9px 12px;
-  margin-top: 19px;
+  margin-top: 12px;
   border: 1px solid #c8b4f6;
   border-radius: 7px;
   background: #fff;

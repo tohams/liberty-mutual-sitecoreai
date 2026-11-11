@@ -1,13 +1,13 @@
 import { isGuideHref, plainGuideText } from "../guide-text";
-import type { GuideLink } from "../types";
-import type { DemoStep } from "./types";
+import type { DemoLaunchLink, DemoStep } from "./types";
 
 type LaunchSource = Pick<DemoStep, "links">;
 
-/** Only the loop's explicit starting destinations become copyable launch URLs. */
-export function demoLaunchUrls(step: LaunchSource): GuideLink[] {
-  const destinations = new Map<string, GuideLink>();
-  const add = ({ label, href }: GuideLink) => {
+/** Keep each explicit destination at its authored cue; do not infer extra URLs. */
+export function demoLaunchUrls(step: LaunchSource): DemoLaunchLink[] {
+  const destinations = new Map<string, DemoLaunchLink>();
+  const add = (link: DemoLaunchLink) => {
+    const { label, href } = link;
     if (!isGuideHref(href)) return;
     let url: URL;
     try {
@@ -25,7 +25,7 @@ export function demoLaunchUrls(step: LaunchSource): GuideLink[] {
       return;
     const name = plainGuideText(label).trim();
     if (name && !destinations.has(url.href))
-      destinations.set(url.href, { label: name, href });
+      destinations.set(url.href, { ...link, label: name });
   };
   step.links?.forEach(add);
   return [...destinations.values()];

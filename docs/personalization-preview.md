@@ -7,7 +7,7 @@ Personalization Preview is a separate private Page Builder app for inspecting th
 1. Open an Agent Portal page in Page Builder, and choose **Apps → Personalization Preview**.
 2. Connect the same Sitecore account if the existing Sitecore session cannot connect automatically.
 3. Choose **Default** or an existing content variant under each component or personalization name.
-4. Select **Preview page**, and then **Open preview** to inspect the current draft.
+4. Select **Preview page** to open the current draft in a new tab. A loading view appears while the selected variants are prepared, and the preview opens automatically. If the browser blocks the tab, use the **Open preview** recovery button.
 5. Select **Refresh choices** after changing the page's personalization configuration.
 
 The app maps native configuration to verified native preview variant IDs. When decision-table metadata is available, it uses that metadata. Otherwise, it reads the selected page's authorized native variant configuration and labels the choices using the actual component and content-variant names. Content-variant names describe the selected content, rather than the conditions that make a visitor eligible for it.
@@ -49,6 +49,6 @@ Twenty production-browser runs passed across Home, Products & appetite, and the 
 | Prepare selected preview | 0.92 s | 1.63 s |
 | Open preview to hydrated rendering | 1.17 s | 2.55 s |
 
-The three paired repeat runs rendered in 1.13–1.16 seconds. The two slower choice loads were dominated by Sitecore page authorization and metadata reads. These are observed single-user results, rather than a load test or latency guarantee. Preparation and opening are separate user actions; the measurements exclude manual pauses between them.
+The three paired repeat runs rendered in 1.13–1.16 seconds. The two slower choice loads were dominated by Sitecore page authorization and metadata reads. These are observed single-user results, rather than a load test or latency guarantee. Preparation and navigation were measured separately; the measurements exclude manual pauses between them. The current interface launches the preview directly from **Preview page**.
 
 Audience Preview also passed a separate sign-in, preparation, and native-content rendering regression check. The release passed all 637 source tests, full lint and TypeScript checks, a production build, and the browser-bundle credential check. No content, targeting rules, or agent profiles were changed by the new app tests.
