@@ -18,14 +18,14 @@ test("starting URLs are explicit, deduplicated, and never inferred from numbered
     "https://pages.sitecorecloud.io/content?sc_itemid=abc&sc_lang=en#fields";
   const source = {
     links: [
-      { label: "**Resource fields**", href: native },
-      { label: "Duplicate fields", href: native },
+      { label: "**Resource fields**", href: native, action: 2, afterLine: 1 },
+      { label: "Duplicate fields", href: native, action: 3, afterLine: 0 },
     ],
     presenterActions: [[`Use [**Live article**](${PUBLIC}/article).`]],
     actions: [`Return to [**Public Home**](${PUBLIC}/).`],
   };
   assert.deepEqual(demoLaunchUrls(source), [
-    { label: "Resource fields", href: native },
+    { label: "Resource fields", href: native, action: 2, afterLine: 1 },
   ]);
   assert.deepEqual(demoLaunchUrls({ ...source, links: [] }), []);
   assert.deepEqual(demoLaunchUrls({}), []);
@@ -48,7 +48,12 @@ test("starting URLs omit unsafe, private helper, and credential-bearing destinat
   ];
   assert.deepEqual(
     demoLaunchUrls({
-      links: blocked.map((href) => ({ label: "Not a starting target", href })),
+      links: blocked.map((href) => ({
+        label: "Not a starting target",
+        href,
+        action: 1,
+        afterLine: 0,
+      })),
     }),
     [],
   );

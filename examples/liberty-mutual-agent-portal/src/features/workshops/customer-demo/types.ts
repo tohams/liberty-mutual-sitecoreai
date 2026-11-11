@@ -8,9 +8,24 @@ export interface DemoImage extends GuideImage {
 /** Exact static text to paste into a field during the numbered action. */
 export interface DemoInput {
   action: number;
+  /** One-based line within the action, immediately before its value is needed. */
+  beforeLine?: number;
   label: string;
   value: string;
 }
+
+/** A cue appears after this line; zero places it before the action's first line. */
+export interface DemoCuePosition {
+  action: number;
+  afterLine: number;
+}
+
+export interface DemoPresenterCue extends DemoCuePosition {
+  /** One-based reference into presenterPoints, keeping the spoken copy in one place. */
+  point: number;
+}
+
+export interface DemoLaunchLink extends GuideLink, DemoCuePosition {}
 
 /** One card in the customer's prescribed use-case order. */
 export interface DemoStep {
@@ -31,6 +46,7 @@ export interface DemoStep {
   actions: string[];
   /** Brief spoken business points and concrete screen observations for this requirement. */
   presenterPoints: string[];
+  presenterCues: DemoPresenterCue[];
   /** Exact clicks in the same action order as the copy fields and screenshots. */
   presenterActions: string[][];
   presenterResult: string;
@@ -38,7 +54,7 @@ export interface DemoStep {
   expected: string[];
   talkTrack: string[];
   controls: string[];
-  links?: GuideLink[];
+  links?: DemoLaunchLink[];
   images?: DemoImage[];
   transition: string;
   mode?: "demonstrate" | "explain";

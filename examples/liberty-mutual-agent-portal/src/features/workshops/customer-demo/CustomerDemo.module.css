@@ -31,6 +31,26 @@
   line-height: 1.6;
   margin-top: 18px;
 }
+.sayLegend,
+.copyLegend,
+.actionLegend {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-weight: 650;
+}
+.sayLegend {
+  background: #f2eaff;
+  color: #64348d;
+}
+.copyLegend {
+  background: #fff3cc;
+  color: #80580b;
+}
+.actionLegend {
+  background: #e7f1ff;
+  color: #225d91;
+}
 .timeBudget {
   display: inline-flex;
   align-items: center;
@@ -280,23 +300,59 @@
   background: #fffdf1;
   font-size: 13px;
 }
-.presenterPoints {
-  padding: 12px 16px;
-  margin: 16px 0;
-  border: 1px solid var(--w-line);
+.cueBox {
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid;
+  border-left-width: 4px;
   border-radius: 8px;
-  background: #f7f9fa;
 }
-.presenterPoints h4 {
+.sayCue {
+  border-color: #decff0;
+  border-left-color: #8551b4;
+  background: #f7f2fc;
+}
+.copyCue {
+  border-color: #e8d9ad;
+  border-left-color: #b9861b;
+  background: #fff9e9;
+}
+.actionCue {
+  border-color: #c7dcf0;
+  border-left-color: #387aae;
+  background: #f1f7fd;
+}
+.article .cueLabel {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   margin: 0 0 7px;
-  color: var(--w-navy);
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
 }
-.presenterPoints ul {
-  display: grid;
-  gap: 6px;
-  padding-left: 20px;
+.sayCue .cueLabel {
+  color: #65368c;
+}
+.copyCue .cueLabel {
+  color: #80580b;
+}
+.actionCue .cueLabel {
+  color: #225d91;
+}
+.article .cueHint {
+  margin: 0 0 9px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #80580b;
+}
+.article .sayCue ul {
+  padding-left: 18px;
   margin: 0;
+}
+.article .sayCue li {
+  padding-left: 2px;
+  margin: 5px 0;
   font-size: 13px;
   line-height: 1.6;
 }
@@ -307,13 +363,7 @@
 .launchUrls {
   display: grid;
   gap: 8px;
-  margin: 14px 0 18px;
-}
-.launchTitle {
   margin: 0;
-  color: var(--w-muted);
-  font-size: 12px;
-  font-weight: 650;
 }
 .observations {
   border-left: 2px solid #b7b2c6;
@@ -323,12 +373,12 @@
 .copyValues {
   display: grid;
   gap: 8px;
-  margin: 12px 0 16px;
+  margin: 0;
 }
 .copyValue {
-  border: 1px solid var(--w-line);
+  border: 1px solid #e8d9ad;
   border-radius: 6px;
-  background: #faf9fc;
+  background: #fffdf6;
   padding: 8px 11px;
 }
 .copyLabel {
@@ -400,12 +450,16 @@
   border: 0;
 }
 .article .clicks > li {
-  padding: 0 0 14px 8px;
-  margin: 16px 0;
+  padding: 0 0 15px 8px;
+  margin: 18px 0;
   border-bottom: 1px solid #eeebf2;
 }
+.clicks > li > .cueBox {
+  margin: 9px 0;
+}
 .clickLine {
-  margin: 5px 0;
+  margin: 4px 0;
+  font-size: 13px;
   line-height: 1.6;
 }
 .screenshot {

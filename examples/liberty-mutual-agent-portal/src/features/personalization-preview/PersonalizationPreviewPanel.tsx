@@ -1,9 +1,8 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
+import { useEffect, useId, useState, type FormEvent } from "react";
 import {
   ArrowUpRight,
-  Check,
   ChevronDown,
   CircleAlert,
   Eye,
@@ -20,6 +19,10 @@ import {
   type PersonalizationPreviewSelection,
 } from "./types";
 import styles from "./PersonalizationPreviewPanel.module.css";
+import {
+  PersonalizationPreviewLauncher,
+  watchPersonalizationPreviewPageExit,
+} from "./preview-window";
 
 interface PersonalizationPreviewPanelProps {
   page: PersonalizationPreviewPage | null;
@@ -47,31 +50,54 @@ export function PersonalizationPreviewPanel({
   );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [completed, setCompleted] = useState<{
+  const [launcher] = useState(
+    () =>
+      new PersonalizationPreviewLauncher(
+        () => window.location.origin,
+        (url) => window.open(url, "_blank"),
+      ),
+  );
+  const [fallback, setFallback] = useState<{
     selections: string;
-    result: PersonalizationPreviewResult;
+    previewUrl: string;
   } | null>(null);
   const selectionKey = JSON.stringify(selections);
-  const result =
-    completed?.selections === selectionKey ? completed.result : null;
+  const fallbackUrl =
+    fallback?.selections === selectionKey ? fallback.previewUrl : null;
+
+  useEffect(
+    () => watchPersonalizationPreviewPageExit(window, launcher),
+    [launcher],
+  );
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!catalog || busy || disabled || loading) return;
+    // This must run before the first await to retain the click's popup permission.
+    const attempt = launcher.start();
     setBusy(true);
     setError("");
-    setCompleted(null);
+    setFallback(null);
     try {
       const generated = await onPreview(selections, catalog);
-      setCompleted({ selections: selectionKey, result: generated });
+      const outcome = launcher.complete(attempt, generated);
+      if (outcome === "blocked")
+        setFallback({
+          selections: selectionKey,
+          previewUrl: generated.previewUrl,
+        });
     } catch (cause) {
-      setError(
-        cause instanceof Error && cause.message
-          ? cause.message
-          : "The preview could not be opened. Please try again.",
-      );
+      if (launcher.isCurrent(attempt)) {
+        launcher.cancel(attempt);
+        setBusy(false);
+        setError(
+          cause instanceof Error && cause.message
+            ? cause.message
+            : "The preview could not be opened. Please try again.",
+        );
+      }
     } finally {
-      setBusy(false);
+      if (launcher.isCurrent(attempt)) setBusy(false);
     }
   };
 
@@ -82,6 +108,7 @@ export function PersonalizationPreviewPanel({
       ),
     );
     setError("");
+    setFallback(null);
   };
 
   return (
@@ -245,38 +272,23 @@ export function PersonalizationPreviewPanel({
         </p>
       </form>
 
-      <div aria-live="polite" aria-atomic="true">
-        {result ? (
-          <section className={styles.result} aria-labelledby={`${id}-result`}>
-            <div className={styles.resultHeading}>
-              <span className={styles.successIcon} aria-hidden="true">
-                <Check size={16} strokeWidth={2.4} />
-              </span>
-              <h2 id={`${id}-result`}>{result.title}</h2>
-            </div>
-            {result.description ? <p>{result.description}</p> : null}
-            {result.selectedExperiences.length > 0 ? (
-              <dl className={styles.matches}>
-                {result.selectedExperiences.map((selection) => (
-                  <div key={selection.flowId}>
-                    <dt>{selection.flowName}</dt>
-                    <dd>{selection.optionLabel}</dd>
-                  </div>
-                ))}
-              </dl>
-            ) : null}
-            <a
-              className={styles.openPreview}
-              href={result.previewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open preview
-              <ArrowUpRight size={17} aria-hidden="true" />
-            </a>
-          </section>
-        ) : null}
-      </div>
+      {fallbackUrl ? (
+        <div className={styles.popupFallback} role="alert">
+          <p>
+            The preview tab could not be opened. Allow pop-ups for this site, or
+            select Open preview.
+          </p>
+          <a
+            className={styles.openPreview}
+            href={fallbackUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open preview
+            <ArrowUpRight size={17} aria-hidden="true" />
+          </a>
+        </div>
+      ) : null}
     </section>
   );
 }

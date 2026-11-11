@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, Clock3 } from "lucide-react";
+import {
+  ArrowRight,
+  Clipboard,
+  Clock3,
+  MessageSquare,
+  MousePointer2,
+} from "lucide-react";
 import {
   getWorkshopSession,
   requireWorkshopSession,
@@ -7,12 +13,12 @@ import {
 import { DemoShell } from "./DemoShell";
 import { CopyValue } from "./CopyValue";
 import { LaunchUrls } from "./LaunchUrls";
-import { demoLaunchUrls } from "./launch-urls";
+import { presenterActionSequence } from "./presenter-sequence";
 import { DemoTabs } from "./DemoTabs";
 import { presenterInputs } from "./demo-inputs.server";
 import { getPresenterProfiles } from "./demo-profiles.server";
 import { GRAPHQL_EXPLORER } from "./demo-destinations";
-import type { DemoChapter } from "./types";
+import type { DemoChapter, DemoInput, DemoStep } from "./types";
 import { GuideText } from "@/features/workshops/GuideText";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
 import {
@@ -46,6 +52,83 @@ function Lines({
       ))}
     </List>
   );
+}
+
+function PresenterActionSequence({
+  step,
+  action,
+  inputs,
+  includeDeliveryToken,
+}: {
+  step: DemoStep;
+  action: number;
+  inputs: DemoInput[];
+  includeDeliveryToken: boolean;
+}) {
+  return presenterActionSequence(step, action, inputs).map((beat, index) => {
+    if (beat.kind === "url")
+      return <LaunchUrls key={index} links={beat.links} />;
+    if (beat.kind === "copy")
+      return (
+        <aside
+          className={`${styles.cueBox} ${styles.copyCue}`}
+          aria-label="Copy / paste"
+          data-demo-cue="copy"
+          key={index}
+        >
+          <h4 className={styles.cueLabel}>
+            <Clipboard size={15} aria-hidden="true" /> Copy / paste
+          </h4>
+          {step.id === "public-api" &&
+            !includeDeliveryToken &&
+            beat.inputs.some((input) => input.label === "HTTP headers") && (
+              <p className={styles.cueHint}>
+                Replace <code>&lt;Delivery API token&gt;</code> in the HTTP
+                headers template with your Live Delivery API token.
+              </p>
+            )}
+          <div className={styles.copyValues}>
+            {beat.inputs.map((input) => (
+              <CopyValue
+                key={`${input.label}-${input.value}`}
+                label={input.label}
+                value={input.value}
+              />
+            ))}
+          </div>
+        </aside>
+      );
+    if (beat.kind === "say")
+      return (
+        <aside
+          className={`${styles.cueBox} ${styles.sayCue}`}
+          aria-label="Say / point out"
+          data-demo-cue="say"
+          key={index}
+        >
+          <h4 className={styles.cueLabel}>
+            <MessageSquare size={15} aria-hidden="true" /> Say / point out
+          </h4>
+          <Lines lines={beat.lines} />
+        </aside>
+      );
+    return (
+      <div
+        className={`${styles.cueBox} ${styles.actionCue}`}
+        data-demo-cue="action"
+        key={index}
+      >
+        <h4 className={styles.cueLabel}>
+          <MousePointer2 size={15} aria-hidden="true" /> Do
+        </h4>
+        {beat.lines.map((line, lineIndex) => (
+          <div className={styles.clickLine} key={lineIndex}>
+            <GuideText text={line} openLinksInNewTab />
+          </div>
+        ))}
+      </div>
+    );
+  });
 }
 
 export async function CustomerDemoGuide({
@@ -97,9 +180,12 @@ export async function CustomerDemoGuide({
             </a>
           </div>
           <p className={styles.copyHint}>
-            Use <strong>Start here</strong> once per loop, or reuse the open
-            tab. Follow the numbered clicks; <strong>Copy</strong> supplies
-            field text and queries. Expand screenshots when needed.
+            Follow each numbered step from top to bottom. The colored boxes show
+            what to <span className={styles.sayLegend}>say</span>,{" "}
+            <span className={styles.copyLegend}>copy and paste</span>, and{" "}
+            <span className={styles.actionLegend}>do</span>, in presentation
+            order. Reuse your open tabs; copy a URL only when needed. Expand
+            screenshots when needed.
           </p>
         </header>
 
@@ -253,7 +339,16 @@ export async function CustomerDemoGuide({
                 </span>
                 <h2>Opening · three outcomes for Liberty Mutual</h2>
                 <p>{customerDemoOpening.presenter}</p>
-                <Lines lines={customerDemoOpening.talkTrack} />
+                <aside
+                  className={`${styles.cueBox} ${styles.sayCue}`}
+                  aria-label="Say / point out"
+                >
+                  <h4 className={styles.cueLabel}>
+                    <MessageSquare size={15} aria-hidden="true" /> Say / point
+                    out
+                  </h4>
+                  <Lines lines={customerDemoOpening.talkTrack} />
+                </aside>
               </section>
             )}
 
@@ -313,46 +408,18 @@ export async function CustomerDemoGuide({
                         <strong>{step.persona}.</strong>{" "}
                         <GuideText text={step.scenario} />
                       </p>
-                      {step.id === "public-api" && !session && (
-                        <p>
-                          Replace <code>&lt;Delivery API token&gt;</code> in the
-                          HTTP headers template with your Live Delivery API
-                          token.
-                        </p>
-                      )}
-                      <LaunchUrls links={demoLaunchUrls(step)} />
-                      <aside
-                        className={styles.presenterPoints}
-                        aria-label="Say / point out"
-                      >
-                        <h4>Say / point out</h4>
-                        <Lines lines={step.presenterPoints} />
-                      </aside>
                       <ol className={styles.clicks}>
-                        {step.presenterActions.map((lines, actionIndex) => (
-                          <li key={actionIndex}>
-                            {lines.map((line, lineIndex) => (
-                              <div className={styles.clickLine} key={lineIndex}>
-                                <GuideText text={line} openLinksInNewTab />
-                              </div>
-                            ))}
-                            {inputs.some(
-                              (input) => input.action === actionIndex + 1,
-                            ) ? (
-                              <div className={styles.copyValues}>
-                                {inputs
-                                  .filter(
-                                    (input) => input.action === actionIndex + 1,
-                                  )
-                                  .map((input) => (
-                                    <CopyValue
-                                      key={`${input.label}-${input.value}`}
-                                      label={input.label}
-                                      value={input.value}
-                                    />
-                                  ))}
-                              </div>
-                            ) : null}
+                        {step.presenterActions.map((_, actionIndex) => (
+                          <li
+                            key={actionIndex}
+                            data-demo-action={actionIndex + 1}
+                          >
+                            <PresenterActionSequence
+                              step={step}
+                              action={actionIndex + 1}
+                              inputs={inputs}
+                              includeDeliveryToken={Boolean(session)}
+                            />
                             {step.images
                               ?.filter(
                                 (image) =>
@@ -423,7 +490,16 @@ export async function CustomerDemoGuide({
                   {elapsedTime(closeStart)}–{elapsedTime(closeEnd)} · Close
                 </span>
                 <h2>Close</h2>
-                <Lines lines={customerDemoClosing} />
+                <aside
+                  className={`${styles.cueBox} ${styles.sayCue}`}
+                  aria-label="Say / point out"
+                >
+                  <h4 className={styles.cueLabel}>
+                    <MessageSquare size={15} aria-hidden="true" /> Say / point
+                    out
+                  </h4>
+                  <Lines lines={customerDemoClosing} />
+                </aside>
                 <p>
                   Return to the deck, then take questions in the Q&amp;A slot.
                 </p>

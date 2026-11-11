@@ -18,6 +18,7 @@ import {
   elapsedTime,
 } from "./timing";
 import type { DemoStep } from "./types";
+import { presenterActionSequence } from "./presenter-sequence";
 import { isGuideHref, plainGuideText } from "../guide-text";
 import { validImageAnnotation, validImageCrop } from "../guide-images";
 import { workshopGuides } from "../content";
@@ -517,6 +518,7 @@ test("public authoring uses one presenter account through review and publication
     entry.inputs?.find((input) => input.label === "New page name"),
     {
       action: 1,
+      beforeLine: 4,
       label: "New page name",
       value: "coverage-page",
     },
@@ -1257,7 +1259,8 @@ test("all thirteen loops provide brief business and screen-observation bullets",
     "utf8",
   );
   assert.match(page, /Say \/ point out/);
-  assert.match(page, /Lines lines={step\.presenterPoints}/);
+  assert.match(page, /presenterActionSequence\(step, action, inputs\)/);
+  assert.doesNotMatch(page, /Lines lines={step\.presenterPoints}/);
   assert.match(page, /step\.persona/);
   assert.match(page, /step\.scenario/);
   assert.match(page, /P2–P3 · One resource, from content to Search/);
@@ -1471,4 +1474,103 @@ test("screenshot guidance has real protected assets and crops or callouts stay i
         );
     }
   }
+});
+
+test("all live cues follow the clicks, with each speaking point, URL, and copy value present once", () => {
+  for (const entry of steps) {
+    assert.deepEqual(
+      entry.presenterCues.map((cue) => cue.point).sort((a, b) => a - b),
+      entry.presenterPoints.map((_, index) => index + 1),
+      `${entry.id}: every speaking point must have exactly one placement`,
+    );
+    for (const cue of [...entry.presenterCues, ...(entry.links ?? [])]) {
+      assert(
+        Number.isInteger(cue.action) &&
+          cue.action >= 1 &&
+          cue.action <= entry.presenterActions.length,
+        entry.id,
+      );
+      assert(
+        Number.isInteger(cue.afterLine) &&
+          cue.afterLine >= 0 &&
+          cue.afterLine <= entry.presenterActions[cue.action - 1].length,
+        entry.id,
+      );
+    }
+    for (const input of entry.inputs ?? []) {
+      assert(
+        Number.isInteger(input.beforeLine),
+        `${entry.id}: copy placement must be explicit`,
+      );
+    }
+    const beats = entry.presenterActions.flatMap((_, index) =>
+      presenterActionSequence(entry, index + 1, entry.inputs),
+    );
+    assert.deepEqual(
+      beats.flatMap((beat) => (beat.kind === "action" ? beat.lines : [])),
+      entry.presenterActions.flat(),
+      entry.id,
+    );
+    assert.deepEqual(
+      beats.flatMap((beat) => (beat.kind === "say" ? beat.lines : [])),
+      entry.presenterPoints,
+      entry.id,
+    );
+    assert.deepEqual(
+      beats.flatMap((beat) => (beat.kind === "url" ? beat.links : [])),
+      entry.links ?? [],
+      entry.id,
+    );
+    assert.deepEqual(
+      beats.flatMap((beat) => (beat.kind === "copy" ? beat.inputs : [])),
+      entry.inputs ?? [],
+      entry.id,
+    );
+  }
+});
+
+test("evidence and copy cues appear while their corresponding screen is visible", () => {
+  const authoring = step("public-authoring");
+  const publication = presenterActionSequence(authoring, 8, authoring.inputs);
+  const publishedUrl = publication.findIndex((beat) => beat.kind === "url");
+  assert.match(
+    prose(publication.slice(0, publishedUrl)),
+    /Wait for publication to complete/,
+  );
+  assert.match(prose(publication.slice(publishedUrl + 1)), /Public website/);
+  const api = step("public-api");
+  assert(
+    !presenterActionSequence(api, 1, api.inputs).some(
+      (beat) => beat.kind === "url",
+    ),
+  );
+  assert.equal(presenterActionSequence(api, 2, api.inputs)[0].kind, "url");
+  const relevance = step("portal-relevance");
+  assert(
+    ![1, 2]
+      .flatMap((action) =>
+        presenterActionSequence(relevance, action, relevance.inputs),
+      )
+      .some(
+        (beat) =>
+          beat.kind === "url" &&
+          beat.links.some((link) => link.href.includes("sitecorecloud.io")),
+      ),
+  );
+  const ai = step("portal-design");
+  const aiBeats = presenterActionSequence(ai, 2, ai.inputs);
+  const aiSpeech = aiBeats.findIndex((beat) => beat.kind === "say");
+  assert.match(
+    prose(aiBeats.slice(0, aiSpeech)),
+    /review the generated paragraph/,
+  );
+  assert.match(
+    prose(aiBeats.slice(aiSpeech + 1)),
+    /Choose.*Revert to original/,
+  );
+  const shared = step("portal-shared-content");
+  const comparison = presenterActionSequence(shared, 4, shared.inputs);
+  const comparisonSpeech = comparison.findIndex((beat) => beat.kind === "say");
+  assert.match(prose(comparison.slice(0, comparisonSpeech)), /2025.*2026/);
+  assert.match(prose(comparison.slice(comparisonSpeech + 1)), /Choose.*close/);
 });

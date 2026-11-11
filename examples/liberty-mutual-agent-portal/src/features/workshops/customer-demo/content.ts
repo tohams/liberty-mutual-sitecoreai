@@ -82,11 +82,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "The supported question shows the range of relevant published results and the approved answer excerpt, and the unsupported question ends with No results found and Contact an agent.",
         inputs: [
           {
+            beforeLine: 1,
             action: 2,
             label: "Supported search question",
             value: "Can I combine home and car coverage?",
           },
           {
+            beforeLine: 1,
             action: 3,
             label: "Unsupported search question",
             value: "Does car insurance cover cyberextortion?",
@@ -97,19 +99,24 @@ export const customerDemoChapters: DemoChapter[] = [
           "Point to the related bundling results and the **Can I bundle my car and home insurance?** answer excerpt; leave results unopened.",
           "For the unsupported question, show **No results found** and **Contact an agent** as the clear next step.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 2, afterLine: 4 },
+          { point: 3, action: 3, afterLine: 2 },
+        ],
         presenterActions: [
           [
-            `Start in the **Public website** tab on **Home**.`,
+            "Start in the **Public website** tab on **Home**.",
             "Select **Search** in the header.",
           ],
           [
-            "Paste **Supported search question** below into **Search**, then select **Search**.",
+            "Paste **Supported search question** into **Search**, then select **Search**.",
             "Wait until **Searching…** finishes.",
             "Show **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**.",
             "Highlight **Can I bundle my car and home insurance?** and its answer excerpt. Keep all results unopened.",
           ],
           [
-            "Replace **keyword(s)** with **Unsupported search question** below, then select **Search**.",
+            "Replace **keyword(s)** with **Unsupported search question**, then select **Search**.",
             "Show **No results found** and **Contact an agent**. Leave the contact link unopened.",
           ],
         ],
@@ -131,7 +138,14 @@ export const customerDemoChapters: DemoChapter[] = [
           "Published website pages join Search when their native **Include in site search** checkbox is selected. The articles and approved answers are managed and published in **SitecoreAI**.",
           "Optional measurement respects the visitor’s stored privacy preferences.",
         ],
-        links: [{ label: "Public website", href: `${PUBLIC}/` }],
+        links: [
+          {
+            action: 1,
+            afterLine: 0,
+            label: "Public website",
+            href: `${PUBLIC}/`,
+          },
+        ],
         images: [
           {
             file: "demo-public-search-panel.png",
@@ -258,11 +272,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native page fields, managed applicability values, canonical URL, and FAQPage metadata have been shown without changing content.",
         inputs: [
           {
+            beforeLine: 2,
             action: 3,
             label: "Find structured data in page source",
             value: "application/ld+json",
           },
           {
+            beforeLine: 4,
             action: 3,
             label: "Find the canonical link in page source",
             value: "canonical",
@@ -271,6 +287,10 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterPoints: [
           "This is the same resource the customer found: one page owns its answer, source, applicability, and review details.",
           "Point to native checklists, the canonical URL, and **FAQPage** data as the foundation for search and permitted AI discovery.",
+        ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 3, afterLine: 4 },
         ],
         presenterActions: [
           [
@@ -286,10 +306,11 @@ export const customerDemoChapters: DemoChapter[] = [
             "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
           ],
           [
-            `Switch to the **Public article** starting tab, then choose **View page source → Find**.`,
-            "Paste **Find structured data in page source** below into **Find**.",
+            "Switch to the **Public website** tab, open the **Public article** URL, then choose **View page source → Find**.",
+            "Paste **Find structured data in page source** into **Find**.",
             "Show **FAQPage**, **Question**, and **acceptedAnswer**.",
-            "Find **canonical** using the Copy field below; close the source tab, and return to the **Public website** tab.",
+            "Find **canonical** using the copy field.",
+            "Close the source tab, and return to the **Public website** tab.",
           ],
         ],
         presenterResult:
@@ -311,8 +332,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "The public rendering supplies **FAQPage** metadata and a canonical URL: a structured foundation for discovery by permitted search and AI consumers.",
         ],
         links: [
-          { label: "SitecoreAI", href: SITECORE_AI },
-          { label: "Public article", href: ARTICLE },
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+          { action: 3, afterLine: 0, label: "Public article", href: ARTICLE },
         ],
         images: [
           {
@@ -379,17 +400,20 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native Search document contains the newly published sentence, with its state, product, and audience values preserved.",
         inputs: [
           {
+            beforeLine: 2,
             action: 1,
             label: "Search by term",
             value: "Can I bundle my car and home insurance?",
           },
           {
+            beforeLine: 3,
             action: 2,
             label: "Detailed explanation — review sentence",
             value:
               "Review your options with your agent before choosing coverage.",
           },
           {
+            beforeLine: 2,
             action: 3,
             label: "Repeat Search by term",
             value: "Can I bundle my car and home insurance?",
@@ -400,23 +424,28 @@ export const customerDemoChapters: DemoChapter[] = [
           "A configured **OnEnd** publication event invokes a custom synchronization service, which reads **Live Experience Edge** and updates the index through the **Search Push API**.",
           "Show the sentence absent before publication and present in Search afterward; the state, product, and audience classifications stay intact.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 2, afterLine: 5 },
+          { point: 3, action: 3, afterLine: 4 },
+        ],
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Content → Search Sources → Liberty Mutual Approved Answers → Preview**. Keep this tab as **Search Preview**.",
-            "Paste **Search by term** below into **Search by term**, then expand the matching row using **Toggle document details**.",
+            "Paste **Search by term** into **Search by term**, then expand the matching row using **Toggle document details**.",
             "Confirm **body** does not contain **Review your options with your agent before choosing coverage.**",
             "If the sentence is present, restore the baseline through [**Before presenting**](#preparation) before continuing.",
           ],
           [
             "Return to the existing **Page Builder** tab and the **bundle-car-and-home** page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed.",
             "Select the recorded **Prepared page version** by number. Wait for loading, then recheck the selected number.",
-            "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field below in **Detailed explanation**.",
+            "Expand **Resource content**; confirm **Resource page review**, **Approved**, and the sentence from the Copy field in **Detailed explanation**.",
             "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
             "Leave **Subpages** unchecked, select **Start publish**, and wait for completion.",
           ],
           [
             "Return to the **Search Preview** tab, and refresh.",
-            "Repeat **Search by term** using the Copy field below; expand the matching row.",
+            "Repeat **Search by term** using the Copy field; expand the matching row.",
             "If needed, wait and refresh until **body** contains **Review your options with your agent before choosing coverage.**",
             "Confirm **state**, **product**, and **audience** are preserved.",
           ],
@@ -437,7 +466,9 @@ export const customerDemoChapters: DemoChapter[] = [
         controls: [
           "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. This loop follows the resource page’s own guidance and applicability metadata.",
         ],
-        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
+        links: [
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+        ],
         images: [
           {
             file: "demo-public-publish-approved.png",
@@ -524,32 +555,38 @@ export const customerDemoChapters: DemoChapter[] = [
           "The new coverage-page page shows the authored headings and the shared Promotion on the public website.",
         inputs: [
           {
+            beforeLine: 4,
             action: 1,
             label: "New page name",
             value: "coverage-page",
           },
           {
+            beforeLine: 2,
             action: 2,
             label: "Hero heading",
             value: "Explore coverage with confidence",
           },
           {
+            beforeLine: 4,
             action: 2,
             label: "Article heading",
             value: "Guidance for your next decision",
           },
           {
+            beforeLine: 5,
             action: 2,
             label: "Article body",
             value:
               "Review approved information, compare your options, and speak with an agent about your needs.",
           },
           {
+            beforeLine: 2,
             action: 6,
             label: "Page submission comment",
             value: "Review coverage guidance page",
           },
           {
+            beforeLine: 2,
             action: 7,
             label: "Approval comment",
             value: "Approved coverage guidance",
@@ -560,20 +597,25 @@ export const customerDemoChapters: DemoChapter[] = [
           "Point to the permitted components, the reused **Promotion**, and the obvious **Image left / Image right** presentation choices.",
           "Submit, approve, and publish the page; show the same headings, image, and Promotion on the public website.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 4, afterLine: 5 },
+          { point: 3, action: 8, afterLine: 4 },
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Editor → Pages**, then select **Home** in **Sitemap**.",
             "Confirm **Public Website**, **English**, and **Default editing host**.",
             "Choose **Home → Create a page → Landing page → Select**.",
-            "Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**.",
+            "Paste **New page name** into the sitemap’s editable **New page** name, then press **Enter**.",
             "Wait for **Page created from branch template**.",
           ],
           [
             "Choose **Reload tree** if shown. In **Sitemap**, select **coverage-page**, and wait for its matching page heading.",
-            "Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading** below.",
+            "Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading**.",
             "Click outside the text, and wait for **Saved**.",
-            "Below the Hero, click **Article text → Heading**, and paste **Article heading** below.",
-            "Click the blank **Body** immediately below that heading, and paste **Article body** below. Click outside, and wait for **Saved**.",
+            "Below the Hero, click **Article text → Heading**, and paste **Article heading**.",
+            "Click the blank **Body** immediately below that heading, and paste **Article body**. Click outside, and wait for **Saved**.",
           ],
           [
             "In the **Page Builder** tab, click the **Hero image** placeholder on the canvas.",
@@ -594,18 +636,19 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "In the **Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**.",
-            "Paste **Page submission comment** below, then select **Submit**.",
+            "Paste **Page submission comment**, then select **Submit**.",
             "Confirm the page is **Awaiting approval**. Its local Hero and Article text follow the page through review.",
           ],
           [
             "Stay on **coverage-page** in **Page Builder**, and review the page on its canvas.",
-            "Choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**.",
+            "Choose **Actions → Approve**; paste **Approval comment**, then select **Submit**.",
             "Confirm **Approved**.",
           ],
           [
             "On the same **coverage-page** in **Page Builder**, choose **Publish**.",
             "Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**.",
-            `After completion, use this loop’s **Published page** starting address in the **Public website** tab. Confirm both headings, the Hero image, and the shared Promotion.`,
+            "Wait for publication to complete.",
+            "Switch to the **Public website** tab, open the **Published page** URL, and confirm both headings, the Hero image, and the shared Promotion.",
           ],
         ],
         presenterResult:
@@ -631,8 +674,10 @@ export const customerDemoChapters: DemoChapter[] = [
           "The configured workflow is **Draft → Awaiting approval → Approved**. The page’s local content moves with it through review, and a separate publishing action releases the approved page. Shared Promotions retain their own review.",
         ],
         links: [
-          { label: "SitecoreAI", href: SITECORE_AI },
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
           {
+            action: 8,
+            afterLine: 3,
             label: "Published page — open after publishing",
             href: `${PUBLIC}/coverage-page`,
           },
@@ -822,6 +867,10 @@ export const customerDemoChapters: DemoChapter[] = [
           "Show the existing **Scrunch** recommendation beside the exact page field it addresses; keep Prospera unchanged.",
           "For **Profound**, a scoped integration could bring proposed content into **Draft**, followed by human editing, review, approval, and publication.",
         ],
+        presenterCues: [
+          { point: 1, action: 3, afterLine: 5 },
+          { point: 2, action: 4, afterLine: 3 },
+        ],
         presenterActions: [
           [
             "Switch to the **Prospera recommendations** tab in the **Incognito / Private** window. Confirm **agverticals → Prospera**.",
@@ -865,6 +914,8 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         links: [
           {
+            action: 1,
+            afterLine: 0,
             label: "Prospera recommendations — Private window",
             href: SCRUNCH_REVIEW,
           },
@@ -1011,6 +1062,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "**pageView** measures page views; **LM_PUBLIC_CTA_CLICK** records selections of defined next-step buttons and links.",
           "Recorded visitor choices automatically govern optional measurement and personalization.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 3 },
+          { point: 2, action: 2, afterLine: 3 },
+          { point: 3, action: 3, afterLine: 2 },
+        ],
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Optimization → Analytics → Events**. If the left navigation is collapsed, choose **Expand navigation** first. Keep this tab as **Events**.",
@@ -1044,7 +1100,9 @@ export const customerDemoChapters: DemoChapter[] = [
           "The **Site** filter separates the Public Website from the Agent Portal. **Time → 1 month** defines the reporting period, and **Event Type** checkboxes focus the report on **pageView** and **LM_PUBLIC_CTA_CLICK**. The native report supplies the recorded rows and totals.",
           "The application defines **LM_PUBLIC_CTA_CLICK** and sends it through the **Sitecore Content SDK** after the visitor allows optional measurement. **SitecoreAI** displays the received custom events alongside page views. Liberty Mutual’s Tealium architecture remains part of the integration discussion.",
         ],
-        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
+        links: [
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+        ],
         images: [
           {
             file: "demo-public-events-month.png",
@@ -1082,6 +1140,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The native GraphQL response shows the same page ID, published version, question, answer, and Detailed explanation, including the sentence published in P3.",
         inputs: [
           {
+            beforeLine: 2,
             action: 2,
             label: "HTTP headers",
             value: `{
@@ -1089,6 +1148,7 @@ export const customerDemoChapters: DemoChapter[] = [
 }`,
           },
           {
+            beforeLine: 3,
             action: 2,
             label: "GraphQL query",
             value: `query PublishedCoverageGuidance {
@@ -1108,18 +1168,24 @@ export const customerDemoChapters: DemoChapter[] = [
           "Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**: one approved source can serve several applications.",
           "Point to the same page ID, published version, and newly published sentence in the live GraphQL response.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 2 },
+          { point: 2, action: 3, afterLine: 2 },
+        ],
         presenterActions: [
           [
             "Return to the already-open presentation, and show **Experience Edge content delivery**.",
             "Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**.",
           ],
           [
-            `Switch to the **GraphQL Explorer** starting tab; its **HTTP HEADERS** already contain the **Live Delivery API token** configured in **P0**.`,
-            "Keep **HTTP HEADERS** configured with your **Live Delivery API token**, using the **HTTP headers** copy field below if needed. Copy **GraphQL query**, replace the existing text in the left **Query** editor, and select the triangular **Run** button.",
+            "Switch to the **GraphQL Explorer** tab; its **HTTP HEADERS** already contain the **Live Delivery API token** configured in **P0**.",
+            "Keep **HTTP HEADERS** configured with your **Live Delivery API token**, using the **HTTP headers** copy field if needed.",
+            "Copy **GraphQL query**, replace the existing text in the left **Query** editor, and select the triangular **Run** button.",
           ],
           [
             "In the response on the right, show **id**, **version**, **question**, **answer**, **explanation**, and **source**.",
-            `Find **Review your options with your agent before choosing coverage.** in **explanation**, then compare it with the **Public article** starting tab. Return to **GraphQL Explorer**.`,
+            "Find **Review your options with your agent before choosing coverage.** in **explanation**.",
+            "Switch to the **Public website** tab, open the **Public article** URL, and compare the wording. Return to **GraphQL Explorer**.",
           ],
           [
             "Explain that the front end, LibertyAir, or any other application can retrieve these same published fields through the native API.",
@@ -1146,8 +1212,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "The query selects the resource page by its stable item ID and English language. **version** identifies its published content version. Draft and Preview content remain in authoring.",
         ],
         links: [
-          { label: "GraphQL Explorer", href: GRAPHQL_EXPLORER },
-          { label: "Public article", href: ARTICLE },
+          {
+            action: 2,
+            afterLine: 0,
+            label: "GraphQL Explorer",
+            href: GRAPHQL_EXPLORER,
+          },
+          { action: 3, afterLine: 2, label: "Public article", href: ARTICLE },
         ],
         transition:
           "The same approved content can serve another application. Next, move to the second journey in your guide: a relevant Liberty Mutual experience for independent agents.",
@@ -1182,21 +1253,26 @@ export const customerDemoChapters: DemoChapter[] = [
           "Show their different priorities and licensed states, then compare the consistent Home and resource-page design before opening marketer screens.",
           "Point to the matching native profile tests and the Texas / Illinois business conditions behind those experiences.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 2, afterLine: 4 },
+          { point: 3, action: 5, afterLine: 4 },
+        ],
         presenterActions: [
           [
-            `Switch to the **Avery portal** tab, and select **My workspace** in the left navigation. Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.`,
+            "Switch to the **Avery portal** tab, and select **My workspace** in the left navigation. Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**.",
             "Find **Priorities for your agency**; show **Build a stronger small-business practice** first.",
             "Then show **Support workers’ compensation conversations in Texas** and **Connect home and auto conversations**.",
-            "Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**.",
+            "Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**. Choose **Close dialog**.",
           ],
           [
-            `Switch to the separate **Daniel portal** tab, and select **My workspace** in the left navigation. Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.`,
+            "Switch to the separate **Daniel portal** tab, and select **My workspace** in the left navigation. Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**.",
             "Compare his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**.",
-            "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**.",
+            "Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**. Choose **Close dialog**.",
             "Return to **Avery portal**, select **Learning & resources**, then **My workspace**. Point to their shared navigation, typography, buttons, and cards before opening marketer screens.",
           ],
           [
-            `In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Agent Portal** card. In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**. Keep **Default editing host**, then choose **Layers → Agency priorities**.`,
+            "In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Agent Portal** card. In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**. Keep **Default editing host**, then choose **Layers → Agency priorities**.",
             "Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**.",
             "Leave the rule Builder open while you find the identifier for Avery’s current profile in the next step.",
           ],
@@ -1237,8 +1313,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "These read-only tests inspect the existing configuration and do not publish or change a rule.",
         ],
         links: [
-          { label: "Agent Portal", href: `${PORTAL}/` },
-          { label: "SitecoreAI", href: SITECORE_AI },
+          {
+            action: 1,
+            afterLine: 0,
+            label: "Agent Portal",
+            href: `${PORTAL}/`,
+          },
+          { action: 3, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
         ],
         images: [
           {
@@ -1311,6 +1392,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The sample Brand Kit, field-level AI writing assistance, and permitted component choices are visible, with no content changes kept or published.",
         inputs: [
           {
+            beforeLine: 3,
             action: 2,
             label: "AI writing prompt",
             value:
@@ -1322,6 +1404,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "Review the suggestion, then **Revert to original**: the author decides what to retain.",
           "Point to the allowed component choice: governed structure keeps the agent experience consistent while marketers edit content.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 2 },
+          { point: 2, action: 2, afterLine: 4 },
+          { point: 3, action: 3, afterLine: 2 },
+        ],
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Design → Brand kits**.",
@@ -1329,14 +1416,16 @@ export const customerDemoChapters: DemoChapter[] = [
             "Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation. Leave the kit unchanged.",
           ],
           [
-            `Return to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.`,
+            "Return to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
             "Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**. Confirm **Introduction** in the right panel.",
-            "Select **Optimize with AI**; point to **Adhere to brand kit**, then paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**.",
-            "When **Ready!** appears, review the generated paragraph. Choose **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.",
+            "Select **Optimize with AI**; point to **Adhere to brand kit**, then paste **AI writing prompt** into **Ask AI for content improvements**, and select **Generate content**.",
+            "When **Ready!** appears, review the generated paragraph.",
+            "Choose **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.",
           ],
           [
             "Open **Layers → headless-agency-priorities**, and select **Insert into** before or after **Agency priorities**.",
-            "Show **Components → Business priorities → Agency priorities** as the permitted choice, then close the picker without inserting content.",
+            "Show **Components → Business priorities → Agency priorities** as the permitted choice.",
+            "Close the picker without inserting content.",
             "Explain: authors change content; reusable components control its presentation, page designs supply shared structure, and placeholder settings govern composition.",
           ],
           [
@@ -1362,7 +1451,9 @@ export const customerDemoChapters: DemoChapter[] = [
           "**Page designs**, **partial designs**, native renderings, and **placeholder settings** govern reusable structure and permitted composition. Content edits remain separate from component code.",
           "The sample **Brand Kit** collects reusable visual and voice guidance for AI-assisted writing. **Optimize with AI** offers **Adhere to brand kit** alongside writing improvements. The author reviews the suggestion; **Revert to original** restores the field without keeping the generated wording or publishing it.",
         ],
-        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
+        links: [
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+        ],
         images: [
           {
             file: "demo-ai-field-copilot.png",
@@ -1471,6 +1562,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Checkpoint: the Texas-first Draft is saved, the original approved version remains intact, and the live experience is unchanged. Continue with the audience-preview demonstration and the review/publication actions to complete this priority-change loop.",
         inputs: [
           {
+            beforeLine: 3,
             action: 2,
             label: "New priority version name",
             value: "Texas guidance priority",
@@ -1480,6 +1572,10 @@ export const customerDemoChapters: DemoChapter[] = [
           "For a Texas workers’ compensation campaign, make the approved Texas guidance the principal audience’s first priority.",
           "Change the actual **Ordered recommendations** in a new **Draft**; the original approved version and live order remain intact.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 3, afterLine: 4 },
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Content**.",
@@ -1488,7 +1584,7 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "Open the version selector; select **Priority baseline version** recorded in **P0**, and wait for its fields to load.",
             "Recheck its version number and original order: **Small business growth → Texas workers compensation → Home and auto conversations**.",
-            "Choose **Create version**; paste **New priority version name** below, then select **Create**.",
+            "Choose **Create version**; paste **New priority version name**, then select **Create**.",
             "Reopen the version selector; select the new **Texas guidance priority → Draft** row by its new number.",
             "Wait for fields to load, then recheck the selected version number.",
           ],
@@ -1521,7 +1617,9 @@ export const customerDemoChapters: DemoChapter[] = [
           "**Ordered recommendations** is an ordered native item selection. This collection supplies the **agency-growth** experience, while **Producer priorities** supplies a separate experience.",
           "The original approved version is retained. Saving the new **Draft** changes authoring content, with publication still governed by the configured workflow.",
         ],
-        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
+        links: [
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+        ],
         images: [
           {
             file: "demo-portal-priority-order.png",
@@ -1575,11 +1673,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "Before publication, Home preview shows Texas guidance first for the principal and the unchanged household-first order for the producer. After publication, Avery and Daniel show those same respective orders live.",
         inputs: [
           {
+            beforeLine: 3,
             action: 4,
             label: "Priority submission comment",
             value: "Prioritize Texas workers compensation guidance",
           },
           {
+            beforeLine: 2,
             action: 5,
             label: "Priority approval comment",
             value: "Approved agency priority update",
@@ -1589,6 +1689,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "**Audience Preview** is a private Marketplace extension: it combines the current authoring page with the existing native personalization rules.",
           "Preview a Texas principal and an Illinois producer using only **Role** and **Licensed states**; the producer keeps the household-first order.",
           "Review and publish the saved priority change once, then show Avery’s updated live order and Daniel’s unchanged order.",
+        ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 2 },
+          { point: 2, action: 3, afterLine: 3 },
+          { point: 3, action: 6, afterLine: 4 },
         ],
         presenterActions: [
           [
@@ -1610,12 +1715,12 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "In **Page Builder**, choose **Content → Data → Agency priorities → Agency growth priorities**, then select **Saved priority version**.",
             "Wait for loading; confirm **Draft** and Texas-first **Ordered recommendations**.",
-            "Choose **Actions → Submit**; paste **Priority submission comment** below, then select **Submit**.",
+            "Choose **Actions → Submit**; paste **Priority submission comment**, then select **Submit**.",
             "Confirm **Awaiting approval**.",
           ],
           [
             "Stay on the same **Saved priority version** in **Page Builder**, and review its Texas-first order.",
-            "Choose **Actions → Approve**; paste **Priority approval comment** below, then select **Submit**.",
+            "Choose **Actions → Approve**; paste **Priority approval comment**, then select **Submit**.",
             "Confirm **Approved**.",
           ],
           [
@@ -1646,7 +1751,9 @@ export const customerDemoChapters: DemoChapter[] = [
           "Preview uses isolated synthetic audience records, without changing human agent accounts. It does not publish content or grant additional content permissions.",
           "The **Saved priority version** from A3 remains Draft during both Home previews. The same presenter account then performs **Submit**, **Approve**, and **Publish** on that exact version in **Page Builder**.",
         ],
-        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
+        links: [
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+        ],
         transition:
           "The intended agent now receives the reviewed priority change. Next, keep approved wording consistent across both independent websites.",
       },
@@ -1667,21 +1774,25 @@ export const customerDemoChapters: DemoChapter[] = [
           "Both site footers show the full copyright notice with 2026 after one shared-source publication.",
         inputs: [
           {
+            beforeLine: 1,
             action: 2,
             label: "New copyright version name",
             value: "Copyright year update",
           },
           {
+            beforeLine: 4,
             action: 2,
             label: "New copyright year",
             value: "2026",
           },
           {
+            beforeLine: 2,
             action: 3,
             label: "Copyright submission comment",
             value: "Review copyright year update to 2026",
           },
           {
+            beforeLine: 4,
             action: 3,
             label: "Copyright approval comment",
             value: "Approved copyright year update to 2026",
@@ -1692,6 +1803,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "Change only **2025 → 2026**, publish the shared source once, and compare versions while delivery completes.",
           "Confirm **2026** on both live sites before beginning restoration.",
         ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 4, afterLine: 5 },
+          { point: 3, action: 5, afterLine: 3 },
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Content**.",
@@ -1699,7 +1815,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Record the original approved English version and full **Disclosure** wording for restoration. Confirm its copyright year is **2025**.",
           ],
           [
-            "Choose **Create version**; paste **New copyright version name** below, then select **Create**.",
+            "Choose **Create version**; paste **New copyright version name**, then select **Create**.",
             "Reopen the version selector; select the new **Copyright year update → Draft** row by its new number.",
             "Wait for fields to load, then recheck the selected number.",
             "In **Disclosure**, replace only **2025** with **2026**. Preserve every other word, punctuation mark, line break, and the **Equal Opportunity Employer** link; click outside, and wait for **Saved**.",
@@ -1707,16 +1823,17 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "Select **Saved copyright version**; confirm **Draft** and copyright year **2026**.",
-            "Choose **Actions → Submit**; paste **Copyright submission comment** below, then **Submit**. Confirm **Awaiting approval**.",
+            "Choose **Actions → Submit**; paste **Copyright submission comment**, then **Submit**. Confirm **Awaiting approval**.",
             "Stay on the same **Saved copyright version** in **Page Builder**, and review the full notice.",
-            "Choose **Actions → Approve**; paste **Copyright approval comment** below, then select **Submit**.",
+            "Choose **Actions → Approve**; paste **Copyright approval comment**, then select **Submit**.",
           ],
           [
             "Stay on the same **Saved copyright version** in **Page Builder**.",
             "Confirm **Approved**, copyright year **2026**, and unchanged surrounding wording.",
             "Publish the shared item once with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
             "While publication and delivery complete, return to the item’s version selector, open **Saved copyright version → ••• → Compare versions**, and set **Compare** to the recorded original version and **With** to **Saved copyright version**.",
-            "Under **Content → Disclosure**, show **2025** beside **2026**, with all surrounding wording and the link intact. Choose **close**.",
+            "Under **Content → Disclosure**, show **2025** beside **2026**, with all surrounding wording and the link intact.",
+            "Choose **close**.",
           ],
           [
             "Wait for publication to complete.",
@@ -1744,8 +1861,13 @@ export const customerDemoChapters: DemoChapter[] = [
           "The complete copyright notice is shared content delivered through **Experience Edge**. Only its year changes from **2025** to **2026**; its address, equal-opportunity wording, line break, and **Equal Opportunity Employer** link stay intact.",
         ],
         links: [
-          { label: "SitecoreAI", href: SITECORE_AI },
-          { label: "Public website", href: `${PUBLIC}/` },
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+          {
+            action: 5,
+            afterLine: 1,
+            label: "Public website",
+            href: `${PUBLIC}/`,
+          },
         ],
         transition:
           "One reviewed update now reaches both footers. Finish by comparing the versions and restoring the original year without losing that history.",
@@ -1766,16 +1888,19 @@ export const customerDemoChapters: DemoChapter[] = [
           "Both site footers show the full copyright notice with restored year 2025, and the original, changed, and restored versions remain in history.",
         inputs: [
           {
+            beforeLine: 3,
             action: 3,
             label: "Restored copyright version name",
             value: "Copyright year restored",
           },
           {
+            beforeLine: 2,
             action: 4,
             label: "Restoration submission comment",
             value: "Restore copyright year to 2025",
           },
           {
+            beforeLine: 4,
             action: 4,
             label: "Restoration approval comment",
             value: "Approved restoration of copyright year to 2025",
@@ -1785,6 +1910,11 @@ export const customerDemoChapters: DemoChapter[] = [
           "Restore earlier wording through a new reviewed version, preserving the original and changed revisions.",
           "Versions show what changed; item statistics show who last updated it and when.",
           "Finish with **2025** in both footers: a controlled change and a controlled reversal.",
+        ],
+        presenterCues: [
+          { point: 1, action: 1, afterLine: 0 },
+          { point: 2, action: 5, afterLine: 6 },
+          { point: 3, action: 6, afterLine: 2 },
         ],
         presenterActions: [
           [
@@ -1798,15 +1928,15 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "Switch to **Page Builder → Content → Data → Disclosures → Copyright notice**; select the recorded original approved English version.",
             "Wait for loading; recheck the selected number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**.",
-            "Paste **Restored copyright version name** below, then **Create**. Reopen the selector; select the new **Copyright year restored → Draft** row.",
+            "Paste **Restored copyright version name**, then **Create**. Reopen the selector; select the new **Copyright year restored → Draft** row.",
             "Wait; recheck its new version number and the full copyright notice with **2025**. Preserve all other wording, punctuation, the line break, and the **Equal Opportunity Employer** link.",
             "After **Saved**, record the number as **Restored copyright version**; use it for submission, approval, and publication.",
           ],
           [
             "Select **Restored copyright version**; confirm **Draft** and original **Disclosure** wording with year **2025**.",
-            "Choose **Actions → Submit**; paste **Restoration submission comment** below, then select **Submit**.",
+            "Choose **Actions → Submit**; paste **Restoration submission comment**, then select **Submit**.",
             "Stay on the same **Restored copyright version** in **Page Builder**, and review the full notice.",
-            "Choose **Actions → Approve**; paste **Restoration approval comment** below, then select **Submit**.",
+            "Choose **Actions → Approve**; paste **Restoration approval comment**, then select **Submit**.",
           ],
           [
             "Stay on the same **Restored copyright version** in **Page Builder**; confirm **Approved** and copyright year **2025**.",
@@ -1814,7 +1944,8 @@ export const customerDemoChapters: DemoChapter[] = [
             "While publication completes, show the original, changed, and restored versions in the **Content version selector**.",
             "Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**.",
             "After closing **Compare versions**, note the current **Show all fields** setting. Enable it if needed, and expand **Statistics**.",
-            "Point to **Updated** and **Updated by** for the item’s latest update. Collapse **Statistics**, and restore **Show all fields** to its original setting.",
+            "Point to **Updated** and **Updated by** for the item’s latest update.",
+            "Collapse **Statistics**, and restore **Show all fields** to its original setting.",
           ],
           [
             "Wait for publication to complete. Reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer.",
@@ -1842,7 +1973,9 @@ export const customerDemoChapters: DemoChapter[] = [
           "Creating a new Draft from the original approved version preserves the original and changed versions. The same governed process reviews and publishes the restoration.",
           "Submission, approval, and publication remain distinct actions in the configured workflow demonstrated earlier.",
         ],
-        links: [{ label: "SitecoreAI", href: SITECORE_AI }],
+        links: [
+          { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
+        ],
         transition:
           "Close on what this enables for Liberty Mutual: trusted guidance, more relevant agent experiences, and business-managed changes with clear accountability.",
       },
