@@ -38,3 +38,17 @@ The app has its own authentication cookie, callback paths, API routes, rate-limi
 Browser User Timing measures record catalog loading (`personalization-preview-catalog`) and preparation (`personalization-preview-prepare`), including response parsing. API `Server-Timing` headers identify the authentication, page authorization, catalog, native rendering, and token stages. These measurements contain durations only.
 
 The preview document marks `personalization-preview-rendered` after hydration, font readiness, and two animation frames. Its `data-personalization-preview-rendered-ms` attribute measures navigation to that point. Check visible images separately; this marker does not imply that every image has loaded. Compare first-use and repeat runs using current page configuration, and verify the rendered content against the selected outcomes.
+
+### Verified on November 11, 2026
+
+Twenty production-browser runs passed across Home, Products & appetite, and the personalized agency-growth landing page. The reproducible matrix used seed `20261111`, covered 17 distinct selections, and included three paired repeats. It checked the expected visible headings, agency-card introductions and ordering, absence of unselected content, and loaded images in the viewport. Every measured preview remained in a visible tab.
+
+| Measurement | Median | Observed maximum |
+| --- | ---: | ---: |
+| Load current choices | 0.89 s | 3.55 s |
+| Prepare selected preview | 0.92 s | 1.63 s |
+| Open preview to hydrated rendering | 1.17 s | 2.55 s |
+
+The three paired repeat runs rendered in 1.13–1.16 seconds. The two slower choice loads were dominated by Sitecore page authorization and metadata reads. These are observed single-user results, rather than a load test or latency guarantee. Preparation and opening are separate user actions; the measurements exclude manual pauses between them.
+
+Audience Preview also passed a separate sign-in, preparation, and native-content rendering regression check. The release passed all 637 source tests, full lint and TypeScript checks, a production build, and the browser-bundle credential check. No content, targeting rules, or agent profiles were changed by the new app tests.
