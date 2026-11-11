@@ -1,6 +1,6 @@
 import "server-only";
 import type { ComponentRendering, Page } from "@sitecore-content-sdk/nextjs";
-import type { AudiencePreviewDecisions } from "@/server/audience-preview/decisions";
+import type { NativePreviewDecisions } from "./native-variants";
 import { PersonalizationPreviewError } from "@/server/marketplace/personalization-preview-config";
 import type { PersonalizationPreviewPage } from "./types";
 
@@ -112,7 +112,7 @@ function descendingPath(left: Path, right: Path): number {
  */
 export async function composeNativePersonalizationPreview(
   selected: PersonalizationPreviewPage,
-  decisions: AudiencePreviewDecisions,
+  decisions: NativePreviewDecisions,
   load: PersonalizationPreviewLoader,
 ): Promise<Page> {
   if (normalize(decisions.pageId) !== normalize(selected.id)) return fail();

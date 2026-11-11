@@ -4,8 +4,8 @@ import type { PersonalizeInfo } from "@sitecore-content-sdk/content/personalize"
 import { PersonalizationPreviewError } from "@/server/marketplace/personalization-preview-config";
 import {
   nativePreviewExecutions,
-  type AudiencePreviewDecisions,
-} from "@/server/audience-preview/decisions";
+  type NativePreviewDecisions,
+} from "./native-variants";
 import type {
   PersonalizationPreviewContext,
   PersonalizationPreviewPage,
@@ -314,7 +314,7 @@ export function selectPersonalizationOutcomes(
   revision: string,
   selections: PersonalizationPreviewSelection[],
 ): {
-  decisions: AudiencePreviewDecisions;
+  decisions: NativePreviewDecisions;
   selectedExperiences: SelectedPersonalizationExperience[];
 } {
   if (revision !== catalog.context.revision)
@@ -333,7 +333,7 @@ export function selectPersonalizationOutcomes(
       "Choose one result for each personalization.",
       400,
     );
-  const decisions: AudiencePreviewDecisions = {
+  const decisions: NativePreviewDecisions = {
     pageId: catalog.context.page.id,
     selectedVariantIds: [],
     componentVariantIds: [],

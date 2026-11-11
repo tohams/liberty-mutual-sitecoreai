@@ -1,7 +1,7 @@
 import "server-only";
 import type { PersonalizeInfo } from "@sitecore-content-sdk/content/personalize";
 import { PersonalizationPreviewError } from "@/server/marketplace/personalization-preview-config";
-import { nativePreviewExecutions } from "@/server/audience-preview/decisions";
+import { nativePreviewExecutions } from "./native-variants";
 import { normalizePreviewId } from "./catalog";
 import {
   nativeMetadataReader,

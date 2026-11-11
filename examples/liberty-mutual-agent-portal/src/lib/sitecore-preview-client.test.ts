@@ -7,15 +7,15 @@ test("versioned SDK preview uses the CM context without changing the normal deli
   const keys = [
     "SITECORE_EDGE_CONTEXT_ID",
     "SITECORE_PREVIEW_CONTEXT_ID",
-    "AUDIENCE_PREVIEW_EDGE_CONTEXT_ID",
+    "PERSONALIZATION_PREVIEW_SITECORE_CONTEXT_ID",
   ] as const;
   const previous = Object.fromEntries(
     keys.map((key) => [key, process.env[key]]),
   );
   process.env.SITECORE_EDGE_CONTEXT_ID = "synthetic-live-context";
   process.env.SITECORE_PREVIEW_CONTEXT_ID = "synthetic-cm-preview-context";
-  process.env.AUDIENCE_PREVIEW_EDGE_CONTEXT_ID =
-    "synthetic-older-preview-context";
+  process.env.PERSONALIZATION_PREVIEW_SITECORE_CONTEXT_ID =
+    "synthetic-app-preview-context";
   try {
     const { getSitecorePreviewClient } =
       await import("./sitecore-preview-client");

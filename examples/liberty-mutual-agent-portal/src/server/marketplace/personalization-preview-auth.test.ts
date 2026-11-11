@@ -66,8 +66,7 @@ test("sign-in requires this app's own Marketplace installation tenant", () => {
     personalizationPreviewAuthConfiguration({
       ...environment,
       PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID: undefined,
-      AUDIENCE_PREVIEW_MARKETPLACE_TENANT_ID:
-        "ba40a477-d452-493b-fb23-08df2a1b4cda",
+      UNRELATED_MARKETPLACE_TENANT_ID: "ba40a477-d452-493b-fb23-08df2a1b4cda",
     }),
     null,
   );
@@ -90,22 +89,21 @@ test("sign-in cannot initialize without a valid server-configured Marketplace ap
   }
 });
 
-test("the parallel app never falls back to Audience Preview configuration or routes", () => {
+test("sign-in never falls back to unrelated portal configuration or routes", () => {
   assert.equal(
     personalizationPreviewAuthConfiguration({
-      AUDIENCE_PREVIEW_AUTH0_CLIENT_ID: "existing-client",
-      AUDIENCE_PREVIEW_AUTH0_CLIENT_SECRET: "existing-client-secret",
-      AUDIENCE_PREVIEW_AUTH0_SECRET: "a".repeat(64),
-      AUDIENCE_PREVIEW_APP_BASE_URL: "https://portal.example",
-      AUDIENCE_PREVIEW_MARKETPLACE_APP_ID:
-        "11111111-1111-4111-8111-111111111111",
+      PORTAL_AUTH0_CLIENT_ID: "existing-client",
+      PORTAL_AUTH0_CLIENT_SECRET: "existing-client-secret",
+      PORTAL_AUTH0_SECRET: "a".repeat(64),
+      PORTAL_APP_BASE_URL: "https://portal.example",
+      PORTAL_MARKETPLACE_APP_ID: "11111111-1111-4111-8111-111111111111",
     }),
     null,
   );
   for (const path of [
-    "/apps/audience-preview",
-    "/api/audience-preview",
-    "/apps/audience-preview/auth/callback",
+    "/apps/other-preview",
+    "/api/other-preview",
+    "/apps/other-preview/auth/callback",
     "/apps/personalization-preview-other",
   ])
     assert.equal(isPersonalizationPreviewAuthPath(path), false);

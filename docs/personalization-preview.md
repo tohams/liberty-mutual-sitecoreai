@@ -1,6 +1,6 @@
 # Personalization Preview
 
-Personalization Preview is a separate private Page Builder app for inspecting the variants already configured on an Agent Portal page. Audience Preview continues to evaluate its prepared synthetic audiences independently.
+Personalization Preview is a private Page Builder app for inspecting the content variants already configured on an Agent Portal page.
 
 ## Using the app
 
@@ -18,20 +18,20 @@ The app does not interpret custom JavaScript, create CDP profiles, change rules,
 
 The private App Studio registration is **Personalization Preview**, with the **Page context panel** extension point. Its deployment URL is `/apps/personalization-preview` on the Agent Portal editing host. It uses SitecoreAI API access, a separate regular-web-app sign-in credential, and pop-up permission for connection and preview windows. Install it only in the intended SitecoreAI environment.
 
-Configure these server-only settings independently of Audience Preview:
+Configure these server-only settings:
 
 - `PERSONALIZATION_PREVIEW_AUTH0_CLIENT_ID`
 - `PERSONALIZATION_PREVIEW_AUTH0_CLIENT_SECRET`
 - `PERSONALIZATION_PREVIEW_AUTH0_SECRET` — a separate 32-byte hexadecimal session key.
-- `PERSONALIZATION_PREVIEW_APP_BASE_URL` — the HTTPS origin that hosts the new routes.
+- `PERSONALIZATION_PREVIEW_APP_BASE_URL` — the HTTPS origin that hosts the app.
 - `PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID`
-- `PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID` — this app's installed Marketplace tenant, shown in its Page Builder iframe URL; this is separate from the CMS tenant and Audience Preview installation.
+- `PERSONALIZATION_PREVIEW_MARKETPLACE_TENANT_ID` — this app's installed Marketplace tenant, shown in its Page Builder iframe URL; this is separate from the CMS tenant.
 - `PERSONALIZATION_PREVIEW_SITECORE_CONTEXT_ID` — the new installed app's `application.context.resourceAccess` → `xmcloud` → `context.preview` value.
 - `PERSONALIZATION_PREVIEW_EDGE_CONTEXT_ID` — optional CMS Preview content context override; otherwise the normal CMS Preview context is used.
 
 Use `NEXT_PUBLIC_PERSONALIZATION_PREVIEW_MARKETPLACE_APP_ID` only for the public app identifier. No credential belongs in a public environment variable.
 
-The app has its own authentication cookie, callback paths, API routes, rate-limit namespace, and short-lived actor-bound preview tokens. Each preview rechecks the author's page/version access and validates the selections against the current native configuration. Its read-only rendering reuses the existing native component-receipt composition without changing Audience Preview's behavior or stored scenarios.
+The app has its own authentication cookie, callback paths, API routes, rate-limit namespace, and short-lived actor-bound preview tokens. Each preview rechecks the author's page/version access and validates the selections against the current native configuration. Its read-only rendering composes verified native component receipts for the selected page and version.
 
 ## Performance checks
 
@@ -51,4 +51,4 @@ Twenty production-browser runs passed across Home, Products & appetite, and the 
 
 The three paired repeat runs rendered in 1.13–1.16 seconds. The two slower choice loads were dominated by Sitecore page authorization and metadata reads. These are observed single-user results, rather than a load test or latency guarantee. Preparation and navigation were measured separately; the measurements exclude manual pauses between them. The current interface launches the preview directly from **Preview page**.
 
-Audience Preview also passed a separate sign-in, preparation, and native-content rendering regression check. The release passed all 637 source tests, full lint and TypeScript checks, a production build, and the browser-bundle credential check. No content, targeting rules, or agent profiles were changed by the new app tests.
+Browser verification was accompanied by source tests, lint and TypeScript checks, a production build, and the browser-bundle credential check. The app tests did not change content, targeting rules, or agent profiles.

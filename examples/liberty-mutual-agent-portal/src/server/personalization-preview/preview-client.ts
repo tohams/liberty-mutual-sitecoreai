@@ -2,15 +2,15 @@ import "server-only";
 import { LayoutServicePageState } from "@sitecore-content-sdk/content/layout";
 import { LayoutKind } from "@sitecore-content-sdk/content/editing";
 import { getSitecorePreviewClient } from "@/lib/sitecore-preview-client";
-import type { AudiencePreviewDecisions } from "@/server/audience-preview/decisions";
+import type { NativePreviewDecisions } from "./native-variants";
 import type { PersonalizationPreviewPage } from "./types";
 import { personalizationPreviewContentContextId } from "./content-context";
 import { composeNativePersonalizationPreview } from "./native-layout";
 
-/** Reuse verified native receipt composition without changing Audience Preview. */
+/** Render the selected native receipts for the authorized page and version. */
 export async function getPersonalizationPreviewLayout(
   page: PersonalizationPreviewPage,
-  decisions: AudiencePreviewDecisions,
+  decisions: NativePreviewDecisions,
 ) {
   const client = getSitecorePreviewClient(
     personalizationPreviewContentContextId(),
