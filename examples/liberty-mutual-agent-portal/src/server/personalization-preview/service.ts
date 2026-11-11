@@ -17,6 +17,7 @@ import {
   type PersonalizationCatalog,
 } from "./catalog";
 import { readPersonalizationFlowDefinitions } from "./upstream";
+import { readNativePersonalizationContentDefinitions } from "./native-content";
 import {
   createPersonalizationPreviewViewSession,
   type PersonalizationPreviewViewSession,
@@ -38,6 +39,7 @@ const object = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === "object" && !Array.isArray(value);
 export interface PersonalizationPreviewDependencies {
   readFlows: typeof readPersonalizationFlowDefinitions;
+  readNativeContent?: typeof readNativePersonalizationContentDefinitions;
   getInfo(
     page: PersonalizationPreviewPage,
   ): Promise<PersonalizeInfo | undefined>;
@@ -63,6 +65,7 @@ export function personalizationPreviewDependencies(): PersonalizationPreviewDepe
   });
   return {
     readFlows: readPersonalizationFlowDefinitions,
+    readNativeContent: readNativePersonalizationContentDefinitions,
     getInfo: (page) =>
       discovery.getPersonalizeInfo(page.path, page.language, page.siteName),
     loadLayout: getPersonalizationPreviewLayout,
@@ -171,6 +174,29 @@ export async function loadPersonalizationPreviewCatalog(
       "SitecoreAI could not confirm this page’s preview variants. Please try again.",
       502,
     );
+  if (
+    !flows.length &&
+    info.variantIds.length &&
+    dependencies.readNativeContent
+  ) {
+    const native = await dependencies.readNativeContent(
+      page,
+      info,
+      accessToken,
+      dependencies.scope,
+    );
+    const catalog = buildPersonalizationCatalog(
+      page,
+      native.definitions,
+      info,
+      dependencies.scope,
+    );
+    catalog.context.warnings = [
+      ...native.warnings,
+      ...(catalog.context.warnings || []),
+    ];
+    return catalog;
+  }
   return buildPersonalizationCatalog(page, flows, info, dependencies.scope);
 }
 

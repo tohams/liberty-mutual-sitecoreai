@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import type { PersonalizeInfo } from "@sitecore-content-sdk/content/personalize";
+import type { PersonalizationPreviewDependencies } from "./service";
 process.env.SITECORE_EDGE_CONTEXT_ID ||= "unit-test-personalization-preview";
 
 const page = {
@@ -43,4 +45,78 @@ test("preview requests accept selectors only, with no profiles, custom expressio
     assert.throws(() =>
       parsePersonalizationPreviewRequest({ ...input, ...extra }),
     );
+});
+
+test("prefers real flow labels and uses native content names only for a successfully empty component discovery", async () => {
+  const { loadPersonalizationPreviewCatalog } = await import("./service");
+  const selected = {
+    id: page.pageId,
+    name: "Home",
+    path: "/",
+    contentPath:
+      "/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Home",
+    siteName: "liberty-mutual-agent-portal",
+    language: "en",
+    version: 1,
+  };
+  const component = "c293373f7f755cfea495f62ed2a70920";
+  const native = `${component}_6c922be5e7d849358e4f405b8d4051a5`;
+  const definition = {
+    ref: "real-flow",
+    name: "Product priorities",
+    subtype: "EXPERIENCE",
+    transpiledVariants: [
+      {
+        name: "agency-growth",
+        tasks: [{ input: { template: JSON.stringify({ variantId: native }) } }],
+      },
+    ],
+  };
+  let fallbackCalls = 0;
+  const dependencies: PersonalizationPreviewDependencies = {
+    readFlows: async () => [definition],
+    getInfo: async () =>
+      ({ pageId: selected.id, variantIds: [native] }) as PersonalizeInfo,
+    loadLayout: async () => {
+      throw new Error("Not used in discovery");
+    },
+    createView: async () => "not-used",
+    readNativeContent: async () => {
+      fallbackCalls++;
+      return {
+        definitions: [
+          {
+            ...definition,
+            ref: `native_${component}`,
+            name: "Agency priorities",
+          },
+        ],
+        warnings: ["Native content variants"],
+      };
+    },
+  };
+  const exact = await loadPersonalizationPreviewCatalog(
+    selected,
+    "author-token",
+    dependencies,
+  );
+  assert.equal(exact.context.flows[0].name, "Product priorities");
+  assert.equal(fallbackCalls, 0);
+  const fallback = await loadPersonalizationPreviewCatalog(
+    selected,
+    "author-token",
+    { ...dependencies, readFlows: async () => [] },
+  );
+  assert.equal(fallback.context.flows[0].name, "Agency priorities");
+  assert.equal(fallbackCalls, 1);
+  assert.deepEqual(fallback.context.warnings, ["Native content variants"]);
+  await assert.rejects(
+    loadPersonalizationPreviewCatalog(selected, "author-token", {
+      ...dependencies,
+      readFlows: async () => {
+        throw new Error("Permission denied");
+      },
+    }),
+  );
+  assert.equal(fallbackCalls, 1);
 });

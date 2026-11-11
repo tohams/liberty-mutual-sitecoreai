@@ -12,7 +12,9 @@ const flowId = (value: unknown): value is string =>
 const object = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === "object" && !Array.isArray(value);
 
-async function json(response: Response): Promise<unknown> {
+export async function readPersonalizationResponse(
+  response: Response,
+): Promise<unknown> {
   const declared = response.headers.get("content-length");
   if (declared && (!/^\d+$/.test(declared) || Number(declared) > MAX_BYTES)) {
     void response.body?.cancel().catch(() => undefined);
@@ -112,7 +114,7 @@ export function personalizationDefinitionReader(
       });
       throw error;
     }
-    return json(response);
+    return readPersonalizationResponse(response);
   };
   return read;
 }

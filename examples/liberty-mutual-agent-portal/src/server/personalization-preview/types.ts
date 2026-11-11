@@ -28,6 +28,9 @@ export interface PersonalizationPreviewPage {
   siteName: string;
   language: string;
   version: number;
+  /** Non-enumerable server-only native layouts supplied after delegated page authorization. */
+  readonly nativeFinalLayout?: unknown;
+  readonly nativeSharedLayout?: unknown;
 }
 
 export interface PersonalizationPreviewContext {

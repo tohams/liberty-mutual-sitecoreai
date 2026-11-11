@@ -88,6 +88,72 @@ test("discovers named table outputs using actual native IDs, without treating ma
   );
 });
 
+test("parses the live page-level flow contract, using native template output IDs rather than management refs", () => {
+  const avery = "ed1ff2801b9b4f71946885ff88584fdf";
+  const daniel = "d57b13d4ee02493f8fcd6f254f8dc699";
+  const selected = {
+    ...page,
+    id: "cfe0e86f-dd93-4b8e-84cd-a2a46e8c1947",
+    path: "/growth/agent-audience-preview",
+    version: 6,
+  };
+  const fixture = [
+    {
+      ref: "7936d1d2-4f16-4ec8-ac63-a87a14a73e80",
+      name: "agent-audience-preview en",
+      type: "EMBEDDED",
+      subtype: "EXPERIENCE",
+      revision: 6,
+      transpiledVariants: [
+        {
+          ref: "477bd16a-3dcf-4f6e-9945-cc0c2a50f6ee",
+          name: "Avery agency principal",
+          tasks: [
+            {
+              implementation: "templateRenderTask",
+              input: {
+                inputType: "templateRenderTaskInput",
+                type: "application/json",
+                template: JSON.stringify({ variantId: avery }),
+              },
+            },
+          ],
+        },
+        {
+          ref: "a9bb18c7-5fa4-4ec9-8471-25d0f23f17dc",
+          name: "Daniel producer",
+          tasks: [
+            {
+              implementation: "templateRenderTask",
+              input: {
+                inputType: "templateRenderTaskInput",
+                type: "application/json",
+                template: JSON.stringify({ variantId: daniel }),
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ];
+  const catalog = buildPersonalizationCatalog(selected, fixture, {
+    pageId: selected.id,
+    variantIds: [avery, daniel],
+  } as PersonalizeInfo);
+  assert.deepEqual(catalog.context.flows[0].options, [
+    { id: "_default", label: "Default", control: true },
+    { id: avery, label: "Avery agency principal", control: false },
+    { id: daniel, label: "Daniel producer", control: false },
+  ]);
+  const choice = selectPersonalizationOutcomes(
+    catalog,
+    catalog.context.revision,
+    [{ flowId: fixture[0].ref, optionId: daniel }],
+  );
+  assert.equal(choice.decisions.pageVariantId, daniel);
+  assert.equal(choice.decisions.componentVariantIds.length, 0);
+});
+
 test("supports multiple component outcomes while preserving each component's default", () => {
   const result = buildPersonalizationCatalog(page, flows, info);
   const selection = selectPersonalizationOutcomes(
