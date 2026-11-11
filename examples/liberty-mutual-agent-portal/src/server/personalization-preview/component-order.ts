@@ -24,7 +24,7 @@ interface PlaceholderGroup {
 
 /** Native layout is already authorized and version-specific; sorting needs no API request. */
 function readRenderings(page: PersonalizationPreviewPage): NativeRendering[] {
-  let layout: unknown = page.nativeFinalLayout ?? page.nativeSharedLayout;
+  let layout: unknown = page.nativeFinalLayout || page.nativeSharedLayout;
   if (typeof layout === "string") {
     if (layout.length > 1_048_576) return [];
     try {
@@ -95,7 +95,7 @@ export function personalizationPreviewComponentOrder(
       });
   }
   const slots = portalPlaceholderOrderForRoute(page.path);
-  const rootOrder: readonly string[] | undefined = slots?.map(
+  const slotOrder: readonly string[] | undefined = slots?.map(
     (slot) => PORTAL_PLACEHOLDERS[slot].name,
   );
   const nestedOrder: readonly string[] = Object.values(CAMPAIGN_SLOTS).map(
@@ -120,10 +120,15 @@ export function personalizationPreviewComponentOrder(
           rendering.dynamicId &&
           candidate.path.at(-1)!.endsWith(`-${rendering.dynamicId}`),
       );
+      const childOrder = children.every((child) =>
+        nestedOrder.includes(child.path.at(-1)!.replace(/-\d+$/, "")),
+      )
+        ? nestedOrder
+        : [];
       children.sort((left, right) => {
         const rank = (child: PlaceholderGroup) => {
           const name = child.path.at(-1)!.replace(/-\d+$/, "");
-          const index = nestedOrder.indexOf(name);
+          const index = childOrder.indexOf(name);
           return index < 0 ? Number.MAX_SAFE_INTEGER : index;
         };
         return rank(left) - rank(right) || left.index - right.index;
@@ -132,6 +137,9 @@ export function personalizationPreviewComponentOrder(
     }
   };
   const roots = [...groups.values()].filter((group) => group.path.length === 1);
+  const rootOrder = roots.every((group) => slotOrder?.includes(group.path[0]))
+    ? slotOrder
+    : undefined;
   roots.sort((left, right) => {
     const rank = (group: PlaceholderGroup) => {
       const index = rootOrder?.indexOf(group.path[0]) ?? -1;

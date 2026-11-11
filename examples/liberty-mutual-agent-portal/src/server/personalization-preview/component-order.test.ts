@@ -135,6 +135,36 @@ test("unrecognized pages and orphaned placeholders retain deterministic native o
   ]);
 });
 
+test("an unfamiliar layout on a known page retains native order instead of moving only its recognized slot", () => {
+  const page = selected("/", [
+    rendering(first, "new-layout-root"),
+    rendering(second, "headless-agent-guidance"),
+  ]);
+  assert.deepEqual(personalizationPreviewComponentOrder(page), [first, second]);
+});
+
+test("a shared-only layout is used when the page has no final-layout overrides", () => {
+  const page = selected("/", []);
+  const shared = {
+    ...page,
+    nativeFinalLayout: "",
+    nativeSharedLayout: JSON.stringify({
+      devices: [
+        {
+          renderings: [
+            rendering(first, "headless-agent-guidance"),
+            rendering(second, "headless-agency-priorities"),
+          ],
+        },
+      ],
+    }),
+  };
+  assert.deepEqual(personalizationPreviewComponentOrder(shared), [
+    second,
+    first,
+  ]);
+});
+
 test("missing or unfamiliar native layouts leave ordering to native discovery, rather than inventing component positions", () => {
   const page = selected("/", []);
   for (const nativeFinalLayout of [undefined, "not-json", { unexpected: true }])
