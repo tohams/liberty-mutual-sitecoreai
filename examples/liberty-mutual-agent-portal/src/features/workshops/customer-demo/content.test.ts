@@ -1262,6 +1262,88 @@ test("one full copyright notice updates both footers and restores only its year"
   );
 });
 
+test("all 58 numbered points have concise purposes aligned with their clicks", () => {
+  assert.deepEqual(
+    steps.map((entry) => entry.actionPurposes.length),
+    [3, 3, 3, 8, 4, 3, 4, 5, 4, 4, 6, 5, 6],
+  );
+  assert.equal(
+    steps.reduce((sum, entry) => sum + entry.actionPurposes.length, 0),
+    58,
+  );
+  for (const entry of steps) {
+    assert.equal(
+      entry.actionPurposes.length,
+      entry.presenterActions.length,
+      entry.id,
+    );
+    assert.equal(entry.actionPurposes.length, entry.actions.length, entry.id);
+    assert.equal(
+      new Set(entry.actionPurposes).size,
+      entry.actionPurposes.length,
+      entry.id,
+    );
+    for (const purpose of entry.actionPurposes) {
+      assert.equal(purpose, purpose.trim(), entry.id);
+      assert(
+        purpose.split(/\s+/).length >= 4 && purpose.split(/\s+/).length <= 13,
+        `${entry.id}: concise purpose`,
+      );
+      assert(purpose.length <= 95, `${entry.id}: second-monitor heading`);
+      assert.doesNotMatch(
+        purpose,
+        /operator|how it works|internal note|step \d|^click |^select /i,
+      );
+    }
+  }
+});
+
+test("purpose headings preserve the specific evidence and boundaries of each journey", () => {
+  const indexing = step("public-indexing").actionPurposes;
+  assert.match(indexing[0], /clean Search record before/);
+  assert.match(indexing[1], /Edit, approve, and publish/);
+  assert.match(
+    indexing[2],
+    /Search updates automatically.*retains classifications/,
+  );
+  const recommendations = step("public-profound").actionPurposes;
+  assert.match(recommendations[0], /existing Scrunch recommendation/);
+  assert.match(
+    recommendations[3],
+    /Explain proposed Profound intake.*human review/,
+  );
+  assert.doesNotMatch(
+    prose(recommendations),
+    /publish Profound|apply Profound/i,
+  );
+  assert.match(
+    step("public-api").actionPurposes[3],
+    /Explain reuse.*other applications/,
+  );
+  assert.deepEqual(step("portal-relevance").actionPurposes.slice(0, 3), [
+    "Show Daniel’s producer baseline for comparison",
+    "Show Avery’s agency-growth priorities for comparison",
+    "Identify Avery’s native profile for an exact test",
+  ]);
+  for (const purpose of step("portal-relevance").actionPurposes)
+    assert.doesNotMatch(purpose, /resources|design|Daniel.*profile/i);
+  const preview = step("portal-preview").actionPurposes;
+  assert.match(preview[1], /Preview.*agency-growth Draft/);
+  assert.match(preview[2], /producer variant remains unchanged/);
+  assert.doesNotMatch(
+    prose(preview.slice(0, 3)),
+    /eligibility|profile test|rule test/i,
+  );
+  assert.match(
+    step("portal-audit-rollback").actionPurposes[1],
+    /Identify.*original and changed versions/,
+  );
+  assert.doesNotMatch(
+    step("portal-audit-rollback").actionPurposes[1],
+    /compare|publish/i,
+  );
+});
+
 test("the presenter guide displays concise clicks and result checks, with preparation kept separate", () => {
   const spoken = prose(
     steps.flatMap((entry) => [...entry.talkTrack, entry.transition]),
@@ -1276,6 +1358,9 @@ test("the presenter guide displays concise clicks and result checks, with prepar
   );
   assert.match(page, /<h3>\{step\.title\}<\/h3>/);
   assert.match(page, /step\.presenterActions\.map/);
+  assert.match(page, /className=\{styles\.actionPurpose\}/);
+  assert.match(page, /\{number\}\.\{actionIndex \+ 1\}/);
+  assert.match(page, /step\.actionPurposes\[actionIndex\]/);
   assert.match(page, /Result check:/);
   assert.match(
     page,

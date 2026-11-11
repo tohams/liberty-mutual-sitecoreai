@@ -104,6 +104,11 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 4 },
           { point: 3, action: 3, afterLine: 2 },
         ],
+        actionPurposes: [
+          "Start the customer’s search for insurance guidance",
+          "Find relevant guidance from a natural-language question",
+          "Offer an agent when the question lacks support",
+        ],
         presenterActions: [
           [
             "Start in the **Public website** tab on **Home**.",
@@ -294,6 +299,11 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 3, afterLine: 4 },
         ],
+        actionPurposes: [
+          "Show one article’s customer copy and governed metadata",
+          "Show how taxonomy identifies content applicability",
+          "Inspect Article schema for permitted external discovery",
+        ],
         presenterActions: [
           [
             "Switch to the **Public website** tab, and open the **Public article** URL. Briefly show **Bundling your car and home insurance** and its article copy.",
@@ -435,6 +445,11 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 9 },
           { point: 3, action: 3, afterLine: 4 },
         ],
+        actionPurposes: [
+          "Establish the clean Search record before the update",
+          "Edit, approve, and publish one controlled revision",
+          "Verify Search updates automatically and retains classifications",
+        ],
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Content → Search Sources → Liberty Mutual Approved Answers → Preview**. Keep this tab as **Search Preview**.",
@@ -572,6 +587,16 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 4, afterLine: 5 },
           { point: 3, action: 8, afterLine: 4 },
+        ],
+        actionPurposes: [
+          "Create a page with approved structure",
+          "Write page content directly on the canvas",
+          "Choose a reusable image from Modern Media Library",
+          "Reuse an approved promotion and change its presentation",
+          "Preview the complete page before publication",
+          "Submit the page and its local content for review",
+          "Approve the reviewed page",
+          "Publish the page and verify the customer experience",
         ],
         presenterActions: [
           [
@@ -842,6 +867,12 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 3, afterLine: 5 },
           { point: 2, action: 4, afterLine: 3 },
         ],
+        actionPurposes: [
+          "Open the existing Scrunch recommendation example",
+          "Compare live copy with the proposed improvement",
+          "Locate that recommendation in the authoring field",
+          "Explain proposed Profound intake and human review",
+        ],
         presenterActions: [
           [
             "Switch to the **Prospera recommendations** tab in the **Incognito / Private** window. Confirm **agverticals → Prospera**.",
@@ -1038,6 +1069,11 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 3, afterLine: 2 },
         ],
+        actionPurposes: [
+          "Focus analytics on the site and reporting period",
+          "Read actual page views and CTA engagement",
+          "Connect a custom event to a business action",
+        ],
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Optimization → Analytics → Events**. If the left navigation is collapsed, choose **Expand navigation** first. Keep this tab as **Events**.",
@@ -1143,6 +1179,12 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 2 },
           { point: 2, action: 3, afterLine: 2 },
         ],
+        actionPurposes: [
+          "Show where Experience Edge delivers approved content",
+          "Retrieve the published page through native GraphQL",
+          "Verify the API and website use the same revision",
+          "Explain reuse by other applications without duplicate content",
+        ],
         presenterActions: [
           [
             "Return to the already-open presentation, and show **Experience Edge content delivery**.",
@@ -1228,6 +1270,13 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 5, afterLine: 4 },
+        ],
+        actionPurposes: [
+          "Show Daniel’s producer baseline for comparison",
+          "Show Avery’s agency-growth priorities for comparison",
+          "Identify Avery’s native profile for an exact test",
+          "Prove Avery matches the agency-growth personalization",
+          "Explain the state and business conditions behind the result",
         ],
         presenterActions: [
           [
@@ -1375,6 +1424,12 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 2 },
           { point: 2, action: 2, afterLine: 4 },
           { point: 3, action: 3, afterLine: 2 },
+        ],
+        actionPurposes: [
+          "Show the Brand Kit that guides AI-assisted writing",
+          "Review an AI suggestion and retain author control",
+          "Show the component choices that govern page design",
+          "Confirm the author controls which copy is retained",
         ],
         presenterActions: [
           [
@@ -1543,6 +1598,12 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 3, afterLine: 4 },
         ],
+        actionPurposes: [
+          "Locate the marketer-managed priority collection",
+          "Create a Draft while preserving the published order",
+          "Reorder approved recommendations for the Texas campaign",
+          "Hold the Draft for preview and approval",
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Content**.",
@@ -1662,6 +1723,14 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 3, afterLine: 3 },
           { point: 3, action: 6, afterLine: 4 },
         ],
+        actionPurposes: [
+          "Open the selected page’s available content variants",
+          "Preview the Texas-first agency-growth Draft",
+          "Confirm the producer variant remains unchanged",
+          "Submit the saved priority change for review",
+          "Approve the reviewed priority order",
+          "Publish once and verify only the intended experience changes",
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
@@ -1775,6 +1844,13 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 4, afterLine: 5 },
           { point: 3, action: 5, afterLine: 3 },
         ],
+        actionPurposes: [
+          "Locate the shared copyright source for both sites",
+          "Change the year while preserving the full notice",
+          "Review and approve the shared content update",
+          "Publish one source and inspect the year-only difference",
+          "Verify both sites display the same updated notice",
+        ],
         presenterActions: [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Content**.",
@@ -1882,6 +1958,14 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 5, afterLine: 6 },
           { point: 3, action: 6, afterLine: 2 },
+        ],
+        actionPurposes: [
+          "Open the shared notice for controlled restoration",
+          "Identify the retained original and changed versions",
+          "Create a new Draft from the original wording",
+          "Review and approve the restored notice",
+          "Publish the restoration and show version history",
+          "Confirm the restored notice reaches both sites",
         ],
         presenterActions: [
           [

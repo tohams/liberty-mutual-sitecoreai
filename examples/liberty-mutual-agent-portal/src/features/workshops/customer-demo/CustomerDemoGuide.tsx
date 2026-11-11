@@ -76,9 +76,9 @@ function PresenterActionSequence({
           data-demo-cue="copy"
           key={index}
         >
-          <h4 className={styles.cueLabel}>
+          <h5 className={styles.cueLabel}>
             <Clipboard size={15} aria-hidden="true" /> Copy / paste
-          </h4>
+          </h5>
           {step.id === "public-api" &&
             !includeDeliveryToken &&
             beat.inputs.some((input) => input.label === "HTTP headers") && (
@@ -106,9 +106,9 @@ function PresenterActionSequence({
           data-demo-cue="say"
           key={index}
         >
-          <h4 className={styles.cueLabel}>
+          <h5 className={styles.cueLabel}>
             <MessageSquare size={15} aria-hidden="true" /> Say / point out
-          </h4>
+          </h5>
           <Lines lines={beat.lines} />
         </aside>
       );
@@ -118,9 +118,9 @@ function PresenterActionSequence({
         data-demo-cue="action"
         key={index}
       >
-        <h4 className={styles.cueLabel}>
+        <h5 className={styles.cueLabel}>
           <MousePointer2 size={15} aria-hidden="true" /> Do
-        </h4>
+        </h5>
         {beat.lines.map((line, lineIndex) => (
           <div className={styles.clickLine} key={lineIndex}>
             <GuideText text={line} openLinksInNewTab />
@@ -409,12 +409,22 @@ export async function CustomerDemoGuide({
                         <strong>{step.persona}.</strong>{" "}
                         <GuideText text={step.scenario} />
                       </p>
-                      <ol className={styles.clicks}>
+                      <ol className={styles.clicks} role="list">
                         {step.presenterActions.map((_, actionIndex) => (
                           <li
                             key={actionIndex}
                             data-demo-action={actionIndex + 1}
                           >
+                            <h4 className={styles.actionPurpose}>
+                              <span className={styles.actionNumber}>
+                                {number}.{actionIndex + 1}
+                              </span>
+                              <span>
+                                <GuideText
+                                  text={step.actionPurposes[actionIndex]}
+                                />
+                              </span>
+                            </h4>
                             <PresenterActionSequence
                               step={step}
                               action={actionIndex + 1}

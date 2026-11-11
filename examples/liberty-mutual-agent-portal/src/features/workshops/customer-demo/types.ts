@@ -47,6 +47,8 @@ export interface DemoStep {
   /** Brief spoken business points and concrete screen observations for this requirement. */
   presenterPoints: string[];
   presenterCues: DemoPresenterCue[];
+  /** Concise purpose of each numbered action, aligned one-to-one with presenterActions. */
+  actionPurposes: string[];
   /** Exact clicks in the same action order as the copy fields and screenshots. */
   presenterActions: string[][];
   presenterResult: string;
