@@ -25,12 +25,11 @@ export async function PersonalizationPreviewView({
   selected: PersonalizationPreviewPage;
   accessToken: string;
 }) {
-  const { decisions, selectedExperiences } =
-    await revalidatePersonalizationPreviewSession(
-      session,
-      selected,
-      accessToken,
-    );
+  const { decisions } = await revalidatePersonalizationPreviewSession(
+    session,
+    selected,
+    accessToken,
+  );
   const page = await getPersonalizationPreviewLayout(selected, decisions);
   const route = selected.path;
   const placements = getPortalPlaceholders(
@@ -64,23 +63,6 @@ export async function PersonalizationPreviewView({
     <NextIntlClientProvider locale={selected.language} messages={{}}>
       <Providers page={page}>
         <div className={styles.preview}>
-          <header className={styles.bar}>
-            <div>
-              <strong>Personalization Preview</strong>
-              <span className={styles.page}>{selected.name}</span>
-            </div>
-            <span className={styles.readOnly}>Read-only</span>
-            {selectedExperiences.length > 0 && (
-              <ul className={styles.selections}>
-                {selectedExperiences.map((experience) => (
-                  <li key={experience.flowId}>
-                    <strong>{experience.flowName}</strong>
-                    <span>{experience.optionLabel}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </header>
           <div className={styles.portal} inert>
             <PortalApp
               initialData={getPersonalizationPreviewBootstrap()}
