@@ -105,7 +105,9 @@ function descendingPath(left: Path, right: Path): number {
 
 /**
  * Combine selected native receipts. A Hide receipt is accepted only when its
- * entire placeholder tree equals the baseline with exactly that target removed.
+ * entire placeholder tree equals its independent native component-control
+ * receipt with exactly that target removed. This proof remains independent of
+ * any simultaneously selected page variant.
  * Unrelated changes, nested selections, and silent default fallbacks are rejected.
  */
 export async function composeNativePersonalizationPreview(
@@ -141,8 +143,15 @@ export async function composeNativePersonalizationPreview(
       const native = verify(await load(selection.variantId), selected);
       const matches = locations(native, ids[index]);
       if (matches.length === 0 && !selection.control) {
-        const expected = structuredClone(baseline);
-        remove(expected, bases[index].path);
+        const control = verify(await load(`${ids[index]}_default`), selected);
+        const controlMatches = locations(control, ids[index]);
+        if (
+          controlMatches.length !== 1 ||
+          !samePath(controlMatches[0].path, bases[index].path)
+        )
+          return fail();
+        const expected = structuredClone(control);
+        remove(expected, controlMatches[0].path);
         if (
           JSON.stringify(expected.layout.sitecore.route!.placeholders) !==
           JSON.stringify(native.layout.sitecore.route!.placeholders)

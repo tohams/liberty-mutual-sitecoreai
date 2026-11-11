@@ -23,6 +23,7 @@ import {
   PersonalizationRequestSuperseded,
   readCurrentPersonalizationResponse,
 } from "./request-state";
+import { startPersonalizationPreviewMeasure } from "./performance";
 
 const REQUEST_TIMEOUT_MS = 60_000;
 let marketplaceClient: Promise<ClientSDK> | null = null;
@@ -135,6 +136,7 @@ export function PersonalizationPreviewMarketplace() {
         language: selected.language,
       });
       if (selected.version) query.set("version", String(selected.version));
+      const finishRoundTrip = startPersonalizationPreviewMeasure("catalog");
       try {
         const response = await fetch(
           `/api/personalization-preview/context?${query}`,
@@ -151,6 +153,7 @@ export function PersonalizationPreviewMarketplace() {
           currentPageKey: () =>
             personalizationPreviewPageKey(nativePage.current),
         });
+        finishRoundTrip();
         if (needsConnection(response, payload)) {
           requireConnection();
           return false;
@@ -183,6 +186,7 @@ export function PersonalizationPreviewMarketplace() {
         );
         return false;
       } finally {
+        finishRoundTrip();
         clearTimeout(timeout);
         if (contextRequest.current === controller) {
           contextRequest.current = null;
@@ -364,6 +368,7 @@ export function PersonalizationPreviewMarketplace() {
         selectedCatalog.page,
       );
       const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+      const finishRoundTrip = startPersonalizationPreviewMeasure("prepare");
       try {
         const response = await fetch("/api/personalization-preview", {
           method: "POST",
@@ -386,6 +391,7 @@ export function PersonalizationPreviewMarketplace() {
           currentPageKey: () =>
             personalizationPreviewPageKey(nativePage.current),
         });
+        finishRoundTrip();
         if (needsConnection(response, payload)) {
           requireConnection();
           setCatalog(null);
@@ -428,6 +434,7 @@ export function PersonalizationPreviewMarketplace() {
           );
         throw error;
       } finally {
+        finishRoundTrip();
         clearTimeout(timeout);
         if (previewRequest.current === controller)
           previewRequest.current = null;

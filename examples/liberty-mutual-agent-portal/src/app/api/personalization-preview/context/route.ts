@@ -9,19 +9,25 @@ import {
   parsePersonalizationPageRequest,
   personalizationPreviewErrorResponse,
 } from "@/server/personalization-preview/service";
+import { PersonalizationPreviewServerTimings } from "@/server/personalization-preview/timing";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 export async function GET(request: NextRequest) {
+  const timings = new PersonalizationPreviewServerTimings();
   try {
     if (
       request.headers.has("origin") ||
       request.headers.get("sec-fetch-site") === "cross-site"
     )
       requireSameOrigin(request);
-    const actor = await requirePersonalizationPreviewSession();
-    await limitPersonalizationPreviewRequests(actor.user.sub!);
+    const actor = await timings.measure("auth", () =>
+      requirePersonalizationPreviewSession(),
+    );
+    await timings.measure("limit", () =>
+      limitPersonalizationPreviewRequests(actor.user.sub!),
+    );
     const params = request.nextUrl.searchParams;
     if (
       [...params.keys()].some(
@@ -47,15 +53,14 @@ export async function GET(request: NextRequest) {
         : {}),
       ...(params.has("siteName") ? { siteName: params.get("siteName") } : {}),
     });
-    const page = await resolveAuthorizedPersonalizationPreviewPage(
-      input,
-      actor.accessToken,
+    const page = await timings.measure("page", () =>
+      resolveAuthorizedPersonalizationPreviewPage(input, actor.accessToken),
     );
-    return jsonResponse(
-      (await loadPersonalizationPreviewCatalog(page, actor.accessToken))
-        .context,
+    const catalog = await timings.measure("catalog", () =>
+      loadPersonalizationPreviewCatalog(page, actor.accessToken),
     );
+    return timings.apply(jsonResponse(catalog.context));
   } catch (error) {
-    return personalizationPreviewErrorResponse(error);
+    return timings.apply(personalizationPreviewErrorResponse(error));
   }
 }

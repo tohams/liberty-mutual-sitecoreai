@@ -23,6 +23,10 @@ import {
 } from "./preview-sessions";
 import { getPersonalizationPreviewLayout } from "./preview-client";
 import { personalizationPreviewContentContextId } from "./content-context";
+import {
+  observePersonalizationPreviewStage,
+  type PersonalizationPreviewTimingObserver,
+} from "./timing";
 import type {
   PersonalizationPreviewPage,
   PersonalizationPreviewPageRequest,
@@ -41,6 +45,7 @@ export interface PersonalizationPreviewDependencies {
   createView: typeof createPersonalizationPreviewViewSession;
   origin?: string;
   scope?: string;
+  onTiming?: PersonalizationPreviewTimingObserver;
 }
 
 export function personalizationPreviewDependencies(): PersonalizationPreviewDependencies {
@@ -176,10 +181,10 @@ export async function preparePersonalizationPreview(
   input: PersonalizationPreviewRequest,
   dependencies = personalizationPreviewDependencies(),
 ): Promise<PersonalizationPreviewResult> {
-  const catalog = await loadPersonalizationPreviewCatalog(
-    page,
-    accessToken,
-    dependencies,
+  const catalog = await observePersonalizationPreviewStage(
+    "catalog",
+    () => loadPersonalizationPreviewCatalog(page, accessToken, dependencies),
+    dependencies.onTiming,
   );
   const { decisions, selectedExperiences } = selectPersonalizationOutcomes(
     catalog,
@@ -187,20 +192,29 @@ export async function preparePersonalizationPreview(
     input.selections,
   );
   // Verify native receipts before creating a ready link. Nothing is published or written to CDP.
-  await dependencies.loadLayout(page, decisions);
+  await observePersonalizationPreviewStage(
+    "render",
+    () => dependencies.loadLayout(page, decisions),
+    dependencies.onTiming,
+  );
   if (!dependencies.origin)
     throw new PersonalizationPreviewError(
       "CONFIGURATION_REQUIRED",
       "Personalization Preview is not configured.",
       503,
     );
-  const token = await dependencies.createView(actor, {
-    page,
-    revision: input.revision,
-    selections: input.selections,
-    decisions,
-    selectedExperiences,
-  });
+  const token = await observePersonalizationPreviewStage(
+    "token",
+    () =>
+      dependencies.createView(actor, {
+        page,
+        revision: input.revision,
+        selections: input.selections,
+        decisions,
+        selectedExperiences,
+      }),
+    dependencies.onTiming,
+  );
   return {
     status: "ready",
     title: "Your personalization preview is ready",

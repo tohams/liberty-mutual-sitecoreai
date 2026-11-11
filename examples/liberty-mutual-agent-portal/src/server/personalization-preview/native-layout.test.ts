@@ -79,7 +79,7 @@ test("accepts a Hide receipt only when the target alone is absent, preserving im
   const result = await composeNativePersonalizationPreview(
     selected,
     decisions([a]),
-    async (variant) => (variant === "_default" ? baseline : hidden),
+    async (variant) => (variant.endsWith("_default") ? baseline : hidden),
   );
   assert.deepEqual(result.layout.sitecore.route!.placeholders.main, [
     component(b, "untouched"),
@@ -108,7 +108,8 @@ test("rejects a target-absent receipt that also mutates, moves, or removes unrel
         composeNativePersonalizationPreview(
           selected,
           decisions([a]),
-          async (variant) => (variant === "_default" ? baseline : receipt),
+          async (variant) =>
+            variant.endsWith("_default") ? baseline : receipt,
         ),
       { code: "PREVIEW_RECEIPT_MISMATCH" },
     );
@@ -142,6 +143,8 @@ test("composes replacements before multiple descending-index hides so every orig
     [`${a}_variant`, hideA],
     [`${b}_variant`, replaceB],
     [`${c}_variant`, hideC],
+    [`${a}_default`, baseline],
+    [`${c}_default`, baseline],
   ]);
   const snapshots = structuredClone([...receipts.values()]);
   const result = await composeNativePersonalizationPreview(
@@ -176,7 +179,7 @@ test("applies a nested hide before an earlier top-level removal shifts its paren
     selected,
     decisions([a, b]),
     async (variant) =>
-      variant === "_default"
+      variant.endsWith("_default")
         ? baseline
         : variant === `${a}_variant`
           ? hideA
@@ -186,6 +189,68 @@ test("applies a nested hide before an earlier top-level removal shifts its paren
     component(d, "second"),
     emptyWrapper,
   ]);
+});
+
+test("a component Hide is proven against its native control while preserving a simultaneous page variant's other content", async () => {
+  const control = page([
+    component(a, "default-a"),
+    component(b, "default-b"),
+    component(c, "unchanged"),
+  ]);
+  const selectedPageVariant = page([
+    component(a, "default-a"),
+    component(b, "page-variant-b"),
+    component(c, "unchanged"),
+  ]);
+  const hidden = page([component(b, "default-b"), component(c, "unchanged")]);
+  const selection = decisions([a]);
+  selection.pageVariantId = "page-variant";
+  const calls: string[] = [];
+  const result = await composeNativePersonalizationPreview(
+    selected,
+    selection,
+    async (variant) => {
+      calls.push(variant);
+      if (variant === "page-variant") return selectedPageVariant;
+      if (variant === `${a}_default`) return control;
+      if (variant === `${a}_variant`) return hidden;
+      assert.fail("Unexpected native receipt request");
+    },
+  );
+  assert.deepEqual(calls, ["page-variant", `${a}_variant`, `${a}_default`]);
+  assert.deepEqual(result.layout.sitecore.route!.placeholders.main, [
+    component(b, "page-variant-b"),
+    component(c, "unchanged"),
+  ]);
+  assert.deepEqual(control.layout.sitecore.route!.placeholders.main, [
+    component(a, "default-a"),
+    component(b, "default-b"),
+    component(c, "unchanged"),
+  ]);
+});
+
+test("a Hide control receipt must contain the same unique target at the selected baseline's location", async () => {
+  const baseline = page([component(a, "default-a"), component(b, "default-b")]);
+  const hidden = page([component(b, "default-b")]);
+  for (const control of [
+    page([component(b, "default-b"), component(a, "default-a")]),
+    page([component(a, "one"), component(a, "two"), component(b, "default-b")]),
+  ]) {
+    await assert.rejects(
+      () =>
+        composeNativePersonalizationPreview(
+          selected,
+          decisions([a]),
+          async (variant) =>
+            variant === "_default"
+              ? baseline
+              : variant === `${a}_default`
+                ? control
+                : hidden,
+        ),
+      { code: "PREVIEW_RECEIPT_MISMATCH" },
+    );
+  }
 });
 
 test("rejects hiding through a default selection or accepting an unchanged non-control receipt", async () => {

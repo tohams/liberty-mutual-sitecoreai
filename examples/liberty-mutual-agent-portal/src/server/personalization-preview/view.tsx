@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import components from ".sitecore/component-map";
 import Providers from "@/Providers";
 import { PortalApp } from "@/features/portal/PortalApp";
+import { PersonalizationPreviewRenderReady } from "@/features/personalization-preview/PersonalizationPreviewRenderReady";
 import {
   getPortalPlaceholders,
   type PortalPlaceholderPlacement,
@@ -94,6 +95,7 @@ export async function PersonalizationPreviewView({
               pageContent={pageContent}
             />
           </div>
+          <PersonalizationPreviewRenderReady />
         </div>
       </Providers>
     </NextIntlClientProvider>
