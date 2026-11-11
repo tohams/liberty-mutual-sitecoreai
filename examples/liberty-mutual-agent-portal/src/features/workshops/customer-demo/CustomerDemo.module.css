@@ -436,6 +436,11 @@
   font-size: 14px;
   line-height: 1.6;
 }
+.slideReturn {
+  display: block;
+  margin-top: 6px;
+  font-weight: 600;
+}
 .observations h4 {
   color: #746b82;
   font-size: 12px;

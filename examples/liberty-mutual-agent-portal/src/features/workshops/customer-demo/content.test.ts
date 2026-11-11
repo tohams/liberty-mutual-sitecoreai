@@ -617,7 +617,7 @@ test("analytics uses the monthly report without generating new events", () => {
     /Events Table/i,
     /Site.*liberty-mutual-public-site/,
     /Time.*1 month/,
-    /Event Type.*pageView.*LM_PUBLIC_CTA_CLICK.*checked/i,
+    /Event Type.*select only pageView and LM_PUBLIC_CTA_CLICK.*clear all other event checkboxes/i,
     /pageView/,
     /LM_PUBLIC_CTA_CLICK/,
     /custom event.*next-step button or link/i,
@@ -1180,6 +1180,10 @@ test("the presenter guide displays concise clicks and result checks, with prepar
   assert.match(page, /<h3>\{step\.title\}<\/h3>/);
   assert.match(page, /step\.presenterActions\.map/);
   assert.match(page, /Result check:/);
+  assert.match(
+    page,
+    /step\.presenterResult[\s\S]*?Return to this slide, and click once to mark the area\s+complete\./,
+  );
   assert.match(page, /className=\{styles\.screenshot\}/);
   assert.doesNotMatch(
     page,

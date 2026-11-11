@@ -379,6 +379,10 @@ export async function CustomerDemoGuide({
                       <p className={styles.resultCheck}>
                         <strong>Result check:</strong>{" "}
                         <GuideText text={step.presenterResult} />
+                        <span className={styles.slideReturn}>
+                          Return to this slide, and click once to mark the area
+                          complete.
+                        </span>
                       </p>
                       {step.images
                         ?.filter((image) => !image.afterAction)
