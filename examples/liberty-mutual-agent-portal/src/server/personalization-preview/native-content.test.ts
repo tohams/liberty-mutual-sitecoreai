@@ -153,6 +153,12 @@ test("stale/missing current-version variants are disclosed rather than silently 
   );
   assert.equal(result.groups[0].choices.length, 1);
   assert.match(result.warnings[0], /selected page version/);
+  const unpublished = nativeContentGroups(selectedPage(), {
+    ...info,
+    variantIds: [agency],
+  });
+  assert.equal(unpublished.groups[0].choices.length, 1);
+  assert.match(unpublished.warnings[0], /selected page version/);
 });
 
 test("rejects missing native metadata instead of inventing content labels", async () => {

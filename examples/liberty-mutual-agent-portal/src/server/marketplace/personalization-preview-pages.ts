@@ -217,10 +217,6 @@ async function readSitecore(
 export async function resolveAuthorizedPersonalizationPreviewPage(
   input: PersonalizationPreviewPageRequest,
   accessToken: string,
-  onLayouts?: (layouts: {
-    finalLayout: unknown;
-    sharedLayout: unknown;
-  }) => void,
 ): Promise<PersonalizationPreviewPage> {
   const pageId = itemId(input.pageId);
   if (
@@ -321,10 +317,6 @@ export async function resolveAuthorizedPersonalizationPreviewPage(
   }
   const contentPath = `/${String(page.path).replace(/^\/+|\/+$/g, "")}`;
   const path = contentPath.slice(`${site.root}/Home`.length) || "/";
-  onLayouts?.({
-    finalLayout: page.finalLayout,
-    sharedLayout: page.sharedLayout,
-  });
   const selected: PersonalizationPreviewPage = {
     id: pageId,
     name: page.name,

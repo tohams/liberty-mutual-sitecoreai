@@ -72,6 +72,7 @@ export function nativeContentGroups(
   const groups: NativeContentGroup[] = [];
   const seen = new Set<string>();
   const mapped = new Set<string>();
+  let unavailableRows = 0;
   for (const device of layout.devices) {
     if (
       !object(device) ||
@@ -114,7 +115,10 @@ export function nativeContentGroups(
         const variantId = matches[0][2];
         if (!new RegExp(`^${componentId}_[a-f0-9]{32}$`).test(variantId))
           invalid();
-        if (!available.has(variantId)) continue; // Not exposed by this native preview context/version.
+        if (!available.has(variantId)) {
+          unavailableRows++;
+          continue; // Not exposed by this native preview context/version.
+        }
         if (mapped.has(variantId)) invalid();
         mapped.add(variantId);
         let dataSourceId: string | undefined;
@@ -134,9 +138,12 @@ export function nativeContentGroups(
   }
   if (groups.length > 10 || mapped.size > 40) invalid();
   const missing = info.variantIds.filter((value) => !mapped.has(value));
-  const warnings = missing.length
-    ? ["Some native variants are not available in this selected page version."]
-    : [];
+  const warnings =
+    missing.length || unavailableRows
+      ? [
+          "Some native variants are not available in this selected page version.",
+        ]
+      : [];
   if (!groups.length && info.variantIds.length) invalid();
   return { groups, warnings };
 }
