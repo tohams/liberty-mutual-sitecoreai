@@ -164,11 +164,11 @@ test("both customer journeys explain demonstrated behavior and a bounded AI-assi
 test("the focused live plan leaves three minutes within the forty-five-minute limit", () => {
   assert.deepEqual(
     customerDemoChapters[0].steps.map((entry) => entry.durationMinutes),
-    [2, 2, 4, 9, 2, 2, 2],
+    [2, 2, 4, 7, 2, 2, 2],
   );
   assert.deepEqual(
     customerDemoChapters[1].steps.map((entry) => entry.durationMinutes),
-    [3, 2, 2, 4, 2, 2],
+    [3, 2, 2, 4, 3, 3],
   );
   const schedule = customerDemoSchedule(customerDemoChapters);
   assert.equal(DEMO_OPENING_MINUTES, 3);
@@ -181,16 +181,16 @@ test("the focused live plan leaves three minutes within the forty-five-minute li
       [3, 5],
       [5, 7],
       [7, 11],
-      [11, 20],
+      [11, 18],
+      [18, 20],
       [20, 22],
       [22, 24],
-      [24, 26],
-      [26, 29],
+      [24, 27],
+      [27, 29],
       [29, 31],
-      [31, 33],
-      [33, 37],
-      [37, 39],
-      [39, 41],
+      [31, 35],
+      [35, 38],
+      [38, 41],
     ],
   );
   assert.deepEqual(
@@ -1106,7 +1106,7 @@ test("one full copyright notice updates both footers and restores only its year"
     "The copyright exercise must not repurpose the product-availability legal notice",
   );
   for (const entry of [shared, step("portal-audit-rollback")]) {
-    assert.equal(entry.durationMinutes, 2);
+    assert.equal(entry.durationMinutes, 3);
     assert.doesNotMatch(
       prose(entry),
       /Coverage and availability|added sentence|temporary sentence|append|Content owner|Public website content team|Content Editor/i,
@@ -1138,6 +1138,16 @@ test("one full copyright notice updates both footers and restores only its year"
   assert.doesNotMatch(
     rollback,
     /Workflow history|acting account|timestamps|read the user|who submitted|Page items/,
+  );
+  const restoration = step("portal-audit-rollback");
+  assert.equal(restoration.presenterActions.length, 6);
+  assert.match(
+    prose(restoration.presenterActions[4]),
+    /Compare versions.*Choose close.*Show all fields.*Statistics.*Updated.*Updated by.*latest update.*Collapse Statistics.*restore Show all fields to its original setting/,
+  );
+  assert.match(
+    prose(restoration.presenterPoints),
+    /Versions show what changed.*statistics show who last updated it and when/,
   );
   assert.match(
     prose(shared.presenterActions[3]),
@@ -1303,7 +1313,7 @@ test("frontend comparisons precede marketer controls and shared publishing prece
     customerDemoChapters.map((chapter) =>
       chapter.steps.reduce((sum, entry) => sum + entry.durationMinutes, 0),
     ),
-    [23, 15],
+    [21, 17],
   );
 });
 

@@ -514,7 +514,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketing builds and publishes pages from a library of pre-approved components",
         phase: "Authoring & Content-Operation Flow",
         sourceSlide: 10,
-        durationMinutes: 9,
+        durationMinutes: 7,
         persona: "Public-site content administrator",
         scenario:
           "A marketer needs a new coverage page using approved components, with review before customers can see it.",
@@ -1657,7 +1657,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Approved shared content is managed once and distributed to every website",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
-        durationMinutes: 2,
+        durationMinutes: 3,
         persona: "Content administrator",
         scenario:
           "The copyright year must stay consistent in the public website and Agent Portal footers.",
@@ -1756,7 +1756,7 @@ export const customerDemoChapters: DemoChapter[] = [
         label: "Every change is approved, auditable, and reversible",
         phase: "Shared-Content Foundation",
         sourceSlide: 11,
-        durationMinutes: 2,
+        durationMinutes: 3,
         persona: "Content administrator",
         scenario:
           "The team needs to compare the shared copyright change and restore its original year while preserving version history.",
@@ -1783,7 +1783,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterPoints: [
           "Restore earlier wording through a new reviewed version, preserving the original and changed revisions.",
-          "While the restoration publishes, show the retained versions and compare the restored notice with the original.",
+          "Versions show what changed; item statistics show who last updated it and when.",
           "Finish with **2025** in both footers: a controlled change and a controlled reversal.",
         ],
         presenterActions: [
@@ -1813,6 +1813,8 @@ export const customerDemoChapters: DemoChapter[] = [
             "Publish with **Item** and **Current language (English)** selected, and **Subitems** unchecked; select **Start publish**.",
             "While publication completes, show the original, changed, and restored versions in the **Content version selector**.",
             "Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**.",
+            "After closing **Compare versions**, note the current **Show all fields** setting. Enable it if needed, and expand **Statistics**.",
+            "Point to **Updated** and **Updated by** for the item’s latest update. Collapse **Statistics**, and restore **Show all fields** to its original setting.",
           ],
           [
             "Wait for publication to complete. Reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer.",
@@ -1826,7 +1828,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Begin restoration only after A5 confirms **2026** in both live footers. Open the version selector, and find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
           "In **Page Builder → Content → Data → Disclosures → Copyright notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**. Name it **Copyright year restored**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved full copyright notice with **2025**, without changing any other wording or punctuation, its line break, or the **Equal Opportunity Employer** link. After the original wording is saved, record the version number currently shown as **Restored copyright version**. Use that same saved version number for submission, approval, and publication.",
           "With **Restored copyright version** selected, recheck **Draft** and the original **Disclosure** wording with year **2025**. Choose **Actions → Submit**, enter **Restore copyright year to 2025**, and select **Submit**. Stay on the same **Restored copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved restoration of copyright year to 2025**, and select **Submit**.",
-          "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**.",
+          "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**. Note the current **Show all fields** setting, enable it if needed, and expand **Statistics**. Point to **Updated** and **Updated by** for the item’s latest update. Collapse **Statistics**, and restore **Show all fields** to its original setting.",
           "After completion, reload the **Public website** tab, and scroll to its footer. Reload **Avery portal**, and scroll to its footer. Confirm that both footers show the full copyright notice with **2025** again, and retain all versions in history.",
         ],
         expected: [
