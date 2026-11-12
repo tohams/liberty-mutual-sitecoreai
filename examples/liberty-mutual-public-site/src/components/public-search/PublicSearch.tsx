@@ -11,7 +11,7 @@ import {
 } from "react";
 import NextLink from "next/link";
 import config from "sitecore.config";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { RichText, Text, useSitecore } from "@sitecore-content-sdk/nextjs";
 import { useSearch } from "@sitecore-content-sdk/nextjs/search";
 import type { SearchDocument } from "@sitecore-content-sdk/search";
@@ -132,6 +132,7 @@ function SearchExperience({
 }) {
   const inputId = useId();
   const searchParams = useSearchParams();
+  const pathname = usePathname().replace(/\/$/, "");
   const [input, setInput] = useState(searchParams.get("q") || "");
   const [query, setQuery] = useState(input);
   const [searchRun, setSearchRun] = useState(0);
@@ -183,7 +184,12 @@ function SearchExperience({
       ]
         .map((name) => text(document, name))
         .join("\n"),
-    (document) => text(document, mapping.state),
+    (document) => {
+      const value = mapping.state ? document[mapping.state] : undefined;
+      return Array.isArray(value)
+        ? value.filter((part) => typeof part === "string")
+        : text(document, mapping.state);
+    },
   );
   const browsing = !query.trim();
   const browseCandidates = browsing
@@ -196,9 +202,21 @@ function SearchExperience({
   });
   if (browsing)
     allCards.sort((left, right) => left.title.localeCompare(right.title, "en"));
-  const total = allCards.length;
+  // A collection page browses its own descendants; typed searches remain site-wide.
+  const collectionCards = browsing
+    ? allCards.filter(({ href }) =>
+        new URL(href, "https://content.invalid").pathname.startsWith(
+          `${pathname}/`,
+        ),
+      )
+    : [];
+  const displayCards = collectionCards.length ? collectionCards : allCards;
+  const total = displayCards.length;
   const totalPages = Math.ceil(total / 6);
-  const resultCards = allCards.slice((currentPage - 1) * 6, currentPage * 6);
+  const resultCards = displayCards.slice(
+    (currentPage - 1) * 6,
+    currentPage * 6,
+  );
   useEffect(() => {
     const consentChanged = () => setConsentRevision((value) => value + 1);
     window.addEventListener(CONSENT_EVENT, consentChanged);
