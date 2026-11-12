@@ -307,7 +307,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "all",
-                      text: "Allow publication, Search updates, and delivery to complete. Confirm the new wording from the current publication before marking its loop complete. Use the reserve for delivery waits, and return to that same loop if necessary. Keep Analytics and API focused on their own outcomes.",
+                      text: "Before presenting, open **SitecoreAI → Settings → Publishing jobs**, and confirm **Now in queue → 0** so previous preparation jobs do not delay the live publication. Allow publication, Search updates, and delivery to complete. Confirm the new wording from the current publication before marking its loop complete. Use the reserve for delivery waits, and return to that same loop if necessary. Keep Analytics and API focused on their own outcomes.",
                     },
                     {
                       chapter: "portal",
