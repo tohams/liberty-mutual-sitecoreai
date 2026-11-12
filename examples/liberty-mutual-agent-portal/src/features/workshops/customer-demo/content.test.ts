@@ -776,7 +776,7 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
   );
   assert.match(
     prose(entry.actions[3]),
-    /Page Builder.*Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities.*Select profile → Load profile → Client ID.*Avery.*Client ID.*Enter.*Testing as: Avery Brooks - 01.*Test.*green first row.*Rule 1 matched.*Builder open/i,
+    /Page Builder.*Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities.*Select profile → Load profile → Client ID.*Avery.*Client ID.*Enter.*Testing as: Avery Brooks - 01.*Test.*green first row.*Rule 1 matched.*single Agent priority column.*Is equal to Agency growth.*Is equal to Producer priorities.*Cancel/i,
   );
   assert.doesNotMatch(
     prose(entry.actions.slice(2)),
@@ -817,28 +817,25 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
   const stateRule = prose(entry.actions[4]);
   assert.match(
     stateRule,
-    /same Liberty Mutual - Agency product priorities Builder.*Agency growth opportunity.*column heading.*⋯ → Edit parameters/i,
+    /SitecoreAI tab used for Profiles.*Optimization → Custom values.*open Agent priority/i,
   );
   assert.match(
     stateRule,
-    /Agency principal.*role dropdown.*Texas.*licensed-state dropdown.*percentage field \(20\)/,
+    /Agency growth.*principal.*licensed in Texas.*agency small-business share below 20%.*14\.46%/,
   );
   assert.match(
     stateRule,
-    /Producer recommendation eligibility.*Producer.*role dropdown.*Illinois.*licensed-state dropdown.*premium amount \(0 USD\).*small-business specialization/,
+    /Producer priorities.*producer.*licensed in Illinois.*small-business specialization.*positive individual small-business production/,
   );
   assert.match(
     stateRule,
-    /Leave the verified values unchanged.*Cancel in Edit parameters.*Cancel in the Builder/,
+    /Leave the saved Agent priority value unchanged.*return to Page Builder/,
   );
   assert.match(
     entry.stopWhen,
-    /Daniel and Avery.*Avery matches.*Rule 1.*Agency growth opportunity.*own Client ID/,
+    /Daniel and Avery.*Avery matches.*Rule 1.*Agent priority.*Agency growth.*own Client ID/,
   );
-  assert.match(
-    entry.stopWhen,
-    /native role, licensed-state, and production controls/,
-  );
+  assert.match(entry.stopWhen, /central business classification/);
   assert.equal(entry.inputs, undefined);
   for (const link of linksIn(entry))
     assert.doesNotMatch(link.href, /\/(?:workshops?|demo)(?:[/?#]|$)/);
@@ -848,7 +845,7 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
   );
   assert.match(
     prose(entry.presenterActions),
-    /Agency growth opportunity.*Agency principal.*role dropdown.*Texas.*licensed-state dropdown.*percentage field \(20\)/,
+    /Optimization → Custom values.*Agent priority.*Agency growth.*principal.*licensed in Texas.*20%/,
   );
   assert.doesNotMatch(
     text,
@@ -864,21 +861,25 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
   );
   assert.match(
     prose(entry.controls),
-    /Unmatched profiles receive the original For all agencies content/,
+    /Standard and unmatched results receive the original For all agencies content/,
+  );
+  assert.match(
+    prose(entry.controls),
+    /Eligibility changes follow the custom value’s Draft, test, and publication process.*authors manage each result’s message and card order in Page Builder/,
   );
   assert.doesNotMatch(
     prose([entry.presenterActions, entry.actions, entry.images]),
-    /Custom values|licensedInTexas|licensedInIllinois|===|JavaScript|code editor/,
+    /Edit parameters|role dropdown|licensed-state dropdown|percentage field|is true/,
   );
   const businessBeats = presenterActionSequence(entry, 5, entry.inputs);
   const businessSpeech = businessBeats.findIndex((beat) => beat.kind === "say");
   assert.match(
     prose(businessBeats.slice(0, businessSpeech)),
-    /Agency growth opportunity.*Agency principal.*role dropdown.*Texas.*licensed-state dropdown.*percentage field \(20\)/,
+    /Optimization → Custom values.*Agent priority.*Agency growth.*Producer priorities/,
   );
   assert.match(
     prose(businessBeats.slice(businessSpeech + 1)),
-    /Leave the verified values unchanged.*Cancel/,
+    /Leave the saved Agent priority value unchanged.*return/,
   );
 });
 
@@ -946,6 +947,11 @@ test("the same Home draft uses native content variants before approval and publi
     /explicitly select Priority baseline version recorded under Before presenting.*wait for its fields to finish loading.*original version number.*Small business growth → Texas workers compensation → Home and auto conversations.*Choose Create version/,
   );
   assert.match(edit, /Ordered recommendations/);
+  assert.match(edit, /1 Agent priority is equal to Agency growth/);
+  assert.match(
+    prose(step("portal-preview").actions),
+    /1 Agent priority is equal to Agency growth/,
+  );
   assert.match(edit, /remains Draft.*Leave it unpublished/i);
   assert.doesNotMatch(
     edit,

@@ -1,0 +1,28 @@
+{
+  "name": "Agent priority",
+  "returnType": "String",
+  "sourceFile": "agent-priority.js",
+  "nativeId": "1bcfee80-f8b5-413e-98c3-a886038d0e5b",
+  "nativeStatus": "Published",
+  "nativeSetupEvidence": "../verification/agent-priority.native-setup.json",
+  "organization": "Safeco Insurance Company of America POC",
+  "results": {
+    "Agency growth": "Agency principal, licensed in Texas, with agency small-business share below 20% of combined personal-lines and small-business written premium",
+    "Producer priorities": "Producer, licensed in Illinois, specializing in small business, with positive individual small-business written premium",
+    "Standard": "All unmatched, anonymous, incomplete, invalid, or unrelated profiles; the decision table leaves the original component in place"
+  },
+  "businessSetting": {
+    "variable": "growthShareLimitPercent",
+    "baseline": 20,
+    "unit": "percent"
+  },
+  "metricBoundary": "Agency share uses agency-level production. The producer rule uses the individual agent's small-business production. Both require USD and agency profile metric scope.",
+  "scope": "Home Agency priorities classification only; licensing, authorization, content eligibility, and transactions remain separately enforced",
+  "sourceOfMetrics": "Existing tenant-accepted synthetic UDL profile-import scalar extensions",
+  "verification": "Published native expression exactly matches the saved source. Actual native Custom Value tests passed for Daniel, Avery at 20%, and Avery with an unsaved Test-only threshold of 10%; the exact 20% baseline remains Published. The one-column component table preserves row IDs and content sources. Actual Avery and Daniel table tests matched Rules 1 and 2. Fresh live sign-ins selected the expected principal and producer orders; Maya received Standard. Draft growth version 36 and unchanged producer content rendered correctly in Personalization Preview. Native review and Item/English publication updated Avery while Daniel remained unchanged. Growth version 37 restores the original approved content and order; native publication finished and live Avery readback was verified.",
+  "sourceSha256": "34c1e08a2ebc7555d309bfdd71d3a9be62f232942051aa1bc28fad3d7f70db68",
+  "nativeProfileTestsVerified": 3,
+  "persistedExpressionReadbackVerified": true,
+  "friendlyName": "agent_priority",
+  "nativeAcceptanceStatus": "Passed"
+}

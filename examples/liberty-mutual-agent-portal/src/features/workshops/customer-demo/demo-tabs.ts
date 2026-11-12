@@ -120,7 +120,7 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       {
         id: "profiles",
         navigation: "**Optimization → Profiles**.",
-        cue: "After Daniel’s portal baseline and Avery’s contrast in A1, open Avery Brooks - 01. Use her Client ID for the native personalization test.",
+        cue: "After Daniel’s portal baseline and Avery’s contrast in A1, open Avery Brooks - 01. Use her Client ID for the native personalization test. Then reuse this SitecoreAI tab for Optimization → Custom values → Agent priority.",
       },
       {
         id: "brandKit",

@@ -11,34 +11,37 @@ This directory preserves source and evidence for native SitecoreAI personalizati
 
 These configurations are independent. Changing a serialized datasource does not configure cloud decisions, transfer native history or authorize insurance transactions.
 
-## Marketer-configurable Agency priorities
+## Agent priority
 
-Home **Agency priorities** uses native component personalization to select its complete recommendation collection. The two reusable native conditions expose business choices through SitecoreAI's condition controls:
+Home **Agency priorities** uses one String custom value, **Agent priority**, to select its complete recommendation collection. Its clearly named business rules live in **Optimization → Custom values → Agent priority**. The component decision table maps the result to authored content:
 
-| Condition | Marketer inputs | Baseline |
+| Agent priority result | Business rule | Component content |
 | --- | --- | --- |
-| **Agency growth opportunity** | Agent role, licensed state, and agency small-business share threshold | Agency principal; Texas; below 20% |
-| **Producer recommendation eligibility** | Agent role, licensed state, and minimum individual small-business written premium in USD | Producer; Illinois; above 0 USD |
+| **Agency growth** | Agency principal, licensed in Texas, with agency small-business share below 20% | Agency growth priorities |
+| **Producer priorities** | Producer, licensed in Illinois, specializing in small business, with positive individual small-business production | Producer priorities |
+| **Standard** | No qualifying rule, or incomplete/untrusted data | Original For all agencies collection |
 
-The state field checks the agent's licensing attributes. Agency share is calculated from agency personal-lines and small-business written premium; individual production remains separate. Both conditions require an identified Liberty Mutual agent profile and valid USD production data. They select marketing content and do not change authorization, licensing, or access to protected resources.
+The [saved JavaScript](custom-values/agent-priority.js) puts **Rule 1: Agency growth** and **Rule 2: Producer priorities** above the validation and calculation helpers. Named variables describe role, licensing, production, and the growth opportunity. The single `growthShareLimitPercent` setting is **20**. Agency share is small-business written premium divided by combined agency personal-lines and small-business written premium. The producer rule separately checks the individual's production.
 
-The reusable JavaScript is initial technical setup. Marketers maintain the declared values in the native condition form, choose the corresponding content variant, edit or reorder its recommendations, and preview the result. No application deployment is required to change those supported business values. Native condition and decision-table changes still require their normal save/publication steps.
+All rules require an identified profile with the **liberty-mutual-agent** identity provider, **USD** production currency, and **agency** metric scope. Invalid required premium values, including negative, fractional, non-finite, or unsafe integer cents, retain **Standard**. These rules select marketing content; they do not grant licensing, authorization, product eligibility, or transaction access.
 
-The saved sources are [agency-growth-opportunity.js](conditions/agency-growth-opportunity.js) and [producer-priorities.js](conditions/producer-priorities.js). Their metadata records the exact condition output text and baseline inputs. Both conditions are Published and connected to the active **Liberty Mutual - Agency product priorities** decision table. The first row requires the growth condition to be true and leaves the producer cell blank; the second leaves the growth cell blank and requires producer eligibility to be true. Empty native cells do not constrain that input. Unmatched agents receive the original collection.
+A marketer can inspect the readable classification in **Optimization → Custom values**. Changes to eligibility use that JavaScript and require native testing and publication. Page Builder then uses straightforward **Agent priority is equal to Agency growth** and **Agent priority is equal to Producer priorities** comparisons. The standard result has no targeting row, so the original component remains in place. Editing the message or changing the order of approved cards remains native content authoring and requires no application code release.
 
-[Native acceptance evidence](verification/marketer-agency-priorities.native-setup.json) records the actual condition and combined-table profile tests, threshold-change publication, live first-sign-in results, and rendered content previews. Changing Avery's table threshold to 10 and publishing Home selected the default collection. Restoring 20 and publishing selected the growth collection again. Daniel retained his producer recommendations without a refresh, and Maya retained the neutral default. The 20%/Illinois/0 USD baseline was restored and published.
+[Native metadata](custom-values/agent-priority.metadata.json) and the [acceptance record](verification/agent-priority.native-setup.json) distinguish source preparation from actual native configuration, profile tests, previews, publication, and live verification. The custom value is Published, and its exact saved expression has been read back. Actual native tests matched Avery to the first table rule and Daniel to the second; fresh sign-ins showed both intended live experiences, and Maya received Standard. The Texas-first growth Draft and unchanged producer content rendered in Personalization Preview. Native review and Item/English publication updated Avery while Daniel stayed unchanged. The original Heading, Intro, and recommendation order were then restored in approved, published version 37, with native publication completion and live Avery readback verified. Saving these source files or deploying Git/Vercel does not configure the native custom value or decision table.
 
-The older [classification custom value](custom-values/agency-product-priorities.js) remains unchanged and available for recovery. It is no longer the active Agency priorities table input. A source file or application deployment does not apply native rule configuration.
+Avery's existing agency small-business share is approximately **14.46%**, so **20** qualifies her and **10** excludes her. Daniel qualifies for **Producer priorities** through his own Illinois licensing, specialization, and positive individual production. No persona or agency ID chooses the result.
 
-The baseline profile data puts Avery's agency small-business share at approximately **14.46%**. A threshold of **20%** includes that profile; **10%** excludes it. Daniel's default Producer/Illinois condition qualifies through his own positive small-business production and specialization. This provides a predictable rule test without changing profile data.
-
-Run the saved-condition checks from the repository root:
+Run the source checks from the repository root:
 
 ```bash
-node authoring/personalization/verify-marketer-agency-priorities.cjs
+node authoring/personalization/verify-agent-priority.cjs
 ```
 
-These checks cover the actual archived profile schema, role and state changes, percentage and monetary boundaries, malformed metrics, anonymous profiles, and profile immutability. They complement native condition tests, decision-table execution, publication, and the live/Personalization Preview browser checks.
+The checks validate exact output labels, role/state requirements, production boundaries, malformed metrics, trusted identity, and profile immutability. They compare all archived synthetic profiles with the previously verified Boolean conditions at their original parameters. CI also runs this verifier. Native profile tests prove qualification; **Personalization Preview** independently renders each selected content variant using current authoring content.
+
+### Earlier Agency priorities configurations
+
+The [earlier classification custom value](custom-values/agency-product-priorities.js) and the reusable [growth](conditions/agency-growth-opportunity.js) and [producer](conditions/producer-priorities.js) Boolean conditions remain unchanged for recovery. They are separate native entities. Their [historical acceptance evidence](verification/marketer-agency-priorities.native-setup.json) records the previously verified two-column table, threshold changes, native profile tests, previews, publication, and restored content. The new **Agent priority** acceptance record owns the current one-column configuration and verification status.
 
 ## Calculated small-business growth opportunity
 

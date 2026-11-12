@@ -67,11 +67,15 @@ test("native tools use their verified menus instead of more deep-link copy targe
   assert.match(source, /GuideText text={tab\.navigation/);
   assert.doesNotMatch(
     JSON.stringify(customerDemoTabGroups),
-    /Custom values|State business rule/,
+    /State business rule/,
   );
   assert.match(
     tabs.find((tab) => tab.id === "pageBuilder")?.cue ?? "",
     /A1.*Agency priorities’ native rule Builder.*this tab/,
+  );
+  assert.match(
+    tabs.find((tab) => tab.id === "profiles")?.cue ?? "",
+    /reuse this SitecoreAI tab for Optimization → Custom values → Agent priority/,
   );
 });
 
