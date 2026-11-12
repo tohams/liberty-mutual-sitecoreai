@@ -30,6 +30,7 @@ const articleId = "33333333-2222-5333-8444-555555555555";
 const unusedId = "44444444-2222-5333-8444-555555555555";
 const sharedId = "55555555-2222-5333-8444-555555555555";
 const answerId = "66666666-2222-5333-8444-555555555555";
+const faqId = "77777777-2222-5333-8444-555555555555";
 const route = "/insurance-resources/auto/bundling/how-to-bundle-your-insurance";
 const field = (value: unknown) => ({ jsonValue: { value } });
 
@@ -120,6 +121,38 @@ function body() {
       },
     },
   };
+}
+
+function faqBody(
+  answer = "<p>An auto and home insurance bundle is a combination of both policies with the same insurer.</p>",
+  source = unusedId,
+  placements = 1,
+) {
+  const data = body();
+  const components: unknown[] =
+    data.layout.item.rendered.sitecore.route.placeholders["headless-main"][0]
+      .placeholders["headless-public-content-1"];
+  for (let index = 0; index < placements; index++) {
+    components.push({
+      componentName: "PublicFaq",
+      dataSource: source,
+      fields: {
+        heading: {
+          value: "Frequently asked questions about bundling insurance",
+        },
+        items: [
+          {
+            id: faqId,
+            fields: {
+              question: { value: "What's an auto and home insurance bundle?" },
+              answer: { value: answer },
+            },
+          },
+        ],
+      },
+    });
+  }
+  return data;
 }
 
 function fixture() {
@@ -335,6 +368,7 @@ test("published local information sections and linked FAQ copy also contribute t
                       heading: { value: "Bundling questions" },
                       items: [
                         {
+                          id: faqId,
                           fields: {
                             question: { value: "When can I bundle?" },
                             answer: {
@@ -358,6 +392,125 @@ test("published local information sections and linked FAQ copy also contribute t
   assert.match(result.body, /Review home and auto coverages/);
   assert.match(result.body, /When can I bundle/);
   assert.match(result.body, /Ask about eligible policies/);
+});
+
+test("native on-page FAQs become individual answer records with real item identities and page permalinks", async () => {
+  const f = fixture();
+  f.setBody(faqBody());
+  const contents = await f.reader.readAll();
+  const page = contents.find((item) => item.kind === "page")!;
+  const faq = contents.find((item) => item.kind === "faq")!;
+  assert.equal(contents.length, 2);
+  assert.equal(faq.id, faqId);
+  assert.equal(faq.canonicalUrl, `${origin}${route}#faq-${faqId}`);
+  assert.equal(faq.title, "What's an auto and home insurance bundle?");
+  assert.equal(
+    faq.summary,
+    "An auto and home insurance bundle is a combination of both policies with the same insurer.",
+  );
+  assert.equal(faq.sourceLink.href, page.sourceLink.href);
+  assert.equal(faq.product, "auto,home");
+  const document = pageSearchDocument(faq);
+  assert.equal(document.fields?.question, faq.title);
+  assert.equal(document.fields?.summary, faq.summary);
+  assert.equal(document.sc_url, faq.canonicalUrl);
+  assert(!document.fields!.body.includes("Compare limits & deductibles"));
+  assert(!document.fields!.body.includes("cyberextortion"));
+  assert.equal(pageSearchDocument(page).fields?.question, "");
+  const indexed = [page, faq].map(pageSearchDocument);
+  assert.equal(
+    supportedQuestionResults(
+      "Can I combine home and car coverage?",
+      indexed,
+      (item) => Object.values(item.fields!).join(" "),
+    ).length,
+    2,
+  );
+  assert.equal(
+    supportedQuestionResults(
+      "Does car insurance cover cyberextortion?",
+      indexed,
+      (item) => Object.values(item.fields!).join(" "),
+    ).length,
+    0,
+  );
+  // Distinct native FAQ anchors coexist with the parent and related articles.
+  assert.equal(
+    (await new LiveSearchContent(answerReader, f.reader).readAll()).length,
+    3,
+  );
+});
+
+test("only complete FAQs rendered by page-owned components enter Search", async () => {
+  const f = fixture();
+  // The same rendered FAQ in two placements still owns one Search identity.
+  f.setBody(faqBody(undefined, unusedId, 2));
+  assert.equal((await f.reader.readAll()).length, 2);
+  f.setBody(faqBody(undefined, sharedId));
+  assert.equal((await f.reader.readAll()).length, 1);
+  f.setBody(faqBody(""));
+  assert.equal((await f.reader.readAll()).length, 1);
+});
+
+test("FAQ publication edits, removals, page opt-out, and unpublish update the same native Search records", async () => {
+  const f = fixture();
+  f.setBody(faqBody());
+  let state: PublicationState | null = null;
+  const store: PublicationStore = {
+    acquire: async () => "test-lease",
+    state: async () => state,
+    latest: async () => null,
+    finish: async (_lease, _receipt, next) => {
+      if (next) state = next;
+    },
+  };
+  const pushes: SearchOperation[][] = [];
+  const service = new PublicationService(
+    new LiveSearchContent(answerReader, f.reader),
+    {
+      push: async (operations) => {
+        pushes.push(operations);
+        return operations.length;
+      },
+    },
+    store,
+  );
+  const sync = () =>
+    service.reconcile({ kind: "edge-publish-complete", id: "faq-publication" });
+  assert.equal((await sync()).upserts, 3);
+  f.setBody(faqBody("<p>Updated published bundling guidance.</p>"));
+  assert.equal((await sync()).upserts, 2);
+  assert.deepEqual(
+    pushes
+      .at(-1)!
+      .map((op) => op.id)
+      .sort(),
+    [id, faqId].sort(),
+  );
+  assert.equal(
+    pushes.at(-1)!.find((op) => op.id === faqId)?.fields?.summary,
+    "Updated published bundling guidance.",
+  );
+  f.setBody(body());
+  assert.equal((await sync()).deletes, 1);
+  assert(
+    pushes.at(-1)!.some((op) => op.id === faqId && op.action === "delete"),
+  );
+  f.setBody(faqBody());
+  await sync();
+  f.setPages([{ ...page(), includeInSearch: field(false) }]);
+  assert.equal((await sync()).deletes, 2);
+  assert.deepEqual(
+    pushes
+      .at(-1)!
+      .map((op) => op.id)
+      .sort(),
+    [id, faqId].sort(),
+  );
+  f.setPages([page()]);
+  await sync();
+  f.setPages([]);
+  assert.equal((await sync()).deletes, 2);
 });
 
 test("wrong layout identity, incomplete local publication, and foreign canonical URLs fail closed", async () => {
