@@ -13,9 +13,9 @@ import {
 
 const tabs = customerDemoTabGroups.flatMap((group) => group.tabs);
 
-test("P0 names fourteen tools but copies only five starting addresses", () => {
-  assert.equal(tabs.length, 14);
-  assert.equal(new Set(tabs.map((tab) => tab.id)).size, 14);
+test("P0 reuses thirteen tools and copies only five starting addresses", () => {
+  assert.equal(tabs.length, 13);
+  assert.equal(new Set(tabs.map((tab) => tab.id)).size, 13);
   assert.deepEqual(
     tabs.filter((tab) => tab.href).map((tab) => [tab.id, tab.href]),
     [
@@ -50,8 +50,6 @@ test("native tools use their verified menus instead of more deep-link copy targe
     events:
       /Expand the navigation if collapsed.*Optimization → Analytics → Events/,
     profiles: /Optimization → Profiles/,
-    stateBusinessRule:
-      /Optimization → Custom values → Liberty Mutual - Agency product priorities/,
     brandKit: /Design → Brand kits/,
     prosperaPageBuilder:
       /Prospera recommendations.*Home → Readability & Clarity → Cards · Description.*page-opening icon.*right of Select/,
@@ -67,6 +65,14 @@ test("native tools use their verified menus instead of more deep-link copy targe
     "utf8",
   );
   assert.match(source, /GuideText text={tab\.navigation/);
+  assert.doesNotMatch(
+    JSON.stringify(customerDemoTabGroups),
+    /Custom values|State business rule/,
+  );
+  assert.match(
+    tabs.find((tab) => tab.id === "pageBuilder")?.cue ?? "",
+    /A1.*Agency priorities’ native rule Builder.*this tab/,
+  );
 });
 
 test("P0 follows Daniel then Avery in separate windows with one login address", () => {

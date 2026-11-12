@@ -1,0 +1,31 @@
+{
+  "name": "Producer recommendation eligibility",
+  "sourceFile": "producer-priorities.js",
+  "returnType": "Boolean",
+  "description": "Identified agents in the selected role and licensed state qualify when they specialize in small business and their individual small-business written premium exceeds the selected USD amount.",
+  "output": "Agent role is [[Agent role]], licensed in [[Licensed state]], specializing in small business, with individual small-business written premium above [[Minimum premium]] USD",
+  "defaults": {
+    "Agent role": "Producer",
+    "Licensed state": "Illinois",
+    "Minimum premium": 0
+  },
+  "scope": "Agent Portal Home Agency priorities component only",
+  "profileContext": "SitecoreAI identified profile.extensions, with liberty-mutual-agent provider and valid USD agency-scoped production metrics",
+  "nativeId": "ec4c782c-1078-4f31-a845-5e569be9c3b2",
+  "nativeStatus": "Published",
+  "nativeParameterControlsVerified": true,
+  "nativeProfileTests": [
+    {
+      "profile": "Daniel, current identified profile",
+      "parameters": { "Agent role": "Producer", "Licensed state": "Illinois", "Minimum premium": 0 },
+      "result": true
+    },
+    {
+      "profile": "Daniel, same identified profile",
+      "parameters": { "Agent role": "Producer", "Licensed state": "Florida", "Minimum premium": 0 },
+      "result": false
+    }
+  ],
+  "nativeAcceptanceScope": "Published condition, active Agency priorities table, actual profile tests, first-sign-in live results, and rendered content previews verified",
+  "nativeDecisionAcceptance": "../verification/marketer-agency-priorities.native-setup.json"
+}

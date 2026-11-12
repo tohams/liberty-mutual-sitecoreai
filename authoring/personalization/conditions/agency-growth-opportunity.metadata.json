@@ -1,0 +1,31 @@
+{
+  "name": "Agency growth opportunity",
+  "sourceFile": "agency-growth-opportunity.js",
+  "returnType": "Boolean",
+  "description": "Identified agents in the selected role and licensed state qualify when agency small-business written premium is below the selected percentage of combined personal-lines and small-business written premium.",
+  "output": "Agent role is [[Agent role]], licensed in [[Licensed state]], with agency small-business share below [[Share threshold]]%",
+  "defaults": {
+    "Agent role": "Agency principal",
+    "Licensed state": "Texas",
+    "Share threshold": 20
+  },
+  "scope": "Agent Portal Home Agency priorities component only",
+  "profileContext": "SitecoreAI identified profile.extensions, with liberty-mutual-agent provider and valid USD agency-scoped production metrics",
+  "nativeId": "3e28b7d3-6e7a-48e8-bbbd-57ea78501649",
+  "nativeStatus": "Published",
+  "nativeParameterControlsVerified": true,
+  "nativeProfileTests": [
+    {
+      "profile": "Avery, current identified profile",
+      "parameters": { "Agent role": "Agency principal", "Licensed state": "Texas", "Share threshold": 20 },
+      "result": true
+    },
+    {
+      "profile": "Avery, same identified profile",
+      "parameters": { "Agent role": "Agency principal", "Licensed state": "Texas", "Share threshold": 10 },
+      "result": false
+    }
+  ],
+  "nativeAcceptanceScope": "Published condition, active Agency priorities table, actual profile tests, threshold-change publication, first-sign-in live results, and rendered content previews verified",
+  "nativeDecisionAcceptance": "../verification/marketer-agency-priorities.native-setup.json"
+}

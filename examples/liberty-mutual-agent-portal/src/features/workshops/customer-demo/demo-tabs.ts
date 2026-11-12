@@ -17,7 +17,6 @@ export const demoTabNames = {
   events: "Events",
   graphqlExplorer: "GraphQL Explorer",
   profiles: "Profiles",
-  stateBusinessRule: "State business rule",
   brandKit: "Brand Kit",
   prosperaRecommendations: "Prospera recommendations",
   prosperaPageBuilder: "Prospera Page Builder",
@@ -93,7 +92,7 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       {
         id: "pageBuilder",
         navigation: "**Channels → Public Website → Page builder**.",
-        cue: "Keep the Page Builder tab opened from Channels, and reuse it for both sites.",
+        cue: "Keep the Page Builder tab opened from Channels, and reuse it for both sites. In A1, open Agency priorities’ native rule Builder in this tab.",
       },
       {
         id: "personalizationPreview",
@@ -122,12 +121,6 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
         id: "profiles",
         navigation: "**Optimization → Profiles**.",
         cue: "After Daniel’s portal baseline and Avery’s contrast in A1, open Avery Brooks - 01. Use her Client ID for the native personalization test.",
-      },
-      {
-        id: "stateBusinessRule",
-        navigation:
-          "**Optimization → Custom values → Liberty Mutual - Agency product priorities**.",
-        cue: "For A1, show the published Liberty Mutual - Agency product priorities custom value. Its Texas and Illinois licensing conditions use known agent attributes. Leave the rule unchanged.",
       },
       {
         id: "brandKit",

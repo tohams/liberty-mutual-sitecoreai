@@ -1,0 +1,120 @@
+{
+  "verifiedOn": "2026-11-12",
+  "scope": "Agent Portal Home Agency priorities component",
+  "status": "Native condition, decision-table, live delivery, and content-preview acceptance passed",
+  "conditions": {
+    "agencyGrowth": {
+      "name": "Agency growth opportunity",
+      "nativeId": "3e28b7d3-6e7a-48e8-bbbd-57ea78501649",
+      "status": "Published",
+      "baselineParameters": {
+        "Agent role": "Agency principal",
+        "Licensed state": "Texas",
+        "Share threshold": 20
+      }
+    },
+    "producerEligibility": {
+      "name": "Producer recommendation eligibility",
+      "nativeId": "ec4c782c-1078-4f31-a845-5e569be9c3b2",
+      "status": "Published",
+      "baselineParameters": {
+        "Agent role": "Producer",
+        "Licensed state": "Illinois",
+        "Minimum premium": 0
+      }
+    }
+  },
+  "decisionTable": {
+    "name": "Liberty Mutual - Agency product priorities",
+    "inputColumns": ["Agency growth opportunity", "Producer recommendation eligibility"],
+    "rules": [
+      {
+        "order": 1,
+        "agencyGrowth": true,
+        "producerEligibility": null,
+        "content": "Agency growth priorities"
+      },
+      {
+        "order": 2,
+        "agencyGrowth": null,
+        "producerEligibility": true,
+        "content": "Producer priorities"
+      }
+    ],
+    "blankCellMeaning": "An empty cell does not constrain that input; null in this evidence file records an empty native rule cell, not a profile value.",
+    "actualProfileTests": [
+      { "profile": "Avery", "matchedRule": 1, "nativeMatchObserved": true },
+      { "profile": "Daniel", "matchedRule": 2, "nativeMatchObserved": true }
+    ]
+  },
+  "nativeConditionTests": [
+    { "condition": "Agency growth opportunity", "profile": "Avery", "shareThresholdPercent": 20, "result": true },
+    { "condition": "Agency growth opportunity", "profile": "Avery", "shareThresholdPercent": 10, "result": false },
+    { "condition": "Producer recommendation eligibility", "profile": "Daniel", "licensedState": "Illinois", "result": true },
+    { "condition": "Producer recommendation eligibility", "profile": "Daniel", "licensedState": "Florida", "result": false }
+  ],
+  "liveDelivery": [
+    {
+      "profile": "Avery",
+      "action": "Changed the growth input threshold to 10, saved the native table, and published Home",
+      "observed": "Default household, small-business, and team recommendations"
+    },
+    {
+      "profile": "Avery",
+      "action": "Restored the growth input threshold to 20, saved the native table, and published Home",
+      "observed": "Agency growth recommendations in small-business, Texas guidance, and household order"
+    },
+    {
+      "profile": "Daniel",
+      "action": "Fresh sign-in after baseline restoration",
+      "observed": "Producer recommendations in household, Illinois guidance, and small-business order without a refresh"
+    },
+    {
+      "profile": "Maya",
+      "action": "Fresh sign-in after baseline restoration",
+      "observed": "Neutral default recommendation collection"
+    }
+  ],
+  "contentPreviews": {
+    "agencyGrowthPriorities": "Correct rendered content and recommendation order observed",
+    "producerPriorities": "Correct rendered content and recommendation order observed",
+    "producerObservedElapsedMs": 2670,
+    "qualificationBoundary": "Personalization Preview renders the selected native content variant. Native profile tests and live decisions separately prove qualification."
+  },
+  "componentContentRoundTrip": {
+    "item": "Agency growth priorities",
+    "authoringSurface": "Page Builder Content mode",
+    "changedVersion": 34,
+    "changedRecommendationOrder": ["Texas guidance", "Small-business growth", "Household conversations"],
+    "unpublishedPreview": "The changed order appeared in Personalization Preview while version 34 was still Draft",
+    "producerPreviewControl": "Producer recommendations retained their existing order",
+    "workflowObserved": ["Draft", "Submit", "Awaiting approval", "Approve", "Approved"],
+    "publicationObserved": {
+      "version": 34,
+      "scope": "Item and current language English; no subitems",
+      "liveAgencyGrowth": "Texas guidance appeared first for Avery after delivery",
+      "liveProducerControl": "Daniel retained household, Illinois guidance, and small-business order"
+    },
+    "baselineRestoration": {
+      "version": 35,
+      "recommendationOrder": ["Small-business growth", "Texas guidance", "Household conversations"],
+      "status": "Passed: version 35 is Live, the original introduction and recommendation order are restored, and live Avery readback matches",
+      "nativeLiveStatusVerified": true,
+      "liveAveryReadbackVerified": true,
+      "producerControl": "Daniel's live order remained unchanged after version 34 publication"
+    }
+  },
+  "restoredBaseline": {
+    "agencyGrowthShareThresholdPercent": 20,
+    "producerLicensedState": "Illinois",
+    "producerMinimumPremiumUsd": 0,
+    "homePublished": true
+  },
+  "recovery": "The previous classification custom value remains unchanged and available for recovery. It is no longer the active Agency priorities decision-table input.",
+  "localSourceChecks": {
+    "targetedChecks": 92,
+    "archivedProfilesWithBaselineParity": 420,
+    "allPassed": true,
+    "scope": "Local source checks; separate from native and browser observations above"
+  }
+}

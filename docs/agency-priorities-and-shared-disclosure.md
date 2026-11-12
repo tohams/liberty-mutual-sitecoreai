@@ -18,16 +18,34 @@ Avery Brooks represents Cedar Ridge Insurance: a principal licensed in Texas, Fl
 
 The **For all agencies** default selects **Home and auto conversations → Small business growth → Team support**. Its state-neutral support card links to the existing Support page. The five-card library also contains the Texas and Illinois guidance cards; each audience collection selects its own ordered subset, and the visitor component renders all selected valid references. The principal baseline remains **Small business growth → Texas workers compensation → Home and auto conversations**; the producer baseline remains **Home and auto conversations → Illinois workers compensation → Small business growth**.
 
+## Marketer-editable audience conditions
+
+The **Liberty Mutual - Agency product priorities** decision table uses reusable native conditions to expose the business settings that marketers maintain:
+
+| Condition | Current business settings | Matching content |
+| --- | --- | --- |
+| Agency growth opportunity | Agent role: Agency principal; Licensed state: Texas; Share threshold: 20% | Agency growth priorities |
+| Producer recommendation eligibility | Agent role: Producer; Licensed state: Illinois; Minimum premium: 0 USD; small-business specialization | Producer priorities |
+| No matching rule | The original component | For all agencies |
+
+Open these controls from **Page Builder → Agent Portal → Editor → Pages → Home → Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities**. In that same Builder, find the **Agency growth opportunity** or **Producer recommendation eligibility** column heading, and choose **⋯ → Edit parameters**. **Agent role**, **Licensed state**, **Share threshold**, and **Minimum premium** are native configuration fields. The state criterion reads the agent’s known licensing data.
+
+The reusable logic reads the known profile, validates its production data, and calculates production share. Marketers use the supported business fields to configure the audience and use **Agency growth priorities** or **Producer priorities** to manage its message, approved cards, and card order. The existing server-side licensing checks continue to control eligibility for protected content and transactions.
+
+Keep qualification and presentation checks distinct. **Select profile → Load profile → Client ID → Test** evaluates the real native rules for a known visitor. **Personalization Preview** selects the configured content variants and shows current authoring content; it does not evaluate those audience conditions or impersonate an agent.
+
+The live A1 inspection stays in the native Builder after Avery’s profile test and shows these readable controls. A3 then changes the matched collection’s card order, and A4 previews, reviews, and publishes the content change. The thirteen prescribed loops retain their existing 39-minute allocation, with opening, closing, and buffer accounting for the full 45-minute presentation.
+
 ## Preview and publish one Home priority change
 
 Use the same presenter account in Page Builder for the demonstration’s editing, submission, approval, and publication. In a normal team, separate Author, Approver, and Publisher permissions govern those actions.
 
-1. In **Page Builder → Agent Portal → Content → Data → Agency priorities → Agency growth priorities**, select the **Priority baseline version** recorded during preparation. Wait for loading, and confirm **Small business growth → Texas workers compensation → Home and auto conversations**.
+1. In **Page Builder → Agent Portal → Editor → Pages → Home**, choose **Layers → Agency priorities → Content**. Select the first personalized rule, and confirm **Content item → Agency growth priorities**. In that content-item card, select the **Priority baseline version** recorded during preparation. Wait for loading, and confirm **Small business growth → Texas workers compensation → Home and auto conversations**.
 2. Create a new **Texas guidance priority** version from that verified original. Explicitly select the new numbered **Draft**, then change **Ordered recommendations** to **Texas workers compensation → Small business growth → Home and auto conversations**. Wait for **Saved**, and record **Saved priority version**. Leave it unpublished.
 3. Return to **Editor → Pages → Home**, and open **Apps → Personalization Preview**. The app attempts to connect the existing SitecoreAI session automatically. If **Connect to SitecoreAI** appears, select it with the same presenter account; its connection window closes after authentication, and the app verifies the session automatically. Complete this connection check before presenting.
 4. Under **Agency priorities**, choose **Agency growth priorities**; leave **Guidance** at **Default**. Select **Preview page**. The current draft opens automatically in a new read-only tab. Confirm Texas guidance appears first in **Priorities for your agency**, then close the preview tab.
 5. Return to the same app, choose **Producer priorities** under **Agency priorities**, and select **Preview page** again. Confirm the producer collection retains **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab.
-6. Return to the exact **Saved priority version**. Submit it, approve it, and publish that item in English. Confirm Avery’s live Home now leads with Texas guidance and Daniel’s household-first order remains unchanged. Publishing the frontend app does not publish CMS content.
+6. Return to **Layers → Agency priorities → Content**, select the first personalized rule, and confirm **Content item → Agency growth priorities**. Choose its **••• (Data source options) → Open in Content mode**, and select the exact **Saved priority version**. Submit it, approve it, and publish that item in English. Confirm Avery’s live Home now leads with Texas guidance and Daniel’s household-first order remains unchanged. Publishing the frontend app does not publish CMS content.
 
 The private Marketplace extension reads the selected page’s current personalization configuration and renders the selected native content variants through the official Content SDK preview service. It does not evaluate visitor eligibility or impersonate Avery or Daniel. Selecting a variant checks how that content looks; the existing published SitecoreAI rules still determine which live agent receives it. The surrounding portal context is generic and read-only. The app does not create CDP profiles, change agent accounts or rules, publish content, or grant content permissions.
 
