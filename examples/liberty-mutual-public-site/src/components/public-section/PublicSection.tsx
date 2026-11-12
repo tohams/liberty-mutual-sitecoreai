@@ -142,6 +142,15 @@ export const RelatedArticles = ({
               <h3>
                 <Link field={item.fields.actionLink}>
                   <Text tag="span" field={item.fields.heading} />
+                  <svg
+                    width="8"
+                    height="8"
+                    viewBox="0 0 8 8"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="M1.8848 7.865L1.2818 7.09313L5.5798 3.95438L1.2878 0.90461L1.8798 0.125L6.7128 3.55973C6.8398 3.64969 6.9158 3.79381 6.9168 3.94567C6.9178 4.0985 6.8438 4.24262 6.7178 4.33547L1.8848 7.865Z" />
+                  </svg>
                 </Link>
               </h3>
             </article>
