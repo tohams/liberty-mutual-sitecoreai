@@ -954,7 +954,7 @@ test("the same Home draft uses native content variants before approval and publi
   );
   assert.match(
     edit,
-    /explicitly select Priority baseline version recorded in P0.*wait for its fields to finish loading.*original version number.*Small business growth → Texas workers compensation → Home and auto conversations.*Choose Create version/,
+    /explicitly select Priority baseline version recorded under Before presenting.*wait for its fields to finish loading.*original version number.*Small business growth → Texas workers compensation → Home and auto conversations.*Choose Create version/,
   );
   assert.match(edit, /Ordered recommendations/);
   assert.match(edit, /remains Draft.*Leave it unpublished/i);
