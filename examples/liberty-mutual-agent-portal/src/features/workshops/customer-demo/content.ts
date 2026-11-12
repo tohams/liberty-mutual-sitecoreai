@@ -307,7 +307,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterActions: [
           [
             "Switch to the **Public website** tab, and open the **Public article** URL. Briefly show **Bundling your car and home insurance** and its article copy.",
-            "In **SitecoreAI**, choose **Channels**, then **Page builder** on the **Public Website** card. Reuse that **Page Builder** tab; choose **Site switcher → Public Website → Editor → Pages**.",
+            "Switch to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Editor → Pages**.",
             "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On that selected row, choose **Content tree options (•••) → Page content**. Confirm **English**.",
             "In the **Page content** panel beside the canvas, expand **Content**: show **Search title**, **Search description**, **Canonical URL**, and **Reference source**.",
             "Expand **Resource content**: point to **Question** and **Plain-language answer** as structured fields for **Search** and connected AI applications. Show **Detailed explanation**, and leave all fields unchanged.",
@@ -318,9 +318,9 @@ export const customerDemoChapters: DemoChapter[] = [
             "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
           ],
           [
-            "Return to the **Public website** tab’s article, then choose **View page source → Find**.",
+            "Return to the **Public website** tab’s article. In the browser, right-click a blank area, and choose **View page source**. If the browser context menu does not offer the source command, use Chrome’s **View → Developer → View Source** menu on Mac. In the source tab, enable **Line wrap**, then press **⌘F** (Mac) or **Ctrl+F** (Windows) to open **Find**.",
             "Paste **Find structured data in page source** into **Find**.",
-            "Show **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**, which identifies the article’s canonical URL.",
+            "Use the first **application/ld+json** script block. Show **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**, which identifies the article’s canonical URL.",
             "Find **canonical** using the copy field, and show the matching **rel=canonical** link.",
             "Close the source tab, and return to the **Public website** tab.",
           ],
@@ -330,7 +330,7 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `Open the [**public article**](${ARTICLE}), and briefly show **Bundling your car and home insurance** and its natural article copy. In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On the selected row, choose **Content tree options (•••) → Page content**. Confirm **English**. In the **Page content** panel beside the canvas, expand **Content** to inspect **Search title**, **Search description**, **Canonical URL**, and **Reference source**. Expand **Resource content** to show **Question** and **Plain-language answer** as structured fields for **Search** and connected AI applications, plus **Detailed explanation**. Leave all fields unchanged.`,
           "In the same **Page content** panel, expand **Content**, or choose **Go to field → State applicability**. Locate **State applicability**, **Products**, and **Audience**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.",
-          "Return to the **Public website** tab’s article. Use **View page source → Find** to locate **application/ld+json**. Identify **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**. Find the **canonical** link, and compare its URL with **@id**. Close the source tab, and return to the rendered article.",
+          "Return to the **Public website** tab’s article. In the browser, right-click a blank area, and choose **View page source**. If the browser context menu does not offer the source command, use Chrome’s **View → Developer → View Source** menu on Mac. In the source tab, enable **Line wrap**, then press **⌘F** (Mac) or **Ctrl+F** (Windows) to open **Find**, and locate the first **application/ld+json** script block. Identify **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**. Find the **canonical** link, and compare its URL with **@id**. Close the source tab, and return to the rendered article.",
         ],
         expected: [
           "The resource page owns its natural article, governed search metadata, managed classifications, and canonical Article schema. Search and connected applications reuse its structured CMS fields.",
@@ -606,7 +606,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Wait for **Page created from branch template**.",
           ],
           [
-            "Choose **Reload tree** if shown. In **Sitemap**, select **coverage-page**, and wait for its matching page heading.",
+            "Choose **Reload tree** if shown, and wait for the refreshed **Sitemap** to finish loading. In **Sitemap**, select **coverage-page**, and wait for its matching page heading in Page Builder. If **Home** still appears, select **Home**, refresh the **Page Builder** browser tab, then reselect **coverage-page**. Confirm its page heading before editing.",
             "Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading**.",
             "Click outside the text, and wait for **Saved**.",
             "Below the Hero, click **Article text → Heading**, and paste **Article heading**.",
@@ -626,7 +626,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "On desktop, confirm the photograph switches sides while the copy stays the same. On mobile, both variants keep the image above the text.",
           ],
           [
-            "In the **Page Builder** tab, select **Preview → Preview**.",
+            "In the **Page Builder** toolbar, choose **Preview** to open the calendar popup, then select **Preview** in that popup. The page preview opens in a new tab.",
             "Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Page Builder**. Keep the page unpublished.",
           ],
           [
@@ -650,10 +650,10 @@ export const customerDemoChapters: DemoChapter[] = [
           "The published **coverage-page** page shows both authored headings, the selected Hero image, and the reused Promotion.",
         actions: [
           "In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**, then select **Home** in **Sitemap**. Confirm **English** and **Default editing host**. Choose **Home → Create a page → Landing page → Select**. Paste **New page name** below into the sitemap’s editable **New page** name, then press **Enter**. Wait for **Page created from branch template**.",
-          "Choose **Reload tree** if shown. In **Sitemap**, select **coverage-page**, and wait for its matching page heading. Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading** below. Click outside the text, and wait for **Saved**. Below the Hero, click **Article text → Heading**, and paste **Article heading** below. Click the blank **Body** immediately below that heading, and paste **Article body** below. Click outside, and wait for **Saved**.",
+          "Choose **Reload tree** if shown, and wait for the refreshed **Sitemap** to finish loading. In **Sitemap**, select **coverage-page**, and wait for its matching page heading in Page Builder. If **Home** still appears, select **Home**, refresh the **Page Builder** browser tab, then reselect **coverage-page**. Confirm its page heading before editing. Keep **Editor** open. On the canvas, click the large blank **Hero → Heading**, and paste **Hero heading** below. Click outside the text, and wait for **Saved**. Below the Hero, click **Article text → Heading**, and paste **Article heading** below. Click the blank **Body** immediately below that heading, and paste **Article body** below. Click outside, and wait for **Saved**.",
           "In the **Page Builder** tab, click the **Hero image** placeholder on the canvas. In the right-hand **Image** panel, choose **Browse media library → Media BETA** to open the **Modern Media Library**. Select **liberty-mutual-public-family-basketball.jpg**, then choose **Insert** in its image details. Confirm the family photograph appears beside the Hero heading, and wait for **Saved**.",
           "In the **Page Builder** tab, open **Layers → headless-public-content-1 → Insert into** immediately after **Article text**. Show the permitted choices; choose **Promotions → Promotion → Bundle and save**. Select **Assign**, rather than **Duplicate and assign**. With **Promotion** selected, choose **Design → Variant → Image left**, then **Image right**. On desktop, confirm the photograph switches sides while the copy stays the same. On mobile, both variants keep the image above the text.",
-          "In the **Page Builder** tab, select **Preview → Preview**. Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Page Builder**. Keep the page unpublished.",
+          "In the **Page Builder** toolbar, choose **Preview** to open the calendar popup, then select **Preview** in that popup. The page preview opens in a new tab. Confirm both headings, the Hero image, and the shared Promotion. Close the preview tab, and return to **Page Builder**. Keep the page unpublished.",
           "In the **Page Builder** tab, select **coverage-page**, then choose **Actions → Submit**. Paste **Page submission comment** below, then select **Submit**. Confirm the page is **Awaiting approval**. Its local Hero and Article text follow the page through review.",
           "Stay on **coverage-page** in **Page Builder**, and review the page on its canvas. Choose **Actions → Approve**; paste **Approval comment** below, then select **Submit**. Confirm **Approved**.",
           `On the same **coverage-page** in **Page Builder**, choose **Publish**. Select **Page**, **Current language (English)**, **All references**, and **Include related items**. Leave **Subpages** unchecked; select **Start publish**. After completion, switch to the **Public website** tab, open [**the published coverage page**](${PUBLIC}/coverage-page), and confirm both headings, the Hero image, and the shared Promotion.`,
@@ -878,12 +878,12 @@ export const customerDemoChapters: DemoChapter[] = [
             "Under **Readability & Clarity**, open the **Home** recommendations. Keep this example read-only.",
           ],
           [
-            "Find **Cards · Description**; compare the upper existing wording with the lower proposed wording.",
+            "Find **Cards · Description**; compare the existing wording under **Original content** with the proposed wording under **Suggested content**.",
             "Point to **trackable rewards** and **card options side by side**.",
             "Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
           ],
           [
-            "Beside **Cards · Description**, select the **page-opening icon** to the right of **Select**. Switch to the **Prospera Page Builder** tab that opens in the same **Incognito / Private** window.",
+            "Beside **Cards · Description**, select the **page-opening icon** to the right of **Select**, labeled **Open in Page Builder**. Switch to the **Prospera Page Builder** tab that opens in the same **Incognito / Private** window.",
             "Show **AEO opportunities** and **Powered by Scrunch**.",
             "On **Cards · Description**, choose **Show live content** if needed.",
             "Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**.",
@@ -899,8 +899,8 @@ export const customerDemoChapters: DemoChapter[] = [
           "Show the recommendation, its target field, and the proposed Profound-to-review path; leave Prospera unchanged.",
         actions: [
           `Open the prepared [**Prospera AEO recommendation review**](${SCRUNCH_REVIEW}) tab. Confirm the **agverticals** environment and **Prospera** site. Under **Readability & Clarity**, review the **Home** page recommendations. This is the existing integrated recommendation example. Keep it read-only.`,
-          "Locate **Cards · Description**. Compare the existing wording in the upper block with the proposed wording in the lower block. Point out **trackable rewards** and **card options side by side** as examples of clearer phrasing. Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
-          `Use **Open in Page builder** on that recommendation, or open the prepared [**same recommendation in Page Builder**](${SCRUNCH_EDITOR}). Show the **AEO opportunities** panel and **Powered by Scrunch** label beside the page. On **Cards · Description**, choose **Show live content** if the existing copy is collapsed. Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**. The corresponding field is outlined on the page. Inspect it without applying the recommendation or changing the page.`,
+          "Locate **Cards · Description**. Compare the existing wording under **Original content** with the proposed wording under **Suggested content**. Point out **trackable rewards** and **card options side by side** as examples of clearer phrasing. Leave **Apply**, **Apply all**, and **Dismiss** untouched.",
+          `Use **Open in Page Builder** on that recommendation, or open the prepared [**same recommendation in Page Builder**](${SCRUNCH_EDITOR}). Show the **AEO opportunities** panel and **Powered by Scrunch** label beside the page. On **Cards · Description**, choose **Show live content** if the existing copy is collapsed. Compare **Recommended | Rewritten** with **Live content**, then select **Scroll to content**. The corresponding field is outlined on the page. Inspect it without applying the recommendation or changing the page.`,
           "Stay in the **Prospera Page Builder** tab in the **Incognito** window. Explain that a marketer can accept a recommendation into editable content, refine the wording, and follow the configured human review and approval workflow before publication. Show the recommendation beside its page field; do not apply it, edit the page, or publish. For Liberty Mutual’s requested Profound integration, this is the intended review pattern.",
         ],
         expected: [
@@ -927,7 +927,7 @@ export const customerDemoChapters: DemoChapter[] = [
             title: "Compare the existing and proposed wording",
             alt: "Native AEO recommendation for Cards Description with existing wording above and proposed clearer phrasing below.",
             caption:
-              "**Cards · Description** identifies the target component and field. Compare the existing wording in the upper block with the proposed wording below it. The page-opening icon launches the same recommendation in **Page Builder**.",
+              "**Cards · Description** identifies the target component and field. Compare the existing wording under **Original content** with the proposed wording under **Suggested content**. The **Open in Page Builder** icon launches the same recommendation in **Page Builder**.",
             afterAction: 2,
             crop: {
               x: 438,
@@ -1289,7 +1289,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**. Choose **Close dialog**.",
           ],
           [
-            "In the **SitecoreAI** tab, choose **Optimization → Profiles**, and open **Avery Brooks - 01**. Keep this tab as **Profiles**; leave the separate **Page Builder** tab open.",
+            "In the **SitecoreAI** tab, choose **Optimization → Profiles**. Under **Most recent users**, open the first, most recent **Avery Brooks - 01** row from the portal login you just showed, normally marked **Now**. Identical names farther down are historical profiles. Keep this tab as **Profiles**; leave the separate **Page Builder** tab open.",
             "Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies Avery for the native rule test.",
           ],
           [
@@ -1310,7 +1310,7 @@ export const customerDemoChapters: DemoChapter[] = [
         actions: [
           `Switch to the **Daniel portal** tab, and open [**portal home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Read his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**, then choose **Close dialog**.`,
           `Switch to the separate **Avery portal** tab, and open [**portal home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**. Contrast her principal priorities: **Build a stronger small-business practice → Support workers’ compensation conversations in Texas → Connect home and auto conversations**. Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**, then choose **Close dialog**.`,
-          "In the **SitecoreAI** tab, choose **Optimization → Profiles**, and open **Avery Brooks - 01**. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies Avery for the native rule test. Keep the separate **Page Builder** tab open.",
+          "In the **SitecoreAI** tab, choose **Optimization → Profiles**. Under **Most recent users**, open the first, most recent **Avery Brooks - 01** row from the portal login you just showed, normally marked **Now**. Identical names farther down are historical profiles. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies Avery for the native rule test. Keep the separate **Page Builder** tab open.",
           `Switch to **Page Builder**, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities**. Choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**, select **Test**, and confirm green **agency-growth**. Choose **Cancel** after this read-only test.`,
           "In the **SitecoreAI** tab, choose **Optimization → Custom values → Liberty Mutual - Agency product priorities**. Show the published rule without editing it. Point to Avery’s matching **agency-growth** condition: **principal**, **licensedInTexas === true**, and agency small-commercial share below **20%**. Show the **producer-priorities** branch behind Daniel’s earlier experience: **producer**, **licensedInIllinois === true**, small-commercial specialization, and positive agent small-commercial production. Explain that these known licensing and business attributes select relevant guidance. Leave the published rule unchanged.",
         ],
@@ -1432,7 +1432,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Design → Brand kits**.",
-            "Select **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**.",
+            "Open **Liberty Mutual — Independent Agents**, marked **PUBLISHED**, then choose **Sections → Tone of Voice**.",
             "Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation. Leave the kit unchanged.",
           ],
           [
@@ -1452,7 +1452,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The Brand Kit guides content creation, native AI assistance operates on an editable field, and governed components preserve a consistent design. No generated change is kept or published.",
         actions: [
-          `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
+          `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Liberty Mutual — Independent Agents**, marked **PUBLISHED**, then choose **Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
           `In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, look for **Build your next opportunity.** and a visibly longer paragraph. Compare the new wording with the original, and check that its meaning is preserved without new claims. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
           "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that authors change content; reusable components control presentation, page designs supply shared structure, and placeholder settings limit which components fit each area.",
         ],
@@ -1604,7 +1604,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Confirm **Content item → Agency growth priorities**. Its **Ordered recommendations** field is in this same panel.",
           ],
           [
-            "In **Content item → Agency growth priorities**, open the content item’s version selector; select **Priority baseline version** recorded in **P0**, and wait for its fields to load.",
+            "In **Content item → Agency growth priorities**, open the content item’s version selector; select **Priority baseline version** recorded under **Before presenting**, and wait for its fields to load.",
             "Recheck its version number and original order: **Small business growth → Texas workers compensation → Home and auto conversations**.",
             "Choose **Create version**; paste **New priority version name**, then select **Create**.",
             "Reopen the content item’s version selector; select the new **Texas guidance priority → Draft** row by its new number.",
@@ -1621,7 +1621,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The recorded **Saved priority version** is a saved Texas-first **Draft**; the original approved version and live order remain unchanged.",
         actions: [
           "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Choose **Layers → Agency priorities**, selecting the component, then open the right-hand **Content** tab. In its personalization dropdown, initially **Original**, choose **rule 1: Liberty Mutual - Agency product priorities is equal to agency-growth**. Confirm **Content item → Agency growth priorities**; its **Ordered recommendations** field appears in this panel.",
-          "In the **Agency growth priorities** content-item card, open its version selector, explicitly select **Priority baseline version** recorded in **P0**, and wait for its fields to finish loading. Confirm that selected original version number and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
+          "In the **Agency growth priorities** content-item card, open its version selector, explicitly select **Priority baseline version** recorded under **Before presenting**, and wait for its fields to finish loading. Confirm that selected original version number and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
           "Find **Ordered recommendations**. For this reorder, click **Remove all items** to clear only this draft’s selection. Use the far-right **down-chevron** to open the available choices, then click the **card names** **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Selected chips determine the cards on the canvas. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, approval, and publication. With **Saved priority version** selected, confirm **Texas workers compensation → Small business growth → Home and auto conversations**, that the version remains **Draft**, and that the canvas shows Texas guidance first. Leave it unpublished for the following preview and review steps.",
         ],
         expected: [
@@ -1970,7 +1970,7 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
           [
             "Begin restoration only after A5 confirms **2026** in both live footers.",
-            "Open the version selector. Find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
+            "Open the version selector. Find the original approved English version recorded under **Before presenting** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
           ],
           [
             "Switch to **Page Builder → Content → Data → Disclosures → Copyright notice**; select the recorded original approved English version.",
@@ -2002,7 +2002,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Both site footers show the full copyright notice with 2025 again; history retains the original, changed, and restored revisions.",
         actions: [
           "In **Page Builder**, choose **Site switcher → Public Website → Content**. Select the top-level **Data → Disclosures → Copyright notice**, and confirm **English**.",
-          "Begin restoration only after A5 confirms **2026** in both live footers. Open the version selector, and find the original approved English version recorded in **P0** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
+          "Begin restoration only after A5 confirms **2026** in both live footers. Open the version selector, and find the original approved English version recorded under **Before presenting** and **Saved copyright version** from A5. Keep both versions; the year-only comparison was shown while A5 published.",
           "In **Page Builder → Content → Data → Disclosures → Copyright notice**, select the item. Select the original approved English version recorded in the prior loop, and wait for its fields to finish loading. Confirm the selected version number and original **Disclosure** wording with copyright year **2025** before choosing **Create version**. Name it **Copyright year restored**, and select **Create**. Reopen the version selector, explicitly select the new **Copyright year restored** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number and that **Disclosure** contains the preserved full copyright notice with **2025**, without changing any other wording or punctuation, its line break, or the **Equal Opportunity Employer** link. After the original wording is saved, record the version number currently shown as **Restored copyright version**. Use that same saved version number for submission, approval, and publication.",
           "With **Restored copyright version** selected, recheck **Draft** and the original **Disclosure** wording with year **2025**. Choose **Actions → Submit**, enter **Restore copyright year to 2025**, and select **Submit**. Stay on the same **Restored copyright version** in **Page Builder**, review the full notice, and choose **Actions → Approve**, enter **Approved restoration of copyright year to 2025**, and select **Submit**.",
           "On the same **Restored copyright version** in **Page Builder**, confirm **Approved** and copyright year **2025**, and publish with **Item** and **Current language (English)** selected and **Subitems** unchecked. While publication completes, use the **Content version selector** to show the original, changed, and restored versions. Open the restored version’s **••• → Compare versions**. Set **Compare** to the recorded original version and **With** to **Restored copyright version**; under **Content → Disclosure**, confirm that the full **2025** notice matches. Choose **close**. Enable **Show all fields** if needed, and expand **Statistics**. Point to **Updated** and **Updated by** for the item’s latest update.",

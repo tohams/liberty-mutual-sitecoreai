@@ -283,7 +283,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "all",
-                      text: "Record the current published versions of **Agency growth priorities** and **Copyright notice**, and keep those versions intact. Confirm that both site footers display the same full copyright notice with **2025**; that is the shared-content baseline. Confirm that the temporary page name **coverage-page** is available.",
+                      text: "Record the current published versions of **Agency growth priorities** and **Copyright notice**, and keep those versions intact. Confirm that both site footers display the same full copyright notice with **2025**; that is the shared-content baseline. Confirm that the temporary page name **coverage-page** is available. If **coverage-page** already exists from a rehearsal, complete its removal under [**After the demonstration → restoration checklist**](#reset) before presenting. Confirm the page is absent from **Sitemap** and its live URL returns **404**.",
                     },
                     {
                       chapter: "all",

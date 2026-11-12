@@ -898,7 +898,7 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
   const actions = entry.actions.map((action) => prose([action]));
   assert.match(
     actions[0],
-    /Design → Brand kits.*Published.*Liberty Mutual — Independent Agents.*Sections → Tone of Voice/,
+    /Design → Brand kits.*Liberty Mutual — Independent Agents.*PUBLISHED.*Sections → Tone of Voice/,
   );
   assert.match(
     actions[1],
@@ -954,7 +954,7 @@ test("the same Home draft uses native content variants before approval and publi
   );
   assert.match(
     edit,
-    /explicitly select Priority baseline version recorded in P0.*wait for its fields to finish loading.*original version number.*Small business growth → Texas workers compensation → Home and auto conversations.*Choose Create version/,
+    /explicitly select Priority baseline version recorded under Before presenting.*wait for its fields to finish loading.*original version number.*Small business growth → Texas workers compensation → Home and auto conversations.*Choose Create version/,
   );
   assert.match(edit, /Ordered recommendations/);
   assert.match(edit, /remains Draft.*Leave it unpublished/i);
