@@ -17,6 +17,23 @@ const {finalPatch}=require('./public-final-layout.cjs');
 const {xmlShape}=require('./configure-product-spotlight.cjs');
 const BASE=path.join(ROOT,'authoring/items/liberty-mutual-public');
 const PUBLIC='/sitecore/content/LibertyMutual/liberty-mutual-public-site';
+const PORTAL_EDITORIAL_ITEMS=new Map([
+ ['649f5db2-d1cd-5fc4-bd87-e31047fbe8e9','For all agencies'],
+ ['3127968e-4b21-50c3-ad79-b6bbbe5303b8','Agency growth priorities'],
+ ['077bbcf9-ce80-5f76-ae6a-8a8b5580f1c0','Producer priorities'],
+ ['5a9ed21c-3f7f-59b8-bfd3-6b81236d9956','Recommendations/Home and auto conversations'],
+ ['5b76c25a-fed2-5163-b8da-8cfe8dd87d9a','Recommendations/Small business growth'],
+ ['ca1dfb2d-8792-5834-8a27-62fda68c2305','Recommendations/Texas workers compensation'],
+ ['647a18a9-a6dc-5859-82f3-6873923f1e4e','Recommendations/Illinois workers compensation'],
+ ['5de9ebd0-c08c-460f-8cd0-d267bdb77e26','Recommendations/Team support'],
+].map(([id,suffix])=>[norm(id),suffix]));
+function assertPortalEditorialTargets(targets,libraryPath){
+ assert(targets.length===PORTAL_EDITORIAL_ITEMS.size&&new Set(targets.map(t=>norm(t.id))).size===targets.length,'Exactly eight agency-priority editorial items are allowed; folders are excluded.');
+ for(const target of targets){
+  const suffix=PORTAL_EDITORIAL_ITEMS.get(norm(target.id));
+  assert(suffix&&target.path===libraryPath+'/'+suffix,'Agency-priority approval target is outside the explicit identity/path allowlist.');
+ }
+}
 const PUBLIC_PAGE='a4de2222-c8a5-54d4-adee-bbad976a457c';
 const PUBLIC_PAGE_TEMPLATES=new Set([PUBLIC_PAGE,'b99218ea-e1fd-41af-a4ae-7ec9e5c30b17'].map(norm));
 function generatedThumbnailId(xml){
@@ -67,7 +84,7 @@ function manifest(){
    expected:delta?delta.fields:Object.fromEntries([...(r.SharedFields||[]),...(r.Languages[0].Fields||[]),...r.Languages[0].Versions[0].Fields].filter(f=>!f.Hint.startsWith('__')||f.Hint==='__Renderings').map(f=>[f.Hint,String(f.Value)]))};
  });
  assert(targets.length>100&&targets.length<250&&new Set(targets.map(t=>norm(t.id))).size===targets.length,'Invalid finite delivery manifest.');
- assert(targets.filter(t=>t.path.startsWith(portal.libraryPath+'/')).length===7,'Exactly seven agency-priority editorial items are allowed; folders are excluded.');
+ assertPortalEditorialTargets(targets.filter(t=>t.path.startsWith(portal.libraryPath+'/')),portal.libraryPath);
  return {sourceHash:digest({editorial,fidelity,portal}),workflow:W.IDS.workflow,targets:targets.sort((a,b)=>a.path.localeCompare(b.path))};
 }
 function sameExpected(name,expected,actual){
@@ -176,4 +193,4 @@ async function main(){
  const journalFile=options['--resume']||options['--journal'];const result=await run({query:api.query,before:baseline.before,journal,apply:options['--apply']===true,persist:j=>writePrivate(journalFile,j)});
  writePrivate(options['--report'],options['--apply']?result:{...plan(baseline.before),verification:result});console.log(JSON.stringify(result));
 }
-module.exports={manifest,sameExpected,assertTarget,details,verifyHistory,patchFrom,overlay,generatedThumbnailId,verifyThumbnailMedia,acknowledgeThumbnail,thumbnailPreflight,verifyExpandedTransition,verifyPrior,preservePrior,capture,run,plan};if(require.main===module)main().catch(e=>{console.error(e.message);process.exitCode=1;});
+module.exports={manifest,assertPortalEditorialTargets,sameExpected,assertTarget,details,verifyHistory,patchFrom,overlay,generatedThumbnailId,verifyThumbnailMedia,acknowledgeThumbnail,thumbnailPreflight,verifyExpandedTransition,verifyPrior,preservePrior,capture,run,plan};if(require.main===module)main().catch(e=>{console.error(e.message);process.exitCode=1;});

@@ -16,6 +16,8 @@ Native personalization selects the **Agency priorities** datasource. Keep the me
 
 Avery Brooks represents Cedar Ridge Insurance: a principal licensed in Texas, Florida, and Illinois. Daniel Ortiz represents Prairie Oak Insurance: a producer licensed in Illinois and Texas. Their native profile attributes select the relevant recommendation collection. The operational Home greeting and task data are separate from that content decision.
 
+The **For all agencies** default selects **Home and auto conversations → Small business growth → Team support**. Its state-neutral support card links to the existing Support page. The five-card library also contains the Texas and Illinois guidance cards; each audience collection selects its own ordered subset, and the visitor component renders all selected valid references. The principal baseline remains **Small business growth → Texas workers compensation → Home and auto conversations**; the producer baseline remains **Home and auto conversations → Illinois workers compensation → Small business growth**.
+
 ## Preview and publish one Home priority change
 
 Use the same presenter account in Page Builder for the demonstration’s editing, submission, approval, and publication. In a normal team, separate Author, Approver, and Publisher permissions govern those actions.

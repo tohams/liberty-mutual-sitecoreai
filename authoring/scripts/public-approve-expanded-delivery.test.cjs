@@ -5,19 +5,32 @@ const W=require('./public-configure-editorial-workflow.cjs');
 const actor='sitecore\\setup';
 const start={cursor:'MA==',node:{date:'2026-11-01T04:00:00Z',user:actor,newState:{stateId:W.IDS.draft,displayName:'Draft'}}};
 const event={date:'2026-11-01T04:01:00Z',user:actor,oldState:{stateId:W.IDS.draft,displayName:'Draft'},newState:{stateId:W.IDS.awaiting,displayName:'Awaiting approval'}};
-test('finite source approval includes the shared copyright, with exactly six revised versions and seven portal editorial records',()=>{
- const m=H.manifest();assert.equal(m.targets.length,187);assert.equal(m.targets.filter(t=>t.version>1).length,6);
+test('finite source approval includes the shared copyright, with exactly six revised versions and eight allowlisted portal editorial records',()=>{
+ const m=H.manifest();assert.equal(m.targets.length,188);assert.equal(m.targets.filter(t=>t.version>1).length,6);
  const copyright=m.targets.find(t=>t.id==='9dc572ee-3d67-5909-922f-6482def1cdb0');
  assert.equal(copyright.path,'/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures/Copyright notice');
  assert.equal(copyright.version,1);assert.equal(copyright.expected.title,'Copyright notice');
  assert(copyright.expected.body.includes('© 2025 Liberty Mutual Insurance'));
  assert.equal(copyright.expected.owner,'');assert.equal(copyright.expected.sourceLink,'');
  assert.equal(m.targets.find(t=>t.id==='82d42b7c-60f7-5230-9c17-03592feb8d05').expected.body,undefined);
- assert.equal(m.targets.filter(t=>t.path.includes('/liberty-mutual-agent-portal/')).length,7);
+ assert.equal(m.targets.filter(t=>t.path.includes('/liberty-mutual-agent-portal/')).length,8);
+ const support=m.targets.find(t=>t.id==='5de9ebd0-c08c-460f-8cd0-d267bdb77e26');
+ assert.equal(support.path,'/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities/Recommendations/Team support');
+ assert.match(support.expected.Link,/linktype="internal" id="312b0e22-ce78-5810-b4c3-150766789153"/);
  assert.equal(m.targets.filter(t=>t.template==='b99218ea-e1fd-41af-a4ae-7ec9e5c30b17').length,10);
  assert(m.targets.every(t=>!t.path.includes('/Data/Approved answers')));
  assert(m.targets.every(t=>!t.path.includes('/Page Branches/')&&!t.path.includes('$name')&&!t.path.includes('/Authoring check')));
  assert(m.targets.every(t=>!['Data','Cards','Questions','Navigation','Columns','Links','Social','Legal'].includes(t.path.split('/').at(-1))));
+});
+test('the portal approval allowlist rejects extra, substituted, duplicated, and moved editorial targets',()=>{
+ const libraryPath='/sitecore/content/LibertyMutual/liberty-mutual-agent-portal/Data/Agency priorities';
+ const targets=H.manifest().targets.filter(t=>t.path.startsWith(libraryPath+'/'));
+ H.assertPortalEditorialTargets(targets,libraryPath);
+ const extra={...targets[0],id:'11111111-1111-5111-8111-111111111111',path:libraryPath+'/Recommendations/Unreviewed card'};
+ assert.throws(()=>H.assertPortalEditorialTargets([...targets,extra],libraryPath),/Exactly eight/);
+ assert.throws(()=>H.assertPortalEditorialTargets([extra,...targets.slice(1)],libraryPath),/explicit identity\/path allowlist/);
+ assert.throws(()=>H.assertPortalEditorialTargets([targets[1],...targets.slice(1)],libraryPath),/Exactly eight/);
+ assert.throws(()=>H.assertPortalEditorialTargets([{...targets[0],path:libraryPath+'/Recommendations'},...targets.slice(1)],libraryPath),/explicit identity\/path allowlist/);
 });
 test('v3 native start event is queried without nonexistent oldState, while all real transitions retain their old state',async()=>{
  let calls=0;

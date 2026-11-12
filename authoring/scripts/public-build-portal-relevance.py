@@ -10,7 +10,10 @@ spec=importlib.util.spec_from_file_location('public_model_helpers',Path(__file__
 h=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)
 BASE=h.BASE; PORTAL=h.PORTAL; LIBRARY=PORTAL+'/Data/Agency priorities'
 M=json.loads((BASE/'public-contract.json').read_text())
-uid,brace,field=h.uid,h.brace,h.field
+brace,field=h.brace,h.field
+# Preserve the identity of the state-neutral card created natively in Page Builder.
+NATIVE_ITEM_IDS={LIBRARY+'/Recommendations/Team support':'5de9ebd0-c08c-460f-8cd0-d267bdb77e26'}
+def uid(path):return NATIVE_ITEM_IDS.get(path,h.uid(path))
 DATA_PARENT='20e904a1-9b60-43a1-a8d0-8e3aee45b115'
 VARIANTS_PARENT='19a63bdd-f9c6-403b-8068-c1884e9bb413'
 PLACEHOLDERS_PARENT='e601261f-f47f-4831-b91e-ef70efab3276'
@@ -38,10 +41,13 @@ def build():
       ('Small business growth','SMALL BUSINESS','Build a stronger small-business practice','<p>Bring approved product guidance and preparation resources into your team’s small-business conversations.</p>','Explore the growth guide','/resources/expand-small-business-practice'),
       ('Texas workers compensation','TEXAS GUIDANCE','Support workers’ compensation conversations in Texas','<p>Use the Texas preparation guide to organize the questions and information needed for your next client conversation.</p>','Read Texas guidance','/resources/texas-workers-compensation'),
       ('Illinois workers compensation','ILLINOIS GUIDANCE','Support workers’ compensation conversations in Illinois','<p>Find state-specific preparation guidance for the Illinois employers with whom you work.</p>','Read Illinois guidance','/resources/illinois-workers-compensation'),
+      ('Team support','YOUR LIBERTY MUTUAL TEAM','Connect with your Liberty Mutual team','<p>Get guidance on product questions, account preparation, and your next client conversation.</p>','Meet your team','/support'),
     ]
-    for name,eyebrow,heading,body,label,url in cards:data(LIBRARY+'/Recommendations/'+name,'AgencyPriority',{'Eyebrow':eyebrow,'Heading':heading,'Body':body,'Image':'','Link':h.link(label,url)})
+    for name,eyebrow,heading,body,label,url in cards:
+        link='<link linktype="internal" id="312b0e22-ce78-5810-b4c3-150766789153" anchor="" querystring="" target="" class="" text="Meet your team" title=""/>' if name=='Team support' else h.link(label,url)
+        data(LIBRARY+'/Recommendations/'+name,'AgencyPriority',{'Eyebrow':eyebrow,'Heading':heading,'Body':body,'Image':'','Link':link})
     ordered={
-      'For all agencies':['Home and auto conversations','Small business growth'],
+      'For all agencies':['Home and auto conversations','Small business growth','Team support'],
       'Agency growth priorities':['Small business growth','Texas workers compensation','Home and auto conversations'],
       'Producer priorities':['Home and auto conversations','Illinois workers compensation','Small business growth'],
     }
