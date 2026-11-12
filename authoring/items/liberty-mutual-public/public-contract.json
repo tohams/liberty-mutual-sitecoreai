@@ -5770,7 +5770,7 @@
       "bucket": "content",
       "fields": {
         "__Workflow": "{1BB54766-6A38-5C47-B0EE-C57570679D14}",
-        "heading": "<h2>How much can you save<br>when you bundle auto and home insurance?</h2>",
+        "heading": "<h2><strong>How much can you save</strong><br/> when you bundle auto and home insurance?</h2>",
         "body": "<p>At Liberty Mutual, new customers who switch and bundle their home and auto insurance save over $950 per year.<sup>1</sup></p><p>Because every policy is different, the exact savings you get from bundling your home and auto insurance policies is unique to you.</p>",
         "image": "<image mediaid=\"{7BC5F70C-4C1A-4506-B3DE-1C678DE3EB0A}\" alt=\"Woman walking to her garage with balloons\" />",
         "primaryLink": "<link text=\"Start your quote\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-home\" />",

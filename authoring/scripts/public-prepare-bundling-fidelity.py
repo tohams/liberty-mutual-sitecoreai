@@ -140,7 +140,10 @@ def prepare(reference_html, bindings=None):
     change(DATA + '/Why bundle', {'image': media_field(DATA + '/Why bundle', 'bundle-family-loading'),
         'heading': '<h2>Why bundle auto and home insurance?</h2><p>Here are just a few reasons why it can help to bundle your insurance.</p>',
         'body': benefits, 'primaryLink': link('Bundle auto and home insurance to see how much you could save', '#bundling-quote')})
-    change(DATA + '/How bundling works', {'body': rich_after_heading('How much can you save')})
+    change(DATA + '/How bundling works', {
+        'heading': re.sub(r'<h2[^>]*>', '<h2>', source_heading('How much can you save')[0]),
+        'body': rich_after_heading('How much can you save'),
+    })
     change(DATA + '/Bundle confidence', {'heading': '<h2>Why choose Liberty Mutual for<br>car insurance?</h2>', 'body': rich_after_heading('Why choose Liberty Mutual for')})
     change(DATA + '/Bundle choices', {'introduction': '<p>At Liberty Mutual, we offer the following insurance bundles</p>'})
     for card in [r for p, r in records.items() if p.startswith(DATA + '/Bundle choices/Cards/')]:
