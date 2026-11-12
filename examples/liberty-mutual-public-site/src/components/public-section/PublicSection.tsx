@@ -1,4 +1,5 @@
 import { Image, Link, RichText, Text } from "@sitecore-content-sdk/nextjs";
+import InPageLink from "src/features/navigation/InPageLink";
 import type { PublicSectionProps } from "./public-section.props";
 
 type SectionStyle = "proof" | "numbered" | "images" | "bundles" | "quote";
@@ -107,7 +108,7 @@ export const IntroductionLinks = ({
         >
           {items.map((item) => (
             <div key={item.id}>
-              <Link
+              <InPageLink
                 className="public-text-link"
                 field={item.fields.actionLink}
               />
