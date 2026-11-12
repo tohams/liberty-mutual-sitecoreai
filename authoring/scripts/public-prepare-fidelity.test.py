@@ -17,6 +17,17 @@ assets=load('fidelity_alt_contract','public-prepare-asset-inventory.py')
 editorial=load('search_native_contract','public-prepare-editorial-seed.py')
 
 class NativeReferences(unittest.TestCase):
+    def test_home_seed_omits_only_its_unused_starter_introduction(self):
+        model=load('home_initial_composition_contract','public-build-model.py')
+        model.build(include_editorial=False)
+        by_path={record['Path']:record for _,record in model.RECORDS}
+        home=model.SITE+'/Home'
+        self.assertNotIn(home+'/Data/Introduction',by_path)
+        layout=next(field['Value'] for field in by_path[home]['SharedFields'] if field['Hint']=='__Renderings')
+        self.assertNotIn('page:/Data/Introduction',layout)
+        branch=model.SITE+'/Presentation/Page Branches/Landing page/$name'
+        self.assertIn(branch+'/Data/Introduction',by_path)
+
     def test_faq_owner_declares_related_and_recursive_dependencies_only(self):
         definitions,_=fidelity.phase.records()
         faq=next(record for record in definitions if record['Path']==fidelity.h.RP+'/PublicFaq')

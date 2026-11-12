@@ -273,7 +273,8 @@ def build(include_editorial=True):
     item(branch,uid(SITE+"/Presentation/Page Branches"),T["branch"],"branch")
     for p,title in [(proto,"$name"),(SITE+"/Home","Liberty Mutual"),(SITE+"/Home/bundling","Bundle home and auto insurance")]:
         bucket="branch" if p==proto else "content"
-        components=[placement(p,"PublicHero","/headless-main/sxa-public-page-body/headless-public-hero-1","page:/Data/Hero",n=2),placement(p,"PublicArticle","/headless-main/sxa-public-page-body/headless-public-content-1","page:/Data/Introduction",n=3)]
+        components=[placement(p,"PublicHero","/headless-main/sxa-public-page-body/headless-public-hero-1","page:/Data/Hero",n=2)]
+        if p!=SITE+"/Home":components.append(placement(p,"PublicArticle","/headless-main/sxa-public-page-body/headless-public-content-1","page:/Data/Introduction",n=3))
         if p!=proto:components += [placement(p,"PublicPromotion","/headless-main/sxa-public-page-body/headless-public-content-1",brace(uid(SITE+"/Data/Promotions/Bundle and save")),"ImageRight" if p.endswith("bundling") else "ImageLeft",4)]
         item(p,uid(branch) if p==proto else uid(SITE) if p==SITE+"/Home" else uid(SITE+"/Home"),page,bucket,shared=fs({"layout":layout(components),"masters":brace(T["data"])+"|"+brace(uid(branch))}),values=[field("d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b","Title",title),field("4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8","NavigationTitle",title)])
         item(p+"/Data",uid(p),T["data"],bucket,shared=fs({"masters":"|".join(brace(TEMPLATES[n]) for n in ["PublicHero","PublicArticle","PublicImage","PublicCta"])}))
@@ -283,7 +284,9 @@ def build(include_editorial=True):
             bundle=p.endswith("bundling")
             hero.update({"eyebrow":"HOME AND AUTO" if bundle else "LIBERTY MUTUAL INSURANCE","heading":"Better together. Home and auto insurance." if bundle else "Protection for the life you live.","summary":"<p>Bring your home and auto insurance together, and explore coverage that fits your needs.</p>" if bundle else "<p>Explore insurance for your home, car, and the things that matter to you.</p>","primaryLink":link("Start your quote","/get-a-quote"),"secondaryLink":link("Explore bundling","/bundling") if not bundle else link("Find answers","/insurance-resources")})
             article={"heading":"Make room for what matters.","body":"<p>Understand your options, find useful guidance, and take your next step with confidence.</p>"}
-        for name,component,vals in [("Hero","PublicHero",hero),("Introduction","PublicArticle",article)]:item(p+"/Data/"+name,uid(p+"/Data"),TEMPLATES[component],bucket,values=[field(FIELDS[component+"."+k],k,v) for k,v in vals.items()])
+        for name,component,vals in [("Hero","PublicHero",hero),("Introduction","PublicArticle",article)]:
+            if p==SITE+"/Home" and name=="Introduction":continue
+            item(p+"/Data/"+name,uid(p+"/Data"),TEMPLATES[component],bucket,values=[field(FIELDS[component+"."+k],k,v) for k,v in vals.items()])
     # Native Page Builder verified this starter creates independent local Hero
     # content and uses the built-in Context Item Resolver for page-owned fields.
     # An empty datasource is intentional: a branch prototype GUID is not remapped.
