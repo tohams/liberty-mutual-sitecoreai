@@ -1411,7 +1411,7 @@ export const customerDemoChapters: DemoChapter[] = [
             action: 2,
             label: "AI writing prompt",
             value:
-              "Expand this brief introduction into a welcoming 35–45-word paragraph for an independent insurance agent. Use three short sentences, starting with “Build your next opportunity.” Address the agent as “you,” and focus on exploring product conversations and useful resources to grow their agency. Do not repeat the original sentence or add products, coverage promises, discounts, or performance claims. Return only the rewritten introduction.",
+              "Expand this brief introduction into a welcoming 35–45-word paragraph for an independent insurance agent. Use three short sentences, starting with “Build your next opportunity.” Address the agent as “you,” and focus on exploring product conversations and useful resources to grow their agency.",
           },
         ],
         presenterPoints: [
