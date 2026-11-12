@@ -2524,6 +2524,27 @@
       }
     },
     {
+      "id": "92c94029-4d2b-4924-bc39-0de92582d0c6",
+      "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings/Sitemap",
+      "parent": "63dc1946-1fc6-4e68-bc6e-653525cee45b",
+      "template": "c71d8566-35c8-49b7-a84d-9d176e9cbd05",
+      "bucket": "site",
+      "fields": {
+        "Refresh Threshold": "1",
+        "GenerateSitemapMediaItems": "1",
+        "Generate Alternate Links": "1",
+        "HrefLang": "{1761AA85-9E69-42A7-A5F0-87507340DF26}",
+        "Include xdefault": "1",
+        "Cache Type": "{AF52EB2D-A852-45A7-ABD6-C931EEDBFC9D}",
+        "Crawler": "itemCrawler",
+        "Language Mode": "{EEEC6C46-AD9E-4CC8-A521-8634EDC69718}",
+        "changefreq": "1",
+        "lastmod": "1",
+        "priority": "1",
+        "Cache Expiration": "1"
+      }
+    },
+    {
       "id": "46873189-36f3-578c-a00b-cb2140d34418",
       "path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Available Renderings/Structure",
       "parent": "cc296536-020c-4b8f-8274-52f97d6afbe2",

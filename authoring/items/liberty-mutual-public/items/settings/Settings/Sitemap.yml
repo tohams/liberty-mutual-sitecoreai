@@ -1,0 +1,47 @@
+---
+ID: 92c94029-4d2b-4924-bc39-0de92582d0c6
+Parent: 63dc1946-1fc6-4e68-bc6e-653525cee45b
+Template: c71d8566-35c8-49b7-a84d-9d176e9cbd05
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Settings/Sitemap
+SharedFields:
+- ID: e12195e6-3bcd-4c51-9cd4-3ae3c0779b9f
+  Hint: Refresh Threshold
+  Value: "1"
+- ID: 7f070bc5-5cd4-474f-aa2f-ab2a0a128f00
+  Hint: GenerateSitemapMediaItems
+  Value: "1"
+- ID: eb78b584-b22e-47cd-88da-e80d6dbb9238
+  Hint: Generate Alternate Links
+  Value: "1"
+- ID: 4369de8a-d99c-441d-8a4d-106b6366a522
+  Hint: HrefLang
+  Value: "{1761AA85-9E69-42A7-A5F0-87507340DF26}"
+- ID: 674a7926-436f-4882-add1-0f92ea860c19
+  Hint: Include xdefault
+  Value: "1"
+- ID: fcefa910-fd09-439b-ae81-ef00487090ad
+  Hint: Cache Type
+  Value: "{AF52EB2D-A852-45A7-ABD6-C931EEDBFC9D}"
+- ID: a4da1f5e-cbfe-458d-bac5-7abfb80b3e84
+  Hint: Crawler
+  Value: itemCrawler
+- ID: 4e383ce4-6f75-4e0d-9a9a-b3fa3518d7ee
+  Hint: Language Mode
+  Value: "{EEEC6C46-AD9E-4CC8-A521-8634EDC69718}"
+- ID: e35a52f4-12f4-4153-a49e-2b894355a22e
+  Hint: changefreq
+  Value: "1"
+- ID: 0708c430-1ad8-4b9b-b48d-e3b7d4495088
+  Hint: lastmod
+  Value: "1"
+- ID: 95c52046-38e4-4d96-bb32-b699891ba215
+  Hint: priority
+  Value: "1"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 139eb09e-73c4-4f96-a06b-a8bc050954e4
+      Hint: Cache Expiration
+      Value: "1"

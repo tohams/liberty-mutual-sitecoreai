@@ -239,6 +239,14 @@ def build(include_editorial=True):
     branch_settings['SharedFields']=merge_fields(branch_settings.get('SharedFields',[]),[field('bb3391dd-f8be-4b2e-ae9f-47bb63c166ce','Rule',rule)])
     grouping=SITE+"/Settings/Site Grouping";item(grouping,uid(SITE+"/Settings"),T["siteGroupingFolder"],"site")
     item(grouping+"/liberty-mutual-public-site",uid(grouping),T["siteGrouping"],"site",shared=[field("cb4e9e2e-2b66-43dc-ad3f-9caf363d28d3","SiteName","liberty-mutual-public-site"),field("1ee576af-ba8e-4312-9fbd-2ccf8395baa1","StartItem",brace(uid(SITE+"/Home"))),field("8e0dd914-9afb-4d45-bf8b-7ff5d6e5337e","HostName","liberty-mutual-public-site.vercel.app"),field("9eaf6dc9-b811-4cda-9edd-9697faba628a","POS","en=liberty-mutual-public-site"),field("f57099a3-526a-49f2-aebd-635453e48875","RenderingHost","liberty-mutual-public-site"),field("da06d09e-02b6-464a-80fc-9d8d7fc875e3","Environment","*")])
+    # This small site's native sitemap follows frequent author publications.
+    # Preserve its captured platform identity/settings; seed only these two
+    # minute values differently, through the explicit CreateOnly SiteSeed.
+    sitemap=SITE+"/Settings/Sitemap"
+    if sitemap in SCAFFOLD:
+        item(sitemap,uid(SITE+"/Settings"),SCAFFOLD[sitemap]["template"],"site",
+             shared=[field("e12195e6-3bcd-4c51-9cd4-3ae3c0779b9f","Refresh Threshold","1")],
+             values=[field("139eb09e-73c4-4f96-a06b-a8bc050954e4","Cache Expiration","1")])
     settings=next(r for _,r in RECORDS if r["Path"]==SITE+"/Settings")
     settings["SharedFields"]=merge_fields(settings.get("SharedFields",[]),[field("3e4f559f-8e59-4405-b50d-619811371f6c","Name","liberty-mutual-public-site"),field("32ce6bbe-4217-46e5-9335-42793884cbe3","AppTemplate",brace(T["site"])),field("5764d2d4-724d-4313-a81b-9246c911faff","AppDatasourcesPath",brace(uid(SITE+"/Data"))),field("5ca117eb-8782-4a4f-9f2f-30de31fc2e34","PlaceholdersPath",brace(uid(PP))),field("c8d002f9-9518-4c5e-9baa-6617e13f0797","LayoutPath",brace(I["layout"])),field("e8881464-38af-4655-be4a-ee10586578a2","Templates",brace(uid(TP))),field("f29428d5-1285-48b8-a884-44057965829a","RenderingsPath",brace(uid(RP))),field("9016141c-ff51-40f2-9135-40f5161b9784","ServerSideRenderingEngine","http"),field("72e83c8d-3578-4e50-b4c0-93a78a1729f2","FilesystemPath","/dist/liberty-mutual-public-site")])
     for group,names in {"Structure":["PublicPageBody"],"Content":["PublicHero","PublicArticle","PublicImage","PublicCta"],"Promotions":["PublicPromotion"],"Guidance":["PublicResourceContent","SharedDisclosure"]}.items():
