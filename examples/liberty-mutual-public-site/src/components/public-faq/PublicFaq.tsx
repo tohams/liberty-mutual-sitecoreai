@@ -46,6 +46,16 @@ export const Default = ({
             <details key={item.id} id={faqAnchor(item.id)}>
               <summary>
                 <Text tag="span" field={item.fields.question} />
+                <svg
+                  className="public-faq__caret"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M2.71112 4.00194L1.29501 5.41426L7.98512 12.1223L14.7092 5.41615L13.2969 4.00005L7.9889 9.29388L2.71112 4.00194Z" />
+                </svg>
               </summary>
               <RichText className="public-prose" field={item.fields.answer} />
             </details>

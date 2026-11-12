@@ -1514,7 +1514,7 @@ code.scpm {
 }
 .public-faq summary {
   position: relative;
-  padding: 19px 44px 19px 16px;
+  padding: 19px 56px 18px 24px;
   cursor: pointer;
   font-size: 18px;
   font-weight: 500;
@@ -1525,20 +1525,19 @@ code.scpm {
 .public-faq summary::-webkit-details-marker {
   display: none;
 }
-.public-faq summary:after {
-  content: "+";
+.public-faq__caret {
   position: absolute;
-  right: 16px;
-  top: 17px;
+  right: 24px;
+  top: 24px;
   color: var(--public-teal);
-  font-size: 24px;
-  font-weight: 300;
+  fill: currentColor;
+  transition: transform 160ms ease;
 }
-.public-faq details[open] summary:after {
-  content: "−";
+.public-faq details[open] .public-faq__caret {
+  transform: rotate(180deg);
 }
 .public-faq details > .public-prose {
-  padding: 0 16px 24px;
+  padding: 0 24px 24px;
   font-size: 16px;
   line-height: 25.6px;
 }
