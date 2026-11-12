@@ -23,7 +23,7 @@ Languages:
       Value: <image mediaid="{3B7DEA98-905E-4BC7-A382-7E5F98F0127B}" alt="Dad helping daughter pack the back of a SUV" />
     - ID: 6f2bb5ea-9611-5298-a6d2-49c85eee3ce8
       Hint: primaryLink
-      Value: <link text="Bundle auto and home insurance to see how much you could save" linktype="external" url="" anchor="bundling-quote" />
+      Value: <link text="Bundle auto and home insurance to see how much you could save" linktype="internal" anchor="bundling-quote" id="{7D7352F2-0C45-5093-B9E6-FBEAE4E08953}" />
     - ID: c2b8db12-5b8e-5f84-a44d-5f017ba52d66
       Hint: secondaryLink
       Value: |

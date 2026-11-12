@@ -70,7 +70,10 @@ def prepare(reference_html, bindings=None):
         assert not value or ('mediaid=' in value.lower() or 'dam-id=' in value.lower()), 'Use an actual uploaded native Image field binding.'
         return value
 
-    def link(text, href): return h.link(text, href)
+    def link(text, href):
+        if href.startswith('#'):
+            return '<link text="' + html.escape(text, quote=True) + '" linktype="internal" id="' + h.brace(h.uid(PAGE)) + '" anchor="' + html.escape(href[1:], quote=True) + '" />'
+        return h.link(text, href)
     def source_heading(pattern):
         return next((match for match in re.finditer(r'<h[23][^>]*>(.*?)</h[23]>', reference_html, re.S)
                      if re.search(html.unescape(pattern), html.unescape(re.sub(r'<[^>]*>', ' ', match[1])))), None)
