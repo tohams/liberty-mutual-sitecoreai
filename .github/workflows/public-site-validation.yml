@@ -71,7 +71,7 @@ jobs:
           python authoring/scripts/public-build-model.py --check
           python authoring/scripts/public-build-portal-relevance.py --check
           python authoring/scripts/public-prepare-fidelity.test.py
-      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
           dotnet-version: "8.0.x"
       - name: Validate public and portal-relevance serialization modules
