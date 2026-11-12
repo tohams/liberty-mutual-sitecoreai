@@ -132,7 +132,7 @@ export const customerDemoTabGroups: DemoTabGroup[] = [
       {
         id: "brandKit",
         navigation: "**Design → Brand kits**.",
-        cue: "Open Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice.",
+        cue: "Open Liberty Mutual — Independent Agents, marked PUBLISHED, then choose Sections → Tone of Voice.",
       },
     ],
   },
