@@ -1133,7 +1133,7 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "In the response on the right, show **id**, **version**, **question**, and **answer**.",
             "Find **Review your options with your agent before choosing coverage.** in **answer**.",
-            "Switch to the **Public website** tab, open the **Published FAQ** URL, and expand its answer, and compare the wording. Return to **GraphQL Explorer**.",
+            "Switch to the **Public website** tab, and open the **Published FAQ** URL. It opens the matching answer automatically; compare its wording with the API response. Return to **GraphQL Explorer**.",
           ],
           [
             "Explain that the front end, LibertyAir, or any other application can retrieve these same published fields through the native API.",
