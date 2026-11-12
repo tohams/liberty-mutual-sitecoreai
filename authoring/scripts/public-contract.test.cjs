@@ -14,14 +14,15 @@ test('native identifiers and references are unique and limited to this customer 
  }
  assert.equal(norm(record(SITE+'/Data/Promotions/Bundle and save').fields.disclosure),norm(model.disclosureId));
 });
-test('one shared Promotion is assigned to Home and Bundling, with different variants',()=>{
+test('Home uses the shared Promotion while Bundling retains only its genuine source content',()=>{
  const home=record(SITE+'/Home').fields.__Renderings;
  const bundling=record(SITE+'/Home/bundling').fields.__Renderings;
- for(const layout of [home,bundling]){
-  assert(layout.includes(model.promotionId.toUpperCase()));
- }
+ assert(home.includes(model.promotionId.toUpperCase()));
  assert(home.includes(model.variantIds['PublicPromotion.ImageLeft'].toUpperCase()));
- assert(bundling.includes(model.variantIds['PublicPromotion.ImageRight'].toUpperCase()));
+ assert(!bundling.includes(model.promotionId.toUpperCase()));
+ assert(!bundling.includes(model.disclosureId.toUpperCase()));
+ const products=record(SITE+'/Home/bundling').fields.product;
+ assert.equal(products,'{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}|{005D71B8-6FD7-4E0A-842A-338DF40E1F47}|{D81D3AE8-243B-4F32-B70D-33796448DCA0}');
 });
 test('one full copyright notice is governed in the shared footer without replacing coverage terms',()=>{
  const copyright=record(SITE+'/Data/Disclosures/Copyright notice');

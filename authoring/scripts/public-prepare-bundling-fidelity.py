@@ -184,6 +184,8 @@ def prepare(reference_html, bindings=None):
         return '<r uid="' + h.brace(uid) + '" id="' + h.brace(model['renderingIds'][component]) + '" ph="/headless-main/sxa-public-page-body/headless-public-content-1" ds="page:/Data/' + local_path + '" par="' + params + '" />'
     for row in rows:
         ds = html.unescape(re.search(r'\bds="([^"]*)"', row)[1])
+        if ds.lower() in {h.brace(model['promotionId']).lower(), h.brace(model['disclosureId']).lower()}:
+            continue
         if ds in ['page:/Data/Multi-car savings', 'page:/Data/Mobile app', 'page:/Data/Related insurance guides', 'page:/Data/More coverage information']:
             continue
         if ds in ['page:/Data/Bundle overview', 'page:/Data/Bundle introduction']:
@@ -203,6 +205,7 @@ def prepare(reference_html, bindings=None):
         if ds == 'page:/Data/Ready for a quote':
             placements += [placement('PublicSection', 'Related insurance guides', 'RelatedArticles'), placement('PublicArticle', 'More coverage information', 'Centered', 'bundling-more-coverage')]
     rendering_field['Value'] = layout[:layout.index(rows[0])] + ''.join(placements) + layout[layout.rindex(rows[-1]) + len(rows[-1]):]
+    change(PAGE, {'product': h.checklist_value('product', 'auto|home|condo|renters')})
     change(DATA + '/Hero', {'secondaryLink': ''})
     retired = SITE + '/Home/insurance-resources/bundle-car-and-home'
     retired_records = [r for p, r in records.items() if p == retired or p.startswith(retired + '/')]
