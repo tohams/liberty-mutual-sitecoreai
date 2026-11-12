@@ -95,7 +95,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Help a customer find relevant guidance without knowing Liberty Mutual’s terminology.",
+          "**Say:** “Your visitors can ask a question in their own words and find useful guidance. A clear route to an agent keeps the conversation moving when published content does not answer their question.”",
           "Point to the related bundling results and the **Can I bundle my car and home insurance?** answer excerpt; leave results unopened.",
           "For the unsupported question, show **No results found** and **Contact an agent** as the clear next step.",
         ],
@@ -290,7 +290,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "The customer reads a natural article. The same governed page supplies the metadata and structured content used for discovery and reuse.",
+          "**Say:** “Structured fields and metadata help search and permitted AI engines understand Liberty Mutual’s content. That makes useful guidance easier to discover while your team maintains one clear, governed source.”",
           "**Search title**, **Search description**, and the native checklists keep the page’s purpose and applicability explicit. **Question** and **Plain-language answer** supply Search and connected applications.",
           "The public page exposes **Article** schema and a canonical URL for permitted search and AI engines. Connected applications retrieve structured CMS fields through their integrations.",
         ],
@@ -436,7 +436,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Make, review, and publish one page revision, without a frontend release.",
+          "**Say:** “Customers need current guidance wherever they find it. Publishing one reviewed change and keeping Search aligned reduces duplicate work for Liberty Mutual and helps visitors find the latest approved wording.”",
           "A configured **OnEnd** publication event invokes a custom synchronization service, which reads **Live Experience Edge** and updates the index through the **Search Push API**.",
           "Show the sentence absent before publication and present in Search afterward; the state, product, and audience classifications stay intact.",
         ],
@@ -578,7 +578,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Create a real page from an approved structure, then edit its words and image directly on the canvas.",
+          "**Say:** “Your marketers can create and publish useful pages without waiting for an engineering ticket. Approved components and review controls help them move quickly while giving visitors a consistent Liberty Mutual experience.”",
           "Point to the permitted components, the reused **Promotion**, and the obvious **Image left / Image right** presentation choices.",
           "Submit, approve, and publish the page; show the same headings, image, and Promotion on the public website.",
         ],
@@ -859,7 +859,7 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "The existing and proposed wording and its target field have been shown, and the proposed Profound-to-Draft, review, and publication path has been explained.",
         presenterPoints: [
-          "Show the existing **Scrunch** recommendation beside the exact page field it addresses; keep Prospera unchanged.",
+          "**Say:** “Liberty Mutual can turn external content recommendations into improvements while retaining editorial control. We’re showing the existing **Scrunch** pattern; a **Profound** integration could bring proposals into the same review and publishing process.”",
           "For **Profound**, a scoped integration could bring proposed content into **Draft**, followed by human editing, review, approval, and publication.",
         ],
         presenterCues: [
@@ -1059,7 +1059,7 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "The public-site report shows pageView and LM_PUBLIC_CTA_CLICK over the past month, and the presenter explains the visitor action represented by the custom event.",
         presenterPoints: [
-          "Show actual public-site activity for **1 month**, using the site and event filters.",
+          "**Say:** “Your team can see which content people visit and which next steps they choose. That gives Liberty Mutual evidence to prioritize improvements around useful customer actions as well as page views.”",
           "**pageView** measures page views; **LM_PUBLIC_CTA_CLICK** records selections of defined next-step buttons and links.",
           "Recorded visitor choices automatically govern optional measurement and personalization.",
         ],
@@ -1171,7 +1171,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**: one approved source can serve several applications.",
+          "**Say:** “One approved source can serve the website and other applications. Liberty Mutual can reuse guidance without maintaining competing copies, and each channel can present that content in the way its audience needs.”",
           "Point to the same page ID, published version, and newly published sentence in the live GraphQL response.",
         ],
         presenterCues: [
@@ -1261,7 +1261,7 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "Daniel and Avery’s different priorities are visible, Avery matches the native agency-growth rule using her own Client ID, and the published Texas and Illinois conditions are shown.",
         presenterPoints: [
-          "Start with Daniel, a producer at **Prairie Oak Insurance**, then contrast Avery, a principal at **Cedar Ridge Insurance**.",
+          "**Say:** “Independent agents have a choice of carriers. Guidance that reflects their role, licensed states, and business priorities helps them find a useful next conversation with Liberty Mutual and makes the portal easier to use.”",
           "Compare the ordered recommendations and licensed states: Daniel sees household guidance first; Avery sees agency growth first.",
           "Follow Avery’s **Client ID** into the native **agency-growth** test, then show the Texas / Illinois business conditions behind the experiences.",
         ],
@@ -1415,7 +1415,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "The sample **Brand Kit** supplies reusable voice guidance; **Content Copilot** helps an author refine an editable field.",
+          "**Say:** “Your marketers can create clearer, on-brand content more efficiently. **Brand Kit** guidance, **Content Copilot**, and approved components help the team focus on the message while agents receive a consistent, professional portal experience.”",
           "Compare the expanded introduction with the short original, check its meaning, then **Revert to original**: the author decides what to retain.",
           "Point to the allowed component choice: governed structure keeps the agent experience consistent while marketers edit content.",
         ],
@@ -1584,7 +1584,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "For a Texas workers’ compensation campaign, make the approved Texas guidance the principal audience’s first priority.",
+          "**Say:** “When priorities change, your marketers can adjust what agents see without waiting for a code release. Putting the Texas campaign first helps eligible agency principals focus on Liberty Mutual’s current growth opportunity.”",
           "Change the actual **Ordered recommendations** in a new **Draft**; the original approved version and live order remain intact.",
         ],
         presenterCues: [
@@ -1710,8 +1710,8 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Personalization Preview** is a private Marketplace extension: choose a native content variant and inspect the current draft on the same page.",
-          "Compare **Agency growth priorities** with **Producer priorities** before publication; the producer keeps the household-first order.",
+          "**Say:** “Your team can check the draft experience for each selected content variant before publication. That helps marketers confirm that agents will see the intended priorities and gives them confidence to make business changes.”",
+          "**Personalization Preview** is a private Marketplace extension. Compare **Agency growth priorities** with **Producer priorities** before publication; the producer keeps the household-first order.",
           "Review and publish the saved priority change once, then show Avery’s updated live order and Daniel’s unchanged order.",
         ],
         presenterCues: [
@@ -1831,7 +1831,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Both website footers reference one full copyright notice, rather than separate copies.",
+          "**Say:** “Shared wording should stay consistent wherever it appears. One reviewed update reaches both sites, reducing repeated work for Liberty Mutual and the chance that visitors and agents encounter different versions of the same notice.”",
           "Change only **2025 → 2026**, publish the shared source once, and compare versions while delivery completes.",
           "Confirm **2026** on both live sites before beginning restoration.",
         ],
@@ -1946,7 +1946,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "Restore earlier wording through a new reviewed version, preserving the original and changed revisions.",
+          "**Say:** “Moving quickly is easier when changes remain accountable and recoverable. Your team can see what changed, review it, and restore earlier approved wording while retaining the history of those decisions.”",
           "Versions show what changed; item statistics show who last updated it and when.",
           "Finish with **2025** in both footers: a controlled change and a controlled reversal.",
         ],
