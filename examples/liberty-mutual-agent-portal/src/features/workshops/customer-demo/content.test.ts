@@ -776,7 +776,7 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
   );
   assert.match(
     prose(entry.actions[3]),
-    /Page Builder.*Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities.*Select profile → Load profile → Client ID.*Avery.*Client ID.*Enter.*Testing as: Avery Brooks - 01.*Test.*green agency-growth.*Cancel/i,
+    /Page Builder.*Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities.*Select profile → Load profile → Client ID.*Avery.*Client ID.*Enter.*Testing as: Avery Brooks - 01.*Test.*green first row.*Rule 1 matched.*Builder open/i,
   );
   assert.doesNotMatch(
     prose(entry.actions.slice(2)),
@@ -809,25 +809,36 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
     preparation,
     /Repeat for Daniel Ortiz|both current Client IDs|Avery’s and Daniel’s current Client ID/,
   );
+  assert.match(profileRules, /most recent matching Avery Brooks - 01/);
+  assert.doesNotMatch(
+    prose([entry.actions, entry.presenterActions]),
+    /normally marked Now|must.*marked Now/i,
+  );
   const stateRule = prose(entry.actions[4]);
   assert.match(
     stateRule,
-    /Optimization → Custom values.*Liberty Mutual - Agency product priorities.*published rule without editing/i,
+    /same Liberty Mutual - Agency product priorities Builder.*Agency growth opportunity.*column heading.*⋯ → Edit parameters/i,
   );
   assert.match(
     stateRule,
-    /agency-growth.*principal.*licensedInTexas === true.*small-commercial share below 20%/,
+    /Agency principal.*role dropdown.*Texas.*licensed-state dropdown.*percentage field \(20\)/,
   );
   assert.match(
     stateRule,
-    /producer-priorities.*producer.*licensedInIllinois === true.*small-commercial specialization.*positive agent small-commercial production/,
+    /Producer recommendation eligibility.*Producer.*role dropdown.*Illinois.*licensed-state dropdown.*premium amount \(0 USD\).*small-business specialization/,
   );
-  assert.match(stateRule, /Leave the published rule unchanged/);
+  assert.match(
+    stateRule,
+    /Leave the verified values unchanged.*Cancel in Edit parameters.*Cancel in the Builder/,
+  );
   assert.match(
     entry.stopWhen,
-    /Daniel and Avery.*Avery matches.*native agency-growth rule.*own Client ID/,
+    /Daniel and Avery.*Avery matches.*Rule 1.*Agency growth opportunity.*own Client ID/,
   );
-  assert.match(entry.stopWhen, /published Texas and Illinois conditions/);
+  assert.match(
+    entry.stopWhen,
+    /native role, licensed-state, and production controls/,
+  );
   assert.equal(entry.inputs, undefined);
   for (const link of linksIn(entry))
     assert.doesNotMatch(link.href, /\/(?:workshops?|demo)(?:[/?#]|$)/);
@@ -837,7 +848,7 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
   );
   assert.match(
     prose(entry.presenterActions),
-    /Optimization → Custom values → Liberty Mutual - Agency product priorities/,
+    /Agency growth opportunity.*Agency principal.*role dropdown.*Texas.*licensed-state dropdown.*percentage field \(20\)/,
   );
   assert.doesNotMatch(
     text,
@@ -851,7 +862,24 @@ test("A1 follows Daniel to Avery and keeps Avery through the native profile and 
     text,
     /application separately enforces licensed-state eligibility/i,
   );
-  assert.match(prose(entry.controls), /Unmatched profiles receive neutral/);
+  assert.match(
+    prose(entry.controls),
+    /Unmatched profiles receive the original For all agencies content/,
+  );
+  assert.doesNotMatch(
+    prose([entry.presenterActions, entry.actions, entry.images]),
+    /Custom values|licensedInTexas|licensedInIllinois|===|JavaScript|code editor/,
+  );
+  const businessBeats = presenterActionSequence(entry, 5, entry.inputs);
+  const businessSpeech = businessBeats.findIndex((beat) => beat.kind === "say");
+  assert.match(
+    prose(businessBeats.slice(0, businessSpeech)),
+    /Agency growth opportunity.*Agency principal.*role dropdown.*Texas.*licensed-state dropdown.*percentage field \(20\)/,
+  );
+  assert.match(
+    prose(businessBeats.slice(businessSpeech + 1)),
+    /Leave the verified values unchanged.*Cancel/,
+  );
 });
 
 test("the design loop connects the Brand Kit to field-level AI and governed composition", () => {
