@@ -65,8 +65,16 @@ def quote_hero_summary(value):
                          'Review your product and ZIP Code choices before continuing to Liberty Mutual for a quote.')
 
 def prepare(source,bindings):
-    assert len(source['pages'])==17 and len(source['answers'])==10,'Expected the agreed focused17-page,10-answer inventory.'
-    assert len({p['slug'] for p in source['pages']})==17
+    # The real /bundling landing page and its native FAQ are the single source
+    # for this subject. Never recreate the retired duplicate resource article.
+    source=copy.deepcopy(source)
+    source['pages']=[p for p in source['pages'] if p['slug']!='/insurance-resources/bundle-car-and-home']
+    source['answers']=[a for a in source['answers'] if a['slug']!='bundle-car-and-home']
+    assert len(source['pages']) in [16,17] and len(source['answers']) in [9,10],'Unexpected focused editorial inventory.'
+    assert len({p['slug'] for p in source['pages']})==len(source['pages'])
+    for page in source['pages']:
+        if page['slug']=='/bundling' and page['hero'].get('secondaryLink',{}).get('href')=='/insurance-resources/bundle-car-and-home':
+            page['hero']['secondaryLink']=None
     by_slug={a['slug']:a for a in source['answers']}
     root=h.SITE;data_root=root+'/Data';resource_root=root+'/Home/insurance-resources';options_root=data_root+'/Product options'
     for folder in ['Product options','Search']:item(data_root+'/'+folder,UID(data_root),h.T['folder'])
@@ -128,7 +136,7 @@ def prepare(source,bindings):
         hero_values={**page['hero'],'summary':hero_summary,'image':image(page['hero'].get('image'),d+'/Hero',bindings),'primaryLink':link(page['hero'].get('primaryLink')),'secondaryLink':link(page['hero'].get('secondaryLink'))}
         data(d+'/Hero','PublicHero',hero_values);data(d+'/Introduction','PublicArticle',page['introduction'])
         page_summaries.append({'route':page['slug'],'id':UID(p),'path':p,'components':[name for name in ['PublicHero','PublicArticle','PublicPromotion','PublicResourceContent','PublicSearch','PublicProductSelector','PublicQuoteHandoff','SharedDisclosure'] if any(BRACE(rendering_id(name)) in c for c in components)]})
-    assert len(page_summaries)==17 and len({r['ID'] for r in RECORDS})==len(RECORDS)
+    assert len(page_summaries)==len(source['pages']) and len({r['ID'] for r in RECORDS})==len(RECORDS)
     new_contracts={
       'PublicSearch':{'fields':{'heading':'Single-Line Text','introduction':'Rich Text','search':'Multi-Line Text'},'source':data_root+'/Search'},
       'PublicProductOption':{'fields':{'label':'Single-Line Text','productKey':'Single-Line Text','image':'Image','quoteLink':'General Link'},'source':options_root},

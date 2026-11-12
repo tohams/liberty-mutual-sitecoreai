@@ -60,3 +60,51 @@ export const TextColumns = ({
       </div>
     </section>
   ) : null;
+
+export const AppFeatures = ({
+  fields,
+  params,
+  rendering,
+}: PublicSplitContentProps) =>
+  fields ? (
+    <section
+      className={`component public-section public-app-features ${params.styles || ""}`}
+      id={params.RenderingIdentifier}
+      data-content-id={rendering.dataSource}
+    >
+      <div className="public-container public-app-features__grid">
+        <div>
+          <RichText className="public-section-heading" field={fields.heading} />
+          <Image field={fields.image} loading="lazy" />
+        </div>
+        <div className="public-app-features__copy">
+          <RichText className="public-prose" field={fields.body} />
+          <Link className="public-text-link" field={fields.primaryLink} />
+        </div>
+      </div>
+    </section>
+  ) : null;
+
+export const Benefits = ({
+  fields,
+  params,
+  rendering,
+}: PublicSplitContentProps) =>
+  fields ? (
+    <section
+      className={`component public-section public-bundle-benefits ${params.styles || ""}`}
+      id={params.RenderingIdentifier}
+      data-content-id={rendering.dataSource}
+    >
+      <div className="public-container">
+        <RichText className="public-section-heading" field={fields.heading} />
+        <div className="public-bundle-benefits__grid">
+          <RichText className="public-prose" field={fields.body} />
+          <Image field={fields.image} loading="lazy" />
+        </div>
+        <div className="public-bundle-benefits__action">
+          <Link className="public-text-link" field={fields.primaryLink} />
+        </div>
+      </div>
+    </section>
+  ) : null;

@@ -84,3 +84,70 @@ export const ImageCards = (props: PublicSectionProps) =>
 export const Bundles = (props: PublicSectionProps) => Section(props, "bundles");
 export const QuoteCards = (props: PublicSectionProps) =>
   Section(props, "quote");
+
+export const IntroductionLinks = ({
+  fields,
+  params,
+  rendering,
+}: PublicSectionProps) => {
+  if (!fields) return null;
+  const items = Array.isArray(fields.items) ? fields.items : [];
+  return (
+    <section
+      className={`component public-section public-introduction-links ${params.styles || ""}`}
+      id={params.RenderingIdentifier}
+      data-content-id={rendering.dataSource}
+    >
+      <div className="public-container public-introduction-links__grid">
+        <RichText className="public-section-heading" field={fields.heading} />
+        <RichText className="public-prose" field={fields.introduction} />
+        <nav
+          aria-label="On this page"
+          className="public-introduction-links__links"
+        >
+          {items.map((item) => (
+            <div key={item.id}>
+              <Link
+                className="public-text-link"
+                field={item.fields.actionLink}
+              />
+              <RichText className="public-prose" field={item.fields.body} />
+            </div>
+          ))}
+        </nav>
+      </div>
+    </section>
+  );
+};
+
+export const RelatedArticles = ({
+  fields,
+  params,
+  rendering,
+}: PublicSectionProps) => {
+  if (!fields) return null;
+  const items = Array.isArray(fields.items) ? fields.items : [];
+  return (
+    <section
+      className={`component public-section public-related-articles ${params.styles || ""}`}
+      id={params.RenderingIdentifier}
+      data-content-id={rendering.dataSource}
+    >
+      <div className="public-container">
+        <RichText className="public-section-heading" field={fields.heading} />
+        <div className="public-related-articles__grid">
+          {items.map((item) => (
+            <article key={item.id}>
+              <Image field={item.fields.image} loading="lazy" />
+              <h3>
+                <Link field={item.fields.actionLink}>
+                  <Text tag="span" field={item.fields.heading} />
+                </Link>
+              </h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
