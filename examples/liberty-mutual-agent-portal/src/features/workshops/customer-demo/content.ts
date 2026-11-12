@@ -79,7 +79,7 @@ export const customerDemoChapters: DemoChapter[] = [
         objective:
           "Help a visitor find relevant approved guidance from a conversational question, with an agent-assisted next step when the subject needs further help.",
         stopWhen:
-          "The supported question shows the range of relevant published results and the approved answer excerpt, and the unsupported question ends with No results found and Contact an agent.",
+          "The supported question shows Bundle home and auto insurance as the lead result with its excerpt and related published guidance, and the unsupported question ends with No results found and Contact an agent.",
         inputs: [
           {
             beforeLine: 1,
@@ -96,7 +96,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterPoints: [
           "**Say:** “Your visitors can ask a question in their own words and find useful guidance. A clear route to an agent keeps the conversation moving when published content does not answer their question.”",
-          "Point to the related bundling results and the **Can I bundle my car and home insurance?** answer excerpt; leave results unopened.",
+          "Point to **Bundle home and auto insurance** as the lead result, which links to **/bundling**, then the related bundling articles; leave every result unopened.",
           "For the unsupported question, show **No results found** and **Contact an agent** as the clear next step.",
         ],
         presenterCues: [
@@ -117,8 +117,8 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "Paste **Supported search question** into **Search**, then select **Search**.",
             "Wait until **Searching…** finishes.",
-            "Show **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**.",
-            "Highlight **Can I bundle my car and home insurance?** and its answer excerpt. Keep all results unopened.",
+            "Highlight **Bundle home and auto insurance** as the first result, which links to **/bundling**, and read its excerpt.",
+            "Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**. Keep all results unopened.",
           ],
           [
             "Replace **keyword(s)** with **Unsupported search question**, then select **Search**.",
@@ -126,21 +126,21 @@ export const customerDemoChapters: DemoChapter[] = [
           ],
         ],
         presenterResult:
-          "The supported question returns relevant guidance; the unsupported question shows **No results found** and **Contact an agent**.",
+          "The supported question shows **Bundle home and auto insurance** first, alongside related published guidance. The unsupported question shows **No results found** and **Contact an agent**.",
         actions: [
           `In the **Public website** tab, open the [**public Home page**](${PUBLIC}/), and select **Search** in the header.`,
-          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**, then highlight the **Can I bundle my car and home insurance?** result and its answer excerpt on the results page. Keep every result unopened.",
+          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Highlight **Bundle home and auto insurance** as the first result, which links to **/bundling**, and read its excerpt on the results page. Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies** as related guidance. Keep every result unopened.",
           "In **keyword(s)**, replace the query with **Does car insurance cover cyberextortion?**, and select **Search**. Show **No results found** and **Contact an agent**. End this loop with that contact option; leave the link unopened.",
         ],
         expected: [
-          "The conversational question returns relevant published guidance, including **How to bundle your insurance policies**, **3 tips for bundling your insurance policies**, and **Can I bundle my car and home insurance?**. The approved answer excerpt is visible in the results. The unsupported subject offers an agent-assisted next step.",
+          "The conversational question returns relevant published guidance: **Bundle home and auto insurance** is the lead result, alongside **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**. The result excerpts help the visitor choose useful content. The unsupported subject offers an agent-assisted next step.",
         ],
         talkTrack: [
-          "One question brings back relevant published guidance, practical articles, and the approved answer. The visitor can compare useful guidance in the results without having to phrase the question exactly as Liberty Mutual does. When published guidance does not address the subject, Contact an agent provides the next step.",
+          "The visitor asks a question in everyday language. Search shows Liberty Mutual’s published bundling page first, with related guidance and useful excerpts. They can find the right starting point without knowing the page title. When published guidance does not address the subject, Contact an agent provides the next step.",
         ],
         controls: [
-          "**SitecoreAI Search** retrieves and ranks published guidance. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
-          "Published website pages join Search when their native **Include in site search** checkbox is selected. The articles and approved answers are managed and published in **SitecoreAI**.",
+          "**SitecoreAI Search** retrieves published pages. A native Search rule pins **Bundle home and auto insurance** as the lead result for bundling keywords. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
+          "Published website pages join Search when their native **Include in site search** checkbox is selected. The bundling page and related articles are managed and published in **SitecoreAI**.",
           "Optional measurement respects the visitor’s stored privacy preferences.",
         ],
         links: [
@@ -193,10 +193,10 @@ export const customerDemoChapters: DemoChapter[] = [
           },
           {
             file: "demo-public-search-results.png",
-            title: "Relevant results and the answer excerpt",
-            alt: "Find Can I bundle my car and home insurance? and read its approved answer excerpt directly in the results. Keep the results unopened.",
+            title: "The lead bundling result and related guidance",
+            alt: "Find Bundle home and auto insurance first, then the related How to bundle your insurance policies and 3 tips for bundling your insurance policies results. Keep the results unopened.",
             caption:
-              "Find **Can I bundle my car and home insurance?** and read its approved answer excerpt directly in the results. Keep the results unopened.",
+              "Find **Bundle home and auto insurance** first, read its excerpt, then point out the related **How to bundle your insurance policies** and **3 tips for bundling your insurance policies** results. Keep the results unopened.",
             afterAction: 2,
             crop: {
               x: 44,
@@ -208,19 +208,18 @@ export const customerDemoChapters: DemoChapter[] = [
             },
             annotations: [
               {
-                x: 1.68,
-                y: 44.3,
-                width: 96.64,
-                height: 10.6,
-                label: "Related bundling guidance",
+                x: 1,
+                y: 17,
+                width: 98,
+                height: 13,
+                label: "Lead result: **Bundle home and auto insurance**",
               },
               {
-                x: 1.68,
-                y: 59.6,
-                width: 96.64,
-                height: 14.39,
-                label:
-                  "Read the **Can I bundle my car and home insurance?** answer excerpt here.",
+                x: 1,
+                y: 62,
+                width: 98,
+                height: 26,
+                label: "Helpful related articles remain available",
               },
             ],
           },
@@ -258,7 +257,7 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The customer has found relevant guidance and a clear next step. Now inspect the content behind that result and how the content team keeps it consistent and discoverable.",
+          "The customer has found a clear starting point and related guidance. Next, inspect the structured content behind one of those supporting resource results.",
       },
       {
         id: "public-discovery",
