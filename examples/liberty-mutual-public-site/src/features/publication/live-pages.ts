@@ -51,12 +51,22 @@ export interface PublishedSearchPage {
   audience: string;
 }
 
-export type PublishedSearchContent = PublishedAnswer | PublishedSearchPage;
+/** An answer displayed by a native FAQ component on an indexed public page. */
+export interface PublishedSearchFaq extends Omit<PublishedSearchPage, "kind"> {
+  kind: "faq";
+  question: string;
+  parentId: string;
+}
+
+export type PublishedPageSearchContent =
+  PublishedSearchPage | PublishedSearchFaq;
+export type PublishedSearchContent =
+  PublishedAnswer | PublishedPageSearchContent;
 export interface SearchContentReader {
   readAll(signal?: AbortSignal): Promise<PublishedSearchContent[]>;
 }
 export interface SearchPageReader {
-  readAll(signal?: AbortSignal): Promise<PublishedSearchPage[]>;
+  readAll(signal?: AbortSignal): Promise<PublishedPageSearchContent[]>;
 }
 
 // Search selects published native pages, not a code-maintained list of result URLs.
@@ -178,7 +188,16 @@ const COMPONENT_TEXT_FIELDS: Record<string, readonly string[]> = {
   PublicFaq: ["heading"],
 };
 
-function renderedBody(page: NativeSearchPage, data: PublishedPageBody): string {
+interface RenderedFaq {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+function renderedContent(
+  page: NativeSearchPage,
+  data: PublishedPageBody,
+): { body: string; faqs: RenderedFaq[] } {
   const localPath = `${page.path}/Data`;
   const local = data.localData;
   if (
@@ -215,6 +234,7 @@ function renderedBody(page: NativeSearchPage, data: PublishedPageBody): string {
   if (!route?.itemId || identifier(route.itemId) !== identifier(page.id))
     throw new PublicationError("PUBLISHED_PAGE_LAYOUT_MISMATCH");
   const text: string[] = [];
+  const faqs = new Map<string, RenderedFaq>();
   let count = 0;
   function visit(value: unknown, depth = 0) {
     if (depth > 20 || ++count > 1500) invalid();
@@ -259,6 +279,18 @@ function renderedBody(page: NativeSearchPage, data: PublishedPageBody): string {
                 ? ["question", "answer"]
                 : ["heading", "body"],
             );
+            if (componentName === "PublicFaq") {
+              const fields = item?.fields;
+              const question = plain(
+                fieldText({ jsonValue: fields?.question }),
+              );
+              const answer = plain(fieldText({ jsonValue: fields?.answer }));
+              // A blank authoring item is not an answer. Only the published,
+              // complete Q&A displayed by this component is a Search document.
+              if (!question || !answer) continue;
+              const id = identifier(item.id);
+              faqs.set(id, { id, question, answer });
+            }
           }
         }
       }
@@ -272,7 +304,7 @@ function renderedBody(page: NativeSearchPage, data: PublishedPageBody): string {
   visit(route.placeholders);
   const body = text.filter(Boolean).join("\n");
   if (!body || body.length > 100000) invalid();
-  return body;
+  return { body, faqs: [...faqs.values()] };
 }
 
 export class LivePages {
@@ -314,7 +346,7 @@ export class LivePages {
     }
   }
 
-  async readAll(signal?: AbortSignal): Promise<PublishedSearchPage[]> {
+  async readAll(signal?: AbortSignal): Promise<PublishedPageSearchContent[]> {
     const deadline = AbortSignal.any([
       AbortSignal.timeout(10000),
       ...(signal ? [signal] : []),
@@ -360,36 +392,59 @@ export class LivePages {
       cursors.add(cursor);
       after = cursor;
     }
-    const published: PublishedSearchPage[] = [];
+    const published: PublishedPageSearchContent[] = [];
     for (let offset = 0; offset < pages.length; offset += 4) {
       published.push(
-        ...(await Promise.all(
-          pages.slice(offset, offset + 4).map(async (page) => {
-            if (!Number.isInteger(page.version) || page.version < 1) invalid();
-            const url = canonical(page, this.publicOrigin);
-            const data = await this.query<PublishedPageBody>(
-              PAGE_BODY_QUERY,
-              { dataPath: `${page.path}/Data`, route: url.pathname },
-              deadline,
-            );
-            const value = {
-              kind: "page" as const,
-              id: identifier(page.id),
-              language: "en" as const,
-              version: page.version,
-              title: plain(fieldText(page.metadataTitle, 500)),
-              summary: plain(fieldText(page.metadataDescription, 2000)),
-              body: renderedBody(page, data),
-              canonicalUrl: url.href,
-              sourceLink: source(page),
-              state: publishedTaxonomy(page.state, "state"),
-              product: publishedTaxonomy(page.product, "product"),
-              audience: publishedTaxonomy(page.audience, "audience"),
-            };
-            if (!value.title || !value.summary) invalid();
-            return { ...value, revision: digest(value) };
-          }),
-        )),
+        ...(
+          await Promise.all(
+            pages.slice(offset, offset + 4).map(async (page) => {
+              if (!Number.isInteger(page.version) || page.version < 1)
+                invalid();
+              const url = canonical(page, this.publicOrigin);
+              const data = await this.query<PublishedPageBody>(
+                PAGE_BODY_QUERY,
+                { dataPath: `${page.path}/Data`, route: url.pathname },
+                deadline,
+              );
+              const content = renderedContent(page, data);
+              const value = {
+                kind: "page" as const,
+                id: identifier(page.id),
+                language: "en" as const,
+                version: page.version,
+                title: plain(fieldText(page.metadataTitle, 500)),
+                summary: plain(fieldText(page.metadataDescription, 2000)),
+                body: content.body,
+                canonicalUrl: url.href,
+                sourceLink: source(page),
+                state: publishedTaxonomy(page.state, "state"),
+                product: publishedTaxonomy(page.product, "product"),
+                audience: publishedTaxonomy(page.audience, "audience"),
+              };
+              if (!value.title || !value.summary) invalid();
+              const publishedPage = { ...value, revision: digest(value) };
+              const publishedFaqs = content.faqs.map((faq) => {
+                const faqValue = {
+                  ...value,
+                  kind: "faq" as const,
+                  id: faq.id,
+                  parentId: value.id,
+                  question: faq.question,
+                  title: faq.question,
+                  summary: faq.answer,
+                  // Parent metadata supplies real page context, while the
+                  // answer shown to the visitor remains this exact native FAQ.
+                  body: [value.title, value.summary, faq.question, faq.answer]
+                    .filter(Boolean)
+                    .join("\n"),
+                  canonicalUrl: `${value.canonicalUrl}#faq-${faq.id}`,
+                };
+                return { ...faqValue, revision: digest(faqValue) };
+              });
+              return [publishedPage, ...publishedFaqs];
+            }),
+          )
+        ).flat(),
       );
     }
     return published.sort((a, b) => a.id.localeCompare(b.id));
@@ -421,7 +476,9 @@ export class LiveSearchContent implements SearchContentReader {
   }
 }
 
-export function pageSearchDocument(page: PublishedSearchPage): SearchOperation {
+export function pageSearchDocument(
+  page: PublishedPageSearchContent,
+): SearchOperation {
   return {
     action: "upsert",
     id: page.id,
@@ -429,7 +486,7 @@ export function pageSearchDocument(page: PublishedSearchPage): SearchOperation {
     sc_url: page.canonicalUrl,
     fields: {
       title: page.title,
-      question: "",
+      question: page.kind === "faq" ? page.question : "",
       summary: page.summary,
       body: page.body,
       canonicalurl: page.canonicalUrl,

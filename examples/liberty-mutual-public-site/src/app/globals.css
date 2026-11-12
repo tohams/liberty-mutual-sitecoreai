@@ -1514,7 +1514,7 @@ code.scpm {
 }
 .public-faq summary {
   position: relative;
-  padding: 19px 44px 19px 16px;
+  padding: 19px 56px 18px 24px;
   cursor: pointer;
   font-size: 18px;
   font-weight: 500;
@@ -1525,20 +1525,19 @@ code.scpm {
 .public-faq summary::-webkit-details-marker {
   display: none;
 }
-.public-faq summary:after {
-  content: "+";
+.public-faq__caret {
   position: absolute;
-  right: 16px;
-  top: 17px;
+  right: 24px;
+  top: 24px;
   color: var(--public-teal);
-  font-size: 24px;
-  font-weight: 300;
+  fill: currentColor;
+  transition: transform 160ms ease;
 }
-.public-faq details[open] summary:after {
-  content: "−";
+.public-faq details[open] .public-faq__caret {
+  transform: rotate(180deg);
 }
 .public-faq details > .public-prose {
-  padding: 0 16px 24px;
+  padding: 0 24px 24px;
   font-size: 16px;
   line-height: 25.6px;
 }
@@ -2176,9 +2175,9 @@ code.scpm {
   font-weight: 700;
 }
 .public-card-section--bundles .public-content-card h3 {
-  font-size: 32px;
+  font-size: 24px;
   line-height: 38.4px;
-  font-weight: 300;
+  font-weight: 400;
 }
 .public-card-section--quote
   .public-content-card:first-child
@@ -2192,4 +2191,189 @@ code.scpm {
   color: var(--public-navy);
   border: 2px solid var(--public-navy);
   padding: 8px 28px;
+}
+
+.public-faq details {
+  scroll-margin-top: 132px;
+}
+.public-introduction-links__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+.public-introduction-links .public-section-heading h2 {
+  margin-top: 0;
+}
+.public-introduction-links__links {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+  padding-left: 32px;
+}
+.public-introduction-links__links .public-text-link {
+  font-size: 18px;
+  font-weight: 700;
+}
+.public-introduction-links__links .public-prose p {
+  margin: 4px 0 0;
+}
+.public-related-articles .public-section-heading {
+  text-align: center;
+}
+.public-related-articles__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+  padding-inline: 24px;
+}
+.public-related-articles__grid article {
+  min-width: 0;
+}
+.public-related-articles__grid img {
+  display: block;
+  width: 100%;
+  height: 185px;
+  border-radius: 24px;
+  object-fit: cover;
+}
+.public-related-articles__grid h3 {
+  font-size: 24px;
+  line-height: 1.2;
+  margin-top: 24px;
+}
+.public-related-articles__grid h3 a {
+  color: var(--public-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.public-related-articles__grid h3 a:hover {
+  text-decoration: underline;
+}
+.public-app-features__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  align-items: center;
+}
+.public-app-features .public-section-heading h2 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+.public-app-features img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.public-app-features__copy {
+  padding: 40px;
+}
+.public-app-features__copy .public-prose p {
+  margin-bottom: 32px;
+}
+.public-bundle-benefits > .public-container > .public-section-heading {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.public-bundle-benefits__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+  padding: 16px 32px;
+}
+.public-bundle-benefits__grid h3 {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-top: 28px;
+  margin-bottom: 20px;
+}
+.public-bundle-benefits__grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 48px;
+}
+.public-bundle-benefits__action {
+  text-align: center;
+  margin-top: 32px;
+}
+#types-for-bundle,
+#how-much-can-i-save,
+#why-choose-liberty,
+#bundling-quote {
+  scroll-margin-top: 132px;
+}
+#how-much-can-i-save,
+#why-choose-liberty {
+  background: linear-gradient(#fff 0%, #f1fcfc 90%, #c4eded 96%, #fff);
+}
+#how-much-can-i-save .public-split-content__image img {
+  max-width: none;
+  width: 135%;
+  margin-left: -10%;
+}
+#why-choose-liberty .public-split-content__image img {
+  max-height: 360px;
+}
+#bundling-more-coverage .public-prose {
+  max-width: none;
+}
+#bundling-more-coverage .public-prose p {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  border-top: 1px solid #d0d4d6;
+  border-bottom: 1px solid #d0d4d6;
+  padding-block: 32px;
+}
+@media (max-width: 900px) {
+  .public-related-articles__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .public-introduction-links__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .public-introduction-links .public-section-heading {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 600px) {
+  .public-faq details,
+  #types-for-bundle,
+  #how-much-can-i-save,
+  #why-choose-liberty,
+  #bundling-quote {
+    scroll-margin-top: 96px;
+  }
+  .public-introduction-links__grid,
+  .public-app-features__grid,
+  .public-bundle-benefits__grid,
+  .public-related-articles__grid {
+    grid-template-columns: 1fr;
+  }
+  .public-introduction-links__links,
+  .public-related-articles__grid {
+    padding-inline: 0;
+  }
+  .public-app-features__copy {
+    padding: 0;
+  }
+  .public-bundle-benefits__grid {
+    padding: 0;
+    gap: 24px;
+  }
+  .public-related-articles__grid img {
+    height: auto;
+    aspect-ratio: 250 / 185;
+  }
+  #how-much-can-i-save .public-split-content__image img {
+    width: 100%;
+    margin-left: 0;
+  }
+  #bundling-more-coverage .public-prose p {
+    flex-direction: column;
+    gap: 24px;
+  }
 }

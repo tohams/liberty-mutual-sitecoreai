@@ -61,7 +61,7 @@ const PUBLIC_HOST = "liberty-mutual-public-site.vercel.app";
 const PORTAL_HOST = "liberty-mutual-agent-portal.vercel.app";
 const ORG = "org_XqL3u1MSNVuubOTb";
 const TENANT_NAME = "scaipocusem400b-sitecoreai950c-demo4418";
-const RESOURCE_PAGE_ID = "ae109fc0-b508-5840-97eb-0b2c02ae1a9b";
+const BUNDLING_FAQ_ID = "8c73b233-9576-52d7-bd5a-a78756a08c14";
 const COPYRIGHT_ID = "9dc572ee-3d67-5909-922f-6482def1cdb0";
 const appRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const steps = customerDemoChapters.flatMap((chapter) => chapter.steps);
@@ -322,100 +322,63 @@ test("the public Search loop proves both outcomes on the results page", () => {
   assert.match(prose(entry.controls), /Include in site search.*checkbox/i);
 });
 
-test("discovery readiness separates public Article metadata from structured CMS reuse", () => {
-  const text = prose(step("public-discovery"));
+test("discovery inspects the bundling page and derives schema from its visible native FAQs", () => {
+  const entry = step("public-discovery");
+  const text = prose(entry);
   for (const required of [
-    /PublicResourcePage/,
-    /Quick Info/,
     /Checklist/,
     /State applicability/,
     /Products/,
     /Audience/,
     /Search title/,
     /Search description/,
-    /Article/,
-    /headline/,
-    /mainEntityOfPage → @id/,
-    /Question.*Plain-language answer.*Search.*connected AI applications/,
+    /FAQPage/,
+    /mainEntity → Question → name/,
+    /acceptedAnswer → text/,
+    /Question.*Answer.*Search.*connected applications/,
     /canonical/i,
   ])
     assert.match(text, required);
-  assert.equal(step("public-discovery").durationMinutes, 2);
-  assert.equal(step("public-discovery").actions.length, 3);
+  assert.equal(entry.durationMinutes, 2);
+  assert.equal(entry.actions.length, 3);
   assert.match(
-    prose(step("public-discovery").presenterActions[0][0]),
-    /Public website.*Public article.*Bundling your car and home insurance.*article copy/,
+    prose(entry.presenterActions[0][0]),
+    /Public website.*Bundling page.*Bundle auto and home insurance to save.*What's an auto and home insurance bundle/,
   );
   assert.match(
-    prose(step("public-discovery").controls),
-    /Article schema.*headline.*native page Title.*Search description.*mainEntityOfPage → @id.*Canonical URL.*published fields support permitted crawlers.*Question.*Plain-language answer.*CMS fields for Search and connected applications/,
+    prose(entry.controls),
+    /same visible Question and Answer fields.*mainEntity.*acceptedAnswer → text.*Canonical URL/,
   );
-  assert.doesNotMatch(text, /FAQPage|acceptedAnswer/);
   assert.deepEqual(
-    step("public-discovery").links?.map(({ label, action, afterLine }) => ({
+    entry.links?.map(({ label, action, afterLine }) => ({
       label,
       action,
       afterLine,
     })),
     [
-      { label: "Public article", action: 1, afterLine: 0 },
+      { label: "Bundling page", action: 1, afterLine: 0 },
       { label: "SitecoreAI", action: 1, afterLine: 1 },
     ],
   );
   assert.match(
-    prose(step("public-discovery").actions),
-    /Open each field’s selection control.*1 item selected.*2 items selected/,
-  );
-  assert.equal(
-    step("public-discovery").images?.[0]?.file,
-    "native-public-taxonomy-checklist.png",
-  );
-  const checklistImage = step("public-discovery").images?.[0];
-  assert.equal(checklistImage?.crop, undefined);
-  const checklistBytes = readFileSync(
-    join(appRoot, "workshop-assets", checklistImage!.file),
-  );
-  assert.equal(checklistBytes.readUInt32BE(16), 310);
-  assert.equal(checklistBytes.readUInt32BE(20), 315);
-  assert.match(text, /Home → insurance-resources.*select bundle-car-and-home/i);
-  assert.match(text, /Reference source/);
-  assert.match(
-    prose(step("public-discovery").actions),
-    /natural article copy.*Page Builder.*expand Content.*Search title.*Search description.*Canonical URL.*Reference source.*Expand Resource content.*Detailed explanation/i,
+    prose(entry.presenterActions[0]),
+    /Home.*select bundling.*selected row.*Content tree options \(•••\) → Page content.*panel beside the canvas/,
   );
   assert.match(
-    prose(step("public-discovery").presenterActions[0]),
-    /selected row.*Content tree options \(•••\) → Page content.*panel beside the canvas/,
-  );
-  assert.doesNotMatch(
-    prose(step("public-discovery").presenterActions),
-    /Quick Info|then choose Content/,
+    prose(entry.presenterActions[1]),
+    /All states.*Auto.*Homeowners.*Renters.*Condo.*All consumers/,
   );
   assert.match(
-    prose(step("public-discovery").presenterActions[1]),
-    /Page content.*Go to field → State applicability/,
-  );
-  const metadataImage = step("public-discovery").images?.find(
-    (image) => image.file === "demo-public-page-content-metadata.png",
-  );
-  assert.equal(metadataImage?.afterAction, 1);
-  assert.match(
-    metadataImage?.alt ?? "",
-    /Search title and Search description.*Bundling your car and home insurance/,
-  );
-  assert.deepEqual(
-    metadataImage?.annotations?.map((annotation) =>
-      plainGuideText(annotation.label ?? ""),
-    ),
-    ["Search title", "Search description"],
-  );
-  assert.match(
-    prose(step("public-indexing").presenterActions[1]),
-    /bundle-car-and-home.*kept selected from P2.*Page content.*panel is closed/,
+    prose(entry.presenterActions[2]),
+    /View page source.*View → Developer → View Source.*Line wrap.*⌘F.*Ctrl\+F.*FAQPage.*canonical/,
   );
   assert.doesNotMatch(
     text,
-    /Apps → Resource metadata|Content to classify|PublicApprovedAnswer|Data → Approved answers/,
+    /bundle-car-and-home|PublicResourcePage|Plain-language answer|Detailed explanation|Article schema|Apps → Resource metadata|Content to classify|PublicApprovedAnswer|Data → Approved answers/,
+  );
+  assert.match(
+    step("public-question").transition,
+    /bundling page behind the lead result.*native FAQs.*Search/,
   );
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
@@ -447,7 +410,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
     assert.match(text, required);
   assert.match(
     prose(entry.controls),
-    /reads published website content.*Search Push API.*Include in site search.*resource page’s own guidance and applicability metadata/i,
+    /reads published website content.*Search Push API.*Include in site search.*Each visible FAQ.*state, product, and audience inherited from that page/i,
   );
   assert.match(
     prose(entry.presenterPoints),
@@ -468,11 +431,11 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   assert(publish < verify);
   assert.match(
     prose(entry.actions[publish]),
-    /Create version.*Resource page review.*select the newest.*Draft.*wait for its fields to finish loading.*At the end of Detailed explanation.*append.*exactly once.*retaining all existing paragraphs.*Press Tab.*click outside Detailed explanation.*leave the edited field and save it.*Saved.*same new version.*Actions → Submit.*Awaiting approval.*same presenter account.*Actions → Approve.*Approved.*Publish.*Start publish/i,
+    /Create version.*Bundling FAQ review.*select the newest.*Draft.*wait for its fields to finish loading.*Editor → Pages → bundling.*At the end of Answer.*append.*exactly once.*retaining its existing wording.*Click outside Answer.*Saved.*same FAQ in Content.*Actions → Submit.*Awaiting approval.*same presenter account.*Actions → Approve.*Approved.*Publish.*Item.*Current language.*Subitems unchecked.*Start publish/i,
   );
   assert.match(
     prose(entry.actions[publish]),
-    /Page is already selected.*Current language \(English\).*Clear Include related items first, then clear All references.*control disappears.*Subpages unchecked.*Start publish/,
+    /Publish with Item and Current language \(English\) selected.*Subitems unchecked.*Start publish/,
   );
   const reuseGuide = workshopGuides.find(
     (guide) => guide.slug === "publish-to-two-experiences",
@@ -498,7 +461,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   );
 });
 
-test("indexing begins with the latest clean published page and creates its Draft live", () => {
+test("indexing versions the native FAQ while preserving the clean published answer", () => {
   const page = readFileSync(
     join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
     "utf8",
@@ -510,11 +473,11 @@ test("indexing begins with the latest clean published page and creates its Draft
   const preparationText = plainGuideText(preparation);
   assert.match(
     preparationText,
-    /latest version.*Approved.*marked Live.*Detailed explanation.*full clean article without.*Keep this latest published version selected.*Do not create a version during preparation.*P3 creates a fresh Resource page review Draft live/,
+    /latest version.*Approved.*marked Live.*full clean Answer.*Keep this latest published version selected.*Do not create a version during preparation.*P3 creates a fresh Bundling FAQ review Draft live/,
   );
   assert.match(
     preparationText,
-    /must be absent from the public article.*Search record.*explanation.*P7 GraphQL query/,
+    /must be absent from the bundling page’s first visible FAQ.*Search record.*answer.*P7 GraphQL query/,
   );
   assert.match(
     preparationText,
@@ -528,17 +491,17 @@ test("indexing begins with the latest clean published page and creates its Draft
   const entry = step("public-indexing");
   assert.equal(entry.durationMinutes, 5);
   assert.deepEqual(
-    entry.inputs?.find((input) => input.label === "New resource version name"),
+    entry.inputs?.find((input) => input.label === "New FAQ version name"),
     {
       action: 2,
       beforeLine: 3,
-      label: "New resource version name",
-      value: "Resource page review",
+      label: "New FAQ version name",
+      value: "Bundling FAQ review",
     },
   );
   assert.equal(
     entry.inputs?.find(
-      (input) => input.label === "Detailed explanation — review sentence",
+      (input) => input.label === "FAQ answer — review sentence",
     )?.beforeLine,
     5,
   );
@@ -547,7 +510,7 @@ test("indexing begins with the latest clean published page and creates its Draft
   );
   assert.match(
     restoration,
-    /begin with the latest published version.*Resource page restored.*newest Draft.*remove only.*Retain the complete article and all other fields.*Save, submit, approve, and publish this same version.*latest version is Approved and marked Live/,
+    /begin with the latest published version.*Bundling FAQ restored.*newest Draft.*remove only.*Retain the complete FAQ answer and all other fields.*Save, submit, approve, and publish this same FAQ version.*latest FAQ version is Approved and marked Live/,
   );
   assert.doesNotMatch(
     prose([entry, page]),
@@ -697,7 +660,7 @@ test("analytics uses the monthly report without generating new events", () => {
   assert.match(page, /step\.presenterResult/);
 });
 
-test("API reuse uses native Live GraphQL with a copyable query for the same published page", () => {
+test("API reuse queries the same published native FAQ used by the page and Search", () => {
   const entry = step("public-api");
   const text = prose(entry);
   assert.equal(entry.durationMinutes, 2);
@@ -719,14 +682,12 @@ test("API reuse uses native Live GraphQL with a copyable query for the same publ
   assert.equal(
     query.value,
     `query PublishedCoverageGuidance {
-  item(path: "{AE109FC0-B508-5840-97EB-0B2C02AE1A9B}", language: "en") {
+  item(path: "{8C73B233-9576-52D7-BD5A-A78756A08C14}", language: "en") {
     id
     name
     version
     question: field(name: "question") { value }
     answer: field(name: "answer") { value }
-    explanation: field(name: "explanation") { value }
-    source: field(name: "sourceLink") { jsonValue }
   }
 }`,
   );
@@ -740,7 +701,7 @@ test("API reuse uses native Live GraphQL with a copyable query for the same publ
   assert.doesNotMatch(headers.value, /x-gql-token/i);
   assert.match(
     entry.stopWhen,
-    /native GraphQL response.*page ID.*published version.*sentence published in P3/i,
+    /native GraphQL response.*FAQ item ID.*published version.*sentence published in P3/i,
   );
   assert.match(
     prose(entry.actions[1]),
@@ -748,7 +709,7 @@ test("API reuse uses native Live GraphQL with a copyable query for the same publ
   );
   assert.match(
     prose(entry.actions[2]),
-    /id.*version.*question.*answer.*explanation.*source.*Review your options with your agent before choosing coverage.*public article/i,
+    /id.*version.*question.*answer.*Review your options with your agent before choosing coverage.*published FAQ/i,
   );
   assert(
     linksIn(entry).some(
@@ -1337,7 +1298,7 @@ test("all thirteen loops provide brief business and screen-observation bullets",
   assert.doesNotMatch(page, /Lines lines={step\.presenterPoints}/);
   assert.match(page, /step\.persona/);
   assert.match(page, /step\.scenario/);
-  assert.match(page, /P2–P3 · One resource, from content to Search/);
+  assert.match(page, /P2–P3 · One FAQ, from page to Search/);
   assert.match(page, /A1–A2 · Agent experience first/);
   assert.match(page, /Lines lines={customerDemoOpening\.talkTrack}/);
   assert.match(page, /Lines lines={customerDemoClosing}/);
@@ -1398,7 +1359,7 @@ test("frontend comparisons precede marketer controls and shared publishing prece
 test("every launch or inline link has a safe destination and the correct site and native item context", () => {
   const nativeSites: Record<string, string> = {
     "6d600332-3e21-4c5f-83ec-aae04f83450f": "liberty-mutual-public-site",
-    [RESOURCE_PAGE_ID]: "liberty-mutual-public-site",
+    [BUNDLING_FAQ_ID]: "liberty-mutual-public-site",
     [COPYRIGHT_ID]: "liberty-mutual-public-site",
     "ae9e45ca-f127-4abe-9ca7-2ff109981998": "liberty-mutual-agent-portal",
     "3127968e-4b21-50c3-ad79-b6bbbe5303b8": "liberty-mutual-agent-portal",
@@ -1487,7 +1448,7 @@ test("every launch or inline link has a safe destination and the correct site an
       url.hostname === PUBLIC_HOST &&
       url.pathname.startsWith("/api/content/v1/answers/")
     )
-      assert.equal(url.pathname, `/api/content/v1/answers/${RESOURCE_PAGE_ID}`);
+      assert.equal(url.pathname, `/api/content/v1/answers/${BUNDLING_FAQ_ID}`);
   }
 });
 

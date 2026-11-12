@@ -14,10 +14,10 @@ Languages:
     Fields:
     - ID: 0642f561-976a-5280-ad0b-49591bb6b97f
       Hint: heading
-      Value: <h2>Why choose Liberty Mutual for car insurance?</h2>
+      Value: <h2>Why choose Liberty Mutual for<br>car insurance?</h2>
     - ID: 2bdf3765-4d4d-54af-879e-96a83b50893e
       Hint: body
-      Value: <p>Explore protection from a company that has helped people insure what matters for more than a century.</p><p>Build a quote around your needs and review your options before you choose.</p>
+      Value: <p>Rated &quot;A&quot; (Excellent) for financial strength by A.M. Best Company, we&#x27;ve been helping people like you protect what they love for over 100 years!<sup>3</sup> <br/><br/>Savings? We&#x27;ve got those too! You could save over $950 when you bundle your auto and home insurance.<sup>1</sup> <br/><br/>Start your quote today, to see how much you could save on an auto and home insurance bundle when you only pay for what you need.</p>
     - ID: 19c458f6-6177-50d1-9756-15ca31cc5674
       Hint: image
       Value: <image mediaid="{11B56049-2934-4A2D-BCD9-751ACB43116F}" alt="Man sitting at a desk" />

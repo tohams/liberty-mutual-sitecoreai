@@ -857,6 +857,9 @@ test("Search writes exactly the native technical schema while the content API ke
   assert.equal(operation.fields?.canonicalurl, published.canonicalUrl);
   assert.equal(operation.fields?.effectivedate, published.effectiveDate);
   assert.equal(operation.fields?.sourceurl, published.sourceLink?.href);
+  assert.equal(operation.fields?.question, "");
+  assert.equal(operation.fields?.title, published.question);
+  assert.equal(published.question, "How do bundles work?");
   assert.equal(Object.hasOwn(operation.fields || {}, "id"), false);
   assert.equal(Object.hasOwn(published, "canonicalUrl"), true);
 });

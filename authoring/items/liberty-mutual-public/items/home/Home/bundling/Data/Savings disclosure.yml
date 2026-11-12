@@ -14,10 +14,11 @@ Languages:
     Fields:
     - ID: 552f64b5-9e7a-5174-b9bd-7efa7e39fb9a
       Hint: title
-      Value: Savings information
+      Value: |
+
     - ID: ba150841-a581-5472-8222-4e5d344df3bf
       Hint: body
-      Value: <p><sup>1</sup> Average annual savings based on a countrywide survey of new customers who reported savings when they switched to Liberty Mutual between 10/2024 and 09/2025. Savings will vary. Comparison does not apply in MA.</p><p>Discounts and savings are available where state laws and regulations allow, and may vary by state and how you purchase. Certain discounts apply to specific coverages only. To the extent permitted by law, applicants are individually underwritten; not all applicants may qualify.</p>
+      Value: "<p><sup>1</sup> $950 Auto & Home Savings Figure: Average annual savings based on a countrywide survey of new customers who reported savings when they switched to Liberty Mutual between 10/2024 and 09/2025. Savings will vary. Comparison does not apply in MA.</p><p><sup>2</sup> Insurance ID cards are permitted in most states; however, some states do not permit the use of Mobile Insurance ID cards as proof of insurance.</p><p><sup>3</sup> A.M. Best Rating Services, 2025.</p><p><sup>4</sup> Discounts and savings are available where state laws and regulations allow, and <a class=\"lm-Link lm-LinkInline\" href=\"https://www.libertymutual.com/ways-to-buy\">may vary by state and how you purchase</a>. Certain discounts apply to specific coverages only. To the extent permitted by law, applicants are individually underwritten; not all applicants may qualify.</p>"
     - ID: 2d7006b7-39eb-5903-a777-4fe7acaa3f07
       Hint: sourceLink
       Value: <link text="Ways to buy insurance" linktype="external" url="https://www.libertymutual.com/ways-to-buy" />

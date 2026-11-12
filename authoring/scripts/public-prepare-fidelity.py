@@ -91,12 +91,12 @@ class Preparation:
                     self.changes.append({'id':h.uid(local),'path':local,'fields':fields,'mode':'new Draft from latest approved version','preserveFields':['image','heading','eyebrow','primaryLink','secondaryLink']})
                 else:self.data(local,name,fields)
                 ordered.append(self.placement(path,component,number,local))
-            # Existing reusable-content placements are retained separately from
-            # source savings footnotes; the public-owned disclosure remains the
-            # very same native item consumed by the Portal.
-            retained=[{'uid':h.uid(path+'/rendering/SharedDisclosure/5'),'renderingId':M['renderingIds']['SharedDisclosure'],'componentName':'SharedDisclosure','dataSource':h.brace(M['disclosureId']),'variant':'Default'}]
-            if page['route'] in ['/','/bundling']:
-                retained.insert(0,{'uid':h.uid(path+'/rendering/PublicPromotion/4'),'renderingId':M['renderingIds']['PublicPromotion'],'componentName':'PublicPromotion','dataSource':h.brace(M['promotionId']),'variant':'Compact' if page['route']=='/bundling' else 'Default'})
+            # Bundling follows the genuine public page, including its own
+            # savings footnotes. Shared-content examples remain on Home and
+            # the coverage-page authoring branch.
+            retained=[] if page['route']=='/bundling' else [{'uid':h.uid(path+'/rendering/SharedDisclosure/5'),'renderingId':M['renderingIds']['SharedDisclosure'],'componentName':'SharedDisclosure','dataSource':h.brace(M['disclosureId']),'variant':'Default'}]
+            if page['route']=='/':
+                retained.insert(0,{'uid':h.uid(path+'/rendering/PublicPromotion/4'),'renderingId':M['renderingIds']['PublicPromotion'],'componentName':'PublicPromotion','dataSource':h.brace(M['promotionId']),'variant':'Default'})
             pages.append({'id':h.uid(path),'path':path,'route':page['route'],'layoutChange':'versioned Final Renderings in a new Draft; preserve existing Shared Renderings and historical approved versions','orderedPlacements':ordered,'retainNativeSharedPlacements':retained,'retireOnlyOwnedInitialPlacement':h.uid(path+'/rendering/PublicArticle/3')})
         for name,key in [('PublicHeader','header'),('PublicFooter','footer')]:
             label=name[6:];path=h.SITE+'/Presentation/Partial Designs/'+label+'/Data/'+label

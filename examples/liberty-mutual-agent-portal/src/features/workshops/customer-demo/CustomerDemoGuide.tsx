@@ -17,7 +17,7 @@ import { presenterActionSequence } from "./presenter-sequence";
 import { DemoTabs } from "./DemoTabs";
 import { presenterInputs } from "./demo-inputs.server";
 import { getPresenterProfiles } from "./demo-profiles.server";
-import { GRAPHQL_EXPLORER } from "./demo-destinations";
+import { bundlingFaqContent, GRAPHQL_EXPLORER } from "./demo-destinations";
 import type { DemoChapter, DemoInput, DemoStep } from "./types";
 import { GuideText } from "@/features/workshops/GuideText";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
@@ -271,7 +271,7 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "all",
-                      text: "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, their resource guidance, and the shared copyright notice. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
+                      text: "In **Page Builder**, use **English** and **Default editing host**. **Public Website** owns the public pages, their native FAQs, and the shared copyright notice. **Agent Portal** owns the agent Home page and its priority collections. Both sites use one **SitecoreAI** environment and separate editing and delivery hosts.",
                     },
                     {
                       chapter: "all",
@@ -291,11 +291,11 @@ export async function CustomerDemoGuide({
                     },
                     {
                       chapter: "public",
-                      text: "Verify the clean published baseline before the indexing example: **Review your options with your agent before choosing coverage.** must be absent from the public article, the native **SitecoreAI Search** record, and the **explanation** returned by the **P7 GraphQL query**. If the sentence is present, use [**After the demonstration → restoration checklist**](#reset) to remove only that temporary sentence through review and publication. Continue only after all three show the clean article.",
+                      text: "Verify the clean published baseline before the indexing example: **Review your options with your agent before choosing coverage.** must be absent from the bundling page’s first visible FAQ, its native **SitecoreAI Search** record, and the **answer** returned by the **P7 GraphQL query**. If the sentence is present, use [**After the demonstration → restoration checklist**](#reset) to remove only that temporary sentence through review and publication. Continue only after all three show the clean FAQ answer.",
                     },
                     {
                       chapter: "public",
-                      text: "Open [**the car-and-home resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en). Confirm the **latest version** is **Approved** and marked **Live**. Expand **Resource content**, and confirm **Detailed explanation** contains the full clean article without **Review your options with your agent before choosing coverage.** Keep this latest published version selected. Do not create a version during preparation: **P3** creates a fresh **Resource page review** Draft live, appends the sentence without replacing existing content, and completes review and publication.",
+                      text: `Open [**the first bundling FAQ in Page Builder Content**](${bundlingFaqContent}). Confirm **Question → What's an auto and home insurance bundle?**. The **latest version** must be **Approved** and marked **Live**, with its full clean **Answer** and no **Review your options with your agent before choosing coverage.** Keep this latest published version selected. Do not create a version during preparation: **P3** creates a fresh **Bundling FAQ review** Draft live, edits that FAQ’s answer on the page canvas, and completes review and publication. Creating a new page version alone does not version the FAQ item.`,
                     },
                     {
                       chapter: "public",
@@ -391,10 +391,9 @@ export async function CustomerDemoGuide({
                       <h3>{step.title}</h3>
                       {step.id === "public-discovery" && (
                         <p className={styles.flowCue}>
-                          <strong>
-                            P2–P3 · One resource, from content to Search.
-                          </strong>{" "}
-                          Keep bundle-car-and-home selected across both steps.
+                          <strong>P2–P3 · One FAQ, from page to Search.</strong>{" "}
+                          Keep bundling and its first native FAQ selected across
+                          both steps.
                         </p>
                       )}
                       {step.id === "portal-relevance" && (
@@ -528,7 +527,7 @@ export async function CustomerDemoGuide({
                   lines={[
                     {
                       chapter: "public",
-                      text: "For [**the car-and-home resource page in Page Builder Content**](https://pages.sitecorecloud.io/content?tenantName=scaipocusem400b-sitecoreai950c-demo4418&sc_site=liberty-mutual-public-site&organization=org_XqL3u1MSNVuubOTb&sc_itemid=ae109fc0-b508-5840-97eb-0b2c02ae1a9b&sc_lang=en), begin with the latest published version, and create a new **Resource page restored** version. Explicitly select its newest **Draft**, and wait for its fields to load. In **Resource content → Detailed explanation**, remove only **Review your options with your agent before choosing coverage.** Retain the complete article and all other fields. Save, submit, approve, and publish this same version using the presenter account. Confirm the sentence is absent from the **public article**, **Search**, and the **P7 GraphQL response**. Verify that the latest version is **Approved** and marked **Live**, and leave it selected for the next demonstration. Keep intermediate versions as the review history.",
+                      text: `For [**the first bundling FAQ in Page Builder Content**](${bundlingFaqContent}), begin with the latest published version, and create a new **Bundling FAQ restored** version. Explicitly select its newest **Draft**, and wait for its fields to load. In **Answer**, remove only **Review your options with your agent before choosing coverage.** Retain the complete FAQ answer and all other fields. Save, submit, approve, and publish this same FAQ version with **Item** and **Current language (English)** selected and **Subitems** unchecked. Confirm the sentence is absent from the **bundling page’s FAQ**, its **Search** record, and the **P7 GraphQL response**. Verify that the latest FAQ version is **Approved** and marked **Live**, and leave it selected for the next demonstration. Keep intermediate versions as the review history.`,
                     },
                     {
                       chapter: "portal",

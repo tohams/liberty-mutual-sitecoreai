@@ -1,0 +1,24 @@
+---
+ID: e7754f0b-25aa-5ef7-8ddf-398192ee0cad
+Parent: b925038f-1cd9-55a8-ac97-753ef2873186
+Template: 8fb0a60a-31d7-5009-abca-636a6a3f40b5
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Multi-car savings
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: 3f27b5a0-0044-5085-b90f-a55499fc260a
+      Hint: heading
+      Value: |
+
+    - ID: 3abbd930-ac1b-5420-9c68-9db3df0aef7e
+      Hint: body
+      Value: <p>We also offer a discount for insuring more than one car with us. The more cars you insure with Liberty Mutual, the more you save with a <a class="lm-Link lm-LinkInline" href="https://www.libertymutual.com/vehicle/auto-insurance/discounts">Multi-Car Discount</a>.<sup>4</sup></p><p><a href="https://www.libertymutual.com/vehicle/auto-insurance/discounts">View more discounts</a></p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

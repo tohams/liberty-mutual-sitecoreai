@@ -432,7 +432,9 @@ export function searchDocument(answer: PublishedAnswer): SearchOperation {
     sc_url: answer.canonicalUrl,
     fields: {
       title: answer.question,
-      question: answer.question,
+      // A Resource page is an article result. Only an actual on-page FAQ
+      // projection supplies the question field used by Search's Answer card.
+      question: "",
       summary: answer.answer,
       body: [
         answer.answer,

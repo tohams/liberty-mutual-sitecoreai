@@ -1,0 +1,23 @@
+---
+ID: ca86799c-5575-5ac2-9acf-db04734fefae
+Parent: f81b6316-6ece-5785-a36a-1b037d6cde64
+Template: 7e71c6a1-8f71-5e0c-8983-e35b4166daa7
+Path: /sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/FAQs/Questions/06 Canceling a bundled policy
+SharedFields:
+- ID: a4f985d9-98b3-4b52-aaaf-4344f6e747c6
+  Hint: __Workflow
+  Value: "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: e0740b71-1b49-514f-89f3-2321e72809f4
+      Hint: question
+      Value: What happens if I cancel one of my policies that is bundled?
+    - ID: 90ca7aa1-fe73-54e2-b966-8ba57c910e21
+      Hint: answer
+      Value: <p>Canceling one of your bundled home and auto insurance policies could result in a loss of your Multi-Policy Discount. Give us a call and we&#x27;ll see if there are other options to help you save on your insurance.</p>
+    - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
+      Hint: __Workflow state
+      Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"

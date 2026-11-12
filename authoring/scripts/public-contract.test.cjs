@@ -14,14 +14,15 @@ test('native identifiers and references are unique and limited to this customer 
  }
  assert.equal(norm(record(SITE+'/Data/Promotions/Bundle and save').fields.disclosure),norm(model.disclosureId));
 });
-test('one shared Promotion is assigned to Home and Bundling, with different variants',()=>{
+test('Home uses the shared Promotion while Bundling retains only its genuine source content',()=>{
  const home=record(SITE+'/Home').fields.__Renderings;
  const bundling=record(SITE+'/Home/bundling').fields.__Renderings;
- for(const layout of [home,bundling]){
-  assert(layout.includes(model.promotionId.toUpperCase()));
- }
+ assert(home.includes(model.promotionId.toUpperCase()));
  assert(home.includes(model.variantIds['PublicPromotion.ImageLeft'].toUpperCase()));
- assert(bundling.includes(model.variantIds['PublicPromotion.ImageRight'].toUpperCase()));
+ assert(!bundling.includes(model.promotionId.toUpperCase()));
+ assert(!bundling.includes(model.disclosureId.toUpperCase()));
+ const products=record(SITE+'/Home/bundling').fields.product;
+ assert.equal(products,'{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}|{005D71B8-6FD7-4E0A-842A-338DF40E1F47}|{D81D3AE8-243B-4F32-B70D-33796448DCA0}');
 });
 test('one full copyright notice is governed in the shared footer without replacing coverage terms',()=>{
  const copyright=record(SITE+'/Data/Disclosures/Copyright notice');
@@ -154,7 +155,7 @@ test('structured resources are page-owned and preserve native identities without
  assert(!model.templateIds.PublicApprovedAnswer);
  assert(model.records.every(r=>!r.path.startsWith(SITE+'/Data/Approved answers')&&!r.path.includes('/PublicApprovedAnswer')));
  const pages=model.records.filter(r=>r.template===resourceId&&r.path.startsWith(SITE+'/Home/insurance-resources/'));
- assert.equal(pages.length,10);
+ assert.equal(pages.length,9);
  for(const page of pages){
   assert(page.path.startsWith(SITE+'/Home/insurance-resources/'));
   for(const key of ['question','answer','formalWording','explanation','owner','effectiveDate','reviewDate','nextStep','disclosure'])assert.equal(typeof page.fields[key],'string',page.path+': '+key);
@@ -163,16 +164,16 @@ test('structured resources are page-owned and preserve native identities without
   const component=page.fields.__Renderings.match(/<r\s[^>]*id="\{4585A48F-E841-50CA-B2A3-0D3FC9893875\}"[^>]*>/i);
   assert(component,page.path);assert(component[0].includes('ds="{'+page.id.toUpperCase()+'}"'));
  }
- const bundle=record(SITE+'/Home/insurance-resources/bundle-car-and-home');
- assert.equal(bundle.id,'ae109fc0-b508-5840-97eb-0b2c02ae1a9b');
- assert.equal(bundle.fields.Title,'Bundling your car and home insurance');
- assert.equal(bundle.fields.metadataTitle,'Bundling your car and home insurance | Liberty Mutual');
- assert.equal(record(bundle.path+'/Data/Hero').fields.heading,bundle.fields.Title);
- assert.match(bundle.fields.explanation,/<h2>Review your coverage options<\/h2>/);
- assert.doesNotMatch(bundle.fields.explanation,/Review your options with your agent before choosing coverage\./,'The factory article starts before the P3 editing exercise.');
- assert.equal(bundle.fields.question,'Can I bundle my car and home insurance?');
- assert.match(bundle.fields.answer,/combining eligible auto and home policies/,'Native Search and API answer fields remain intact.');
- assert(bundle.fields.__Renderings.includes('{1FA93D3A-1935-52B8-B512-5CC2F274B489}'),'Preserve the placed component identity.');
+ assert(!record(SITE+'/Home/insurance-resources/bundle-car-and-home'),'The duplicate article is retired.');
+ const faq=record(SITE+'/Home/bundling/Data/FAQs');
+ const selected=faq.fields.items.split('|').map(norm);
+ assert.equal(selected.length,6);
+ assert.equal(selected[0],norm('8c73b233-9576-52d7-bd5a-a78756a08c14'));
+ const first=model.records.find(r=>norm(r.id)===selected[0]);
+ assert.equal(first.fields.question,"What's an auto and home insurance bundle?");
+ assert.match(first.fields.answer,/same company/);
+ assert.match(first.fields.answer,/auto and renters/,'Keep the full visible second paragraph.');
+ assert.equal(record(SITE+'/Home/bundling/Data/Hero').fields.secondaryLink,'');
  assert.equal(model.renderingIds.PublicResourceContent,'4585a48f-e841-50ca-b2a3-0d3fc9893875');
  assert.equal(model.variantIds['PublicResourceContent.Default'],'3e82160b-336f-5744-a667-7a1b94bc7307');
  const rendering=record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicResourceContent');

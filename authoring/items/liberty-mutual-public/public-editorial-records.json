@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ownership": "One-time CreateOnly page-owned editorial seed; excluded from normal Deploy.",
-  "routeCount": 17,
+  "routeCount": 16,
   "records": [
     {
       "ID": "6d600332-3e21-4c5f-83ec-aae04f83450f",
@@ -256,7 +256,7 @@
         {
           "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
           "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{97736030-56EB-58D3-9254-8518B6F1178B}\" id=\"{2472C249-4D6A-5BB7-B388-BD4F3CC4EAA1}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Breadcrumbs\" par=\"FieldNames={41780E9B-DA80-5629-9B6F-EF1011D29C0C}&amp;DynamicPlaceholderId=10\" /><r uid=\"{F01F3844-ACC4-5C3A-B756-E9628ED1B14C}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={843D437A-CF51-5140-B236-AE8E1D3E191C}&amp;DynamicPlaceholderId=11\" /><r uid=\"{EF974D60-154F-5889-94D5-381C3207348E}\" id=\"{FF280574-45AE-5A99-B5E0-5E290B91D9B0}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Quote choices\" par=\"FieldNames={D1E3F875-4FEB-504A-B3F4-19A93E10BC85}&amp;DynamicPlaceholderId=12\" /><r uid=\"{238FEFE7-BCB6-54E6-9917-0DF6C6BDAABA}\" id=\"{44D749A9-68A1-5987-844B-00DE3ABFB287}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Family basketball\" par=\"FieldNames={42ECEB7E-E29B-573B-BE9B-B7C120B0E339}&amp;DynamicPlaceholderId=13\" /><r uid=\"{857320CC-3BFF-5CEB-9508-A78B90CF5E36}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Bundle overview\" par=\"FieldNames={E1344F68-CD05-5C89-9E06-B458018A1FB1}&amp;DynamicPlaceholderId=14\" /><r uid=\"{B73817BD-E15B-585F-BBCF-03781720DDDC}\" id=\"{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Bundle choices\" par=\"FieldNames={827ADE4F-93AF-5A2A-BDB8-F730B0C63BF2}&amp;DynamicPlaceholderId=15\" /><r uid=\"{6DFA0F66-244D-55D9-9C8A-74972C1B5466}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/How bundling works\" par=\"FieldNames={F322362D-A717-59BE-8109-D5BECBB51310}&amp;DynamicPlaceholderId=16\" /><r uid=\"{4F7E009C-6E93-5A4F-A04C-39C56EF8D6D2}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Why bundle\" par=\"FieldNames={1B8D9769-ABB9-5E7D-A4D1-A4FE12DFA3CA}&amp;DynamicPlaceholderId=17\" /><r uid=\"{DE9EFC0F-F2AB-565A-A95D-8105EA7616AA}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Bundle confidence\" par=\"FieldNames={1B8D9769-ABB9-5E7D-A4D1-A4FE12DFA3CA}&amp;DynamicPlaceholderId=18\" /><r uid=\"{2D6E1D7D-F1AD-57B8-A38F-5BD2B819474F}\" id=\"{F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/FAQs\" par=\"FieldNames={C39B072D-2A29-55DA-9A57-9D9FACA0F280}&amp;DynamicPlaceholderId=19\" /><r uid=\"{6A78629D-602A-54FD-97DA-DAF8426BB0EF}\" id=\"{FF280574-45AE-5A99-B5E0-5E290B91D9B0}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Ready for a quote\" par=\"FieldNames={5E7C88D5-F15C-5742-B88F-AC05787E6BB5}&amp;DynamicPlaceholderId=20\" /><r uid=\"{7DB767AA-3533-5D6C-B1BD-748419A79E8D}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Savings disclosure\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=21\" /><r uid=\"{3057C476-D9C2-5B42-AA9F-93B3C92B481C}\" id=\"{3B2349C9-F98B-5C1A-8A5A-3B98BA3535F1}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{9610856E-28F7-5333-8923-80AC8A880E94}\" par=\"FieldNames={9740E635-3B9F-57FA-A134-72A97C4ADDFA}&amp;DynamicPlaceholderId=4\" /><r uid=\"{F41E3C0D-445F-56C2-8F7C-103232136E89}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
+          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{97736030-56EB-58D3-9254-8518B6F1178B}\" id=\"{2472C249-4D6A-5BB7-B388-BD4F3CC4EAA1}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Breadcrumbs\" par=\"FieldNames={41780E9B-DA80-5629-9B6F-EF1011D29C0C}&amp;DynamicPlaceholderId=10\" /><r uid=\"{F01F3844-ACC4-5C3A-B756-E9628ED1B14C}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={843D437A-CF51-5140-B236-AE8E1D3E191C}&amp;DynamicPlaceholderId=11\" /><r uid=\"{EF974D60-154F-5889-94D5-381C3207348E}\" id=\"{FF280574-45AE-5A99-B5E0-5E290B91D9B0}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Quote choices\" par=\"FieldNames={D1E3F875-4FEB-504A-B3F4-19A93E10BC85}&amp;DynamicPlaceholderId=12&amp;RenderingIdentifier=bundling-quote\" /><r uid=\"{238FEFE7-BCB6-54E6-9917-0DF6C6BDAABA}\" id=\"{44D749A9-68A1-5987-844B-00DE3ABFB287}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Family basketball\" par=\"FieldNames={42ECEB7E-E29B-573B-BE9B-B7C120B0E339}&amp;DynamicPlaceholderId=13\" /><r uid=\"{857320CC-3BFF-5CEB-9508-A78B90CF5E36}\" id=\"{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Bundle introduction\" par=\"FieldNames={4970C669-573A-5641-B898-7A0C31B7FAAC}&amp;DynamicPlaceholderId=14\" /><r uid=\"{B73817BD-E15B-585F-BBCF-03781720DDDC}\" id=\"{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Bundle choices\" par=\"FieldNames={827ADE4F-93AF-5A2A-BDB8-F730B0C63BF2}&amp;DynamicPlaceholderId=15&amp;RenderingIdentifier=types-for-bundle\" /><r uid=\"{94B48383-662D-517A-9CE6-669AD527E16D}\" id=\"{F63F0F36-EA5B-5693-85C6-B4DF475C8840}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Multi-car savings\" par=\"FieldNames={C3FAE5B5-007A-5669-9E2E-59816D8D8808}&amp;DynamicPlaceholderId=36\" /><r uid=\"{6DFA0F66-244D-55D9-9C8A-74972C1B5466}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/How bundling works\" par=\"FieldNames={F322362D-A717-59BE-8109-D5BECBB51310}&amp;DynamicPlaceholderId=16&amp;RenderingIdentifier=how-much-can-i-save\" /><r uid=\"{4F7E009C-6E93-5A4F-A04C-39C56EF8D6D2}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Why bundle\" par=\"FieldNames={C5ED3C10-56A0-5600-A595-502BB07D9D15}&amp;DynamicPlaceholderId=17\" /><r uid=\"{DE9EFC0F-F2AB-565A-A95D-8105EA7616AA}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Bundle confidence\" par=\"FieldNames={1B8D9769-ABB9-5E7D-A4D1-A4FE12DFA3CA}&amp;DynamicPlaceholderId=18&amp;RenderingIdentifier=why-choose-liberty\" /><r uid=\"{103697CA-B6BB-53D7-A577-FA8618B09939}\" id=\"{0839D907-B33B-5AAD-8030-635F1451794F}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Mobile app\" par=\"FieldNames={F5664BEE-3E81-524A-83B3-5503744276AF}&amp;DynamicPlaceholderId=40\" /><r uid=\"{2D6E1D7D-F1AD-57B8-A38F-5BD2B819474F}\" id=\"{F4EF94BB-096B-5404-9B3E-E0F2B0B041C5}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/FAQs\" par=\"FieldNames={C39B072D-2A29-55DA-9A57-9D9FACA0F280}&amp;DynamicPlaceholderId=19\" /><r uid=\"{6A78629D-602A-54FD-97DA-DAF8426BB0EF}\" id=\"{FF280574-45AE-5A99-B5E0-5E290B91D9B0}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Ready for a quote\" par=\"FieldNames={5E7C88D5-F15C-5742-B88F-AC05787E6BB5}&amp;DynamicPlaceholderId=20\" /><r uid=\"{9B5FBC5F-1E20-5F9B-9C79-4E0138D38034}\" id=\"{7EFB74E9-A17B-5A27-9118-6B78AE1B2D8C}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Related insurance guides\" par=\"FieldNames={23E68595-DC31-570A-9159-8C322D75786B}&amp;DynamicPlaceholderId=43\" /><r uid=\"{D1DE911A-D4D2-51D3-9450-A952D6A0DB04}\" id=\"{F63F0F36-EA5B-5693-85C6-B4DF475C8840}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/More coverage information\" par=\"FieldNames={C3FAE5B5-007A-5669-9E2E-59816D8D8808}&amp;DynamicPlaceholderId=43&amp;RenderingIdentifier=bundling-more-coverage\" /><r uid=\"{7DB767AA-3533-5D6C-B1BD-748419A79E8D}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"page:/Data/Savings disclosure\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=21\" /></d></r>"
         },
         {
           "ID": "1172f251-dad4-4efb-a329-0c63500e4f1e",
@@ -319,7 +319,7 @@
                 {
                   "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
                   "Hint": "product",
-                  "Value": ""
+                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}|{005D71B8-6FD7-4E0A-842A-338DF40E1F47}|{D81D3AE8-243B-4F32-B70D-33796448DCA0}"
                 }
               ]
             }
@@ -743,7 +743,7 @@
                 {
                   "ID": "ba150841-a581-5472-8222-4e5d344df3bf",
                   "Hint": "body",
-                  "Value": "<p>\u00a9 2025 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116<br>Liberty Mutual is an <a href=\"https://www.libertymutualgroup.com/about-lm/our-company/equal-employment-opportunity-and-anti-discrimination-policy\">Equal Opportunity Employer</a> and an Equal Housing Insurer.</p>"
+                  "Value": "<p>© 2025 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116<br>Liberty Mutual is an <a href=\"https://www.libertymutualgroup.com/about-lm/our-company/equal-employment-opportunity-and-anti-discrimination-policy\">Equal Opportunity Employer</a> and an Equal Housing Insurer.</p>"
                 },
                 {
                   "ID": "2d7006b7-39eb-5903-a777-4fe7acaa3f07",
@@ -1462,7 +1462,7 @@
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
                   "Hint": "body",
-                  "Value": "<p>Just 5\u201310 minutes and the basic details gets you started.</p>"
+                  "Value": "<p>Just 5–10 minutes and the basic details gets you started.</p>"
                 },
                 {
                   "ID": "19c458f6-6177-50d1-9756-15ca31cc5674",
@@ -1517,7 +1517,7 @@
                 {
                   "ID": "3abbd930-ac1b-5420-9c68-9db3df0aef7e",
                   "Hint": "body",
-                  "Value": "<p>See our <a href=\"https://www.trustpilot.com/review/www.libertymutual.com\"><strong>4,452 reviews</strong></a> on <span class=\"public-trustpilot-star\">\u2605</span>Trustpilot</p>"
+                  "Value": "<p>See our <a href=\"https://www.trustpilot.com/review/www.libertymutual.com\"><strong>4,452 reviews</strong></a> on <span class=\"public-trustpilot-star\">★</span>Trustpilot</p>"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -1749,7 +1749,7 @@
                 {
                   "ID": "0642f561-976a-5280-ad0b-49591bb6b97f",
                   "Hint": "heading",
-                  "Value": "<h2>Quickly pay your bill or get your ID cards \u2014 <strong>download our mobile app to keep them close.</strong></h2>"
+                  "Value": "<h2>Quickly pay your bill or get your ID cards — <strong>download our mobile app to keep them close.</strong></h2>"
                 },
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
@@ -1804,7 +1804,7 @@
                 {
                   "ID": "0642f561-976a-5280-ad0b-49591bb6b97f",
                   "Hint": "heading",
-                  "Value": "<h2>Using your name and date of birth \u2014 <strong>no login required.</strong></h2>"
+                  "Value": "<h2>Using your name and date of birth — <strong>no login required.</strong></h2>"
                 },
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
@@ -2470,136 +2470,6 @@
                   "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
                   "Hint": "nextStep",
                   "Value": "<link text=\"Explore auto and renters options\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-renters&amp;source=bundle-auto-and-renters\" />"
-                },
-                {
-                  "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
-                  "Hint": "disclosure",
-                  "Value": "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"
-                },
-                {
-                  "ID": "d74e777c-dbb0-5d67-accf-4cfd8c391cc4",
-                  "Hint": "includeInSearch",
-                  "Value": "1"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "ae109fc0-b508-5840-97eb-0b2c02ae1a9b",
-      "Parent": "afad2c4c-2dc6-5428-b357-28fca18b611d",
-      "Template": "b99218ea-e1fd-41af-a4ae-7ec9e5c30b17",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-car-and-home",
-      "SharedFields": [
-        {
-          "ID": "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e",
-          "Hint": "__Renderings",
-          "Value": "<r><d id=\"{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}\" l=\"{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}\"><r uid=\"{AE05A1A0-5729-5A88-A5EF-5B123E9F4285}\" id=\"{38A74FC9-3FF2-5E89-8545-DAA4B3A164C4}\" ph=\"/headless-main/sxa-public-page-body/headless-public-hero-1\" ds=\"page:/Data/Hero\" par=\"FieldNames={AE66B881-D8E6-59C6-89DB-59FA1538B810}&amp;DynamicPlaceholderId=2\" /><r uid=\"{1FA93D3A-1935-52B8-B512-5CC2F274B489}\" id=\"{4585A48F-E841-50CA-B2A3-0D3FC9893875}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{AE109FC0-B508-5840-97EB-0B2C02AE1A9B}\" par=\"FieldNames={3E82160B-336F-5744-A667-7A1B94BC7307}&amp;DynamicPlaceholderId=6\" /><r uid=\"{25A364F1-1249-5E0C-AA6B-024B8DCE62D4}\" id=\"{4BC5C522-23DE-54E1-8420-169BDCF996E9}\" ph=\"/headless-main/sxa-public-page-body/headless-public-content-1\" ds=\"{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}\" par=\"FieldNames={8244A4F5-62C2-5025-B1A3-12751E300D0E}&amp;DynamicPlaceholderId=5\" /></d></r>"
-        },
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b",
-                  "Hint": "Title",
-                  "Value": "Bundling your car and home insurance"
-                },
-                {
-                  "ID": "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8",
-                  "Hint": "NavigationTitle",
-                  "Value": "Can I bundle my car and home insurance?"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                },
-                {
-                  "ID": "748e2709-fb2f-5f73-9ca6-d8e801b6eafc",
-                  "Hint": "metadataTitle",
-                  "Value": "Bundling your car and home insurance | Liberty Mutual"
-                },
-                {
-                  "ID": "396bcd2c-e08b-56fa-8d7a-170b9a7a18e8",
-                  "Hint": "metadataDescription",
-                  "Value": "Learn about combining car and home insurance with Liberty Mutual."
-                },
-                {
-                  "ID": "a98fdad1-e82c-5380-9954-33b996734100",
-                  "Hint": "canonicalUrl",
-                  "Value": "https://liberty-mutual-public-site.vercel.app/insurance-resources/bundle-car-and-home"
-                },
-                {
-                  "ID": "001ac65e-7daa-5a02-af03-2a5ebdabd129",
-                  "Hint": "audience",
-                  "Value": "{CE752A42-2038-419C-99A1-9C0C04800CD3}"
-                },
-                {
-                  "ID": "44cc401f-47ef-5b97-9a35-2bd9a860c066",
-                  "Hint": "state",
-                  "Value": "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
-                },
-                {
-                  "ID": "9c5ab0fe-bb46-51cc-98f0-412ca7d8e543",
-                  "Hint": "product",
-                  "Value": "{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}"
-                },
-                {
-                  "ID": "de4a7a26-6fe3-571d-9b4c-6e117690f9b5",
-                  "Hint": "question",
-                  "Value": "Can I bundle my car and home insurance?"
-                },
-                {
-                  "ID": "54e5a9a7-a8e8-54f9-b163-f6cf04fe0119",
-                  "Hint": "answer",
-                  "Value": "You can explore combining eligible auto and home policies with Liberty Mutual. Bundling may qualify you for savings and can make your insurance easier to manage. Available options and discounts depend on your state, eligibility, and how you purchase."
-                },
-                {
-                  "ID": "47041dc1-a183-5516-85ea-afdea936289c",
-                  "Hint": "formalWording",
-                  "Value": "<p>Bundling and multi-policy savings are subject to product availability and eligibility. A quote determines the options and discounts available to you.</p>"
-                },
-                {
-                  "ID": "db533ede-0a22-5a9b-ae03-f3298cfc2e70",
-                  "Hint": "explanation",
-                  "Value": "<div class=\"ck-content\"><p>Bundling means insuring your car and home with the same company. Keeping eligible policies together may make them easier to manage and may qualify you for a multi-policy discount.</p><h2>Review your coverage options</h2><p>Start with the products you need, and compare their coverages, limits, and deductibles. If your circumstances need a closer look, an independent agent can help you discuss the options.</p></div>"
-                },
-                {
-                  "ID": "b6cfeb53-9864-5c4a-b920-d5d283af71fd",
-                  "Hint": "owner",
-                  "Value": "Liberty Mutual"
-                },
-                {
-                  "ID": "c154a6f5-b9d8-5cb8-b57f-ad8b93044dfe",
-                  "Hint": "effectiveDate",
-                  "Value": "20261031T000000Z"
-                },
-                {
-                  "ID": "17ea77c7-9126-5fcc-a6a1-82da22fc8df5",
-                  "Hint": "reviewDate",
-                  "Value": "20270131T000000Z"
-                },
-                {
-                  "ID": "e270fde6-7f22-5dfa-af6b-101de974f0f8",
-                  "Hint": "sourceLink",
-                  "Value": "<link text=\"Liberty Mutual: bundling auto and home\" linktype=\"external\" url=\"https://www.libertymutual.com/bundling\" />"
-                },
-                {
-                  "ID": "07a77a0f-36c5-5e6e-867e-cc75a35820d8",
-                  "Hint": "nextStep",
-                  "Value": "<link text=\"Explore a bundled quote\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-home&amp;source=bundle-car-and-home\" />"
                 },
                 {
                   "ID": "6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d",
@@ -3761,7 +3631,7 @@
                 {
                   "ID": "9a7aa587-fb2b-5828-9471-4013c68c7422",
                   "Hint": "introduction",
-                  "Value": "<p>At Liberty Mutual, explore these insurance bundles.</p>"
+                  "Value": "<p>At Liberty Mutual, we offer the following insurance bundles</p>"
                 },
                 {
                   "ID": "a7dae70d-8577-536a-bb6f-a63b64fdbe0b",
@@ -3806,12 +3676,12 @@
                 {
                   "ID": "0642f561-976a-5280-ad0b-49591bb6b97f",
                   "Hint": "heading",
-                  "Value": "<h2>Why choose Liberty Mutual for car insurance?</h2>"
+                  "Value": "<h2>Why choose Liberty Mutual for<br>car insurance?</h2>"
                 },
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
                   "Hint": "body",
-                  "Value": "<p>Explore protection from a company that has helped people insure what matters for more than a century.</p><p>Build a quote around your needs and review your options before you choose.</p>"
+                  "Value": "<p>Rated &quot;A&quot; (Excellent) for financial strength by A.M. Best Company, we&#x27;ve been helping people like you protect what they love for over 100 years!<sup>3</sup> <br/><br/>Savings? We&#x27;ve got those too! You could save over $950 when you bundle your auto and home insurance.<sup>1</sup> <br/><br/>Start your quote today, to see how much you could save on an auto and home insurance bundle when you only pay for what you need.</p>"
                 },
                 {
                   "ID": "19c458f6-6177-50d1-9756-15ca31cc5674",
@@ -3866,7 +3736,7 @@
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
                   "Hint": "body",
-                  "Value": "<p>Bring your auto and home insurance together with Liberty Mutual. Bundling can also combine auto with renters or condo insurance.</p><p>Compare your options and start a bundled quote to explore the savings available to you.</p>"
+                  "Value": "<p>An auto and home insurance bundle is when you have your auto and home insured with the same company. These policies are often called a “bundle” and can apply to more than auto and home products.</p><p>At Liberty Mutual, we offer a discount for having your auto and home bundled. We also offer bundling savings when you combine your auto and other products like renters, condo, motorcycle, and more!</p><p>Start your bundled quote today to see how much you could save!</p>"
                 },
                 {
                   "ID": "19c458f6-6177-50d1-9756-15ca31cc5674",
@@ -3921,7 +3791,7 @@
                 {
                   "ID": "80b5b9b2-74f9-5a08-bcb5-d1cbae7cb8f9",
                   "Hint": "items",
-                  "Value": "{8C73B233-9576-52D7-BD5A-A78756A08C14}|{E7682FE6-B2A5-5E70-85E1-A8F1F6A45989}|{AB3FFB9C-4625-5CE7-BFCC-7DD79417C3F9}|{4A640900-E761-5958-B737-A0040A06D96B}"
+                  "Value": "{8C73B233-9576-52D7-BD5A-A78756A08C14}|{E7682FE6-B2A5-5E70-85E1-A8F1F6A45989}|{AB3FFB9C-4625-5CE7-BFCC-7DD79417C3F9}|{D86D2E9E-785D-521A-AAEB-A8267D5441DC}|{4A640900-E761-5958-B737-A0040A06D96B}|{CA86799C-5575-5AC2-9ACF-DB04734FEFAE}"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -4021,7 +3891,7 @@
                 {
                   "ID": "cedce3ca-6429-5a30-bae6-ed4e6508a0af",
                   "Hint": "secondaryLink",
-                  "Value": "<link text=\"Understand bundling\" linktype=\"external\" url=\"/insurance-resources/bundle-car-and-home\" />"
+                  "Value": ""
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -4067,7 +3937,7 @@
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
                   "Hint": "body",
-                  "Value": "<p>New customers who switch and bundle their home and auto insurance save over $950 per year.<sup>1</sup></p><p>Your individual savings depend on your policies and circumstances.</p>"
+                  "Value": "<p>At Liberty Mutual, new customers who switch and bundle their home and auto insurance save over $950 per year.<sup>1</sup></p><p>Because every policy is different, the exact savings you get from bundling your home and auto insurance policies is unique to you.</p>"
                 },
                 {
                   "ID": "19c458f6-6177-50d1-9756-15ca31cc5674",
@@ -4353,12 +4223,12 @@
                 {
                   "ID": "552f64b5-9e7a-5174-b9bd-7efa7e39fb9a",
                   "Hint": "title",
-                  "Value": "Savings information"
+                  "Value": ""
                 },
                 {
                   "ID": "ba150841-a581-5472-8222-4e5d344df3bf",
                   "Hint": "body",
-                  "Value": "<p><sup>1</sup> Average annual savings based on a countrywide survey of new customers who reported savings when they switched to Liberty Mutual between 10/2024 and 09/2025. Savings will vary. Comparison does not apply in MA.</p><p>Discounts and savings are available where state laws and regulations allow, and may vary by state and how you purchase. Certain discounts apply to specific coverages only. To the extent permitted by law, applicants are individually underwritten; not all applicants may qualify.</p>"
+                  "Value": "<p><sup>1</sup> $950 Auto & Home Savings Figure: Average annual savings based on a countrywide survey of new customers who reported savings when they switched to Liberty Mutual between 10/2024 and 09/2025. Savings will vary. Comparison does not apply in MA.</p><p><sup>2</sup> Insurance ID cards are permitted in most states; however, some states do not permit the use of Mobile Insurance ID cards as proof of insurance.</p><p><sup>3</sup> A.M. Best Rating Services, 2025.</p><p><sup>4</sup> Discounts and savings are available where state laws and regulations allow, and <a class=\"lm-Link lm-LinkInline\" href=\"https://www.libertymutual.com/ways-to-buy\">may vary by state and how you purchase</a>. Certain discounts apply to specific coverages only. To the extent permitted by law, applicants are individually underwritten; not all applicants may qualify.</p>"
                 },
                 {
                   "ID": "2d7006b7-39eb-5903-a777-4fe7acaa3f07",
@@ -4413,22 +4283,22 @@
                 {
                   "ID": "0642f561-976a-5280-ad0b-49591bb6b97f",
                   "Hint": "heading",
-                  "Value": "<h2>Why bundle auto and home insurance?</h2>"
+                  "Value": "<h2>Why bundle auto and home insurance?</h2><p>Here are just a few reasons why it can help to bundle your insurance.</p>"
                 },
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
                   "Hint": "body",
-                  "Value": "<h3>Save money</h3><p>Combining qualifying policies can help you save on insurance.</p><h3>It is more convenient</h3><p>Manage your policies in one place, including policy documents, payments, and claims.</p><h3>Flexibility</h3><p>Access your policies online or with the Liberty Mutual app when it suits you.</p>"
+                  "Value": "<h3>Save money</h3><p>A home and auto insurance bundle is the easiest way to save money on your insurance. If you need auto insurance and home, renters, or condo insurance, you could save hundreds a year just by bundling!</p><h3>It&#x27;s more convenient</h3><p>At Liberty Mutual, when you bundle home and auto insurance you can manage both of your policies in one place, to</p> <ul><li>View and download policy documents, like ID cards<sup>2</sup></li><li>Securely pay and manage bills</li><li>File, manage, and track claims</li><li>Review coverages and make policy changes 24/7</li></ul><h3>Flexibility</h3><p>A home and auto insurance bundle lets you manage your insurance anywhere, no need to call an agent or go to an office. Plus, with Liberty Mutual, you can access your policies with our easy-to-use app.</p>"
                 },
                 {
                   "ID": "19c458f6-6177-50d1-9756-15ca31cc5674",
                   "Hint": "image",
-                  "Value": "<image mediaid=\"{451ED505-9D65-4258-A241-CB8510EE449B}\" alt=\"Family walking away from their car in a field\" />"
+                  "Value": "<image mediaid=\"{3B7DEA98-905E-4BC7-A382-7E5F98F0127B}\" alt=\"Dad helping daughter pack the back of a SUV\" />"
                 },
                 {
                   "ID": "6f2bb5ea-9611-5298-a6d2-49c85eee3ce8",
                   "Hint": "primaryLink",
-                  "Value": "<link text=\"Bundle auto and home insurance\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-home\" />"
+                  "Value": "<link text=\"Bundle auto and home insurance to see how much you could save\" linktype=\"external\" url=\"\" anchor=\"bundling-quote\" />"
                 },
                 {
                   "ID": "c2b8db12-5b8e-5f84-a44d-5f017ba52d66",
@@ -4939,29 +4809,6 @@
       "Parent": "777de2e0-bae0-508b-926f-8e17cc1f95d2",
       "Template": "1c82e550-ebcd-4e5d-8abd-d50d0809541e",
       "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-auto-and-renters/Data",
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
-                  "Hint": "__Created",
-                  "Value": "20261031T160000Z"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "38fd655f-d3c6-5c37-9d97-e984e6a5de7a",
-      "Parent": "ae109fc0-b508-5840-97eb-0b2c02ae1a9b",
-      "Template": "1c82e550-ebcd-4e5d-8abd-d50d0809541e",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-car-and-home/Data",
       "Languages": [
         {
           "Language": "en",
@@ -6075,106 +5922,6 @@
       ]
     },
     {
-      "ID": "51a361cb-874a-5f46-809d-e07ef49c1dec",
-      "Parent": "38fd655f-d3c6-5c37-9d97-e984e6a5de7a",
-      "Template": "0d29dd73-62cc-5421-b14c-b8f8d8921540",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-car-and-home/Data/Hero",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "f6b19f8a-18e0-5550-85ab-7602cecec48c",
-                  "Hint": "eyebrow",
-                  "Value": "Insurance resources"
-                },
-                {
-                  "ID": "3a61c47e-c996-5a80-ba68-f988ee36554f",
-                  "Hint": "heading",
-                  "Value": "Bundling your car and home insurance"
-                },
-                {
-                  "ID": "608c6aac-cdd7-5be1-b727-a1647363b89c",
-                  "Hint": "summary",
-                  "Value": "<p>Learn about combining car and home insurance with Liberty Mutual.</p>"
-                },
-                {
-                  "ID": "f8a68051-c885-5977-aa21-4629eb0f3a2c",
-                  "Hint": "image",
-                  "Value": "<Image height=\"1018\" src=\"https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/47f9e23f20434020ac5e3bdc5eaece5e?transform=true&amp;format=auto&amp;width=2304&amp;height=1018\" dam-id=\"LYzRfhlKQhuySvMJMtJ-Gg\" thumbnailsrc=\"https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/47f9e23f20434020ac5e3bdc5eaece5e?transform=true&amp;format=auto&amp;width=2304&amp;height=1018\" width=\"2304\" dam-content-type=\"Image\" alt=\"Family plays basketball in a driveway beside an open garage and parked car.\" />"
-                },
-                {
-                  "ID": "ef75886c-587f-5fb0-b3ee-b6163e7f7661",
-                  "Hint": "primaryLink",
-                  "Value": "<link text=\"Explore a bundled quote\" linktype=\"external\" url=\"/get-a-quote\" querystring=\"product=auto-home&amp;source=bundle-car-and-home\" />"
-                },
-                {
-                  "ID": "cedce3ca-6429-5a30-bae6-ed4e6508a0af",
-                  "Hint": "secondaryLink",
-                  "Value": "<link text=\"Browse insurance resources\" linktype=\"external\" url=\"/insurance-resources\" />"
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ID": "df9145b8-2e5c-594e-b175-a15dbf3c5272",
-      "Parent": "38fd655f-d3c6-5c37-9d97-e984e6a5de7a",
-      "Template": "8fb0a60a-31d7-5009-abca-636a6a3f40b5",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/insurance-resources/bundle-car-and-home/Data/Introduction",
-      "SharedFields": [
-        {
-          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
-          "Hint": "__Workflow",
-          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
-        }
-      ],
-      "Languages": [
-        {
-          "Language": "en",
-          "Versions": [
-            {
-              "Version": 1,
-              "Fields": [
-                {
-                  "ID": "3f27b5a0-0044-5085-b90f-a55499fc260a",
-                  "Hint": "heading",
-                  "Value": ""
-                },
-                {
-                  "ID": "3abbd930-ac1b-5420-9c68-9db3df0aef7e",
-                  "Hint": "body",
-                  "Value": ""
-                },
-                {
-                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
-                  "Hint": "__Workflow state",
-                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "ID": "2dd42b8a-9b16-5ac0-9266-e2f0d96cca90",
       "Parent": "b5f24ff7-b476-5074-935a-5bfcb34c394e",
       "Template": "0d29dd73-62cc-5421-b14c-b8f8d8921540",
@@ -7066,7 +6813,7 @@
                 {
                   "ID": "3abbd930-ac1b-5420-9c68-9db3df0aef7e",
                   "Hint": "body",
-                  "Value": "<p>Review the role of different coverages. Coverage, terms, and availability depend on your policy and state.</p><table><thead><tr><th scope=\"col\">Coverage type</th><th scope=\"col\">How it can help</th></tr></thead><tbody><tr><th scope=\"row\"><a href=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/bodily-injury-liability\">Bodily Injury Liability</a></th><td>Can help with injury-related costs for which you are responsible after an accident.</td></tr><tr><th scope=\"row\"><a href=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/property-damage-coverage\">Property Damage Liability</a></th><td>Can help pay for damage to someone else\u2019s property for which you are responsible.</td></tr><tr><th scope=\"row\"><a href=\"/insurance-resources/comprehensive-auto-coverage\">Comprehensive</a></th><td>Can help with covered damage from events other than a collision, subject to your deductible.</td></tr><tr><th scope=\"row\"><a href=\"/insurance-resources/collision-coverage-and-deductibles\">Collision</a></th><td>Can help with covered collision damage to your vehicle, subject to your deductible.</td></tr></tbody></table>"
+                  "Value": "<p>Review the role of different coverages. Coverage, terms, and availability depend on your policy and state.</p><table><thead><tr><th scope=\"col\">Coverage type</th><th scope=\"col\">How it can help</th></tr></thead><tbody><tr><th scope=\"row\"><a href=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/bodily-injury-liability\">Bodily Injury Liability</a></th><td>Can help with injury-related costs for which you are responsible after an accident.</td></tr><tr><th scope=\"row\"><a href=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage/property-damage-coverage\">Property Damage Liability</a></th><td>Can help pay for damage to someone else’s property for which you are responsible.</td></tr><tr><th scope=\"row\"><a href=\"/insurance-resources/comprehensive-auto-coverage\">Comprehensive</a></th><td>Can help with covered damage from events other than a collision, subject to your deductible.</td></tr><tr><th scope=\"row\"><a href=\"/insurance-resources/collision-coverage-and-deductibles\">Collision</a></th><td>Can help with covered collision damage to your vehicle, subject to your deductible.</td></tr></tbody></table>"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -8132,7 +7879,7 @@
                 {
                   "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
                   "Hint": "body",
-                  "Value": "<p>Bring protection for your home and car together. You could save $950 when you bundle.<sup>1</sup></p>"
+                  "Value": "<p>When you bundle your auto and home, you could save $950!<sup>1</sup></p>"
                 },
                 {
                   "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
@@ -8187,7 +7934,7 @@
                 {
                   "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
                   "Hint": "body",
-                  "Value": "<p>Combine your auto and renters insurance and explore potential savings.</p>"
+                  "Value": "<p>When you bundle auto and renters insurance, you could save money!</p>"
                 },
                 {
                   "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
@@ -8242,7 +7989,7 @@
                 {
                   "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
                   "Hint": "body",
-                  "Value": "<p>Explore savings when you bring your auto and condo insurance together.</p>"
+                  "Value": "<p>We offer savings when you bundle your auto and condo insurance!</p>"
                 },
                 {
                   "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
@@ -8287,12 +8034,12 @@
                 {
                   "ID": "e0740b71-1b49-514f-89f3-2321e72809f4",
                   "Hint": "question",
-                  "Value": "What is an auto and home insurance bundle?"
+                  "Value": "What's an auto and home insurance bundle?"
                 },
                 {
                   "ID": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
                   "Hint": "answer",
-                  "Value": "<p>A bundle brings your auto and home insurance policies together with one insurer.</p>"
+                  "Value": "<p>In general, when people say auto and home insurance bundle, they&#x27;re talking about having your auto and home insurance with the same company.</p> <p>Same goes with other products too, but the most common insurance bundles are auto and home or auto and renters.</p>"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -8332,7 +8079,7 @@
                 {
                   "ID": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
                   "Hint": "answer",
-                  "Value": "<p>These terms often refer to savings available when you insure more than one type of policy with the same company. Availability and qualification depend on your policies and state.</p>"
+                  "Value": "<p>Usually, yes. At Liberty Mutual, we use bundling and multi-policy savings interchangeably. If you have 2 or more auto policies with us, we call it a Multi-Car Discount.</p>"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -8372,7 +8119,7 @@
                 {
                   "ID": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
                   "Hint": "answer",
-                  "Value": "<p>You can explore a bundle when shopping for a new policy, preparing for renewal, or reviewing your insurance needs.</p>"
+                  "Value": "<p>Any time can be the right time to bundle! The sooner you bundle, the sooner you can start saving money. When you&#x27;re ready, simply get a quote for your home and auto, renters and auto, or condo and auto insurance.</p>"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -8407,12 +8154,12 @@
                 {
                   "ID": "e0740b71-1b49-514f-89f3-2321e72809f4",
                   "Hint": "question",
-                  "Value": "Can I add home insurance after buying an auto policy?"
+                  "Value": "If I buy an auto insurance policy with Liberty Mutual today, can I add home insurance later?"
                 },
                 {
                   "ID": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
                   "Hint": "answer",
-                  "Value": "<p>You can explore adding another policy later. Review available options and any applicable savings when you request your quote.</p>"
+                  "Value": "<p>Yes! There&#x27;s no time limit on when you can bundle your insurance. Whenever you&#x27;re ready, you can buy a home insurance policy from Liberty Mutual and we&#x27;ll bundle your eligible policies and immediately apply your discount.</p>"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -8723,12 +8470,12 @@
                 {
                   "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
                   "Hint": "heading",
-                  "Value": "RightTrack\u00ae"
+                  "Value": "RightTrack®"
                 },
                 {
                   "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
                   "Hint": "body",
-                  "Value": "<p>Learn about savings through Liberty Mutual\u2019s safe driving program. Availability varies by state.</p>"
+                  "Value": "<p>Learn about savings through Liberty Mutual’s safe driving program. Availability varies by state.</p>"
                 },
                 {
                   "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
@@ -10168,7 +9915,7 @@
       "ID": "9360bc0d-ee4f-5fd2-8675-45b5b1f91852",
       "Parent": "d4fbc777-b19c-5dfc-b6d6-662d92881071",
       "Template": "9e6168b4-3c3e-5764-bfa0-6f4e5210d426",
-      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer/Data/Footer/Columns/03 Quick Links/Links/05 Espa\u00f1ol",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Presentation/Partial Designs/Footer/Data/Footer/Columns/03 Quick Links/Links/05 Español",
       "SharedFields": [
         {
           "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
@@ -10186,7 +9933,7 @@
                 {
                   "ID": "a13aa6a3-e920-5c27-a58a-69d5543e8071",
                   "Hint": "link",
-                  "Value": "<link text=\"Espa\u00f1ol\" linktype=\"external\" url=\"https://www.libertymutual.com/espanol\" />"
+                  "Value": "<link text=\"Español\" linktype=\"external\" url=\"https://www.libertymutual.com/espanol\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -10653,7 +10400,755 @@
           ]
         }
       ]
+    },
+    {
+      "ID": "d86d2e9e-785d-521a-aaeb-a8267d5441dc",
+      "Parent": "f81b6316-6ece-5785-a36a-1b037d6cde64",
+      "Template": "7e71c6a1-8f71-5e0c-8983-e35b4166daa7",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/FAQs/Questions/04 Renters discount after buying a home",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "e0740b71-1b49-514f-89f3-2321e72809f4",
+                  "Hint": "question",
+                  "Value": "I just bought a home. Will my auto and renters bundle discount transfer to my new home policy?"
+                },
+                {
+                  "ID": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
+                  "Hint": "answer",
+                  "Value": "<p>Yes! You&#x27;ll continue to earn your Multi-Policy Discount as long as you have at least 2 eligible policies, including replacing your renters policy with a homeowners policy.</p>"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ca86799c-5575-5ac2-9acf-db04734fefae",
+      "Parent": "f81b6316-6ece-5785-a36a-1b037d6cde64",
+      "Template": "7e71c6a1-8f71-5e0c-8983-e35b4166daa7",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/FAQs/Questions/06 Canceling a bundled policy",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "e0740b71-1b49-514f-89f3-2321e72809f4",
+                  "Hint": "question",
+                  "Value": "What happens if I cancel one of my policies that is bundled?"
+                },
+                {
+                  "ID": "90ca7aa1-fe73-54e2-b966-8ba57c910e21",
+                  "Hint": "answer",
+                  "Value": "<p>Canceling one of your bundled home and auto insurance policies could result in a loss of your Multi-Policy Discount. Give us a call and we&#x27;ll see if there are other options to help you save on your insurance.</p>"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "59624416-e2a4-58ea-b23e-ae26515c41dd",
+      "Parent": "4fea3abe-c91a-53f9-bbd5-b161e0ddc427",
+      "Template": "a87a00b1-e6db-45ab-8b54-636fec3b5523",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Bundle introduction/Cards",
+      "SharedFields": [],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261112T000000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "8590e295-bde5-5991-a52d-8540d4acf3d0",
+      "Parent": "59624416-e2a4-58ea-b23e-ae26515c41dd",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Bundle introduction/Cards/01 What can I bundle",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+                  "Hint": "heading",
+                  "Value": "What can I bundle"
+                },
+                {
+                  "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+                  "Hint": "body",
+                  "Value": "<p>We offer bundles on things like auto, home, renters, and more!</p>"
+                },
+                {
+                  "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+                  "Hint": "image",
+                  "Value": ""
+                },
+                {
+                  "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+                  "Hint": "value",
+                  "Value": ""
+                },
+                {
+                  "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+                  "Hint": "actionLink",
+                  "Value": "<link text=\"What can I bundle\" linktype=\"external\" url=\"\" anchor=\"types-for-bundle\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2cab9cba-a25f-51f6-becb-baf7b67e70f5",
+      "Parent": "59624416-e2a4-58ea-b23e-ae26515c41dd",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Bundle introduction/Cards/02 How much can I save",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+                  "Hint": "heading",
+                  "Value": "How much can I save"
+                },
+                {
+                  "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+                  "Hint": "body",
+                  "Value": "<p>You could save $950 when you bundle auto and home with Liberty Mutual!<sup>1</sup></p>"
+                },
+                {
+                  "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+                  "Hint": "image",
+                  "Value": ""
+                },
+                {
+                  "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+                  "Hint": "value",
+                  "Value": ""
+                },
+                {
+                  "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+                  "Hint": "actionLink",
+                  "Value": "<link text=\"How much can I save\" linktype=\"external\" url=\"\" anchor=\"how-much-can-i-save\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "ae541b99-143b-5c02-8be3-fea2ac44a5c2",
+      "Parent": "59624416-e2a4-58ea-b23e-ae26515c41dd",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Bundle introduction/Cards/03 Why choose Liberty Mutual",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+                  "Hint": "heading",
+                  "Value": "Why choose Liberty Mutual"
+                },
+                {
+                  "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+                  "Hint": "body",
+                  "Value": "<p>Helping insure the things you love for over 100 years!</p>"
+                },
+                {
+                  "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+                  "Hint": "image",
+                  "Value": ""
+                },
+                {
+                  "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+                  "Hint": "value",
+                  "Value": ""
+                },
+                {
+                  "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+                  "Hint": "actionLink",
+                  "Value": "<link text=\"Why choose Liberty Mutual\" linktype=\"external\" url=\"\" anchor=\"why-choose-liberty\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4fea3abe-c91a-53f9-bbd5-b161e0ddc427",
+      "Parent": "b925038f-1cd9-55a8-ac97-753ef2873186",
+      "Template": "fc07715c-5b17-53a5-89ce-1b08d6b2a816",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Bundle introduction",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "265c0d23-68cd-5fa3-ae77-cddc4fd25ab3",
+                  "Hint": "heading",
+                  "Value": "<h2><strong>Auto and home</strong><br/>insurance bundle</h2>"
+                },
+                {
+                  "ID": "9a7aa587-fb2b-5828-9471-4013c68c7422",
+                  "Hint": "introduction",
+                  "Value": "<p>An auto and home insurance bundle is when you have your auto and home insured with the same company. These policies are often called a “bundle” and can apply to more than auto and home products.</p><p>At Liberty Mutual, we offer a discount for having your auto and home bundled. We also offer bundling savings when you combine your auto and other products like renters, condo, motorcycle, and more!</p><p>Start your bundled quote today to see how much you could save!</p>"
+                },
+                {
+                  "ID": "a7dae70d-8577-536a-bb6f-a63b64fdbe0b",
+                  "Hint": "items",
+                  "Value": "{8590E295-BDE5-5991-A52D-8540D4ACF3D0}|{2CAB9CBA-A25F-51F6-BECB-BAF7B67E70F5}|{AE541B99-143B-5C02-8BE3-FEA2AC44A5C2}"
+                },
+                {
+                  "ID": "3f9c6aaf-39c9-5ebd-950c-4cf2e513c838",
+                  "Hint": "actionLink",
+                  "Value": ""
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "e7754f0b-25aa-5ef7-8ddf-398192ee0cad",
+      "Parent": "b925038f-1cd9-55a8-ac97-753ef2873186",
+      "Template": "8fb0a60a-31d7-5009-abca-636a6a3f40b5",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Multi-car savings",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "3f27b5a0-0044-5085-b90f-a55499fc260a",
+                  "Hint": "heading",
+                  "Value": ""
+                },
+                {
+                  "ID": "3abbd930-ac1b-5420-9c68-9db3df0aef7e",
+                  "Hint": "body",
+                  "Value": "<p>We also offer a discount for insuring more than one car with us. The more cars you insure with Liberty Mutual, the more you save with a <a class=\"lm-Link lm-LinkInline\" href=\"https://www.libertymutual.com/vehicle/auto-insurance/discounts\">Multi-Car Discount</a>.<sup>4</sup></p><p><a href=\"https://www.libertymutual.com/vehicle/auto-insurance/discounts\">View more discounts</a></p>"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "2bc9958d-06aa-5104-a70c-70630b939a69",
+      "Parent": "b925038f-1cd9-55a8-ac97-753ef2873186",
+      "Template": "efcc13af-1e31-55d3-bca6-f2533d50e674",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Mobile app",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "0642f561-976a-5280-ad0b-49591bb6b97f",
+                  "Hint": "heading",
+                  "Value": "<h2>Get the Liberty Mutual app today!</h2><p>The fastest, easiest way to manage your insurance.</p>"
+                },
+                {
+                  "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
+                  "Hint": "body",
+                  "Value": "<p><strong>Access your ID cards</strong><sup>2</sup><br/> <span style=\"font-size:1rem\">Save them right to your device for proof of insurance.</span></p> <p><strong>Pay and manage bills</strong><br/> <span style=\"font-size:1rem\">Quickly pay bills, enroll in Autopay, and update billing preferences.</span></p> <p><strong>File and track claims</strong><br/> <span style=\"font-size:1rem\">File a claim in minutes and request Roadside Assistance when you need it.</span></p>"
+                },
+                {
+                  "ID": "19c458f6-6177-50d1-9756-15ca31cc5674",
+                  "Hint": "image",
+                  "Value": "<image mediaid=\"{BEBDCC90-238A-47C0-A464-B2C0D8DAB59E}\" alt=\"Liberty Mutual mobile app on a phone\" />"
+                },
+                {
+                  "ID": "6f2bb5ea-9611-5298-a6d2-49c85eee3ce8",
+                  "Hint": "primaryLink",
+                  "Value": "<link text=\"Download the app to see how we help make insurance simple\" linktype=\"external\" url=\"https://www.libertymutual.com/mobile-app\" />"
+                },
+                {
+                  "ID": "c2b8db12-5b8e-5f84-a44d-5f017ba52d66",
+                  "Hint": "secondaryLink",
+                  "Value": ""
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "29199a7e-d8ca-5980-9c4d-dc975a784157",
+      "Parent": "4d4f1265-c492-5d52-a600-5e755a6db1ca",
+      "Template": "a87a00b1-e6db-45ab-8b54-636fec3b5523",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Related insurance guides/Cards",
+      "SharedFields": [],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "25bed78c-4957-4165-998a-ca1b52f67497",
+                  "Hint": "__Created",
+                  "Value": "20261112T000000Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "f7dc8624-b8e4-5b21-a8d5-362925709b0b",
+      "Parent": "29199a7e-d8ca-5980-9c4d-dc975a784157",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Related insurance guides/Cards/01 When to buy homeowners insurance",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+                  "Hint": "heading",
+                  "Value": "When to buy homeowners insurance"
+                },
+                {
+                  "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+                  "Hint": "body",
+                  "Value": ""
+                },
+                {
+                  "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+                  "Hint": "value",
+                  "Value": ""
+                },
+                {
+                  "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+                  "Hint": "image",
+                  "Value": "<image mediaid=\"{AB3FDDB3-5F99-4603-AAE3-0323645C091C}\" alt=\"Front door on a white house with a wraparound porch\" />"
+                },
+                {
+                  "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+                  "Hint": "actionLink",
+                  "Value": "<link text=\"When to buy homeowners insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/insurance-resources/property/when-to-buy-homeowners-insurance\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "6d826f09-0a34-5555-96d4-5bfbb9a4c2f1",
+      "Parent": "29199a7e-d8ca-5980-9c4d-dc975a784157",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Related insurance guides/Cards/02 13 ways to lower your car insurance rate",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+                  "Hint": "heading",
+                  "Value": "13 ways to lower your car insurance rate"
+                },
+                {
+                  "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+                  "Hint": "body",
+                  "Value": ""
+                },
+                {
+                  "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+                  "Hint": "value",
+                  "Value": ""
+                },
+                {
+                  "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+                  "Hint": "image",
+                  "Value": "<image mediaid=\"{26563256-DDAE-4ECC-A470-7DF148DA2B37}\" alt=\"The front ends of cars in a line\" />"
+                },
+                {
+                  "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+                  "Hint": "actionLink",
+                  "Value": "<link text=\"13 ways to lower your car insurance rate\" linktype=\"external\" url=\"https://www.libertymutual.com/insurance-resources/auto/how-to-lower-your-car-insurance-rate\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4a828fb9-98be-5403-acd0-0719d52ffa1d",
+      "Parent": "29199a7e-d8ca-5980-9c4d-dc975a784157",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Related insurance guides/Cards/03 What isnt covered by home insurance",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+                  "Hint": "heading",
+                  "Value": "What isn't covered by home insurance"
+                },
+                {
+                  "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+                  "Hint": "body",
+                  "Value": ""
+                },
+                {
+                  "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+                  "Hint": "value",
+                  "Value": ""
+                },
+                {
+                  "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+                  "Hint": "image",
+                  "Value": "<image mediaid=\"{B724313B-5A9A-4D12-BAEE-9F83FDCD4B90}\" alt=\"Kids playing on a trampoline\" />"
+                },
+                {
+                  "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+                  "Hint": "actionLink",
+                  "Value": "<link text=\"What isn&#x27;t covered by home insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/insurance-resources/property/what-is-not-covered-by-homeowners-insurance\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "c7a7e29a-9540-5010-86b8-a0d3db3aecb8",
+      "Parent": "29199a7e-d8ca-5980-9c4d-dc975a784157",
+      "Template": "824a2dde-d100-591c-a91b-1d9edb4f925e",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Related insurance guides/Cards/04 How to switch car insurance companies",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "2e0042be-6693-536c-90cb-412fd6b7e104",
+                  "Hint": "heading",
+                  "Value": "How to switch car insurance companies"
+                },
+                {
+                  "ID": "4fe5c833-fa49-52d9-86f0-3afc561b9165",
+                  "Hint": "body",
+                  "Value": ""
+                },
+                {
+                  "ID": "818b1b49-589e-5b3c-87ea-f8dc62e674e3",
+                  "Hint": "value",
+                  "Value": ""
+                },
+                {
+                  "ID": "d94b0c27-d2a9-5a26-87c4-f4ab54db55ab",
+                  "Hint": "image",
+                  "Value": "<image mediaid=\"{95011662-FB27-4F72-842A-6C31FC2A17AC}\" alt=\"Two people laughing after working on a car\" />"
+                },
+                {
+                  "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
+                  "Hint": "actionLink",
+                  "Value": "<link text=\"How to switch car insurance companies\" linktype=\"external\" url=\"https://www.libertymutual.com/insurance-resources/auto/how-to-switch-car-insurance-companies\" />"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "4d4f1265-c492-5d52-a600-5e755a6db1ca",
+      "Parent": "b925038f-1cd9-55a8-ac97-753ef2873186",
+      "Template": "fc07715c-5b17-53a5-89ce-1b08d6b2a816",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/Related insurance guides",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "265c0d23-68cd-5fa3-ae77-cddc4fd25ab3",
+                  "Hint": "heading",
+                  "Value": "<h2>Learn more about auto and homeowners insurance</h2>"
+                },
+                {
+                  "ID": "9a7aa587-fb2b-5828-9471-4013c68c7422",
+                  "Hint": "introduction",
+                  "Value": ""
+                },
+                {
+                  "ID": "a7dae70d-8577-536a-bb6f-a63b64fdbe0b",
+                  "Hint": "items",
+                  "Value": "{F7DC8624-B8E4-5B21-A8D5-362925709B0B}|{6D826F09-0A34-5555-96D4-5BFBB9A4C2F1}|{4A828FB9-98BE-5403-ACD0-0719D52FFA1D}|{C7A7E29A-9540-5010-86B8-A0D3DB3AECB8}"
+                },
+                {
+                  "ID": "3f9c6aaf-39c9-5ebd-950c-4cf2e513c838",
+                  "Hint": "actionLink",
+                  "Value": ""
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": "fe630034-7f07-5ec7-b72d-a86caa83c611",
+      "Parent": "b925038f-1cd9-55a8-ac97-753ef2873186",
+      "Template": "8fb0a60a-31d7-5009-abca-636a6a3f40b5",
+      "Path": "/sitecore/content/LibertyMutual/liberty-mutual-public-site/Home/bundling/Data/More coverage information",
+      "SharedFields": [
+        {
+          "ID": "a4f985d9-98b3-4b52-aaaf-4344f6e747c6",
+          "Hint": "__Workflow",
+          "Value": "{1BB54766-6A38-5C47-B0EE-C57570679D14}"
+        }
+      ],
+      "Languages": [
+        {
+          "Language": "en",
+          "Versions": [
+            {
+              "Version": 1,
+              "Fields": [
+                {
+                  "ID": "3f27b5a0-0044-5085-b90f-a55499fc260a",
+                  "Hint": "heading",
+                  "Value": "More about insurance coverage"
+                },
+                {
+                  "ID": "3abbd930-ac1b-5420-9c68-9db3df0aef7e",
+                  "Hint": "body",
+                  "Value": "<p><a href=\"https://www.libertymutual.com/vehicle/auto-insurance/coverage\">Auto coverage</a><a href=\"https://www.libertymutual.com/vehicle/auto-insurance/calculator\">Auto coverage calculator</a><a href=\"https://www.libertymutual.com/property/homeowners-insurance/home-insurance-calculator\">Home coverage calculator</a></p>"
+                },
+                {
+                  "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
+                  "Hint": "__Workflow state",
+                  "Value": "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
-  "resourcePageCount": 10
+  "resourcePageCount": 9
 }
