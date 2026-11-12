@@ -169,23 +169,33 @@ function SearchExperience({
     !needsSubject &&
     (isLoading || status === "idle" || awaitingCurrentResults);
   const mapping = configuration.fieldsMapping;
-  const supported = supportedQuestionResults(query, results, (document) =>
-    [
-      mapping.title,
-      mapping.description,
-      "question",
-      "body",
-      mapping.product,
-      mapping.state,
-    ]
-      .map((name) => text(document, name))
-      .join("\n"),
+  const supported = supportedQuestionResults(
+    query,
+    results,
+    (document) =>
+      [
+        mapping.title,
+        mapping.description,
+        "question",
+        "body",
+        mapping.product,
+        mapping.state,
+      ]
+        .map((name) => text(document, name))
+        .join("\n"),
+    (document) => text(document, mapping.state),
   );
-  const allCards = supported.flatMap((document) => {
+  const browsing = !query.trim();
+  const browseCandidates = browsing
+    ? supported.filter((document) => !text(document, "question").trim())
+    : supported;
+  const allCards = browseCandidates.flatMap((document) => {
     const href = publicHref(text(document, mapping.link));
     const title = text(document, mapping.title);
     return href && title ? [{ document, href, title }] : [];
   });
+  if (browsing)
+    allCards.sort((left, right) => left.title.localeCompare(right.title, "en"));
   const total = allCards.length;
   const totalPages = Math.ceil(total / 6);
   const resultCards = allCards.slice((currentPage - 1) * 6, currentPage * 6);

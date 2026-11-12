@@ -118,8 +118,8 @@ export const generateMetadata = async ({ params }: PageProps) => {
       fields?.Title?.value?.toString() ||
       undefined,
     description:
-      fields?.ogDescription?.value?.toString() ||
       fields?.metadataDescription?.value?.toString() ||
+      fields?.ogDescription?.value?.toString() ||
       undefined,
     keywords,
     ...(canonicalUrl && {

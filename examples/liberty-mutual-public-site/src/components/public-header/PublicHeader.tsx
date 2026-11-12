@@ -71,21 +71,37 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
     setSearchOpen(false);
     if (restoreFocus) triggerRef.current?.focus({ preventScroll: true });
   }, []);
+  const closeMenus = useCallback((restoreFocus = false) => {
+    const openMenus = Array.from(
+      headerRef.current?.querySelectorAll<HTMLDetailsElement>(
+        "details[open]",
+      ) || [],
+    );
+    const trigger = openMenus[0]?.querySelector<HTMLElement>("summary");
+    openMenus.forEach((menu) => {
+      menu.open = false;
+    });
+    if (restoreFocus) trigger?.focus({ preventScroll: true });
+  }, []);
 
   useEffect(() => {
-    if (!searchOpen) return;
-    inputRef.current?.focus({ preventScroll: true });
+    if (searchOpen) inputRef.current?.focus({ preventScroll: true });
     const dismissOutside = (event: PointerEvent) => {
       if (
         event.target instanceof Node &&
         !headerRef.current?.contains(event.target)
-      )
+      ) {
         closeSearch();
+        closeMenus();
+      }
     };
     const dismissWithEscape = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
+      if (!searchOpen && !headerRef.current?.querySelector("details[open]"))
+        return;
       event.preventDefault();
-      closeSearch(true);
+      if (searchOpen) closeSearch(true);
+      else closeMenus(true);
     };
     document.addEventListener("pointerdown", dismissOutside);
     document.addEventListener("keydown", dismissWithEscape);
@@ -93,17 +109,15 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
       document.removeEventListener("pointerdown", dismissOutside);
       document.removeEventListener("keydown", dismissWithEscape);
     };
-  }, [searchOpen, closeSearch]);
+  }, [searchOpen, closeSearch, closeMenus]);
 
   const toggleSearch = () => {
-    headerRef.current
-      ?.querySelectorAll<HTMLDetailsElement>("details[open]")
-      .forEach((menu) => {
-        menu.open = false;
-      });
+    closeMenus();
     setSearchOpen((open) => !open);
   };
   const dismissForNavigation = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.target instanceof Element && event.target.closest("a"))
+      closeMenus();
     if (
       searchOpen &&
       event.target instanceof Element &&
@@ -143,7 +157,11 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
         </Link>
         <nav className="public-header__nav" aria-label="Main navigation">
           {groups.map((group) => (
-            <details className="public-header__dropdown" key={group.id}>
+            <details
+              className="public-header__dropdown"
+              name={`${searchId}-navigation`}
+              key={group.id}
+            >
               <summary>
                 <Text tag="span" field={group.fields.label} />
               </summary>
@@ -198,9 +216,24 @@ function PublicHeader({ fields, params }: PublicHeaderProps) {
           </summary>
           <nav aria-label="Mobile navigation">
             {groups.map((group) => (
-              <details key={group.id}>
+              <details name={`${searchId}-mobile-navigation`} key={group.id}>
                 <summary>
                   <Text tag="span" field={group.fields.label} />
+                  <svg
+                    aria-hidden="true"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="m6 9 6 6 6-6"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </summary>
                 <ul>
                   {(Array.isArray(group.fields.links)
