@@ -8,9 +8,11 @@ The initial collections live beneath the Agent Portal's **Data → Agency priori
 
 | Collection | Intended native audience variant | Initial emphasis |
 | --- | --- | --- |
-| For all agencies | Neutral default | Home/auto conversations, followed by small-business growth |
+| For all agencies | Neutral default | Home/auto conversations, small-business growth, and state-neutral team support |
 | Agency growth priorities | Principal, including Avery | Small-business growth, Texas guidance, and home/auto conversations |
 | Producer priorities | Producer, including Daniel | Home/auto conversations, Illinois guidance, and small-business growth |
+
+The recommendation library contains five available cards. The default selects **Home and auto conversations → Small business growth → Team support**, in that order. Its third card links to **Support** and is not state-specific. The principal and producer collections retain their own three-card orders. Available picker choices are separate from the selected chips that determine the rendered cards.
 
 The collections share their recommendation items deliberately. No username, fixture, or browser query selects a collection in the visitor component. Native personalization on the Home component selects a datasource. Existing licensing and authorization remain independent of this marketing emphasis. The seeded state-specific links are limited to Texas and Illinois, for which both selected agents are licensed.
 

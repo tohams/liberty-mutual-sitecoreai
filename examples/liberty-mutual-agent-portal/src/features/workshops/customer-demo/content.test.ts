@@ -1059,7 +1059,7 @@ test("the same Home draft uses native content variants before approval and publi
     assert.doesNotMatch(
       source,
       /Connect home and auto conversations → Build a stronger small-business practice/,
-      "The real producer experience has three cards; the neutral fallback has two",
+      "The producer experience must preserve its three authored cards and order",
     );
   }
 });

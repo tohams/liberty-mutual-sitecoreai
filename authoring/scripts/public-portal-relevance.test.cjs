@@ -43,4 +43,7 @@ test('audience collections share real ordered card references and separate state
  assert(refs('producer').includes(m.recommendations['Illinois workers compensation']));
  assert(!refs('neutral').includes(m.recommendations['Texas workers compensation']));
  assert(!refs('neutral').includes(m.recommendations['Illinois workers compensation']));
+ assert.deepEqual(refs('neutral'),[m.recommendations['Home and auto conversations'],m.recommendations['Small business growth'],m.recommendations['Team support']]);
+ assert.notDeepEqual(refs('neutral'),refs('principal'));
+ assert.notDeepEqual(refs('neutral'),refs('producer'));
 });
