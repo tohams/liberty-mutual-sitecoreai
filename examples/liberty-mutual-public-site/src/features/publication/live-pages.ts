@@ -123,7 +123,7 @@ function plain(value: string): string {
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">")
     .replace(/&quot;/gi, '"')
-    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&#x27;|&#39;|&apos;/gi, "'")
     .replace(/\s+/g, " ")
     .trim();
 }

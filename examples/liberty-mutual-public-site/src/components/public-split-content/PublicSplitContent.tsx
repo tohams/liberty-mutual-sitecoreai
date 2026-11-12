@@ -1,4 +1,5 @@
 import { Image, Link, RichText } from "@sitecore-content-sdk/nextjs";
+import InPageLink from "src/features/navigation/InPageLink";
 import type { PublicSplitContentProps } from "./public-split-content.props";
 
 function Split(
@@ -103,7 +104,7 @@ export const Benefits = ({
           <Image field={fields.image} loading="lazy" />
         </div>
         <div className="public-bundle-benefits__action">
-          <Link className="public-text-link" field={fields.primaryLink} />
+          <InPageLink className="public-text-link" field={fields.primaryLink} />
         </div>
       </div>
     </section>

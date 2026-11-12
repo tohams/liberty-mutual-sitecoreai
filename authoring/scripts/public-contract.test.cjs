@@ -24,6 +24,18 @@ test('Home uses the shared Promotion while Bundling retains only its genuine sou
  const products=record(SITE+'/Home/bundling').fields.product;
  assert.equal(products,'{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}|{005D71B8-6FD7-4E0A-842A-338DF40E1F47}|{D81D3AE8-243B-4F32-B70D-33796448DCA0}');
 });
+test('Bundling jump links reference the native page instead of an empty external URL',()=>{
+ const page=record(SITE+'/Home/bundling');
+ const links=model.records.filter(r=>r.path.startsWith(SITE+'/Home/bundling/Data/Bundle introduction/Cards/')&&r.fields.actionLink).map(r=>r.fields.actionLink);
+ links.push(record(SITE+'/Home/bundling/Data/Why bundle').fields.primaryLink);
+ assert.equal(links.length,4);
+ for(const link of links){
+  assert(link.includes('linktype="internal"'));
+  assert(link.includes('id="{'+page.id.toUpperCase()+'}"'));
+  assert(/anchor="[a-z-]+"/.test(link));
+  assert(!link.includes('url=""'));
+ }
+});
 test('one full copyright notice is governed in the shared footer without replacing coverage terms',()=>{
  const copyright=record(SITE+'/Data/Disclosures/Copyright notice');
  assert.equal(copyright.id,'9dc572ee-3d67-5909-922f-6482def1cdb0');

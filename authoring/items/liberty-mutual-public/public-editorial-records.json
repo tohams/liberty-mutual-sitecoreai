@@ -3932,7 +3932,7 @@
                 {
                   "ID": "0642f561-976a-5280-ad0b-49591bb6b97f",
                   "Hint": "heading",
-                  "Value": "<h2>How much can you save<br>when you bundle auto and home insurance?</h2>"
+                  "Value": "<h2><strong>How much can you save</strong><br/> when you bundle auto and home insurance?</h2>"
                 },
                 {
                   "ID": "2bdf3765-4d4d-54af-879e-96a83b50893e",
@@ -4298,7 +4298,7 @@
                 {
                   "ID": "6f2bb5ea-9611-5298-a6d2-49c85eee3ce8",
                   "Hint": "primaryLink",
-                  "Value": "<link text=\"Bundle auto and home insurance to see how much you could save\" linktype=\"external\" url=\"\" anchor=\"bundling-quote\" />"
+                  "Value": "<link text=\"Bundle auto and home insurance to see how much you could save\" linktype=\"internal\" anchor=\"bundling-quote\" id=\"{7D7352F2-0C45-5093-B9E6-FBEAE4E08953}\" />"
                 },
                 {
                   "ID": "c2b8db12-5b8e-5f84-a44d-5f017ba52d66",
@@ -10547,7 +10547,7 @@
                 {
                   "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
                   "Hint": "actionLink",
-                  "Value": "<link text=\"What can I bundle\" linktype=\"external\" url=\"\" anchor=\"types-for-bundle\" />"
+                  "Value": "<link text=\"What can I bundle\" linktype=\"internal\" anchor=\"types-for-bundle\" id=\"{7D7352F2-0C45-5093-B9E6-FBEAE4E08953}\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -10602,7 +10602,7 @@
                 {
                   "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
                   "Hint": "actionLink",
-                  "Value": "<link text=\"How much can I save\" linktype=\"external\" url=\"\" anchor=\"how-much-can-i-save\" />"
+                  "Value": "<link text=\"How much can I save\" linktype=\"internal\" anchor=\"how-much-can-i-save\" id=\"{7D7352F2-0C45-5093-B9E6-FBEAE4E08953}\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
@@ -10657,7 +10657,7 @@
                 {
                   "ID": "989b5d38-8109-53f9-a130-c2fd63873c2d",
                   "Hint": "actionLink",
-                  "Value": "<link text=\"Why choose Liberty Mutual\" linktype=\"external\" url=\"\" anchor=\"why-choose-liberty\" />"
+                  "Value": "<link text=\"Why choose Liberty Mutual\" linktype=\"internal\" anchor=\"why-choose-liberty\" id=\"{7D7352F2-0C45-5093-B9E6-FBEAE4E08953}\" />"
                 },
                 {
                   "ID": "3e431de1-525e-47a3-b6b0-1ccbec3a8c98",
