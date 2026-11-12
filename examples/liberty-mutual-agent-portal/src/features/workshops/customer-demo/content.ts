@@ -1199,25 +1199,25 @@ export const customerDemoChapters: DemoChapter[] = [
         scenario:
           "Agents with different roles, licensed states, and agency context need priorities relevant to their business.",
         objective:
-          "Start with Daniel’s producer priorities, contrast Avery’s principal priorities, then test Avery’s profile and inspect the marketer-editable business conditions in the same native rule Builder.",
+          "Start with Daniel’s producer priorities, contrast Avery’s principal priorities, then test Avery’s profile and inspect the readable Agent priority classification behind the named result.",
         stopWhen:
-          "Daniel and Avery’s different priorities are visible, Avery matches **Rule 1** for **Agency growth opportunity** using her own Client ID, and the native role, licensed-state, and production controls are shown.",
+          "Daniel and Avery’s different priorities are visible, Avery matches **Rule 1** for **Agent priority → Agency growth** using her own Client ID, and the central business classification is shown.",
         presenterPoints: [
           "**Say:** “Independent agents have a choice of carriers. Guidance that reflects their role, licensed states, and business priorities helps them find a useful next conversation with Liberty Mutual and makes the portal easier to use.”",
           "Compare the ordered recommendations and licensed states: Daniel sees household guidance first; Avery sees agency growth first.",
-          "The role and licensed-state dropdowns, and the percentage field, expose business settings that marketers can adjust without an application code release.",
+          "One **Agent priority** value keeps the business classification in one place. The component maps **Agency growth** or **Producer priorities** to the corresponding content; the original content covers **Standard**.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 2, afterLine: 3 },
-          { point: 3, action: 5, afterLine: 2 },
+          { point: 3, action: 5, afterLine: 3 },
         ],
         actionPurposes: [
           "Show Daniel’s producer baseline for comparison",
           "Show Avery’s agency growth priorities for comparison",
           "Identify Avery’s native profile for an exact test",
           "Prove Avery matches the agency growth rule",
-          "Show the marketer-editable business conditions behind the result",
+          "Show the central Agent priority business rules",
         ],
         presenterActions: [
           [
@@ -1238,36 +1238,37 @@ export const customerDemoChapters: DemoChapter[] = [
             "Switch to **Page Builder**. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**, keep **Default editing host**, then choose **Layers → Agency priorities**.",
             "Choose **Edit personalization rules → Liberty Mutual - Agency product priorities**.",
             "In the Builder, choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**.",
-            "Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm the green first row and **Rule 1 matched**. Keep the Builder open for its business controls.",
+            "Wait for **Testing as: Avery Brooks - 01**; select **Test**, and confirm the green first row and **Rule 1 matched**. Point to the single **Agent priority** column: its first row is **Is equal to Agency growth**, and its second row is **Is equal to Producer priorities**. Select **Cancel** to return to **Page Builder**.",
           ],
           [
-            "Stay in the same **Liberty Mutual - Agency product priorities** Builder. In the **Agency growth opportunity** column heading, select **⋯ → Edit parameters**.",
-            "Show the **Agency principal** role dropdown, **Texas** licensed-state dropdown, and the **percentage field (20)**. The readable condition states **agency small-business share below 20%**. Marketers select these business values through native controls.",
-            "Select **Cancel** in **Edit parameters**. In the **Producer recommendation eligibility** column heading, select **⋯ → Edit parameters**; show the **Producer** role dropdown, **Illinois** licensed-state dropdown, and **premium amount (0 USD)**. Its readable condition also requires small-business specialization and premium above that amount.",
-            "Leave the verified values unchanged. Select **Cancel** in **Edit parameters**, then **Cancel** in the **Builder** to return to **Page Builder**.",
+            "Switch to the **SitecoreAI** tab used for Profiles. Choose **Optimization → Custom values**, and open **Agent priority**.",
+            "Find the **Agency growth** business section. Show the readable criteria: **principal**, **licensed in Texas**, and **agency small-business share below 20%**. Avery’s share is about **14.46%**, so she receives this result.",
+            "Find the **Producer priorities** business section. Show **producer**, **licensed in Illinois**, **small-business specialization**, and **positive individual small-business production**. These criteria explain Daniel’s result.",
+            "Explain that this saved JavaScript classifies the trusted profile; the component uses its named result to choose content. Content authors still edit the message and card order in **Page Builder**.",
+            "Leave the saved **Agent priority** value unchanged, and return to the **Page Builder** tab.",
           ],
         ],
         presenterResult:
-          "Daniel’s producer-first baseline contrasts with Avery’s principal experience. Avery’s own native profile test shows **Rule 1 matched**, and readable native fields show the role, licensing, and production criteria behind both experiences.",
+          "Daniel’s producer-first baseline contrasts with Avery’s principal experience. Avery’s native profile test shows **Rule 1 matched** for **Agency growth**. The **Agent priority** custom value explains the shared business classification, and the component maps each named result to its content.",
         actions: [
           `Switch to the **Daniel portal** tab, and open [**portal home**](${PORTAL}/). Confirm **daniel.01 → Daniel Ortiz → Prairie Oak Insurance**. Read his three priorities in order: **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Open **Your profile**; show the producer role and **Licensed states: Illinois and Texas**, then choose **Close dialog**.`,
           `Switch to the separate **Avery portal** tab, and open [**portal home**](${PORTAL}/). Confirm **avery.01 → Avery Brooks → Cedar Ridge Insurance**. Contrast her principal priorities: **Build a stronger small-business practice → Support workers’ compensation conversations in Texas → Connect home and auto conversations**. Open **Your profile**; show the principal role and **Licensed states: Texas, Illinois, and Florida**, then choose **Close dialog**.`,
           "In the **SitecoreAI** tab, choose **Optimization → Profiles**. Under **Most recent users**, open the most recent matching **Avery Brooks - 01** row from the portal login you just showed. Identical names farther down are historical profiles. Choose **Toggle menu → Inspect → JSON view**. Copy the first UUID in **clientIds**, without quotation marks, then close **Inspect profile**. This **Client ID** identifies Avery for the native rule test. Keep the separate **Page Builder** tab open.",
-          `Switch to **Page Builder**, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities**. Choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**, select **Test**, and confirm the green first row and **Rule 1 matched**. Keep the Builder open for its business controls.`,
-          "Stay in the same **Liberty Mutual - Agency product priorities** Builder. In the **Agency growth opportunity** column heading, select **⋯ → Edit parameters**. Show the **Agency principal** role dropdown, **Texas** licensed-state dropdown, and the **percentage field (20)**. The readable condition states **agency small-business share below 20%**. Marketers select these business values through native controls. Select **Cancel** in **Edit parameters**. In the **Producer recommendation eligibility** column heading, select **⋯ → Edit parameters**, and show the **Producer** role dropdown, **Illinois** licensed-state dropdown, and **premium amount (0 USD)**. Its readable condition also requires small-business specialization and premium above that amount. Leave the verified values unchanged. Select **Cancel** in **Edit parameters**, then **Cancel** in the **Builder** to return to **Page Builder**.",
+          `Switch to **Page Builder**, and open [**Agent Portal Home**](${portalEditor}); keep **Default editing host**, then choose **Layers → Agency priorities → Edit personalization rules → Liberty Mutual - Agency product priorities**. Choose **Select profile → Load profile → Client ID**; paste Avery’s copied **Client ID**, then press **Enter**. Wait for **Testing as: Avery Brooks - 01**, select **Test**, and confirm the green first row and **Rule 1 matched**. Point to the single **Agent priority** column: its first row is **Is equal to Agency growth**, and its second row is **Is equal to Producer priorities**. Select **Cancel** to return to **Page Builder**.`,
+          "Switch to the **SitecoreAI** tab used for Profiles. Choose **Optimization → Custom values**, and open **Agent priority**. Find the **Agency growth** business section: **principal**, **licensed in Texas**, and **agency small-business share below 20%**. Avery’s share is about **14.46%**, so she receives this result. Find **Producer priorities**: **producer**, **licensed in Illinois**, **small-business specialization**, and **positive individual small-business production** explain Daniel’s result. Explain that the saved JavaScript classifies the trusted profile; the component uses its named result to choose content. Content authors edit the message and card order in **Page Builder**. Leave the saved **Agent priority** value unchanged, and return to **Page Builder**.",
         ],
         expected: [
-          "Daniel’s producer priorities and Avery’s principal priorities differ. Avery’s native profile test verifies her qualification; native condition fields expose the role, licensed-state, and production criteria marketers can manage.",
+          "Daniel’s producer priorities and Avery’s principal priorities differ. Avery’s native profile test verifies her qualification. One central **Agent priority** custom value returns a named business result for the component to use.",
         ],
         talkTrack: [
-          "Daniel’s producer priorities lead with household conversations. Avery’s principal priorities lead with agency growth. We test Avery’s actual profile, then show the business controls behind that result. A marketer can choose a role and licensed state, set a production threshold, and associate the right content. Liberty Mutual can keep Ping for sign-in and supply trusted agent context from its existing systems.",
+          "Daniel’s producer priorities lead with household conversations. Avery’s principal priorities lead with agency growth. We test Avery’s actual profile, then show the readable business classification behind the result. The central Agent priority custom value returns a meaningful name; Page Builder associates that result with content. Liberty Mutual can keep Ping for sign-in and supply trusted agent context from its existing systems.",
           customerDemoAiContext.portal.talkTrack,
         ],
         controls: [
-          "The native decision table uses reusable **Agency growth opportunity** and **Producer recommendation eligibility** conditions. Marketers configure role, licensed state, and business thresholds through their native fields. The current principal rule uses **Agency principal**, **Texas**, and small-business share below **20%**; the producer rule uses **Producer**, **Illinois**, small-commercial specialization, and positive agent production. Unmatched profiles receive the original **For all agencies** content.",
+          "The native decision table has one **Agent priority** custom-value input. **Is equal to Agency growth** selects **Agency growth priorities**; **Is equal to Producer priorities** selects **Producer priorities**. The readable JavaScript in **Optimization → Custom values → Agent priority** defines the role, licensing, and production criteria. **Standard** and unmatched results receive the original **For all agencies** content.",
           "The rule requires an identified **liberty-mutual-agent** profile, **USD** production currency, and **agency** production scope. Agency small-commercial share is small-commercial production divided by personal plus small-commercial production. The application separately enforces licensed-state eligibility alongside the content personalization.",
           "The priority Builder loads a visitor through **Load profile → Client ID**. Find that UUID in the native profile’s **Inspect → JSON view → clientIds**; the **Profile ID** in the browser URL is a different identifier. Inspect Avery’s current profile in **A1**, and use her **Client ID** throughout the native test.",
-          "These read-only checks inspect the existing configuration and do not publish or change a rule. Reusable condition logic reads the trusted profile and calculates production share; marketers control the supported values and content through the native interface.",
+          "These read-only checks inspect the existing configuration and do not publish or change a rule. The custom value validates the trusted profile and calculates production share before returning **Agency growth**, **Producer priorities**, or **Standard**. Eligibility changes follow the custom value’s Draft, test, and publication process; authors manage each result’s message and card order in **Page Builder**.",
         ],
         links: [
           {
@@ -1299,26 +1300,58 @@ export const customerDemoChapters: DemoChapter[] = [
           },
           {
             file: "demo-state-business-rule.png",
-            afterAction: 5,
-            title: "Show marketer-editable business conditions",
-            alt: "Agency growth opportunity’s Edit parameters popup shows the Agency principal role dropdown, Texas licensed-state dropdown, and a percentage field set to 20.",
+            afterAction: 4,
+            title: "Read the named Agent priority results",
+            alt: "The single Agent priority decision-table column has Is equal to Agency growth and Is equal to Producer priorities rows; Avery’s Agency growth row is green after the native test.",
             caption:
-              "In **Agency growth opportunity → ⋯ → Edit parameters**, show the **Agency principal** and **Texas** dropdowns, and the **percentage field (20)**. Keep the verified values unchanged during this inspection.",
+              "In **Liberty Mutual - Agency product priorities**, the single **Agent priority** column uses two distinct results: **Is equal to Agency growth** and **Is equal to Producer priorities**. Avery’s first row is green after **Test**.",
             crop: {
-              x: 110,
-              y: 270,
-              width: 1030,
-              height: 325,
-              sourceWidth: 1280,
-              sourceHeight: 720,
+              x: 125,
+              y: 285,
+              width: 725,
+              height: 210,
+              sourceWidth: 1440,
+              sourceHeight: 900,
             },
             annotations: [
               {
-                x: 10.49,
-                y: 16.31,
-                width: 33.5,
-                height: 76.92,
-                label: "Use native role, licensing, and percentage controls.",
+                x: 2.76,
+                y: 7.14,
+                width: 56.55,
+                height: 85.71,
+                label: "Compare the two named priority results.",
+              },
+            ],
+          },
+          {
+            file: "demo-agent-priority-custom-value.png",
+            afterAction: 5,
+            title: "Read the central Agent priority business rules",
+            alt: "Published Agent priority custom value with the 20% growth threshold and readable Agency growth and Producer priorities business sections.",
+            caption:
+              "Open **Optimization → Custom values → Agent priority**. **growthShareLimitPercent = 20** sets the agency-growth threshold. The **Agency growth** and **Producer priorities** sections return the named results used by the component. Inspect this published value without changing it.",
+            crop: {
+              x: 25,
+              y: 65,
+              width: 760,
+              height: 645,
+              sourceWidth: 813,
+              sourceHeight: 987,
+            },
+            annotations: [
+              {
+                x: 7.24,
+                y: 11.16,
+                width: 39.47,
+                height: 4.96,
+                label: "The agency-growth threshold is **20%**.",
+              },
+              {
+                x: 6.58,
+                y: 31.32,
+                width: 92.11,
+                height: 59.69,
+                label: "Read the two named business rules.",
               },
             ],
           },
@@ -1535,7 +1568,7 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "Reuse the **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Agent Portal → Page builder**. Choose **Site switcher → Agent Portal → Editor → Pages → Home**. Confirm **English** and **Default editing host**.",
             "Choose **Layers → Agency priorities**, selecting the component, then open its right-hand **Content** tab.",
-            "Open the component’s personalization dropdown, initially **Original**, and choose **1 Agency growth opportunity is true**.",
+            "Open the component’s personalization dropdown, initially **Original**, and choose **1 Agent priority is equal to Agency growth**.",
             "Confirm **Content item → Agency growth priorities**. Its **Ordered recommendations** field is in this same panel.",
           ],
           [
@@ -1555,7 +1588,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The recorded **Saved priority version** is a saved Texas-first **Draft**; the original approved version and live order remain unchanged.",
         actions: [
-          "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Choose **Layers → Agency priorities**, selecting the component, then open the right-hand **Content** tab. In its personalization dropdown, initially **Original**, choose **1 Agency growth opportunity is true**. Confirm **Content item → Agency growth priorities**; its **Ordered recommendations** field appears in this panel.",
+          "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Choose **Layers → Agency priorities**, selecting the component, then open the right-hand **Content** tab. In its personalization dropdown, initially **Original**, choose **1 Agent priority is equal to Agency growth**. Confirm **Content item → Agency growth priorities**; its **Ordered recommendations** field appears in this panel.",
           "In the **Agency growth priorities** content-item card, open its version selector, explicitly select **Priority baseline version** recorded under **Before presenting**, and wait for its fields to finish loading. Confirm that selected original version number and its order: **Small business growth → Texas workers compensation → Home and auto conversations**. Choose **Create version**, name it **Texas guidance priority**, and click **Create**. Reopen the version selector, explicitly select the new **Texas guidance priority** **Draft** row by its new version number, and wait for its fields to finish loading. Confirm the selected version number before changing **Ordered recommendations**.",
           "Find **Ordered recommendations**. For this reorder, click **Remove all items** to clear only this draft’s selection. Use the far-right **down-chevron** to open the available choices, then click the **card names** **Texas workers compensation**, **Small business growth**, and **Home and auto conversations**, in that order. Selected chips determine the cards on the canvas. Click the item heading to close the picker, and wait for **Saved**. Record the version number currently shown as **Saved priority version**. Use that same saved version number for submission, approval, and publication. With **Saved priority version** selected, confirm **Texas workers compensation → Small business growth → Home and auto conversations**, that the version remains **Draft**, and that the canvas shows Texas guidance first. Leave it unpublished for the following preview and review steps.",
         ],
@@ -1666,7 +1699,7 @@ export const customerDemoChapters: DemoChapter[] = [
             "Close the preview tab, and return to **Page Builder**. Both previews used named content variants, without an agent login.",
           ],
           [
-            "Close **Personalization Preview**, then in **Page Builder**, choose **Layers → Agency priorities → Content**. In the component’s personalization dropdown, choose **1 Agency growth opportunity is true**.",
+            "Close **Personalization Preview**, then in **Page Builder**, choose **Layers → Agency priorities → Content**. In the component’s personalization dropdown, choose **1 Agent priority is equal to Agency growth**.",
             "Confirm **Content item → Agency growth priorities**, then choose its **••• (Data source options) → Open in Content mode**. Select **Saved priority version**, wait for loading, and confirm the **Agency growth priorities** heading, **Draft**, and Texas-first **Ordered recommendations**.",
             "Choose **Actions → Submit**; paste **Priority submission comment**, then select **Submit**.",
             "Confirm **Awaiting approval**.",
@@ -1689,7 +1722,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, and confirm **English** and **Default editing host**. Open **Apps → Personalization Preview**, and keep **Home** selected in **Page Builder**. Leave **Saved priority version** unpublished.",
           "Under **Agency priorities**, choose **Agency growth priorities**, and leave **Guidance → Default**. Select **Preview page**; the preview opens directly in a new tab. On **Home**, find **Priorities for your agency**, and confirm the draft order **Support workers’ compensation conversations in Texas → Build a stronger small-business practice → Connect home and auto conversations**. Close the preview tab, and return to the same **Personalization Preview** panel in **Page Builder**.",
           "Under **Agency priorities**, choose **Producer priorities**, and keep **Guidance → Default**. Select **Preview page**; the preview opens directly in a new tab. On **Home**, confirm the producer’s unchanged order **Connect home and auto conversations → Support workers’ compensation conversations in Illinois → Build a stronger small-business practice**. Close the preview tab, and return to **Page Builder**. Neither preview requires an agent login or a human profile identifier.",
-          "Close **Personalization Preview**, then in **Page Builder**, choose **Layers → Agency priorities → Content**, and select **1 Agency growth opportunity is true** in the component’s personalization dropdown. Confirm **Content item → Agency growth priorities**, and choose its **••• (Data source options) → Open in Content mode**. Confirm the **Agency growth priorities** heading. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
+          "Close **Personalization Preview**, then in **Page Builder**, choose **Layers → Agency priorities → Content**, and select **1 Agent priority is equal to Agency growth** in the component’s personalization dropdown. Confirm **Content item → Agency growth priorities**, and choose its **••• (Data source options) → Open in Content mode**. Confirm the **Agency growth priorities** heading. Select **Saved priority version**, wait for its fields to load, and recheck **Draft** and the Texas-first order in **Ordered recommendations**. Choose **Actions → Submit**, enter **Prioritize Texas workers compensation guidance**, and click **Submit**. Confirm **Awaiting approval**.",
           "Stay on the same **Saved priority version** in **Page Builder**, inspect its submitted order, and choose **Actions → Approve**. Enter **Approved agency priority update**, click **Submit**, and confirm **Approved**.",
           "On the same **Saved priority version** in **Page Builder**, confirm **Approved** and its Texas-first order, and choose **Publish**. Keep **Item** and **Current language (English)** selected, leave **Subitems** unchecked, and click **Start publish**. After completion, in the **Avery portal** tab, select **My workspace** in the left navigation, and reload; confirm Texas guidance first. Repeat in **Daniel portal**, and confirm his household-first order remains unchanged.",
         ],

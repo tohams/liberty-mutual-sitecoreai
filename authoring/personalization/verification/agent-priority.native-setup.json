@@ -1,0 +1,201 @@
+{
+  "scope": "Agent Portal Home Agency priorities component",
+  "customValue": "Agent priority",
+  "returnType": "String",
+  "status": "Passed: native classification, decision-table tests, live delivery, draft previews, reviewed content publication, and content restoration verified",
+  "decisionTable": {
+    "name": "Liberty Mutual - Agency product priorities",
+    "input": "Agent priority",
+    "default": "Standard has no matching rule; retain the original For all agencies component",
+    "inputType": "Custom value",
+    "rules": [
+      {
+        "order": 1,
+        "comparator": "Is equal to",
+        "value": "Agency growth",
+        "content": "Agency growth priorities"
+      },
+      {
+        "order": 2,
+        "comparator": "Is equal to",
+        "value": "Producer priorities",
+        "content": "Producer priorities"
+      }
+    ],
+    "saved": true,
+    "rowIdsAndContentSourcesPreserved": true,
+    "actualProfileTests": [
+      {
+        "profile": "Avery",
+        "matchedRule": 1,
+        "row1": "Green match",
+        "row2": "Red nonmatch",
+        "profileContextEdited": false
+      },
+      {
+        "profile": "Daniel",
+        "matchedRule": 2,
+        "row1": "Red nonmatch",
+        "row2": "Green match",
+        "profileContextEdited": false
+      }
+    ]
+  },
+  "baseline": {
+    "growthShareLimitPercent": 20,
+    "agencyGrowth": "Principal, licensed in Texas, with valid agency small-business share strictly below 20%",
+    "producerPriorities": "Producer, licensed in Illinois, specializing in small business, with valid individual small-business written premium above zero"
+  },
+  "localChecks": {
+    "targetingBaseline": "Published reusable Boolean conditions at their original parameters",
+    "scope": "Synthetic local source execution only; not native acceptance",
+    "targetedChecks": 79,
+    "archivedProfileParity": 420,
+    "allPassed": true
+  },
+  "previewBoundary": "Personalization Preview renders selected native content variants. Native Custom Value and decision-table tests separately prove profile qualification.",
+  "recovery": "The earlier classification Custom Value source and reusable Boolean condition sources remain unchanged. Source files and application deployments do not configure native decisions.",
+  "nativeId": "1bcfee80-f8b5-413e-98c3-a886038d0e5b",
+  "nativeCustomValueStatus": "Published",
+  "nativeProfileTests": [
+    {
+      "profile": "Daniel",
+      "growthShareLimitPercent": 20,
+      "result": "Producer priorities",
+      "profileContextEdited": false
+    },
+    {
+      "profile": "Avery",
+      "growthShareLimitPercent": 20,
+      "result": "Agency growth",
+      "profileContextEdited": false
+    },
+    {
+      "profile": "Avery",
+      "growthShareLimitPercent": 10,
+      "result": "Standard",
+      "profileContextEdited": false,
+      "scope": "Temporary unsaved source test; baseline restored to 20 and published afterward"
+    }
+  ],
+  "customValueBaselineRestored": {
+    "growthShareLimitPercent": 20,
+    "published": true
+  },
+  "publishedSourceReadback": {
+    "matchesSavedSource": true,
+    "sha256": "34c1e08a2ebc7555d309bfdd71d3a9be62f232942051aa1bc28fad3d7f70db68",
+    "scope": "Exact installed Published expression, not an uninstalled formatting revision"
+  },
+  "friendlyName": "agent_priority",
+  "homeRulePublication": {
+    "item": "Home",
+    "language": "English",
+    "published": true
+  },
+  "liveDelivery": [
+    {
+      "profile": "Daniel",
+      "action": "Fresh sign-in after Home rule publication",
+      "recommendationOrder": [
+        "Household conversations",
+        "Illinois guidance",
+        "Small-business growth"
+      ]
+    },
+    {
+      "profile": "Avery",
+      "action": "Fresh sign-in after Home rule publication",
+      "recommendationOrder": [
+        "Small-business growth",
+        "Texas guidance",
+        "Household conversations"
+      ]
+    },
+    {
+      "profile": "Maya",
+      "action": "Fresh sign-in with Agent priority table active",
+      "result": "Standard",
+      "recommendationOrder": [
+        "Household conversations",
+        "Small-business growth",
+        "Team support"
+      ],
+      "intro": "Explore product conversations and resources that help your agency grow."
+    }
+  ],
+  "draftContentPreview": {
+    "agencyGrowthVersion": 36,
+    "stateDuringPreview": "Draft",
+    "savedThrough": "Page Builder",
+    "agencyGrowthOrder": [
+      "Texas guidance",
+      "Small-business growth",
+      "Household conversations"
+    ],
+    "producerOrder": [
+      "Household conversations",
+      "Illinois guidance",
+      "Small-business growth"
+    ],
+    "liveAveryDuringDraft": "Retained the original small-business-first published order",
+    "previewBoundary": "Previews render selected native content variants; qualification was independently verified in native profile tests and live sign-ins",
+    "initialTransientIssue": {
+      "observed": "The first preview read could not load native variant metadata",
+      "recovery": "Refresh choices and a fresh retry rendered both selected variants correctly"
+    }
+  },
+  "priorityContentPublication": {
+    "agencyGrowthVersion": 36,
+    "status": "Passed",
+    "workflowObserved": [
+      "Draft",
+      "Submit",
+      "Awaiting approval",
+      "Approve",
+      "Approved"
+    ],
+    "scope": "Item and current language English",
+    "liveAvery": "Texas guidance, small-business growth, and household order observed after publication",
+    "liveDaniel": "Household, Illinois guidance, and small-business order remained unchanged after publication"
+  },
+  "growthContentRestoration": {
+    "version": 37,
+    "label": "Original agency priorities restored",
+    "status": "Passed",
+    "scope": "Agency growth priorities only",
+    "workflowObserved": [
+      "Draft",
+      "Submit",
+      "Awaiting approval",
+      "Approve",
+      "Approved"
+    ],
+    "restoredFields": [
+      "Heading",
+      "Intro",
+      "Recommendations"
+    ],
+    "recommendationOrder": [
+      "Small-business growth",
+      "Texas guidance",
+      "Household conversations"
+    ],
+    "previousAuthoredVersionsPreserved": 36,
+    "unrelatedFieldsPreserved": true,
+    "publication": {
+      "target": "Live Experience Edge",
+      "languages": [
+        "en"
+      ],
+      "publishSubItems": false,
+      "publishRelatedItems": false,
+      "isDone": true,
+      "isFailed": false,
+      "state": "FINISHED"
+    },
+    "liveAveryReadbackVerified": true,
+    "originalIntroRestored": true
+  },
+  "verifiedOn": "2026-11-12"
+}
