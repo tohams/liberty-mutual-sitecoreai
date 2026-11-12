@@ -441,6 +441,21 @@ test("native on-page FAQs become individual answer records with real item identi
   );
 });
 
+test("Search answer excerpts decode native Rich Text apostrophes", async () => {
+  const f = fixture();
+  f.setBody(
+    faqBody(
+      "<p>It&#x27;s an auto and home bundle. You&#39;ll manage both policies together.</p>",
+    ),
+  );
+  const faq = (await f.reader.readAll()).find((item) => item.kind === "faq")!;
+  assert.equal(
+    faq.summary,
+    "It's an auto and home bundle. You'll manage both policies together.",
+  );
+  assert(!pageSearchDocument(faq).fields!.summary.includes("&#"));
+});
+
 test("only complete FAQs rendered by page-owned components enter Search", async () => {
   const f = fixture();
   // The same rendered FAQ in two placements still owns one Search identity.
