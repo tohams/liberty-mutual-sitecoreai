@@ -17,16 +17,16 @@ Languages:
       Value: Insurance resources
     - ID: 3a61c47e-c996-5a80-ba68-f988ee36554f
       Hint: heading
-      Value: Can this information confirm whether my particular loss is covered?
+      Value: How to check whether your insurance covers a loss
     - ID: 608c6aac-cdd7-5be1-b727-a1647363b89c
       Hint: summary
-      Value: <p>Find out where to check the coverage, limits, and exclusions in your policy.</p>
+      Value: <p>Learn where to find your covered losses, policy limits, deductibles, and exclusions, and when to ask for help.</p>
     - ID: f8a68051-c885-5977-aa21-4629eb0f3a2c
       Hint: image
       Value: <Image height="1018" src="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/47f9e23f20434020ac5e3bdc5eaece5e?transform=true&amp;format=auto&amp;width=2304&amp;height=1018" dam-id="LYzRfhlKQhuySvMJMtJ-Gg" thumbnailsrc="https://media.sitecorecloud.io/api/media/v2/delivery/7b25799c-8365-4fdf-d93a-08defdaed40b/content/47f9e23f20434020ac5e3bdc5eaece5e?transform=true&amp;format=auto&amp;width=2304&amp;height=1018" width="2304" dam-content-type="Image" alt="Family plays basketball in a driveway beside an open garage and parked car." />
     - ID: ef75886c-587f-5fb0-b3ee-b6163e7f7661
       Hint: primaryLink
-      Value: <link text="Ask an agent about your situation" linktype="external" url="/contact-an-agent" querystring="product=home&amp;source=check-your-policy-for-a-specific-loss" />
+      Value: <link text="Find a local agent" linktype="external" url="/contact-an-agent" querystring="product=home&amp;source=check-your-policy-for-a-specific-loss" />
     - ID: cedce3ca-6429-5a30-bae6-ed4e6508a0af
       Hint: secondaryLink
       Value: <link text="Browse insurance resources" linktype="external" url="/insurance-resources" />

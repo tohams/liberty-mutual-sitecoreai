@@ -37,3 +37,14 @@ test("empty, punctuation-only, and filler-only inputs have no subject terms", ()
     assert.equal(normalizeSearchQuestion(question), "");
   }
 });
+
+test("there is grammatical filler, while named topics and state acronyms remain intact", () => {
+  assert.equal(
+    normalizeSearchQuestion("Is there a multi-policy discount in IL?"),
+    "multi policy discount IL",
+  );
+  assert.equal(
+    normalizeSearchQuestion("Are there cheaper home and car policies?"),
+    "cheaper home car policies",
+  );
+});

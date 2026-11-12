@@ -21,7 +21,6 @@ const W = require("./public-configure-editorial-workflow.cjs");
 const PATHS = Object.freeze([
   SITE + "/Home",
   SITE + "/Home/Data/Hero",
-  SITE + "/Home/Data/Introduction",
   SITE + "/Home/bundling",
   SITE + "/Home/bundling/Data/Hero",
   SITE + "/Home/bundling/Data/Introduction",

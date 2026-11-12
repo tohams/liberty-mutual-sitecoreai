@@ -6,7 +6,7 @@ const actor='sitecore\\setup';
 const start={cursor:'MA==',node:{date:'2026-11-01T04:00:00Z',user:actor,newState:{stateId:W.IDS.draft,displayName:'Draft'}}};
 const event={date:'2026-11-01T04:01:00Z',user:actor,oldState:{stateId:W.IDS.draft,displayName:'Draft'},newState:{stateId:W.IDS.awaiting,displayName:'Awaiting approval'}};
 test('finite source approval includes the shared copyright, with exactly six revised versions and eight allowlisted portal editorial records',()=>{
- const m=H.manifest();assert.equal(m.targets.length,199);assert.equal(m.targets.filter(t=>t.version>1).length,6);
+ const m=H.manifest();assert.equal(m.targets.length,198);assert.equal(m.targets.filter(t=>t.version>1).length,6);
  const copyright=m.targets.find(t=>t.id==='9dc572ee-3d67-5909-922f-6482def1cdb0');
  assert.equal(copyright.path,'/sitecore/content/LibertyMutual/liberty-mutual-public-site/Data/Disclosures/Copyright notice');
  assert.equal(copyright.version,1);assert.equal(copyright.expected.title,'Copyright notice');

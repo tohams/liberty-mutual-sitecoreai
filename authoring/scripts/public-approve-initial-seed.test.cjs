@@ -22,9 +22,10 @@ function item(state = W.IDS.draft) {
 }
 
 test("initial delivery scope contains exactly ten explicit items, no branch prototypes or temporary QA", () => {
-  assert.equal(S.PATHS.length, 10);
-  assert.equal(new Set(S.PATHS).size, 10);
-  assert.equal(S.targets().length, 10);
+  assert.equal(S.PATHS.length, 9);
+  assert.equal(new Set(S.PATHS).size, 9);
+  assert.equal(S.targets().length, 9);
+  assert(!S.PATHS.some((path) => path.endsWith("/Home/Data/Introduction")));
   for (const path of S.PATHS)
     assert.doesNotMatch(
       path,

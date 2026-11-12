@@ -11,7 +11,7 @@ import {
 } from "react";
 import NextLink from "next/link";
 import config from "sitecore.config";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { RichText, Text, useSitecore } from "@sitecore-content-sdk/nextjs";
 import { useSearch } from "@sitecore-content-sdk/nextjs/search";
 import type { SearchDocument } from "@sitecore-content-sdk/search";
@@ -132,6 +132,7 @@ function SearchExperience({
 }) {
   const inputId = useId();
   const searchParams = useSearchParams();
+  const pathname = usePathname().replace(/\/$/, "");
   const [input, setInput] = useState(searchParams.get("q") || "");
   const [query, setQuery] = useState(input);
   const [searchRun, setSearchRun] = useState(0);
@@ -169,26 +170,53 @@ function SearchExperience({
     !needsSubject &&
     (isLoading || status === "idle" || awaitingCurrentResults);
   const mapping = configuration.fieldsMapping;
-  const supported = supportedQuestionResults(query, results, (document) =>
-    [
-      mapping.title,
-      mapping.description,
-      "question",
-      "body",
-      mapping.product,
-      mapping.state,
-    ]
-      .map((name) => text(document, name))
-      .join("\n"),
+  const supported = supportedQuestionResults(
+    query,
+    results,
+    (document) =>
+      [
+        mapping.title,
+        mapping.description,
+        "question",
+        "body",
+        mapping.product,
+        mapping.state,
+      ]
+        .map((name) => text(document, name))
+        .join("\n"),
+    (document) => {
+      const value = mapping.state ? document[mapping.state] : undefined;
+      return Array.isArray(value)
+        ? value.filter((part) => typeof part === "string")
+        : text(document, mapping.state);
+    },
   );
-  const allCards = supported.flatMap((document) => {
+  const browsing = !query.trim();
+  const browseCandidates = browsing
+    ? supported.filter((document) => !text(document, "question").trim())
+    : supported;
+  const allCards = browseCandidates.flatMap((document) => {
     const href = publicHref(text(document, mapping.link));
     const title = text(document, mapping.title);
     return href && title ? [{ document, href, title }] : [];
   });
-  const total = allCards.length;
+  if (browsing)
+    allCards.sort((left, right) => left.title.localeCompare(right.title, "en"));
+  // A collection page browses its own descendants; typed searches remain site-wide.
+  const collectionCards = browsing
+    ? allCards.filter(({ href }) =>
+        new URL(href, "https://content.invalid").pathname.startsWith(
+          `${pathname}/`,
+        ),
+      )
+    : [];
+  const displayCards = collectionCards.length ? collectionCards : allCards;
+  const total = displayCards.length;
   const totalPages = Math.ceil(total / 6);
-  const resultCards = allCards.slice((currentPage - 1) * 6, currentPage * 6);
+  const resultCards = displayCards.slice(
+    (currentPage - 1) * 6,
+    currentPage * 6,
+  );
   useEffect(() => {
     const consentChanged = () => setConsentRevision((value) => value + 1);
     window.addEventListener(CONSENT_EVENT, consentChanged);

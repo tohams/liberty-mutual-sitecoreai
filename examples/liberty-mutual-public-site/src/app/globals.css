@@ -1083,6 +1083,15 @@ code.scpm {
   padding: 0 0 0 16px;
   list-style: none;
 }
+.public-header__mobile nav > details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.public-header__mobile nav > details[open] > summary svg {
+  transform: rotate(180deg);
+}
 .public-header__mobile li {
   margin-top: 16px;
 }
@@ -2174,6 +2183,8 @@ code.scpm {
 }
 .public-header__bar {
   background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 .public-card-section--numbered h3 a {
   font-size: 24px;

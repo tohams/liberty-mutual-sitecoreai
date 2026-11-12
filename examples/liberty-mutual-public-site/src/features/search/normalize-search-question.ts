@@ -41,6 +41,7 @@ const GRAMMATICAL_FILLER = new Set([
   "whose",
   "when",
   "where",
+  "there",
   "why",
   "how",
   "what's",

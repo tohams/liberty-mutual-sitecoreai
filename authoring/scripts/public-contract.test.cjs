@@ -24,6 +24,26 @@ test('Home uses the shared Promotion while Bundling retains only its genuine sou
  const products=record(SITE+'/Home/bundling').fields.product;
  assert.equal(products,'{2DC9A2FF-F885-4C9D-92A5-75C1306B6FCD}|{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}|{005D71B8-6FD7-4E0A-842A-338DF40E1F47}|{D81D3AE8-243B-4F32-B70D-33796448DCA0}');
 });
+test('Home has no initial starter Introduction while the landing branch retains its editable Introduction',()=>{
+ assert(!record(SITE+'/Home/Data/Introduction'));
+ assert(!record(SITE+'/Home').fields.__Renderings.includes('7C500A94-7B14-56FA-AAEB-5F437235BCD1'));
+ const branch=SITE+'/Presentation/Page Branches/Landing page/$name';
+ assert(record(branch+'/Data/Introduction'));
+ assert.equal(record(branch+'/Data/Introduction').fields.heading,'');
+ assert.equal(record(branch+'/Data/Introduction').fields.body,'');
+ assert(record(branch).fields.__Renderings.includes('page:/Data/Introduction'));
+});
+test('factory sitemap uses matching one-minute thresholds and preserves other native settings',()=>{
+ const sitemap=record(SITE+'/Settings/Sitemap');
+ assert.equal(sitemap.id,'92c94029-4d2b-4924-bc39-0de92582d0c6');
+ assert.equal(sitemap.fields['Refresh Threshold'],'1');
+ assert.equal(sitemap.fields['Cache Expiration'],'1');
+ const native=JSON.parse(fs.readFileSync(path.join(__dirname,'../items/liberty-mutual-public/public-native-scaffold.json')))[sitemap.path];
+ assert.equal(sitemap.template,native.template);
+ for(const field of native.fields.filter(f=>!['Refresh Threshold','Cache Expiration'].includes(f.name)))assert.equal(sitemap.fields[field.name],field.value,field.name);
+ const module=JSON.parse(fs.readFileSync(path.join(__dirname,'../items/liberty-mutual-public/LibertyMutual.PublicSiteSeed.module.json')));
+ assert.equal(module.items.includes.find(include=>include.name==='settings').allowedPushOperations,'CreateOnly');
+});
 test('Bundling jump links reference the native page instead of an empty external URL',()=>{
  const page=record(SITE+'/Home/bundling');
  const links=model.records.filter(r=>r.path.startsWith(SITE+'/Home/bundling/Data/Bundle introduction/Cards/')&&r.fields.actionLink).map(r=>r.fields.actionLink);

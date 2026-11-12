@@ -98,7 +98,8 @@ def prepare(source,bindings):
     for page in source['pages']:
         p=root+'/Home'+('' if page['slug']=='/' else page['slug']);d=p+'/Data'
         hero_summary=quote_hero_summary(page['hero']['summary']) if page['slug']=='/get-a-quote' else page['hero']['summary']
-        components=[placement(p,'PublicHero',hero,'page:/Data/Hero',2),placement(p,'PublicArticle',body,'page:/Data/Introduction',3)]
+        components=[placement(p,'PublicHero',hero,'page:/Data/Hero',2)]
+        if page['slug']!='/':components.append(placement(p,'PublicArticle',body,'page:/Data/Introduction',3))
         if page.get('sharedPromotion'):components.append(placement(p,'PublicPromotion',body,BRACE(M['promotionId']),4,'Compact' if page['slug']=='/bundling' else 'Default'))
         if page.get('approvedAnswerSlug'):
             answer=by_slug[page['approvedAnswerSlug']];assert p==resource_root+'/'+answer['slug'], 'Resource page and structured content must have the same native URL.'
@@ -134,7 +135,8 @@ def prepare(source,bindings):
         item(p,UID(p.rsplit('/',1)[0]),template('PublicResourcePage' if page.get('approvedAnswerSlug') else 'PublicPage'),values,shared)
         item(d,UID(p),h.T['data'])
         hero_values={**page['hero'],'summary':hero_summary,'image':image(page['hero'].get('image'),d+'/Hero',bindings),'primaryLink':link(page['hero'].get('primaryLink')),'secondaryLink':link(page['hero'].get('secondaryLink'))}
-        data(d+'/Hero','PublicHero',hero_values);data(d+'/Introduction','PublicArticle',page['introduction'])
+        data(d+'/Hero','PublicHero',hero_values)
+        if page['slug']!='/':data(d+'/Introduction','PublicArticle',page['introduction'])
         page_summaries.append({'route':page['slug'],'id':UID(p),'path':p,'components':[name for name in ['PublicHero','PublicArticle','PublicPromotion','PublicResourceContent','PublicSearch','PublicProductSelector','PublicQuoteHandoff','SharedDisclosure'] if any(BRACE(rendering_id(name)) in c for c in components)]})
     assert len(page_summaries)==len(source['pages']) and len({r['ID'] for r in RECORDS})==len(RECORDS)
     new_contracts={
