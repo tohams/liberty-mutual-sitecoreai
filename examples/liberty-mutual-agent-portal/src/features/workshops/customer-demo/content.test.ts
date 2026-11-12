@@ -276,11 +276,11 @@ test("the public Search loop proves both outcomes on the results page", () => {
   const live = prose(entry.actions);
   assert.match(
     live,
-    /enter Can I combine home and car coverage\?.*Can I bundle my car and home insurance\?/i,
+    /enter Can I combine home and car coverage\?.*Bundle home and auto insurance/i,
   );
   for (const required of [
     /Briefly point out How to bundle your insurance policies and 3 tips for bundling your insurance policies/i,
-    /result and its answer excerpt on the results page/i,
+    /first result.*excerpt on the results page/i,
     /Keep every result unopened/i,
     /keyword\(s\).*replace the query/i,
     /Contact an agent/i,
@@ -293,7 +293,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
   );
   assert.match(
     entry.stopWhen,
-    /range of relevant published results.*approved answer excerpt.*unsupported question.*No results found.*Contact an agent/i,
+    /Bundle home and auto insurance as the lead result.*excerpt.*related published guidance.*unsupported question.*No results found.*Contact an agent/i,
   );
   assert.match(prose(entry.expected), /relevant published guidance/i);
   assert.doesNotMatch(
@@ -303,7 +303,7 @@ test("the public Search loop proves both outcomes on the results page", () => {
   for (const title of [
     "How to bundle your insurance policies",
     "3 tips for bundling your insurance policies",
-    "Can I bundle my car and home insurance?",
+    "Bundle home and auto insurance",
   ])
     assert(prose(entry.expected).includes(title));
   assert.equal(entry.durationMinutes, 2);
