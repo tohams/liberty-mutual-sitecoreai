@@ -1898,11 +1898,16 @@ code.scpm {
     line-height: 33.6px;
   }
   .public-faq summary {
-    padding-left: 0;
+    padding: 16px 40px 16px 8px;
     font-size: 16px;
+    line-height: 22.4px;
+  }
+  .public-faq__caret {
+    right: 12px;
+    top: 20px;
   }
   .public-faq details > .public-prose {
-    padding-left: 0;
+    padding-inline: 8px;
   }
   .public-footer__main {
     padding: 40px 0 48px;
@@ -2356,6 +2361,9 @@ code.scpm {
   .public-introduction-links__links,
   .public-related-articles__grid {
     padding-inline: 0;
+  }
+  .public-introduction-links__links {
+    display: none;
   }
   .public-app-features__copy {
     padding: 0;
