@@ -17,6 +17,16 @@ assets=load('fidelity_alt_contract','public-prepare-asset-inventory.py')
 editorial=load('search_native_contract','public-prepare-editorial-seed.py')
 
 class NativeReferences(unittest.TestCase):
+    def test_faq_owner_declares_related_and_recursive_dependencies_only(self):
+        definitions,_=fidelity.phase.records()
+        faq=next(record for record in definitions if record['Path']==fidelity.h.RP+'/PublicFaq')
+        dependency=next(field for field in faq['SharedFields'] if field['Hint']=='Content Dependencies')
+        self.assertEqual(dependency['ID'],'b4bbc0be-7619-4678-b2f7-947d84aa77a9')
+        self.assertEqual(dependency['Value'].split('|'),[
+            '{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}',
+            '{5E13EE6F-522F-41CA-8929-AEE8EE103862}',
+        ])
+
     def test_quote_summary_and_metadata_describe_the_zip_control(self):
         before='Review your product and state choices before continuing to Liberty Mutual for a quote.'
         after='Review your product and ZIP Code choices before continuing to Liberty Mutual for a quote.'

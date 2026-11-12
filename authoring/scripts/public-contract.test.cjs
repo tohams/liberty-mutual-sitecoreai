@@ -195,6 +195,19 @@ test('structured resources are page-owned and preserve native identities without
  assert.equal(rendering.fields['Can select Page as datasource'],'1');assert.equal(norm(rendering.fields.AllowedOnTemplates),norm(resourceId));
 });
 
+test('publishing a selected FAQ updates its containing page without publishing unrelated siblings',()=>{
+ const faq=record('/sitecore/layout/Renderings/Project/LibertyMutualPublic/PublicFaq');
+ assert.deepEqual(faq.fields['Content Dependencies'].split('|').map(norm),[
+  norm('07bb8abe-7a1d-4af2-b7d6-bf5140aaaf21'),
+  norm('5e13ee6f-522f-41ca-8929-aee8ee103862'),
+ ]);
+ const extensions=JSON.parse(fs.readFileSync(path.join(__dirname,'../items/liberty-mutual-public/public-model-extensions.json')));
+ const definition=extensions.newDefinitions.find(r=>r.ID===faq.id);
+ const dependencies=definition.SharedFields.find(f=>f.Hint==='Content Dependencies');
+ assert.equal(dependencies.ID,'b4bbc0be-7619-4678-b2f7-947d84aa77a9');
+ assert.equal(dependencies.Value,faq.fields['Content Dependencies']);
+});
+
 test('ResourcePage inherits shared classification fields once and enables search only for its own family',()=>{
  const root='/sitecore/templates/Project/LibertyMutualPublic';
  const template=record(root+'/PublicResourcePage');

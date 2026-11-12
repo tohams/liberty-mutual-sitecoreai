@@ -12,6 +12,10 @@ def module(name,file):
 h=module('phase_two_model','public-build-model.py')
 content=module('phase_two_content','public-prepare-editorial-seed.py')
 M=json.loads((h.BASE/'public-contract.json').read_text())
+FAQ_CONTENT_DEPENDENCIES=(
+    '{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}', # Related Items: ordered native questions.
+    '{5E13EE6F-522F-41CA-8929-AEE8EE103862}', # Recursive Related Items: their page dependencies.
+)
 def icon_svg(body):
     return '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect x="1" y="1" width="62" height="62" rx="12" fill="#f4f2fc"/><g transform="translate(12 12)" fill="none" stroke="#20174b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">'+body+'</g></svg>\n'
 ICONS={
@@ -68,7 +72,9 @@ def records():
     variant_names={'PublicQuoteHandoff':['Default','Agent'],'PublicProductSelector':['Default','Quote','Compact'],'PublicSection':['Default','ProofCards','NumberedLinks','ImageCards','Bundles','QuoteCards','IntroductionLinks','RelatedArticles'],'PublicSplitContent':['Default','ImageLeft','ImageRight','TextColumns','ImageRightSoft','AppFeatures','Benefits']}
     for name,label,location,icon in rendering_specs:
         rid=h.uid(h.RP+'/'+name);h.RENDERINGS[name]=rid
-        h.item(h.RP+'/'+name,h.uid(h.RP),h.T['rendering'],'renderings',shared=[h.field('037fe404-dd19-4bf7-8e30-4dadf68b27b0','componentName',name),h.field('1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f','Datasource Template',h.TP+'/'+name),h.field('b5b27af1-25ef-405c-87ce-369b3a004016','Datasource Location',location),h.field('a77e8568-1ab3-44f1-a664-b7c37ec7810d','Parameters Template',h.brace(M['templateIds']['PublicRenderingParameters'])),h.field(h.F['icon'],'__Icon',icon)],values=[h.field('1b58d065-fe74-43e3-ba20-54c9588b3011','AllowedOnTemplates',h.brace(M['templateIds']['PublicPage']))],label=label)
+        shared=[h.field('037fe404-dd19-4bf7-8e30-4dadf68b27b0','componentName',name),h.field('1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f','Datasource Template',h.TP+'/'+name),h.field('b5b27af1-25ef-405c-87ce-369b3a004016','Datasource Location',location),h.field('a77e8568-1ab3-44f1-a664-b7c37ec7810d','Parameters Template',h.brace(M['templateIds']['PublicRenderingParameters'])),h.field(h.F['icon'],'__Icon',icon)]
+        if name=='PublicFaq':shared.append(h.field('b4bbc0be-7619-4678-b2f7-947d84aa77a9','Content Dependencies','|'.join(FAQ_CONTENT_DEPENDENCIES)))
+        h.item(h.RP+'/'+name,h.uid(h.RP),h.T['rendering'],'renderings',shared=shared,values=[h.field('1b58d065-fe74-43e3-ba20-54c9588b3011','AllowedOnTemplates',h.brace(M['templateIds']['PublicPage']))],label=label)
         vp=h.SITE+'/Presentation/Headless Variants/'+name
         h.item(vp,h.uid(h.SITE+'/Presentation/Headless Variants'),h.T['variantFolder'],'presentation')
         for n,v in enumerate(variant_names.get(name,['Default']),1):h.item(vp+'/'+v,h.uid(vp),h.T['variant'],'presentation',shared=[h.field(h.F['sort'],'__Sortorder',n*100)])
