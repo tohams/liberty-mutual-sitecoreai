@@ -1432,7 +1432,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterActions: [
           [
             "In the **SitecoreAI** tab, choose **Design → Brand kits**.",
-            "Select **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**.",
+            "Open **Liberty Mutual — Independent Agents**, marked **PUBLISHED**, then choose **Sections → Tone of Voice**.",
             "Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation. Leave the kit unchanged.",
           ],
           [
@@ -1452,7 +1452,7 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The Brand Kit guides content creation, native AI assistance operates on an editable field, and governed components preserve a consistent design. No generated change is kept or published.",
         actions: [
-          `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Published → Liberty Mutual — Independent Agents → Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
+          `Switch to the prepared [**Brand Kit**](${BRAND_KITS}) tab, or navigate **Design → Brand kits**. Open **Liberty Mutual — Independent Agents**, marked **PUBLISHED**, then choose **Sections → Tone of Voice**. Explain that a Brand Kit supplies reusable voice and messaging guidance for AI-assisted content generation, and leave the kit unchanged.`,
           `In **Page Builder**, choose **Site switcher → Agent Portal → Editor → Pages → Home**, or open [**Agent Portal Home**](${portalEditor}). Confirm **English** and **Default editing host**. Choose **Layers → Agency priorities → Introduction**, or click the paragraph beneath **Priorities for your agency**; confirm **Introduction** in the right panel. Select **Optimize with AI**, and point to **Adhere to brand kit**. Paste **AI writing prompt** below into **Ask AI for content improvements**, and select **Generate content**. When **Ready!** appears, look for **Build your next opportunity.** and a visibly longer paragraph. Compare the new wording with the original, and check that its meaning is preserved without new claims. Select **Revert to original**, and confirm the original wording returns. Leave **Keep optimized**, **A/B/n test**, and **Publish** untouched.`,
           "In **Layers**, find **headless-agency-priorities**, and choose its **Insert into** button before or after **Agency priorities**. The filtered **Components** picker shows **Business priorities → Agency priorities** for this placeholder. Close the picker without selecting a component or inserting content. Explain that authors change content; reusable components control presentation, page designs supply shared structure, and placeholder settings limit which components fit each area.",
         ],

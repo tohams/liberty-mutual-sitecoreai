@@ -898,7 +898,7 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
   const actions = entry.actions.map((action) => prose([action]));
   assert.match(
     actions[0],
-    /Design → Brand kits.*Published.*Liberty Mutual — Independent Agents.*Sections → Tone of Voice/,
+    /Design → Brand kits.*Liberty Mutual — Independent Agents.*PUBLISHED.*Sections → Tone of Voice/,
   );
   assert.match(
     actions[1],
