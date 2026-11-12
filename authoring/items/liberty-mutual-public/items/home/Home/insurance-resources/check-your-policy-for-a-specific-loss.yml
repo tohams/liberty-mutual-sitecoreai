@@ -17,19 +17,19 @@ Languages:
     Fields:
     - ID: d3bed2bd-a5f0-49ab-b7a5-6b72b0f34e4b
       Hint: Title
-      Value: Can this information confirm whether my particular loss is covered?
+      Value: How to check whether your insurance covers a loss
     - ID: 4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8
       Hint: NavigationTitle
-      Value: Can this information confirm whether my particular loss is covered?
+      Value: How to check whether your insurance covers a loss
     - ID: 3e431de1-525e-47a3-b6b0-1ccbec3a8c98
       Hint: __Workflow state
       Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
     - ID: 748e2709-fb2f-5f73-9ca6-d8e801b6eafc
       Hint: metadataTitle
-      Value: Can this information confirm whether my particular loss is covered?
+      Value: How to check whether your insurance covers a loss
     - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
       Hint: metadataDescription
-      Value: Find out where to check the coverage, limits, and exclusions in your policy.
+      Value: Learn where to find your covered losses, policy limits, deductibles, and exclusions, and when to ask for help.
     - ID: a98fdad1-e82c-5380-9954-33b996734100
       Hint: canonicalUrl
       Value: https://liberty-mutual-public-site.vercel.app/insurance-resources/check-your-policy-for-a-specific-loss
@@ -44,16 +44,16 @@ Languages:
       Value: "{67EB1C7D-4DC4-4F43-AF28-DADCDA50EC59}"
     - ID: de4a7a26-6fe3-571d-9b4c-6e117690f9b5
       Hint: question
-      Value: Can this information confirm whether my particular loss is covered?
+      Value: How to check whether your insurance covers a loss
     - ID: 54e5a9a7-a8e8-54f9-b163-f6cf04fe0119
       Hint: answer
-      Value: General insurance information cannot determine whether your specific loss is covered. The cause of the damage, your selected coverages, policy limits, exclusions, and conditions all matter. Review your policy contract, and contact your insurer or agent for help with your situation.
+      Value: Learn where to find your covered losses, policy limits, deductibles, and exclusions, and when to ask for help.
     - ID: 47041dc1-a183-5516-85ea-afdea936289c
       Hint: formalWording
-      Value: <p>Coverage for a specific loss is determined from the applicable policy and the facts of the loss. This general overview is not a coverage decision or a promise of payment.</p>
+      Value: <p>Coverage depends on the applicable policy, selected coverages, exclusions, limits, and circumstances of the loss.</p>
     - ID: db533ede-0a22-5a9b-ae03-f3298cfc2e70
       Hint: explanation
-      Value: "<p>For example, water damage does not have a single answer that applies to every situation. A sudden plumbing problem, maintenance-related damage, and flooding can be treated differently. Ask for a review of your policy rather than relying on a general search result.</p><ul><li><a href=\"https://www.libertymutual.com/home-coverage-education\" target=\"_blank\" rel=\"noopener noreferrer\">Liberty Mutual: home coverage education</a></li></ul>"
+      Value: <h2>Read your policy documents</h2><p>Start with the coverages you selected and the limits and deductibles that apply. Review the exclusions and conditions, along with the declarations page.</p><h2>Look at how the damage happened</h2><p>Water damage can have different causes. A sudden plumbing leak, a maintenance issue, and flooding can involve different policy terms. Keep the details of the damage available when you speak with your insurer.</p><h2>Ask about your next step</h2><p>Your insurer can help you understand your policy and explain how to report a claim. Your agent can help you review your policy and discuss your situation.</p>
     - ID: b6cfeb53-9864-5c4a-b920-d5d283af71fd
       Hint: owner
       Value: Liberty Mutual
@@ -68,7 +68,7 @@ Languages:
       Value: "<link text=\"Liberty Mutual: what is not covered by homeowners insurance\" linktype=\"external\" url=\"https://www.libertymutual.com/insurance-resources/property/what-is-not-covered-by-homeowners-insurance\" />"
     - ID: 07a77a0f-36c5-5e6e-867e-cc75a35820d8
       Hint: nextStep
-      Value: <link text="Ask an agent about your situation" linktype="external" url="/contact-an-agent" querystring="product=home&amp;source=check-your-policy-for-a-specific-loss" />
+      Value: <link text="Find a local agent" linktype="external" url="/contact-an-agent" querystring="product=home&amp;source=check-your-policy-for-a-specific-loss" />
     - ID: 6dfdc7ce-e91f-5e5a-aaf3-a9bc7992e64d
       Hint: disclosure
       Value: "{C4FD68F7-7C79-5BB6-9919-FB6F82B84BCA}"

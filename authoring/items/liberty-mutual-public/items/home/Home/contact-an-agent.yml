@@ -26,10 +26,10 @@ Languages:
       Value: "{CE5C0C95-AF32-5457-849B-11E8EFAF72D7}"
     - ID: 748e2709-fb2f-5f73-9ca6-d8e801b6eafc
       Hint: metadataTitle
-      Value: Find a local agent
+      Value: Find a local insurance agent
     - ID: 396bcd2c-e08b-56fa-8d7a-170b9a7a18e8
       Hint: metadataDescription
-      Value: An independent agent can help you compare options and discuss the coverage that fits your situation.
+      Value: Find a local insurance agent to discuss coverage, compare your options, and get help with an insurance quote.
     - ID: a98fdad1-e82c-5380-9954-33b996734100
       Hint: canonicalUrl
       Value: https://liberty-mutual-public-site.vercel.app/contact-an-agent
@@ -41,4 +41,10 @@ Languages:
       Value: "{6B0CB6CC-2C45-4B39-94E4-A8FE8100DC38}"
     - ID: 9c5ab0fe-bb46-51cc-98f0-412ca7d8e543
       Hint: product
-      Value: |
+      Value: "{B24F0924-07A9-486A-BB65-EA9DB0C91C11}"
+    - ID: e270fde6-7f22-5dfa-af6b-101de974f0f8
+      Hint: sourceLink
+      Value: "<link text=\"Liberty Mutual: find a local agent\" linktype=\"external\" url=\"https://agents.libertymutual.com/\" />"
+    - ID: d74e777c-dbb0-5d67-accf-4cfd8c391cc4
+      Hint: includeInSearch
+      Value: "1"
