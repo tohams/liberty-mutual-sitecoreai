@@ -4829,6 +4829,11 @@
           "ID": "06d5295c-ed2f-4a54-9bf2-26228d113318",
           "Hint": "__Icon",
           "Value": "Office/32x32/question.png"
+        },
+        {
+          "ID": "b4bbc0be-7619-4678-b2f7-947d84aa77a9",
+          "Hint": "Content Dependencies",
+          "Value": "{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}"
         }
       ],
       "Languages": [

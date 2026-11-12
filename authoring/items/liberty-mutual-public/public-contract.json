@@ -4634,6 +4634,7 @@
         "Datasource Location": "query:./Data",
         "Parameters Template": "{97353208-4C49-506D-A35A-1EA62E35F2A2}",
         "__Icon": "Office/32x32/question.png",
+        "Content Dependencies": "{07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}|{5E13EE6F-522F-41CA-8929-AEE8EE103862}",
         "__Display name": "Questions and answers",
         "AllowedOnTemplates": "{A4DE2222-C8A5-54D4-ADEE-BBAD976A457C}",
         "__Created": "20261101T035443Z"
