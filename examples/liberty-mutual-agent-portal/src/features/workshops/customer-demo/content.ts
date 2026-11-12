@@ -6,7 +6,8 @@ import {
   PORTAL,
   SEARCH_SOURCE,
   ANALYTICS,
-  ARTICLE,
+  BUNDLING,
+  BUNDLING_FAQ,
   GRAPHQL_EXPLORER,
   SCRUNCH_REVIEW,
   SCRUNCH_EDITOR,
@@ -21,11 +22,11 @@ export const customerDemoAiContext: Record<
 > = {
   public: {
     demonstrated:
-      "Search retrieves approved guidance. Published article metadata, schema, and canonical URLs help permitted search and AI engines understand the public page; structured CMS fields also support connected applications.",
+      "Search retrieves approved guidance. Published page metadata, visible FAQ schema, and canonical URLs help permitted search and AI engines understand the public page; the same native FAQ fields also support Search and connected applications.",
     nextStep:
       "SitecoreAI assistants can help marketers draft and refine brand-aligned website copy for human review. The proposed Profound integration would bring external content proposals into the same Draft, approval, and publishing process.",
     talkTrack:
-      "Published article metadata supports search and AI discovery; structured CMS fields support connected applications. SitecoreAI assistants help marketers draft and refine brand-aligned copy. Proposed Profound intake would use the same human review and publication controls.",
+      "Published page metadata and visible FAQ schema support search and AI discovery; the same native FAQ fields support Search and connected applications. SitecoreAI assistants help marketers draft and refine brand-aligned copy. Proposed Profound intake would use the same human review and publication controls.",
   },
   portal: {
     demonstrated:
@@ -96,7 +97,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterPoints: [
           "**Say:** “Your visitors can ask a question in their own words and find useful guidance. A clear route to an agent keeps the conversation moving when published content does not answer their question.”",
-          "Point to **Bundle home and auto insurance** as the lead result, which links to **/bundling**, then the related bundling articles; leave every result unopened.",
+          "Point to **Bundle home and auto insurance** as the lead result, which links to **/bundling**, its FAQ answer result, and the related bundling articles; leave every result unopened.",
           "For the unsupported question, show **No results found** and **Contact an agent** as the clear next step.",
         ],
         presenterCues: [
@@ -117,7 +118,7 @@ export const customerDemoChapters: DemoChapter[] = [
           [
             "Paste **Supported search question** into **Search**, then select **Search**.",
             "Wait until **Searching…** finishes.",
-            "Highlight **Bundle home and auto insurance** as the first result, which links to **/bundling**, and read its excerpt.",
+            "Highlight **Bundle home and auto insurance** as the first result, which links to **/bundling**, and read its excerpt. Point to the blue FAQ answer as guidance from that same page.",
             "Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**. Keep all results unopened.",
           ],
           [
@@ -129,18 +130,18 @@ export const customerDemoChapters: DemoChapter[] = [
           "The supported question shows **Bundle home and auto insurance** first, alongside related published guidance. The unsupported question shows **No results found** and **Contact an agent**.",
         actions: [
           `In the **Public website** tab, open the [**public Home page**](${PUBLIC}/), and select **Search** in the header.`,
-          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Highlight **Bundle home and auto insurance** as the first result, which links to **/bundling**, and read its excerpt on the results page. Briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies** as related guidance. Keep every result unopened.",
+          "In **Search**, enter **Can I combine home and car coverage?**, and select **Search**. Wait for **Searching…** to finish. Highlight **Bundle home and auto insurance** as the first result, which links to **/bundling**, and read its excerpt on the results page. Point to the blue FAQ answer from the same bundling page, then briefly point out **How to bundle your insurance policies** and **3 tips for bundling your insurance policies** as related guidance. Keep every result unopened.",
           "In **keyword(s)**, replace the query with **Does car insurance cover cyberextortion?**, and select **Search**. Show **No results found** and **Contact an agent**. End this loop with that contact option; leave the link unopened.",
         ],
         expected: [
           "The conversational question returns relevant published guidance: **Bundle home and auto insurance** is the lead result, alongside **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**. The result excerpts help the visitor choose useful content. The unsupported subject offers an agent-assisted next step.",
         ],
         talkTrack: [
-          "The visitor asks a question in everyday language. Search shows Liberty Mutual’s published bundling page first, with related guidance and useful excerpts. They can find the right starting point without knowing the page title. When published guidance does not address the subject, Contact an agent provides the next step.",
+          "The visitor asks a question in everyday language. Search shows Liberty Mutual’s published bundling page first, with related guidance and useful excerpts. A FAQ answer from that same page also helps them understand the topic. They can find the right starting point without knowing the page title. When published guidance does not address the subject, Contact an agent provides the next step.",
         ],
         controls: [
           "**SitecoreAI Search** retrieves published pages. A native Search rule pins **Bundle home and auto insurance** as the lead result for bundling keywords. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
-          "Published website pages join Search when their native **Include in site search** checkbox is selected. The bundling page and related articles are managed and published in **SitecoreAI**.",
+          "Published website pages join Search when their native **Include in site search** checkbox is selected. Its visible native FAQs also supply individual Search answer records linking to their anchors on **/bundling**, with classifications inherited from the page. The bundling page and related articles are managed and published in **SitecoreAI**.",
           "Optional measurement respects the visitor’s stored privacy preferences.",
         ],
         links: [
@@ -257,11 +258,11 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         transition:
-          "The customer has found a clear starting point and related guidance. Next, inspect the structured content behind one of those supporting resource results.",
+          "The customer has found a clear starting point and related guidance. Next, inspect the bundling page behind the lead result and the native FAQs that also supply Search.",
       },
       {
         id: "public-discovery",
-        title: "Inspect article metadata and structured content",
+        title: "Inspect page metadata and native FAQs",
         label:
           "Search engines and AI answer engines can find and cite the right LM content",
         phase: "Core Demonstration Flow",
@@ -269,17 +270,17 @@ export const customerDemoChapters: DemoChapter[] = [
         durationMinutes: 2,
         persona: "Public-site marketer",
         scenario:
-          "The marketer needs a natural customer article with clear metadata, source attribution, and applicability for discovery and reuse.",
+          "The marketer needs a natural bundling page whose metadata and visible FAQs support discovery, Search, and reuse.",
         objective:
-          "Show one natural article backed by governed SEO metadata, taxonomy, and published Article schema, with structured fields available to Search and connected applications.",
+          "Show one natural bundling page backed by governed metadata, taxonomy, and visible FAQPage schema, with the same native FAQ fields available to Search and connected applications.",
         stopWhen:
-          "The natural article, Search title and description, managed applicability values, canonical URL, and Article schema have been shown without changing content.",
+          "The bundling page, Search title and description, managed applicability values, canonical URL, and FAQPage schema have been shown without changing content.",
         inputs: [
           {
             beforeLine: 2,
             action: 3,
             label: "Find structured data in page source",
-            value: "application/ld+json",
+            value: "FAQPage",
           },
           {
             beforeLine: 4,
@@ -290,8 +291,8 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         presenterPoints: [
           "**Say:** “Structured fields and metadata help search and permitted AI engines understand Liberty Mutual’s content. That makes useful guidance easier to discover while your team maintains one clear, governed source.”",
-          "**Search title**, **Search description**, and the native checklists keep the page’s purpose and applicability explicit. **Question** and **Plain-language answer** supply Search and connected applications.",
-          "The public page exposes **Article** schema and a canonical URL for permitted search and AI engines. Connected applications retrieve structured CMS fields through their integrations.",
+          "**Search title**, **Search description**, and the native checklists keep the page’s purpose and applicability explicit. The visible FAQs’ native **Question** and **Answer** fields supply individual Search records and connected applications.",
+          "The public page exposes **FAQPage** schema that matches its visible questions and answers, plus a canonical URL. Connected applications retrieve the same native FAQ fields through their integrations.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 1 },
@@ -299,97 +300,55 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 3, action: 3, afterLine: 4 },
         ],
         actionPurposes: [
-          "Show one article’s customer copy and governed metadata",
+          "Show the bundling page’s content and governed metadata",
           "Show how taxonomy identifies content applicability",
-          "Inspect Article schema for permitted external discovery",
+          "Inspect visible FAQ schema for permitted external discovery",
         ],
         presenterActions: [
           [
-            "Switch to the **Public website** tab, and open the **Public article** URL. Briefly show **Bundling your car and home insurance** and its article copy.",
+            "Switch to the **Public website** tab, and open the **Bundling page** URL. Briefly show **Bundle auto and home insurance to save**, then expand **What's an auto and home insurance bundle?** in its FAQ section.",
             "Switch to the existing **Page Builder** tab. If it is closed, choose **SitecoreAI → Channels → Public Website → Page builder**. Choose **Site switcher → Public Website → Editor → Pages**.",
-            "In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On that selected row, choose **Content tree options (•••) → Page content**. Confirm **English**.",
+            "In **Sitemap**, expand **Home**, and select **bundling**. On that selected row, choose **Content tree options (•••) → Page content**. Confirm **English**.",
             "In the **Page content** panel beside the canvas, expand **Content**: show **Search title**, **Search description**, **Canonical URL**, and **Reference source**.",
-            "Expand **Resource content**: point to **Question** and **Plain-language answer** as structured fields for **Search** and connected AI applications. Show **Detailed explanation**, and leave all fields unchanged.",
+            "Return to the canvas, and expand the first FAQ, **What's an auto and home insurance bundle?**. Point to its visible question and answer: these are native **Question** and **Answer** fields, reused by Search and connected applications. Leave all content unchanged.",
           ],
           [
             "In **Page content**, expand **Content**, or use **Go to field → State applicability**. Open **State applicability** using its **1 item selected** control; show **All states**, then close.",
-            "Open **Products** using **2 items selected**; show **Auto** and **Homeowners**, then close.",
+            "Open **Products**; show **Auto**, **Homeowners**, **Renters**, and **Condo** selected as separate checkboxes, then close.",
             "Open **Audience**; show **All consumers**, then close. Leave all selections unchanged.",
           ],
           [
-            "Return to the **Public website** tab’s article. In the browser, right-click a blank area, and choose **View page source**. If the browser context menu does not offer the source command, use Chrome’s **View → Developer → View Source** menu on Mac. In the source tab, enable **Line wrap**, then press **⌘F** (Mac) or **Ctrl+F** (Windows) to open **Find**.",
+            "Return to the **Public website** tab’s bundling page. In the browser, right-click a blank area, and choose **View page source**. If the browser context menu does not offer the source command, use Chrome’s **View → Developer → View Source** menu on Mac. In the source tab, enable **Line wrap**, then press **⌘F** (Mac) or **Ctrl+F** (Windows) to open **Find**.",
             "Paste **Find structured data in page source** into **Find**.",
-            "Use the first **application/ld+json** script block. Show **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**, which identifies the article’s canonical URL.",
+            "Use the actual **FAQPage** script block, rather than a later escaped copy in application data. Show **mainEntity → Question → name** and **acceptedAnswer → text** matching the visible first FAQ; its **url** points to that FAQ on **/bundling**.",
             "Find **canonical** using the copy field, and show the matching **rel=canonical** link.",
             "Close the source tab, and return to the **Public website** tab.",
           ],
         ],
         presenterResult:
-          "One natural article has governed search metadata, managed classifications, published **Article** schema, and a canonical URL; its structured CMS fields also support Search and connected applications.",
+          "One natural bundling page has governed metadata, managed classifications, a canonical URL, and **FAQPage** schema matching its visible FAQs; the same native FAQ fields also supply Search and connected applications.",
         actions: [
-          `Open the [**public article**](${ARTICLE}), and briefly show **Bundling your car and home insurance** and its natural article copy. In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home → insurance-resources**, and select **bundle-car-and-home**. On the selected row, choose **Content tree options (•••) → Page content**. Confirm **English**. In the **Page content** panel beside the canvas, expand **Content** to inspect **Search title**, **Search description**, **Canonical URL**, and **Reference source**. Expand **Resource content** to show **Question** and **Plain-language answer** as structured fields for **Search** and connected AI applications, plus **Detailed explanation**. Leave all fields unchanged.`,
-          "In the same **Page content** panel, expand **Content**, or choose **Go to field → State applicability**. Locate **State applicability**, **Products**, and **Audience**. Open each field’s selection control: the collapsed labels show **1 item selected** or **2 items selected**. Show **All states** under **State applicability**, **Auto** and **Homeowners** under **Products**, and **All consumers** under **Audience**. Close each list before opening the next, and leave this approved version unchanged.",
-          "Return to the **Public website** tab’s article. In the browser, right-click a blank area, and choose **View page source**. If the browser context menu does not offer the source command, use Chrome’s **View → Developer → View Source** menu on Mac. In the source tab, enable **Line wrap**, then press **⌘F** (Mac) or **Ctrl+F** (Windows) to open **Find**, and locate the first **application/ld+json** script block. Identify **Article**, **headline → Bundling your car and home insurance**, **description**, and **mainEntityOfPage → @id**. Find the **canonical** link, and compare its URL with **@id**. Close the source tab, and return to the rendered article.",
+          `Open the [**bundling page**](${BUNDLING}), and expand **What's an auto and home insurance bundle?** in its FAQ section. In **Page Builder**, choose **Site switcher → Public Website → Editor → Pages**. In **Sitemap**, expand **Home**, and select **bundling**. On the selected row, choose **Content tree options (•••) → Page content**. Confirm **English**. In the panel beside the canvas, expand **Content** to inspect **Search title**, **Search description**, **Canonical URL**, and **Reference source**. Return to the canvas, and expand the first FAQ. Its visible **Question** and **Answer** are native fields used by Search and connected applications. Leave all content unchanged.`,
+          "In the same **Page content** panel, expand **Content**, or choose **Go to field → State applicability**. Open **State applicability** to show **All states**, then close it. Open **Products** to show **Auto**, **Homeowners**, **Renters**, and **Condo** selected independently, then close it. Open **Audience** to show **All consumers**, then close it. Leave all selections unchanged.",
+          "Return to the **Public website** tab’s bundling page. Right-click a blank area, and choose **View page source**. If needed on Mac, use Chrome’s **View → Developer → View Source** menu. Enable **Line wrap**, then press **⌘F** (Mac) or **Ctrl+F** (Windows). Find **FAQPage**, and use the actual JSON-LD script block rather than a later escaped copy in application data. Show **mainEntity → Question → name**, **acceptedAnswer → text**, and the FAQ **url** matching the visible first FAQ. Find **canonical** to show the page’s **rel=canonical** link. Close the source tab, and return to the rendered bundling page.",
         ],
         expected: [
-          "The resource page owns its natural article, governed search metadata, managed classifications, and canonical Article schema. Search and connected applications reuse its structured CMS fields.",
+          "The bundling page owns its governed metadata, managed classifications, and visible FAQs. FAQPage schema, individual Search records, and native APIs reuse those same FAQ fields.",
         ],
         talkTrack: [
-          "The customer reads a natural article about bundling car and home insurance. Behind it, the marketer manages the Search title and description, canonical URL, source, and applicability on one page. Its published Article schema supports external discovery; its structured fields also serve Search and connected applications.",
+          "The customer sees a normal bundling page, including useful FAQs. The marketer manages its Search title and description, canonical URL, and applicability as native page fields. The same visible FAQ questions and answers supply structured data, Search records that link back to this page, and the content API. Liberty Mutual maintains this guidance once.",
           customerDemoAiContext.public.talkTrack,
         ],
         controls: [
-          "The **Page content** panel keeps native resource fields and **Checklist** classifications beside the page canvas. Classification choices are maintained beneath **Data → Taxonomy**. If a template question arises, the full **Page Builder → Content → Quick Info** view identifies **PublicResourcePage**; that extra view is not needed for the live loop. Content and classifications follow the same publication into Search and the content API.",
-          "The public rendering supplies **Article** schema: **headline** uses the native page **Title**, **description** uses **Search description**, and **url** and **mainEntityOfPage → @id** use **Canonical URL**. These published fields support permitted crawlers. **Question** and **Plain-language answer** remain native CMS fields for Search and connected applications through their configured APIs.",
+          "The native **Page content** panel keeps metadata and **Checklist** classifications beside the canvas. Choices are maintained beneath **Data → Taxonomy**. The **Questions and answers** component renders the page’s native FAQ items. Search inherits the parent page’s state, product, and audience classifications for each FAQ record.",
+          "The public rendering supplies **FAQPage** JSON-LD from the same visible **Question** and **Answer** fields: **mainEntity** contains **Question** objects with **name**, **acceptedAnswer → text**, and native-ID anchor URLs on **/bundling**. The page’s **Canonical URL** supplies the canonical link. These fields support permitted crawlers.",
         ],
         links: [
-          { action: 1, afterLine: 0, label: "Public article", href: ARTICLE },
+          { action: 1, afterLine: 0, label: "Bundling page", href: BUNDLING },
           { action: 1, afterLine: 1, label: "SitecoreAI", href: SITECORE_AI },
         ],
-        images: [
-          {
-            file: "native-public-taxonomy-checklist.png",
-            afterAction: 2,
-            title: "Open a native checklist to inspect its selections",
-            alt: "Native Products checklist with Auto and Homeowners selected independently",
-            caption:
-              "Open **Products** using its **2 items selected** control to see the separate **Auto**, **Homeowners**, and **Condo** checkboxes. These are the resource page’s native classification fields. Leave the selected choices unchanged during this inspection.",
-          },
-          {
-            file: "demo-public-page-content-metadata.png",
-            afterAction: 1,
-            title: "Keep SEO metadata beside the natural article",
-            alt: "Native Page content Search title and Search description fields beside the public heading Bundling your car and home insurance.",
-            caption:
-              "**Search title** and **Search description** are native fields in **Page content**. The canvas beside them shows the natural article heading, **Bundling your car and home insurance**.",
-            crop: {
-              x: 300,
-              y: 390,
-              width: 950,
-              height: 245,
-              sourceWidth: 1280,
-              sourceHeight: 720,
-            },
-            annotations: [
-              {
-                x: 2.63,
-                y: 20.41,
-                width: 47.26,
-                height: 24.49,
-                label: "**Search title**",
-              },
-              {
-                x: 2.63,
-                y: 53.47,
-                width: 47.26,
-                height: 42.45,
-                label: "**Search description**",
-              },
-            ],
-          },
-        ],
         transition:
-          "Keep this same resource selected. Next, make a reviewed update and verify that Search receives the published wording automatically.",
+          "Keep this same bundling page selected. Next, update its first native FAQ, complete review, and verify that Search receives the published wording automatically.",
       },
       {
         id: "public-indexing",
@@ -412,18 +371,18 @@ export const customerDemoChapters: DemoChapter[] = [
             beforeLine: 2,
             action: 1,
             label: "Search by term",
-            value: "Can I bundle my car and home insurance?",
+            value: "What's an auto and home insurance bundle?",
           },
           {
             beforeLine: 3,
             action: 2,
-            label: "New resource version name",
-            value: "Resource page review",
+            label: "New FAQ version name",
+            value: "Bundling FAQ review",
           },
           {
             beforeLine: 5,
             action: 2,
-            label: "Detailed explanation — review sentence",
+            label: "FAQ answer — review sentence",
             value:
               "Review your options with your agent before choosing coverage.",
           },
@@ -431,7 +390,7 @@ export const customerDemoChapters: DemoChapter[] = [
             beforeLine: 2,
             action: 3,
             label: "Repeat Search by term",
-            value: "Can I bundle my car and home insurance?",
+            value: "What's an auto and home insurance bundle?",
           },
         ],
         presenterPoints: [
@@ -456,15 +415,15 @@ export const customerDemoChapters: DemoChapter[] = [
             "Confirm **body** does not contain **Review your options with your agent before choosing coverage.**",
           ],
           [
-            "Return to the existing **Page Builder** tab and the **bundle-car-and-home** page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed.",
-            "In the version selector, confirm the **latest version** is **Approved** and marked **Live**. Its **Detailed explanation** must not contain the review sentence.",
-            "Choose **Create version**, paste **New resource version name**, and select **Create**.",
-            "Reopen the version selector, explicitly select the newest **Resource page review → Draft** row, and wait for its fields to load. Confirm **Draft**.",
-            "Expand **Resource content**. Place the cursor at the end of **Detailed explanation**, and append **Detailed explanation — review sentence** exactly once. Retain all existing paragraphs; do not replace the field’s content.",
-            "Press **Tab**, or click outside **Detailed explanation**, to leave the edited field and save it. Wait for **Saved**. On this same new version, choose **Actions → Submit**, then **Submit**; confirm **Awaiting approval**.",
-            "Using the same presenter account, review this version’s complete content, choose **Actions → Approve**, then **Submit**; confirm **Approved**.",
-            "Choose **Publish**: keep **Page** and **Current language (English)** selected; clear **Include related items** before **All references**.",
-            "Leave **Subpages** unchecked, select **Start publish**, and wait for completion.",
+            "Return to the existing **Page Builder** tab. In **Content**, expand **Home → bundling → Data → FAQs → Questions**, and select **01 What is an auto and home insurance bundle**. Confirm its **Question** is **What's an auto and home insurance bundle?**; this is the same visible FAQ inspected in P2.",
+            "In this FAQ item’s version selector, confirm the **latest version** is **Approved** and marked **Live**. Its **Answer** must not contain the review sentence.",
+            "Choose **Create version**, paste **New FAQ version name**, and select **Create**.",
+            "Reopen the FAQ item’s version selector, explicitly select the newest **Bundling FAQ review → Draft** row, and wait for its fields to load. Confirm **Draft**.",
+            "Return to **Editor → Pages → bundling**, expand **What's an auto and home insurance bundle?**, and click its answer on the canvas. Append **FAQ answer — review sentence** exactly once at the end of **Answer**, retaining its existing wording.",
+            "Click outside **Answer**, and wait for **Saved**. Return to the same FAQ item in **Content**, reselect the new Draft version, then choose **Actions → Submit**, followed by **Submit**; confirm **Awaiting approval**.",
+            "Using the same presenter account, review this FAQ version’s complete answer, choose **Actions → Approve**, then **Submit**; confirm **Approved**.",
+            "Choose **Publish** on this FAQ item: keep **Item** and **Current language (English)** selected.",
+            "Leave **Subitems** unchecked, select **Start publish**, and wait for completion.",
           ],
           [
             "Return to the **Search Preview** tab, and refresh.",
@@ -476,48 +435,21 @@ export const customerDemoChapters: DemoChapter[] = [
         presenterResult:
           "The native Search document contains the newly published sentence, with its **state**, **product**, and **audience** unchanged.",
         actions: [
-          `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **Can I bundle my car and home insurance?** in **Search by term**, open the matching row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent.`,
-          "Return to **Page Builder** for **bundle-car-and-home**, the page kept selected from P2. Reopen **Content tree options (•••) → Page content** only if its panel is closed. Confirm the **latest version** is **Approved** and marked **Live**, with the review sentence absent. Choose **Create version**, name it **Resource page review**, and select **Create**. Reopen the version selector, explicitly select the newest **Resource page review → Draft** row, and wait for its fields to finish loading. Expand **Resource content**. At the end of **Detailed explanation**, append **Review your options with your agent before choosing coverage.** exactly once, retaining all existing paragraphs. Press **Tab**, or click outside **Detailed explanation**, to leave the edited field and save it. Wait for **Saved**. On this same new version, choose **Actions → Submit**, then **Submit**, and confirm **Awaiting approval**. Using the same presenter account, review the complete content, choose **Actions → Approve**, then **Submit**, and confirm **Approved**. Choose **Publish**. **Page** is already selected. Keep **Current language (English)** selected. Clear **Include related items** first, then clear **All references**; the related-items control disappears when **All references** is cleared. Leave **Subpages** unchecked, and select **Start publish**.",
-          `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact title search, and expand the result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence and that **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
+          `Open [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}). Enter **What's an auto and home insurance bundle?** in **Search by term**, open the matching FAQ row with **Toggle document details**, and confirm that **Review your options with your agent before choosing coverage.** is absent.`,
+          "Return to **Page Builder**. In **Content**, expand **Home → bundling → Data → FAQs → Questions**, and select **01 What is an auto and home insurance bundle**. Confirm **Question → What's an auto and home insurance bundle?**, its **latest version** is **Approved** and marked **Live**, and its **Answer** lacks the review sentence. Choose **Create version**, name it **Bundling FAQ review**, and select **Create**. Explicitly select the newest **Bundling FAQ review → Draft** row, and wait for its fields to finish loading. Return to **Editor → Pages → bundling**, expand that FAQ, and click its answer on the canvas. At the end of **Answer**, append **Review your options with your agent before choosing coverage.** exactly once, retaining its existing wording. Click outside **Answer**, and wait for **Saved**. Return to this same FAQ in **Content**, reselect the new Draft version, choose **Actions → Submit**, then **Submit**, and confirm **Awaiting approval**. Using the same presenter account, review the complete answer, choose **Actions → Approve**, then **Submit**, and confirm **Approved**. Choose **Publish** with **Item** and **Current language (English)** selected; leave **Subitems** unchecked, then select **Start publish**.",
+          `Wait for the publishing job to complete. Return to [**SitecoreAI Search → Preview**](${SEARCH_SOURCE}), refresh, repeat the exact question search, and expand the FAQ result. If the prior wording is still visible, allow content distribution and the automatic Search update to finish, then refresh again until the added sentence appears. Confirm that **body** contains the added sentence, **url** points to the FAQ on **/bundling**, and **state**, **product**, and **audience** remain correct. No manual reindex or second content edit is needed.`,
         ],
         expected: [
-          "A single approved page publication updates the native Search record automatically, including the changed body and unchanged applicability metadata.",
+          "Publishing one reviewed native FAQ updates its individual Search record automatically, including the changed answer, canonical page anchor, and inherited applicability metadata.",
         ],
         talkTrack: [
-          "We create one fresh Draft, retain the article, and append one sentence. The same presenter account submits, reviews, and publishes that revision; separate roles normally govern those actions. Experience Edge distributes published content globally, while the configured publication flow keeps Search aligned with the approved wording and classifications. The team manages the page content once across these delivery channels.",
+          "We create a Draft of this native FAQ, keep its existing answer, and append one sentence on the page canvas. The same presenter account submits, reviews, and publishes that revision; separate roles normally govern those actions. Experience Edge distributes the approved answer globally, while the configured publication flow updates its Search record and retains the page’s classifications. Liberty Mutual maintains the guidance once across these delivery channels.",
         ],
         controls: [
-          "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. This loop follows the resource page’s own guidance and applicability metadata.",
+          "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. Each visible FAQ receives its own Search record linking to its native anchor on **/bundling**, with state, product, and audience inherited from that page. This loop publishes the FAQ item itself; creating a page version does not create a new FAQ version.",
         ],
         links: [
           { action: 1, afterLine: 0, label: "SitecoreAI", href: SITECORE_AI },
-        ],
-        images: [
-          {
-            file: "demo-public-search-published-body.png",
-            title: "The published sentence appears in Search",
-            alt: "In the expanded native Search document, body now contains the sentence published from the page. This is the automatic update to verify.",
-            caption:
-              "In the expanded native **Search** document, body now contains the sentence published from the page. This is the automatic update to verify.",
-            afterAction: 3,
-            crop: {
-              x: 80,
-              y: 90,
-              width: 1280,
-              height: 720,
-              sourceWidth: 1440,
-              sourceHeight: 900,
-            },
-            annotations: [
-              {
-                x: 10.23,
-                y: 25.69,
-                width: 87.34,
-                height: 29.58,
-                label: "The updated published body is in **Search**",
-              },
-            ],
-          },
         ],
         transition:
           "The published answer and Search now agree. Next, give a marketer the same control over a complete page.",
@@ -1140,9 +1072,9 @@ export const customerDemoChapters: DemoChapter[] = [
         scenario:
           "Another application needs the same approved guidance without maintaining another copy.",
         objective:
-          "Show how any application can retrieve the same published page fields through Experience Edge’s native GraphQL API.",
+          "Show how any application can retrieve the same published FAQ fields through Experience Edge’s native GraphQL API.",
         stopWhen:
-          "The native GraphQL response shows the same page ID, published version, question, answer, and Detailed explanation, including the sentence published in P3.",
+          "The native GraphQL response shows the same FAQ item ID, published version, question and answer, including the sentence published in P3.",
         inputs: [
           {
             beforeLine: 2,
@@ -1157,21 +1089,19 @@ export const customerDemoChapters: DemoChapter[] = [
             action: 2,
             label: "GraphQL query",
             value: `query PublishedCoverageGuidance {
-  item(path: "{AE109FC0-B508-5840-97EB-0B2C02AE1A9B}", language: "en") {
+  item(path: "{8C73B233-9576-52D7-BD5A-A78756A08C14}", language: "en") {
     id
     name
     version
     question: field(name: "question") { value }
     answer: field(name: "answer") { value }
-    explanation: field(name: "explanation") { value }
-    source: field(name: "sourceLink") { jsonValue }
   }
 }`,
           },
         ],
         presenterPoints: [
           "**Say:** “One approved source can serve the website and other applications. Liberty Mutual can reuse guidance without maintaining competing copies, and each channel can present that content in the way its audience needs.”",
-          "Point to the same page ID, published version, and newly published sentence in the live GraphQL response.",
+          "Point to the same FAQ item ID, published version, and newly published sentence in the live GraphQL response.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 2 },
@@ -1179,7 +1109,7 @@ export const customerDemoChapters: DemoChapter[] = [
         ],
         actionPurposes: [
           "Show where Experience Edge delivers approved content",
-          "Retrieve the published page through native GraphQL",
+          "Retrieve the published FAQ through native GraphQL",
           "Verify the API and website use the same revision",
           "Explain reuse by other applications without duplicate content",
         ],
@@ -1194,33 +1124,33 @@ export const customerDemoChapters: DemoChapter[] = [
             "Copy **GraphQL query**, replace the existing text in the left **Query** editor, and select the triangular **Run** button.",
           ],
           [
-            "In the response on the right, show **id**, **version**, **question**, **answer**, **explanation**, and **source**.",
-            "Find **Review your options with your agent before choosing coverage.** in **explanation**.",
-            "Switch to the **Public website** tab, open the **Public article** URL, and compare the wording. Return to **GraphQL Explorer**.",
+            "In the response on the right, show **id**, **version**, **question**, and **answer**.",
+            "Find **Review your options with your agent before choosing coverage.** in **answer**.",
+            "Switch to the **Public website** tab, open the **Published FAQ** URL, and expand its answer, and compare the wording. Return to **GraphQL Explorer**.",
           ],
           [
             "Explain that the front end, LibertyAir, or any other application can retrieve these same published fields through the native API.",
-            "Finish on the actual response: one approved page, available to multiple experiences without another content copy.",
+            "Finish on the actual response: one approved FAQ, available to multiple experiences without another content copy.",
           ],
         ],
         presenterResult:
-          "The native GraphQL response and public article show the same published guidance and added sentence, with the resource page’s ID, published version, and source.",
+          "The native GraphQL response and the bundling page’s first FAQ show the same published question, answer, and added sentence, with the native FAQ item’s ID and published version.",
         actions: [
           "Show **Experience Edge content delivery** in [**the shared presentation**](https://sitecore1.sharepoint.com/:p:/s/Ops/cQoDg9wZPRa8Tb3nJmHAOX-TEgUCuSmQQA7MGbe1g6C_LnOG3A). Trace **SitecoreAI authoring → Publish → Experience Edge → API consumers**.",
           `Open the prepared [**GraphQL Explorer**](${GRAPHQL_EXPLORER}). Its **HTTP HEADERS** must use the **Live Delivery API token** configured in **P0**, not Preview. Use the **HTTP headers** copy field below if needed. Copy **GraphQL query** below, replace the existing text in the left **Query** editor, and select the triangular **Run** button.`,
-          `In the response on the right, identify **id**, **version**, **question**, **answer**, **explanation**, and **source**. Find **Review your options with your agent before choosing coverage.** in **explanation**, and briefly compare it with [**the public article**](${ARTICLE}). Return to **GraphQL Explorer**.`,
+          `In the response on the right, identify **id**, **version**, **question**, and **answer**. Find **Review your options with your agent before choosing coverage.** in **answer**, and briefly compare it with [**the published FAQ**](${BUNDLING_FAQ}). Return to **GraphQL Explorer**.`,
           "Explain that the front end, LibertyAir, or any other application can retrieve these same published fields through the native API. Finish on the actual response; no additional application demonstration is needed.",
         ],
         expected: [
-          "Experience Edge’s native GraphQL API returns the same approved, published page fields used by the public website.",
+          "Experience Edge’s native GraphQL API returns the same approved, published FAQ fields used by the public website.",
         ],
         talkTrack: [
           "Content teams manage and approve content in SitecoreAI. Publishing sends that content to Experience Edge, Sitecore’s globally distributed content delivery service. Websites and other applications retrieve it through APIs. That lets Liberty Mutual reuse one approved source across experiences, while publishing content independently of application deployments.",
-          "This is the native GraphQL response for the same car-and-home page. Its ID, published version, guidance, and source come directly from Live Experience Edge, including the sentence we just published. The website, LibertyAir, or another application can retrieve these fields without maintaining another copy of the content.",
+          "This is the native GraphQL response for the same FAQ on the bundling page. Its ID, published version, question, and answer come directly from Live Experience Edge, including the sentence we just published. The website, LibertyAir, or another application can retrieve these fields without maintaining another copy of the content.",
         ],
         controls: [
           "**GraphQL Explorer** queries **Live Experience Edge** using a generated **Delivery API token** in the **sc_apikey** HTTP header. The token is configured locally before the demonstration; it is not part of the query or link.",
-          "The query selects the resource page by its stable item ID and English language. **version** identifies its published content version. Draft and Preview content remain in authoring.",
+          "The query selects the native FAQ item by its stable item ID and English language. **version** identifies its published content version. Draft and Preview content remain in authoring.",
         ],
         links: [
           {
@@ -1229,7 +1159,12 @@ export const customerDemoChapters: DemoChapter[] = [
             label: "GraphQL Explorer",
             href: GRAPHQL_EXPLORER,
           },
-          { action: 3, afterLine: 2, label: "Public article", href: ARTICLE },
+          {
+            action: 3,
+            afterLine: 2,
+            label: "Published FAQ",
+            href: BUNDLING_FAQ,
+          },
         ],
         transition:
           "The same approved content can serve another application. Next, move to the second journey in your guide: a relevant Liberty Mutual experience for independent agents.",
