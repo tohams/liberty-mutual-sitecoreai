@@ -55,6 +55,9 @@ function Selector({
   );
   const [zip, setZip] = useState(incoming.zip);
   const zipId = useId();
+  const selectionErrorId = useId();
+  const [selectionError, setSelectionError] = useState(false);
+  const optionsRef = useRef<HTMLFieldSetElement>(null);
   const form = useRef<HTMLFormElement>(null);
   if (!fields) return null;
   const options = Array.isArray(fields.products)
@@ -64,6 +67,7 @@ function Selector({
     : [];
   const choose = (key: ProductKey, checked: boolean) => {
     if (!page.mode.isNormal) return;
+    setSelectionError(false);
     setSelected((current) => {
       if (!checked) return current.filter((part) => part !== key);
       if (!["auto", "home", "renters", "condo"].includes(key)) return [key];
@@ -92,7 +96,13 @@ function Selector({
       (event.currentTarget.target && event.currentTarget.target !== "_self")
     )
       return;
-    if (quote && (!selected.length || !form.current?.reportValidity())) {
+    if (quote && !selected.length) {
+      event.preventDefault();
+      setSelectionError(true);
+      optionsRef.current?.querySelector<HTMLInputElement>("input")?.focus();
+      return;
+    }
+    if (quote && !form.current?.reportValidity()) {
       event.preventDefault();
       return;
     }
@@ -134,7 +144,11 @@ function Selector({
           </div>
         )}
         {style !== "compact" && (
-          <fieldset className="public-product-selector__options">
+          <fieldset
+            className="public-product-selector__options"
+            ref={optionsRef}
+            aria-describedby={selectionError ? selectionErrorId : undefined}
+          >
             <legend className="sr-only">Choose insurance products</legend>
             {options.map((option) => {
               const key = option.fields.productKey?.value as ProductKey;
@@ -169,6 +183,11 @@ function Selector({
               );
             })}
           </fieldset>
+        )}
+        {selectionError && (
+          <p id={selectionErrorId} className="public-prose" role="alert">
+            Choose at least one insurance product to continue.
+          </p>
         )}
         <form
           ref={form}

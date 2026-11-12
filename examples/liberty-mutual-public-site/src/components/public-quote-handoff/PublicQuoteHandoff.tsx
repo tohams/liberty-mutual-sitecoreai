@@ -39,6 +39,7 @@ function Handoff({
   const router = useRouter();
   const context = publicContext(query);
   if (!fields) return null;
+  if (!agent && page.mode.isNormal && !context.products.length) return null;
   const key = productContextKey(context.products);
   const products = Array.isArray(fields.products) ? fields.products : [];
   const selected = products.find(
