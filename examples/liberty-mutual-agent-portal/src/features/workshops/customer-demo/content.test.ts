@@ -1655,3 +1655,64 @@ test("evidence and copy cues appear while their corresponding screen is visible"
   assert.match(prose(comparison.slice(0, comparisonSpeech)), /2025.*2026/);
   assert.match(prose(comparison.slice(comparisonSpeech + 1)), /Choose.*close/);
 });
+
+test("every Do block has a concise authored summary without moving its detailed clicks", () => {
+  for (const entry of steps) {
+    const beats = entry.presenterActions.flatMap((_, index) =>
+      presenterActionSequence(entry, index + 1, entry.inputs),
+    );
+    const actions = beats.filter((beat) => beat.kind === "action");
+    assert.deepEqual(
+      actions.map((beat) => beat.summary),
+      entry.actionSummaries.map((summary) => summary.text),
+      `${entry.id}: every authored task summary appears once`,
+    );
+    assert.deepEqual(
+      actions.flatMap((beat) => beat.lines),
+      entry.presenterActions.flat(),
+      `${entry.id}: collapsed details retain every exact click`,
+    );
+    for (const beat of actions) {
+      const summary = plainGuideText(beat.summary).trim();
+      assert(summary, `${entry.id}: each Do block needs a quick-scan task`);
+      assert(
+        summary.split(/\s+/).length <= 14,
+        `${entry.id}: keep the task heading brief`,
+      );
+      assert.doesNotMatch(summary, /https?:|click-by-click|step by step/i);
+    }
+  }
+  const discovery = step("public-discovery").actionSummaries;
+  assert.deepEqual(
+    discovery
+      .filter((summary) => summary.action === 1)
+      .map((summary) => summary.text),
+    [
+      "Show **bundling** public page.",
+      "Show first FAQ on **bundling** page in **Page Builder**.",
+    ],
+  );
+});
+
+test("Do summaries stay visible while their accessible click-by-click disclosures start closed", () => {
+  const page = readFileSync(
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
+    "utf8",
+  );
+  const panel = page.slice(
+    page.indexOf('data-demo-cue="action"'),
+    page.indexOf("export async function CustomerDemoGuide"),
+  );
+  assert(panel.indexOf("text={beat.summary}") < panel.indexOf("<details"));
+  assert.match(panel, /<details className={styles\.actionDetails}>/);
+  assert.doesNotMatch(panel, /<details[^>]*\bopen(?:\s|=|>)/);
+  assert.match(
+    panel,
+    /aria-label={`Click-by-click: \$\{plainGuideText\(beat\.summary\)\}`}/,
+  );
+  assert.match(panel, />\s*Click-by-click\s*<\/summary>/);
+  assert.match(
+    panel,
+    /<summary[\s\S]*<div className={styles\.actionInstructions}>[\s\S]*beat\.lines\.map/,
+  );
+});

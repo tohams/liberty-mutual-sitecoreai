@@ -27,6 +27,13 @@ export interface DemoPresenterCue extends DemoCuePosition {
 
 export interface DemoLaunchLink extends GuideLink, DemoCuePosition {}
 
+/** A quick-scan task heading before this one-based click line. */
+export interface DemoActionSummary {
+  action: number;
+  beforeLine: number;
+  text: string;
+}
+
 /** One card in the customer's prescribed use-case order. */
 export interface DemoStep {
   id: string;
@@ -51,6 +58,8 @@ export interface DemoStep {
   actionPurposes: string[];
   /** Exact clicks in the same action order as the copy fields and screenshots. */
   presenterActions: string[][];
+  /** Authored headings for the Do blocks; click details remain beneath each heading. */
+  actionSummaries: DemoActionSummary[];
   presenterResult: string;
   inputs?: DemoInput[];
   expected: string[];

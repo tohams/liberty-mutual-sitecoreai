@@ -20,6 +20,7 @@ import { getPresenterProfiles } from "./demo-profiles.server";
 import { bundlingFaqContent, GRAPHQL_EXPLORER } from "./demo-destinations";
 import type { DemoChapter, DemoInput, DemoStep } from "./types";
 import { GuideText } from "@/features/workshops/GuideText";
+import { plainGuideText } from "@/features/workshops/guide-text";
 import { GuideScreenshot } from "@/features/workshops/WorkshopControls";
 import {
   customerDemoChapters,
@@ -121,11 +122,23 @@ function PresenterActionSequence({
         <h5 className={styles.cueLabel}>
           <MousePointer2 size={15} aria-hidden="true" /> Do
         </h5>
-        {beat.lines.map((line, lineIndex) => (
-          <div className={styles.clickLine} key={lineIndex}>
-            <GuideText text={line} openLinksInNewTab />
+        <p className={styles.actionSummary}>
+          <GuideText text={beat.summary} openLinksInNewTab />
+        </p>
+        <details className={styles.actionDetails}>
+          <summary
+            aria-label={`Click-by-click: ${plainGuideText(beat.summary)}`}
+          >
+            Click-by-click
+          </summary>
+          <div className={styles.actionInstructions}>
+            {beat.lines.map((line, lineIndex) => (
+              <div className={styles.clickLine} key={lineIndex}>
+                <GuideText text={line} openLinksInNewTab />
+              </div>
+            ))}
           </div>
-        ))}
+        </details>
       </div>
     );
   });

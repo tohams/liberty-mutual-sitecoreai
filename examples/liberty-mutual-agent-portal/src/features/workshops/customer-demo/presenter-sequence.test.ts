@@ -5,7 +5,11 @@ import type { DemoInput, DemoStep } from "./types";
 
 const source: Pick<
   DemoStep,
-  "presenterActions" | "presenterPoints" | "presenterCues" | "links"
+  | "presenterActions"
+  | "actionSummaries"
+  | "presenterPoints"
+  | "presenterCues"
+  | "links"
 > = {
   presenterActions: [
     ["Create the page.", "Paste the heading.", "Save the page."],
@@ -14,6 +18,13 @@ const source: Pick<
       "Publish and wait for completion.",
       "Open the published page.",
     ],
+  ],
+  actionSummaries: [
+    { action: 1, beforeLine: 1, text: "Create the page" },
+    { action: 1, beforeLine: 2, text: "Edit the heading" },
+    { action: 1, beforeLine: 3, text: "Save the page" },
+    { action: 2, beforeLine: 1, text: "Approve and publish" },
+    { action: 2, beforeLine: 3, text: "Open the live page" },
   ],
   presenterPoints: [
     "Introduce the goal.",
@@ -53,11 +64,15 @@ test("spoken context, destination, actions, and copy values follow the presentat
   assert.deepEqual(sequence, [
     { kind: "say", lines: ["Introduce the goal."] },
     { kind: "url", links: [source.links![0]] },
-    { kind: "action", lines: ["Create the page."] },
+    { kind: "action", summary: "Create the page", lines: ["Create the page."] },
     { kind: "copy", inputs: [input] },
-    { kind: "action", lines: ["Paste the heading."] },
+    {
+      kind: "action",
+      summary: "Edit the heading",
+      lines: ["Paste the heading."],
+    },
     { kind: "say", lines: ["Show the editable heading."] },
-    { kind: "action", lines: ["Save the page."] },
+    { kind: "action", summary: "Save the page", lines: ["Save the page."] },
   ]);
 });
 
@@ -65,10 +80,15 @@ test("the published URL follows completed publication, while uninterrupted actio
   assert.deepEqual(presenterActionSequence(source, 2, [input]), [
     {
       kind: "action",
+      summary: "Approve and publish",
       lines: ["Approve the page.", "Publish and wait for completion."],
     },
     { kind: "url", links: [source.links![1]] },
-    { kind: "action", lines: ["Open the published page."] },
+    {
+      kind: "action",
+      summary: "Open the live page",
+      lines: ["Open the published page."],
+    },
     { kind: "say", lines: ["Show the published result."] },
   ]);
 });
@@ -141,4 +161,56 @@ test("invalid cue references fail rather than silently dropping speaking or copy
     () => presenterActionSequence(source, 1, [{ ...input, beforeLine: 4 }]),
     RangeError,
   );
+});
+
+test("authored summaries can split an uninterrupted task without moving clicks or cues", () => {
+  const step = {
+    ...source,
+    actionSummaries: [
+      ...source.actionSummaries,
+      { action: 2, beforeLine: 2, text: "Wait for publication" },
+    ],
+  };
+  const sequence = presenterActionSequence(step, 2, [input]);
+  const actions = sequence.filter((beat) => beat.kind === "action");
+  assert.deepEqual(
+    actions.map((beat) => beat.summary),
+    ["Approve and publish", "Wait for publication", "Open the live page"],
+  );
+  assert.deepEqual(
+    actions.flatMap((beat) => beat.lines),
+    source.presenterActions[1],
+  );
+  assert.deepEqual(
+    sequence.filter((beat) => beat.kind !== "action"),
+    presenterActionSequence(source, 2, [input]).filter(
+      (beat) => beat.kind !== "action",
+    ),
+  );
+});
+
+test("missing, duplicate, empty, or misplaced Do summaries fail instead of hiding click instructions", () => {
+  const invalid = [
+    source.actionSummaries.filter(
+      (summary) => !(summary.action === 1 && summary.beforeLine === 2),
+    ),
+    [...source.actionSummaries, source.actionSummaries[0]],
+    [
+      { ...source.actionSummaries[0], text: " " },
+      ...source.actionSummaries.slice(1),
+    ],
+    [
+      ...source.actionSummaries,
+      { action: 1, beforeLine: 4, text: "Outside the action" },
+    ],
+    [
+      ...source.actionSummaries,
+      { action: 0, beforeLine: 1, text: "Outside the action" },
+    ],
+  ];
+  for (const actionSummaries of invalid)
+    assert.throws(
+      () => presenterActionSequence({ ...source, actionSummaries }, 1, [input]),
+      RangeError,
+    );
 });

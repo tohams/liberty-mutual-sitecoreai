@@ -105,6 +105,23 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 4 },
           { point: 3, action: 3, afterLine: 2 },
         ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open **Search** on the **Public Website** **Home** page.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "**Search** the question; show **bundling** and related results.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Show **No results found** and **Contact an agent**.",
+          },
+        ],
         actionPurposes: [
           "Start the customer’s search for insurance guidance",
           "Find relevant guidance from a natural-language question",
@@ -307,6 +324,39 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 3, afterLine: 4 },
         ],
+        actionSummaries: [
+          { action: 1, beforeLine: 1, text: "Show **bundling** public page." },
+          {
+            action: 1,
+            beforeLine: 2,
+            text: "Show first FAQ on **bundling** page in **Page Builder**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Show the state, product, and audience checklists.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Open the **bundling** page’s source in the browser.",
+          },
+          {
+            action: 3,
+            beforeLine: 2,
+            text: "Show **FAQPage** schema matching the first visible FAQ.",
+          },
+          {
+            action: 3,
+            beforeLine: 4,
+            text: "Show the canonical link to the **bundling** page.",
+          },
+          {
+            action: 3,
+            beforeLine: 5,
+            text: "Close page source; return to the public page.",
+          },
+        ],
         actionPurposes: [
           "Show the bundling page’s content and governed metadata",
           "Show how taxonomy identifies content applicability",
@@ -409,6 +459,43 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 2, afterLine: 9 },
           { point: 3, action: 3, afterLine: 4 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open the public **Search** source’s **Preview** tab.",
+          },
+          {
+            action: 1,
+            beforeLine: 2,
+            text: "Show the FAQ’s existing **Search** body before editing.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Open the first **bundling** FAQ’s latest **Live** version.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Create the **Bundling FAQ review** **Draft** version.",
+          },
+          {
+            action: 2,
+            beforeLine: 5,
+            text: "Append the review sentence, approve, and publish.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Return to **Search Preview** and refresh its content.",
+          },
+          {
+            action: 3,
+            beforeLine: 2,
+            text: "Verify the new sentence and unchanged **Search** classifications.",
+          },
         ],
         actionPurposes: [
           "Establish the clean Search record before the update",
@@ -524,6 +611,83 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 4, afterLine: 5 },
           { point: 3, action: 8, afterLine: 4 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Create a **Landing page** beneath **Public Website** **Home**.",
+          },
+          {
+            action: 1,
+            beforeLine: 4,
+            text: "Name the new page **coverage-page**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Select **coverage-page** and confirm its canvas.",
+          },
+          {
+            action: 2,
+            beforeLine: 2,
+            text: "Add the **Hero** heading on the canvas.",
+          },
+          {
+            action: 2,
+            beforeLine: 4,
+            text: "Add the **Article text** heading.",
+          },
+          {
+            action: 2,
+            beforeLine: 5,
+            text: "Add the **Article text** body and save.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Choose the family photograph from **Modern Media Library**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Reuse **Bundle and save**; compare **Image left** / **Image right**.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "**Preview** the complete page before publication.",
+          },
+          {
+            action: 6,
+            beforeLine: 1,
+            text: "Open **Submit** for the **coverage-page** **Draft**.",
+          },
+          {
+            action: 6,
+            beforeLine: 2,
+            text: "**Submit** the page and local content for approval.",
+          },
+          {
+            action: 7,
+            beforeLine: 1,
+            text: "Review the complete **coverage-page** on its canvas.",
+          },
+          {
+            action: 7,
+            beforeLine: 2,
+            text: "**Approve** the page after reviewing its content.",
+          },
+          {
+            action: 8,
+            beforeLine: 1,
+            text: "**Publish** the page with its referenced content.",
+          },
+          {
+            action: 8,
+            beforeLine: 4,
+            text: "Verify the published headings, image, and shared **Promotion**.",
+          },
         ],
         actionPurposes: [
           "Create a page with approved structure",
@@ -804,6 +968,28 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 3, afterLine: 5 },
           { point: 2, action: 4, afterLine: 3 },
         ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open **Prospera**’s **Home** recommendations in the Private window.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Compare **Original content** with **Suggested content**.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Locate the suggested change in **Prospera** **Page Builder**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Explain proposed **Profound** intake and human review.",
+          },
+        ],
         actionPurposes: [
           "Open the existing Scrunch recommendation example",
           "Compare live copy with the proposed improvement",
@@ -1006,6 +1192,23 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 3, afterLine: 2 },
         ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Filter monthly public **Events Table** to **pageView** and CTA clicks.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Show recorded page views and CTA event counts.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Connect **LM_PUBLIC_CTA_CLICK** to a visitor’s next-step selection.",
+          },
+        ],
         actionPurposes: [
           "Focus analytics on the site and reporting period",
           "Read actual page views and CTA engagement",
@@ -1114,6 +1317,43 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 2 },
           { point: 2, action: 3, afterLine: 2 },
         ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Trace publishing through **Experience Edge** to consuming applications.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Switch to the prepared **GraphQL Explorer** tab.",
+          },
+          {
+            action: 2,
+            beforeLine: 2,
+            text: "Confirm **Live Delivery API token** in **HTTP HEADERS**.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Run the GraphQL query for the published FAQ.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Show the published FAQ fields and added sentence.",
+          },
+          {
+            action: 3,
+            beforeLine: 3,
+            text: "Compare the API response with the public FAQ.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Explain content reuse by **LibertyAir** and other applications.",
+          },
+        ],
         actionPurposes: [
           "Show where Experience Edge delivers approved content",
           "Retrieve the published FAQ through native GraphQL",
@@ -1209,6 +1449,38 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 5, afterLine: 3 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Show **Daniel**’s producer priorities, role, and licensed states.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Compare **Avery**’s principal priorities, role, and licensed states.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Find **Avery**’s profile and copy her Client ID.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Test **Avery**’s Client ID against **Agency growth**.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "Show **Agent priority**’s **Agency growth** and **Producer priorities** conditions.",
+          },
+          {
+            action: 5,
+            beforeLine: 4,
+            text: "Explain named results; return to **Page Builder**.",
+          },
         ],
         actionPurposes: [
           "Show Daniel’s producer baseline for comparison",
@@ -1389,6 +1661,43 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 2, afterLine: 4 },
           { point: 3, action: 3, afterLine: 2 },
         ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Show the published **Brand Kit**’s **Tone of Voice**.",
+          },
+          {
+            action: 1,
+            beforeLine: 3,
+            text: "Explain how the **Brand Kit** guides content generation.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Select **Agency priorities**’ **Introduction** in **Page Builder**.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Generate expanded copy and compare the AI suggestion.",
+          },
+          {
+            action: 2,
+            beforeLine: 5,
+            text: "**Revert to original** and show author control.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Show the **Agency priorities** placeholder’s permitted components.",
+          },
+          {
+            action: 3,
+            beforeLine: 3,
+            text: "Close the picker; explain governed content and design.",
+          },
+        ],
         actionPurposes: [
           "Show the Brand Kit that guides AI-assisted writing",
           "Review an expanded introduction and retain author control",
@@ -1556,6 +1865,28 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 3, afterLine: 4 },
         ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Select **Agency growth priorities** and its **Ordered recommendations**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Show the original published recommendation order.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Create the Texas guidance priority **Draft** version.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Put Texas guidance first; save the unpublished **Draft**.",
+          },
+        ],
         actionPurposes: [
           "Locate the marketer-managed priority collection",
           "Create a Draft while preserving the published order",
@@ -1669,6 +2000,53 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 2 },
           { point: 2, action: 3, afterLine: 3 },
           { point: 3, action: 6, afterLine: 4 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open **Personalization Preview** for **Agent Portal** **Home**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "**Preview** **Agency growth priorities** with Texas guidance first.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "**Preview** the producer’s unchanged household-first recommendation order.",
+          },
+          {
+            action: 3,
+            beforeLine: 4,
+            text: "Close the preview and return to **Page Builder**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Open the saved **Agency growth priorities** **Draft**.",
+          },
+          {
+            action: 4,
+            beforeLine: 3,
+            text: "**Submit** the saved priority change for approval.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "Review the same **Draft**’s Texas-first recommendation order.",
+          },
+          {
+            action: 5,
+            beforeLine: 2,
+            text: "**Approve** the reviewed **Agency growth priorities** version.",
+          },
+          {
+            action: 6,
+            beforeLine: 1,
+            text: "**Publish**; verify **Avery** changes and **Daniel** stays unchanged.",
+          },
         ],
         actionPurposes: [
           "Open the selected page’s available content variants",
@@ -1791,6 +2169,58 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 2, action: 4, afterLine: 5 },
           { point: 3, action: 5, afterLine: 3 },
         ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Show the shared **Copyright notice** and original 2025 version.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Create the **Copyright year update** **Draft** version.",
+          },
+          {
+            action: 2,
+            beforeLine: 4,
+            text: "Change only 2025 to 2026; save the version.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Select the saved **Draft** showing copyright year 2026.",
+          },
+          {
+            action: 3,
+            beforeLine: 2,
+            text: "**Submit** the shared notice, then review its wording.",
+          },
+          {
+            action: 3,
+            beforeLine: 4,
+            text: "**Approve** the saved **Copyright year update** version.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "**Publish** once; compare the year-only change between versions.",
+          },
+          {
+            action: 4,
+            beforeLine: 6,
+            text: "Close the **Copyright notice** version comparison.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "Wait for the shared content publication to finish.",
+          },
+          {
+            action: 5,
+            beforeLine: 2,
+            text: "Verify the full 2026 notice on both sites.",
+          },
+        ],
         actionPurposes: [
           "Locate the shared copyright source for both sites",
           "Change the year while preserving the full notice",
@@ -1905,6 +2335,53 @@ export const customerDemoChapters: DemoChapter[] = [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 5, afterLine: 6 },
           { point: 3, action: 6, afterLine: 2 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open the shared **Copyright notice** in **Page Builder**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Find the retained original and changed copyright versions.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Select the original 2025 notice before creating a version.",
+          },
+          {
+            action: 3,
+            beforeLine: 3,
+            text: "Create and select the **Copyright year restored** **Draft**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Review the restored **Draft**’s full 2025 notice.",
+          },
+          {
+            action: 4,
+            beforeLine: 2,
+            text: "**Submit** the restored notice and review its wording.",
+          },
+          {
+            action: 4,
+            beforeLine: 4,
+            text: "**Approve** the restored **Copyright notice** version.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "**Publish**; show matching restored wording and update history.",
+          },
+          {
+            action: 6,
+            beforeLine: 1,
+            text: "Verify both footers show the restored 2025 notice.",
+          },
         ],
         actionPurposes: [
           "Open the shared notice for controlled restoration",

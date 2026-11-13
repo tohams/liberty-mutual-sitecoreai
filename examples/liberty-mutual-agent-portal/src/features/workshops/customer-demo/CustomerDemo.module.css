@@ -493,6 +493,31 @@
   font-size: 13px;
   line-height: 1.6;
 }
+.article .actionSummary {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.actionDetails {
+  margin-top: 6px;
+}
+.actionDetails > summary {
+  width: fit-content;
+  border-radius: 3px;
+  color: #225d91;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.actionDetails > summary:focus-visible {
+  outline: 2px solid #8551b4;
+  outline-offset: 3px;
+}
+.actionInstructions {
+  margin-top: 8px;
+}
 .screenshot {
   margin: 12px 0;
   border: 1px solid var(--w-line);
