@@ -71,7 +71,7 @@ function roleSpecs(pairNumbers) {
 const READ_ONLY = Object.freeze({ "item:read": true, "item:write": false, "item:create": false, "item:delete": false, "item:rename": false, "item:admin": false });
 const EDIT_PAGE = Object.freeze({ ...READ_ONLY, "item:write": true });
 function aclEntry(role, item, descendants = {}) {
-  assert(role.startsWith(ROLE_PREFIX) && !/[|\r\n]/.test(role), "Only workshop roles can receive an ACL entry.");
+  assert((role.startsWith(ROLE_PREFIX) || role === "sitecore\\Liberty Mutual Demo Presenter") && !/[|\r\n]/.test(role), "Only workshop roles or the dedicated demo presenter can receive an ACL entry.");
   const encode = rights => Object.entries(rights).map(([right, allowed]) => {
     assert(/^(item:(read|write|create|delete|rename|admin)|workflowState:(write|delete)|workflowCommand:execute)$/.test(right) && typeof allowed === "boolean", "Unexpected right in workshop ACL.");
     return (allowed ? "+" : "-") + right;

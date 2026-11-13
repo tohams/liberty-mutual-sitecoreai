@@ -58,6 +58,42 @@ test("public review has exactly three states, separated commands, and no publish
   );
 });
 
+test("the dedicated presenter can review content without deleting versions or writing approved content", () => {
+  const specs = W.specifications();
+  const explicit = specs.filter((spec) =>
+    spec.fields.__Security?.includes(`ar|${W.DEMO_PRESENTER_ROLE}|`),
+  );
+  assert.deepEqual(
+    explicit.map((spec) => spec.key),
+    ["workflow", "draft", "awaiting", "approved"],
+  );
+  for (const spec of explicit) {
+    const permissions = rights(spec.fields.__Security, W.DEMO_PRESENTER_ROLE);
+    for (const permission of [
+      "-item:write",
+      "-item:delete",
+      "-item:admin",
+      "-workflowState:delete",
+    ])
+      assert(permissions.includes(permission));
+    assert(!permissions.includes("+workflowState:delete"));
+    if (spec.key === "workflow")
+      assert(permissions.includes("+workflowCommand:execute"));
+    else
+      assert(
+        permissions.includes(
+          `${spec.key === "approved" ? "-" : "+"}workflowState:write`,
+        ),
+      );
+  }
+  assert.deepEqual(W.DEMO_PRESENTER_PARENTS, [
+    "sitecore\\Sitecore Client Authoring",
+    "sitecore\\Sitecore Client Designing",
+    "sitecore\\Sitecore Client Publishing",
+    "sitecore\\Sitecore Client Users",
+  ]);
+});
+
 test("workflow migration preserves approved content and refuses foreign or unknown states", () => {
   assert.equal(
     W.stateFor(W.BASIC.workflow, W.BASIC.draft).toLowerCase(),
@@ -132,7 +168,9 @@ test("ACL scalars retain one literal native domain slash and the recovery except
     assert.equal(W.serializedValue({ Hint: "__Security", Value: acl }), acl);
     assert.deepEqual(
       acl.match(/\\+/g).map((value) => value.length),
-      [1, 1],
+      spec.fields.__Security.includes(W.DEMO_PRESENTER_ROLE)
+        ? [1, 1, 1]
+        : [1, 1],
     );
     const escaped = acl.replaceAll("\\", "\\\\");
     assert.equal(W.isEscapedAclArtifact(escaped, acl), true);
