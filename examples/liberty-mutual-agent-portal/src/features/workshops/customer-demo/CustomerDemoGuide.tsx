@@ -131,13 +131,13 @@ function PresenterActionSequence({
           >
             Click-by-click
           </summary>
-          <div className={styles.actionInstructions}>
+          <ol className={styles.actionInstructions}>
             {beat.lines.map((line, lineIndex) => (
-              <div className={styles.clickLine} key={lineIndex}>
+              <li className={styles.clickLine} key={lineIndex}>
                 <GuideText text={line} openLinksInNewTab />
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </details>
       </div>
     );
