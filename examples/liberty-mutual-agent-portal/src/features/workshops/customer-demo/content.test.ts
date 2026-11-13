@@ -1713,6 +1713,6 @@ test("Do summaries stay visible while their accessible click-by-click disclosure
   assert.match(panel, />\s*Click-by-click\s*<\/summary>/);
   assert.match(
     panel,
-    /<summary[\s\S]*<div className={styles\.actionInstructions}>[\s\S]*beat\.lines\.map/,
+    /<summary[\s\S]*<ol className={styles\.actionInstructions}>[\s\S]*beat\.lines\.map/,
   );
 });

@@ -488,7 +488,7 @@
 .clicks > li > .cueBox {
   margin: 9px 0;
 }
-.clickLine {
+.article .actionInstructions > .clickLine {
   margin: 4px 0;
   font-size: 13px;
   line-height: 1.6;
@@ -515,8 +515,10 @@
   outline: 2px solid #8551b4;
   outline-offset: 3px;
 }
-.actionInstructions {
-  margin-top: 8px;
+.article .actionInstructions {
+  margin: 8px 0 0;
+  padding-left: 24px;
+  list-style: decimal;
 }
 .screenshot {
   margin: 12px 0;
