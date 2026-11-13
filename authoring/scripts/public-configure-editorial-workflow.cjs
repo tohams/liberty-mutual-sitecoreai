@@ -5,7 +5,7 @@
  * ENV --snapshot /abs/before.json
  * ENV --baseline /abs/before.json --report /abs/plan.json
  * ENV --baseline /abs/before.json --report /abs/result.json --apply --journal /abs/journal.json
- * Reuses installed Author/Approver roles. Never creates users, changes role
+ * Reuses installed Author/Approver and Demo Presenter roles. Never creates users, changes role
  * membership, publishes, or edits Basic/portal workflow definitions.
  */
 const fs = require("node:fs");
@@ -128,6 +128,31 @@ const commandAcl = (author) => [
   [ROLES.author, { ...READ, "workflowCommand:execute": author }],
   [ROLES.approver, { ...READ, "workflowCommand:execute": !author }],
 ];
+const DEMO_PRESENTER_ROLE = "sitecore\\Liberty Mutual Demo Presenter";
+const DEMO_PRESENTER_PARENTS = Object.freeze([
+  "sitecore\\Sitecore Client Authoring",
+  "sitecore\\Sitecore Client Designing",
+  "sitecore\\Sitecore Client Publishing",
+  "sitecore\\Sitecore Client Users",
+]);
+// Preserve the separately provisioned presenter's exact scoped native ACLs.
+// State write permits a non-admin user to create a version from final content.
+// Native final-state versioning remains in place; deletion stays denied.
+function presenterAcl(stateWrite) {
+  const rights = {
+    "item:read": true,
+    "item:write": false,
+    "item:create": false,
+    "item:rename": false,
+    "item:delete": false,
+    "item:admin": false,
+    ...(stateWrite === undefined
+      ? { "workflowCommand:execute": true }
+      : { "workflowState:write": stateWrite }),
+    "workflowState:delete": false,
+  };
+  return ownedAcl([[DEMO_PRESENTER_ROLE, rights, rights]]);
+}
 
 function specifications() {
   return [
@@ -139,7 +164,7 @@ function specifications() {
       fields: {
         "Initial state": brace(IDS.draft),
         "__Short description": MARKER,
-        __Security: ownedAcl(common()),
+        __Security: ownedAcl(common()) + presenterAcl(),
       },
     },
     {
@@ -150,7 +175,7 @@ function specifications() {
       fields: {
         Final: "",
         __Sortorder: "10",
-        __Security: ownedAcl(stateAcl(true, false)),
+        __Security: ownedAcl(stateAcl(true, false)) + presenterAcl(true),
       },
     },
     {
@@ -161,7 +186,7 @@ function specifications() {
       fields: {
         Final: "",
         __Sortorder: "20",
-        __Security: ownedAcl(stateAcl(false, true)),
+        __Security: ownedAcl(stateAcl(false, true)) + presenterAcl(true),
       },
     },
     // Non-admin edits of final content create a new native version in Draft.
@@ -173,7 +198,7 @@ function specifications() {
       fields: {
         Final: "1",
         __Sortorder: "30",
-        __Security: ownedAcl(stateAcl(true, false)),
+        __Security: ownedAcl(stateAcl(true, false)) + presenterAcl(true),
       },
     },
     {
@@ -574,6 +599,14 @@ async function capture(query, { allowEscapedAcl = false } = {}) {
     );
     roles.push(role);
   }
+  const presenter = await readRole(query, DEMO_PRESENTER_ROLE);
+  assert(
+    presenter &&
+      JSON.stringify(presenter.memberOf) ===
+        JSON.stringify(DEMO_PRESENTER_PARENTS),
+    "Reuse only the verified non-admin Demo Presenter role and its four client roles.",
+  );
+  roles.push(presenter);
   const workflow = [],
     serializationRepairIds = [];
   for (const spec of specifications()) {
@@ -1027,6 +1060,8 @@ module.exports = {
   READ,
   AUTHOR_CONTENT,
   APPROVER_CONTENT,
+  DEMO_PRESENTER_ROLE,
+  DEMO_PRESENTER_PARENTS,
   specifications,
   serialization,
   serializedValue,

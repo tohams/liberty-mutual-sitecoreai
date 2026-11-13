@@ -124,6 +124,8 @@ test("ACL merge preserves unrelated users and roles byte-for-byte and is idempot
   assert.equal(M.mergeAcl(once, entries), once);
   assert.throws(() => M.mergeAcl("unrecognized ACL", entries));
   assert.throws(() => M.aclEntry("sitecore\\Everyone", M.EDIT_PAGE));
+  assert(M.aclEntry("sitecore\\Liberty Mutual Demo Presenter", M.READ_ONLY).includes("-item:delete"));
+  assert.throws(() => M.aclEntry("sitecore\\Liberty Mutual Demo Presenter Extra", M.READ_ONLY));
 });
 
 test("only exact recorded practice pages can receive per-pair rights", () => {
