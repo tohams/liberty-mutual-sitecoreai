@@ -58,7 +58,7 @@ test("public review has exactly three states, separated commands, and no publish
   );
 });
 
-test("the dedicated presenter can review content without deleting versions or writing approved content", () => {
+test("presenter workflow permissions allow version creation without deletion or administration", () => {
   const specs = W.specifications();
   const explicit = specs.filter((spec) =>
     spec.fields.__Security?.includes(`ar|${W.DEMO_PRESENTER_ROLE}|`),
@@ -79,13 +79,9 @@ test("the dedicated presenter can review content without deleting versions or wr
     assert(!permissions.includes("+workflowState:delete"));
     if (spec.key === "workflow")
       assert(permissions.includes("+workflowCommand:execute"));
-    else
-      assert(
-        permissions.includes(
-          `${spec.key === "approved" ? "-" : "+"}workflowState:write`,
-        ),
-      );
+    else assert(permissions.includes("+workflowState:write"));
   }
+  assert.equal(specs.find((spec) => spec.key === "approved").fields.Final, "1");
   assert.deepEqual(W.DEMO_PRESENTER_PARENTS, [
     "sitecore\\Sitecore Client Authoring",
     "sitecore\\Sitecore Client Designing",

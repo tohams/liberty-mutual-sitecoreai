@@ -136,7 +136,8 @@ const DEMO_PRESENTER_PARENTS = Object.freeze([
   "sitecore\\Sitecore Client Users",
 ]);
 // Preserve the separately provisioned presenter's exact scoped native ACLs.
-// Workflow commands inherit execution access; final content remains read-only.
+// State write permits a non-admin user to create a version from final content.
+// Native final-state versioning remains in place; deletion stays denied.
 function presenterAcl(stateWrite) {
   const rights = {
     "item:read": true,
@@ -197,7 +198,7 @@ function specifications() {
       fields: {
         Final: "1",
         __Sortorder: "30",
-        __Security: ownedAcl(stateAcl(true, false)) + presenterAcl(false),
+        __Security: ownedAcl(stateAcl(true, false)) + presenterAcl(true),
       },
     },
     {
