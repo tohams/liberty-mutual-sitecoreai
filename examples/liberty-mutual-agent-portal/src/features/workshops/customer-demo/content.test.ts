@@ -414,7 +414,7 @@ test("the indexing loop owns both publication and fresh Search-record verificati
   );
   assert.match(
     prose(entry.presenterPoints),
-    /OnEnd.*publication event.*custom synchronization service.*Live Experience Edge.*Search Push API/i,
+    /custom synchronization.*published Experience Edge.*Search Push API/i,
   );
   const publish = actionIndex(
     entry.id,
@@ -591,8 +591,8 @@ test("public authoring uses one presenter account through review and publication
     /Author Page Builder|Approver Page Builder|Publisher Page Builder|separate.*profile|switch.*account/i,
   );
   assert.match(
-    prose(entry.talkTrack),
-    /one SitecoreAI administrator account.*production teams normally.*separate roles/i,
+    prose(entry.presenterPoints),
+    /One presenter.*production teams normally separate authoring, approval, and publishing/i,
   );
 });
 
@@ -731,7 +731,7 @@ test("API reuse queries the same published native FAQ used by the page and Searc
   );
   assert.match(
     entry.talkTrack[0],
-    /Content teams manage and approve content.*Publishing sends.*Experience Edge.*globally distributed.*APIs.*publishing content independently of application deployments/,
+    /published FAQ.*Experience Edge.*GraphQL API.*reuse approved content across applications/,
   );
   assert.match(entry.transition, /Next.*independent agents/);
   const page = readFileSync(
@@ -903,10 +903,10 @@ test("the design loop connects the Brand Kit to field-level AI and governed comp
     prose(entry.presenterActions[0]),
     /SitecoreAI.*Design → Brand kits/,
   );
-  assert.match(prose(entry.talkTrack), /sample Liberty Mutual Brand Kit/);
+  assert.match(prose(entry.controls), /sample Brand Kit/);
   assert.match(
     prose(entry.talkTrack),
-    /Content and design remain separate.*authors manage words and images.*content templates define the fields.*reusable components.*page designs.*Placeholder settings/i,
+    /Brand Kit.*AI writing assistance.*Page Builder.*Approved components/i,
   );
   assert(
     entry.inputs?.some(
@@ -1213,7 +1213,7 @@ test("one full copyright notice updates both footers and restores only its year"
   );
   assert.match(
     prose(restoration.presenterPoints),
-    /Versions show what changed.*statistics show who last updated it and when/,
+    /Versions.*Statistics.*who changed it and when/,
   );
   assert.match(
     prose(shared.presenterActions[3]),
@@ -1311,11 +1311,25 @@ test("all thirteen loops provide brief business and screen-observation bullets",
       entry.presenterPoints.length >= 2 && entry.presenterPoints.length <= 3,
       entry.id,
     );
-    for (const point of entry.presenterPoints) {
+    assert.equal(
+      entry.talkTrack.length,
+      1,
+      `${entry.id}: one brief introduction`,
+    );
+    assert(
+      entry.talkTrack[0].split(/\s+/).length <= 30,
+      `${entry.id}: briefly state the demonstration and its value`,
+    );
+    assert.equal(
+      entry.presenterPoints[0],
+      `**Say:** “${entry.talkTrack[0]}”`,
+      `${entry.id}: keep the spoken introduction consistent`,
+    );
+    for (const [index, point] of entry.presenterPoints.entries()) {
       assert(plainGuideText(point).trim());
       assert(
-        point.split(/\s+/).length <= 45,
-        `${entry.id}: keep the speaking cue concise`,
+        point.split(/\s+/).length <= (index === 0 ? 31 : 16),
+        `${entry.id}: keep introductions and screen pointers brief`,
       );
       assert.doesNotMatch(
         point,
@@ -1640,4 +1654,65 @@ test("evidence and copy cues appear while their corresponding screen is visible"
   const comparisonSpeech = comparison.findIndex((beat) => beat.kind === "say");
   assert.match(prose(comparison.slice(0, comparisonSpeech)), /2025.*2026/);
   assert.match(prose(comparison.slice(comparisonSpeech + 1)), /Choose.*close/);
+});
+
+test("every Do block has a concise authored summary without moving its detailed clicks", () => {
+  for (const entry of steps) {
+    const beats = entry.presenterActions.flatMap((_, index) =>
+      presenterActionSequence(entry, index + 1, entry.inputs),
+    );
+    const actions = beats.filter((beat) => beat.kind === "action");
+    assert.deepEqual(
+      actions.map((beat) => beat.summary),
+      entry.actionSummaries.map((summary) => summary.text),
+      `${entry.id}: every authored task summary appears once`,
+    );
+    assert.deepEqual(
+      actions.flatMap((beat) => beat.lines),
+      entry.presenterActions.flat(),
+      `${entry.id}: collapsed details retain every exact click`,
+    );
+    for (const beat of actions) {
+      const summary = plainGuideText(beat.summary).trim();
+      assert(summary, `${entry.id}: each Do block needs a quick-scan task`);
+      assert(
+        summary.split(/\s+/).length <= 14,
+        `${entry.id}: keep the task heading brief`,
+      );
+      assert.doesNotMatch(summary, /https?:|click-by-click|step by step/i);
+    }
+  }
+  const discovery = step("public-discovery").actionSummaries;
+  assert.deepEqual(
+    discovery
+      .filter((summary) => summary.action === 1)
+      .map((summary) => summary.text),
+    [
+      "Show **bundling** public page.",
+      "Show first FAQ on **bundling** page in **Page Builder**.",
+    ],
+  );
+});
+
+test("Do summaries stay visible while their accessible click-by-click disclosures start closed", () => {
+  const page = readFileSync(
+    join(appRoot, "src/features/workshops/customer-demo/CustomerDemoGuide.tsx"),
+    "utf8",
+  );
+  const panel = page.slice(
+    page.indexOf('data-demo-cue="action"'),
+    page.indexOf("export async function CustomerDemoGuide"),
+  );
+  assert(panel.indexOf("text={beat.summary}") < panel.indexOf("<details"));
+  assert.match(panel, /<details className={styles\.actionDetails}>/);
+  assert.doesNotMatch(panel, /<details[^>]*\bopen(?:\s|=|>)/);
+  assert.match(
+    panel,
+    /aria-label={`Click-by-click: \$\{plainGuideText\(beat\.summary\)\}`}/,
+  );
+  assert.match(panel, />\s*Click-by-click\s*<\/summary>/);
+  assert.match(
+    panel,
+    /<summary[\s\S]*<div className={styles\.actionInstructions}>[\s\S]*beat\.lines\.map/,
+  );
 });

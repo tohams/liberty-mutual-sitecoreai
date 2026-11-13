@@ -96,14 +96,31 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Your visitors can ask a question in their own words and find useful guidance. A clear route to an agent keeps the conversation moving when published content does not answer their question.”",
-          "Point to **Bundle home and auto insurance** as the lead result, which links to **/bundling**, its FAQ answer result, and the related bundling articles; leave every result unopened.",
-          "For the unsupported question, show **No results found** and **Contact an agent** as the clear next step.",
+          "**Say:** “We’ll ask an insurance question in everyday language, then try an unsupported topic. Customers get relevant guidance and a clear route to an agent.”",
+          "Point to the lead **/bundling** result, its FAQ answer, and related articles.",
+          "Show **No results found** and **Contact an agent**.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 2, afterLine: 4 },
           { point: 3, action: 3, afterLine: 2 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open **Search** on the **Public Website** **Home** page.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "**Search** the question; show **bundling** and related results.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Show **No results found** and **Contact an agent**.",
+          },
         ],
         actionPurposes: [
           "Start the customer’s search for insurance guidance",
@@ -137,7 +154,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The conversational question returns relevant published guidance: **Bundle home and auto insurance** is the lead result, alongside **How to bundle your insurance policies** and **3 tips for bundling your insurance policies**. The result excerpts help the visitor choose useful content. The unsupported subject offers an agent-assisted next step.",
         ],
         talkTrack: [
-          "The visitor asks a question in everyday language. Search shows Liberty Mutual’s published bundling page first, with related guidance and useful excerpts. A FAQ answer from that same page also helps them understand the topic. They can find the right starting point without knowing the page title. When published guidance does not address the subject, Contact an agent provides the next step.",
+          "We’ll ask an insurance question in everyday language, then try an unsupported topic. Customers get relevant guidance and a clear route to an agent.",
         ],
         controls: [
           "**SitecoreAI Search** retrieves published pages. A native Search rule pins **Bundle home and auto insurance** as the lead result for bundling keywords. The application’s authored-evidence check confirms whether approved source material addresses the question before presenting a result.",
@@ -298,14 +315,47 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Structured fields and metadata help search and permitted AI engines understand Liberty Mutual’s content. That makes useful guidance easier to discover while your team maintains one clear, governed source.”",
-          "**Search title**, **Search description**, and the native checklists keep the page’s purpose and applicability explicit. The visible FAQs’ native **Question** and **Answer** fields supply individual Search records and connected applications.",
-          "The public page exposes **FAQPage** schema that matches its visible questions and answers, plus a canonical URL. Connected applications retrieve the same native FAQ fields through their integrations.",
+          "**Say:** “We’ll inspect the bundling page’s metadata and FAQs. One content source helps customers, Search, and permitted AI engines find consistent guidance.”",
+          "**Search title**, **Search description**, and checklists define purpose and applicability.",
+          "Visible FAQs supply **FAQPage** schema, Search answers, and API fields.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 1 },
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 3, afterLine: 4 },
+        ],
+        actionSummaries: [
+          { action: 1, beforeLine: 1, text: "Show **bundling** public page." },
+          {
+            action: 1,
+            beforeLine: 2,
+            text: "Show first FAQ on **bundling** page in **Page Builder**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Show the state, product, and audience checklists.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Open the **bundling** page’s source in the browser.",
+          },
+          {
+            action: 3,
+            beforeLine: 2,
+            text: "Show **FAQPage** schema matching the first visible FAQ.",
+          },
+          {
+            action: 3,
+            beforeLine: 4,
+            text: "Show the canonical link to the **bundling** page.",
+          },
+          {
+            action: 3,
+            beforeLine: 5,
+            text: "Close page source; return to the public page.",
+          },
         ],
         actionPurposes: [
           "Show the bundling page’s content and governed metadata",
@@ -344,8 +394,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The bundling page owns its governed metadata, managed classifications, and visible FAQs. FAQPage schema, individual Search records, and native APIs reuse those same FAQ fields.",
         ],
         talkTrack: [
-          "The customer sees a normal bundling page, including useful FAQs. The marketer manages its Search title and description, canonical URL, and applicability as native page fields. The same visible FAQ questions and answers supply structured data, Search records that link back to this page, and the content API. Liberty Mutual maintains this guidance once.",
-          customerDemoAiContext.public.talkTrack,
+          "We’ll inspect the bundling page’s metadata and FAQs. One content source helps customers, Search, and permitted AI engines find consistent guidance.",
         ],
         controls: [
           "The native **Page content** panel keeps metadata and **Checklist** classifications beside the canvas. Choices are maintained beneath **Data → Taxonomy**. The **Questions and answers** component renders the page’s native FAQ items. Search inherits the parent page’s state, product, and audience classifications for each FAQ record.",
@@ -402,14 +451,51 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Customers need current guidance wherever they find it. Publishing one reviewed change and keeping Search aligned reduces duplicate work for Liberty Mutual and helps visitors find the latest approved wording.”",
-          "A configured **OnEnd** publication event invokes a custom synchronization service, which reads **Live Experience Edge** and updates the index through the **Search Push API**.",
-          "Show the sentence absent before publication and present in Search afterward; the state, product, and audience classifications stay intact.",
+          "**Say:** “We’ll see a published FAQ update reach Search automatically. Liberty Mutual can keep customer guidance current without duplicate content maintenance.”",
+          "Custom synchronization sends published **Experience Edge** content through the **Search Push API**.",
+          "Show the new sentence in Search; classifications stay intact.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 2, afterLine: 9 },
           { point: 3, action: 3, afterLine: 4 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open the public **Search** source’s **Preview** tab.",
+          },
+          {
+            action: 1,
+            beforeLine: 2,
+            text: "Show the FAQ’s existing **Search** body before editing.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Open the first **bundling** FAQ’s latest **Live** version.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Create the **Bundling FAQ review** **Draft** version.",
+          },
+          {
+            action: 2,
+            beforeLine: 5,
+            text: "Append the review sentence, approve, and publish.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Return to **Search Preview** and refresh its content.",
+          },
+          {
+            action: 3,
+            beforeLine: 2,
+            text: "Verify the new sentence and unchanged **Search** classifications.",
+          },
         ],
         actionPurposes: [
           "Establish the clean Search record before the update",
@@ -451,7 +537,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Publishing one reviewed native FAQ updates its individual Search record automatically, including the changed answer, canonical page anchor, and inherited applicability metadata.",
         ],
         talkTrack: [
-          "We create a Draft of this native FAQ, keep its existing answer, and append one sentence on the page canvas. The same presenter account submits, reviews, and publishes that revision; separate roles normally govern those actions. Experience Edge distributes the approved answer globally, while the configured publication flow updates its Search record and retains the page’s classifications. Liberty Mutual maintains the guidance once across these delivery channels.",
+          "We’ll see a published FAQ update reach Search automatically. Liberty Mutual can keep customer guidance current without duplicate content maintenance.",
         ],
         controls: [
           "The **OnEnd** publication event calls the configured publication service, which reads published website content from **Live Experience Edge** and synchronizes it through the **Search Push API**. **Include in site search** selects the pages available to Search. Each visible FAQ receives its own Search record linking to its native anchor on **/bundling**, with state, product, and audience inherited from that page. This loop publishes the FAQ item itself; creating a page version does not create a new FAQ version.",
@@ -517,14 +603,91 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Your marketers can create and publish useful pages without waiting for an engineering ticket. Approved components and review controls help them move quickly while giving visitors a consistent Liberty Mutual experience.”",
-          "Point to the permitted components, the reused **Promotion**, and the obvious **Image left / Image right** presentation choices.",
-          "Submit, approve, and publish the page; show the same headings, image, and Promotion on the public website.",
+          "**Say:** “We’ll build a page visually with approved components and reusable content, then publish it. Marketers can move quickly while protecting Liberty Mutual’s design standards.”",
+          "Show approved components, the shared **Promotion**, and **Image left / Image right**.",
+          "One presenter publishes; production teams normally separate authoring, approval, and publishing.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 4, afterLine: 5 },
           { point: 3, action: 8, afterLine: 4 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Create a **Landing page** beneath **Public Website** **Home**.",
+          },
+          {
+            action: 1,
+            beforeLine: 4,
+            text: "Name the new page **coverage-page**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Select **coverage-page** and confirm its canvas.",
+          },
+          {
+            action: 2,
+            beforeLine: 2,
+            text: "Add the **Hero** heading on the canvas.",
+          },
+          {
+            action: 2,
+            beforeLine: 4,
+            text: "Add the **Article text** heading.",
+          },
+          {
+            action: 2,
+            beforeLine: 5,
+            text: "Add the **Article text** body and save.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Choose the family photograph from **Modern Media Library**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Reuse **Bundle and save**; compare **Image left** / **Image right**.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "**Preview** the complete page before publication.",
+          },
+          {
+            action: 6,
+            beforeLine: 1,
+            text: "Open **Submit** for the **coverage-page** **Draft**.",
+          },
+          {
+            action: 6,
+            beforeLine: 2,
+            text: "**Submit** the page and local content for approval.",
+          },
+          {
+            action: 7,
+            beforeLine: 1,
+            text: "Review the complete **coverage-page** on its canvas.",
+          },
+          {
+            action: 7,
+            beforeLine: 2,
+            text: "**Approve** the page after reviewing its content.",
+          },
+          {
+            action: 8,
+            beforeLine: 1,
+            text: "**Publish** the page with its referenced content.",
+          },
+          {
+            action: 8,
+            beforeLine: 4,
+            text: "Verify the published headings, image, and shared **Promotion**.",
+          },
         ],
         actionPurposes: [
           "Create a page with approved structure",
@@ -601,7 +764,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The new page is previewed and published without code changes, using approved components, independent local content, a reused Promotion, and the configured review workflow.",
         ],
         talkTrack: [
-          "The same publishing controls also support a complete page. The marketer starts with an approved structure and permitted components. Local copy remains independently editable, while the shared Promotion is reused. We submit, approve, and publish the page without a frontend deployment. I’m using one SitecoreAI administrator account to move through these steps quickly; production teams normally assign authoring, approval, and publishing permissions to separate roles.",
+          "We’ll build a page visually with approved components and reusable content, then publish it. Marketers can move quickly while protecting Liberty Mutual’s design standards.",
         ],
         controls: [
           "**Landing page** creates local **Hero** and **Introduction** items. Placeholder settings restrict the available components. **Assign** reuses the existing Promotion; **Image left** and **Image right** change only its presentation. Both place the image above the text on mobile.",
@@ -798,12 +961,34 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "The existing and proposed wording and its target field have been shown, and the proposed Profound-to-Draft, review, and publication path has been explained.",
         presenterPoints: [
-          "**Say:** “Liberty Mutual can turn external content recommendations into improvements while retaining editorial control. We’re showing the existing **Scrunch** pattern; a **Profound** integration could bring proposals into the same review and publishing process.”",
-          "For **Profound**, a scoped integration could bring proposed content into **Draft**, followed by human editing, review, approval, and publication.",
+          "**Say:** “We’ll review a suggested content change beside its page. This Scrunch example shows how a proposed Profound integration could support faster updates with human approval.”",
+          "Proposed **Profound** intake follows **Draft**, human review, approval, and publication.",
         ],
         presenterCues: [
           { point: 1, action: 3, afterLine: 5 },
           { point: 2, action: 4, afterLine: 3 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open **Prospera**’s **Home** recommendations in the Private window.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Compare **Original content** with **Suggested content**.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Locate the suggested change in **Prospera** **Page Builder**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Explain proposed **Profound** intake and human review.",
+          },
         ],
         actionPurposes: [
           "Open the existing Scrunch recommendation example",
@@ -846,7 +1031,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The marketer can inspect a real contextual recommendation in SitecoreAI and understand how proposed Profound content would enter Liberty Mutual’s existing Draft, review, and publishing process.",
         ],
         talkTrack: [
-          "SitecoreAI brings content opportunities into the authoring experience. Here the marketer can compare the suggested wording with the original and see the exact page field it would change. This existing experience uses Scrunch. For Profound, an integration could use Sitecore’s authoring APIs to create or update the appropriate content as a draft. The Liberty Mutual review, approval, and publishing controls we just demonstrated would then apply.",
+          "We’ll review a suggested content change beside its page. This Scrunch example shows how a proposed Profound integration could support faster updates with human approval.",
         ],
         controls: [
           "The existing **AEO opportunities** experience associates a recommendation with its native page, component, and field. This example is read-only in **Sales Engineers1 → agverticals → Prospera**.",
@@ -998,14 +1183,31 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "The public-site report shows pageView and LM_PUBLIC_CTA_CLICK over the past month, and the presenter explains the visitor action represented by the custom event.",
         presenterPoints: [
-          "**Say:** “Your team can see which content people visit and which next steps they choose. That gives Liberty Mutual evidence to prioritize improvements around useful customer actions as well as page views.”",
-          "**pageView** measures page views; **LM_PUBLIC_CTA_CLICK** records selections of defined next-step buttons and links.",
-          "Recorded visitor choices automatically govern optional measurement and personalization.",
+          "**Say:** “We’ll see page views and meaningful CTA clicks. Marketers can understand engagement and decide where customer content needs improvement.”",
+          "Show **pageView** and the custom **LM_PUBLIC_CTA_CLICK** event.",
+          "Visitor privacy choices govern optional analytics and personalization.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 3 },
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 3, afterLine: 2 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Filter monthly public **Events Table** to **pageView** and CTA clicks.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Show recorded page views and CTA event counts.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Connect **LM_PUBLIC_CTA_CLICK** to a visitor’s next-step selection.",
+          },
         ],
         actionPurposes: [
           "Focus analytics on the site and reporting period",
@@ -1039,7 +1241,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "A marketer can inspect the public site’s recorded page views and custom business actions in SitecoreAI over the selected monthly reporting period.",
         ],
         talkTrack: [
-          "Marketers can measure website page views and the actions that matter to Liberty Mutual. Here, pageView records page views, and the defined LM_PUBLIC_CTA_CLICK event records selections of next-step buttons and links. Custom events let the team name and measure meaningful business actions. This report shows the public site’s actual recorded activity over the past month.",
+          "We’ll see page views and meaningful CTA clicks. Marketers can understand engagement and decide where customer content needs improvement.",
         ],
         controls: [
           "The **Site** filter separates the Public Website from the Agent Portal. **Time → 1 month** defines the reporting period, and **Event Type** checkboxes focus the report on **pageView** and **LM_PUBLIC_CTA_CLICK**. The native report supplies the recorded rows and totals.",
@@ -1108,12 +1310,49 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “One approved source can serve the website and other applications. Liberty Mutual can reuse guidance without maintaining competing copies, and each channel can present that content in the way its audience needs.”",
-          "Point to the same FAQ item ID, published version, and newly published sentence in the live GraphQL response.",
+          "**Say:** “We’ll retrieve the same published FAQ through Experience Edge’s GraphQL API. Liberty Mutual can reuse approved content across applications without maintaining competing copies.”",
+          "Match the FAQ ID, published version, and newly published sentence.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 2 },
           { point: 2, action: 3, afterLine: 2 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Trace publishing through **Experience Edge** to consuming applications.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Switch to the prepared **GraphQL Explorer** tab.",
+          },
+          {
+            action: 2,
+            beforeLine: 2,
+            text: "Confirm **Live Delivery API token** in **HTTP HEADERS**.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Run the GraphQL query for the published FAQ.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Show the published FAQ fields and added sentence.",
+          },
+          {
+            action: 3,
+            beforeLine: 3,
+            text: "Compare the API response with the public FAQ.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Explain content reuse by **LibertyAir** and other applications.",
+          },
         ],
         actionPurposes: [
           "Show where Experience Edge delivers approved content",
@@ -1153,8 +1392,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Experience Edge’s native GraphQL API returns the same approved, published FAQ fields used by the public website.",
         ],
         talkTrack: [
-          "Content teams manage and approve content in SitecoreAI. Publishing sends that content to Experience Edge, Sitecore’s globally distributed content delivery service. Websites and other applications retrieve it through APIs. That lets Liberty Mutual reuse one approved source across experiences, while publishing content independently of application deployments.",
-          "This is the native GraphQL response for the same FAQ on the bundling page. Its ID, published version, question, and answer come directly from Live Experience Edge, including the sentence we just published. The website, LibertyAir, or another application can retrieve these fields without maintaining another copy of the content.",
+          "We’ll retrieve the same published FAQ through Experience Edge’s GraphQL API. Liberty Mutual can reuse approved content across applications without maintaining competing copies.",
         ],
         controls: [
           "**GraphQL Explorer** queries **Live Experience Edge** using a generated **Delivery API token** in the **sc_apikey** HTTP header. The token is configured locally before the demonstration; it is not part of the query or link.",
@@ -1203,14 +1441,46 @@ export const customerDemoChapters: DemoChapter[] = [
         stopWhen:
           "Daniel and Avery’s different priorities are visible, Avery matches **Rule 1** for **Agent priority → Agency growth** using her own Client ID, and the central business classification is shown.",
         presenterPoints: [
-          "**Say:** “Independent agents have a choice of carriers. Guidance that reflects their role, licensed states, and business priorities helps them find a useful next conversation with Liberty Mutual and makes the portal easier to use.”",
-          "Compare the ordered recommendations and licensed states: Daniel sees household guidance first; Avery sees agency growth first.",
-          "One **Agent priority** value keeps the business classification in one place. The component maps **Agency growth** or **Producer priorities** to the corresponding content; the original content covers **Standard**.",
+          "**Say:** “We’ll compare Daniel’s and Avery’s priorities, then inspect the profile-driven rule. Liberty Mutual can make each agent’s next opportunity easier to find.”",
+          "Compare Daniel’s household-first order with Avery’s growth-first order.",
+          "**Agent priority** combines role, licensed state, and production for relevant recommendations.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 2, afterLine: 3 },
           { point: 3, action: 5, afterLine: 3 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Show **Daniel**’s producer priorities, role, and licensed states.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Compare **Avery**’s principal priorities, role, and licensed states.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Find **Avery**’s profile and copy her Client ID.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Test **Avery**’s Client ID against **Agency growth**.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "Show **Agent priority**’s **Agency growth** and **Producer priorities** conditions.",
+          },
+          {
+            action: 5,
+            beforeLine: 4,
+            text: "Explain named results; return to **Page Builder**.",
+          },
         ],
         actionPurposes: [
           "Show Daniel’s producer baseline for comparison",
@@ -1261,8 +1531,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Daniel’s producer priorities and Avery’s principal priorities differ. Avery’s native profile test verifies her qualification. One central **Agent priority** custom value returns a named business result for the component to use.",
         ],
         talkTrack: [
-          "Daniel’s producer priorities lead with household conversations. Avery’s principal priorities lead with agency growth. We test Avery’s actual profile, then show the readable business classification behind the result. The central Agent priority custom value returns a meaningful name; Page Builder associates that result with content. Liberty Mutual can keep Ping for sign-in and supply trusted agent context from its existing systems.",
-          customerDemoAiContext.portal.talkTrack,
+          "We’ll compare Daniel’s and Avery’s priorities, then inspect the profile-driven rule. Liberty Mutual can make each agent’s next opportunity easier to find.",
         ],
         controls: [
           "The native decision table has one **Agent priority** custom-value input. **Is equal to Agency growth** selects **Agency growth priorities**; **Is equal to Producer priorities** selects **Producer priorities**. The readable JavaScript in **Optimization → Custom values → Agent priority** defines the role, licensing, and production criteria. **Standard** and unmatched results receive the original **For all agencies** content.",
@@ -1383,14 +1652,51 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Your marketers can create clearer, on-brand content more efficiently. **Brand Kit** guidance, **Content Copilot**, and approved components help the team focus on the message while agents receive a consistent, professional portal experience.”",
-          "Compare the expanded introduction with the short original, check its meaning, then **Revert to original**: the author decides what to retain.",
-          "Point to the allowed component choice: governed structure keeps the agent experience consistent while marketers edit content.",
+          "**Say:** “We’ll use Brand Kit guidance and AI writing assistance within Page Builder. Approved components help marketers create consistent content faster while retaining control.”",
+          "Compare the expanded introduction; **Revert to original** keeps authors in control.",
+          "Allowed components protect the design while authors edit content.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 2 },
           { point: 2, action: 2, afterLine: 4 },
           { point: 3, action: 3, afterLine: 2 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Show the published **Brand Kit**’s **Tone of Voice**.",
+          },
+          {
+            action: 1,
+            beforeLine: 3,
+            text: "Explain how the **Brand Kit** guides content generation.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Select **Agency priorities**’ **Introduction** in **Page Builder**.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Generate expanded copy and compare the AI suggestion.",
+          },
+          {
+            action: 2,
+            beforeLine: 5,
+            text: "**Revert to original** and show author control.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Show the **Agency priorities** placeholder’s permitted components.",
+          },
+          {
+            action: 3,
+            beforeLine: 3,
+            text: "Close the picker; explain governed content and design.",
+          },
         ],
         actionPurposes: [
           "Show the Brand Kit that guides AI-assisted writing",
@@ -1428,7 +1734,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Marketers can use brand guidance and native AI assistance while editing content, with reusable design and restricted component choices preserving a consistent portal.",
         ],
         talkTrack: [
-          "We assembled a sample Liberty Mutual Brand Kit with reusable voice and messaging guidance for AI-assisted writing. Content Copilot helps an author refine copy directly in Page Builder, with human review before keeping the result. Content and design remain separate: authors manage words and images, content templates define the fields, reusable components control presentation, and page designs arrange those components. Placeholder settings limit the permitted choices. Marketers can work faster while agents receive a consistent Liberty Mutual experience.",
+          "We’ll use Brand Kit guidance and AI writing assistance within Page Builder. Approved components help marketers create consistent content faster while retaining control.",
         ],
         controls: [
           "**Page designs**, **partial designs**, native renderings, and **placeholder settings** govern reusable structure and permitted composition. Content edits remain separate from component code.",
@@ -1552,12 +1858,34 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “When priorities change, your marketers can adjust what agents see without waiting for a code release. Putting the Texas campaign first helps eligible agency principals focus on Liberty Mutual’s current growth opportunity.”",
-          "Change the actual **Ordered recommendations** in a new **Draft**; the original approved version and live order remain intact.",
+          "**Say:** “We’ll reorder the principal audience’s recommendations without changing code. Marketers can quickly align agent guidance with Liberty Mutual’s business priorities.”",
+          "Save a new **Draft**; the approved live order stays unchanged.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 3, afterLine: 4 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Select **Agency growth priorities** and its **Ordered recommendations**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Show the original published recommendation order.",
+          },
+          {
+            action: 2,
+            beforeLine: 3,
+            text: "Create the Texas guidance priority **Draft** version.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Put Texas guidance first; save the unpublished **Draft**.",
+          },
         ],
         actionPurposes: [
           "Locate the marketer-managed priority collection",
@@ -1596,7 +1924,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "The new Draft references the same approved cards in the new order. Avery’s live page retains the published order until the following preview and publication loop completes.",
         ],
         talkTrack: [
-          "For a Texas workers’ compensation campaign, the marketer moves approved Texas guidance to the top of the principal audience’s recommendations. The new Draft leaves the current live experience intact until it is reviewed and published.",
+          "We’ll reorder the principal audience’s recommendations without changing code. Marketers can quickly align agent guidance with Liberty Mutual’s business priorities.",
         ],
         controls: [
           "**Ordered recommendations** is an ordered native item selection. **Agency growth priorities** supplies the first personalized rule’s content; **Producer priorities** supplies the second rule’s content.",
@@ -1664,14 +1992,61 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Your team can check the draft experience for each selected content variant before publication. That helps marketers confirm that agents will see the intended priorities and gives them confidence to make business changes.”",
-          "**Personalization Preview** is a private Marketplace extension. Compare **Agency growth priorities** with **Producer priorities** before publication; the producer keeps the household-first order.",
-          "Review and publish the saved priority change once, then show Avery’s updated live order and Daniel’s unchanged order.",
+          "**Say:** “We’ll preview each content variant before publishing. Marketers can check the intended agent experience and release changes with confidence.”",
+          "**Personalization Preview**, a private Marketplace extension, compares native content variants.",
+          "Publish once; Avery’s order changes, while Daniel’s stays unchanged.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 2 },
           { point: 2, action: 3, afterLine: 3 },
           { point: 3, action: 6, afterLine: 4 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open **Personalization Preview** for **Agent Portal** **Home**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "**Preview** **Agency growth priorities** with Texas guidance first.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "**Preview** the producer’s unchanged household-first recommendation order.",
+          },
+          {
+            action: 3,
+            beforeLine: 4,
+            text: "Close the preview and return to **Page Builder**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Open the saved **Agency growth priorities** **Draft**.",
+          },
+          {
+            action: 4,
+            beforeLine: 3,
+            text: "**Submit** the saved priority change for approval.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "Review the same **Draft**’s Texas-first recommendation order.",
+          },
+          {
+            action: 5,
+            beforeLine: 2,
+            text: "**Approve** the reviewed **Agency growth priorities** version.",
+          },
+          {
+            action: 6,
+            beforeLine: 1,
+            text: "**Publish**; verify **Avery** changes and **Daniel** stays unchanged.",
+          },
         ],
         actionPurposes: [
           "Open the selected page’s available content variants",
@@ -1730,7 +2105,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Personalization Preview shows the draft Agency growth priorities and unchanged Producer priorities on the same Home page. Publishing the reviewed priority collection updates Avery’s Home without publishing Home manually or deploying frontend code; Daniel remains unchanged.",
         ],
         talkTrack: [
-          "Before publishing, I can choose each personalized content variant on this same Home page. The Agency growth priorities draft puts Texas guidance first; the producer keeps the household-first order. I can inspect these draft experiences without signing in as an agent, then review and publish the saved change and confirm that only the intended live experience changes.",
+          "We’ll preview each content variant before publishing. Marketers can check the intended agent experience and release changes with confidence.",
         ],
         controls: [
           "**Personalization Preview** is a private **Marketplace** extension inside **Page Builder**. It reads the selected page’s native content-variant names and renders the chosen variants with current authoring content for **Home**.",
@@ -1785,14 +2160,66 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Shared wording should stay consistent wherever it appears. One reviewed update reaches both sites, reducing repeated work for Liberty Mutual and the chance that visitors and agents encounter different versions of the same notice.”",
-          "Change only **2025 → 2026**, publish the shared source once, and compare versions while delivery completes.",
-          "Confirm **2026** on both live sites before beginning restoration.",
+          "**Say:** “We’ll change one shared copyright notice and see both sites update. Liberty Mutual maintains consistent content once, while each site keeps its own design.”",
+          "**2025 → 2026**: publish once, then compare versions while delivery completes.",
+          "Confirm **2026** in both live footers before restoring.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 4, afterLine: 5 },
           { point: 3, action: 5, afterLine: 3 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Show the shared **Copyright notice** and original 2025 version.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Create the **Copyright year update** **Draft** version.",
+          },
+          {
+            action: 2,
+            beforeLine: 4,
+            text: "Change only 2025 to 2026; save the version.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Select the saved **Draft** showing copyright year 2026.",
+          },
+          {
+            action: 3,
+            beforeLine: 2,
+            text: "**Submit** the shared notice, then review its wording.",
+          },
+          {
+            action: 3,
+            beforeLine: 4,
+            text: "**Approve** the saved **Copyright year update** version.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "**Publish** once; compare the year-only change between versions.",
+          },
+          {
+            action: 4,
+            beforeLine: 6,
+            text: "Close the **Copyright notice** version comparison.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "Wait for the shared content publication to finish.",
+          },
+          {
+            action: 5,
+            beforeLine: 2,
+            text: "Verify the full 2026 notice on both sites.",
+          },
         ],
         actionPurposes: [
           "Locate the shared copyright source for both sites",
@@ -1847,7 +2274,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Both independent sites display the same full copyright notice with 2026 from one governed content item, without separate copy edits or frontend releases. The first line reads **© 2026 Liberty Mutual Insurance, 175 Berkeley Street, Boston, MA 02116**. The second reads **Liberty Mutual is an Equal Opportunity Employer and an Equal Housing Insurer.** The **Equal Opportunity Employer** link remains intact.",
         ],
         talkTrack: [
-          "Both footers use one copyright notice. I change only the year, review the change, and publish its shared source once. Experience Edge makes that approved content available to both sites, while each site retains its own design.",
+          "We’ll change one shared copyright notice and see both sites update. Liberty Mutual maintains consistent content once, while each site keeps its own design.",
         ],
         controls: [
           "**Copyright notice** belongs to the public site’s top-level **Data → Disclosures** library. Both footers reference that same native item.",
@@ -1900,14 +2327,61 @@ export const customerDemoChapters: DemoChapter[] = [
           },
         ],
         presenterPoints: [
-          "**Say:** “Moving quickly is easier when changes remain accountable and recoverable. Your team can see what changed, review it, and restore earlier approved wording while retaining the history of those decisions.”",
-          "Versions show what changed; item statistics show who last updated it and when.",
-          "Finish with **2025** in both footers: a controlled change and a controlled reversal.",
+          "**Say:** “We’ll compare versions and restore earlier wording through approval. Liberty Mutual can correct content safely while preserving a clear history of changes.”",
+          "**Versions** compare wording; **Statistics** shows who changed it and when.",
+          "Both footers return to **2025**; every version remains available.",
         ],
         presenterCues: [
           { point: 1, action: 1, afterLine: 0 },
           { point: 2, action: 5, afterLine: 6 },
           { point: 3, action: 6, afterLine: 2 },
+        ],
+        actionSummaries: [
+          {
+            action: 1,
+            beforeLine: 1,
+            text: "Open the shared **Copyright notice** in **Page Builder**.",
+          },
+          {
+            action: 2,
+            beforeLine: 1,
+            text: "Find the retained original and changed copyright versions.",
+          },
+          {
+            action: 3,
+            beforeLine: 1,
+            text: "Select the original 2025 notice before creating a version.",
+          },
+          {
+            action: 3,
+            beforeLine: 3,
+            text: "Create and select the **Copyright year restored** **Draft**.",
+          },
+          {
+            action: 4,
+            beforeLine: 1,
+            text: "Review the restored **Draft**’s full 2025 notice.",
+          },
+          {
+            action: 4,
+            beforeLine: 2,
+            text: "**Submit** the restored notice and review its wording.",
+          },
+          {
+            action: 4,
+            beforeLine: 4,
+            text: "**Approve** the restored **Copyright notice** version.",
+          },
+          {
+            action: 5,
+            beforeLine: 1,
+            text: "**Publish**; show matching restored wording and update history.",
+          },
+          {
+            action: 6,
+            beforeLine: 1,
+            text: "Verify both footers show the restored 2025 notice.",
+          },
         ],
         actionPurposes: [
           "Open the shared notice for controlled restoration",
@@ -1966,7 +2440,7 @@ export const customerDemoChapters: DemoChapter[] = [
           "Native version comparison shows the year-only change. A newer reviewed version restores copyright year 2025 in both footers while preserving the original and changed versions.",
         ],
         talkTrack: [
-          "We have already seen the review and approval process. Version comparison now shows exactly what changed: only the copyright year. We restore the earlier wording through a new reviewed version, returning both footers to 2025 while retaining the original and changed versions.",
+          "We’ll compare versions and restore earlier wording through approval. Liberty Mutual can correct content safely while preserving a clear history of changes.",
         ],
         controls: [
           "In **Content**, the item’s version selector exposes **••• → Compare versions**. Compare the recorded original, changed, and restored versions without changing their wording.",

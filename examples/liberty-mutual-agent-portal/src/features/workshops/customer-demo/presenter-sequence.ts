@@ -5,11 +5,15 @@ export type PresenterBeat =
   | { kind: "say"; lines: string[] }
   | { kind: "url"; links: DemoLaunchLink[] }
   | { kind: "copy"; inputs: DemoInput[] }
-  | { kind: "action"; lines: string[] };
+  | { kind: "action"; summary: string; lines: string[] };
 
 type SequenceSource = Pick<
   DemoStep,
-  "presenterActions" | "presenterPoints" | "presenterCues" | "links"
+  | "presenterActions"
+  | "actionSummaries"
+  | "presenterPoints"
+  | "presenterCues"
+  | "links"
 >;
 
 /** Interleave authored cues without changing action order or clipboard values. */
@@ -24,6 +28,25 @@ export function presenterActionSequence(
   const cues = step.presenterCues.filter((cue) => cue.action === action);
   const links = demoLaunchUrls(step).filter((link) => link.action === action);
   const values = inputs.filter((input) => input.action === action);
+  const summaries = new Map<number, string>();
+  for (const summary of step.actionSummaries) {
+    const actionLines = step.presenterActions[summary.action - 1];
+    if (
+      !Number.isInteger(summary.action) ||
+      !actionLines ||
+      !Number.isInteger(summary.beforeLine) ||
+      summary.beforeLine < 1 ||
+      summary.beforeLine > actionLines.length ||
+      !summary.text.trim()
+    )
+      throw new RangeError(
+        "Place each Do summary before an existing click line.",
+      );
+    if (summary.action !== action) continue;
+    if (summaries.has(summary.beforeLine))
+      throw new RangeError("Use one Do summary per click-line position.");
+    summaries.set(summary.beforeLine, summary.text);
+  }
   for (const cue of [...cues, ...links]) {
     if (
       !Number.isInteger(cue.afterLine) ||
@@ -68,8 +91,14 @@ export function presenterActionSequence(
     if (copy.length) beats.push({ kind: "copy", inputs: copy });
     if (afterLine === lines.length) continue;
     const previous = beats.at(-1);
-    if (previous?.kind === "action") previous.lines.push(lines[afterLine]);
-    else beats.push({ kind: "action", lines: [lines[afterLine]] });
+    const summary = summaries.get(afterLine + 1);
+    if (previous?.kind === "action" && !summary)
+      previous.lines.push(lines[afterLine]);
+    else {
+      if (!summary)
+        throw new RangeError("Give each Do block an authored task summary.");
+      beats.push({ kind: "action", summary, lines: [lines[afterLine]] });
+    }
   }
   return beats;
 }
